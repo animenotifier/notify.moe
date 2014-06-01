@@ -8,4 +8,8 @@ Supports anime lists from:
 - MyAnimeList (myanimelist.net)
 
 Installation:
-https://chrome.google.com/webstore/detail/anime-release-notifier/hajchfikckiofgilinkpifobdbiajfch
+- https://chrome.google.com/webstore/detail/anime-release-notifier/hajchfikckiofgilinkpifobdbiajfch
+
+Forum:
+- http://anilist.co/forum_post?id=1297
+- http://myanimelist.net/forum/?topicid=1175519
