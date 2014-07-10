@@ -402,12 +402,12 @@ var animeUpdater = {
 			var match = anichartTitleRegEx.exec(animeInfo);
 
 			if(match != null) {
-				var title = match[1].toUpperCase();
+				var title = match[1].replace("-", " ").toUpperCase();
 				var anime;
 
 				for(var i = 0, len = this.animeList.length; i < len; i++) {
 					anime = this.animeList[i];
-					if(title == anime.title.toUpperCase().replace(/\(TV\)/g, "").trim()) {
+					if(title == anime.title.replace("-", " ").toUpperCase().replace(/\(TV\)/g, "").trim()) {
 						anime.days = daysMatch ? parseInt(daysMatch[1]) : 0;
 						anime.hours = hoursMatch ? parseInt(hoursMatch[1]) : 0;
 						anime.minutes = minutesMatch ? parseInt(minutesMatch[1]) : 0;
