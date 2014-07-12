@@ -482,7 +482,8 @@ var specialAnimeSearchNames = function(animeTitle) {
 			.replace("Sidonia no Kishi", "Knights of Sidonia")
 			.replace("Gokukoku no Brynhildr", "Brynhildr")
 			.replace("Mahouka Koukou no Rettousei", "Mahouka")
-			.replace("JoJo no Kimyou na Bouken: Stardust Crusaders", "JoJo Stardust Crusaders");
+			.replace("JoJo no Kimyou na Bouken: Stardust Crusaders", "JoJo Stardust Crusaders")
+			.replace("Psycho Pass New Edit Version", "Psycho Pass Extended Edition");
 };
 
 var plural = function(count, noun) {
