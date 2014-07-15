@@ -1,7 +1,7 @@
 {
   "name": "Anime Release Notifier",
   "short_name": "Anime Notifier",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "manifest_version": 2,
   "description": "Notifies you when there's a new episode of your favourite anime available.",
   "homepage_url": "http://blitzprog.org/projects",

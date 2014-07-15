@@ -147,8 +147,9 @@ this.manifest = {
 			"group": "Top donators",
 			"name": "donatorList",
 			"type": "description",
-			"text": "You'll be mentioned here if you support this project.<br/><br/><ul>" + 
-					"<strong>5 €</strong> - Josh Star, AniList Admin" + 
+			"text": "You'll be mentioned here if you support this project.<br/><br/><ul class='donators'>" + 
+					"<li><strong>7,35 €</strong> - <strong>Izzy</strong> (Anilist)</li>" + 
+					"<li><strong>5,00 €</strong> - <strong>Josh Star</strong> (Anilist Admin)</li>" + 
 					"</ul>"
 		}
 	],

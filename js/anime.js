@@ -16,6 +16,8 @@ var animeUpdater = {
 	notificationIdToLink: {},
 	qualityRegEx: /([0-9]{3,4})p[^a-zA-Z]/,
 	subsRegEx: /^\[([^\]]*)\]/,
+	aniChartHTML: null,
+	animeListCreated : false,
 
 	// Request anime list
 	requestAnimeList: function(newSettings, callback) {
@@ -51,12 +53,15 @@ var animeUpdater = {
 			this.backgroundCallback = callback;
 
 		this.userAnimeListURL = this.animeListProvider.url + userName + this.animeListProvider.urlSuffix;
-		//console.log(finalURL);
+		this.animeListCreated = false;
 
 		var req = new XMLHttpRequest();
 		req.open("GET", this.userAnimeListURL, true);
 		req.onload = this.showAnimeList.bind(this);
 		req.send(null);
+
+		// Sort please
+		this.requestAniChart();
 	},
 
 	// Parse anime list
@@ -218,15 +223,8 @@ var animeUpdater = {
 			document.body.innerHTML = "";
 		}
 
+		// Each anime
 		this.animeList.forEach(function(entry) {
-			/*document.body.appendChild(document.createElement("br"));
-
-			var a = document.createElement("a");
-			a.href = "http://myanimelist.net/anime/" + entry.id + "/";
-			a.target = "_blank";
-			a.appendChild(document.createTextNode(entry.title));
-			document.body.appendChild(a);*/
-
 			// Nyaa links
 			var key = "store.settings." + entry.originalTitle;
 			var quality = localStorage[key + ":quality"];
@@ -356,9 +354,16 @@ var animeUpdater = {
 			};
 			req.send(null);
 		});
-	
-		// Sort please
-		this.sendSortRequest();
+		
+		// This is not perfectly correct in terms of real concurrency
+		// but it doesn't even matter: Worst case scenario (<0.1%) is that the list
+		// gets sorted twice.
+		if(this.aniChartHTML && !this.animeListSorted) {
+			this.animeListSorted = true;
+			this.sortAnimeList(this.aniChartHTML);
+		}
+		
+		this.animeListCreated = true;
 		
 		// Create footer
 		var footer = document.createElement("div");
@@ -371,25 +376,33 @@ var animeUpdater = {
 		this.backgroundCallback();
 	},
 
-	// Send sort request
-	sendSortRequest: function() {
-		if(this.animeList.length == 0)
-			return;
-
+	// Request AniChart
+	requestAniChart: function() {
 		var req = new XMLHttpRequest();
 		req.open("GET", "http://anichart.net/airing", true);
-		req.onload = this.sortAnimeList.bind(this);
+		req.onload = this.receiveAniChart.bind(this);
 		req.send(null);
 	},
 
+	receiveAniChart: function(e) {
+		this.aniChartHTML = e.target.responseText;
+
+		// This is not perfectly correct in terms of real concurrency
+		// but it doesn't even matter: Worst case scenario (<0.1%) is that the list
+		// gets sorted twice.
+		if(this.animeListCreated && !this.animeListSorted) {
+			this.animeListSorted = true;
+			this.sortAnimeList(this.aniChartHTML);
+		}
+	},
+
 	// Sort anime list
-	sortAnimeList: function(e) {
+	sortAnimeList: function(html) {
 		var anichartAnimeInfoRegEx = /<div class="anime_info_sml">/g;
 		var anichartTitleRegEx = /class="title_sml[^"']*"><a href=["'][^"']*["'] target="_blank">([^<]+)<\/a>/;
 		var daysRegEx = /<span class="cd_day">([0-9]{0,3})<\/span>/;
 		var hoursRegEx = /<span class="cd_hr">([0-9]{0,2})<\/span>/;
 		var minutesRegEx = /<span class="cd_min">([0-9]{0,2})<\/span>/;
-		var html = e.target.responseText;
 
 		var infoMatch = anichartAnimeInfoRegEx.exec(html);
 		while(infoMatch != null) {
@@ -475,15 +488,33 @@ Storage.prototype.getObject = function(key) {
 	return value && JSON.parse(value);
 }
 
+// Special titles
+var specialAnimeSearchNames = {
+	"Fairy Tail (2014)":
+	"Fairy Tail S2",
+
+	"Sidonia no Kishi":
+	"Knights of Sidonia",
+
+	"Gokukoku no Brynhildr":
+	"Brynhildr",
+
+	"Mahouka Koukou no Rettousei":
+	"Mahouka",
+
+	"JoJo no Kimyou na Bouken: Stardust Crusaders":
+	"JoJo Stardust Crusaders",
+
+	"Psycho Pass New Edit Version":
+	"Psycho Pass Extended Edition"
+}
+
 // Helper functions
-var specialAnimeSearchNames = function(animeTitle) {
-	return animeTitle
-			.replace("Fairy Tail (2014)", "Fairy Tail S2")
-			.replace("Sidonia no Kishi", "Knights of Sidonia")
-			.replace("Gokukoku no Brynhildr", "Brynhildr")
-			.replace("Mahouka Koukou no Rettousei", "Mahouka")
-			.replace("JoJo no Kimyou na Bouken: Stardust Crusaders", "JoJo Stardust Crusaders")
-			.replace("Psycho Pass New Edit Version", "Psycho Pass Extended Edition");
+var replaceSpecialAnimeSearchNames = function(animeTitle) {
+	if(animeTitle in specialAnimeSearchNames)
+		return specialAnimeSearchNames[animeTitle];
+	else
+		return animeTitle;
 };
 
 var plural = function(count, noun) {
@@ -501,7 +532,7 @@ var removeHtmlEntities = function(str) {
 };
 
 var makeAnimeSearchTitle = function(animeTitle) {
-	return removeHtmlEntities(specialAnimeSearchNames(animeTitle))
+	return removeHtmlEntities(replaceSpecialAnimeSearchNames(animeTitle))
 			.replace(/:/g, "")
 			.replace(/&/g, "")
 			.replace(/\(TV\)/g, "")

@@ -2,6 +2,10 @@
 // Add your own style rules here, not in css/main.css
 // or css/setting.css for easy updating reasons.
 */
+.donators li {
+	font-size: 1.5em;
+}
+
 .list-box {
 	height: auto !important;
 }
