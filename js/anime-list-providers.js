@@ -6,7 +6,7 @@ var animeListProviders = {
 		urlSuffix: "&status=1",
 		//ignoreAfter: 'class="header_completed"',
 		animeRegEx: /<a href=["']\/anime\/([^\/]+)\/([^"']+)/g,
-		progressRegEx: />([0-9-]+)[^0-9-]*([0-9-]+)</,
+		progressRegEx: />([0-9-]+)[^0-9-]{1,10}([0-9-]+)</,
 		animeImgRegEx: /<img src="(http:\/\/cdn.myanimelist.net\/images\/anime\/[^"]+)/,
 		queryImage: function(entry, callBack) {
 			var provider = animeListProviders["myanimelist.net"];
@@ -33,7 +33,7 @@ var animeListProviders = {
 		urlSuffix: "",
 		ignoreAfter: "<div id='Completed'",
 		animeRegEx: /<a href=["']\/anime\/([^\/]+)\/[^"']+[^>]*>([^<]+)</g,
-		progressRegEx: /class='cep[0-9]+[^0-9]+([0-9-]+)[^0-9-]{0,10}([0-9-]*)/,
+		progressRegEx: /class='cep[0-9]+[^0-9]+([0-9-]+)[^0-9-]{1,10}([0-9-]*)/,
 		queryImage: function(entry, callBack) {
 			callBack("http://anilist.co/img/dir/anime/reg/" + entry.id + ".jpg");
 		}

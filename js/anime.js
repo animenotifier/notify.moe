@@ -83,6 +83,7 @@ var animeUpdater = {
 			var watchedEpisodes = "-";
 			var maxEpisodes = "-";
 
+			var htmlSub = html.substr(animeRegEx.lastIndex);
 			var progressMatch = progressRegEx.exec(html.substr(animeRegEx.lastIndex));
 			if(progressMatch != null) {
 				watchedEpisodes = parseInt(progressMatch[1]);
@@ -113,89 +114,6 @@ var animeUpdater = {
 		}
 
 		return animeList;
-	},
-
-	// 
-	queryPossibleAnimeOptions: function(animeTitle, subsProvider, callback) {
-		var customSearchTitle = localStorage["store.settings." + animeTitle + ":search"];
-
-		if(customSearchTitle)
-			customSearchTitle = customSearchTitle.replace(/"/g, "");
-
-		var urlObject = {};
-		getURLs(customSearchTitle ? customSearchTitle : animeTitle, "", subsProvider, urlObject);
-
-		var req = new XMLHttpRequest();
-		req.overrideMimeType('text/xml');
-		req.open("GET", urlObject.rssUrl, true);
-		req.onload = function(e) {
-			var qualities = [
-				{
-					"value": "",
-					"text": "*"
-				}
-			];
-
-			var subs = [
-				{
-					"value": "",
-					"text": "*"
-				}
-			];
-
-			var qualitiesFound = {};
-			var subsFound = {};
-
-			// Find quality and subs which are available
-			var itemList = e.target.responseXML.querySelectorAll("item");
-			[].forEach.call(
-				itemList, 
-				function(item) {
-					var title = item.getElementsByTagName("title")[0].innerHTML;
-
-					// Quality
-					var match = animeUpdater.qualityRegEx.exec(title);
-					if(match != null) {
-						var quality = match[1];
-
-						if(!(quality in qualitiesFound)) {
-							qualities.push({
-								"value": quality,
-								"text" : quality + "p"
-							});
-
-							qualitiesFound[quality] = true;
-						}
-					}
-
-					// Subs
-					var match = animeUpdater.subsRegEx.exec(title);
-					if(match != null) {
-						var sub = match[1];
-
-						if(!(sub in subsFound)) {
-							subs.push({
-								"value": sub,
-								"text" : sub
-							});
-
-							subsFound[sub] = true;
-						}
-					}
-				}
-			);
-
-			qualities.sort(function(a, b) {
-				return parseInt(a["value"]) - parseInt(b["value"]);
-			});
-
-			subs.sort(function(a, b) {
-				return a["text"].localeCompare(b["text"]);
-			});
-
-			callback(animeTitle, qualities, subs);
-		};
-		req.send(null);
 	},
 
 	// Show anime list
@@ -376,26 +294,6 @@ var animeUpdater = {
 		this.backgroundCallback();
 	},
 
-	// Request AniChart
-	requestAniChart: function() {
-		var req = new XMLHttpRequest();
-		req.open("GET", "http://anichart.net/airing", true);
-		req.onload = this.receiveAniChart.bind(this);
-		req.send(null);
-	},
-
-	receiveAniChart: function(e) {
-		this.aniChartHTML = e.target.responseText;
-
-		// This is not perfectly correct in terms of real concurrency
-		// but it doesn't even matter: Worst case scenario (<0.1%) is that the list
-		// gets sorted twice.
-		if(this.animeListCreated && !this.animeListSorted) {
-			this.animeListSorted = true;
-			this.sortAnimeList(this.aniChartHTML);
-		}
-	},
-
 	// Sort anime list
 	sortAnimeList: function(html) {
 		var anichartAnimeInfoRegEx = /<div class="anime_info_sml">/g;
@@ -476,88 +374,109 @@ var animeUpdater = {
 				entry.element.style.opacity = Math.max(1.0 - (factor * factor) / 10.0, 0.2);
 			}
 		});
+	},
+
+	// Request AniChart
+	requestAniChart: function() {
+		var req = new XMLHttpRequest();
+		req.open("GET", "http://anichart.net/airing", true);
+		req.onload = this.receiveAniChart.bind(this);
+		req.send(null);
+	},
+
+	// Receive AniChart
+	receiveAniChart: function(e) {
+		this.aniChartHTML = e.target.responseText;
+
+		// This is not perfectly correct in terms of real concurrency
+		// but it doesn't even matter: Worst case scenario (<0.1%) is that the list
+		// gets sorted twice.
+		if(this.animeListCreated && !this.animeListSorted) {
+			this.animeListSorted = true;
+			this.sortAnimeList(this.aniChartHTML);
+		}
+	},
+
+	// Query possible anime options
+	queryPossibleAnimeOptions: function(animeTitle, subsProvider, callback) {
+		var customSearchTitle = localStorage["store.settings." + animeTitle + ":search"];
+
+		if(customSearchTitle)
+			customSearchTitle = customSearchTitle.replace(/"/g, "");
+
+		var urlObject = {};
+		getURLs(customSearchTitle ? customSearchTitle : animeTitle, "", subsProvider, urlObject);
+
+		var req = new XMLHttpRequest();
+		req.overrideMimeType('text/xml');
+		req.open("GET", urlObject.rssUrl, true);
+		req.onload = function(e) {
+			var qualities = [
+				{
+					"value": "",
+					"text": "*"
+				}
+			];
+
+			var subs = [
+				{
+					"value": "",
+					"text": "*"
+				}
+			];
+
+			var qualitiesFound = {};
+			var subsFound = {};
+
+			// Find quality and subs which are available
+			var itemList = e.target.responseXML.querySelectorAll("item");
+			[].forEach.call(
+				itemList, 
+				function(item) {
+					var title = item.getElementsByTagName("title")[0].innerHTML;
+
+					// Quality
+					var match = animeUpdater.qualityRegEx.exec(title);
+					if(match != null) {
+						var quality = match[1];
+
+						if(!(quality in qualitiesFound)) {
+							qualities.push({
+								"value": quality,
+								"text" : quality + "p"
+							});
+
+							qualitiesFound[quality] = true;
+						}
+					}
+
+					// Subs
+					var match = animeUpdater.subsRegEx.exec(title);
+					if(match != null) {
+						var sub = match[1];
+
+						if(!(sub in subsFound)) {
+							subs.push({
+								"value": sub,
+								"text" : sub
+							});
+
+							subsFound[sub] = true;
+						}
+					}
+				}
+			);
+
+			qualities.sort(function(a, b) {
+				return parseInt(a["value"]) - parseInt(b["value"]);
+			});
+
+			subs.sort(function(a, b) {
+				return a["text"].localeCompare(b["text"]);
+			});
+
+			callback(animeTitle, qualities, subs);
+		};
+		req.send(null);
 	}
 };
-
-Storage.prototype.setObject = function(key, value) {
-	this.setItem(key, JSON.stringify(value));
-}
-
-Storage.prototype.getObject = function(key) {
-	var value = this.getItem(key);
-	return value && JSON.parse(value);
-}
-
-// Special titles
-var specialAnimeSearchNames = {
-	"Fairy Tail (2014)":
-	"Fairy Tail S2",
-
-	"Sidonia no Kishi":
-	"Knights of Sidonia",
-
-	"Gokukoku no Brynhildr":
-	"Brynhildr",
-
-	"Mahouka Koukou no Rettousei":
-	"Mahouka",
-
-	"JoJo no Kimyou na Bouken: Stardust Crusaders":
-	"JoJo Stardust Crusaders",
-
-	"Psycho Pass New Edit Version":
-	"Psycho Pass Extended Edition"
-}
-
-// Helper functions
-var replaceSpecialAnimeSearchNames = function(animeTitle) {
-	if(animeTitle in specialAnimeSearchNames)
-		return specialAnimeSearchNames[animeTitle];
-	else
-		return animeTitle;
-};
-
-var plural = function(count, noun) {
-	return count + " " + (count == 1 ? noun : noun + "s");
-};
-
-var decodeHtmlEntities = function(str) {
-	return str.replace(/&#(\d+);/g, function(match, dec) {
-		return String.fromCharCode(dec);
-	});
-};
-
-var removeHtmlEntities = function(str) {
-	return str.replace(/&#\d+;/g, " ").replace(/&[a-zA-Z]{2,10};/g, " ");
-};
-
-var makeAnimeSearchTitle = function(animeTitle) {
-	return removeHtmlEntities(replaceSpecialAnimeSearchNames(animeTitle))
-			.replace(/:/g, "")
-			.replace(/&/g, "")
-			.replace(/\(TV\)/g, "")
-			.replace(/[^a-zA-Z0-9!']+/g, " ");
-};
-
-var encodeHtmlEntities = function(str) {
-	var buf = [];
-	for (var i=str.length-1;i>=0;i--) {
-		buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
-	}
-	return buf.join('');
-};
-
-var getURLs = function(animeTitle, quality, subs, obj) {
-	var nyaaSearchTitle = makeAnimeSearchTitle(animeTitle)
-							.replace(/_/g, "+")
-							.replace(/ /g, "+")
-							.replace(/\+\+/g, "+");
-
-	var nyaaSuffix = ("&cats=1_37&filter=0&sort=2&term=" + nyaaSearchTitle + "+" + quality + "+" + subs).replace(/\++$/, "");
-	
-	obj.url = "http://www.nyaa.se/?page=search" + nyaaSuffix;
-	obj.rssUrl = "http://www.nyaa.se/?page=rss" + nyaaSuffix;
-
-	//var watchAnimeUrl = "http://www.watch-anime.net/" + entry.searchTitle.toLowerCase().replace(/ /g, "-") + "/" + entry.nextEpisodeToWatch;
-	//var kissAnimeUrl = "http://kissanime.com/Anime/" + entry.searchTitle.replace(/ /g, "-") + "/Episode-" + ("000" + entry.nextEpisodeToWatch).slice(-3);
-}
