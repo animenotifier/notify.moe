@@ -7,6 +7,7 @@ this.manifest = {
 			"tab": i18n.get("Basic"),
 			"group": "Account",
 			"name": "userName",
+			"id": "userName",
 			"type": "text",
 			"label": "Username:",
 			"text": "Your MAL username or anilist.co display name"
@@ -15,6 +16,7 @@ this.manifest = {
 			"tab": i18n.get("Basic"),
 			"group": "Account",
 			"name": "animeListProvider",
+			"id": "animeListProvider",
 			"type": "popupButton",
 			"label": "Anime list:",
 			"options": [
@@ -151,8 +153,9 @@ this.manifest = {
 			"name": "donatorList",
 			"type": "description",
 			"text": "You'll be mentioned here if you support this project.<br/><br/><ul class='donators'>" + 
-					"<li><strong>7,35 €</strong> - <strong>Izzy</strong> (Anilist)</li>" + 
-					"<li><strong>5,00 €</strong> - <strong>Josh Star</strong> (Anilist Admin)</li>" + 
+					"<li><div class='donation-amount'>10,00 €</div> <a href='http://anilist.co/user/drill' target='_blank'>drill</a> (Anilist)</li>" + 
+					"<li><div class='donation-amount'>7,35 €</div> <a href='http://anilist.co/user/Izzy' target='_blank'>Izzy</a> (Anilist)</li>" + 
+					"<li><div class='donation-amount'>5,00 €</div> <a href='http://anilist.co/user/Josh' target='_blank'>Josh Star</a> (Anilist Admin)</li>" + 
 					"</ul>"
 		}
 	],

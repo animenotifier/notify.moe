@@ -4,6 +4,36 @@
 */
 .donators li {
 	font-size: 1.5em;
+	list-style-image: url(http://blitzprog.org/images/icons/money.png);
+	margin-left: 1em;
+}
+
+.donators a {
+	text-decoration: none;
+}
+
+.donation-amount {
+	display: inline-block;
+	width: 4em;
+	text-align: right;
+}
+
+.donation-amount:after {
+	content: ":";
+}
+
+#userName {
+	background-image: url(http://blitzprog.org/images/icons/user.png);
+	background-repeat: no-repeat;
+	padding-left: 26px;
+	background-position: 5px center;
+}
+
+#animeListProvider {
+	background-image: url(http://blitzprog.org/images/icons/animelist.png);
+	background-repeat: no-repeat;
+	padding-left: 22px;
+	background-position: 4px center;
 }
 
 .list-box {
