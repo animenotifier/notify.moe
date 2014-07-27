@@ -31,7 +31,7 @@ var animeListProviders = {
 		host: "anilist.co",
 		url: "http://anilist.co/animelist/",
 		urlSuffix: "",
-		ignoreAfter: "<div id='Completed'",
+		ignoreAfter: "</table>",
 		animeRegEx: /<a href=["']\/anime\/([^\/]+)\/[^"']+[^>]*>([^<]+)</g,
 		progressRegEx: /class='cep[0-9]+[^0-9]+([0-9-]+)[^0-9-]{1,10}([0-9-]*)/,
 		queryImage: function(entry, callBack) {
