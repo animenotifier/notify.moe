@@ -1,19 +1,3 @@
-// Get URLs
-var getURLs = function(animeTitle, quality, subs, obj) {
-	var nyaaSearchTitle = makeAnimeSearchTitle(animeTitle)
-							.replace(/_/g, "+")
-							.replace(/ /g, "+")
-							.replace(/\+\+/g, "+");
-
-	var nyaaSuffix = ("&cats=1_37&filter=0&sort=2&term=" + nyaaSearchTitle + "+" + quality + "+" + subs).replace(/\++$/, "");
-	
-	obj.url = "http://www.nyaa.se/?page=search" + nyaaSuffix;
-	obj.rssUrl = "http://www.nyaa.se/?page=rss" + nyaaSuffix;
-
-	//var watchAnimeUrl = "http://www.watch-anime.net/" + entry.searchTitle.toLowerCase().replace(/ /g, "-") + "/" + entry.nextEpisodeToWatch;
-	//var kissAnimeUrl = "http://kissanime.com/Anime/" + entry.searchTitle.replace(/ /g, "-") + "/Episode-" + ("000" + entry.nextEpisodeToWatch).slice(-3);
-}
-
 // Set object (store objects in localStorage)
 Storage.prototype.setObject = function(key, value) {
 	this.setItem(key, JSON.stringify(value));

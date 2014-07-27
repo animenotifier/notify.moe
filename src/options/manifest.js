@@ -114,7 +114,6 @@ this.manifest = {
 			"type": "description",
 			"text": "The <strong>update interval</strong> indicates how often the updater will check for new releases. The <strong>max episode difference</strong> will tell the updater to only notify you when you're this many or less episodes behind the latest."
 		},
-		
 		{
 			"tab": i18n.get("Advanced"),
 			"group": "Backend",
@@ -123,8 +122,12 @@ this.manifest = {
 			"label": "Anime provider:",
 			"options": [
 				{
-					"value": "nyaa",
+					"value": "nyaa.se",
 					"text": "Nyaa (nyaa.se)"
+				},
+				{
+					"value": "kissanime.com",
+					"text": "KissAnime (kissanime.com) ALPHA"
 				}
 			]
 		},

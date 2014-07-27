@@ -1,14 +1,6 @@
 var animeUpdater = {
+	animeBackend: null,
 	animeListProvider: null,
-	settings: {
-		"userName": "",
-		"quality": "",
-		"subs": "",
-		"otherSearch": "",
-		"updateInterval": "5",
-		"maxEpisodeDifference": "1",
-		"animeListProvider": "anilist.co"
-	},
 	animeList: [],
 	userAnimeListURL: "",
 	optionsURL: "",
@@ -18,6 +10,18 @@ var animeUpdater = {
 	subsRegEx: /^\[([^\]]*)\]/,
 	aniChartHTML: null,
 	animeListCreated : false,
+
+	// Settings
+	settings: {
+		"userName": "",
+		"quality": "",
+		"subs": "",
+		"otherSearch": "",
+		"updateInterval": "5",
+		"maxEpisodeDifference": "1",
+		"animeProvider": "nyaa.se",
+		"animeListProvider": "anilist.co"
+	},
 
 	// Request anime list
 	requestAnimeList: function(newSettings, callback) {
@@ -37,8 +41,15 @@ var animeUpdater = {
 
 	// Send request
 	sendRequest: function() {
+		if(typeof this.settings["animeListProvider"] == 'undefined')
+			this.settings["animeListProvider"] = "anilist.co";
+
+		if(typeof this.settings["animeProvider"] == 'undefined')
+			this.settings["animeProvider"] = "nyaa.se";
+
 		this.animeListProvider = animeListProviders[this.settings["animeListProvider"]];
-		this.optionsURL = chrome.extension.getURL("src/options_custom/index.html");
+		this.animeBackend = animeBackends[this.settings["animeProvider"]];
+		this.optionsURL = chrome.extension.getURL("src/options/index.html");
 
 		// Username check
 		var userName = this.settings["userName"];
@@ -127,11 +138,7 @@ var animeUpdater = {
 		this.animeList = this.parseAnimeList(e.target.responseText);
 
 		var userName = this.settings["userName"];
-		var maxEpisodeDifference = parseInt(this.settings["maxEpisodeDifference"]);
-		var showImages = true;
-
-		var episodeRegEx = /[ _]-[ _]([0-9]{1,3})v?\d?[ _][^a-zA-Z0-9]/;
-		var fetchImage = this.animeListProvider.queryImage;
+		var backend = this.animeBackend;
 
 		if(this.animeList.length == 0) {
 			document.body.innerHTML = "No anime found in the watching list of " + 
@@ -142,135 +149,18 @@ var animeUpdater = {
 		}
 
 		// Each anime
-		this.animeList.forEach(function(entry) {
-			// Nyaa links
-			var key = "store.settings." + entry.originalTitle;
-			var quality = localStorage[key + ":quality"];
-			var subs = localStorage[key + ":subs"];
-			var customSearchTitle = localStorage[key + ":search"];
+		this.animeList.forEach(function(anime) {
+			// Create link
+			anime.element = document.createElement("a");
+			anime.element.className = "anime";
+			anime.element.target = "_blank";
+			anime.element.appendChild(document.createTextNode(anime.title + " "));
 
-			if(customSearchTitle)
-				customSearchTitle = customSearchTitle.replace(/"/g, "");
+			// Add link to document
+			document.body.appendChild(anime.element);
 
-			var urlObject = {};
-			getURLs(customSearchTitle ? customSearchTitle : entry.originalTitle, quality ? quality.replace(/"/g, "") : "", subs ? subs.replace(/"/g, "") : "", urlObject);
-
-			entry.element = document.createElement("a");
-			entry.element.className = "anime";
-			entry.element.href = urlObject.url;
-			entry.element.target = "_blank";
-
-			// TODO: http://cdn.myanimelist.net/images/anime/6/60479.jpg
-			entry.element.appendChild(document.createTextNode(entry.title + " "));
-
-			document.body.appendChild(entry.element);
-
-			var req = new XMLHttpRequest();
-			req.overrideMimeType('text/xml');
-			req.open("GET", urlObject.rssUrl, true);
-			req.onload = function(e) {
-				entry.latestEpisodeNumber = -1;
-				//console.log(entry.title);
-
-				// Find latest episode
-				var itemList = e.target.responseXML.querySelectorAll("item");
-				[].forEach.call(
-					itemList, 
-					function(item) {
-						var title = item.getElementsByTagName("title")[0].innerHTML;
-						var link = item.getElementsByTagName("link")[0].innerHTML;
-						var pubDate = item.getElementsByTagName("pubDate")[0].innerHTML;
-
-						var match = episodeRegEx.exec(title);
-						if(match != null) {
-							var episodeNumber = parseInt(match[1]);
-
-							if(!isNaN(episodeNumber) && episodeNumber > entry.latestEpisodeNumber) {
-								entry.latestEpisodeNumber = episodeNumber;
-								entry.latestEpisodeLink = link.replace("&amp;", "&");
-							}
-						}
-					}
-				);
-
-				// Add episode number
-				var episodesHTML;
-				if(entry.latestEpisodeNumber == -1) {
-					// Use watched episodes as a fallback
-					//entry.latestEpisodeNumber = entry.watchedEpisodes;
-					episodesHTML = "<span class='episodes latest-episode-fail'>";
-				} else {
-					episodesHTML = "<span class='episodes'>";
-				}
-				episodesHTML += "<span class='watched-episode-number'>" + entry.watchedEpisodes + "</span> "
-					+ "<span class='latest-episode-number'>/ " + (entry.latestEpisodeNumber != -1 ? entry.latestEpisodeNumber : "?") + "</span> "
-					+ "<span class='max-episode-part'>[" + entry.maxEpisodes + "]</span></span>";
-				entry.element.innerHTML += episodesHTML;
-
-				// Make it green
-				if(entry.latestEpisodeNumber > entry.watchedEpisodes && entry.watchedEpisodes != "-") {
-					entry.element.className += " new-episodes";
-				} else if(entry.maxEpisodes > 0 && entry.watchedEpisodes == entry.maxEpisodes) {
-					entry.element.className += " completed";
-				}
-
-				entry.element.title = "You watched " + entry.watchedEpisodes + " episodes out of " + entry.latestEpisodeNumber + " available (maximum: " + entry.maxEpisodes + ")";
-
-				// Notification options
-				var notificationOptions = {
-					type: "basic",
-					title: entry.title + " [Ep. " + entry.latestEpisodeNumber + "]",
-					message: "New episode available\n",
-					buttons: [{
-						title: "Download"
-					}]
-				};
-
-				// Fetch image
-				fetchImage(entry, function(coverUrl) {
-					notificationOptions.iconUrl = coverUrl;
-					entry.imageUrl = coverUrl;
-
-					if(showImages) {
-						/*nyaa.style.background = "url('" + entry.imageUrl + "') no-repeat center center fixed";
-						nyaa.style.backgroundSize = "cover";*/
-						//nyaa.innerHTML = "<img src='" + entry.imageUrl + "' alt='" + entry.title + "'/> " + nyaa.innerHTML;
-
-						var animeImg = document.createElement("img");
-						animeImg.src = entry.imageUrl;
-						animeImg.alt = entry.title;
-
-						entry.element.appendChild(animeImg);
-					}
-
-					// Do we have latest episode info?
-					if(entry.latestEpisodeNumber != -1) {
-						//console.log(entry.title + "...");
-						var key = "anime." + entry.title;
-						var cached = localStorage.getObject(key);
-						//console.log(cached);
-
-						if(typeof(cached) != "undefined" && cached != null) {
-							var latestEpisodeCached = parseInt(cached.latestEpisodeNumber);
-							//console.log(latestEpisodeCached);
-
-							// Just released?
-							if(!isNaN(latestEpisodeCached) && entry.latestEpisodeNumber > latestEpisodeCached && entry.latestEpisodeNumber - entry.watchedEpisodes <= maxEpisodeDifference) {
-								// Display notification
-								chrome.notifications.create("", notificationOptions, function(notificationId) {
-									animeUpdater.notificationIdToLink[notificationId] = entry.latestEpisodeLink;
-								});
-							}
-						}
-
-						// Save in cache
-						localStorage.setObject(key, {
-							latestEpisodeNumber: entry.latestEpisodeNumber
-						});
-					}
-				});
-			};
-			req.send(null);
+			// Backend
+			backend.process(anime);
 		});
 		
 		// This is not perfectly correct in terms of real concurrency
@@ -286,9 +176,10 @@ var animeUpdater = {
 		// Create footer
 		var footer = document.createElement("div");
 		footer.className = "footer";
-		footer.innerHTML = "<a href='" + this.userAnimeListURL + "' target='_blank' title='Profile'>" + userName + "</a> " + 
-							"<a href='" + this.optionsURL + "' target='_blank' title='Options'><img src='http://blitzprog.org/images/anime-release-notifier/settings.png' alt='Options'/></a> " + 
-							"<a href='http://anichart.net/airing' target='_blank' title='Chart'><img src='http://blitzprog.org/images/anime-release-notifier/chart.png' alt='Chart'/></a>";
+		footer.innerHTML = "<a href='" + this.userAnimeListURL + "' target='_blank' title='Profile'>" + userName + "</a> | " + this.settings["animeProvider"] + 
+							" <a href='http://anichart.net/airing' target='_blank' title='Chart'><img src='http://blitzprog.org/images/anime-release-notifier/chart.png' alt='Chart'/></a>" +
+							" <a href='" + this.optionsURL + "' target='_blank' title='Options'><img src='http://blitzprog.org/images/anime-release-notifier/settings.png' alt='Options'/></a>"; 
+							
 		document.body.appendChild(footer);
 
 		this.backgroundCallback();
