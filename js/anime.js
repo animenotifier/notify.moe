@@ -296,7 +296,7 @@ var animeUpdater = {
 			customSearchTitle = customSearchTitle.replace(/"/g, "");
 
 		var urlObject = {};
-		getURLs(customSearchTitle ? customSearchTitle : animeTitle, "", subsProvider, urlObject);
+		animeBackends["nyaa.se"].getURLs(customSearchTitle ? customSearchTitle : animeTitle, "", subsProvider, urlObject);
 
 		var req = new XMLHttpRequest();
 		req.overrideMimeType('text/xml');
