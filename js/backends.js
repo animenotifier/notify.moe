@@ -217,7 +217,7 @@ var animeBackends = {
 		process: function(anime) {
 			//var watchAnimeUrl = "http://www.watch-anime.net/" + anime.searchTitle.toLowerCase().replace(/ /g, "-") + "/" + anime.nextEpisodeToWatch;
 			var kissAnimeURL = "http://kissanime.com/Anime/"
-									+ anime.title.replace(/ /g, "-").replace(/!/g, "").replace(/:/g, "")
+									+ anime.title.replace(/ /g, "-").replace(/\./g, "-").replace(/!/g, "").replace(/:/g, "").replace(/\(/g, "").replace(/\)/g, "")
 									+ "/Episode-" + ("000" + anime.nextEpisodeToWatch).slice(-3);
 
 			anime.element.href = kissAnimeURL;
