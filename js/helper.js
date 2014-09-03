@@ -46,3 +46,18 @@ var encodeHtmlEntities = function(str) {
 	}
 	return buf.join('');
 };
+
+var markAnimeAsNew = function(anime) {
+	anime.element.className += " new-episodes";
+	anime.hasNewEpisodes = true;
+	chrome.browserAction.getBadgeText({}, function(text) {
+		count = parseInt(text);
+
+		if(isNaN(count))
+			count = 0;
+
+		chrome.browserAction.setBadgeText({
+			text: (count + 1).toString()
+		});
+	});
+};

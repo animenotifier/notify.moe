@@ -69,7 +69,7 @@ var animeBackends = {
 
 				// Make it green
 				if(anime.latestEpisodeNumber > anime.watchedEpisodes && anime.watchedEpisodes != "-") {
-					anime.element.className += " new-episodes";
+					markAnimeAsNew(anime);
 				} else if(anime.maxEpisodes > 0 && anime.watchedEpisodes == anime.maxEpisodes) {
 					anime.element.className += " completed";
 				}
@@ -174,8 +174,9 @@ var animeBackends = {
 			req.onload = function(e) {
 				var html = e.target.responseText;
 
-				if(html.indexOf('<div class="release_episode">' + anime.nextEpisodeToWatch + '</div>') != -1)
-					anime.element.className += " new-episodes";
+				if(html.indexOf('<div class="release_episode">' + anime.nextEpisodeToWatch + '</div>') != -1) {
+					markAnimeAsNew(anime);
+				}
 			};
 			req.send(null);
 
@@ -227,8 +228,10 @@ var animeBackends = {
 			req.onload = function(e) {
 				var html = e.target.responseText;
 
-				if(html.indexOf("ContentVideo") != -1)
-					anime.element.className += " new-episodes";
+				if(html.indexOf("ContentVideo") != -1) {
+					markAnimeAsNew(anime);
+				}
+				
 			};
 			req.send(null);
 

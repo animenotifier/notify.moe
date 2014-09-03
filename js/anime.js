@@ -116,6 +116,8 @@ var animeUpdater = {
 				watchedEpisodes: watchedEpisodes,
 				nextEpisodeToWatch: watchedEpisodes + 1,
 				maxEpisodes: maxEpisodes,
+				hasNewEpisodes: false,
+				latestEpisodeNumber: -1,
 				days: 0,
 				hours: 0,
 				minutes: 0
@@ -147,6 +149,10 @@ var animeUpdater = {
 		} else {
 			document.body.innerHTML = "";
 		}
+
+		chrome.browserAction.setBadgeText({
+			text: ""
+		});
 
 		// Each anime
 		this.animeList.forEach(function(anime) {
