@@ -1,7 +1,7 @@
 {
   "name": "Anime Release Notifier",
   "short_name": "Anime Notifier",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "manifest_version": 2,
   "description": "Notifies you when there's a new episode of your favourite anime available.",
   "homepage_url": "http://blitzprog.org/projects",
@@ -21,6 +21,7 @@
   "permissions": [
     "notifications",
     "http://www.nyaa.se/",
+    "http://www.shanaproject.com/",
     "http://kissanime.com/",
     "http://anilist.co/",
     "http://myanimelist.net/",

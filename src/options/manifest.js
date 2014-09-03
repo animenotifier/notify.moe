@@ -130,6 +130,10 @@ this.manifest = {
 				{
 					"value": "kissanime.com",
 					"text": "KissAnime (kissanime.com) ALPHA"
+				},
+				{
+					"value": "shanaproject.com",
+					"text": "Shana Project (shanaproject.com) ALPHA"
 				}
 			]
 		},
