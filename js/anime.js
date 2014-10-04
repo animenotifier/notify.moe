@@ -276,7 +276,7 @@ var animeUpdater = {
 	// Request AniChart
 	requestAniChart: function() {
 		var req = new XMLHttpRequest();
-		req.open("GET", "http://anichart.net/airing", true);
+		req.open("GET", "http://old.anichart.net/airing", true);
 		req.onload = this.receiveAniChart.bind(this);
 		req.send(null);
 	},
