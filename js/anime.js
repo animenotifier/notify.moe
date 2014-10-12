@@ -63,12 +63,20 @@ var animeUpdater = {
 		if(typeof callback != 'undefined')
 			this.backgroundCallback = callback;
 
+		// url used for parsing and extracting watch data
+		this.userAnimeListApiURL = (this.animeListProvider.apiUrl || this.animeListProvider.url) + userName + (this.animeListProvider.apiUrlSuffix || this.animeListProvider.urlSuffix);
+		// user link to access their profile from the popup
 		this.userAnimeListURL = this.animeListProvider.url + userName + this.animeListProvider.urlSuffix;
 		this.animeListCreated = false;
 
 		var req = new XMLHttpRequest();
-		req.open("GET", this.userAnimeListURL, true);
+		req.open("GET", this.userAnimeListApiURL, true);
+		req.responseType = 'text';
 		req.onload = this.showAnimeList.bind(this);
+		if(this.animeListProvider.beforeSend) {
+			// allow anime-list-providers to modify request object before sending
+			this.animeListProvider.beforeSend(req);
+		}
 		req.send(null);
 
 		// Sort please
@@ -136,8 +144,12 @@ var animeUpdater = {
 			console.log(e.target.statusText);
 		}
 
-		// Parse the list
-		this.animeList = this.parseAnimeList(e.target.responseText);
+		// Parse the list (using override if applicable)
+		if(this.animeListProvider.overrideParse) {
+			this.animeList = this.animeListProvider.overrideParse(e.target.response);
+		} else {
+			this.animeList = this.parseAnimeList(e.target.response);
+		}
 
 		var userName = this.settings["userName"];
 		var backend = this.animeBackend;

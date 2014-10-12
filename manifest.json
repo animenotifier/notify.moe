@@ -25,7 +25,8 @@
     "http://kissanime.com/",
     "http://anilist.co/",
     "http://myanimelist.net/",
-    "http://old.anichart.net/"
+    "http://old.anichart.net/",
+    "https://hummingbirdv1.p.mashape.com/"
   ],
   "browser_action": {
     "default_icon": "icons/icon128.png",

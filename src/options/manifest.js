@@ -27,6 +27,10 @@ this.manifest = {
 				{
 					"value": "myanimelist.net",
 					"text" : "My Anime List (myanimelist.net)"
+				},
+				{
+					"value": "hummingbird.me",
+					"text": "Hummingbird (hummingbird.me)"
 				}
 			]
 		},
