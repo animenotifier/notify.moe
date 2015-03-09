@@ -1,0 +1,13 @@
+{
+	"name": "animereleasenotifier.com",
+	"repository": "blitzprog/animereleasenotifier.com",
+	"version": "0.0.1",
+	"dependencies": {
+		"aero": "*"
+	},
+	"author": {
+		"name": "Eduard Urbach",
+		"email": "e.urbach@gmail.com",
+		"url": "http://blitzprog.org"
+	}
+}
