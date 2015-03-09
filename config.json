@@ -1,4 +1,7 @@
 {
 	"siteName": "Anime Release Notifier",
+	"pages": [
+		"users"
+	],
 	"port": 4001
 }
