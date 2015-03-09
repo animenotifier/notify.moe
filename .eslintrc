@@ -1,0 +1,12 @@
+{
+    "env": {
+        "node": true
+    },
+    "rules": {
+        "eqeqeq": 2,
+        "curly": 0,
+        "quotes": [2, "double"],
+        "no-trailing-spaces": 0,
+        "eol-last": 0
+    }
+}

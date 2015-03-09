@@ -12,9 +12,6 @@ Supports anime lists from:
 Website:
 - https://animereleasenotifier.com/
 
-Installation:
-- https://play.google.com/store/apps/details?id=com.freezingwind.animereleasenotifier
-
 Forum:
 - http://anilist.co/forum/thread/64
 - http://myanimelist.net/forum/?topicid=1175519
