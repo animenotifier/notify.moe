@@ -3,5 +3,11 @@
 	"pages": [
 		"users"
 	],
+	"ssl": {
+		"cert": "ssl/ssl.crt",
+		"key": "ssl/ssl.key",
+		"ca": "ssl/combined.pem",
+		"port": 4002
+	},
 	"port": 4001
 }
