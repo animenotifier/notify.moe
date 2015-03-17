@@ -113,13 +113,13 @@
 	"JoJo-s-Bizarre-Adventure-Stardust-Crusaders--Battle-in-Egypt":
 	"Jojo-s-Bizarre-Adventure-Stardust-Crusaders-2nd-Season",
 
-	"Kuroko%27s-Basketball-3":
+	"Kuroko's-Basketball-3":
 	"Kuroko-no-Basket-3rd-Season",
 
 	"Attack-on-Titan-No-Regrets--Birth-of-Levi":
 	"Shingeki-no-Kyojin-Kuinaki-Sentaku",
 
-	"Kuroko%27s-Basketball-2":
+	"Kuroko's-Basketball-2":
 	"Kuroko-no-Basket-2",
 
 	"Kyousougiga":
@@ -182,7 +182,7 @@
 	"Yahari-Ore-no-Seishun-Love-Comedy-wa-Machigatteiru-OVA":
 	"Oregairu%20OVA",
 	
-	"JoJo%27s-Bizarre-Adventure-Stardust-Crusaders--Egypt-Arc":
+	"JoJo's-Bizarre-Adventure-Stardust-Crusaders--Egypt-Arc":
 	"Jojo-s-Bizarre-Adventure-Stardust-Crusaders-2nd-Season",
 	
 	"Bonjour-Koiaji-Pâtisserie":
@@ -194,7 +194,7 @@
 	"Gintama-2":
 	"Gintama",
 	
-	"Gintama%27-Enchousen":
+	"Gintama'-Enchousen":
 	"Gintama",
 	
 	"Bishoujo-Senshi-Sailor-Moon":
@@ -336,6 +336,174 @@
 	"Ghost-in-the-Shell-Arise-Alternative-Architecture",
 	
 	"Uta-no-Prince-sama-Maji-Love-Revolutions":
-	"Uta-no-Prince-Sama-3"
+	"Uta-no-Prince-Sama-3",
+	
+	"Juuza-Engi-Engetsu-Sangokuden--Gaiden-Youzhou-Genya":
+	"Juuza-Engi-Engetsu-Sangokuden",
+	
+	"Yuusha-ni-Narenakatta-Ore-wa-Shibushibu-Shuushoku-wo-Ketsui-Shimashita":
+	"Yu-sibu",
+	
+	"Working-2":
+	"Working",
+	
+	"Working-S1":
+	"Working",
+	
+	"Suzumiya-Haruhi-no-Yuuutsu-2009":
+	"Suzumiya-Haruhi-no-Yuuutsu",
+	
+	"Steins-Gate-Fuka-Ryouiki-no-Déjà-vu":
+	"Steins-Gate-Fuka-Ryouiki-no-Deja-vu",
+	
+	"Soukyuu-no-Fafner-Dead-Aggressor":
+	"Fafner-Sub",
+	
+	"Soukyuu-no-Fafner-Dead-Aggressor--Exodus":
+	"Soukyuu-no-Fafner-Dead-Aggressor-Exodus",
+	
+	"Soukyuu-no-Fafner-Dead-Aggressor--Heaven-and-Earth":
+	"Fafner-Heaven-and-Earth-Sub",
+	
+	"Sidonia-no-Kishi-Daikyuu-Wakusei-Seneki":
+	"Knights-of-Sidonia-Battle-for-Planet-Nine",
+	
+	"Sensei-no-Ojikan-Doki-Doki-School-Hours-OVA":
+	"Sensei-no-Ojikan-Doki-Doki-School-Hours-OVA-Sub",
+	
+	"Sensei-no-Ojikan-Doki-Doki-School-Hours":
+	"Sensei-no-Ojikan-Doki-Doki-School-Hours-Sub",
+	
+	"School-Days-Valentine-Days":
+	"School-Days-OVA",
+		
+	"School-Days-Magical-Heart-Kokoro-chan":
+	"School-Days-OVA",
+			
+	"Rinne-no-Lagrange-Kamogawa-Days":
+	"Rinne-no-Lagrange",
+			
+	"Rinne-no-Lagrange-Season-2":
+	"Rinne-no-Lagrange",
+			
+	"Ore, Twintails ni Narimasu":
+	"Ore-Twintail-ni-Narimasu",
+			
+	"Narutaru-Mukuro-Naru-Hoshi-Tama-Taru-Ko":
+	"Shadow-Star-Narutaru-Sub",
+			
+	"Narue-no-Sekai":
+	"The-World-of-Narue-Sub",
+			
+	"Mnemosyne-Mnemosyne-no-Musume-tachi":
+	"Rin-Daughters-of-Mnemosyne",
+			
+	"Kyoukai-no-Rinne":
+	"Kyoukai-no-Rinne-TV",
+			
+	"Kiniro-Mosaic":
+	"Yellow-Mosaic",
+		
+	"Hello--Kiniro-Mosaic":
+	"Hello-Kiniro-Mosaic",
+		
+	"Kashimashi-Girl-Meets-Girl":
+	"Girl-Meets-Girl",
+		
+	"Kashimashi-Girl-Meets-Girl-OVA":
+	"Girl-Meets-Girl",
+		
+	"Gasaraki":
+	"Gasaraki-Sub",
+		
+	"Druaga-no-Tou-The-Aegis-of-Uruk":
+	"Druaga-no-Tou-The-Aegis-of-Uruk-Sub",
+		
+	"Dungeon-ni-Deai-o-Motomeru-no-wa-Machigatteiru-Darou-ka":
+	"Dungeon-ni-Deai-wo-Motomeru-no-wa-Machigatteiru-Darou-ka",
+		
+	"Danna-ga-Nani-o-Itteiru-ka-Wakaranai-Ken-2-sure-me":
+	"I-Can-t-Understand-What-My-Husband-Is-Saying-Second-Season",
+		
+	"Code-Geass-Boukoku-no-Akito-1--Yokuryuu-wa-Maiorita":
+	"Code-Geass-Akito-the-Exiled-1",
+		
+	"Code-Geass-Boukoku-no-Akito-2--Hikisakareshi-Yokuryuu":
+	"Code-Geass-Akito-the-Exiled-2",
+	
+	"Code-Breaker-OVA":
+	"Code-Breaker",
+	
+	"Bounen-no-Xamdou":
+	"Xam-d-Lost-Memories",
+	
+	"Aozora-Shoujotai":
+	"Aozora-Shoujotai-Sub",
+	
+	"Asura-Cryin'-2":
+	"Asura-Cryin-2",
+	
+	"Asura-Cryin-2":
+	"Asura-Cryin",
+	
+	"A-Channel--A-Channel":
+	"A-Channel",
+	
+	"A-Channel-A-Channel-smile":
+	"A-Channel-OVA",
+	
+	"Gintama'-2015":
+	"Gintama-2015",
+	
+	"Punch-Line":
+	"Punchline",
+	
+	"Code-Geass-Hangyaku-no-Lelouch":
+	"Code-Geass-Lelouch-of-the-Rebellion",
+	
+	"Black-Lagoon-Roberta's-Blood-Trail":
+	"Black-Lagoon-Roberta-s-Blood-Trail",
+	
+	"Rekka-no-Honoo":
+	"Flame-of-Recca",
+	
+	"Rekka-no-Honoo-Final-Burning":
+	"Flame-of-Recca-Final-Burning",
+	
+	"Kurokami-The-Animation":
+	"Black-God",
+	
+	"The-Legend-of-Korra-Book-2-Spirits":
+	"The-Legend-of-Korra-Season-2",
+	
+	"My-Little-Monster":
+	"Tonari-no-Kaibutsu-kun",
+	
+	"I-My-Me-Strawberry-Eggs":
+	"I-My-Me-Strawberry-Eggs-Sub",
+	
+	"Angel-Beats-Specials":
+	"Angel-Beats",
+	
+	"Code-Geass-Hangyaku-no-Lelouch-R2":
+	"Code-Geass-Lelouch-of-the-Rebellion-R2",
+	
+	"Your-lie-in-April":
+	"Shigatsu-wa-Kimi-no-Uso",
+	
+	"Dragon-Ball-GT":
+	"Dragon-Ball-GT-Sub",
+	
+	"hack-Sign":
+	"-hack-Sign",
+	
+	"Yu-Gi-Oh-Duel-Monsters":
+	"Yu-Gi-Oh-Duel-Monsters-Sub",
+	
+	"Gyakkyou-Burai-Kaiji-Ultimate-Survivor":
+	"Kaiji",
+	
+	"Gyakkyou-Burai-Kaiji-Hakairoku-Hen":
+	"Kaiji-2"
 	
 }
