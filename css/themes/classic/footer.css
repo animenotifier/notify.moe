@@ -1,0 +1,30 @@
+.footer {
+	float: right;
+	text-align: right;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding: 0.5em 1em;
+	/*width: calc(100% - 2em);*/
+}
+
+.footer img {
+	vertical-align: middle;
+}
+
+.footer a {
+	text-decoration: none;
+	color: rgb(20, 140, 243);
+}
+
+.footer a:hover {
+	color: rgb(0, 70, 255);
+	/*text-decoration: underline;*/
+	/*text-shadow: 1px 1px 1px rgba(40, 180, 255, 0.4);*/
+	
+	transition: all 290ms ease;
+}
+
+.footer a:visited {
+	color: rgb(0, 0, 255);
+}

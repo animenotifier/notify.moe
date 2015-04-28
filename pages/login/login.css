@@ -1,0 +1,10 @@
+#login-page {
+	width: 100%;
+	float: left;
+}
+
+#login-page form {
+	width: 100%;
+	max-width: 25em;
+	display: inline-block;
+}

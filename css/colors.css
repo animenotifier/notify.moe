@@ -1,0 +1,100 @@
+html, body {
+	color: rgb(32, 32, 32);
+	background-color: rgb(254, 254, 254);
+
+	/*background: url(/images/backgrounds/meka-light-inv.jpg) no-repeat center center fixed;*/
+}
+
+a {
+	/*color: rgb(243, 140, 20);*/
+	color: rgb(8, 193, 70);
+}
+
+a:hover {
+	color: rgb(12, 213, 110);
+	/*text-shadow: 1px 1px 8px rgba(12, 213, 110, 0.25);*/
+	/*color: rgb(255, 255, 255);
+	text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);*/
+}
+
+#header {
+	background: rgba(0, 0, 0, 0.03);
+
+	background-image: url(/images/backgrounds/kano-196.png);
+	background-repeat: no-repeat;
+	background-size: auto 100%;
+	background-position: 100% 0%;
+}
+
+@media only screen and (max-width: 1000px) {
+	#header {
+		background-image: none;
+	}
+}
+
+#title a {
+	
+}
+
+#content {
+	background-color: transparent;
+}
+
+#footer {
+	background: rgba(0, 0, 0, 0.06);
+}
+
+#footer a {
+	color: rgb(6, 140, 35);
+}
+
+#footer a:hover {
+	color: rgb(12, 200, 65);
+}
+
+#navigation {
+	/*border-bottom: 1px solid rgba(48, 48, 48, 0.65);*/
+}
+
+.navigation-button {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.navigation-button:hover {
+	color: rgb(0, 0, 0);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	color: rgb(32, 32, 32);
+	background-color: rgb(255, 255, 255);
+	box-shadow: none;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+	color: rgb(0, 0, 0);
+	/*box-shadow: 0 0 2px #ed1c24 inset;*/
+	/*background-color: #fff;*/
+	box-shadow: 0 0 6px rgba(16, 223, 120, 0.2);
+	border: 1px solid rgba(16, 223, 120, 0.95);
+}
+
+select {
+	color: rgb(48, 48, 48);
+}
+
+select:disabled {
+	background-color: rgb(235, 235, 228);
+}
+
+.user-name a {
+	color: rgb(16, 16, 16);
+}
+
+.list-provider-name-highlight {
+	color: rgb(48, 48, 48);
+}

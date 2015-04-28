@@ -1,0 +1,45 @@
+html, body {
+	font-family: "Open Sans", Ubuntu, "Trebuchet MS", sans-serif;
+	font-size: 1.05em;
+	tab-size: 4;
+	
+	overflow-x: hidden;
+	overflow-y: hidden;
+	height: 100%;
+
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+a {
+	text-decoration: none;
+	transition: all 290ms ease;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+nav a {
+	display: inline-block;
+	position: relative;
+}
+	
+nav a:after {
+	content: "";
+	display: block;
+	margin: auto;
+	margin-top: 0;
+	height: 2px;
+	width: 0px;
+	background-color: rgba(20, 243, 140, 0);
+	transition: all 500ms ease;
+}
+
+nav a:hover:after {
+	width: 100%;
+	background-color: rgba(40, 247, 200, 1);
+}

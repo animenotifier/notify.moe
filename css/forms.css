@@ -1,0 +1,96 @@
+/* Forms */
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	font-family: "Open Sans", Ubuntu, sans-serif;
+	font-size: 1em;
+
+	border-radius: 3px;
+	transition: all 0.5s ease;
+	margin: 0 0 10px;
+	padding: 0.4em 0.8em;
+	width: calc(100% - 1.6em);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+	outline: none;
+}
+
+input[type="submit"], .button, .ui-button {
+	font-family: "Open Sans", Ubuntu, sans-serif;
+	font-size: 1em;
+
+	color: black;
+
+	padding: 0.5em 2em;
+	border-radius: 3px;
+	box-shadow: none;
+	border: none;
+	text-align: center;
+	transition: all 290ms ease;
+}
+
+input[type="submit"]:hover, .button:hover {
+	cursor: pointer;
+	background: rgb(26, 26, 26);
+	text-decoration: none;
+	color: white;
+}
+
+form div a {
+	float: right;
+	margin: 30px 15px 0 0;
+}
+
+textarea {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	font-size: 1em;
+	font-family: "<?php echo $config['font']; ?>", Ubuntu, "Trebuchet MS", sans-serif;
+	line-height: 1.7em;
+	outline: none;
+	resize: vertical;
+	overflow: auto;
+}
+
+select {
+	padding: 0.5em;
+	border-radius: 3px;
+	
+	font-size: 1em;
+	font-weight: normal;
+	font-family: inherit;
+	box-shadow: 0 0 2px #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+	transition: all 0.5s ease;
+
+	-webkit-appearance: button;
+	
+	
+	-webkit-padding-end: 20px;
+	-webkit-padding-start: 2px;
+
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	user-select: none;
+
+	border-radius: 2px;
+	background-image: url(/images/elements/arrow-down.png), -webkit-linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+	background-position: 97% center;
+	background-repeat: no-repeat;
+	border: 1px solid #AAA;
+	font-size: inherit;
+	overflow: hidden;
+	padding: 5px 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 250px;
+}
+
+.error {
+	padding: 1em;
+	background-color: rgb(255, 64, 64);
+	color: white;
+	border-radius: 5px;
+	margin-bottom: 1em;
+}

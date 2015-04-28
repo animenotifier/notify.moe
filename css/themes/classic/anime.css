@@ -1,0 +1,115 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+	font-family: "Open Sans", "Trebuchet MS", Helvetica, sans-serif;
+	font-size: 100%;
+	
+	min-width: calc(450px + 225px + 2em);
+	min-height: calc(360px + 2em);
+
+	background-color: rgb(254, 254, 254);
+	color: rgb(32, 32, 32);
+	/*text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);*/
+}
+
+#userName {
+	width: 50%;
+	padding: 0.5em;
+}
+
+.anime {
+	opacity: 1.0;
+	text-decoration: none;
+	padding: 0.25em 1em;
+	margin: 0.1em 0;
+	display: block;
+	width: calc(100% - 2em - 225px - 2em + 5px);
+	float: left;
+	vertical-align: middle;
+	color: rgb(32, 32, 32) !important;
+	border-radius: 3px;
+	border: 1px solid rgb(224, 224, 224);
+	background: linear-gradient(to bottom, rgba(232, 232, 232, 0.7) 0%, rgba(232, 232, 232, 1.0) 100%);
+}
+
+.anime:hover {
+	opacity: 1.0 !important;
+	background: linear-gradient(to bottom, rgba(32, 32, 32, 0.8) 0%, rgba(32, 32, 32, 1.0) 100%);
+	color: white !important;
+	text-decoration: none;
+	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.5);
+	border: 1px solid black;
+}
+
+.anime img {
+	width: 225px;
+	height: auto;
+	display: block;
+	position: fixed;
+	z-index: 1000;
+
+	right: 10000px;
+	top: 10000px;
+	
+	opacity: 0.0;
+	box-shadow: 0px 0px 16px black;
+	border: 1px solid black;
+	user-select: none;
+	transition: opacity 290ms ease;
+}
+
+.anime:hover img {
+	right: 1em;
+	top: 1em;
+
+	opacity: 1.0;
+}
+
+.episodes {
+	float: right;
+	text-align: right;
+	display: none;
+}
+
+.anime:hover .episodes {
+	display: block;
+}
+
+.latest-episode-number {
+	opacity: 0.65;
+}
+
+.latest-episode-fail .latest-episode-number {
+	/*opacity: 0.25;*/
+	color: red;
+}
+
+.max-episode-part {
+	opacity: 0.35;
+}
+
+.new-episodes {
+	opacity: 1.0 !important;
+	background: linear-gradient(to bottom, rgba(160, 255, 160, 0.7) 0%, rgba(160, 255, 160, 1.0) 100%);
+	border: 1px solid green;
+	color: rgb(16, 16, 16) !important;
+}
+
+.release-time {
+	float: right;
+	opacity: 0.9;
+	margin-left: 1em;
+	min-width: 3em;
+	text-align: right;
+}
+
+.completed {
+	opacity: 1.0 !important;
+	background: linear-gradient(to bottom, rgba(30, 192, 255, 0.7) 0%, rgba(30, 192, 255, 1.0) 100%);
+	border: 1px solid blue;
+	color: rgb(0, 0, 0) !important;
+}
+
+.date-in-the-past {
+	opacity: 0.5;
+}
