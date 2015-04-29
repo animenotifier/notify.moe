@@ -315,7 +315,7 @@
 				$url = $website;
 			}
 
-			echo "<a href='$url' target='_blank' class='user-website'>$website</a>";
+			echo "<a href='$url' target='_blank' class='user-website' rel='nofollow'>$website</a>";
 		?>
 
 		<?php
