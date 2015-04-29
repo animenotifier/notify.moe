@@ -20,10 +20,10 @@ a:hover {
 #header {
 	background: rgba(0, 0, 0, 0.03);
 
-	background-image: url(/images/backgrounds/kano-196.png);
+	/*background-image: url(/images/backgrounds/kano-196.png);
 	background-repeat: no-repeat;
 	background-size: auto 100%;
-	background-position: 100% 0%;
+	background-position: 100% 0%;*/
 }
 
 @media only screen and (max-width: 1000px) {

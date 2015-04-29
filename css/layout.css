@@ -43,6 +43,16 @@
 	overflow: hidden;
 }
 
+#title-and-tagline {
+	float: left;
+	width: calc(100% - 320px - 16px);
+}
+
+#ads {
+	float: right;
+	margin-right: 16px;
+}
+
 #title, #tagline {
 	display: block;
 	margin: 0 auto;
@@ -76,6 +86,8 @@
 /* Navigation */
 
 #navigation {
+	float: left;
+	width: 100%;
 	display: block;
 	margin: 0 auto;
 	width: calc(100% - 3em);

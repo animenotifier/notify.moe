@@ -22,6 +22,7 @@
 		require_once("fw/header.php");
 	?>
 
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch">
 </head>
 
@@ -30,14 +31,28 @@
 		<!-- Header -->
 		<div id="header-container">
 			<div id="header">
-				<div id="title">
-					<a href="/">
-						<h1><?php echo $title; ?></h1>
-					</a>
+				<div id="title-and-tagline">
+					<div id="title">
+						<a href="/">
+							<h1><?php echo $title; ?></h1>
+						</a>
+					</div>
+
+					<div id="tagline">
+						<!--Don't miss the next episode.--> <span style="opacity: 1.0;">See <a href="https://twitter.com/animenotifier" target="_blank">Twitter</a> for the latest news. KissAnime is currently not working because of their website changes.</span>
+					</div>
 				</div>
 
-				<div id="tagline">
-					<!--Don't miss the next episode.--> <span style="opacity: 1.0;">See <a href="https://twitter.com/animenotifier" target="_blank">Twitter</a> for the latest news. KissAnime is currently not working because of their website changes.</span>
+				<!-- Header Ad -->
+				<div id="ads">
+					<ins class="adsbygoogle"
+					     style="display:inline-block;width:320px;height:100px"
+					     data-ad-client="ca-pub-6906849754754856"
+					     data-ad-slot="7056875727"
+					></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
 				</div>
 
 				<nav id="navigation">
