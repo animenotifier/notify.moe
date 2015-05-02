@@ -154,7 +154,7 @@ function AnimeList(json, $animeList, maxEpisodeDifference, notificationCallBack)
 		var tooltip = "You watched " + anime.episodes.watched + " episodes out of " + available + " available (maximum: " + max + ")";
 
 		$animeList.append("<a href='" + anime.actionUrl.replace(/'/g, "%27") + "' target='_blank' class='" + cssClass + "' title='" + tooltip + "' itemscope itemtype='http://schema.org/ViewAction'>" +
-			anime.title +
+			'<span class="title">' + anime.title + '</span>' +
 			(anime.airingDate.timeStamp != -1 ? ('<span class="release-time">' + anime.airingDate.remainingString + '</span>') : '') +
 			'<span class="episodes"><span class="watched-episode-number">' + (anime.episodes.watched != -1 ? anime.episodes.watched : '?') +
 			'</span> <span class="latest-episode-number">/ ' + available + 

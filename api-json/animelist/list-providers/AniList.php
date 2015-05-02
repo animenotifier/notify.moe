@@ -206,7 +206,7 @@ class AniList implements ListProvider, TimeProvider {
 			$newEntry = array(
 				'title' => $title,
 				'image' => str_replace('http://', 'https://', $anime['image_url_lge']),
-				'url' => 'http://anilist.co/anime/' . $anime['id'],
+				'url' => 'https://anilist.co/anime/' . $anime['id'],
 				'id' => $anime['id'],
 				'airingDate' => [
 					'timeStamp' => '',
