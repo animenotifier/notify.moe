@@ -67,7 +67,7 @@
 		$results = $googleData['responseData']['results'];
 
 		if(count($results) === 0)
-			return;
+			return '';
 
 		foreach($results as $result) {
 			if(strpos($result['url'], $linkNeedsToContain) !== false)

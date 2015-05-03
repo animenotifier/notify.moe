@@ -9,7 +9,7 @@
 		'font' => 'Open Sans',
 
 		'loginSystem' => 'AeroSpikeLogin',
-		'googleAPIKey' => 'AIzaSyC02wQE4rM945X-Yp1vQkT8RJm3a5Qmplk',
+		'googleAPIKey' => 'AIzaSyApYgtVoDp9SkszMlZfPbcwy5HQgkBd1t4',
 
 		'cssFiles' => array(
 			'css/animereleasenotifier.css',

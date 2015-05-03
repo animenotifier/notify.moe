@@ -392,9 +392,10 @@
 		<td>
 			<select id="animeProvider" <?php echo $disabled; ?>>
 				<?php
-					animeProviderOption("kissanime.com", "KissAnime");
 					animeProviderOption("nyaa.se", "Nyaa");
-					animeProviderOption("twist.moe", "AnimeTwist");
+					animeProviderOption("animeshow.tv (ALPHA)", "AnimeShow");
+					animeProviderOption("kissanime.com (deprecated)", "KissAnime");
+					animeProviderOption("twist.moe (deprecated)", "AnimeTwist");
 				?>
 			</select>
 		</td>
