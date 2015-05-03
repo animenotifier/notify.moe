@@ -201,7 +201,7 @@ class AniList implements ListProvider, TimeProvider {
 				$episodesOffset = $this->specialOffsets[$title];
 
 			$episodesWatched = $entry["episodes_watched"];
-			$nextEpisodeToWatch = $episodesWatched + 1 + $episodesOffset;
+			$nextEpisodeToWatch = $episodesWatched + 1;
 
 			$newEntry = array(
 				'title' => $title,

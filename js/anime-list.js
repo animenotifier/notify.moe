@@ -149,7 +149,13 @@ function AnimeList(json, $animeList, maxEpisodeDifference, notificationCallBack)
 		else
 			this.successCount += 1;
 
-		var available = (anime.episodes.available != -1 ? anime.episodes.available - anime.episodes.offset : '?');
+		// Available
+		var available = '?';
+
+		if(anime.episodes.available !== -1) {
+			available = anime.episodes.available - anime.episodes.offset;
+		}
+
 		var max = (anime.episodes.max != -1 ? anime.episodes.max : '?');
 		var tooltip = "You watched " + anime.episodes.watched + " episodes out of " + available + " available (maximum: " + max + ")";
 

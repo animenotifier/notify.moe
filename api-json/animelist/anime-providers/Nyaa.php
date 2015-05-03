@@ -33,7 +33,7 @@ class Nyaa implements AnimeProvider {
 		$nyaa = [
 			"url" => $url,
 			"rssUrl" => $rssUrl,
-			"nextEpisodeUrl" => $url . "+" . str_pad($anime["episodes"]["next"], 2, "0", STR_PAD_LEFT),
+			"nextEpisodeUrl" => $url . "+" . str_pad($anime["episodes"]["next"] + $anime["episodes"]["offset"], 2, "0", STR_PAD_LEFT),
 			"videoUrl" => ""
 		];
 

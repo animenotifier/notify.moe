@@ -62,7 +62,7 @@ class KissAnime implements AnimeProvider {
 			$kaTitle = $this->special[$kaTitle];
 
 		// KissAnime URLs
-		$nextEpisodeToWatch = $anime["episodes"]["next"];
+		$nextEpisodeToWatch = $anime["episodes"]["next"] + $anime["episodes"]["offset"];
 		$kissAnimeURL = "http://kissanime.com/Anime/" . $kaTitle;
 		
 		$episodePadLength = 3;
