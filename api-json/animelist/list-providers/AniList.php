@@ -184,7 +184,11 @@ class AniList implements ListProvider, TimeProvider {
 
 		// Watching list
 		$watching = array();
-		$lists = $data["lists"];
+
+		if(!array_key_exists('lists', $data))
+			return $watching;
+
+		$lists = $data['lists'];
 
 		if(!$lists || !array_key_exists($requestedStatus, $lists))
 			return $watching;

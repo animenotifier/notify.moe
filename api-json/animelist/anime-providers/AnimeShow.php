@@ -67,7 +67,7 @@ class AnimeShow implements AnimeProvider {
 		$key = $anime["title"] . ":animeShow-episodes-available";
 		$available = apc_fetch($key, $found);
 
-		if(!$found || 1) {
+		if(!$found) {
 			$available = $this->getAvailableEpisode($nativeURL, $lookUpTitle);
 
 			/*if($available === -1) {
@@ -86,7 +86,7 @@ class AnimeShow implements AnimeProvider {
 		return $anime;
 	}
 
-	// Get link from AnimeShow
+	/*// Get link from AnimeShow
 	private function getLinkFromAnimeShow($title) {
 		//$title = preg_replace('/[^[:alnum:]\'*]/ui', '+', $title);
 		$apiURL = 'http://animeshow.tv/pages/search-data.php';
@@ -137,6 +137,6 @@ class AnimeShow implements AnimeProvider {
 		}
 
 		return '';
-	}
+	}*/
 }
 ?>
