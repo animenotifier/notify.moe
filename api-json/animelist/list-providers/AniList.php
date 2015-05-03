@@ -92,7 +92,7 @@ class AniList implements ListProvider, TimeProvider {
 		$anime['airingDate']['timeStamp'] = $timeStamp;
 
 		if($timeStamp == -1) {
-			$anime['airingDate']['remaining'] = '';
+			$anime['airingDate']['remaining'] = 0;
 			$anime['airingDate']['remainingString'] = '';
 			return $anime;
 		}
@@ -122,8 +122,8 @@ class AniList implements ListProvider, TimeProvider {
 		if($airingDate < $this->now) {
 			$remaining .= ' ago';
 		}
-
-		$anime['airingDate']['remaining'] = $remaining;
+		
+		$anime['airingDate']['remaining'] = $airingDate->getTimestamp() - $this->now->getTimeStamp();
 		$anime['airingDate']['remainingString'] = $remaining;
 
 		return $anime;
@@ -193,7 +193,7 @@ class AniList implements ListProvider, TimeProvider {
 		
 		foreach($aniListWatching as $entry) {
 			$anime = $entry["anime"];
-			$title = $anime['title_romaji'];
+			$title = trim($anime['title_romaji']);
 
 			$episodesOffset = 0;
 
