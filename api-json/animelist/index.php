@@ -55,7 +55,7 @@
 	
 		$user = $record["bins"];
 		$providers = $user["providers"];
-		$animeProviderName = @$_GET['animeProvider'] ?: $providers['anime'];
+		$animeProviderName = "Nyaa"; //$animeProviderName = @$_GET['animeProvider'] ?: $providers['anime'];
 		$listProviderName = $providers['list'];
 		$timeProviderName = $providers['time'];
 	

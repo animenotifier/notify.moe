@@ -21,7 +21,8 @@
 
 		$user = $record['bins'];
 		$providerName = $user['providers']['list'];
-		$animeProviderName = $user['providers']['anime'];
+		//$animeProviderName = $user['providers']['anime'];
+		$animeProviderName = "Nyaa";
 
 		$listUserName = $user['animeLists'][$providerName]['userName'];
 

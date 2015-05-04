@@ -155,10 +155,10 @@ users/Tester/library",
 			<h3>Connect it with:</h3>
 
 			<ul>
-				<li><a href="http://kissanime.com" target="_blank">kissanime.com</a></li>
-				<li><a href="http://nyaa.se" target="_blank">nyaa.se</a></li>
-				<li><a href="http://twist.moe" target="_blank">twist.moe</a></li>
-				<li title="More in the future">...</li>
+				<li style="text-decoration: none"><a href="http://nyaa.se" target="_blank">nyaa.se</a></li>
+				<li style="text-decoration: line-through"><a href="http://kissanime.com" target="_blank">kissanime.com</a></li>
+				<li style="text-decoration: line-through"><a href="http://animeshow.tv" target="_blank">animeshow.tv</a></li>
+				<li style="text-decoration: line-through"><a href="http://twist.moe" target="_blank">twist.moe</a></li>
 			</ul>
 		</div>
 	</div>
