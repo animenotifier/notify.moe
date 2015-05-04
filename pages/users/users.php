@@ -118,6 +118,10 @@
 		opacity: 0.2;
 	}
 
+	.recommendation {
+		opacity: 0.8;
+	}
+
 	@media only screen and (max-width: 800px) {
 		table {
 			display: block;
@@ -339,6 +343,11 @@
 					listProviderOption("myanimelist.net", "MyAnimeList");
 				?>
 			</select>
+			<?php if($ownAccount && $listProviderName !== 'AniList'): ?>
+			<p class="recommendation">
+				anilist.co is recommended because it has the fastest and most accurate information when combined with the anilist.co airing time provider.
+			</p>
+			<?php endif; ?>
 		</td>
 	</tr>
 
@@ -447,7 +456,7 @@
 		</td>
 	</tr>
 
-	<tr>
+	<!--<tr>
 		<td class="label">
 			Opacity by:
 		</td>
@@ -463,7 +472,7 @@
 		<td class="wip">
 			(work in progress)
 		</td>
-	</tr>
+	</tr>-->
 <?php endif; ?>
 
 	<tr>

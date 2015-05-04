@@ -89,7 +89,7 @@
 	
 			$i = 0;
 			foreach($watching as $entry) {
-				$entry['listProvider'] = $timeProviderName;
+				$entry['listProvider'] = $listProviderName;
 				$entry = $animeProvider->getAnimeInfo($entry);
 				$entry = $timeProvider->getAiringDate($entry);
 				$watching[$i] = $entry;
