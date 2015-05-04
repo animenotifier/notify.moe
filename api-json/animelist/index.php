@@ -82,13 +82,14 @@
 			$animeProvider = new $animeProviderName();
 	
 			// Initialize time provider
-			if($timeProviderName == $listProviderName)
+			if($timeProviderName === $listProviderName)
 				$timeProvider = $listProvider;
 			else
 				$timeProvider = new $timeProviderName($user);
 	
 			$i = 0;
 			foreach($watching as $entry) {
+				$entry['listProvider'] = $timeProviderName;
 				$entry = $animeProvider->getAnimeInfo($entry);
 				$entry = $timeProvider->getAiringDate($entry);
 				$watching[$i] = $entry;

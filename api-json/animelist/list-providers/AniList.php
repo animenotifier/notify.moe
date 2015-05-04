@@ -14,7 +14,7 @@ class AniList implements ListProvider, TimeProvider {
 		$this->now = new DateTime();
 
 		// Cached access token
-		$cacheTime = 30 * 60;
+		$cacheTime = 45 * 60;
 		$key = 'anilist-access-token'; //$user['userName'] . ":anilist-access-token";
 		$this->accessToken = apc_fetch($key, $found);
 
@@ -48,12 +48,12 @@ class AniList implements ListProvider, TimeProvider {
 
 	// Get airing date
 	public function getAiringDate($anime) {
-		global $listProviderName;
-		$nextEpisode = $anime['episodes']['next'] - $anime['episodes']['offset'];
+		$listProviderName = $anime['listProvider'];
+		$nextEpisode = $anime['episodes']['next'];
 		$remaining = '';
 
 		// Shortcut if AniList is also the list provider
-		if($listProviderName == 'AniList') {
+		if($listProviderName === 'AniList') {
 			$timeStamp = $this->getAiringDateForAnimeID($anime['id'], $nextEpisode);
 		} else {
 			$animeTitle = $anime['title'];
@@ -91,7 +91,7 @@ class AniList implements ListProvider, TimeProvider {
 		
 		$anime['airingDate']['timeStamp'] = $timeStamp;
 
-		if($timeStamp == -1) {
+		if($timeStamp === -1) {
 			$anime['airingDate']['remaining'] = 0;
 			$anime['airingDate']['remainingString'] = '';
 			return $anime;
@@ -139,6 +139,7 @@ class AniList implements ListProvider, TimeProvider {
 		if(!$found) {
 			$airingDateURL = "https://anilist.co/api/anime/$animeId/airing";
 			$json = getJSON($airingDateURL . "?access_token=$this->accessToken");
+
 			$airingDates = json_decode($json, true);
 
 			if(is_array($airingDates) && array_key_exists($nextEpisode, $airingDates))
@@ -185,7 +186,7 @@ class AniList implements ListProvider, TimeProvider {
 		// Watching list
 		$watching = array();
 
-		if(!array_key_exists('lists', $data))
+		if(!$data || !array_key_exists('lists', $data))
 			return $watching;
 
 		$lists = $data['lists'];
