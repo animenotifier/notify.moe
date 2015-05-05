@@ -1,4 +1,5 @@
 /ssl
 /fw
+/php-paypal-ipn
 sftp-config.json
 deployment-config.json

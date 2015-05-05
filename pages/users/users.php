@@ -515,15 +515,15 @@
 
 	<tr>
 		<td class="label">
-			Export:
+			API:
 		</td>
 		<td>
 			<a href="http://animereleasenotifier.com/api/users/<?php echo $userName; ?>" target="_blank">
-				User JSON
+				User
 			</a>
 			|
 			<a href="http://animereleasenotifier.com/api/animelist/<?php echo $userName; ?>" target="_blank">
-				Animelist JSON
+				Animelist
 			</a>
 		</td>
 	</tr>
