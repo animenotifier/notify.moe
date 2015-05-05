@@ -66,6 +66,12 @@ Supports anime lists from:
 				'visible' => false
 			),
 
+			'subscribe' => array(
+				'title' => 'Subscribe',
+				'description' => 'Subscribe',
+				'visible' => false
+			),
+
 			'donate' => array(
 				'title' => 'Donate',
 				'description' => 'Donations'

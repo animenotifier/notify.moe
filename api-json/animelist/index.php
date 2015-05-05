@@ -5,12 +5,6 @@
 	require_once("list-providers/interface.php");
 	require_once("anime-providers/interface.php");
 	require_once("time-providers/interface.php");
-	
-	// Content type
-	header('Content-Type: application/json');
-
-	// CORS
-	header('Access-Control-Allow-Origin: *');
 
 	//apc_clear_cache('user');
 	if(!array_key_exists('userName', $_GET) || $_GET['userName'] == "") {
@@ -19,6 +13,13 @@
 	}
 
 	$userName = $_GET['userName'];
+
+	// Content type
+	header('Content-Type: application/json');
+
+	// CORS
+	header('Access-Control-Allow-Origin: *');
+
 	$json = getAnimeListJSON($userName);
 	
 	// Output

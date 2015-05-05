@@ -45,7 +45,11 @@
 
 <ol class="donators">
 	<li>
-		<div class="donation-amount">10,00 &euro;</div>
+		<div class="donation-amount">40,00 $</div>
+		<a href="/+animedreamer" class="ajax">animedreamer</a>
+	</li>
+	<li>
+		<div class="donation-amount">10,00 €</div>
 		<a href="/+drill" class="ajax">drill</a>
 	</li>
 	<li>
@@ -57,19 +61,19 @@
 		<a href="/+synthtech" class="ajax">synthtech</a>
 	</li>
 	<li>
-		<div class="donation-amount">7,35 &euro;</div>
+		<div class="donation-amount">7,35 €</div>
 		<a href="/+izzy" class="ajax">izzy</a>
 	</li>
 	<li>
-		<div class="donation-amount">5,00 &euro;</div>
+		<div class="donation-amount">5,00 €</div>
 		<a href="/+Josh" class="ajax">Josh</a>
 	</li>
 	<li>
-		<div class="donation-amount">1,00 &euro;</div>
+		<div class="donation-amount">1,00 €</div>
 		<a href="/+mrskizzex" class="ajax">mrskizzex</a>
 	</li>
 	<li>
-		<div class="donation-amount">1,00 &euro;</div>
+		<div class="donation-amount">1,00 €</div>
 		<a href="/+magister" class="ajax">magister</a>
 	</li>
 </ol>

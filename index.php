@@ -39,7 +39,7 @@
 					</div>
 
 					<div id="tagline">
-						<!--Don't miss the next episode.--> <span style="opacity: 1.0;">See <a href="https://twitter.com/animenotifier" target="_blank">Twitter</a> for the latest news. KissAnime is currently not working because of their website changes.</span>
+						Don't miss the next episode. Get notified instantly.
 					</div>
 				</div>
 

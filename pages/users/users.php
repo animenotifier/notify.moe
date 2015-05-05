@@ -272,7 +272,7 @@
 
 			$admins = array('Aky');
 			$dataMods = array('mrskizzex', 'Bleack', 'Jinnial');
-			$donators = array('Soulcramer', 'synthtech', 'drill', 'izzy', 'Josh', 'mrskizzex', 'magister');
+			$donators = array('animedreamer', 'Soulcramer', 'synthtech', 'drill', 'izzy', 'Josh', 'mrskizzex', 'magister');
 
 			if(in_array($userName, $admins)) {
 				$userTitle = "Admin";
