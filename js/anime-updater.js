@@ -38,8 +38,8 @@ var animeUpdater = {
 		$(footer).html(
 			"<a href='" + profileUrl + "' target='_blank' title='Profile'>" + userName + "</a> | " +
 			"<a href='" + listUrl + "' target='_blank' title='Anime List'>Edit List</a>" +
-			" <a href='http://anichart.net/airing' target='_blank' title='Chart'><img src='http://blitzprog.org/images/anime-release-notifier/chart.png' alt='Chart'/></a>" +
-			" <a href='javascript:toggleSettings();' title='Options'><img src='http://blitzprog.org/images/anime-release-notifier/settings.png' alt='Options'/></a>"
+			" <a href='http://anichart.net/airing' target='_blank' title='Chart'><img src='https://animereleasenotifier.com/images/icons/chart.png' alt='Chart'/></a>" +
+			" <a href='javascript:toggleSettings();' title='Options'><img src='https://animereleasenotifier.com/images/icons/settings.png' alt='Options'/></a>"
 		); 
 		
 		$("#anime-list").append(footer);

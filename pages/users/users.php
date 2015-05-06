@@ -404,7 +404,7 @@
 			<select id="animeProvider" <?php echo $disabled; ?>>
 				<?php
 					animeProviderOption("nyaa.se", "Nyaa");
-					animeProviderOption("animeshow.tv (Alpha)", "AnimeShow");
+					animeProviderOption("animeshow.tv", "AnimeShow");
 					/*animeProviderOption("kissanime.com (deprecated)", "KissAnime");
 					animeProviderOption("twist.moe (deprecated)", "AnimeTwist");*/
 				?>

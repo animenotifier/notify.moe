@@ -156,9 +156,9 @@ users/Tester/library",
 
 			<ul>
 				<li style="text-decoration: none"><a href="http://nyaa.se" target="_blank" rel="nofollow">nyaa.se</a></li>
+				<li style="text-decoration: none"><a href="http://animeshow.tv" target="_blank" rel="nofollow">animeshow.tv</a></li>
 				<li style="text-decoration: line-through"><a href="http://kissanime.com" target="_blank" rel="nofollow">kissanime.com</a></li>
-				<li style="text-decoration: line-through"><a href="http://animeshow.tv" target="_blank" rel="nofollow">animeshow.tv</a></li>
-				<li style="text-decoration: line-through"><a href="http://twist.moe" target="_blank" rel="nofollow">twist.moe</a></li>
+				<li style="text-decoration: line-through"><a href="http://rawranime.tv" target="_blank" rel="nofollow">rawranime.tv</a></li>
 			</ul>
 		</div>
 	</div>

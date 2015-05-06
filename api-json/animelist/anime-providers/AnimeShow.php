@@ -51,6 +51,18 @@ class AnimeShow implements AnimeProvider {
 		if($this->special != null && array_key_exists($nativeTitle, $this->special))
 			$nativeTitle = $this->special[$nativeTitle];
 
+		// Doesn't exist on the platform?
+		if(empty($nativeTitle)) {
+			$anime['episodes']['available'] = -1;
+			$anime["animeProvider"] = array(
+				'url' => '',
+				'nextEpisodeUrl' => '',
+				'videoUrl' => ''
+			);
+			
+			return $anime;
+		}
+
 		// Native URLs
 		$nextEpisodeToWatch = $anime['episodes']['next'];
 		$nativeURL = 'http://animeshow.tv/' . $nativeTitle . '/';
@@ -64,10 +76,29 @@ class AnimeShow implements AnimeProvider {
 		if(!$found) {
 			$available = $this->getAvailableEpisode($nativeURL, $lookUpTitle);
 
-			/*if($available === -1) {
-				$nativeURL = $this->getLinkFromAnimeShow($animeTitle);
-				$available = $this->getAvailableEpisode($nativeURL, $lookUpTitle);
-			}*/
+			// Google fetch
+			if($available === -1) {
+				$googleCacheTime = 12 * 60 * 60;
+				$googleKey = $animeTitle . ":animeShow-google-result";
+				$nativeTitle = apc_fetch($key, $googleCached);
+
+				if(!$googleCached) {
+					$nativeTitle = $this->getNativeTitleFromGoogle($animeTitle);
+
+					// Cache it
+					apc_add($googleKey, $nativeTitle, $googleCacheTime);
+				}
+
+				if(!empty($nativeTitle)) {
+					$nativeURL = 'http://animeshow.tv/' . $nativeTitle . '/';
+					$nativeNextEpisodeURL = "http://animeshow.tv/$nativeTitle-episode-$nextEpisodeToWatch/";
+					$available = $this->getAvailableEpisode($nativeURL, $lookUpTitle);
+
+					if($available !== -1) {
+						sendSlackMessage("[A] $animeTitle\n[U] $nativeURL\n[E] https://github.com/freezingwind/animereleasenotifier.com/edit/master/api/providers/anime/AnimeShow/special.json\n```\"$lookUpTitle\":\n\"$nativeTitle\",```", 'animeshow');
+					}
+				}
+			}
 
 			// Cache it
 			apc_add($key, $available, $cacheTime);
@@ -106,12 +137,12 @@ class AnimeShow implements AnimeProvider {
 	}*/
 	
 	// Get native title from Google
-	private function getNativeTitleFromGoogle($title, $site) {
+	private function getNativeTitleFromGoogle($title) {
 		global $config;
 		
 		$title = preg_replace('/[^[:alnum:]\'*]/ui', '+', $title);
 		$customSearchEngineId = '002450170332278128138:nxs5wgw2vrg';
-		$googleURL = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&key=" . $config['googleAPIKey'] . '$cx=' . $customSearchEngineId . "&userip=" . $_SERVER['REMOTE_ADDR'] . "&q=site:$site+" . $title;
+		$googleURL = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&key=" . $config['googleAPIKey'] . '&cx=' . $customSearchEngineId . "&userip=" . $_SERVER['REMOTE_ADDR'] . "&q=site:animeshow.tv+" . $title;
 		$googleResults = getHTML($googleURL);
 
 		// Parse JSON
@@ -128,9 +159,14 @@ class AnimeShow implements AnimeProvider {
 			return '';
 
 		foreach($results as $result) {
-			if(strpos($result['titleNoFormatting'], 'Episodes - ') !== false) {
-				$url = $result['url'];
-				return $url;
+			$url = $result['url'];
+
+			if(preg_match("/animeshow.tv\/([-\p{L}\d]+)-episode-(\d{1,3})/", $url, $matches) === 1 || preg_match("/animeshow.tv\/([-\p{L}\d]+)\//", $url, $matches) === 1) {
+				// If we find a 'genre' link that probably means the anime doesn't exist so we'll give up
+				if(substr($matches[1], 0, 5) === 'genre')
+					return '';
+
+				return $matches[1];
 			}
 		}
 
