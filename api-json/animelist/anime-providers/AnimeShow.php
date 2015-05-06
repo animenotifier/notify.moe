@@ -61,7 +61,7 @@ class AnimeShow implements AnimeProvider {
 
 		$lookUpTitle = $nativeTitle;
 		
-		if($this->special != null && array_key_exists($nativeTitle, $this->special))
+		if(!empty($this->special) && array_key_exists($nativeTitle, $this->special))
 			$nativeTitle = $this->special[$nativeTitle];
 
 		// Doesn't exist on the platform?

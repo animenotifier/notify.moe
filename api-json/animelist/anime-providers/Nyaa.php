@@ -4,7 +4,20 @@ class Nyaa implements AnimeProvider {
 	public $special;
 
 	function __construct() {
-		$this->special = json_decode(getHTML("https://raw.githubusercontent.com/freezingwind/animereleasenotifier.com/master/api/providers/anime/Nyaa/special.json"), true);
+		// Cached
+		$cacheTime = 2 * 60;
+		$key = "nyaa-exceptions";
+		$json = apc_fetch($key, $found);
+
+		if(!$found) {
+			$json = getHTML("https://raw.githubusercontent.com/freezingwind/animereleasenotifier.com/master/api/providers/anime/Nyaa/special.json");
+
+			// Cache it
+			if(!empty($json))
+				apc_add($key, $json, $cacheTime);
+		}
+		
+		$this->special = json_decode($json, true);
 	}
 
 	public function getAnimeInfo($anime) {

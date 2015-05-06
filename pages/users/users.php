@@ -571,6 +571,8 @@
 		}
 		?>
 
+		document.removeEventListener('DOMContentLoaded', setup);
+		
 		setPageHandler(function(pageId) {
 			document.removeEventListener('DOMContentLoaded', setup);
 		});

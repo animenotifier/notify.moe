@@ -128,12 +128,15 @@ function AnimeList(json, $animeList, maxEpisodeDifference, notificationCallBack)
 		var cssClass = "anime";
 
 		// Action URL
-		anime.actionUrl = anime.animeProvider.url;
+		anime.actionUrl = anime.url;
 
-		if(anime.animeProvider.nextEpisodeUrl != "" && anime.episodes.available >= anime.episodes.next)
+		if(anime.animeProvider.url)
+			anime.actionUrl = anime.animeProvider.url;
+
+		if(anime.animeProvider.nextEpisodeUrl && anime.episodes.available >= anime.episodes.next)
 			anime.actionUrl = anime.animeProvider.nextEpisodeUrl;
 
-		if(anime.animeProvider.videoUrl == "" && typeof anime.animeProvider.videoHash != "undefined" && anime.animeProvider.videoHash != "" && typeof asp.wrap != "undefined")
+		if(anime.animeProvider.videoUrl && typeof anime.animeProvider.videoHash != "undefined" && anime.animeProvider.videoHash != "" && typeof asp.wrap != "undefined")
 			anime.animeProvider.videoUrl = asp.wrap(anime.animeProvider.videoHash);
 
 		// New episodes
