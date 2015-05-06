@@ -1,16 +1,9 @@
-<style scoped>
-	h2 {
-		text-align: center;
-	}
-</style>
-
-<h2>Live statistics</h2>
 <div id="listProviders" style="width: 100%; height: 500px;"></div>
 
 <?php
 	$providers = array();
 
-	$db->scan('arn', 'Users', function($record) {
+	$db->scan('arn', 'Accounts', function($record) {
 		global $providers;
 
 		$user = $record['bins'];
@@ -55,7 +48,8 @@
 			['E-Mail provider', 'Users'],
 			<?php
 				foreach($providers as $providerName => $userCount) {
-					echo "['$providerName', $userCount],";
+					if($userCount >= 5)
+						echo "['$providerName', $userCount],";
 				}
 			?>
 		]);
@@ -64,8 +58,8 @@
 			title: 'E-Mail providers',
 			fontName: 'Open Sans',
 			backgroundColor: { fill:'transparent' },
-			legend: {position: 'right', textStyle: {color: 'white', fontSize: 16}},
-			titleTextStyle: {color: 'white', fontSize: 20},
+			legend: {position: 'right', textStyle: {color: 'black', fontSize: 16}},
+			titleTextStyle: {color: 'black', fontSize: 20},
 			pieSliceBorderColor: 'transparent'
 		};
 

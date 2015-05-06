@@ -45,7 +45,7 @@
 
 #title-and-tagline {
 	float: left;
-	width: calc(100% - 320px - 16px);
+	width: 100%;
 }
 
 #ads {
@@ -144,7 +144,7 @@
 
 #content > div {
 	float: left;
-	width: calc(100% - 3em);
+	width: 100%;
 	text-align: center;
 }
 

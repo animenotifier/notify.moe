@@ -56,12 +56,6 @@ class AnimeShow implements AnimeProvider {
 		$nativeURL = 'http://animeshow.tv/' . $nativeTitle . '/';
 		$nativeNextEpisodeURL = "http://animeshow.tv/$nativeTitle-episode-$nextEpisodeToWatch/";
 
-		$animeShow = array(
-			'url' => $nativeURL,
-			'nextEpisodeUrl' => $nativeNextEpisodeURL,
-			'videoUrl' => ''
-		);
-
 		// Cached last episode available
 		$cacheTime = 10 * 60;
 		$key = $anime["title"] . ":animeShow-episodes-available";
@@ -81,7 +75,11 @@ class AnimeShow implements AnimeProvider {
 
 		$anime['episodes']['available'] = $available;
 		$anime['episodes']['offset'] = 0; // TEMPORARY WORKAROUND
-		$anime["animeProvider"] = $animeShow;
+		$anime["animeProvider"] = array(
+			'url' => $nativeURL,
+			'nextEpisodeUrl' => $nativeNextEpisodeURL,
+			'videoUrl' => ''
+		);
 		
 		return $anime;
 	}
@@ -105,21 +103,19 @@ class AnimeShow implements AnimeProvider {
 		} else {
 			return null;
 		}
-	}
+	}*/
 	
-	// Get link from Google
-	private function getLinkFromGoogle($title, $site) {
+	// Get native title from Google
+	private function getNativeTitleFromGoogle($title, $site) {
 		global $config;
 		
 		$title = preg_replace('/[^[:alnum:]\'*]/ui', '+', $title);
-
-		$googleURL = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&key=" . $config['googleAPIKey'] . "&q=site:$site+" . $title;
-		
+		$customSearchEngineId = '002450170332278128138:nxs5wgw2vrg';
+		$googleURL = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&key=" . $config['googleAPIKey'] . '$cx=' . $customSearchEngineId . "&userip=" . $_SERVER['REMOTE_ADDR'] . "&q=site:$site+" . $title;
 		$googleResults = getHTML($googleURL);
 
 		// Parse JSON
 		$googleData = json_decode($googleResults, true);
-		
 		$responseData = $googleData['responseData'];
 		
 		// Quota exceeded
@@ -132,11 +128,13 @@ class AnimeShow implements AnimeProvider {
 			return '';
 
 		foreach($results as $result) {
-			if(strpos($result['titleNoFormatting'], 'Episodes - ') !== false)
-				return $result['url'];
+			if(strpos($result['titleNoFormatting'], 'Episodes - ') !== false) {
+				$url = $result['url'];
+				return $url;
+			}
 		}
 
 		return '';
-	}*/
+	}
 }
 ?>

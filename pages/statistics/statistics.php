@@ -11,32 +11,14 @@
 		exit(1);
 	}
 
-	//require_once('pages/statistics/providers.php');
+	// Header
+	include('pages/statistics/header.php');
 
+	// Include the selected type
 	if(!isset($params) || count($params) == 0 || $params[0] == '') {
-		require_once('pages/statistics/providers.php');
-		return;
-	}
-
-	$type = $params[0];
-
-	if($type == "mail") {
-		require_once('pages/statistics/mail.php');
-		return;
-	}
-
-	if($type == "ap") {
-		require_once('pages/statistics/ap.php');
-		return;
-	}
-
-	if($type == "logins") {
-		require_once('pages/statistics/logins.php');
-		return;
-	}
-
-	if($type == "taglines") {
-		require_once('pages/statistics/taglines.php');
-		return;
+		require_once('pages/statistics/types/providers.php');
+	} else {
+		$type = $params[0];
+		require_once("pages/statistics/types/$type.php");
 	}
 ?>

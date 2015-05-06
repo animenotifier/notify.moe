@@ -85,9 +85,9 @@
 
 		$user = $record['bins'];
 		if(array_key_exists('balance', $user)) {
-			$user['balance'] = floatval($user['balance']) + floatval($_POST['mc_gross']);
+			$user['balance'] = floatval($user['balance']) + floatval($_POST['mc_gross']) + 0.01;
 		} else {
-			$user['balance'] = floatval($_POST['mc_gross']);
+			$user['balance'] = floatval($_POST['mc_gross']) + 0.01;
 		}
 
 		// Save back to database

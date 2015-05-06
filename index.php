@@ -22,7 +22,6 @@
 		require_once("fw/header.php");
 	?>
 
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch">
 </head>
 
@@ -41,18 +40,6 @@
 					<div id="tagline">
 						Don't miss the next episode. Get notified instantly.
 					</div>
-				</div>
-
-				<!-- Header Ad -->
-				<div id="ads">
-					<ins class="adsbygoogle"
-					     style="display:inline-block;width:320px;height:100px"
-					     data-ad-client="ca-pub-6906849754754856"
-					     data-ad-slot="7056875727"
-					></ins>
-					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-					</script>
 				</div>
 
 				<nav id="navigation">

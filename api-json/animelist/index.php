@@ -56,7 +56,12 @@
 	
 		$user = $record["bins"];
 		$providers = $user["providers"];
-		$animeProviderName = "Nyaa"; //$animeProviderName = @$_GET['animeProvider'] ?: $providers['anime'];
+		$animeProviderName = @$_GET['animeProvider'] ?: $providers['anime'];
+
+		if($animeProviderName === "KissAnime" || $animeProviderName === "AnimeTwist") {
+			$animeProviderName = "Nyaa";
+		}
+
 		$listProviderName = $providers['list'];
 		$timeProviderName = $providers['time'];
 	
@@ -69,10 +74,10 @@
 	
 		// Initialize list provider
 		$listProvider = new $listProviderName($user);
-	
+		
 		if(array_key_exists('clearListCache', $_GET) && $_GET['clearListCache'] == 1)
 			$listProvider->clearCache($listProviderUserName);
-	
+		
 		$onlyCompleted = array_key_exists('completed', $_GET) && $_GET['completed'] == 1;
 		
 		// Get watching list from list provider
@@ -87,7 +92,7 @@
 				$timeProvider = $listProvider;
 			else
 				$timeProvider = new $timeProviderName($user);
-	
+			
 			$i = 0;
 			foreach($watching as $entry) {
 				$entry['listProvider'] = $listProviderName;

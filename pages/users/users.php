@@ -118,8 +118,9 @@
 		opacity: 0.2;
 	}
 
-	.recommendation {
-		opacity: 0.8;
+	.tooltip {
+		margin-left: 0.4em;
+		color: rgba(32, 32, 32, 0.6);
 	}
 
 	@media only screen and (max-width: 800px) {
@@ -343,15 +344,16 @@
 					listProviderOption("myanimelist.net", "MyAnimeList");
 				?>
 			</select>
-			<?php if($ownAccount && $listProviderName !== 'AniList'): ?>
-			<p class="recommendation">
-				anilist.co is recommended because it has the fastest and most accurate information when combined with the anilist.co airing time provider.
-			</p>
+
+			<?php if($ownAccount): ?>
+			<span class="tooltip" data-tooltip="This is the source of your anime list. anilist.co is heavily recommended for performance reasons.">
+				(?)
+			</span>
 			<?php endif; ?>
 		</td>
 	</tr>
 
-<?php if($ownAccount): ?>
+	<?php if($ownAccount): ?>
 	<tr>
 		<td class="label">
 			<img class="icon" itemprop="image" src="/images/icons/list-username.png" alt="List user name" width="16" height="16">&nbsp; Name on <span class="list-provider-name-highlight"><?php echo $listProviderName; ?></span>:
@@ -368,7 +370,7 @@
 			<input type="text" id="listUserName" placeholder="<?php echo $listProviderName; ?> user name" style="width: 220px;" value="<?php echo $listUserName; ?>" <?php echo $disabled; ?>>
 		</td>
 	</tr>
-<?php endif; ?>
+	<?php endif; ?>
 
 	<!-- Auth -->
 	<?php if($ownAccount && $listProviderName == 'AniList'): ?>
@@ -402,11 +404,17 @@
 			<select id="animeProvider" <?php echo $disabled; ?>>
 				<?php
 					animeProviderOption("nyaa.se", "Nyaa");
-					/*animeProviderOption("animeshow.tv (alpha)", "AnimeShow");
-					animeProviderOption("kissanime.com (deprecated)", "KissAnime");
+					animeProviderOption("animeshow.tv (Alpha)", "AnimeShow");
+					/*animeProviderOption("kissanime.com (deprecated)", "KissAnime");
 					animeProviderOption("twist.moe (deprecated)", "AnimeTwist");*/
 				?>
 			</select>
+
+			<?php if($ownAccount): ?>
+			<span class="tooltip" data-tooltip="This is where we'll get the anime links from and determine if a new episode is available to make an entry green. nyaa.se works best. Use other providers at your own risk.">
+				(?)
+			</span>
+			<?php endif; ?>
 		</td>
 	</tr>
 
@@ -420,6 +428,12 @@
 					timeProviderOption("anilist.co", "AniList");
 				?>
 			</select>
+
+			<?php if($ownAccount): ?>
+			<span class="tooltip" data-tooltip="This is where we'll get the airing date from. The remaining time is displayed on the right side of your preview.">
+				(?)
+			</span>
+			<?php endif; ?>
 		</td>
 	</tr>
 
@@ -525,6 +539,12 @@
 			<a href="http://animereleasenotifier.com/api/animelist/<?php echo $userName; ?>" target="_blank">
 				Animelist
 			</a>
+
+			<?php if($ownAccount): ?>
+			<span class="tooltip" data-tooltip="If you're a developer you might be interested in using this JSON API for your own apps.">
+				(?)
+			</span>
+			<?php endif; ?>
 		</td>
 	</tr>
 
@@ -584,7 +604,10 @@
 		$.getJSON("/api/animelist/" + userName, function(json) {
 			var animeList = new AnimeList(json, $element, 1 <?php if($ownAccount) echo ", function(anime){ anime.sendNotification(); }"; ?>);
 
-			$("#successRate").text(Math.round(animeList.successRate * 100) + " %");
+			// Success rate
+			var $successRate = $("#successRate");
+			$successRate.text(Math.round(animeList.successRate * 100) + " %");
+			$successRate.append("<span class='tooltip' data-tooltip='This percentage indicates how many anime of your list were successfully connected with the anime provider you selected.'>(?)</span>");
 
 			$listUrl.attr("href", animeList.listUrl);
 			$listUrl.text(animeList.listUrl);

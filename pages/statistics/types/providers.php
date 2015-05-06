@@ -1,10 +1,3 @@
-<style scoped>
-	h2 {
-		text-align: center;
-	}
-</style>
-
-<h2>Live statistics</h2>
 <div id="listProviders" style="width: 100%; height: 500px;"></div>
 <div id="animeProviders" style="width: 100%; height: 500px;"></div>
 <div id="combinations" style="width: 100%; height: 500px;"></div>
@@ -21,8 +14,7 @@
 
 		$user = $record['bins'];
 		$providerName = $user['providers']['list'];
-		//$animeProviderName = $user['providers']['anime'];
-		$animeProviderName = "Nyaa";
+		$animeProviderName = $user['providers']['anime'];
 
 		$listUserName = $user['animeLists'][$providerName]['userName'];
 

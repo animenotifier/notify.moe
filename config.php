@@ -66,9 +66,9 @@ Supports anime lists from:
 				'visible' => false
 			),
 
-			'subscribe' => array(
-				'title' => 'Subscribe',
-				'description' => 'Subscribe',
+			'buy' => array(
+				'title' => 'Buy',
+				'description' => 'Buy',
 				'visible' => false
 			),
 
