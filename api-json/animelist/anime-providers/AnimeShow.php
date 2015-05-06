@@ -5,7 +5,20 @@ class AnimeShow implements AnimeProvider {
 	
 	// Constructor
 	function __construct() {
-		$this->special = json_decode(getHTML("https://raw.githubusercontent.com/freezingwind/animereleasenotifier.com/master/api/providers/anime/AnimeShow/special.json"), true);
+		// Cached
+		$cacheTime = 2 * 60;
+		$key = "animeShow-exceptions";
+		$json = apc_fetch($key, $found);
+
+		if(!$found) {
+			$json = getHTML("https://raw.githubusercontent.com/freezingwind/animereleasenotifier.com/master/api/providers/anime/AnimeShow/special.json");
+
+			// Cache it
+			if(!empty($json))
+				apc_add($key, $json, $cacheTime);
+		}
+
+		$this->special = json_decode($json, true);
 	}
 	
 	// Get available episode
@@ -77,7 +90,7 @@ class AnimeShow implements AnimeProvider {
 			$available = $this->getAvailableEpisode($nativeURL, $lookUpTitle);
 
 			// Google fetch
-			if($available === -1) {
+			if($available === -1 && !empty($this->special)) {
 				$googleCacheTime = 12 * 60 * 60;
 				$googleKey = $animeTitle . ":animeShow-google-result";
 				$nativeTitle = apc_fetch($key, $googleCached);
