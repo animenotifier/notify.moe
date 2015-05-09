@@ -47,8 +47,9 @@
 		var listProviderData = google.visualization.arrayToDataTable([
 			['E-Mail provider', 'Users'],
 			<?php
+				arsort($providers);
 				foreach($providers as $providerName => $userCount) {
-					if($userCount >= 5)
+					if($userCount >= 10)
 						echo "['$providerName', $userCount],";
 				}
 			?>

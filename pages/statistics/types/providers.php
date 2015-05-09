@@ -8,11 +8,13 @@
 	$combinations = array();
 
 	$db->scan('arn', 'Users', function($record) {
+		global $db;
 		global $providers;
 		global $animeProviders;
 		global $combinations;
 
 		$user = $record['bins'];
+		$userName = $user['userName'];
 		$providerName = $user['providers']['list'];
 		$animeProviderName = $user['providers']['anime'];
 
@@ -33,6 +35,22 @@
 		else
 			$providerName = "Uncool";
 		// End April's fool*/
+
+		$animeListKey = $db->initKey('arn', 'AnimeLists', $userName);
+		$status = $db->get($animeListKey, $animeListRecord);
+
+		if($status != Aerospike::OK)
+			return;
+
+		$animeList = $animeListRecord['bins'];
+
+		if(!array_key_exists('timeStamp', $animeList))
+			return;
+
+		$lastUpdate = $animeList['timeStamp'];
+
+		if(time() - $lastUpdate > 24 * 60 * 60)
+			return;
 
 		if(array_key_exists($providerName, $providers)) {
 			$providers[$providerName] += 1;
@@ -83,6 +101,7 @@
 		var listProviderData = google.visualization.arrayToDataTable([
 			['List provider', 'Users'],
 			<?php
+				arsort($providers);
 				foreach($providers as $providerName => $userCount) {
 					echo "['$providerName', $userCount],";
 				}
@@ -92,6 +111,7 @@
 		var animeProviderData = google.visualization.arrayToDataTable([
 			['Anime provider', 'Users'],
 			<?php
+				arsort($animeProviders);
 				foreach($animeProviders as $providerName => $userCount) {
 					echo "['$providerName', $userCount],";
 				}
@@ -101,6 +121,7 @@
 		var combinationData = google.visualization.arrayToDataTable([
 			['Combination', 'Users'],
 			<?php
+				arsort($combinations);
 				foreach($combinations as $providerName => $userCount) {
 					echo "['$providerName', $userCount],";
 				}
