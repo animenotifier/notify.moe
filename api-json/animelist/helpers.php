@@ -58,7 +58,7 @@
 		
 		$title = preg_replace('/[^[:alnum:]\'*]/ui', '+', $title);
 
-		$googleURL = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&key=" . $config['googleAPIKey'] . "&q=site:$site+" . $title;
+		$googleURL = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&key=" . $config['googleAPIKey'] . "&userip=" . $_SERVER['REMOTE_ADDR'] . "&q=site:$site+" . $title;
 		$googleResults = getHTML($googleURL);
 
 		// Parse JSON

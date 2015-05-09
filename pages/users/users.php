@@ -405,8 +405,8 @@
 				<?php
 					animeProviderOption("nyaa.se", "Nyaa");
 					animeProviderOption("animeshow.tv", "AnimeShow");
-					/*animeProviderOption("kissanime.com (deprecated)", "KissAnime");
-					animeProviderOption("twist.moe (deprecated)", "AnimeTwist");*/
+					//animeProviderOption("kissanime.com (deprecated, don't use)", "KissAnime");
+					//animeProviderOption("twist.moe (deprecated)", "AnimeTwist");
 				?>
 			</select>
 

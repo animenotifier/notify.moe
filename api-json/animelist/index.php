@@ -7,6 +7,8 @@
 	require_once("anime-providers/interface.php");
 	require_once("time-providers/interface.php");
 
+	date_default_timezone_set("UTC");
+
 	//apc_clear_cache('user');
 	if(!array_key_exists('userName', $_GET) || $_GET['userName'] == "") {
 		echo "Please specify your username in the settings.";
@@ -32,12 +34,12 @@
 		global $sortingAlgorithms;
 		
 		$db = new Aerospike($config["aeroSpike"]);
-	
+		
 		if(!$db->isConnected()) {
 			echo "Failed to connect to the database [{$db->errorno()}]: {$db->error()}\n";
 			exit(1);
 		}
-	
+		
 		$key = $db->initKey("arn", "Users", $userName);
 		
 		$status = $db->get($key, $record);
@@ -52,20 +54,16 @@
 			exit(3);
 		}
 	
-		$db->close();
-		// ...
-	
 		$user = $record["bins"];
 		$providers = $user["providers"];
 		$animeProviderName = @$_GET['animeProvider'] ?: $providers['anime'];
 
-		if($animeProviderName === "KissAnime" || $animeProviderName === "AnimeTwist") {
-			$animeProviderName = "Nyaa";
-		}
+		if($animeProviderName === 'KissAnime')
+			$animeProviderName = 'Nyaa';
 
 		$listProviderName = $providers['list'];
 		$timeProviderName = $providers['time'];
-	
+		
 		$listProviderUserName = $user["animeLists"][$listProviderName]["userName"];
 	
 		// Include files
@@ -112,14 +110,35 @@
 		} else {
 			usort($watching, $sortingAlgorithms['title']);
 		}
+
+		$requestCount = 0;
+		$animeListKey = $db->initKey('arn', 'AnimeLists', $userName);
+
+		// Old anime list available?
+		$status = $db->get($animeListKey, $animeListRecord);
+
+		if($status === Aerospike::OK) {
+			$oldAnimeList = $animeListRecord['bins'];
+			$requestCount = intval($oldAnimeList['requestCount']) + 1;
+		}
 	
 		// User data
 		$user = array(
 			'name' => $listProviderUserName,
 			'listUrl' => $listProvider->getAnimeListUrl($listProviderUserName),
+			'requestCount' => $requestCount,
+			'timeStamp' => time(),
 			'watching' => $watching
 		);
-	
+
+		// Save in database
+		if(!$onlyCompleted) {
+			$db->put($animeListKey, $user);
+		}
+		
+		// Close DB connection
+		$db->close();
+
 		return json_encode($user);
 	}
 ?>

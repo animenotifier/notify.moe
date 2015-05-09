@@ -15,9 +15,12 @@
 			$count++;
 		}
 
+		/*$animeListKey = $db->initKey("arn", "AnimeLists", $userName);
+		$db->remove($animeListKey);*/
+
 		/*if($user['providers']['anime'] === 'KissAnime' || $user['providers']['anime'] === 'AnimeTwist') {
 			$key = $db->initKey('arn', 'Users', $userName);
-			$user['providers']['anime'] = 'Nyaa';
+			$user['providers']['anime'] = 'AnimeShow';
 			$db->put($key, $user);
 		}*/
 
