@@ -1,14 +1,14 @@
 "use strict";
 
-var express = require("aero").express;
-var app = express();
+let express = require("aero").express;
+let app = express();
 
 app.get("/", function(request, response) {
 	response.send("Anime Release Notifier API");
 });
 
 app.get("/users/:name", function(request, response) {
-	var userName = request.params.name;
+	let userName = request.params.name;
 	
 	response.json({
 		userName: userName

@@ -1,5 +1,7 @@
-var aero = require("aero");
-var api = require("./api/api");
+"use strict";
+
+let aero = require("aero");
+let api = require("./api/api");
 
 // Website
 aero.start();
