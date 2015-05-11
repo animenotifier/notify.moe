@@ -1,6 +1,9 @@
 {
 	"name": "animereleasenotifier.com",
-	"repository": "blitzprog/animereleasenotifier.com",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/freezingwind/animereleasenotifier.com"
+	},
 	"version": "0.0.1",
 	"dependencies": {
 		"aero": "*"
