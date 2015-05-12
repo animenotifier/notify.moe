@@ -6,7 +6,8 @@
 	},
 	"version": "0.0.1",
 	"dependencies": {
-		"aero": "*"
+		"aero": "*",
+		"nodiak": "*"
 	},
 	"author": {
 		"name": "Eduard Urbach",
