@@ -1,17 +1,33 @@
 {
-	"name": "animereleasenotifier.com",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/freezingwind/animereleasenotifier.com"
-	},
+	"name": "anime-release-notifier",
 	"version": "0.0.1",
+	"private": false,
 	"dependencies": {
-		"aero": "*",
-		"nodiak": "*"
+		"keystone": "^0.3.8",
+		"async": "^0.9.0",
+		"underscore": "^1.8.0",
+		"node-sass": "^2.1.1",
+		"node-sass-middleware": "^0.5.0",
+		"dotenv": "^1.1.0",
+		"gravatar": "*"
+	},
+	"devDependencies": {
+		"gulp": "^3.7.0",
+		"gulp-jshint": "^1.9.0",
+		"jshint-stylish": "^0.1.3",
+		"gulp-watch": "^0.6.5"
+	},
+	"engines": {
+		"node": ">=0.10.22",
+		"npm": ">=1.3.14"
+	},
+	"scripts": {
+		   "start": "node keystone.js"
 	},
 	"author": {
 		"name": "Eduard Urbach",
 		"email": "e.urbach@gmail.com",
 		"url": "http://blitzprog.org"
-	}
+	},
+	"main": "keystone.js"
 }

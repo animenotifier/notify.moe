@@ -1,0 +1,25 @@
+extends ../layouts/default
+
+block content
+	.container: .jumbotron
+		h1 Anime Release Notifier
+		p Don't miss the next episode. Get notified instantly.
+		
+	.container
+		.row.text-center
+			.col-md-3
+				a.platform-link(href="#")
+					img(itemprop="image", src="/images/platforms/chrome.png", alt="Chrome", width="128", height="128")
+					.platform-name Chrome
+			.col-md-3
+				a.platform-link(href="#")
+					img(itemprop="image", src="/images/platforms/firefox.png", alt="Firefox", width="128", height="128")
+					.platform-name Firefox
+			.col-md-3
+				a.platform-link(href="#")
+					img(itemprop="image", src="/images/platforms/android.png", alt="Android", width="128", height="128")
+					.platform-name Android
+			.col-md-3
+				a.platform-link(href="#")
+					img(itemprop="image", src="/images/platforms/pc.png", alt="PC", width="128", height="128")
+					.platform-name PC
