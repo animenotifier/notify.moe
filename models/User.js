@@ -7,7 +7,13 @@ var keystone = require('keystone'),
  * ==========
  */
 
-var User = new keystone.List('User');
+var User = new keystone.List('User', {
+	map: {
+		name: 'nick'
+	},
+	track: true,
+	defaultSort: '-createdAt'
+});
 
 User.add({
 	nick: {
@@ -18,7 +24,7 @@ User.add({
 	},
 	name: {
 		type: Types.Name,
-		required: true,
+		initial: true,
 		index: true
 	},
 	email: {
@@ -38,10 +44,6 @@ User.add({
 		index: true
 	}
 }, 'Dates', {
-	created: {
-		type: Types.Datetime,
-		default: Date.now
-	},
 	birthDay: {
 		type: Types.Date
 	}
