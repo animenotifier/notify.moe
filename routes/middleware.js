@@ -20,7 +20,6 @@ var _ = require('underscore');
 */
 
 exports.initLocals = function(req, res, next) {
-	
 	var locals = res.locals;
 	
 	locals.navLinks = [
@@ -31,7 +30,6 @@ exports.initLocals = function(req, res, next) {
 	locals.user = req.user;
 	
 	next();
-	
 };
 
 
@@ -60,12 +58,10 @@ exports.flashMessages = function(req, res, next) {
  */
 
 exports.requireUser = function(req, res, next) {
-	
 	if (!req.user) {
 		req.flash('error', 'Please sign in to access this page.');
 		res.redirect('/keystone/signin');
 	} else {
 		next();
 	}
-	
 };

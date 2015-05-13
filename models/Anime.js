@@ -6,7 +6,7 @@ var keystone = require('keystone'),
  * ==========
  */
 
-var Anime = new keystone.List('Anime', {
+Anime = new keystone.List('Anime', {
 	map: {
 		name: 'romajiName'
 	},

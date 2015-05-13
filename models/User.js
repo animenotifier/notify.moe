@@ -7,7 +7,7 @@ var keystone = require('keystone'),
  * ==========
  */
 
-var User = new keystone.List('User', {
+User = new keystone.List('User', {
 	map: {
 		name: 'nick'
 	},
