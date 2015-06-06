@@ -1,6 +1,6 @@
 {
-	"requireCurlyBraces": [ "for", "while", "do" ],
-	"requireSpaceAfterKeywords": [ "do", "return" ],
+	"requireCurlyBraces": ["for", "while", "do"],
+	"requireSpaceAfterKeywords": ["do", "return"],
 	"requireSpacesInFunctionExpression": {
 		"beforeOpeningCurlyBrace": true
 	},
@@ -14,16 +14,16 @@
 	"requireMultipleVarDecl": true,
 	"requireSpacesInsideObjectBrackets": "all",
 	"requireSpacesInsideArrayBrackets": "all",
-	"disallowLeftStickedOperators": [ "?", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<=" ],
-	"disallowRightStickedOperators": [ "?", "/", "*", ":", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
+	"disallowLeftStickedOperators": ["?", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
+	"disallowRightStickedOperators": ["?", "/", "*", ":", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
 	"requireSpaceBeforeBinaryOperators": ["+", "-", "/", "*", "=", "==", "===", "!=", "!=="],
 	"disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-"],
 	"disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
-	"requireRightStickedOperators": [ "!" ],
-	"requireLeftStickedOperators": [ "," ],
-	"disallowKeywords": [ "with" ],
+	"requireRightStickedOperators": ["!"],
+	"requireLeftStickedOperators": [","],
+	"disallowKeywords": ["with"],
 	"disallowMultipleLineBreaks": true,
-	"disallowKeywordsOnNewLine": [ "else" ],
+	"disallowKeywordsOnNewLine": ["else"],
 	"requireLineFeedAtFileEnd": true,
 	"disallowSpaceAfterObjectKeys": true,
 	"validateLineBreaks": "LF"

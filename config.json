@@ -1,0 +1,13 @@
+{
+	"siteName": "Anime Release Notifier",
+	"security": {
+		"key": "",
+		"cert": ""
+	},
+	"static": [],
+	"styles": [],
+	"scripts": [],
+	"favIcon": "favicon.ico",
+	"liveReloadPort": 9000,
+	"port": 4000
+}
