@@ -1,0 +1,53 @@
+section
+	position relative
+	left 50%
+	transform translateX(-50%)
+	float left
+	display block
+	clear both
+	transform-style preserve-3d
+	header
+		width 100%
+		clear both
+	h2
+		text-align center
+		font-size 2em
+
+.button-list
+	float left
+	display block
+	margin 0
+	position relative
+	left 50%
+	transform translateX(-50%)
+	li
+		float left
+		display block
+
+.button-link
+	float left
+	display inline-block
+	padding 1em
+	margin 0.5em
+	border-radius 5px
+	width 256px
+	height 256px
+	text-align center
+	transform scale(0.7)
+	&:hover
+		width 256px
+		height 256px
+		text-decoration none
+		transform scale(1)
+
+.button-content
+	span[itemprop="name"]
+		display none
+	h3
+		font-size 1em
+		font-weight normal
+		margin-bottom 1em !important
+		text-align center
+
+.no-scale
+	transform scale(1.0)
