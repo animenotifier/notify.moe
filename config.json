@@ -21,6 +21,7 @@
 	],
 	"scripts": [
 		"jquery",
+		"kaze",
 		"footer",
 		"init",
 		"analytics"

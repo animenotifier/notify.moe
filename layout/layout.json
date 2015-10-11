@@ -1,0 +1,12 @@
+{
+    "nav": [
+		{
+            "title": "About",
+            "url": ""
+        },
+        {
+            "title": "Statistics",
+            "url": "statistics"
+        }
+	]
+}

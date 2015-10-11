@@ -16,8 +16,9 @@ html
 					#tagline Don't miss the next episode. Get notified instantly.
 					
 					nav#navigation
-						a.ajax(href="/")
-							.navigation-button About
+						each link in nav
+							a.navigation-link.ajax(href="/#{link.url}")
+								.navigation-button= link.title
 		
 			#content-container
 				#content!= content
