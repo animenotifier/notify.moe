@@ -1,14 +1,14 @@
 {
 	"name": "anime-release-notifier",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"private": false,
 	"dependencies": {
 		"aero": "*",
-		"aerospike": "https://github.com/blitzprog/aerospike-client-nodejs",
+		"aerospike": "*",
 		"gravatar": "*"
 	},
 	"engines": {
-		"node": ">= 0.12.4",
+		"node": ">= 4.0.0",
 		"iojs": ">= 2.0.0"
 	},
 	"scripts": {
