@@ -4,10 +4,26 @@
 		"key": "",
 		"cert": ""
 	},
-	"static": [],
-	"styles": [],
-	"scripts": [],
+	"static": [
+		"images"
+	],
+	"styles": [
+		"reset",
+		"base",
+		"layout",
+		"elements",
+		"headers",
+		"forms",
+		"colors"
+	],
+	"fonts": [
+		"Open Sans"
+	],
+	"scripts": [
+		"jquery",
+		"init"
+	],
 	"favIcon": "favicon.ico",
 	"liveReloadPort": 9000,
-	"port": 4000
+	"port": 5000
 }

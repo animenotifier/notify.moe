@@ -5,6 +5,24 @@ html
 		style!= css
 
 	body
-		h1 Anime Release Notifier
-		#content!= content
+		#container
+			#header-container
+				#header
+					#title-and-tagline
+						#title
+							a(href="/")
+								h1= siteName
+					#tagline Don't miss the next episode. Get notified instantly.
+					
+					nav#navigation
+						a.ajax(href="/")
+							.navigation-button About
+		
+			#content-container
+				#content!= content
+			
+			#footer-container
+				#footer
+					#copyright &copy; 2015 Eduard Urbach
+		
 		script!= js

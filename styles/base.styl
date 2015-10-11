@@ -1,0 +1,60 @@
+html
+    height 100%
+
+body
+	font-family "Open Sans", Ubuntu, "Trebuchet MS", sans-serif
+	font-size 1.05em
+	tab-size 4
+	overflow-x hidden
+	overflow-y hidden
+	height 100%
+
+a
+	text-decoration none
+	transition all 290ms ease
+	&:hover
+		text-decoration none
+
+nav
+	a
+		display inline-block
+		position relative
+		&:after
+			content ""
+			display block
+			margin auto
+			margin-top 0
+			height 2px
+			width 0px
+			background-color rgba(20, 243, 140, 0)
+			transition all 500ms ease
+		&:hover
+			&:after
+				width 100%
+				background-color rgba(40, 247, 200, 1)
+
+.tooltip
+	display inline
+	position relative
+	&:hover
+		&:after
+			background rgb(51, 51, 51)
+			background rgba(0, 0, 0, 0.8)
+			border-radius 5px
+			bottom 26px
+			color rgb(255, 255, 255)
+			content attr(data-tooltip)
+			left 20%
+			padding 5px 15px
+			position absolute
+			z-index 98
+			width 220px
+		&:before
+			border solid
+			border-color rgb(51, 51, 51) transparent
+			border-width 6px 6px 0 6px
+			bottom 20px
+			content ""
+			left 50%
+			position absolute
+			z-index 99
