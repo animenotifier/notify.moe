@@ -21,6 +21,7 @@
 	],
 	"scripts": [
 		"jquery",
+		"footer",
 		"init"
 	],
 	"favIcon": "favicon.ico",
