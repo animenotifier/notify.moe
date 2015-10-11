@@ -22,7 +22,8 @@
 	"scripts": [
 		"jquery",
 		"footer",
-		"init"
+		"init",
+		"analytics"
 	],
 	"favIcon": "favicon.ico",
 	"liveReloadPort": 9000,
