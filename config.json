@@ -1,7 +1,6 @@
 {
 	"siteName": "Anime Release Notifier",
 	"styles": [
-		"reset",
 		"base",
 		"layout",
 		"elements",
@@ -10,12 +9,17 @@
 		"colors"
 	],
 	"scripts": [
-		"jquery",
-		"kaze",
 		"footer",
-		"init",
-		"analytics"
+		"init"
 	],
+	"plugins": {
+		"jquery": {},
+		"kaze": {},
+		"reset": {},
+		"google-analytics": {
+			"UA": "UA-58621284-1"
+		}
+	},
 	"fonts": [
 		"Open Sans"
 	],
