@@ -52,7 +52,6 @@ kaze.loadURL = function(url, addToHistory) {
 	kaze.currentURL = url;
 
 	if(addToHistory) {
-		console.log('Push history: ' + url);
 		history.pushState(url, null, url);
 	}
 
@@ -88,13 +87,10 @@ kaze.ajaxifyLinks();
 // Load history (used on backward and forward button)
 window.addEventListener('popstate', function(e) {
 	var url = e.state;
-	console.log('popstate');
 
 	if(url) {
-		console.log('Load history: ' + url);
 		kaze.loadURL(url, false);
 	} else if(kaze.currentURL !== kaze.originalURL) {
-		console.log('Load non-history: ' + kaze.originalURL);
 		kaze.loadURL(kaze.originalURL, false);
 	}
 });

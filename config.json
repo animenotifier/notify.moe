@@ -1,12 +1,5 @@
 {
 	"siteName": "Anime Release Notifier",
-	"security": {
-		"key": "",
-		"cert": ""
-	},
-	"static": [
-		"images"
-	],
 	"styles": [
 		"reset",
 		"base",
@@ -16,9 +9,6 @@
 		"forms",
 		"colors"
 	],
-	"fonts": [
-		"Open Sans"
-	],
 	"scripts": [
 		"jquery",
 		"kaze",
@@ -26,6 +16,16 @@
 		"init",
 		"analytics"
 	],
+	"fonts": [
+		"Open Sans"
+	],
+	"static": [
+		"images"
+	],
+	"security": {
+		"key": "ssl.key",
+		"cert": "ssl.chain.crt"
+	},
 	"favIcon": "favicon.ico",
 	"liveReloadPort": 9000,
 	"port": 5000
