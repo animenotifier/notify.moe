@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-    get: function(userName) {
-        return {
-            userName
-        };
-    }
+	get: function(userName) {
+		return {
+			userName
+		};
+	}
 };

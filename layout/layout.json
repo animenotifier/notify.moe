@@ -1,16 +1,16 @@
 {
-    "nav": [
+	"nav": [
 		{
-            "title": "About",
-            "url": ""
-        },
-        {
-            "title": "Statistics",
-            "url": "statistics"
-        },
-        {
-            "title": "Feedback",
-            "url": "feedback"
-        }
+			"title": "About",
+			"url": ""
+		},
+		{
+			"title": "Statistics",
+			"url": "statistics"
+		},
+		{
+			"title": "Feedback",
+			"url": "feedback"
+		}
 	]
 }
