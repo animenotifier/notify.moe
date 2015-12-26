@@ -1,23 +1,31 @@
 section
 	header
 		h2 Pick a platform
+	
 	.button-list
+		// Chrome
 		a.button-link(href='javascript:chrome.webstore.install();', title='Chrome', itemscope='', itemtype='http://schema.org/Product')
 			.button-content
 				span(itemprop='name') Anime Release Notifier - Chrome Extension
 				img(itemprop='image', src='/images/platforms/chrome.png', alt='Chrome', width='256', height='256')
+		
+		// Firefox
 		a.button-link(href='https://addons.mozilla.org/en-US/firefox/addon/anime-release-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
 			.button-content
 				span(itemprop='name') Anime Release Notifier - Firefox Extension
 				img(itemprop='image', src='/images/platforms/firefox.png', alt='Firefox', width='256', height='256')
+		
+		// Android
 		a.button-link(href='https://play.google.com/store/apps/details?id=com.freezingwind.animereleasenotifier', target='_blank', title='Android', itemscope='', itemtype='http://schema.org/Product')
 			.button-content
 				span(itemprop='name') Anime Release Notifier - Android App
 				img(itemprop='image', src='/images/platforms/android.png', alt='Android', width='256', height='256')
-		a.ajax.button-link(href='/pc', title='PC', width='256', height='256', itemscope='', itemtype='http://schema.org/Product')
-			.button-content
-				span(itemprop='name') Anime Release Notifier - Web Interface
-				img(itemprop='image', src='/images/platforms/pc.png', alt='Web')
+		
+		// PC
+		//- a.ajax.button-link(href='/pc', title='PC', itemscope='', itemtype='http://schema.org/Product')
+		//- 	.button-content
+		//- 		span(itemprop='name') Anime Release Notifier - Web Interface
+		//- 		img(itemprop='image', src='/images/platforms/pc.png', alt='Web', width='256', height='256')
 
 section
 	header
@@ -26,34 +34,31 @@ section
 	.button-link.no-scale
 		.button-content
 			h3 Get your watching list:
-				| &#x9;&#x9;&#x9;
 			ul
 				li
 					a(href='http://anilist.co', target='_blank') anilist.co
-					| &#x9;&#x9;&#x9;&#x9;
+				
 				li
 					a(href='http://anime-planet.com', target='_blank') anime-planet.com
-					| &#x9;&#x9;&#x9;&#x9;
+				
 				li
 					a(href='http://hummingbird.me', target='_blank') hummingbird.me
-					| &#x9;&#x9;&#x9;&#x9;
+				
 				li
 					a(href='http://myanimelist.net', target='_blank') myanimelist.net
 
 	.button-link.no-scale
 		.button-content
 			h3 Connect it with:
-				| &#x9;&#x9;&#x9;
-			
 			ul
 				li(style='text-decoration: none')
 					a(href='http://nyaa.se', target='_blank', rel='nofollow') nyaa.se
-					| &#x9;&#x9;&#x9;&#x9;
-				li(style='text-decoration: line-through')
-					a(href='http://animeshow.tv', target='_blank', rel='nofollow') animeshow.tv
-					| &#x9;&#x9;&#x9;&#x9;
-				li(style='text-decoration: line-through')
-					a(href='http://kissanime.com', target='_blank', rel='nofollow') kissanime.com
-					| &#x9;&#x9;&#x9;&#x9;
-				li(style='text-decoration: line-through')
-					a(href='http://rawranime.tv', target='_blank', rel='nofollow') rawranime.tv
+				
+				//- li(style='text-decoration: line-through')
+				//- 	a(href='http://animeshow.tv', target='_blank', rel='nofollow') animeshow.tv
+				//- 
+				//- li(style='text-decoration: line-through')
+				//- 	a(href='http://kissanime.com', target='_blank', rel='nofollow') kissanime.com
+				//- 
+				//- li(style='text-decoration: line-through')
+				//- 	a(href='http://rawranime.tv', target='_blank', rel='nofollow') rawranime.tv

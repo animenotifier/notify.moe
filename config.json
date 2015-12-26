@@ -6,16 +6,16 @@
 		"elements",
 		"headers",
 		"forms",
-		"colors"
+		"colors",
+		"fade"
 	],
 	"scripts": [
 		"footer",
 		"init"
 	],
 	"plugins": {
-		"jquery": {},
+		"style-reset": {},
 		"kaze": {},
-		"reset": {},
 		"google-analytics": {
 			"UA": "UA-58621284-1"
 		}

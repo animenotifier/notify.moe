@@ -1,4 +1,4 @@
-var $container = $('#container');
+/*var $container = $('#container');
 var $headerContainer = $('#header-container');
 var $footer = $('#footer');
 var $contentContainer = $('#content-container');
@@ -17,4 +17,4 @@ $(window).resize(function() {
 	recalculateContentSize();
 });
 
-recalculateContentSize();
+recalculateContentSize();*/

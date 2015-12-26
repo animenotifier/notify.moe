@@ -1,11 +1,10 @@
 section
-	position relative
-	left 50%
-	transform translateX(-50%)
 	float left
 	display block
 	clear both
 	transform-style preserve-3d
+	width 100%
+	text-align center
 	header
 		width 100%
 		clear both
@@ -14,18 +13,13 @@ section
 		font-size 2em
 
 .button-list
-	float left
-	display block
+	display inline-block
 	margin 0
-	position relative
-	left 50%
-	transform translateX(-50%)
 	li
 		float left
 		display block
 
 .button-link
-	float left
 	display inline-block
 	padding 1em
 	margin 0.5em
@@ -38,7 +32,7 @@ section
 		width 256px
 		height 256px
 		text-decoration none
-		transform scale(1.0)
+		transform scale(0.9)
 
 .button-content
 	span[itemprop="name"]
@@ -51,3 +45,6 @@ section
 
 .no-scale
 	transform scale(1.0)
+
+	&:hover
+		transform scale(1.0)
