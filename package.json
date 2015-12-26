@@ -1,6 +1,6 @@
 {
 	"name": "anime-release-notifier",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"homepage": "https://animereleasenotifier.com",
 	"main": "index.js",
 	"private": false,
@@ -17,12 +17,12 @@
 	},
 	"repository": {
 		"type" : "git",
-		"url" : "https://github.com/blitzprog/animereleasenotifier.com"
+		"url" : "https://github.com/animenotifier/animereleasenotifier.com"
 	},
 	"author": {
 		"name": "Eduard Urbach",
 		"email": "e.urbach@gmail.com",
-		"url": "http://blitzprog.org"
+		"url": "https://blitzprog.org"
 	},
 	"license": "GPL-3.0"
 }
