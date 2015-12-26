@@ -5,6 +5,27 @@ let passport = require('passport')
 let session = require('express-session')
 let fs = require('fs')
 let apiKeys = JSON.parse(fs.readFileSync('security/api-keys.json'))
+
+// Google
+let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+
+let googleConfig = Object.assign(
+	{
+		callbackURL: '/auth/google/callback'
+	},
+	apiKeys.google
+)
+
+passport.use(
+	new GoogleStrategy(
+		googleConfig,
+		function(accessToken, refreshToken, profile, done) {
+			done(null, profile)
+		}
+	)
+)
+
+// Facebook
 let FacebookStrategy = require('passport-facebook').Strategy
 
 let facebookConfig = Object.assign(
@@ -15,7 +36,6 @@ let facebookConfig = Object.assign(
 	apiKeys.facebook
 )
 
-// Facebook
 passport.use(
 	new FacebookStrategy(
 		facebookConfig,
@@ -39,7 +59,7 @@ passport.deserializeUser(function(id, done) {
 
 let sessionOptions = {
 	name: 'sid',
-	secret: 'keyboard cat',//require('crypto').randomBytes(64).toString('hex'),
+	secret: require('crypto').randomBytes(64).toString('hex'),
 	saveUninitialized: true,
 	resave: false,
 	cookie: {
@@ -69,7 +89,20 @@ aero.get('/auth/facebook', passport.authenticate('facebook', {
 aero.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
 		successRedirect: '/',
-		failureRedirect: '/fail'
+		failureRedirect: '/login'
+	})
+)
+
+// Google login
+aero.get('/auth/google', passport.authenticate('google', {
+	scope: 'https://www.googleapis.com/auth/plus.login'
+}))
+
+// Google callback
+aero.get('/auth/google/callback',
+	passport.authenticate('google', {
+		successRedirect: '/',
+		failureRedirect: '/login'
 	})
 )
 
