@@ -30,7 +30,10 @@
 		"key": "ssl.key",
 		"cert": "ssl.chain.crt"
 	},
-	"favIcon": "favicon.ico",
-	"liveReloadPort": 9000,
-	"port": 5000
+	"ports": {
+		"http": 5000,
+		"https": 5001,
+		"liveReload": 9000
+	},
+	"favIcon": "favicon.ico"
 }
