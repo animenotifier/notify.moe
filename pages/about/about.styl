@@ -1,4 +1,31 @@
-section
+.category
+	width 100%
+
+	header
+		width 100%
+
+	h2
+		text-align center
+		font-size 2em
+
+.box
+	display inline-block
+	padding 1em
+	margin 0.5em
+	width 256px
+	text-align center
+	&:hover
+		text-decoration none
+	span[itemprop="name"]
+		display none
+
+.scale
+	transform scale(0.7)
+
+	&:hover
+		transform scale(0.9)
+
+/*section
 	float left
 	display block
 	clear both
@@ -42,9 +69,4 @@ section
 		font-weight normal
 		margin-bottom 1em !important
 		text-align center
-
-.no-scale
-	transform scale(1.0)
-
-	&:hover
-		transform scale(1.0)
+*/
