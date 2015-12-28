@@ -8,7 +8,7 @@ html
 	body
 		#container
 			#header-container
-				#header
+				#header(style=user ? 'background-image: none' : '')
 					if !user
 						#title
 							a(href='/')
@@ -17,11 +17,12 @@ html
 					
 					nav#navigation
 						each link in nav
-							a(href='/#{link.url}', class='navigation-link' + (link.ajax === false ? '' : ' ajax'))
+							a(href='/#{link.url}', class='navigation-link' + (link.ajax === false ? '' : ' ajax'), style=`float: ${link.float ? link.float : 'left'}`)
 								.navigation-button
 									if link.icon
-										span(class='glyphicon glyphicon-' + link.icon)
-									span= link.title
+										span(class='glyphicon glyphicon-' + link.icon, style=link.title ? '' : 'margin: 0')
+									if link.title
+										span= link.title
 		
 			#content-container
 				#content.fade!= content

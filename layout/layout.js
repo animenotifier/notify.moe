@@ -5,9 +5,9 @@ exports.render = function(request, render) {
 	let nav = []
 
 	nav.push({
-		title: user ? 'Dashboard' : 'About',
+		title: 'Dash',
 		url: '',
-		icon: user ? 'dashboard' : 'info-sign'
+		icon: 'dashboard'
 	})
 
 	if(user) {
@@ -17,6 +17,12 @@ exports.render = function(request, render) {
 			icon: 'user'
 		})
 	}
+
+	nav.push({
+		title: 'Anime',
+		url: 'anime',
+		icon: 'eye-open'
+	})
 
 	nav.push({
 		title: 'Users',
@@ -32,10 +38,11 @@ exports.render = function(request, render) {
 
 	if(user) {
 		nav.push({
-			title: 'Logout',
+			title: '',
 			url: 'logout',
 			icon: 'log-out',
-			ajax: false
+			ajax: false,
+			float: 'right'
 		})
 	}
 

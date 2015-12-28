@@ -7,7 +7,8 @@
 		"headers",
 		"forms",
 		"colors",
-		"fade"
+		"fade",
+		"mobile"
 	],
 	"scripts": [
 		"footer",
