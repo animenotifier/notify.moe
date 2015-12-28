@@ -1,5 +1,4 @@
-mainColor = rgb(248, 165, 130)
-hoverColor = rgb(255, 145, 70)
+@require "styles/config.styl"
 
 html, body
 	color rgb(60, 60, 60)
@@ -42,8 +41,8 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus
 	color rgb(0, 0, 0)
-	box-shadow 0 0 6px rgba(16, 223, 120, 0.2)
-	border 1px solid rgba(16, 223, 120, 0.95)
+	box-shadow 0 0 6px alpha(mainColor, 20%)
+	border 1px solid mainColor
 
 select
 	color rgb(48, 48, 48)

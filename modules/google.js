@@ -60,6 +60,7 @@ module.exports = function(aero) {
 					arn.setAsync('GoogleToUser', google.id, { userId: user.id }),
 					arn.setAsync('NickToUser', user.nick, { userId: user.id }),
 					arn.setAsync('EmailToUser', user.email, { userId: user.id })
+					// arn.setAsync('AnimeList', user.id, {})
 				])
 
 				done(undefined, user)

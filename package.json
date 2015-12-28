@@ -7,12 +7,14 @@
 	"dependencies": {
 		"aero": "*",
 		"aerospike": "*",
+		"body-parser": "*",
 		"express-session": "*",
 		"gravatar": "*",
 		"passport": "*",
 		"passport-facebook": "*",
 		"passport-google-oauth": "*",
-		"shortid": "*"
+		"shortid": "*",
+		"validator": "*"
 	},
 	"engines": {
 		"node": ">= 4.0.0"
