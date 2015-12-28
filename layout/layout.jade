@@ -17,12 +17,11 @@ html
 					
 					nav#navigation
 						each link in nav
-							if link.ajax !== false
-								a.navigation-link.ajax(href='/#{link.url}')
-									.navigation-button= link.title
-							else
-								a.navigation-link(href='/#{link.url}')
-									.navigation-button= link.title
+							a(href='/#{link.url}', class='navigation-link' + (link.ajax === false ? '' : ' ajax'))
+								.navigation-button
+									if link.icon
+										span(class='glyphicon glyphicon-' + link.icon)
+									span= link.title
 		
 			#content-container
 				#content.fade!= content

@@ -16,6 +16,7 @@
 	"plugins": {
 		"style-reset": {},
 		"kaze": {},
+		"glyphicons": {},
 		"google-analytics": {
 			"UA": "UA-58621284-1"
 		}

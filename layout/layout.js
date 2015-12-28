@@ -5,26 +5,30 @@ exports.render = function(request, render) {
 	let nav = []
 
 	nav.push({
-		title: 'About',
-		url: ''
+		title: user ? 'Dashboard' : 'About',
+		url: '',
+		icon: 'dashboard'
 	})
 
 	if(user) {
 		nav.push({
 			title: 'Profile',
-			url: 'profile/' + user.nick
+			url: 'profile/' + user.nick,
+			icon: 'user'
 		})
 	}
 
 	nav.push({
-		title: 'Statistics',
-		url: 'statistics'
+		title: 'Stats',
+		url: 'statistics',
+		icon: 'stats'
 	})
 
 	if(user) {
 		nav.push({
 			title: 'Logout',
 			url: 'logout',
+			icon: 'log-out',
 			ajax: false
 		})
 	}

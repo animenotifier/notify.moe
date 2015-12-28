@@ -22,7 +22,7 @@ module.exports = function(aero) {
 	// This means we're reducing the user data to a single hash by which the user can be identified.
 	passport.serializeUser(function(user, done) {
 		user.nick = 'fb' + user.accounts.facebook
-		
+
 		// Save in database
 		aero.db.put({
 			ns: 'arn',

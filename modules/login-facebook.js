@@ -66,7 +66,6 @@ module.exports = function(aero) {
 
 					done(null, user)
 				} else {
-					console.log('EXISTING', record.userId)
 					// Existing user
 					aero.db.get({
 						ns: 'arn',
