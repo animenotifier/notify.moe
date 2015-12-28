@@ -7,7 +7,7 @@ exports.render = function(request, render) {
 	nav.push({
 		title: user ? 'Dashboard' : 'About',
 		url: '',
-		icon: 'dashboard'
+		icon: user ? 'dashboard' : 'info-sign'
 	})
 
 	if(user) {
@@ -17,6 +17,12 @@ exports.render = function(request, render) {
 			icon: 'user'
 		})
 	}
+
+	nav.push({
+		title: 'Users',
+		url: 'users',
+		icon: 'globe'
+	})
 
 	nav.push({
 		title: 'Stats',
