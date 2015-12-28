@@ -21,7 +21,8 @@ module.exports = function(aero) {
 	// Serialize
 	// This means we're reducing the user data to a single hash by which the user can be identified.
 	passport.serializeUser(function(user, done) {
-		user.nick = 'fb' + user.accounts.facebook
+		let now = new Date()
+		user.lastLogin = now.toISOString()
 
 		// Save in database
 		aero.db.put({

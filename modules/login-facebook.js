@@ -27,6 +27,8 @@ module.exports = function(aero) {
 				key: fb.id
 			}, function(error, record, metadata, key) {
 				if(error.code !== 0) {
+					let now = new Date()
+
 					// New user
 					let user = {
 						id: shortid.generate(),
@@ -34,6 +36,8 @@ module.exports = function(aero) {
 						firstName: fb.first_name,
 						lastName: fb.last_name,
 						email: fb.email,
+						registered: now.toISOString(),
+						lastLogin: now.toISOString(),
 						accounts: {
 							facebook: fb.id
 						}
