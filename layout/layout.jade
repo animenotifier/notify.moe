@@ -3,22 +3,26 @@ html
 	head
 		title= siteName
 		style!= css
-		link(rel="chrome-webstore-item", href="https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch")
+		link(rel='chrome-webstore-item', href='https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch')
 
 	body
 		#container
 			#header-container
 				#header
-					#title-and-tagline
+					if !user
 						#title
-							a(href="/")
+							a(href='/')
 								h1= siteName
-					#tagline Don't miss the next episode. Get notified instantly.
+						#tagline Don't miss the next episode. Get notified instantly.
 					
 					nav#navigation
 						each link in nav
-							a.navigation-link.ajax(href="/#{link.url}")
-								.navigation-button= link.title
+							if link.ajax !== false
+								a.navigation-link.ajax(href='/#{link.url}')
+									.navigation-button= link.title
+							else
+								a.navigation-link(href='/#{link.url}')
+									.navigation-button= link.title
 		
 			#content-container
 				#content.fade!= content

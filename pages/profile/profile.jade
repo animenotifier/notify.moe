@@ -1,0 +1,12 @@
+if !viewUser
+	section
+		header
+			h2 Error
+		
+		p User not found.
+else
+	section
+		header
+			h2.user-name= viewUser.nick
+		
+		img.user-image(src=viewUser.gravatarURL, alt='Profile image')

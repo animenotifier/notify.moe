@@ -3,7 +3,7 @@
 		"node": true
 	},
 	"ecmaFeatures": {
-		"arrowFunctions": false,
+		"arrowFunctions": true,
 		"blockBindings": true,
 		"forOf": true,
 		"generators": true,

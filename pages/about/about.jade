@@ -17,17 +17,18 @@ section.category
 		span(itemprop='name') Anime Release Notifier - Android App
 		img(itemprop='image', src='/images/platforms/android.png', alt='Android', width='256', height='256')
 
-section.category
-	header
-		h2 Try it!
-		
-	.box
-		a(href='/auth/google')
-			img(src='/images/elements/google-login.png', alt='Google Login')
-				
-	.box
-		a(href='/auth/facebook')
-			img(src='/images/elements/facebook-login.png', alt='Facebook Login')
+if !user
+	section.category
+		header
+			h2 Try it!
+			
+		.box
+			a(href='/auth/google')
+				img(src='/images/elements/google-login.png', alt='Google Login')
+					
+		.box
+			a(href='/auth/facebook')
+				img(src='/images/elements/facebook-login.png', alt='Facebook Login')
 
 //- section.category
 //- 	header

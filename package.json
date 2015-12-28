@@ -11,7 +11,8 @@
 		"gravatar": "*",
 		"passport": "*",
 		"passport-facebook": "*",
-		"passport-google-oauth": "*"
+		"passport-google-oauth": "*",
+		"shortid": "*"
 	},
 	"engines": {
 		"node": ">= 4.0.0"
