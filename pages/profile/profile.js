@@ -1,7 +1,7 @@
 'use strict'
 
 let gravatar = require('gravatar')
-let aero = require('aero')
+let arn = require('../../lib')
 
 exports.get = function(request, response) {
 	let user = request.user
@@ -12,28 +12,19 @@ exports.get = function(request, response) {
 		return
 	}
 
-	aero.db.get({
-		ns: 'arn',
-		set: 'NickToAccount',
-		key: viewUserNick
-	}, function(error, nick, metadata, key) {
-		if(error.code !== 0) {
+	arn.get('NickToUser', viewUserNick, (error, nick) => {
+		if(error) {
 			response.render({ user })
 			return
 		}
 
-		aero.db.get({
-			ns: 'arn',
-			set: 'Accounts',
-			key: nick.userId
-		}, function(error, viewUser, metadata, key) {
-			if(error.code !== 0) {
+		arn.getUser(nick.userId, function(error, viewUser) {
+			if(error) {
 				response.render({ user })
 				return
 			}
 
 			viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '200', r: 'x', d: 'mm'}, true)
-
 			response.render({
 				user,
 				viewUser

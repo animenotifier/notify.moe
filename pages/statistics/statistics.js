@@ -1,28 +1,25 @@
 'use strict'
 
-let aero = require('aero')
+let arn = require('../../lib')
 
 exports.get = function(request, response) {
-	let scan = aero.db.query('arn', 'Accounts', {
-	    concurrent: true,
-	    nobins: false,
-	})
-	let stream = scan.execute()
 	let recordCount = 0
+	let gender = {
+		male: 0,
+		female: 0
+	}
 
-	stream.on('data', function(record) {
+	arn.scan('Users', function(user) {
+		if(user.gender === 'male' || user.gender === 'female')
+			gender[user.gender] += 1
+
 		recordCount++
-	})
-
-	stream.on('error', function(error) {
-		console.error('Error occured while scanning:', error)
-	})
-
-	stream.on('end', function(end) {
+	}, function() {
 		response.render({
-			accounts: {
-				total: recordCount
-			}
+			users: {
+				total: recordCount,
+				gender
+			},
 		})
 	})
 }

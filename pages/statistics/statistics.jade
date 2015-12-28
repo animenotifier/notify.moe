@@ -1,13 +1,31 @@
 section
 	header
 		h2 Statistics
-		
-	table
-		tbody
-			tr
-				td.statistics-label Accounts
-				td.statistics-value= accounts.total
+	
+	section
+		header
+			h3 General
 			
-			tr
-				td.statistics-label Anime
-				td.statistics-value 0
+		table
+			tbody
+				tr
+					td.statistics-label Users
+					td.statistics-value= users.total
+				
+				tr
+					td.statistics-label Anime
+					td.statistics-value 0
+					
+	section
+		header
+			h3 Gender
+			
+		table
+			tbody
+				tr
+					td.statistics-label Male
+					td.statistics-value= users.gender.male
+				
+				tr
+					td.statistics-label Female
+					td.statistics-value= users.gender.female

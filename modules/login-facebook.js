@@ -1,8 +1,10 @@
 'use strict'
 
 let fs = require('fs')
+let arn = require('../lib')
 let shortid = require('shortid')
 let passport = require('passport')
+let Promise = require('bluebird')
 let FacebookStrategy = require('passport-facebook').Strategy
 
 module.exports = function(aero) {
@@ -10,75 +12,59 @@ module.exports = function(aero) {
 
 	let facebookConfig = Object.assign({
 	        callbackURL: '/auth/facebook/callback',
-			profileFields: ['id', 'name', 'email'],
-	        enableProof: false
+			profileFields: ['id', 'name', 'email', 'gender', 'age_range'],
+	        enableProof: false,
+			passReqToCallback: true
 	    },
 	    apiKeys.facebook
 	)
 
 	passport.use(new FacebookStrategy(
         facebookConfig,
-        function(accessToken, refreshToken, profile, done) {
+        function(request, accessToken, refreshToken, profile, done) {
 			let fb = profile._json
+			let email = fb.email
 
-			aero.db.get({
-				ns: 'arn',
-				set: 'FacebookToAccount',
-				key: fb.id
-			}, function(error, record, metadata, key) {
-				if(error.code !== 0) {
-					let now = new Date()
+			if(email.endsWith('googlemail.com'))
+				email = email.replace('googlemail.com', 'gmail.com')
 
-					// New user
-					let user = {
-						id: shortid.generate(),
-						nick: 'fb' + fb.id,
-						firstName: fb.first_name,
-						lastName: fb.last_name,
-						email: fb.email,
-						registered: now.toISOString(),
-						lastLogin: now.toISOString(),
-						accounts: {
-							facebook: fb.id
-						}
+			Promise.any([
+				arn.getAsync('FacebookToUser', fb.id),
+				arn.getAsync('EmailToUser', email)
+			])
+			.then(record => arn.getUser(record.userId, function(error, user) {
+				if(user && user.accounts)
+					user.accounts.facebook = fb.id
+
+				done(error, user)
+			}))
+			.catch(error => {
+				// New user
+				let now = new Date()
+				let user = {
+					id: shortid.generate(),
+					nick: 'fb' + fb.id,
+					firstName: fb.first_name,
+					lastName: fb.last_name,
+					email: email,
+					gender: fb.gender,
+					language: '',
+					ageRange: fb.age_range,
+					registered: now.toISOString(),
+					lastLogin: now.toISOString(),
+					ip: request.connection.remoteAddress,
+					accounts: {
+						facebook: fb.id
 					}
-
-					if(user.email.endsWith('googlemail.com'))
-						user.email = user.email.replace('googlemail.com', 'gmail.com')
-
-					aero.db.put({
-						ns: 'arn',
-						set: 'FacebookToAccount',
-						key: fb.id
-					}, {
-						userId: user.id
-					}, function(error) {
-						if(error.code !== 0)
-							console.log('error: %s', error.message)
-					})
-
-					aero.db.put({
-						ns: 'arn',
-						set: 'NickToAccount',
-						key: user.nick
-					}, {
-						userId: user.id
-					}, function(error) {
-						if(error.code !== 0)
-							console.log('error: %s', error.message)
-					})
-
-					done(null, user)
-				} else {
-					// Existing user
-					aero.db.get({
-						ns: 'arn',
-						set: 'Accounts',
-						key: record.userId
-					}, function(error, user, metadata, key) {
-						done(error.code !== 0 ? error : null, user)
-					})
 				}
+
+				Promise.all([
+					arn.setAsync('FacebookToUser', fb.id, { userId: user.id }),
+					arn.setAsync('NickToUser', user.nick, { userId: user.id }),
+					arn.setAsync('EmailToUser', user.email, { userId: user.id })
+				])
+
+				done(undefined, user)
 			})
         }
 	))
