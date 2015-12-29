@@ -12,6 +12,14 @@ module.exports = {
 		let anilistNick = 'Akyoto'
 
 		arn.AniList.getAnimeList(anilistNick, function(error, watching) {
+			watching.forEach(function(entry) {
+				entry.animeProvider = {
+					url: null,
+					nextEpisodeUrl: null,
+					videoUrl: null
+				}
+			})
+
 			let json = {
 				listProvider: 'AniList',
 				watching
