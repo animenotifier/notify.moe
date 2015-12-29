@@ -4,7 +4,29 @@ let arn = require('../../../lib')
 
 module.exports = {
 	get: function(request, response) {
-		response.end('Welcome to the ARN users API.');
+		let nick = request.params[0]
+
+		if(!nick)
+			return response.end()
+
+		arn.getUserByNick(nick, function(error, user) {
+			if(error)
+				return response.end()
+
+			response.setHeader('Content-Type', 'application/json')
+
+			// Do not show critical information
+			delete user.id
+			delete user.ip
+			delete user.accounts
+			delete user.ageRange
+			delete user.email
+			delete user.gender
+			delete user.firstName
+			delete user.lastName
+
+			response.end(JSON.stringify(user))
+		})
 	},
 
 	post: function(request, response) {
@@ -36,4 +58,4 @@ module.exports = {
 
 		response.end()
 	}
-};
+}
