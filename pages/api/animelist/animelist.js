@@ -22,6 +22,7 @@ module.exports = {
 
 			let json = {
 				listProvider: 'AniList',
+				listUrl: arn.AniList.getAnimeListUrl(anilistNick),
 				watching
 			}
 
