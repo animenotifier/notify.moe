@@ -58,13 +58,12 @@ module.exports = function(aero) {
 					}
 				}
 
-				Promise.all([
-					arn.setAsync('FacebookToUser', fb.id, { userId: user.id }),
-					arn.setAsync('NickToUser', user.nick, { userId: user.id }),
-					arn.setAsync('EmailToUser', user.email, { userId: user.id })
-				])
-
-				done(undefined, user)
+				arn.registerNewUser(
+					user,
+					arn.setAsync('FacebookToUser', fb.id, { userId: user.id })
+				).then(function() {
+					done(undefined, user)
+				})
 			})
         }
 	))
