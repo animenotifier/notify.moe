@@ -46,7 +46,7 @@ module.exports = function(aero) {
 					nick: 'fb' + fb.id,
 					firstName: fb.first_name,
 					lastName: fb.last_name,
-					email: email,
+					email: email ? email : '',
 					gender: fb.gender,
 					language: '',
 					ageRange: fb.age_range,
