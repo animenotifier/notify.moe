@@ -40,12 +40,12 @@ var animeUpdater = {
 			"<a href='" + listUrl + "' target='_blank' title='Anime List'>Edit List</a>" +
 			" <a href='http://anichart.net/airing' target='_blank' title='Chart'><img src='https://animereleasenotifier.com/images/icons/chart.png' alt='Chart'/></a>" +
 			" <a href='javascript:toggleSettings();' title='Options'><img src='https://animereleasenotifier.com/images/icons/settings.png' alt='Options'/></a>"
-		); 
-		
+		);
+
 		$("#anime-list").append(footer);
 	},
 
 	getProfileUrl: function(userName) {
-		return 'https://animereleasenotifier.com/+' + userName;
+		return 'https://animereleasenotifier.com/profile/' + userName;
 	}
 };

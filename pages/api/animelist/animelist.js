@@ -10,10 +10,15 @@ module.exports = {
 			return response.end()
 
 		let anilistNick = 'Akyoto'
-		
-		arn.AniList.getAnimeList(anilistNick, function(error, data) {
+
+		arn.AniList.getAnimeList(anilistNick, function(error, watching) {
+			let json = {
+				listProvider: 'AniList',
+				watching
+			}
+
 			response.setHeader('Content-Type', 'application/json')
-			response.end(JSON.stringify(data))
+			response.end(JSON.stringify(json))
 		})
 	}
 }
