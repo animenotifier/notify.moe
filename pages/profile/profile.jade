@@ -20,7 +20,7 @@ else
 		
 		mixin text(field)
 			- var value = viewUser[field.id]
-			label(for=field.id)= field.title
+			label(for=field.id)= field.label
 			input.save-on-change(id=field.id, type='text', value=value, placeholder=field.placeholder)
 		
 		each field in fields

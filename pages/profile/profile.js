@@ -12,8 +12,7 @@ exports.get = function(request, response) {
 		return
 	}
 
-	arn.getAsync('NickToUser', viewUserNick)
-	.then(nick => arn.getUserAsync(nick.userId))
+	arn.getUserByNickAsync(viewUserNick)
 	.then(viewUser => {
 		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
 		response.render({

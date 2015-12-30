@@ -23,18 +23,38 @@ exports.post = function(request, response) {
 		return
 	}*/
 
-	/*if(key === 'nick') {
+	if(key === 'nick') {
 		let oldNick = user.nick
 
 		arn.getAsync('NickToUser', value)
-		.catch(error => {
-			arn.remove('NickToUser', oldNick)
-			arn.set('NickToUser', value, { userId: user.id })
+		.then(record => {
+			response.writeHead(409)
+			response.end('Username is already taken.')
 		})
+		.catch(error => {
+			user[key] = value
+
+			Promise.all([
+				arn.removeAsync('NickToUser', oldNick),
+				arn.setAsync('NickToUser', value, { userId: user.id }),
+				arn.setUserAsync(user.id, user)
+			])
+			.then(() => response.end())
+			.catch(error => {
+				response.writeHead(409)
+				response.end(error.message)
+			})
+		})
+		return
 	}
 
 	user[key] = value
-	arn.setUser(user.id, user)*/
 
-	response.end()
+	arn.setUserAsync(user.id, user)
+		.then(() => response.end())
+		.catch(error => {
+			console.log(error)
+			response.writeHead(409)
+			response.end(error.message)
+		})
 }
