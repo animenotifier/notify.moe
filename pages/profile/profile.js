@@ -12,23 +12,17 @@ exports.get = function(request, response) {
 		return
 	}
 
-	arn.get('NickToUser', viewUserNick, (error, nick) => {
-		if(error) {
-			response.render({ user })
-			return
-		}
-
-		arn.getUser(nick.userId, function(error, viewUser) {
-			if(error) {
-				response.render({ user })
-				return
-			}
-
-			viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '200', r: 'x', d: 'mm'}, true)
-			response.render({
-				user,
-				viewUser
-			})
+	arn.getAsync('NickToUser', viewUserNick)
+	.then(nick => arn.getUserAsync(nick.userId))
+	.then(viewUser => {
+		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
+		response.render({
+			user,
+			viewUser
 		})
+	}).catch(error => {
+		console.error(error)
+		response.render({ user })
+		return
 	})
 }

@@ -48,12 +48,19 @@ module.exports = function(aero) {
 					gender: google.gender ? google.gender : '',
 					language: google.language,
 					ageRange: google.ageRange ? google.ageRange : null,
-					registered: now.toISOString(),
-					lastLogin: now.toISOString(),
-					ip: request.connection.remoteAddress,
 					accounts: {
 						google: google.id
-					}
+					},
+					tagline: '',
+					providers: {
+						list: 'AniList',
+						anime: '',
+						airingDate: 'AniList'
+					},
+					listProviders: {},
+					ip: request.connection.remoteAddress,
+					registered: now.toISOString(),
+					lastLogin: now.toISOString(),
 				}
 
 				arn.registerNewUser(

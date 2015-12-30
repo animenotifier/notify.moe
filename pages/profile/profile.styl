@@ -1,11 +1,29 @@
-.user-nick
+.image-container
 	float left
 	width auto
+
+.image
+	border-radius 3px
+
+.intro-container
+	float left
+	width auto
+	padding 0.5em
 	margin-left 1em
 
-.user-image
-	float left
-	border-radius 100%
+.nick
+	margin-top 0
+	margin-bottom 0
 
-.user-fields
-	clear both
+@media only screen and (max-width: 900px)
+	.image-container
+		width 100%
+
+	.intro-container
+		margin 1em 0
+		padding 0
+		width 100%
+
+	.nick, .tagline
+		width 100%
+		text-align center

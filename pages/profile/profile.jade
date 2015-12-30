@@ -6,5 +6,22 @@ if !viewUser
 		p User not found.
 else
 	section
-		img.user-image(src=viewUser.gravatarURL, alt='Profile image')
-		h2(class='user-nick' + (user ? ' editable' : ''), data-binding='nick')= viewUser.nick
+		.image-container
+			img.image(src=viewUser.gravatarURL, alt='Profile image')
+		
+		.intro-container
+			h2.nick= viewUser.nick
+			
+			if viewUser.tagline
+				p.tagline= viewUser.tagline
+			else
+				p.tagline
+					em No tagline yet.
+		
+		mixin text(field)
+			- var value = viewUser[field.id]
+			label(for=field.id)= field.title
+			input.save-on-change(id=field.id, type='text', value=value, placeholder=field.placeholder)
+		
+		each field in fields
+			+text(field)

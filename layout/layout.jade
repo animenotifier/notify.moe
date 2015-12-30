@@ -13,7 +13,7 @@ html
 						#title
 							a(href='/')
 								h1= siteName
-						#tagline Don't miss the next episode. Get notified instantly.
+						#slogan Don't miss the next episode. Get notified instantly.
 					
 					nav#navigation
 						each link in nav
@@ -22,7 +22,7 @@ html
 									if link.icon
 										span(class='glyphicon glyphicon-' + link.icon, style=link.title ? '' : 'margin: 0')
 									if link.title
-										span= link.title
+										span.navigation-text= link.title
 		
 			#content-container
 				#content.fade!= content

@@ -50,12 +50,19 @@ module.exports = function(aero) {
 					gender: fb.gender,
 					language: '',
 					ageRange: fb.age_range,
-					registered: now.toISOString(),
-					lastLogin: now.toISOString(),
-					ip: request.connection.remoteAddress,
 					accounts: {
 						facebook: fb.id
-					}
+					},
+					tagline: '',
+					providers: {
+						list: 'AniList',
+						anime: '',
+						airingDate: 'AniList'
+					},
+					listProviders: {},
+					ip: request.connection.remoteAddress,
+					registered: now.toISOString(),
+					lastLogin: now.toISOString()
 				}
 
 				arn.registerNewUser(

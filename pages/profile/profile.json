@@ -1,0 +1,19 @@
+{
+	"fields": [
+		{
+			"id": "nick",
+			"label": "Name:",
+			"placeholder": "Your ARN username"
+		},
+		{
+			"id": "tagline",
+			"label": "Tagline:",
+			"placeholder": "Text that appears below your username"
+		},
+		{
+			"id": "listProviders.aniList.userName",
+			"label": "AniList:",
+			"placeholder": "Your anilist.co username"
+		}
+	]
+}

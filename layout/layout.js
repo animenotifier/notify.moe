@@ -18,11 +18,11 @@ exports.render = function(request, render) {
 		})
 	}
 
-	nav.push({
-		title: 'Anime',
-		url: 'anime',
-		icon: 'eye-open'
-	})
+	// nav.push({
+	// 	title: 'Anime',
+	// 	url: 'anime',
+	// 	icon: 'eye-open'
+	// })
 
 	nav.push({
 		title: 'Users',
