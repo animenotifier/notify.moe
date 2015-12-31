@@ -48,7 +48,24 @@ exports.post = function(request, response) {
 		return
 	}
 
-	user[key] = value
+	if(key.indexOf('.') !== -1) {
+		let parts = key.split('.')
+		let obj = user
+
+		for(let i = 0; i < parts.length - 1; i++) {
+			let key = parts[i]
+
+			if(!obj.hasOwnProperty(key))
+				obj[key] = {}
+
+			obj = obj[key]
+		}
+
+		let lastKey = parts[parts.length - 1]
+		obj[lastKey] = value
+	} else {
+		user[key] = value
+	}
 
 	arn.setUserAsync(user.id, user)
 		.then(() => response.end())

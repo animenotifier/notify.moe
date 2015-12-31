@@ -13,7 +13,7 @@ exports.render = function(request, render) {
 	if(user) {
 		nav.push({
 			title: 'Profile',
-			url: 'profile/' + user.nick,
+			url: 'user/' + user.nick,
 			icon: 'user'
 		})
 	}

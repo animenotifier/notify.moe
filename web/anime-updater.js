@@ -46,6 +46,6 @@ var animeUpdater = {
 	},
 
 	getProfileUrl: function(userName) {
-		return 'https://animereleasenotifier.com/profile/' + userName;
+		return 'https://animereleasenotifier.com/user/' + userName;
 	}
 };

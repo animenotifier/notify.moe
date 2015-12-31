@@ -46,7 +46,7 @@ window.postSave = function(key, value) {
 	switch(key) {
 		case 'nick':
 			var oldPath = window.location.pathname;
-			var newPath = '/profile/' + value;
+			var newPath = '/user/' + value;
 
 			window.history.pushState('', document.title, newPath);
 

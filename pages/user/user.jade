@@ -19,9 +19,12 @@ else
 					em No tagline yet.
 		
 		mixin text(field)
-			- var value = viewUser[field.id]
-			label(for=field.id)= field.label
-			input.save-on-change(id=field.id, type='text', value=value, placeholder=field.placeholder)
+			.field
+				label(for=field.id)= field.label
+				input.save-on-change(id=field.id, type='text', value=getProperty(viewUser, field.id), placeholder=field.placeholder)
 		
-		each field in fields
-			+text(field)
+		.fields
+			each category, title in fields
+				h3= title
+				each field in category
+					+text(field)

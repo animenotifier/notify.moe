@@ -1,0 +1,38 @@
+{
+	"fields": {
+		"General": [
+			{
+				"id": "nick",
+				"label": "Name:",
+				"placeholder": "Your ARN username"
+			},
+			{
+				"id": "tagline",
+				"label": "Tagline:",
+				"placeholder": "Text that appears below your username"
+			}
+		],
+		"List providers": [
+			{
+				"id": "listProviders.aniList.userName",
+				"label": "AniList:",
+				"placeholder": "Your anilist.co username"
+			},
+			{
+				"id": "listProviders.animePlanet.userName",
+				"label": "AnimePlanet:",
+				"placeholder": "Your anime-planet.com username"
+			},
+			{
+				"id": "listProviders.hummingBird.userName",
+				"label": "HummingBird:",
+				"placeholder": "Your hummingbird.me username"
+			},
+			{
+				"id": "listProviders.myAnimeList.userName",
+				"label": "MyAnimeList:",
+				"placeholder": "Your myanimelist.net username"
+			}
+		]
+	}
+}
