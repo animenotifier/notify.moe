@@ -7,13 +7,21 @@ module.exports = {
 		let nick = request.params[0]
 
 		if(!nick)
-			return response.end()
+			return response.end('Username not specified')
 
 		arn.getUserByNickAsync(nick)
 		.then(user => {
-			let anilistNick = user.listProviders.aniList.userName
+			let listProviderName = user.providers.list
+			let listProvider = arn[listProviderName]
+			let listProviderSettings = user.listProviders[listProviderName]
 
-			arn.AniList.getAnimeList(anilistNick, function(error, watching) {
+			if(!listProvider)
+				throw 'Invalid list provider'
+
+			if(!listProviderSettings || !listProviderSettings.userName)
+				throw `${listProviderName} username has not been specified`
+
+			listProvider.getAnimeList(listProviderSettings.userName, function(error, watching) {
 				watching.forEach(function(entry) {
 					entry.animeProvider = {
 						url: null,
@@ -23,8 +31,8 @@ module.exports = {
 				})
 
 				let json = {
-					listProvider: 'AniList',
-					listUrl: arn.AniList.getAnimeListUrl(anilistNick),
+					listProvider: listProviderName,
+					listUrl: listProvider.getAnimeListUrl(listProviderSettings.userName),
 					watching
 				}
 
@@ -32,6 +40,15 @@ module.exports = {
 				response.end(JSON.stringify(json))
 			})
 		})
-		.catch(error => console.error(error))
+		.catch(error => {
+			response.writeHead(409)
+
+			if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND')
+				response.end(`User '${nick}' not found`)
+			else if(error.message)
+				response.end(error.message)
+			else
+				response.end(error.toString())
+		})
 	}
 }

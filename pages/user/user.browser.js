@@ -23,7 +23,7 @@ window.save = function(e) {
 
 		window.postSave(key, value);
 
-		kaze.get('/_' + location.pathname, function(newPageCode) {
+		kaze.get('/_' + location.pathname, function(error, newPageCode) {
 			var focusedElementId = document.activeElement.id;
 			var focusedElementValue = document.activeElement.value;
 
@@ -72,8 +72,13 @@ window.loadAnimeList = function() {
 	animeList.innerText = 'Loading your anime list...';
 
 	var userName = window.location.pathname.substring(2);
-	console.log(userName);
-	kaze.getJSON('/api/animelist/' + userName, function(response) {
+
+	kaze.getJSON('/api/animelist/' + userName, function(error, response) {
+		if(error) {
+			animeList.innerText = 'Error loading your anime list.';
+			return;
+		}
+
 		animeList.innerText = JSON.stringify(response, null, '\t');
 	});
 }

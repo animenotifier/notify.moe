@@ -52,22 +52,22 @@
 		],
 		"List providers": [
 			{
-				"id": "listProviders.aniList.userName",
+				"id": "listProviders.AniList.userName",
 				"label": "AniList:",
 				"description": "Your anilist.co username"
 			},
 			{
-				"id": "listProviders.animePlanet.userName",
+				"id": "listProviders.AnimePlanet.userName",
 				"label": "AnimePlanet:",
 				"description": "Your anime-planet.com username"
 			},
 			{
-				"id": "listProviders.hummingBird.userName",
+				"id": "listProviders.HummingBird.userName",
 				"label": "HummingBird:",
 				"description": "Your hummingbird.me username"
 			},
 			{
-				"id": "listProviders.myAnimeList.userName",
+				"id": "listProviders.MyAnimeList.userName",
 				"label": "MyAnimeList:",
 				"description": "Your myanimelist.net username"
 			}
