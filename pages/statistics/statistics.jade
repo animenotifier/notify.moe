@@ -15,17 +15,22 @@ section
 				tr
 					td.statistics-label Anime
 					td.statistics-value 0
-					
-	section
-		header
-			h3 Gender
-			
-		table
-			tbody
-				tr
-					td.statistics-label Male
-					td.statistics-value= users.gender.male
+	
+	if users.total !== 0
+		section
+			header
+				h3 Gender
 				
-				tr
-					td.statistics-label Female
-					td.statistics-value= users.gender.female
+			table
+				tbody
+					tr
+						td.statistics-label Male
+						td.statistics-value= Math.round(users.gender.male / users.total * 100) + ' %'
+					
+					tr
+						td.statistics-label Female
+						td.statistics-value= Math.round(users.gender.female / users.total * 100) + ' %'
+					
+					tr
+						td.statistics-label Not specified
+						td.statistics-value= Math.round(users.gender.unknown / users.total * 100) + ' %'
