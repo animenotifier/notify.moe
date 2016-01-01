@@ -27,7 +27,8 @@ exports.get = function(request, response) {
 		response.render({
 			user,
 			viewUser,
-			getProperty
+			getProperty,
+			canEdit: user && user.id === viewUser.id
 		})
 	}).catch(error => {
 		console.error(error)

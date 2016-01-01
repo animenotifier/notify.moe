@@ -52,6 +52,7 @@ module.exports = function(aero) {
 						google: google.id
 					},
 					tagline: '',
+					website: '',
 					providers: {
 						list: 'AniList',
 						anime: '',

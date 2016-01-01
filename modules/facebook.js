@@ -54,6 +54,7 @@ module.exports = function(aero) {
 						facebook: fb.id
 					},
 					tagline: '',
+					website: '',
 					providers: {
 						list: 'AniList',
 						anime: '',

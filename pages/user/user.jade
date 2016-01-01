@@ -13,18 +13,28 @@ else
 			h2.nick= viewUser.nick
 			
 			if viewUser.tagline
-				p.tagline= viewUser.tagline
+				p.tagline
+					em= viewUser.tagline
 			else
 				p.tagline
 					em No tagline yet.
+			
+			if viewUser.website
+				p.website
+					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website
 		
 		mixin text(field)
 			.field
 				label(for=field.id)= field.label
-				input.save-on-change(id=field.id, type='text', value=getProperty(viewUser, field.id), placeholder=field.placeholder)
+				if canEdit
+					input.save-on-change(id=field.id, type=field.type ? field.type : 'text', value=getProperty(viewUser, field.id), placeholder=field.placeholder)
+				else
+					- var value = getProperty(viewUser, field.id)
+					p.value(id=field.id)= value ? value : '-'
 		
 		.fields
 			each category, title in fields
-				h3= title
-				each field in category
-					+text(field)
+				if title !== 'General' || canEdit
+					h3= title
+					each field in category
+						+text(field)
