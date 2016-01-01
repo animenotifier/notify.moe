@@ -97,8 +97,6 @@ function AnimeList(json, $animeList, maxEpisodeDifference, notificationCallBack)
 		}
 	}.bind(this));
 
-
-
 	this.length = this.successCount + this.failCount;
 
 	if(this.length != 0)

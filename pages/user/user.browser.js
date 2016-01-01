@@ -67,9 +67,22 @@ window.postSave = function(key, value) {
 	}
 };
 
+window.loadAnimeList = function() {
+	var animeList = document.getElementById('animeList');
+	animeList.innerText = 'Loading your anime list...';
+
+	var userName = window.location.pathname.substring(2);
+	console.log(userName);
+	kaze.getJSON('/api/animelist/' + userName, function(response) {
+		animeList.innerText = JSON.stringify(response, null, '\t');
+	});
+}
+
 var myNodeList = document.querySelectorAll('.save-on-change');
 
 for(var i = 0; i < myNodeList.length; ++i) {
 	var element = myNodeList[i];
 	element.onchange = window.save;
 }
+
+window.loadAnimeList();

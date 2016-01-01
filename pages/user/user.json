@@ -24,10 +24,10 @@
 				"label": "List provider:",
 				"description": "This is where we'll get your anime list from",
 				"options": {
-					"anilist.co": "aniList",
-					"anime-planet.com": "animePlanet",
-					"hummingbird.me": "hummingBird",
-					"myanimelist.net": "myAnimeList"
+					"anilist.co": "AniList",
+					"anime-planet.com": "AnimePlanet",
+					"hummingbird.me": "HummingBird",
+					"myanimelist.net": "MyAnimeList"
 				}
 			},
 			{
@@ -35,7 +35,10 @@
 				"label": "Anime provider:",
 				"description": "This is where we'll look for new episodes of your anime",
 				"options": {
-					"": ""
+					"": "",
+					"hulu.com": "Hulu",
+					"crunchyroll.com": "CrunchyRoll",
+					"nyaa.se": "Nyaa"
 				}
 			},
 			{
@@ -43,7 +46,7 @@
 				"label": "Airing date provider:",
 				"description": "This is where we'll fetch the airing date for your anime",
 				"options": {
-					"anilist.co": "aniList"
+					"anilist.co": "AniList"
 				}
 			}
 		],

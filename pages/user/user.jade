@@ -27,7 +27,7 @@ else
 			.field
 				- var value = getProperty(viewUser, field.id)
 				label(for=field.id)= field.label
-				if canEdit || 1
+				if canEdit
 					if field.options
 						select.save-on-change(id=field.id)
 							each optionValue, key in field.options
@@ -46,3 +46,5 @@ else
 					h3= title
 					each field in category
 						+text(field)
+		
+		pre#animeList
