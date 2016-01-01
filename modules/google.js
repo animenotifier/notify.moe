@@ -1,6 +1,5 @@
 'use strict'
 
-let fs = require('fs')
 let arn = require('../lib')
 let shortid = require('shortid')
 let passport = require('passport')
@@ -8,7 +7,7 @@ let Promise = require('bluebird')
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 module.exports = function(aero) {
-	let apiKeys = JSON.parse(fs.readFileSync('security/api-keys.json'))
+	let apiKeys = require('../security/api-keys.json')
 
 	let googleConfig = Object.assign({
 	        callbackURL: '/auth/google/callback',

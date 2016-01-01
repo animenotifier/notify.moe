@@ -12,7 +12,8 @@ module.exports = {
 		arn.getUserByNickAsync(nick)
 		.then(user => {
 			let listProviderName = user.providers.list
-			let listProvider = arn[listProviderName]
+			let listProvider = arn.listProviders[listProviderName]
+			let airingDateProvider = arn.airingDateProviders[listProviderName]
 			let listProviderSettings = user.listProviders[listProviderName]
 
 			if(!listProvider)
@@ -22,22 +23,31 @@ module.exports = {
 				throw `${listProviderName} username has not been specified`
 
 			listProvider.getAnimeList(listProviderSettings.userName, function(error, watching) {
+				let airingDateTasks = []
+
 				watching.forEach(function(entry) {
 					entry.animeProvider = {
 						url: null,
 						nextEpisodeUrl: null,
 						videoUrl: null
 					}
+
+					if(listProvider === airingDateProvider && airingDateProvider.getAiringDateById)
+						airingDateTasks.push(airingDateProvider.getAiringDateById(entry))
+					else
+						airingDateTasks.push(airingDateProvider.getAiringDate(entry))
 				})
 
-				let json = {
-					listProvider: listProviderName,
-					listUrl: listProvider.getAnimeListUrl(listProviderSettings.userName),
-					watching
-				}
+				Promise.all(airingDateTasks).then(() => {
+					let json = {
+						listProvider: listProviderName,
+						listUrl: listProvider.getAnimeListUrl(listProviderSettings.userName),
+						watching
+					}
 
-				response.setHeader('Content-Type', 'application/json')
-				response.end(JSON.stringify(json))
+					response.setHeader('Content-Type', 'application/json')
+					response.end(JSON.stringify(json))
+				})
 			})
 		})
 		.catch(error => {

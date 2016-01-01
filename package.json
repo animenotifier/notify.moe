@@ -1,6 +1,6 @@
 {
 	"name": "anime-release-notifier",
-	"version": "0.0.5",
+	"version": "3.0.0",
 	"homepage": "https://animereleasenotifier.com",
 	"main": "index.js",
 	"private": false,
@@ -13,12 +13,12 @@
 		"passport": "*",
 		"passport-facebook": "*",
 		"passport-google-oauth": "*",
-		"request": "*",
+		"request-promise": "*",
 		"shortid": "*",
 		"validator": "*"
 	},
 	"engines": {
-		"node": ">= 4.0.0"
+		"node": ">= 5.0.0"
 	},
 	"scripts": {
 
