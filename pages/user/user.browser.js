@@ -1,5 +1,5 @@
 window.save = function(e) {
-	var item = e.srcElement;
+	var item = e.target;
 
 	if(document.saving)
 		return;
