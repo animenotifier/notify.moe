@@ -16,8 +16,10 @@ window.save = function(e) {
 		key: key,
 		value: value
 	}, function(response) {
-		if(response)
-			console.error(response);
+		if(response) {
+			kaze.onResponse(response);
+			return;
+		}
 
 		window.postSave(key, value);
 
@@ -46,7 +48,7 @@ window.postSave = function(key, value) {
 	switch(key) {
 		case 'nick':
 			var oldPath = window.location.pathname;
-			var newPath = '/user/' + value;
+			var newPath = '/+' + value;
 
 			window.history.pushState('', document.title, newPath);
 

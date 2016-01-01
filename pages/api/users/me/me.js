@@ -4,14 +4,14 @@ let arn = require('../../../../lib')
 
 exports.post = function(request, response) {
 	if(request.body.function !== 'save') {
-		response.end()
+		response.end('Invalid function!')
 		return
 	}
 
 	let user = request.user
 
 	if(!user) {
-		response.end()
+		response.end('Not logged in!')
 		return
 	}
 
