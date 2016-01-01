@@ -4,40 +4,69 @@
 			{
 				"id": "nick",
 				"label": "Name:",
-				"placeholder": "Your ARN username"
+				"description": "Your ARN username"
 			},
 			{
 				"id": "tagline",
 				"label": "Tagline:",
-				"placeholder": "Text that appears below your username"
+				"description": "Text that appears below your username"
 			},
 			{
 				"id": "website",
 				"label": "Website:",
-				"placeholder": "Your homepage",
+				"description": "Your homepage",
 				"type": "url"
+			}
+		],
+		"Providers": [
+			{
+				"id": "providers.list",
+				"label": "List provider:",
+				"description": "This is where we'll get your anime list from",
+				"options": {
+					"anilist.co": "aniList",
+					"anime-planet.com": "animePlanet",
+					"hummingbird.me": "hummingBird",
+					"myanimelist.net": "myAnimeList"
+				}
+			},
+			{
+				"id": "providers.anime",
+				"label": "Anime provider:",
+				"description": "This is where we'll look for new episodes of your anime",
+				"options": {
+					"": ""
+				}
+			},
+			{
+				"id": "providers.airingDate",
+				"label": "Airing date provider:",
+				"description": "This is where we'll fetch the airing date for your anime",
+				"options": {
+					"anilist.co": "aniList"
+				}
 			}
 		],
 		"List providers": [
 			{
 				"id": "listProviders.aniList.userName",
 				"label": "AniList:",
-				"placeholder": "Your anilist.co username"
+				"description": "Your anilist.co username"
 			},
 			{
 				"id": "listProviders.animePlanet.userName",
 				"label": "AnimePlanet:",
-				"placeholder": "Your anime-planet.com username"
+				"description": "Your anime-planet.com username"
 			},
 			{
 				"id": "listProviders.hummingBird.userName",
 				"label": "HummingBird:",
-				"placeholder": "Your hummingbird.me username"
+				"description": "Your hummingbird.me username"
 			},
 			{
 				"id": "listProviders.myAnimeList.userName",
 				"label": "MyAnimeList:",
-				"placeholder": "Your myanimelist.net username"
+				"description": "Your myanimelist.net username"
 			}
 		]
 	}

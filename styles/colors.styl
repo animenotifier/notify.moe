@@ -46,9 +46,15 @@ input[type="url"]
 		border 1px solid mainColor
 
 select
-	color rgb(48, 48, 48)
+	color rgb(32, 32, 32)
+	background linear-gradient(rgb(250, 250, 250), rgb(244, 244, 244) 40%, rgb(229, 229, 229))
+	box-shadow 0 0 2px rgb(255, 255, 255), 0 -2px 5px rgba(0, 0, 0, 0.08) inset
 	&:disabled
 		background-color rgb(235, 235, 228)
+	&:focus
+		color rgb(0, 0, 0)
+		box-shadow 0 0 6px alpha(mainColor, 20%)
+		border 1px solid mainColor
 
 .user-name
 	a

@@ -35,7 +35,11 @@ window.save = function(e) {
 
 				if(focusedElement) {
 					focusedElement.value = focusedElementValue;
-					focusedElement.select();
+
+					if(focusedElement.select)
+						focusedElement.select();
+					else if(focusedElement.focus)
+						focusedElement.focus();
 				}
 			}
 

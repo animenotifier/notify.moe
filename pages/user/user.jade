@@ -25,11 +25,19 @@ else
 		
 		mixin text(field)
 			.field
+				- var value = getProperty(viewUser, field.id)
 				label(for=field.id)= field.label
-				if canEdit
-					input.save-on-change(id=field.id, type=field.type ? field.type : 'text', value=getProperty(viewUser, field.id), placeholder=field.placeholder)
+				if canEdit || 1
+					if field.options
+						select.save-on-change(id=field.id)
+							each optionValue, key in field.options
+								if value === optionValue
+									option(value=optionValue, selected)= key
+								else
+									option(value=optionValue)= key
+					else
+						input.save-on-change(id=field.id, type=field.type ? field.type : 'text', value=getProperty(viewUser, field.id), placeholder=field.description)
 				else
-					- var value = getProperty(viewUser, field.id)
 					p.value(id=field.id)= value ? value : '-'
 		
 		.fields
