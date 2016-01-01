@@ -34,11 +34,12 @@ module.exports = {
 
 					if(listProvider === airingDateProvider && airingDateProvider.getAiringDateById)
 						airingDateTasks.push(airingDateProvider.getAiringDateById(entry))
-					else
-						airingDateTasks.push(airingDateProvider.getAiringDate(entry))
+					//else
+					//	airingDateTasks.push(airingDateProvider.getAiringDate(entry))
 				})
 
-				Promise.all(airingDateTasks).then(() => {
+				Promise.all(airingDateTasks)
+				.then(() => {
 					let json = {
 						listProvider: listProviderName,
 						listUrl: listProvider.getAnimeListUrl(listProviderSettings.userName),
@@ -47,10 +48,12 @@ module.exports = {
 
 					response.setHeader('Content-Type', 'application/json')
 					response.end(JSON.stringify(json))
+				}).catch(error => {
+					response.writeHead(409)
+					response.end(error.toString())
 				})
 			})
-		})
-		.catch(error => {
+		}).catch(error => {
 			response.writeHead(409)
 
 			if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND')

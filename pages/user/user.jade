@@ -14,13 +14,16 @@ else
 			
 			if viewUser.tagline
 				p.tagline
+					span.glyphicon.glyphicon-comment
 					em= viewUser.tagline
 			else
 				p.tagline
+					span.glyphicon.glyphicon-comment
 					em No tagline yet.
 			
 			if viewUser.website
 				p.website
+					span.glyphicon.glyphicon-home
 					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website
 		
 		mixin text(field)
