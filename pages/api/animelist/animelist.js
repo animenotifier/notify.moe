@@ -13,7 +13,7 @@ module.exports = {
 		.then(user => {
 			let listProviderName = user.providers.list
 			let listProvider = arn.listProviders[listProviderName]
-			let airingDateProvider = arn.airingDateProviders[listProviderName]
+			let airingDateProvider = arn.airingDateProviders[user.providers.airingDate]
 			let listProviderSettings = user.listProviders[listProviderName]
 
 			if(!listProvider)
@@ -33,9 +33,9 @@ module.exports = {
 					}
 
 					if(listProvider === airingDateProvider && airingDateProvider.getAiringDateById)
-						airingDateTasks.push(airingDateProvider.getAiringDateById(entry))
-					//else
-					//	airingDateTasks.push(airingDateProvider.getAiringDate(entry))
+						airingDateTasks.push(airingDateProvider.getAiringDateById(entry, entry.providerId))
+					else
+						airingDateTasks.push(airingDateProvider.getAiringDate(entry))
 				})
 
 				Promise.all(airingDateTasks)
