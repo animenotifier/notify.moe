@@ -5,4 +5,4 @@ section
 	each user in users
 		.user
 			a.ajax(href='/+' + user.nick, title=user.nick)
-				img.user-image(src=user.gravatarURL, alt='Profile image')
+				img.user-image(src=user.gravatarURL, alt=user.nick)
