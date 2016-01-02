@@ -11,7 +11,7 @@ module.exports = function(aero) {
 	    saveUninitialized: true,
 	    resave: false,
 	    cookie: {
-	        secure: false
+	        secure: true
 	    }
 	}
 
