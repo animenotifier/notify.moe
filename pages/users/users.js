@@ -11,7 +11,7 @@ exports.get = function(request, response) {
 		users.push(user)
 	}, function() {
 		// Sort by registration date
-		users.sort((a, b) => new Date(b.registered) - new Date(a.registered))
+		users.sort((a, b) => new Date(a.registered) - new Date(b.registered))
 
 		response.render({
 			users
