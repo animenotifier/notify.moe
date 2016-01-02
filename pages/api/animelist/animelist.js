@@ -2,6 +2,25 @@
 
 let arn = require('../../../lib')
 
+let sortAlgorithms = {
+	airingDate: (a, b) => {
+		return a.airingDate.timeStamp - b.airingDate.timeStamp
+	},
+
+	alphabetically: (a, b) => {
+		let aLower = a.title.toLowerCase()
+		let bLower = b.title.toLowerCase()
+
+		if(aLower < bLower)
+			return -1
+
+		if(aLower > bLower)
+			return 1
+
+		return 0
+	}
+}
+
 module.exports = {
 	get: function(request, response) {
 		let nick = request.params[0]
@@ -45,19 +64,7 @@ module.exports = {
 
 				Promise.all(asyncTasks)
 				.then(() => {
-					/*watching.sort((a, b) => {
-						return a.airingDate.timeStamp - b.airingDate.timeStamp
-					})*/
-
-					watching.sort((a, b) => {
-						if(a.title < b.title)
-							return -1
-
-						if(a.title > b.title)
-							return 1
-
-						return 0
-					})
+					watching.sort(sortAlgorithms['alphabetically'])
 
 					let json = {
 						listProvider: listProviderName,
