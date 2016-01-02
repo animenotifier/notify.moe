@@ -5,11 +5,20 @@ let database = require('../modules/database')
 let arn = require('../lib')
 
 database(aero, function(error) {
-	arn.getUserByNickAsync('Aky').then(user => {
+	/*arn.getUserByNickAsync('Aky').then(user => {
 		user.role = 'admin'
 
 		arn.setUserAsync(user.id, user).then(() => {
 			console.log('Finished updating ' + user.nick)
 		})
+	})*/
+
+	arn.scan('Users', function(user) {
+		user.providers.anime = 'Nyaa'
+		arn.setUserAsync(user.id, user).then(() => {
+			console.log('Finished updating ' + user.nick)
+		})
+	}, function() {
+		console.log('Finished updating all users')
 	})
 })

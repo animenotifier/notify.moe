@@ -35,9 +35,6 @@
 				"label": "Anime provider:",
 				"description": "This is where we'll look for new episodes of your anime",
 				"options": {
-					"": "",
-					"hulu.com": "Hulu",
-					"crunchyroll.com": "CrunchyRoll",
 					"nyaa.se": "Nyaa"
 				}
 			},

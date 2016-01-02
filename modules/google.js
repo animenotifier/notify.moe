@@ -55,7 +55,7 @@ module.exports = function(aero) {
 					website: '',
 					providers: {
 						list: 'AniList',
-						anime: '',
+						anime: 'Nyaa',
 						airingDate: 'AniList'
 					},
 					listProviders: {},
