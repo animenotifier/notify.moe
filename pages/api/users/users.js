@@ -12,8 +12,6 @@ exports.get = function(request, response) {
 		if(error)
 			return response.end()
 
-		response.setHeader('Content-Type', 'application/json')
-
 		// Do not show critical information
 		delete user.id
 		delete user.ip
@@ -24,6 +22,6 @@ exports.get = function(request, response) {
 		delete user.firstName
 		delete user.lastName
 
-		response.end(JSON.stringify(user))
+		response.json(user)
 	})
 }

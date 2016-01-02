@@ -51,8 +51,7 @@ module.exports = {
 						watching
 					}
 
-					response.setHeader('Content-Type', 'application/json; charset=UTF-8')
-					response.end(JSON.stringify(json))
+					response.json(json)
 				}).catch(error => {
 					console.error(error)
 					response.writeHead(409)

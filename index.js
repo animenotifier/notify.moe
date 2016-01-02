@@ -1,8 +1,10 @@
 'use strict'
 
 let aero = require('aero')
+let arn = require('./lib')
 let fs = require('fs')
 let bodyParser = require('body-parser')
+let request = require('request-promise')
 
 // Start the server
 aero.run()
@@ -17,6 +19,23 @@ aero.preRoute(function(request, response) {
 
 // For POST requests
 aero.use(bodyParser.json())
+
+// Send slack messages
+arn.on('new user', function(user) {
+	let host = 'https://animereleasenotifier.com'
+	let webhook = 'https://hooks.slack.com/services/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'
+
+	request.post({
+		url: webhook,
+		body: JSON.stringify({
+			text: `<${host}/users|${user.firstName} ${user.lastName} (${user.email})>`
+		})
+	}).then(body => {
+		console.log(`Sent slack message about the new user registration: ${user.email}`)
+	}).catch(error => {
+		console.error('Error sending slack message:', error)
+	})
+})
 
 // Load all modules
 fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(aero))

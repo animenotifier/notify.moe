@@ -78,7 +78,7 @@ window.loadAnimeList = function() {
 
 	kaze.getJSON('/api/animelist/' + userName, function(error, response) {
 		if(error) {
-			animeList.innerText = 'Error loading your anime list.';
+			animeList.innerText = 'Error loading your anime list: ' + error.toString();
 			return;
 		}
 
