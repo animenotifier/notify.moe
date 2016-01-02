@@ -11,6 +11,11 @@ aero.run()
 
 // Rewrite URLs
 aero.preRoute(function(request, response) {
+	if(request.headers.host.indexOf('animereleasenotifier.com') !== -1) {
+        response.redirect('https://notify.moe' + request.url)
+        return true
+    }
+
 	if(request.url.startsWith('/+'))
 		request.url = '/user/' + request.url.substring(2)
 	else if(request.url.startsWith('/_/+'))
@@ -22,7 +27,7 @@ aero.use(bodyParser.json())
 
 // Send slack messages
 arn.on('new user', function(user) {
-	let host = 'https://animereleasenotifier.com'
+	let host = 'https://notify.moe'
 	let webhook = 'https://hooks.slack.com/services/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'
 
 	request.post({

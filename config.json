@@ -1,5 +1,5 @@
 {
-	"siteName": "Anime Release Notifier",
+	"siteName": "ARN 3.0 - Early Alpha",
 	"styles": [
 		"base",
 		"layout",
@@ -30,8 +30,8 @@
 		"web"
 	],
 	"security": {
-		"key": "ssl.key",
-		"cert": "ssl.chain.crt"
+		"key": "privkey.pem",
+        "cert": "fullchain.pem"
 	},
 	"ports": {
 		"http": 5000,

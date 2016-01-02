@@ -10,7 +10,7 @@ Supports anime lists from:
 - hummingbird.me
 
 Website:
-- https://animereleasenotifier.com/
+- https://notify.moe
 
 Forum:
 - [AniList](http://anilist.co/forum/thread/64)
