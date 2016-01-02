@@ -5,7 +5,7 @@ html, body
 	background-color rgb(254, 254, 254)
 
 a
-	color darken(mainColor, 20%)
+	color mainColor
 	&:hover
 		color hoverColor
 
@@ -21,6 +21,11 @@ a
 
 #content
 	background-color transparent
+
+	a
+		color darken(mainColor, 15%)
+		&:hover
+			color darken(hoverColor, 20%)
 
 .navigation-link
 	color rgb(160, 160, 160)

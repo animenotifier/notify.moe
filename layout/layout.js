@@ -30,8 +30,6 @@ exports.render = function(request, render) {
 		icon: 'globe'
 	})
 
-
-
 	if(user) {
 		nav.push({
 			title: 'Changes',
