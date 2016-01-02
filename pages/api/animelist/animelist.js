@@ -45,6 +45,20 @@ module.exports = {
 
 				Promise.all(asyncTasks)
 				.then(() => {
+					/*watching.sort((a, b) => {
+						return a.airingDate.timeStamp - b.airingDate.timeStamp
+					})*/
+
+					watching.sort((a, b) => {
+						if(a.title < b.title)
+							return -1
+
+						if(a.title > b.title)
+							return 1
+
+						return 0
+					})
+
 					let json = {
 						listProvider: listProviderName,
 						listUrl: listProvider.getAnimeListUrl(listProviderSettings.userName),
