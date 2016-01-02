@@ -82,7 +82,26 @@ window.loadAnimeList = function() {
 			return;
 		}
 
-		animeList.innerText = JSON.stringify(response, null, '\t');
+		if(!response.watching) {
+			animeList.innerText = 'There are no anime your watching list.';
+			return;
+		}
+
+		var titles = response.watching.map(function(anime) {
+			return anime.title
+		});
+
+		animeList.innerHTML = '';
+
+		var list = document.createElement('ul');
+
+		titles.forEach(function(title) {
+			var item = document.createElement('li');
+			item.appendChild(document.createTextNode(title));
+			list.appendChild(item);
+		});
+
+		animeList.appendChild(list);
 	});
 }
 

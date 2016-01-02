@@ -54,13 +54,18 @@ else
 				p.role
 					span.glyphicon.glyphicon-education
 					span= roles[viewUser.role]
+			
+			each provider in ['AniList', 'AnimePlanet', 'HummingBird', 'MyAnimeList']
+				if viewUser.listProviders[provider] && viewUser.listProviders[provider].userName
+					p(class='website list-provider-username' + (viewUser.providers.list === provider ? ' main' : ' alternative'))
+						span= provider + ' (' + viewUser.listProviders[provider].userName + ')'
 		
 		.fields
 			each category, title in fields
-				if title !== 'General' || canEdit
+				if canEdit
 					h3= title
 					each field in category
 						+text(field)
 		
-		h3 JSON
-		pre#animeList
+		h3= viewUser.nick + ' is watching...'
+		#animeList
