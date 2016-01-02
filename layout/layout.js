@@ -30,13 +30,21 @@ exports.render = function(request, render) {
 		icon: 'globe'
 	})
 
-	nav.push({
-		title: 'Stats',
-		url: 'statistics',
-		icon: 'stats'
-	})
+
 
 	if(user) {
+		nav.push({
+			title: 'Changes',
+			url: 'changes',
+			icon: 'refresh'
+		})
+
+		// nav.push({
+		// 	title: 'Stats',
+		// 	url: 'statistics',
+		// 	icon: 'stats'
+		// })
+
 		nav.push({
 			title: '',
 			url: 'logout',
