@@ -3,7 +3,7 @@
 let Promise = require('bluebird')
 let aerospike = require('aerospike')
 
-module.exports = function(aero) {
+module.exports = function(aero, callback) {
 	aero.db = aerospike.client({
 	    hosts: [{
 	        addr: '127.0.0.1',
@@ -22,9 +22,15 @@ module.exports = function(aero) {
 	aero.db.connect(function(response) {
 	    if(response.code === 0) {
 	        console.log('Successfully connected to database!')
+
+			if(callback)
+				callback(undefined)
 	    } else {
 	        console.error('Couldn\'t connect to database!')
 	        console.error(response)
+
+			if(callback)
+				callback(response)
 	    }
 	})
 }

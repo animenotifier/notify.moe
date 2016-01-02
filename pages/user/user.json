@@ -74,8 +74,7 @@
 		]
 	},
 	"roles": {
-		"Aky": "Developer",
-		"Mr_SkiZZeX": "Editor",
-		"scott": "Editor"
+		"admin": "Admin",
+		"editor": "Editor"
 	}
 }

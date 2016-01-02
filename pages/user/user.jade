@@ -26,10 +26,10 @@ else
 					span.glyphicon.glyphicon-home
 					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website
 					
-			if roles[viewUser.nick]
+			if viewUser.role
 				p.role
 					span.glyphicon.glyphicon-education
-					span= roles[viewUser.nick]
+					span= roles[viewUser.role]
 		
 		mixin text(field)
 			.field

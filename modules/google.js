@@ -41,6 +41,7 @@ module.exports = function(aero) {
 				let user = {
 					id: shortid.generate(),
 					nick: 'g' + google.id,
+					role: '',
 					firstName: google.name.givenName ? google.name.givenName : '',
 					lastName: google.name.familyName ? google.name.familyName : '',
 					email: email,
@@ -58,7 +59,6 @@ module.exports = function(aero) {
 						airingDate: 'AniList'
 					},
 					listProviders: {},
-					ip: request.connection.remoteAddress,
 					registered: now.toISOString(),
 					lastLogin: now.toISOString(),
 				}
