@@ -72,5 +72,10 @@
 				"description": "Your myanimelist.net username"
 			}
 		]
+	},
+	"roles": {
+		"Aky": "Developer",
+		"Mr_SkiZZeX": "Editor",
+		"scott": "Editor"
 	}
 }
