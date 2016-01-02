@@ -24,10 +24,9 @@ section
 			table
 				tbody
 					each count, index in providers.list
-						if index
-							tr
-								td.statistics-label= index
-								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+						tr
+							td.statistics-label= index
+							td.statistics-value= Math.round(count / users.total * 100) + ' %'
 		
 		section
 			header
@@ -36,10 +35,9 @@ section
 			table
 				tbody
 					each count, index in providers.anime
-						if index
-							tr
-								td.statistics-label= index
-								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+						tr
+							td.statistics-label= index ? index : 'Not specified'
+							td.statistics-value= Math.round(count / users.total * 100) + ' %'
 							
 		section
 			header
@@ -48,10 +46,9 @@ section
 			table
 				tbody
 					each count, index in providers.airingDate
-						if index
-							tr
-								td.statistics-label= index
-								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+						tr
+							td.statistics-label= index
+							td.statistics-value= Math.round(count / users.total * 100) + ' %'
 							
 		section
 			header
