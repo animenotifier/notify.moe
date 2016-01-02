@@ -10,20 +10,22 @@ window.save = function(e) {
 	var value = item.value;
 
 	item.classList.add('saving');
+	kaze.content.style.cursor = 'wait';
 
 	kaze.postJSON('/api/users/me', {
 		function: 'save',
 		key: key,
 		value: value
-	}, function(response) {
-		if(response) {
-			kaze.onResponse(response);
-			return;
-		}
+	}, function(error, response) {
+		if(error)
+			console.log(error);
 
 		window.postSave(key, value);
 
 		kaze.get('/_' + location.pathname, function(error, newPageCode) {
+			if(error)
+				console.log(error);
+
 			var focusedElementId = document.activeElement.id;
 			var focusedElementValue = document.activeElement.value;
 
@@ -43,6 +45,7 @@ window.save = function(e) {
 				}
 			}
 
+			kaze.content.style.cursor = 'auto';
 			document.saving = false;
 		})
 	});

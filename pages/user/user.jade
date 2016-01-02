@@ -1,3 +1,23 @@
+mixin profileImage()
+	img.image(src=viewUser.gravatarURL, alt='Profile image', width=320, height=320)
+
+mixin text(field)
+	.field
+		- var value = getProperty(viewUser, field.id)
+		label(for=field.id)= field.label
+		if canEdit
+			if field.options
+				select.save-on-change(id=field.id)
+					each optionValue, key in field.options
+						if value === optionValue
+							option(value=optionValue, selected)= key
+						else
+							option(value=optionValue)= key
+			else
+				input.save-on-change(id=field.id, type=field.type ? field.type : 'text', value=getProperty(viewUser, field.id), placeholder=field.description)
+		else
+			p.value(id=field.id)= value ? value : '-'
+
 if !viewUser
 	section
 		header
@@ -7,7 +27,11 @@ if !viewUser
 else
 	section
 		.image-container
-			img.image(src=viewUser.gravatarURL, alt='Profile image', width=320, height=320)
+			if user && user.id === viewUser.id
+				a(href='https://gravatar.com/emails/', target='_blank', rel='nofollow', title='Change your gravatar picture')
+					+profileImage()
+			else
+				+profileImage()
 		
 		.intro-container
 			h2.nick= viewUser.nick
@@ -30,23 +54,6 @@ else
 				p.role
 					span.glyphicon.glyphicon-education
 					span= roles[viewUser.role]
-		
-		mixin text(field)
-			.field
-				- var value = getProperty(viewUser, field.id)
-				label(for=field.id)= field.label
-				if canEdit
-					if field.options
-						select.save-on-change(id=field.id)
-							each optionValue, key in field.options
-								if value === optionValue
-									option(value=optionValue, selected)= key
-								else
-									option(value=optionValue)= key
-					else
-						input.save-on-change(id=field.id, type=field.type ? field.type : 'text', value=getProperty(viewUser, field.id), placeholder=field.description)
-				else
-					p.value(id=field.id)= value ? value : '-'
 		
 		.fields
 			each category, title in fields
