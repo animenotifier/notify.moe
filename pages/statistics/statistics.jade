@@ -19,6 +19,42 @@ section
 	if users.total !== 0
 		section
 			header
+				h3 List providers
+				
+			table
+				tbody
+					each count, index in providers.list
+						if index
+							tr
+								td.statistics-label= index
+								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+		
+		section
+			header
+				h3 Anime providers
+				
+			table
+				tbody
+					each count, index in providers.anime
+						if index
+							tr
+								td.statistics-label= index
+								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+							
+		section
+			header
+				h3 Airing date providers
+				
+			table
+				tbody
+					each count, index in providers.airingDate
+						if index
+							tr
+								td.statistics-label= index
+								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+							
+		section
+			header
 				h3 Gender
 				
 			table
