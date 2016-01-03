@@ -1,8 +1,17 @@
 section
 	header
-		h2 Users
-		
-	each user in users
-		.user
-			a.ajax(href='/+' + user.nick, title=user.nick)
-				img.user-image(src=user.gravatarURL, alt=user.nick)
+		h2(style='display: none') Users
+	
+	each category, categoryTitle in categories
+		h2= categoryTitle
+		each user in category
+			.user
+				a.ajax(href='/+' + user.nick, title=user.nick)
+					img.user-image(src=user.gravatarURL, alt=user.nick)
+
+	p
+		a.ajax(href='/users') All at once
+		|  | 
+		a.ajax(href='/users/listproviders') By list providers
+		|  | 
+		a.ajax(href='/users/countries') By countries
