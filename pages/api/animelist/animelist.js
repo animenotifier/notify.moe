@@ -5,7 +5,7 @@ let NodeCache = require('node-cache')
 
 let sortAlgorithms = {
 	airingDate: (a, b) => {
-		return a.airingDate.timeStamp - b.airingDate.timeStamp
+		return b.airingDate.timeStamp - a.airingDate.timeStamp
 	},
 
 	alphabetically: (a, b) => {
