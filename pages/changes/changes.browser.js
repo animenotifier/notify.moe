@@ -37,6 +37,6 @@ kaze.getJSON('https://api.github.com/users/animenotifier/events?clientid=e8fe5e8
 				return '<li class="commit"><a href="https://github.com/' + e.repo.name + '/commit/' + commit.sha + '" target="_blank" title="' + e.repo.name.substring(e.repo.name.indexOf('/') + 1) + '">' + commit.message.split('\n')[0] + '</a>'
 					+ '<span class="datetime"> (' + timeSince(now, new Date(e.created_at)) + ' ago)</span>'
 					+ '</li>';
-			}).join('');
+			}).reverse().join('');
 		}).join('') + '</ul>';
 });
