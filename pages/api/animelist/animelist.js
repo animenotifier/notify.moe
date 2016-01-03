@@ -24,7 +24,7 @@ let sortAlgorithms = {
 
 module.exports = {
 	cache: new NodeCache({
-		stdTTL: 120
+		stdTTL: 5 * 60
 	}),
 
 	get: function(request, response) {
