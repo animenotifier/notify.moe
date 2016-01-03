@@ -50,7 +50,7 @@ exports.get = function(request, response) {
 		if(!listProviderSettings || !listProviderSettings.userName)
 			throw `${listProviderName} username has not been specified`
 
-		let cacheKey = nick + ':' + listProviderName + ':' + listProviderSettings.userName
+		let cacheKey = nick + ':' + listProviderName + ':' + listProviderSettings.userName + ':' + user.sortBy
 
 		cache.get(cacheKey, (error, json) => {
 			if(!error && json) {

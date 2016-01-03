@@ -47,6 +47,17 @@
 				}
 			}
 		],
+		"Details": [
+			{
+				"id": "sortBy",
+				"label": "Sort by:",
+				"description": "Sorting algorithm for your anime list",
+				"options": {
+					"Airing date": "airingDate",
+					"Alphabetically": "alphabetically"
+				}
+			}
+		],
 		"List providers": [
 			{
 				"id": "listProviders.AniList.userName",
