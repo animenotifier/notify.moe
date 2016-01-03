@@ -13,7 +13,7 @@ exports.get = function(request, response) {
 			addUser = user => {
 				if(!user.location)
 					return
-				
+
 				let country = user.location.countryName
 
 				if(!country || country === '-')
@@ -46,8 +46,8 @@ exports.get = function(request, response) {
 			break
 
 		default:
-			categories.Users = []
-			addUser = user => categories.Users.push(user)
+			categories.All = []
+			addUser = user => categories.All.push(user)
 	}
 
 	arn.scan('Users', function(user) {
