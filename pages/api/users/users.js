@@ -22,6 +22,7 @@ exports.get = function(request, response) {
 		delete user.firstName
 		delete user.lastName
 		delete user.agent
+		delete user.location
 
 		response.json(user)
 	})
