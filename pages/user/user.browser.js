@@ -91,14 +91,30 @@ window.loadAnimeList = function() {
 		animeList.innerHTML = '';
 
 		var list = document.createElement('ul');
+		list.className = 'anime-list';
 
 		response.watching.forEach(function(anime) {
 			var item = document.createElement('li');
+			item.className = 'anime';
+
 			var link = document.createElement('a');
 			link.appendChild(document.createTextNode(anime.title));
 			link.href = anime.url;
 			link.target = '_blank';
+			link.className = 'anime-link';
+
+			var view = document.createElement('a');
+			view.href = anime.animeProvider.url;
+			view.target = '_blank';
+			view.className = 'anime-view-link';
+
+			var icon = document.createElement('div');
+			icon.className = 'glyphicon glyphicon-eye-open';
+			view.appendChild(icon);
+
 			item.appendChild(link);
+			item.appendChild(view);
+
 			list.appendChild(item);
 		});
 
