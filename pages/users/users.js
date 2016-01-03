@@ -37,19 +37,19 @@ exports.get = function(request, response) {
 			break
 
 		case 'registration':
+			// Force a special order
+			categories = {
+				'Last 24 hours': [],
+				'Yesterday': [],
+				'Last week': [],
+				'Ojii-san': []
+			}
+			
 			addUser = user => {
 				let registrationDate = new Date(user.registered)
 				let seconds = Math.floor((now - registrationDate) / 1000)
 				let days = seconds / 60 / 60 / 24
 				let categoryName = 'Ojii-san'
-
-				// Force a special order
-				categories = {
-					'Last 24 hours': [],
-					'Yesterday': [],
-					'Last week': [],
-					'Ojii-san': []
-				}
 
 				if(days <= 1)
 					categoryName = 'Last 24 hours'
