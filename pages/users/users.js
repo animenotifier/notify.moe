@@ -57,6 +57,16 @@ exports.get = function(request, response) {
 		if(user.nick.startsWith('fb') && !isNaN(parseInt(user.nick.substring(2))))
 			return
 
+		let listProviderName = user.providers.list
+
+		if(!listProviderName)
+			return
+
+		let listProvider = user.listProviders[listProviderName]
+
+		if(!listProvider || !listProvider.userName)
+			return
+
 		user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: 'mm'}, true)
 
 		addUser(user)
