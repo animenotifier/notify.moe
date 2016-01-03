@@ -48,10 +48,10 @@ else
 			if viewUser.location && viewUser.location.countryName != '-'
 				p.location
 					span.glyphicon.glyphicon-map-marker
-					if viewUser.location.cityName != '-'
-						span= viewUser.location.cityName + ', ' + viewUser.location.countryName
-					else
-						span= viewUser.location.countryName
+					//- if viewUser.location.cityName != '-'
+					//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
+					//- else
+					span= viewUser.location.countryName
 				
 			if viewUser.website
 				p.website
