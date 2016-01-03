@@ -21,7 +21,7 @@
 		"Providers": [
 			{
 				"id": "providers.list",
-				"label": "List provider:",
+				"label": "List:",
 				"description": "This is where we'll get your anime list from",
 				"options": {
 					"anilist.co": "AniList",
@@ -32,7 +32,7 @@
 			},
 			{
 				"id": "providers.anime",
-				"label": "Anime provider:",
+				"label": "Anime:",
 				"description": "This is where we'll look for new episodes of your anime",
 				"options": {
 					"nyaa.se": "Nyaa"
@@ -40,7 +40,7 @@
 			},
 			{
 				"id": "providers.airingDate",
-				"label": "Airing date provider:",
+				"label": "Airing date:",
 				"description": "This is where we'll fetch the airing date for your anime",
 				"options": {
 					"anilist.co": "AniList"
