@@ -22,87 +22,87 @@ let sortAlgorithms = {
 	}
 }
 
-module.exports = {
-	cache: new NodeCache({
-		stdTTL: 5 * 60
-	}),
+let cache = new NodeCache({
+	stdTTL: 5 * 60
+})
 
-	get: function(request, response) {
-		let nick = request.params[0]
+exports.get = function(request, response) {
+	let nick = request.params[0]
 
-		if(!nick)
-			return response.end('Username not specified')
+	if(!nick)
+		return response.end('Username not specified')
 
-		this.cache.get(nick, (error, json) => {
+	arn.getUserByNickAsync(nick)
+	.then(user => {
+		let listProviderName = user.providers.list
+		let listProvider = arn.listProviders[listProviderName]
+		let animeProviderName = user.providers.anime
+		let animeProvider = arn.animeProviders[animeProviderName]
+		let airingDateProvider = arn.airingDateProviders[user.providers.airingDate]
+		let listProviderSettings = user.listProviders[listProviderName]
+
+		if(!listProvider)
+			throw 'Invalid list provider'
+
+		if(!listProviderSettings || !listProviderSettings.userName)
+			throw `${listProviderName} username has not been specified`
+
+		let cacheKey = nick + ':' + listProviderName + ':' + listProviderSettings.userName
+
+		cache.get(cacheKey, (error, json) => {
 			if(!error && json) {
 				response.json(json)
 				return
 			}
 
-			arn.getUserByNickAsync(nick)
-			.then(user => {
-				let listProviderName = user.providers.list
-				let listProvider = arn.listProviders[listProviderName]
-				let animeProviderName = user.providers.anime
-				let animeProvider = arn.animeProviders[animeProviderName]
-				let airingDateProvider = arn.airingDateProviders[user.providers.airingDate]
-				let listProviderSettings = user.listProviders[listProviderName]
+			listProvider.getAnimeList(listProviderSettings.userName, (error, watching) => {
+				let asyncTasks = []
 
-				if(!listProvider)
-					throw 'Invalid list provider'
+				watching.forEach(entry => {
+					entry.animeProvider = {
+						url: null,
+						nextEpisodeUrl: null,
+						videoUrl: null
+					}
 
-				if(!listProviderSettings || !listProviderSettings.userName)
-					throw `${listProviderName} username has not been specified`
+					if(listProvider === airingDateProvider && airingDateProvider.getAiringDateById)
+						asyncTasks.push(airingDateProvider.getAiringDateById(entry, entry.providerId))
+					else
+						asyncTasks.push(airingDateProvider.getAiringDate(entry))
 
-				listProvider.getAnimeList(listProviderSettings.userName, (error, watching) => {
-					let asyncTasks = []
-
-					watching.forEach(entry => {
-						entry.animeProvider = {
-							url: null,
-							nextEpisodeUrl: null,
-							videoUrl: null
-						}
-
-						if(listProvider === airingDateProvider && airingDateProvider.getAiringDateById)
-							asyncTasks.push(airingDateProvider.getAiringDateById(entry, entry.providerId))
-						else
-							asyncTasks.push(airingDateProvider.getAiringDate(entry))
-
-						if(animeProvider)
-							asyncTasks.push(animeProvider.getAnimeInfo(entry))
-					})
-
-					Promise.all(asyncTasks)
-					.then(() => {
-						watching.sort(sortAlgorithms['alphabetically'])
-
-						let json = {
-							listProvider: listProviderName,
-							listUrl: listProvider.getAnimeListUrl(listProviderSettings.userName),
-							watching
-						}
-
-						response.json(json)
-
-						// Cache it
-						this.cache.set(nick, json, (error, success) => error)
-					}).catch(error => {
-						console.error(error)
-						response.writeHead(409)
-						response.end(error.toString())
-					})
+					if(animeProvider)
+						asyncTasks.push(animeProvider.getAnimeInfo(entry))
 				})
-			}).catch(error => {
-				response.writeHead(409)
 
-				if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND')
-					response.end(`User '${nick}' not found`)
-				else if(error.message)
-					response.end(error.message)
-				else
+				Promise.all(asyncTasks)
+				.then(() => {
+					watching.sort(sortAlgorithms['alphabetically'])
+
+					let json = {
+						listProvider: listProviderName,
+						listUrl: listProvider.getAnimeListUrl(listProviderSettings.userName),
+						watching
+					}
+
+					response.json(json)
+
+					// Cache it
+					cache.set(cacheKey, json, (error, success) => error)
+				}).catch(error => {
+					console.error(error)
+					response.writeHead(409)
 					response.end(error.toString())
+				})
 			})
 		})
-	}
+	}).catch(error => {
+		response.writeHead(409)
+
+		if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND')
+			response.end(`User '${nick}' not found`)
+		else if(error.message)
+			response.end(error.message)
+		else
+			response.end(error.toString())
+	})
 }
