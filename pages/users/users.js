@@ -28,7 +28,7 @@ exports.get = function(request, response) {
 
 		case 'listproviders':
 			addUser = user => {
-				if(categories.hasOwnProperty(listProviderName))
+				if(categories.hasOwnProperty(user.providers.list))
 					categories[user.providers.list].push(user)
 				else
 					categories[user.providers.list] = [user]
