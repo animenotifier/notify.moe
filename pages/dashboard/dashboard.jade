@@ -1,23 +1,37 @@
-section.category
-	header
-		h2 Pick a platform!
-	
-	// Chrome
-	a.box.scale(href='javascript:chrome.webstore.install();', title='Chrome', itemscope='', itemtype='http://schema.org/Product')
-		span(itemprop='name') Anime Release Notifier - Chrome Extension
-		img(itemprop='image', src='/images/platforms/chrome.png', alt='Chrome', width='256', height='256')
-	
-	// Firefox
-	//-a.box.scale(href='https://addons.mozilla.org/en-US/firefox/addon/anime-release-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
-		span(itemprop='name') Anime Release Notifier - Firefox Extension
-		img(itemprop='image', src='/images/platforms/firefox.png', alt='Firefox', width='256', height='256')
-	
-	// Android
-	//-a.box.scale(href='https://play.google.com/store/apps/details?id=com.freezingwind.animereleasenotifier', target='_blank', title='Android', itemscope='', itemtype='http://schema.org/Product')
-		span(itemprop='name') Anime Release Notifier - Android App
-		img(itemprop='image', src='/images/platforms/android.png', alt='Android', width='256', height='256')
+if user && widgets
+	section
+		header
+			h2 News
+		
+		each widget, title in widgets
+			h3= title
+			ul.news
+				each item in widget
+					li
+						a(href=item.link, target='_blank', rel='nofollow')= item.title
+		
+		p.powered-by Powered by 
+			a(href='http://www.animenewsnetwork.com/', target='_blank', rel='nofollow') animenewsnetwork.com
+else
+	section.category
+		header
+			h2 Pick a platform!
+		
+		// Chrome
+		a.box.scale(href='javascript:chrome.webstore.install();', title='Chrome', itemscope='', itemtype='http://schema.org/Product')
+			span(itemprop='name') Anime Release Notifier - Chrome Extension
+			img(itemprop='image', src='/images/platforms/chrome.png', alt='Chrome', width='256', height='256')
+		
+		// Firefox
+		//-a.box.scale(href='https://addons.mozilla.org/en-US/firefox/addon/anime-release-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
+			span(itemprop='name') Anime Release Notifier - Firefox Extension
+			img(itemprop='image', src='/images/platforms/firefox.png', alt='Firefox', width='256', height='256')
+		
+		// Android
+		//-a.box.scale(href='https://play.google.com/store/apps/details?id=com.freezingwind.animereleasenotifier', target='_blank', title='Android', itemscope='', itemtype='http://schema.org/Product')
+			span(itemprop='name') Anime Release Notifier - Android App
+			img(itemprop='image', src='/images/platforms/android.png', alt='Android', width='256', height='256')
 
-if !user
 	section.category(style='margin-bottom: 3.5em')
 		header
 			h2 Try it!
@@ -30,32 +44,32 @@ if !user
 			a(href='/auth/facebook')
 				img(src='/images/elements/facebook-login.png', alt='Facebook Login')
 
-section.category
-	header
-		h2 Follow the project!
+	section.category
+		header
+			h2 Follow the project!
+			
+		.box
+			a(href='https://github.com/animenotifier/notify.moe', target='_blank')
+				img(src='https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png', alt='GitHub')
 		
-	.box
-		a(href='https://github.com/animenotifier/notify.moe', target='_blank')
-			img(src='https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png', alt='GitHub')
-		
-section.category
-	header
-		h2(style='display: none') Forums
-	.box
-		p
-			a(href='https://www.facebook.com/animenotifier', target='_blank') Facebook
-		p
-			a(href='https://twitter.com/animenotifier', target='_blank') Twitter
-		p
-			a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank') Google+
-		
-	.box
-		p
-			a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
-		p
-			a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
-		p
-			a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
+	section.category
+		header
+			h2(style='display: none') Forums
+		.box
+			p
+				a(href='https://www.facebook.com/animenotifier', target='_blank') Facebook
+			p
+				a(href='https://twitter.com/animenotifier', target='_blank') Twitter
+			p
+				a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank') Google+
+			
+		.box
+			p
+				a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
+			p
+				a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
+			p
+				a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
 
 //- section.category
 //- 	header
