@@ -11,6 +11,9 @@ exports.get = function(request, response) {
 	switch(orderBy) {
 		case 'countries':
 			addUser = user => {
+				if(!user.location)
+					return
+				
 				let country = user.location.countryName
 
 				if(!country || country === '-')
