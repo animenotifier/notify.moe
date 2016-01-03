@@ -103,20 +103,22 @@ window.loadAnimeList = function() {
 			link.target = '_blank';
 			link.className = 'anime-link';
 
-			var view = document.createElement('a');
-			view.href = anime.animeProvider.nextEpisodeUrl;
-			view.target = '_blank';
-			view.className = 'anime-view-link';
-
-			if(anime.episodes.next && anime.episodes.next !== 0)
-				view.title = 'Watch episode ' + anime.episodes.next;
-
-			var icon = document.createElement('div');
-			icon.className = 'glyphicon glyphicon-eye-open';
-			view.appendChild(icon);
-
 			item.appendChild(link);
-			item.appendChild(view);
+
+			if(anime.episodes.available >= anime.episodes.next) {
+				var view = document.createElement('a');
+				view.href = anime.animeProvider.nextEpisodeUrl;
+				view.target = '_blank';
+				view.className = 'anime-view-link';
+
+				if(anime.episodes.next && anime.episodes.next !== 0)
+					view.title = 'Watch episode ' + anime.episodes.next;
+
+				var icon = document.createElement('div');
+				icon.className = 'glyphicon glyphicon-eye-open';
+				view.appendChild(icon);
+				item.appendChild(view);
+			}
 
 			list.appendChild(item);
 		});
