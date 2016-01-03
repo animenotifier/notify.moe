@@ -31,16 +31,22 @@ exports.render = function(request, render) {
 	})
 
 	if(user) {
-		nav.push({
-			title: 'Youtube',
-			url: 'videos',
-			icon: 'facetime-video'
-		})
+		// nav.push({
+		// 	title: 'Youtube',
+		// 	url: 'videos',
+		// 	icon: 'facetime-video'
+		// })
+		//
+		// nav.push({
+		// 	title: 'News',
+		// 	url: 'news',
+		// 	icon: 'pushpin'
+		// })
 
 		nav.push({
-			title: 'News',
-			url: 'news',
-			icon: 'pushpin'
+			title: 'FAQ',
+			url: 'faq',
+			icon: 'question-sign'
 		})
 
 		nav.push({
