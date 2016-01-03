@@ -5,6 +5,9 @@ let NodeCache = require('node-cache')
 
 let sortAlgorithms = {
 	airingDate: (a, b) => {
+		if(b.airingDate.timeStamp === null && a.airingDate.timeStamp === null)
+			return sortAlgorithms.alphabetically(a, b)
+
 		return b.airingDate.timeStamp - a.airingDate.timeStamp
 	},
 
