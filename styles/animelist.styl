@@ -1,3 +1,5 @@
+@require "styles/config.styl"
+
 .anime-list-container
 	max-width 728px
 
@@ -11,6 +13,11 @@
 	border-radius 3px
 	margin 0.25em 0
 	background linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%)
+
+.anime-link, .anime-view-link
+	color darken(mainColor, 30%) !important
+	&:hover
+		color rgb(255, 42, 12) !important
 
 .anime-view-link
 	float right
