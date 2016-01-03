@@ -76,7 +76,7 @@ exports.get = function(request, response) {
 
 				Promise.all(asyncTasks)
 				.then(() => {
-					watching.sort(sortAlgorithms['alphabetically'])
+					watching.sort(sortAlgorithms[user.sortBy ? user.sortBy : 'alphabetically'])
 
 					let json = {
 						listProvider: listProviderName,

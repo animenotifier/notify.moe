@@ -59,6 +59,7 @@ module.exports = function(aero) {
 						airingDate: 'AniList'
 					},
 					listProviders: {},
+					sortBy: 'airingDate',
 					registered: now.toISOString(),
 					lastLogin: now.toISOString(),
 				}
