@@ -44,12 +44,16 @@ else
 				p.tagline
 					span.glyphicon.glyphicon-comment
 					em No tagline yet.
-			
+					
+			if user && user.role === 'admin' && viewUser.location && viewUser.location.cityName != '-' && viewUser.location.countryName != '-'
+				span.glyphicon.glyphicon-map-marker
+				span= viewUser.location.cityName + ', ' + viewUser.location.countryName
+				
 			if viewUser.website
 				p.website
 					span.glyphicon.glyphicon-home
 					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website
-					
+			
 			if viewUser.role
 				p.role
 					span.glyphicon.glyphicon-education
