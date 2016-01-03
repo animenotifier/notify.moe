@@ -45,10 +45,13 @@ else
 					span.glyphicon.glyphicon-comment
 					em No tagline yet.
 					
-			if user && user.role === 'admin' && viewUser.location && viewUser.location.cityName != '-' && viewUser.location.countryName != '-'
+			if viewUser.location && viewUser.location.countryName != '-'
 				p.location
 					span.glyphicon.glyphicon-map-marker
-					span= viewUser.location.cityName + ', ' + viewUser.location.countryName
+					if viewUser.location.cityName != '-'
+						span= viewUser.location.cityName + ', ' + viewUser.location.countryName
+					else
+						span= viewUser.location.countryName
 				
 			if viewUser.website
 				p.website
