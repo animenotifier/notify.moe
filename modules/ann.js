@@ -23,8 +23,12 @@ module.exports = function(aero) {
 		.then(rss => {
 			return xmlParser.parseStringAsync(rss).then(json => {
 				let items = json.channel.item
-				arn.animeNews = items.filter(item => item.category === 'Anime')
-				arn.gamesNews = items.filter(item => item.category === 'Games')
+
+				arn.news = {
+					'Anime': items.filter(item => item.category === 'Anime'),
+					'Manga': items.filter(item => item.category === 'Manga'),
+					'Games': items.filter(item => item.category === 'Games')
+				}
 			})
 		})
 		.catch(error => {

@@ -32,6 +32,12 @@ exports.render = function(request, render) {
 
 	if(user) {
 		nav.push({
+			title: 'News',
+			url: 'news',
+			icon: 'pushpin'
+		})
+
+		nav.push({
 			title: 'Changes',
 			url: 'changes',
 			icon: 'refresh'
