@@ -43,8 +43,18 @@ exports.get = function(request, response) {
 				let days = seconds / 60 / 60 / 24
 				let categoryName = 'Ojii-san'
 
+				// Force a special order
+				categories = {
+					'Last 24 hours': [],
+					'Yesterday': [],
+					'Last week': [],
+					'Ojii-san': []
+				}
+
 				if(days <= 1)
 					categoryName = 'Last 24 hours'
+				else if(days <= 2)
+					categoryName = 'Yesterday'
 				else if(days <= 7)
 					categoryName = 'Last week'
 

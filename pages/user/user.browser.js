@@ -98,7 +98,9 @@ window.loadAnimeList = function() {
 
 		titles.forEach(function(title) {
 			var item = document.createElement('li');
-			item.appendChild(document.createTextNode(title));
+			var link = document.createElement('a');
+			link.appendChild(document.createTextNode(title));
+			item.appendChild(link);
 			list.appendChild(item);
 		});
 
