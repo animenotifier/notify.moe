@@ -45,6 +45,8 @@ exports.get = function(request, response) {
 
 				if(days <= 1)
 					categoryName = 'Last 24 hours'
+				else if(days <= 7)
+					categoryName = 'Last week'
 
 				if(categories.hasOwnProperty(categoryName))
 					categories[categoryName].push(user)
