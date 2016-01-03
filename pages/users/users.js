@@ -28,20 +28,10 @@ exports.get = function(request, response) {
 
 		case 'listproviders':
 			addUser = user => {
-				let listProviderName = user.providers.list
-
-				if(!listProviderName)
-					return
-
-				let listProvider = user.listProviders[listProviderName]
-
-				if(!listProvider || !listProvider.userName)
-					return
-
 				if(categories.hasOwnProperty(listProviderName))
-					categories[listProviderName].push(user)
+					categories[user.providers.list].push(user)
 				else
-					categories[listProviderName] = [user]
+					categories[user.providers.list] = [user]
 			}
 			break
 
