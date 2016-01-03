@@ -30,6 +30,18 @@ exports.render = function(request, render) {
 		icon: 'globe'
 	})
 
+	nav.push({
+		title: 'FAQ',
+		url: 'faq',
+		icon: 'question-sign'
+	})
+
+	nav.push({
+		title: 'Changes',
+		url: 'changes',
+		icon: 'refresh'
+	})
+
 	if(user) {
 		// nav.push({
 		// 	title: 'Youtube',
@@ -42,18 +54,6 @@ exports.render = function(request, render) {
 		// 	url: 'news',
 		// 	icon: 'pushpin'
 		// })
-
-		nav.push({
-			title: 'FAQ',
-			url: 'faq',
-			icon: 'question-sign'
-		})
-
-		nav.push({
-			title: 'Changes',
-			url: 'changes',
-			icon: 'refresh'
-		})
 
 		// nav.push({
 		// 	title: 'Stats',
