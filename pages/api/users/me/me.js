@@ -24,6 +24,8 @@ exports.post = function(request, response) {
 	}*/
 
 	if(key === 'nick') {
+		value = value.replace(/\s+/g, '')
+		
 		if(!value || value.length < 2) {
 			response.writeHead(409)
 			response.end('Username must have a length of at least 2 characters')

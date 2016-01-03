@@ -54,6 +54,7 @@ window.save = function(e) {
 window.postSave = function(key, value) {
 	switch(key) {
 		case 'nick':
+			value = value.replace(/\s+/g, '');
 			var oldPath = window.location.pathname;
 			var newPath = '/+' + value;
 
