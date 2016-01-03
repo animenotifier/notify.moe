@@ -88,18 +88,16 @@ window.loadAnimeList = function() {
 			return;
 		}
 
-		var titles = response.watching.map(function(anime) {
-			return anime.title
-		});
-
 		animeList.innerHTML = '';
 
 		var list = document.createElement('ul');
 
-		titles.forEach(function(title) {
+		response.watching.forEach(function(anime) {
 			var item = document.createElement('li');
 			var link = document.createElement('a');
-			link.appendChild(document.createTextNode(title));
+			link.appendChild(document.createTextNode(anime.title));
+			link.href = anime.url;
+			link.target = '_blank';
 			item.appendChild(link);
 			list.appendChild(item);
 		});
