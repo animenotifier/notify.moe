@@ -10,8 +10,7 @@ section
 		a.ajax(href='/users/countries') By countries
 	
 	each category, categoryTitle in categories
-		if categoryTitle !== 'All'
-			h3= categoryTitle
+		h3= categoryTitle
 		each user in category
 			.user
 				a.ajax(href='/+' + user.nick, title=user.nick)
