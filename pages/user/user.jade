@@ -28,7 +28,7 @@ else
 	section
 		.image-container
 			if user && user.id === viewUser.id
-				a(href='https://gravatar.com/emails/', target='_blank', rel='nofollow', title='Change your gravatar picture')
+				a(href='https://gravatar.com/emails/', target='_blank', rel='nofollow', title='Change your gravatar picture for ' + user.email)
 					+profileImage()
 			else
 				+profileImage()
