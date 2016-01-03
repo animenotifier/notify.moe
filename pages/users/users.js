@@ -7,6 +7,7 @@ exports.get = function(request, response) {
 	let orderBy = request.params[0]
 	let categories = {}
 	let addUser = null
+	let now = new Date()
 
 	switch(orderBy) {
 		case 'countries':
@@ -32,6 +33,23 @@ exports.get = function(request, response) {
 					categories[user.providers.list].push(user)
 				else
 					categories[user.providers.list] = [user]
+			}
+			break
+
+		case 'registration':
+			addUser = user => {
+				let registrationDate = new Date(user.registered)
+				let seconds = Math.floor((now - registrationDate) / 1000)
+				let days = seconds / 60 / 60 / 24
+				let categoryName = 'Ojii-san'
+
+				if(days <= 1)
+					categoryName = 'Last 24 hours'
+
+				if(categories.hasOwnProperty(categoryName))
+					categories[categoryName].push(user)
+				else
+					categories[categoryName] = [user]
 			}
 			break
 
