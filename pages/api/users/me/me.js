@@ -24,34 +24,19 @@ exports.post = function(request, response) {
 	}*/
 
 	if(key === 'nick') {
-		value = value.replace(/\s+/g, '')
-		
+		value = arn.fixNick(value)
+
 		if(!value || value.length < 2) {
 			response.writeHead(409)
 			response.end('Username must have a length of at least 2 characters')
 			return
 		}
 
-		let oldNick = user.nick
-
-		arn.getAsync('NickToUser', value)
-		.then(record => {
-			response.writeHead(409)
-			response.end('Username is already taken.')
-		})
+		arn.changeNickAsync(user, value)
+		.then(() => response.end(user.nick))
 		.catch(error => {
-			user[key] = value
-
-			Promise.all([
-				arn.removeAsync('NickToUser', oldNick),
-				arn.setAsync('NickToUser', value, { userId: user.id }),
-				arn.setUserAsync(user.id, user)
-			])
-			.then(() => response.end())
-			.catch(error => {
-				response.writeHead(409)
-				response.end(error.message)
-			})
+			response.writeHead(409)
+			response.end(user.nick)
 		})
 		return
 	}

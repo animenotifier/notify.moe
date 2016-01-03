@@ -20,7 +20,7 @@ window.save = function(e) {
 		if(error)
 			console.log(error);
 
-		window.postSave(key, value);
+		window.postSave(key, response);
 
 		kaze.get('/_' + location.pathname, function(error, newPageCode) {
 			if(error)

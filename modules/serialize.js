@@ -11,16 +11,19 @@ passport.serializeUser(function(request, user, done) {
 	user.ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
 	user.agent = request.headers['user-agent']
 
-	arn.getLocation(user).then(location => {
-		user.location = location
-	}).catch(error => {
-		user.location = null
-	}).finally(() => {
-		// Save in database
-		arn.setUser(user.id, user)
+	arn.setUserAsync(user.id, user).then(() => {
+		done(null, user.id)
+
+		arn.getLocation(user).then(location => {
+			user.location = location
+		}).catch(error => {
+			user.location = null
+		}).finally(() => {
+			// Save in database
+			arn.setUser(user.id, user)
+		})
 	})
 
-	done(null, user.id)
 })
 
 module.exports = function() {

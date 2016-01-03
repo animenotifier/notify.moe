@@ -16,10 +16,16 @@ database(aero, function(error) {
         })*/
 
         arn.scan('Users', function(user) {
-                user.nick = user.nick.trim()
-                arn.setUserAsync(user.id, user).then(() => {
-                        console.log('Finished updating ' + user.nick)
-                })
+				let old = user.nick
+				let newNick = arn.fixNick(user.nick)
+
+				console.log(old, '=', newNick)
+
+                arn.changeNickAsync(user, newNick).then(() => {
+                    console.log('Finished updating ' + user.nick)
+                }).catch(error => {
+					console.error('Error updating ' + user.nick)
+				})
         }, function() {
                 console.log('Finished updating all users')
         })
