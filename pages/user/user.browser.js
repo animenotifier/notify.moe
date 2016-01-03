@@ -104,9 +104,12 @@ window.loadAnimeList = function() {
 			link.className = 'anime-link';
 
 			var view = document.createElement('a');
-			view.href = anime.animeProvider.url;
+			view.href = anime.animeProvider.nextEpisodeUrl;
 			view.target = '_blank';
 			view.className = 'anime-view-link';
+
+			if(anime.episodes.next && anime.episodes.next !== 0)
+				view.title = 'Watch episode ' + anime.episodes.next;
 
 			var icon = document.createElement('div');
 			icon.className = 'glyphicon glyphicon-eye-open';
