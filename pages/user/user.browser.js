@@ -47,6 +47,12 @@ window.loadAnimeList = function() {
 				icon.className = 'glyphicon glyphicon-eye-open';
 				view.appendChild(icon);
 				item.appendChild(view);
+
+				var behind = (anime.episodes.available - anime.episodes.watched);
+				var episodes = document.createElement('span');
+				episodes.className = 'episodes-behind';
+				episodes.appendChild(document.createTextNode(behind + (behind === 1 ? ' episode' : ' episodes') + ' behind'));
+				item.appendChild(episodes);
 			}
 
 			list.appendChild(item);
