@@ -84,5 +84,11 @@
 	"roles": {
 		"admin": "Admin",
 		"editor": "Editor"
+	},
+	"donators": {
+		"VkVaI_MPl": true,
+		"NJqoLKfvg": true,
+		"VJOK1ckvx": true,
+		"Vy2Hk5yvx": true
 	}
 }

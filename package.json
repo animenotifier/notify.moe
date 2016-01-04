@@ -15,6 +15,7 @@
 		"passport-facebook": "*",
 		"passport-google-oauth": "*",
 		"request-promise": "*",
+		"session-file-store": "*",
 		"shortid": "*",
 		"validator": "*",
 		"xml2js": "*"

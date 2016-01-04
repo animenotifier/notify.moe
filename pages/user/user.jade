@@ -62,6 +62,10 @@ else
 				p.role
 					span.glyphicon.glyphicon-education
 					span= roles[viewUser.role]
+			else if donators[viewUser.id]
+				p.role
+					span.glyphicon.glyphicon-heart
+					span Supporter
 			
 			//-each provider in ['AniList', 'AnimePlanet', 'HummingBird', 'MyAnimeList']
 				if viewUser.listProviders[provider] && viewUser.listProviders[provider].userName
