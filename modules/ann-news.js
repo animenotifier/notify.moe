@@ -16,6 +16,7 @@ module.exports = function(aero) {
 
 	Promise.promisifyAll(xmlParser)
 
+	// News
 	let updateNews = function() {
 		let url = 'http://www.animenewsnetwork.com/news/rss.xml'
 
