@@ -16,13 +16,14 @@ exports.get = function(request, response) {
 	}
 
 	let animeList = []
+	let hasSpace = term.indexOf(' ') !== -1
 	arn.scan('Anime', function(anime) {
 		if(!anime.title)
 			return
 
 		let title = anime.title.toLowerCase()
 
-		if(title === term) {
+		if(title === term || (hasSpace && title.indexOf(term) !== -1)) {
 			animeList.push(anime)
 			return
 		}
