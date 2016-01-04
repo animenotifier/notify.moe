@@ -2,15 +2,13 @@ var search = document.getElementById('search');
 var searchResults = document.getElementById('search-results');
 var lastRequest = undefined
 
-window.searchAnime = function(e) {
-	if(e !== 'force') {
-		e = event || window.event;
+window.searchAnime = function() {
+	/*if(force !== 'force') {
+		ev = ev || event || window.event;
 
-		var keyCode = e.keyCode || e.which;
-
-		if(keyCode !== 13)
+		if(ev.keyCode !== 13)
 			return;
-	}
+	}*/
 
 	if(lastRequest) {
 		lastRequest.abort();
@@ -26,5 +24,5 @@ if(search) {
 	search.select();
 
 	if(search.value)
-		window.searchAnime('force');
+		window.searchAnime();
 }
