@@ -1,2 +1,30 @@
-h2 Anime
-p Nothing here yet.
+if anime
+	section
+		header
+			h2= anime.title
+			
+		if anime.image && anime.image.src
+			img.anime-database-image(src=anime.image.src.replace('http://', 'https://'), alt=anime.name)
+		
+		.anime-info
+			if anime.summary
+				h3.anime-header Summary
+				p.anime-summary!= anime.summary
+				
+			if anime.websites
+				h3.anime-header Links
+				ul.anime-websites
+					each website in anime.websites
+						li
+							a(href=website.url, target='_blank', rel='nofollow')= website.title
+	
+		p.powered-by Data by 
+			a(href='http://www.animenewsnetwork.com/', target='_blank', rel='nofollow') animenewsnetwork.com
+else
+	section
+		header
+			h2 Anime
+		
+		input#search(type='text', placeholder='Search...', onkeyup='window.searchAnime();', onfocus='this.select();')
+		
+		#search-results

@@ -1,0 +1,8 @@
+if term
+	h3= term
+
+if animeList
+	ul
+		each anime in animeList
+			li
+				a.ajax(href='/anime/' + anime.id)= anime.title

@@ -27,27 +27,31 @@ module.exports = function(aero) {
 
 	// Anime database
 	let importAnime = url => {
-		request(url)
-		.then(xml => {
+		return request(url).then(xml => {
 			return xmlParser.parseStringAsync(xml).then(json => {
 				let result = json.anime.map(ann => {
 					let episodes = []
 
-					ann.episode.forEach(episode => {
-						episodes[episode.$.num] = {
-							title: episode.title._,
-							language: episode.title.$.lang.toLowerCase()
-						}
-					})
+					if(ann.episode) {
+						ann.episode.forEach(episode => {
+							episodes[episode.$.num] = {
+								title: episode.title._,
+								language: episode.title.$.lang.toLowerCase()
+							}
+						})
+					}
+
+					let picture = getInfo(ann, 'Picture')
+					let summary = getInfo(ann, 'Plot Summary', true)
 
 					let anime = {
-						id: ann.$.id,
-						name: ann.$.name,
+						id: ann.$.id ? ann.$.id : -1,
+						title: ann.$.name ? ann.$.name : '',
 						altNames: [],
-						type: ann.$.type,
+						type: ann.$.type ? ann.$.type : '',
 						precision: ann.$.precision,
-						summary: getInfo(ann, 'Plot Summary', true),
-						image: getInfo(ann, 'Picture').img.reduce((a, b) => a.$.width > b.$.width ? a : b).$,
+						summary: summary ? summary : '',
+						image: picture ? picture.img.reduce((a, b) => a.$.width > b.$.width ? a : b).$ : '',
 						episodes,
 						websites: ann.info.filter(info => info.$.type === 'Official website').map(website => {
 							return {
@@ -57,6 +61,7 @@ module.exports = function(aero) {
 								lang: website.$.lang
 							}
 						}),
+						genres: [],
 						staff: [],
 						cast: [],
 						credit: []
@@ -65,33 +70,41 @@ module.exports = function(aero) {
 					return anime
 				})
 
-				console.log(require('util').inspect(result, false, null))
+				return result
 			})
-		})
-		.catch(error => {
+		}).catch(error => {
 			console.log('Error importing anime:', error)
 		})
 	}
 
-	/*let importAnimeList = url => {
-		request(url)
-		.then(xml => {
+	let getAnimeIds = url => {
+		return request(url).then(xml => {
 			return xmlParser.parseStringAsync(xml).then(json => {
 				let animeIds = json.item.map(item => item.id).join('/')
 
 				if(!animeIds)
 					return
 
-				importAnime(`http://cdn.animenewsnetwork.com/encyclopedia/api.xml?title=${animeIds}`)
+				return animeIds
 			})
-		})
-		.catch(error => {
-			console.log('Error importing anime:', error)
+		}).catch(error => {
+			console.log('Error getting list of anime:', error)
 		})
 	}
 
-	importAnimeList('http://www.animenewsnetwork.com/encyclopedia/reports.xml?id=155&type=anime&nlist=2')*/
+	getAnimeIds('http://www.animenewsnetwork.com/encyclopedia/reports.xml?id=155&type=anime&nlist=50')
+	.then(animeIds => importAnime(`http://cdn.animenewsnetwork.com/encyclopedia/api.xml?title=${animeIds}`))
+	.then(animeList => {
+		//console.log(require('util').inspect(animeList, false, null))
 
-	importAnime(`http://cdn.animenewsnetwork.com/encyclopedia/api.xml?title=15118/16134`)
+		animeList.forEach(anime => {
+			if(!anime.id || !anime.title)
+				return
+
+			arn.setAsync('Anime', anime.id, anime).then(() => console.log('Imported anime: ' + anime.title))
+		})
+	}).catch(erro => {
+		console.log('ANN import error:', error)
+	})
 	//http://www.animenewsnetwork.com/encyclopedia/reports.xml?id=155&type=anime&nlist=all
 }
