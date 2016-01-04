@@ -22,15 +22,38 @@ section
 		
 		dt What does "list provider" mean?
 		dd The site you are using to manage your anime list.
+			if user
+				|  You are currently using 
+				span.user-data= user.providers.list
+				| .
 		
 		dt What does "anime provider" mean?
 		dd The site you are using to watch anime.
+			if user
+				|  You are currently using 
+				span.user-data= user.providers.anime
+				| .
 		
 		dt What does "airing date provider" mean?
 		dd The site you want to use as a source for airing dates. Whether an airing date is available or not depends on the site you chose.
+			if user
+				|  You are currently using 
+				span.user-data= user.providers.airingDate
+				| .
 		
-		dt Why is my profile not shown on the user list?
-		dd In order to appear in the user list you need to have a username on Anime Notifier and you also need to enter the username for the list provider you selected.
+		if !user || !user.providers.list || !user.listProviders[user.providers.list] || !user.listProviders[user.providers.list].userName
+			dt Why is my profile not shown on the user list?
+			dd In order to appear in the user list you need to 
+				span.main-point set a username
+				|  on Anime Notifier and you also need to enter the 
+				span.main-point username for the list provider
+				|  you selected.
 		
 		dt I've set my gravatar picture for my email but it doesn't show up?
-		dd Gravatar needs some time to update its cache. You need to wait a few minutes before it shows up on Anime Notifier.
+		dd 
+			if user
+				| Remember to add 
+				span.user-data= user.email
+				|  as an email address to your gravatar account. 
+			| Gravatar needs some time to update its cache.
+			| You need to wait a few minutes before it shows up.
