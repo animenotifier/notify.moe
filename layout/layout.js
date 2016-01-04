@@ -36,30 +36,34 @@ exports.render = function(request, render) {
 			url: 'logout',
 			icon: 'log-out',
 			ajax: false,
-			float: 'right'
+			float: 'right',
+			tooltip: 'Logout'
+		})
+
+		nav.push({
+			title: '',
+			url: 'faq',
+			icon: 'question-sign',
+			float: 'right',
+			tooltip: 'FAQ'
+		})
+
+		nav.push({
+			title: '',
+			url: 'changes',
+			icon: 'refresh',
+			float: 'right',
+			tooltip: 'Changes'
+		})
+
+		nav.push({
+			title: '',
+			url: 'roadmap',
+			icon: 'road',
+			float: 'right',
+			tooltip: 'Roadmap'
 		})
 	}
-
-	nav.push({
-		title: '',
-		url: 'faq',
-		icon: 'question-sign',
-		float: 'right'
-	})
-
-	nav.push({
-		title: '',
-		url: 'changes',
-		icon: 'refresh',
-		float: 'right'
-	})
-
-	nav.push({
-		title: '',
-		url: 'roadmap',
-		icon: 'road',
-		float: 'right'
-	})
 
 	render({
 		user,

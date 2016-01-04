@@ -21,7 +21,7 @@ html
 							a(href='/#{link.url}', class='navigation-link' + (link.ajax === false ? '' : ' ajax'), style=`float: ${link.float ? link.float : 'left'}`)
 								.navigation-button
 									if link.icon
-										span(class='glyphicon glyphicon-' + link.icon, style=link.title ? '' : 'margin: 0')
+										span(class='glyphicon glyphicon-' + link.icon, style=link.title ? '' : 'margin: 0', title=link.tooltip)
 									if link.title
 										span.navigation-text= link.title
 		
