@@ -1,10 +1,10 @@
 if anime
 	section
 		header
-			h2= anime.title
+			h2= anime.title + ' (' + anime.precision + ')'
 			
 		if anime.image && anime.image.src
-			img.anime-database-image(src=anime.image.src.replace('http://', 'https://'), alt=anime.name)
+			img.anime-database-image(src=anime.image.src, alt=anime.name)
 		
 		.anime-info
 			if anime.summary
@@ -15,8 +15,9 @@ if anime
 				h3.anime-header Links
 				ul.anime-websites
 					each website in anime.websites
-						li
-							a(href=website.url, target='_blank', rel='nofollow')= website.title
+						if website.title && website.url
+							li
+								a(href=website.url, target='_blank', rel='nofollow')= website.title
 	
 		p.powered-by Data by 
 			a(href='http://www.animenewsnetwork.com/', target='_blank', rel='nofollow') animenewsnetwork.com

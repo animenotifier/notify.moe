@@ -6,7 +6,7 @@ let Promise = require('bluebird')
 let arn = require('../lib')
 
 module.exports = function(aero) {
-	let xmlParser = new xml2js.Parser({
+	/*let xmlParser = new xml2js.Parser({
 		explicitArray: false,	// Don't put single nodes into an array
 		ignoreAttrs: false,
 		trim: true,
@@ -103,8 +103,8 @@ module.exports = function(aero) {
 
 			arn.setAsync('Anime', anime.id, anime).then(() => console.log('Imported anime: ' + anime.title))
 		})
-	}).catch(erro => {
+	}).catch(error => {
 		console.log('ANN import error:', error)
 	})
-	//http://www.animenewsnetwork.com/encyclopedia/reports.xml?id=155&type=anime&nlist=all
+	//http://www.animenewsnetwork.com/encyclopedia/reports.xml?id=155&type=anime&nlist=all*/
 }

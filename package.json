@@ -10,6 +10,7 @@
 		"body-parser": "*",
 		"express-session": "*",
 		"gravatar": "*",
+		"limiter": "*",
 		"node-cache": "*",
 		"passport": "*",
 		"passport-facebook": "*",

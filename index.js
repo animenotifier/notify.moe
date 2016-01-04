@@ -27,6 +27,10 @@ aero.use(bodyParser.json())
 
 // Send slack messages
 arn.on('new user', function(user) {
+	// Ignore my own attempts on empty databases
+	if(user.email === 'e.urbach@gmail.com')
+		return
+
 	let host = 'https://notify.moe'
 	let webhook = 'https://hooks.slack.com/services/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'
 
