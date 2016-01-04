@@ -19,21 +19,27 @@ exports.render = function(request, render) {
 	}
 
 	nav.push({
-		title: 'Anime',
-		url: 'anime',
-		icon: 'film'
-	})
-
-	nav.push({
 		title: 'Users',
 		url: 'users',
 		icon: 'globe'
 	})
 
 	nav.push({
+		title: 'Anime',
+		url: 'anime',
+		icon: 'film'
+	})
+
+	nav.push({
 		title: 'FAQ',
 		url: 'faq',
 		icon: 'question-sign'
+	})
+
+	nav.push({
+		title: 'Roadmap',
+		url: 'roadmap',
+		icon: 'road'
 	})
 
 	nav.push({
