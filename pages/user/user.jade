@@ -56,7 +56,7 @@ else
 			if viewUser.website
 				p.website
 					span.glyphicon.glyphicon-home
-					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website
+					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
 			
 			if viewUser.role
 				p.role

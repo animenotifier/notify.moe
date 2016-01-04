@@ -2,6 +2,7 @@
 
 let passport = require('passport')
 let session = require('express-session')
+let apiKeys = require('../security/api-keys.json')
 
 module.exports = function(aero) {
 	// Session
