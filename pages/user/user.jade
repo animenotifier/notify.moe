@@ -37,16 +37,16 @@ else
 			h2.nick= viewUser.nick
 			
 			if viewUser.tagline
-				p.tagline
+				p.profile-field.tagline
 					span.glyphicon.glyphicon-comment
 					em= viewUser.tagline
 			else
-				p.tagline
+				p.profile-field.tagline
 					span.glyphicon.glyphicon-comment
 					em No tagline yet.
 					
 			if viewUser.location && viewUser.location.countryName != '-'
-				p.location
+				p.profile-field.location
 					span.glyphicon.glyphicon-map-marker
 					//- if viewUser.location.cityName != '-'
 					//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
@@ -54,20 +54,20 @@ else
 					span= viewUser.location.countryName
 			
 			if viewUser.website
-				p.website
+				p.profile-field.website
 					span.glyphicon.glyphicon-home
 					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
 			
 			if viewUser.role
-				p.role
+				p.profile-field.role
 					span.glyphicon.glyphicon-education
 					span= roles[viewUser.role]
 			else if donators[viewUser.id]
-				p.role
+				p.profile-field.role
 					span.glyphicon.glyphicon-heart
 					span Supporter
 			else
-				p.role
+				p.profile-field.role
 					span.glyphicon.glyphicon-star
 					span Alpha Tester
 			
