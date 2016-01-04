@@ -1,6 +1,6 @@
 window.loadAnimeList = function() {
 	var animeList = document.getElementById('animeList');
-	animeList.innerText = 'Loading your anime list...';
+	animeList.innerText = 'Loading anime list...';
 
 	var userName = window.location.pathname.substring(2);
 
