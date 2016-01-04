@@ -18,7 +18,8 @@ html
 					
 					nav#navigation
 						each link in nav
-							a(href='/#{link.url}', class='navigation-link' + (link.ajax === false ? '' : ' ajax'), style=`float: ${link.float ? link.float : 'left'}`)
+							- var external = link.url.startsWith('http')
+							a(href=external ? link.url : '/#{link.url}', class='navigation-link' + ((external || link.ajax === false) ? '' : ' ajax'), target=external ? '_blank' : undefined, style=`float: ${link.float ? link.float : 'left'}`)
 								.navigation-button
 									if link.icon
 										span(class='glyphicon glyphicon-' + link.icon, style=link.title ? '' : 'margin: 0', title=link.tooltip)

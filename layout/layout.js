@@ -30,6 +30,12 @@ exports.render = function(request, render) {
 			url: 'settings',
 			icon: 'cog'
 		})
+
+		nav.push({
+			title: 'Donate',
+			url: 'https://www.paypal.me/blitzprog',
+			icon: 'heart'
+		})
 	}
 
 	/*nav.push({
