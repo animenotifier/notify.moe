@@ -4,7 +4,8 @@ var lastRequest = undefined
 
 window.searchAnime = function(e) {
 	if(e !== 'force') {
-		var e = window.event;
+		e = window.event;
+
 		var keyCode = e.keyCode || e.which;
 
 		if(keyCode !== 13)
@@ -23,7 +24,7 @@ window.searchAnime = function(e) {
 
 if(search) {
 	search.select();
-	
+
 	if(search.value)
 		window.searchAnime('force');
 }
