@@ -52,7 +52,7 @@ else
 					//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
 					//- else
 					span= viewUser.location.countryName
-				
+			
 			if viewUser.website
 				p.website
 					span.glyphicon.glyphicon-home
@@ -84,4 +84,8 @@ else
 						+text(field)
 		
 		h3= viewUser.nick + ' is watching:'
-		#animeList.anime-list-container
+		
+		if user
+			#animeList.anime-list-container(data-logged='true')
+		else
+			#animeList.anime-list-container(data-logged='false')

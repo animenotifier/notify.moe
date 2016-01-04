@@ -93,6 +93,8 @@ window.loadAnimeList = function() {
 		var list = document.createElement('ul');
 		list.className = 'anime-list';
 
+		var loggedIn = animeList.dataset.logged === 'true';
+
 		response.watching.forEach(function(anime) {
 			var item = document.createElement('li');
 			item.className = 'anime';
@@ -105,7 +107,7 @@ window.loadAnimeList = function() {
 
 			item.appendChild(link);
 
-			if(anime.episodes.available >= anime.episodes.next) {
+			if(loggedIn && anime.episodes.available >= anime.episodes.next) {
 				var view = document.createElement('a');
 				view.href = anime.animeProvider.nextEpisodeUrl;
 				view.target = '_blank';
