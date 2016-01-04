@@ -41,10 +41,11 @@ exports.get = function(request, response) {
 			categories = {
 				'Last 24 hours': [],
 				'Yesterday': [],
-				'Last week': [],
+				'This week': [],
+				'This month': [],
 				'Ojii-san': []
 			}
-			
+
 			addUser = user => {
 				let registrationDate = new Date(user.registered)
 				let seconds = Math.floor((now - registrationDate) / 1000)
@@ -56,7 +57,9 @@ exports.get = function(request, response) {
 				else if(days <= 2)
 					categoryName = 'Yesterday'
 				else if(days <= 7)
-					categoryName = 'Last week'
+					categoryName = 'This week'
+				else if(days <= 30)
+					categoryName = 'This month'
 
 				if(categories.hasOwnProperty(categoryName))
 					categories[categoryName].push(user)
