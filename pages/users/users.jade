@@ -5,11 +5,11 @@ section
 	p
 		a.ajax(href='/users') All at once
 		|  | 
-		a.ajax(href='/users/listproviders') By list providers
+		a.ajax(href='/users/listproviders') List providers
 		|  | 
-		a.ajax(href='/users/countries') By countries
+		a.ajax(href='/users/countries') Countries
 		|  | 
-		a.ajax(href='/users/registration') By registration date
+		a.ajax(href='/users/registration') Registration date
 	
 	each category, categoryTitle in categories
 		h3(title=category.length + (category.length === 1 ? ' user' : ' users'))= categoryTitle

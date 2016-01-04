@@ -24,6 +24,14 @@ exports.render = function(request, render) {
 		icon: 'globe'
 	})
 
+	if(user) {
+		nav.push({
+			title: 'Settings',
+			url: 'settings',
+			icon: 'cog'
+		})
+	}
+
 	/*nav.push({
 		title: 'Anime',
 		url: 'anime',

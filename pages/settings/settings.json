@@ -1,0 +1,84 @@
+{
+	"fields": {
+		"General": [
+			{
+				"id": "nick",
+				"label": "Name:",
+				"description": "Your ARN username"
+			},
+			{
+				"id": "tagline",
+				"label": "Tagline:",
+				"description": "Text that appears below your username"
+			},
+			{
+				"id": "website",
+				"label": "Website:",
+				"description": "Your homepage",
+				"type": "url"
+			}
+		],
+		"Providers": [
+			{
+				"id": "providers.list",
+				"label": "List:",
+				"description": "This is where we'll get your anime list from",
+				"options": {
+					"anilist.co": "AniList",
+					"anime-planet.com": "AnimePlanet",
+					"hummingbird.me": "HummingBird",
+					"myanimelist.net": "MyAnimeList"
+				}
+			},
+			{
+				"id": "providers.anime",
+				"label": "Anime:",
+				"description": "This is where we'll look for new episodes of your anime",
+				"options": {
+					"nyaa.se": "Nyaa"
+				}
+			},
+			{
+				"id": "providers.airingDate",
+				"label": "Airing date:",
+				"description": "This is where we'll fetch the airing date for your anime",
+				"options": {
+					"anilist.co": "AniList"
+				}
+			}
+		],
+		"Details": [
+			{
+				"id": "sortBy",
+				"label": "Sort by:",
+				"description": "Sorting algorithm for your anime list",
+				"options": {
+					"Airing date": "airingDate",
+					"Alphabetically": "alphabetically"
+				}
+			}
+		],
+		"List providers": [
+			{
+				"id": "listProviders.AniList.userName",
+				"label": "AniList:",
+				"description": "Your anilist.co username"
+			},
+			{
+				"id": "listProviders.AnimePlanet.userName",
+				"label": "AnimePlanet:",
+				"description": "Your anime-planet.com username"
+			},
+			{
+				"id": "listProviders.HummingBird.userName",
+				"label": "HummingBird:",
+				"description": "Your hummingbird.me username"
+			},
+			{
+				"id": "listProviders.MyAnimeList.userName",
+				"label": "MyAnimeList:",
+				"description": "Your myanimelist.net username"
+			}
+		]
+	}
+}
