@@ -30,43 +30,7 @@ exports.render = function(request, render) {
 		icon: 'film'
 	})
 
-	nav.push({
-		title: 'FAQ',
-		url: 'faq',
-		icon: 'question-sign'
-	})
-
-	nav.push({
-		title: 'Roadmap',
-		url: 'roadmap',
-		icon: 'road'
-	})
-
-	nav.push({
-		title: 'Changes',
-		url: 'changes',
-		icon: 'refresh'
-	})
-
 	if(user) {
-		// nav.push({
-		// 	title: 'Youtube',
-		// 	url: 'videos',
-		// 	icon: 'facetime-video'
-		// })
-		//
-		// nav.push({
-		// 	title: 'News',
-		// 	url: 'news',
-		// 	icon: 'pushpin'
-		// })
-
-		// nav.push({
-		// 	title: 'Stats',
-		// 	url: 'statistics',
-		// 	icon: 'stats'
-		// })
-
 		nav.push({
 			title: '',
 			url: 'logout',
@@ -75,6 +39,27 @@ exports.render = function(request, render) {
 			float: 'right'
 		})
 	}
+
+	nav.push({
+		title: '',
+		url: 'faq',
+		icon: 'question-sign',
+		float: 'right'
+	})
+
+	nav.push({
+		title: '',
+		url: 'changes',
+		icon: 'refresh',
+		float: 'right'
+	})
+
+	nav.push({
+		title: '',
+		url: 'roadmap',
+		icon: 'road',
+		float: 'right'
+	})
 
 	render({
 		user,
