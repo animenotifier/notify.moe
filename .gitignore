@@ -32,6 +32,7 @@ node_modules
 
 # ARN specific
 /security
+/sessions
 /db
 /sftp-config.json
 /deployment-config.json

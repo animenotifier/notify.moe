@@ -3,13 +3,14 @@
 let passport = require('passport')
 let session = require('express-session')
 let apiKeys = require('../security/api-keys.json')
-//let FileStore = require('session-file-store')(session)
+let FileStore = require('session-file-store')(session)
 
 module.exports = function(aero) {
 	// Session
 	let sessionOptions = {
+		store: new FileStore(),
 	    name: 'sid',
-	    secret: require('crypto').randomBytes(64).toString('hex'),
+	    secret: apiKeys.session.secret,
 	    saveUninitialized: false,
 	    resave: false,
 	    cookie: {
