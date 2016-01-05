@@ -5,6 +5,7 @@ exports.post = (request, response) => {
 
 	try {
 		endpoint = JSON.parse(request.body).endpoint
+		console.log(endpoint)
 	} catch(e) {
 		console.error(e)
 	}
