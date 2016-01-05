@@ -1,10 +1,19 @@
 var isPushEnabled = false;
 
-function sendSubscriptionToServer(subscription) {
+function subscribeOnServer(subscription) {
 	console.log('Send subscription to server...');
 	console.log(subscription);
 
-	kaze.postJSON('/api/push', {}, function(error, response) {
+	kaze.postJSON('/api/notifications/subscribe', subscription, function(error, response) {
+		console.log(response);
+	});
+}
+
+function unsubscribeOnServer(subscription) {
+	console.log('Send unsubscription to server...');
+	console.log(subscription);
+
+	kaze.postJSON('/api/notifications/unsubscribe', subscription, function(error, response) {
 		console.log(response);
 	});
 }
@@ -26,7 +35,7 @@ function subscribe() {
 
 			// TODO: Send the subscription.endpoint to your server
 			// and save it to send a push message at a later date
-			return sendSubscriptionToServer(subscription);
+			return subscribeOnServer(subscription);
 		}).catch(function(e) {
 			if(Notification.permission === 'denied') {
 				// The user denied the notification permission which
@@ -69,6 +78,7 @@ function unsubscribe() {
 			// TODO: Make a request to your server to remove
 			// the subscriptionId from your data store so you
 			// don't attempt to send them push messages anymore
+			unsubscribeOnServer(subscriptionId);
 
 			// We have a subscription, so call unsubscribe on it
 			pushSubscription.unsubscribe().then(function(successful) {
@@ -136,7 +146,7 @@ function initialiseState(registration) {
 			}
 
 			// Keep your server in sync with the latest subscriptionId
-			sendSubscriptionToServer(subscription);
+			subscribeOnServer(subscription);
 
 			// Set your UI to show they have subscribed for
 			// push messages
