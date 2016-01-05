@@ -25,7 +25,7 @@ exports.post = (request, response) => {
 	console.log('Saving device', deviceId, 'for user', user.nick)
 
 	// Add ID to the user's devices
-	user.devices[deviceId] = new Date()
+	user.devices[deviceId] = (new Date()).toISOString()
 
 	arn.setUserAsync(user.id, user).then(() => response.end('Subscribe response.'))
 }
