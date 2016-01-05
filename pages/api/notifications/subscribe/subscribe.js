@@ -3,11 +3,11 @@
 exports.post = (request, response) => {
 	let endpoint = null
 
-	console.log(request.body)
+	console.log('body:', request.body)
 
 	try {
 		endpoint = JSON.parse(request.body).endpoint
-		console.log(endpoint)
+		console.log('json:', endpoint)
 	} catch(e) {
 		console.error(e)
 	}
