@@ -4,7 +4,9 @@ function subscribeOnServer(subscription) {
 	console.log('Send subscription to server...');
 	console.log(subscription);
 
-	kaze.postJSON('/api/notifications/subscribe', subscription, function(error, response) {
+	kaze.postJSON('/api/notifications/subscribe', {
+		endpoint: subscription.endpoint
+	}, function(error, response) {
 		console.log(response);
 	});
 }
