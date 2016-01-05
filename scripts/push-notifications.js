@@ -22,6 +22,14 @@ function unsubscribeOnServer(subscription) {
 	});
 }
 
+function sendTestNotification() {
+	console.log('Sending test notification...')
+	
+	kaze.get('/api/notifications/test', function(error, response) {
+		// ...
+	})
+}
+
 function subscribe() {
 	// Disable the button so it can't be changed while
 	// we process the permission request

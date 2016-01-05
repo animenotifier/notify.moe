@@ -23,9 +23,9 @@ if user
 				each field in category
 					+text(field)
 		
-		//user && user.role === 'admin'
-		if 1
+		if user && user.role === 'admin'
 			.category
 				h3 Notifier
 				.field
 					button.push-button(disabled) Enable Notifications
+					button.test-notification(onclick='sendTestNotification();') Send test notification
