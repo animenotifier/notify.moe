@@ -78,11 +78,7 @@ function unsubscribe() {
 				return;
 			}
 
-			var subscriptionId = pushSubscription.subscriptionId;
-			// TODO: Make a request to your server to remove
-			// the subscriptionId from your data store so you
-			// don't attempt to send them push messages anymore
-			unsubscribeOnServer(subscriptionId);
+			unsubscribeOnServer(pushSubscription);
 
 			// We have a subscription, so call unsubscribe on it
 			pushSubscription.unsubscribe().then(function(successful) {
