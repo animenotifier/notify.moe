@@ -1,14 +1,15 @@
 'use strict'
 
 exports.post = (request, response) => {
-	let endpoint = null
+	let user = request.user
 
-	try {
-		endpoint = request.body.endpoint
-		console.log(endpoint)
-	} catch(e) {
-		console.error(e)
+	if(!user) {
+		response.writeHead(409)
+		response.end('Not logged in')
+		return
 	}
 
-	response.end('Unsubscribe response.')
+	console.log(request.body)
+
+	response.end('test')
 }
