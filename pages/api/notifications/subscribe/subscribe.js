@@ -9,7 +9,8 @@ exports.post = (request, response) => {
 	}
 
 	let endpoint = request.body.endpoint
-	let deviceId = endpoint.split('/')[0]
+	let parts = endpoint.split('/')
+	let deviceId = parts[parts.length - 1]
 
 	console.log('Saving device', deviceId, 'for user', user.nick)
 
