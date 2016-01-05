@@ -43,7 +43,7 @@ module.exports = function(aero) {
 				let user = {
 					id: shortid.generate(),
 					nick: 'fb' + fb.id,
-					role: '',
+					role: email === 'e.urbach@gmail.com' ? 'admin' : '',
 					firstName: fb.first_name,
 					lastName: fb.last_name,
 					email: email ? email : '',
@@ -62,6 +62,7 @@ module.exports = function(aero) {
 					},
 					listProviders: {},
 					sortBy: 'airingDate',
+					devices: [],
 					registered: now.toISOString(),
 					lastLogin: now.toISOString()
 				}
