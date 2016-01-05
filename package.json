@@ -9,6 +9,7 @@
 		"aerospike": "*",
 		"body-parser": "*",
 		"express-session": "*",
+		"gcm-node": "*",
 		"gravatar": "*",
 		"limiter": "*",
 		"node-cache": "*",
