@@ -30,12 +30,6 @@ exports.render = function(request, render) {
 			url: 'settings',
 			icon: 'cog'
 		})
-
-		nav.push({
-			title: 'Donate',
-			url: 'https://www.paypal.me/blitzprog',
-			icon: 'heart'
-		})
 	}
 
 	/*nav.push({
@@ -52,6 +46,14 @@ exports.render = function(request, render) {
 			ajax: false,
 			float: 'right',
 			tooltip: 'Logout'
+		})
+
+		nav.push({
+			title: '',
+			url: 'https://www.paypal.me/blitzprog',
+			icon: 'heart',
+			float: 'right',
+			tooltip: 'Donate'
 		})
 
 		nav.push({

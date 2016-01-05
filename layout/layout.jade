@@ -1,7 +1,9 @@
 doctype html
 html
 	head
-		title= siteName
+		title Anime Notifier
+		meta(name='description', content='Anime Release Notifier will notify you when a new episode of your favourite anime has been released.')
+		meta(name='keywords', content='anime,notifier,notify')
 		style!= css
 		link(rel='chrome-webstore-item', href='https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch')
 		link(rel='manifest', href='/manifest.json')
@@ -15,7 +17,7 @@ html
 							a(href='/')
 								h1= siteName
 						//#slogan Don't miss the next episode. Get notified instantly.
-						#slogan This project is currently under heavy development.
+						#slogan 3.0 Alpha Test
 					
 					nav#navigation
 						each link in nav
