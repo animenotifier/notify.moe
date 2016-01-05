@@ -3,6 +3,7 @@
 let aero = require('aero')
 let arn = require('./lib')
 let fs = require('fs')
+let path = require('path')
 let bodyParser = require('body-parser')
 let request = require('request-promise')
 
@@ -41,6 +42,17 @@ aero.get('manifest.json', (request, response) => {
 	})
 })
 
+aero.get('service-worker.js', (request, response) => {
+	let filePath = path.join(__dirname, 'service-worker.js')
+	let stat = fs.statSync(filePath)
+
+	response.writeHead(200, {
+		'Content-Type': 'application/javascript',
+		'Content-Length': stat.size
+	})
+
+	fs.createReadStream(filePath).pipe(response)
+})
 
 // Send slack messages
 arn.on('new user', function(user) {

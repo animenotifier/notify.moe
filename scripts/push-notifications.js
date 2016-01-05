@@ -43,7 +43,10 @@ function subscribe() {
 }
 
 // Once the service worker is registered set the initial state
-function initialiseState() {
+function initialiseState(registration) {
+	console.log('Initialise state...');
+	console.log('Scope:', registration.scope);
+
 	// Are Notifications supported in the service worker?
 	if(!('showNotification' in ServiceWorkerRegistration.prototype)) {
 		console.warn('Notifications aren\'t supported.');
