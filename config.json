@@ -13,7 +13,8 @@
 	],
 	"scripts": [
 		"footer",
-		"init"
+		"init",
+		"push-notifications"
 	],
 	"plugins": {
 		"style-reset": {},

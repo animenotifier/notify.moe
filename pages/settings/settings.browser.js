@@ -78,3 +78,24 @@ for(var i = 0; i < myNodeList.length; ++i) {
 	var element = myNodeList[i];
 	element.onchange = window.save;
 }
+
+// Push notifications
+var pushButton = document.querySelector('.push-button');
+
+if(pushButton) {
+	pushButton.addEventListener('click', function() {
+		if(isPushEnabled) {
+			unsubscribe();
+		} else {
+			subscribe();
+		}
+	});
+
+	// Check that service workers are supported, if so, progressively
+	// enhance and add push messaging support, otherwise continue without it.
+	if('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/web/service-worker.js').then(initialiseState);
+	} else {
+		console.warn('Service workers aren\'t supported in this browser.');
+	}
+}

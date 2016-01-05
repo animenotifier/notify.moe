@@ -22,3 +22,9 @@ if user
 				h3= title
 				each field in category
 					+text(field)
+		
+		if user && user.role === 'admin'
+			.category
+				h3 Notifier
+				.field
+					button.push-button(disabled) Enable Notifications

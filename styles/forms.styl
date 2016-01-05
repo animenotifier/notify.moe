@@ -1,21 +1,26 @@
-input[type="text"],
-input[type="email"],
-input[type="password"],
+maxWidth = 560px
+
+input[type="text"]
+input[type="email"]
+input[type="password"]
 input[type="url"]
-	font-family "Open Sans", Ubuntu, sans-serif
+button
+	font-family "Ubuntu", sans-serif
 	font-size 1em
 	border-radius 3px
 	transition all 0.5s ease
 	margin 0 0 10px
 	padding 0.4em 0.8em
 	width calc(100% - 1.6em)
-	max-width 560px
+	max-width maxWidth
 	float left
 	&:focus
 		outline none
 
-input[type="submit"], .button, .ui-button
-	font-family "Open Sans", Ubuntu, sans-serif
+input[type="submit"]
+button
+.button
+	font-family "Ubuntu", sans-serif
 	font-size 1em
 	color black
 	padding 0.5em 2em
@@ -24,18 +29,8 @@ input[type="submit"], .button, .ui-button
 	border none
 	text-align center
 	transition all 290ms ease
-
-input[type="submit"]:hover, .button:hover
-	cursor pointer
-	background rgb(26, 26, 26)
-	text-decoration none
-	color white
-
-form
-	div
-		a
-			float right
-			margin 30px 15px 0 0
+	width 100%
+	max-width none
 
 textarea
 	float left
@@ -68,7 +63,6 @@ select
 	box-shadow 0px 1px 3px rgba(0, 0, 0, 0.1)
 	user-select none
 	border-radius 2px
-	border 1px solid rgb(170, 170, 170)
 	font-size inherit
 	overflow hidden
 	text-overflow ellipsis
