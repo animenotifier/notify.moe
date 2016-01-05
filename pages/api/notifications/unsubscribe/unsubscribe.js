@@ -10,6 +10,7 @@ exports.post = (request, response) => {
 	}
 
 	console.log(request.body)
+	console.log(request.body.deviceId)
 
 	response.end('test')
 }

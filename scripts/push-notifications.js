@@ -11,11 +11,13 @@ function subscribeOnServer(subscription) {
 	});
 }
 
-function unsubscribeOnServer(subscription) {
+function unsubscribeOnServer(subscriptionId) {
 	console.log('Send unsubscription to server...');
-	console.log(subscription);
+	console.log(subscriptionId);
 
-	kaze.postJSON('/api/notifications/unsubscribe', subscription, function(error, response) {
+	kaze.postJSON('/api/notifications/unsubscribe', {
+		deviceId: subscriptionId
+	}, function(error, response) {
 		console.log(response);
 	});
 }
