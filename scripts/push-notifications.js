@@ -1,8 +1,12 @@
 var isPushEnabled = false;
 
 function sendSubscriptionToServer(subscription) {
-	console.log('Send sendSubscription to server...');
+	console.log('Send subscription to server...');
 	console.log(subscription);
+
+	kaze.postJSON('/api/push', {}, function(error, response) {
+		console.log(response);
+	});
 }
 
 function subscribe() {
