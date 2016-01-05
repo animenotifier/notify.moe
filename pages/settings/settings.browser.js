@@ -94,8 +94,11 @@ if(pushButton) {
 	// Check that service workers are supported, if so, progressively
 	// enhance and add push messaging support, otherwise continue without it.
 	if('serviceWorker' in navigator) {
+		console.log('Registering service worker...');
 		navigator.serviceWorker.register('/web/service-worker.js').then(initialiseState);
 	} else {
 		console.warn('Service workers aren\'t supported in this browser.');
 	}
+} else {
+	console.warn('Push button not found.');
 }

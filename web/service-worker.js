@@ -1,3 +1,8 @@
+self.addEventListener('install', function(event) {
+	console.log('Service worker installation...');
+	// Perform install steps
+});
+
 self.addEventListener('push', function(event) {
 	console.log('Received a push message', event);
 
