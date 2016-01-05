@@ -11,12 +11,12 @@ function subscribeOnServer(subscription) {
 	});
 }
 
-function unsubscribeOnServer(subscriptionId) {
+function unsubscribeOnServer(subscription) {
 	console.log('Send unsubscription to server...');
-	console.log(subscriptionId);
+	console.log(subscription);
 
 	kaze.postJSON('/api/notifications/unsubscribe', {
-		deviceId: subscriptionId
+		endpoint: subscription.endpoint
 	}, function(error, response) {
 		console.log(response);
 	});
