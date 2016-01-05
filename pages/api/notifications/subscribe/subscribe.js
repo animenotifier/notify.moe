@@ -1,14 +1,17 @@
 'use strict'
 
 exports.post = (request, response) => {
-	let endpoint = null
+	let user = request.user
 
-	try {
-		endpoint = request.body.endpoint
-		console.log(endpoint)
-	} catch(e) {
-		console.error(e)
+	if(!user) {
+		response.end('Not logged in')
+		return
 	}
+
+	let endpoint = request.body.endpoint
+	let deviceId = endpoint.split('/')[0]
+
+	console.log('Saving device', deviceId, 'for user', user.nick)
 
 	response.end('Subscribe response.')
 }
