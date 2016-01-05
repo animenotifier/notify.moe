@@ -25,6 +25,23 @@ aero.preRoute(function(request, response) {
 // For POST requests
 aero.use(bodyParser.json())
 
+// Web app manifest
+aero.get('manifest.json', (request, response) => {
+	response.json({
+		name: 'Anime Notifier',
+		short_name: 'Anime Notifier',
+		icons: [{
+			src: 'images/characters/arn-waifu.png',
+			sizes: '300x300',
+			type: 'image/png'
+		}],
+		start_url: '/',
+		display: 'standalone',
+		gcm_sender_id: '941298467524'
+	})
+})
+
+
 // Send slack messages
 arn.on('new user', function(user) {
 	// Ignore my own attempts on empty databases
