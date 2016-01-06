@@ -30,6 +30,12 @@ exports.render = function(request, render) {
 			url: 'settings',
 			icon: 'cog'
 		})
+	} else {
+		nav.push({
+			title: 'FAQ',
+			url: 'faq',
+			icon: 'question-sign'
+		})
 	}
 
 	/*nav.push({
