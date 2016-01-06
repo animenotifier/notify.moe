@@ -24,6 +24,7 @@ exports.get = function(request, response) {
 		delete user.agent
 		delete user.location
 		delete user.lastLogin
+		delete user.devices
 
 		response.json(user)
 	})
