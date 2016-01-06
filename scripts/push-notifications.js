@@ -24,7 +24,7 @@ function unsubscribeOnServer(subscription) {
 
 function sendTestNotification() {
 	console.log('Sending test notification...')
-	
+
 	kaze.get('/api/notifications/test', function(error, response) {
 		// ...
 	})
@@ -44,6 +44,7 @@ function subscribe() {
 			isPushEnabled = true;
 			pushButton.textContent = 'Disable Notifications';
 			pushButton.disabled = false;
+			document.querySelector('.test-notification').disabled = false;
 
 			// TODO: Send the subscription.endpoint to your server
 			// and save it to send a push message at a later date
@@ -71,6 +72,7 @@ function subscribe() {
 function unsubscribe() {
 	var pushButton = document.querySelector('.push-button');
 	pushButton.disabled = true;
+	document.querySelector('.test-notification').disabled = true;
 
 	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 		// To unsubscribe from push messaging, you need get the
@@ -160,6 +162,9 @@ function initialiseState(registration) {
 			// push messages
 			pushButton.textContent = 'Disable Notifications';
 			isPushEnabled = true;
+
+			// Enable test notifications
+			document.querySelector('.test-notification').disabled = false;
 		}).catch(function(err) {
 			console.warn('Error during getSubscription()', err);
 		});
