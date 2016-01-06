@@ -44,7 +44,7 @@ window.loadAnimeList = function() {
 					view.title = 'Download episode ' + anime.episodes.next;
 
 				var icon = document.createElement('div');
-				icon.className = 'glyphicon glyphicon-download';
+				icon.className = 'glyphicon glyphicon-cloud-download';
 				view.appendChild(icon);
 				item.appendChild(view);
 
