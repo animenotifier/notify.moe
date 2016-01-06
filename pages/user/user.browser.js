@@ -41,10 +41,10 @@ window.loadAnimeList = function() {
 				view.className = 'anime-view-link';
 
 				if(anime.episodes.next && anime.episodes.next !== 0)
-					view.title = 'Watch episode ' + anime.episodes.next;
+					view.title = 'Download episode ' + anime.episodes.next;
 
 				var icon = document.createElement('div');
-				icon.className = 'glyphicon glyphicon-eye-open';
+				icon.className = 'glyphicon glyphicon-download';
 				view.appendChild(icon);
 				item.appendChild(view);
 
