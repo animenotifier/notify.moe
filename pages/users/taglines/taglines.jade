@@ -1,0 +1,10 @@
+section
+	header
+		h2 Taglines
+	
+	each user in users
+		.row
+			.user
+				a.ajax(href='/+' + user.nick, title=user.nick)
+					img.user-image(src=user.gravatarURL, alt=user.nick)
+			.user-tagline= user.tagline

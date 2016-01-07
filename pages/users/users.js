@@ -75,20 +75,7 @@ exports.get = function(request, response) {
 	}
 
 	arn.scan('Users', function(user) {
-		if(user.nick.startsWith('g') && !isNaN(parseInt(user.nick.substring(1))))
-			return
-
-		if(user.nick.startsWith('fb') && !isNaN(parseInt(user.nick.substring(2))))
-			return
-
-		let listProviderName = user.providers.list
-
-		if(!listProviderName)
-			return
-
-		let listProvider = user.listProviders[listProviderName]
-
-		if(!listProvider || !listProvider.userName)
+		if(!arn.isActiveUser(user))
 			return
 
 		user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: 'mm'}, true)
