@@ -10,7 +10,9 @@ html
 
 	body
 		if user && user.location && user.location.countryName && user.location.countryName.toLowerCase() === 'japan'
-			p We're sorry but Anime Notifier is not available in Japan yet.
+			.region-block
+				p アニメNotifierはまだ日本では利用できません。申し訳ございません。
+				p Anime Notifier is not available in Japan yet. Sorry for the inconveniences.
 		else
 			#container
 				#header-container
