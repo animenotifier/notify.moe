@@ -12,10 +12,10 @@ passport.serializeUser(function(request, user, done) {
 	user.agent = request.headers['user-agent']
 
 	arn.setUserAsync(user.id, user).then(() => {
-		done(null, user.id)
-
-		if(!user.ip)
+		if(!user.ip) {
+			done(null, user.id)
 			return
+		}
 
 		arn.getLocation(user).then(location => {
 			user.location = location
@@ -23,7 +23,9 @@ passport.serializeUser(function(request, user, done) {
 			user.location = null
 		}).finally(() => {
 			// Save in database
-			arn.setUser(user.id, user)
+			arn.setUserAsync(user.id, user).then(() => {
+				done(null, user.id)
+			})
 		})
 	})
 })
