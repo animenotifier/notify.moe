@@ -48,7 +48,7 @@ exports.get = function(request, response) {
 			}
 
 			addUser = user => {
-				let date = new Date(orderBy === 'registered' ? user.registered : user.lastLogin)
+				let date = new Date(orderBy === 'registration' ? user.registered : user.lastLogin)
 				let seconds = Math.floor((now - date) / 1000)
 				let days = seconds / 60 / 60 / 24
 				let categoryName = 'Ojii-san'
