@@ -21,20 +21,17 @@ self.addEventListener('push', function(event) {
 
 			// Examine the text in the response
 			return response.json().then(function(data) {
-				if(data.error || !data.notification) {
+				if(data.error || !data.notifications) {
 					console.error('The API returned an error.', data.error);
 					throw new Error();
 				}
 
-				var title = data.notification.title;
-				var message = data.notification.message;
-				var icon = data.notification.icon;
-				var notificationTag = data.notification.tag;
-
-				return self.registration.showNotification(title, {
-					body: message,
-					icon: icon,
-					tag: notificationTag
+				data.notifications.forEach(function(notification) {
+					return self.registration.showNotification(notification.title, {
+						body: notification.message,
+						icon: notification.icon,
+						tag: notification.tag
+					});
 				});
 			});
 		}).catch(function(err) {
