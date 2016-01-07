@@ -30,7 +30,7 @@ exports.get = (request, response) => {
 		response.json({
 			notifications: [{
 				title: 'Error fetching notifications',
-				message: 'Log in on notify.moe to view them',
+				message: 'Open notify.moe to view them',
 				icon: '/images/characters/arn-waifu.png',
 				tag: 'error'
 			}]
