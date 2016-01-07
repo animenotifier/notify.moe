@@ -17,15 +17,14 @@ exports.get = (request, response) => {
 		return
 	}
 
-	// TODO: Fetch stored notifications for the user
-	// -> Grab them and send all of them
-	// -> Delete all of them in the DB
 	arn.getAsync('Notifications', user.id).then(record => {
 		console.log(`Notifications for ${user.nick}:`, record.notifications)
 
 		response.json({
 			notifications: record.notifications
 		})
+
+		arn.remove('Notifications', user.id)
 	}).catch(error => {
 		response.json({
 			notifications: [{
