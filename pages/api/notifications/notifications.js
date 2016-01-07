@@ -2,19 +2,17 @@
 
 let arn = require('../../../lib')
 
-let defaultNotifications = [{
-	title: 'You have new notifications',
-	message: 'Log in on notify.moe to view them',
-	icon: '/images/characters/arn-waifu.png',
-	tag: 'not-logged-in'
-}]
-
 exports.get = (request, response) => {
 	let user = request.user
 
 	if(!user) {
 		response.json({
-			notifications: defaultNotifications
+			notifications: [{
+				title: 'You have new notifications',
+				message: 'Log in on notify.moe to view them',
+				icon: '/images/characters/arn-waifu.png',
+				tag: 'not-logged-in'
+			}]
 		})
 		return
 	}
@@ -30,7 +28,12 @@ exports.get = (request, response) => {
 		})
 	}).catch(error => {
 		response.json({
-			notifications: defaultNotifications
+			notifications: [{
+				title: 'Error fetching notifications',
+				message: 'Log in on notify.moe to view them',
+				icon: '/images/characters/arn-waifu.png',
+				tag: 'error'
+			}]
 		})
 	})
 }
