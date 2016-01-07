@@ -36,6 +36,7 @@ exports.get = function(request, response) {
 			}
 			break
 
+		case 'login':
 		case 'registration':
 			// Force a special order
 			categories = {
@@ -47,8 +48,8 @@ exports.get = function(request, response) {
 			}
 
 			addUser = user => {
-				let registrationDate = new Date(user.registered)
-				let seconds = Math.floor((now - registrationDate) / 1000)
+				let date = new Date(orderBy === 'registered' ? user.registered : user.lastLogin)
+				let seconds = Math.floor((now - date) / 1000)
 				let days = seconds / 60 / 60 / 24
 				let categoryName = 'Ojii-san'
 
