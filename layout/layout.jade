@@ -11,8 +11,10 @@ html
 	body
 		if user && user.location && user.location.countryName && user.location.countryName.toLowerCase() === 'japan'
 			.region-block
+				p
+					img(src='/images/elements/gomennasai.png', alt='Anime Notifier is not available in Japan yet.')
 				p アニメNotifierはまだ日本では利用できません。申し訳ございません。
-				p Anime Notifier is not available in Japan yet. Sorry for the inconveniences.
+				p Anime Notifier is not available in Japan yet. I apologize for the inconvenience.
 		else
 			#container
 				#header-container
