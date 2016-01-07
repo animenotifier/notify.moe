@@ -1,5 +1,7 @@
 'use strict'
 
+let arn = require('../../../lib')
+
 let defaultNotifications = [{
 	title: 'You have new notifications',
 	message: 'Log in on notify.moe to view them',
