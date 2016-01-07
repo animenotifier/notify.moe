@@ -9,7 +9,7 @@ html
 		link(rel='manifest', href='/manifest.json')
 
 	body
-		if user && user.location && user.location.countryName && user.location.countryName.toLowerCase() === 'japan'
+		if user && user.role !== 'admin' && user.location && user.location.countryName && user.location.countryName.toLowerCase() === 'japan'
 			.region-block
 				p
 					img(src='/images/elements/gomennasai.png', alt='Anime Notifier is not available in Japan yet.')
