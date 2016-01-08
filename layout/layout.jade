@@ -1,12 +1,21 @@
 doctype html
 html(lang='en')
 	head
-		title Anime Notifier
-		meta(name='description', content='Anime Release Notifier will notify you when a new episode of your favourite anime has been released.')
-		meta(name='keywords', content='anime,notifier,notify')
+		title= title
 		style!= css
 		link(rel='chrome-webstore-item', href='https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch')
 		link(rel='manifest', href='/manifest.json')
+		
+		// Generic
+		meta(name='description', content=description)
+		meta(name='keywords', content='anime,notifier,notify')
+		
+		// Open Graph
+		meta(property='og:url', content='https://notify.moe')
+		meta(property='og:type', content='website')
+		meta(property='og:title', content=title)
+		meta(property='og:description', content=description)
+		meta(property='og:image', content='/images/characters/arn-waifu.png')
 
 	body
 		if user && user.role !== 'admin' && user.location && user.location.countryName && user.location.countryName.toLowerCase() === 'japan'

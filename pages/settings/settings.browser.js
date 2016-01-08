@@ -18,13 +18,13 @@ window.save = function(e) {
 		value: value
 	}, function(error, response) {
 		if(error)
-			console.log(error);
+			console.error(error);
 
 		window.postSave(key, response);
 
 		kaze.get('/_' + location.pathname, function(error, newPageCode) {
 			if(error)
-				console.log(error);
+				console.error(error);
 
 			var focusedElementId = document.activeElement.id;
 			var focusedElementValue = document.activeElement.value;
