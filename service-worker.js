@@ -1,5 +1,6 @@
 self.addEventListener('install', function(event) {
 	console.log('Service worker installation...');
+	console.log(event);
 	// Perform install steps
 });
 
@@ -30,8 +31,7 @@ self.addEventListener('push', function(event) {
 					return self.registration.showNotification(notification.title, {
 						body: notification.message,
 						icon: notification.icon,
-						tag: notification.tag,
-						url: notification.url
+						tag: notification.tag
 					});
 				});
 			});
@@ -46,8 +46,7 @@ self.addEventListener('push', function(event) {
 			return self.registration.showNotification(title, {
 				body: message,
 				icon: icon,
-				tag: notificationTag,
-				url: '/'
+				tag: notificationTag
 			});
 		})
 	);
@@ -59,7 +58,7 @@ self.addEventListener('notificationclick', function(event) {
 	// See: http://crbug.com/463146
 	event.notification.close();
 
-	var url = event.notification.url ? event.notification.url : '/';
+	var url = '/';
 
 	// This looks to see if the current is already open and
 	// focuses if it is
