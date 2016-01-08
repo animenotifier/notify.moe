@@ -1,25 +1,26 @@
 'use strict'
 
 let arn = require('../lib')
+let RateLimiter = require('limiter').RateLimiter
+let limiter = new RateLimiter(1, 100)
 
 // Check every now and then if users have new episodes
 let refreshAnimeLists = function() {
 	console.log('Refreshing anime lists...')
 
-	let tasks = []
 	arn.scan('Users', function(user) {
 		if(!arn.isActiveUser(user))
 			return
 
-		tasks.push(arn.getAnimeListAsync(user).then(json => {
-			console.log(user.nick, json)
-		}).catch(error => {
-			console.error(user.nick, error)
-		}))
-	}, function() {
-		Promise.all(tasks).then(() => {
-			console.log('Finished updating all anime lists')
+		limiter.removeTokens(1, function() {
+			arn.getAnimeListAsync(user).then(animeList => {
+				// ...
+			}).catch(error => {
+				console.error(`Error when automatically updating the anime list of ${user.nick}:`, error)
+			})
 		})
+	}, function() {
+
 	})
 }
 
