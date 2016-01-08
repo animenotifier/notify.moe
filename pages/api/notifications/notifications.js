@@ -17,7 +17,7 @@ exports.get = (request, response) => {
 		return
 	}
 
-	arn.getAsync('Notifications', user.id).then(record => {
+	arn.get('Notifications', user.id).then(record => {
 		console.log(`Notifications for ${user.nick}:`, record.notifications)
 
 		response.json({

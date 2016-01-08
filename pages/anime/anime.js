@@ -7,7 +7,7 @@ exports.get = function(request, response) {
 	let animeId = request.params[0]
 
 	if(animeId) {
-		arn.getAsync('Anime', animeId).then(anime => {
+		arn.get('Anime', animeId).then(anime => {
 			response.render({
 				user,
 				anime

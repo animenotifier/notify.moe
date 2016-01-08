@@ -101,7 +101,7 @@ module.exports = function(aero) {
 			if(!anime.id || !anime.title)
 				return
 
-			arn.setAsync('Anime', anime.id, anime).then(() => console.log('Imported anime: ' + anime.title))
+			arn.set('Anime', anime.id, anime).then(() => console.log('Imported anime: ' + anime.title))
 		})
 	}).catch(error => {
 		console.log('ANN import error:', error)

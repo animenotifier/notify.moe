@@ -28,8 +28,8 @@ module.exports = function(aero) {
 				email = email.replace('googlemail.com', 'gmail.com')
 
 			Promise.any([
-				arn.getAsync('FacebookToUser', fb.id),
-				arn.getAsync('EmailToUser', email)
+				arn.get('FacebookToUser', fb.id),
+				arn.get('EmailToUser', email)
 			])
 			.then(record => arn.getUser(record.userId, function(error, user) {
 				if(user && user.accounts)
@@ -69,7 +69,7 @@ module.exports = function(aero) {
 
 				arn.registerNewUser(
 					user,
-					arn.setAsync('FacebookToUser', fb.id, { userId: user.id })
+					arn.set('FacebookToUser', fb.id, { userId: user.id })
 				).then(function() {
 					done(undefined, user)
 				})

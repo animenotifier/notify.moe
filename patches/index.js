@@ -5,7 +5,7 @@ let database = require('../modules/database')
 let arn = require('../lib')
 
 database(aero, function(error) {
-	//arn.removeAsync('NickToUser', 'Sebastian ').then(() => {console.log('OK')})
+	//arn.remove('NickToUser', 'Sebastian ').then(() => {console.log('OK')})
 	//arn.set('NickToUser', 'Sebastian', {userId: 'Ny9pwwZvg'})
 	/*arn.getUserByNickAsync('Aky').then(user => {
 		user.role = 'admin'
