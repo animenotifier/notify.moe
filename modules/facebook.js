@@ -62,7 +62,7 @@ module.exports = function(aero) {
 					},
 					listProviders: {},
 					sortBy: 'airingDate',
-					devices: [],
+					devices: {},
 					registered: now.toISOString(),
 					lastLogin: now.toISOString()
 				}
