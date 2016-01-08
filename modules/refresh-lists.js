@@ -2,7 +2,7 @@
 
 let arn = require('../lib')
 let RateLimiter = require('limiter').RateLimiter
-let limiter = new RateLimiter(1, 250)
+let limiter = new RateLimiter(1, 500)
 
 // Check every now and then if users have new episodes
 let refreshAnimeLists = function() {
