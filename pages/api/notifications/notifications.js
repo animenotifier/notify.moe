@@ -19,20 +19,20 @@ exports.get = (request, response) => {
 
 	arn.get('Notifications', user.id).then(record => {
 		console.log(`Notifications for ${user.nick}:`, record.notifications)
-
-		response.json({
-			notifications: record.notifications
+		arn.remove('Notifications', user.id).then(() => {
+			response.json({
+				notifications: record.notifications
+			})
 		})
-
-		arn.remove('Notifications', user.id)
 	}).catch(error => {
 		if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND') {
 			response.json({
 				notifications: []
 			})
-			return
+			return error
 		}
 
+		console.error(error)
 		response.json({
 			notifications: [{
 				title: 'Error fetching notifications',
