@@ -20,7 +20,7 @@ exports.get = function(request, response) {
 			viewUser
 		})
 	}).catch(error => {
-		console.error(error)
+		console.error(error.stack)
 		response.render({ user })
 		return
 	})

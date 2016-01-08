@@ -16,7 +16,7 @@ let refreshAnimeLists = function() {
 			arn.getAnimeListAsync(user).then(animeList => {
 				// ...
 			}).catch(error => {
-				console.error(`Error when automatically updating the anime list of ${user.nick}:`, error)
+				console.error(`Error when automatically updating the anime list of ${user.nick}:`, error, error.stack)
 			})
 		})
 	}, function() {

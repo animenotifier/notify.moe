@@ -71,7 +71,7 @@ arn.on('new user', function(user) {
 	}).then(body => {
 		console.log(`Sent slack message about the new user registration: ${user.email}`)
 	}).catch(error => {
-		console.error('Error sending slack message:', error)
+		console.error('Error sending slack message:', error, error.stack)
 	})
 })
 
@@ -86,7 +86,7 @@ arn.on('new forum reply', function(link, userName) {
 	}).then(body => {
 		console.log(`Sent slack message about a new forum reply from ${userName}`)
 	}).catch(error => {
-		console.error('Error sending slack message:', error)
+		console.error('Error sending slack message:', error, error.stack)
 	})
 })
 

@@ -32,7 +32,7 @@ exports.get = (request, response) => {
 			return error
 		}
 
-		console.error(error)
+		console.error(error.stack)
 		response.json({
 			notifications: [{
 				title: 'Error fetching notifications',

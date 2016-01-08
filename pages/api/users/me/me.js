@@ -63,7 +63,7 @@ exports.post = function(request, response) {
 	arn.setUserAsync(user.id, user)
 		.then(() => response.end())
 		.catch(error => {
-			console.error(error)
+			console.error(error.stack)
 			response.writeHead(409)
 			response.end(error.message)
 		})

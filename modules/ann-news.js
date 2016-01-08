@@ -33,7 +33,7 @@ module.exports = function(aero) {
 			})
 		})
 		.catch(error => {
-			console.error(error)
+			console.error(error.stack)
 		})
 	}
 
