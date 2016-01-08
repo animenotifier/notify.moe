@@ -20,11 +20,11 @@ let refreshAnimeLists = function() {
 			})
 		})
 	}, function() {
-
+		// ...
 	})
 }
 
 module.exports = function(aero, callback) {
-	arn.animeListCacheTime = 300 * 1000
+	arn.animeListCacheTime = 5 * 60 * 1000
 	setInterval(refreshAnimeLists, arn.animeListCacheTime)
 }

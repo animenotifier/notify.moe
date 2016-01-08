@@ -30,7 +30,8 @@ self.addEventListener('push', function(event) {
 					return self.registration.showNotification(notification.title, {
 						body: notification.message,
 						icon: notification.icon,
-						tag: notification.tag
+						tag: notification.tag,
+						url: notification.url
 					});
 				});
 			});
@@ -45,7 +46,8 @@ self.addEventListener('push', function(event) {
 			return self.registration.showNotification(title, {
 				body: message,
 				icon: icon,
-				tag: notificationTag
+				tag: notificationTag,
+				url: '/'
 			});
 		})
 	);
@@ -57,6 +59,8 @@ self.addEventListener('notificationclick', function(event) {
 	// See: http://crbug.com/463146
 	event.notification.close();
 
+	var url = event.notification.url ? event.notification.url : '/';
+
 	// This looks to see if the current is already open and
 	// focuses if it is
 	event.waitUntil(
@@ -65,11 +69,12 @@ self.addEventListener('notificationclick', function(event) {
 		}).then(function(clientList) {
 			for(var i = 0; i < clientList.length; i++) {
 				var client = clientList[i];
-				if(client.url === '/' && 'focus' in client)
+				if(client.url === url && 'focus' in client)
 					return client.focus();
 			}
+			
 			if(clients.openWindow) {
-				return clients.openWindow('/');
+				return clients.openWindow(url);
 			}
 		})
 	);
