@@ -13,8 +13,11 @@ window.loadAnimeList = function() {
 	var userName = window.location.pathname.substring(2);
 
 	kaze.getJSON('/api/animelist/' + userName, function(error, response) {
-		if(error || response.error) {
-			animeList.innerText = 'Error loading your anime list: ' + response.error;
+		if(error) {
+			if(response && response.error)
+				animeList.innerText = 'Error loading your anime list: ' + response.error;
+			else
+				animeList.innerText = 'Error loading your anime list: ' + error;
 			return;
 		}
 
