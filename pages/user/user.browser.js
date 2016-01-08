@@ -1,12 +1,20 @@
 window.loadAnimeList = function() {
 	var animeList = document.getElementById('animeList');
-	animeList.innerText = 'Loading anime list...';
+
+	// Loading animation
+	animeList.innerHTML =
+		'<div class="sk-folding-cube">' +
+			'<div class="sk-cube1 sk-cube"></div>' +
+			'<div class="sk-cube2 sk-cube"></div>' +
+			'<div class="sk-cube4 sk-cube"></div>' +
+			'<div class="sk-cube3 sk-cube"></div>' +
+		'</div>';
 
 	var userName = window.location.pathname.substring(2);
 
 	kaze.getJSON('/api/animelist/' + userName, function(error, response) {
-		if(error) {
-			animeList.innerText = 'Error loading your anime list: ' + error.toString();
+		if(error || response.error) {
+			animeList.innerText = 'Error loading your anime list: ' + response.error;
 			return;
 		}
 
