@@ -12,7 +12,7 @@ exports.get = function(request, response) {
 		if(error)
 			return response.end()
 
-		user.notificationsEnabled = Object.keys(user.devices) > 0
+		user.notificationsEnabled = Object.keys(user.devices).length > 0
 
 		// Do not show critical information
 		delete user.id
