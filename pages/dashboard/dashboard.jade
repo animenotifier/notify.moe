@@ -8,8 +8,8 @@ if user
 		li(class=(user.nick.startsWith('fb') || user.nick.startsWith('g')) ? 'not-finished' : 'finished') Change your username
 		li(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
 		if user.email
-			li#gravatar-text Add a gravatar image
-				img(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
+			li.finished#gravatar-text Add a gravatar image
+				img#gravatar-test-image(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
 		li(class=Object.keys(user.devices).length > 0 ? 'finished' : 'not-finished') Activate push notifications
 		li
 			a(href='javascript:chrome.webstore.install();') Install the Chrome extension

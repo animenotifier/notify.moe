@@ -13,7 +13,7 @@ exports.get = function(request, response) {
 			user.hasListProviderUserName = true
 
 		if(user.email)
-			user.gravatarURL = gravatar.url(user.email, {s: '12', r: 'x', d: '404'}, true)
+			user.gravatarURL = gravatar.url(user.email, {s: '1', r: 'x', d: '404'}, true)
 	}
 
 	response.render({
