@@ -67,17 +67,30 @@ window.loadAnimeList = function() {
 					episodes.className = 'episodes-behind';
 					episodes.appendChild(document.createTextNode(behind + (behind === 1 ? ' episode' : ' episodes') + ' behind'));
 					item.appendChild(episodes);
-				} else if(anime.episodes.available === anime.episodes.watched) {
+				} else if(anime.episodes.available > 0 && anime.episodes.available === anime.episodes.watched) {
 					var ok = document.createElement('a');
 					ok.href = anime.animeProvider.nextEpisodeUrl;
 					ok.target = '_blank';
 					ok.className = 'anime-up-to-date';
+					ok.title = 'You watched ' + anime.episodes.watched + ' out of ' + anime.episodes.available + ' available.';
 
 					var icon = document.createElement('div');
 					icon.className = 'glyphicon glyphicon-ok';
 					ok.appendChild(icon);
 
 					item.appendChild(ok);
+				} else if(anime.episodes.watched > anime.episodes.available) {
+					var warning = document.createElement('a');
+					warning.href = anime.animeProvider.url;
+					warning.target = '_blank';
+					warning.className = 'anime-warning';
+					warning.title = 'Could not find your anime title on the anime provider.';
+
+					var icon = document.createElement('div');
+					icon.className = 'glyphicon glyphicon-alert';
+					warning.appendChild(icon);
+
+					item.appendChild(warning);
 				}
 			}
 
