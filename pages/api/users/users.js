@@ -12,6 +12,8 @@ exports.get = function(request, response) {
 		if(error)
 			return response.end()
 
+		user.notificationsEnabled = Object.keys(user.devices) > 0
+
 		// Do not show critical information
 		delete user.id
 		delete user.ip

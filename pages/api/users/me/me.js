@@ -2,16 +2,6 @@
 
 let arn = require('../../../../lib')
 
-let autoCorrectUserNames = [
-	/anilist.co\/user\/(.*)/,
-	/anilist.co\/animelist\/(.*)/,
-	/hummingbird.me\/users\/(.*?)\/library/,
-	/hummingbird.me\/users\/(.*)/,
-	/anime-planet.com\/users\/(.*?)\/anime/,
-	/anime-planet.com\/users\/(.*)/,
-	/myanimelist.net\/profile\/(.*)/
-]
-
 exports.post = function(request, response) {
 	if(request.body.function !== 'save') {
 		response.end('Invalid function!')
@@ -49,17 +39,8 @@ exports.post = function(request, response) {
 			response.end(user.nick)
 		})
 		return
-	}
-
-	if(key.startsWith('listProviders.') && key.endsWith('.userName')) {
-		value = value.trim()
-		for(let regex of autoCorrectUserNames) {
-			let match = regex.exec(value)
-
-			if(match !== null) {
-				value = match[1]
-			}
-		}
+	} else if(key.startsWith('listProviders.') && key.endsWith('.userName')) {
+		value = arn.fixListProviderUserName(value)
 	}
 
 	if(key.indexOf('.') !== -1) {
