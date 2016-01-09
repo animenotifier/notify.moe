@@ -47,25 +47,31 @@ window.loadAnimeList = function() {
 
 			item.appendChild(link);
 
-			if(loggedIn && anime.episodes.available >= anime.episodes.next) {
-				var view = document.createElement('a');
-				view.href = anime.animeProvider.nextEpisodeUrl;
-				view.target = '_blank';
-				view.className = 'anime-view-link';
+			if(loggedIn) {
+				if(anime.episodes.available >= anime.episodes.next) {
+					var download = document.createElement('a');
+					download.href = anime.animeProvider.nextEpisodeUrl;
+					download.target = '_blank';
+					download.className = 'anime-download-link';
 
-				if(anime.episodes.next && anime.episodes.next !== 0)
-					view.title = 'Download episode ' + anime.episodes.next;
+					if(anime.episodes.next && anime.episodes.next !== 0)
+						download.title = 'Download episode ' + anime.episodes.next;
 
-				var icon = document.createElement('div');
-				icon.className = 'glyphicon glyphicon-cloud-download';
-				view.appendChild(icon);
-				item.appendChild(view);
+					var icon = document.createElement('div');
+					icon.className = 'glyphicon glyphicon-cloud-download';
+					download.appendChild(icon);
+					item.appendChild(view);
 
-				var behind = (anime.episodes.available - anime.episodes.watched);
-				var episodes = document.createElement('span');
-				episodes.className = 'episodes-behind';
-				episodes.appendChild(document.createTextNode(behind + (behind === 1 ? ' episode' : ' episodes') + ' behind'));
-				item.appendChild(episodes);
+					var behind = (anime.episodes.available - anime.episodes.watched);
+					var episodes = document.createElement('span');
+					episodes.className = 'episodes-behind';
+					episodes.appendChild(document.createTextNode(behind + (behind === 1 ? ' episode' : ' episodes') + ' behind'));
+					item.appendChild(episodes);
+				} else if(anime.episodes.available === anime.episodes.watched) {
+					var icon = document.createElement('div');
+					icon.className = 'glyphicon glyphicon-ok';
+					item.appendChild(icon);
+				}
 			}
 
 			list.appendChild(item);
