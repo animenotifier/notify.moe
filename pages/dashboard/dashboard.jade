@@ -11,7 +11,9 @@ if user
 			li#gravatar-text Add a gravatar image
 				img(src=user.gravatarURL, onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);')
 		li(class=Object.keys(user.devices).length > 0 ? 'finished' : 'not-finished') Activate push notifications
-		li Install any apps you like
+		li
+			a(href='javascript:chrome.webstore.install();') Install the Chrome extension
+			|  (will be updated soon)
 		li Follow the project:
 			ul
 				li
