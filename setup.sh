@@ -6,7 +6,7 @@ sugoi redirectPort 80 5000
 sugoi redirectPort 443 5001
 sugoi blockPort 3000
 
-# Disable swap
+# Use swap only when needed
 sudo sysctl vm.swappiness=0
 
 # TCP settings
