@@ -34,7 +34,8 @@ function subscribe() {
 	// Disable the button so it can't be changed while
 	// we process the permission request
 	var pushButton = document.querySelector('.push-button');
-	pushButton.disabled = true;
+	if(pushButton)
+		pushButton.disabled = true;
 
 	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 		serviceWorkerRegistration.pushManager.subscribe({
@@ -42,8 +43,10 @@ function subscribe() {
 		}).then(function(subscription) {
 			// The subscription was successful
 			isPushEnabled = true;
-			pushButton.textContent = 'Disable Notifications';
-			pushButton.disabled = false;
+			if(pushButton) {
+				pushButton.textContent = 'Disable Notifications';
+				pushButton.disabled = false;
+			}
 			document.querySelector('.test-notification').disabled = false;
 
 			// TODO: Send the subscription.endpoint to your server
@@ -56,14 +59,17 @@ function subscribe() {
 				// to manually change the notification permission to
 				// subscribe to push messages
 				console.warn('Permission for Notifications was denied');
-				pushButton.disabled = true;
+				if(pushButton)
+					pushButton.disabled = true;
 			} else {
 				// A problem occurred with the subscription; common reasons
 				// include network errors, and lacking gcm_sender_id and/or
 				// gcm_user_visible_only in the manifest.
 				console.error('Unable to subscribe to push.', e);
-				pushButton.disabled = false;
-				pushButton.textContent = 'Enable Notifications';
+				if(pushButton) {
+					pushButton.disabled = false;
+					pushButton.textContent = 'Enable Notifications';
+				}
 			}
 		});
 	});
@@ -83,8 +89,10 @@ function unsubscribe() {
 				// No subscription object, so set the state
 				// to allow the user to subscribe to push
 				isPushEnabled = false;
-				pushButton.disabled = false;
-				pushButton.textContent = 'Enable Notifications';
+				if(pushButton) {
+					pushButton.disabled = false;
+					pushButton.textContent = 'Enable Notifications';
+				}
 				return;
 			}
 
@@ -92,8 +100,10 @@ function unsubscribe() {
 
 			// We have a subscription, so call unsubscribe on it
 			pushSubscription.unsubscribe().then(function(successful) {
-				pushButton.disabled = false;
-				pushButton.textContent = 'Enable Notifications';
+				if(pushButton) {
+					pushButton.disabled = false;
+					pushButton.textContent = 'Enable Notifications';
+				}
 				isPushEnabled = false;
 			}).catch(function(e) {
 				// We failed to unsubscribe, this can lead to
@@ -102,8 +112,10 @@ function unsubscribe() {
 				// inform the user that you have done so
 
 				console.log('Unsubscription error: ', e);
-				pushButton.disabled = false;
-				pushButton.textContent = 'Enable Notifications';
+				if(pushButton) {
+					pushButton.disabled = false;
+					pushButton.textContent = 'Enable Notifications';
+				}
 			});
 		}).catch(function(e) {
 			console.error('Error thrown while unsubscribing from push messaging.', e);
@@ -147,7 +159,8 @@ function initialiseState(registration) {
 			// Enable any UI which subscribes / unsubscribes from
 			// push messages.
 			var pushButton = document.querySelector('.push-button');
-			pushButton.disabled = false;
+			if(pushButton)
+				pushButton.disabled = false;
 
 			if(!subscription) {
 				// We aren't subscribed to push, so set UI
@@ -160,7 +173,8 @@ function initialiseState(registration) {
 
 			// Set your UI to show they have subscribed for
 			// push messages
-			pushButton.textContent = 'Disable Notifications';
+			if(pushButton)
+				pushButton.textContent = 'Disable Notifications';
 			isPushEnabled = true;
 
 			// Enable test notifications

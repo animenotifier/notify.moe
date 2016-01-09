@@ -42,17 +42,22 @@ aero.get('manifest.json', (request, response) => {
 	})
 })
 
-aero.get('service-worker.js', (request, response) => {
-	let filePath = path.join(__dirname, 'service-worker.js')
-	let stat = fs.statSync(filePath)
+let serveFile = fileName => {
+	return (request, response) => {
+		let filePath = path.join(__dirname, fileName)
+		let stat = fs.statSync(filePath)
 
-	response.writeHead(200, {
-		'Content-Type': 'application/javascript',
-		'Content-Length': stat.size
-	})
+		response.writeHead(200, {
+			'Content-Type': 'application/javascript',
+			'Content-Length': stat.size
+		})
 
-	fs.createReadStream(filePath).pipe(response)
-})
+		fs.createReadStream(filePath).pipe(response)
+	}
+}
+
+aero.get('service-worker.js', serveFile('worker/service-worker.js'))
+aero.get('cache-polyfill.js', serveFile('worker/cache-polyfill.js'))
 
 // Send slack messages
 arn.on('new user', function(user) {

@@ -1,61 +1,92 @@
-section.category
-	header
-		h2 Pick a platform!
-	
-	// Chrome
-	a.box.scale(href='javascript:chrome.webstore.install();', title='Chrome', itemscope='', itemtype='http://schema.org/Product')
-		span(itemprop='name') Anime Release Notifier - Chrome Extension
-		img(itemprop='image', src='/images/platforms/chrome.png', alt='Chrome', width='256', height='256')
-	
-	// Firefox
-	//-a.box.scale(href='https://addons.mozilla.org/en-US/firefox/addon/anime-release-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
-		span(itemprop='name') Anime Release Notifier - Firefox Extension
-		img(itemprop='image', src='/images/platforms/firefox.png', alt='Firefox', width='256', height='256')
-	
-	// Android
-	//-a.box.scale(href='https://play.google.com/store/apps/details?id=com.freezingwind.animereleasenotifier', target='_blank', title='Android', itemscope='', itemtype='http://schema.org/Product')
-		span(itemprop='name') Anime Release Notifier - Android App
-		img(itemprop='image', src='/images/platforms/android.png', alt='Android', width='256', height='256')
-
-if !user
-	section.category(style='margin-bottom: 3.5em')
+if user
+	// Checklist
+	section
 		header
-			h2 Try it!
+			h2 Checklist
+	
+	ol
+		li(class=(user.nick.startsWith('fb') || user.nick.startsWith('g')) ? 'not-finished' : 'finished') Change your username
+		li(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
+		if user.email
+			li#gravatar-text Add a gravatar image
+				img(src=user.gravatarURL, onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);')
+		li(class=Object.keys(user.devices).length > 0 ? 'finished' : 'not-finished') Activate push notifications
+		li Install any apps you like
+		li Follow the project:
+			ul
+				li
+					a(href='https://www.facebook.com/animenotifier', target='_blank') Facebook
+				li
+					a(href='https://twitter.com/animenotifier', target='_blank') Twitter
+				li
+					a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank') Google+
+		li Visit the forum threads:
+			ul
+				li
+					a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
+				li
+					a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
+				li
+					a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
+else
+	section.category
+		header
+			h2 Pick a platform!
+		
+		// Chrome
+		a.box.scale(href='javascript:chrome.webstore.install();', title='Chrome', itemscope='', itemtype='http://schema.org/Product')
+			span(itemprop='name') Anime Release Notifier - Chrome Extension
+			img(itemprop='image', src='/images/platforms/chrome.png', alt='Chrome', width='256', height='256')
+		
+		// Firefox
+		//-a.box.scale(href='https://addons.mozilla.org/en-US/firefox/addon/anime-release-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
+			span(itemprop='name') Anime Release Notifier - Firefox Extension
+			img(itemprop='image', src='/images/platforms/firefox.png', alt='Firefox', width='256', height='256')
+		
+		// Android
+		//-a.box.scale(href='https://play.google.com/store/apps/details?id=com.freezingwind.animereleasenotifier', target='_blank', title='Android', itemscope='', itemtype='http://schema.org/Product')
+			span(itemprop='name') Anime Release Notifier - Android App
+			img(itemprop='image', src='/images/platforms/android.png', alt='Android', width='256', height='256')
+
+	if !user
+		section.category(style='margin-bottom: 3.5em')
+			header
+				h2 Try it!
+				
+			.box
+				a(href='/auth/google')
+					img.login-button(src='/images/elements/google-login.png', alt='Google Login')
+						
+			.box
+				a(href='/auth/facebook')
+					img.login-button(src='/images/elements/facebook-login.png', alt='Facebook Login')
+
+	section.category
+		header
+			h2 Follow the project!
 			
 		.box
-			a(href='/auth/google')
-				img.login-button(src='/images/elements/google-login.png', alt='Google Login')
-					
-		.box
-			a(href='/auth/facebook')
-				img.login-button(src='/images/elements/facebook-login.png', alt='Facebook Login')
-
-section.category
-	header
-		h2 Follow the project!
-		
-	.box
-		a(href='https://github.com/animenotifier/notify.moe', target='_blank')
-			img(src='https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png', alt='GitHub')
+			a(href='https://github.com/animenotifier/notify.moe', target='_blank')
+				img(src='https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png', alt='GitHub')
 	
-section.category
-	header
-		h2(style='display: none') Forums
-	.box
-		p
-			a(href='https://www.facebook.com/animenotifier', target='_blank') Facebook
-		p
-			a(href='https://twitter.com/animenotifier', target='_blank') Twitter
-		p
-			a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank') Google+
-		
-	.box
-		p
-			a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
-		p
-			a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
-		p
-			a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
+	section.category
+		header
+			h2(style='display: none') Forums
+		.box
+			p
+				a(href='https://www.facebook.com/animenotifier', target='_blank') Facebook
+			p
+				a(href='https://twitter.com/animenotifier', target='_blank') Twitter
+			p
+				a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank') Google+
+			
+		.box
+			p
+				a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
+			p
+				a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
+			p
+				a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
 
 //- section.category
 //- 	header

@@ -2,6 +2,10 @@
 
 let arn = require('../../../../lib')
 
+/*let autoCorrectUserNames = [
+	//g
+]*/
+
 exports.post = function(request, response) {
 	if(request.body.function !== 'save') {
 		response.end('Invalid function!')
@@ -39,6 +43,10 @@ exports.post = function(request, response) {
 			response.end(user.nick)
 		})
 		return
+	}
+
+	if(key.startsWith('listProviders.') && key.endsWith('.userName')) {
+		value = value.trim()
 	}
 
 	if(key.indexOf('.') !== -1) {
