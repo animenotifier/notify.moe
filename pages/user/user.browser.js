@@ -79,7 +79,7 @@ window.loadAnimeList = function() {
 					ok.appendChild(icon);
 
 					item.appendChild(ok);
-				} else if(anime.episodes.watched > anime.episodes.available) {
+				} else if(anime.episodes.available === 0) {
 					var warning = document.createElement('a');
 					warning.href = anime.animeProvider.url;
 					warning.target = '_blank';
