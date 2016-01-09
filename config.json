@@ -15,8 +15,7 @@
 	"scripts": [
 		"footer",
 		"init",
-		"push-notifications",
-		"service-worker-registration"
+		"push-notifications"
 	],
 	"plugins": {
 		"style-reset": {},
