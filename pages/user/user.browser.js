@@ -69,7 +69,7 @@ window.loadAnimeList = function() {
 					item.appendChild(episodes);
 				} else if(anime.episodes.available === anime.episodes.watched) {
 					var icon = document.createElement('div');
-					icon.className = 'glyphicon glyphicon-ok';
+					icon.className = 'anime-up-to-date glyphicon glyphicon-ok';
 					item.appendChild(icon);
 				}
 			}
