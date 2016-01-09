@@ -64,6 +64,14 @@ exports.render = function(request, render) {
 
 		nav.push({
 			title: '',
+			url: 'api',
+			icon: 'fire',
+			float: 'right',
+			tooltip: 'API (for developers)'
+		})
+
+		nav.push({
+			title: '',
 			url: 'faq',
 			icon: 'question-sign',
 			float: 'right',
