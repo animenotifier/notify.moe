@@ -2,7 +2,7 @@
 
 let arn = require('../lib')
 let RateLimiter = require('limiter').RateLimiter
-let limiter = new RateLimiter(1, 500)
+let limiter = new RateLimiter(1, 1000)
 
 // Check every now and then if users have new episodes
 let refreshAnimeLists = function() {
@@ -25,6 +25,6 @@ let refreshAnimeLists = function() {
 }
 
 module.exports = function(aero, callback) {
-	arn.animeListCacheTime = 10 * 60 * 1000
+	arn.animeListCacheTime = 20 * 60 * 1000
 	setInterval(refreshAnimeLists, arn.animeListCacheTime)
 }
