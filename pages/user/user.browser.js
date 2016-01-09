@@ -99,7 +99,7 @@ window.loadAnimeList = function() {
 					warning.title = 'Could not find your anime title on the anime provider.';
 
 					var icon = document.createElement('div');
-					icon.className = 'glyphicon glyphicon-alert';
+					icon.className = 'glyphicon glyphicon-exclamation-sign';
 					warning.appendChild(icon);
 
 					item.appendChild(warning);
