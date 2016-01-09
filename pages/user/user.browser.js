@@ -48,7 +48,19 @@ window.loadAnimeList = function() {
 			item.appendChild(link);
 
 			if(loggedIn) {
-				if(anime.episodes.available >= anime.episodes.next) {
+				if(anime.episodes.watched > 0 && anime.episodes.watched === anime.episodes.max) {
+					var completed = document.createElement('a');
+					completed.href = response.listUrl;
+					completed.target = '_blank';
+					completed.className = 'anime-completed';
+					completed.title = 'You completed this anime.';
+
+					var icon = document.createElement('div');
+					icon.className = 'glyphicon glyphicon-ok-sign';
+					completed.appendChild(icon);
+
+					item.appendChild(completed);
+				} else if(anime.episodes.available >= anime.episodes.next) {
 					var download = document.createElement('a');
 					download.href = anime.animeProvider.nextEpisodeUrl;
 					download.target = '_blank';
