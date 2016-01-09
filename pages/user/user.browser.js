@@ -68,9 +68,16 @@ window.loadAnimeList = function() {
 					episodes.appendChild(document.createTextNode(behind + (behind === 1 ? ' episode' : ' episodes') + ' behind'));
 					item.appendChild(episodes);
 				} else if(anime.episodes.available === anime.episodes.watched) {
+					var ok = document.createElement('a');
+					ok.href = anime.animeProvider.nextEpisodeUrl;
+					ok.target = '_blank';
+					ok.className = 'anime-up-to-date';
+
 					var icon = document.createElement('div');
-					icon.className = 'anime-up-to-date glyphicon glyphicon-ok';
-					item.appendChild(icon);
+					icon.className = 'glyphicon glyphicon-ok';
+					ok.appendChild(icon);
+
+					item.appendChild(ok);
 				}
 			}
 
