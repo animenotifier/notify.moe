@@ -60,7 +60,7 @@ window.loadAnimeList = function() {
 					var icon = document.createElement('div');
 					icon.className = 'glyphicon glyphicon-cloud-download';
 					download.appendChild(icon);
-					item.appendChild(view);
+					item.appendChild(download);
 
 					var behind = (anime.episodes.available - anime.episodes.watched);
 					var episodes = document.createElement('span');
