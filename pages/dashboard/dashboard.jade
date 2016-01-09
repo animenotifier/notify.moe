@@ -9,7 +9,7 @@ if user
 		li(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
 		if user.email
 			li#gravatar-text Add a gravatar image
-				img(src=user.gravatarURL, onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);')
+				img(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
 		li(class=Object.keys(user.devices).length > 0 ? 'finished' : 'not-finished') Activate push notifications
 		li
 			a(href='javascript:chrome.webstore.install();') Install the Chrome extension
