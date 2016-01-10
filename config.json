@@ -2,13 +2,15 @@
 	"siteName": "notify.moe",
 	"styles": [
 		"base",
-		"layout",
 		"elements",
+		"layout",
+		"navigation",
 		"headers",
 		"forms",
 		"colors",
 		"animelist",
 		"user",
+		"loading",
 		"fade",
 		"mobile"
 	],

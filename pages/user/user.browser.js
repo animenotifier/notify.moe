@@ -43,7 +43,7 @@ window.loadAnimeList = function() {
 			link.appendChild(document.createTextNode(anime.title));
 			link.href = anime.url;
 			link.target = '_blank';
-			link.className = 'anime-link';
+			link.className = 'anime-title';
 
 			item.appendChild(link);
 
@@ -80,8 +80,7 @@ window.loadAnimeList = function() {
 					var behind = (anime.episodes.available - anime.episodes.watched);
 					var episodes = document.createElement('span');
 					episodes.className = 'episodes-behind';
-					episodes.appendChild(document.createTextNode('+' + behind));
-					episodes.title = behind + (behind === 1 ? ' episode' : ' episodes') + ' behind';
+					episodes.appendChild(document.createTextNode(behind + ' new episode' + (behind === 1 ? '' : 's')));
 					item.appendChild(episodes);
 				} else if(anime.episodes.available > 0 && anime.episodes.available === anime.episodes.watched) {
 					addIconLink(
@@ -90,6 +89,13 @@ window.loadAnimeList = function() {
 						'anime-up-to-date',
 						'You watched ' + anime.episodes.watched + ' out of ' + anime.episodes.available + ' available.'
 					);
+
+					if(anime.airingDate.remaining !== null) {
+						var airingDate = document.createElement('span');
+						airingDate.className = 'airing-date';
+						airingDate.appendChild(document.createTextNode((anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ') + anime.airingDate.remainingString));
+						item.appendChild(airingDate);
+					}
 				} else if(anime.episodes.available === 0) {
 					addIconLink(
 						'exclamation-sign',
