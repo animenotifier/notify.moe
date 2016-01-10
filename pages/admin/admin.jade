@@ -1,0 +1,16 @@
+if !user
+	p Not logged in.
+else if user.role !== 'admin'
+	p Not authorized to view this page.
+else
+	section
+		header
+			h2 Admin Panel
+		
+		h3 Resources
+		table
+			tbody
+				each info in status
+					tr
+						td= info[0]
+						td= info[1]

@@ -93,6 +93,16 @@ exports.render = function(request, render) {
 			float: 'right',
 			tooltip: 'Roadmap'
 		})
+
+		if(user.role === 'admin') {
+			nav.push({
+				title: '',
+				url: 'admin',
+				icon: 'wrench',
+				float: 'right',
+				tooltip: 'Admin Panel'
+			})
+		}
 	}
 
 	render({
