@@ -14,7 +14,11 @@ aero.use(function(request, response, next) {
 	let start = new Date()
 	next()
 	let end = new Date()
-	console.log(request.url, '|', end - start, 'ms')
+
+	if(request.user && request.user.nick)
+		console.log(request.url, '|', end - start, 'ms', '|', request.user.nick)
+	else
+		console.log(request.url, '|', end - start, 'ms')
 })
 
 // Rewrite URLs
