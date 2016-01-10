@@ -10,6 +10,13 @@ let request = require('request-promise')
 // Start the server
 aero.run()
 
+aero.use(function(request, response, next) {
+	let start = new Date()
+	next()
+	let end = new Date()
+	console.log(request.url, '|', end - start, 'ms')
+})
+
 // Rewrite URLs
 aero.preRoute(function(request, response) {
 	if(request.headers.host.indexOf('animereleasenotifier.com') !== -1) {
