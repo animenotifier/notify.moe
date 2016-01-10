@@ -93,7 +93,7 @@ exports.get = function(request, response) {
 			if(!arn.isActiveUser(user))
 				return
 
-			user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: 'mm'}, true)
+			user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
 
 			addUser(user)
 		}, function() {
