@@ -12,6 +12,7 @@
 		"node-gcm": "*",
 		"gravatar": "*",
 		"limiter": "*",
+		"natural": "*",
 		"node-cache": "*",
 		"passport": "*",
 		"passport-facebook": "*",

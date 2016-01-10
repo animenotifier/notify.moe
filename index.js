@@ -10,17 +10,6 @@ let request = require('request-promise')
 // Start the server
 aero.run()
 
-aero.use(function(request, response, next) {
-	let start = new Date()
-	next()
-	let end = new Date()
-
-	if(request.user && request.user.nick)
-		console.log(request.url, '|', end - start, 'ms', '|', request.user.nick)
-	else
-		console.log(request.url, '|', end - start, 'ms')
-})
-
 // Rewrite URLs
 aero.preRoute(function(request, response) {
 	if(request.headers.host.indexOf('animereleasenotifier.com') !== -1) {
@@ -32,6 +21,18 @@ aero.preRoute(function(request, response) {
 		request.url = '/user/' + request.url.substring(2)
 	else if(request.url.startsWith('/_/+'))
 		request.url = '/_/user/' + request.url.substring(4)
+})
+
+// Log requests
+aero.use(function(request, response, next) {
+	let start = new Date()
+	next()
+	let end = new Date()
+
+	if(request.user && request.user.nick)
+		console.log(request.url, '|', end - start, 'ms', '|', request.user.nick)
+	else
+		console.log(request.url, '|', end - start, 'ms')
 })
 
 // For POST requests
