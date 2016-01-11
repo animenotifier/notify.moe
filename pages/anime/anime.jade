@@ -4,6 +4,9 @@ if anime
 		header
 			h2.anime-db-title(title=anime.type)= anime.title.romaji
 		
+		if anime.title.japanese !== anime.title.romaji
+			.anime-japanese-title= anime.title.japanese
+		
 		if anime.image
 			img.anime-db-image-left(src=anime.image, alt=anime.name)
 			img.anime-db-image(src=anime.image, alt=anime.name)
@@ -34,7 +37,7 @@ if anime
 						li= synonym
 			else
 				ul.anime-synonyms
-					li.anime-japanese-title= anime.title.japanese
+					li
 	//p.powered-by Data by 
 	//	a(href='http://anilist.co/', target='_blank', rel='nofollow') anilist.co
 else
