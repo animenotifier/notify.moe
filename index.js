@@ -107,5 +107,15 @@ arn.on('new forum reply', function(link, userName) {
 	})
 })
 
+// Authorize AniList
+let anilist = arn.listProviders.AniList
+anilist.authorize().then(accessToken => {
+	console.log('AniList API token:', accessToken)
+
+	// Check forum thread replies
+	setInterval(anilist.checkForumReplies.bind(anilist), 5 * 60 * 1000)
+	anilist.checkForumReplies()
+})
+
 // Load all modules
 fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(aero))

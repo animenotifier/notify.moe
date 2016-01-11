@@ -16,8 +16,8 @@ database(aero, function(error) {
 	})*/
 
 	arn.scan('Users', function(user) {
-		user.sortBy = 'airingDate'
-		arn.setUser(user.id, user)
+		//user.sortBy = 'airingDate'
+		//arn.setUser(user.id, user)
 		/*arn.getLocation(user).then(location => {
 			user.location = location
 			console.log(user.location)
