@@ -23,6 +23,5 @@ window.searchAnime = function() {
 if(search) {
 	search.select();
 
-	if(search.value)
-		window.searchAnime();
+	window.searchAnime();
 }

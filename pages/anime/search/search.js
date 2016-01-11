@@ -5,21 +5,19 @@ let arn = require('../../../lib')
 exports.get = function(request, response) {
 	let user = request.user
 	let term = request.params[0] || ''
+	let animeCount = 0
+
+	let start = new Date()
 
 	term = term.replace('%20', ' ').trim().toLowerCase()
-
-	if(!term) {
-		response.render({
-			user
-		})
-		return
-	}
 
 	let animeList = []
 	let hasSpace = term.indexOf(' ') !== -1
 
 	arn.scan('Anime', function(anime) {
-		if(!anime.title)
+		animeCount++
+
+		if(!term)
 			return
 
 		let title = anime.title.romaji.toLowerCase()
@@ -52,11 +50,16 @@ exports.get = function(request, response) {
 			return*/
 	}, function() {
 		animeList.sort((a, b) => a.title.romaji.localeCompare(b.title.romaji))
+		let end = new Date()
+		let time = end - start
+		console.log('Search:', term, '|', time, 'ms')
 
 		response.render({
 			user,
 			term,
-			animeList
+			animeList,
+			animeCount,
+			time
 		})
 	})
 }
