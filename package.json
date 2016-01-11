@@ -14,6 +14,7 @@
 		"limiter": "*",
 		"natural": "*",
 		"node-cache": "*",
+		"node-watch": "*",
 		"passport": "*",
 		"passport-facebook": "*",
 		"passport-google-oauth": "*",
