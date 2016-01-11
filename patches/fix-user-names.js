@@ -17,7 +17,7 @@ database(aero, function(error) {
 
 			tasks.push(arn.setUser(user.id, user))
         }
-    }, function() {
+    }).then(function() {
 		Promise.all(tasks).then(() => console.log(`Finished updating ${tasks.length} users`))
     })
 })

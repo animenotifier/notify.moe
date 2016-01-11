@@ -15,7 +15,7 @@ exports.get = function(request, response) {
 
 		user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: 'mm'}, true)
 		users.push(user)
-	}, function() {
+	}).then(function() {
 		users.sort((a, b) => new Date(a.registered) - new Date(b.registered))
 
 		response.render({

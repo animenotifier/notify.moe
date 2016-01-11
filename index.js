@@ -121,7 +121,7 @@ arn.on('database ready', function() {
 
 		if(anime.title.english)
 			arn.animeToId[processTitle(anime.title.english)] = anime.id
-	}, () => {
+	}).then(() => {
 		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
 	})
 })

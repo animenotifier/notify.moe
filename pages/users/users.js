@@ -96,7 +96,7 @@ exports.get = function(request, response) {
 			user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
 
 			addUser(user)
-		}, function() {
+		}).then(function() {
 			// Sort by registration date
 			Object.keys(categories).forEach(categoryName => {
 				let category = categories[categoryName]

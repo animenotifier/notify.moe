@@ -9,7 +9,7 @@ database(aero, function(error) {
         user.devices = {}
 		arn.setUser(user.id, user)
 		console.log(user.nick)
-    }, function() {
+    }).then(function() {
         console.log('Finished updating all users')
     })
 })

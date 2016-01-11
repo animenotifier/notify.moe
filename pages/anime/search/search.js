@@ -48,7 +48,7 @@ exports.get = function(request, response) {
 
 		if(tryTitle(title.replace('ō', 'ou').replace('Ō', 'ou')))
 			return*/
-	}, function() {
+	}).then(function() {
 		animeList.sort((a, b) => a.title.romaji.localeCompare(b.title.romaji))
 		let end = new Date()
 		let time = end - start

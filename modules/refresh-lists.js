@@ -19,7 +19,7 @@ let refreshAnimeLists = function() {
 				console.error(`Error when automatically updating the anime list of ${user.nick}:`, error, error.stack)
 			})
 		})
-	}, function() {
+	}).then(function() {
 		// ...
 	})
 }

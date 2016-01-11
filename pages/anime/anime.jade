@@ -16,6 +16,18 @@ if anime
 		ul.anime-websites
 			li
 				a(href='https://anilist.co/anime/' + anime.id, target='_blank', rel='nofollow') anilist.co
+				
+			if providers.HummingBird
+				li
+					a(href='https://hummingbird.me/anime/' + providers.HummingBird, target='_blank', rel='nofollow') hummingbird.me
+					
+			if providers.MyAnimeList
+				li
+					a(href='http://myanimelist.net/anime/' + providers.MyAnimeList, target='_blank', rel='nofollow') myanimelist.net
+					
+			if providers.AnimePlanet
+				li
+					a(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet, target='_blank', rel='nofollow') anime-planet.com
 		
 		//-
 			h3.anime-header Summary

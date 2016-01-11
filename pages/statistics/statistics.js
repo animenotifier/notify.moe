@@ -32,7 +32,7 @@ exports.get = function(request, response) {
 		increment(providers.airingDate, user.providers.airingDate)
 
 		recordCount++
-	}, function() {
+	}).then(function() {
 		response.render({
 			users: {
 				total: recordCount,

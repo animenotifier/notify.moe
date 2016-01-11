@@ -9,7 +9,7 @@ database(aero, function(error) {
 
     arn.scan('Anime', function(anime) {
 		tasks.push(arn.remove('Anime', anime.id))
-    }, function() {
+    }).then(function() {
 		console.log('Waiting...')
 		Promise.all(tasks).then(() => console.log(`Finished deleting ${tasks.length} anime`))
     })

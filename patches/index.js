@@ -24,7 +24,7 @@ database(aero, function(error) {
 
 			arn.setUser(user.id, user)
 		})*/
-	}, function() {
+	}).then(function() {
 		console.log('Finished updating all users')
 	})
 })
