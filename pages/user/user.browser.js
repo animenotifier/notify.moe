@@ -41,7 +41,7 @@ window.loadAnimeList = function() {
 
 			var link = document.createElement('a');
 			link.appendChild(document.createTextNode(anime.title));
-			
+
 			if(anime.id) {
 				link.href = '/anime/' + anime.id;
 				link.className = 'anime-title ajax';
@@ -116,6 +116,7 @@ window.loadAnimeList = function() {
 		});
 
 		animeList.appendChild(list);
+		kaze.ajaxifyLinks();
 	});
 };
 
