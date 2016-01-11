@@ -47,8 +47,8 @@ window.searchAnime = function() {
 
 		results.push(title);
 
-		if(results.length >= maxSearchResults)
-			break;
+		/*if(results.length >= maxSearchResults)
+			break;*/
 	}
 
 	results.sort(function(a, b) {
@@ -60,6 +60,9 @@ window.searchAnime = function() {
 
 		return similarityA < similarityB
 	});
+
+	if(results.length >= maxSearchResults)
+		results.length = maxSearchResults;
 
 	for(i = 0; i < results.length; i++) {
 		var title = results[i];
