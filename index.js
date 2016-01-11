@@ -6,6 +6,7 @@ let fs = require('fs')
 let path = require('path')
 let bodyParser = require('body-parser')
 let request = require('request-promise')
+let RateLimiter = require('limiter').RateLimiter
 
 // Start the server
 aero.run()
@@ -109,12 +110,14 @@ arn.on('new forum reply', function(link, userName) {
 
 // Create search index
 arn.on('database ready', function() {
+	let processTitle = title => title.replace(/[^A-Za-z0-9.:!'" ]/g, ' ').replace(/  /g, ' ')
 	arn.animeToId = {}
 	arn.scan('Anime', anime => {
 		if(anime.type === 'Music')
 			return
 
-		arn.animeToId[anime.title.romaji.replace(/[^A-Za-z0-9.:!'" ]/g, ' ').replace(/  /g, ' ')] = anime.id
+		arn.animeToId[processTitle(anime.title.romaji)] = anime.id
+		arn.animeToId[processTitle(anime.title.english)] = anime.id
 	}, () => {
 		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
 	})
@@ -129,6 +132,29 @@ anilist.authorize().then(accessToken => {
 	setInterval(anilist.checkForumReplies.bind(anilist), 5 * 60 * 1000)
 	anilist.checkForumReplies()
 })
+
+// Do a full import every 24 hours
+let anilistImport = function() {
+	if(!arn.db)
+		return Promise.reject('No database connection')
+
+	console.log('Doing full anilist import')
+
+	let limiter = new RateLimiter(1, 1100)
+
+	return arn.listProviders.AniList.authorize().then(() => {
+		let maxPage = 238
+		for(let page = 1; page <= maxPage; page++) {
+			limiter.removeTokens(1, function() {
+				arn.listProviders.AniList.getAnimeFromPage(page).then(animeList => {
+					let tasks = animeList.map(anime => arn.set('Anime', anime.id, anime))
+					Promise.all(tasks).then(() => console.log('Finished importing page', page))
+				})
+			})
+		}
+	})
+}
+setInterval(anilistImport, 24 * 60 * 60 * 1000)
 
 // Load all modules
 fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(aero))

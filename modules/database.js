@@ -5,7 +5,7 @@ let aerospike = require('aerospike')
 let arn = require('../lib')
 
 module.exports = function(aero, callback) {
-	arn.db = aerospike.client({
+	let db = aerospike.client({
 	    hosts: [{
 	        addr: '127.0.0.1',
 	        port: 3000
@@ -18,12 +18,13 @@ module.exports = function(aero, callback) {
 	    }
 	})
 
-	Promise.promisifyAll(arn.db)
+	Promise.promisifyAll(db)
 
-	arn.db.connect(function(response) {
+	db.connect(function(response) {
 	    if(response.code === 0) {
 	        console.log('Successfully connected to database!')
 
+			arn.db = db
 			arn.events.emit('database ready')
 
 			if(callback)

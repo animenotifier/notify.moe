@@ -10,7 +10,7 @@ let aero = require('aero')
 
 database(aero, function(error) {
 	arn.listProviders.AniList.authorize().then(() => {
-		let maxPage = 237
+		let maxPage = 238
 		for(let page = 1; page <= maxPage; page++) {
 			limiter.removeTokens(1, function() {
 				arn.listProviders.AniList.getAnimeFromPage(page).then(animeList => {
