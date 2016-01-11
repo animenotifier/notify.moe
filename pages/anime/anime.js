@@ -24,7 +24,7 @@ exports.get = function(request, response) {
 	if(animeToIdJSONString === null) {
 		let animeToId = {}
 		arn.scan('Anime', anime => {
-			animeToId[anime.title.romaji] = anime.id
+			animeToId[anime.title.romaji.replace(/[^A-Za-z0-9.:!'" ]/g, ' ').replace(/  /g, ' ')] = anime.id
 		}, () => {
 			animeToIdJSONString = JSON.stringify(animeToId)
 

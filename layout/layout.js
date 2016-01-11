@@ -23,7 +23,7 @@ exports.render = function(request, render) {
 		url: 'users',
 		icon: 'globe'
 	})
-	
+
 	nav.push({
 		title: 'Anime',
 		url: 'anime',
