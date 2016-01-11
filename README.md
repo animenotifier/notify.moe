@@ -23,5 +23,5 @@ Platforms:
 - [Firefox](https://github.com/blitzprog/anime-release-notifier-firefox)
 
 Powered by:
-- [Aero](https://github.com/aerojs/aero) | Web server
+- [Aero](https://github.com/aerojs/aero) | Web framework
 - [Aerospike](https://github.com/aerospike) | Database
