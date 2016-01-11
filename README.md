@@ -4,13 +4,13 @@ Anime Release Notifier
 Fetches your anime "watching" list and notifies you when a new anime episode is available. It also displays the time until a new episode is released.
 
 Supports anime lists from:
-- anilist.co
-- anime-planet.com
-- myanimelist.net
-- hummingbird.me
+- [anilist.co](https://anilist.co)
+- [anime-planet.com](http://anime-planet.com)
+- [myanimelist.net](http://myanimelist.net)
+- [hummingbird.me](https://hummingbird.me)
 
 Website:
-- https://notify.moe
+- [notify.moe](https://notify.moe)
 
 Forum:
 - [AniList](http://anilist.co/forum/thread/64)
