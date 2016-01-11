@@ -1,10 +1,10 @@
 if anime
 	section
 		header
-			h2= anime.title + ' (' + anime.precision + ')'
+			h2= anime.title.romaji
 			
-		if anime.image && anime.image.src
-			img.anime-database-image(src=anime.image.src, alt=anime.name)
+		if anime.image
+			img.anime-database-image(src=anime.image, alt=anime.name)
 		
 		.anime-info
 			if anime.summary
@@ -19,8 +19,8 @@ if anime
 							li
 								a(href=website.url, target='_blank', rel='nofollow')= website.title
 	
-		p.powered-by Data by 
-			a(href='http://www.animenewsnetwork.com/', target='_blank', rel='nofollow') animenewsnetwork.com
+		//p.powered-by Data by 
+		//	a(href='http://www.animenewsnetwork.com/', target='_blank', rel='nofollow') animenewsnetwork.com
 else
 	section
 		header
@@ -29,3 +29,4 @@ else
 		input#search(type='text', placeholder='Search...', onkeyup='window.searchAnime();', onfocus='this.select();')
 		
 		#search-results
+			.anime-count= animeCount + ' anime in the database.'

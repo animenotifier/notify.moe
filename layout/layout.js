@@ -24,6 +24,12 @@ exports.render = function(request, render) {
 		icon: 'globe'
 	})
 
+	nav.push({
+		title: 'Anime',
+		url: 'anime',
+		icon: 'film'
+	})
+
 	if(user) {
 		nav.push({
 			title: 'Settings',
@@ -37,12 +43,6 @@ exports.render = function(request, render) {
 			icon: 'question-sign'
 		})
 	}
-
-	/*nav.push({
-		title: 'Anime',
-		url: 'anime',
-		icon: 'film'
-	})*/
 
 	if(user) {
 		nav.push({

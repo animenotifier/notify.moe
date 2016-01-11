@@ -17,11 +17,12 @@ exports.get = function(request, response) {
 
 	let animeList = []
 	let hasSpace = term.indexOf(' ') !== -1
+
 	arn.scan('Anime', function(anime) {
 		if(!anime.title)
 			return
 
-		let title = anime.title.toLowerCase()
+		let title = anime.title.romaji.toLowerCase()
 
 		if(title === term || (hasSpace && title.indexOf(term) !== -1)) {
 			animeList.push(anime)
@@ -44,13 +45,13 @@ exports.get = function(request, response) {
 		if(tryTitle(title))
 			return
 
-		if(tryTitle(title.replace('ō', 'o').replace('Ō', 'o')))
+		/*if(tryTitle(title.replace('ō', 'o').replace('Ō', 'o')))
 			return
 
 		if(tryTitle(title.replace('ō', 'ou').replace('Ō', 'ou')))
-			return
+			return*/
 	}, function() {
-		animeList.sort((a, b) => a.title > b.title ? 1 : -1)
+		animeList.sort((a, b) => a.title.romaji.localeCompare(b.title.romaji))
 
 		response.render({
 			user,
