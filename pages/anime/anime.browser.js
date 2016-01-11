@@ -1,23 +1,76 @@
 var search = document.getElementById('search');
 var searchResults = document.getElementById('search-results');
-var lastRequest = undefined
+var allAnimeObject = document.getElementById('all-anime');
+var allAnime = JSON.parse(allAnimeObject.text);
+var animeTitles = Object.keys(allAnime);
+var lastRequest = undefined;
+var maxSearchResults = 15;
+
+window.similar = function(a, b) {
+    var lengthA = a.length;
+    var lengthB = b.length;
+
+    var equivalency = 0;
+
+    var minLength = (a.length > b.length) ? b.length : a.length;
+    var maxLength = (a.length < b.length) ? b.length : a.length;
+
+    for(var i = 0; i < minLength; i++) {
+        if(a[i] === b[i]) {
+            equivalency++;
+        }
+    }
+
+    return equivalency / maxLength;
+}
 
 window.searchAnime = function() {
-	/*if(force !== 'force') {
-		ev = ev || event || window.event;
+	var term = search.value.trim().toLowerCase();
 
-		if(ev.keyCode !== 13)
-			return;
-	}*/
-
-	if(lastRequest) {
-		lastRequest.abort();
-		lastRequest = undefined
+	if(!term) {
+		searchResults.innerHTML = animeTitles.length + ' anime in the database.';
+		searchResults.className = 'anime-count';
+		return;
 	}
 
-	lastRequest = kaze.get('/_/anime/search/' + search.value, function(error, body) {
-		searchResults.innerHTML = body;
+	searchResults.className = '';
+	searchResults.innerHTML = '';
+
+	var i = 0;
+	var results = [];
+
+	for(i = 0; i < animeTitles.length; i++) {
+		var title = animeTitles[i];
+
+		if(title.toLowerCase().indexOf(term) === -1)
+			continue;
+
+		results.push(title);
+
+		if(results.length >= maxSearchResults)
+			break;
+	}
+
+	results.sort(function(a, b) {
+		var similarityA = window.similar(a.toLowerCase(), term)
+		var similarityB = window.similar(b.toLowerCase(), term)
+
+		if(similarityA === similarityB)
+			return a > b
+
+		return similarityA < similarityB
 	});
+
+	for(i = 0; i < results.length; i++) {
+		var title = results[i];
+
+		var element = document.createElement('a');
+		element.className = 'search-result';
+		element.href = '/anime/' + allAnime[title];
+		element.appendChild(document.createTextNode(title));
+
+		searchResults.appendChild(element);
+	}
 };
 
 if(search) {

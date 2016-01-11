@@ -2,6 +2,8 @@
 
 let arn = require('../../lib')
 
+let animeToIdJSONString = null
+
 exports.get = function(request, response) {
 	let user = request.user
 	let animeId = parseInt(request.params[0])
@@ -19,7 +21,22 @@ exports.get = function(request, response) {
 		return
 	}
 
-	response.render({
-		user
-	})
+	if(animeToIdJSONString === null) {
+		let animeToId = {}
+		arn.scan('Anime', anime => {
+			animeToId[anime.title.romaji] = anime.id
+		}, () => {
+			animeToIdJSONString = JSON.stringify(animeToId)
+
+			response.render({
+				user,
+				animeToIdJSONString
+			})
+		})
+	} else {
+		response.render({
+			user,
+			animeToIdJSONString
+		})
+	}
 }
