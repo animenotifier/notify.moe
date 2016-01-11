@@ -1,17 +1,40 @@
-.anime-database-image
+.anime-container
 	float left
+	max-width 728px
+	padding 0 1em
+	text-align center
+	border-radius 3px
+
+.anime-db-title
+	text-align center
+
+.anime-db-image
+.anime-db-image-left
+.anime-db-image-right
 	width 100%
 	max-width 225px !important
 	border-radius 3px
-	box-shadow 0 0 4px rgb(0, 0, 0)
 
-.anime-info
-	float left
-	max-width 928px
-	padding 0 1em
+angle = 20deg
+scale = 0.5
 
-.anime-header
-	margin-top 0
+.anime-db-image
+	box-shadow 0 0 8px rgba(0, 0, 0, 0.7)
+	filter saturate(100%)
+	transition all 290ms ease
+	&:hover
+		filter saturate(130%)
+		box-shadow 0 0 12px rgba(0, 0, 0, 0.8)
+
+.anime-db-image-left
+.anime-db-image-right
+	filter grayscale(1)
+
+.anime-db-image-left
+	transform translateX(-10px) scale(scale) rotateZ(angle * -1)
+
+.anime-db-image-right
+	transform translateX(10px) scale(scale) rotateZ(angle)
 
 .search-performance
 .anime-count

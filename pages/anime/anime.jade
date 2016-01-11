@@ -1,26 +1,41 @@
 if anime
-	section
-		header
-			h2= anime.title.romaji
-			
-		if anime.image
-			img.anime-database-image(src=anime.image, alt=anime.name)
-		
-		.anime-info
-			if anime.summary
-				h3.anime-header Summary
-				p.anime-summary!= anime.summary
-				
-			if anime.websites
-				h3.anime-header Links
-				ul.anime-websites
-					each website in anime.websites
-						if website.title && website.url
-							li
-								a(href=website.url, target='_blank', rel='nofollow')= website.title
+	section.anime-container
 	
-		//p.powered-by Data by 
-		//	a(href='http://www.animenewsnetwork.com/', target='_blank', rel='nofollow') animenewsnetwork.com
+		header
+			h2.anime-db-title(title=anime.type)= anime.title.romaji
+		
+		if anime.image
+			img.anime-db-image-left(src=anime.image, alt=anime.name)
+			img.anime-db-image(src=anime.image, alt=anime.name)
+			img.anime-db-image-right(src=anime.image, alt=anime.name)
+		
+		h3.anime-header Summary
+		if anime.summary
+			p.anime-summary!= anime.summary
+		else
+			p.anime-summary -
+		
+		h3.anime-header Links
+		if anime.websites
+			ul.anime-websites
+				each website in anime.websites
+					if website.title && website.url
+						li
+							a(href=website.url, target='_blank', rel='nofollow')= website.title
+		else
+			p.anime-websites -
+		
+		h3.anime-header Synonyms
+		if anime.title.synonyms
+			ul.anime-synonyms
+				li.anime-japanese-title= anime.title.japanese
+				each synonym in anime.title.synonyms
+					li= synonym
+		else
+			ul.anime-synonyms
+				li.anime-japanese-title= anime.title.japanese
+	//p.powered-by Data by 
+	//	a(href='http://anilist.co/', target='_blank', rel='nofollow') anilist.co
 else
 	section
 		header
