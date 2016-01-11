@@ -4,13 +4,18 @@ if anime
 		header
 			h2.anime-db-title(title=anime.type)= anime.title.romaji
 		
-		if anime.title.japanese !== anime.title.romaji
-			.anime-japanese-title= anime.title.japanese
+			if anime.title.japanese !== anime.title.romaji
+				h3.anime-japanese-title= anime.title.japanese
 		
 		if anime.image
 			img.anime-db-image-left(src=anime.image, alt=anime.name)
 			img.anime-db-image(src=anime.image, alt=anime.name)
 			img.anime-db-image-right(src=anime.image, alt=anime.name)
+		
+		h3.anime-header Links
+		ul.anime-websites
+			li
+				a(href='https://anilist.co/anime/' + anime.id, target='_blank', rel='nofollow') anilist.co
 		
 		//-
 			h3.anime-header Summary
@@ -38,6 +43,14 @@ if anime
 			else
 				ul.anime-synonyms
 					li
+					
+					h3.anime-header Links
+					if anime.websites
+						ul.anime-websites
+							each website in anime.websites
+								if website.title && website.url
+									li
+										a(href=website.url, target='_blank', rel='nofollow')= website.title
 	//p.powered-by Data by 
 	//	a(href='http://anilist.co/', target='_blank', rel='nofollow') anilist.co
 else

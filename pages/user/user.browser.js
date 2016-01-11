@@ -41,9 +41,15 @@ window.loadAnimeList = function() {
 
 			var link = document.createElement('a');
 			link.appendChild(document.createTextNode(anime.title));
-			link.href = anime.url;
-			link.target = '_blank';
-			link.className = 'anime-title';
+			
+			if(anime.id) {
+				link.href = '/anime/' + anime.id;
+				link.className = 'anime-title ajax';
+			} else {
+				link.href = anime.url;
+				link.target = '_blank';
+				link.className = 'anime-title';
+			}
 
 			item.appendChild(link);
 

@@ -107,6 +107,19 @@ arn.on('new forum reply', function(link, userName) {
 	})
 })
 
+// Create search index
+arn.on('database ready', function() {
+	arn.animeToId = {}
+	arn.scan('Anime', anime => {
+		if(anime.type === 'Music')
+			return
+
+		arn.animeToId[anime.title.romaji.replace(/[^A-Za-z0-9.:!'" ]/g, ' ').replace(/  /g, ' ')] = anime.id
+	}, () => {
+		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
+	})
+})
+
 // Authorize AniList
 let anilist = arn.listProviders.AniList
 anilist.authorize().then(accessToken => {
