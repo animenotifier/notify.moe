@@ -116,8 +116,11 @@ arn.on('database ready', function() {
 		if(anime.type === 'Music')
 			return
 
-		arn.animeToId[processTitle(anime.title.romaji)] = anime.id
-		arn.animeToId[processTitle(anime.title.english)] = anime.id
+		if(anime.title.romaji)
+			arn.animeToId[processTitle(anime.title.romaji)] = anime.id
+
+		if(anime.title.english)
+			arn.animeToId[processTitle(anime.title.english)] = anime.id
 	}, () => {
 		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
 	})
