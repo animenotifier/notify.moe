@@ -68,7 +68,7 @@ window.searchAnime = function() {
 		var title = results[i];
 
 		var element = document.createElement('a');
-		element.className = 'search-result';
+		element.className = 'search-result ajax';
 		element.href = '/anime/' + allAnime[title];
 		element.appendChild(document.createTextNode(title));
 
