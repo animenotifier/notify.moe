@@ -24,11 +24,13 @@ exports.render = function(request, render) {
 		icon: 'globe'
 	})
 
-	nav.push({
-		title: 'Anime',
-		url: 'anime',
-		icon: 'film'
-	})
+	if(user && (user.role === 'admin' || user.role === 'editor')) {
+		nav.push({
+			title: 'Anime',
+			url: 'anime',
+			icon: 'film'
+		})
+	}
 
 	if(user) {
 		nav.push({
