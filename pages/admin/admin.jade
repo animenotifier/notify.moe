@@ -1,6 +1,6 @@
 if !user
 	p Not logged in.
-else if user.role !== 'admin'
+else if user.role !== 'admin' && user.role !== 'editor'
 	p Not authorized to view this page.
 else
 	section
