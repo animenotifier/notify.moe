@@ -94,7 +94,7 @@ exports.render = function(request, render) {
 			tooltip: 'Roadmap'
 		})
 
-		if(user.role === 'admin') {
+		if(user.role === 'admin' || user.role === 'editor') {
 			nav.push({
 				title: '',
 				url: 'admin',
