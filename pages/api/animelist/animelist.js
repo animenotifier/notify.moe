@@ -4,6 +4,8 @@ let arn = require('../../../lib')
 
 exports.get = function(request, response) {
 	let nick = request.params[0]
+	let command = request.params[1]
+	let clearCache = false
 
 	if(!nick) {
 		response.writeHead(409)
@@ -12,7 +14,11 @@ exports.get = function(request, response) {
 		})
 	}
 
-	return arn.getAnimeListByNickAsync(nick).then(json => {
+	if(command && command === 'clearListCache') {
+		clearCache = true
+	}
+
+	return arn.getAnimeListByNickAsync(nick, clearCache).then(json => {
 		response.json(json)
 	}).catch(error => {
 		response.writeHead(409)
