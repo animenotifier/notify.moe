@@ -17,6 +17,7 @@
 	"scripts": [
 		"footer",
 		"init",
+		"save-on-change",
 		"push-notifications"
 	],
 	"plugins": {

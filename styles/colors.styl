@@ -41,6 +41,7 @@ input[type="text"]
 input[type="email"]
 input[type="password"]
 input[type="url"]
+input[type="number"]
 	color rgb(32, 32, 32)
 	background-color rgb(255, 255, 255)
 	box-shadow none
@@ -49,6 +50,9 @@ input[type="url"]
 		color rgb(0, 0, 0)
 		box-shadow 0 0 6px alpha(mainColor, 20%)
 		border 1px solid mainColor
+	&:disabled
+		background-color rgb(224, 224, 224)
+		cursor not-allowed
 
 button
 select

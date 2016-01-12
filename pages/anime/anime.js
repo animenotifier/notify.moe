@@ -13,7 +13,7 @@ exports.get = function(request, response) {
 		let createScanFunction = function(listProviderName) {
 			return match => {
 				if(match.id === animeId)
-					providers[listProviderName] = match.providerId
+					providers[listProviderName] = match
 			}
 		}
 
@@ -28,7 +28,8 @@ exports.get = function(request, response) {
 				response.render({
 					user,
 					anime,
-					providers
+					providers,
+					canEdit: user && (user.role === 'admin' || user.role === 'editor')
 				})
 			})
 		}).catch(error => {

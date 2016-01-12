@@ -6,7 +6,7 @@ else
 	section
 		header
 			h2 Admin Panel
-		
+
 		h3 Resources
 		table
 			tbody
@@ -14,3 +14,51 @@ else
 					tr
 						td= info[0]
 						td= info[1]
+
+		h3 MyAnimeList - Worst Matches
+		table.match-list
+			thead
+				tr
+					th Provider
+					th ARN
+					th Similarity
+			tbody
+				each match in malMatches
+					tr(data-id=match.providerId)
+						td
+							a(href='http://myanimelist.net/anime/' + match.providerId, target='_blank')= match.providerTitle
+						td
+							a.ajax(href='/anime/' + match.id)= match.title
+						td= Math.round(match.similarity * 100) + ' %'
+
+		h3 HummingBird - Worst Matches
+		table.match-list
+			thead
+				tr
+					th Provider
+					th ARN
+					th Similarity
+			tbody
+				each match in hbMatches
+					tr(data-id=match.providerId)
+						td
+							a(href='https://hummingbird.me/anime/' + match.providerId, target='_blank')= match.providerTitle
+						td
+							a.ajax(href='/anime/' + match.id)= match.title
+						td= Math.round(match.similarity * 100) + ' %'
+
+		h3 AnimePlanet - Worst Matches
+		table.match-list
+			thead
+				tr
+					th Provider
+					th ARN
+					th Similarity
+			tbody
+				each match in apMatches
+					tr(data-id=match.providerId)
+						td
+							a(href='http://anime-planet.com/anime/' + match.providerId, target='_blank')= match.providerTitle
+						td
+							a.ajax(href='/anime/' + match.id)= match.title
+						td= Math.round(match.similarity * 100) + ' %'

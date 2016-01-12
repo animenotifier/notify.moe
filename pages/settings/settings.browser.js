@@ -1,57 +1,5 @@
-window.save = function(e) {
-	var item = e.target;
-
-	if(document.saving)
-		return;
-
-	document.saving = true;
-
-	var key = item.id;
-	var value = item.value;
-
-	item.classList.add('saving');
-	kaze.content.style.cursor = 'wait';
-
-	kaze.postJSON('/api/users/me', {
-		function: 'save',
-		key: key,
-		value: value
-	}, function(error, response) {
-		if(error)
-			console.error(error.stack);
-
-		window.postSave(key, response);
-
-		kaze.get('/_' + location.pathname, function(error, newPageCode) {
-			if(error)
-				console.error(error.stack);
-
-			var focusedElementId = document.activeElement.id;
-			var focusedElementValue = document.activeElement.value;
-
-			kaze.onResponse(newPageCode);
-
-			// Re-focus previously selected element
-			if(focusedElementId) {
-				var focusedElement = document.getElementById(focusedElementId);
-
-				if(focusedElement) {
-					focusedElement.value = focusedElementValue;
-
-					if(focusedElement.select)
-						focusedElement.select();
-					else if(focusedElement.focus)
-						focusedElement.focus();
-				}
-			}
-
-			kaze.content.style.cursor = 'auto';
-			document.saving = false;
-		})
-	});
-};
-
-window.postSave = function(key, value) {
+var userName = document.getElementById('nick').value;
+makeSaveable('/api/users/me', function(key, value) {
 	switch(key) {
 		case 'nick':
 			value = value.replace(/\s+/g, '');
@@ -69,15 +17,7 @@ window.postSave = function(key, value) {
 
 			break;
 	}
-};
-
-var userName = document.getElementById('nick').value;
-var myNodeList = document.querySelectorAll('.save-on-change');
-
-for(var i = 0; i < myNodeList.length; ++i) {
-	var element = myNodeList[i];
-	element.onchange = window.save;
-}
+});
 
 // Push notifications
 var pushButton = document.querySelector('.push-button');
