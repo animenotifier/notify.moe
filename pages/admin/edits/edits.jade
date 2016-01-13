@@ -1,0 +1,16 @@
+section
+	header
+		h2 Editor Panel - Edits
+	
+	include ../header.jade
+	
+	h3 Log
+	if edits
+		table
+			tbody
+				each edit in edits
+					tr
+						td
+							a.ajax(href='/anime/' + edit.id)= edit.title
+						td= edit.edited
+						td= edit.editedBy.nick
