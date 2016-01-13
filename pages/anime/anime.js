@@ -3,6 +3,29 @@
 let arn = require('../../lib')
 let Promise = require('bluebird')
 let gravatar = require('gravatar')
+let popularAnimeCached = []
+
+let updatePopularAnime = function() {
+	let popularAnime = []
+
+	return arn.scan('Anime', anime => {
+		if(anime.watching)
+			popularAnime.push(anime)
+	}).then(() => {
+		popularAnime.sort((a, b) => a.watching < b.watching ? 1 : -1)
+
+		if(popularAnime.length > maxPopularAnime)
+			popularAnime.length = maxPopularAnime
+
+		return popularAnime
+	})
+}
+
+setInterval(function() {
+	updatePopularAnime().then(popularAnime => {
+		popularAnimeCached = popularAnime
+	})
+}, 60 * 1000)
 
 const maxPopularAnime = 10
 
@@ -64,21 +87,21 @@ exports.get = function(request, response) {
 		return
 	}
 
-	let popularAnime = []
+	if(popularAnimeCached.length === 0) {
+		updatePopularAnime().then(popularAnime => {
+			popularAnimeCached = popularAnime
 
-	arn.scan('Anime', anime => {
-		if(anime.watching)
-			popularAnime.push(anime)
-	}).then(() => {
-		popularAnime.sort((a, b) => a.watching < b.watching ? 1 : -1)
-
-		if(popularAnime.length > maxPopularAnime)
-			popularAnime.length = maxPopularAnime
-
+			response.render({
+				user,
+				popularAnime: popularAnimeCached,
+				animeToIdJSONString: arn.animeToIdJSONString
+			})
+		})
+	} else {
 		response.render({
 			user,
-			popularAnime,
+			popularAnime: popularAnimeCached,
 			animeToIdJSONString: arn.animeToIdJSONString
 		})
-	})
+	}
 }
