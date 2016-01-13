@@ -3,6 +3,7 @@ var animeContainer = document.querySelector('.anime-container');
 if(animeContainer && animeContainer.dataset.id) {
 	console.log(animeContainer.dataset.id);
 	makeSaveable('/api/anime/' + animeContainer.dataset.id);
+	getGravatarImages();
 } else {
 	var search = document.getElementById('search');
 	var searchResults = document.getElementById('search-results');

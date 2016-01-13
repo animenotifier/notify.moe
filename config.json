@@ -15,8 +15,8 @@
 		"mobile"
 	],
 	"scripts": [
-		"footer",
 		"init",
+		"gravatar",
 		"save-on-change",
 		"push-notifications"
 	],
