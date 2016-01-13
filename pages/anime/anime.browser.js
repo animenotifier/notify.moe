@@ -11,7 +11,7 @@ if(animeContainer && animeContainer.dataset.id) {
 	var allAnime = JSON.parse(allAnimeObject.text);
 	var animeTitles = Object.keys(allAnime);
 	var lastRequest = undefined;
-	var maxSearchResults = 15;
+	var maxSearchResults = 14;
 
 	window.similar = function(a, b) {
 	    var lengthA = a.length;
