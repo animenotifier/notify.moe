@@ -25,7 +25,6 @@ exports.post = (request, response) => {
 	let bucket = 'Match' + request.body.key
 	let providerId = request.body.value.trim()
 	let oldProviderId = request.body.old
-	console.log('Old:', oldProviderId)
 
 	if(providerId === oldProviderId) {
 		response.end('Can not change to same ID!')
