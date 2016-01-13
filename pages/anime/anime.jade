@@ -41,21 +41,21 @@ if anime
 						td
 							input.save-on-change(id='MyAnimeList', type='text', value=providers.MyAnimeList ? providers.MyAnimeList.providerId : '', disabled=(providers.MyAnimeList && providers.MyAnimeList.similarity === 1) ? true : false)
 						td
-							a(href='https://google.com?q=site:myanimelist.net+' + anime.title.romaji.replace(' ', '+'), target='_blank')
+							a(href='https://search.yahoo.com/search?p=site:myanimelist.net+' + anime.title.romaji.replace(' ', '+'), target='_blank')
 								.glyphicon.glyphicon-search
 					tr
 						td HummingBird
 						td
 							input.save-on-change(id='HummingBird', type='text', value=providers.HummingBird ? providers.HummingBird.providerId : '', disabled=(providers.HummingBird && providers.HummingBird.similarity === 1) ? true : false)
 						td
-							a(href='https://google.com?q=site:hummingbird.me+' + anime.title.romaji.replace(' ', '+'), target='_blank')
+							a(href='https://search.yahoo.com/search?p=site:hummingbird.me+' + anime.title.romaji.replace(' ', '+'), target='_blank')
 								.glyphicon.glyphicon-search
 					tr
 						td AnimePlanet
 						td
 							input.save-on-change(id='AnimePlanet', type='text', value=providers.AnimePlanet ? providers.AnimePlanet.providerId : '', disabled=(providers.AnimePlanet && providers.AnimePlanet.similarity === 1) ? true : false)
 						td
-							a(href='https://google.com?q=site:anime-planet.com+' + anime.title.romaji.replace(' ', '+'), target='_blank')
+							a(href='https://search.yahoo.com/search?p=site:anime-planet.com+' + anime.title.romaji.replace(' ', '+'), target='_blank')
 								.glyphicon.glyphicon-search
 		//-
 			h3.anime-header Summary
