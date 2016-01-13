@@ -6,11 +6,13 @@ section
 	
 	h3 Log
 	if edits
-		table
+		table.edits
 			tbody
 				each edit in edits
 					tr
 						td
 							a.ajax(href='/anime/' + edit.id)= edit.title
+						td= edit.providerName
 						td= edit.edited
-						td= edit.editedBy.nick
+						td
+							a.ajax(href='/+' + edit.editedBy.nick)= edit.editedBy.nick

@@ -16,7 +16,10 @@ exports.get = (request, response) => {
 	let edits = []
 
 	let scanBucket = bucketName => {
+		let providerName = bucketName.replace('Match', '')
 		return arn.scan(bucketName, record => {
+			record.providerName = providerName
+
 			if(record.edited)
 				edits.push(record)
 		})
