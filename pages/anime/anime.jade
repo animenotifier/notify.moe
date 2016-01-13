@@ -97,5 +97,12 @@ else
 		input#search(type='text', placeholder='Search...', onkeyup='window.searchAnime();', onfocus='this.select();')
 		
 		#search-results
+		
+		if popularAnime
+			h3 Popular
+			p
+				each anime in popularAnime
+					a.popular-anime.ajax(href='/anime/' + anime.id, title=anime.title.romaji + ' (' + anime.watching + (anime.watching === 1 ? ' user' : ' users') + ' watching)')
+						img.anime-db-image.popular-anime-image(src=anime.image, alt=anime.title.romaji)
 	
 	script#all-anime(type='application/json')!= animeToIdJSONString

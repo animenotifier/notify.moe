@@ -4,6 +4,8 @@ let arn = require('../../lib')
 let Promise = require('bluebird')
 let gravatar = require('gravatar')
 
+const maxPopularAnime = 10
+
 exports.get = function(request, response) {
 	let user = request.user
 	let animeId = parseInt(request.params[0])
@@ -39,7 +41,6 @@ exports.get = function(request, response) {
 
 		arn.get('Anime', animeId).then(anime => {
 			Promise.props(otherTasks).then(result => {
-				console.log(userQueryTasks.length)
 				Promise.all(userQueryTasks).then(usersWatching => {
 					response.render({
 						user,
@@ -47,6 +48,11 @@ exports.get = function(request, response) {
 						providers,
 						usersWatching,
 						canEdit: user && (user.role === 'admin' || user.role === 'editor')
+					})
+
+					// Save number of people watching
+					arn.set('Anime', animeId, {
+						watching: usersWatching.length
 					})
 				})
 			})
@@ -58,8 +64,21 @@ exports.get = function(request, response) {
 		return
 	}
 
-	response.render({
-		user,
-		animeToIdJSONString: arn.animeToIdJSONString
+	let popularAnime = []
+
+	arn.scan('Anime', anime => {
+		if(anime.watching)
+			popularAnime.push(anime)
+	}).then(() => {
+		popularAnime.sort((a, b) => a.watching < b.watching ? 1 : -1)
+
+		if(popularAnime.length > maxPopularAnime)
+			popularAnime.length = maxPopularAnime
+
+		response.render({
+			user,
+			popularAnime,
+			animeToIdJSONString: arn.animeToIdJSONString
+		})
 	})
 }
