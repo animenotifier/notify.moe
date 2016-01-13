@@ -36,7 +36,7 @@ else
 					//- else
 					span= viewUser.location.countryName
 			
-			if viewUser.website
+			if user && viewUser.website
 				p.profile-field.website
 					span.glyphicon.glyphicon-home
 					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
