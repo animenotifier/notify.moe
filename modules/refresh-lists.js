@@ -13,7 +13,7 @@ let refreshAnimeLists = function() {
 			return
 
 		limiter.removeTokens(1, function() {
-			arn.getAnimeListAsync(user).then(animeList => {
+			arn.getAnimeListAsync(user, true).then(animeList => {
 				// ...
 			}).catch(error => {
 				console.error(`Error when automatically updating the anime list of ${user.nick}:`, error, error.stack)
