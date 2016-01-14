@@ -13,44 +13,40 @@ exports.get = (request, response) => {
 		return
 	}
 
-	let malMatches = []
-	let hbMatches = []
-	let apMatches = []
+	let providers = [
+		'MyAnimeList',
+		'HummingBird',
+		'AnimePlanet'
+	]
 
-	Promise.props({
-		scanMAL: arn.scan('MatchMyAnimeList', record => {
+	let matches = {}
+	let tasks = []
+
+	providers.forEach(provider => {
+		matches[provider] = []
+
+		tasks.push(arn.scan('Match' + provider, record => {
 			if(!record.edited)
-				malMatches.push(record)
-		}),
-		scanHB: arn.scan('MatchHummingBird', record => {
-			if(!record.edited)
-				hbMatches.push(record)
-		}),
-		scanAP: arn.scan('MatchAnimePlanet', record => {
-			if(!record.edited)
-				apMatches.push(record)
+				matches[provider].push(record)
+		}))
+	})
+
+	Promise.all(tasks).then(() => {
+		providers.forEach(provider => {
+			matches[provider].sort((a, b) => a.similarity > b.similarity ? 1 : -1)
+
+			if(matches[provider].length >= listLength)
+				matches[provider].length = listLength
 		})
-	}).then(result => {
-		malMatches.sort((a, b) => a.similarity > b.similarity ? 1 : -1)
-
-		if(malMatches.length >= listLength)
-			malMatches.length = listLength
-
-		hbMatches.sort((a, b) => a.similarity > b.similarity ? 1 : -1)
-
-		if(hbMatches.length >= listLength)
-			hbMatches.length = listLength
-
-		apMatches.sort((a, b) => a.similarity > b.similarity ? 1 : -1)
-
-		if(apMatches.length >= listLength)
-			apMatches.length = listLength
 
 		response.render({
 			user,
-			malMatches,
-			hbMatches,
-			apMatches
+			matches,
+			linkPrefixes: {
+				MyAnimeList: 'http://myanimelist.net/anime/',
+				HummingBird: 'https://hummingbird.me/anime/',
+				AnimePlanet: 'http://anime-planet.com/anime/'
+			}
 		})
 	})
 }
