@@ -1,3 +1,52 @@
+@require "styles/config.styl"
+
+duration = 0.8s
+size = 24px
+
+#loading-animation
+	display block
+	position fixed
+	bottom 1.15rem
+	right calc(1.15rem + 17px)
+
+.sk-cube-grid
+	width size
+	height size
+	transform rotateZ(0deg)
+	animation sk-rotate duration infinite linear
+
+	.sk-cube
+		width 33.3%
+		height 33.3%
+		background-color alpha(linkHoverColor, 70%)
+		box-shadow 0 0 size alpha(linkHoverColor, 80%)
+		float left
+		animation sk-cube-grid duration infinite linear
+		border-radius 100%
+
+	.sk-cube5
+		background-color linkHoverColor
+		box-shadow 0 0 size alpha(linkHoverColor, 90%)
+
+	.sk-cube1
+	.sk-cube3
+	.sk-cube7
+	.sk-cube9
+		visibility hidden
+
+@keyframes sk-cube-grid
+	0%, 100%
+		transform scale3D(0.4, 0.4, 0.4)
+	50%
+		transform scale3D(0.9, 0.9, 0.9)
+
+@keyframes sk-rotate
+	0%
+		transform rotateZ(0deg)
+	100%
+		transform rotateZ(360deg)
+
+// Anime list loading
 .sk-folding-cube
 	margin 20px auto
 	width 40px

@@ -10,3 +10,8 @@ $("#title").animate({
 if(window.location.hash && window.location.hash === '#_=_') {
 	window.history.pushState('', document.title, window.location.pathname);
 }
+
+// Fade out loading animation
+document.addEventListener('DOMContentLoaded', function(event) {
+	kaze.loadingAnimation.classList.add('fade-out');
+});
