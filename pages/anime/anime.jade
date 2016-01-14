@@ -12,28 +12,27 @@ if anime
 			img.anime-db-image(src=anime.image, alt=anime.name)
 			img.anime-db-image-right(src=anime.image, alt=anime.name)
 		
-		h3.anime-header(style='display: none') Links
-		.anime-websites
-			a.anime-website-link(href='https://anilist.co/anime/' + anime.id, target='_blank', rel='nofollow') anilist.co
-				
+		h3.anime-header Links
+		ul.anime-websites
+			li: a.anime-website-link(href='https://anilist.co/anime/' + anime.id, target='_blank', rel='nofollow') anilist.co
+			
 			if providers.HummingBird
-				a.anime-website-link(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank', rel='nofollow') hummingbird.me
+				li: a.anime-website-link(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank', rel='nofollow') hummingbird.me
 					
 			if providers.MyAnimeList
-				a.anime-website-link(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank', rel='nofollow') myanimelist.net
+				li: a.anime-website-link(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank', rel='nofollow') myanimelist.net
 					
 			if providers.AnimePlanet
-				a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank', rel='nofollow') anime-planet.com
+				li: a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank', rel='nofollow') anime-planet.com
 		
 		if usersWatching
-			h3.anime-header= `Currently watching (${usersWatching.length})`
+			h3.anime-header(title=usersWatching.length) Watching
 			each user in usersWatching
 				.user
 					a.ajax(href='/+' + user.nick, title=user.nick)
 						img.user-image(src='/images/elements/no-gravatar.png', alt=user.nick, data-image=user.gravatarURL)
 		
 		if canEdit
-			hr
 			h3.anime-header IDs
 			table
 				tbody
