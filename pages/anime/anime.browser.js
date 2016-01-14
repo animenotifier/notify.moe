@@ -8,10 +8,11 @@ if(animeContainer && animeContainer.dataset.id) {
 	var search = document.getElementById('search');
 	var searchResults = document.getElementById('search-results');
 	var allAnimeObject = document.getElementById('all-anime');
-	var allAnime = JSON.parse(allAnimeObject.text);
-	var animeTitles = Object.keys(allAnime);
 	var lastRequest = undefined;
 	var maxSearchResults = 14;
+	var allAnime = localStorage.getItem('allAnimeTitles');
+	var animeTitles = null;
+	var redownload = true;
 
 	window.similar = function(a, b) {
 	    var lengthA = a.length;
@@ -83,9 +84,31 @@ if(animeContainer && animeContainer.dataset.id) {
 		}
 	};
 
-	if(search) {
+	window.activateSearch = function() {
+		search.disabled = false;
 		search.select();
-
 		window.searchAnime();
+	};
+
+	window.downloadSearchList = function() {
+		kaze.getJSON('/api/searchlist', function(error, json) {
+			allAnime = json;
+			animeTitles = Object.keys(allAnime);
+			console.log(animeTitles.length);
+			localStorage.setItem('allAnimeTitles', JSON.stringify(allAnime));
+			window.activateSearch();
+		});
+	};
+
+	if(allAnime && allAnime !== null) {
+		allAnime = JSON.parse(allAnime);
+		animeTitles = Object.keys(allAnime);
+
+		if(animeTitles.length === parseInt(search.dataset.count))
+			window.activateSearch();
+		else
+			window.downloadSearchList();
+	} else {
+		window.downloadSearchList();
 	}
 }

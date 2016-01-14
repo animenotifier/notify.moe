@@ -94,14 +94,14 @@ exports.get = function(request, response) {
 			response.render({
 				user,
 				popularAnime: popularAnimeCached,
-				animeToIdJSONString: arn.animeToIdJSONString
+				animeToIdCount: arn.animeToIdCount
 			})
 		})
 	} else {
 		response.render({
 			user,
 			popularAnime: popularAnimeCached,
-			animeToIdJSONString: arn.animeToIdJSONString
+			animeToIdCount: arn.animeToIdCount
 		})
 	}
 }

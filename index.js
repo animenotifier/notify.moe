@@ -4,6 +4,7 @@ let aero = require('aero')
 let arn = require('./lib')
 let fs = require('fs')
 let path = require('path')
+let zlib = require('zlib')
 let bodyParser = require('body-parser')
 let request = require('request-promise')
 let RateLimiter = require('limiter').RateLimiter
@@ -122,7 +123,12 @@ arn.on('database ready', function() {
 		if(anime.title.english)
 			arn.animeToId[processTitle(anime.title.english)] = anime.id
 	}).then(() => {
+		arn.animeToIdCount = Object.keys(arn.animeToId).length
 		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
+
+		zlib.gzip(arn.animeToIdJSONString, function(error, gzippedJSON) {
+			arn.animeToIdJSONStringGzipped = gzippedJSON
+		})
 	})
 })
 
