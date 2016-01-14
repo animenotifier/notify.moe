@@ -26,11 +26,13 @@ if anime
 				li: a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank', rel='nofollow') anime-planet.com
 		
 		if usersWatching
-			h3.anime-header(title=usersWatching.length) Watching
-			each user in usersWatching
-				.user
-					a.ajax(href='/+' + user.nick, title=user.nick)
-						img.user-image(src='/images/elements/no-gravatar.png', alt=user.nick, data-image=user.gravatarURL)
+			h3.anime-header Currently watching 
+				span.users-count= `(${usersWatching.length})`
+			p.users
+				each user in usersWatching
+					.user
+						a.ajax(href='/+' + user.nick, title=user.nick)
+							img.user-image(src='/images/elements/no-gravatar.png', alt=user.nick, data-image=user.gravatarURL)
 		
 		if canEdit
 			h3.anime-header IDs
