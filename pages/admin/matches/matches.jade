@@ -27,6 +27,6 @@ else
 								a.ajax(href='/anime/' + match.id)= match.title
 							td.match-similarity= Math.round(match.similarity * 100) + ' %'
 							td.match-confirm
-								a(href=`javascript:window.confirmMatch('${provider}', '${match.providerId}');`)
+								a(href=`javascript:if(window.confirm('Are you sure you want to confirm this match: [${match.providerTitle}] => [${match.title}] ?')) window.confirmMatch('${provider}', '${match.providerId}');`, title='Confirm that this match is correct')
 									.glyphicon.glyphicon-check
 			p 

@@ -1,6 +1,5 @@
 'use strict'
 
-
 let natural = require('natural')
 
 exports.post = (request, response) => {
