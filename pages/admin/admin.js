@@ -11,6 +11,9 @@ let execute = Promise.promisify((command, callback) => {
 })
 
 exports.get = (request, response) => {
+	if(!arn.auth(request, response, 'editor'))
+		return
+
 	let user = request.user
 	let malMatches = []
 	let hbMatches = []

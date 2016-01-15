@@ -1,32 +1,27 @@
-if !user
-	p Not logged in.
-else if user.role !== 'admin' && user.role !== 'editor'
-	p Not authorized to view this page.
-else
-	section
-		header
-			h2 Editor Panel - Matches
-		
-		include ../header.jade
-		
-		each matchList, provider in matches
-			h3= provider
-			table.match-list
-				thead
-					tr
-						th Tried to find
-						th Best match
-						th Similarity
-				
-				tbody
-					each match in matchList
-						tr(data-id=match.providerId)
-							td.match-provider-title
-								a(href=linkPrefixes[provider] + match.providerId, target='_blank')= match.providerTitle
-							td.match-title
-								a.ajax(href='/anime/' + match.id)= match.title
-							td.match-similarity= Math.round(match.similarity * 100) + ' %'
-							td.match-confirm
-								a(href=`javascript:if(window.confirm('Are you sure you want to confirm this match: [${match.providerTitle}] => [${match.title}] ?')) window.confirmMatch('${provider}', '${match.providerId}');`, title='Confirm that this match is correct')
-									.glyphicon.glyphicon-check
-			p 
+section
+	header
+		h2 Editor Panel - Matches
+	
+	include ../header.jade
+	
+	each matchList, provider in matches
+		h3= provider
+		table.match-list
+			thead
+				tr
+					th Tried to find
+					th Best match
+					th Similarity
+			
+			tbody
+				each match in matchList
+					tr(data-id=match.providerId)
+						td.match-provider-title
+							a(href=linkPrefixes[provider] + match.providerId, target='_blank')= match.providerTitle
+						td.match-title
+							a.ajax(href='/anime/' + match.id)= match.title
+						td.match-similarity= Math.round(match.similarity * 100) + ' %'
+						td.match-confirm
+							a(href=`javascript:if(window.confirm('Are you sure you want to confirm this match: [${match.providerTitle}] => [${match.title}] ?')) window.confirmMatch('${provider}', '${match.providerId}');`, title='Confirm that this match is correct')
+								.glyphicon.glyphicon-check
+		p 

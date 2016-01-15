@@ -3,21 +3,14 @@
 let natural = require('natural')
 
 exports.post = (request, response) => {
+	if(!arn.auth(request, response, 'editor'))
+		return
+
 	let user = request.user
 	let animeId = parseInt(request.params[0])
 
 	if(!animeId) {
 		response.end('Invalid ID!')
-		return
-	}
-
-	if(!user) {
-		response.end('Not logged in!')
-		return
-	}
-
-	if(user.role !== 'admin' && user.role !== 'editor') {
-		response.end('Not authorized!')
 		return
 	}
 

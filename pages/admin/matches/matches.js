@@ -6,12 +6,10 @@ let Promise = require('bluebird')
 const listLength = 15
 
 exports.get = (request, response) => {
-	let user = request.user
-
-	if(!user) {
-		response.render({})
+	if(!arn.auth(request, response, 'editor'))
 		return
-	}
+
+	let user = request.user
 
 	let providers = [
 		'MyAnimeList',

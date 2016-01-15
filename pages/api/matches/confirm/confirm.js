@@ -1,19 +1,12 @@
 'use strict'
 
 exports.post = (request, response) => {
+	if(!arn.auth(request, response, 'editor'))
+		return
+
 	let user = request.user
 	let provider = request.body.provider
 	let providerId = request.body.providerId
-
-	if(!user) {
-		response.end('Not logged in!')
-		return
-	}
-
-	if(user.role !== 'admin' && user.role !== 'editor') {
-		response.end('Not authorized!')
-		return
-	}
 
 	if(!provider || !providerId) {
 		response.end('Invalid data!')
