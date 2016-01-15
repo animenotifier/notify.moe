@@ -1,7 +1,5 @@
 'use strict'
 
-let arn = require('../../../../lib')
-
 exports.post = (request, response) => {
 	let user = request.user
 
@@ -27,5 +25,5 @@ exports.post = (request, response) => {
 	// Add ID to the user's devices
 	user.devices[deviceId] = (new Date()).toISOString()
 
-	arn.setUserAsync(user.id, user).then(() => response.end('success'))
+	arn.set('Users', user.id, user).then(() => response.end('success'))
 }

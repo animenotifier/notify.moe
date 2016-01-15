@@ -15,7 +15,7 @@ database(aero, function(error) {
 			user.listProviders[listProviderName].userName = arn.fixListProviderUserName(userName)
 			console.log(user.listProviders[listProviderName].userName)
 
-			tasks.push(arn.setUser(user.id, user))
+			tasks.push(arn.set('Users', user.id, user))
         }
     }).then(function() {
 		Promise.all(tasks).then(() => console.log(`Finished updating ${tasks.length} users`))

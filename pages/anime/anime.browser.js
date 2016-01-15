@@ -91,7 +91,7 @@ if(animeContainer && animeContainer.dataset.id) {
 	};
 
 	window.downloadSearchList = function() {
-		kaze.getJSON('/api/searchlist', function(error, json) {
+		kaze.getJSON('/api/searchlist').then(function(json) {
 			allAnime = json;
 			animeTitles = Object.keys(allAnime);
 			console.log(animeTitles.length);

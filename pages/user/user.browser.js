@@ -12,14 +12,9 @@ window.loadAnimeList = function() {
 
 	var userName = window.location.pathname.substring(2);
 
-	kaze.getJSON('/api/animelist/' + userName, function(error, response) {
+	kaze.getJSON('/api/animelist/' + userName).then(function(response) {
 		if(response && response.error) {
 			animeList.innerText = 'Error loading your anime list: ' + response.error;
-			return;
-		}
-
-		if(error) {
-			animeList.innerText = 'Error: ' + error;
 			return;
 		}
 
@@ -117,6 +112,8 @@ window.loadAnimeList = function() {
 
 		animeList.appendChild(list);
 		kaze.ajaxifyLinks();
+	}).catch(function(error) {
+		animeList.innerText = 'Error: ' + error;
 	});
 };
 

@@ -1,7 +1,6 @@
 'use strict'
 
 let gravatar = require('gravatar')
-let arn = require('../../lib')
 
 exports.get = function(request, response) {
 	let user = request.user
@@ -12,7 +11,7 @@ exports.get = function(request, response) {
 		return
 	}
 
-	arn.getUserByNickAsync(viewUserNick)
+	arn.getUserByNick(viewUserNick)
 	.then(viewUser => {
 		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
 		response.render({

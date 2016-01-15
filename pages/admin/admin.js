@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../../lib')
+
 let Promise = require('bluebird')
 let exec = require('child_process').exec
 

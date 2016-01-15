@@ -19,17 +19,13 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 			key: key,
 			value: value,
 			old: old
-		}, function(error, response) {
-			if(error)
-				console.error(error.stack);
-
+		}).then(function(response) {
 			if(postSaveCallback)
 				postSaveCallback(key, response);
-
-			kaze.get('/_' + location.pathname, function(error, newPageCode) {
-				if(error)
-					console.error(error.stack);
-
+		}).catch(function(error) {
+			console.error(error);
+		}).then(function() {
+			kaze.get('/_' + location.pathname).then(function(newPageCode) {
 				var focusedElementId = document.activeElement.id;
 				var focusedElementValue = document.activeElement.value;
 
@@ -51,7 +47,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 
 				kaze.content.style.cursor = 'auto';
 				document.saving = false;
-			})
+			});
 		});
 	};
 

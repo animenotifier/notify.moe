@@ -1,6 +1,5 @@
 'use strict'
 
-let arn = require('../lib')
 let passport = require('passport')
 
 // Serialize
@@ -11,7 +10,7 @@ passport.serializeUser(function(request, user, done) {
 	user.ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress || ''
 	user.agent = request.headers['user-agent']
 
-	arn.setUserAsync(user.id, user).then(() => {
+	arn.set('Users', user.id, user).then(() => {
 		if(!user.ip) {
 			done(null, user.id)
 			return
@@ -23,7 +22,7 @@ passport.serializeUser(function(request, user, done) {
 			user.location = null
 		}).finally(() => {
 			// Save in database
-			arn.setUserAsync(user.id, user).then(() => {
+			arn.set('Users', user.id, user).then(() => {
 				done(null, user.id)
 			})
 		})

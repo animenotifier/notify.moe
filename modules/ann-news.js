@@ -3,7 +3,6 @@
 let request = require('request-promise')
 let xml2js = require('xml2js')
 let Promise = require('bluebird')
-let arn = require('../lib')
 
 module.exports = function(aero) {
 	let xmlParser = new xml2js.Parser({

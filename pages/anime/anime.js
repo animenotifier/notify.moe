@@ -1,6 +1,5 @@
 'use strict'
 
-let arn = require('../../lib')
 let Promise = require('bluebird')
 let gravatar = require('gravatar')
 let popularAnimeCached = []

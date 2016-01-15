@@ -1,6 +1,5 @@
 'use strict'
 
-let arn = require('../lib')
 let shortid = require('shortid')
 let passport = require('passport')
 let Promise = require('bluebird')
@@ -29,13 +28,14 @@ module.exports = function(aero) {
 				arn.get('GoogleToUser', google.id),
 				arn.get('EmailToUser', email)
 			])
-			.then(record => arn.getUser(record.userId, function(error, user) {
+			.then(record => arn.get('Users', record.userId).then(user => {
 				if(user && user.accounts)
 					user.accounts.google = google.id
 
-				done(error, user)
-			}))
-			.catch(error => {
+				done(undefined, user)
+			})).catch(error => {
+				console.error(error)
+
 				// New user
 				let now = new Date()
 				let user = {

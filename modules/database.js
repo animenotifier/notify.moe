@@ -2,7 +2,7 @@
 
 let Promise = require('bluebird')
 let aerospike = require('aerospike')
-let arn = require('../lib')
+
 
 module.exports = function(aero, callback) {
 	let db = aerospike.client({

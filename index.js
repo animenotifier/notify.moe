@@ -1,7 +1,8 @@
 'use strict'
 
+global.arn = require('./lib')
+
 let aero = require('aero')
-let arn = require('./lib')
 let fs = require('fs')
 let path = require('path')
 let zlib = require('zlib')
@@ -142,7 +143,7 @@ anilist.authorize().then(accessToken => {
 	anilist.checkForumReplies()
 })
 
-// Do a full import every 24 hours
+// Do a full import every 12 hours
 let anilistImport = function() {
 	if(!arn.db)
 		return Promise.reject('No database connection')
@@ -163,7 +164,7 @@ let anilistImport = function() {
 		}
 	})
 }
-setInterval(anilistImport, 24 * 60 * 60 * 1000)
+setInterval(anilistImport, 12 * 60 * 60 * 1000)
 
 // Load all modules
 fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(aero))

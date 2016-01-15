@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../../../lib')
+
 
 exports.get = (request, response) => {
 	response.writeHead(200, {

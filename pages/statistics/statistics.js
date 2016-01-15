@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../../lib')
+
 let increment = function(obj, key) {
 	if(obj.hasOwnProperty(key))
 		obj[key] += 1

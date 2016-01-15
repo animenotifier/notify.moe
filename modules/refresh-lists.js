@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../lib')
+
 let RateLimiter = require('limiter').RateLimiter
 let limiter = new RateLimiter(1, 1000)
 

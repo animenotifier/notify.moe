@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../../../lib')
+
 let natural = require('natural')
 
 exports.post = (request, response) => {

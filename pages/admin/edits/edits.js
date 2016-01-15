@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../../../lib')
+
 let Promise = require('bluebird')
 
 const listLength = 15

@@ -1,4 +1,5 @@
 var userName = document.getElementById('nick').value;
+
 makeSaveable('/api/users/me', function(key, value) {
 	switch(key) {
 		case 'nick':

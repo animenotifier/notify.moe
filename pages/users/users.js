@@ -1,11 +1,10 @@
 'use strict'
 
-let arn = require('../../lib')
 let gravatar = require('gravatar')
 let NodeCache = require('node-cache')
 
 let cache = new NodeCache({
-	stdTTL: 5 * 60
+	stdTTL: 1 * 60
 })
 
 exports.get = function(request, response) {

@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../../../../lib')
+
 
 exports.post = function(request, response) {
 	if(request.body.function !== 'save') {
@@ -32,7 +32,7 @@ exports.post = function(request, response) {
 			return
 		}
 
-		arn.changeNickAsync(user, value)
+		arn.changeNick(user, value)
 		.then(() => response.end(user.nick))
 		.catch(error => {
 			response.writeHead(409)
@@ -62,7 +62,7 @@ exports.post = function(request, response) {
 		user[key] = value
 	}
 
-	arn.setUserAsync(user.id, user)
+	arn.set('Users', user.id, user)
 		.then(() => response.end())
 		.catch(error => {
 			console.error(error.stack)

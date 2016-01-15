@@ -6,7 +6,7 @@ function subscribeOnServer(subscription) {
 
 	kaze.postJSON('/api/notifications/subscribe', {
 		endpoint: subscription.endpoint
-	}, function(error, response) {
+	}).then(function(response) {
 		console.log(response);
 	});
 }
@@ -17,7 +17,7 @@ function unsubscribeOnServer(subscription) {
 
 	kaze.postJSON('/api/notifications/unsubscribe', {
 		endpoint: subscription.endpoint
-	}, function(error, response) {
+	}).then(function(response) {
 		console.log(response);
 	});
 }
@@ -25,7 +25,7 @@ function unsubscribeOnServer(subscription) {
 function sendTestNotification() {
 	console.log('Sending test notification...')
 
-	kaze.get('/api/notifications/test', function(error, response) {
+	kaze.get('/api/notifications/test').then(function(response) {
 		// ...
 	})
 }

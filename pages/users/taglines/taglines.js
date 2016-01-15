@@ -1,6 +1,6 @@
 'use strict'
 
-let arn = require('../../../lib')
+
 let gravatar = require('gravatar')
 
 exports.get = function(request, response) {
