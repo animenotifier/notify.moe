@@ -31,7 +31,7 @@ self.addEventListener('push', function(event) {
 
 				data.notifications.forEach(function(notification) {
 					return self.registration.showNotification(notification.title, {
-						body: notification.message,
+						body: notification.body,
 						icon: notification.icon,
 						tag: notification.tag
 					});
@@ -41,12 +41,12 @@ self.addEventListener('push', function(event) {
 			console.error('Unable to retrieve data', err);
 
 			var title = 'An error occurred';
-			var message = 'We were unable to get the information for this push message';
+			var body = 'We were unable to get the information for this push message';
 			var icon = '/images/characters/arn-waifu.png';
 			var notificationTag = 'notification-error';
 
 			return self.registration.showNotification(title, {
-				body: message,
+				body: body,
 				icon: icon,
 				tag: notificationTag
 			});
