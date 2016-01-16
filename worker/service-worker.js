@@ -31,13 +31,16 @@ self.addEventListener('push', function(event) {
 					throw new Error();
 				}
 
-				data.notifications.forEach(function(notification) {
+				var tasks = data.notifications.map(function(notification) {
 					return self.registration.showNotification(notification.title, {
 						body: notification.body,
 						icon: notification.icon,
 						tag: notification.tag
 					});
 				});
+
+				if(tasks.length > 0)
+					return tasks[0];
 			});
 		}).catch(function(err) {
 			console.error('Unable to retrieve data', err);
