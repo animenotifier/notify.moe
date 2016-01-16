@@ -53,7 +53,7 @@ aero.get('manifest.json', (request, response) => {
 		}],
 		start_url: '/',
 		display: 'standalone',
-		gcm_sender_id: '941298467524'
+		gcm_sender_id: arn.apiKeys.gcm.senderID
 	})
 })
 

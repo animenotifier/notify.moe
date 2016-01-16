@@ -24,6 +24,11 @@ html(lang='en')
 					img(src='/images/elements/gomennasai.png', alt='Anime Notifier is not available in Japan yet.')
 				p アニメNotifierはまだ日本では利用できません。申し訳ございません。
 				p Anime Notifier is not available in Japan yet. I apologize for the inconvenience.
+		else if maintenance && !(user && user.role === 'admin')
+			.maintenance
+				span Sorry, currently under maintenance!
+				br
+				img(src='/images/elements/gomennasai.png', alt='Anime Notifier is not available in Japan yet.')
 		else
 			#container
 				//-#emergency -

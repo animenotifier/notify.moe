@@ -3,7 +3,7 @@
 exports.render = function(request, render) {
 	let user = request.user
 	let nav = []
-	
+
 	nav.push({
 		title: 'Dash',
 		url: '',
@@ -107,6 +107,7 @@ exports.render = function(request, render) {
 
 	render({
 		user,
-		nav
+		nav,
+		maintenance: arn.maintenance
 	})
 }
