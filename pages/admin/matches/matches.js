@@ -22,7 +22,7 @@ exports.get = (request, response) => {
 		return obj
 	}, {})
 
-	let tasks = providers.map(provider => arn.filter('Match' + provider, record => !record.edited).then(uneditedMatches => matches[provider] = uneditedMatches))
+	let tasks = providers.map(provider => arn.filter('Match' + provider, record => !record.edited && record.similarity !== 1).then(uneditedMatches => matches[provider] = uneditedMatches))
 
 	Promise.all(tasks).then(() => {
 		providers.forEach(provider => {
