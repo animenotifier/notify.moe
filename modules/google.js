@@ -6,13 +6,11 @@ let Promise = require('bluebird')
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 module.exports = function(aero) {
-	let apiKeys = require('../security/api-keys.json')
-
 	let googleConfig = Object.assign({
 	        callbackURL: '/auth/google/callback',
 			passReqToCallback: true
 	    },
-	    apiKeys.google
+	    arn.apiKeys.google
 	)
 
 	passport.use(new GoogleStrategy(

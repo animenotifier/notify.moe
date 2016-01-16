@@ -6,15 +6,13 @@ let Promise = require('bluebird')
 let FacebookStrategy = require('passport-facebook').Strategy
 
 module.exports = function(aero) {
-	let apiKeys = require('../security/api-keys.json')
-
 	let facebookConfig = Object.assign({
 	        callbackURL: '/auth/facebook/callback',
 			profileFields: ['id', 'name', 'email', 'gender', 'age_range'],
 	        enableProof: false,
 			passReqToCallback: true
 	    },
-	    apiKeys.facebook
+	    arn.apiKeys.facebook
 	)
 
 	passport.use(new FacebookStrategy(

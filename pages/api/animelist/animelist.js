@@ -18,7 +18,7 @@ exports.get = function(request, response) {
 		clearCache = true
 	}
 
-	return arn.getAnimeListByNickAsync(nick, clearCache).then(json => {
+	return arn.getAnimeListByNick(nick, clearCache).then(json => {
 		// Delete critical data
 		delete json.userId
 
