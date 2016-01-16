@@ -7,6 +7,8 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('push', function(event) {
+	console.log('Received push event:', event);
+
 	// Since there is no payload data with the first version
 	// of push messages, we'll grab some data from
 	// an API and use it to populate a notification
@@ -58,7 +60,8 @@ self.addEventListener('notificationclick', function(event) {
 	console.log('On notification click: ', event.notification);
 	// Android doesn't close the notification when you click on it
 	// See: http://crbug.com/463146
-	event.notification.close();
+	if(event.notification.close)
+		event.notification.close();
 
 	var url = '/';
 
