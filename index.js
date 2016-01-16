@@ -114,7 +114,7 @@ arn.on('new forum reply', function(link, userName) {
 arn.on('database ready', function() {
 	let processTitle = title => title.replace(/[^A-Za-z0-9.:!'" ]/g, ' ').replace(/  /g, ' ')
 	arn.animeToId = {}
-	arn.scan('Anime', anime => {
+	arn.forEach('Anime', anime => {
 		if(anime.type === 'Music')
 			return
 

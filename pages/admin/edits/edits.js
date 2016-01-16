@@ -1,6 +1,5 @@
 'use strict'
 
-
 let Promise = require('bluebird')
 
 const listLength = 15
@@ -14,7 +13,7 @@ exports.get = (request, response) => {
 
 	let scanBucket = bucketName => {
 		let providerName = bucketName.replace('Match', '')
-		return arn.scan(bucketName, record => {
+		return arn.forEach(bucketName, record => {
 			record.providerName = providerName
 
 			if(record.edited)

@@ -8,7 +8,7 @@ let limiter = new RateLimiter(1, 1000)
 let refreshAnimeLists = function() {
 	console.log('Refreshing anime lists...')
 
-	arn.scan('Users', function(user) {
+	arn.forEach('Users', function(user) {
 		if(!arn.isActiveUser(user))
 			return
 

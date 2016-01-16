@@ -27,17 +27,19 @@ exports.get = function(request, response) {
 			case 'countries':
 				addUser = user => {
 					if(!user.location)
-						return
+						return false
 
 					let country = user.location.countryName
 
 					if(!country || country === '-')
-						return
+						return false
 
 					if(categories.hasOwnProperty(country))
 						categories[country].push(user)
 					else
 						categories[country] = [user]
+
+					return true
 				}
 				break
 
@@ -47,6 +49,8 @@ exports.get = function(request, response) {
 						categories[user.providers.list].push(user)
 					else
 						categories[user.providers.list] = [user]
+
+					return true
 				}
 				break
 
@@ -80,6 +84,8 @@ exports.get = function(request, response) {
 						categories[categoryName].push(user)
 					else
 						categories[categoryName] = [user]
+
+					return true
 				}
 				break
 
@@ -88,14 +94,11 @@ exports.get = function(request, response) {
 				addUser = user => categories.All.push(user)
 		}
 
-		arn.scan('Users', function(user) {
-			if(!arn.isActiveUser(user))
-				return
+		arn.filter('Users', user => arn.isActiveUser(user) && addUser(user)).then(users => {
+			users.forEach(user => {
+				user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
+			})
 
-			user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
-
-			addUser(user)
-		}).then(function() {
 			// Sort by registration date
 			Object.keys(categories).forEach(categoryName => {
 				let category = categories[categoryName]

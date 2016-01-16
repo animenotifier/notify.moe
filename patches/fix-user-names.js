@@ -7,7 +7,7 @@ let arn = require('../lib')
 database(aero, function(error) {
 	let tasks = []
 
-    arn.scan('Users', function(user) {
+    arn.forEach('Users', function(user) {
 		let listProviderName = user.providers.list
         if(user.listProviders[listProviderName] && user.listProviders[listProviderName].userName) {
             let userName = user.listProviders[listProviderName].userName

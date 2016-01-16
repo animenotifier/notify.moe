@@ -7,7 +7,7 @@ let arn = require('../lib')
 database(aero, function(error) {
 	let tasks = []
 
-    arn.scan('Anime', function(anime) {
+    arn.forEach('Anime', function(anime) {
 		tasks.push(arn.remove('Anime', anime.id))
     }).then(function() {
 		console.log('Waiting...')

@@ -7,7 +7,7 @@ let popularAnimeCached = []
 let updatePopularAnime = function() {
 	let popularAnime = []
 
-	return arn.scan('Anime', anime => {
+	return arn.forEach('Anime', anime => {
 		if(anime.watching)
 			popularAnime.push(anime)
 	}).then(() => {
@@ -45,10 +45,10 @@ exports.get = function(request, response) {
 		let userQueryTasks = []
 
 		let otherTasks = {
-			HummingBird: arn.scan('MatchHummingBird', createScanFunction('HummingBird')),
-			MyAnimeList: arn.scan('MatchMyAnimeList', createScanFunction('MyAnimeList')),
-			AnimePlanet: arn.scan('MatchAnimePlanet', createScanFunction('AnimePlanet')),
-			Watching: arn.scan('AnimeLists', list => {
+			HummingBird: arn.forEach('MatchHummingBird', createScanFunction('HummingBird')),
+			MyAnimeList: arn.forEach('MatchMyAnimeList', createScanFunction('MyAnimeList')),
+			AnimePlanet: arn.forEach('MatchAnimePlanet', createScanFunction('AnimePlanet')),
+			Watching: arn.forEach('AnimeLists', list => {
 				if(!list.userId)
 					return
 

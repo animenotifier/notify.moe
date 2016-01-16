@@ -21,7 +21,7 @@ exports.get = function(request, response) {
 		airingDate: {}
 	}
 
-	arn.scan('Users', function(user) {
+	arn.forEach('Users', function(user) {
 		if(user.gender === 'male' || user.gender === 'female')
 			gender[user.gender] += 1
 		else

@@ -17,17 +17,12 @@ exports.get = (request, response) => {
 		'AnimePlanet'
 	]
 
-	let matches = {}
-	let tasks = []
+	let matches = providers.reduce((obj, provider) => {
+		obj[provider] = []
+		return obj
+	}, {})
 
-	providers.forEach(provider => {
-		matches[provider] = []
-
-		tasks.push(arn.scan('Match' + provider, record => {
-			if(!record.edited)
-				matches[provider].push(record)
-		}))
-	})
+	let tasks = providers.map(provider => arn.filter('Match' + provider, record => !record.edited).then(uneditedMatches => matches[provider] = uneditedMatches))
 
 	Promise.all(tasks).then(() => {
 		providers.forEach(provider => {
