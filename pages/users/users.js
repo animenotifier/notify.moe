@@ -1,11 +1,6 @@
 'use strict'
 
 let gravatar = require('gravatar')
-let NodeCache = require('node-cache')
-
-let cache = new NodeCache({
-	stdTTL: 1 * 60
-})
 
 exports.get = function(request, response) {
 	let orderBy = request.params[0]
@@ -13,7 +8,7 @@ exports.get = function(request, response) {
 	let now = new Date()
 	let cacheKey = `users:${orderBy}`
 
-	cache.get(cacheKey, function(error, categories) {
+	arn.userListCache.get(cacheKey, function(error, categories) {
 		if(!error && categories) {
 			response.render({
 				categories
@@ -94,22 +89,29 @@ exports.get = function(request, response) {
 				addUser = user => categories.All.push(user)
 		}
 
+		console.time('filter')
 		arn.filter('Users', user => arn.isActiveUser(user) && addUser(user)).then(users => {
+			console.timeEnd('filter')
+
+			console.time('gravatar')
 			users.forEach(user => {
 				user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
 			})
+			console.timeEnd('gravatar')
 
 			// Sort by registration date
+			console.time('sort')
 			Object.keys(categories).forEach(categoryName => {
 				let category = categories[categoryName]
 				category.sort((a, b) => new Date(a.registered) - new Date(b.registered))
 			})
+			console.timeEnd('sort')
 
 			response.render({
 				categories
 			})
 
-			cache.set(cacheKey, categories, () => {})
+			arn.userListCache.set(cacheKey, categories, () => {})
 		})
 	})
 }
