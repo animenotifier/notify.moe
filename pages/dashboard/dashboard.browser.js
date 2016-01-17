@@ -4,6 +4,6 @@ window.gravatarAvailable = function(available) {
 	gravatarText.className = available ? 'finished' : 'not-finished';
 };
 
-if(chrome.app.isInstalled) {
+if(window.chrome.app.isInstalled) {
 	document.getElementById('install-chrome').className = 'finished';
 }

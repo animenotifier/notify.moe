@@ -14,22 +14,76 @@ if(animeContainer && animeContainer.dataset.id) {
 	var animeTitles = null;
 	var redownload = true;
 
-	window.similar = function(a, b) {
-	    var lengthA = a.length;
-	    var lengthB = b.length;
+	// Copyright (c) 2015 Jordan Thomas
+	window.similar = function(s1, s2) {
+		var m = 0;
+		var i;
+		var j;
 
-	    var equivalency = 0;
+		// Exit early if either are empty.
+		if(s1.length === 0 || s2.length === 0) {
+			return 0;
+		}
 
-	    var minLength = (a.length > b.length) ? b.length : a.length;
-	    var maxLength = (a.length < b.length) ? b.length : a.length;
+		// Exit early if they're an exact match.
+		if(s1 === s2) {
+			return 1;
+		}
 
-	    for(var i = 0; i < minLength; i++) {
-	        if(a[i] === b[i]) {
-	            equivalency++;
-	        }
-	    }
+		var range = (Math.floor(Math.max(s1.length, s2.length) / 2)) - 1;
+		var s1Matches = new Array(s1.length);
+		var s2Matches = new Array(s2.length);
 
-	    return equivalency / maxLength;
+		for (i = 0; i < s1.length; i++) {
+			var low  = (i >= range) ? i - range : 0;
+			var high = (i + range <= s2.length) ? (i + range) : (s2.length - 1);
+
+			for (j = low; j <= high; j++) {
+				if(s1Matches[i] !== true && s2Matches[j] !== true && s1[i] === s2[j]) {
+					++m;
+					s1Matches[i] = s2Matches[j] = true;
+					break;
+				}
+			}
+		}
+
+		// Exit early if no matches were found.
+		if(m === 0) {
+			return 0;
+		}
+
+		// Count the transpositions.
+		var k = 0;
+		var numTrans = 0;
+
+		for(i = 0; i < s1.length; i++) {
+			if(s1Matches[i] === true) {
+				for (j = k; j < s2.length; j++) {
+					if(s2Matches[j] === true) {
+						k = j + 1;
+						break;
+					}
+				}
+
+				if(s1[i] !== s2[j]) {
+					++numTrans;
+				}
+			}
+		}
+
+		var weight = (m / s1.length + m / s2.length + (m - (numTrans / 2)) / m) / 3;
+		var l = 0;
+		var p = 0.1;
+
+		if(weight > 0.7) {
+			while(s1[l] === s2[l] && l < 4) {
+				++l;
+			}
+
+			weight = weight + l * p * (1 - weight);
+		}
+
+		return weight;
 	}
 
 	window.searchAnime = function() {
@@ -49,36 +103,56 @@ if(animeContainer && animeContainer.dataset.id) {
 
 		for(i = 0; i < animeTitles.length; i++) {
 			var title = animeTitles[i];
+			var titleLower = title.toLowerCase();
 
-			if(title.toLowerCase().indexOf(term) === -1)
-				continue;
+			if(titleLower === term) {
+				results.push({
+					title: title,
+					similarity: 1
+				});
+			} else if(term.length >= 2 && titleLower.startsWith(term)) {
+				results.push({
+					title: title,
+					similarity: 0.999
+				});
+			} else if(term.length >= 3 && titleLower.indexOf(term) !== -1) {
+				results.push({
+					title: title,
+					similarity: 0.989
+				});
+			} else {
+				var similarity = window.similar(titleLower, term);
 
-			results.push(title);
+				if(similarity >= 0.87) {
+					results.push({
+						title: title,
+						similarity: similarity
+					});
+				}
+			}
 
 			/*if(results.length >= maxSearchResults)
 				break;*/
 		}
 
 		results.sort(function(a, b) {
-			var similarityA = window.similar(a.toLowerCase(), term)
-			var similarityB = window.similar(b.toLowerCase(), term)
+			if(a.similarity === b.similarity)
+				return a.title.localeCompare(b.title)
 
-			if(similarityA === similarityB)
-				return a > b
-
-			return similarityA < similarityB
+			return a.similarity > b.similarity ? -1 : 1
 		});
 
 		if(results.length >= maxSearchResults)
 			results.length = maxSearchResults;
 
 		for(i = 0; i < results.length; i++) {
-			var title = results[i];
+			var result = results[i];
 
 			var element = document.createElement('a');
 			element.className = 'search-result ajax';
-			element.href = '/anime/' + allAnime[title];
-			element.appendChild(document.createTextNode(title));
+			element.href = '/anime/' + allAnime[result.title];
+			element.style.opacity = (result.similarity - 0.8) * 5;
+			element.appendChild(document.createTextNode(result.title));
 
 			searchResults.appendChild(element);
 		}
