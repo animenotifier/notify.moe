@@ -66,19 +66,18 @@ if anime
 								.glyphicon.glyphicon-search
 						td
 					
-					if user.role === 'admin'
-						- var title = providers.Nyaa ? providers.Nyaa.title : ''
-						- var proposedTitle = nyaa.buildNyaaTitle(anime.title.romaji)
-						tr
-							td Nyaa
-							td
-								input.save-on-change(id='Nyaa', type='text', value=title, placeholder=proposedTitle)
-							td
-								a(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
-									.glyphicon.glyphicon-search
-							td
-								if providers.Nyaa && providers.Nyaa.episodes !== undefined
-									span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
+					- var title = providers.Nyaa ? providers.Nyaa.title : ''
+					- var proposedTitle = nyaa.buildNyaaTitle(anime.title.romaji)
+					tr
+						td Nyaa
+						td
+							input.save-on-change(id='Nyaa', type='text', value=title, placeholder=proposedTitle)
+						td
+							a(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
+								.glyphicon.glyphicon-search
+						td
+							if providers.Nyaa && providers.Nyaa.episodes !== undefined
+								span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
 		//-
 			h3.anime-header Summary
 			if anime.summary

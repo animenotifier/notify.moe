@@ -43,6 +43,7 @@ aero.use(bodyParser.json())
 
 // Web app manifest
 aero.get('manifest.json', (request, response) => {
+	//response.writeHead(200, )
 	response.json({
 		name: 'Anime Notifier',
 		short_name: 'Anime Notifier',
