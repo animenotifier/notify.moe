@@ -50,6 +50,7 @@ exports.get = function(request, response) {
 			HummingBird: arn.forEach('MatchHummingBird', createScanFunction('HummingBird')),
 			MyAnimeList: arn.forEach('MatchMyAnimeList', createScanFunction('MyAnimeList')),
 			AnimePlanet: arn.forEach('MatchAnimePlanet', createScanFunction('AnimePlanet')),
+			Nyaa: arn.get('AnimeToNyaa', animeId).catch(error => undefined),
 			Watching: arn.forEach('AnimeLists', list => {
 				if(!list.userId)
 					return
@@ -84,12 +85,15 @@ exports.get = function(request, response) {
 				providers.HummingBird = providers.HummingBird[0]
 				providers.AnimePlanet = providers.AnimePlanet[0]
 
+				providers.Nyaa = result.Nyaa
+
 				Promise.all(userQueryTasks).then(usersWatching => {
 					response.render({
 						user,
 						anime,
 						providers,
 						usersWatching,
+						nyaa: arn.animeProviders.Nyaa,
 						canEdit: user && (user.role === 'admin' || user.role === 'editor')
 					})
 

@@ -24,6 +24,9 @@ if anime
 					
 			if providers.AnimePlanet
 				li: a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') anime-planet.com
+				
+			if user && providers.Nyaa
+				li: a.anime-website-link(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') nyaa.se
 		
 		if usersWatching
 			h3.anime-header Currently watching 
@@ -35,7 +38,7 @@ if anime
 							img.user-image(src='/images/elements/no-gravatar.png', alt=user.nick, data-image=user.gravatarURL)
 		
 		if canEdit
-			h3.anime-header List providers
+			h3.anime-header Links
 			table
 				tbody
 					tr
@@ -43,34 +46,39 @@ if anime
 						td
 							input.save-on-change(id='MyAnimeList', type='text', value=providers.MyAnimeList ? providers.MyAnimeList.providerId : '', disabled=(providers.MyAnimeList && providers.MyAnimeList.similarity === 1) ? true : false)
 						td
-							a(href='https://search.yahoo.com/search?p=site:myanimelist.net/anime+' + anime.title.english.replace(' ', '+'), target='_blank')
+							a(href='https://www.google.co.jp/search?q=site:myanimelist.net/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
 								.glyphicon.glyphicon-search
+						td
 					tr
 						td HummingBird
 						td
 							input.save-on-change(id='HummingBird', type='text', value=providers.HummingBird ? providers.HummingBird.providerId : '', disabled=(providers.HummingBird && providers.HummingBird.similarity === 1) ? true : false)
 						td
-							a(href='https://search.yahoo.com/search?p=site:hummingbird.me/anime+' + anime.title.english.replace(' ', '+'), target='_blank')
+							a(href='https://www.google.co.jp/search?q=site:hummingbird.me/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
 								.glyphicon.glyphicon-search
+						td
 					tr
 						td AnimePlanet
 						td
 							input.save-on-change(id='AnimePlanet', type='text', value=providers.AnimePlanet ? providers.AnimePlanet.providerId : '', disabled=(providers.AnimePlanet && providers.AnimePlanet.similarity === 1) ? true : false)
 						td
-							a(href='https://search.yahoo.com/search?p=site:anime-planet.com/anime+' + anime.title.english.replace(' ', '+'), target='_blank')
+							a(href='https://www.google.co.jp/search?q=site:anime-planet.com/anime+' + anime.title.english.replace(/ /g, '+'), target='_blank')
 								.glyphicon.glyphicon-search
-			
-			if user.role === 'admin'
-				h3.anime-header Anime providers
-				table
-					tbody
+						td
+					
+					if user.role === 'admin'
+						- var title = providers.Nyaa ? providers.Nyaa.title : ''
+						- var proposedTitle = nyaa.buildNyaaTitle(anime.title.romaji)
 						tr
 							td Nyaa
 							td
-								input.save-on-change(id='Nyaa', type='text', value='')
+								input.save-on-change(id='Nyaa', type='text', value=title, placeholder=proposedTitle)
 							td
-								a(href='https://search.yahoo.com/search?p=site:nyaa.se+' + anime.title.romaji.replace(' ', '+'), target='_blank')
+								a(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
 									.glyphicon.glyphicon-search
+							td
+								if providers.Nyaa && providers.Nyaa.episodes !== undefined
+									span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
 		//-
 			h3.anime-header Summary
 			if anime.summary

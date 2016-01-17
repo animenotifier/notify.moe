@@ -8,8 +8,8 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 		document.saving = true;
 
 		var key = item.id;
-		var value = item.value;
-		var old = item.dataset.old;
+		var value = item.value ? item.value : '';
+		var old = item.dataset.old ? item.dataset.old : '';
 
 		item.classList.add('saving');
 		kaze.content.style.cursor = 'wait';
@@ -29,7 +29,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 				var focusedElementId = document.activeElement.id;
 				var focusedElementValue = document.activeElement.value;
 
-				kaze.onResponse(newPageCode);
+				kaze.setContent(newPageCode);
 
 				// Re-focus previously selected element
 				if(focusedElementId) {
