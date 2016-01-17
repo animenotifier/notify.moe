@@ -1,3 +1,10 @@
+var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+window.getWeekDay = function(timeStamp) {
+	var date = new Date(timeStamp * 1000);
+	return weekDays[date.getDay()];
+};
+
 window.loadAnimeList = function() {
 	var animeList = document.getElementById('animeList');
 
@@ -95,6 +102,7 @@ window.loadAnimeList = function() {
 						var airingDate = document.createElement('span');
 						airingDate.className = 'airing-date';
 						airingDate.appendChild(document.createTextNode((anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ') + anime.airingDate.remainingString));
+						airingDate.title = window.getWeekDay(anime.airingDate.timeStamp);
 						item.appendChild(airingDate);
 					}
 				} else if(anime.episodes.available === 0) {
