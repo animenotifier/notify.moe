@@ -15,7 +15,7 @@ if(animeContainer && animeContainer.dataset.id) {
 	var redownload = true;
 
 	// Copyright (c) 2011 Andrei Mackenzie
-	window.levenshtein = function(a, b) {
+	var levenshtein = function(a, b) {
 		if(a.length === 0)
 			return b.length;
 
@@ -92,7 +92,7 @@ if(animeContainer && animeContainer.dataset.id) {
 			for(i = 0; i < animeTitles.length; i++) {
 				var title = animeTitles[i];
 				var titleLower = title.toLowerCase();
-				var distance = window.levenshtein(titleLower, term);
+				var distance = levenshtein(titleLower, term);
 
 				if(distance <= title.length / 2) {
 					results.push({
