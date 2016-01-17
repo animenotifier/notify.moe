@@ -6,25 +6,24 @@ if anime
 		
 			if anime.title.japanese !== anime.title.romaji
 				p.anime-japanese-title-container
-					a.anime-japanese-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org')= anime.title.japanese
+					a.anime-japanese-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org', rel='nofollow')= anime.title.japanese
 		
 		if anime.image
-			img.anime-db-image-left(src=anime.image, alt=anime.name)
-			img.anime-db-image(src=anime.image, alt=anime.name)
-			img.anime-db-image-right(src=anime.image, alt=anime.name)
+			.anime-db-image-container
+				img.anime-db-image(src=anime.image, alt=anime.name)
 		
 		h3.anime-header Links
 		ul.anime-websites
-			li: a.anime-website-link(href='https://anilist.co/anime/' + anime.id, target='_blank', rel='nofollow') anilist.co
+			li: a.anime-website-link(href='https://anilist.co/anime/' + anime.id, target='_blank') anilist.co
 			
 			if providers.HummingBird
-				li: a.anime-website-link(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank', rel='nofollow') hummingbird.me
+				li: a.anime-website-link(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') hummingbird.me
 					
 			if providers.MyAnimeList
-				li: a.anime-website-link(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank', rel='nofollow') myanimelist.net
+				li: a.anime-website-link(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank') myanimelist.net
 					
 			if providers.AnimePlanet
-				li: a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank', rel='nofollow') anime-planet.com
+				li: a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') anime-planet.com
 		
 		if usersWatching
 			h3.anime-header Currently watching 

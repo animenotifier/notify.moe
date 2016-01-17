@@ -3,20 +3,19 @@
 	width 100%
 	max-width 760px
 	padding 0 1em
-	text-align center
+	text-align left
 	border-radius 3px
 	box-sizing border-box
 
 .anime-db-title
-	text-align center
+	text-align left
 
 .anime-japanese-title-container
 	float left
 	width 100%
-	text-align center
-	margin-top -0.5em
-	margin-bottom 1em
-	padding 0
+	text-align left
+	margin-top -0.6em
+	margin-bottom 0.6em
 
 .anime-japanese-title
 	font-size 0.9em
@@ -24,10 +23,8 @@
 	color rgba(60, 60, 60, 0.5) !important
 
 .anime-db-image
-.anime-db-image-left
-.anime-db-image-right
-	width 100%
-	max-width 225px !important
+	//width 100%
+	//max-width 225px !important
 	border-radius 3px
 
 angle = 20deg
@@ -40,16 +37,6 @@ scale = 0.5
 	&:hover
 		filter saturate(130%)
 		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.8)
-
-.anime-db-image-left
-.anime-db-image-right
-	filter grayscale(1)
-
-.anime-db-image-left
-	transform translateX(-10px) scale(scale) rotateZ(angle * -1)
-
-.anime-db-image-right
-	transform translateX(10px) scale(scale) rotateZ(angle)
 
 .search-performance
 .anime-count
@@ -108,6 +95,7 @@ scale = 0.5
 		background linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.95) 100%)*/
 
 @media only screen and (max-width: 800px)
-	.anime-db-image-left
-	.anime-db-image-right
-		display none
+	.anime-db-title
+	.anime-db-image-container
+	.anime-japanese-title-container
+		text-align center
