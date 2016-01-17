@@ -14,77 +14,44 @@ if(animeContainer && animeContainer.dataset.id) {
 	var animeTitles = null;
 	var redownload = true;
 
-	// Copyright (c) 2015 Jordan Thomas
-	window.similar = function(s1, s2) {
-		var m = 0;
+	// Copyright (c) 2011 Andrei Mackenzie
+	window.levenshtein = function(a, b) {
+		if(a.length === 0)
+			return b.length;
+
+		if(b.length === 0)
+			return a.length;
+
+		var matrix = [];
+
+		// increment along the first column of each row
 		var i;
+		for(i = 0; i <= b.length; i++) {
+			matrix[i] = [i];
+		}
+
+		// increment each column in the first row
 		var j;
-
-		// Exit early if either are empty.
-		if(s1.length === 0 || s2.length === 0) {
-			return 0;
+		for(j = 0; j <= a.length; j++) {
+			matrix[0][j] = j;
 		}
 
-		// Exit early if they're an exact match.
-		if(s1 === s2) {
-			return 1;
-		}
-
-		var range = (Math.floor(Math.max(s1.length, s2.length) / 2)) - 1;
-		var s1Matches = new Array(s1.length);
-		var s2Matches = new Array(s2.length);
-
-		for (i = 0; i < s1.length; i++) {
-			var low  = (i >= range) ? i - range : 0;
-			var high = (i + range <= s2.length) ? (i + range) : (s2.length - 1);
-
-			for (j = low; j <= high; j++) {
-				if(s1Matches[i] !== true && s2Matches[j] !== true && s1[i] === s2[j]) {
-					++m;
-					s1Matches[i] = s2Matches[j] = true;
-					break;
+		// Fill in the rest of the matrix
+		for(i = 1; i <= b.length; i++) {
+			for(j = 1; j <= a.length; j++) {
+				if(b.charAt(i-1) === a.charAt(j-1)) {
+					matrix[i][j] = matrix[i-1][j-1];
+				} else {
+					matrix[i][j] =
+						Math.min(matrix[i-1][j-1] + 1, // substitution
+						Math.min(matrix[i][j-1] + 1, // insertion
+						matrix[i-1][j] + 1)); // deletion
 				}
 			}
 		}
 
-		// Exit early if no matches were found.
-		if(m === 0) {
-			return 0;
-		}
-
-		// Count the transpositions.
-		var k = 0;
-		var numTrans = 0;
-
-		for(i = 0; i < s1.length; i++) {
-			if(s1Matches[i] === true) {
-				for (j = k; j < s2.length; j++) {
-					if(s2Matches[j] === true) {
-						k = j + 1;
-						break;
-					}
-				}
-
-				if(s1[i] !== s2[j]) {
-					++numTrans;
-				}
-			}
-		}
-
-		var weight = (m / s1.length + m / s2.length + (m - (numTrans / 2)) / m) / 3;
-		var l = 0;
-		var p = 0.1;
-
-		if(weight > 0.7) {
-			while(s1[l] === s2[l] && l < 4) {
-				++l;
-			}
-
-			weight = weight + l * p * (1 - weight);
-		}
-
-		return weight;
-	}
+		return matrix[b.length][a.length];
+	};
 
 	window.getSearchResults = function(resolve, reject) {
 		var term = search.value.trim().toLowerCase();
@@ -92,12 +59,11 @@ if(animeContainer && animeContainer.dataset.id) {
 		if(!term) {
 			searchResults.innerHTML = animeTitles.length + ' anime in the database. Powered by Anilist.';
 			searchResults.className = 'anime-count';
-			return;
+			return reject(new Error('no search term'));
 		}
 
-		var i = 0;
 		var results = [];
-		var directResults = 0;
+		var i = 0;
 
 		for(i = 0; i < animeTitles.length; i++) {
 			var title = animeTitles[i];
@@ -106,41 +72,42 @@ if(animeContainer && animeContainer.dataset.id) {
 			if(titleLower === term) {
 				results.push({
 					title: title,
-					similarity: 1
+					distance: 0
 				});
-				directResults++;
 			} else if(term.length >= 2 && titleLower.startsWith(term)) {
 				results.push({
 					title: title,
-					similarity: 0.999
+					distance: 0.1
 				});
-				directResults++;
 			} else if(term.length >= 3 && titleLower.indexOf(term) !== -1) {
 				results.push({
 					title: title,
-					similarity: 0.989
+					distance: 0.2
 				});
-				directResults++;
-			} else if(directResults === 0) {
-				var similarity = window.similar(titleLower, term);
+			}
+		}
 
-				if(similarity >= 0.87) {
+		// Nothing found? Do a precise search:
+		if(results.length === 0 && term.length >= 4) {
+			for(i = 0; i < animeTitles.length; i++) {
+				var title = animeTitles[i];
+				var titleLower = title.toLowerCase();
+				var distance = window.levenshtein(titleLower, term);
+
+				if(distance <= title.length / 2) {
 					results.push({
 						title: title,
-						similarity: similarity
+						distance: distance
 					});
 				}
 			}
-
-			/*if(results.length >= maxSearchResults)
-				break;*/
 		}
 
 		results.sort(function(a, b) {
-			if(a.similarity === b.similarity)
+			if(a.distance === b.distance)
 				return a.title.localeCompare(b.title)
 
-			return a.similarity > b.similarity ? -1 : 1
+			return a.distance > b.distance ? 1 : -1
 		});
 
 		if(results.length >= maxSearchResults)
@@ -159,7 +126,7 @@ if(animeContainer && animeContainer.dataset.id) {
 			var element = document.createElement('a');
 			element.className = 'search-result ajax';
 			element.href = '/anime/' + allAnime[result.title];
-			element.style.opacity = (result.similarity - 0.8) * 5;
+			//element.style.opacity = (result.similarity - 0.8) * 5;
 			element.appendChild(document.createTextNode(result.title));
 
 			searchResults.appendChild(element);
@@ -167,7 +134,10 @@ if(animeContainer && animeContainer.dataset.id) {
 	};
 
 	window.searchAnime = function() {
-		return new Promise(window.getSearchResults).then(window.displaySearchResults);
+		return new Promise(window.getSearchResults).then(window.displaySearchResults).catch(function(error) {
+			if(error.message !== 'no search term')
+				console.error(error);
+		});
 	};
 
 	window.activateSearch = function() {
