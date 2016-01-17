@@ -43,8 +43,7 @@ aero.use(bodyParser.json())
 
 // Web app manifest
 aero.get('manifest.json', (request, response) => {
-	//response.writeHead(200, )
-	response.json({
+	let manifest = {
 		name: 'Anime Notifier',
 		short_name: 'Anime Notifier',
 		icons: [{
@@ -56,7 +55,17 @@ aero.get('manifest.json', (request, response) => {
 		display: 'standalone',
 		lang: 'en',
 		gcm_sender_id: arn.apiKeys.gcm.senderID
+	}
+
+	let manifestString = JSON.stringify(manifest)
+
+	response.writeHead(200, {
+		'Content-Type': 'application/json',
+		'Content-Length': Buffer.byteLength(manifestString, 'utf8'),
+		'Cache-Control': 'max-age=3600'
 	})
+
+	response.end(manifestString)
 })
 
 let serveFile = fileName => {
