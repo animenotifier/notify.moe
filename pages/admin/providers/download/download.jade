@@ -1,0 +1,18 @@
+section
+	header
+		h2 Editor Panel - Download providers
+	
+	include ../../header.jade
+	
+	each matchList, provider in matches
+		h3= provider + ' errors'
+		table.match-list
+			thead
+				tr
+					th Anime
+			
+			tbody
+				each match in matchList
+					tr(data-id=match.providerId)
+						td.match-title
+							a.ajax(href='/anime/' + match.id)= match.title
