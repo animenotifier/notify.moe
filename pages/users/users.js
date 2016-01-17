@@ -89,23 +89,16 @@ exports.get = function(request, response) {
 				addUser = user => categories.All.push(user)
 		}
 
-		console.time('filter')
 		arn.filter('Users', user => arn.isActiveUser(user) && addUser(user)).then(users => {
-			console.timeEnd('filter')
-
-			console.time('gravatar')
 			users.forEach(user => {
 				user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
 			})
-			console.timeEnd('gravatar')
 
 			// Sort by registration date
-			console.time('sort')
 			Object.keys(categories).forEach(categoryName => {
 				let category = categories[categoryName]
 				category.sort((a, b) => new Date(a.registered) - new Date(b.registered))
 			})
-			console.timeEnd('sort')
 
 			response.render({
 				categories

@@ -41,6 +41,7 @@ exports.post = function(request, response) {
 		return
 	} else if(key.startsWith('listProviders.') && key.endsWith('.userName')) {
 		value = arn.fixListProviderUserName(value)
+		arn.userListCache.flushAll()
 	} else if(key.startsWith('providers.')) {
 		arn.userListCache.flushAll()
 	}

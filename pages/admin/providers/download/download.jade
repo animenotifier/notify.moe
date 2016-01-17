@@ -10,9 +10,13 @@ section
 			thead
 				tr
 					th Anime
+					th Users
 			
 			tbody
 				each match in matchList
 					tr(data-id=match.providerId)
 						td.match-title
 							a.ajax(href='/anime/' + match.id)= match.title
+						td.match-watching
+							if animeIdToWatching[match.id] !== undefined
+								span= animeIdToWatching[match.id] + ' watching'
