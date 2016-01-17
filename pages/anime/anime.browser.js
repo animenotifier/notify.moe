@@ -120,7 +120,7 @@ if(animeContainer && animeContainer.dataset.id) {
 					title: title,
 					similarity: 0.989
 				});
-			} else {
+			} else if(results.length === 0) {
 				var similarity = window.similar(titleLower, term);
 
 				if(similarity >= 0.87) {
