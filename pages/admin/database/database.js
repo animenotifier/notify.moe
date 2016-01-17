@@ -16,13 +16,11 @@ exports.get = (request, response) => {
 	let user = request.user
 
 	Promise.props({
-		statusText: execute('sugoi stats')
+		statusText: execute('aql -c \'show sets\'')
 	}).then(result => {
-		let status = result.statusText.split('\n').map(line => line.split(':').map(value => value.trim()))
-
 		response.render({
 			user,
-			status
+			statusText: result.statusText
 		})
 	})
 }
