@@ -100,6 +100,7 @@ if(animeContainer && animeContainer.dataset.id) {
 
 		var i = 0;
 		var results = [];
+		var directResults = 0;
 
 		for(i = 0; i < animeTitles.length; i++) {
 			var title = animeTitles[i];
@@ -110,17 +111,20 @@ if(animeContainer && animeContainer.dataset.id) {
 					title: title,
 					similarity: 1
 				});
+				directResults++;
 			} else if(term.length >= 2 && titleLower.startsWith(term)) {
 				results.push({
 					title: title,
 					similarity: 0.999
 				});
+				directResults++;
 			} else if(term.length >= 3 && titleLower.indexOf(term) !== -1) {
 				results.push({
 					title: title,
 					similarity: 0.989
 				});
-			} else if(results.length === 0) {
+				directResults++;
+			} else if(directResults === 0) {
 				var similarity = window.similar(titleLower, term);
 
 				if(similarity >= 0.87) {
