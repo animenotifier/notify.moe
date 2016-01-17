@@ -95,9 +95,6 @@ if(animeContainer && animeContainer.dataset.id) {
 			return;
 		}
 
-		searchResults.className = '';
-		searchResults.innerHTML = '';
-
 		var i = 0;
 		var results = [];
 		var directResults = 0;
@@ -153,6 +150,9 @@ if(animeContainer && animeContainer.dataset.id) {
 	};
 
 	window.displaySearchResults = function(results) {
+		searchResults.className = '';
+		kaze.clear(searchResults);
+
 		for(i = 0; i < results.length; i++) {
 			var result = results[i];
 

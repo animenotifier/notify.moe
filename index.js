@@ -53,6 +53,7 @@ aero.get('manifest.json', (request, response) => {
 		}],
 		start_url: '/',
 		display: 'standalone',
+		lang: 'en',
 		gcm_sender_id: arn.apiKeys.gcm.senderID
 	})
 })
@@ -112,7 +113,7 @@ arn.on('new forum reply', function(link, userName) {
 
 // Create search index
 arn.on('database ready', function() {
-	let processTitle = title => title.replace(/[^A-Za-z0-9.:!'" ]/g, ' ').replace(/  /g, ' ')
+	let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
 	arn.animeToId = {}
 	arn.forEach('Anime', anime => {
 		if(anime.type === 'Music')
