@@ -5,7 +5,8 @@ if anime
 			h2.anime-db-title(title=anime.type)= anime.title.romaji
 		
 			if anime.title.japanese !== anime.title.romaji
-				h3.anime-japanese-title= anime.title.japanese
+				p.anime-japanese-title-container
+					a.anime-japanese-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org')= anime.title.japanese
 		
 		if anime.image
 			img.anime-db-image-left(src=anime.image, alt=anime.name)
