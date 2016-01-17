@@ -17,10 +17,9 @@ if user
 			li.finished#gravatar-text Add a gravatar image
 				img#gravatar-test-image(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
 		li(class=Object.keys(user.devices).length > 0 ? 'finished' : 'not-finished') Activate push notifications
-		li
-			a(href='javascript:chrome.webstore.install();') Install the Chrome extension
-			|  (will be updated soon)
-			
+		li#install-chrome
+			a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)') Install the Chrome extension
+	
 	h3 Follow the project
 	ul
 		li

@@ -3,3 +3,7 @@ window.gravatarAvailable = function(available) {
 	gravatarText.innerHTML = 'Add a gravatar image';
 	gravatarText.className = available ? 'finished' : 'not-finished';
 };
+
+if(chrome.app.isInstalled) {
+	document.getElementById('install-chrome').className = 'finished';
+}
