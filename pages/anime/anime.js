@@ -65,13 +65,13 @@ exports.get = function(request, response) {
 
 		let sortMatches = (a, b) => {
 			if((a.edited && b.edited) || (!a.edited && !b.edited))
-				return a.similarity > b.similarity ? 1 : -1
+				return a.similarity < b.similarity ? 1 : -1
 
 			if(a.edited)
-				return 1
+				return -1
 
 			// b edited
-			return -1
+			return 1
 		}
 
 		arn.get('Anime', animeId).then(anime => {
