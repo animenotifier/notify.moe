@@ -36,9 +36,11 @@ exports.get = function(request, response) {
 		let providers = {}
 
 		let createScanFunction = function(listProviderName) {
+			providers[listProviderName] = []
+
 			return match => {
 				if(match.id === animeId)
-					providers[listProviderName] = match
+					providers[listProviderName].push(match)
 			}
 		}
 
@@ -61,8 +63,27 @@ exports.get = function(request, response) {
 			})
 		}
 
+		let sortMatches = (a, b) => {
+			if((a.edited && b.edited) || (!a.edited && !b.edited))
+				return a.similarity > b.similarity ? 1 : -1
+
+			if(a.edited)
+				return 1
+
+			// b edited
+			return -1
+		}
+
 		arn.get('Anime', animeId).then(anime => {
 			Promise.props(otherTasks).then(result => {
+				providers.MyAnimeList.sort(sortMatches)
+				providers.HummingBird.sort(sortMatches)
+				providers.AnimePlanet.sort(sortMatches)
+
+				providers.MyAnimeList = providers.MyAnimeList[0]
+				providers.HummingBird = providers.HummingBird[0]
+				providers.AnimePlanet = providers.AnimePlanet[0]
+
 				Promise.all(userQueryTasks).then(usersWatching => {
 					response.render({
 						user,

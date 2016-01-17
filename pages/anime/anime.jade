@@ -60,16 +60,17 @@ if anime
 							a(href='https://search.yahoo.com/search?p=site:anime-planet.com/anime+' + anime.title.english.replace(' ', '+'), target='_blank')
 								.glyphicon.glyphicon-search
 			
-			h3.anime-header Anime providers
-			table
-				tbody
-					tr
-						td Nyaa
-						td
-							input.save-on-change(id='Nyaa', type='text', value='')
-						td
-							a(href='https://search.yahoo.com/search?p=site:nyaa.se+' + anime.title.romaji.replace(' ', '+'), target='_blank')
-								.glyphicon.glyphicon-search
+			if user.role === 'admin'
+				h3.anime-header Anime providers
+				table
+					tbody
+						tr
+							td Nyaa
+							td
+								input.save-on-change(id='Nyaa', type='text', value='')
+							td
+								a(href='https://search.yahoo.com/search?p=site:nyaa.se+' + anime.title.romaji.replace(' ', '+'), target='_blank')
+									.glyphicon.glyphicon-search
 		//-
 			h3.anime-header Summary
 			if anime.summary
