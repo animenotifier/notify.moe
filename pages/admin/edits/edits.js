@@ -12,7 +12,7 @@ exports.get = (request, response) => {
 	let edits = []
 
 	let scanBucket = bucketName => {
-		let providerName = bucketName.replace('Match', '')
+		let providerName = bucketName.replace('Match', '').replace('AnimeTo', '')
 		return arn.forEach(bucketName, record => {
 			record.providerName = providerName
 
@@ -24,7 +24,8 @@ exports.get = (request, response) => {
 	Promise.all([
 		scanBucket('MatchMyAnimeList'),
 		scanBucket('MatchHummingBird'),
-		scanBucket('MatchAnimePlanet')
+		scanBucket('MatchAnimePlanet'),
+		scanBucket('AnimeToNyaa')
 	]).then(() => {
 		edits.sort((a, b) => a.edited < b.edited ? 1 : -1)
 
