@@ -86,84 +86,88 @@ if(animeContainer && animeContainer.dataset.id) {
 		return weight;
 	}
 
-	window.searchAnime = function() {
-		return new Promise(function(resolve, reject) {
-			var term = search.value.trim().toLowerCase();
+	window.getSearchResults = function(resolve, reject) {
+		var term = search.value.trim().toLowerCase();
 
-			if(!term) {
-				searchResults.innerHTML = animeTitles.length + ' anime in the database. Powered by Anilist.';
-				searchResults.className = 'anime-count';
-				return;
-			}
+		if(!term) {
+			searchResults.innerHTML = animeTitles.length + ' anime in the database. Powered by Anilist.';
+			searchResults.className = 'anime-count';
+			return;
+		}
 
-			searchResults.className = '';
-			searchResults.innerHTML = '';
+		searchResults.className = '';
+		searchResults.innerHTML = '';
 
-			var i = 0;
-			var results = [];
-			var directResults = 0;
+		var i = 0;
+		var results = [];
+		var directResults = 0;
 
-			for(i = 0; i < animeTitles.length; i++) {
-				var title = animeTitles[i];
-				var titleLower = title.toLowerCase();
+		for(i = 0; i < animeTitles.length; i++) {
+			var title = animeTitles[i];
+			var titleLower = title.toLowerCase();
 
-				if(titleLower === term) {
+			if(titleLower === term) {
+				results.push({
+					title: title,
+					similarity: 1
+				});
+				directResults++;
+			} else if(term.length >= 2 && titleLower.startsWith(term)) {
+				results.push({
+					title: title,
+					similarity: 0.999
+				});
+				directResults++;
+			} else if(term.length >= 3 && titleLower.indexOf(term) !== -1) {
+				results.push({
+					title: title,
+					similarity: 0.989
+				});
+				directResults++;
+			} else if(directResults === 0) {
+				var similarity = window.similar(titleLower, term);
+
+				if(similarity >= 0.87) {
 					results.push({
 						title: title,
-						similarity: 1
+						similarity: similarity
 					});
-					directResults++;
-				} else if(term.length >= 2 && titleLower.startsWith(term)) {
-					results.push({
-						title: title,
-						similarity: 0.999
-					});
-					directResults++;
-				} else if(term.length >= 3 && titleLower.indexOf(term) !== -1) {
-					results.push({
-						title: title,
-						similarity: 0.989
-					});
-					directResults++;
-				} else if(directResults === 0) {
-					var similarity = window.similar(titleLower, term);
-
-					if(similarity >= 0.87) {
-						results.push({
-							title: title,
-							similarity: similarity
-						});
-					}
 				}
-
-				/*if(results.length >= maxSearchResults)
-					break;*/
 			}
 
-			results.sort(function(a, b) {
-				if(a.similarity === b.similarity)
-					return a.title.localeCompare(b.title)
+			/*if(results.length >= maxSearchResults)
+				break;*/
+		}
 
-				return a.similarity > b.similarity ? -1 : 1
-			});
+		results.sort(function(a, b) {
+			if(a.similarity === b.similarity)
+				return a.title.localeCompare(b.title)
 
-			if(results.length >= maxSearchResults)
-				results.length = maxSearchResults;
-
-			resolve(results);
-		}).then(function(results) {
-			for(i = 0; i < results.length; i++) {
-				var result = results[i];
-
-				var element = document.createElement('a');
-				element.className = 'search-result ajax';
-				element.href = '/anime/' + allAnime[result.title];
-				element.style.opacity = (result.similarity - 0.8) * 5;
-				element.appendChild(document.createTextNode(result.title));
-
-				searchResults.appendChild(element);
-			}
+			return a.similarity > b.similarity ? -1 : 1
 		});
+
+		if(results.length >= maxSearchResults)
+			results.length = maxSearchResults;
+
+		resolve(results);
+	};
+
+	window.displaySearchResults = function(results) {
+		for(i = 0; i < results.length; i++) {
+			var result = results[i];
+
+			var element = document.createElement('a');
+			element.className = 'search-result ajax';
+			element.href = '/anime/' + allAnime[result.title];
+			element.style.opacity = (result.similarity - 0.8) * 5;
+			element.appendChild(document.createTextNode(result.title));
+
+			searchResults.appendChild(element);
+		}
+	};
+
+	window.searchAnime = function() {
+		return new Promise(window.getSearchResults).then(window.displaySearchResults);
 	};
 
 	window.activateSearch = function() {
