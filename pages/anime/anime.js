@@ -2,6 +2,7 @@
 
 let Promise = require('bluebird')
 let gravatar = require('gravatar')
+let striptags = require('striptags')
 let popularAnimeCached = []
 
 let updatePopularAnime = function() {
@@ -76,6 +77,8 @@ exports.get = function(request, response) {
 		}
 
 		arn.get('Anime', animeId).then(anime => {
+			anime.description = striptags(anime.description, ['br'])
+
 			Promise.props(otherTasks).then(result => {
 				providers.MyAnimeList.sort(sortMatches)
 				providers.HummingBird.sort(sortMatches)

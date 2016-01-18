@@ -21,6 +21,7 @@
 		"request-promise": "*",
 		"session-file-store": "*",
 		"shortid": "*",
+		"striptags": "*",
 		"validator": "*",
 		"xml2js": "*"
 	},

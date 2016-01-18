@@ -11,22 +11,49 @@ if anime
 		if anime.image
 			.anime-db-image-container
 				img.anime-db-image(src=anime.image, alt=anime.name)
+				
+			if anime.description
+				h3.anime-header Summary
+				p!= anime.description
 		
-		h3.anime-header Links
+		if anime.youtubeId
+			h3.anime-header Video
+			.anime-trailer.video-container.widescreen
+				iframe.video(src='https://www.youtube.com/embed/' + anime.youtubeId + '?showinfo=0', frameborder='0', allowfullscreen)
+		
+		if anime.links
+			h3.anime-header Links
+			ul.anime-websites
+				each link in anime.links
+					li
+						a.anime-website-link(href=link.url, target='_blank')= link.title
+					
+				if user && providers.Nyaa && providers.Nyaa.episodes > 0
+					li
+						a.anime-website-link(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
+		
+		h3.anime-header List providers
 		ul.anime-websites
-			li: a.anime-website-link(href='https://anilist.co/anime/' + anime.id, target='_blank') anilist.co
+			li
+				a.anime-website-link(href='https://anilist.co/anime/' + anime.id, target='_blank') anilist.co
 			
 			if providers.HummingBird
-				li: a.anime-website-link(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') hummingbird.me
+				li
+					a.anime-website-link(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') hummingbird.me
 					
 			if providers.MyAnimeList
-				li: a.anime-website-link(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank') myanimelist.net
+				li
+					a.anime-website-link(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank') myanimelist.net
 					
 			if providers.AnimePlanet
-				li: a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') anime-planet.com
-				
-			if user && providers.Nyaa && providers.Nyaa.episodes > 0
-				li: a.anime-website-link(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') nyaa.se
+				li
+					a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') anime-planet.com
+		
+		if anime.genres
+			h3.anime-header Genres
+			ul
+				each genre in anime.genres
+					li= genre
 		
 		if usersWatching
 			h3.anime-header Currently watching 
