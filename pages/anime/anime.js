@@ -5,6 +5,8 @@ let gravatar = require('gravatar')
 let striptags = require('striptags')
 let popularAnimeCached = []
 
+let sourceRegEx = /\(Source: (.*?)\)/i
+
 let updatePopularAnime = function() {
 	let popularAnime = []
 
@@ -77,7 +79,14 @@ exports.get = function(request, response) {
 		}
 
 		arn.get('Anime', animeId).then(anime => {
-			anime.description = striptags(anime.description, ['br'])
+			anime.description = striptags(anime.description)
+
+			let descriptionSource = ''
+			let sourceMatch = anime.description.match(sourceRegEx)
+			if(sourceMatch !== null)
+				descriptionSource = sourceMatch[1]
+
+			anime.description = anime.description.replace(sourceRegEx, '').trim()
 
 			Promise.props(otherTasks).then(result => {
 				providers.MyAnimeList.sort(sortMatches)
@@ -96,6 +105,7 @@ exports.get = function(request, response) {
 						anime,
 						providers,
 						usersWatching,
+						descriptionSource,
 						nyaa: arn.animeProviders.Nyaa,
 						canEdit: user && (user.role === 'admin' || user.role === 'editor')
 					})
