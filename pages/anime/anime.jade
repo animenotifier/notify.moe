@@ -105,6 +105,9 @@ if anime
 						td
 							if providers.Nyaa && providers.Nyaa.episodes !== undefined
 								span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
+		
+		.sources
+			p Powered by Anilist.
 		//-
 			h3.anime-header Summary
 			if anime.summary
