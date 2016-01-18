@@ -13,8 +13,8 @@ database(aero, Promise.coroutine(function*(error) {
 
 	arn.forEach('Anime', anime => {
 		// Skip anime that have been imported already
-		if(anime.description)
-			return
+		//if(anime.description)
+		//	return
 
 		limiter.removeTokens(1, function() {
 			arn.listProviders.AniList.getAnimeDetails(anime.id).then(details => {
