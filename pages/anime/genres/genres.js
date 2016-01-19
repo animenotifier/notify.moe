@@ -23,6 +23,15 @@ repeatedly(30 * 60, () => {
 				console.log('Updating genre:', genre)
 
 				return arn.filter('Anime', anime => anime.genres && (';' + anime.genres.map(arn.fixGenre).join(';') + ';').indexOf(genreSearch) !== -1).then(animeList => {
+					animeList = animeList.map(anime => {
+						return {
+							id: anime.id,
+							title: anime.title,
+							startDate: anime.startDate,
+							watching: anime.watching
+						}
+					})
+
 					animeList.sort((a, b) => {
 						if(!a.startDate)
 							return 1
