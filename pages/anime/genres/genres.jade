@@ -1,0 +1,10 @@
+section
+	header
+		h2= genre ? (genre.charAt(0).toUpperCase() + genre.slice(1)) : 'Genre not specified'
+	
+	ul
+		each anime in animeList
+			li
+				a.ajax(href='/anime/' + anime.id)= anime.title.romaji
+				if anime.watching
+					span= ' (' + anime.watching + ' watching)'
