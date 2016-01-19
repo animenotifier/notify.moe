@@ -4,9 +4,10 @@ section
 	
 	include header.jade
 	
-	each category, categoryTitle in categories
-		h3(title=category.length + (category.length === 1 ? ' user' : ' users'))= categoryTitle
-		each user in category
-			.user
-				a.ajax(href='/+' + user.nick, title=user.nick)
-					img.user-image(src='/images/elements/no-gravatar.png', alt=user.nick, data-image=user.gravatarURL)
+	if categories
+		each category, categoryTitle in categories
+			h3(title=category.length + (category.length === 1 ? ' user' : ' users'))= categoryTitle
+			each user in category
+				.user
+					a.ajax(href='/+' + user.nick, title=user.nick)
+						img.user-image(src='/images/elements/no-gravatar.png', alt=user.nick, data-image=user.gravatarURL)
