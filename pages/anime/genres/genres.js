@@ -22,16 +22,22 @@ repeatedly(30 * 60, () => {
 			tasks.push(Promise.delay(tasks.length * 500).then(() => {
 				console.log('Updating genre:', genre)
 
-				return arn.filter('Anime', anime => anime.genres && (';' + anime.genres.map(arn.fixGenre).join(';') + ';').indexOf(genreSearch) !== -1).then(animeList => {
-					animeList = animeList.map(anime => {
-						return {
-							id: anime.id,
-							title: anime.title,
-							startDate: anime.startDate,
-							watching: anime.watching
-						}
-					})
+				let animeList = []
 
+				return arn.forEach('Anime', anime => {
+					if(!anime.genres)
+						return
+
+					if((';' + anime.genres.map(arn.fixGenre).join(';') + ';').indexOf(genreSearch) === -1)
+						return
+
+					animeList.push({
+						id: anime.id,
+						title: anime.title,
+						startDate: anime.startDate,
+						watching: anime.watching
+					})
+				}).then(() => {
 					animeList.sort((a, b) => {
 						if(!a.startDate)
 							return 1
