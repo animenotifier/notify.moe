@@ -48,7 +48,10 @@ arn.repeatedly(30 * 60, () => {
 						}
 					})
 
-					arn.set('Genres', genre, animeList)
+					arn.set('Genres', genre, {
+						genre,
+						animeList
+					})
 				})
 			})
 		})
@@ -63,14 +66,10 @@ exports.get = (request, response) => {
 		return
 	}
 
-	arn.get('Genres', genre).then(animeList => {
-		response.render({
-			genre,
-			animeList
-		})
+	arn.get('Genres', genre).then(record => {
+		response.render(record)
 	}).catch(error => {
 		console.error(error, error.stack)
 		response.render({})
-		return
 	})
 }
