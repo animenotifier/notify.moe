@@ -23,11 +23,11 @@ let updatePopularAnime = function() {
 	})
 }
 
-setInterval(function() {
+arn.repeatedly(5 * 60, function() {
 	updatePopularAnime().then(popularAnime => {
-		popularAnimeCached = popularAnime
+		arn.set('Cache', 'popularAnime', popularAnime)
 	})
-}, 60 * 1000)
+})
 
 const maxPopularAnime = 10
 
@@ -125,21 +125,11 @@ exports.get = function(request, response) {
 		return
 	}
 
-	if(popularAnimeCached.length === 0) {
-		updatePopularAnime().then(popularAnime => {
-			popularAnimeCached = popularAnime
-
-			response.render({
-				user,
-				popularAnime: popularAnimeCached,
-				animeToIdCount: arn.animeToIdCount
-			})
-		})
-	} else {
+	arn.get('Cache', 'popularAnime').then(popularAnime => {
 		response.render({
 			user,
-			popularAnime: popularAnimeCached,
+			popularAnime,
 			animeToIdCount: arn.animeToIdCount
 		})
-	}
+	})
 }

@@ -1,12 +1,11 @@
 'use strict'
 
 let Promise = require('bluebird')
-let repeatedly = require('../../../lib/utils/repeatedly')
 let fs = Promise.promisifyAll(require('fs'))
 let RateLimiter = require('limiter').RateLimiter
 let limiter = new RateLimiter(1, 2000)
 
-repeatedly(30 * 60, () => {
+arn.repeatedly(30 * 60, () => {
 	console.log('Updating genre cache...')
 
 	fs.readFileAsync('pages/anime/genres/genres.txt', 'utf8').then(genreText => {
@@ -29,12 +28,7 @@ repeatedly(30 * 60, () => {
 					if((';' + anime.genres.map(arn.fixGenre).join(';') + ';').indexOf(genreSearch) === -1)
 						return
 
-					animeList.push({
-						id: anime.id,
-						title: anime.title,
-						startDate: anime.startDate,
-						watching: anime.watching
-					})
+					animeList.push(anime)
 				}).then(() => {
 					animeList.sort((a, b) => {
 						if(a.watching === b.watching) {
