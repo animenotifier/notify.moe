@@ -1,42 +1,48 @@
 'use strict'
 
-let fs = require('fs')
-let AutoUpdateCache = require('../../../lib/classes/AutoUpdateCache')
+let Promise = require('bluebird')
+let repeatedly = require('../../../lib/utils/repeatedly')
+let fs = Promise.promisifyAll(require('fs'))
 
-let genres = new AutoUpdateCache(() => {
+let genres = {}
+
+repeatedly(30 * 60, () => {
 	console.log('Updating genre cache...')
 
-	let allGenres = {}
-	let genreList = fs.readFileSync('pages/anime/genres/genres.txt', 'utf8').split('\n')
-	let tasks = []
+	fs.readFileAsync('pages/anime/genres/genres.txt', 'utf8').then(genreText => {
+		let genreList = genreText.split('\n')
+		let tasks = []
 
-	genreList.forEach(genre => {
-		console.log('Updating cache for genre:', genre)
+		genreList.forEach(genre => {
+			console.log(genre)
 
-		genre = genre.toLowerCase()
-		let genreSearch = `;${genre};`
+			genre = arn.fixGenre(genre)
+			let genreSearch = `;${genre};`
 
-		tasks.push(arn.filter('Anime', anime => anime.genres && (';' + anime.genres.join(';').toLowerCase() + ';').indexOf(genreSearch) !== -1).then(animeList => {
-			animeList.sort((a, b) => {
-				if(!a.startDate)
-					return 1
+			tasks.push(Promise.delay(tasks.length * 250).then(() => {
+				console.log('Updating genre:', genre)
 
-				if(!b.startDate)
-					return -1
+				return arn.filter('Anime', anime => anime.genres && (';' + anime.genres.map(arn.fixGenre).join(';') + ';').indexOf(genreSearch) !== -1).then(animeList => {
+					animeList.sort((a, b) => {
+						if(!a.startDate)
+							return 1
 
-				return a.startDate > b.startDate ? -1 : 1
-			})
+						if(!b.startDate)
+							return -1
 
-			allGenres[genre] = animeList
-		}))
+						return a.startDate > b.startDate ? -1 : 1
+					})
+
+					genres[genre] = animeList
+				})
+			}))
+		})
 	})
-
-	return Promise.all(tasks).then(() => allGenres)
-}, 30 * 60, {})
+})
 
 exports.get = (request, response) => {
 	let genre = request.params[0]
-	let animeList = genres.cache[genre]
+	let animeList = genres[genre]
 
 	response.render({
 		genre,
