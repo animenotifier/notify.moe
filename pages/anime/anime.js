@@ -107,6 +107,7 @@ exports.get = function(request, response) {
 						usersWatching,
 						descriptionSource,
 						nyaa: arn.animeProviders.Nyaa,
+						fixGenre: arn.fixGenre,
 						canEdit: user && (user.role === 'admin' || user.role === 'editor')
 					})
 

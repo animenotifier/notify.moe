@@ -54,7 +54,7 @@ if anime
 			ul
 				each genre in anime.genres
 					li
-						a.ajax(href='/anime/genres/' + genre.toLowerCase())= genre
+						a.ajax(href='/anime/genres/' + fixGenre(genre))= genre
 		
 		if usersWatching
 			h3.anime-header Currently watching 
