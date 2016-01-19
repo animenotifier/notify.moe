@@ -3,19 +3,20 @@
 let Promise = require('bluebird')
 let repeatedly = require('../../../lib/utils/repeatedly')
 let fs = Promise.promisifyAll(require('fs'))
+let RateLimiter = require('limiter').RateLimiter
+let limiter = new RateLimiter(1, 2000)
 
 repeatedly(30 * 60, () => {
 	console.log('Updating genre cache...')
 
 	fs.readFileAsync('pages/anime/genres/genres.txt', 'utf8').then(genreText => {
 		let genreList = genreText.split('\n')
-		let tasks = []
 
 		genreList.forEach(genre => {
 			genre = arn.fixGenre(genre)
 			let genreSearch = `;${genre};`
 
-			tasks.push(Promise.delay(tasks.length * 1000).then(() => {
+			limiter.removeTokens(1, () => {
 				let animeList = []
 
 				return arn.forEach('Anime', anime => {
@@ -54,11 +55,8 @@ repeatedly(30 * 60, () => {
 					})
 
 					arn.set('Genres', genre, animeList)
-
-					if(global.gc)
-						global.gc()
 				})
-			}))
+			})
 		})
 	})
 })
