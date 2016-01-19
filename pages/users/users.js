@@ -113,24 +113,26 @@ let orderByMethods = {
 
 arn.repeatedly(5 * 60, () => {
 	Object.keys(orderByMethods).forEach(orderBy => {
-		let method = orderByMethods[orderBy]
-		let categories = method.getCategories()
-		let addUser = method.addUser
-		let cacheKey = `users:${orderBy}`
+		arn.cacheLimiter.removeTokens(1, () => {
+			let method = orderByMethods[orderBy]
+			let categories = method.getCategories()
+			let addUser = method.addUser
+			let cacheKey = `users:${orderBy}`
 
-		arn.filter('Users', user => arn.isActiveUser(user) && addUser(user, categories)).then(users => {
-			users.forEach(user => {
-				user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
-			})
+			arn.filter('Users', user => arn.isActiveUser(user) && addUser(user, categories)).then(users => {
+				users.forEach(user => {
+					user.gravatarURL = gravatar.url(user.email, {s: '50', r: 'x', d: '404'}, true)
+				})
 
-			// Sort by registration date
-			Object.keys(categories).forEach(categoryName => {
-				let category = categories[categoryName]
-				category.sort((a, b) => new Date(a.registered) - new Date(b.registered))
-			})
+				// Sort by registration date
+				Object.keys(categories).forEach(categoryName => {
+					let category = categories[categoryName]
+					category.sort((a, b) => new Date(a.registered) - new Date(b.registered))
+				})
 
-			arn.set('Cache', cacheKey, {
-				categories
+				arn.set('Cache', cacheKey, {
+					categories
+				})
 			})
 		})
 	})

@@ -123,23 +123,25 @@ arn.on('new forum reply', function(link, userName) {
 
 // Create search index
 arn.on('database ready', function() {
-	let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
-	arn.animeToId = {}
-	arn.forEach('Anime', anime => {
-		if(anime.type === 'Music')
-			return
+	arn.cacheLimiter.removeTokens(1, () => {
+		let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
+		arn.animeToId = {}
+		arn.forEach('Anime', anime => {
+			if(anime.type === 'Music')
+				return
 
-		if(anime.title.romaji)
-			arn.animeToId[processTitle(anime.title.romaji)] = anime.id
+			if(anime.title.romaji)
+				arn.animeToId[processTitle(anime.title.romaji)] = anime.id
 
-		if(anime.title.english)
-			arn.animeToId[processTitle(anime.title.english)] = anime.id
-	}).then(() => {
-		arn.animeToIdCount = Object.keys(arn.animeToId).length
-		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
+			if(anime.title.english)
+				arn.animeToId[processTitle(anime.title.english)] = anime.id
+		}).then(() => {
+			arn.animeToIdCount = Object.keys(arn.animeToId).length
+			arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
 
-		zlib.gzip(arn.animeToIdJSONString, function(error, gzippedJSON) {
-			arn.animeToIdJSONStringGzipped = gzippedJSON
+			zlib.gzip(arn.animeToIdJSONString, function(error, gzippedJSON) {
+				arn.animeToIdJSONStringGzipped = gzippedJSON
+			})
 		})
 	})
 })

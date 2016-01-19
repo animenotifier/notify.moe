@@ -2,8 +2,6 @@
 
 let Promise = require('bluebird')
 let fs = Promise.promisifyAll(require('fs'))
-let RateLimiter = require('limiter').RateLimiter
-let limiter = new RateLimiter(1, 2000)
 
 arn.repeatedly(30 * 60, () => {
 	console.log('Updating genre cache...')
@@ -15,7 +13,7 @@ arn.repeatedly(30 * 60, () => {
 			genre = arn.fixGenre(genre)
 			let genreSearch = `;${genre};`
 
-			limiter.removeTokens(1, () => {
+			arn.cacheLimiter.removeTokens(1, () => {
 				let animeList = []
 
 				return arn.forEach('Anime', anime => {
