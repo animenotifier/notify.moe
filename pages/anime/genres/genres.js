@@ -19,7 +19,7 @@ repeatedly(30 * 60, () => {
 			genre = arn.fixGenre(genre)
 			let genreSearch = `;${genre};`
 
-			tasks.push(Promise.delay(tasks.length * 250).then(() => {
+			tasks.push(Promise.delay(tasks.length * 500).then(() => {
 				console.log('Updating genre:', genre)
 
 				return arn.filter('Anime', anime => anime.genres && (';' + anime.genres.map(arn.fixGenre).join(';') + ';').indexOf(genreSearch) !== -1).then(animeList => {
