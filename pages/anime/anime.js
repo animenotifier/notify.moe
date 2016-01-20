@@ -129,8 +129,8 @@ let updateAllAnimePages = () => {
 }
 
 // Repeatedly
-arn.repeatedly(5 * 60, updatePopularAnime)
-arn.repeatedly(5 * 60 * 60, updateAllAnimePages)
+//arn.repeatedly(5 * 60, updatePopularAnime)
+//arn.repeatedly(5 * 60 * 60, updateAllAnimePages)
 
 exports.get = function(request, response) {
 	let user = request.user
