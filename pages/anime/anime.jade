@@ -1,4 +1,6 @@
-if anime
+if error === 404
+	p Anime pages are currently under maintenance. Sorry for the inconvenience.
+else if anime
 	section.anime-container(data-id=anime.id)
 	
 		header
@@ -110,7 +112,7 @@ if anime
 		.sources
 			p Powered by Anilist.
 				if descriptionSource
-					span= ' Summary by ' + descriptionSource + '.'
+					span= ' Summary by ' + summarySource + '.'
 		//-
 			h3.anime-header Summary
 			if anime.summary
