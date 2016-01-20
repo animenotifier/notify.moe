@@ -3,12 +3,9 @@ function getGravatarImages() {
 
 	for(var i = 0; i < images.length; ++i) {
 		var element = images[i];
-		var oldSource = element.src;
 
 		element.onerror = function() {
-			this.src = oldSource;
+			this.src = '/images/elements/no-gravatar.png';
 		};
-
-		element.src = element.dataset.image;
 	}
 }
