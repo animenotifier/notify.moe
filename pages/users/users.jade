@@ -8,6 +8,5 @@ section
 		each category, categoryTitle in categories
 			h3(title=category.length + (category.length === 1 ? ' user' : ' users'))= categoryTitle
 			each user in category
-				.user
-					a.ajax(href='/+' + user.nick, title=user.nick)
-						img.user-image(src=user.gravatarURL, alt='')
+				a.ajax.user(href='/+' + user.nick, title=user.nick)
+					img.user-image(src=user.gravatarURL, alt='')
