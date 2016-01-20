@@ -63,9 +63,8 @@ else if anime
 				span.users-count= `(${usersWatching.length})`
 			p.users
 				each user in usersWatching
-					.user
-						a.ajax(href='/+' + user.nick, title=user.nick)
-							img.user-image(src=user.gravatarURL, alt='')
+					a.user.ajax(href='/+' + user.nick, title=user.nick)
+						img.user-image(src=user.gravatarURL, alt='')
 		
 		if canEdit
 			h3.anime-header Links
