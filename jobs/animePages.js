@@ -103,9 +103,7 @@ let updateAllAnimePages = () => {
 		if(anime.pageGenerated && now.getTime() - (new Date(anime.pageGenerated)).getTime() < animePageCacheTime)
 			return
 
-		arn.cacheLimiter.removeTokens(1, () => {
-			updateAnimePage(anime)
-		})
+		updateAnimePage(anime)
 	})
 }
 
