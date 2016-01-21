@@ -122,7 +122,7 @@ arn.on('new forum reply', function(link, userName) {
 })
 
 // Create search index
-arn.on('database ready', function() {
+arn.db.ready.then(() => {
 	arn.cacheLimiter.removeTokens(1, () => {
 		let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
 		arn.animeToId = {}
