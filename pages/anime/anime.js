@@ -132,34 +132,37 @@ let updateAllAnimePages = () => {
 //arn.repeatedly(5 * 60, updatePopularAnime)
 //arn.repeatedly(5 * 60 * 60, updateAllAnimePages)
 
-exports.get = function(request, response) {
+exports.get = function*(request, response) {
 	let user = request.user
 	let animeId = parseInt(request.params[0])
 
 	if(animeId) {
-		arn.get('AnimePages', animeId).then(animePage => {
+		try {
+			let animePage = yield arn.get('AnimePages', animeId)
+
 			response.render(Object.assign({
 				user,
 				fixGenre: arn.fixGenre,
 				nyaa: arn.animeProviders.Nyaa,
 				canEdit: user && (user.role === 'admin' || user.role === 'editor')
 			}, animePage))
-		}).catch(error => {
+		} catch(error) {
 			console.error(error, error.stack)
 
 			response.render({
 				user,
 				error: 404
 			})
-		})
+		}
+
 		return
 	}
 
-	arn.get('Cache', 'popularAnime').then(popularAnime => {
-		response.render({
-			user,
-			popularAnime,
-			animeToIdCount: arn.animeToIdCount
-		})
+	let popularAnime = yield arn.get('Cache', 'popularAnime')
+
+	response.render({
+		user,
+		popularAnime,
+		animeToIdCount: arn.animeToIdCount
 	})
 }

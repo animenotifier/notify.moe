@@ -1,28 +1,15 @@
 'use strict'
 
-let Promise = require('bluebird')
-let exec = require('child_process').exec
-
-let execute = Promise.promisify((command, callback) => {
-    exec(command, function(error, stdout, stderr) {
-		callback(error, stdout)
-	})
-})
-
-exports.get = (request, response) => {
+exports.get = function*(request, response) {
 	if(!arn.auth(request, response, 'editor'))
 		return
 
 	let user = request.user
+	let statusText = yield arn.execute('sugoi stats')
+	let status = statusText.trim().split('\n').map(line => line.split(':').map(value => value.trim()))
 
-	Promise.props({
-		statusText: execute('sugoi stats')
-	}).then(result => {
-		let status = result.statusText.split('\n').map(line => line.split(':').map(value => value.trim()))
-
-		response.render({
-			user,
-			status
-		})
+	response.render({
+		user,
+		status
 	})
 }

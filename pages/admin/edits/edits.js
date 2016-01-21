@@ -4,7 +4,7 @@ let Promise = require('bluebird')
 
 const listLength = 15
 
-exports.get = (request, response) => {
+exports.get = function*(request, response) {
 	if(!arn.auth(request, response, 'editor'))
 		return
 
@@ -21,23 +21,23 @@ exports.get = (request, response) => {
 		})
 	}
 
-	Promise.all([
+	yield [
 		scanBucket('MatchMyAnimeList'),
 		scanBucket('MatchHummingBird'),
 		scanBucket('MatchAnimePlanet'),
 		scanBucket('AnimeToNyaa')
-	]).then(() => {
-		edits.sort((a, b) => a.edited < b.edited ? 1 : -1)
+	]
 
-		let getUsers = edits.map(edit => {
-			return arn.get('Users', edit.editedBy).then(editor => edit.editedBy = editor)
-		})
+	edits.sort((a, b) => a.edited < b.edited ? 1 : -1)
 
-		Promise.all(getUsers).then(() => {
-			response.render({
-				user,
-				edits
-			})
-		})
+	let getUsers = edits.map(edit => {
+		return arn.get('Users', edit.editedBy).then(editor => edit.editedBy = editor)
+	})
+
+	yield Promise.all(getUsers)
+
+	response.render({
+		user,
+		edits
 	})
 }

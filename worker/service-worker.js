@@ -16,8 +16,8 @@ self.addEventListener('push', function(event) {
 	// of push messages, we'll grab some data from
 	// an API and use it to populate a notification
 	event.waitUntil(
-		fetch('/api/notifications', {
-			credentials: 'include'
+		fetch('https://notify.moe/api/notifications', {
+			credentials: 'same-origin'
 		}).then(function(response) {
 			if(response.status !== 200) {
 				// Either show a message to the user explaining the error

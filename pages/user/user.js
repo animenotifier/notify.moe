@@ -2,7 +2,7 @@
 
 let gravatar = require('gravatar')
 
-exports.get = function(request, response) {
+exports.get = function*(request, response) {
 	let user = request.user
 	let viewUserNick = request.params[0]
 
@@ -11,16 +11,18 @@ exports.get = function(request, response) {
 		return
 	}
 
-	arn.getUserByNick(viewUserNick)
-	.then(viewUser => {
+	try {
+		let viewUser = yield arn.getUserByNick(viewUserNick)
 		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
+
 		response.render({
 			user,
 			viewUser
 		})
-	}).catch(error => {
+	} catch(error) {
 		console.error(error.stack)
-		response.render({ user })
-		return
-	})
+		response.render({
+			user
+		})
+	}
 }
