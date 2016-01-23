@@ -27,7 +27,7 @@ aero.preRoute(function(request, response) {
 })
 
 // Log requests
-aero.use(function(request, response, next) {
+/*aero.use(function(request, response, next) {
 	let start = new Date()
 	next()
 	let end = new Date()
@@ -36,7 +36,7 @@ aero.use(function(request, response, next) {
 		console.log(request.url, '|', end - start, 'ms', '|', request.user.nick)
 	else
 		console.log(request.url, '|', end - start, 'ms')
-})
+})*/
 
 // For POST requests
 aero.use(bodyParser.json())
