@@ -7,7 +7,7 @@ let updatePopularAnime = function() {
 
 	let popularAnime = []
 
-	return arn.forEach('Anime', anime => {
+	arn.forEach('Anime', anime => {
 		if(anime.watching)
 			popularAnime.push(anime)
 	}).then(() => {
@@ -23,4 +23,6 @@ let updatePopularAnime = function() {
 	})
 }
 
-arn.repeatedly(5 * 60, updatePopularAnime)
+arn.repeatedly(5 * 60, () => {
+	arn.cacheLimiter.removeTokens(1, updatePopularAnime)
+})

@@ -8,7 +8,7 @@ const animePageCacheTime = 60 * 60 * 1000
 const sourceRegEx = /\(Source: (.*?)\)/i
 
 let updateAnimePage = anime => {
-	console.log(`Updating anime page ${anime.id} [${anime.title.romaji}]`)
+	//console.log(`Updating anime page ${anime.id}`)
 
 	let providers = {}
 
@@ -91,7 +91,9 @@ let updateAnimePage = anime => {
 			})
 
 			// Save anime page
-			return arn.set('AnimePages', anime.id, animePage)
+			return arn.set('AnimePages', anime.id, animePage).then(() => {
+				console.log(`Updated anime page ${anime.id}`)
+			})
 		})
 	})
 }
@@ -103,7 +105,9 @@ let updateAllAnimePages = () => {
 		if(anime.pageGenerated && now.getTime() - (new Date(anime.pageGenerated)).getTime() < animePageCacheTime)
 			return
 
-		updateAnimePage(anime)
+		arn.cacheLimiter.removeTokens(1, () => {
+			updateAnimePage(anime)
+		})
 	})
 }
 
