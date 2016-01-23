@@ -27,16 +27,18 @@ aero.preRoute(function(request, response) {
 })
 
 // Log requests
-/*aero.use(function(request, response, next) {
-	let start = new Date()
-	next()
-	let end = new Date()
+if(!arn.production) {
+	aero.use(function(request, response, next) {
+		let start = new Date()
+		next()
+		let end = new Date()
 
-	if(request.user && request.user.nick)
-		console.log(request.url, '|', end - start, 'ms', '|', request.user.nick)
-	else
-		console.log(request.url, '|', end - start, 'ms')
-})*/
+		if(request.user && request.user.nick)
+			console.log(request.url, '|', end - start, 'ms', '|', request.user.nick)
+		else
+			console.log(request.url, '|', end - start, 'ms')
+	})
+}
 
 // For POST requests
 aero.use(bodyParser.json())
