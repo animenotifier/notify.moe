@@ -7,7 +7,7 @@ let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 module.exports = function(aero) {
 	let googleConfig = Object.assign({
-	        callbackURL: 'https://notify.moe/auth/google/callback',
+	        callbackURL: arn.production ? 'https://notify.moe/auth/google/callback' : '/auth/google/callback',
 			passReqToCallback: true
 	    },
 	    arn.apiKeys.google

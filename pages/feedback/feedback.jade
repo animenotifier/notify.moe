@@ -1,6 +1,10 @@
-section
-	header
-		h2 Feedback
-	
-	textarea.feedback(placeholder="Did something go wrong?")
-	button Send
+if !user
+	p Not logged in.
+else
+	section
+		header
+			h2 Feedback
+		
+		textarea#feedback(placeholder="Did something go wrong?")
+		p
+			button#send-feedback(onclick='window.sendFeedback();') Send

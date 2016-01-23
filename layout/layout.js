@@ -94,6 +94,14 @@ exports.render = function(request, render) {
 			tooltip: 'Roadmap'
 		})
 
+		nav.push({
+			title: '',
+			url: 'feedback',
+			icon: 'comment',
+			float: 'right',
+			tooltip: 'Feedback'
+		})
+
 		if(user.role === 'admin' || user.role === 'editor') {
 			nav.push({
 				title: '',
