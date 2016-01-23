@@ -7,7 +7,7 @@ let FacebookStrategy = require('passport-facebook').Strategy
 
 module.exports = function(aero) {
 	let facebookConfig = Object.assign({
-	        callbackURL: '/auth/facebook/callback',
+	        callbackURL: 'https://notify.moe/auth/facebook/callback',
 			profileFields: ['id', 'name', 'email', 'gender', 'age_range'],
 	        enableProof: false,
 			passReqToCallback: true
