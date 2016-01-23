@@ -56,8 +56,8 @@ let orderByMethods = {
 		getCategories: () => {
 			return {
 				'AniList': [],
-				'MyAnimeList': [],
 				'HummingBird': [],
+				'MyAnimeList': [],
 				'AnimePlanet': []
 			}
 		},
