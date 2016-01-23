@@ -1,6 +1,6 @@
 'use strict'
 
-let Promise = require('Promise')
+let Promise = require('bluebird')
 let natural = require('natural')
 
 let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
@@ -24,6 +24,18 @@ let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
 		return yield arn.remove(bucket, oldProviderId)
 	}
 
+	let removeOldAndSave = match => {
+		let verb = 'edited'
+		if(!oldProviderId || oldProviderId === NaN)
+			verb = 'added'
+		console.log(`${user.nick} ${verb} ${request.body.key} ID of '${anime.title.romaji}' (https://notify.moe/anime/${anime.id}):`, verb === 'added' ? providerId : `${oldProviderId} => ${providerId}`)
+
+		if(oldProviderId !== NaN)
+			return arn.remove(bucket, oldProviderId).catch(error => null).finally(() => arn.set(bucket, providerId, match))
+		else
+			return arn.set(bucket, providerId, match)
+	}
+
 	try {
 		let match = yield arn.get(bucket, providerId)
 
@@ -33,19 +45,10 @@ let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
 		match.edited = (new Date()).toISOString()
 		match.editedBy = user.id
 
-		let verb = 'edited'
-		if(!oldProviderId || oldProviderId === NaN)
-			verb = 'added'
-
-		console.log(`${user.nick} ${verb} ${request.body.key} ID of '${anime.title.romaji}' (https://notify.moe/anime/${anime.id}):`, verb === 'added' ? providerId : `${oldProviderId} => ${providerId}`)
-
-		if(oldProviderId !== NaN)
-			yield arn.remove(bucket, oldProviderId).catch(error => null).finally(() => arn.set(bucket, providerId, match))
-		else
-			yield arn.set(bucket, providerId, match)
+		yield removeOldAndSave(match)
 	} catch(error) {
 		if(error && error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND') {
-			return removeOldAndSave({
+			return yield removeOldAndSave({
 				id: anime.id,
 				title: anime.title.romaji,
 				similarity: null,
@@ -61,8 +64,6 @@ let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
 })
 
 exports.post = (request, response) => {
-	console.log('ROUTE HANDLER')
-
 	if(!arn.auth(request, response, 'editor'))
 		return
 
