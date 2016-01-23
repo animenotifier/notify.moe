@@ -100,6 +100,27 @@ let orderByMethods = {
 		addUser: getAddUserFunction('joindate')
 	},
 
+	staff: {
+		getCategories: () => {
+			return {
+				'Developers': [],
+				'Editors': []
+			}
+		},
+
+		addUser: (user, categories) => {
+			if(user.role === 'admin') {
+				categories.Developers.push(user)
+				return true
+			} else if(user.role === 'editor') {
+				categories.Editors.push(user)
+				return true
+			}
+
+			return false
+		}
+	},
+
 	default: {
 		getCategories: () => {
 			return {
