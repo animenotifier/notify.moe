@@ -27,10 +27,12 @@ section
 			Therefore you need to have watched the latest episode of that anime to receive notifications.
 			
 		dt Why do I get different accounts for Google and Facebook login?
-		dd.
-			Anime Notifier can't determine whether a Google user who logged in earlier is the same person who just used a Facebook login or vice versa.
-			Currently the only way to link those to the same Anime Notifier account is to make sure you use the same email address on both services.
-			In the future you will be able to link any number of accounts in the settings page.
+		dd
+			| Anime Notifier can't determine whether a Google user who logged in earlier is the same person who just used a Facebook login or vice versa.
+			| Currently the only way to link those to the same Anime Notifier account is to make sure you use the 
+			span.main-point same email address
+			|  on both services.
+			| In the future you will be able to link any number of accounts on the settings page.
 		
 		if !user || !user.providers.list || !user.listProviders[user.providers.list] || !user.listProviders[user.providers.list].userName
 			dt Why is my profile not shown on the user list?
