@@ -4,19 +4,21 @@ else if anime
 	section.anime-container(data-id=anime.id)
 	
 		header
-			h2.anime-db-title(title=anime.type)= anime.title.romaji
+			h2.anime-title-db(title=anime.type)= anime.title.romaji
 		
 			if anime.title.japanese !== anime.title.romaji
 				p.anime-japanese-title-container
 					a.anime-japanese-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org', rel='nofollow')= anime.title.japanese
 		
-		if anime.image
-			.anime-db-image-container
-				img.anime-db-image(src=anime.image, alt=anime.name)
-				
+		.image-and-summary
+			if anime.image
+				.anime-image-container
+					img.anime-image(src=anime.image, alt=anime.name)
+					
 			if anime.description
-				h3.anime-header Summary
-				p= anime.description
+				.anime-summary
+					h3.anime-header.anime-summary-header Summary
+					p= anime.description
 		
 		if anime.youtubeId
 			h3.anime-header Video
@@ -172,4 +174,4 @@ else
 			p
 				each anime in popularAnime
 					a.popular-anime.ajax(href='/anime/' + anime.id, title=anime.title.romaji + ' (' + anime.watching + (anime.watching === 1 ? ' user' : ' users') + ' watching)')
-						img.anime-db-image.popular-anime-image(src=anime.image, alt=anime.title.romaji)
+						img.anime-image.popular-anime-image(src=anime.image, alt=anime.title.romaji)

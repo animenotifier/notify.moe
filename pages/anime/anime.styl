@@ -17,7 +17,7 @@
 	min-width 300px
 	max-width 100%
 
-.anime-db-title
+.anime-title-db
 	text-align left
 
 .anime-japanese-title-container
@@ -32,10 +32,27 @@
 	font-weight normal
 	color rgba(60, 60, 60, 0.5) !important
 
-.anime-db-image
+.image-and-summary
+	float left
+	width 100%
+	display flex
+	flex-flow row wrap
+
+.anime-summary-header
+	display none
+
+.anime-image
 	//width 100%
 	//max-width 225px !important
 	border-radius 3px
+	flex 0
+
+.anime-summary
+	flex 1
+	margin-left 1em
+	min-width 300px
+	.anime-header
+		margin-top 0
 
 .anime-trailer
 	width 100%
@@ -54,7 +71,7 @@
 angle = 20deg
 scale = 0.5
 
-.anime-db-image
+.anime-image
 	box-shadow 4px 4px 8px rgba(0, 0, 0, 0.7)
 	filter saturate(100%)
 	transition all 290ms ease
@@ -126,7 +143,17 @@ scale = 0.5
 		background linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.95) 100%)*/
 
 @media only screen and (max-width: 800px)
-	.anime-db-title
-	.anime-db-image-container
+	.anime-title-db
 	.anime-japanese-title-container
 		text-align center
+
+	.anime-summary
+		margin-left 0
+		margin-top 1em
+
+	.anime-image-container
+		width 100%
+		text-align center
+
+	.anime-summary-header
+		display block
