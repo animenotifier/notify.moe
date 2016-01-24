@@ -40,12 +40,14 @@ else if anime
 							li
 								a.anime-website-link(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
 			
-			if anime.genres
+			if anime.genres && Array.isArray(anime.genres)
 				.anime-links-category
 					h3.anime-header Genres
-					ul
+					ul.genre-list
 						each genre in anime.genres
-							li
+							li.genre
+								if genreIcons[genre]
+									i(class='fa fa-' + genreIcons[genre] + ' fa-fw')
 								a.ajax(href='/anime/genres/' + fixGenre(genre))= genre
 								
 			.anime-links-category

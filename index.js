@@ -154,32 +154,36 @@ anilist.authorize().then(accessToken => {
 	console.log('AniList API token:', accessToken)
 
 	// Check forum thread replies
-	setInterval(anilist.checkForumReplies.bind(anilist), 5 * 60 * 1000)
-	anilist.checkForumReplies()
+	if(arn.production) {
+		setInterval(anilist.checkForumReplies.bind(anilist), 5 * 60 * 1000)
+		anilist.checkForumReplies()
+	}
 })
 
 // Do a full import every 12 hours
-let anilistImport = function() {
-	if(!arn.db)
-		return Promise.reject('No database connection')
+if(arn.production) {
+	let anilistImport = function() {
+		if(!arn.db)
+			return Promise.reject('No database connection')
 
-	console.log('Doing full anilist import')
+		console.log('Doing full anilist import')
 
-	let limiter = new RateLimiter(1, 1100)
+		let limiter = new RateLimiter(1, 1100)
 
-	return arn.listProviders.AniList.authorize().then(() => {
-		let maxPage = 238
-		for(let page = 1; page <= maxPage; page++) {
-			limiter.removeTokens(1, function() {
-				arn.listProviders.AniList.getAnimeFromPage(page).then(animeList => {
-					let tasks = animeList.map(anime => arn.set('Anime', anime.id, anime))
-					Promise.all(tasks).then(() => console.log('Finished importing page', page))
+		return arn.listProviders.AniList.authorize().then(() => {
+			let maxPage = 238
+			for(let page = 1; page <= maxPage; page++) {
+				limiter.removeTokens(1, function() {
+					arn.listProviders.AniList.getAnimeFromPage(page).then(animeList => {
+						let tasks = animeList.map(anime => arn.set('Anime', anime.id, anime))
+						Promise.all(tasks).then(() => console.log('Finished importing page', page))
+					})
 				})
-			})
-		}
-	})
+			}
+		})
+	}
+	setInterval(anilistImport, 12 * 60 * 60 * 1000)
 }
-setInterval(anilistImport, 12 * 60 * 60 * 1000)
 
 // Load all modules
 fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(aero))

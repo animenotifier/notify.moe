@@ -1,5 +1,33 @@
 'use strict'
 
+const genreIcons = {
+	'Action': 'bomb',
+	'Adventure': 'diamond',
+	'Comedy': 'smile-o',
+	'Drama': 'heartbeat',
+	'Ecchi': 'heart-o',
+	'Fantasy' : 'tree',
+	'Harem' : 'group',
+	'Historical' : 'history',
+	'Horror' : 'frown-o',
+	'Martial Arts' : 'hand-rock-o',
+	'Mecha' : 'reddit-alien',
+	'Military' : 'fighter-jet',
+	'Mystery' : 'question',
+	'Psychological': 'lightbulb-o',
+	'Romance': 'heart',
+	'Sci-Fi' : 'space-shuttle',
+	'School' : 'graduation-cap',
+	'Seinen' : 'male',
+	'Shounen' : 'male',
+	'Shoujo': 'female',
+	'Sports': 'soccer-ball-o',
+	'Supernatural': 'magic',
+	'Super Power': 'flash',
+	'Thriller': 'hourglass-end',
+	'Vampire': 'eye'
+}
+
 exports.get = function*(request, response) {
 	let user = request.user
 	let animeId = parseInt(request.params[0])
@@ -33,6 +61,7 @@ exports.get = function*(request, response) {
 			videoParameters,
 			fixGenre: arn.fixGenre,
 			nyaa: arn.animeProviders.Nyaa,
+			genreIcons,
 			canEdit: user && (user.role === 'admin' || user.role === 'editor')
 		}, animePage))
 	} catch(error) {
