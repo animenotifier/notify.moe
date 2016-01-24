@@ -64,9 +64,6 @@ let updateAnimeTracks = () => {
 	console.log('Updating anime tracks...')
 
 	arn.forEach('Anime', anime => {
-		if(anime.id !== 21256 && anime.id !== 21234)
-			return
-
 		arn.networkLimiter.removeTokens(1, () => {
 			findTracksForAnime(anime)
 		})
