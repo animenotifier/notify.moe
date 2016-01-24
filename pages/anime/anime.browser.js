@@ -87,7 +87,7 @@ if(animeContainer && animeContainer.dataset.id) {
 		}
 
 		// Nothing found? Do a precise search:
-		if(results.length === 0 && term.length >= 4) {
+		/*if(results.length === 0 && term.length >= 4) {
 			for(i = 0; i < animeTitles.length; i++) {
 				var title = animeTitles[i];
 				var titleLower = title.toLowerCase();
@@ -100,7 +100,7 @@ if(animeContainer && animeContainer.dataset.id) {
 					});
 				}
 			}
-		}
+		}*/
 
 		results.sort(function(a, b) {
 			if(a.distance === b.distance)
