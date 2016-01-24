@@ -63,7 +63,7 @@ window.loadAnimeList = function() {
 				link.title = tooltip;
 
 				var icon = document.createElement('i');
-				icon.className = 'fa fa-' + iconName;
+				icon.className = 'fa fa-' + iconName + ' anime-status-icon';
 				link.appendChild(icon);
 
 				item.appendChild(link);
