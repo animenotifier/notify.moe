@@ -3,6 +3,10 @@
 exports.get = function*(request, response) {
 	let user = request.user
 	let animeId = parseInt(request.params[0])
+	let category = request.params[1]
+	let categoryParameter = request.params[2]
+
+	console.log(request.params)
 
 	if(!animeId) {
 		let popularAnime = yield arn.get('Cache', 'popularAnime')
@@ -16,9 +20,19 @@ exports.get = function*(request, response) {
 
 	try {
 		let animePage = yield arn.get('AnimePages', animeId)
+		let videoParameters = ''
+
+		if(category === 'video') {
+			videoParameters += '&autoplay=1'
+
+			if(categoryParameter && categoryParameter.indexOf('s') !== -1) {
+				videoParameters += '&start=' + categoryParameter.replace('s', '')
+			}
+		}
 
 		response.render(Object.assign({
 			user,
+			videoParameters,
 			fixGenre: arn.fixGenre,
 			nyaa: arn.animeProviders.Nyaa,
 			canEdit: user && (user.role === 'admin' || user.role === 'editor')

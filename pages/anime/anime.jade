@@ -21,7 +21,7 @@ else if anime
 		if anime.youtubeId
 			h3.anime-header Video
 			.anime-trailer.video-container.widescreen
-				iframe.video(src='https://www.youtube.com/embed/' + anime.youtubeId + '?showinfo=0', frameborder='0', allowfullscreen)
+				iframe.video(src='https://www.youtube.com/embed/' + anime.youtubeId + '?showinfo=0' + videoParameters, frameborder='0', allowfullscreen)
 		
 		if anime.links
 			h3.anime-header Links
