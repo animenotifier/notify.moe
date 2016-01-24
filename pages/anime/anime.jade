@@ -23,6 +23,10 @@ else if anime
 			.anime-trailer.video-container.widescreen
 				iframe.video(src='https://www.youtube.com/embed/' + anime.youtubeId + '?showinfo=0' + videoParameters, frameborder='0', allowfullscreen)
 		
+		if anime.tracks && anime.tracks.opening
+			h3.anime-header Tracks
+			iframe(width='100%', height='150', scrolling='no', frameborder='no', src='https://w.soundcloud.com/player/?url=' + anime.tracks.opening.uri + '?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true')
+		
 		if anime.links
 			h3.anime-header Links
 			ul.anime-websites

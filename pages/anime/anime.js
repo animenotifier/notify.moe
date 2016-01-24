@@ -6,8 +6,6 @@ exports.get = function*(request, response) {
 	let category = request.params[1]
 	let categoryParameter = request.params[2]
 
-	console.log(request.params)
-
 	if(!animeId) {
 		let popularAnime = yield arn.get('Cache', 'popularAnime')
 

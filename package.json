@@ -16,6 +16,7 @@
 		"natural": "*",
 		"node-cache": "*",
 		"node-watch": "*",
+		"node-soundcloud": "*",
 		"passport": "*",
 		"passport-facebook": "*",
 		"passport-google-oauth": "*",
