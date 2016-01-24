@@ -21,7 +21,7 @@ const genreIcons = {
 	'Seinen' : 'male',
 	'Shounen' : 'male',
 	'Shoujo': 'female',
-	'Slice of Life' : 'hand-piece-o',
+	'Slice of Life' : 'hand-peace-o',
 	'Sports': 'soccer-ball-o',
 	'Supernatural': 'magic',
 	'Super Power': 'flash',
