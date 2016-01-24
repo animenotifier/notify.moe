@@ -40,7 +40,7 @@ exports.render = function(request, render) {
 		nav.push({
 			title: 'FAQ',
 			url: 'faq',
-			icon: 'question-sign'
+			icon: 'question-circle'
 		})
 	}
 
@@ -73,7 +73,7 @@ exports.render = function(request, render) {
 		nav.push({
 			title: '',
 			url: 'faq',
-			icon: 'question',
+			icon: 'question-circle',
 			float: 'right',
 			tooltip: 'FAQ'
 		})
