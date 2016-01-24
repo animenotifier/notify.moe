@@ -46,10 +46,17 @@ let findTracksForAnime = anime => {
 				opening
 			}
 
+			// Assign tracks to this object so that the anime page already has the info
+			if(!anime.tracks)
+				anime.tracks = tracks
+			else
+				anime.tracks = Object.assign({}, anime.tracks, tracks)
+
 			return arn.set('Anime', anime.id, {
 				tracks
 			}).then(() => {
-				return arn.updateAnimePage(anime)
+				// We add a delay to let the database catch up
+				return Promise.delay(100).then(() => arn.updateAnimePage(anime))
 			}).then(() => {
 				console.log(`Saved opening track for "${anime.title.romaji}" (${opening.title})`)
 			})
