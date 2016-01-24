@@ -13,6 +13,9 @@ SC.init({
 })
 
 let findTracksForAnime = anime => {
+	if(anime.tracks && anime.tracks.opening)
+		return
+
 	let searchTermOpening = anime.title.romaji + ' Opening'
 	let opening = null
 	let tmp = null
