@@ -79,6 +79,18 @@
 				"label": "MyAnimeList:",
 				"description": "Your myanimelist.net username"
 			}
+		],
+		"Others": [
+			{
+				"id": "twitter",
+				"label": "Twitter:",
+				"description": "Your username on twitter"
+			},
+			{
+				"id": "osu",
+				"label": "osu!:",
+				"description": "Your username on the popular rhythm game osu!"
+			}
 		]
 	}
 }
