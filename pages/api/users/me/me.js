@@ -1,7 +1,5 @@
 'use strict'
 
-
-
 exports.post = function(request, response) {
 	if(request.body.function !== 'save') {
 		response.end('Invalid function!')
@@ -39,11 +37,10 @@ exports.post = function(request, response) {
 			response.end(user.nick)
 		})
 		return
-	} else if(key.startsWith('listProviders.') && key.endsWith('.userName')) {
+	} else if((key.startsWith('listProviders.') && key.endsWith('.userName')) || key === 'twitter' || key === 'osu') {
 		value = arn.fixListProviderUserName(value)
-		arn.userListCache.flushAll()
 	} else if(key.startsWith('providers.')) {
-		arn.userListCache.flushAll()
+		// arn.userListCache.flushAll()
 	}
 
 	if(key.indexOf('.') !== -1) {
