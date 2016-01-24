@@ -1,9 +1,11 @@
 'use strict'
 
+let chalk = require('chalk')
+
 const maxPopularAnime = 10
 
 let updatePopularAnime = function() {
-	console.log('Updating popular anime...')
+	console.log(chalk.yellow('✖'), 'Updating popular anime...')
 
 	let popularAnime = []
 
@@ -18,7 +20,7 @@ let updatePopularAnime = function() {
 
 		return popularAnime
 	}).then(popularAnime => {
-		console.log('Updated popular anime.')
+		console.log(chalk.green('✔'), 'Updated popular anime.')
 		return arn.set('Cache', 'popularAnime', popularAnime)
 	})
 }

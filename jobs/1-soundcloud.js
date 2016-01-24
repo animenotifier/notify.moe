@@ -3,6 +3,7 @@
 let SC = require('node-soundcloud')
 let Promise = require('bluebird')
 let natural = require('natural')
+let chalk = require('chalk')
 
 Promise.promisifyAll(SC)
 
@@ -61,7 +62,7 @@ let findTracksForAnime = anime => {
 				// We add a delay to let the database catch up
 				return Promise.delay(100).then(() => arn.updateAnimePage(anime))
 			}).then(() => {
-				console.log(`Saved opening track for "${anime.title.romaji}" (${opening.title})`)
+				console.log(chalk.green('✔'), `Saved opening track for ${chalk.cyan(anime.title.romaji)} (${opening.title})`)
 			})
 		}
 	}).catch(error => {
@@ -71,7 +72,7 @@ let findTracksForAnime = anime => {
 }
 
 let updateAnimeTracks = () => {
-	console.log('Updating anime tracks...')
+	console.log(chalk.yellow('✖'), 'Updating anime tracks...')
 
 	arn.forEach('Anime', anime => {
 		arn.networkLimiter.removeTokens(1, () => {

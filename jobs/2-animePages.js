@@ -1,8 +1,12 @@
 'use strict'
 
-const animePageCacheTime = 60 * 60 * 1000
+let chalk = require('chalk')
+
+const animePageCacheTime = 120 * 60 * 1000
 
 let updateAllAnimePages = () => {
+	console.log(chalk.yellow('✖'), 'Updating all anime pages...')
+
 	let now = new Date()
 
 	return arn.forEach('Anime', anime => {
