@@ -62,8 +62,8 @@ window.loadAnimeList = function() {
 				link.className = linkClass;
 				link.title = tooltip;
 
-				var icon = document.createElement('div');
-				icon.className = 'glyphicon glyphicon-' + iconName;
+				var icon = document.createElement('i');
+				icon.className = 'fa fa-' + iconName;
 				link.appendChild(icon);
 
 				item.appendChild(link);
@@ -72,7 +72,7 @@ window.loadAnimeList = function() {
 			if(loggedIn) {
 				if(anime.episodes.watched > 0 && anime.episodes.watched === anime.episodes.max) {
 					addIconLink(
-						'ok-sign',
+						'check-circle',
 						response.listUrl,
 						'anime-completed',
 						'You completed this anime.'
@@ -92,7 +92,7 @@ window.loadAnimeList = function() {
 					item.appendChild(episodes);
 				} else if(anime.episodes.available > 0 && anime.episodes.available === anime.episodes.watched) {
 					addIconLink(
-						'ok',
+						'check',
 						anime.animeProvider.nextEpisodeUrl,
 						'anime-up-to-date',
 						'You watched ' + anime.episodes.watched + ' out of ' + anime.episodes.available + ' available.'
@@ -107,7 +107,7 @@ window.loadAnimeList = function() {
 					}
 				} else if(anime.episodes.available === 0) {
 					addIconLink(
-						'exclamation-sign',
+						'exclamation-circle',
 						anime.animeProvider.url,
 						'anime-warning',
 						'Could not find your anime title on the anime provider.'

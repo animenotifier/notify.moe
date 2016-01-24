@@ -25,5 +25,5 @@ section
 							- var providerTitle = match.providerTitle.replace(/'/g, "")
 							- var arnTitle = match.title.replace(/'/g, "")
 							a(href=`javascript:if(window.confirm('Are you sure you want to confirm this match: [${providerTitle}] => [${arnTitle}] ?')) window.confirmMatch('${provider}', '${match.providerId}');`, title='Confirm that this match is correct')
-								.glyphicon.glyphicon-check
+								.fa.fa-check
 		p 

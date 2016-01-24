@@ -50,7 +50,7 @@ html(lang='en')
 								a(href=external ? link.url : '/#{link.url}', class=className, target=target, style=style)
 									.navigation-button
 										if link.icon
-											span(class='glyphicon glyphicon-' + link.icon, style=link.title ? '' : 'margin: 0', title=link.tooltip)
+											i(class='fa fa-' + link.icon, style=link.title ? '' : 'margin: 0', title=link.tooltip)
 										if link.title
 											span.navigation-text= link.title
 			

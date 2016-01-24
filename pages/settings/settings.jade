@@ -11,7 +11,7 @@ mixin text(field)
 						else
 							option(value=optionValue)= key
 			else
-				input.save-on-change(id=field.id, type=field.type ? field.type : 'text', value=getProperty(viewUser, field.id), placeholder=field.description)
+				input.save-on-change(id=field.id, type=field.type ? field.type : 'text', value=getProperty(viewUser, field.id), placeholder=field.description, title=field.description)
 		else
 			p.value(id=field.id)= value ? value : '-'
 

@@ -24,7 +24,7 @@
 	"plugins": {
 		"style-reset": {},
 		"kaze": {},
-		"glyphicons": {}
+		"font-awesome": {}
 	},
 	"fonts": [
 		"Ubuntu"

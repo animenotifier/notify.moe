@@ -21,16 +21,16 @@ else
 			
 			if viewUser.tagline
 				p.profile-field.tagline
-					span.glyphicon.glyphicon-comment
+					i.fa.fa-comment
 					em= viewUser.tagline
 			else
 				p.profile-field.tagline
-					span.glyphicon.glyphicon-comment
+					i.fa.fa-comment
 					em No tagline yet.
 					
 			//-if user && viewUser.location && viewUser.location.countryName != '-'
 				p.profile-field.location
-					span.glyphicon.glyphicon-map-marker
+					i.fa.fa-map-marker
 					//- if viewUser.location.cityName != '-'
 					//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
 					//- else
@@ -38,20 +38,20 @@ else
 			
 			if user && viewUser.website
 				p.profile-field.website
-					span.glyphicon.glyphicon-home
+					i.fa.fa-home
 					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
 			
 			if viewUser.role
 				p.profile-field.role
-					span.glyphicon.glyphicon-education
+					i.fa.fa-rocket
 					span= roles[viewUser.role]
 			else if donators[viewUser.id]
 				p.profile-field.role
-					span.glyphicon.glyphicon-heart
+					i.fa.fa-heart
 					span Supporter
 			else
 				p.profile-field.role
-					span.glyphicon.glyphicon-star
+					i.fa.fa-star
 					span Alpha Tester
 			
 			//-each provider in ['AniList', 'AnimePlanet', 'HummingBird', 'MyAnimeList']

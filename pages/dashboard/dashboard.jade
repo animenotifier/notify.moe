@@ -18,18 +18,28 @@ if user
 				img#gravatar-test-image(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
 		li(class=Object.keys(user.devices).length > 0 ? 'finished' : 'not-finished') Activate push notifications
 		li#install-chrome
-			a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)') Install the Chrome extension
+			a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
+				i.fa.fa-chrome
+				span Install the Chrome extension
 	
 	h3 Follow the project
 	ul
 		li
-			a(href='https://www.facebook.com/animenotifier', target='_blank') Facebook
+			a(href='https://www.facebook.com/animenotifier', target='_blank')
+				i.fa.fa-facebook
+				span Facebook
 		li
-			a(href='https://twitter.com/animenotifier', target='_blank') Twitter
+			a(href='https://twitter.com/animenotifier', target='_blank')
+				i.fa.fa-twitter
+				span Twitter
 		li
-			a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank') Google+
+			a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank')
+				i.fa.fa-google-plus
+				span Google+
 		li
-			a(href='https://github.com/animenotifier/notify.moe', target='_blank') GitHub
+			a(href='https://github.com/animenotifier/notify.moe', target='_blank')
+				i.fa.fa-github
+				span GitHub
 	
 	h3 Visit the forum threads
 	ul

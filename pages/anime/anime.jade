@@ -80,7 +80,7 @@ else if anime
 							input.save-on-change(id='MyAnimeList', type='text', value=providers.MyAnimeList ? providers.MyAnimeList.providerId : '', disabled=(providers.MyAnimeList && providers.MyAnimeList.similarity === 1) ? true : false)
 						td
 							a(href='https://www.google.co.jp/search?q=site:myanimelist.net/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
-								.glyphicon.glyphicon-search
+								.fa.fa-search
 						td
 					tr
 						td HummingBird
@@ -88,7 +88,7 @@ else if anime
 							input.save-on-change(id='HummingBird', type='text', value=providers.HummingBird ? providers.HummingBird.providerId : '', disabled=(providers.HummingBird && providers.HummingBird.similarity === 1) ? true : false)
 						td
 							a(href='https://www.google.co.jp/search?q=site:hummingbird.me/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
-								.glyphicon.glyphicon-search
+								.fa.fa-search
 						td
 					tr
 						td AnimePlanet
@@ -96,7 +96,7 @@ else if anime
 							input.save-on-change(id='AnimePlanet', type='text', value=providers.AnimePlanet ? providers.AnimePlanet.providerId : '', disabled=(providers.AnimePlanet && providers.AnimePlanet.similarity === 1) ? true : false)
 						td
 							a(href='https://www.google.co.jp/search?q=site:anime-planet.com/anime+' + anime.title.english.replace(/ /g, '+'), target='_blank')
-								.glyphicon.glyphicon-search
+								.fa.fa-search
 						td
 					
 					- var title = providers.Nyaa ? providers.Nyaa.title : ''
@@ -107,7 +107,7 @@ else if anime
 							input.save-on-change(id='Nyaa', type='text', value=title, placeholder=proposedTitle)
 						td
 							a(href='http://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
-								.glyphicon.glyphicon-search
+								.fa.fa-search
 						td
 							if providers.Nyaa && providers.Nyaa.episodes !== undefined
 								span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'

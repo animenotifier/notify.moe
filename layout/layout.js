@@ -48,7 +48,7 @@ exports.render = function(request, render) {
 		nav.push({
 			title: '',
 			url: 'logout',
-			icon: 'log-out',
+			icon: 'sign-out',
 			ajax: false,
 			float: 'right',
 			tooltip: 'Logout'
@@ -65,7 +65,7 @@ exports.render = function(request, render) {
 		nav.push({
 			title: '',
 			url: 'api',
-			icon: 'fire',
+			icon: 'code',
 			float: 'right',
 			tooltip: 'API (for developers)'
 		})
@@ -73,7 +73,7 @@ exports.render = function(request, render) {
 		nav.push({
 			title: '',
 			url: 'faq',
-			icon: 'question-sign',
+			icon: 'question',
 			float: 'right',
 			tooltip: 'FAQ'
 		})
