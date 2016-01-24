@@ -4,8 +4,15 @@ section
 	
 	include ../../header.jade
 	
+	h3 Info
+	p.editor-info.
+		All of the following anime have an "available" episode count of 0 because ARN could not find the anime by the shown title on Nyaa.
+		To fix it, go to the anime page and change the Nyaa title to the correct one. HorribleSubs titles are preferred. However, if HS is not available,
+		you can link to any fansub. If the only available download is a collection of all episodes you should link to the title of the collection because
+		in the future ARN will be able to parse and detect collections.
+	
 	each matchList, provider in matches
-		h3= provider + ' errors'
+		h3= provider + ' fails sorted by popularity'
 		table.match-list
 			thead
 				tr
