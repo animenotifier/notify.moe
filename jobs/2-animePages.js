@@ -3,7 +3,7 @@
 let chalk = require('chalk')
 let RateLimiter = require('limiter').RateLimiter
 
-let pageCacheLimiter = new RateLimiter(1, 100)
+let pageCacheLimiter = new RateLimiter(1, 250)
 
 const animePageCacheTime = 120 * 60 * 1000
 
