@@ -26,5 +26,5 @@ let updatePopularAnime = function() {
 }
 
 arn.repeatedly(5 * 60, () => {
-	arn.cacheLimiter.removeTokens(1, updatePopularAnime)
+	updatePopularAnime()
 })
