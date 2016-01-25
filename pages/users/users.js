@@ -151,7 +151,7 @@ arn.repeatedly(5 * 60, () => {
 					category.sort((a, b) => new Date(a.registered) - new Date(b.registered))
 				})
 
-				arn.set('Cache', cacheKey, {
+				return arn.set('Cache', cacheKey, {
 					categories
 				})
 			})

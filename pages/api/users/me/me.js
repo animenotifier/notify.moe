@@ -30,13 +30,12 @@ exports.post = function(request, response) {
 			return
 		}
 
-		arn.changeNick(user, value)
+		return arn.changeNick(user, value)
 		.then(() => response.end(user.nick))
 		.catch(error => {
 			response.writeHead(409)
 			response.end(user.nick)
 		})
-		return
 	} else if((key.startsWith('listProviders.') && key.endsWith('.userName')) || key === 'twitter' || key === 'osu') {
 		value = arn.fixListProviderUserName(value)
 	} else if(key.startsWith('providers.')) {

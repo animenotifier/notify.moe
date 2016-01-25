@@ -42,7 +42,7 @@ window.loadAnimeList = function() {
 			item.className = 'anime';
 
 			var link = document.createElement('a');
-			link.appendChild(document.createTextNode(anime.title));
+			link.appendChild(document.createTextNode(anime.title.romaji));
 
 			if(anime.id) {
 				link.href = '/anime/' + anime.id;
@@ -56,9 +56,13 @@ window.loadAnimeList = function() {
 			item.appendChild(link);
 
 			var addIconLink = function(iconName, url, linkClass, tooltip) {
-				var link = document.createElement('a');
-				link.href = url;
-				link.target = '_blank';
+				var link = document.createElement(url ? 'a' : 'div');
+
+				if(url) {
+					link.href = url;
+					link.target = '_blank';
+				}
+
 				link.className = linkClass;
 				link.title = tooltip;
 
@@ -67,7 +71,18 @@ window.loadAnimeList = function() {
 				link.appendChild(icon);
 
 				item.appendChild(link);
-			}
+			};
+
+			var addAiringDate = function() {
+				if(anime.airingDate.remaining === null)
+					return;
+
+				var airingDate = document.createElement('span');
+				airingDate.className = 'airing-date';
+				airingDate.appendChild(document.createTextNode((anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ') + anime.airingDate.remainingString));
+				airingDate.title = window.getWeekDay(anime.airingDate.timeStamp);
+				item.appendChild(airingDate);
+			};
 
 			if(loggedIn) {
 				if(anime.episodes.watched > 0 && anime.episodes.watched === anime.episodes.max) {
@@ -77,10 +92,10 @@ window.loadAnimeList = function() {
 						'anime-completed',
 						'You completed this anime.'
 					);
-				} else if(anime.episodes.available >= anime.episodes.next) {
+				} else if(anime.episodes.available >= anime.episodes.next && anime.animeProvider.nextEpisode) {
 					addIconLink(
 						'cloud-download',
-						anime.animeProvider.nextEpisodeUrl,
+						anime.animeProvider.nextEpisode.url,
 						'anime-download-link',
 						'Download episode ' + anime.episodes.next
 					);
@@ -93,18 +108,12 @@ window.loadAnimeList = function() {
 				} else if(anime.episodes.available > 0 && anime.episodes.available === anime.episodes.watched) {
 					addIconLink(
 						'check',
-						anime.animeProvider.nextEpisodeUrl,
+						anime.animeProvider.nextEpisode ? anime.animeProvider.nextEpisode.url : anime.animeProvider.url,
 						'anime-up-to-date',
 						'You watched ' + anime.episodes.watched + ' out of ' + anime.episodes.available + ' available.'
 					);
 
-					if(anime.airingDate.remaining !== null) {
-						var airingDate = document.createElement('span');
-						airingDate.className = 'airing-date';
-						airingDate.appendChild(document.createTextNode((anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ') + anime.airingDate.remainingString));
-						airingDate.title = window.getWeekDay(anime.airingDate.timeStamp);
-						item.appendChild(airingDate);
-					}
+					addAiringDate();
 				} else if(anime.episodes.available === 0) {
 					addIconLink(
 						'exclamation-circle',
@@ -112,6 +121,8 @@ window.loadAnimeList = function() {
 						'anime-warning',
 						'Could not find your anime title on the anime provider.'
 					);
+
+					addAiringDate();
 				}
 			}
 

@@ -14,8 +14,8 @@ SC.init({
 })
 
 let findTracksForAnime = anime => {
-	if(anime.tracks && anime.tracks.opening)
-		return
+	//if(anime.tracks && anime.tracks.opening)
+	//	return
 
 	let searchTermOpening = anime.title.romaji + ' Opening'
 	let opening = null
@@ -47,7 +47,14 @@ let findTracksForAnime = anime => {
 
 		if(opening.similarity >= similarityThreshold && opening.likes_count >= 2 && opening.title.toLowerCase().indexOf('opening') !== -1 && opening.title.toLowerCase().indexOf(anime.title.romaji.toLowerCase()) !== -1) {
 			let tracks = {
-				opening
+				opening: {
+					uri: opening.uri,
+					title: opening.title,
+					similarity: opening.similarity,
+					likes: opening.likes_count,
+					plays: opening.playback_count,
+					permalink: opening.permalink_url
+				}
 			}
 
 			// Assign tracks to this object so that the anime page already has the info
