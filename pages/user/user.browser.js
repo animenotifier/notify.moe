@@ -93,11 +93,13 @@ window.loadAnimeList = function() {
 						'You completed this anime.'
 					);
 				} else if(anime.episodes.available >= anime.episodes.next && anime.animeProvider.nextEpisode) {
+					var isDownload = (anime.animeProvider.type === undefined || anime.animeProvider.type === 'download');
+
 					addIconLink(
-						'cloud-download',
+						isDownload ? 'cloud-download' : 'eye',
 						anime.animeProvider.nextEpisode.url,
 						'anime-download-link',
-						'Download episode ' + anime.episodes.next
+						(isDownload ? 'Download' : 'Watch') + ' episode ' + anime.episodes.next
 					);
 
 					var behind = (anime.episodes.available - anime.episodes.watched);
