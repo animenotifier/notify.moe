@@ -48,7 +48,8 @@ let updateGenres = () => {
 					})
 
 					console.log(chalk.green('✔'), `Updated genre ${chalk.yellow(genre)} (${animeList.length} anime)`)
-					arn.set('Genres', genre, {
+					
+					return arn.set('Genres', genre, {
 						genre,
 						animeList
 					})

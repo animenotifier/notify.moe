@@ -1,6 +1,9 @@
 'use strict'
 
 let chalk = require('chalk')
+let RateLimiter = require('limiter').RateLimiter
+
+let pageCacheLimiter = new RateLimiter(1, 100)
 
 const animePageCacheTime = 120 * 60 * 1000
 
@@ -13,7 +16,7 @@ let updateAllAnimePages = () => {
 		if(anime.pageGenerated && now.getTime() - (new Date(anime.pageGenerated)).getTime() < animePageCacheTime)
 			return
 
-		arn.cacheLimiter.removeTokens(1, () => {
+		pageCacheLimiter.removeTokens(1, () => {
 			arn.updateAnimePage(anime)
 		})
 	})
