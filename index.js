@@ -127,10 +127,13 @@ arn.on('new forum reply', function(link, userName) {
 arn.db.ready.then(() => {
 	arn.cacheLimiter.removeTokens(1, () => {
 		let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
+		arn.animeCount = 0
 		arn.animeToId = {}
 		arn.forEach('Anime', anime => {
 			if(anime.type === 'Music')
 				return
+
+			arn.animeCount++
 
 			if(anime.title.romaji)
 				arn.animeToId[processTitle(anime.title.romaji)] = anime.id

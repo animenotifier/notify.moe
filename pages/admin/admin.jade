@@ -5,9 +5,9 @@ section
 	include header.jade
 	
 	h3 Resources
-	table
+	table.resources
 		tbody
 			each info in status
 				tr
-					td= info[0]
-					td= info[1]
+					td.resource-label= info[0]
+					td.resource-usage= info[1]

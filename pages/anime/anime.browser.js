@@ -56,7 +56,7 @@ if(animeContainer && animeContainer.dataset.id) {
 		var term = search.value.trim().toLowerCase();
 
 		if(!term) {
-			searchResults.innerHTML = animeTitles.length + ' anime in the database. Powered by Anilist.';
+			searchResults.innerHTML = animeTitles.length + ' titles in the database. Powered by Anilist.';
 			searchResults.className = 'anime-count';
 			return reject(new Error('no search term'));
 		}

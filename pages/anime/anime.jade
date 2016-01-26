@@ -73,6 +73,9 @@ else if anime
 									i(class='fa fa-' + genreIcons[genre] + ' fa-fw')
 								a.ajax(href='/anime/genres/' + fixGenre(genre))= genre
 		
+		//if crunchy
+		//	h3.anime-header Episodes
+		
 		if usersWatching
 			h3.anime-header Currently watching 
 				span.users-count= `(${usersWatching.length})`

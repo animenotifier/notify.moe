@@ -2,68 +2,97 @@ section
 	header
 		h2 Statistics
 	
-	section
-		header
-			h3 General
-			
-		table
-			tbody
-				tr
-					td.statistics-label Users
-					td.statistics-value= users.total
-				
-				tr
-					td.statistics-label Anime
-					td.statistics-value 0
-	
-	if users.total !== 0
-		section
+	.statistics
+		section.statistics-panel
 			header
-				h3 List providers
+				h3 General
 				
 			table
 				tbody
-					each count, index in providers.list
-						tr
-							td.statistics-label= index
-							td.statistics-value= Math.round(count / users.total * 100) + ' %'
+					tr
+						td.statistics-label Anime
+						td.statistics-value= anime.total
+					
+					tr
+						td.statistics-label Users
+						td.statistics-value= users.total
 		
-		section
-			header
-				h3 Anime providers
-				
-			table
-				tbody
-					each count, index in providers.anime
-						tr
-							td.statistics-label= index ? index : 'Not specified'
-							td.statistics-value= Math.round(count / users.total * 100) + ' %'
-							
-		section
-			header
-				h3 Airing date providers
-				
-			table
-				tbody
-					each count, index in providers.airingDate
-						tr
-							td.statistics-label= index
-							td.statistics-value= Math.round(count / users.total * 100) + ' %'
-							
-		section
-			header
-				h3 Gender
-				
-			table
-				tbody
-					tr
-						td.statistics-label Male
-						td.statistics-value= Math.round(users.gender.male / users.total * 100) + ' %'
+		if users.total !== 0
+			section.statistics-panel
+				header
+					h3 List providers
 					
-					tr
-						td.statistics-label Female
-						td.statistics-value= Math.round(users.gender.female / users.total * 100) + ' %'
+				table
+					tbody
+						each count, index in providers.list
+							tr
+								td.statistics-label= index
+								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+			
+			section.statistics-panel
+				header
+					h3 Anime providers
 					
-					tr
-						td.statistics-label Not specified
-						td.statistics-value= Math.round(users.gender.unknown / users.total * 100) + ' %'
+				table
+					tbody
+						each count, index in providers.anime
+							tr
+								td.statistics-label= index ? index : 'Not specified'
+								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+								
+			//-section.statistics-panel
+				header
+					h3 Airing date providers
+					
+				table
+					tbody
+						each count, index in providers.airingDate
+							tr
+								td.statistics-label= index
+								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+								
+			section.statistics-panel
+				header
+					h3 Title language
+					
+				table
+					tbody
+						tr
+							td.statistics-label Romaji
+							td.statistics-value= Math.round(users.titleLanguages.romaji / users.total * 100) + ' %'
+							
+						tr
+							td.statistics-label English
+							td.statistics-value= Math.round(users.titleLanguages.english / users.total * 100) + ' %'
+							
+						tr
+							td.statistics-label Japanese
+							td.statistics-value= Math.round(users.titleLanguages.japanese / users.total * 100) + ' %'
+			
+			section.statistics-panel
+				header
+					h3 Sorting algorithm
+					
+				table
+					tbody
+						tr
+							td.statistics-label Airing date
+							td.statistics-value= Math.round(users.sortBy.airingDate / users.total * 100) + ' %'
+						
+						tr
+							td.statistics-label Alphabetically
+							td.statistics-value= Math.round(users.sortBy.alphabetically / users.total * 100) + ' %'
+			
+			section.statistics-panel
+				header
+					h3 Gender
+					
+				table
+					tbody
+						tr
+							td.statistics-label Male
+							td.statistics-value= Math.round(users.gender.male / users.genderSpecified * 100) + ' %'
+						
+						tr
+							td.statistics-label Female
+							td.statistics-value= Math.round(users.gender.female / users.genderSpecified * 100) + ' %'
