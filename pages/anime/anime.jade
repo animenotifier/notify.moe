@@ -2,13 +2,16 @@ if error === 404
 	p Anime pages are currently under maintenance. Sorry for the inconvenience.
 else if anime
 	section.anime-container(data-id=anime.id)
-	
 		header
-			h2.anime-title-db(title=anime.type)= anime.title.romaji
-		
-			if anime.title.japanese !== anime.title.romaji
-				p.anime-japanese-title-container
-					a.anime-japanese-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org', rel='nofollow')= anime.title.japanese
+			h2.anime-title-db(title=anime.type)= anime.title[user ? user.titleLanguage : 'romaji']
+			
+			if user && user.titleLanguage === 'japanese'
+				p.anime-second-title-container
+					.anime-second-title= anime.title.english
+			else
+				if anime.title.japanese !== anime.title.romaji
+					p.anime-second-title-container
+						a.anime-second-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org', rel='nofollow')= anime.title.japanese
 		
 		.image-and-summary
 			if anime.image
@@ -125,41 +128,12 @@ else if anime
 				if descriptionSource
 					span= ' Summary by ' + summarySource + '.'
 		//-
-			h3.anime-header Summary
-			if anime.summary
-				p.anime-summary!= anime.summary
-			else
-				p.anime-summary -
-			
-			h3.anime-header Links
-			if anime.websites
-				ul.anime-websites
-					each website in anime.websites
-						if website.title && website.url
-							li
-								a(href=website.url, target='_blank', rel='nofollow')= website.title
-			else
-				p.anime-websites -
-		
 			h3.anime-header Synonyms
 			if anime.title.synonyms
 				ul.anime-synonyms
 					li.anime-japanese-title= anime.title.japanese
 					each synonym in anime.title.synonyms
 						li= synonym
-			else
-				ul.anime-synonyms
-					li
-					
-					h3.anime-header Links
-					if anime.websites
-						ul.anime-websites
-							each website in anime.websites
-								if website.title && website.url
-									li
-										a(href=website.url, target='_blank', rel='nofollow')= website.title
-	//p.powered-by Data by 
-	//	a(href='http://anilist.co/', target='_blank', rel='nofollow') anilist.co
 else
 	section
 		header
@@ -173,5 +147,5 @@ else
 			h3 Popular
 			p
 				each anime in popularAnime
-					a.popular-anime.ajax(href='/anime/' + anime.id, title=anime.title.romaji + ' (' + anime.watching + (anime.watching === 1 ? ' user' : ' users') + ' watching)')
+					a.popular-anime.ajax(href='/anime/' + anime.id, title=anime.title[user ? user.titleLanguage : 'romaji'] + ' (' + anime.watching + (anime.watching === 1 ? ' user' : ' users') + ' watching)')
 						img.anime-image.popular-anime-image(src=anime.image, alt=anime.title.romaji)

@@ -42,7 +42,7 @@ window.loadAnimeList = function() {
 			item.className = 'anime';
 
 			var link = document.createElement('a');
-			link.appendChild(document.createTextNode(anime.title.romaji));
+			link.appendChild(document.createTextNode(anime.title[response.titleLanguage]));
 
 			if(anime.id) {
 				link.href = '/anime/' + anime.id;
