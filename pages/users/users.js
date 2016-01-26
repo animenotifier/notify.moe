@@ -52,7 +52,7 @@ let orderByMethods = {
 		}
 	},
 
-	listproviders: {
+	'providers/list': {
 		getCategories: () => {
 			return {
 				'AniList': [],
@@ -67,6 +67,24 @@ let orderByMethods = {
 				categories[user.providers.list].push(user)
 			else
 				categories[user.providers.list] = [user]
+
+			return true
+		}
+	},
+
+	'providers/anime': {
+		getCategories: () => {
+			return {
+				'CrunchyRoll': [],
+				'Nyaa': []
+			}
+		},
+
+		addUser: (user, categories) => {
+			if(categories.hasOwnProperty(user.providers.anime))
+				categories[user.providers.anime].push(user)
+			else
+				categories[user.providers.anime] = [user]
 
 			return true
 		}
@@ -98,6 +116,23 @@ let orderByMethods = {
 		},
 
 		addUser: getAddUserFunction('joindate')
+	},
+
+	osu: {
+		getCategories: () => {
+			return {
+				'osu! Players': []
+			}
+		},
+
+		addUser: (user, categories) => {
+			if(!user.osu)
+				return false
+
+			categories['osu! Players'].push(user)
+
+			return true
+		}
 	},
 
 	staff: {
@@ -161,6 +196,10 @@ arn.repeatedly(5 * 60, () => {
 
 exports.get = function(request, response) {
 	let orderBy = request.params[0] || 'default'
+
+	if(request.params[1])
+		orderBy += '/' + request.params[1]
+
 	let cacheKey = `users:${orderBy}`
 
 	arn.get('Cache', cacheKey).then(record => {
