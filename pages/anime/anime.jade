@@ -7,7 +7,7 @@ else if anime
 			
 			if user && user.titleLanguage === 'japanese'
 				p.anime-second-title-container
-					.anime-second-title(title=anime.title.english !== anime.title.romaji ? anime.title.english : null)= anime.title.romaji
+					span.anime-second-title(title=anime.title.english !== anime.title.romaji ? anime.title.english : null)= anime.title.romaji
 			else
 				if anime.title.japanese !== anime.title.romaji
 					p.anime-second-title-container
