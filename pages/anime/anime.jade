@@ -2,37 +2,40 @@ if error === 404
 	p Anime pages are currently under maintenance. Sorry for the inconvenience.
 else if anime
 	section.anime-container(data-id=anime.id)
-		header
-			h2.anime-title-db(title=anime.type)= anime.title[user ? user.titleLanguage : 'romaji']
-			
-			if user && user.titleLanguage === 'japanese'
-				p.anime-second-title-container
-					span.anime-second-title(title=anime.title.english !== anime.title.romaji ? anime.title.english : null)= anime.title.romaji
-			else
-				if anime.title.japanese !== anime.title.romaji
+		.page
+			header
+				h2.anime-title-db(title=anime.type)= anime.title[user ? user.titleLanguage : 'romaji']
+				
+				if user && user.titleLanguage === 'japanese'
 					p.anime-second-title-container
-						a.anime-second-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org', rel='nofollow')= anime.title.japanese
-		
-		.image-and-summary
-			if anime.image
-				.anime-image-container
-					img.anime-image(src=anime.image, alt=anime.name)
-					
-			if anime.description
-				.anime-summary
-					h3.anime-header.anime-summary-header Summary
-					p= anime.description
+						span.anime-second-title(title=anime.title.english !== anime.title.romaji ? anime.title.english : null)= anime.title.romaji
+				else
+					if anime.title.japanese !== anime.title.romaji
+						p.anime-second-title-container
+							a.anime-second-title(href='http://jisho.org/search/' + anime.title.japanese, target='_blank', title='Look up reading on jisho.org', rel='nofollow')= anime.title.japanese
+			
+			.image-and-summary
+				if anime.image
+					.anime-image-container
+						img.anime-image(src=anime.image, alt=anime.name)
+						
+				if anime.description
+					.anime-summary
+						h3.anime-header.anime-summary-header Summary
+						p= anime.description
 		
 		if anime.youtubeId
-			h3.anime-header Video
-			.anime-trailer.video-container
-				iframe.video(src='https://www.youtube.com/embed/' + anime.youtubeId + '?showinfo=0' + videoParameters, frameborder='0', allowfullscreen)
+			.page
+				h3.anime-header Video
+				.anime-trailer.video-container
+					iframe.video(src='https://www.youtube.com/embed/' + anime.youtubeId + '?showinfo=0' + videoParameters, frameborder='0', allowfullscreen)
 		
 		if anime.tracks && anime.tracks.opening
-			h3.anime-header Tracks
-			iframe(width='100%', height='150', scrolling='no', frameborder='no', src='https://w.soundcloud.com/player/?url=' + anime.tracks.opening.uri + '?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true')
+			.page
+				h3.anime-header Tracks
+				iframe(width='100%', height='150', scrolling='no', frameborder='no', src='https://w.soundcloud.com/player/?url=' + anime.tracks.opening.uri + '?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true')
 		
-		.anime-links
+		.page.anime-links
 			if anime.links
 				.anime-links-category
 					h3.anime-header Links
@@ -77,54 +80,56 @@ else if anime
 		//	h3.anime-header Episodes
 		
 		if usersWatching
-			h3.anime-header Currently watching 
-				span.users-count= `(${usersWatching.length})`
-			p.users
-				each user in usersWatching
-					a.user.ajax(href='/+' + user.nick, title=user.nick)
-						img.user-image(src=user.gravatarURL, alt='')
+			.page
+				h3.anime-header Currently watching 
+					span.users-count= `(${usersWatching.length})`
+				p.users
+					each user in usersWatching
+						a.user.ajax(href='/+' + user.nick, title=user.nick)
+							img.user-image(src=user.gravatarURL, alt='')
 		
 		if canEdit
-			h3.anime-header Links
-			table
-				tbody
-					tr
-						td MyAnimeList
-						td
-							input.save-on-change(id='MyAnimeList', type='text', value=providers.MyAnimeList ? providers.MyAnimeList.providerId : '', disabled=(providers.MyAnimeList && providers.MyAnimeList.similarity === 1) ? true : false)
-						td
-							a(href='https://www.google.co.jp/search?q=site:myanimelist.net/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
-								.fa.fa-search
-						td
-					tr
-						td HummingBird
-						td
-							input.save-on-change(id='HummingBird', type='text', value=providers.HummingBird ? providers.HummingBird.providerId : '', disabled=(providers.HummingBird && providers.HummingBird.similarity === 1) ? true : false)
-						td
-							a(href='https://www.google.co.jp/search?q=site:hummingbird.me/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
-								.fa.fa-search
-						td
-					tr
-						td AnimePlanet
-						td
-							input.save-on-change(id='AnimePlanet', type='text', value=providers.AnimePlanet ? providers.AnimePlanet.providerId : '', disabled=(providers.AnimePlanet && providers.AnimePlanet.similarity === 1) ? true : false)
-						td
-							a(href='https://www.google.co.jp/search?q=site:anime-planet.com/anime+' + anime.title.english.replace(/ /g, '+'), target='_blank')
-								.fa.fa-search
-						td
-					
-					- var title = providers.Nyaa ? providers.Nyaa.title : ''
-					- var proposedTitle = nyaa.buildNyaaTitle(anime.title.romaji)
-					tr
-						td Nyaa
-						td
-							input.save-on-change(id='Nyaa', type='text', value=title, placeholder=proposedTitle)
-						td
-							a(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
-								.fa.fa-search
-						td
-							if providers.Nyaa && providers.Nyaa.episodes !== undefined
-								span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
+			.page
+				h3.anime-header Links
+				table
+					tbody
+						tr
+							td MyAnimeList
+							td
+								input.save-on-change(id='MyAnimeList', type='text', value=providers.MyAnimeList ? providers.MyAnimeList.providerId : '', disabled=(providers.MyAnimeList && providers.MyAnimeList.similarity === 1) ? true : false)
+							td
+								a(href='https://www.google.co.jp/search?q=site:myanimelist.net/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
+									.fa.fa-search
+							td
+						tr
+							td HummingBird
+							td
+								input.save-on-change(id='HummingBird', type='text', value=providers.HummingBird ? providers.HummingBird.providerId : '', disabled=(providers.HummingBird && providers.HummingBird.similarity === 1) ? true : false)
+							td
+								a(href='https://www.google.co.jp/search?q=site:hummingbird.me/anime+' + anime.title.romaji.replace(/ /g, '+'), target='_blank')
+									.fa.fa-search
+							td
+						tr
+							td AnimePlanet
+							td
+								input.save-on-change(id='AnimePlanet', type='text', value=providers.AnimePlanet ? providers.AnimePlanet.providerId : '', disabled=(providers.AnimePlanet && providers.AnimePlanet.similarity === 1) ? true : false)
+							td
+								a(href='https://www.google.co.jp/search?q=site:anime-planet.com/anime+' + anime.title.english.replace(/ /g, '+'), target='_blank')
+									.fa.fa-search
+							td
+						
+						- var title = providers.Nyaa ? providers.Nyaa.title : ''
+						- var proposedTitle = nyaa.buildNyaaTitle(anime.title.romaji)
+						tr
+							td Nyaa
+							td
+								input.save-on-change(id='Nyaa', type='text', value=title, placeholder=proposedTitle)
+							td
+								a(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
+									.fa.fa-search
+							td
+								if providers.Nyaa && providers.Nyaa.episodes !== undefined
+									span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
 		
 		.sources
 			p Powered by Anilist.
