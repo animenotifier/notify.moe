@@ -25,7 +25,7 @@ else if anime
 		
 		if anime.youtubeId
 			h3.anime-header Video
-			.anime-trailer.video-container.widescreen
+			.anime-trailer.video-container
 				iframe.video(src='https://www.youtube.com/embed/' + anime.youtubeId + '?showinfo=0' + videoParameters, frameborder='0', allowfullscreen)
 		
 		if anime.tracks && anime.tracks.opening
@@ -44,16 +44,6 @@ else if anime
 						if user && providers.Nyaa && providers.Nyaa.episodes > 0
 							li
 								a.anime-website-link(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
-			
-			if anime.genres && Array.isArray(anime.genres)
-				.anime-links-category
-					h3.anime-header Genres
-					ul.genre-list
-						each genre in anime.genres
-							li.genre
-								if genreIcons[genre]
-									i(class='fa fa-' + genreIcons[genre] + ' fa-fw')
-								a.ajax(href='/anime/genres/' + fixGenre(genre))= genre
 								
 			.anime-links-category
 				h3.anime-header List providers
@@ -72,6 +62,16 @@ else if anime
 					if providers.AnimePlanet
 						li
 							a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') anime-planet.com
+		
+			if anime.genres && Array.isArray(anime.genres)
+				.anime-links-category
+					h3.anime-header Genres
+					ul.genre-list
+						each genre in anime.genres
+							li.genre
+								if genreIcons[genre]
+									i(class='fa fa-' + genreIcons[genre] + ' fa-fw')
+								a.ajax(href='/anime/genres/' + fixGenre(genre))= genre
 		
 		if usersWatching
 			h3.anime-header Currently watching 
