@@ -93,6 +93,12 @@ window.loadAnimeList = function() {
 						'You completed this anime.'
 					);
 				} else if(anime.episodes.available >= anime.episodes.next && anime.animeProvider.nextEpisode) {
+					var behind = (anime.episodes.available - anime.episodes.watched);
+					var episodes = document.createElement('span');
+					episodes.className = 'episodes-behind';
+					episodes.appendChild(document.createTextNode(behind + ' new episode' + (behind === 1 ? '' : 's')));
+					item.appendChild(episodes);
+
 					var isDownload = (anime.animeProvider.type === undefined || anime.animeProvider.type === 'download');
 
 					addIconLink(
@@ -101,30 +107,24 @@ window.loadAnimeList = function() {
 						'anime-download-link',
 						(isDownload ? 'Download' : 'Watch') + ' episode ' + anime.episodes.next
 					);
-
-					var behind = (anime.episodes.available - anime.episodes.watched);
-					var episodes = document.createElement('span');
-					episodes.className = 'episodes-behind';
-					episodes.appendChild(document.createTextNode(behind + ' new episode' + (behind === 1 ? '' : 's')));
-					item.appendChild(episodes);
 				} else if(anime.episodes.available > 0 && anime.episodes.available === anime.episodes.watched) {
+					addAiringDate();
+
 					addIconLink(
 						'check',
 						anime.animeProvider.nextEpisode ? anime.animeProvider.nextEpisode.url : anime.animeProvider.url,
 						'anime-up-to-date',
 						'You watched ' + anime.episodes.watched + ' out of ' + anime.episodes.available + ' available.'
 					);
-
-					addAiringDate();
 				} else if(anime.episodes.available === 0) {
+					addAiringDate();
+
 					addIconLink(
 						'exclamation-circle',
 						anime.animeProvider.url,
 						'anime-warning',
 						'Could not find your anime title on the anime provider.'
 					);
-
-					addAiringDate();
 				}
 			}
 
