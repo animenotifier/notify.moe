@@ -79,7 +79,12 @@ window.loadAnimeList = function() {
 
 				var airingDate = document.createElement('span');
 				airingDate.className = 'airing-date';
-				airingDate.appendChild(document.createTextNode((anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ') + anime.airingDate.remainingString));
+
+				var airingDatePrefix = document.createElement('span');
+				airingDatePrefix.className = 'airing-date-prefix';
+				airingDatePrefix.innerText = anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ';
+				airingDate.appendChild(airingDatePrefix);
+				airingDate.appendChild(document.createTextNode(anime.airingDate.remainingString));
 				airingDate.title = window.getWeekDay(anime.airingDate.timeStamp);
 				item.appendChild(airingDate);
 			};
