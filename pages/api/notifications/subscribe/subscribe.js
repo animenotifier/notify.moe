@@ -19,11 +19,14 @@ exports.post = (request, response) => {
 
 	let parts = endpoint.split('/')
 	let deviceId = parts[parts.length - 1]
+	let pushUrl = endpoint.slice(-deviceId.length)
 
-	console.log('Saving device', deviceId, 'for user', user.nick)
+	console.log('Saving push endpoint', endpoint, 'for user', user.nick)
 
-	// Add ID to the user's devices
-	user.devices[deviceId] = (new Date()).toISOString()
+	// Add endpoint
+	user.pushEndpoints[endpoint] = {
+		registered: (new Date()).toISOString()
+	}
 
 	arn.set('Users', user.id, user).then(() => response.end('success'))
 }

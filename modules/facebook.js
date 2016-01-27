@@ -61,7 +61,7 @@ module.exports = function(aero) {
 					listProviders: {},
 					sortBy: 'airingDate',
 					titleLanguage: 'english',
-					devices: {},
+					pushEndpoints: {},
 					registered: now.toISOString(),
 					lastLogin: now.toISOString()
 				}

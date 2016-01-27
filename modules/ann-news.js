@@ -5,7 +5,7 @@ let xml2js = require('xml2js')
 let Promise = require('bluebird')
 
 module.exports = function(aero) {
-	let xmlParser = new xml2js.Parser({
+	/*let xmlParser = new xml2js.Parser({
 		explicitArray: false,	// Don't put single nodes into an array
 		ignoreAttrs: true,		// Ignore attributes and only create text nodes
 		trim: true,
@@ -37,5 +37,5 @@ module.exports = function(aero) {
 	}
 
 	setInterval(updateNews, 15 * 60 * 1000)
-	updateNews()
+	updateNews()*/
 }

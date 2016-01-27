@@ -17,13 +17,10 @@ exports.post = (request, response) => {
 		return
 	}
 
-	let parts = endpoint.split('/')
-	let deviceId = parts[parts.length - 1]
-
-	console.log('Removing device', deviceId, 'from user', user.nick)
+	console.log('Removing push endpoint', endpoint, 'from user', user.nick)
 
 	// Add ID to the user's devices
-	delete user.devices[deviceId]
+	delete user.pushEndpoints[endpoint]
 
 	arn.set('Users', user.id, user).then(() => response.end('success'))
 }

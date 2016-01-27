@@ -25,6 +25,7 @@
 		"shortid": "*",
 		"striptags": "*",
 		"validator": "*",
+		"web-push": "*",
 		"xml2js": "*"
 	},
 	"engines": {
