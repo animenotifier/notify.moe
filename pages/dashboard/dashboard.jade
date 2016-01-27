@@ -16,11 +16,18 @@ if user
 		if user.email
 			li.finished#gravatar-text Add a gravatar image
 				img#gravatar-test-image(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
-		li(class=Object.keys(user.devices).length > 0 ? 'finished' : 'not-finished') Activate push notifications
+		li(class=Object.keys(user.pushEndpoints).length > 0 ? 'finished' : 'not-finished') Activate push notifications
 		li#install-chrome
 			a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
 				i.fa.fa-chrome
 				span Install the Chrome extension
+	
+	h3 Join the chat!
+	
+	ul
+		li
+			i.fa.fa-microphone
+			a(href='https://discord.gg/0kimAmMCeXGXuzNF', target='_blank') notify.moe on Discord
 	
 	h3 Follow the project
 	ul
