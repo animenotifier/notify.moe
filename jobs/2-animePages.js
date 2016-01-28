@@ -1,25 +1,22 @@
 'use strict'
 
 let chalk = require('chalk')
-let RateLimiter = require('limiter').RateLimiter
-
-let pageCacheLimiter = new RateLimiter(1, 250)
+let Promise = require('bluebird')
 
 const animePageCacheTime = 120 * 60 * 1000
 
-let updateAllAnimePages = () => {
+let updateAllAnimePages = Promise.coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating all anime pages...')
 
 	let now = new Date()
 
-	return arn.forEach('Anime', anime => {
+	for(let anime of arn.animeList) {
 		if(anime.pageGenerated && now.getTime() - (new Date(anime.pageGenerated)).getTime() < animePageCacheTime)
-			return
+			continue
 
-		pageCacheLimiter.removeTokens(1, () => {
-			arn.updateAnimePage(anime)
-		})
-	})
-}
+		yield Promise.delay(250)
+		arn.updateAnimePage(anime)
+	}
+})
 
 arn.repeatedly(3 * 60 * 60, updateAllAnimePages)

@@ -71,6 +71,8 @@ let findTracksForAnime = anime => {
 			}).then(() => {
 				console.log(chalk.green('✔'), `Saved opening track for ${chalk.cyan(anime.title.romaji)} (${opening.title})`)
 			})
+		} else {
+			console.log(chalk.red('✖'), `No tracks found for ${chalk.cyan(anime.title.romaji)}`)
 		}
 	}).catch(error => {
 		console.error(error, error.stack)
@@ -78,16 +80,13 @@ let findTracksForAnime = anime => {
 	})
 }
 
-let updateAnimeTracks = () => {
+let updateAnimeTracks = Promise.coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating anime tracks...')
 
-	arn.forEach('Anime', anime => {
-		arn.networkLimiter.removeTokens(1, () => {
-			findTracksForAnime(anime)
-		})
-	})
-}
-
-arn.repeatedly(24 * 60 * 60, () => {
-	updateAnimeTracks()
+	for(let anime of arn.animeList) {
+		yield Promise.delay(500)
+		findTracksForAnime(anime)
+	}
 })
+
+arn.repeatedly(24 * 60 * 60, updateAnimeTracks)
