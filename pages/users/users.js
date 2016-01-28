@@ -121,15 +121,30 @@ let orderByMethods = {
 	osu: {
 		getCategories: () => {
 			return {
-				'osu! Players': []
+				'10k pp': [],
+				'9k pp': [],
+				'8k pp': [],
+				'7k pp': [],
+				'6k pp': [],
+				'5k pp': [],
+				'4k pp': [],
+				'3k pp': [],
+				'2k pp': [],
+				'1k pp': [],
+				'Beginners': [],
 			}
 		},
 
 		addUser: (user, categories) => {
-			if(!user.osu)
+			if(!user.osu || !user.osuDetails)
 				return false
 
-			categories['osu! Players'].push(user)
+			if(user.osuDetails.pp < 1000)
+				categories.Beginners.push(user)
+			else if(user.osuDetails.pp >= 10000)
+				categories['10k pp'].push(user)
+			else
+				categories[parseInt(user.osuDetails.pp / 1000) + 'k pp'].push(user)
 
 			return true
 		}
