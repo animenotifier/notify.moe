@@ -14,7 +14,7 @@ let RateLimiter = require('limiter').RateLimiter
 aero.run()
 
 // Rewrite URLs
-aero.preRoute(function(request, response) {
+aero.rewrite(function(request, response) {
 	if(request.headers.host.indexOf('animereleasenotifier.com') !== -1) {
         response.redirect('https://notify.moe' + request.url)
         return true
