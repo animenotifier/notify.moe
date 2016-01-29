@@ -24,6 +24,7 @@
 		"session-file-store": "*",
 		"shortid": "*",
 		"striptags": "*",
+		"useragent": "*",
 		"validator": "*",
 		"web-push": "*",
 		"xml2js": "*"
