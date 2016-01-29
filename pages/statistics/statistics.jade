@@ -16,6 +16,10 @@ section
 					tr
 						td.statistics-label Users
 						td.statistics-value= users.total
+						
+					tr
+						td.statistics-label Notifications enabled
+						td.statistics-value= Math.round(users.notificationsEnabled / users.total * 100) + ' %'
 		
 		if users.total !== 0
 			section.statistics-panel

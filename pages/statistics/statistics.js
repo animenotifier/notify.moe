@@ -10,6 +10,7 @@ let increment = function(obj, key) {
 
 exports.get = function*(request, response) {
 	let recordCount = 0
+	let notificationsEnabled = 0
 
 	let gender = {
 		male: 0,
@@ -46,6 +47,9 @@ exports.get = function*(request, response) {
 		titleLanguages[user.titleLanguage] += 1
 		sortBy[user.sortBy] += 1
 
+		if(Object.keys(user.pushEndpoints).length > 0)
+			notificationsEnabled += 1
+
 		increment(providers.list, user.providers.list)
 		increment(providers.anime, user.providers.anime)
 		increment(providers.airingDate, user.providers.airingDate)
@@ -59,6 +63,7 @@ exports.get = function*(request, response) {
 			gender,
 			genderSpecified: gender.male + gender.female,
 			titleLanguages,
+			notificationsEnabled,
 			sortBy
 		},
 		anime: {
