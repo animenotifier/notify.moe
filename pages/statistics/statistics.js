@@ -35,6 +35,8 @@ exports.get = function*(request, response) {
 		airingDate: 0
 	}
 
+	let browsers = {}
+
 	yield arn.forEach('Users', function(user) {
 		if(!arn.isActiveUser(user))
 			return
@@ -50,6 +52,9 @@ exports.get = function*(request, response) {
 		if(Object.keys(user.pushEndpoints).length > 0)
 			notificationsEnabled += 1
 
+		if(user.agent && user.agent.family)
+			increment(browsers, user.agent.family)
+
 		increment(providers.list, user.providers.list)
 		increment(providers.anime, user.providers.anime)
 		increment(providers.airingDate, user.providers.airingDate)
@@ -64,6 +69,7 @@ exports.get = function*(request, response) {
 			genderSpecified: gender.male + gender.female,
 			titleLanguages,
 			notificationsEnabled,
+			browsers,
 			sortBy
 		},
 		anime: {

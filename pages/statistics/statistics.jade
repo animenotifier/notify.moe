@@ -44,17 +44,28 @@ section
 								td.statistics-label= index ? index : 'Not specified'
 								td.statistics-value= Math.round(count / users.total * 100) + ' %'
 								
-			//-section.statistics-panel
+			//- section.statistics-panel
+			//- 	header
+			//- 		h3 Airing date providers
+			//- 		
+			//- 	table
+			//- 		tbody
+			//- 			each count, index in providers.airingDate
+			//- 				tr
+			//- 					td.statistics-label= index
+			//- 					td.statistics-value= Math.round(count / users.total * 100) + ' %'
+			
+			section.statistics-panel
 				header
-					h3 Airing date providers
+					h3 Browsers
 					
 				table
 					tbody
-						each count, index in providers.airingDate
+						each count, index in users.browsers
 							tr
-								td.statistics-label= index
+								td.statistics-label= index ? index : 'Not specified'
 								td.statistics-value= Math.round(count / users.total * 100) + ' %'
-								
+			
 			section.statistics-panel
 				header
 					h3 Title language
