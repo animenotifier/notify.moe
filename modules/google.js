@@ -58,7 +58,7 @@ module.exports = function(aero) {
 					},
 					listProviders: {},
 					sortBy: 'airingDate',
-					titleLanguage: 'english',
+					titleLanguage: 'romaji',
 					pushEndpoints: {},
 					registered: now.toISOString(),
 					lastLogin: now.toISOString(),
