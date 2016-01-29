@@ -44,7 +44,7 @@ else if anime
 							li
 								a.anime-website-link(href=link.url, target='_blank')= link.title
 							
-						if user && providers.Nyaa && providers.Nyaa.episodes > 0
+						if user && user.providers.anime === 'Nyaa' && providers.Nyaa && providers.Nyaa.episodes > 0
 							li
 								a.anime-website-link(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
 								
