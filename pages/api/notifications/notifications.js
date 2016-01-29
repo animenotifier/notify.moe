@@ -1,7 +1,5 @@
 'use strict'
 
-
-
 exports.get = (request, response) => {
 	let user = request.user
 
@@ -18,7 +16,8 @@ exports.get = (request, response) => {
 	}
 
 	arn.get('Notifications', user.id).then(record => {
-		console.log(`Notifications for ${user.nick}:`, record.notifications)
+		console.log(`Service worker retrieved notifications of ${user.nick}:`, record.notifications)
+
 		arn.remove('Notifications', user.id).then(() => {
 			response.json({
 				notifications: record.notifications
@@ -33,6 +32,7 @@ exports.get = (request, response) => {
 		}
 
 		console.error(error, error.stack)
+
 		response.json({
 			notifications: [{
 				title: 'Error fetching notifications',
