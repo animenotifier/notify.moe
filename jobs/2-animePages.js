@@ -1,11 +1,8 @@
 'use strict'
 
-let chalk = require('chalk')
-let Promise = require('bluebird')
-
 const animePageCacheTime = 120 * 60 * 1000
 
-let updateAllAnimePages = Promise.coroutine(function*() {
+let updateAllAnimePages = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating all anime pages...')
 
 	let now = new Date()
@@ -19,4 +16,4 @@ let updateAllAnimePages = Promise.coroutine(function*() {
 	}
 })
 
-arn.repeatedly(3 * 60 * 60, updateAllAnimePages)
+arn.repeatedly(3 * hours, updateAllAnimePages)

@@ -1,7 +1,7 @@
 'use strict'
 
 exports.get = function*(request, response) {
-	if(!arn.auth(request, response, 'editor'))
+	if(!arn.auth(request, response, 'admin'))
 		return
 
 	let user = request.user

@@ -1,6 +1,5 @@
 'use strict'
 
-let chalk = require('chalk')
 let request = require('request-promise')
 let RateLimiter = require('limiter').RateLimiter
 
@@ -26,6 +25,9 @@ let updateOsuDetails = function() {
 			}).then(body => {
 				let osu = JSON.parse(body)[0]
 
+				if(!osu)
+					throw new Error(`User ${user.osu} not found on osu`)
+
 				arn.set('Users', user.id, {
 					osuDetails: {
 						nick: osu.username,
@@ -36,12 +38,12 @@ let updateOsuDetails = function() {
 					}
 				})
 			}).catch(error => {
-				console.error(error, error.stack)
+				console.error(chalk.red(error.stack))
 			})
 		})
 	})
 }
 
-arn.repeatedly(60 * 60, () => {
+arn.repeatedly(30 * minutes, () => {
 	updateOsuDetails()
 })

@@ -8,7 +8,6 @@ let path = require('path')
 let zlib = require('zlib')
 let bodyParser = require('body-parser')
 let request = require('request-promise')
-let RateLimiter = require('limiter').RateLimiter
 
 // Start the server
 aero.run()
@@ -108,45 +107,29 @@ arn.on('new user', function(user) {
 	})
 })
 
-arn.on('new forum reply', function(link, userName) {
-	let webhook = 'https://hooks.slack.com/services/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'
-
-	request.post({
-		url: webhook,
-		body: JSON.stringify({
-			text: `<${link}|${userName}>`
-		})
-	}).then(body => {
-		console.log(`Sent slack message about a new forum reply from ${userName}`)
-	}).catch(error => {
-		console.error('Error sending slack message:', error, error.stack)
-	})
-})
-
 // Create search index
 arn.db.ready.then(() => {
-	arn.cacheLimiter.removeTokens(1, () => {
-		let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
-		arn.animeCount = 0
-		arn.animeToId = {}
-		arn.forEach('Anime', anime => {
-			if(anime.type === 'Music')
-				return
+	let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
+	arn.animeCount = 0
+	arn.animeToId = {}
 
-			arn.animeCount++
+	arn.forEach('Anime', anime => {
+		if(anime.type === 'Music')
+			return
 
-			if(anime.title.romaji)
-				arn.animeToId[processTitle(anime.title.romaji)] = anime.id
+		arn.animeCount++
 
-			if(anime.title.english)
-				arn.animeToId[processTitle(anime.title.english)] = anime.id
-		}).then(() => {
-			arn.animeToIdCount = Object.keys(arn.animeToId).length
-			arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
+		if(anime.title.romaji)
+			arn.animeToId[processTitle(anime.title.romaji)] = anime.id
 
-			zlib.gzip(arn.animeToIdJSONString, function(error, gzippedJSON) {
-				arn.animeToIdJSONStringGzipped = gzippedJSON
-			})
+		if(anime.title.english)
+			arn.animeToId[processTitle(anime.title.english)] = anime.id
+	}).then(() => {
+		arn.animeToIdCount = Object.keys(arn.animeToId).length
+		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
+
+		zlib.gzip(arn.animeToIdJSONString, function(error, gzippedJSON) {
+			arn.animeToIdJSONStringGzipped = gzippedJSON
 		})
 	})
 })
@@ -155,38 +138,7 @@ arn.db.ready.then(() => {
 let anilist = arn.listProviders.AniList
 anilist.authorize().then(accessToken => {
 	console.log('AniList API token:', accessToken)
-
-	// Check forum thread replies
-	if(arn.production) {
-		setInterval(anilist.checkForumReplies.bind(anilist), 5 * 60 * 1000)
-		anilist.checkForumReplies()
-	}
 })
-
-// Do a full import every 12 hours
-if(arn.production) {
-	let anilistImport = function() {
-		if(!arn.db)
-			return Promise.reject('No database connection')
-
-		console.log('Doing full anilist import')
-
-		let limiter = new RateLimiter(1, 1100)
-
-		return arn.listProviders.AniList.authorize().then(() => {
-			let maxPage = 238
-			for(let page = 1; page <= maxPage; page++) {
-				limiter.removeTokens(1, function() {
-					arn.listProviders.AniList.getAnimeFromPage(page).then(animeList => {
-						let tasks = animeList.map(anime => arn.set('Anime', anime.id, anime))
-						Promise.all(tasks).then(() => console.log('Finished importing page', page))
-					})
-				})
-			}
-		})
-	}
-	setInterval(anilistImport, 12 * 60 * 60 * 1000)
-}
 
 // Load all modules
 fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(aero))

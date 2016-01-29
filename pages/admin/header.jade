@@ -1,8 +1,11 @@
 p
 	a.ajax(href='/admin') Dashboard
 	|  | 
-	a.ajax(href='/admin/database') Database
-	|  | 
+	
+	if user && user.role === 'admin'
+		a.ajax(href='/admin/database') Database
+		|  | 
+	
 	a.ajax(href='/admin/providers/list') List providers
 	|  | 
 	a.ajax(href='/admin/providers/download') Download providers

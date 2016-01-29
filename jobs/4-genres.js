@@ -1,10 +1,6 @@
 'use strict'
 
-let Promise = require('bluebird')
-let chalk = require('chalk')
-let fs = Promise.promisifyAll(require('fs'))
-
-let updateGenres = Promise.coroutine(function*() {
+let updateGenres = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating genre cache...')
 
 	let genreText = yield fs.readFileAsync('pages/anime/genres/genres.txt', 'utf8')
@@ -56,4 +52,4 @@ let updateGenres = Promise.coroutine(function*() {
 	}
 })
 
-arn.repeatedly(30 * 60, updateGenres)
+arn.repeatedly(30 * minutes, updateGenres)

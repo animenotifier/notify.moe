@@ -1,11 +1,8 @@
 'use strict'
 
-let chalk = require('chalk')
-let Promise = require('bluebird')
-
 const maxPopularAnime = 10
 
-let updatePopularAnime = Promise.coroutine(function*() {
+let updatePopularAnime = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating popular anime...')
 
 	let popularAnime = arn.animeList.filter(anime => anime.watching)
@@ -19,4 +16,4 @@ let updatePopularAnime = Promise.coroutine(function*() {
 	console.log(chalk.green('✔'), 'Updated popular anime.')
 })
 
-arn.repeatedly(5 * 60, updatePopularAnime)
+arn.repeatedly(5 * minutes, updatePopularAnime)

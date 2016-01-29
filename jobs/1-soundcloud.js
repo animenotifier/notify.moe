@@ -1,9 +1,7 @@
 'use strict'
 
 let SC = require('node-soundcloud')
-let Promise = require('bluebird')
 let natural = require('natural')
-let chalk = require('chalk')
 
 Promise.promisifyAll(SC)
 
@@ -80,7 +78,7 @@ let findTracksForAnime = anime => {
 	})
 }
 
-let updateAnimeTracks = Promise.coroutine(function*() {
+let updateAnimeTracks = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating anime tracks...')
 
 	for(let anime of arn.animeList) {
@@ -89,4 +87,4 @@ let updateAnimeTracks = Promise.coroutine(function*() {
 	}
 })
 
-arn.repeatedly(24 * 60 * 60, updateAnimeTracks)
+arn.repeatedly(24 * hours, updateAnimeTracks)
