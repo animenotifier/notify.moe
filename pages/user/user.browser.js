@@ -5,8 +5,8 @@ window.getWeekDay = function(timeStamp) {
 	return weekDays[date.getDay()];
 };
 
-window.loadAnimeList = function() {
-	var animeList = document.getElementById('animeList');
+window.loadAnimeList = function(clearCache) {
+	var animeList = document.getElementById('anime-list-container');
 
 	// Loading animation
 	animeList.innerHTML =
@@ -19,7 +19,7 @@ window.loadAnimeList = function() {
 
 	var userName = document.getElementById('nick').innerText;
 
-	kaze.getJSON('/api/animelist/' + userName).then(function(response) {
+	kaze.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
 		if(response && response.error) {
 			animeList.innerText = 'Error loading your anime list: ' + response.error;
 			return;
@@ -31,6 +31,10 @@ window.loadAnimeList = function() {
 		}
 
 		animeList.innerHTML = '';
+		var listProviderLink = document.getElementById('list-provider-link');
+		if(listProviderLink) {
+			listProviderLink.href = response.listUrl;
+		}
 
 		var list = document.createElement('ul');
 		list.className = 'anime-list';

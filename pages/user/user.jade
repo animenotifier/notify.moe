@@ -1,7 +1,19 @@
 mixin profileImage()
 	img.profile-image(src=viewUser.gravatarURL, alt='Profile image')
 
-if !viewUser
+if !user && !viewUser
+	section
+		header
+			h2 Login:
+		
+		.box
+			a(href='/auth/google')
+				img.login-button(src='/images/elements/google-login.png', alt='Google Login')
+					
+		.box
+			a(href='/auth/facebook')
+				img.login-button(src='/images/elements/facebook-login.png', alt='Facebook Login')
+else if !viewUser
 	section
 		header
 			h2 Error
@@ -62,6 +74,15 @@ else
 		h3(style=embeddedList ? 'display: none' : null)= viewUser.nick + ' is watching:'
 		
 		if user
-			#animeList(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')
+			#anime-list-container(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')
 		else
-			#animeList(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='false')
+			#anime-list-container(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='false')
+			
+		if embeddedList && user && user.id === viewUser.id
+			#embedded-footer
+				a(href='/+' + user.nick, target='_blank')= user.nick
+				span.embedded-footer-separator  / 
+				a(id='list-provider-link', href=null, target='_blank')= user.providers.list
+				span.embedded-footer-separator  / 
+				a(href='javascript:window.loadAnimeList(true);', title='Refresh list')
+					span.fa.fa-refresh.fa-fw

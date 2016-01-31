@@ -22,7 +22,7 @@
 .anime-image
 	display none
 	position fixed
-	top 3.5em
+	top 50%
 	right calc(16px + 1em)
 	z-index 9999
 	width 225px
@@ -31,8 +31,18 @@
 	opacity 0
 	border-radius 3px
 	box-shadow 0px 0px 8px rgba(0, 0, 0, 0.4)
-	transform translateX(10%)
+	transform translate(10%, -50%)
 	transition all 290ms ease
+
+#embedded-footer
+	position fixed
+	bottom 1em
+	right calc(16px + 1em)
+	text-align right
+	z-index 1
+
+.embedded-footer-separator
+	opacity 0.2
 
 .anime
 	padding 0.25em 0.75em
@@ -45,7 +55,7 @@
 	&:hover
 		.anime-image
 			opacity 1
-			transform translateX(0)
+			transform translate(0, -50%)
 
 .anime-title
 .anime-view-link

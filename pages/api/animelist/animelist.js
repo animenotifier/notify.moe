@@ -14,7 +14,7 @@ exports.get = function(request, response) {
 		})
 	}
 
-	if(command && command === 'clearListCache') {
+	if(command && (command === 'clearCache' || command === 'clearListCache')) {
 		clearCache = true
 	}
 
