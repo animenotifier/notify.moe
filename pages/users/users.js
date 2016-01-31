@@ -121,8 +121,6 @@ let orderByMethods = {
 	osu: {
 		getCategories: () => {
 			return {
-				'10k pp': [],
-				'9k pp': [],
 				'8k pp': [],
 				'7k pp': [],
 				'6k pp': [],
@@ -141,8 +139,8 @@ let orderByMethods = {
 
 			if(user.osuDetails.pp < 1000)
 				categories.Beginners.push(user)
-			else if(user.osuDetails.pp >= 10000)
-				categories['10k pp'].push(user)
+			else if(user.osuDetails.pp >= 8000)
+				categories['8k pp'].push(user)
 			else
 				categories[parseInt(user.osuDetails.pp / 1000) + 'k pp'].push(user)
 
