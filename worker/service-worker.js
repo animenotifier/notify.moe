@@ -69,7 +69,7 @@ self.addEventListener('notificationclick', function(event) {
 	if(event.notification.close)
 		event.notification.close();
 
-	var url = '/';
+	var url = '/+';
 
 	// This looks to see if the current is already open and
 	// focuses if it is

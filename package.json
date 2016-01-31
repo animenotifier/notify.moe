@@ -9,6 +9,7 @@
 		"aerospike": "*",
 		"body-parser": "*",
 		"chalk": "*",
+		"connect-aerospike": "*",
 		"express-session": "*",
 		"node-gcm": "*",
 		"gravatar": "*",
