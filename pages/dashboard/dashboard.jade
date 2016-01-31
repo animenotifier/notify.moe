@@ -17,35 +17,46 @@ if user
 			li.finished#gravatar-text Add a gravatar image
 				img#gravatar-test-image(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
 		li(class=Object.keys(user.pushEndpoints).length > 0 ? 'finished' : 'not-finished') Activate push notifications
-		li#install-chrome
-			a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
-				i.fa.fa-chrome
-				span Install the Chrome extension
+		
+	h3 Apps
 	
-	h3 Join the chat!
+	ul.icon-list
+		if user.agent && user.agent.family
+			if user.agent.family === 'Chrome'
+				li
+					i.fa.fa-chrome.fa-fw
+					a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
+						span Chrome extension
+			else if user.agent.family === 'Firefox'
+				li
+					i.fa.fa-firefox.fa-fw
+					a(href='https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/', target='_blank')
+						span Firefox extension
 	
-	ul
+	h3 Join the chat
+	
+	ul.icon-list
 		li
-			i.fa.fa-microphone
+			i.fa.fa-microphone.fa-fw
 			a(href='https://discord.gg/0kimAmMCeXGXuzNF', target='_blank') notify.moe on Discord
 	
 	h3 Follow the project
-	ul
+	ul.icon-list
 		li
+			i.fa.fa-facebook.fa-fw
 			a(href='https://www.facebook.com/animenotifier', target='_blank')
-				i.fa.fa-facebook
 				span Facebook
 		li
+			i.fa.fa-twitter.fa-fw
 			a(href='https://twitter.com/animenotifier', target='_blank')
-				i.fa.fa-twitter
 				span Twitter
 		li
+			i.fa.fa-google-plus.fa-fw
 			a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank')
-				i.fa.fa-google-plus
 				span Google+
 		li
+			i.fa.fa-github.fa-fw
 			a(href='https://github.com/animenotifier/notify.moe', target='_blank')
-				i.fa.fa-github
 				span GitHub
 	
 	h3 Visit the forum threads
@@ -68,7 +79,7 @@ else
 			img(itemprop='image', src='/images/platforms/chrome.png', alt='Chrome', width='256', height='256')
 		
 		// Firefox
-		//-a.box.scale(href='https://addons.mozilla.org/en-US/firefox/addon/anime-release-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
+		a.box.scale(href='https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
 			span(itemprop='name') Anime Release Notifier - Firefox Extension
 			img(itemprop='image', src='/images/platforms/firefox.png', alt='Firefox', width='256', height='256')
 		
