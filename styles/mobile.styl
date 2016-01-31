@@ -13,7 +13,10 @@
 		margin-right 0
 
 	.episodes-behind
-		display none
+		&:before
+			content '+'
+		&:after
+			content ''
 
 	#content
 		padding 1em

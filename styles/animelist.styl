@@ -52,7 +52,9 @@
 	background linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%)
 	display flex
 	flex-direction row
+	transition all 200ms ease
 	&:hover
+		background linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.03) 100%)
 		.anime-image
 			opacity 1
 			transform translate(0, -50%)
@@ -64,10 +66,14 @@
 		color rgb(255, 32, 12) !important
 
 .anime-title
-	flex 3
+	flex-grow 0
+	flex-shrink 1
 	white-space nowrap
 	text-overflow ellipsis
 	overflow hidden
+
+.spacer
+	flex 1
 
 .anime-completed
 .anime-warning
@@ -94,9 +100,14 @@
 
 .airing-date
 .episodes-behind
-	flex 1
+	flex-grow 0
+	flex-shrink 1
 	opacity 0.5
 	text-align right
-
-.airing-date
 	white-space nowrap
+
+.episodes-behind
+	&:before
+		content '+'
+	&:after
+		content ''

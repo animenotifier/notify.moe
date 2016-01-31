@@ -67,6 +67,11 @@ window.loadAnimeList = function(clearCache) {
 
 			item.appendChild(link);
 
+			// Spacer
+			var spacer = document.createElement('span');
+			spacer.className = 'spacer';
+			item.appendChild(spacer);
+
 			var addIconLink = function(iconName, url, linkClass, tooltip) {
 				var link = document.createElement(url ? 'a' : 'div');
 
@@ -113,7 +118,8 @@ window.loadAnimeList = function(clearCache) {
 					var behind = (anime.episodes.available - anime.episodes.watched);
 					var episodes = document.createElement('span');
 					episodes.className = 'episodes-behind';
-					episodes.appendChild(document.createTextNode(behind + ' new episode' + (behind === 1 ? '' : 's')));
+					episodes.appendChild(document.createTextNode(behind));
+					episodes.title = behind + ' new episode' + (behind === 1 ? '' : 's');
 					item.appendChild(episodes);
 
 					var isDownload = (anime.animeProvider.type === undefined || anime.animeProvider.type === 'download');

@@ -14,7 +14,7 @@ module.exports = function(aero) {
 	    resave: false,
 	    cookie: {
 	        secure: true,
-			maxAge: 30 * 24 * 60 * 60 * 1000
+			maxAge: 6 * 30 * 24 * 60 * 60 * 1000
 	    }
 	}
 
