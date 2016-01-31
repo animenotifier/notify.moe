@@ -4,15 +4,12 @@ mixin profileImage()
 if !user && !viewUser
 	section
 		header
-			h2 Login:
+			h2 Not logged in
 		
-		.box
-			a(href='/auth/google')
-				img.login-button(src='/images/elements/google-login.png', alt='Google Login')
-					
-		.box
-			a(href='/auth/facebook')
-				img.login-button(src='/images/elements/facebook-login.png', alt='Facebook Login')
+		p
+			span Please 
+			a(href='https://notify.moe/', target='_blank') login via the website
+			span  first before using this extension.
 else if !viewUser
 	section
 		header
