@@ -6,10 +6,33 @@
 	max-width 750px
 	text-align left
 
+.embedded-anime-list-container
+	width calc(100% - 225px - 1em)
+	.anime-image
+		display block
+
 .anime-list
 	list-style-type none
 	margin 0
 	width 100%
+
+.anime-status-icon
+	margin 0 !important
+
+.anime-image
+	display none
+	position fixed
+	top 3.5em
+	right calc(16px + 1em)
+	z-index 9999
+	width 225px
+	margin 0
+	padding 0
+	opacity 0
+	border-radius 3px
+	box-shadow 0px 0px 8px rgba(0, 0, 0, 0.4)
+	transform translateX(10%)
+	transition all 290ms ease
 
 .anime
 	padding 0.25em 0.75em
@@ -19,12 +42,16 @@
 	background linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%)
 	display flex
 	flex-direction row
+	&:hover
+		.anime-image
+			opacity 1
+			transform translateX(0)
 
 .anime-title
 .anime-view-link
 	color darken(mainColor, 30%) !important
 	&:hover
-		color rgb(255, 42, 12) !important
+		color rgb(255, 32, 12) !important
 
 .anime-title
 	flex 3

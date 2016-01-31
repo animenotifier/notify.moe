@@ -130,6 +130,8 @@ if(animeContainer && animeContainer.dataset.id) {
 
 			searchResults.appendChild(element);
 		}
+
+		kaze.ajaxifyLinks();
 	};
 
 	window.searchAnime = function() {

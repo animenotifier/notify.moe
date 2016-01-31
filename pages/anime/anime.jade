@@ -16,8 +16,8 @@ else if anime
 			
 			.image-and-summary
 				if anime.image
-					.anime-image-container
-						img.anime-image(src=anime.image, alt=anime.name)
+					.anime-page-image-container
+						img.anime-page-image(src=anime.image, alt=anime.name)
 						
 				if anime.description
 					.anime-summary
@@ -156,4 +156,4 @@ else
 			p
 				each anime in popularAnime
 					a.popular-anime.ajax(href='/anime/' + anime.id, title=anime.title[user ? user.titleLanguage : 'romaji'] + ' (' + anime.watching + (anime.watching === 1 ? ' user' : ' users') + ' watching)')
-						img.anime-image.popular-anime-image(src=anime.image, alt=anime.title.romaji)
+						img.anime-page-image.popular-anime-image(src=anime.image, alt=anime.title.romaji)

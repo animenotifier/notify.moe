@@ -19,9 +19,7 @@ aero.rewrite(function(request, response) {
         return true
     }
 
-	if(request.user && request.url.startsWith('/+me'))
-		request.url = '/user/' + request.user.nick + request.url.substring(4)
-	else if(request.url.startsWith('/+'))
+	if(request.url.startsWith('/+'))
 		request.url = '/user/' + request.url.substring(2)
 	else if(request.url.startsWith('/_/+'))
 		request.url = '/_/user/' + request.url.substring(4)

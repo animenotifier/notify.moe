@@ -9,15 +9,15 @@ if !viewUser
 		p User not found.
 else
 	section
-		.image-container
+		.image-container(style=embeddedList ? 'display: none' : null)
 			if user && user.id === viewUser.id
 				a(href='https://gravatar.com/emails/', target='_blank', rel='nofollow', title='Change your gravatar picture for ' + user.email)
 					+profileImage()
 			else
 				+profileImage()
 		
-		.intro-container
-			h2.nick= viewUser.nick
+		.intro-container(style=embeddedList ? 'display: none' : null)
+			h2#nick= viewUser.nick
 			
 			if viewUser.tagline
 				p.profile-field.tagline
@@ -59,9 +59,9 @@ else
 					p(class='website list-provider-username' + (viewUser.providers.list === provider ? ' main' : ' alternative'))
 						span= provider + ' (' + viewUser.listProviders[provider].userName + ')'
 		
-		h3= viewUser.nick + ' is watching:'
+		h3(style=embeddedList ? 'display: none' : null)= viewUser.nick + ' is watching:'
 		
 		if user
-			#animeList.anime-list-container(data-logged='true')
+			#animeList(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')
 		else
-			#animeList.anime-list-container(data-logged='false')
+			#animeList(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='false')

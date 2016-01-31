@@ -3,6 +3,7 @@
 exports.render = function(request, render) {
 	let user = request.user
 	let nav = []
+	let embedded = request.params.indexOf('embedded') !== -1
 
 	nav.push({
 		title: 'Dash',
@@ -13,7 +14,7 @@ exports.render = function(request, render) {
 	if(user) {
 		nav.push({
 			title: 'Profile',
-			url: '+' + user.nick,
+			url: embedded ? '+/watching' : '+' + user.nick,
 			icon: 'user'
 		})
 	}
@@ -45,14 +46,16 @@ exports.render = function(request, render) {
 	}
 
 	if(user) {
-		nav.push({
-			title: '',
-			url: 'logout',
-			icon: 'sign-out',
-			ajax: false,
-			float: 'right',
-			tooltip: 'Logout'
-		})
+		if(!embedded) {
+			nav.push({
+				title: '',
+				url: 'logout',
+				icon: 'sign-out',
+				ajax: false,
+				float: 'right',
+				tooltip: 'Logout'
+			})
+		}
 
 		/*nav.push({
 			title: '',
@@ -70,13 +73,15 @@ exports.render = function(request, render) {
 			tooltip: 'FAQ'
 		})
 
-		nav.push({
-			title: '',
-			url: 'api',
-			icon: 'code',
-			float: 'right',
-			tooltip: 'API (for developers)'
-		})
+		if(!embedded) {
+			nav.push({
+				title: '',
+				url: 'api',
+				icon: 'code',
+				float: 'right',
+				tooltip: 'API (for developers)'
+			})
+		}
 
 		nav.push({
 			title: '',
@@ -110,7 +115,7 @@ exports.render = function(request, render) {
 			tooltip: 'Feedback'
 		})
 
-		if(user.role === 'admin' || user.role === 'editor') {
+		if(!embedded && (user.role === 'admin' || user.role === 'editor')) {
 			nav.push({
 				title: '',
 				url: 'admin',
@@ -124,6 +129,7 @@ exports.render = function(request, render) {
 	render({
 		user,
 		nav,
-		maintenance: arn.maintenance
+		maintenance: arn.maintenance,
+		embedded
 	})
 }

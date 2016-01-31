@@ -41,12 +41,6 @@
 .anime-summary-header
 	display none
 
-.anime-image
-	//width 100%
-	//max-width 225px !important
-	border-radius 3px
-	flex 0
-
 .anime-summary
 	flex 1
 	margin-left 1.2em
@@ -71,13 +65,15 @@
 angle = 20deg
 scale = 0.5
 
-.anime-image
-	box-shadow 4px 4px 8px rgba(0, 0, 0, 0.7)
+.anime-page-image
+	border-radius 3px
+	flex 0
+	box-shadow 4px 4px 8px rgba(0, 0, 0, 0.12)
 	filter saturate(100%)
 	transition all 290ms ease
 	&:hover
 		filter saturate(130%)
-		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.8)
+		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.2)
 
 .search-performance
 .anime-count
@@ -151,7 +147,7 @@ scale = 0.5
 		margin-left 0
 		margin-top 1em
 
-	.anime-image-container
+	.anime-page-image-container
 		width 100%
 		text-align center
 

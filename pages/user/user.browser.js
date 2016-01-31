@@ -17,7 +17,7 @@ window.loadAnimeList = function() {
 			'<div class="sk-cube3 sk-cube"></div>' +
 		'</div>';
 
-	var userName = window.location.pathname.substring(2);
+	var userName = document.getElementById('nick').innerText;
 
 	kaze.getJSON('/api/animelist/' + userName).then(function(response) {
 		if(response && response.error) {
@@ -41,6 +41,14 @@ window.loadAnimeList = function() {
 			var item = document.createElement('li');
 			item.className = 'anime';
 
+			// Image
+			var image = document.createElement('img');
+			image.src = anime.image;
+			image.alt = anime.preferredTitle;
+			image.className = 'anime-image';
+			item.appendChild(image);
+
+			// Link
 			var link = document.createElement('a');
 			link.appendChild(document.createTextNode(anime.title[response.titleLanguage]));
 
