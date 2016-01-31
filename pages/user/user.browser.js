@@ -17,16 +17,16 @@ window.loadAnimeList = function(clearCache) {
 			'<div class="sk-cube3 sk-cube"></div>' +
 		'</div>';
 
-	var userName = document.getElementById('nick').innerText;
+	var userName = document.getElementById('nick').textContent.trim();
 
 	kaze.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
 		if(response && response.error) {
-			animeList.innerText = 'Error loading your anime list: ' + response.error;
+			animeList.textContent = 'Error loading your anime list: ' + response.error;
 			return;
 		}
 
 		if(!response.watching) {
-			animeList.innerText = 'There are no anime your watching list.';
+			animeList.textContent = 'There are no anime your watching list.';
 			return;
 		}
 
@@ -99,7 +99,7 @@ window.loadAnimeList = function(clearCache) {
 
 				var airingDatePrefix = document.createElement('span');
 				airingDatePrefix.className = 'airing-date-prefix';
-				airingDatePrefix.innerText = anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ';
+				airingDatePrefix.textContent = anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ';
 				airingDate.appendChild(airingDatePrefix);
 				airingDate.appendChild(document.createTextNode(anime.airingDate.remainingString));
 				airingDate.title = window.getWeekDay(anime.airingDate.timeStamp);
@@ -157,7 +157,7 @@ window.loadAnimeList = function(clearCache) {
 		animeList.appendChild(list);
 		kaze.ajaxifyLinks();
 	}).catch(function(error) {
-		animeList.innerText = 'Error: ' + error;
+		animeList.textContent = 'Error: ' + error;
 	});
 };
 
