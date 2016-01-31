@@ -38,14 +38,6 @@
 					"crunchyroll.com": "CrunchyRoll",
 					"nyaa.eu": "Nyaa"
 				}
-			},
-			{
-				"id": "providers.airingDate",
-				"label": "Airing date:",
-				"description": "This is where we'll fetch the airing date for your anime",
-				"options": {
-					"anilist.co": "AniList"
-				}
 			}
 		],
 		"Details": [
