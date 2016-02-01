@@ -5,7 +5,7 @@ let passport = require('passport')
 let Promise = require('bluebird')
 let FacebookStrategy = require('passport-facebook').Strategy
 
-module.exports = function(aero) {
+module.exports = function(app) {
 	let facebookConfig = Object.assign({
 	        callbackURL: arn.production ? 'https://notify.moe/auth/facebook/callback' : '/auth/facebook/callback',
 			profileFields: ['id', 'name', 'email', 'gender', 'age_range'],
@@ -77,7 +77,7 @@ module.exports = function(aero) {
 	))
 
 	// Facebook login
-	aero.get('/auth/facebook', passport.authenticate('facebook', {
+	app.get('/auth/facebook', passport.authenticate('facebook', {
 	    scope: [
 	        'email',
 	        'public_profile'
@@ -85,7 +85,7 @@ module.exports = function(aero) {
 	}))
 
 	// Facebook callback
-	aero.get('/auth/facebook/callback',
+	app.get('/auth/facebook/callback',
 	    passport.authenticate('facebook', {
 	        successRedirect: '/',
 	        failureRedirect: '/login'

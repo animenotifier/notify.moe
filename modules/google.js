@@ -5,7 +5,7 @@ let passport = require('passport')
 let Promise = require('bluebird')
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
-module.exports = function(aero) {
+module.exports = function(app) {
 	let googleConfig = Object.assign({
 	        callbackURL: arn.production ? 'https://notify.moe/auth/google/callback' : '/auth/google/callback',
 			passReqToCallback: true
@@ -75,7 +75,7 @@ module.exports = function(aero) {
 	))
 
 	// Google login
-	aero.get('/auth/google', passport.authenticate('google', {
+	app.get('/auth/google', passport.authenticate('google', {
 	    scope: [
 	        'https://www.googleapis.com/auth/plus.login',
 	        'email'
@@ -83,7 +83,7 @@ module.exports = function(aero) {
 	}))
 
 	// Google callback
-	aero.get('/auth/google/callback',
+	app.get('/auth/google/callback',
 	    passport.authenticate('google', {
 	        successRedirect: '/',
 	        failureRedirect: '/login'
