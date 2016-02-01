@@ -52,7 +52,7 @@ app.get('manifest.json', (request, response) => {
 			sizes: '300x300',
 			type: 'image/png'
 		}],
-		start_url: '/',
+		start_url: '/+',
 		display: 'standalone',
 		lang: 'en',
 		gcm_sender_id: arn.apiKeys.gcm.senderID
