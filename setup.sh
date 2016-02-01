@@ -2,8 +2,8 @@
 
 # Firewall
 sugoi clearFirewall
-sugoi redirectPort 80 5000
-sugoi redirectPort 443 5001
+#sugoi redirectPort 80 5000
+#sugoi redirectPort 443 5001
 sugoi blockPort 3000
 
 # Use swap only when needed
