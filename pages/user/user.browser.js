@@ -40,6 +40,7 @@ window.loadAnimeList = function(clearCache) {
 		list.className = 'anime-list';
 
 		var loggedIn = animeList.dataset.logged === 'true';
+		var newAnimeCount = 0;
 
 		response.watching.forEach(function(anime) {
 			var item = document.createElement('li');
@@ -130,6 +131,8 @@ window.loadAnimeList = function(clearCache) {
 						'anime-download-link',
 						(isDownload ? 'Download' : 'Watch') + ' episode ' + anime.episodes.next
 					);
+
+					newAnimeCount++;
 				} else if(anime.episodes.available > 0 && anime.episodes.available === anime.episodes.watched) {
 					addAiringDate();
 
@@ -149,6 +152,13 @@ window.loadAnimeList = function(clearCache) {
 						'Could not find your anime title on the anime provider.'
 					);
 				}
+			}
+
+			// If this is embedded in an iframe, send additional info to the top site
+			if(window.top) {
+				window.top.postMessage(JSON.stringify({
+					newAnimeCount: newAnimeCount
+				}), '*')
 			}
 
 			list.appendChild(item);

@@ -2,7 +2,7 @@
 
 global.arn = require('./lib')
 
-let aero = require('aero')
+let app = require('aero')()
 let fs = require('fs')
 let path = require('path')
 let zlib = require('zlib')
@@ -10,10 +10,10 @@ let bodyParser = require('body-parser')
 let request = require('request-promise')
 
 // Start the server
-aero.run()
+app.run()
 
 // Rewrite URLs
-aero.rewrite(function(request, response) {
+app.rewrite(function(request, response) {
 	if(request.headers.host.indexOf('animereleasenotifier.com') !== -1) {
         response.redirect('https://notify.moe' + request.url)
         return true
@@ -27,7 +27,7 @@ aero.rewrite(function(request, response) {
 
 // Log requests
 if(!arn.production) {
-	aero.use(function(request, response, next) {
+	app.use(function(request, response, next) {
 		let start = new Date()
 		next()
 		let end = new Date()
@@ -40,10 +40,10 @@ if(!arn.production) {
 }
 
 // For POST requests
-aero.use(bodyParser.json())
+app.use(bodyParser.json())
 
 // Web app manifest
-aero.get('manifest.json', (request, response) => {
+app.get('manifest.json', (request, response) => {
 	let manifest = {
 		name: 'Anime Notifier',
 		short_name: 'Anime Notifier',
@@ -83,8 +83,8 @@ let serveFile = fileName => {
 	}
 }
 
-aero.get('service-worker.js', serveFile('worker/service-worker.js'))
-aero.get('cache-polyfill.js', serveFile('worker/cache-polyfill.js'))
+app.get('service-worker.js', serveFile('worker/service-worker.js'))
+app.get('cache-polyfill.js', serveFile('worker/cache-polyfill.js'))
 
 // Send slack messages
 arn.on('new user', function(user) {
@@ -141,4 +141,4 @@ anilist.authorize().then(accessToken => {
 })
 
 // Load all modules
-fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(aero))
+fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(app))
