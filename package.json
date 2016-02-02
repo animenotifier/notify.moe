@@ -6,6 +6,9 @@
 	"private": false,
 	"dependencies": {
 		"aero": "*",
+		"aero-style-reset": "*",
+		"aero-kaze": "*",
+		"aero-font-awesome": "*",
 		"aerospike": "*",
 		"body-parser": "*",
 		"chalk": "*",
