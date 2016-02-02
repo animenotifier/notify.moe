@@ -1,5 +1,7 @@
 if error === 404
 	p Anime pages are currently under maintenance. Sorry for the inconvenience.
+else if !user && anime && anime.adult
+	p Please log in to view adult content.
 else if anime
 	section.anime-container(data-id=anime.id)
 		.page

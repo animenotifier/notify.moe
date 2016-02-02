@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
 	head
-		title= title
+		title= app.config.title
 		style!= css
 		link(rel='chrome-webstore-item', href='https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch')
 		link(rel='manifest', href='/manifest.json')
@@ -37,7 +37,7 @@ html(lang='en')
 						if !user
 							#title
 								a(href='/')
-									h1= siteName
+									h1= app.config.title
 							#slogan Don't miss the next episode. Get notified instantly.
 						
 						nav#navigation
