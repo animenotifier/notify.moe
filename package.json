@@ -3,7 +3,7 @@
 	"version": "3.0.0",
 	"homepage": "https://notify.moe",
 	"main": "index.js",
-	"private": false,
+	"description": "Anime Release Notifier will notify you when a new episode of your favourite anime has been released.",
 	"dependencies": {
 		"aero": "*",
 		"aero-style-reset": "*",
@@ -33,12 +33,11 @@
 		"web-push": "*",
 		"xml2js": "*"
 	},
-	"engines": {
-		"node": ">= 5.0.0"
-	},
-	"scripts": {
-
-	},
+	"keywords": [
+		"anime",
+		"notifier",
+		"notify"
+	],
 	"repository": {
 		"type" : "git",
 		"url" : "https://github.com/animenotifier/notify.moe"

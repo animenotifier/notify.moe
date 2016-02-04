@@ -1,20 +1,21 @@
 doctype html
 html(lang='en')
 	head
-		title= title
-		style!= css
+		title= app.config.title
+		
 		link(rel='chrome-webstore-item', href='https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch')
 		link(rel='manifest', href='/manifest.json')
+		style!= css
 		
 		// Generic
-		meta(name='description', content=description)
-		meta(name='keywords', content='anime,notifier,notify')
+		meta(name='description', content=app.package.description)
+		meta(name='keywords', content=app.package.keywords.join(','))
 		
 		// Open Graph
-		meta(property='og:url', content='https://notify.moe')
+		meta(property='og:url', content=app.package.url)
 		meta(property='og:type', content='website')
-		meta(property='og:title', content=title)
-		meta(property='og:description', content=description)
+		meta(property='og:title', content=app.config.title)
+		meta(property='og:description', content=app.package.description)
 		meta(property='og:image', content='/images/characters/arn-waifu.png')
 
 	body
@@ -37,7 +38,7 @@ html(lang='en')
 						if !user
 							#title
 								a(href='/')
-									h1= app.config.title
+									h1= app.package.name
 							#slogan Don't miss the next episode. Get notified instantly.
 						
 						nav#navigation
@@ -55,7 +56,7 @@ html(lang='en')
 											span.navigation-text= link.title
 			
 				#content-container
-					#content.fade!= content
+					main#content.fade!= content
 				
 				#loading-animation.sk-cube-grid.fade
 					.sk-cube.sk-cube1
