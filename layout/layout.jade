@@ -7,11 +7,11 @@ html(lang='en')
 		link(rel='manifest', href='/manifest.json')
 		style!= css
 		
-		// Generic
+		//- Generic
 		meta(name='description', content=app.package.description)
 		meta(name='keywords', content=app.package.keywords.join(','))
 		
-		// Open Graph
+		//- Open Graph
 		meta(property='og:url', content=app.package.url)
 		meta(property='og:type', content='website')
 		meta(property='og:title', content=app.config.title)

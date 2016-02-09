@@ -19,7 +19,7 @@ window.loadAnimeList = function(clearCache) {
 
 	var userName = document.getElementById('nick').textContent.trim();
 
-	kaze.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
+	aero.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
 		if(response && response.error) {
 			animeList.textContent = 'Error loading your anime list: ' + response.error;
 			return;
@@ -165,7 +165,7 @@ window.loadAnimeList = function(clearCache) {
 		});
 
 		animeList.appendChild(list);
-		kaze.ajaxifyLinks();
+		aero.ajaxifyLinks();
 	}).catch(function(error) {
 		animeList.textContent = 'Error: ' + error;
 	});

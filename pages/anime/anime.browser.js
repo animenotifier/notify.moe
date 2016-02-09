@@ -117,7 +117,7 @@ if(animeContainer && animeContainer.dataset.id) {
 
 	window.displaySearchResults = function(results) {
 		searchResults.className = '';
-		kaze.clear(searchResults);
+		aero.clear(searchResults);
 
 		for(i = 0; i < results.length; i++) {
 			var result = results[i];
@@ -131,7 +131,7 @@ if(animeContainer && animeContainer.dataset.id) {
 			searchResults.appendChild(element);
 		}
 
-		kaze.ajaxifyLinks();
+		aero.ajaxifyLinks();
 	};
 
 	window.searchAnime = function() {
@@ -148,7 +148,7 @@ if(animeContainer && animeContainer.dataset.id) {
 	};
 
 	window.downloadSearchList = function() {
-		kaze.getJSON('/api/searchlist').then(function(json) {
+		aero.getJSON('/api/searchlist').then(function(json) {
 			allAnime = json;
 			animeTitles = Object.keys(allAnime);
 			console.log(animeTitles.length);

@@ -5,7 +5,7 @@ window.sendFeedback = function() {
 	if(!feedback.value)
 		return;
 
-	kaze.postJSON('/api/feedback', {
+	aero.postJSON('/api/feedback', {
 		text: feedback.value
 	}).then(function(response) {
 		if(response === 'OK') {

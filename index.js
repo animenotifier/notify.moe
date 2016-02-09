@@ -26,7 +26,7 @@ app.rewrite(function(request, response) {
 })
 
 // Log requests
-if(!arn.production) {
+/*if(!arn.production) {
 	app.use(function(request, response, next) {
 		let start = new Date()
 		next()
@@ -37,7 +37,7 @@ if(!arn.production) {
 		else
 			console.log(request.url, '|', end - start, 'ms')
 	})
-}
+}*/
 
 // For POST requests
 app.use(bodyParser.json())

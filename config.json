@@ -28,10 +28,6 @@
 		"images",
 		"web"
 	],
-	"security": {
-		"key": "privkey.pem",
-        "cert": "fullchain.pem"
-	},
 	"ports": {
 		"http": 5000,
 		"https": 5001,

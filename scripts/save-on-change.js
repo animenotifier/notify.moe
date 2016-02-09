@@ -12,9 +12,9 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 		var old = item.dataset.old ? item.dataset.old : '';
 
 		item.classList.add('saving');
-		kaze.content.style.cursor = 'wait';
+		aero.content.style.cursor = 'wait';
 
-		kaze.postJSON(apiEndpoint, {
+		aero.postJSON(apiEndpoint, {
 			function: 'save',
 			key: key,
 			value: value,
@@ -25,11 +25,11 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 		}).catch(function(error) {
 			console.error(error);
 		}).then(function() {
-			kaze.get('/_' + location.pathname).then(function(newPageCode) {
+			aero.get('/_' + location.pathname).then(function(newPageCode) {
 				var focusedElementId = document.activeElement.id;
 				var focusedElementValue = document.activeElement.value;
 
-				kaze.setContent(newPageCode);
+				aero.setContent(newPageCode);
 
 				// Re-focus previously selected element
 				if(focusedElementId) {
@@ -45,7 +45,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 					}
 				}
 
-				kaze.content.style.cursor = 'auto';
+				aero.content.style.cursor = 'auto';
 				document.saving = false;
 			});
 		});

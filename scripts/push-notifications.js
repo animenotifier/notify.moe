@@ -4,7 +4,7 @@ function subscribeOnServer(subscription) {
 	console.log('Send subscription to server...');
 	console.log(subscription);
 
-	kaze.postJSON('/api/notifications/subscribe', {
+	aero.postJSON('/api/notifications/subscribe', {
 		endpoint: subscription.endpoint
 	}).then(function(response) {
 		console.log(response);
@@ -15,7 +15,7 @@ function unsubscribeOnServer(subscription) {
 	console.log('Send unsubscription to server...');
 	console.log(subscription);
 
-	kaze.postJSON('/api/notifications/unsubscribe', {
+	aero.postJSON('/api/notifications/unsubscribe', {
 		endpoint: subscription.endpoint
 	}).then(function(response) {
 		console.log(response);
@@ -25,7 +25,7 @@ function unsubscribeOnServer(subscription) {
 function sendTestNotification() {
 	console.log('Sending test notification...')
 
-	kaze.get('/api/notifications/test').then(function(response) {
+	aero.get('/api/notifications/test').then(function(response) {
 		// ...
 	})
 }

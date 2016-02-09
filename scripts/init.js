@@ -13,5 +13,5 @@ if(window.location.hash && window.location.hash === '#_=_') {
 
 // Fade out loading animation
 document.addEventListener('DOMContentLoaded', function(event) {
-	kaze.loadingAnimation.classList.add('fade-out');
+	aero.loadingAnimation.classList.add('fade-out');
 });
