@@ -6,7 +6,7 @@ window.getWeekDay = function(timeStamp) {
 };
 
 window.loadAnimeList = function(clearCache) {
-	var animeList = document.getElementById('anime-list-container');
+	var animeList = $('anime-list-container');
 
 	// Loading animation
 	animeList.innerHTML =
@@ -17,7 +17,7 @@ window.loadAnimeList = function(clearCache) {
 			'<div class="sk-cube3 sk-cube"></div>' +
 		'</div>';
 
-	var userName = document.getElementById('nick').textContent.trim();
+	var userName = $('nick').textContent.trim();
 
 	aero.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
 		if(response && response.error) {
@@ -31,7 +31,7 @@ window.loadAnimeList = function(clearCache) {
 		}
 
 		animeList.innerHTML = '';
-		var listProviderLink = document.getElementById('list-provider-link');
+		var listProviderLink = $('list-provider-link');
 		if(listProviderLink) {
 			listProviderLink.href = response.listUrl;
 		}

@@ -4,9 +4,9 @@ if(animeContainer && animeContainer.dataset.id) {
 	makeSaveable('/api/anime/' + animeContainer.dataset.id);
 	getGravatarImages();
 } else {
-	var search = document.getElementById('search');
-	var searchResults = document.getElementById('search-results');
-	var allAnimeObject = document.getElementById('all-anime');
+	var search = $('search');
+	var searchResults = $('search-results');
+	var allAnimeObject = $('all-anime');
 	var lastRequest = undefined;
 	var maxSearchResults = 14;
 	var allAnime = localStorage.getItem('allAnimeTitles');

@@ -33,7 +33,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 
 				// Re-focus previously selected element
 				if(focusedElementId) {
-					var focusedElement = document.getElementById(focusedElementId);
+					var focusedElement = $(focusedElementId);
 
 					if(focusedElement) {
 						focusedElement.value = focusedElementValue;

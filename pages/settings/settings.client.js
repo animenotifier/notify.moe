@@ -1,4 +1,4 @@
-var userName = document.getElementById('nick').value;
+var userName = $('nick').value;
 
 makeSaveable('/api/users/me', function(key, value) {
 	switch(key) {

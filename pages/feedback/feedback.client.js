@@ -1,4 +1,4 @@
-var feedback = document.getElementById('feedback');
+var feedback = $('feedback');
 feedback.focus();
 
 window.sendFeedback = function() {

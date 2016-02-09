@@ -28,7 +28,7 @@ aero.getJSON('https://api.github.com/users/animenotifier/events?clientid=e8fe5e8
 .then(function(data) {
 	var now = new Date();
 
-	document.getElementById('github-events').innerHTML = '<ul>' +
+	$('github-events').innerHTML = '<ul>' +
 		data
 		.filter(function(e) {
 			return e.type === 'PushEvent'
