@@ -28,6 +28,12 @@
 		"images",
 		"web"
 	],
+	"icons": [
+		"images/characters/arn-waifu.png"
+	],
+	"manifest": {
+		"gcm_sender_id": "941298467524"
+	},
 	"ports": {
 		"http": 5000,
 		"https": 5001,

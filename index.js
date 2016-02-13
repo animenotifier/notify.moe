@@ -7,9 +7,6 @@ let zlib = require('zlib')
 let bodyParser = require('body-parser')
 let request = require('request-promise')
 
-// Start the server
-app.run()
-
 // Rewrite URLs
 app.rewrite(function(request, response) {
 	if(request.headers.host.indexOf('animereleasenotifier.com') !== -1) {
@@ -39,33 +36,6 @@ app.rewrite(function(request, response) {
 
 // For POST requests
 app.use(bodyParser.json())
-
-// Web app manifest
-app.get('manifest.json', (request, response) => {
-	let manifest = {
-		name: 'Anime Notifier',
-		short_name: 'Anime Notifier',
-		icons: [{
-			src: 'images/characters/arn-waifu.png',
-			sizes: '300x300',
-			type: 'image/png'
-		}],
-		start_url: '/',
-		display: 'standalone',
-		lang: 'en',
-		gcm_sender_id: arn.apiKeys.gcm.senderID
-	}
-
-	let manifestString = JSON.stringify(manifest)
-
-	response.writeHead(200, {
-		'Content-Type': 'application/json',
-		'Content-Length': Buffer.byteLength(manifestString, 'utf8'),
-		'Cache-Control': 'max-age=3600'
-	})
-
-	response.end(manifestString)
-})
 
 let serveFile = fileName => {
 	return (request, response) => {
@@ -140,3 +110,6 @@ anilist.authorize().then(accessToken => {
 
 // Load all modules
 fs.readdirSync('modules').forEach(mod => require('./modules/' + mod)(app))
+
+// Start the server
+app.run()
