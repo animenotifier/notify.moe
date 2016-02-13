@@ -1,5 +1,3 @@
-'use strict'
-
 global.arn = require('./lib')
 
 let app = require('aero')()
