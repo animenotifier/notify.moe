@@ -2,8 +2,6 @@
 
 let Promise = require('bluebird')
 
-const listLength = 25
-
 exports.get = function*(request, response) {
 	if(!arn.auth(request, response, 'editor'))
 		return
