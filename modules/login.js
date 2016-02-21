@@ -7,7 +7,7 @@ let AerospikeStore = require('connect-aerospike')(session)
 
 const cookieDurationInSeconds = 6 * 30 * 24 * 60 * 60
 
-module.exports = function(aero) {
+module.exports = function(app) {
 	// Session
 	let sessionOptions = {
 		store: new AerospikeStore({
@@ -28,14 +28,14 @@ module.exports = function(aero) {
 	}
 
 	// Middleware
-	aero.use(
+	app.use(
 	    session(sessionOptions),
 	    passport.initialize(),
 	    passport.session()
 	)
 
 	// Logout
-	$.get('/logout', function(req, res) {
+	app.get('/logout', function(req, res) {
 	    req.logout()
 	    res.redirect('/')
 	})
