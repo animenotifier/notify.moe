@@ -24,12 +24,12 @@
 		"passport": "*",
 		"passport-facebook": "*",
 		"passport-google-oauth": "*",
+		"paypal-rest-sdk": "*",
 		"request-promise": "*",
 		"session-file-store": "*",
 		"shortid": "*",
 		"striptags": "*",
 		"useragent": "*",
-		"validator": "*",
 		"web-push": "*",
 		"xml2js": "*"
 	},

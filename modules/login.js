@@ -35,7 +35,7 @@ module.exports = function(aero) {
 	)
 
 	// Logout
-	aero.get('/logout', function(req, res) {
+	$.get('/logout', function(req, res) {
 	    req.logout()
 	    res.redirect('/')
 	})

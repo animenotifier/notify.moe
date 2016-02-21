@@ -4,7 +4,7 @@ function subscribeOnServer(subscription) {
 	console.log('Send subscription to server...');
 	console.log(subscription);
 
-	aero.postJSON('/api/notifications/subscribe', {
+	$.post('/api/notifications/subscribe', {
 		endpoint: subscription.endpoint
 	}).then(function(response) {
 		console.log(response);
@@ -15,7 +15,7 @@ function unsubscribeOnServer(subscription) {
 	console.log('Send unsubscription to server...');
 	console.log(subscription);
 
-	aero.postJSON('/api/notifications/unsubscribe', {
+	$.post('/api/notifications/unsubscribe', {
 		endpoint: subscription.endpoint
 	}).then(function(response) {
 		console.log(response);
@@ -25,7 +25,7 @@ function unsubscribeOnServer(subscription) {
 function sendTestNotification() {
 	console.log('Sending test notification...')
 
-	aero.get('/api/notifications/test').then(function(response) {
+	$.get('/api/notifications/test').then(function(response) {
 		// ...
 	})
 }

@@ -14,7 +14,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 		item.classList.add('saving');
 		aero.content.style.cursor = 'wait';
 
-		aero.postJSON(apiEndpoint, {
+		$.post(apiEndpoint, {
 			function: 'save',
 			key: key,
 			value: value,
@@ -25,7 +25,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 		}).catch(function(error) {
 			console.error(error);
 		}).then(function() {
-			aero.get('/_' + location.pathname).then(function(newPageCode) {
+			$.get('/_' + location.pathname).then(function(newPageCode) {
 				var focusedElementId = document.activeElement.id;
 				var focusedElementValue = document.activeElement.value;
 

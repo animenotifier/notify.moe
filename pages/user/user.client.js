@@ -19,7 +19,7 @@ window.loadAnimeList = function(clearCache) {
 
 	var userName = $('nick').textContent.trim();
 
-	aero.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
+	$.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
 		if(response && response.error) {
 			animeList.textContent = 'Error loading your anime list: ' + response.error;
 			return;

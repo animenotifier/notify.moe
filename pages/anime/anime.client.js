@@ -148,7 +148,7 @@ if(animeContainer && animeContainer.dataset.id) {
 	};
 
 	window.downloadSearchList = function() {
-		aero.getJSON('/api/searchlist').then(function(json) {
+		$.getJSON('/api/searchlist').then(function(json) {
 			allAnime = json;
 			animeTitles = Object.keys(allAnime);
 			console.log(animeTitles.length);

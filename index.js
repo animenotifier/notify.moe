@@ -6,6 +6,13 @@ let path = require('path')
 let zlib = require('zlib')
 let bodyParser = require('body-parser')
 let request = require('request-promise')
+let paypal = require('paypal-rest-sdk')
+
+paypal.configure({
+	mode: 'sandbox',
+	client_id: arn.apiKeys.paypal.clientID,
+	client_secret: arn.apiKeys.paypal.clientSecret
+})
 
 // Rewrite URLs
 app.rewrite(function(request, response) {

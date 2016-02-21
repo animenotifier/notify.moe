@@ -5,7 +5,7 @@ window.sendFeedback = function() {
 	if(!feedback.value)
 		return;
 
-	aero.postJSON('/api/feedback', {
+	$.post('/api/feedback', {
 		text: feedback.value
 	}).then(function(response) {
 		if(response === 'OK') {
