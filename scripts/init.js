@@ -5,5 +5,5 @@ if(window.location.hash && window.location.hash === '#_=_') {
 
 // Fade out loading animation
 document.addEventListener('DOMContentLoaded', function(event) {
-	aero.loadingAnimation.classList.add('fade-out');
+	$.loadingAnimation.classList.add('fade-out');
 });

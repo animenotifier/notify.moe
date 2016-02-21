@@ -165,7 +165,7 @@ window.loadAnimeList = function(clearCache) {
 		});
 
 		animeList.appendChild(list);
-		aero.ajaxifyLinks();
+		$.ajaxifyLinks();
 	}).catch(function(error) {
 		animeList.textContent = 'Error: ' + error;
 	});

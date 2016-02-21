@@ -117,7 +117,7 @@ if(animeContainer && animeContainer.dataset.id) {
 
 	window.displaySearchResults = function(results) {
 		searchResults.className = '';
-		aero.clear(searchResults);
+		$.clear(searchResults);
 
 		for(i = 0; i < results.length; i++) {
 			var result = results[i];
@@ -131,7 +131,7 @@ if(animeContainer && animeContainer.dataset.id) {
 			searchResults.appendChild(element);
 		}
 
-		aero.ajaxifyLinks();
+		$.ajaxifyLinks();
 	};
 
 	window.searchAnime = function() {

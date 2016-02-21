@@ -12,7 +12,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 		var old = item.dataset.old ? item.dataset.old : '';
 
 		item.classList.add('saving');
-		aero.content.style.cursor = 'wait';
+		$.content.style.cursor = 'wait';
 
 		$.post(apiEndpoint, {
 			function: 'save',
@@ -29,7 +29,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 				var focusedElementId = document.activeElement.id;
 				var focusedElementValue = document.activeElement.value;
 
-				aero.setContent(newPageCode);
+				$.setContent(newPageCode);
 
 				// Re-focus previously selected element
 				if(focusedElementId) {
@@ -45,7 +45,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 					}
 				}
 
-				aero.content.style.cursor = 'auto';
+				$.content.style.cursor = 'auto';
 				document.saving = false;
 			});
 		});
