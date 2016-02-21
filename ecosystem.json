@@ -1,0 +1,20 @@
+{
+	"apps" : [
+		{
+			"name": "website",
+			"script": "index.js",
+			"node_args": "--use_strict",
+			"env": {
+				"NODE_ENV": "production"
+			}
+		},
+		{
+			"name": "jobs",
+			"script": "jobs/index.js",
+			"node_args": "--use_strict",
+			"env": {
+				"NODE_ENV": "production"
+			}
+		}
+	]
+}
