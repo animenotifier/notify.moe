@@ -40,12 +40,13 @@
 	flex-flow row wrap
 
 .anime-summary-header
-	display none
+	display block
 
 .anime-summary
 	flex 1
-	margin-left 1.2em
 	min-width 300px
+	margin-left 0
+	margin-top 1em
 	.anime-header
 		margin-top 0
 
@@ -63,9 +64,6 @@
 	font-size 0.8em
 	opacity 0.5
 
-angle = 20deg
-scale = 0.5
-
 .anime-page-image
 	border-radius 3px
 	flex 0
@@ -75,6 +73,9 @@ scale = 0.5
 	&:hover
 		filter saturate(130%)
 		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.2)
+
+.anime-page-image-container
+	width 100%
 
 .search-performance
 .anime-count
@@ -110,6 +111,23 @@ scale = 0.5
 .anime-websites
 	float left
 	width 100%
+	list-style-type none
+	margin 0
+	width auto
+	display flex
+	flex-flow row wrap
+	justify-content flex-start
+	font-size 0.9em
+
+.anime-website
+	padding 0.5em 1em
+	border-radius 3px
+	&:hover
+		color white !important
+		background-color linkHoverColor
+
+.anime-website-link
+	//
 
 .entry-error
 	color red !important
@@ -117,40 +135,18 @@ scale = 0.5
 .entry-ok
 	color green !important
 
-/*.anime-websites
-	display flex
-	flex-flow row wrap
-	justify-content center
-	padding 1em
-
-.anime-website-link
-	flex-grow 0
-	padding 0.75em 1em
-	margin 0.5em
-	color cornflowerblue !important
-	background linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%)
-	border 1px solid rgb(32, 32, 32)
-	box-shadow 0 0 2px rgb(255, 255, 255), 0 -2px 5px rgba(0, 0, 0, 0.08) inset
-	border-radius 3px
-	letter-spacing 1px
-	transition background 500ms ease !important
-	width 200px
-	text-transform uppercase
-	&:hover
-		background linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.95) 100%)*/
-
 @media only screen and (max-width: 800px)
 	.anime-title-db
 	.anime-second-title-container
-		text-align center
-
-	.anime-summary
-		margin-left 0
-		margin-top 1em
-
 	.anime-page-image-container
-		width 100%
 		text-align center
+	// .anime-page-image-container
+	// 	width 100%
+	// 	text-align center
 
-	.anime-summary-header
-		display block
+	// .anime-summary
+	// 	margin-left 0
+	// 	margin-top 1em
+	//
+	// .anime-summary-header
+	// 	display block

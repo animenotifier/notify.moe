@@ -38,36 +38,6 @@ else if anime
 				iframe(width='100%', height='150', scrolling='no', frameborder='no', src='https://w.soundcloud.com/player/?url=' + anime.tracks.opening.uri + '?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true')
 		
 		.page.anime-links
-			if anime.links
-				.anime-links-category
-					h3.anime-header Links
-					ul.anime-websites
-						each link in anime.links
-							li
-								a.anime-website-link(href=link.url, target='_blank')= link.title
-							
-						if user && user.providers.anime === 'Nyaa' && providers.Nyaa && providers.Nyaa.episodes > 0
-							li
-								a.anime-website-link(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
-								
-			.anime-links-category
-				h3.anime-header List providers
-				ul.anime-websites
-					li
-						a.anime-website-link(href='https://anilist.co/anime/' + anime.id, target='_blank') anilist.co
-					
-					if providers.HummingBird
-						li
-							a.anime-website-link(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') hummingbird.me
-							
-					if providers.MyAnimeList
-						li
-							a.anime-website-link(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank') myanimelist.net
-							
-					if providers.AnimePlanet
-						li
-							a.anime-website-link(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') anime-planet.com
-		
 			if anime.genres && Array.isArray(anime.genres)
 				.anime-links-category
 					h3.anime-header Genres
@@ -132,6 +102,27 @@ else if anime
 							td
 								if providers.Nyaa && providers.Nyaa.episodes !== undefined
 									span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
+		
+		h3.anime-header Links
+		.anime-websites
+			if anime.links
+				each link in anime.links
+					a.anime-website(href=link.url, target='_blank')= link.title
+				
+				//- if user && user.providers.anime === 'Nyaa' && providers.Nyaa && providers.Nyaa.episodes > 0
+				//- 	li
+				//- 		a.anime-website(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
+			
+			a.anime-website(href='https://anilist.co/anime/' + anime.id, target='_blank') AniList
+			
+			if providers.HummingBird
+				a.anime-website(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') HummingBird
+			
+			if providers.MyAnimeList
+				a.anime-website(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank') MyAnimeList
+			
+			if providers.AnimePlanet
+				a.anime-website(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') AnimePlanet
 		
 		.sources
 			p Powered by Anilist.
