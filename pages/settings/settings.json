@@ -36,7 +36,7 @@
 				"description": "This is where we'll look for new episodes of your anime",
 				"options": {
 					"crunchyroll.com": "CrunchyRoll",
-					"nyaa.eu": "Nyaa"
+					"nyaa.se": "Nyaa"
 				}
 			}
 		],

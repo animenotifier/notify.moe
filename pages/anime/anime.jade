@@ -97,7 +97,7 @@ else if anime
 							td
 								input.save-on-change(id='Nyaa', type='text', value=title, placeholder=proposedTitle)
 							td
-								a(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
+								a(href='https://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + (title ? title.replace(/ /g, '+') : proposedTitle), target='_blank')
 									.fa.fa-search
 							td
 								if providers.Nyaa && providers.Nyaa.episodes !== undefined
@@ -111,7 +111,7 @@ else if anime
 				
 				//- if user && user.providers.anime === 'Nyaa' && providers.Nyaa && providers.Nyaa.episodes > 0
 				//- 	li
-				//- 		a.anime-website(href='https://www.nyaa.eu/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
+				//- 		a.anime-website(href='https://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
 			
 			a.anime-website(href='https://anilist.co/anime/' + anime.id, target='_blank') AniList
 			
