@@ -31,11 +31,11 @@ else
 			if viewUser.tagline
 				p.profile-field.tagline
 					i.fa.fa-comment
-					em= viewUser.tagline
+					span.tagline= viewUser.tagline
 			else
 				p.profile-field.tagline
 					i.fa.fa-comment
-					em No tagline yet.
+					span.tagline No tagline yet.
 					
 			//-if user && viewUser.location && viewUser.location.countryName != '-'
 				p.profile-field.location
