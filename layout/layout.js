@@ -73,6 +73,7 @@ exports.render = function(request, render) {
 			tooltip: 'FAQ'
 		})
 
+		/*
 		if(!embedded) {
 			nav.push({
 				title: '',
@@ -105,6 +106,14 @@ exports.render = function(request, render) {
 			icon: 'road',
 			float: 'right',
 			tooltip: 'Roadmap'
+		})*/
+
+		nav.push({
+			title: '',
+			url: 'others',
+			icon: 'asterisk',
+			float: 'right',
+			tooltip: 'Others'
 		})
 
 		nav.push({
