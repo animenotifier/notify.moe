@@ -38,7 +38,8 @@ let updateOsuDetails = function() {
 					}
 				})
 			}).catch(error => {
-				console.error(chalk.red(error.stack))
+				if(error.message.indexOf('not found on osu') === -1)
+					console.error(chalk.red(error.stack))
 			})
 		})
 	})

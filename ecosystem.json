@@ -3,7 +3,7 @@
 		{
 			"name": "website",
 			"script": "index.js",
-			"node_args": "--use_strict",
+			"node_args": "--use_strict --expose-gc",
 			"env": {
 				"NODE_ENV": "production"
 			}
@@ -11,7 +11,7 @@
 		{
 			"name": "jobs",
 			"script": "jobs/index.js",
-			"node_args": "--use_strict",
+			"node_args": "--use_strict --expose-gc",
 			"env": {
 				"NODE_ENV": "production"
 			}
