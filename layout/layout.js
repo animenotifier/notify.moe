@@ -28,7 +28,7 @@ exports.render = function(request, render) {
 	nav.push({
 		title: 'Anime',
 		url: 'anime',
-		icon: 'film'
+		icon: 'television'
 	})
 
 	if(user) {
