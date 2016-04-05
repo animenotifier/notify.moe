@@ -2,13 +2,13 @@ doctype html
 html(lang='en')
 	head
 		title= app.config.title
-		
+
 		link(rel='chrome-webstore-item', href='https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch')
-		
+
 		//- Generic
 		meta(name='description', content=app.package.description)
 		meta(name='keywords', content=app.package.keywords.join(','))
-		
+
 		//- Open Graph
 		meta(property='og:url', content=app.package.homepage)
 		meta(property='og:type', content='website')
@@ -31,14 +31,14 @@ html(lang='en')
 		else
 			#container
 				//-#emergency -
-				#header-container
+				#header-container(class=embedded ? 'embedded-header' : '')
 					#header(style=user ? 'background-image: none' : '')
 						if !user
 							#title
 								a(href='/')
 									h1= app.package.name
 							#slogan Don't miss the next episode. Get notified instantly.
-						
+
 						nav#navigation
 							each link in nav
 								- var external = link.url.startsWith('http')
@@ -52,10 +52,10 @@ html(lang='en')
 											i(class='fa fa-' + link.icon, style=link.title ? '' : 'margin: 0', title=link.tooltip)
 										if link.title
 											span.navigation-text= link.title
-			
-				#content-container
+
+				#content-container(class=embedded ? 'embedded-content' : '')
 					main#content.fade!= content
-				
+
 				#loading-animation.sk-cube-grid.fade
 					.sk-cube.sk-cube1
 					.sk-cube.sk-cube2
