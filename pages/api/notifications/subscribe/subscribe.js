@@ -24,9 +24,15 @@ exports.post = (request, response) => {
 	console.log('Saving push endpoint', endpoint, 'for user', user.nick)
 
 	// Add endpoint
-	user.pushEndpoints[endpoint] = {
+	let subscription = {
 		registered: (new Date()).toISOString()
 	}
+
+	// New in Chrome 50
+	if(request.body.keys)
+		subscription.keys = request.body.keys
+
+	user.pushEndpoints[endpoint] = subscription
 
 	arn.set('Users', user.id, user).then(() => response.end('success'))
 }
