@@ -3,20 +3,13 @@
 let passport = require('passport')
 let session = require('express-session')
 let FileStore = require('session-file-store')(session)
-let AerospikeStore = require('connect-aerospike')(session)
 
 const cookieDurationInSeconds = 6 * 30 * 24 * 60 * 60
 
 module.exports = function(app) {
 	// Session
 	let sessionOptions = {
-		store: new AerospikeStore({
-			ttl: 24 * 60 * 60,
-			hosts: ['127.0.0.1:3000'],
-			prefix: 'arn:',
-			ns: 'arn',
-			st: 'Sessions'
-		}),
+		store: new FileStore(),
 	    name: 'sid',
 	    secret: arn.apiKeys.session.secret,
 	    saveUninitialized: false,
