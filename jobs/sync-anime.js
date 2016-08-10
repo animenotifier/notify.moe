@@ -5,7 +5,7 @@ let importAnimeFromAniList = coroutine(function*() {
 
 	yield arn.listProviders.AniList.authorize()
 
-	let maxPage = 250
+	let maxPage = 260
 	for(let page = maxPage; page >= 1; page--) {
 		yield Promise.delay(1100)
 
