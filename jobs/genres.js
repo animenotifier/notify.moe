@@ -10,7 +10,7 @@ let updateGenres = coroutine(function*() {
 		genre = arn.fixGenre(genre)
 		let genreSearch = `;${genre};`
 
-		yield Promise.delay(350)
+		yield Promise.delay(1000)
 
 		let animeList = arn.animeList.filter(anime => {
 			if(!anime.watching)
