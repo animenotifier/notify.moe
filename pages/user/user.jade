@@ -75,8 +75,8 @@ else
 		else
 			#anime-list-container(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='false')
 
-		if user && user.role === 'admin'
-			.admin-info
+		if user && (user.role === 'editor' || user.role === 'admin')
+			#staff-info
 				a(href='/api/users/' + viewUser.nick, target='_blank') API
 
 		if embeddedList && user && user.id === viewUser.id
