@@ -4,7 +4,7 @@ let gravatar = require('gravatar')
 
 let updateUserLists = coroutine(function*() {
 	for(let orderBy of Object.keys(arn.userOrderBy)) {
-		yield Promise.delay(500)
+		yield Promise.delay(1000)
 
 		console.log(chalk.yellow('✖'), `Updating user list ${chalk.yellow(orderBy)}...`)
 
