@@ -44,22 +44,9 @@ app.rewrite(function(request, response) {
 // For POST requests
 app.use(bodyParser.json())
 
-let serveFile = fileName => {
-	return (request, response) => {
-		let filePath = path.join(__dirname, fileName)
-		let stat = fs.statSync(filePath)
-
-		response.writeHead(200, {
-			'Content-Type': 'application/javascript',
-			'Content-Length': stat.size
-		})
-
-		fs.createReadStream(filePath).pipe(response)
-	}
-}
-
-app.get('service-worker.js', serveFile('worker/service-worker.js'))
-app.get('cache-polyfill.js', serveFile('worker/cache-polyfill.js'))
+// Service worker routes
+app.sendFile('service-worker.js', 'worker/service-worker.js')
+app.sendFile('cache-polyfill.js', 'worker/cache-polyfill.js')
 
 // Send slack messages
 arn.on('new user', function(user) {
