@@ -5,16 +5,16 @@ if !user && !viewUser
 	section
 		header
 			h2 Not logged in
-		
+
 		p
-			span Please 
+			span Please
 			a(href='https://notify.moe/', target='_blank') login via the website
 			span  first before using this extension.
 else if !viewUser
 	section
 		header
 			h2 Error
-		
+
 		p User not found.
 else
 	section
@@ -24,10 +24,10 @@ else
 					+profileImage()
 			else
 				+profileImage()
-		
+
 		.intro-container(style=embeddedList ? 'display: none' : null)
 			h2#nick= viewUser.nick
-			
+
 			if viewUser.tagline
 				p.profile-field.tagline
 					i.fa.fa-comment
@@ -36,20 +36,20 @@ else
 				p.profile-field.tagline
 					i.fa.fa-comment
 					span.tagline No tagline yet.
-					
-			//-if user && viewUser.location && viewUser.location.countryName != '-'
+
+			if user && viewUser.location && viewUser.location.countryName != '-'
 				p.profile-field.location
 					i.fa.fa-map-marker
 					//- if viewUser.location.cityName != '-'
 					//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
 					//- else
 					span= viewUser.location.countryName
-			
+
 			if user && viewUser.website
 				p.profile-field.website
 					i.fa.fa-home
 					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
-			
+
 			if viewUser.role
 				p.profile-field.role
 					i.fa.fa-rocket
@@ -62,24 +62,28 @@ else
 				p.profile-field.role
 					i.fa.fa-star
 					span Alpha Tester
-			
+
 			//-each provider in ['AniList', 'AnimePlanet', 'HummingBird', 'MyAnimeList']
 				if viewUser.listProviders[provider] && viewUser.listProviders[provider].userName
 					p(class='website list-provider-username' + (viewUser.providers.list === provider ? ' main' : ' alternative'))
 						span= provider + ' (' + viewUser.listProviders[provider].userName + ')'
-		
+
 		h3(style=embeddedList ? 'display: none' : null)= viewUser.nick + ' is watching:'
-		
+
 		if user
 			#anime-list-container(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')
 		else
 			#anime-list-container(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='false')
-			
+
+		if user && user.role === 'admin'
+			.admin-info
+				a(href='/api/users/' + viewUser.nick, target='_blank') API
+
 		if embeddedList && user && user.id === viewUser.id
 			#embedded-footer
 				a(href='/+' + user.nick, target='_blank')= user.nick
-				span.embedded-footer-separator  / 
+				span.embedded-footer-separator  /
 				a(id='list-provider-link', href=null, target='_blank') List
-				span.embedded-footer-separator  / 
+				span.embedded-footer-separator  /
 				a(href='javascript:window.loadAnimeList(true);', title='Refresh list')
 					span.fa.fa-refresh.fa-fw

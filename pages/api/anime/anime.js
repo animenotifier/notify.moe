@@ -63,6 +63,21 @@ let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
 	}
 })
 
+exports.get = function(request, response) {
+	let id = parseInt(request.params[0])
+
+	if(!id)
+		return response.end()
+
+	arn.get('Anime', id).then(anime => {
+		response.json(anime)
+	}).catch(error => {
+		response.json({
+			error
+		})
+	})
+}
+
 exports.post = (request, response) => {
 	if(!arn.auth(request, response, 'editor'))
 		return

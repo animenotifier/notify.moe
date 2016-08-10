@@ -10,18 +10,20 @@ exports.get = function(request, response) {
 		user.notificationsEnabled = Object.keys(user.pushEndpoints).length > 0
 
 		// Do not show critical information
-		delete user.id
-		delete user.ip
-		delete user.accounts
-		delete user.ageRange
-		delete user.email
-		delete user.gender
-		delete user.firstName
-		delete user.lastName
-		delete user.agent
-		delete user.location
-		delete user.lastLogin
-		delete user.pushEndpoints
+		if(!request.user || request.user.role !== 'admin') {
+			delete user.id
+			delete user.ip
+			delete user.accounts
+			delete user.ageRange
+			delete user.email
+			delete user.gender
+			delete user.firstName
+			delete user.lastName
+			delete user.agent
+			delete user.location
+			delete user.lastLogin
+			delete user.pushEndpoints
+		}
 
 		response.json(user)
 	}).catch(error => {
