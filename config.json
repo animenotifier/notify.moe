@@ -26,8 +26,7 @@
 		"push-notifications"
 	],
 	"static": [
-		"images",
-		"web"
+		"images"
 	],
 	"icons": [
 		"images/characters/arn-waifu.png"
