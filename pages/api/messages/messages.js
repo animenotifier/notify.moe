@@ -31,6 +31,8 @@ exports.post = function*(request, response) {
 		return
 	}
 	
+	text = text.trim()
+	
 	if(text.length > maxMessageLength) {
 		response.writeHead(409)
 		response.end('Message too long')
