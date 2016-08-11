@@ -12,7 +12,7 @@ let updateAllAnimePages = coroutine(function*() {
 			continue
 
 		yield Promise.delay(2000)
-		arn.updateAnimePage(anime)
+		yield arn.updateAnimePage(anime)
 	}
 })
 
