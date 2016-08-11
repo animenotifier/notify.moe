@@ -1,8 +1,6 @@
 'use strict'
 
-let request = require('request-promise')
 let RateLimiter = require('limiter').RateLimiter
-
 let osuAPILimiter = new RateLimiter(1, 100)
 
 let updateOsuDetails = function() {
@@ -15,7 +13,7 @@ let updateOsuDetails = function() {
 		let apiURL = `https://osu.ppy.sh/api/get_user?k=${arn.apiKeys.osu.clientSecret}&u=${user.osu}`
 
 		osuAPILimiter.removeTokens(1, () => {
-			request({
+			fetch({
 				uri: apiURL,
 				method: 'GET',
 				headers: {

@@ -9,8 +9,6 @@ const hosts = [
 	'https://www.nyaa.se'
 ]
 
-let request = require('request-promise')
-
 let updateStatus = coroutine(function*() {
 	let status = []
 	
@@ -19,7 +17,7 @@ let updateStatus = coroutine(function*() {
 	for(let host of hosts) {
 		yield Promise.delay(100)
 		
-		yield request({
+		yield fetch({
 			uri: host,
 			method: 'GET',
 			headers: {

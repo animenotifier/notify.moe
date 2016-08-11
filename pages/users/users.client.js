@@ -1,1 +1,1 @@
-getGravatarImages();
+// getGravatarImages();

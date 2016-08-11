@@ -10,7 +10,7 @@ let checkForumReplies = coroutine(function*() {
 arn.on('new forum reply', function(link, userName) {
 	let webhook = 'https://hooks.slack.com/services/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'
 
-	request.post({
+	fetch.post({
 		url: webhook,
 		body: JSON.stringify({
 			text: `<${link}|${userName}>`

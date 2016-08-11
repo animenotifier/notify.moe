@@ -3,8 +3,10 @@
 global.arn = require('../lib')
 global.chalk = require('chalk')
 global.Promise = require('bluebird')
+global.fetch = require('request-promise')
 global.fs = Promise.promisifyAll(require('fs'))
 global.coroutine = Promise.coroutine
+global.gravatar = require('gravatar')
 
 // Time units
 global.seconds = 1
