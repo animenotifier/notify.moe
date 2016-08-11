@@ -1,4 +1,5 @@
 var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var userName = $('nick').textContent.trim();
 
 window.getWeekDay = function(timeStamp) {
 	var date = new Date(timeStamp * 1000);
@@ -16,8 +17,6 @@ window.loadAnimeList = function(clearCache) {
 			'<div class="sk-cube4 sk-cube"></div>' +
 			'<div class="sk-cube3 sk-cube"></div>' +
 		'</div>';
-
-	var userName = $('nick').textContent.trim();
 
 	$.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
 		if(response && response.error) {
@@ -171,4 +170,18 @@ window.loadAnimeList = function(clearCache) {
 	});
 };
 
-window.loadAnimeList();
+window.loadMessages = function() {
+	let posts = $('posts')
+
+	if(!posts)
+		return
+
+	$.get('/_/messages/' + userName).then(response => {
+		posts.innerHTML = response
+		$.executeScripts(posts)
+		$.emit('DOMContentLoaded')
+	})
+}
+
+window.loadAnimeList()
+window.loadMessages()

@@ -17,66 +17,71 @@ else if !viewUser
 
 		p User not found.
 else
-	section
-		.image-container(style=embeddedList ? 'display: none' : null)
-			if user && user.id === viewUser.id
-				a(href='https://gravatar.com/emails/', target='_blank', rel='nofollow', title='Change your gravatar picture for ' + user.email)
+	.categories
+		#profile.category
+			.image-container(style=embeddedList ? 'display: none' : null)
+				if user && user.id === viewUser.id
+					a(href='https://gravatar.com/emails/', target='_blank', rel='nofollow', title='Change your gravatar picture for ' + user.email)
+						+profileImage()
+				else
 					+profileImage()
-			else
-				+profileImage()
 
-		.intro-container(style=embeddedList ? 'display: none' : null)
-			h2#nick= viewUser.nick
+			.intro-container(style=embeddedList ? 'display: none' : null)
+				h2#nick= viewUser.nick
 
-			if viewUser.tagline
-				p.profile-field.tagline
-					i.fa.fa-comment
-					span.tagline= viewUser.tagline
-			else
-				p.profile-field.tagline
-					i.fa.fa-comment
-					span.tagline No tagline yet.
+				if viewUser.tagline
+					p.profile-field.tagline
+						i.fa.fa-comment
+						span.tagline= viewUser.tagline
+				else
+					p.profile-field.tagline
+						i.fa.fa-comment
+						span.tagline No tagline yet.
 
-			if user && viewUser.location && viewUser.location.countryName != '-'
-				p.profile-field.location
-					i.fa.fa-map-marker
-					//- if viewUser.location.cityName != '-'
-					//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
-					//- else
-					span= viewUser.location.countryName
+				if user && viewUser.location && viewUser.location.countryName != '-'
+					p.profile-field.location
+						i.fa.fa-map-marker
+						//- if viewUser.location.cityName != '-'
+						//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
+						//- else
+						span= viewUser.location.countryName
 
-			if user && viewUser.website
-				p.profile-field.website
-					i.fa.fa-home
-					a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
+				if user && viewUser.website
+					p.profile-field.website
+						i.fa.fa-home
+						a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
 
-			if viewUser.role
-				p.profile-field.role
-					i.fa.fa-rocket
-					span= roles[viewUser.role]
-			else if donators[viewUser.id]
-				p.profile-field.role
-					i.fa.fa-heart
-					span Supporter
-			else
-				p.profile-field.role
-					i.fa.fa-star
-					span Alpha Tester
+				if viewUser.role
+					p.profile-field.role
+						i.fa.fa-rocket
+						span= roles[viewUser.role]
+				else if donators[viewUser.id]
+					p.profile-field.role
+						i.fa.fa-heart
+						span Supporter
+				else
+					p.profile-field.role
+						i.fa.fa-star
+						span Alpha Tester
 
-			//-each provider in ['AniList', 'AnimePlanet', 'HummingBird', 'MyAnimeList']
-				if viewUser.listProviders[provider] && viewUser.listProviders[provider].userName
-					p(class='website list-provider-username' + (viewUser.providers.list === provider ? ' main' : ' alternative'))
-						span= provider + ' (' + viewUser.listProviders[provider].userName + ')'
+				//-each provider in ['AniList', 'AnimePlanet', 'HummingBird', 'MyAnimeList']
+					if viewUser.listProviders[provider] && viewUser.listProviders[provider].userName
+						p(class='website list-provider-username' + (viewUser.providers.list === provider ? ' main' : ' alternative'))
+							span= provider + ' (' + viewUser.listProviders[provider].userName + ')'
 
-		h3(style=embeddedList ? 'display: none' : null)= viewUser.nick + ' is watching:'
-
+			
+			//- h3(style=embeddedList ? 'display: none' : null)= viewUser.nick + ' is watching:'
+		
 		if user
-			#anime-list-container(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')
+			#anime-list-container(class='category anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')
 		else
-			#anime-list-container(class='anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='false')
+			#anime-list-container(class='category anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='false')
+		
+		if !embeddedList
+			#posts.category
 
 		if user && (user.role === 'editor' || user.role === 'admin')
-			#staff-info
+			#staff-info.category
 				a(href='/api/users/' + viewUser.nick, target='_blank') User JSON
 				span  | 
 				a(href='/api/animelist/' + viewUser.nick, target='_blank') Animelist JSON
