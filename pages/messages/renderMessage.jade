@@ -6,7 +6,7 @@ mixin renderMessage(message, user)
 		.post-content!= app.markdown(message.text)
 			.post-toolbar
 				.spacer
-				a(href='/messages/' + message.id, title='Permalink')
+				a.ajax(href='/messages/' + message.id, title='Permalink')
 					i.fa.fa-link.fa-fw
 				if user
 					if user.id !== message.authorId
