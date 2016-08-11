@@ -82,7 +82,7 @@ let updateAnimeTracks = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating anime tracks...')
 
 	for(let anime of arn.animeList) {
-		yield Promise.delay(500)
+		yield Promise.delay(1500)
 		findTracksForAnime(anime)
 	}
 })
