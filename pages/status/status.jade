@@ -1,0 +1,15 @@
+if !user
+	p Please login to view the status.
+else
+	section
+		header
+			h2 Status
+		
+		ul#status
+			each info in status
+				li
+					if info.error
+						i.fa.fa-exclamation-triangle
+					else
+						i.fa.fa-check
+					a(href=info.context, target='_blank')= info.context.replace('https://', '').replace('http://', '').replace('www.', '')
