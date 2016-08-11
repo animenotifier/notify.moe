@@ -15,7 +15,7 @@ let updateUserLists = coroutine(function*() {
 			users = yield Promise.filter(users, user => addUser(user, categories))
 
 			users.forEach(user => {
-				user.gravatarURL = user.avatar + '?s=50'
+				user.gravatarURL = user.avatar + '?s=50&r=x&d=mm'
 			})
 
 			// Sort by registration date
