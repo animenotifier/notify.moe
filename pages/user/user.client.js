@@ -170,6 +170,24 @@ window.loadAnimeList = function(clearCache) {
 	});
 };
 
+window.sendMessage = function() {
+	let userName = $('nick').textContent
+	let postInput = $('post-input')
+	
+	if(!postInput.value)
+		return
+	
+	$.post('/api/messages/' + userName, {
+		text: postInput.value
+	}).then(response => {
+		console.log(response)
+		postInput.value = ''
+		
+		if(window.loadMessages)
+			window.loadMessages()
+	})
+}
+
 window.loadMessages = function() {
 	let posts = $('posts')
 
@@ -178,8 +196,9 @@ window.loadMessages = function() {
 
 	$.get('/_/messages/' + userName).then(response => {
 		posts.innerHTML = response
-		$.executeScripts(posts)
-		$.emit('DOMContentLoaded')
+		updateAvatars()
+		// $.executeScripts(posts)
+		// $.emit('DOMContentLoaded')
 	})
 }
 
