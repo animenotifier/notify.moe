@@ -2,7 +2,7 @@ var animeContainer = document.querySelector('.anime-container');
 
 if(animeContainer && animeContainer.dataset.id) {
 	makeSaveable('/api/anime/' + animeContainer.dataset.id);
-	// getGravatarImages();
+	updateAvatars();
 } else {
 	var search = $('search');
 	var searchResults = $('search-results');
