@@ -139,6 +139,7 @@ exports.render = function(request, render) {
 		user,
 		nav,
 		maintenance: arn.maintenance,
-		embedded
+		embedded,
+		request
 	})
 }

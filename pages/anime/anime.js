@@ -57,6 +57,9 @@ exports.get = function*(request, response) {
 				videoParameters += '&start=' + categoryParameter.replace('s', '')
 			}
 		}
+		
+		// For the layout
+		request.animePage = animePage
 
 		response.render(Object.assign({
 			user,

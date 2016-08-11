@@ -10,11 +10,18 @@ html(lang='en')
 		meta(name='keywords', content=app.package.keywords.join(','))
 
 		//- Open Graph
-		meta(property='og:url', content=app.package.homepage)
-		meta(property='og:type', content='website')
-		meta(property='og:title', content=app.config.title)
-		meta(property='og:description', content=app.package.description)
-		meta(property='og:image', content='/images/characters/arn-waifu.png')
+		if request.animePage
+			meta(property='og:url', content=app.package.homepage + '/anime/' + request.animePage.anime.id)
+			meta(property='og:type', content='website')
+			meta(property='og:title', content=request.animePage.anime.title.romaji)
+			meta(property='og:description', content=request.animePage.anime.description)
+			meta(property='og:image', content=request.animePage.anime.image)
+		else
+			meta(property='og:url', content=app.package.homepage)
+			meta(property='og:type', content='website')
+			meta(property='og:title', content=app.config.title)
+			meta(property='og:description', content=app.package.description)
+			meta(property='og:image', content='/images/characters/arn-waifu.png')
 
 	body
 		if user && user.role !== 'admin' && user.location && user.location.countryName && user.location.countryName.toLowerCase() === 'japan'
