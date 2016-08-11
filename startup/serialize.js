@@ -1,5 +1,3 @@
-'use strict'
-
 let passport = require('passport')
 let useragent = require('useragent')
 
@@ -29,7 +27,3 @@ passport.serializeUser(function(request, user, done) {
 		})
 	})
 })
-
-module.exports = function() {
-	// ...
-}

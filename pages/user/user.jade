@@ -77,7 +77,9 @@ else
 
 		if user && (user.role === 'editor' || user.role === 'admin')
 			#staff-info
-				a(href='/api/users/' + viewUser.nick, target='_blank') API
+				a(href='/api/users/' + viewUser.nick, target='_blank') User JSON
+				span  | 
+				a(href='/api/animelist/' + viewUser.nick, target='_blank') Animelist JSON
 
 		if embeddedList && user && user.id === viewUser.id
 			#embedded-footer

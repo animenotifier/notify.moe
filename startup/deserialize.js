@@ -1,5 +1,3 @@
-'use strict'
-
 let passport = require('passport')
 
 // Deserialize
@@ -7,7 +5,3 @@ let passport = require('passport')
 passport.deserializeUser(function(userId, done) {
 	return arn.get('Users', userId).then(user => done(undefined, user))
 })
-
-module.exports = function() {
-	// ...
-}

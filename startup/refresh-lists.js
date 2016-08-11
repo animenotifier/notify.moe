@@ -1,6 +1,3 @@
-'use strict'
-
-
 let RateLimiter = require('limiter').RateLimiter
 let limiter = new RateLimiter(1, 1000)
 
@@ -24,7 +21,5 @@ let refreshAnimeLists = function() {
 	})
 }
 
-module.exports = function(aero, callback) {
-	arn.animeListCacheTime = 20 * 60 * 1000
-	setInterval(refreshAnimeLists, arn.animeListCacheTime)
-}
+arn.animeListCacheTime = 20 * 60 * 1000
+setInterval(refreshAnimeLists, arn.animeListCacheTime)
