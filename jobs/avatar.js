@@ -1,5 +1,5 @@
 let RateLimiter = require('limiter').RateLimiter
-let fetchLimiter = new RateLimiter(1, 250)
+let fetchLimiter = new RateLimiter(1, 500)
 
 let checkAvatars = function() {
 	console.log(chalk.yellow('✖'), 'Updating user avatars...')
