@@ -11,7 +11,7 @@ let updateAllAnimePages = coroutine(function*() {
 		if(anime.pageGenerated && now.getTime() - (new Date(anime.pageGenerated)).getTime() < animePageCacheTime)
 			continue
 
-		yield Promise.delay(1500)
+		yield Promise.delay(2000)
 		arn.updateAnimePage(anime)
 	}
 })

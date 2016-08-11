@@ -30,6 +30,8 @@ let updateUserLists = coroutine(function*() {
 				categories
 			})
 		})))
+		
+		tasks.push(Promise.delay(1000))
 	}
 	
 	yield tasks

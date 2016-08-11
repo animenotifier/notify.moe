@@ -7,7 +7,7 @@ let importAnimeFromAniList = coroutine(function*() {
 
 	let maxPage = 260
 	for(let page = maxPage; page >= 1; page--) {
-		yield Promise.delay(1100)
+		yield Promise.delay(1200)
 
 		let animeList = yield arn.listProviders.AniList.getAnimeFromPage(page)
 		let tasks = animeList.map(anime => arn.set('Anime', anime.id, anime))
