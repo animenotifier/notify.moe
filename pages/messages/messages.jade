@@ -1,26 +1,5 @@
-if !messages
-	p No messages.
+if !message
+	p No message.
 else
-	each message in messages
-		.post
-			.post-author
-				a.user(href='/+' + message.author.nick, title=message.author.nick)
-					img.user-image(src=message.author.avatar + '?s=50&r=x')
-			.post-content!= app.markdown(message.text)
-		
-		//- if user.id === viewUser.id
-		//- 	.post-toolbar
-		//- 		.spacer
-		//- 		a(onclick=`if(confirm("Do you really want to delete this message from ${message.author.nick}?")) window.deleteMessage('${message.id}')`)
-		//- 			i.fa.fa-trash
-
-if user
-	.post
-		.post-author
-			a.user.ajax(href='/+' + user.nick, title=user.nick)
-				img.user-image(src=user.avatar + '?s=50&r=x')
-		.post-content
-			textarea(placeholder='Enter your message here...')#post-input
-	.post-toolbar
-		.spacer
-		button.post-submit(onclick='window.sendMessage()') Send message
+	include renderMessage.jade
+	+renderMessage(message, user)

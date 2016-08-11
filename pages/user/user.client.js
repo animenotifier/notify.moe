@@ -170,6 +170,10 @@ window.loadAnimeList = function(clearCache) {
 	});
 };
 
+window.likeMessage = window.editMessage = window.deleteMessage = function() {
+	alert('work in progress')
+}
+
 window.sendMessage = function() {
 	let userName = $('nick').textContent
 	let postInput = $('post-input')
@@ -194,7 +198,7 @@ window.loadMessages = function() {
 	if(!posts)
 		return
 
-	$.get('/_/messages/' + userName).then(response => {
+	$.get('/_/messages/user/' + userName).then(response => {
 		posts.innerHTML = response
 		updateAvatars()
 		// $.executeScripts(posts)

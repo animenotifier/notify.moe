@@ -28,6 +28,16 @@
 	align-items flex-end
 	
 .post-toolbar
+	width 100%
+	display flex
+	flex-flow row
+	opacity 0
+	transition opacity 250ms ease
+	position absolute
+	bottom 3px
+	right 0
+	
+.post-input-toolbar
 	display flex
 	flex-flow row
 	
@@ -39,6 +49,11 @@
 	background-color rgba(0, 0, 0, 0.03)
 	border-radius 3px
 	border 1px solid rgba(0, 0, 0, 0.08)
+	position relative
+	
+	&:hover
+		.post-toolbar
+			opacity 1
 	
 	h1
 		font-size 1.5rem
