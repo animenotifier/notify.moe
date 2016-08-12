@@ -61,6 +61,20 @@ exports.get = function*(request, response) {
 
 		recordCount++
 	})
+	
+	browsers.Others = 0
+	
+	const onePercentMark = recordCount / 100
+	
+	Object.keys(browsers).forEach(key => {
+		if(key === 'Others')
+			return
+		
+		if(browsers[key] < onePercentMark) {
+			browsers.Others += browsers[key]
+			delete browsers[key]
+		}
+	})
 
 	response.render({
 		users: {
