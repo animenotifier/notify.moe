@@ -31,3 +31,4 @@ If you want to run this site locally on your own computer make sure to do the fo
 * You'll need to prepare a lot of API keys. Save them under `notify.moe/security/api-keys.json`
 * Once database and API keys are setup, run `npm i -g pm2` to install pm2
 * Start the website with `pm2 start ecosystem.json`
+* Visit `https://localhost:5001/` in your browser
