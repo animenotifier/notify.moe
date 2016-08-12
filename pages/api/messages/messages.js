@@ -39,8 +39,10 @@ exports.get = function*(request, response) {
 			avatar: recipient.avatar
 		}
 		
+		// Remove IDs
 		delete message.authorId
 		delete message.recipientId
+		message.likes = message.likes.length
 	})
 	
 	response.json(messages)
