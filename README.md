@@ -1,5 +1,4 @@
-Anime Notifier
-==============
+# Anime Notifier
 
 Fetches your anime "watching" list and notifies you when a new anime episode is available. It also displays the time until a new episode is released.
 
@@ -19,3 +18,16 @@ Powered by:
 - [Aerospike](https://github.com/aerospike) | Database
 
 [![By Eduard Urbach](http://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/blitzprog)
+
+## Installation for developers
+
+If you want to run this site locally on your own computer make sure to do the following:
+
+* Get a Linux desktop or server (e.g. Ubuntu)
+* Install node.js 6.x
+* Install Aerospike
+* Configure a namespace called `arn` in the Aerospike config, 4 GB space
+* Create a self-signed SSL certificate and put it inside `notify.moe/security/` directory
+* You'll need to prepare a lot of API keys. Save them under `notify.moe/security/api-keys.json`
+* Once database and API keys are setup, run `npm i -g pm2` to install pm2
+* Start the website with `pm2 start ecosystem.json`
