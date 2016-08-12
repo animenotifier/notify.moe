@@ -15,6 +15,8 @@ exports.post = function*(request, response) {
 		return
 	}
 	
+	// TODO: Check message author ID
+	
 	yield arn.remove('Messages', messageId)
 	
 	console.log(`${user.nick} deleted the message '${messageId}'`)
