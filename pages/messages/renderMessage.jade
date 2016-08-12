@@ -3,6 +3,10 @@ mixin renderMessage(message, user)
 		.post-author
 			a.user(href='/+' + message.author.nick, title=message.author.nick)
 				img.user-image(src=message.author.avatar + '?s=50&r=x')
+				
+			if message.recipient && message.recipient.id !== message.author.id
+				a.user.message-recipient(href='/+' + message.recipient.nick, title=message.recipient.nick)
+					img.user-image(src=message.recipient.avatar + '?s=50&r=x')
 		.post-content!= app.markdown(message.text)
 			.post-toolbar
 				.spacer
