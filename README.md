@@ -17,8 +17,6 @@ Powered by:
 - [Aero](https://github.com/aerojs/aero) | Web framework
 - [Aerospike](https://github.com/aerospike) | Database
 
-[![By Eduard Urbach](http://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/blitzprog)
-
 ## Installation for developers
 
 If you want to run this site locally on your own computer make sure to do the following:
@@ -34,3 +32,5 @@ If you want to run this site locally on your own computer make sure to do the fo
 * Install the dependencies by running `npm install`
 * Start the website with `pm2 start ecosystem.json`
 * Visit `https://localhost:5001/` in your browser
+
+[![By Eduard Urbach](http://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/blitzprog)
