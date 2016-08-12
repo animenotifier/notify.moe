@@ -27,8 +27,10 @@ If you want to run this site locally on your own computer make sure to do the fo
 * Install node.js 6.x
 * Install Aerospike
 * Configure a namespace called `arn` in the Aerospike config, 4 GB space
-* Create a self-signed SSL certificate and put it inside `notify.moe/security/` directory
+* Clone the notify.moe repository
+* Create a self-signed SSL certificate and put it inside a new `notify.moe/security/` directory
 * You'll need to prepare a lot of API keys. Save them under `notify.moe/security/api-keys.json`
 * Once database and API keys are setup, run `npm i -g pm2` to install pm2
+* Install the dependencies by running `npm install`
 * Start the website with `pm2 start ecosystem.json`
 * Visit `https://localhost:5001/` in your browser
