@@ -22,9 +22,9 @@ mixin renderMessage(message, user)
 						else
 							a.post-tool.post-unlike(onclick=`window.unlikeMessage('${message.id}')`, title='Unlike')
 								i.fa.fa-thumbs-down.fa-fw
-					if user.id === message.authorId
-						a.post-tool.post-edit(onclick=`window.editMessage('${message.id}')`, title='Edit')
-							i.fa.fa-pencil.fa-fw
+					//- if user.id === message.authorId
+					//- 	a.post-tool.post-edit(onclick=`window.editMessage('${message.id}')`, title='Edit')
+					//- 		i.fa.fa-pencil.fa-fw
 					
 				a.post-tool.post-permalink.ajax(href='/messages/' + message.id, title='Permalink')
 					i.fa.fa-link.fa-fw
