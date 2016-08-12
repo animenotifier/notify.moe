@@ -20,24 +20,19 @@
 
 .anime-title-db
 	text-align left
+	width auto
 
-.anime-second-title-container
+.second-title-container
 	float left
 	width 100%
 	text-align left
 	margin-top -0.6em
 	margin-bottom 0.6em
 
-.anime-second-title
+.second-title
 	font-size 0.9em
 	font-weight normal
 	color rgba(60, 60, 60, 0.5) !important
-
-.image-and-summary
-	float left
-	width 100%
-	display flex
-	flex-flow row wrap
 
 .anime-summary-header
 	display block
@@ -45,8 +40,8 @@
 .anime-summary
 	flex 1
 	min-width 300px
+	max-width 100%
 	margin-left 0
-	margin-top 1em
 	.anime-header
 		margin-top 0
 
@@ -64,9 +59,12 @@
 	font-size 0.8em
 	opacity 0.5
 
-.anime-page-image
+.anime-header
+	display flex
+	flex-flow row
+
+.anime-image
 	border-radius 3px
-	flex 0
 	box-shadow 4px 4px 8px rgba(0, 0, 0, 0.12)
 	filter saturate(100%)
 	transition all 290ms ease
@@ -74,8 +72,18 @@
 		filter saturate(130%)
 		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.2)
 
-.anime-page-image-container
-	width 100%
+.anime-image-container
+	flex-shrink 0
+	text-align center
+	margin-bottom 1rem
+	.anime-image
+		margin 0 !important
+		margin-right 1.5rem !important
+
+.info-column
+	flex-grow 1
+	display flex
+	flex-flow column
 
 .search-performance
 .anime-count
@@ -95,11 +103,22 @@
 #search-results
 	float left
 	width 100%
-	text-align left
+	text-align center
 
 .users-count
 	opacity 0.5
 	font-size 0.9em
+
+.anime-frontpage
+	h2, h3
+		text-align center
+
+#search
+	float none
+
+.popular-anime-list
+	float left
+	width 100%
 
 .popular-anime
 	padding 0.5em
@@ -136,11 +155,16 @@
 	color green !important
 
 @media only screen and (max-width: 800px)
+	.anime-header
+		flex-flow row wrap
+	
 	.anime-title-db
-	.anime-second-title-container
-	.anime-page-image-container
+	.second-title-container
+	.anime-image-container
 		text-align center
-	// .anime-page-image-container
+		flex-grow 1
+		
+	// .anime-image-container
 	// 	width 100%
 	// 	text-align center
 

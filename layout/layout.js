@@ -20,16 +20,18 @@ exports.render = function(request, render) {
 	}
 
 	nav.push({
-		title: 'Users',
-		url: 'users',
-		icon: 'globe'
-	})
-
-	nav.push({
 		title: 'Anime',
 		url: 'anime',
 		icon: 'television'
 	})
+	
+	if(!arn.production) {
+		nav.push({
+			title: 'Forum',
+			url: 'forum',
+			icon: 'comment'
+		})
+	}
 
 	if(user) {
 		nav.push({
@@ -107,21 +109,21 @@ exports.render = function(request, render) {
 			float: 'right',
 			tooltip: 'Roadmap'
 		})*/
-
+		
 		nav.push({
 			title: '',
 			url: 'others',
-			icon: 'asterisk',
+			icon: 'table',
 			float: 'right',
 			tooltip: 'Others'
 		})
-
+		
 		nav.push({
 			title: '',
-			url: 'feedback',
-			icon: 'comment',
+			url: 'users',
+			icon: 'globe',
 			float: 'right',
-			tooltip: 'Feedback'
+			tooltip: 'Users'
 		})
 
 		if(!embedded && (user.role === 'admin' || user.role === 'editor')) {

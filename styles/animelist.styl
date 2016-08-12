@@ -4,7 +4,7 @@
 .embedded-anime-list-container
 	.anime-list
 		width calc(100% - 225px - 1em)
-	.anime-image
+	.anime-list-image
 		display block
 
 .anime-list
@@ -16,7 +16,7 @@
 .anime-status-icon
 	margin 0 !important
 
-.anime-image
+.anime-list-image
 	display none
 	position fixed
 	top 50%
@@ -43,7 +43,7 @@
 	transition all 200ms ease
 	&:hover
 		background linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.03) 100%)
-		.anime-image
+		.anime-list-image
 			opacity 1
 			transform translate(0, -50%)
 

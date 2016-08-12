@@ -49,7 +49,7 @@ window.loadAnimeList = function(clearCache) {
 			var image = document.createElement('img');
 			image.src = anime.image;
 			image.alt = anime.preferredTitle;
-			image.className = 'anime-image';
+			image.className = 'anime-list-image';
 			item.appendChild(image);
 
 			// Link

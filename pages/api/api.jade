@@ -3,12 +3,16 @@ section
 		h2 API
 	
 		p Welcome to the notify.moe API!
-		p The information on this page is meant for developers who want to use the standardized data from notify.moe in their own applications.
-		p Currently there are 2 endpoints with read-only data:
+		p
+			| The information on this page is meant for developers who want to use the standardized data from notify.moe in their own applications.
+			| Authentication is not required at the time of writing this, however this might change in the future.
+			| Currently there are a few endpoints with read-only JSON data:
 		ul
 			li
-				a(href='/api/animelist/' + exampleName, target='_blank')= 'https://notify.moe/api/animelist/' + exampleName
+				a(href='/api/animelist/' + exampleName, target='_blank')= '/api/animelist/' + exampleName
 			li
-				a(href='/api/users/' + exampleName, target='_blank')= 'https://notify.moe/api/users/' + exampleName
-		
-		p Authentication is not required at the time of writing this, however this might change in the future.
+				a(href='/api/users/' + exampleName, target='_blank')= '/api/users/' + exampleName
+			li
+				a(href='/api/anime/' + 16498, target='_blank')= '/api/anime/' + 16498
+			li
+				a(href='/api/messages/' + exampleName, target='_blank')= '/api/messages/' + exampleName
