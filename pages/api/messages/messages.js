@@ -14,7 +14,34 @@ exports.get = function*(request, response) {
 		return
 	}
 	
-	let messages = yield arn.filter('Messages', message => message.authorId === viewUser.id)
+	let messages = yield arn.filter('Messages', message => message.recipientId === viewUser.id)
+	
+	let idToUser = {}
+	messages.forEach(message => {
+		idToUser[message.authorId] = null
+		idToUser[message.recipientId] = null
+	})
+	
+	let users = yield arn.batchGet('Users', Object.keys(idToUser))
+	
+	users.forEach(user => idToUser[user.id] = user)
+	messages.forEach(message => {
+		let author = idToUser[message.authorId]
+		let recipient = idToUser[message.recipientId]
+		
+		message.author = {
+			nick: author.nick,
+			avatar: author.avatar
+		}
+		
+		message.recipient = {
+			nick: recipient.nick,
+			avatar: recipient.avatar
+		}
+		
+		delete message.authorId
+		delete message.recipientId
+	})
 	
 	response.json(messages)
 }
