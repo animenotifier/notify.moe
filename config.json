@@ -6,7 +6,20 @@
 	],
 	"styles": [
 		"base",
-		"elements"
+		"elements",
+		"layout",
+		"navigation",
+		"headers",
+		"forms",
+		"colors",
+		"animelist",
+		"forum",
+		"settings",
+		"user",
+		"video",
+		"loading",
+		"fade",
+		"mobile"
 	],
 	"static": [
 		"images"
