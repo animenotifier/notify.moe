@@ -26,7 +26,7 @@ exports.get = function*(request, response) {
 	try {
 		let messages = yield arn.filter('Messages', message => message.recipientId === viewUser.id)
 		
-		messages.sort((a, b) => a.created < b.created)
+		messages.sort((a, b) => (a.created > b.created) ? -1 : ((a.created < b.created) ? 1 : 0))
 		
 		if(viewUserNick && messages.length > maxMessages)
 			messages.length = maxMessages

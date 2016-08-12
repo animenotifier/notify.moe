@@ -181,7 +181,8 @@ window.sendMessage = function() {
 	if(!postInput.value)
 		return
 	
-	$.post('/api/messages/' + userName, {
+	$.post('/api/messages', {
+		recipient: userName,
 		text: postInput.value
 	}).then(response => {
 		console.log(response)

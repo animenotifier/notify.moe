@@ -1,8 +1,23 @@
-'use strict'
+let shortid = require('shortid')
 
 const maxMessageLength = 100000
 
-let shortid = require('shortid')
+exports.get = function*(request, response) {
+	let user = request.user
+	let viewUserNick = request.params[0]
+	let viewUser = viewUserNick ? yield arn.getUserByNick(viewUserNick) : user
+	
+	if(!viewUser) {
+		response.json({
+			error: "Invalid recipient"
+		})
+		return
+	}
+	
+	let messages = yield arn.filter('Messages', message => message.authorId === viewUser.id)
+	
+	response.json(messages)
+}
 
 exports.post = function*(request, response) {
 	let user = request.user
@@ -13,15 +28,15 @@ exports.post = function*(request, response) {
 		return
 	}
 	
-	let viewUserNick = request.params[0]
+	let recipientNick = request.body.recipient
 	
-	if(!viewUserNick) {
+	if(!recipientNick) {
 		response.writeHead(409)
 		response.end('No recipient specified')
 		return
 	}
 	
-	let viewUser = yield arn.getUserByNick(viewUserNick)
+	let recipient = yield arn.getUserByNick(recipientNick)
 
 	let text = request.body.text
 
@@ -45,14 +60,14 @@ exports.post = function*(request, response) {
 	yield arn.set('Messages', messageId, {
 		id: messageId,
 		authorId: user.id,
-		recipientId: viewUser.id,
+		recipientId: recipient.id,
 		text,
 		likes: [],
 		created: (new Date()).toISOString()
 	})
 	
 	// Send notification about the message
-	yield arn.sendNotification(viewUser, {
+	yield arn.sendNotification(recipient, {
 		title: `New message from ${user.nick}`,
 		icon: user.avatar + '?s=128&r=x&d=mm',
 		body: text
