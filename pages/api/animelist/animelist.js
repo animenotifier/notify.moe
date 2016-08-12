@@ -1,7 +1,3 @@
-'use strict'
-
-
-
 exports.get = function(request, response) {
 	let nick = request.params[0]
 	let command = request.params[1]

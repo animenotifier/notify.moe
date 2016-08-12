@@ -1,5 +1,3 @@
-'use strict'
-
 let $ = require('request-promise')
 let webhook = 'https://hooks.slack.com/services/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'
 

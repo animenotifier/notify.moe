@@ -1,5 +1,3 @@
-'use strict'
-
 let gravatar = require('gravatar')
 
 exports.get = function*(request, response) {

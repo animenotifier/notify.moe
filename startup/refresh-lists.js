@@ -1,6 +1,9 @@
 let RateLimiter = require('limiter').RateLimiter
 let limiter = new RateLimiter(1, 1000)
 
+if(!arn.production)
+	return
+
 // Check every now and then if users have new episodes
 let refreshAnimeLists = function() {
 	console.log('Refreshing anime lists...')

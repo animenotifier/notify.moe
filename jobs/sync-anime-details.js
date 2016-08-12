@@ -1,5 +1,3 @@
-'use strict'
-
 let processQueue = coroutine(function*(queue) {
 	for(let animeId of queue) {
 		yield Promise.delay(1100)

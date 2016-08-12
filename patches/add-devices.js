@@ -1,5 +1,3 @@
-'use strict'
-
 let aero = require('aero')
 let database = require('../modules/database')
 let arn = require('../lib')

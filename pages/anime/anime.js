@@ -1,5 +1,3 @@
-'use strict'
-
 const genreIcons = {
 	'Action': 'bomb',
 	'Adventure': 'diamond',

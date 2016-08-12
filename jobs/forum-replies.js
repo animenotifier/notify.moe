@@ -1,5 +1,3 @@
-'use strict'
-
 let checkAniListForumReplies = arn.listProviders.AniList.checkForumReplies.bind(arn.listProviders.AniList)
 
 let checkForumReplies = coroutine(function*() {

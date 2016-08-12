@@ -1,5 +1,3 @@
-'use strict'
-
 let request = require('request-promise')
 let Promise = require('bluebird')
 let arn = require('../lib')

@@ -1,5 +1,3 @@
-'use strict'
-
 exports.post = (request, response) => {
 	if(!arn.auth(request, response, 'editor'))
 		return

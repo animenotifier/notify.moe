@@ -1,5 +1,8 @@
 let request = require('request-promise')
 
+if(!arn.production)
+	return
+
 // Send slack messages
 arn.on('new user', user => {
 	// Ignore my own attempts on empty databases

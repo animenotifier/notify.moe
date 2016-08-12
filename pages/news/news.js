@@ -1,5 +1,3 @@
-'use strict'
-
 exports.get = function(request, response) {
 	let user = request.user
 

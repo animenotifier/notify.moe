@@ -1,5 +1,3 @@
-'use strict'
-
 const animePageCacheTime = 120 * 60 * 1000
 
 let updateAllAnimePages = coroutine(function*() {

@@ -1,5 +1,3 @@
-'use strict'
-
 exports.post = (request, response) => {
 	let user = request.user
 

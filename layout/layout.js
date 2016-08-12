@@ -1,5 +1,3 @@
-'use strict'
-
 exports.render = function(request, render) {
 	let user = request.user
 	let nav = []

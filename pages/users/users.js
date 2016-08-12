@@ -1,5 +1,3 @@
-'use strict'
-
 exports.get = function(request, response) {
 	let orderBy = request.params[0] || 'default'
 

@@ -1,5 +1,3 @@
-'use strict'
-
 let arn = require('../lib')
 let useragent = require('useragent')
 

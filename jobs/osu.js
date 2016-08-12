@@ -1,5 +1,3 @@
-'use strict'
-
 let RateLimiter = require('limiter').RateLimiter
 let osuAPILimiter = new RateLimiter(1, 200)
 

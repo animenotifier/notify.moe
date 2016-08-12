@@ -1,5 +1,3 @@
-'use strict'
-
 exports.post = function(request, response) {
 	if(request.body.function !== 'save') {
 		response.end('Invalid function!')

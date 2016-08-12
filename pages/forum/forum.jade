@@ -2,4 +2,6 @@ section
 	header
 		h2 Forum
 		
-		p Work in progress.
+	each thread in threads
+		.thread
+			a(href='#').thread-title= thread.title

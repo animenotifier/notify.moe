@@ -1,5 +1,3 @@
-'use strict'
-
 const maxMessages = 5
 
 let gravatar = require('gravatar')

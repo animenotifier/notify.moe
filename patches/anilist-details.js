@@ -1,5 +1,3 @@
-'use strict'
-
 let aero = require('aero')
 let arn = require('../lib')
 let request = require('request-promise')

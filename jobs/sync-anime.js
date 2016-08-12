@@ -1,5 +1,3 @@
-'use strict'
-
 let importAnimeFromAniList = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Import anime from anilist...')
 

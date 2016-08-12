@@ -1,5 +1,3 @@
-'use strict'
-
 let updateUserLists = coroutine(function*() {
 	let tasks = []
 	

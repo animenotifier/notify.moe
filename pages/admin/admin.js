@@ -1,5 +1,3 @@
-'use strict'
-
 exports.get = function*(request, response) {
 	if(!arn.auth(request, response, 'editor'))
 		return

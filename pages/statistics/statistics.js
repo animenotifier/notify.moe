@@ -1,6 +1,3 @@
-'use strict'
-
-
 let increment = function(obj, key) {
 	if(obj.hasOwnProperty(key))
 		obj[key] += 1

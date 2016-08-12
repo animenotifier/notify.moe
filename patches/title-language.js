@@ -1,5 +1,3 @@
-'use strict'
-
 let arn = require('../lib')
 
 arn.db.ready.then(() => {

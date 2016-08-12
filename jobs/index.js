@@ -1,5 +1,3 @@
-'use strict'
-
 global.arn = require('../lib')
 global.chalk = require('chalk')
 global.Promise = require('bluebird')

@@ -1,5 +1,3 @@
-'use strict'
-
 const hosts = [
 	'https://anilist.co',
 	'https://hummingbird.me',

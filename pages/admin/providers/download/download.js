@@ -1,5 +1,3 @@
-'use strict'
-
 let Promise = require('bluebird')
 
 exports.get = (request, response) => {

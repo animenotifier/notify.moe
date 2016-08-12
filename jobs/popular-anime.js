@@ -1,5 +1,3 @@
-'use strict'
-
 const maxPopularAnime = 10
 
 let updatePopularAnime = coroutine(function*() {

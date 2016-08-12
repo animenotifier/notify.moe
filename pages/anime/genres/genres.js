@@ -1,5 +1,3 @@
-'use strict'
-
 exports.get = (request, response) => {
 	let user = request.user
 	let genre = request.params[0]

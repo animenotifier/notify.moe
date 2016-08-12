@@ -1,5 +1,3 @@
-'use strict'
-
 exports.get = (request, response) => {
 	if(!arn.animeToIdJSONStringGzipped) {
 		response.writeHead(404)

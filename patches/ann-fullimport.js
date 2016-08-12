@@ -1,5 +1,3 @@
-'use strict'
-
 let fs = require('fs')
 let request = require('request-promise')
 let xml2js = require('xml2js')

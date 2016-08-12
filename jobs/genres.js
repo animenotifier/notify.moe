@@ -1,5 +1,3 @@
-'use strict'
-
 let updateGenres = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Updating genre cache...')
 

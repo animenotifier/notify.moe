@@ -1,5 +1,3 @@
-'use strict'
-
 let SC = require('node-soundcloud')
 let natural = require('natural')
 
