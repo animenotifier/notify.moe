@@ -24,7 +24,7 @@ Powered by:
 If you want to run this site locally on your own computer make sure to do the following:
 
 * Get a Linux desktop or server (e.g. Ubuntu)
-* Install node.js 6.x
+* Install node.js
 * Install Aerospike
 * Configure a namespace called `arn` in the Aerospike config, 4 GB space
 * Clone the notify.moe repository
