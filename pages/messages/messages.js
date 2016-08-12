@@ -16,7 +16,7 @@ exports.get = function*(request, response) {
 	]
 	
 	response.render({
-		message,
-		user
+		user,
+		message
 	})
 }

@@ -1,7 +1,15 @@
+mixin renderThreadLink(thread)
+	.thread
+		.thread-author
+			a.user.ajax(href='/+' + thread.author.nick)
+				img.user-image(src=thread.author.avatar + '?s=50&r=x&d=mm', alt=)
+		.post-content
+			a.ajax(href='/threads/' + thread.id).thread-title= thread.title
+			.thread-reply-count= 25
+
 section
 	header
 		h2 Forum
 		
 	each thread in threads
-		.thread
-			a(href='#').thread-title= thread.title
+		+renderThreadLink(thread)

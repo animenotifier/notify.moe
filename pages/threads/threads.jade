@@ -1,0 +1,7 @@
+if !thread
+	p Invalid thread.
+else
+	h2= thread.title
+	
+	include ../messages/renderMessage.jade
+	+renderMessage(thread, user, 'threads')
