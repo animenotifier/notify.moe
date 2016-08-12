@@ -15,4 +15,4 @@ section
 						td= edit.providerName
 						td= edit.edited
 						td
-							a.ajax(href='/+' + edit.editedBy.nick)= edit.editedBy.nick
+							a.ajax(href='/+' + users[edit.editedBy].nick)= users[edit.editedBy].nick

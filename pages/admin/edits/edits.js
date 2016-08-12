@@ -2,6 +2,8 @@
 
 let Promise = require('bluebird')
 
+const maxLogLength = 100
+
 exports.get = function*(request, response) {
 	if(!arn.auth(request, response, 'editor'))
 		return
@@ -27,15 +29,23 @@ exports.get = function*(request, response) {
 	]
 
 	edits.sort((a, b) => a.edited < b.edited ? 1 : -1)
-
-	let getUsers = edits.map(edit => {
-		return arn.get('Users', edit.editedBy).then(editor => edit.editedBy = editor)
+	
+	if(edits.length > maxLogLength)
+		edits.length = maxLogLength
+	
+	let userTasks = {}
+	edits.forEach(edit => {
+		if(userTasks.hasOwnProperty(edit.editedBy))
+			return
+		
+		userTasks[edit.editedBy] = arn.get('Users', edit.editedBy)
 	})
 
-	yield Promise.all(getUsers)
+	let users = yield userTasks
 
 	response.render({
 		user,
-		edits
+		edits,
+		users
 	})
 }
