@@ -37,10 +37,10 @@ else
 					p.profile-field.tagline
 						i.fa.fa-comment
 						span.tagline No tagline yet.
-
+				
 				if user && viewUser.location && viewUser.location.countryName != '-'
 					p.profile-field.location
-						i.fa.fa-map-marker
+						i.fa.fa-map-marker(style='width: 0.94em; text-align: center')
 						//- if viewUser.location.cityName != '-'
 						//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
 						//- else

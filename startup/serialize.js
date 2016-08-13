@@ -6,24 +6,6 @@ let useragent = require('useragent')
 passport.serializeUser(function(request, user, done) {
 	let now = new Date()
 	user.lastLogin = now.toISOString()
-	user.ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress || ''
 	user.agent = useragent.parse(request.headers['user-agent'])
-
-	arn.set('Users', user.id, user).then(() => {
-		if(!user.ip) {
-			done(null, user.id)
-			return
-		}
-
-		arn.getLocation(user).then(location => {
-			user.location = location
-		}).catch(error => {
-			user.location = null
-		}).finally(() => {
-			// Save in database
-			arn.set('Users', user.id, user).then(() => {
-				done(null, user.id)
-			})
-		})
-	})
+	done(null, user.id)
 })

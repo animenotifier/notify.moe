@@ -21,7 +21,47 @@ let sessionOptions = {
 app.use(
     session(sessionOptions),
     passport.initialize(),
-    passport.session()
+    passport.session(),
+	(request, response, next) => {
+		let user = request.user
+		
+		if(!user) {
+			next()
+			return
+		}
+		
+		let newIP = request.headers['x-forwarded-for'] || request.connection.remoteAddress || ''
+		
+		if(!newIP) {
+			next()
+			return
+		}
+		
+		if(user.ip === newIP) {
+			next()
+			return
+		}
+		
+		user.ip = newIP
+		
+		// IP changed: Update location
+		arn.set('Users', user.id, {
+			ip: user.ip
+		}).then(() => {
+			arn.getLocation(user).then(location => {
+				user.location = location
+			}).catch(error => {
+				user.location = null
+			}).finally(() => {
+				// Save in database
+				arn.set('Users', user.id, {
+					location: user.location
+				})
+			})
+		})
+		
+		next()
+	}
 )
 
 // Logout
