@@ -3,8 +3,12 @@ let processQueue = coroutine(function*(queue) {
 		yield Promise.delay(1100)
 
 		let details = yield arn.listProviders.AniList.getAnimeDetails(animeId)
+		
+		if(!details)
+			continue
+		
 		yield arn.set('Anime', animeId, details)
-
+		
 		console.log(chalk.green('✔'), `Finished importing anime details of ${chalk.cyan(animeId)}`)
 	}
 })

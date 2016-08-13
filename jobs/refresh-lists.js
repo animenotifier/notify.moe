@@ -15,8 +15,8 @@ let refreshAnimeLists = coroutine(function*() {
 		yield arn.getAnimeList(user, true).then(animeList => {
 			// ...
 		}).catch(error => {
-			if(error.statusCode === 404) {
-				console.warn(`404: ${error.options.uri}`)
+			if(error.name === 'StatusCodeError') {
+				console.warn(`Unavailable [${error.statusCode}]: ${error.options.uri}`)
 				return
 			}
 			
