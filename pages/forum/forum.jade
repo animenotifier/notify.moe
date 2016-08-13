@@ -33,4 +33,5 @@ section
 	each thread in threads
 		+renderThreadLink(thread)
 	
-	a.create-thread.ajax(href='/threads/new') Create thread
+	if user
+		a.create-thread.ajax(href='/threads/new') Create thread
