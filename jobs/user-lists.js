@@ -9,7 +9,7 @@ let updateUserLists = coroutine(function*() {
 		let addUser = method.addUser
 		let cacheKey = `users:${orderBy}`
 
-		tasks.push(arn.filter('Users', user => arn.isActiveUser(user)).then(coroutine(function*(users) {
+		tasks.push(arn.filter('Users', user => arn.isActiveUser(user) && user.avatar).then(coroutine(function*(users) {
 			users = yield Promise.filter(users, user => addUser(user, categories))
 
 			users.forEach(user => {

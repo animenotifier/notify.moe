@@ -19,9 +19,13 @@ arn.db.ready.then(Promise.coroutine(function*() {
 	console.log(arn.animeList.length + ' anime')
 
 	let files = yield fs.readdirAsync('jobs')
+	let filterJob = process.argv[2]
 
 	files.forEach(file => {
 		if(file === 'index.js')
+			return
+			
+		if(filterJob && file !== filterJob + '.js')
 			return
 
 		console.log(chalk.green('[Starting job]'), chalk.blue(file.replace('.js', '')))
