@@ -34,15 +34,15 @@
 
 .anime
 	padding 0.25em 0.75em
-	border 1px solid rgba(0, 0, 0, 0.1)
+	border uiBorder
 	border-radius 3px
 	margin 0.25em 0
-	background linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%)
+	background uiBackground
 	display flex
 	flex-direction row
 	transition all 200ms ease
 	&:hover
-		background linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.03) 100%)
+		background uiHoverBackground
 		.anime-list-image
 			opacity 1
 			transform translate(0, -50%)

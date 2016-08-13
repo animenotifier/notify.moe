@@ -11,8 +11,6 @@
 	
 .post-author
 	flex-grow 0
-	flex-basis 50px
-	width 50px
 	
 	img
 		margin 0 !important
@@ -66,13 +64,14 @@
 	text-align left
 	flex-grow 1
 	padding 0.4rem 1rem
-	margin-left 0.75rem
-	background-color rgba(0, 0, 0, 0.03)
+	margin-left 0.3rem
+	background uiBackground
+	border uiBorder
 	border-radius 3px
-	border 1px solid rgba(0, 0, 0, 0.08)
 	position relative
 	
 	&:hover
+		background uiHoverBackground
 		.post-toolbar
 			opacity 1
 	

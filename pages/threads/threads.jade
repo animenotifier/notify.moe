@@ -5,3 +5,6 @@ else
 	
 	include ../messages/renderMessage.jade
 	+renderMessage(thread, user, 'threads')
+	
+	each post in posts
+		+renderMessage(post, user, 'posts')

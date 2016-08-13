@@ -1,12 +1,15 @@
+.forum-tags
+	text-align left
+	margin-bottom 1.5rem
+
 .thread
 	display flex
 	flex-flow row
 	width 100%
 	
-	
 .thread-author
 	//
-	
+
 .thread-title
 	// display flex
 	// align-items center
@@ -20,8 +23,23 @@
 	&:after
 		content " replies"
 	
-.post-content
+.thread-content-container
+	display flex
+	align-items center
+	width 100%
+	
+.thread-content
 	display flex
 	align-items center
 	justify-content flex-start
 	text-align left
+	min-height 80%
+	// border-radius 0
+	// margin-bottom -1px
+	a
+		color rgb(32, 32, 32) !important
+		&:hover
+			color linkHoverColor !important
+			
+.sticky-thread
+	//

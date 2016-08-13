@@ -1,15 +1,29 @@
 mixin renderThreadLink(thread)
-	.thread
-		.thread-author
-			a.user.ajax(href='/+' + thread.author.nick)
+	.thread(class=thread.sticky ? 'sticky-thread' : '')
+		.post-author.thread-author
+			a.user.ajax(href='/+' + thread.author.nick, title=thread.author.nick)
 				img.user-image(src=thread.author.avatar + '?s=50&r=x&d=mm', alt=)
-		.post-content
-			a.ajax(href='/threads/' + thread.id).thread-title= thread.title
-			.thread-reply-count= 25
+		.thread-content-container
+			.post-content.thread-content
+				if thread.sticky
+					i.fa.fa-thumb-tack
+				a.ajax(href='/threads/' + thread.id).thread-title= thread.title
+				//- .thread-reply-count= 25
 
 section
 	header
 		h2 Forum
-		
+	
+	.forum-tags
+		a.ajax(href='/forum') All
+		|  | 
+		a.ajax(href='/forum/general') General
+		|  | 
+		a.ajax(href='/forum/anime') Anime
+		|  | 
+		a.ajax(href='/forum/suggestion') Ideas
+		|  | 
+		a.ajax(href='/forum/bug') Bugs
+	
 	each thread in threads
 		+renderThreadLink(thread)
