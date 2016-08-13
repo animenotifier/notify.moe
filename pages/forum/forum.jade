@@ -6,8 +6,11 @@ mixin renderThreadLink(thread)
 		.thread-content-container
 			.post-content.thread-content
 				if thread.sticky
-					i.fa.fa-thumb-tack
+					i.fa.fa-thumb-tack.fa-fw.thread-icon
 				a.ajax(href='/threads/' + thread.id).thread-title= thread.title
+				.thread-icons
+					each icon in thread.icons
+						i(class='fa fa-' + icon + ' fa-fw thread-icon')
 				//- .thread-reply-count= 25
 
 section
