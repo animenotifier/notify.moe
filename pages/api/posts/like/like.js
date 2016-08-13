@@ -1,0 +1,1 @@
+module.exports = arn.getLikeController('Posts')

@@ -48,7 +48,8 @@ else if anime
 		//	h3.anime-header Episodes
 
 		if usersWatching
-			h3.anime-header Currently watching 
+			h3.anime-header
+				| Currently watching&nbsp;
 				span.users-count= `(${usersWatching.length})`
 			.users
 				each user in usersWatching

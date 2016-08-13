@@ -1,0 +1,5 @@
+if !post
+	p No post.
+else
+	include ../messages/renderMessage.jade
+	+renderMessage(post, user, 'Posts', null)

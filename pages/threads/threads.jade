@@ -7,7 +7,7 @@ else
 	
 	.thread
 		.posts
-			+renderMessage(thread, user, 'threads', thread.author.id)
+			+renderMessage(thread, user, 'Threads', thread.author.id)
 			
 			each post in posts
-				+renderMessage(post, user, 'posts', thread.author.id)
+				+renderMessage(post, user, 'Posts', thread.author.id)

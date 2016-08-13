@@ -1,12 +1,13 @@
 mixin renderMessage(message, user, type, specialAuthorId)
+	- var typeSingular = type.slice(0, -1)
 	.post(class=message.author.id === specialAuthorId ? 'special-post' : '')
 		.post-author
 			a.user(href='/+' + message.author.nick, title=message.author.nick)
-				img.user-image(src=message.author.avatar + '?s=50&r=x')
+				img.user-image(src=message.author.avatar + '?s=50&r=x', alt=message.author.nick)
 				
 			if message.recipient && message.recipient.id !== message.author.id
 				a.user.message-recipient(href='/+' + message.recipient.nick, title=message.recipient.nick)
-					img.user-image(src=message.recipient.avatar + '?s=50&r=x')
+					img.user-image(src=message.recipient.avatar + '?s=50&r=x', alt=message.recipient.nick)
 		.post-content!= app.markdown(message.text)
 			.post-toolbar
 				.spacer
@@ -17,18 +18,19 @@ mixin renderMessage(message, user, type, specialAuthorId)
 				if user
 					if user.id !== message.authorId
 						if message.likes.indexOf(user.id) === -1
-							a.post-tool.post-like(onclick=`window.likeMessage('${message.id}')`, title='Like')
+							a.post-tool.post-like(onclick=`window.like('${type.toLowerCase()}', '${message.id}').then(window.loadMessages)`, title='Like')
 								i.fa.fa-thumbs-up.fa-fw
 						else
-							a.post-tool.post-unlike(onclick=`window.unlikeMessage('${message.id}')`, title='Unlike')
+							a.post-tool.post-unlike(onclick=`window.unlike('${type.toLowerCase()}', '${message.id}').then(window.loadMessages)`, title='Unlike')
 								i.fa.fa-thumbs-down.fa-fw
 					//- if user.id === message.authorId
 					//- 	a.post-tool.post-edit(onclick=`window.editMessage('${message.id}')`, title='Edit')
 					//- 		i.fa.fa-pencil.fa-fw
-					
-				a.post-tool.post-permalink.ajax(href='/' + type + '/' + message.id, title='Permalink')
-					i.fa.fa-link.fa-fw
+				
+				if type !== 'Threads'
+					a.post-tool.post-permalink.ajax(href='/' + type.toLowerCase() + '/' + message.id, title='Permalink')
+						i.fa.fa-link.fa-fw
 				
 				if user && (user.id === message.authorId || user.id === message.recipientId)
-					a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this message from ${message.author.nick}?")) window.deleteMessage('${message.id}')`, title='Delete')
+					a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this ${typeSingular.toLowerCase()} from ${message.author.nick}?")) window.delete${typeSingular}('${message.id}')`, title='Delete')
 						i.fa.fa-trash.fa-fw

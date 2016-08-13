@@ -174,8 +174,6 @@ window.editMessage = function() {
 	alert('work in progress')
 }
 
-window.likeMessage = messageId => $.post('/api/messages/like/' + messageId).then(window.loadMessages)
-window.unlikeMessage = messageId => $.post('/api/messages/unlike/' + messageId).then(window.loadMessages)
 window.deleteMessage = messageId => $.post('/api/messages/delete/' + messageId).then(window.loadMessages)
 
 window.sendMessage = function() {
