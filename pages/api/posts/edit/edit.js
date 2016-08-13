@@ -33,6 +33,14 @@ exports.post = function*(request, response) {
 		return
 	}
 	
+	let post = yield arn.get('Posts', postId)
+	
+	if(post.authorId !== user.id) {
+		response.writeHead(409)
+		response.end('Can not edit the post of a different user')
+		return
+	}
+	
 	// Save post
 	yield arn.set('Posts', postId, {
 		text,

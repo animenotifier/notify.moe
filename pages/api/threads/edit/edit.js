@@ -33,6 +33,14 @@ exports.post = function*(request, response) {
 		return
 	}
 	
+	let thread = yield arn.get('Threads', threadId)
+	
+	if(thread.authorId !== user.id) {
+		response.writeHead(409)
+		response.end('Can not edit the thread of a different user')
+		return
+	}
+	
 	// Save post
 	yield arn.set('Threads', threadId, {
 		text,
