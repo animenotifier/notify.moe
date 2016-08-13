@@ -47,6 +47,8 @@
 .post-likes
 	opacity 0.4
 	margin-right 0.4em
+	&:before
+		content "+"
 
 .post-permalink
 	color blue !important
@@ -92,3 +94,18 @@
 .special-post
 	.post-content
 		border 2px solid alpha(mainColor, 70%)
+		
+.hidden
+	display none
+	
+.thread
+	display flex
+	flex-flow column
+	align-items center
+	
+.thread-title
+	width auto
+
+.posts
+	width 100%
+	max-width 830px

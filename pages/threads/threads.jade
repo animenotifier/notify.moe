@@ -1,13 +1,24 @@
 if !thread
 	p Invalid thread.
 else
-	h2= thread.title
-	
 	include ../messages/renderMessage.jade
 	
 	.thread
+		h2.thread-title= thread.title
+		
 		.posts
 			+renderMessage(thread, user, 'Threads', thread.author.id)
 			
 			each post in posts
 				+renderMessage(post, user, 'Posts', thread.author.id)
+	
+			if user
+				.post
+					.post-author
+						a.user.ajax(href='/+' + user.nick, title=user.nick)
+							img.user-image(src=user.avatar + '?s=50&r=x')
+					.post-content
+						textarea#post-input(placeholder='Reply...')
+				.post-input-toolbar
+					.spacer
+					button.post-submit(onclick=`window.replyToThread('${thread.id}')`) Submit

@@ -3,7 +3,8 @@ const tagToIcon = {
 	general: 'paperclip',
 	anime: 'television',
 	suggestion: 'lightbulb-o',
-	bug: 'bug'
+	bug: 'bug',
+	news: 'newspaper-o'
 }
 
 exports.get = function*(request, response) {

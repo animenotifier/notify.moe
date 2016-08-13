@@ -1,1 +1,21 @@
-h2 New
+if !user
+	p Not logged in.
+else
+	.thread
+		input#new-thread-title(type='text', placeholder='Title', maxlength=100, tabindex=1)
+		
+		.posts
+			.post
+				.post-author
+					a.user.ajax(href='/+' + user.nick, title=user.nick)
+						img.user-image(src=user.avatar + '?s=50&r=x')
+				.post-content
+					textarea#post-input(placeholder='Content', tabindex=2)
+			.post-input-toolbar
+				select#tag(title='Category', tabindex=3)
+					option(value='general', selected) General
+					option(value='news') News
+					option(value='anime') Anime
+					option(value='suggestion') Suggestion
+					option(value='bug') Bug
+				button.post-submit(onclick=`window.newThread()`, tabindex=4) Create thread

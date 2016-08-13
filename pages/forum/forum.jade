@@ -22,6 +22,8 @@ section
 		|  | 
 		a.ajax(href='/forum/general') General
 		|  | 
+		a.ajax(href='/forum/news') News
+		|  | 
 		a.ajax(href='/forum/anime') Anime
 		|  | 
 		a.ajax(href='/forum/suggestion') Suggestions
@@ -30,3 +32,5 @@ section
 	
 	each thread in threads
 		+renderThreadLink(thread)
+	
+	a.create-thread.ajax(href='/threads/new') Create thread

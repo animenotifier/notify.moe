@@ -11,7 +11,7 @@ if user
 			a.user.ajax(href='/+' + user.nick, title=user.nick)
 				img.user-image(src=user.avatar + '?s=50&r=x')
 		.post-content
-			textarea(placeholder='Enter your message here...')#post-input
+			textarea#post-input(placeholder='Enter your message here...')
 	.post-input-toolbar
 		.spacer
 		button.post-submit(onclick='window.sendMessage()') Send message
