@@ -1,5 +1,5 @@
-mixin renderMessage(message, user, type)
-	.post
+mixin renderMessage(message, user, type, specialAuthorId)
+	.post(class=message.author.id === specialAuthorId ? 'special-post' : '')
 		.post-author
 			a.user(href='/+' + message.author.nick, title=message.author.nick)
 				img.user-image(src=message.author.avatar + '?s=50&r=x')

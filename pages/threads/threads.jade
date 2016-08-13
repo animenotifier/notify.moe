@@ -4,7 +4,10 @@ else
 	h2= thread.title
 	
 	include ../messages/renderMessage.jade
-	+renderMessage(thread, user, 'threads')
 	
-	each post in posts
-		+renderMessage(post, user, 'posts')
+	.thread
+		.posts
+			+renderMessage(thread, user, 'threads', thread.author.id)
+			
+			each post in posts
+				+renderMessage(post, user, 'posts', thread.author.id)

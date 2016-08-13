@@ -3,7 +3,7 @@ if !messages
 else
 	include ../renderMessage.jade
 	each message in messages
-		+renderMessage(message, user, 'messages')
+		+renderMessage(message, user, 'messages', null)
 
 if user
 	.post
