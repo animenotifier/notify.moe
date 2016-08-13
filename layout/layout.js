@@ -23,13 +23,11 @@ exports.render = function(request, render) {
 		icon: 'television'
 	})
 	
-	if(!arn.production) {
-		nav.push({
-			title: 'Forum',
-			url: 'forum',
-			icon: 'comment'
-		})
-	}
+	nav.push({
+		title: 'Forum',
+		url: 'forum',
+		icon: 'comment'
+	})
 
 	if(user) {
 		nav.push({

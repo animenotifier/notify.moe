@@ -1,35 +1,45 @@
-mixin renderMessage(message, user, type, specialAuthorId)
+mixin renderMessage(post, user, type, specialAuthorId)
 	- var typeSingular = type.slice(0, -1)
-	.post(class=message.author.id === specialAuthorId ? 'special-post' : '')
+	.post(class=post.author.id === specialAuthorId ? 'special-post' : '')
 		.post-author
-			a.user(href='/+' + message.author.nick, title=message.author.nick)
-				img.user-image(src=message.author.avatar + '?s=50&r=x', alt=message.author.nick)
+			a.user(href='/+' + post.author.nick, title=post.author.nick)
+				img.user-image(src=post.author.avatar + '?s=50&r=x', alt=post.author.nick)
 				
-			if message.recipient && message.recipient.id !== message.author.id
-				a.user.message-recipient(href='/+' + message.recipient.nick, title=message.recipient.nick)
-					img.user-image(src=message.recipient.avatar + '?s=50&r=x', alt=message.recipient.nick)
-		.post-content!= app.markdown(message.text)
-			.post-toolbar
+			if post.recipient && post.recipient.id !== post.author.id
+				a.user.post-recipient(href='/+' + post.recipient.nick, title=post.recipient.nick)
+					img.user-image(src=post.recipient.avatar + '?s=50&r=x', alt=post.recipient.nick)
+		.post-content
+			div(id='render-' + post.id)!= app.markdown(post.text)
+			
+			if user && user.id === post.authorId
+				textarea.post-input.hidden(id='source-' + post.id)= post.text
+				a.post-save.hidden(id='save-' + post.id, onclick=`window.saveEdit('${type.toLowerCase()}', '${post.id}')`)
+					i.fa.fa-save
+					span Save
+			
+			.post-toolbar(id='toolbar-' + post.id)
 				.spacer
-				.post-likes(id='likes-' + message.id)= message.likes.length
+				.post-likes(id='likes-' + post.id)= post.likes.length
 				
 				if user
-					if user.id !== message.authorId
-						- var liked = message.likes && message.likes.indexOf(user.id) !== -1
+					if user.id !== post.authorId
+						- var liked = post.likes && post.likes.indexOf(user.id) !== -1
 						
-						a.post-tool.post-like(id='like-' + message.id, onclick=`window.like('${type.toLowerCase()}', '${message.id}')`, title='Like', class=liked ? 'hidden' : '')
+						a.post-tool.post-like(id='like-' + post.id, onclick=`window.like('${type.toLowerCase()}', '${post.id}')`, title='Like', class=liked ? 'hidden' : '')
 							i.fa.fa-thumbs-up.fa-fw
 						
-						a.post-tool.post-unlike(id='unlike-' + message.id, onclick=`window.unlike('${type.toLowerCase()}', '${message.id}')`, title='Unlike', class=!liked ? 'hidden' : '')
+						a.post-tool.post-unlike(id='unlike-' + post.id, onclick=`window.unlike('${type.toLowerCase()}', '${post.id}')`, title='Unlike', class=!liked ? 'hidden' : '')
 							i.fa.fa-thumbs-down.fa-fw
-					//- if user.id === message.authorId
-					//- 	a.post-tool.post-edit(onclick=`window.editMessage('${message.id}')`, title='Edit')
-					//- 		i.fa.fa-pencil.fa-fw
+					
+					if type === 'Posts' || type === 'Threads'
+						if user.id === post.authorId
+							a.post-tool.post-edit(onclick=`window.edit('${post.id}')`, title='Edit')
+								i.fa.fa-pencil.fa-fw
 				
 				if type !== 'Threads'
-					a.post-tool.post-permalink.ajax(href='/' + type.toLowerCase() + '/' + message.id, title='Permalink')
+					a.post-tool.post-permalink.ajax(href='/' + type.toLowerCase() + '/' + post.id, title='Permalink')
 						i.fa.fa-link.fa-fw
 				
-				if type === 'Messages' && user && (user.id === message.authorId || user.id === message.recipientId)
-					a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this ${typeSingular.toLowerCase()} from ${message.author.nick}?")) window.delete${typeSingular}('${message.id}')`, title='Delete')
+				if type === 'Messages' && user && (user.id === post.authorId || user.id === post.recipientId)
+					a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this ${typeSingular.toLowerCase()} from ${post.author.nick}?")) window.delete${typeSingular}('${post.id}')`, title='Delete')
 						i.fa.fa-trash.fa-fw

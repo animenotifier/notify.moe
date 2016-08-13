@@ -1,5 +1,6 @@
 let shortid = require('shortid')
 
+const minTitleLength = 3
 const maxTitleLength = 100
 const maxPostLength = 100000
 
@@ -30,9 +31,9 @@ exports.post = function*(request, response) {
 	
 	title = title.trim()
 	
-	if(title.length > maxTitleLength) {
+	if(title.length > maxTitleLength || title.length < minTitleLength) {
 		response.writeHead(409)
-		response.end('Title too long')
+		response.end('Invalid title length')
 		return
 	}
 
@@ -52,6 +53,8 @@ exports.post = function*(request, response) {
 		return
 	}
 	
+	let sticky = request.body.sticky ? 1 : 0
+	
 	let postId = shortid.generate()
 	
 	// Save post
@@ -62,7 +65,7 @@ exports.post = function*(request, response) {
 		text,
 		tags: [tag],
 		likes: [],
-		sticky: 0,
+		sticky,
 		replies: 0,
 		created: (new Date()).toISOString()
 	})

@@ -1,4 +1,4 @@
-const maxThreadCount = 13
+const maxThreadCount = 12
 const tagToIcon = {
 	general: 'paperclip',
 	anime: 'television',

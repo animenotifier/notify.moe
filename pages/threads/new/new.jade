@@ -2,7 +2,7 @@ if !user
 	p Not logged in.
 else
 	.thread
-		input#new-thread-title(type='text', placeholder='Title', maxlength=100, tabindex=1)
+		input#new-thread-title(type='text', placeholder='Title', pattern='.{3,}', maxlength=100, tabindex=1)
 		
 		.posts
 			.post
@@ -18,4 +18,9 @@ else
 					option(value='anime') Anime
 					option(value='suggestion') Suggestion
 					option(value='bug') Bug
-				button.post-submit(onclick=`window.newThread()`, tabindex=4) Create thread
+				
+				if user.role === 'admin'
+					input#sticky(type='checkbox')
+					| Sticky
+				
+				input.post-submit(type='submit', onclick=`window.newThread()`, tabindex=4, value='Create thread')
