@@ -32,7 +32,7 @@ exports.get = function*(request, response) {
 			text: testTexts[i % testTexts.length],
 			authorId: ['HyhW-TsW', 'VkBaMJ6ux', 'NyGyZ2xwe', 'EkffWKXte'][i % 4],
 			id: 'test' + i,
-			sticky: false,
+			sticky: 0,
 			created: (new Date()).toISOString()
 		})
 	}
@@ -40,10 +40,7 @@ exports.get = function*(request, response) {
 	threads[13].sticky = true
 	
 	threads.sort((a, b) => {
-		if(a.sticky !== b.sticky)
-			return a.sticky ? (-1 + b.sticky) : (1 - b.sticky)
-		
-		return (a.created > b.created) ? -1 : ((a.created < b.created) ? 1 : 0)
+		return (a.sticky ? (-1 + b.sticky) : b.sticky) || (a.created > b.created) ? -1 : ((a.created < b.created) ? 1 : 0)
 	})
 	
 	if(threads.length > maxThreadCount)
