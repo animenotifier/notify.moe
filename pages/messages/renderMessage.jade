@@ -2,7 +2,7 @@ mixin renderMessage(post, user, type, specialAuthorId)
 	- var typeSingular = type.slice(0, -1)
 	.post(class=post.author.id === specialAuthorId ? 'special-post' : '')
 		.post-author
-			a.user(href='/+' + post.author.nick, title=post.author.nick)
+			a.user.ajax(href='/+' + post.author.nick, title=post.author.nick)
 				img.user-image(src=post.author.avatar + '?s=50&r=x', alt=post.author.nick)
 				
 			if post.recipient && post.recipient.id !== post.author.id
