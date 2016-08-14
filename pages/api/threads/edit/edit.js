@@ -1,3 +1,4 @@
+const parameters = ['id', 'text']
 const maxThreadLength = 100000
 
 exports.post = function*(request, response) {
@@ -8,28 +9,18 @@ exports.post = function*(request, response) {
 		response.end('Not logged in')
 		return
 	}
-
-	let text = request.body.text
-
-	if(!text) {
-		response.writeHead(409)
-		response.end('Thread text required')
+	
+	if(!arn.assertParams(request, parameters))
 		return
-	}
+	
+	let threadId = request.body.id
+	let text = request.body.text
 	
 	text = text.trim()
 	
 	if(text.length > maxThreadLength) {
 		response.writeHead(409)
 		response.end('Thread too long')
-		return
-	}
-	
-	let threadId = request.body.id
-	
-	if(!threadId) {
-		response.writeHead(409)
-		response.end('Thread ID required')
 		return
 	}
 	
