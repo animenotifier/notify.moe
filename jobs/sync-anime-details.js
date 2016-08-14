@@ -15,15 +15,16 @@ let processQueue = coroutine(function*(queue) {
 
 let importAnimeDetailsFromAniList = coroutine(function*() {
 	console.log(chalk.yellow('✖'), 'Import anime details from anilist...')
-
+	
+	// Get an access token
 	yield arn.listProviders.AniList.authorize()
 
 	// We have 2 queues: high and low priority
 	let highPriority = []
 	let lowPriority = []
 
+	// Filter anime that have been imported already into the low priority queue
 	arn.animeList.forEach(anime => {
-		// Skip anime that have been imported already
 		if(anime.description || anime.totalEpisodes || anime.duration)
 			lowPriority.push(anime.id)
 		else
