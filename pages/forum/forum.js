@@ -1,10 +1,11 @@
 const maxThreadCount = 12
 const tagToIcon = {
 	general: 'paperclip',
+	news: 'newspaper-o',
 	anime: 'television',
+	update: 'cubes',
 	suggestion: 'lightbulb-o',
-	bug: 'bug',
-	news: 'newspaper-o'
+	bug: 'bug'
 }
 
 exports.get = function*(request, response) {
