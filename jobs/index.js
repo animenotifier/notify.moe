@@ -15,8 +15,10 @@ arn.runningBackgroundJobs = true
 
 arn.db.ready.then(Promise.coroutine(function*() {
 	arn.animeList = yield arn.filter('Anime', anime => true)
-
 	console.log(arn.animeList.length + ' anime')
+	
+	// Build search index
+	require('../startup/search-index')
 
 	let files = yield fs.readdirAsync('jobs')
 	let filterJob = process.argv[2]
