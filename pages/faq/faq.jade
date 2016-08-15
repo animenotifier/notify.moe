@@ -67,26 +67,26 @@ section
 			| Gravatar needs some time to update its cache.
 			| You need to wait a few minutes before it shows up.
 			
-		dt What does "list provider" mean?
-		dd The site you are using to manage your anime list.
-			if user
-				|  You are currently using 
-				span.user-data= user.providers.list
-				| .
-		
-		dt What does "anime provider" mean?
-		dd The site you are using to watch anime.
-			if user
-				|  You are currently using 
-				span.user-data= user.providers.anime
-				| .
-		
-		dt What does "airing date provider" mean?
-		dd The site you want to use as a source for airing dates. Whether an airing date is available or not depends on the site you chose.
-			if user
-				|  You are currently using 
-				span.user-data= user.providers.airingDate
-				| .
+		dt What is the meaning of these "providers"?
+		dd
+			ul
+				li List provider is the site you are using to manage your anime list.
+					if user
+						|  You are currently using 
+						span.user-data= user.providers.list
+						| .
+			
+				li Anime provider is the site you are using to watch anime.
+					if user
+						|  You are currently using 
+						span.user-data= user.providers.anime
+						| .
+			
+				li Airing date provider is the site you want to use as a source for airing dates.
+					if user
+						|  You are currently using 
+						span.user-data= user.providers.airingDate
+						| .
 		
 		dt Is Anime Notifier available in every country?
 		dd.
