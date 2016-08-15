@@ -100,6 +100,17 @@ section
 			
 			section.statistics-panel
 				header
+					h3 Countries
+					
+				table
+					tbody
+						each count, index in users.countries
+							tr
+								td.statistics-label= index ? index : 'Not specified'
+								td.statistics-value= Math.round(count / users.total * 100) + ' %'
+			
+			section.statistics-panel
+				header
 					h3 Gender
 					
 				table

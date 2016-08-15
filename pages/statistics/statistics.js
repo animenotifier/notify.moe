@@ -5,6 +5,20 @@ let increment = function(obj, key) {
 		obj[key] = 1
 }
 
+let filterLessThan = function(map, threshold) {
+	map.Others = 0
+	
+	Object.keys(map).forEach(key => {
+		if(key === 'Others')
+			return
+		
+		if(map[key] < threshold) {
+			map.Others += map[key]
+			delete map[key]
+		}
+	})
+}
+
 exports.get = function*(request, response) {
 	let recordCount = 0
 	let notificationsEnabled = 0
@@ -33,6 +47,7 @@ exports.get = function*(request, response) {
 	}
 
 	let browsers = {}
+	let countries = {}
 
 	yield arn.forEach('Users', function(user) {
 		if(!arn.isActiveUser(user))
@@ -51,6 +66,11 @@ exports.get = function*(request, response) {
 
 		if(user.agent && user.agent.family)
 			increment(browsers, user.agent.family)
+			
+		if(user.location && user.location.countryName && user.location.countryName != '-')
+			increment(countries, user.location.countryName)
+		else
+			increment(countries, 'Unknown')
 
 		increment(providers.list, user.providers.list)
 		increment(providers.anime, user.providers.anime)
@@ -59,19 +79,10 @@ exports.get = function*(request, response) {
 		recordCount++
 	})
 	
-	browsers.Others = 0
-	
 	const onePercentMark = recordCount / 100
 	
-	Object.keys(browsers).forEach(key => {
-		if(key === 'Others')
-			return
-		
-		if(browsers[key] < onePercentMark) {
-			browsers.Others += browsers[key]
-			delete browsers[key]
-		}
-	})
+	filterLessThan(browsers, onePercentMark)
+	filterLessThan(countries, onePercentMark)
 
 	response.render({
 		users: {
@@ -81,6 +92,7 @@ exports.get = function*(request, response) {
 			titleLanguages,
 			notificationsEnabled,
 			browsers,
+			countries,
 			sortBy
 		},
 		anime: {
