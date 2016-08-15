@@ -8,8 +8,12 @@ exports.get = function*(request, response) {
 	if(!viewUserNick) {
 		let viewUser = user
 
-		if(viewUser)
+		if(viewUser) {
 			viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
+			
+			if(viewUser.role === 'editor')
+				viewUser.dataEditCount = (yield arn.get('Cache', 'dataEditCount')).contributions[viewUser.id]
+		}
 
 		response.render({
 			user,
@@ -22,6 +26,9 @@ exports.get = function*(request, response) {
 	try {
 		let viewUser = yield arn.getUserByNick(viewUserNick)
 		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
+		
+		if(viewUser.role === 'editor')
+			viewUser.dataEditCount = (yield arn.get('Cache', 'dataEditCount')).contributions[viewUser.id]
 
 		response.render({
 			user,

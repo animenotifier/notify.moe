@@ -25,14 +25,18 @@ exports.get = function*(request, response) {
 		scanBucket('MatchAnimePlanet'),
 		scanBucket('AnimeToNyaa')
 	]
-
-	edits.sort((a, b) => a.edited < b.edited ? 1 : -1)
 	
 	if(edits.length > maxLogLength)
 		edits.length = maxLogLength
 	
 	let userTasks = {}
+	let userEdits = {}
 	edits.forEach(edit => {
+		if(userEdits.hasOwnProperty(edit.editedBy))
+			userEdits[edit.editedBy] += 1
+		else
+			userEdits[edit.editedBy] = 1
+		
 		if(userTasks.hasOwnProperty(edit.editedBy))
 			return
 		
@@ -40,6 +44,15 @@ exports.get = function*(request, response) {
 	})
 
 	let users = yield userTasks
+	
+	// Save editor contribution
+	arn.set('Cache', 'dataEditCount', {
+		contributions: userEdits
+	})
+	
+	// Don't optimize it by putting it before the loop.
+	// It would mess up editor edit counts.
+	edits.sort((a, b) => a.edited < b.edited ? 1 : -1)
 
 	response.render({
 		user,

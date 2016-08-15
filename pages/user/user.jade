@@ -52,9 +52,14 @@ else
 						a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
 				
 				if user && (user.osu || user.osuDetails) && viewUser.osuDetails && viewUser.osuDetails.pp >= 1000
-					p.profile-field.osu
+					p.profile-field.osu(title='osu! performance points')
 						i.fa.fa-trophy
-						span(title='osu! performance points')= parseInt(viewUser.osuDetails.pp) + ' pp'
+						span= parseInt(viewUser.osuDetails.pp) + ' pp'
+				
+				if viewUser.dataEditCount
+					p.profile-field.editor-contribution(title='Anime data modifications')
+						i.fa.fa-edit
+						span= viewUser.dataEditCount
 				
 				if viewUser.role
 					p.profile-field.role
