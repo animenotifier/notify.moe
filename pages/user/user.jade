@@ -51,7 +51,7 @@ else
 						i.fa.fa-home
 						a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
 				
-				if user && user.osuDetails && viewUser.osuDetails && viewUser.osuDetails.pp >= 1000
+				if user && (user.osu || user.osuDetails) && viewUser.osuDetails && viewUser.osuDetails.pp >= 1000
 					p.profile-field.osu
 						i.fa.fa-trophy
 						span(title='osu! performance points')= parseInt(viewUser.osuDetails.pp) + ' pp'
