@@ -1,28 +1,31 @@
 let arn = require('../lib')
 let chalk = require('chalk')
+let Promise = require('bluebird')
 
-arn.db.ready.then(() => {
-	let tasks = []
-
-    arn.forEach('Users', user => {
-		if(!user.ip)
-			return
+arn.db.ready.then(Promise.coroutine(function*() {
+	let users = yield arn.all('Users')
+	
+	for(let user of users) {
+		if(!user.ip || (user.location && user.location.countryName))
+			continue
 		
-		tasks.push(arn.getLocation(user).then(location => {
+		console.log(`Querying ${chalk.blue(user.nick)} (${user.id} | ${user.ip})`)
+		
+		yield arn.getLocation(user).then(location => {
 			user.location = location
 			
 			if(user.location && user.location.countryName)
 				console.log(`${chalk.blue(user.nick)} from ${chalk.yellow(user.location.countryName)}`)
-		}).catch(error => {
-			user.location = null
-		}).finally(() => {
-			// Save in database
+			
 			return arn.set('Users', user.id, {
 				location: user.location
 			})
-		}))
-    }).then(() => {
-		console.log(`Waiting for ${tasks.length} tasks to finish...`)
-		Promise.all(tasks).then(() => console.log(`Finished updating ${tasks.length} users`))
-    })
-})
+		}).catch(error => {
+			user.location = null
+		})
+		
+		yield Promise.delay(550)
+	}
+	
+	console.log('Finished updating locations')
+}))
