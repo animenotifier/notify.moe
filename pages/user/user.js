@@ -1,5 +1,20 @@
 let gravatar = require('gravatar')
 
+const monthNames = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+]
+
 exports.get = function*(request, response) {
 	let user = request.user
 	let viewUserNick = request.params[0]
@@ -18,7 +33,8 @@ exports.get = function*(request, response) {
 		response.render({
 			user,
 			viewUser,
-			embeddedList
+			embeddedList,
+			monthNames
 		})
 		return
 	}
@@ -33,7 +49,8 @@ exports.get = function*(request, response) {
 		response.render({
 			user,
 			viewUser,
-			embeddedList
+			embeddedList,
+			monthNames
 		})
 	} catch(error) {
 		console.error(error, error.stack)

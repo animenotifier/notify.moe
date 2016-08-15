@@ -61,6 +61,12 @@ else
 						i.fa.fa-edit
 						span= viewUser.dataEditCount
 				
+				if viewUser.registered
+					p.profile-field.registration-date(title='Member since')
+						- var joined = (new Date(viewUser.registered))
+						i.fa.fa-calendar
+						span= monthNames[joined.getMonth()] + ' ' + joined.getFullYear()
+				
 				if viewUser.role
 					p.profile-field.role
 						i.fa.fa-rocket
