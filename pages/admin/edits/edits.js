@@ -26,9 +26,6 @@ exports.get = function*(request, response) {
 		scanBucket('AnimeToNyaa')
 	]
 	
-	if(edits.length > maxLogLength)
-		edits.length = maxLogLength
-	
 	let userTasks = {}
 	let userEdits = {}
 	edits.forEach(edit => {
@@ -53,6 +50,9 @@ exports.get = function*(request, response) {
 	// Don't optimize it by putting it before the loop.
 	// It would mess up editor edit counts.
 	edits.sort((a, b) => a.edited < b.edited ? 1 : -1)
+	
+	if(edits.length > maxLogLength)
+		edits.length = maxLogLength
 
 	response.render({
 		user,
