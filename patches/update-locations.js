@@ -24,7 +24,7 @@ arn.db.ready.then(Promise.coroutine(function*() {
 			user.location = null
 		})
 		
-		yield Promise.delay(550)
+		yield Promise.delay(800)
 	}
 	
 	console.log('Finished updating locations')
