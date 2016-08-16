@@ -3,8 +3,8 @@ var arn = require('../lib')
 arn.db.ready.then(() => {
 	let tasks = []
 	
-    arn.forEach('Threads', post => {
-		tasks.push(arn.set('Threads', post.id, {
+    arn.forEach('Messages', post => {
+		tasks.push(arn.set('Messages', post.id, {
 			likes: []
 		}))
     }).then(function() {

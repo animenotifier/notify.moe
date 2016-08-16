@@ -30,6 +30,17 @@ app.use(
 			return
 		}
 		
+		// Save last view date
+		if(!request.url.startsWith('/api/') && request.url !== '/favicon.ico' && request.url !== '/service-worker.js') {
+			arn.set('Users', user.id, {
+				lastView: {
+					url: request.url,
+					date: (new Date()).toISOString()
+				}
+			})
+		}
+		
+		// IP
 		let newIP = request.headers['x-forwarded-for'] || request.connection.remoteAddress || ''
 		
 		if(!newIP) {
