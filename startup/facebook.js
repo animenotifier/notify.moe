@@ -22,8 +22,8 @@ passport.use(new FacebookStrategy(
 			email = email.replace('googlemail.com', 'gmail.com')
 
 		Promise.any([
-			arn.get('FacebookToUser', fb.id),
-			arn.get('EmailToUser', email)
+			arn.get('FacebookToUser', fb.id).catch(error => null),
+			arn.get('EmailToUser', email).catch(error => null)
 		])
 		.then(record => arn.get('Users', record.userId).then(user => {
 			if(user && user.accounts)
