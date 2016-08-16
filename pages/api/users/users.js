@@ -20,6 +20,7 @@ exports.get = function(request, response) {
 			delete user.agent
 			delete user.location
 			delete user.lastLogin
+			delete user.lastView
 			delete user.pushEndpoints
 		}
 
