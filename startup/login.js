@@ -1,6 +1,7 @@
 let passport = require('passport')
 let session = require('express-session')
 let AerospikeStore = require('aerospike-session-store')(session)
+let Promise = require('bluebird')
 
 const cookieDurationInSeconds = 6 * 30 * 24 * 60 * 60
 
@@ -89,7 +90,7 @@ app.get('/logout', function(req, res) {
 	
 	if(req.session && req.session.destroy) {
 		req.session.destroy(function(err) {
-			res.redirect('/')
+			Promise.delay(500).then(() => res.redirect('/'))
 		})
 	}
 })
