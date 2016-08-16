@@ -9,7 +9,5 @@ passport.serializeUser(function(request, user, done) {
 	user.agent = useragent.parse(request.headers['user-agent'])
 	
 	// Save in database
-	arn.set('Users', user.id, user)
-	
-	done(null, user.id)
+	arn.set('Users', user.id, user).then(() => done(null, user.id))
 })
