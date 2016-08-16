@@ -29,8 +29,6 @@ passport.use(new GoogleStrategy(
 
 			done(undefined, user)
 		})).catch(error => {
-			console.error(error)
-
 			// New user
 			let now = new Date()
 			let user = {
