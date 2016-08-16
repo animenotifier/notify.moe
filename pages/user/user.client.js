@@ -18,7 +18,7 @@ window.loadAnimeList = function(clearCache) {
 			'<div class="sk-cube3 sk-cube"></div>' +
 		'</div>';
 
-	$.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(function(response) {
+	$.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(response => {
 		if(response && response.error) {
 			animeList.textContent = 'Error loading your anime list: ' + response.error;
 			return;
@@ -165,8 +165,12 @@ window.loadAnimeList = function(clearCache) {
 
 		animeList.appendChild(list);
 		$.ajaxifyLinks();
-	}).catch(function(error) {
-		animeList.textContent = 'Error: ' + error;
+	}).catch(error => {
+		error = JSON.parse(error)
+		animeList.innerHTML = '' // Remove loading animation
+		let pre = document.createElement('pre')
+		pre.appendChild(document.createTextNode(JSON.stringify(error, null, '\t')))
+		animeList.appendChild(pre)
 	});
 };
 
