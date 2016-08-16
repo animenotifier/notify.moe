@@ -78,7 +78,10 @@ app.use(
 // Logout
 app.get('/logout', function(req, res) {
     req.logout()
-	req.session.destroy(function(err) {
-		res.redirect('/')
-	})
+	
+	if(req.session && req.session.destroy) {
+		req.session.destroy(function(err) {
+			res.redirect('/')
+		})
+	}
 })
