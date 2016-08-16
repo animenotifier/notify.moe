@@ -20,7 +20,7 @@ let refreshAnimeLists = coroutine(function*() {
 				return
 			}
 			
-			console.error(`Error when automatically updating the anime list of ${user.nick}:`, error, error.stack)
+			console.error(`Error when automatically updating the anime list of ${user.nick}:`, error)
 		})
 	}
 })

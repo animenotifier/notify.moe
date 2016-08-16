@@ -71,7 +71,7 @@ let findTracksForAnime = anime => {
 			console.log(chalk.red('✖'), `No tracks found for ${chalk.cyan(anime.title.romaji)}`)
 		}
 	}).catch(error => {
-		console.error(error, error.stack)
+		console.error(error)
 		console.log(tmp)
 	})
 }

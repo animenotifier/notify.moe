@@ -14,7 +14,7 @@ exports.get = (request, response) => {
 			user
 		}, record))
 	}).catch(error => {
-		console.error(error, error.stack)
+		console.error(error)
 		response.render({
 			user
 		})

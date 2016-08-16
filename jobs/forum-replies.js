@@ -16,7 +16,7 @@ arn.on('new forum reply', function(link, userName) {
 	}).then(body => {
 		console.log(`Sent slack message about a new forum reply from ${userName}`)
 	}).catch(error => {
-		console.error('Error sending slack message:', error, error.stack)
+		console.error('Error sending slack message:', error)
 	})
 })
 

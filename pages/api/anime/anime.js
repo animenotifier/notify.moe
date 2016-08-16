@@ -56,7 +56,7 @@ let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
 				editedBy: user.id
 			})
 		} else {
-			console.error(error, error.stack)
+			console.error(error)
 		}
 	}
 })
@@ -119,7 +119,7 @@ exports.post = (request, response) => {
 			if(error && error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND') {
 				console.error('Anime not found: ' + animeId)
 			} else {
-				console.error(error, error.stack)
+				console.error(error)
 			}
 		}).finally(() => {
 			response.end()

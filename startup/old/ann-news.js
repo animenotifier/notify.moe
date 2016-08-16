@@ -31,7 +31,7 @@ let updateNews = function() {
 		})
 	})
 	.catch(error => {
-		console.error(error, error.stack)
+		console.error(error)
 	})
 }
 

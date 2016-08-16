@@ -68,7 +68,7 @@ exports.get = function*(request, response) {
 			canEdit: user && (user.role === 'admin' || user.role === 'editor')
 		}, animePage))
 	} catch(error) {
-		console.error(error, error.stack)
+		console.error(error)
 
 		response.render({
 			user,

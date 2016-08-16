@@ -29,7 +29,7 @@ exports.get = (request, response) => {
 			return error
 		}
 
-		console.error(error, error.stack)
+		console.error(error)
 
 		response.json({
 			notifications: [{

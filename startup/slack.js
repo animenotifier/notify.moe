@@ -20,6 +20,6 @@ arn.on('new user', user => {
 	}).then(body => {
 		console.log(`Sent slack message about the new user registration: ${user.email}`)
 	}).catch(error => {
-		console.error('Error sending slack message:', error, error.stack)
+		console.error('Error sending slack message:', error)
 	})
 })

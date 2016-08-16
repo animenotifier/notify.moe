@@ -39,7 +39,7 @@ exports.get = function*(request, response) {
 			messages
 		})
 	} catch(error) {
-		console.error(error, error.stack)
+		console.error(error)
 		response.render({
 			user
 		})

@@ -62,7 +62,7 @@ exports.post = function(request, response) {
 	arn.set('Users', user.id, user)
 		.then(() => response.end())
 		.catch(error => {
-			console.error(error, error.stack)
+			console.error(error)
 			response.writeHead(409)
 			response.end(error.message)
 		})
