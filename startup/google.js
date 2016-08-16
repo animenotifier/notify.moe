@@ -20,8 +20,8 @@ passport.use(new GoogleStrategy(
 			email = email.replace('googlemail.com', 'gmail.com')
 
 		Promise.any([
-			arn.get('GoogleToUser', google.id).catch(error => null),
-			arn.get('EmailToUser', email).catch(error => null)
+			arn.get('GoogleToUser', google.id),
+			arn.get('EmailToUser', email)
 		])
 		.then(record => arn.get('Users', record.userId).then(user => {
 			if(user && user.accounts)
