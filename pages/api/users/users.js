@@ -9,6 +9,8 @@ exports.get = function(request, response) {
 
 		// Do not show critical information
 		if(!request.user || request.user.role !== 'admin') {
+			user.following = user.following.length
+			
 			delete user.id
 			delete user.ip
 			delete user.accounts
