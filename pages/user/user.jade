@@ -106,7 +106,11 @@ else
 			#embedded-footer
 				a(href='/+' + user.nick, target='_blank')= user.nick
 				span.embedded-footer-separator  / 
-				a(id='list-provider-link', href=null, target='_blank') List
-				span.embedded-footer-separator  / 
 				a(href='javascript:window.loadAnimeList(true);', title='Refresh list')
 					span.fa.fa-refresh.fa-fw
+				span.embedded-footer-separator  / 
+				a(id='list-provider-link', href=null, target='_blank', title=user.providers.list)
+					span.fa.fa-list.fa-fw
+				span.embedded-footer-separator  / 
+				a(href='/forum/update', target='_blank', title='Latest updates')
+					span.fa.fa-cubes.fa-fw

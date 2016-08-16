@@ -59,6 +59,7 @@ passport.use(new FacebookStrategy(
 				sortBy: 'airingDate',
 				titleLanguage: 'romaji',
 				pushEndpoints: {},
+				following: [],
 				registered: now.toISOString(),
 				lastLogin: now.toISOString()
 			}

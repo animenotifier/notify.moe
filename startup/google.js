@@ -57,6 +57,7 @@ passport.use(new GoogleStrategy(
 				sortBy: 'airingDate',
 				titleLanguage: 'romaji',
 				pushEndpoints: {},
+				following: [],
 				registered: now.toISOString(),
 				lastLogin: now.toISOString(),
 			}

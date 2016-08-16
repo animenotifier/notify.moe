@@ -1,0 +1,3 @@
+arn.addProperties('Users', {
+	following: []
+})
