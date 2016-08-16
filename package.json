@@ -25,7 +25,7 @@
 		"passport-google-oauth": "*",
 		"paypal-rest-sdk": "*",
 		"request-promise": "*",
-		"session-file-store": "*",
+		"aerospike-session-store": "*",
 		"shortid": "*",
 		"striptags": "*",
 		"useragent": "*",
