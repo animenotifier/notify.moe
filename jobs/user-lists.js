@@ -1,16 +1,18 @@
 let updateUserLists = coroutine(function*() {
 	let tasks = []
+	let allUsers = yield arn.filter('Users', user => arn.isActiveUser(user) && user.avatar)
+	console.log(`${allUsers.length} active users`)
 	
 	for(let orderBy of Object.keys(arn.userOrderBy)) {
-		console.log(chalk.yellow('✖'), `Updating user list ${chalk.yellow(orderBy)}...`)
-
 		let method = arn.userOrderBy[orderBy]
 		let categories = method.getCategories()
 		let addUser = method.addUser
 		let cacheKey = `users:${orderBy}`
-
-		tasks.push(arn.filter('Users', user => arn.isActiveUser(user) && user.avatar).then(coroutine(function*(users) {
-			users = yield Promise.filter(users, user => addUser(user, categories))
+		
+		console.log(chalk.yellow('✖'), `Updating user list ${chalk.yellow(orderBy)}...`)
+		
+		let updateUserList = coroutine(function*() {
+			let users = yield Promise.filter(allUsers, user => addUser(user, categories))
 
 			// Sort by registration date
 			Object.keys(categories).forEach(categoryName => {
@@ -33,12 +35,15 @@ let updateUserLists = coroutine(function*() {
 			}).catch(error => {
 				console.error(`Error saving user list ${chalk.yellow(orderBy)}`, error)
 			})
-		})))
-		
-		tasks.push(Promise.delay(1000))
+		})
+
+		yield updateUserList()
+		yield Promise.delay(100)
 	}
 	
 	yield tasks
+	
+	console.log(chalk.green('✔'), 'Finished updating all user lists')
 })
 
 arn.repeatedly(4 * 60, updateUserLists)
