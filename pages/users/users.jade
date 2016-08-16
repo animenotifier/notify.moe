@@ -9,4 +9,4 @@ section
 			h3(title=category.length + (category.length === 1 ? ' user' : ' users'))= categoryTitle
 			each user in category
 				a.user.ajax(href='/+' + user.nick, title=user.nick)
-					img.user-image(src=user.gravatarURL, alt='')
+					img.user-image(src=user.avatar + '?s=50&r=x&d=mm', alt='')

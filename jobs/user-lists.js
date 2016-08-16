@@ -12,20 +12,26 @@ let updateUserLists = coroutine(function*() {
 		tasks.push(arn.filter('Users', user => arn.isActiveUser(user) && user.avatar).then(coroutine(function*(users) {
 			users = yield Promise.filter(users, user => addUser(user, categories))
 
-			users.forEach(user => {
-				user.gravatarURL = user.avatar + '?s=50&r=x&d=mm'
-			})
-
 			// Sort by registration date
 			Object.keys(categories).forEach(categoryName => {
 				let category = categories[categoryName]
 				category.sort((a, b) => new Date(a.registered) - new Date(b.registered))
+				
+				// Reduce data size for the database
+				categories[categoryName] = category.map(user => {
+					return {
+						nick: user.nick,
+						avatar: user.avatar
+					}
+				})
 			})
 			
 			console.log(chalk.green('✔'), `Finished updating user list ${chalk.yellow(orderBy)}`)
 			
 			return arn.set('Cache', cacheKey, {
 				categories
+			}).catch(error => {
+				console.error(`Error saving user list ${chalk.yellow(orderBy)}`, error)
 			})
 		})))
 		
