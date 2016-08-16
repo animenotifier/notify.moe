@@ -7,5 +7,9 @@ passport.serializeUser(function(request, user, done) {
 	let now = new Date()
 	user.lastLogin = now.toISOString()
 	user.agent = useragent.parse(request.headers['user-agent'])
+	
+	// Save in database
+	arn.set('Users', user.id, user)
+	
 	done(null, user.id)
 })
