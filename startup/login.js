@@ -23,6 +23,9 @@ app.use(
     passport.initialize(),
     passport.session(),
 	(request, response, next) => {
+		if(!request.isAuthenticated())
+			request.user = null
+		
 		let user = request.user
 		
 		if(!user) {
