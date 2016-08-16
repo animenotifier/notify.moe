@@ -11,6 +11,7 @@ let sessionOptions = {
     secret: arn.apiKeys.session.secret,
     saveUninitialized: false,
     resave: false,
+	unset: 'destroy',
     cookie: {
         secure: true,
 		maxAge: cookieDurationInSeconds * 1000
