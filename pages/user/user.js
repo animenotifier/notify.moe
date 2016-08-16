@@ -19,13 +19,6 @@ exports.get = function*(request, response) {
 	let user = request.user
 	let viewUserNick = request.params[0]
 	let embeddedList = request.params[1] === 'watching'
-	
-	// Very old Android app requests
-	if(viewUserNick.indexOf('&animeProvider=') !== -1) {
-		response.writeHead(409)
-		response.end()
-		return
-	}
 
 	if(!viewUserNick) {
 		let viewUser = user
@@ -43,6 +36,13 @@ exports.get = function*(request, response) {
 			embeddedList,
 			monthNames
 		})
+		return
+	}
+	
+	// Very old Android app requests
+	if(viewUserNick.indexOf('&animeProvider=') !== -1) {
+		response.writeHead(409)
+		response.end()
 		return
 	}
 
