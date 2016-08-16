@@ -15,7 +15,7 @@ if user
 		li(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
 		if user.email
 			li.finished#gravatar-text Add a gravatar image
-				img#gravatar-test-image(onerror='window.gravatarAvailable(false);', onload='window.gravatarAvailable(true);', src=user.gravatarURL)
+				img#gravatar-test-image(onerror='if(window.gravatarAvailable) window.gravatarAvailable(false);', onload='if(window.gravatarAvailable) window.gravatarAvailable(true);', src=user.gravatarURL)
 		li(class=Object.keys(user.pushEndpoints).length > 0 ? 'finished' : 'not-finished') Activate push notifications
 
 	h3 Apps
