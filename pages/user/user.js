@@ -21,7 +21,7 @@ exports.get = function*(request, response) {
 	let embeddedList = request.params[1] === 'watching'
 	
 	// Very old Android app requests
-	if(viewUserNick.indexOf('&animeProvider=')) {
+	if(viewUserNick.indexOf('&animeProvider=') !== -1) {
 		response.writeHead(409)
 		response.end()
 		return
