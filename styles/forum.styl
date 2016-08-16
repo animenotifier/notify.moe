@@ -6,14 +6,18 @@
 	
 .post
 	display flex
-	flex-flow row
+	flex-flow column
 	margin 0.5rem 0
 	
 .post-author
+	text-align center
 	flex-grow 0
 	
 	img
 		margin 0 !important
+		
+	.user
+		float none
 
 #post-input
 .post-input
@@ -115,3 +119,11 @@
 .posts
 	width 100%
 	max-width 830px
+	
+@media only screen and (min-width: 500px)
+	.post
+		flex-flow row
+		justify-content center
+		
+	.post-author
+		//

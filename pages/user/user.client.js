@@ -207,5 +207,19 @@ window.loadMessages = function() {
 	})
 }
 
+window.follow = function(userName) {
+	$.get('/api/users/follow/' + userName).then(response => {
+		$('unfollow').style.display = 'block'
+		$('follow').style.display = 'none'
+	})
+}
+
+window.unfollow = function(userName) {
+	$.get('/api/users/unfollow/' + userName).then(response => {
+		$('follow').style.display = 'block'
+		$('unfollow').style.display = 'none'
+	})
+}
+
 window.loadAnimeList()
 window.loadMessages()

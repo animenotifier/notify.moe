@@ -7,18 +7,19 @@ exports.get = function*(request, response) {
 		return
 	}
 
-	let followUserNick = request.params[0]
+	let unfollowUserNick = request.params[0]
 
-	if(!followUserNick) {
+	if(!unfollowUserNick) {
 		response.writeHead(409)
 		response.end('Username required')
 		return
 	}
 	
-	let followUser = yield arn.getUserByNick(followUserNick)
+	let unfollowUser = yield arn.getUserByNick(unfollowUserNick)
+	let index = user.following.indexOf(unfollowUser.id)
 	
-	if(user.id !== followUser.id && user.following.indexOf(followUser.id) === -1) {
-		user.following.push(followUser.id)
+	if(index !== -1) {
+		user.following.splice(index, 1)
 		yield arn.set('Users', user.id, user)
 	}
 	

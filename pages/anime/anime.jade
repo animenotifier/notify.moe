@@ -47,14 +47,13 @@ else if anime
 		//if crunchy
 		//	h3.anime-header Episodes
 
-		if usersWatching
-			h3.anime-header
-				| Currently watching&nbsp;
-				span.users-count= `(${usersWatching.length})`
+		if usersWatching && user && user.following
+			h3.anime-header Friends watching
 			.users
-				each user in usersWatching
-					a.user.ajax(href='/+' + user.nick, title=user.nick)
-						img.user-image(src=user.gravatarURL, alt='')
+				each watcher in usersWatching
+					if user.following.indexOf(watcher.id) !== -1
+						a.user.ajax(href='/+' + watcher.nick, title=watcher.nick)
+							img.user-image(src=watcher.gravatarURL, alt='')
 
 		if canEdit
 			#staff-info

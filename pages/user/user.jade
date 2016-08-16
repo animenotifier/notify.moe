@@ -38,13 +38,13 @@ else
 						i.fa.fa-comment
 						span.tagline No tagline yet.
 				
-				if user && user.role === 'admin' && viewUser.location && viewUser.location.countryName != '-'
-					p.profile-field.location
-						i.fa.fa-map-marker(style='width: 0.94em; text-align: center')
-						//- if viewUser.location.cityName != '-'
-						//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
-						//- else
-						span= viewUser.location.countryName
+				//- if user && user.role === 'admin' && viewUser.location && viewUser.location.countryName != '-'
+				//- 	p.profile-field.location
+				//- 		i.fa.fa-map-marker(style='width: 0.94em; text-align: center')
+				//- 		//- if viewUser.location.cityName != '-'
+				//- 		//- 	span= viewUser.location.cityName + ', ' + viewUser.location.countryName
+				//- 		//- else
+				//- 		span= viewUser.location.countryName
 
 				if user && viewUser.website
 					p.profile-field.website
@@ -71,22 +71,20 @@ else
 					p.profile-field.role
 						i.fa.fa-rocket
 						span= roles[viewUser.role]
-				else if donators[viewUser.id]
-					p.profile-field.role
-						i.fa.fa-heart
-						span Supporter
-				else
-					p.profile-field.role
-						i.fa.fa-star
-						span Alpha Tester
-
-				//-each provider in ['AniList', 'AnimePlanet', 'HummingBird', 'MyAnimeList']
-					if viewUser.listProviders[provider] && viewUser.listProviders[provider].userName
-						p(class='website list-provider-username' + (viewUser.providers.list === provider ? ' main' : ' alternative'))
-							span= provider + ' (' + viewUser.listProviders[provider].userName + ')'
-
+				//- else if donators[viewUser.id]
+				//- 	p.profile-field.role
+				//- 		i.fa.fa-heart
+				//- 		span Supporter
+				//- else
+				//- 	p.profile-field.role
+				//- 		i.fa.fa-star
+				//- 		span Alpha Tester
 			
-			//- h3(style=embeddedList ? 'display: none' : null)= viewUser.nick + ' is watching:'
+			if user && user.id !== viewUser.id
+				.user-actions
+					- var following = user.following.indexOf(viewUser.id) !== -1
+					button.user-action#follow(onclick=`window.follow('${viewUser.nick}')`, class=following ? 'hidden' : '') Follow
+					button.user-action#unfollow(onclick=`window.unfollow('${viewUser.nick}')`, class=following ? '' : 'hidden') Unfollow
 		
 		if user
 			#anime-list-container(class='category anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')

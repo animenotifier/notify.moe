@@ -1,6 +1,9 @@
 #profile
 	min-width 100%
 
+#anime-list-container
+	flex 1.5
+
 .image-container
 	float left
 	width auto
@@ -13,10 +16,22 @@
 .intro-container
 	float left
 	width auto
+	display flex
+	flex-flow column
+	align-items center
 	padding 0.5em
 	margin-left 1em
-	max-width 728px
-
+	max-width 900px
+	
+.user-actions
+	float right
+	display flex
+	flex-flow row
+	justify-content center
+	
+.user-action
+	max-width 250px
+	
 #nick
 	margin-top 0
 	margin-bottom 0
@@ -53,17 +68,25 @@
 	opacity 0.2
 
 @media only screen and (max-width: 900px)
-	.image-container
-		width 100%
-
 	.intro-container
 		margin 1em 0
 		padding 0
 		width 100%
+		text-align center !important
+		
+	#anime-list-container
+	.image-container
+	.user-actions
+		width 100%
 
-	#nick, .profile-field
+	#nick
+	.profile-field
 		width 100%
 		text-align center
+
+@media only screen and (min-width: 900px)
+	#posts
+		margin-left 0.5em
 
 @media only screen and (max-width: 800px)
 	.airing-date-prefix
