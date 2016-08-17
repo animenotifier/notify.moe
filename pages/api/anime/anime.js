@@ -102,9 +102,10 @@ exports.post = (request, response) => {
 				title,
 				edited: (new Date()).toISOString(),
 				editedBy: user.id
-			}).then(() => {
-				return arn.updateAnimePage(animeId)
-			}).then(() => response.end())
+			})
+			.then(() => arn.animeProviders.Nyaa.getAnimeInfo(animeId))
+			.then(() => arn.updateAnimePage(animeId))
+			.then(() => response.end())
 		} else {
 			console.log(`${user.nick} deleted Nyaa title of https://notify.moe/anime/${animeId} which was '${old}'`)
 
