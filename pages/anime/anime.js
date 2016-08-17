@@ -75,7 +75,8 @@ exports.get = function*(request, response) {
 			fixGenre: arn.fixGenre,
 			nyaa: arn.animeProviders.Nyaa,
 			genreIcons,
-			canEdit: user && (user.role === 'admin' || user.role === 'editor')
+			canEdit: user && (user.role === 'admin' || user.role === 'editor'),
+			friendsWatching: user ? animePage.usersWatching.filter(watcher => user.following.indexOf(watcher.id) !== -1) : null
 		}, animePage))
 	} catch(error) {
 		console.error(error)

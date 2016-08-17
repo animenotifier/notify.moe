@@ -27,6 +27,13 @@ exports.get = function*(request, response) {
 		else
 			viewUser = yield arn.getUserByNick(viewUserNick)
 		
+		if(!viewUser) {
+			response.render({
+				user
+			})
+			return
+		}
+		
 		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
 		
 		if(viewUser.role === 'editor')

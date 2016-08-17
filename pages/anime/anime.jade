@@ -33,27 +33,24 @@ else if anime
 			h3.anime-header Tracks
 			iframe(width='100%', height='150', scrolling='no', frameborder='no', src='https://w.soundcloud.com/player/?url=' + anime.tracks.opening.uri + '?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true')
 
-		.anime-links
-			if anime.genres && Array.isArray(anime.genres) && anime.genres.length > 0
-				.anime-links-category
-					h3.anime-header Genres
-					ul.genre-list
-						each genre in anime.genres
-							li.genre
-								if genreIcons[genre]
-									i(class='fa fa-' + genreIcons[genre] + ' fa-fw')
-								a.ajax(href='/anime/genres/' + fixGenre(genre))= genre
+		if friendsWatching && user && user.following && user.following.length > 0
+			h3.anime-header Watching
+			.users
+				each watcher in friendsWatching
+					a.user.ajax(href='/+' + watcher.nick, title=watcher.nick)
+						img.user-image(src=watcher.gravatarURL, alt='')
+
+		if anime.genres && Array.isArray(anime.genres) && anime.genres.length > 0
+			h3.anime-header Genres
+			.light-button-group
+					each genre in anime.genres
+						a.light-button.ajax(href='/anime/genres/' + fixGenre(genre))
+							if genreIcons[genre]
+								i(class='fa fa-' + genreIcons[genre] + ' fa-fw')
+							span= genre
 
 		//if crunchy
 		//	h3.anime-header Episodes
-
-		if usersWatching && user && user.following
-			h3.anime-header Friends watching
-			.users
-				each watcher in usersWatching
-					if user.following.indexOf(watcher.id) !== -1
-						a.user.ajax(href='/+' + watcher.nick, title=watcher.nick)
-							img.user-image(src=watcher.gravatarURL, alt='')
 
 		if canEdit
 			#staff-info
@@ -99,25 +96,21 @@ else if anime
 									span(class=providers.Nyaa.episodes === 0 ? 'entry-error' : 'entry-ok')= providers.Nyaa.episodes + ' eps'
 
 		h3.anime-header Links
-		.anime-websites
+		.light-button-group
 			if anime.links
 				each link in anime.links
-					a.anime-website(href=link.url, target='_blank')= link.title
-
-				//- if user && user.providers.anime === 'Nyaa' && providers.Nyaa && providers.Nyaa.episodes > 0
-				//- 	li
-				//- 		a.anime-website(href='https://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=' + providers.Nyaa.title.replace(/ /g, '+'), target='_blank') Nyaa
-
-			a.anime-website(href='https://anilist.co/anime/' + anime.id, target='_blank') AniList
+					a.light-button(href=link.url, target='_blank')= link.title
+			
+			a.light-button(href='https://anilist.co/anime/' + anime.id, target='_blank') AniList
 
 			if providers.HummingBird
-				a.anime-website(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') HummingBird
+				a.light-button(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') HummingBird
 
 			if providers.MyAnimeList
-				a.anime-website(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank') MyAnimeList
+				a.light-button(href='http://myanimelist.net/anime/' + providers.MyAnimeList.providerId, target='_blank') MyAnimeList
 
 			if providers.AnimePlanet
-				a.anime-website(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') AnimePlanet
+				a.light-button(href='http://www.anime-planet.com/anime/' + providers.AnimePlanet.providerId, target='_blank') AnimePlanet
 
 		.sources
 			p Powered by Anilist.
