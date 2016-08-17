@@ -9,12 +9,6 @@ section
 			then retrieves airing dates for each of your anime. The Anime Notifier project is also an effort to unify the
 			communities of multiple anime related sites on one platform.
 		
-		dt Is it finished yet?
-		dd.
-			Software usually goes through 3 stages: Alpha, Beta and Release.
-			Only the last stage is considered to be stable and fully functional.
-			Anime Notifier is currently in Alpha stage, therefore it's far away from being finished yet.
-		
 		dt Why is my list not loading?
 		dd Make sure you selected the correct list provider and also entered your username (not a link) for that site.
 		
@@ -41,12 +35,9 @@ section
 		
 		dt Is Anime Notifier free to use?
 		dd
-			span.main-point Alpha and Beta test are completely free for anyone.
-			|  At release I'll need to charge a little fee to keep the servers and the project alive.
-			| The project code is managed only by myself and I'd like to provide you with high quality software that everyone likes using.
-			| My dream is to work fulltime on this project and listen to community feedback to work on improved solutions together.
-			| The price will be 9.95 $ for 12 months (6.95 $ if you were an alpha/beta tester before).
-			| Primary payment methods will be PayPal and Stripe, however I'm not going to leave you in the dark if you don't own any of those.
+			span.main-point
+				| Alpha and Beta test are completely free for everyone. 
+			| At release I might need to charge a little fee to keep the servers and the project alive.
 		
 		if !user || !user.providers.list || !user.listProviders[user.providers.list] || !user.listProviders[user.providers.list].userName || !user.avatar
 			dt Why is my profile not shown on the user list?
