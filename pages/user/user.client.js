@@ -129,7 +129,7 @@ window.loadAnimeList = function(clearCache) {
 						isDownload ? (isBatch ? 'archive' : 'cloud-download') : 'eye',
 						anime.animeProvider.nextEpisode ? anime.animeProvider.nextEpisode.url : anime.animeProvider.url,
 						'anime-download-link',
-						(isDownload ? 'Download' : 'Watch') + ' episode ' + anime.episodes.next
+						(isDownload ? 'Download' : 'Watch') + (isBatch ? '' : ' episode ' + anime.episodes.next)
 					);
 
 					newAnimeCount++;
