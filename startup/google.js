@@ -1,5 +1,6 @@
 let shortid = require('shortid')
 let passport = require('passport')
+let gravatar = require('gravatar')
 let Promise = require('bluebird')
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
@@ -60,6 +61,7 @@ passport.use(new GoogleStrategy(
 				following: [],
 				registered: now.toISOString(),
 				lastLogin: now.toISOString(),
+				avatar: email ? gravatar.url(email) : ''
 			}
 
 			arn.registerNewUser(
