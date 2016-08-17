@@ -1,3 +1,5 @@
+const maxEntries = 100
+
 let Promise = require('bluebird')
 
 exports.get = (request, response) => {
@@ -20,7 +22,8 @@ exports.get = (request, response) => {
 
 	Promise.all(tasks).then(() => {
 		Promise.all(providers.map(provider => {
-			let keys = matches[provider].map(match => match.id)
+			let providerMatches = matches[provider]
+			let keys = providerMatches.map(match => match.id)
 
 			return arn.batchGet('Anime', keys).then(results => {
 				animeIdToWatching = results.reduce((dict, anime) => {
@@ -29,8 +32,10 @@ exports.get = (request, response) => {
 
 					return dict
 				}, {})
+				
+				providerMatches = providerMatches.filter(match => animeIdToWatching[match.id] > 0)
 
-				matches[provider].sort((a, b) => {
+				providerMatches.sort((a, b) => {
 					let aWatching = animeIdToWatching[a.id]
 					let bWatching = animeIdToWatching[b.id]
 
@@ -42,6 +47,11 @@ exports.get = (request, response) => {
 
 					return aWatching > bWatching ? -1 : 1
 				})
+				
+				if(providerMatches.length > maxEntries)
+					providerMatches.length = maxEntries
+				
+				matches[provider] = providerMatches
 			})
 		})).then(() => {
 			response.render({
