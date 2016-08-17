@@ -5,7 +5,12 @@ app.get('/logout', function(req, res) {
 			if(err)
 				console.error('Session destroy error:', error)
 			
-			Promise.delay(1000).then(() => res.redirect('/'))
+			Promise.delay(1000).then(() => {
+				this.writeHead(302, {
+					'Location': '/'
+				})
+				this.end()
+			})
 		})
 	} else {
 		req.logout()
