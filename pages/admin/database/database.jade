@@ -5,4 +5,10 @@ section
 	include ../header.jade
 	
 	h3 Tables
-	pre= statusText
+	table.sets
+		tbody
+			each set in sets
+				tr.set
+					td.set-name= set.name
+					td.set-objects(title='Objects')= set.objects
+					td.set-memory(title='Memory usage')= prettyBytes(set.memoryUsage)
