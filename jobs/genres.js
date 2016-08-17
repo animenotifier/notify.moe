@@ -8,7 +8,7 @@ let updateGenres = coroutine(function*() {
 		genre = arn.fixGenre(genre)
 		let genreSearch = `;${genre};`
 
-		yield Promise.delay(1500)
+		yield Promise.delay(1000)
 
 		let animeList = arn.animeList.filter(anime => {
 			if(!anime.watching)
@@ -21,6 +21,16 @@ let updateGenres = coroutine(function*() {
 				return false
 
 			return true
+		})
+		
+		// Reduce data size
+		animeList = animeList.map(anime => {
+			return {
+				id: anime.id,
+				title: anime.title,
+				watching: anime.watching,
+				startDate: anime.startDate
+			}
 		})
 
 		animeList.sort((a, b) => {
