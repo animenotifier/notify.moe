@@ -15,8 +15,10 @@ let facebookConfig = Object.assign({
 passport.use(new FacebookStrategy(
     facebookConfig,
     function(request, accessToken, refreshToken, profile, done) {
+		console.log(chalk.cyan('FacebookStrategy:'), (profile && profile._json) ? profile._json : profile)
+		
 		let fb = profile._json
-		let email = fb.email
+		let email = fb.email || ''
 
 		if(email.endsWith('googlemail.com'))
 			email = email.replace('googlemail.com', 'gmail.com')

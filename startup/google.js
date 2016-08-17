@@ -13,6 +13,8 @@ let googleConfig = Object.assign({
 passport.use(new GoogleStrategy(
     googleConfig,
     function(request, accessToken, refreshToken, profile, done) {
+		console.log(chalk.cyan('GoogleStrategy:'), (profile && profile._json) ? profile._json : profile)
+		
 		let google = profile._json
 		let email = google.emails.length > 0 ? google.emails[0].value : ''
 
