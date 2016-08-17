@@ -114,7 +114,7 @@ window.loadAnimeList = function(clearCache) {
 						'anime-completed',
 						'You completed this anime.'
 					);
-				} else if(anime.episodes.available >= anime.episodes.next && anime.animeProvider.nextEpisode) {
+				} else if(anime.episodes.available >= anime.episodes.next) {
 					var behind = (anime.episodes.available - anime.episodes.watched);
 					var episodes = document.createElement('span');
 					episodes.className = 'episodes-behind';
@@ -123,10 +123,11 @@ window.loadAnimeList = function(clearCache) {
 					item.appendChild(episodes);
 
 					var isDownload = (anime.animeProvider.type === undefined || anime.animeProvider.type === 'download');
+					var isBatch = anime.animeProvider.isBatch
 
 					addIconLink(
-						isDownload ? 'cloud-download' : 'eye',
-						anime.animeProvider.nextEpisode.url,
+						isDownload ? (isBatch ? 'archive' : 'cloud-download') : 'eye',
+						anime.animeProvider.nextEpisode ? anime.animeProvider.nextEpisode.url : anime.animeProvider.url,
 						'anime-download-link',
 						(isDownload ? 'Download' : 'Watch') + ' episode ' + anime.episodes.next
 					);
