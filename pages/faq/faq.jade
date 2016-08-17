@@ -49,15 +49,16 @@ section
 				span.main-point have a gravatar image
 				| .
 		
-		dt I've set my gravatar picture for my email but it doesn't show up?
-		dd 
-			if user
-				| Remember to add 
-				span.user-data= user.email
-				|  as an email address to your gravatar account. 
-			| Gravatar needs some time to update its cache.
-			| You need to wait a few minutes before it shows up.
-			
+		if !user || !user.avatar
+			dt I've set my gravatar picture for my email but it doesn't show up?
+			dd 
+				if user
+					| Remember to add 
+					span.user-data= user.email
+					|  as an email address to your gravatar account. 
+				| Gravatar needs some time to update its cache.
+				| You need to wait a few minutes before it shows up.
+		
 		dt What is the meaning of these "providers"?
 		dd
 			ul
