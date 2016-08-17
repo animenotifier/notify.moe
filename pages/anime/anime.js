@@ -9,6 +9,7 @@ const genreIcons = {
 	'Historical' : 'history',
 	'Horror' : 'frown-o',
 	'Martial Arts' : 'hand-rock-o',
+	'Magic': 'magic',
 	'Mecha' : 'reddit-alien',
 	'Military' : 'fighter-jet',
 	'Mystery' : 'question',
