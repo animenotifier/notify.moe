@@ -46,6 +46,14 @@ exports.get = function*(request, response) {
 	users.forEach(user => idToUser[user.id] = user)
 	posts.forEach(post => post.author = idToUser[post.authorId])
 	
+	// Open Graph
+	request.og = {
+		url: app.package.homepage + '/threads/' + thread.id,
+		title: thread.title,
+		description: thread.text,
+		type: 'article'
+	}
+	
 	response.render({
 		user,
 		thread,

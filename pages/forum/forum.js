@@ -7,6 +7,11 @@ const tagToIcon = {
 	suggestion: 'lightbulb-o',
 	bug: 'bug'
 }
+const openGraph = {
+	url: app.package.homepage + '/forum',
+	title: 'Anime Notifier - Forum',
+	description: 'Forum for notify.moe'
+}
 
 exports.get = function*(request, response) {
 	let user = request.user
@@ -74,6 +79,9 @@ exports.get = function*(request, response) {
 		else
 			thread.icons = thread.tags.map(tag => tagToIcon[tag]).filter(icon => icon)
 	})
+	
+	// Open Graph
+	request.og = openGraph
 	
 	response.render({
 		user,

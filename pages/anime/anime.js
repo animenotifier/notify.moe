@@ -61,8 +61,13 @@ exports.get = function*(request, response) {
 			}
 		}
 		
-		// For the layout
-		request.animePage = animePage
+		// Open Graph
+		request.og = {
+			url: app.package.homepage + '/anime/' + animePage.anime.id,
+			title: animePage.anime.title.romaji,
+			description: animePage.anime.description,
+			image: animePage.anime.image
+		}
 
 		response.render(Object.assign({
 			user,

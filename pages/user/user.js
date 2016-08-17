@@ -19,32 +19,26 @@ exports.get = function*(request, response) {
 	let user = request.user
 	let viewUserNick = request.params[0]
 	let embeddedList = request.params[1] === 'watching'
-
-	if(!viewUserNick) {
-		let viewUser = user
-
-		if(viewUser) {
-			viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
-			
-			if(viewUser.role === 'editor')
-				viewUser.dataEditCount = (yield arn.get('Cache', 'dataEditCount')).contributions[viewUser.id]
-		}
-
-		response.render({
-			user,
-			viewUser,
-			embeddedList,
-			monthNames
-		})
-		return
-	}
+	let viewUser = null
 
 	try {
-		let viewUser = yield arn.getUserByNick(viewUserNick)
+		if(!viewUserNick)
+			viewUser = user
+		else
+			viewUser = yield arn.getUserByNick(viewUserNick)
+		
 		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
 		
 		if(viewUser.role === 'editor')
 			viewUser.dataEditCount = (yield arn.get('Cache', 'dataEditCount')).contributions[viewUser.id]
+		
+		// Open Graph
+		request.og = {
+			url: app.package.homepage + '/+' + viewUser.nick,
+			title: viewUser.nick,
+			description: `${viewUser.nick}'s profile`,
+			image: viewUser.gravatarURL
+		}
 
 		response.render({
 			user,
@@ -54,6 +48,7 @@ exports.get = function*(request, response) {
 		})
 	} catch(error) {
 		console.error(error)
+		
 		response.render({
 			user
 		})

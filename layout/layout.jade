@@ -10,12 +10,13 @@ html(lang='en')
 		meta(name='keywords', content=app.package.keywords.join(','))
 
 		//- Open Graph
-		if request.animePage
-			meta(property='og:url', content=app.package.homepage + '/anime/' + request.animePage.anime.id)
-			meta(property='og:type', content='website')
-			meta(property='og:title', content=request.animePage.anime.title.romaji)
-			meta(property='og:description', content=request.animePage.anime.description)
-			meta(property='og:image', content=request.animePage.anime.image)
+		if request.og
+			meta(property='og:url', content=request.og.url)
+			meta(property='og:type', content=request.og.type ? request.og.type : 'website')
+			meta(property='og:title', content=request.og.title)
+			meta(property='og:description', content=request.og.description)
+			if request.og.image
+				meta(property='og:image', content=request.og.image)
 		else
 			meta(property='og:url', content=app.package.homepage)
 			meta(property='og:type', content='website')
