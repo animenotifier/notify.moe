@@ -48,6 +48,14 @@ else if anime
 							if genreIcons[genre]
 								i(class='fa fa-' + genreIcons[genre] + ' fa-fw')
 							span= genre
+		
+		if anime.studios && anime.studios.length > 0
+			h3.anime-header Studios
+			.light-button-group
+				each studio in anime.studios
+					a.light-button(href=studio.url, target='_blank')
+						i.fa.fa-building.fa-fw
+						span= studio.name
 
 		//if crunchy
 		//	h3.anime-header Episodes

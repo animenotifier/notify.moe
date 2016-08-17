@@ -61,6 +61,12 @@ exports.get = function*(request, response) {
 			}
 		}
 		
+		if(animePage.anime.studios) {
+			animePage.anime.studios.forEach(studio => {
+				studio.url = studio.wiki ? studio.wiki : `https://anilist.co/studio/${studio.id}`
+			})
+		}
+		
 		// Open Graph
 		request.og = {
 			url: app.package.homepage + '/anime/' + animePage.anime.id,
