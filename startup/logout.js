@@ -6,10 +6,10 @@ app.get('/logout', function(req, res) {
 				console.error('Session destroy error:', error)
 			
 			Promise.delay(1000).then(() => {
-				this.writeHead(302, {
+				res.writeHead(302, {
 					'Location': '/'
 				})
-				this.end()
+				res.end()
 			})
 		})
 	} else {
