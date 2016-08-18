@@ -68,6 +68,11 @@ exports.get = function(request, response) {
 		return response.end()
 
 	arn.get('Anime', id).then(anime => {
+		if(!request.user || request.user.role !== 'admin') {
+			delete anime.createdBy
+			delete anime.editedBy
+		}
+		
 		response.json(anime)
 	}).catch(error => {
 		response.json({
