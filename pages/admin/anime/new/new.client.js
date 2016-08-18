@@ -11,7 +11,7 @@ window.addAnime = () => {
 		$.post('/api/anime/add', anime)
 		.then(response => {
 			response = JSON.parse(response)
-			status.innerHTML = `Added anime: <a href="/anime/${response.id}">${response.title.romaji}</a>`
+			status.innerHTML = `Added anime: <a href="/anime/${response.id}" target="_blank">${response.title.romaji}</a>`
 		})
 		.catch(error => status.textContent = error)
 	} catch(error) {
