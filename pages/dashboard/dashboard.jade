@@ -1,17 +1,17 @@
 if user
 	section
 		header
-			h2= 'Hi ' + user.nick + ','
+			h2= user.welcomeLine
 
 	p Please go to your 
 		a.ajax(href='/settings') settings
 		|  and enter the required data.
 
-	// Checklist
+	//- Checklist
 	h3 Checklist
 
 	ol
-		li(class=(user.nick.startsWith('fb') || user.nick.startsWith('g')) ? 'not-finished' : 'finished') Change your username
+		li(class=user.hasNick ? 'finished' : 'not-finished') Change your username
 		li(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
 		if user.email
 			li.finished#gravatar-text Add a gravatar image
@@ -78,17 +78,17 @@ else
 		header
 			h2 Pick a platform!
 
-		// Chrome
+		//- Chrome
 		a.box.scale(href='javascript:chrome.webstore.install();', title='Chrome', itemscope='', itemtype='http://schema.org/Product')
 			span(itemprop='name') Anime Release Notifier - Chrome Extension
 			img(itemprop='image', src='/images/platforms/chrome.png', alt='Chrome', width='256', height='256')
 
-		// Firefox
+		//- Firefox
 		a.box.scale(href='https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/', target='_blank', title='Firefox', itemscope='', itemtype='http://schema.org/Product')
 			span(itemprop='name') Anime Release Notifier - Firefox Extension
 			img(itemprop='image', src='/images/platforms/firefox.png', alt='Firefox', width='256', height='256')
 
-		// Android
+		//- Android
 		a.box.scale(href='https://www.youtube.com/watch?v=opyt4cw0ep8', target='_blank', title='Android', itemscope='', itemtype='http://schema.org/Product')
 			span(itemprop='name') Anime Release Notifier - Android App
 			img(itemprop='image', src='/images/platforms/android.png', alt='Android', width='256', height='256')
