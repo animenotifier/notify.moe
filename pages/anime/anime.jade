@@ -109,7 +109,8 @@ else if anime
 				each link in anime.links
 					a.light-button(href=link.url, target='_blank')= link.title
 			
-			a.light-button(href='https://anilist.co/anime/' + anime.id, target='_blank') AniList
+			if !anime.createdBy
+				a.light-button(href='https://anilist.co/anime/' + anime.id, target='_blank') AniList
 
 			if providers.HummingBird
 				a.light-button(href='https://hummingbird.me/anime/' + providers.HummingBird.providerId, target='_blank') HummingBird
