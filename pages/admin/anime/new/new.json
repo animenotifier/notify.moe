@@ -1,0 +1,37 @@
+{
+	"template": {
+		"type": "TV",
+		"title": {  
+			"romaji": "",
+			"english": "",
+			"japanese": "",
+			"synonyms": []
+		},
+		"image": "",
+		"airingStatus": "",
+		"adult": 0,
+		"description": "",
+		"startDate": "",
+		"hashtag": "#",
+		"youtubeId": "",
+		"genres": [],
+		"source": "",
+		"links": [  
+			{  
+				"url": "",
+				"title": "Official Site"
+			}
+		],
+		"studios": [  
+			{  
+				"name": "",
+				"wiki": null,
+				"isMainStudio": 1,
+				"id": null
+			}
+		],
+		"relations": [],
+		"totalEpisodes": 0,
+		"duration": 0
+	}
+}

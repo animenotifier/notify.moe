@@ -9,7 +9,9 @@ let updatePopularAnime = coroutine(function*() {
 	if(popularAnime.length > maxPopularAnime)
 		popularAnime.length = maxPopularAnime
 
-	yield arn.set('Cache', 'popularAnime', popularAnime)
+	yield arn.set('Cache', 'popularAnime', {
+		anime: popularAnime
+	})
 
 	console.log(chalk.green('✔'), 'Updated popular anime.')
 })

@@ -1,0 +1,12 @@
+section
+	header
+		h2 Editor Panel - Add anime
+		
+	include ../../header.jade
+	
+	textarea#anime-json= JSON.stringify(template, null, '\t')
+	
+	#add-anime-container
+		button#add-anime(onclick='addAnime()') Add anime
+	
+	#status

@@ -39,11 +39,11 @@ exports.get = function*(request, response) {
 	let categoryParameter = request.params[2]
 
 	if(isNaN(animeId)) {
-		let popularAnime = yield arn.get('Cache', 'popularAnime')
+		let popular = yield arn.get('Cache', 'popularAnime')
 
 		return response.render({
 			user,
-			popularAnime,
+			popularAnime: popular.anime,
 			animeToIdCount: arn.animeToIdCount,
 			anime: null
 		})
