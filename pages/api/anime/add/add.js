@@ -33,7 +33,7 @@ exports.post = function*(request, response) {
 		return
 	}
 	
-	if(!anime.studios || anime.studios.length === 0 || anime.studios.filter(studio => !studio.id || !studio.name).length > 0) {
+	if(anime.studios && anime.studios.length >= 0 && anime.studios.filter(studio => !studio.id || !studio.name).length > 0) {
 		response.writeHead(409)
 		response.end('Missing studio information')
 		return
