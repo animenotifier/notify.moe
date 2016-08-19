@@ -40,6 +40,7 @@ passport.use(new TwitterStrategy(
 				lastName: nameParts[1] ? nameParts[1] : '',
 				tagline: twitter.description,
 				language: twitter.lang,
+				twitter: twitter.screen_name,
 				accounts: {
 					twitter: twitter.id
 				}
