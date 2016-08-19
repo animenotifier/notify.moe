@@ -21,8 +21,8 @@ if user
 			.category
 				h3= title
 				each field in category
-					//- if !(field.id === 'email' && user.email)
-					+text(field)
+					if !(field.id === 'email' && user.email)
+						+text(field)
 		
 		.category
 			h3 Notifier
