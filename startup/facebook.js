@@ -1,7 +1,4 @@
-let shortid = require('shortid')
 let passport = require('passport')
-let gravatar = require('gravatar')
-let Promise = require('bluebird')
 let FacebookStrategy = require('passport-facebook').Strategy
 
 let facebookConfig = Object.assign({
@@ -16,7 +13,7 @@ let facebookConfig = Object.assign({
 passport.use(new FacebookStrategy(
     facebookConfig,
     function(request, accessToken, refreshToken, profile, done) {
-		console.log(chalk.cyan('FacebookStrategy:'), (profile && profile._json) ? profile._json : profile)
+		console.log(chalk.cyan('Facebook data:'), (profile && profile._json) ? profile._json : profile)
 		
 		let fb = profile._json
 		let email = fb.email || ''
@@ -29,49 +26,30 @@ passport.use(new FacebookStrategy(
 			arn.get('EmailToUser', email)
 		])
 		.then(record => arn.get('Users', record.userId).then(user => {
+			// Existing user
 			if(user && user.accounts)
 				user.accounts.facebook = fb.id
 
 			done(undefined, user)
 		})).catch(error => {
 			// New user
-			let now = new Date()
-			let user = {
-				id: shortid.generate(),
+			arn.registerNewUser({
 				nick: 'fb' + fb.id,
-				role: email === 'e.urbach@gmail.com' ? 'admin' : '',
 				firstName: fb.first_name,
 				lastName: fb.last_name,
 				email: email ? email : '',
 				gender: fb.gender,
-				language: '',
 				ageRange: fb.age_range,
 				accounts: {
 					facebook: fb.id
-				},
-				tagline: '',
-				website: '',
-				providers: {
-					list: 'AniList',
-					anime: 'CrunchyRoll',
-					airingDate: 'AniList'
-				},
-				listProviders: {},
-				sortBy: 'airingDate',
-				titleLanguage: 'romaji',
-				pushEndpoints: {},
-				following: [],
-				registered: now.toISOString(),
-				lastLogin: now.toISOString(),
-				avatar: email ? gravatar.url(email) : ''
-			}
-
-			arn.registerNewUser(
-				user,
-				arn.set('FacebookToUser', fb.id, { userId: user.id })
-			).then(function() {
+				}
+			}).then(user => {
+				arn.set('FacebookToUser', fb.id, {
+					userId: user.id
+				})
+				
 				done(undefined, user)
-			})
+			}).catch(error => done(error, false))
 		})
     }
 ))

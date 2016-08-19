@@ -24,6 +24,7 @@
 		"passport": "*",
 		"passport-facebook": "*",
 		"passport-google-oauth": "*",
+		"passport-twitter": "*",
 		"paypal-rest-sdk": "*",
 		"pretty-bytes": "*",
 		"request-promise": "*",

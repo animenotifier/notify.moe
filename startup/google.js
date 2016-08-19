@@ -1,7 +1,4 @@
-let shortid = require('shortid')
 let passport = require('passport')
-let gravatar = require('gravatar')
-let Promise = require('bluebird')
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 let googleConfig = Object.assign({
@@ -14,7 +11,7 @@ let googleConfig = Object.assign({
 passport.use(new GoogleStrategy(
     googleConfig,
     function(request, accessToken, refreshToken, profile, done) {
-		console.log(chalk.cyan('GoogleStrategy:'), (profile && profile._json) ? profile._json : profile)
+		console.log(chalk.cyan('Google data:'), (profile && profile._json) ? profile._json : profile)
 		
 		let google = profile._json
 		let email = google.emails.length > 0 ? google.emails[0].value : ''
@@ -27,17 +24,15 @@ passport.use(new GoogleStrategy(
 			arn.get('EmailToUser', email)
 		])
 		.then(record => arn.get('Users', record.userId).then(user => {
+			// Existing user
 			if(user && user.accounts)
 				user.accounts.google = google.id
 
 			done(undefined, user)
 		})).catch(error => {
 			// New user
-			let now = new Date()
-			let user = {
-				id: shortid.generate(),
+			arn.registerNewUser({
 				nick: 'g' + google.id,
-				role: email === 'e.urbach@gmail.com' ? 'admin' : '',
 				firstName: google.name.givenName ? google.name.givenName : '',
 				lastName: google.name.familyName ? google.name.familyName : '',
 				email: email,
@@ -46,30 +41,14 @@ passport.use(new GoogleStrategy(
 				ageRange: google.ageRange ? google.ageRange : null,
 				accounts: {
 					google: google.id
-				},
-				tagline: '',
-				website: '',
-				providers: {
-					list: 'AniList',
-					anime: 'CrunchyRoll',
-					airingDate: 'AniList'
-				},
-				listProviders: {},
-				sortBy: 'airingDate',
-				titleLanguage: 'romaji',
-				pushEndpoints: {},
-				following: [],
-				registered: now.toISOString(),
-				lastLogin: now.toISOString(),
-				avatar: email ? gravatar.url(email) : ''
-			}
-
-			arn.registerNewUser(
-				user,
-				arn.set('GoogleToUser', google.id, { userId: user.id })
-			).then(function() {
+				}
+			}).then(user => {
+				arn.set('GoogleToUser', google.id, {
+					userId: user.id
+				})
+				
 				done(undefined, user)
-			})
+			}).catch(error => done(error, false))
 		})
     }
 ))
