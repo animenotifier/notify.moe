@@ -16,6 +16,12 @@
 				"label": "Website:",
 				"description": "Your homepage",
 				"type": "url"
+			},
+			{
+				"id": "email",
+				"label": "Email:",
+				"description": "Your e-mail address",
+				"type": "email"
 			}
 		],
 		"Providers": [

@@ -1,24 +1,30 @@
 {
-	"env": {
-		"node": true
-	},
-	"ecmaFeatures": {
-		"arrowFunctions": true,
-		"blockBindings": true,
-		"forOf": true,
-		"generators": true,
-		"templateStrings": true,
-		"classes": true,
-		"objectLiteralShorthandProperties": true
-	},
-	"rules": {
-		"strict": 0,
-		"eqeqeq": 2,
-		"curly": 0,
-		"quotes": [2, "single"],
-		"no-trailing-spaces": 0,
-		"no-extend-native": 0,
-		"no-process-exit": 0,
-		"eol-last": 0
-	}
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "jsx": false
+        }
+    },
+    "env": {
+        "node": true
+    },
+    "ecmaFeatures": {
+        "arrowFunctions": true,
+        "blockBindings": true,
+        "forOf": true,
+        "generators": true,
+        "templateStrings": true,
+        "classes": true,
+        "objectLiteralShorthandProperties": true
+    },
+    "rules": {
+        "strict": 0,
+        "eqeqeq": 2,
+        "curly": 0,
+        "quotes": [2, "single"],
+        "no-trailing-spaces": 0,
+        "no-extend-native": 0,
+        "no-process-exit": 0,
+        "eol-last": 0
+    }
 }
