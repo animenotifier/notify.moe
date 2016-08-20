@@ -29,7 +29,8 @@ exports.get = function*(request, response) {
 		
 		if(!viewUser) {
 			response.render({
-				user
+				user,
+				viewUser
 			})
 			return
 		}
@@ -57,7 +58,8 @@ exports.get = function*(request, response) {
 		console.error(error)
 		
 		response.render({
-			user
+			user,
+			viewUser
 		})
 	}
 }
