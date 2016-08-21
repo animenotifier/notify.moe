@@ -28,6 +28,14 @@ exports.render = function(request, render) {
 		url: 'forum',
 		icon: 'comment'
 	})
+	
+	if(!user) {
+		nav.push({
+			title: 'Users',
+			url: 'users',
+			icon: 'globe'
+		})
+	}
 
 	if(user) {
 		nav.push({
