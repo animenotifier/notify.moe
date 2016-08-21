@@ -13,6 +13,7 @@
 		"aerospike-session-store": "*",
 		"body-parser": "*",
 		"chalk": "*",
+		"discord.js": "*",
 		"express-session": "*",
 		"node-gcm": "*",
 		"gravatar": "*",
