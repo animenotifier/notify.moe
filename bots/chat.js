@@ -25,6 +25,9 @@ bot.on('message', Promise.coroutine(function*(message) {
 		let command = message.content.substring(1).split(' ')[0]
 		let parameters = message.content.substring(command.length + 2)
 		
+		if(command === 'help')
+			return bot.reply(message, '\n!user [name]\n!sounds\n!s [number of sound file]\n!say [message in general chat]')
+		
 		if(command === 'user') {
 			let lowerCaseUserName = parameters.toLowerCase()
 			let users = yield arn.filter('Users', user => user.nick.toLowerCase() === lowerCaseUserName)
@@ -53,6 +56,9 @@ bot.on('message', Promise.coroutine(function*(message) {
 				})
 			}
 		}
+		
+		if(command === 'sounds')
+			return bot.reply(message, '\n' + (yield fs.readdirAsync('bots/sounds')).map(file => file.replace(/\.(mp3|ogg)/, '')).sort((a, b) => parseInt(a) - parseInt(b)).join('\n'))
 		
 		return bot.reply(message, 'I d-don\'t understand what business you have with me!')
 	}
