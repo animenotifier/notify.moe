@@ -14,6 +14,7 @@
 		"body-parser": "*",
 		"chalk": "*",
 		"discord.js": "*",
+		"dnode": "*",
 		"express-session": "*",
 		"node-gcm": "*",
 		"gravatar": "*",

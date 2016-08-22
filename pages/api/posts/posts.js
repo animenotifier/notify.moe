@@ -64,4 +64,8 @@ exports.post = function*(request, response) {
 	})
 	
 	response.end(postId)
+	
+	// Announce on chat
+	if(arn.chatBot)
+		arn.chatBot.sendMessage('general', `New reply: ${app.package.homepage}/threads/${thread.id}`)
 }

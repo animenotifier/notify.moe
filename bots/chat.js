@@ -1,6 +1,20 @@
+const serverId = '134910939140063232'
+
 let Discord = require('discord.js')
 let bot = new Discord.Client()
+let dnode = require('dnode')
+
+let server = null
 let generalChannel = null
+
+let nodeServer = dnode({
+    sendMessage: function(channelName, message) {
+		let channel = server.channels.get('name', channelName)
+		bot.sendMessage(channel, message)
+    }
+})
+
+nodeServer.listen(require('../config.json').ports.chatBot)
 
 bot.on('message', Promise.coroutine(function*(message) {
 	console.log(message.cleanContent)
@@ -36,7 +50,7 @@ bot.on('message', Promise.coroutine(function*(message) {
 }))
 
 bot.on('ready', () => {
-	let server = bot.servers.get('id', '134910939140063232')
+	server = bot.servers.get('id', '134910939140063232')
 	generalChannel = server.channels.get('id', '134910939140063232')
 	
 	console.log(chalk.green('Bot is ready'))

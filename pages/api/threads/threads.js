@@ -55,11 +55,11 @@ exports.post = function*(request, response) {
 	
 	let sticky = request.body.sticky ? 1 : 0
 	
-	let postId = shortid.generate()
+	let threadId = shortid.generate()
 	
 	// Save post
-	yield arn.set('Threads', postId, {
-		id: postId,
+	yield arn.set('Threads', threadId, {
+		id: threadId,
 		authorId: user.id,
 		title,
 		text,
@@ -70,5 +70,9 @@ exports.post = function*(request, response) {
 		created: (new Date()).toISOString()
 	})
 	
-	response.end(postId)
+	response.end(threadId)
+	
+	// Announce on chat
+	if(arn.chatBot)
+		arn.chatBot.sendMessage('general', `New thread: ${app.package.homepage}/threads/${threadId}`)
 }

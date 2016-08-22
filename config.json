@@ -33,6 +33,7 @@
 	"ports": {
 		"http": 5000,
 		"https": 5001,
-		"liveReload": 9000
+		"liveReload": 9000,
+		"chatBot": 5004
 	}
 }
