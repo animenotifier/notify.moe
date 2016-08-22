@@ -40,6 +40,19 @@ bot.on('message', Promise.coroutine(function*(message) {
 		
 		if(command === 'rin')
 			return bot.reply(message, 'http://pa1.narvii.com/5930/db735965b205ff5fa6783ae8aa3be0ff16766b2d_hq.gif')
+			
+		if(command === 's') {
+			let soundNumber = parseInt(parameters)
+			let sounds = yield fs.readdirAsync('bots/sounds')
+			let filtered = sounds.filter(sound => parseInt(sound) === soundNumber)
+			
+			if(filtered.length > 0) {
+				return bot.voiceConnection.playFile(`bots/sounds/${filtered[0]}`, {}, (error, streamIntent) => {
+					if(error)
+						console.error(error)
+				})
+			}
+		}
 		
 		return bot.reply(message, 'I d-don\'t understand what business you have with me!')
 	}
@@ -54,6 +67,18 @@ bot.on('ready', () => {
 	generalChannel = server.channels.get('id', '134910939140063232')
 	
 	console.log(chalk.green('Bot is ready'))
+	
+	for(let channel of server.channels) {
+		if(channel.type === 'voice' && channel.name.endsWith('Talk')) {
+			bot.joinVoiceChannel(channel, (error, voiceConnection) => {
+				if(error)
+					return console.error(error)
+				
+				console.log(chalk.green('Bot joined voice channel Talk'))
+			})
+			break
+		}
+	}
 })
 
 bot.loginWithToken(arn.apiKeys.discord.token, (error, token) => {

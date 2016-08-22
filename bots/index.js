@@ -10,7 +10,7 @@ arn.db.ready.then(Promise.coroutine(function*() {
 	let filterJob = process.argv[2]
 
 	files.forEach(file => {
-		if(file === 'index.js')
+		if(file === 'index.js' || file === 'sounds')
 			return
 		
 		if(filterJob && file !== filterJob + '.js')
