@@ -17,7 +17,11 @@ let nodeServer = dnode({
 nodeServer.listen(require('../config.json').ports.chatBot)
 
 bot.on('message', Promise.coroutine(function*(message) {
-	console.log(message.cleanContent)
+	console.log(chalk.yellow(message.author.username), message.cleanContent)
+	
+	// Ignore own messages
+	if(message.author.id === bot.user.id)
+		return
 	
 	let mentioned = message.isMentioned(bot.user)
 	
