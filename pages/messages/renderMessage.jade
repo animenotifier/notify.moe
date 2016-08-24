@@ -7,7 +7,7 @@ mixin renderMessage(post, user, type, specialAuthorId)
 			
 			if post.recipient && post.recipient.id !== post.author.id
 				a.user.post-recipient(href='/+' + post.recipient.nick, title=post.recipient.nick)
-					img.user-image(src=post.recipient.avatar + '?s=50&r=x&d=mm', alt=post.recipient.nick)
+					img.user-image(src=post.recipient.avatar ? (post.recipient.avatar + '?s=50&r=x&d=mm') : '/images/elements/no-gravatar.png', alt=post.recipient.nick)
 		.post-content
 			div(id='render-' + post.id)!= app.markdown(post.text)
 			

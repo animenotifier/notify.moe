@@ -9,7 +9,7 @@ if user
 	.post
 		.post-author
 			a.user.ajax(href='/+' + user.nick, title=user.nick)
-				img.user-image(src=user.avatar + '?s=50&r=x')
+				img.user-image(src=user.avatar ? (user.avatar + '?s=50&r=x') : '/images/elements/no-gravatar.png')
 		.post-content
 			textarea#post-input(placeholder='Enter your message here...')
 	.post-input-toolbar
