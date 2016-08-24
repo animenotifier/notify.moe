@@ -10,7 +10,7 @@ function updateAvatars() {
 			}
 
 			img.onerror = function() {
-				this.src = '/images/elements/no-gravatar.png'
+				this.src = '/images/elements/no-gravatar.svg'
 				this.style.opacity = 1.0
 			}
 		} else {

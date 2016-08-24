@@ -3,11 +3,11 @@ mixin renderMessage(post, user, type, specialAuthorId)
 	.post(class=post.author.id === specialAuthorId ? 'special-post' : '')
 		.post-author
 			a.user.ajax(href='/+' + post.author.nick, title=post.author.nick)
-				img.user-image(src=post.author.avatar ? (post.author.avatar + '?s=50&r=x&d=mm') : '/images/elements/no-gravatar.png', alt=post.author.nick)
+				img.user-image(src=post.author.avatar ? (post.author.avatar + '?s=50&r=x&d=mm') : '/images/elements/no-gravatar.svg', alt=post.author.nick)
 			
 			if post.recipient && post.recipient.id !== post.author.id
 				a.user.post-recipient(href='/+' + post.recipient.nick, title=post.recipient.nick)
-					img.user-image(src=post.recipient.avatar ? (post.recipient.avatar + '?s=50&r=x&d=mm') : '/images/elements/no-gravatar.png', alt=post.recipient.nick)
+					img.user-image(src=post.recipient.avatar ? (post.recipient.avatar + '?s=50&r=x&d=mm') : '/images/elements/no-gravatar.svg', alt=post.recipient.nick)
 		.post-content
 			div(id='render-' + post.id)!= app.markdown(post.text)
 			

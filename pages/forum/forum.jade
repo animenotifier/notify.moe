@@ -2,7 +2,7 @@ mixin renderThreadLink(thread)
 	.thread(class=thread.sticky ? 'sticky-thread' : '')
 		.post-author.thread-author
 			a.user.ajax(href='/+' + thread.author.nick, title=thread.author.nick)
-				img.user-image(src=thread.author.avatar ? (thread.author.avatar + '?s=50&r=x&d=mm') : '/images/elements/no-gravatar.png', alt=thread.author.nick)
+				img.user-image(src=thread.author.avatar ? (thread.author.avatar + '?s=50&r=x&d=mm') : '/images/elements/no-gravatar.svg', alt=thread.author.nick)
 		.thread-content-container
 			.post-content.thread-content
 				if thread.sticky

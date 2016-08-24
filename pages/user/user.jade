@@ -1,5 +1,5 @@
 mixin profileImage()
-	img.profile-image(src=viewUser.gravatarURL, alt='Profile image')
+	img.profile-image(src=viewUser.avatar ? (viewUser.avatar + '?s=320&r=x&d=mm') : '/images/elements/no-gravatar.svg', alt='Profile image')
 
 if !user && !viewUser
 	section
