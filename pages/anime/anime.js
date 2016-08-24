@@ -16,6 +16,7 @@ const genreIcons = {
 	'Magic': 'magic',
 	'Mecha' : 'reddit-alien',
 	'Military' : 'fighter-jet',
+	'Music': 'music',
 	'Mystery' : 'question',
 	'Psychological': 'lightbulb-o',
 	'Romance': 'heart',
