@@ -29,9 +29,21 @@ bot.on('message', Promise.coroutine(function*(message) {
 		let command = message.content.substring(1).split(' ')[0]
 		let parameters = message.content.substring(command.length + 2)
 		
-		if(command === 'help')
-			return bot.reply(message, '\n!user [name]\n!sounds\n!s [number of sound file]\n!say [message in general chat]')
+		if(command === 'say')
+			return bot.sendMessage(generalChannel, parameters)
+			
+		if(command === 'search')
+			return bot.reply(message, 'https://www.google.com/search?q=site:notify.moe+' + encodeURIComponent(parameters))
+			
+		if(command === 'google')
+			return bot.reply(message, 'https://www.google.com/search?q=' + encodeURIComponent(parameters))
+			
+		if(command === 'lmgtfy')
+			return bot.reply(message, 'http://lmgtfy.com/?q=' + encodeURIComponent(parameters))
 		
+		if(command === 'rin')
+			return bot.reply(message, 'http://pa1.narvii.com/5930/db735965b205ff5fa6783ae8aa3be0ff16766b2d_hq.gif')
+			
 		if(command === 'user') {
 			let lowerCaseUserName = parameters.toLowerCase()
 			let users = yield arn.filter('Users', user => user.nick.toLowerCase() === lowerCaseUserName)
@@ -41,12 +53,9 @@ bot.on('message', Promise.coroutine(function*(message) {
 			else
 				return bot.reply(message, `https://notify.moe/+${users[0].nick}`)
 		}
-		
-		if(command === 'say')
-			return bot.sendMessage(generalChannel, parameters)
-		
-		if(command === 'rin')
-			return bot.reply(message, 'http://pa1.narvii.com/5930/db735965b205ff5fa6783ae8aa3be0ff16766b2d_hq.gif')
+			
+		if(command === 'sounds')
+			return bot.reply(message, '\n' + (yield fs.readdirAsync('bots/sounds')).map(file => file.replace(/\.(mp3|ogg)/, '')).sort((a, b) => parseInt(a) - parseInt(b)).join('\n'))
 			
 		if(command === 's') {
 			let soundNumber = parseInt(parameters)
@@ -61,8 +70,17 @@ bot.on('message', Promise.coroutine(function*(message) {
 			}
 		}
 		
-		if(command === 'sounds')
-			return bot.reply(message, '\n' + (yield fs.readdirAsync('bots/sounds')).map(file => file.replace(/\.(mp3|ogg)/, '')).sort((a, b) => parseInt(a) - parseInt(b)).join('\n'))
+		if(command === 'help') {
+			let commands = [
+				'**!google** [search term]',
+				'**!s** [number of sound file]',
+				'**!say** [message in general chat]',
+				'**!search** [search term for notify.moe only]',
+				'**!sounds**',
+				'**!user** [name]'
+			]
+			return bot.reply(message, '\n' + commands.join('\n'))
+		}
 		
 		return bot.reply(message, 'I d-don\'t understand what business you have with me!')
 	}
