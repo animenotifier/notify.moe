@@ -40,9 +40,6 @@ bot.on('message', Promise.coroutine(function*(message) {
 			
 		if(command === 'lmgtfy')
 			return bot.reply(message, 'http://lmgtfy.com/?q=' + encodeURIComponent(parameters))
-		
-		if(command === 'rin')
-			return bot.reply(message, 'http://pa1.narvii.com/5930/db735965b205ff5fa6783ae8aa3be0ff16766b2d_hq.gif')
 			
 		if(command === 'user') {
 			let lowerCaseUserName = parameters.toLowerCase()
@@ -70,9 +67,63 @@ bot.on('message', Promise.coroutine(function*(message) {
 			}
 		}
 		
+		if(command === 'addreply') {
+			let name = parameters.split(' ')[0]
+			let reply = parameters.substring(name.length + 1)
+			
+			if(!name || !reply)
+				return
+			
+			console.log('Adding reply:', name, reply)
+			
+			// Limit reply length
+			if(reply.length > 512)
+				return
+			
+			let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+				return {
+					replies: {}
+				}
+			})
+			
+			botCommands.replies[name] = reply
+			
+			return arn.set('Cache', 'botCommands', botCommands).then(() => bot.reply(message, 'Registered commands:\n' + Object.keys(botCommands.replies)))
+		}
+		
+		if(command === 'removereply') {
+			let name = parameters
+			
+			if(!name)
+				return
+			
+			let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+				return {
+					replies: {}
+				}
+			})
+			
+			delete botCommands.replies[name]
+			
+			return arn.set('Cache', 'botCommands', botCommands).then(() => bot.reply(message, 'Registered commands:\n' + Object.keys(botCommands.replies).join(', ')))
+		}
+		
+		if(command === 'replies') {
+			let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+				return {
+					replies: {}
+				}
+			})
+			
+			return bot.reply(message, 'Registered commands:\n' + Object.keys(botCommands.replies).join(', '))
+		}
+		
 		if(command === 'help') {
 			let commands = [
+				'**!addreply** [name] [message]',
 				'**!google** [search term]',
+				'**!removereply** [name]',
+				'**!replies**',
 				'**!s** [number of sound file]',
 				'**!say** [message in general chat]',
 				'**!search** [search term for notify.moe only]',
@@ -81,6 +132,16 @@ bot.on('message', Promise.coroutine(function*(message) {
 			]
 			return bot.reply(message, '\n' + commands.join('\n'))
 		}
+		
+		// Custom replies
+		let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+			return {
+				replies: {}
+			}
+		})
+		
+		if(botCommands.replies[command])
+			return bot.reply(message, botCommands.replies[command])
 		
 		return bot.reply(message, 'I d-don\'t understand what business you have with me!')
 	}
