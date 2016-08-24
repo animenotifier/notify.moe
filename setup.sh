@@ -7,7 +7,7 @@ sugoi clearFirewall
 sugoi blockPort 3000
 
 # Use swap only when needed
-sudo sysctl vm.swappiness=0
+sudo sysctl vm.swappiness=5
 
 # TCP settings
 sudo sysctl net.ipv4.ip_local_port_range="15000 61000"
