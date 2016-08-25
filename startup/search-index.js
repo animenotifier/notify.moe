@@ -1,8 +1,9 @@
 let zlib = require('zlib')
 
+let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
+
 // Create search index
 arn.db.ready.then(() => {
-	let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/  /g, ' ')
 	arn.animeCount = 0
 	arn.animeToId = {}
 

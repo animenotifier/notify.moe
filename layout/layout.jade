@@ -8,6 +8,9 @@ html(lang='en')
 		//- Generic
 		meta(name='description', content=app.package.description)
 		meta(name='keywords', content=app.package.keywords.join(','))
+		
+		if user && user.listProviders[user.providers.list]
+			link(rel='preconnect' href=`/api/animelist/${user.nick}`)
 
 		//- Open Graph
 		if request.og
