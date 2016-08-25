@@ -11,10 +11,13 @@ let reconnect = () => {
 		console.log(chalk.green('Connected to chat bot'))
 	})
 	
-	d.on('error', function(error) {
+	let onError = error => {
 		arn.chatBot = null
 		Promise.delay(reconnectTime).then(reconnect)
-	})
+	}
+	
+	d.on('fail', onError)
+	d.on('error', onError)
 }
 
 app.on('config loaded', reconnect)
