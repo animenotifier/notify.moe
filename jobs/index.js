@@ -11,7 +11,7 @@ global.seconds = 1
 global.minutes = 60 * seconds
 global.hours = 60 * minutes
 
-arn.runningBackgroundJobs = true
+arn.db.scanPriority = require('aerospike').scanPriority.LOW
 
 arn.db.ready.then(Promise.coroutine(function*() {
 	arn.animeList = yield arn.filter('Anime', anime => true)

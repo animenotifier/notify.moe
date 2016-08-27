@@ -3,7 +3,7 @@ global.chalk = require('chalk')
 global.Promise = require('bluebird')
 global.fs = Promise.promisifyAll(require('fs'))
 
-arn.runningBackgroundJobs = true
+arn.db.scanPriority = require('aerospike').scanPriority.LOW
 
 arn.db.ready.then(Promise.coroutine(function*() {
 	let files = yield fs.readdirAsync('bots')
