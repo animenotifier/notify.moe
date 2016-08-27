@@ -9,7 +9,7 @@
 		"aero-reset": "*",
 		"aero-ajax": "*",
 		"aero-font-awesome": "*",
-		"aerospike": "*",
+		"aero-aerospike": "*",
 		"aerospike-session-store": "*",
 		"body-parser": "*",
 		"chalk": "*",

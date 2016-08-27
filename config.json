@@ -30,6 +30,10 @@
 	"manifest": {
 		"gcm_sender_id": "941298467524"
 	},
+	"database": {
+		"host": "127.0.0.1:3000",
+		"namespace": "arn"
+	},
 	"ports": {
 		"http": 5000,
 		"https": 5001,
