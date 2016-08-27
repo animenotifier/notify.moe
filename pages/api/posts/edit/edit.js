@@ -5,7 +5,7 @@ exports.post = function*(request, response) {
 	let user = request.user
 
 	if(!user) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not logged in')
 		return
 	}
@@ -19,7 +19,7 @@ exports.post = function*(request, response) {
 	text = text.trim()
 	
 	if(text.length > maxPostLength) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Post too long')
 		return
 	}
@@ -27,7 +27,7 @@ exports.post = function*(request, response) {
 	let post = yield arn.get('Posts', postId)
 	
 	if(post.authorId !== user.id) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Can not edit the post of a different user')
 		return
 	}

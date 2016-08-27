@@ -18,6 +18,7 @@
 		"express-session": "*",
 		"node-gcm": "*",
 		"gravatar": "*",
+		"http-status-codes": "*",
 		"limiter": "*",
 		"natural": "*",
 		"node-cache": "*",

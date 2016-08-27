@@ -2,7 +2,7 @@ exports.post = (request, response) => {
 	let user = request.user
 
 	if(!user) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not logged in')
 		return
 	}
@@ -10,7 +10,7 @@ exports.post = (request, response) => {
 	let endpoint = request.body.endpoint
 
 	if(!endpoint) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('endpoint required')
 		return
 	}

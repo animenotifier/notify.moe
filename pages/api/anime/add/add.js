@@ -10,31 +10,31 @@ exports.post = function*(request, response) {
 	let anime = request.body
 	
 	if(!user || (user.role !== 'editor' && user.role !== 'admin')) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not authorized')
 		return
 	}
 	
 	if(!anime.title || !anime.title.romaji || !anime.title.japanese || !anime.title.english) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Missing title')
 		return
 	}
 	
 	if(!anime.image) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Missing image')
 		return
 	}
 	
 	if(anime.links.filter(link => !link.url || !link.title).length > 0) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Missing link information')
 		return
 	}
 	
 	if(anime.studios && anime.studios.length >= 0 && anime.studios.filter(studio => !studio.id || !studio.name).length > 0) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Missing studio information')
 		return
 	}

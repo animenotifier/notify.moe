@@ -2,7 +2,7 @@ exports.get = function*(request, response) {
 	let user = request.user
 
 	if(!user) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not logged in')
 		return
 	}
@@ -10,7 +10,7 @@ exports.get = function*(request, response) {
 	let unfollowUserNick = request.params[0]
 
 	if(!unfollowUserNick) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Username required')
 		return
 	}

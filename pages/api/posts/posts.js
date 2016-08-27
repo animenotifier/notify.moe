@@ -6,7 +6,7 @@ exports.post = function*(request, response) {
 	let user = request.user
 
 	if(!user) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not logged in')
 		return
 	}
@@ -14,7 +14,7 @@ exports.post = function*(request, response) {
 	let threadId = request.body.threadId
 	
 	if(!threadId) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('No thread specified')
 		return
 	}
@@ -22,7 +22,7 @@ exports.post = function*(request, response) {
 	let thread = yield arn.get('Threads', threadId)
 	
 	if(!thread) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Thread does not exist')
 		return
 	}
@@ -30,7 +30,7 @@ exports.post = function*(request, response) {
 	let text = request.body.text
 
 	if(!text) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Post text required')
 		return
 	}
@@ -38,7 +38,7 @@ exports.post = function*(request, response) {
 	text = text.trim()
 	
 	if(text.length > maxPostLength) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Post too long')
 		return
 	}

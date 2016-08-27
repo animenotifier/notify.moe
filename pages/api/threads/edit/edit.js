@@ -5,7 +5,7 @@ exports.post = function*(request, response) {
 	let user = request.user
 
 	if(!user) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not logged in')
 		return
 	}
@@ -19,7 +19,7 @@ exports.post = function*(request, response) {
 	text = text.trim()
 	
 	if(text.length > maxThreadLength) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Thread too long')
 		return
 	}
@@ -27,7 +27,7 @@ exports.post = function*(request, response) {
 	let thread = yield arn.get('Threads', threadId)
 	
 	if(thread.authorId !== user.id) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Can not edit the thread of a different user')
 		return
 	}

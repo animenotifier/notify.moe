@@ -27,7 +27,7 @@ exports.post = function*(request, response) {
 		value = arn.fixNick(value)
 
 		if(!value || value.length < 2) {
-			response.writeHead(409)
+			response.writeHead(HTTP.BAD_REQUEST)
 			response.end('Username must have a length of at least 2 characters')
 			return
 		}
@@ -35,7 +35,7 @@ exports.post = function*(request, response) {
 		return arn.changeNick(user, value)
 		.then(() => response.end(user.nick))
 		.catch(error => {
-			response.writeHead(409)
+			response.writeHead(HTTP.BAD_REQUEST)
 			response.end(user.nick)
 		})
 	} else if((key.startsWith('listProviders.') && key.endsWith('.userName')) || key === 'twitter' || key === 'osu') {
@@ -49,7 +49,7 @@ exports.post = function*(request, response) {
 			value = value.replace('googlemail.com', 'gmail.com')
 		
     	if(!emailRegEx.test(value)) {
-			response.writeHead(409)
+			response.writeHead(HTTP.BAD_REQUEST)
 			response.end('Invalid email')
 			return
 		}
@@ -57,7 +57,7 @@ exports.post = function*(request, response) {
 		try {
 			yield arn.get('EmailToUser', value)
 			
-			response.writeHead(409)
+			response.writeHead(HTTP.BAD_REQUEST)
 			response.end('Email already used by another user')
 			return
 		} catch(error) {
@@ -95,7 +95,7 @@ exports.post = function*(request, response) {
 		.then(() => response.end())
 		.catch(error => {
 			console.error(error)
-			response.writeHead(409)
+			response.writeHead(HTTP.BAD_REQUEST)
 			response.end(error.message)
 		})
 }

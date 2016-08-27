@@ -4,7 +4,7 @@ exports.get = function(request, response) {
 	let clearCache = false
 
 	if(!nick) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		return response.json({
 			error: 'Username not specified'
 		})
@@ -20,7 +20,7 @@ exports.get = function(request, response) {
 
 		response.json(json)
 	}).catch(error => {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.json({
 			error: error.toString()
 		})

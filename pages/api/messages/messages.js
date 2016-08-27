@@ -6,7 +6,7 @@ exports.post = function*(request, response) {
 	let user = request.user
 
 	if(!user) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not logged in')
 		return
 	}
@@ -14,7 +14,7 @@ exports.post = function*(request, response) {
 	let recipientNick = request.body.recipient
 	
 	if(!recipientNick) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('No recipient specified')
 		return
 	}
@@ -24,7 +24,7 @@ exports.post = function*(request, response) {
 	let text = request.body.text
 
 	if(!text) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Message text required')
 		return
 	}
@@ -32,7 +32,7 @@ exports.post = function*(request, response) {
 	text = text.trim()
 	
 	if(text.length > maxMessageLength) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Message too long')
 		return
 	}

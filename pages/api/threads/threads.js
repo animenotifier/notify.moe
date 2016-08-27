@@ -8,7 +8,7 @@ exports.post = function*(request, response) {
 	let user = request.user
 
 	if(!user) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Not logged in')
 		return
 	}
@@ -16,7 +16,7 @@ exports.post = function*(request, response) {
 	let tag = request.body.tag
 	
 	if(!tag) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('No tag specified')
 		return
 	}
@@ -24,7 +24,7 @@ exports.post = function*(request, response) {
 	let title = request.body.title
 
 	if(!title) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Thread title required')
 		return
 	}
@@ -32,7 +32,7 @@ exports.post = function*(request, response) {
 	title = title.trim()
 	
 	if(title.length > maxTitleLength || title.length < minTitleLength) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Invalid title length')
 		return
 	}
@@ -40,7 +40,7 @@ exports.post = function*(request, response) {
 	let text = request.body.text
 
 	if(!text) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Post text required')
 		return
 	}
@@ -48,7 +48,7 @@ exports.post = function*(request, response) {
 	text = text.trim()
 	
 	if(text.length > maxPostLength) {
-		response.writeHead(409)
+		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Post too long')
 		return
 	}
