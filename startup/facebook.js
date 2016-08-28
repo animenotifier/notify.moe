@@ -2,17 +2,17 @@ let passport = require('passport')
 let FacebookStrategy = require('passport-facebook').Strategy
 
 let facebookConfig = Object.assign({
-        callbackURL: arn.production ? 'https://notify.moe/auth/facebook/callback' : '/auth/facebook/callback',
+		callbackURL: arn.production ? 'https://notify.moe/auth/facebook/callback' : '/auth/facebook/callback',
 		profileFields: ['id', 'name', 'email', 'gender', 'age_range'],
-        enableProof: false,
+		enableProof: false,
 		passReqToCallback: true
-    },
-    arn.apiKeys.facebook
+	},
+	arn.apiKeys.facebook
 )
 
 passport.use(new FacebookStrategy(
-    facebookConfig,
-    function(request, accessToken, refreshToken, profile, done) {
+	facebookConfig,
+	function(request, accessToken, refreshToken, profile, done) {
 		console.log(chalk.cyan('Facebook data:'), (profile && profile._json) ? profile._json : profile)
 		
 		let fb = profile._json
@@ -51,21 +51,21 @@ passport.use(new FacebookStrategy(
 				done(undefined, user)
 			}).catch(error => done(error, false))
 		})
-    }
+	}
 ))
 
 // Facebook login
 app.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: [
-        'email',
-        'public_profile'
-    ]
+	scope: [
+		'email',
+		'public_profile'
+	]
 }))
 
 // Facebook callback
 app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    })
+	passport.authenticate('facebook', {
+		successRedirect: '/',
+		failureRedirect: '/login'
+	})
 )

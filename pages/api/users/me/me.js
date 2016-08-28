@@ -48,7 +48,7 @@ exports.post = function*(request, response) {
 		if(value.endsWith('googlemail.com'))
 			value = value.replace('googlemail.com', 'gmail.com')
 		
-    	if(!emailRegEx.test(value)) {
+		if(!emailRegEx.test(value)) {
 			response.writeHead(HTTP.BAD_REQUEST)
 			response.end('Invalid email')
 			return

@@ -1,9 +1,9 @@
 // Rewrite URLs
 app.rewrite(function(request, response) {
 	if(request.headers.host.indexOf('animereleasenotifier.com') !== -1) {
-        response.redirect('https://notify.moe' + request.url)
-        return true
-    }
+		response.redirect('https://notify.moe' + request.url)
+		return true
+	}
 
 	if(request.url.startsWith('/+'))
 		request.url = '/user/' + request.url.substring(2)

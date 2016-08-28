@@ -13,14 +13,14 @@ let sessionOptions = {
 		ttl: cookieDurationInSeconds, // 1 day
 		hosts: '127.0.0.1:3000'
 	}),
-    name: 'sid',
-    secret: arn.apiKeys.session.secret,
+	name: 'sid',
+	secret: arn.apiKeys.session.secret,
 	resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: true,
+	saveUninitialized: false,
+	cookie: {
+		secure: true,
 		maxAge: cookieDurationInSeconds * 1000
-    }
+	}
 }
 
 let userInfo = (request, response, next) => {
@@ -77,8 +77,8 @@ let userInfo = (request, response, next) => {
 
 // Middleware
 app.use(
-    session(sessionOptions),
-    passport.initialize(),
-    passport.session(),
+	session(sessionOptions),
+	passport.initialize(),
+	passport.session(),
 	userInfo
 )

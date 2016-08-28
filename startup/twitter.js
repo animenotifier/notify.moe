@@ -2,15 +2,15 @@ let passport = require('passport')
 let TwitterStrategy = require('passport-twitter').Strategy
 
 let twitterConfig = {
-    callbackURL: arn.production ? 'https://notify.moe/auth/twitter/callback' : 'https://127.0.0.1:5001/auth/twitter/callback',
+	callbackURL: arn.production ? 'https://notify.moe/auth/twitter/callback' : 'https://127.0.0.1:5001/auth/twitter/callback',
 	passReqToCallback: true,
 	consumerKey: arn.apiKeys.twitter.clientID,
 	consumerSecret: arn.apiKeys.twitter.clientSecret
 }
 
 passport.use(new TwitterStrategy(
-    twitterConfig,
-    function(request, accessToken, refreshToken, profile, done) {
+	twitterConfig,
+	function(request, accessToken, refreshToken, profile, done) {
 		console.log(chalk.cyan('Twitter data:'), (profile && profile._json) ? profile._json : profile)
 		
 		let twitter = profile._json
@@ -52,7 +52,7 @@ passport.use(new TwitterStrategy(
 				done(undefined, user)
 			}).catch(error => done(error, false))
 		})
-    }
+	}
 ))
 
 // Twitter login
@@ -60,8 +60,8 @@ app.get('/auth/twitter', passport.authenticate('twitter'))
 
 // Twitter callback
 app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    })
+	passport.authenticate('twitter', {
+		successRedirect: '/',
+		failureRedirect: '/login'
+	})
 )

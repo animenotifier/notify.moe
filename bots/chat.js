@@ -8,10 +8,10 @@ let server = null
 let generalChannel = null
 
 let nodeServer = dnode({
-    sendMessage: function(channelName, message) {
+	sendMessage: function(channelName, message) {
 		let channel = server.channels.get('name', channelName)
 		bot.sendMessage(channel, message)
-    }
+	}
 })
 
 nodeServer.listen(require('../config.json').ports.chatBot)

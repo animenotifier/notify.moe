@@ -2,6 +2,7 @@
     "parserOptions": {
         "ecmaVersion": 6,
         "ecmaFeatures": {
+            "impliedStrict": true,
             "jsx": false
         }
     },
@@ -25,6 +26,7 @@
         "no-trailing-spaces": 0,
         "no-extend-native": 0,
         "no-process-exit": 0,
+        "no-mixed-spaces-and-tabs": 2,
         "eol-last": 0
     }
 }

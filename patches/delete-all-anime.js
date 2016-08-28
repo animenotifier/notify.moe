@@ -5,10 +5,10 @@ let arn = require('../lib')
 database(aero, function(error) {
 	let tasks = []
 
-    arn.forEach('Anime', function(anime) {
+	arn.forEach('Anime', function(anime) {
 		tasks.push(arn.remove('Anime', anime.id))
-    }).then(function() {
+	}).then(function() {
 		console.log('Waiting...')
 		Promise.all(tasks).then(() => console.log(`Finished deleting ${tasks.length} anime`))
-    })
+	})
 })

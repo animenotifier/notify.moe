@@ -2,15 +2,15 @@ let passport = require('passport')
 let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 let googleConfig = Object.assign({
-        callbackURL: arn.production ? 'https://notify.moe/auth/google/callback' : '/auth/google/callback',
+		callbackURL: arn.production ? 'https://notify.moe/auth/google/callback' : '/auth/google/callback',
 		passReqToCallback: true
-    },
-    arn.apiKeys.google
+	},
+	arn.apiKeys.google
 )
 
 passport.use(new GoogleStrategy(
-    googleConfig,
-    function(request, accessToken, refreshToken, profile, done) {
+	googleConfig,
+	function(request, accessToken, refreshToken, profile, done) {
 		console.log(chalk.cyan('Google data:'), (profile && profile._json) ? profile._json : profile)
 		
 		let google = profile._json
@@ -50,21 +50,21 @@ passport.use(new GoogleStrategy(
 				done(undefined, user)
 			}).catch(error => done(error, false))
 		})
-    }
+	}
 ))
 
 // Google login
 app.get('/auth/google', passport.authenticate('google', {
-    scope: [
-        'https://www.googleapis.com/auth/plus.login',
-        'email'
-    ]
+	scope: [
+		'https://www.googleapis.com/auth/plus.login',
+		'email'
+	]
 }))
 
 // Google callback
 app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    })
+	passport.authenticate('google', {
+		successRedirect: '/',
+		failureRedirect: '/login'
+	})
 )
