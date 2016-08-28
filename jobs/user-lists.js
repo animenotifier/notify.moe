@@ -1,6 +1,10 @@
+const allowNoAvatars = ['joindate', 'active', 'login']
+
 let updateUserLists = coroutine(function*() {
 	let tasks = []
-	let allUsers = yield arn.filter('Users', user => arn.isActiveUser(user) && user.avatar)
+	let allUsers = yield arn.filter('Users', user => arn.isActiveUser(user))
+	let usersWithAvatar = allUsers.filter(user => user.avatar !== '')
+	
 	console.log(`${allUsers.length} active users`)
 	
 	for(let orderBy of Object.keys(arn.userOrderBy)) {
@@ -12,12 +16,21 @@ let updateUserLists = coroutine(function*() {
 		console.log(chalk.yellow('✖'), `Updating user list ${chalk.yellow(orderBy)}...`)
 		
 		let updateUserList = coroutine(function*() {
-			let users = yield Promise.filter(allUsers, user => addUser(user, categories))
+			let userList = allowNoAvatars.indexOf(orderBy) !== -1 ? allUsers : usersWithAvatar
+			let users = yield Promise.filter(userList, user => addUser(user, categories))
 
 			// Sort by registration date
 			Object.keys(categories).forEach(categoryName => {
 				let category = categories[categoryName]
-				category.sort((a, b) => new Date(a.registered) - new Date(b.registered))
+				category.sort((a, b) => {
+					let aVatar = a.avatar !== ''
+					let bVatar = b.avatar !== ''
+					
+					if(aVatar === bVatar)
+						return new Date(a.registered) - new Date(b.registered)
+					else
+						return bVatar - aVatar
+				})
 				
 				// Reduce data size for the database
 				categories[categoryName] = category.map(user => {
