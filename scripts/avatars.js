@@ -1,7 +1,7 @@
 function updateAvatars() {
 	let images = document.querySelectorAll('.user-image')
 
-	for(var i = 0; i < images.length; ++i) {
+	for(let i = 0; i < images.length; ++i) {
 		let img = images[i]
 		
 		if(img.naturalWidth === 0) {
@@ -17,4 +17,15 @@ function updateAvatars() {
 			img.style.opacity = 1.0
 		}
 	}
+	
+	// Tooltips
+	// let links = document.querySelectorAll('.user')
+	// 
+	// for(let i = 0; i < links.length; ++i) {
+	// 	let link = links[i]
+	// 	
+	// 	link.classList.add('tooltip')
+	// 	link.setAttribute('data-tooltip', link.title)
+	// 	link.title = ''
+	// }
 }

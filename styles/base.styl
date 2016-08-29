@@ -53,28 +53,52 @@ section
 .editor-info
 	max-width 1200px
 
-.tooltip
-	display inline
-	position relative
-	&:hover
-		&:after
-			background rgb(51, 51, 51)
-			background rgba(0, 0, 0, 0.8)
-			border-radius 5px
-			bottom 26px
-			color rgb(255, 255, 255)
-			content attr(data-tooltip)
-			left 20%
-			padding 5px 15px
-			position absolute
-			z-index 98
-			width 220px
-		&:before
-			border solid
-			border-color rgb(51, 51, 51) transparent
-			border-width 6px 6px 0 6px
-			bottom 20px
-			content ""
-			left 50%
-			position absolute
-			z-index 99
+// tooltipOffset = -10px
+// 
+// .tooltip
+// 	display inline-block
+// 	position relative
+// 	
+// 	&:after
+// 		display inline
+// 		content attr(data-tooltip)
+// 		opacity 0
+// 		transition opacity 250ms ease
+// 		background rgb(48, 48, 48)
+// 		border-radius 3px
+// 		color rgb(255, 255, 255)
+// 		// box-shadow 0 0 8px rgba(0, 0, 0, 0.2)
+// 		padding 0.3rem 0.75rem
+// 		width auto
+// 		pointer-events none
+// 		
+// 		position absolute
+// 		left 50%
+// 		top tooltipOffset
+// 		transform translate(-50%, -100%)
+// 		z-index 100
+// 		
+// 		margin 0
+// 	
+// 	&:before
+// 		content ""
+// 		border solid
+// 		border-color rgb(60, 60, 60) transparent
+// 		border-width 6px 6px 0 6px
+// 		opacity 0
+// 		transition opacity 250ms ease
+// 		pointer-events none
+// 		margin 0
+// 		padding 0
+// 		
+// 		position absolute
+// 		left 50%
+// 		top tooltipOffset
+// 		transform translateX(-50%)
+// 		z-index 99
+// 	
+// 	&:hover
+// 		&:after
+// 			opacity 1
+// 		&:before
+// 			opacity 1
