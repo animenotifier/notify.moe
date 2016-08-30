@@ -30,6 +30,9 @@
 	"manifest": {
 		"gcm_sender_id": "941298467524"
 	},
+	"headers": {
+		"X-Frame-Options": ""
+	},
 	"database": {
 		"host": "127.0.0.1:3000",
 		"namespace": "arn"
