@@ -10,7 +10,8 @@ html(lang='en')
 		meta(name='keywords', content=app.package.keywords.join(','))
 		
 		if user && user.listProviders[user.providers.list]
-			link(rel='preconnect' href=`/api/animelist/${user.nick}`)
+			link(rel='prefetch' href=`/api/animelist/${user.nick}`)
+		link(rel='prefetch' href=`/api/searchlist`)
 
 		//- Open Graph
 		if request.og
