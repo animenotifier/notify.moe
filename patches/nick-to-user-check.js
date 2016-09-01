@@ -16,6 +16,10 @@ arn.db.ready.then(() => {
 			} else if(user.accounts.twitter) {
 				arn.changeNick(user, 't' + user.accounts.twitter)
 			}
+		} else {
+			arn.set('NickToUser', user.nick, {
+				userId: user.id
+			})
 		}
 
 		nicks[user.nick] = user.id
