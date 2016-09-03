@@ -36,6 +36,7 @@ self.addEventListener('push', function(event) {
 					return self.registration.showNotification(notification.title, {
 						body: notification.body,
 						icon: notification.icon,
+						badge: '/images/elements/badge.png',
 						tag: notification.tag
 					});
 				});
@@ -46,15 +47,11 @@ self.addEventListener('push', function(event) {
 		}).catch(function(err) {
 			console.error('Unable to retrieve data', err);
 
-			var title = 'An error occurred';
-			var body = 'We were unable to get the information for this push message';
-			var icon = '/images/characters/arn-waifu.png';
-			var notificationTag = 'notification-error';
-
-			return self.registration.showNotification(title, {
-				body: body,
-				icon: icon,
-				tag: notificationTag
+			return self.registration.showNotification('An error occurred', {
+				body: 'We were unable to get the information for this push message',
+				icon: '/images/characters/arn-waifu.png',
+				badge: '/images/elements/badge.png',
+				tag: 'notification-error'
 			});
 		})
 	);
