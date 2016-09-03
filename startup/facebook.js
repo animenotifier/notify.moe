@@ -14,7 +14,7 @@ passport.use(new FacebookStrategy(
 	facebookConfig,
 	function(request, accessToken, refreshToken, profile, done) {
 		console.log(chalk.cyan('Facebook data:'), (profile && profile._json) ? profile._json : profile)
-		
+
 		let fb = profile._json
 		let email = fb.email || ''
 
@@ -47,7 +47,7 @@ passport.use(new FacebookStrategy(
 				arn.set('FacebookToUser', fb.id, {
 					userId: user.id
 				})
-				
+
 				done(undefined, user)
 			}).catch(error => done(error, false))
 		})

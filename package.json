@@ -10,6 +10,7 @@
 		"aero-ajax": "*",
 		"aero-font-awesome": "*",
 		"aero-aerospike": "*",
+		"aero-auth": "*",
 		"aerospike-session-store": "*",
 		"body-parser": "*",
 		"chalk": "*",

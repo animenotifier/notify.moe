@@ -1,36 +1,13 @@
-let passport = require('passport')
-let session = require('express-session')
-let AerospikeStore = require('aerospike-session-store')(session)
-let Promise = require('bluebird')
+let useragent = require('useragent')
 
-const cookieDurationInSeconds = 6 * 30 * 24 * 60 * 60
-
-// Session
-let sessionOptions = {
-	store: new AerospikeStore({
-		namespace: 'arn',
-		set: 'Sessions',
-		ttl: cookieDurationInSeconds, // 1 day
-		hosts: '127.0.0.1:3000'
-	}),
-	name: 'sid',
-	secret: arn.apiKeys.session.secret,
-	resave: false,
-	saveUninitialized: false,
-	cookie: {
-		secure: true,
-		maxAge: cookieDurationInSeconds * 1000
-	}
-}
-
-let userInfo = (request, response, next) => {
+app.use((request, response, next) => {
 	let user = request.user
-	
+
 	if(!user) {
 		next()
 		return
 	}
-	
+
 	// Save last view date
 	if(!request.url.startsWith('/api/') && request.url !== '/favicon.ico' && request.url !== '/service-worker.js') {
 		arn.set('Users', user.id, {
@@ -40,22 +17,29 @@ let userInfo = (request, response, next) => {
 			}
 		})
 	}
-	
+
+	// Save user agent
+	user.agent = useragent.parse(request.headers['user-agent'])
+
+	arn.set('Users', user.id, {
+		agent: user.agent
+	})
+
 	// IP
 	let newIP = request.headers['x-forwarded-for'] || request.connection.remoteAddress || ''
-	
+
 	if(!newIP) {
 		next()
 		return
 	}
-	
+
 	if(user.ip === newIP) {
 		next()
 		return
 	}
-	
+
 	user.ip = newIP
-	
+
 	// IP changed: Update location
 	arn.set('Users', user.id, {
 		ip: user.ip
@@ -71,14 +55,6 @@ let userInfo = (request, response, next) => {
 			})
 		})
 	})
-	
-	next()
-}
 
-// Middleware
-app.use(
-	session(sessionOptions),
-	passport.initialize(),
-	passport.session(),
-	userInfo
-)
+	next()
+})
