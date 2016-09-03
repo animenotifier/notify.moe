@@ -1,39 +1,35 @@
-let passport = require('passport')
-let FacebookStrategy = require('passport-facebook').Strategy
+app.auth.facebook = {
+	login: function*(fb) {
+		console.log(chalk.cyan('Facebook data:\n'), fb)
 
-let facebookConfig = Object.assign({
-		callbackURL: arn.production ? 'https://notify.moe/auth/facebook/callback' : '/auth/facebook/callback',
-		profileFields: ['id', 'name', 'email', 'gender', 'age_range'],
-		enableProof: false,
-		passReqToCallback: true
-	},
-	arn.apiKeys.facebook
-)
-
-passport.use(new FacebookStrategy(
-	facebookConfig,
-	function(request, accessToken, refreshToken, profile, done) {
-		console.log(chalk.cyan('Facebook data:'), (profile && profile._json) ? profile._json : profile)
-
-		let fb = profile._json
 		let email = fb.email || ''
 
 		if(email.endsWith('googlemail.com'))
 			email = email.replace('googlemail.com', 'gmail.com')
 
-		Promise.any([
-			arn.get('FacebookToUser', fb.id),
-			arn.get('EmailToUser', email)
-		])
-		.then(record => arn.get('Users', record.userId).then(user => {
+		try {
+			let record = yield Promise.any([
+				db.get('FacebookToUser', fb.id),
+				db.get('EmailToUser', email)
+			])
+
+			let user = yield db.get('Users', record.userId)
+
 			// Existing user
 			if(user && user.accounts)
 				user.accounts.facebook = fb.id
 
-			done(undefined, user)
-		})).catch(error => {
+			db.set('FacebookToUser', fb.id, {
+				id: fb.id,
+				userId: user.id
+			})
+
+			console.log(`Existing user ${chalk.yellow(user.nick)} logged in`)
+
+			return user
+		} catch(_) {
 			// New user
-			arn.registerNewUser({
+			let user = yield arn.registerNewUser({
 				nick: 'fb' + fb.id,
 				firstName: fb.first_name,
 				lastName: fb.last_name,
@@ -43,29 +39,16 @@ passport.use(new FacebookStrategy(
 				accounts: {
 					facebook: fb.id
 				}
-			}).then(user => {
-				arn.set('FacebookToUser', fb.id, {
-					userId: user.id
-				})
+			})
 
-				done(undefined, user)
-			}).catch(error => done(error, false))
-		})
+			db.set('FacebookToUser', fb.id, {
+				id: fb.id,
+				userId: user.id
+			})
+
+			console.log(`New user ${chalk.yellow(user.nick)} logged in`)
+
+			return user
+		}
 	}
-))
-
-// Facebook login
-app.get('/auth/facebook', passport.authenticate('facebook', {
-	scope: [
-		'email',
-		'public_profile'
-	]
-}))
-
-// Facebook callback
-app.get('/auth/facebook/callback',
-	passport.authenticate('facebook', {
-		successRedirect: '/',
-		failureRedirect: '/login'
-	})
-)
+}
