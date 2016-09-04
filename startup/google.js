@@ -2,7 +2,7 @@ app.auth.google = {
 	login: function*(google) {
 		console.log(chalk.cyan('Google data:\n'), google)
 
-		let email = google.email || ''
+		let email = google.emails.length > 0 ? google.emails[0].value : ''
 
 		if(email.endsWith('googlemail.com'))
 			email = email.replace('googlemail.com', 'gmail.com')
