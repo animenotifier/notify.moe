@@ -26,7 +26,7 @@ exports.get = function*(request, response) {
 			viewUser = user
 		else
 			viewUser = yield arn.getUserByNick(viewUserNick)
-		
+
 		if(!viewUser) {
 			response.render({
 				user,
@@ -34,12 +34,12 @@ exports.get = function*(request, response) {
 			})
 			return
 		}
-		
+
 		viewUser.gravatarURL = gravatar.url(viewUser.email, {s: '320', r: 'x', d: 'mm'}, true)
-		
+
 		if(viewUser.role === 'editor')
 			viewUser.dataEditCount = (yield arn.get('Cache', 'dataEditCount')).contributions[viewUser.id]
-		
+
 		// Open Graph
 		request.og = {
 			url: app.package.homepage + '/+' + viewUser.nick,
@@ -54,12 +54,15 @@ exports.get = function*(request, response) {
 			embeddedList,
 			monthNames
 		})
-	} catch(error) {
-		console.error(error)
-		
-		response.render({
-			user,
-			viewUser
+	} catch(_) {
+		arn.get('Users', viewUserNick)
+		.then(user => response.redirect('/+' + user.nick))
+		.catch(error => {
+			response.status = HTTP.NOT_FOUND
+			response.render({
+				user,
+				viewUser
+			})
 		})
 	}
 }

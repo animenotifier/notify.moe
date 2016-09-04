@@ -12,15 +12,15 @@ exports.post = function*(request, response) {
 		response.end('Not logged in')
 		return
 	}
-	
+
 	let tag = request.body.tag
-	
+
 	if(!tag) {
 		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('No tag specified')
 		return
 	}
-	
+
 	let title = request.body.title
 
 	if(!title) {
@@ -28,9 +28,9 @@ exports.post = function*(request, response) {
 		response.end('Thread title required')
 		return
 	}
-	
+
 	title = title.trim()
-	
+
 	if(title.length > maxTitleLength || title.length < minTitleLength) {
 		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Invalid title length')
@@ -44,19 +44,19 @@ exports.post = function*(request, response) {
 		response.end('Post text required')
 		return
 	}
-	
+
 	text = text.trim()
-	
+
 	if(text.length > maxPostLength) {
 		response.writeHead(HTTP.BAD_REQUEST)
 		response.end('Post too long')
 		return
 	}
-	
+
 	let sticky = request.body.sticky ? 1 : 0
-	
+
 	let threadId = shortid.generate()
-	
+
 	// Save post
 	yield arn.set('Threads', threadId, {
 		id: threadId,
@@ -69,10 +69,9 @@ exports.post = function*(request, response) {
 		replies: 0,
 		created: (new Date()).toISOString()
 	})
-	
+
 	response.end(threadId)
-	
+
 	// Announce on chat
-	if(arn.chatBot)
-		arn.chatBot.sendMessage('general', `New thread: ${app.package.homepage}/threads/${threadId}`)
+	arn.chatBot.sendMessage('forum', `New thread: ${app.package.homepage}/threads/${threadId}`)
 }
