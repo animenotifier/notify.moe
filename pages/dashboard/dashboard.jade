@@ -12,6 +12,8 @@ if user
 
 	ol
 		li(class=user.hasNick ? 'finished' : 'not-finished') Change your username
+		if !user.email
+			li.not-finished Add your email address (one time change)
 		li(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
 		if user.email
 			li.finished#gravatar-text Add a gravatar image

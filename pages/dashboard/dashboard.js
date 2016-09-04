@@ -12,9 +12,9 @@ exports.get = function(request, response) {
 
 		if(user.email)
 			user.gravatarURL = gravatar.url(user.email, {s: '1', r: 'x', d: '404'}, true)
-		
-		user.hasNick = !(user.nick.startsWith('fb') || user.nick.startsWith('g'))
-		
+
+		user.hasNick = !(user.nick.startsWith('fb') || user.nick.startsWith('g') || user.nick.startsWith('t'))
+
 		if(user.hasNick)
 			user.welcomeLine = 'Hi ' + user.nick + ','
 		else if(user.firstName)
