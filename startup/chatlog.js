@@ -11,7 +11,7 @@ arn.on('new user', user => {
 	let infos = [
 		`New user: https://notify.moe/+${user.id}`,
 		`Name: **${user.firstName} ${user.lastName}**`,
-		`Email: **${user.email}**`,
+		`Email: **${user.email ? user.email : '-'}**`,
 		`Via: **${Object.keys(user.accounts)[0]}**`
 	]
 
