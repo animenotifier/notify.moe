@@ -118,11 +118,14 @@
 	float none
 
 .popular-anime-list
-	float left
 	width 100%
+	display flex
+	flex-flow row wrap
+	justify-content center
 
 .popular-anime
 	padding 0.5em
+	display block
 
 .popular-anime-image
 	width 100px !important
@@ -157,13 +160,13 @@
 @media only screen and (max-width: 800px)
 	.anime-header
 		flex-flow row wrap
-	
+
 	.anime-title-db
 	.second-title-container
 	.anime-image-container
 		text-align center
 		flex-grow 1
-		
+
 	// .anime-image-container
 	// 	width 100%
 	// 	text-align center

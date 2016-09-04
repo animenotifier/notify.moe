@@ -3,33 +3,34 @@
 	flex-flow column
 	flex 1
 	max-width 100%
-	
+
 .post
 	display flex
 	flex-flow column
 	margin 0.5rem 0
-	
+
 .post-author
 	text-align center
 	flex-grow 0
-	
+	display flex
+	flex-flow row
+	justify-content center
+	margin-bottom -3px
+
 	img
 		margin 0 !important
-		
-	.user
-		float none
 
 #post-input
 .post-input
 	width 100%
 	min-height 150px
 	margin 0.5rem 0
-	
+
 .post-submit
 	margin-top 0.5rem
 	max-width 200px
 	align-items flex-end
-	
+
 .post-toolbar
 	display flex
 	flex-flow row
@@ -43,17 +44,17 @@
 	float right
 	&:hover
 		cursor pointer
-	
+
 .post-input-toolbar
 	display flex
 	flex-flow row
-	
+
 .post-tool
 	opacity 0.7
 	&:hover
 		cursor pointer
 		opacity 1
-	
+
 .post-likes
 	opacity 0.4
 	margin-right 0.4em
@@ -62,16 +63,16 @@
 
 .post-permalink
 	color blue !important
-	
+
 .post-delete
 	color rgb(255, 32, 12) !important
-	
+
 .post-like
 	color green !important
-	
+
 .post-unlike
 	color rgb(255, 32, 12) !important
-	
+
 .post-content
 	text-align left
 	flex-grow 1
@@ -81,49 +82,49 @@
 	border uiBorder
 	border-radius 3px
 	position relative
-	
+
 	&:hover
 		background uiHoverBackground
 		.post-toolbar
 			opacity 1
-	
+
 	h1
 		font-size 1.5rem
 		line-height 2em
-			
+
 	h2
 		font-size 1.3rem
 		line-height 2em
 		font-weight normal
-			
+
 	h3
 		font-size 1.1rem
 		line-height 2em
 		font-weight normal
-		
+
 .special-post
 	.post-content
 		border 2px solid alpha(mainColor, 70%)
-		
+
 .hidden
 	display none
-	
+
 .thread
 	display flex
 	flex-flow column
 	align-items center
-	
+
 .thread-title
 	width auto
 
 .posts
 	width 100%
 	max-width 830px
-	
+
 @media only screen and (min-width: 500px)
 	.post
 		flex-flow row
 		justify-content center
-		
+
 	.post-author
 		//
