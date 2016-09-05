@@ -66,5 +66,5 @@ exports.post = function*(request, response) {
 	response.end(postId)
 
 	// Announce on chat
-	arn.chatBot.sendMessage('forum', `New reply: ${app.package.homepage}/threads/${thread.id}`)
+	arn.chatBot.sendMessage('forum', `New reply: ${app.package.homepage}/posts/${postId}`)
 }

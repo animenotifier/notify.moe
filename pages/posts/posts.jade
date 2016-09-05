@@ -3,3 +3,6 @@ if !post
 else
 	include ../messages/renderMessage.jade
 	+renderMessage(post, user, 'Posts', null)
+	
+	.thread-source
+		a(href=`/threads/${post.thread.id}`)= post.thread.title
