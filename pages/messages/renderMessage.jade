@@ -9,7 +9,7 @@ mixin renderMessage(post, user, type, specialAuthorId)
 					svg.user-image(width='50', height='50')
 						circle(cx='25', cy='19', r='10')
 						circle(cx='25', cy='50', r='20')
-						text(x='25', y='44', text-anchor='middle')= 'AWK'
+						text(x='25', y='44', text-anchor='middle')= post.author.nick.split('').filter(char => char === char.toUpperCase()).join('').substring(0, 3)
 			
 			if post.recipient && post.recipient.id !== post.author.id
 				a.user.post-recipient(href='/+' + post.recipient.nick, title=post.recipient.nick)
