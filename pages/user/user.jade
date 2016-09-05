@@ -103,13 +103,16 @@ else
 		if embeddedList && user && user.id === viewUser.id
 			#embedded-footer
 				include ../messages/avatar.jade
-				+avatar(user, 18, '_blank')
-				span.embedded-footer-separator  / 
-				a(href='javascript:window.loadAnimeList(true);', title='Refresh list')
-					span.fa.fa-refresh.fa-fw
-				span.embedded-footer-separator  / 
-				a(id='list-provider-link', href=null, target='_blank', title=user.providers.list)
-					span.fa.fa-list.fa-fw
-				span.embedded-footer-separator  / 
-				a(href='/forum/update', target='_blank', title='Latest updates')
-					span.fa.fa-cubes.fa-fw
+				+avatar(user, 50, '_blank')
+				
+				.embedded-footer-info
+					.embedded-footer-nick= user.nick
+					div
+						a(href='javascript:window.loadAnimeList(true);', title='Refresh list')
+							span.fa.fa-refresh.fa-fw
+						span.embedded-footer-separator  / 
+						a(id='list-provider-link', href=null, target='_blank', title=user.providers.list)
+							span.fa.fa-list.fa-fw
+						span.embedded-footer-separator  / 
+						a(href='/forum/update', target='_blank', title='Latest updates')
+							span.fa.fa-cubes.fa-fw
