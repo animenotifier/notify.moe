@@ -1,6 +1,6 @@
 let updateUserLists = coroutine(function*() {
 	let tasks = []
-	let allUsers = yield arn.filter('Users', user => arn.isActiveUser(user))
+	let allUsers = yield arn.filter('Users', user => arn.isActiveUser(user) && user.avatar)
 
 	console.log(`${allUsers.length} active users`)
 
