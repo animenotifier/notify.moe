@@ -19,7 +19,7 @@ exports.get = function*(request, response) {
 	request.og = {
 		url: app.package.homepage + '/posts/' + postId,
 		title: `${post.author.nick}'s reply to "${post.thread.title}"`,
-		image: post.author.avatar,
+		image: post.author.avatar ? post.author.avatar.replace('//www.gravatar.com', 'https://www.gravatar.com') : '',
 		description: post.text,
 		type: 'article'
 	}
