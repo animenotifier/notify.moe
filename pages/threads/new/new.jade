@@ -12,16 +12,17 @@ else
 				.post-content
 					textarea#post-input(placeholder='Content', tabindex=2)
 			.post-input-toolbar
+				mixin option(value, title, tag)
+					option(value=value, selected=(value === tag) ? 'selected' : undefined)= title
+				
 				select#tag(title='Category', tabindex=3)
-					option(value='general', selected) General
-					option(value='news') News
-					option(value='anime') Anime
-					
+					+option('general', 'General', tag)
+					+option('news', 'News', tag)
+					+option('anime', 'Anime', tag)
 					if user.role === 'admin'
-						option(value='update') Update
-					
-					option(value='suggestion') Suggestion
-					option(value='bug') Bug
+						+option('update', 'Update', tag)
+					+option('suggestion', 'Suggestion', tag)
+					+option('bug', 'Bug', tag)
 				
 				if user.role === 'admin'
 					input#sticky(type='checkbox')

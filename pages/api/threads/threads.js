@@ -55,6 +55,12 @@ exports.post = function*(request, response) {
 
 	let sticky = request.body.sticky ? 1 : 0
 
+	if((sticky || tag === 'update') && user.role !== 'admin') {
+		response.writeHead(HTTP.BAD_REQUEST)
+		response.end('Not authorized')
+		return
+	}
+
 	let threadId = shortid.generate()
 
 	// Save post

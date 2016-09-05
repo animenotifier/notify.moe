@@ -172,6 +172,15 @@ window.loadAnimeList = function(clearCache) {
 		let pre = document.createElement('pre')
 		pre.appendChild(document.createTextNode(JSON.stringify(error, null, '\t')))
 		animeList.appendChild(pre)
+
+		if(error.error && error.error.endsWith('username has not been specified'))
+			return
+
+		let p = document.createElement('p')
+		p.className = 'report-bug-hint'
+		p.innerHTML = 'Seems like you encountered a problem. Want to <a href="/threads/new/bug" class="ajax">report the bug</a> on the forums?'
+		animeList.appendChild(p)
+		$.ajaxifyLinks(p)
 	});
 };
 
@@ -184,10 +193,10 @@ window.deleteMessage = messageId => $.post('/api/messages/delete/' + messageId).
 window.sendMessage = function() {
 	let userName = $('nick').textContent
 	let postInput = $('post-input')
-	
+
 	if(!postInput.value)
 		return
-	
+
 	$.post('/api/messages', {
 		recipient: userName,
 		text: postInput.value
