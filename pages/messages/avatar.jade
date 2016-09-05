@@ -5,7 +5,7 @@ mixin avatar(user, size, target)
 			if user.avatar.indexOf('gravatar.com') !== -1
 				img.user-image(src=user.avatar + `?s=${size}&r=x&d=mm`, alt=user.nick)
 			else
-				img.user-image(src=user.avatar, alt=user.nick, style=size !== 50 ? `width: ${size}px; height: ${size}px;` : undefined)
+				img.user-image(src=user.avatar, alt=user.nick)
 		else
 			svg.user-image(width='50', height='50')
 				circle.head(cx='25', cy='19', r='10', fill=app.toRGB(user.id))
