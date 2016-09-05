@@ -1,7 +1,11 @@
-mixin avatar(user)
-	a.user.ajax(href='/+' + user.nick, title=user.nick)
+mixin avatar(user, size, target)
+	- size = size || 50
+	a.user(class=target ? '' : 'ajax', href='/+' + user.nick, title=user.nick, target=target)
 		if user.avatar
-			img.user-image(src=user.avatar + '?s=50&r=x&d=mm', alt=user.nick)
+			if user.avatar.indexOf('gravatar.com') !== -1
+				img.user-image(src=user.avatar + `?s=${size}&r=x&d=mm`, alt=user.nick)
+			else
+				img.user-image(src=user.avatar, alt=user.nick, style=size !== 50 ? `width: ${size}px; height: ${size}px;` : undefined)
 		else
 			svg.user-image(width='50', height='50')
 				circle.head(cx='25', cy='19', r='10', fill=app.toRGB(user.id))
