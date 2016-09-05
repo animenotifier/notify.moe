@@ -1,9 +1,6 @@
-const allowNoAvatars = ['joindate', 'active', 'login']
-
 let updateUserLists = coroutine(function*() {
 	let tasks = []
 	let allUsers = yield arn.filter('Users', user => arn.isActiveUser(user))
-	let usersWithAvatar = allUsers.filter(user => user.avatar !== '')
 
 	console.log(`${allUsers.length} active users`)
 
@@ -16,8 +13,7 @@ let updateUserLists = coroutine(function*() {
 		console.log(chalk.yellow('✖'), `Updating user list ${chalk.yellow(orderBy)}...`)
 
 		let updateUserList = coroutine(function*() {
-			let userList = allowNoAvatars.indexOf(orderBy) !== -1 ? allUsers : usersWithAvatar
-			let users = yield Promise.filter(userList, user => addUser(user, categories))
+			let users = yield Promise.filter(allUsers, user => addUser(user, categories))
 
 			// Sort by registration date
 			Object.keys(categories).forEach(categoryName => {
@@ -35,6 +31,7 @@ let updateUserLists = coroutine(function*() {
 				// Reduce data size for the database
 				categories[categoryName] = category.map(user => {
 					return {
+						id: user.id,
 						nick: user.nick,
 						avatar: user.avatar
 					}
