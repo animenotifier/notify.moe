@@ -82,7 +82,7 @@ exports.get = function*(request, response) {
 	const onePercentMark = recordCount / 100
 	
 	filterLessThan(browsers, onePercentMark)
-	filterLessThan(countries, onePercentMark)
+	filterLessThan(countries, onePercentMark * 4)
 
 	response.render({
 		users: {
