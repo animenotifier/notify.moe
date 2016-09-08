@@ -8,6 +8,7 @@
 		"aero": "*",
 		"aero-reset": "*",
 		"aero-ajax": "*",
+		"aero-git": "*",
 		"aero-font-awesome": "*",
 		"aero-aerospike": "*",
 		"aero-auth": "*",
