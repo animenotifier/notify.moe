@@ -61,12 +61,11 @@ html(lang='en')
 								- var external = link.url.startsWith('http')
 								- var className = 'navigation-link' + ((external || link.ajax === false) ? '' : ' ajax')
 								- className += ' navigation-link-' + (link.float ? link.float : 'left')
-								- if(link.float === 'right') className += ' navigation-link-right';
 								- var target = external ? '_blank' : undefined
 								a(href=external ? link.url : '/#{link.url}', class=className, target=target)
 									.navigation-button
 										if link.icon
-											i(class='fa fa-' + link.icon + (link.title ? '' : 'navigation-icon-no-title'), title=link.tooltip)
+											i(class='fa fa-' + link.icon + (link.title ? '' : ' navigation-icon-no-title'), title=link.tooltip)
 										if link.title
 											span.navigation-text= link.title
 
