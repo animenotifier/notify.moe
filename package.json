@@ -16,7 +16,6 @@
 		"aero-auth-facebook": "*",
 		"aero-auth-google": "*",
 		"aero-auth-twitter": "*",
-		"aerospike-session-store": "*",
 		"body-parser": "*",
 		"chalk": "*",
 		"discord.js": "*",
