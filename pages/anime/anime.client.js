@@ -1,5 +1,11 @@
 var animeContainer = document.querySelector('.anime-container');
 
+$.clear = element => {
+	while(element.lastChild) {
+		element.removeChild(element.lastChild)
+	}
+}
+
 if(animeContainer && animeContainer.dataset.id) {
 	makeSaveable('/api/anime/' + animeContainer.dataset.id);
 } else {
