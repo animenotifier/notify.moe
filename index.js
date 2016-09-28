@@ -1,7 +1,10 @@
 global.arn = require('./lib')
 global.app = require('aero')()
 global.HTTP = require('http-status-codes')
-arn.maintenance = true
+
+if(app.production)
+	arn.maintenance = true
+
 app.on('database ready', db => {
 	global.db = db
 })
