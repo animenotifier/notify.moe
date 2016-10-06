@@ -12,5 +12,13 @@ app.on('database ready', db => {
 // For POST requests
 app.use(require('body-parser').json())
 
+let chalk = require('chalk')
+app.use((request, response, next) => {
+	console.log(chalk.cyan(request.url))
+	console.log(request.params)
+	console.log(request.query)
+	next()
+})
+
 // Start the server
 app.run()

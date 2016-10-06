@@ -1,3 +1,5 @@
+let chalk = require('chalk')
+
 app.auth.facebook = {
 	login: function*(fb) {
 		console.log(chalk.cyan('Facebook data:\n'), fb)

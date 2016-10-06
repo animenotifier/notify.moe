@@ -1,3 +1,5 @@
+let chalk = require('chalk')
+
 app.auth.google = {
 	login: function*(google) {
 		console.log(chalk.cyan('Google data:\n'), google)

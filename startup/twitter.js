@@ -1,3 +1,5 @@
+let chalk = require('chalk')
+
 app.auth.twitter = {
 	login: function*(twitter) {
 		console.log(chalk.cyan('Twitter data:\n'), twitter)
