@@ -4,9 +4,7 @@ function subscribeOnServer(subscription) {
 	console.log('Send subscription to server...');
 	console.log(subscription);
 
-	$.post('/api/notifications/subscribe', {
-		endpoint: subscription.endpoint
-	}).then(function(response) {
+	$.post('/api/notifications/subscribe', subscription).then(function(response) {
 		console.log(response);
 	});
 }
@@ -15,9 +13,7 @@ function unsubscribeOnServer(subscription) {
 	console.log('Send unsubscription to server...');
 	console.log(subscription);
 
-	$.post('/api/notifications/unsubscribe', {
-		endpoint: subscription.endpoint
-	}).then(function(response) {
+	$.post('/api/notifications/unsubscribe', subscription).then(function(response) {
 		console.log(response);
 	});
 }
