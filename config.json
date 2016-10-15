@@ -31,8 +31,8 @@
 		"gcm_sender_id": "941298467524"
 	},
 	"headers": {
-		"Content-Security-Policy": "",
-		"X-Frame-Options": ""
+		"Content-Security-Policy": "default-src * 'unsafe-inline' 'unsafe-eval'",
+		"X-Frame-Options": "ALLOWALL"
 	},
 	"database": {
 		"host": "127.0.0.1:3000",
