@@ -11,23 +11,14 @@ self.addEventListener('push', function(event) {
 	console.log('Received push event:', event)
 
 	if(event.data) {
-		event.waitUntil(
-			event.data.json().then(function(notification) {
-				return self.registration.showNotification(notification.title, {
-					body: notification.body,
-					icon: notification.icon,
-					badge: '/images/elements/badge.png',
-					tag: notification.tag
-				})
-			}).catch(function(err) {
-				console.error('Unable to retrieve data', err)
+		let notification = event.data.json()
 
-				return self.registration.showNotification('An error occurred', {
-					body: 'We were unable to get the information for this push message',
-					icon: '/images/characters/arn-waifu.png',
-					badge: '/images/elements/badge.png',
-					tag: 'notification-error'
-				})
+		event.waitUntil(
+			self.registration.showNotification(notification.title, {
+				body: notification.body,
+				icon: notification.icon,
+				badge: '/images/elements/badge.png',
+				tag: notification.tag
 			})
 		)
 	}
