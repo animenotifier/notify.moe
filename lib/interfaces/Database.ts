@@ -3,7 +3,7 @@ export interface Database {
 	get(table: string, key: any)
 	set(table: string, key: any, value: any)
 	remove(table: string, key: any)
-	forEach(table: string, func: (iterator: any) => any)
+	forEach(table: string, func: (iterator: any) => void)
 	filter(table: string, include: (iterator: any) => boolean)
 	getMany(table: string, key: any[])
 }
