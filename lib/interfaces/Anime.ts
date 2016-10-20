@@ -6,4 +6,5 @@ export interface Anime {
 		japanese: string
 	}
 	episodes: any
+	image: string
 }

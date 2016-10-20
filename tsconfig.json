@@ -16,6 +16,9 @@
         "suppressImplicitAnyIndexErrors": true,
 		"strictNullChecks": true
     },
+	"include": [
+		"lib/**/*"
+	],
     "exclude": [
         "typings/browser",
         "typings/browser.d.ts"

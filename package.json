@@ -40,7 +40,9 @@
 		"xml2js": "*",
 		"@types/node": "*",
 		"@types/bluebird": "*",
-		"@types/xml2js": "*"
+		"@types/xml2js": "*",
+		"@types/node-cache": "*",
+		"@types/natural": "*"
 	},
 	"keywords": [
 		"anime",

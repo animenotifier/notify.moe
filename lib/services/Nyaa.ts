@@ -1,12 +1,13 @@
-import { AnimeReleaseNotifier } from '../'
+import * as arn from '../'
 import { Anime } from '../interfaces/Anime'
 import * as bluebird from 'bluebird'
 import * as xml2js from 'xml2js'
+import * as NodeCache from 'node-cache'
 
-let NodeCache = require('node-cache')
+const xml2jsAsync: any = bluebird.promisifyAll(xml2js)
+const NodeCacheAsync: any = bluebird.promisifyAll(NodeCache)
+
 let watch = require('node-watch')
-
-declare var arn: AnimeReleaseNotifier
 
 function pad(pad, str, padLeft) {
 	if(str === undefined)
@@ -22,11 +23,11 @@ function pad(pad, str, padLeft) {
 }
 
 class Nyaa {
-	headers = {
+	static headers = {
 		'User-Agent': 'Anime Release Notifier'
 	}
 
-	xmlParser = new xml2js.Parser({
+	static xmlParser = new xml2jsAsync.Parser({
 		explicitArray: false,
 		ignoreAttrs: true,
 		trim: true,
@@ -35,17 +36,12 @@ class Nyaa {
 		strict: true
 	})
 
-	episodeRegEx = /[ _]-[ _](\d{2,3})(?:v\d)?[ _][\(\[-]/
-	batchRegEx = /[^h\d]\d{2,3}-(\d{2,3})[^p\d]/
+	static episodeRegEx = /[ _]-[ _](\d{2,3})(?:v\d)?[ _][\(\[-]/
+	static batchRegEx = /[^h\d]\d{2,3}-(\d{2,3})[^p\d]/
 
-	cache = new NodeCache({
+	cache = new NodeCacheAsync({
 		stdTTL: 20 * 60
 	})
-
-	constructor() {
-		bluebird.promisifyAll(this.cache)
-		bluebird.promisifyAll(this.xmlParser)
-	}
 
 	async getAnimeInfo(anime: Anime) {
 		let searchTitle = await arn.db.get('AnimeToNyaa', anime.id).then(match => {
@@ -101,7 +97,7 @@ class Nyaa {
 			return request({
 				uri: nyaa.rssUrl,
 				method: 'GET',
-				headers: this.headers
+				headers: Nyaa.headers
 			}).then(rss => {
 				return this.getItemWithMostEpisodes(rss, anime, cacheKey).then(item => {
 					addItemInfo(nyaa, item)
@@ -135,17 +131,17 @@ class Nyaa {
 		return title
 	}
 
-	getItemWithMostEpisodes(rssResponse, anime, cacheKey) {
+	getItemWithMostEpisodes(rssResponse, anime, cacheKey): Promise<{ episodes: number, isBatch: boolean }> {
 		let highestItem = {
 			episodes: 0,
 			isBatch: 0
 		}
 
-		return this.xmlParser.parseStringAsync(rssResponse).then(json => {
+		return Nyaa.xmlParser.parseStringAsync(rssResponse).then(json => {
 			if(Array.isArray(json.channel.item)) {
 				// Get highest episode number
 				let items = json.channel.item.map(item => {
-					let match = this.episodeRegEx.exec(item.title)
+					let match = Nyaa.episodeRegEx.exec(item.title)
 
 					if(match !== null) {
 						return {
@@ -154,7 +150,7 @@ class Nyaa {
 						}
 					}
 
-					match = this.batchRegEx.exec(item.title)
+					match = Nyaa.batchRegEx.exec(item.title)
 
 					if(match !== null) {
 						return {

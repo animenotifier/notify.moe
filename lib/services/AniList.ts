@@ -4,15 +4,15 @@ let datediff = require('../utils/datediff')
 let querystring = require('querystring')
 
 class AniList {
-	security: any
-	authURL = 'https://anilist.co/api/auth/access_token'
-	accessToken = undefined
-	icon = 'http://anilist.co/favicon.png'
-	lastReplyCount = undefined
-	headers = {
+	static authURL = 'https://anilist.co/api/auth/access_token'
+	static icon = 'http://anilist.co/favicon.png'
+	static headers = {
 		'User-Agent': 'Anime Release Notifier',
 		'Accept': 'application/json'
 	}
+
+	accessToken = undefined
+	security: any
 
 	constructor() {
 		this.security = require('../../security/api-keys.json').anilist
@@ -24,14 +24,14 @@ class AniList {
 
 	authorize() {
 		return request({
-			uri: this.authURL,
+			uri: AniList.authURL,
 			method: 'POST',
 			json: {
 				grant_type: 'client_credentials',
 				client_id: this.security.id,
 				client_secret: this.security.secret
 			},
-			headers: this.headers
+			headers: AniList.headers
 		})
 		.then(body => this.accessToken = body.access_token)
 		.catch(error => console.error('Anilist access token acquisition failed'))
@@ -53,7 +53,7 @@ class AniList {
 		request({
 			uri: apiURL,
 			method: 'GET',
-			headers: this.headers
+			headers: AniList.headers
 		}).then(body => {
 			let anilistJSON: any = {}
 
@@ -110,7 +110,7 @@ class AniList {
 		return request({
 			uri: `https://anilist.co/api/anime/${anime.id}/airing?access_token=${this.accessToken}`,
 			method: 'GET',
-			headers: this.headers
+			headers: AniList.headers
 		}).then(body => {
 			let anilistJSON = JSON.parse(body)
 			let timeStamp: number = anilistJSON[anime.episodes.next]
@@ -166,7 +166,7 @@ class AniList {
 		return request({
 			uri: `https://anilist.co/api/browse/anime?sort=updated_at-desc&page=${page}&access_token=${this.accessToken}`,
 			method: 'GET',
-			headers: this.headers
+			headers: AniList.headers
 		}).then(body => {
 			let anilist = JSON.parse(body)
 
@@ -195,7 +195,7 @@ class AniList {
 		return request({
 			uri: `https://anilist.co/api/anime/${animeId}/page?access_token=${this.accessToken}`,
 			method: 'GET',
-			headers: this.headers
+			headers: AniList.headers
 		}).then(body => {
 			let anime = JSON.parse(body)
 
@@ -245,7 +245,7 @@ class AniList {
 		return request({
 			uri: `https://anilist.co/api/user/${userName}?access_token=${this.accessToken}`,
 			method: 'GET',
-			headers: this.headers
+			headers: AniList.headers
 		}).then(body => {
 			let image = JSON.parse(body).image_url_lge
 
