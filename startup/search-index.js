@@ -7,7 +7,7 @@ arn.db.ready.then(() => {
 	arn.animeCount = 0
 	arn.animeToId = {}
 
-	arn.forEach('Anime', anime => {
+	arn.db.forEach('Anime', anime => {
 		if(anime.type === 'Music')
 			return
 

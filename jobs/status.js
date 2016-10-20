@@ -40,7 +40,7 @@ let updateStatus = coroutine(function*() {
 		})
 	}
 	
-	arn.set('Cache', 'status', status)
+	arn.db.set('Cache', 'status', status)
 })
 
 arn.repeatedly(5 * minutes, updateStatus)

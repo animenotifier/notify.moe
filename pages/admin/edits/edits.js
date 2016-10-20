@@ -11,7 +11,7 @@ exports.get = function*(request, response) {
 
 	let scanBucket = bucketName => {
 		let providerName = bucketName.replace('Match', '').replace('AnimeTo', '')
-		return arn.forEach(bucketName, record => {
+		return arn.db.forEach(bucketName, record => {
 			record.providerName = providerName
 
 			if(record.edited)
@@ -37,13 +37,13 @@ exports.get = function*(request, response) {
 		if(userTasks.hasOwnProperty(edit.editedBy))
 			return
 		
-		userTasks[edit.editedBy] = arn.get('Users', edit.editedBy)
+		userTasks[edit.editedBy] = arn.db.get('Users', edit.editedBy)
 	})
 
 	let users = yield userTasks
 	
 	// Save editor contribution
-	arn.set('Cache', 'dataEditCount', {
+	arn.db.set('Cache', 'dataEditCount', {
 		contributions: userEdits
 	})
 	

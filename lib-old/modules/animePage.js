@@ -8,7 +8,7 @@ const writtenByRegEx = /\[Written by (.*?)\]/i
 
 arn.updateAnimePage = Promise.coroutine(function*(anime) {
 	if(!isNaN(anime)) {
-		anime = yield arn.get('Anime', anime)
+		anime = yield arn.db.get('Anime', anime)
 	}
 
 	let providers = {}
@@ -25,16 +25,16 @@ arn.updateAnimePage = Promise.coroutine(function*(anime) {
 	let userQueryTasks = []
 
 	let otherTasks = {
-		HummingBird: arn.forEach('MatchHummingBird', createScanFunction('HummingBird')),
-		MyAnimeList: arn.forEach('MatchMyAnimeList', createScanFunction('MyAnimeList')),
-		AnimePlanet: arn.forEach('MatchAnimePlanet', createScanFunction('AnimePlanet')),
-		Nyaa: arn.get('AnimeToNyaa', anime.id).catch(error => undefined),
-		Watching: arn.forEach('AnimeLists', list => {
+		HummingBird: arn.db.forEach('MatchHummingBird', createScanFunction('HummingBird')),
+		MyAnimeList: arn.db.forEach('MatchMyAnimeList', createScanFunction('MyAnimeList')),
+		AnimePlanet: arn.db.forEach('MatchAnimePlanet', createScanFunction('AnimePlanet')),
+		Nyaa: arn.db.get('AnimeToNyaa', anime.id).catch(error => undefined),
+		Watching: arn.db.forEach('AnimeLists', list => {
 			if(!list.userId)
 				return
 
 			if(list.watching.find(entry => entry.id === anime.id)) {
-				userQueryTasks.push(arn.get('Users', list.userId).then(user => {
+				userQueryTasks.push(arn.db.get('Users', list.userId).then(user => {
 					if(!arn.isActiveUser(user))
 						return null
 
@@ -100,11 +100,11 @@ arn.updateAnimePage = Promise.coroutine(function*(anime) {
 	}
 
 	yield [
-		arn.set('Anime', anime.id, {
+		arn.db.set('Anime', anime.id, {
 			watching: usersWatching.length,
 			pageGenerated: generated
 		}),
-		arn.set('AnimePages', anime.id, animePage).then(() => {
+		arn.db.set('AnimePages', anime.id, animePage).then(() => {
 			console.log(chalk.green('✔'), `Updated anime page ${chalk.cyan(anime.id)}`)
 		})
 	]

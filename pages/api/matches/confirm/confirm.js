@@ -16,7 +16,7 @@ exports.post = (request, response) => {
 
 	console.log(`${user.nick} confirmed a match for ${provider} ID ${providerId}`)
 
-	arn.set('Match' + provider, providerId, {
+	arn.db.set('Match' + provider, providerId, {
 		edited: (new Date()).toISOString(),
 		editedBy: user.id
 	}).finally(() => {

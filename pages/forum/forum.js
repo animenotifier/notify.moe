@@ -19,9 +19,9 @@ exports.get = function*(request, response) {
 	let threads = null
 	
 	if(!tag)
-		threads = yield arn.all('Threads')
+		threads = yield arn.db.all('Threads')
 	else
-		threads = yield arn.filter('Threads', thread => thread.tags && thread.tags.indexOf(tag) !== -1)
+		threads = yield arn.db.filter('Threads', thread => thread.tags && thread.tags.indexOf(tag) !== -1)
 	
 	// const testTexts = [
 	// 	'A Guide to Forum Flags	',
@@ -62,12 +62,12 @@ exports.get = function*(request, response) {
 		return order
 	})
 	
-	yield threads.map(thread => arn.set('Threads', thread.id, thread))
+	yield threads.map(thread => arn.db.set('Threads', thread.id, thread))
 	
 	if(threads.length > maxThreadCount)
 		threads.length = maxThreadCount
 		
-	let users = yield arn.batchGet('Users', threads.map(thread => thread.authorId))
+	let users = yield arn.db.getMany('Users', threads.map(thread => thread.authorId))
 	let idToUser = {}
 	
 	users.forEach(user => idToUser[user.id] = user)

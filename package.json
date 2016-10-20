@@ -24,6 +24,7 @@
 		"node-gcm": "*",
 		"gravatar": "*",
 		"http-status-codes": "*",
+		"load-class": "*",
 		"limiter": "*",
 		"natural": "*",
 		"node-cache": "*",
@@ -36,7 +37,10 @@
 		"striptags": "*",
 		"useragent": "*",
 		"web-push": "*",
-		"xml2js": "*"
+		"xml2js": "*",
+		"@types/node": "*",
+		"@types/bluebird": "*",
+		"@types/xml2js": "*"
 	},
 	"keywords": [
 		"anime",

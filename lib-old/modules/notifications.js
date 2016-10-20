@@ -3,7 +3,7 @@ let webPush = require('web-push')
 
 const vapid = webPush.generateVAPIDKeys()
 
-webPush.setGCMAPIKey(arn.apiKeys.gcm.serverKey)
+webPush.setGCMAPIKey(arn.api.gcm.serverKey)
 webPush.setVapidDetails('mailto:push@notify.moe', vapid.publicKey, vapid.privateKey)
 
 arn.sendNotification = (user, notification) => {
@@ -13,7 +13,7 @@ arn.sendNotification = (user, notification) => {
 	console.log(`Sending notification to ${user.nick}`, notification)
 
 	let notify = Promise.coroutine(function*(record) {
-		yield arn.set('Notifications', user.id, record)
+		yield arn.db.set('Notifications', user.id, record)
 		yield Promise.delay(100)
 
 		Object.keys(user.pushEndpoints).forEach(endpoint => {
@@ -29,7 +29,7 @@ arn.sendNotification = (user, notification) => {
 		})
 	})
 
-	return arn.get('Notifications', user.id).then(record => {
+	return arn.db.get('Notifications', user.id).then(record => {
 		// Add to existing, queued-up notifications
 		record.notifications.push(notification)
 		return notify(record)

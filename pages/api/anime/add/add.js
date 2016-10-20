@@ -1,6 +1,6 @@
 let highestId = 1000000
 
-arn.forEach('Anime', anime => {
+arn.db.forEach('Anime', anime => {
 	if(anime.id > highestId)
 		highestId = anime.id
 })
@@ -49,5 +49,5 @@ exports.post = function*(request, response) {
 		anime.editedBy = user.id
 	}
 	
-	arn.set('Anime', anime.id, anime).then(() => arn.updateAnimePage(anime)).then(() => response.json(anime))
+	arn.db.set('Anime', anime.id, anime).then(() => arn.updateAnimePage(anime)).then(() => response.json(anime))
 }

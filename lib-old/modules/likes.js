@@ -19,7 +19,7 @@ arn.getLikeController = type => {
 				return
 			}
 			
-			let element = yield arn.get(type, id)
+			let element = yield arn.db.get(type, id)
 			
 			if(!element.likes)
 				element.likes = []
@@ -31,7 +31,7 @@ arn.getLikeController = type => {
 			
 			element.likes.push(user.id)
 			
-			yield arn.set(type, element.id, {
+			yield arn.db.set(type, element.id, {
 				likes: element.likes
 			})
 			
@@ -62,7 +62,7 @@ arn.getUnlikeController = type => {
 				return
 			}
 			
-			let element = yield arn.get(type, id)
+			let element = yield arn.db.get(type, id)
 			
 			if(!element.likes)
 				element.likes = []
@@ -76,7 +76,7 @@ arn.getUnlikeController = type => {
 			
 			element.likes.splice(index, 1)
 			
-			yield arn.set(type, element.id, {
+			yield arn.db.set(type, element.id, {
 				likes: element.likes
 			})
 			

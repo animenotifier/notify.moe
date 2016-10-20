@@ -64,7 +64,7 @@ exports.post = function*(request, response) {
 	let threadId = shortid.generate()
 
 	// Save post
-	yield arn.set('Threads', threadId, {
+	yield arn.db.set('Threads', threadId, {
 		id: threadId,
 		authorId: user.id,
 		title,

@@ -19,7 +19,7 @@ exports.post = function*(request, response) {
 		return
 	}
 
-	let thread = yield arn.get('Threads', threadId)
+	let thread = yield arn.db.get('Threads', threadId)
 
 	if(!thread) {
 		response.writeHead(HTTP.BAD_REQUEST)
@@ -46,7 +46,7 @@ exports.post = function*(request, response) {
 	let postId = shortid.generate()
 
 	// Save post
-	yield arn.set('Posts', postId, {
+	yield arn.db.set('Posts', postId, {
 		id: postId,
 		authorId: user.id,
 		threadId: thread.id,
@@ -59,7 +59,7 @@ exports.post = function*(request, response) {
 	if(!thread.replies)
 		thread.replies = 0
 
-	arn.set('Threads', thread.id, {
+	arn.db.set('Threads', thread.id, {
 		replies: thread.replies + 1
 	})
 

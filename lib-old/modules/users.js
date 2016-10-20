@@ -90,11 +90,11 @@ arn.registerNewUser = function(userData) {
 	console.log(chalk.green('New user:'), user)
 
 	let tasks = [
-		arn.set('NickToUser', user.nick, { userId: user.id })
+		arn.db.set('NickToUser', user.nick, { userId: user.id })
 	]
 
 	if(user.email)
-		tasks.push(arn.set('EmailToUser', user.email, { userId: user.id }))
+		tasks.push(arn.db.set('EmailToUser', user.email, { userId: user.id }))
 
 	return Promise.all(tasks).then(function() {
 		arn.events.emit('new user', user)
@@ -102,13 +102,13 @@ arn.registerNewUser = function(userData) {
 	})
 }
 
-arn.getUserByNick = Promise.coroutine(function*(nick) {
+arn.db.getUserByNick = Promise.coroutine(function*(nick) {
 	// Very old Android app requests
 	if(nick.indexOf('&animeProvider=') !== -1)
 		return Promise.reject('Old Android app request')
 
-	let record = yield arn.get('NickToUser', nick)
-	return arn.get('Users', record.userId)
+	let record = yield arn.db.get('NickToUser', nick)
+	return arn.db.get('Users', record.userId)
 })
 
 arn.changeNick = function(user, newNick) {
@@ -117,7 +117,7 @@ arn.changeNick = function(user, newNick) {
 	if(oldNick === newNick)
 		return Promise.resolve()
 
-	return arn.get('NickToUser', newNick).then(record => {
+	return arn.db.get('NickToUser', newNick).then(record => {
 		return Promise.reject(userNameTakenMessage)
 	}).catch(error => {
 		if(error === userNameTakenMessage)
@@ -126,9 +126,9 @@ arn.changeNick = function(user, newNick) {
 		user.nick = newNick
 
 		return Promise.all([
-			arn.remove('NickToUser', oldNick),
-			arn.set('NickToUser', newNick, { userId: user.id }),
-			arn.set('Users', user.id, user)
+			arn.db.remove('NickToUser', oldNick),
+			arn.db.set('NickToUser', newNick, { userId: user.id }),
+			arn.db.set('Users', user.id, user)
 		])
 	})
 }
@@ -174,6 +174,6 @@ arn.isActiveUser = function(user) {
 }
 
 arn.getLocation = function(user) {
-	let locationAPI = `http://api.ipinfodb.com/v3/ip-city/?key=${arn.apiKeys.ipInfoDB.clientID}&ip=${user.ip}&format=json`
+	let locationAPI = `http://api.ipinfodb.com/v3/ip-city/?key=${arn.api.ipInfoDB.clientID}&ip=${user.ip}&format=json`
 	return request(locationAPI).then(JSON.parse)
 }

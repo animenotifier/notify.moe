@@ -55,16 +55,16 @@ exports.post = function*(request, response) {
 		}
 		
 		try {
-			yield arn.get('EmailToUser', value)
+			yield arn.db.get('EmailToUser', value)
 			
 			response.writeHead(HTTP.BAD_REQUEST)
 			response.end('Email already used by another user')
 			return
 		} catch(error) {
 			if(user.email)
-				yield arn.remove('EmailToUser', user.email)
+				yield arn.db.remove('EmailToUser', user.email)
 			
-			yield arn.set('EmailToUser', value, {
+			yield arn.db.set('EmailToUser', value, {
 				userId: user.id
 			})
 			
@@ -91,7 +91,7 @@ exports.post = function*(request, response) {
 		user[key] = value
 	}
 
-	arn.set('Users', user.id, user)
+	arn.db.set('Users', user.id, user)
 		.then(() => response.end())
 		.catch(error => {
 			console.error(error)

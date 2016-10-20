@@ -4,7 +4,7 @@ exports.get = function(request, response) {
 	if(!nick)
 		return response.end()
 
-	arn.getUserByNick(nick).then(user => {
+	arn.db.getUserByNick(nick).then(user => {
 		user.notificationsEnabled = Object.keys(user.pushEndpoints).length > 0
 
 		// Do not show critical information

@@ -1,6 +1,6 @@
 let updateUserLists = coroutine(function*() {
 	let tasks = []
-	let allUsers = yield arn.filter('Users', user => arn.isActiveUser(user) && user.avatar)
+	let allUsers = yield arn.db.filter('Users', user => arn.isActiveUser(user) && user.avatar)
 
 	console.log(`${allUsers.length} active users`)
 
@@ -40,7 +40,7 @@ let updateUserLists = coroutine(function*() {
 
 			console.log(chalk.green('✔'), `Finished updating user list ${chalk.yellow(orderBy)}`)
 
-			return arn.set('Cache', cacheKey, {
+			return arn.db.set('Cache', cacheKey, {
 				categories
 			}).catch(error => {
 				console.error(`Error saving user list ${chalk.yellow(orderBy)}`, error)

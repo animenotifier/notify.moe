@@ -8,7 +8,7 @@ arn.getAnimeIdBySimilarTitle = Promise.promisify(function(anime, listProviderNam
 	let bucket = 'Match' + listProviderName
 
 	// Look up cached or corrected version by ID
-	arn.get(bucket, anime.providerId).then(match => {
+	arn.db.get(bucket, anime.providerId).then(match => {
 		callback(undefined, match)
 	}).catch(error => {
 		let search = anime.title
@@ -39,7 +39,7 @@ arn.getAnimeIdBySimilarTitle = Promise.promisify(function(anime, listProviderNam
 		let bestResult = searchResults[0]
 
 		// Save in database
-		arn.set(bucket, anime.providerId, bestResult)
+		arn.db.set(bucket, anime.providerId, bestResult)
 
 		return callback(undefined, bestResult)
 	})

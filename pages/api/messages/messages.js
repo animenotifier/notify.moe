@@ -19,7 +19,7 @@ exports.post = function*(request, response) {
 		return
 	}
 	
-	let recipient = yield arn.getUserByNick(recipientNick)
+	let recipient = yield arn.db.getUserByNick(recipientNick)
 
 	let text = request.body.text
 
@@ -40,7 +40,7 @@ exports.post = function*(request, response) {
 	let messageId = shortid.generate()
 	
 	// Save message
-	yield arn.set('Messages', messageId, {
+	yield arn.db.set('Messages', messageId, {
 		id: messageId,
 		authorId: user.id,
 		recipientId: recipient.id,

@@ -49,7 +49,7 @@ exports.get = function*(request, response) {
 	let browsers = {}
 	let countries = {}
 
-	yield arn.forEach('Users', function(user) {
+	yield arn.db.forEach('Users', function(user) {
 		if(!arn.isActiveUser(user))
 			return
 

@@ -24,7 +24,7 @@ exports.post = function*(request, response) {
 		return
 	}
 	
-	let post = yield arn.get('Posts', postId)
+	let post = yield arn.db.get('Posts', postId)
 	
 	if(post.authorId !== user.id) {
 		response.writeHead(HTTP.BAD_REQUEST)
@@ -33,7 +33,7 @@ exports.post = function*(request, response) {
 	}
 	
 	// Save post
-	yield arn.set('Posts', postId, {
+	yield arn.db.set('Posts', postId, {
 		text,
 		edited: (new Date()).toISOString()
 	})

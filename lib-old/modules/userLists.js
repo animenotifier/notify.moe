@@ -200,7 +200,7 @@ arn.userOrderBy = {
 		},
 
 		addUser: Promise.coroutine(function*(user, categories) {
-			let animeList = yield arn.get('AnimeLists', user.id).catch(error => null)
+			let animeList = yield arn.db.get('AnimeLists', user.id).catch(error => null)
 
 			if(!animeList)
 				return false

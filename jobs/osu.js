@@ -4,11 +4,11 @@ let osuAPILimiter = new RateLimiter(1, 200)
 let updateOsuDetails = function() {
 	console.log(chalk.yellow('✖'), 'Updating osu ranks...')
 
-	arn.forEach('Users', user => {
+	arn.db.forEach('Users', user => {
 		if(!user.osu)
 			return
 
-		let apiURL = `https://osu.ppy.sh/api/get_user?k=${arn.apiKeys.osu.clientSecret}&u=${user.osu}`
+		let apiURL = `https://osu.ppy.sh/api/get_user?k=${arn.api.osu.clientSecret}&u=${user.osu}`
 
 		osuAPILimiter.removeTokens(1, () => {
 			fetch({
@@ -24,7 +24,7 @@ let updateOsuDetails = function() {
 				if(!osu)
 					throw new Error(`User ${user.osu} not found on osu`)
 
-				arn.set('Users', user.id, {
+				arn.db.set('Users', user.id, {
 					osuDetails: {
 						nick: osu.username,
 						pp: parseFloat(osu.pp_raw),

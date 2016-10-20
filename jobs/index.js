@@ -14,7 +14,7 @@ global.hours = 60 * minutes
 arn.db.scanPriority = require('aerospike').scanPriority.LOW
 
 arn.db.ready.then(Promise.coroutine(function*() {
-	arn.animeList = yield arn.filter('Anime', anime => true)
+	arn.animeList = yield arn.db.filter('Anime', anime => true)
 	console.log(arn.animeList.length + ' anime')
 	
 	// Build search index

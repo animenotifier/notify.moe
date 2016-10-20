@@ -99,7 +99,7 @@ getAnimeIds('http://www.animenewsnetwork.com/encyclopedia/reports.xml?id=155&typ
 		if(!anime.id || !anime.title)
 			return
 
-		arn.set('Anime', anime.id, anime).then(() => console.log('Imported anime: ' + anime.title))
+		arn.db.set('Anime', anime.id, anime).then(() => console.log('Imported anime: ' + anime.title))
 	})
 }).catch(error => {
 	console.log('ANN import error:', error)

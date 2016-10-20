@@ -43,7 +43,7 @@ bot.on('message', Promise.coroutine(function*(message) {
 			
 		if(command === 'user') {
 			let lowerCaseUserName = parameters.toLowerCase()
-			let users = yield arn.filter('Users', user => user.nick.toLowerCase() === lowerCaseUserName)
+			let users = yield arn.db.filter('Users', user => user.nick.toLowerCase() === lowerCaseUserName)
 			
 			if(users.length === 0)
 				return bot.reply(message, 'That user d-doesn\'t exist, baaka!')
@@ -80,7 +80,7 @@ bot.on('message', Promise.coroutine(function*(message) {
 			if(reply.length > 512)
 				return
 			
-			let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+			let botCommands = yield arn.db.get('Cache', 'botCommands').catch(error => {
 				return {
 					replies: {}
 				}
@@ -88,7 +88,7 @@ bot.on('message', Promise.coroutine(function*(message) {
 			
 			botCommands.replies[name] = reply
 			
-			return arn.set('Cache', 'botCommands', botCommands).then(() => bot.reply(message, 'Registered commands:\n' + Object.keys(botCommands.replies)))
+			return arn.db.set('Cache', 'botCommands', botCommands).then(() => bot.reply(message, 'Registered commands:\n' + Object.keys(botCommands.replies)))
 		}
 		
 		if(command === 'removereply') {
@@ -97,7 +97,7 @@ bot.on('message', Promise.coroutine(function*(message) {
 			if(!name)
 				return
 			
-			let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+			let botCommands = yield arn.db.get('Cache', 'botCommands').catch(error => {
 				return {
 					replies: {}
 				}
@@ -105,11 +105,11 @@ bot.on('message', Promise.coroutine(function*(message) {
 			
 			delete botCommands.replies[name]
 			
-			return arn.set('Cache', 'botCommands', botCommands).then(() => bot.reply(message, 'Registered commands:\n' + Object.keys(botCommands.replies).join(', ')))
+			return arn.db.set('Cache', 'botCommands', botCommands).then(() => bot.reply(message, 'Registered commands:\n' + Object.keys(botCommands.replies).join(', ')))
 		}
 		
 		if(command === 'replies') {
-			let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+			let botCommands = yield arn.db.get('Cache', 'botCommands').catch(error => {
 				return {
 					replies: {}
 				}
@@ -134,7 +134,7 @@ bot.on('message', Promise.coroutine(function*(message) {
 		}
 		
 		// Custom replies
-		let botCommands = yield arn.get('Cache', 'botCommands').catch(error => {
+		let botCommands = yield arn.db.get('Cache', 'botCommands').catch(error => {
 			return {
 				replies: {}
 			}
@@ -170,6 +170,6 @@ bot.on('ready', () => {
 	}
 })
 
-bot.loginWithToken(arn.apiKeys.discord.token, (error, token) => {
+bot.loginWithToken(arn.api.discord.token, (error, token) => {
 	console.log(chalk.green('Logged in'))
 })

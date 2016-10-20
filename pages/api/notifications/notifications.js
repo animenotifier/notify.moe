@@ -13,10 +13,10 @@ exports.get = (request, response) => {
 		return
 	}
 
-	arn.get('Notifications', user.id).then(record => {
+	arn.db.get('Notifications', user.id).then(record => {
 		console.log(`Service worker retrieved notifications of ${user.nick}:`, record.notifications)
 
-		arn.remove('Notifications', user.id).then(() => {
+		arn.db.remove('Notifications', user.id).then(() => {
 			response.json({
 				notifications: record.notifications
 			})

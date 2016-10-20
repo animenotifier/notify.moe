@@ -32,5 +32,5 @@ exports.post = (request, response) => {
 
 	user.pushEndpoints[endpoint] = subscription
 
-	arn.set('Users', user.id, user).then(() => response.end('success'))
+	arn.db.set('Users', user.id, user).then(() => response.end('success'))
 }

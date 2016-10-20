@@ -4,8 +4,8 @@ let natural = require('natural')
 Promise.promisifyAll(SC)
 
 SC.init({
-	id: arn.apiKeys.soundcloud.clientID,
-	secret: arn.apiKeys.soundcloud.clientSecret,
+	id: arn.api.soundcloud.clientID,
+	secret: arn.api.soundcloud.clientSecret,
 	uri: 'https://notify.moe/soundcloud/callback'
 })
 
@@ -59,7 +59,7 @@ let findTracksForAnime = anime => {
 			else
 				anime.tracks = Object.assign({}, anime.tracks, tracks)
 
-			return arn.set('Anime', anime.id, {
+			return arn.db.set('Anime', anime.id, {
 				tracks
 			}).then(() => {
 				// We add a delay to let the database catch up

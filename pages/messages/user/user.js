@@ -11,7 +11,7 @@ exports.get = function*(request, response) {
 	if(!viewUserNick) {
 		viewUser = user
 	} else {
-		viewUser = yield arn.getUserByNick(viewUserNick)
+		viewUser = yield arn.db.getUserByNick(viewUserNick)
 	}
 	
 	if(!viewUser) {
@@ -22,7 +22,7 @@ exports.get = function*(request, response) {
 	}
 
 	try {
-		let messages = yield arn.filter('Messages', message => message.recipientId === viewUser.id)
+		let messages = yield arn.db.filter('Messages', message => message.recipientId === viewUser.id)
 		
 		messages.sort((a, b) => (a.created > b.created) ? -1 : ((a.created < b.created) ? 1 : 0))
 		
@@ -30,7 +30,7 @@ exports.get = function*(request, response) {
 			messages.length = maxMessages
 		
 		yield messages.map(message => {
-			return arn.get('Users', message.authorId).then(author => message.author = author)
+			return arn.db.get('Users', message.authorId).then(author => message.author = author)
 		})
 
 		response.render({

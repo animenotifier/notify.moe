@@ -15,11 +15,11 @@ let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
 		oldProviderId = parseInt(oldProviderId)
 	}
 
-	let anime = yield arn.get('Anime', animeId)
+	let anime = yield arn.db.get('Anime', animeId)
 
 	if((!providerId || providerId === NaN) && (oldProviderId && oldProviderId !== NaN)) {
 		console.log(`${user.nick} deleted ${request.body.key} ID of '${anime.title.romaji}' (https://notify.moe/anime/${anime.id}): ${oldProviderId} => DELETED`)
-		return yield arn.remove(bucket, oldProviderId)
+		return yield arn.db.remove(bucket, oldProviderId)
 	}
 
 	let removeOldAndSave = match => {
@@ -29,13 +29,13 @@ let editListProviderId = Promise.coroutine(function*(request, user, animeId) {
 		console.log(`${user.nick} ${verb} ${request.body.key} ID of '${anime.title.romaji}' (https://notify.moe/anime/${anime.id}):`, verb === 'added' ? providerId : `${oldProviderId} => ${providerId}`)
 
 		if(oldProviderId !== NaN)
-			return arn.remove(bucket, oldProviderId).catch(error => null).finally(() => arn.set(bucket, providerId, match))
+			return arn.db.remove(bucket, oldProviderId).catch(error => null).finally(() => arn.db.set(bucket, providerId, match))
 		else
-			return arn.set(bucket, providerId, match)
+			return arn.db.set(bucket, providerId, match)
 	}
 
 	try {
-		let match = yield arn.get(bucket, providerId)
+		let match = yield arn.db.get(bucket, providerId)
 
 		match.id = anime.id
 		match.title = anime.title.romaji
@@ -67,7 +67,7 @@ exports.get = function(request, response) {
 	if(!id)
 		return response.end()
 
-	arn.get('Anime', id).then(anime => {
+	arn.db.get('Anime', id).then(anime => {
 		if(!request.user || request.user.role !== 'admin') {
 			delete anime.createdBy
 			delete anime.editedBy
@@ -102,7 +102,7 @@ exports.post = (request, response) => {
 		if(title) {
 			console.log(`${user.nick} set Nyaa title of https://notify.moe/anime/${animeId} from '${old}' to '${title}'`)
 
-			arn.set('AnimeToNyaa', animeId, {
+			arn.db.set('AnimeToNyaa', animeId, {
 				id: animeId,
 				title,
 				edited: (new Date()).toISOString(),
@@ -114,7 +114,7 @@ exports.post = (request, response) => {
 		} else {
 			console.log(`${user.nick} deleted Nyaa title of https://notify.moe/anime/${animeId} which was '${old}'`)
 
-			arn.remove('AnimeToNyaa', animeId).then(() => {
+			arn.db.remove('AnimeToNyaa', animeId).then(() => {
 				return arn.updateAnimePage(animeId)
 			}).then(() => response.end())
 		}

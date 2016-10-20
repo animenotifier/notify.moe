@@ -3,7 +3,7 @@ let chalk = require('chalk')
 let Promise = require('bluebird')
 
 arn.db.ready.then(Promise.coroutine(function*() {
-	let users = yield arn.all('Users')
+	let users = yield arn.db.all('Users')
 	
 	for(let user of users) {
 		if(!user.ip || (user.location && user.location.countryName))
@@ -17,7 +17,7 @@ arn.db.ready.then(Promise.coroutine(function*() {
 			if(user.location && user.location.countryName)
 				console.log(`${chalk.blue(user.nick)} from ${chalk.yellow(user.location.countryName)}`)
 			
-			return arn.set('Users', user.id, {
+			return arn.db.set('Users', user.id, {
 				location: user.location
 			})
 		}).catch(error => {

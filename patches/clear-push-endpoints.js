@@ -14,7 +14,7 @@ arn.db.ready.then(() => {
 
 		console.log(user.pushEndpoints)
 
-		arn.set('Users', user.id, {
+		arn.db.set('Users', user.id, {
 			pushEndpoints: user.pushEndpoints
 		})
 	})

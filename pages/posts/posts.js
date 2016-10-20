@@ -9,10 +9,10 @@ exports.get = function*(request, response) {
 		return
 	}
 
-	let post = yield arn.get('Posts', postId)
+	let post = yield arn.db.get('Posts', postId)
 	yield [
-		arn.get('Users', post.authorId).then(author => post.author = author),
-		arn.get('Threads', post.threadId).then(thread => post.thread = thread)
+		arn.db.get('Users', post.authorId).then(author => post.author = author),
+		arn.db.get('Threads', post.threadId).then(thread => post.thread = thread)
 	]
 
 	// Open Graph

@@ -6,7 +6,7 @@ let checkAvatars = coroutine(function*() {
 
 	yield arn.listProviders.AniList.authorize()
 
-	yield arn.forEach('Users', user => {
+	yield arn.db.forEach('Users', user => {
 		if(!arn.isActiveUser(user))
 			return
 
@@ -22,7 +22,7 @@ let checkAvatars = coroutine(function*() {
 			}).then(body => {
 				console.log(chalk.green('✔'), `${user.nick}: Global avatar`)
 
-				arn.set('Users', user.id, { avatar: gravatar.url(user.email) })
+				arn.db.set('Users', user.id, { avatar: gravatar.url(user.email) })
 			}).catch(error => {
 				let tasks = []
 
@@ -49,12 +49,12 @@ let checkAvatars = coroutine(function*() {
 				.then(imageURL => {
 					console.log(chalk.green('✔'), `${user.nick}: ${imageURL}`)
 
-					arn.set('Users', user.id, { avatar: imageURL })
+					arn.db.set('Users', user.id, { avatar: imageURL })
 				})
 				.catch(error => {
 					console.log(chalk.red('✖'), `${user.nick}: No avatar`)
 
-					arn.set('Users', user.id, { avatar: '' })
+					arn.db.set('Users', user.id, { avatar: '' })
 				})
 			})
 		})

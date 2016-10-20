@@ -9,10 +9,10 @@ exports.get = function*(request, response) {
 		return
 	}
 	
-	let thread = yield arn.get('Threads', threadId)
-	yield arn.get('Users', thread.authorId).then(author => thread.author = author)
+	let thread = yield arn.db.get('Threads', threadId)
+	yield arn.db.get('Users', thread.authorId).then(author => thread.author = author)
 	
-	let posts = yield arn.filter('Posts', post => post.threadId === threadId)
+	let posts = yield arn.db.filter('Posts', post => post.threadId === threadId)
 	
 	// const testTexts = [
 	// 	'Lorem ipsum dolor sit amet',
@@ -33,14 +33,14 @@ exports.get = function*(request, response) {
 	// 	})
 	// }
 	// 
-	// yield posts.map(post => arn.set('Posts', post.id, post))
+	// yield posts.map(post => arn.db.set('Posts', post.id, post))
 	// console.log('saved')
 	
 	posts.sort((a, b) => {
 		return (a.created > b.created) ? 1 : ((a.created < b.created) ? -1 : 0)
 	})
 	
-	let users = yield arn.batchGet('Users', posts.map(post => post.authorId))
+	let users = yield arn.db.getMany('Users', posts.map(post => post.authorId))
 	let idToUser = {}
 	
 	users.forEach(user => idToUser[user.id] = user)

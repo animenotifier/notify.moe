@@ -22,13 +22,13 @@ exports.render = function(request, render) {
 		url: 'anime',
 		icon: 'television'
 	})
-	
+
 	nav.push({
 		title: 'Forum',
 		url: 'forum',
 		icon: 'comment'
 	})
-	
+
 	if(!user) {
 		nav.push({
 			title: 'Users',
@@ -113,7 +113,7 @@ exports.render = function(request, render) {
 			float: 'right',
 			tooltip: 'Roadmap'
 		})*/
-		
+
 		nav.push({
 			title: '',
 			url: 'others',
@@ -121,7 +121,7 @@ exports.render = function(request, render) {
 			float: 'right',
 			tooltip: 'Others'
 		})
-		
+
 		nav.push({
 			title: '',
 			url: 'users',
@@ -144,7 +144,7 @@ exports.render = function(request, render) {
 	render({
 		user,
 		nav,
-		maintenance: arn.maintenance,
+		maintenance: app.maintenance,
 		embedded,
 		request
 	})

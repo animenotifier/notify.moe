@@ -40,7 +40,7 @@ exports.get = function*(request, response) {
 	let categoryParameter = request.params[2]
 
 	if(isNaN(animeId)) {
-		let popular = yield arn.get('Cache', 'popularAnime')
+		let popular = yield arn.db.get('Cache', 'popularAnime')
 
 		return response.render({
 			user,
@@ -51,7 +51,7 @@ exports.get = function*(request, response) {
 	}
 
 	try {
-		let animePage = yield arn.get('AnimePages', animeId)
+		let animePage = yield arn.db.get('AnimePages', animeId)
 		let videoParameters = ''
 
 		if(category === 'video') {

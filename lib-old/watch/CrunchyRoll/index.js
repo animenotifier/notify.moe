@@ -43,7 +43,7 @@ class CrunchyRoll {
 				return crunchy
 			}
 			
-			let crunchy = yield arn.get('CrunchyRoll', anime.id).catch(error => {
+			let crunchy = yield arn.db.get('CrunchyRoll', anime.id).catch(error => {
 				return forUser({
 					url: null,
 					rssUrl: null,
@@ -137,7 +137,7 @@ class CrunchyRoll {
 			crunchy.id = anime.id
 
 			// Cache it
-			arn.set('CrunchyRoll', anime.id, crunchy)
+			arn.db.set('CrunchyRoll', anime.id, crunchy)
 
 			return forUser(crunchy)
 		})

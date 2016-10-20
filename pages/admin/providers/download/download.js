@@ -17,7 +17,7 @@ exports.get = (request, response) => {
 		return obj
 	}, {})
 
-	let tasks = providers.map(provider => arn.filter('AnimeTo' + provider, record => !record.edited && record.episodes === 0).then(uneditedMatches => matches[provider] = uneditedMatches))
+	let tasks = providers.map(provider => arn.db.filter('AnimeTo' + provider, record => !record.edited && record.episodes === 0).then(uneditedMatches => matches[provider] = uneditedMatches))
 	let animeIdToWatching = {}
 
 	Promise.all(tasks).then(() => {
@@ -25,7 +25,7 @@ exports.get = (request, response) => {
 			let providerMatches = matches[provider]
 			let keys = providerMatches.map(match => match.id)
 
-			return arn.batchGet('Anime', keys).then(results => {
+			return arn.db.getMany('Anime', keys).then(results => {
 				animeIdToWatching = results.reduce((dict, anime) => {
 					if(anime.watching)
 						dict[anime.id] = anime.watching

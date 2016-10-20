@@ -1,22 +1,25 @@
 let request = require('request-promise')
-let plural = require('../../utils/plural')
-let datediff = require('../../utils/datediff')
-let Promise = require('bluebird')
+let plural = require('../utils/plural')
+let datediff = require('../utils/datediff')
 let querystring = require('querystring')
 
 class AniList {
+	security: any
+	authURL = 'https://anilist.co/api/auth/access_token'
+	accessToken = undefined
+	icon = 'http://anilist.co/favicon.png'
+	lastReplyCount = undefined
+	headers = {
+		'User-Agent': 'Anime Release Notifier',
+		'Accept': 'application/json'
+	}
+
 	constructor() {
-		this.authURL = 'https://anilist.co/api/auth/access_token'
-		this.accessToken = undefined
-		this.icon = 'http://anilist.co/favicon.png'
-		this.lastReplyCount = undefined
-		this.headers = {
-			'User-Agent': 'Anime Release Notifier',
-			'Accept': 'application/json'
-		}
+		this.security = require('../../security/api-keys.json').anilist
+		this.authorize()
 
 		// Authorize every 30 minutes
-		setInterval(this.authorize.bind(this), 1 * 5 * 1000)
+		setInterval(this.authorize.bind(this), 30 * 60 * 1000)
 	}
 
 	authorize() {
@@ -25,11 +28,13 @@ class AniList {
 			method: 'POST',
 			json: {
 				grant_type: 'client_credentials',
-				client_id: arn.apiKeys.anilist.clientID,
-				client_secret: arn.apiKeys.anilist.clientSecret
+				client_id: this.security.id,
+				client_secret: this.security.secret
 			},
 			headers: this.headers
-		}).then(body => this.accessToken = body.access_token)
+		})
+		.then(body => this.accessToken = body.access_token)
+		.catch(error => console.error('Anilist access token acquisition failed'))
 	}
 
 	getAnimeListUrl(userName) {
@@ -50,7 +55,7 @@ class AniList {
 			method: 'GET',
 			headers: this.headers
 		}).then(body => {
-			let anilistJSON = {}
+			let anilistJSON: any = {}
 
 			try {
 				anilistJSON = JSON.parse(body)
@@ -108,13 +113,13 @@ class AniList {
 			headers: this.headers
 		}).then(body => {
 			let anilistJSON = JSON.parse(body)
-			let timeStamp = anilistJSON[anime.episodes.next]
+			let timeStamp: number = anilistJSON[anime.episodes.next]
 
 			// Airing date not available for this episode?
 			if(!timeStamp)
 				throw new Error(`No airing date available for ${anime.id}`)
 
-			let remaining = parseInt(timeStamp - now)
+			let remaining = timeStamp - now
 			let remainingString = remaining + plural(remaining, 'second')
 
 			let days = datediff.inDays(now, timeStamp)
@@ -248,29 +253,6 @@ class AniList {
 				throw new Error('Default avatar')
 
 			return image.replace('http://', 'https://')
-		})
-	}
-
-	checkForumReplies() {
-		let forumThreadId = 64
-		let apiURL = `https://anilist.co/api/forum/thread/${forumThreadId}?access_token=${this.accessToken}`
-
-		return request({
-			uri: apiURL,
-			method: 'GET',
-			headers: this.headers
-		}).then(body => {
-			let thread = JSON.parse(body)
-			if(!this.lastReplyCount || thread.reply_count > this.lastReplyCount) {
-				console.log(`Anilist forum thread has ${thread.reply_count} replies`)
-
-				if(this.lastReplyCount !== undefined)
-					arn.events.emit('new forum reply', `https://anilist.co/forum/thread/${forumThreadId}`, thread.reply_user.display_name)
-
-				this.lastReplyCount = thread.reply_count
-			}
-		}).catch(error => {
-			console.error('Error checking anilist.co forum replies:', error)
 		})
 	}
 }

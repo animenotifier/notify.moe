@@ -6,7 +6,7 @@ exports.get = function(request, response) {
 
 	let cacheKey = `users:${orderBy}`
 
-	arn.get('Cache', cacheKey).then(record => {
+	arn.db.get('Cache', cacheKey).then(record => {
 		// We need to copy the object to keep the order.
 		// It sucks but the database doesn't keep object properties' order.
 		let categories = arn.userOrderBy[orderBy].getCategories()

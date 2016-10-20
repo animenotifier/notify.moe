@@ -10,7 +10,7 @@ app.use((request, response, next) => {
 
 	// Save last view date
 	if(!request.url.startsWith('/api/') && request.url !== '/favicon.ico' && request.url !== '/service-worker.js') {
-		arn.set('Users', user.id, {
+		arn.db.set('Users', user.id, {
 			lastView: {
 				url: request.url,
 				date: (new Date()).toISOString()
@@ -21,7 +21,7 @@ app.use((request, response, next) => {
 	// Save user agent
 	user.agent = useragent.parse(request.headers['user-agent'])
 
-	arn.set('Users', user.id, {
+	arn.db.set('Users', user.id, {
 		agent: user.agent
 	})
 
@@ -41,7 +41,7 @@ app.use((request, response, next) => {
 	user.ip = newIP
 
 	// IP changed: Update location
-	arn.set('Users', user.id, {
+	arn.db.set('Users', user.id, {
 		ip: user.ip
 	}).then(() => {
 		arn.getLocation(user).then(location => {
@@ -50,7 +50,7 @@ app.use((request, response, next) => {
 			user.location = null
 		}).finally(() => {
 			// Save in database
-			arn.set('Users', user.id, {
+			arn.db.set('Users', user.id, {
 				location: user.location
 			})
 		})

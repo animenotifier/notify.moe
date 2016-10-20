@@ -62,7 +62,7 @@ arn.getAnimeList = Promise.promisify(function(user, clearCache, callback) {
 			.catch(callback)
 	}
 
-	arn.get('AnimeLists', user.id).then(animeList => {
+	arn.db.get('AnimeLists', user.id).then(animeList => {
 		let now = new Date()
 		let generated = new Date(animeList.generated)
 
@@ -88,7 +88,7 @@ arn.refreshAnimeList = Promise.promisify(function(user, listProvider, animeProvi
 			return
 		}
 
-		let mapToNativeAnime = watchingOnProvider.map(watchingAnime => arn.get('Anime', watchingAnime.id).then(anime => {
+		let mapToNativeAnime = watchingOnProvider.map(watchingAnime => arn.db.get('Anime', watchingAnime.id).then(anime => {
 			return {
 				id: anime.id,
 				title: anime.title,
@@ -136,7 +136,7 @@ arn.refreshAnimeList = Promise.promisify(function(user, listProvider, animeProvi
 				}
 
 				// Cache it
-				return arn.set('AnimeLists', user.id, animeList).then(() => {
+				return arn.db.set('AnimeLists', user.id, animeList).then(() => {
 					callback(undefined, animeList)
 				})
 			}).catch(error => {
@@ -148,7 +148,7 @@ arn.refreshAnimeList = Promise.promisify(function(user, listProvider, animeProvi
 
 // getAnimeListByNick
 arn.getAnimeListByNick = function(nick, clearCache) {
-	return arn.getUserByNick(nick).then(user => arn.getAnimeList(user, clearCache)).catch(error => {
+	return arn.db.getUserByNick(nick).then(user => arn.getAnimeList(user, clearCache)).catch(error => {
 		if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND')
 			return Promise.reject(`User '${nick}' not found`)
 

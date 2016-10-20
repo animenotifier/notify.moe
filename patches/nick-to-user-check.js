@@ -1,8 +1,8 @@
 let nicks = {}
 
 arn.db.ready.then(() => {
-	arn.forEach('Users', user => {
-		// arn.get('NickToUser', user.nick).then(record => {
+	arn.db.forEach('Users', user => {
+		// arn.db.get('NickToUser', user.nick).then(record => {
 		// 	if(record.userId !== user.id)
 		// 		console.log(user.nick)
 		// })
@@ -17,7 +17,7 @@ arn.db.ready.then(() => {
 				arn.changeNick(user, 't' + user.accounts.twitter)
 			}
 		} else {
-			arn.set('NickToUser', user.nick, {
+			arn.db.set('NickToUser', user.nick, {
 				userId: user.id
 			})
 		}

@@ -9,7 +9,7 @@ exports.get = (request, response) => {
 		return
 	}
 
-	arn.get('Genres', genre).then(record => {
+	arn.db.get('Genres', genre).then(record => {
 		response.render(Object.assign({
 			user
 		}, record))

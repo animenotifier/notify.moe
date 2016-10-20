@@ -20,5 +20,5 @@ exports.post = (request, response) => {
 	// Add ID to the user's devices
 	delete user.pushEndpoints[endpoint]
 
-	arn.set('Users', user.id, user).then(() => response.end('success'))
+	arn.db.set('Users', user.id, user).then(() => response.end('success'))
 }

@@ -113,7 +113,7 @@ database(aero, function(error) {
 						if(!anime.id || !anime.title)
 							return
 
-						arn.set('Anime', anime.id, anime).catch(error => {
+						arn.db.set('Anime', anime.id, anime).catch(error => {
 							console.error('Error saving anime', anime.id)
 						}) //.then(() => console.log('Imported anime: ' + anime.title))
 					})

@@ -24,7 +24,7 @@ exports.post = function*(request, response) {
 		return
 	}
 	
-	let thread = yield arn.get('Threads', threadId)
+	let thread = yield arn.db.get('Threads', threadId)
 	
 	if(thread.authorId !== user.id) {
 		response.writeHead(HTTP.BAD_REQUEST)
@@ -33,7 +33,7 @@ exports.post = function*(request, response) {
 	}
 	
 	// Save post
-	yield arn.set('Threads', threadId, {
+	yield arn.db.set('Threads', threadId, {
 		text,
 		edited: (new Date()).toISOString()
 	})

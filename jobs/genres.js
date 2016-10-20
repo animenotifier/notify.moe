@@ -51,7 +51,7 @@ let updateGenres = coroutine(function*() {
 			}
 		})
 
-		yield arn.set('Genres', genre, {
+		yield arn.db.set('Genres', genre, {
 			genre,
 			animeList
 		})

@@ -4,7 +4,7 @@ let refreshAnimeLists = coroutine(function*() {
 	
 	yield arn.listProviders.AniList.authorize()
 	
-	let users = yield arn.filter('Users', user => arn.isActiveUser(user))
+	let users = yield arn.db.filter('Users', user => arn.isActiveUser(user))
 	console.log(`Refreshing anime lists of ${users.length} users`)
 	
 	for(let user of users) {

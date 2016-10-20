@@ -1,13 +1,8 @@
-global.arn = require('./lib')
-global.app = require('aero')()
-global.HTTP = require('http-status-codes')
-
+global.app = require('aero')();
+global.arn = require('./lib');
+global.HTTP = require('http-status-codes');
 app.on('database ready', db => {
-	global.db = db
-})
-
-// For POST requests
-app.use(require('body-parser').json())
-
-// Start the server
-app.run()
+    global.db = db;
+});
+app.use(require('body-parser').json());
+app.run();

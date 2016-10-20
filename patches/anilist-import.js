@@ -12,7 +12,7 @@ database(aero, function(error) {
 		for(let page = 1; page <= maxPage; page++) {
 			limiter.removeTokens(1, function() {
 				arn.listProviders.AniList.getAnimeFromPage(page).then(animeList => {
-					let tasks = animeList.map(anime => arn.set('Anime', anime.id, anime))
+					let tasks = animeList.map(anime => arn.db.set('Anime', anime.id, anime))
 					Promise.all(tasks).then(() => console.log('Finished importing page', page))
 				})
 			})
