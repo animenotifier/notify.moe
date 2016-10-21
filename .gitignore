@@ -28,3 +28,6 @@ _testmain.go
 
 # external packages folder
 vendor/
+
+# debugger
+debug
