@@ -1,4 +1,4 @@
-import { arn } from './'
+import * as arn from './'
 import * as natural from 'natural'
 
 export async function getAnimeIdBySimilarTitle(anime, listProviderName) {
