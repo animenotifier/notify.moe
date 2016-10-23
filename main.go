@@ -8,15 +8,6 @@ import (
 	"github.com/blitzprog/arn"
 )
 
-const (
-	gzipThreshold         = 1450
-	contentTypeHeader     = "content-type"
-	contentType           = "text/html;charset=utf-8"
-	contentEncodingHeader = "content-encoding"
-	contentEncoding       = "gzip"
-	hello                 = "Hello World"
-)
-
 func main() {
 	app := aero.New()
 
@@ -26,11 +17,11 @@ func main() {
 		ctx.RespondBytes(example)
 	})
 
-	template := aero.NewTemplate("pages/anime/anime.pug")
+	app.Get("/hello", func(ctx *aero.Context) {
+		ctx.Respond("Hello World")
+	})
 
-	// app.Get("/hello", func(ctx *fasthttp.RequestCtx, _ fasthttprouter.Params) {
-	// 	aero.Respond(ctx, "Hello World")
-	// })
+	template := aero.NewTemplate("pages/anime/anime.pug")
 
 	app.Get("/anime/:id", func(ctx *aero.Context) {
 		id, _ := strconv.Atoi(ctx.Params.ByName("id"))
