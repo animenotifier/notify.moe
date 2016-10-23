@@ -1,17 +1,21 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"runtime"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/Joker/jade"
+	"github.com/OneOfOne/xxhash"
 	"github.com/aerojs/aero"
 	"github.com/blitzprog/arn"
 	"github.com/buaazp/fasthttprouter"
+	cache "github.com/patrickmn/go-cache"
 	"github.com/robertkrimen/otto"
 	"github.com/valyala/fasthttp"
 	"github.com/valyala/fasttemplate"
@@ -26,20 +30,44 @@ const (
 	hello                 = "Hello World"
 )
 
+var jsonToResponse *cache.Cache
+
 func worker(script *otto.Script, jobs <-chan map[string]interface{}, results chan<- string) {
 	vm := otto.New()
 
 	for properties := range jobs {
-		for key, value := range properties {
-			vm.Set(key, value)
+		h := xxhash.NewS64(0)
+
+		for _, value := range properties {
+			jsonBytes, err := json.Marshal(value)
+
+			if err == nil {
+				h.Write(jsonBytes)
+				// fmt.Println(string(buffer))
+			}
 		}
-		result, _ := vm.Run(script)
-		code, _ := result.ToString()
-		results <- code
+
+		hash := strconv.FormatUint(h.Sum64(), 10)
+		cachedResponse, found := jsonToResponse.Get(hash)
+
+		if found {
+			results <- cachedResponse.(string)
+		} else {
+			for key, value := range properties {
+				vm.Set(key, value)
+			}
+
+			result, _ := vm.Run(script)
+			code, _ := result.ToString()
+			results <- code
+
+			jsonToResponse.Set(hash, code, cache.DefaultExpiration)
+		}
 	}
 }
 
 func main() {
+	jsonToResponse = cache.New(5*time.Minute, 1*time.Minute)
 	app := aero.New()
 	jade.PrettyOutput = false
 	code, _ := jade.ParseFile("pages/anime/anime.pug")
@@ -103,20 +131,14 @@ func main() {
 			return
 		}
 
-		myMap := make(map[string]interface{})
-		myMap["anime"] = anime
-		jobs <- myMap
+		templateParams := make(map[string]interface{})
+		templateParams["anime"] = anime
+		jobs <- templateParams
 
 		aero.Respond(ctx, <-results)
-
-		// if runErr != nil {
-		// 	panic(runErr)
-		// }
-
-		// aero.Respond(ctx, result.String())
 	})
 
-	fmt.Println("Starting server on http://localhost:5000/")
+	fmt.Println("Starting server on http://localhost:4000/")
 
 	app.Run()
 }
