@@ -1,0 +1,3 @@
+component Anime(anime *arn.Anime)
+	h2= anime.Title.Romaji
+	p= anime.Description

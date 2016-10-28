@@ -1,0 +1,7 @@
+component Layout(content string, css string)
+	html
+		head
+			title Test
+			style!= css
+		body
+			main#content
