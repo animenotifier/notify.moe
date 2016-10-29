@@ -1,7 +1,7 @@
 import * as arn from './'
 import * as natural from 'natural'
 
-export async function getAnimeIdBySimilarTitle(anime, listProviderName) {
+export async function getAnimeIdBySimilarTitle(anime, listProviderName: string) {
 	if(!anime || !anime.providerId)
 		return null
 

@@ -19,7 +19,7 @@ exports.post = function*(request, response) {
 		return
 	}
 	
-	let recipient = yield arn.db.getUserByNick(recipientNick)
+	let recipient = yield arn.getUserByNick(recipientNick)
 
 	let text = request.body.text
 

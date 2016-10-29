@@ -5,7 +5,7 @@ let processTitle = title => title.replace(/[^A-Za-z0-9.:!'"+ ]/g, ' ').replace(/
 // Create search index
 arn.db.ready.then(() => {
 	arn.animeCount = 0
-	arn.animeToId = {}
+	arn.titleToId = {}
 
 	arn.db.forEach('Anime', anime => {
 		if(anime.type === 'Music')
@@ -14,16 +14,16 @@ arn.db.ready.then(() => {
 		arn.animeCount++
 
 		if(anime.title.romaji)
-			arn.animeToId[processTitle(anime.title.romaji)] = anime.id
+			arn.titleToId[processTitle(anime.title.romaji)] = anime.id
 
 		if(anime.title.english)
-			arn.animeToId[processTitle(anime.title.english)] = anime.id
+			arn.titleToId[processTitle(anime.title.english)] = anime.id
 	}).then(() => {
-		arn.animeToIdCount = Object.keys(arn.animeToId).length
-		arn.animeToIdJSONString = JSON.stringify(arn.animeToId)
+		arn.titleToIdCount = Object.keys(arn.titleToId).length
+		arn.titleToIdJSONString = JSON.stringify(arn.titleToId)
 
-		zlib.gzip(arn.animeToIdJSONString, function(error, gzippedJSON) {
-			arn.animeToIdJSONStringGzipped = gzippedJSON
+		zlib.gzip(arn.titleToIdJSONString, function(error, gzippedJSON) {
+			arn.titleToIdJSONStringGzipped = gzippedJSON
 		})
 	})
 })

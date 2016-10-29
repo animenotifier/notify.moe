@@ -11,7 +11,7 @@ exports.get = function*(request, response) {
 	if(!viewUserNick) {
 		viewUser = user
 	} else {
-		viewUser = yield arn.db.getUserByNick(viewUserNick)
+		viewUser = yield arn.getUserByNick(viewUserNick)
 	}
 	
 	if(!viewUser) {

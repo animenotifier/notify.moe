@@ -45,7 +45,7 @@ exports.get = function*(request, response) {
 		return response.render({
 			user,
 			popularAnime: popular.anime,
-			animeToIdCount: arn.animeToIdCount,
+			animeToIdCount: arn.titleToIdCount,
 			anime: null
 		})
 	}

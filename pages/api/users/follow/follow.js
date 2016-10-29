@@ -15,7 +15,7 @@ exports.get = function*(request, response) {
 		return
 	}
 	
-	let followUser = yield arn.db.getUserByNick(followUserNick)
+	let followUser = yield arn.getUserByNick(followUserNick)
 	
 	if(user.id !== followUser.id && user.following.indexOf(followUser.id) === -1) {
 		user.following.push(followUser.id)

@@ -1,5 +1,5 @@
 exports.get = (request, response) => {
-	if(!arn.animeToIdJSONStringGzipped) {
+	if(!arn.titleToIdJSONStringGzipped) {
 		response.writeHead(HTTP.NOT_FOUND)
 		response.end()
 		return
@@ -8,7 +8,7 @@ exports.get = (request, response) => {
 	response.writeHead(HTTP.OK, {
 		'Content-Type': 'application/json; charset=UTF-8',
 		'Content-Encoding': 'gzip',
-		'Content-Length': arn.animeToIdJSONStringGzipped.length
+		'Content-Length': arn.titleToIdJSONStringGzipped.length
 	})
-	response.end(arn.animeToIdJSONStringGzipped)
+	response.end(arn.titleToIdJSONStringGzipped)
 }

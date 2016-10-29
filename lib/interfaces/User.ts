@@ -1,3 +1,5 @@
+import { Location } from './Location'
+
 export interface User {
 	id: string
 	nick: string
@@ -11,7 +13,11 @@ export interface User {
 			userName: string
 		}
 	},
-	ip: string,
+	sortBy: string
+	titleLanguage: string
+	location: Location
+	pushEndpoints: Map<string, any>
+	ip: string
 	lastView?: {
 		date: string
 	}

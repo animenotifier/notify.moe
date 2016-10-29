@@ -1,7 +1,7 @@
 exports.get = function*(request, response) {
 	let user = request.user
 	let viewUserNick = request.params[0]
-	let viewUser = viewUserNick ? yield arn.db.getUserByNick(viewUserNick) : user
+	let viewUser = viewUserNick ? yield arn.getUserByNick(viewUserNick) : user
 	
 	if(!viewUser) {
 		response.json({

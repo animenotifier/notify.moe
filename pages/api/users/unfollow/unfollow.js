@@ -15,7 +15,7 @@ exports.get = function*(request, response) {
 		return
 	}
 	
-	let unfollowUser = yield arn.db.getUserByNick(unfollowUserNick)
+	let unfollowUser = yield arn.getUserByNick(unfollowUserNick)
 	let index = user.following.indexOf(unfollowUser.id)
 	
 	if(index !== -1) {
