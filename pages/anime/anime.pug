@@ -34,7 +34,7 @@ else if anime
 			iframe(width='100%', height='150', scrolling='no', frameborder='no', src='https://w.soundcloud.com/player/?url=' + anime.tracks.opening.uri + '?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true')
 
 		if user && friendsWatching && friendsWatching.length > 0
-			include ../messages/avatar.jade
+			include ../messages/avatar.pug
 			
 			h3.anime-header Watching
 			.user-list

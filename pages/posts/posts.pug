@@ -1,7 +1,7 @@
 if !post
 	p No post.
 else
-	include ../messages/renderMessage.jade
+	include ../messages/renderMessage.pug
 	+renderMessage(post, user, 'Posts', null)
 	
 	.thread-source

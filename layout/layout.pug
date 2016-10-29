@@ -62,7 +62,7 @@ html(lang='en')
 								- var className = 'navigation-link' + ((external || link.ajax === false) ? '' : ' ajax')
 								- className += ' navigation-link-' + (link.float ? link.float : 'left')
 								- var target = external ? '_blank' : undefined
-								a(href=external ? link.url : '/#{link.url}', class=className, target=target)
+								a(href=external ? link.url : `/${link.url}`, class=className, target=target)
 									.navigation-button
 										if link.icon
 											i(class='fa fa-' + link.icon + (link.title ? '' : ' navigation-icon-no-title'), title=link.tooltip)
