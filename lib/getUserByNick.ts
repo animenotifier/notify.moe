@@ -1,4 +1,4 @@
-import * as arn from './'
+import * as arn from '.'
 import { User } from './interfaces/User'
 
 export async function getUserByNick(nick: string): Promise<User> {

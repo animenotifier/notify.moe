@@ -1,4 +1,4 @@
-import * as arn from './'
+import * as arn from '.'
 import * as Promise from 'bluebird'
 import { User } from './interfaces/User'
 import { Notification } from './interfaces/Notification'

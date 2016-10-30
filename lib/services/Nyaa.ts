@@ -3,6 +3,7 @@ import { Anime } from '../interfaces/Anime'
 import * as bluebird from 'bluebird'
 import * as xml2js from 'xml2js'
 import * as NodeCache from 'node-cache'
+import * as request from 'request-promise'
 
 const xml2jsAsync: any = bluebird.promisifyAll(xml2js)
 const NodeCacheAsync: any = bluebird.promisifyAll(NodeCache)
@@ -39,7 +40,7 @@ class Nyaa {
 	static episodeRegEx = /[ _]-[ _](\d{2,3})(?:v\d)?[ _][\(\[-]/
 	static batchRegEx = /[^h\d]\d{2,3}-(\d{2,3})[^p\d]/
 
-	cache = new NodeCacheAsync({
+	static cache = new NodeCacheAsync({
 		stdTTL: 20 * 60
 	})
 
@@ -89,7 +90,7 @@ class Nyaa {
 
 		let cacheKey = `${searchTitle}:${quality}:${subs}`
 
-		await this.cache.getAsync(cacheKey).then(item => {
+		await Nyaa.cache.getAsync(cacheKey).then(item => {
 			if(item) {
 				return addItemInfo(nyaa, item)
 			}
@@ -184,7 +185,7 @@ class Nyaa {
 				})
 			}
 
-			this.cache.set(cacheKey, highestItem, (error, success) => error)
+			Nyaa.cache.set(cacheKey, highestItem, (error, success) => error)
 
 			// Save available count in database
 			arn.db.set('AnimeToNyaa', anime.id, highestItem)

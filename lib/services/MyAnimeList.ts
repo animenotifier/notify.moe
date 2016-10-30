@@ -1,5 +1,6 @@
 import * as xml2js from 'xml2js'
 import * as arn from '../'
+import * as request from 'request-promise'
 import { Anime } from '../interfaces/Anime'
 
 const COMPLETED = 2

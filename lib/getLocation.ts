@@ -1,6 +1,9 @@
 import { User } from './interfaces/User'
+import { Location } from './interfaces/Location'
+import * as request from 'request-promise'
 
-export function getLocation(user: User): Location {
+export async function getLocation(user: User): Promise<Location> {
 	let locationAPI = `http://api.ipinfodb.com/v3/ip-city/?key=${this.api.ipInfoDB.clientID}&ip=${user.ip}&format=json`
-	return request(locationAPI).then(JSON.parse)
+	let location: Location = await request(locationAPI).then(JSON.parse)
+	return location
 }

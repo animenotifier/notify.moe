@@ -38,11 +38,15 @@
 		"useragent": "*",
 		"web-push": "*",
 		"xml2js": "*",
-		"@types/node": "*",
 		"@types/bluebird": "*",
-		"@types/xml2js": "*",
+		"@types/chalk": "*",
+		"@types/gravatar": "*",
+		"@types/natural": "*",
+		"@types/node": "*",
 		"@types/node-cache": "*",
-		"@types/natural": "*"
+		"@types/request-promise": "*",
+		"@types/shortid": "*",
+		"@types/xml2js": "*"
 	},
 	"keywords": [
 		"anime",

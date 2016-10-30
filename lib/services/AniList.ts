@@ -1,7 +1,6 @@
-let request = require('request-promise')
-let plural = require('../utils/plural')
-let datediff = require('../utils/datediff')
-let querystring = require('querystring')
+import * as arn from '../'
+import * as querystring from 'querystring'
+import * as request from 'request-promise'
 
 class AniList {
 	static authURL = 'https://anilist.co/api/auth/access_token'
@@ -120,22 +119,22 @@ class AniList {
 				throw new Error(`No airing date available for ${anime.id}`)
 
 			let remaining = timeStamp - now
-			let remainingString = remaining + plural(remaining, 'second')
+			let remainingString = remaining + arn.plural(remaining, 'second')
 
-			let days = datediff.inDays(now, timeStamp)
+			let days = arn.inDays(now, timeStamp)
 			if(Math.abs(days) >= 1) {
-				remainingString = plural(days, 'day')
+				remainingString = arn.plural(days, 'day')
 			} else {
-				let hours = datediff.inHours(now, timeStamp)
+				let hours = arn.inHours(now, timeStamp)
 				if(Math.abs(hours) >= 1) {
-					remainingString = plural(hours, 'hour')
+					remainingString = arn.plural(hours, 'hour')
 				} else {
-					let minutes = datediff.inMinutes(now, timeStamp)
+					let minutes = arn.inMinutes(now, timeStamp)
 					if(Math.abs(minutes) >= 1) {
-						remainingString = plural(minutes, 'minute')
+						remainingString = arn.plural(minutes, 'minute')
 					} else {
-						let seconds = datediff.inSeconds(now, timeStamp)
-						remainingString = plural(seconds, 'second')
+						let seconds = arn.inSeconds(now, timeStamp)
+						remainingString = arn.plural(seconds, 'second')
 					}
 				}
 			}

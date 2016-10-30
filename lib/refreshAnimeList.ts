@@ -1,9 +1,9 @@
-import * as arn from './'
+import * as arn from '.'
 import * as Promise from 'bluebird'
 import { User } from './interfaces/User'
 
 // refreshAnimeList
-export let refreshAnimeList = Promise.promisify(function(user: User, listProvider, animeProvider, airingDateProvider, listProviderSettings, cacheKey, callback) {
+export const refreshAnimeList = Promise.promisify(function(user: User, listProvider, animeProvider, airingDateProvider, listProviderSettings, cacheKey, callback) {
 	return listProvider.getAnimeList(listProviderSettings.userName, (error, watchingOnProvider) => {
 		if(error) {
 			callback(error, watchingOnProvider)
@@ -21,9 +21,9 @@ export let refreshAnimeList = Promise.promisify(function(user: User, listProvide
 		}))
 
 		Promise.all(mapToNativeAnime).then(watching => {
-			let tasks = []
+			let tasks = new Array<Promise<any>>()
 
-			watching.forEach(entry => {
+			watching.forEach((entry: any) => {
 				// Airing date
 				tasks.push(airingDateProvider.getAiringDate(entry).then(airingDate => entry.airingDate = airingDate))
 

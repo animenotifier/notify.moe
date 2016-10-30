@@ -138,9 +138,11 @@ else
 		header
 			h2 Anime
 		
-		input#search(type='text', placeholder='Search...', onkeyup='window.searchAnime();', onfocus='this.select();', disabled, data-count=animeToIdCount)
-
-		#search-results
+		#search-container
+			input#search(type='text', placeholder='Search...', onkeyup='window.searchAnime();', onfocus='this.select();', disabled, data-count=animeToIdCount)
+		
+		#search-results-container
+			#search-results
 
 		if popularAnime
 			h3 Popular

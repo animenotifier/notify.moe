@@ -2,7 +2,7 @@ import { User } from './interfaces/User'
 
 const userNameTakenMessage = 'Username is already taken.'
 
-export function changeNick(user: User, newNick: string) {
+export function changeNick(user: User, newNick: string): Promise<any> {
 	let oldNick = user.nick
 
 	if(oldNick === newNick)

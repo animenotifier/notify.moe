@@ -1,10 +1,9 @@
-
-export function inSeconds(a: Date, b: Date): number {
-	return b.valueOf() - a.valueOf()
+export function inSeconds(a: number, b: number): number {
+	return b - a
 }
 
-export function inMinutes(a: Date, b: Date): number {
-	let val = (b.valueOf() - a.valueOf()) / 60.0
+export function inMinutes(a: number, b: number): number {
+	let val = (b - a) / 60.0
 
 	if(Math.abs(val) < 1)
 		return 0
@@ -12,8 +11,8 @@ export function inMinutes(a: Date, b: Date): number {
 		return Math.ceil(val)
 }
 
-export function inHours(a: Date, b: Date): number {
-	let val = (b.valueOf() - a.valueOf()) / (60 * 60.0)
+export function inHours(a: number, b: number): number {
+	let val = (b - a) / (60 * 60.0)
 
 	if(Math.abs(val) < 1)
 		return 0
@@ -21,8 +20,8 @@ export function inHours(a: Date, b: Date): number {
 		return Math.ceil(val)
 }
 
-export function inDays(a: Date, b: Date): number {
-	let val = (b.valueOf() - a.valueOf()) / (24 * 60 * 60.0)
+export function inDays(a: number, b: number): number {
+	let val = (b - a) / (24 * 60 * 60.0)
 
 	if(Math.abs(val) < 1)
 		return 0

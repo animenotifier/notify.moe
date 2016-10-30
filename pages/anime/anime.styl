@@ -52,9 +52,6 @@
 	list-style-type none
 	margin-left 0.5em
 
-.genre
-	//
-
 .sources
 	font-size 0.8em
 	opacity 0.5
@@ -86,26 +83,6 @@
 	display flex
 	flex-flow column
 
-.search-performance
-.anime-count
-	float left
-	opacity 0.25
-
-.search-result
-	float left
-	width 100%
-	padding 0.25em 0.5em
-	border-radius 3px
-	box-sizing border-box
-	&:focus
-		background-color rgb(32, 32, 32) !important
-		color rgb(232, 232, 232) !important
-
-#search-results
-	float left
-	width 100%
-	text-align center
-
 .users-count
 	opacity 0.5
 	font-size 0.9em
@@ -113,9 +90,6 @@
 .anime-frontpage
 	h2, h3
 		text-align center
-
-#search
-	float none
 
 .popular-anime-list
 	width 100%
@@ -148,14 +122,34 @@
 		color white !important
 		background-color linkHoverColor
 
-.anime-website-link
-	//
-
 .entry-error
 	color red !important
 
 .entry-ok
 	color green !important
+
+#search
+	float none
+
+#search-results
+	width 100%
+	max-width 560px
+	text-align left
+	margin 0 auto
+
+.search-performance, .anime-count
+	opacity 0.25
+	text-align center !important
+
+.search-result
+	float left
+	width 100%
+	padding 0.25em 0.5em
+	border-radius 3px
+	box-sizing border-box
+	&:focus
+		background-color rgb(32, 32, 32) !important
+		color rgb(232, 232, 232) !important
 
 @media only screen and (max-width: 800px)
 	.anime-header
@@ -166,14 +160,3 @@
 	.anime-image-container
 		text-align center
 		flex-grow 1
-
-	// .anime-image-container
-	// 	width 100%
-	// 	text-align center
-
-	// .anime-summary
-	// 	margin-left 0
-	// 	margin-top 1em
-	//
-	// .anime-summary-header
-	// 	display block

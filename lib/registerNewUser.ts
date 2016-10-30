@@ -1,12 +1,13 @@
-let Promise = require('bluebird')
-let request = require('request-promise')
-let shortid = require('shortid')
-let gravatar = require('gravatar')
-let chalk = require('chalk')
+import * as arn from '.'
+import * as Promise from 'bluebird'
+import * as chalk from 'chalk'
+import * as shortid from 'shortid'
+import * as gravatar from 'gravatar'
+import { User } from './interfaces/User'
 
-arn.registerNewUser = function(userData) {
+export function registerNewUser(userData: User) {
 	let now = new Date()
-	let user = {
+	let user: User = <User> {
 		id: shortid.generate(),
 		nick: '',
 		role: '',
@@ -27,7 +28,7 @@ arn.registerNewUser = function(userData) {
 		listProviders: {},
 		sortBy: 'airingDate',
 		titleLanguage: 'romaji',
-		pushEndpoints: {},
+		pushEndpoints: <Map<string, any>> {},
 		following: [],
 		registered: now.toISOString(),
 		lastLogin: now.toISOString(),

@@ -1,23 +1,25 @@
-let Promise = require('bluebird')
+import * as arn from '.'
+import * as Promise from 'bluebird'
+import { User } from './interfaces/User'
 
-let getUserDate = (user, orderBy) => {
+function getUserDate(user, orderBy) {
 	switch(orderBy) {
 		case 'joindate':
 			return user.registered
-		
+
 		case 'login':
 			return user.lastLogin
-		
+
 		case 'active':
 			return user.lastView ? user.lastView.date : user.lastLogin
 	}
 }
 
-let getAddUserFunction = orderBy => {
-	return (user, categories) => {
+function getAddUserFunction(orderBy): Function {
+	return function(user: User, categories): boolean {
 		let date = new Date(getUserDate(user, orderBy))
 		let now = new Date()
-		let seconds = Math.floor((now - date) / 1000)
+		let seconds = Math.floor((now.valueOf() - date.valueOf()) / 1000)
 		let days = seconds / 60 / 60 / 24
 		let categoryName = 'Ojii-san'
 
@@ -37,8 +39,8 @@ let getAddUserFunction = orderBy => {
 	}
 }
 
-arn.userOrderBy = {
-	countries: {
+export const userOrderBy = {
+	'countries': {
 		getCategories: () => {
 			return {}
 		},
@@ -99,7 +101,7 @@ arn.userOrderBy = {
 		}
 	},
 
-	login: {
+	'login': {
 		getCategories: () => {
 			return {
 				'Last 24 hours': [],
@@ -112,7 +114,7 @@ arn.userOrderBy = {
 		addUser: getAddUserFunction('login')
 	},
 
-	joindate: {
+	'joindate': {
 		getCategories: () => {
 			return {
 				'Last 24 hours': [],
@@ -124,8 +126,8 @@ arn.userOrderBy = {
 
 		addUser: getAddUserFunction('joindate')
 	},
-	
-	active: {
+
+	'active': {
 		getCategories: () => {
 			return {
 				'Last 24 hours': [],
@@ -138,7 +140,7 @@ arn.userOrderBy = {
 		addUser: getAddUserFunction('active')
 	},
 
-	osu: {
+	'osu': {
 		getCategories: () => {
 			return {
 				'8k pp': [],
@@ -162,13 +164,13 @@ arn.userOrderBy = {
 			else if(user.osuDetails.pp >= 8000)
 				categories['8k pp'].push(user)
 			else
-				categories[parseInt(user.osuDetails.pp / 1000) + 'k pp'].push(user)
+				categories[Math.round(user.osuDetails.pp / 1000) + 'k pp'].push(user)
 
 			return true
 		}
 	},
 
-	staff: {
+	'staff': {
 		getCategories: () => {
 			return {
 				'Developers': [],
@@ -218,7 +220,7 @@ arn.userOrderBy = {
 				return true
 			}
 
-			let category = (parseInt(animeList.watching.length / 10) * 10) + '+'
+			let category = (Math.round(animeList.watching.length / 10) * 10) + '+'
 			categories[category].push(user)
 			return true
 		})
