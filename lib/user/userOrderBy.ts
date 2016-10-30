@@ -1,6 +1,6 @@
-import * as arn from 'lib'
+import * as arn from 'arn'
 import * as Promise from 'bluebird'
-import { User } from 'lib/interfaces/User'
+import { User } from 'arn/interfaces/User'
 
 function getUserDate(user, orderBy) {
 	switch(orderBy) {

@@ -22,7 +22,8 @@ exports.get = function(request, response) {
 	}).catch(error => {
 		response.writeHead(HTTP.BAD_REQUEST)
 		response.json({
-			error: error.toString()
+			error: error.toString(),
+			stack: error.stack ? error.stack.toString().replace(/\/home\/eduard\//g, '').split('\n') : ''
 		})
 	})
 }

@@ -1,5 +1,5 @@
-import { User } from 'lib/interfaces/User'
-import { Location } from 'lib/interfaces/Location'
+import { User } from 'arn/interfaces/User'
+import { Location } from 'arn/interfaces/Location'
 import * as request from 'request-promise'
 
 export async function getLocation(user: User): Promise<Location> {

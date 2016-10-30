@@ -1,7 +1,7 @@
-import * as arn from 'lib'
+import * as arn from 'arn'
 import * as Promise from 'bluebird'
-import { User } from 'lib/interfaces/User'
-import { Notification } from 'lib/interfaces/Notification'
+import { User } from 'arn/interfaces/User'
+import { Notification } from 'arn/interfaces/Notification'
 
 const webPush = require('web-push')
 const vapid = arn.api.vapid

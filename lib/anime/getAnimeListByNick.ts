@@ -1,4 +1,4 @@
-import * as arn from 'lib'
+import * as arn from 'arn'
 import * as Promise from 'bluebird'
 
 export function getAnimeListByNick(nick: string, clearCache: boolean) {

@@ -1,4 +1,4 @@
-import * as arn from 'lib/lib'
+import * as arn from 'arn/lib'
 declare var global: any
 
 let app = require('aero')()

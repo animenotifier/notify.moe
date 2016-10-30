@@ -1,5 +1,5 @@
-import * as arn from 'lib'
-import { User } from 'lib/interfaces/User'
+import * as arn from 'arn'
+import { User } from 'arn/interfaces/User'
 
 export async function getUserByNick(nick: string): Promise<User> {
 	// Very old Android app requests
