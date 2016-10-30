@@ -2,12 +2,12 @@ import * as arn from '.'
 import * as Promise from 'bluebird'
 import { User } from './interfaces/User'
 import { Notification } from './interfaces/Notification'
-const webPush = require('web-push')
 
-const vapid = webPush.generateVAPIDKeys()
+const webPush = require('web-push')
+const vapid = arn.api.vapid
 
 webPush.setGCMAPIKey(arn.api.gcm.serverKey)
-webPush.setVapidDetails('mailto:push@notify.moe', vapid.publicKey, vapid.privateKey)
+webPush.setVapidDetails(vapid.subject, vapid.publicKey, vapid.privateKey)
 
 export function sendNotification(user: User, notification: Notification) {
 	if(!arn.production)
@@ -29,6 +29,7 @@ export function sendNotification(user: User, notification: Notification) {
 				return
 
 			webPush.sendNotification(subscription, JSON.stringify(notification), { TTL: 24 * 60 * 60 * 60 })
+			.catch(console.error)
 		})
 	})
 
