@@ -1,4 +1,4 @@
-import { User } from './interfaces/User'
+import { User } from 'lib/interfaces/User'
 
 const userNameTakenMessage = 'Username is already taken.'
 

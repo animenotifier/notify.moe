@@ -1,5 +1,5 @@
-import * as arn from '.'
-import { User } from './interfaces/User'
+import * as arn from 'lib'
+import { User } from 'lib/interfaces/User'
 
 export const animeListCacheTime = 20 * 60 * 1000
 

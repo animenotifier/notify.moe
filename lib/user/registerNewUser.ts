@@ -1,9 +1,9 @@
-import * as arn from '.'
+import * as arn from 'lib'
 import * as Promise from 'bluebird'
 import * as chalk from 'chalk'
 import * as shortid from 'shortid'
 import * as gravatar from 'gravatar'
-import { User } from './interfaces/User'
+import { User } from 'lib/interfaces/User'
 
 export function registerNewUser(userData: User) {
 	let now = new Date()

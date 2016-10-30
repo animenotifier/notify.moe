@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { Database } from './interfaces/Database'
+import { Database } from 'lib/interfaces/Database'
 
 const aerospike = require('aero-aerospike')
 

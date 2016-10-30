@@ -1,4 +1,4 @@
-import { User } from './interfaces/User'
+import { User } from 'lib/interfaces/User'
 
 export function isActiveUser(user: User): boolean {
 	if(user.nick.startsWith('g'))

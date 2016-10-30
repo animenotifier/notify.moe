@@ -14,7 +14,8 @@
         "noLib": false,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true,
-		"strictNullChecks": true
+		"strictNullChecks": true,
+		"baseUrl": "./"
     },
 	"include": [
 		"lib/**/*"
