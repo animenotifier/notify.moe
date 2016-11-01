@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"description": "Anime Release Notifier will notify you when a new episode of your favourite anime has been released.",
 	"dependencies": {
-		"aero": "*",
+		"aero": "git+https://git@github.com/aerojs/aero.git",
 		"aero-reset": "*",
 		"aero-ajax": "*",
 		"aero-font-awesome": "*",
