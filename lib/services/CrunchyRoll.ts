@@ -6,7 +6,7 @@ import * as request from 'request-promise'
 let xml2js: any = bluebird.promisifyAll(xml2jsNode)
 let striptags = require('striptags')
 
-export class CrunchyRoll {
+class CrunchyRoll {
 	static cacheTime = 20 * 60 * 1000
 	static rssLinkRegEx = /(http:\/\/www\.crunchyroll\.com\/[^"]+?\.rss)/
 
@@ -23,7 +23,7 @@ export class CrunchyRoll {
 		strict: true			// Set sax-js to strict or non-strict parsing mode. Defaults to true which is highly recommended.
 	})
 
-	static async getAnimeInfo(anime) {
+	async getAnimeInfo(anime) {
 		// Modifications for the user anime list
 		let forUser = crunchy => {
 			if(crunchy.episodes) {
@@ -141,3 +141,5 @@ export class CrunchyRoll {
 		return forUser(crunchy)
 	}
 }
+
+module.exports = new CrunchyRoll()
