@@ -35,6 +35,7 @@
 		"request-promise": "*",
 		"shortid": "*",
 		"striptags": "*",
+		"typescript": "*",
 		"useragent": "*",
 		"web-push": "*",
 		"xml2js": "*",
@@ -47,6 +48,9 @@
 		"@types/request-promise": "*",
 		"@types/shortid": "*",
 		"@types/xml2js": "*"
+	},
+	"scripts": {
+		"postinstall": "node_modules/typescript/bin/tsc"
 	},
 	"keywords": [
 		"anime",
