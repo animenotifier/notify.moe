@@ -7,7 +7,7 @@ import { User } from 'arn/interfaces/User'
 
 export function registerNewUser(userData: User) {
 	let now = new Date()
-	let user: User = <User> {
+	let user: User = {
 		id: shortid.generate(),
 		nick: '',
 		role: '',
