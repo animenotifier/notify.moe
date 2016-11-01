@@ -18,7 +18,7 @@ window.loadAnimeList = function(clearCache) {
 
 	// Loading animation
 	animeList.innerHTML =
-		'<div class="anime-list"><div class="sk-folding-cube">' +
+		'<div class="anime-list appear"><div class="sk-folding-cube">' +
 			'<div class="sk-cube1 sk-cube"></div>' +
 			'<div class="sk-cube2 sk-cube"></div>' +
 			'<div class="sk-cube4 sk-cube"></div>' +
