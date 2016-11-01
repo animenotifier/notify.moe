@@ -50,7 +50,7 @@
 		"@types/xml2js": "*"
 	},
 	"scripts": {
-		"postinstall": "node_modules/typescript/bin/tsc && ln -s lib node_modules/arn"
+		"postinstall": "./node_modules/typescript/bin/tsc && ln -fs ./lib ./node_modules/arn"
 	},
 	"keywords": [
 		"anime",
