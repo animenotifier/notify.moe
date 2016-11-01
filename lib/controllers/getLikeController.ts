@@ -1,3 +1,5 @@
+import * as arn from 'arn'
+
 const HTTP = require('http-status-codes')
 
 export function getLikeController(type: string) {
@@ -21,7 +23,7 @@ export function getLikeController(type: string) {
 				return
 			}
 
-			let element = await this.db.get(type, id)
+			let element = await arn.db.get(type, id)
 
 			if(!element.likes)
 				element.likes = []
@@ -33,7 +35,7 @@ export function getLikeController(type: string) {
 
 			element.likes.push(user.id)
 
-			await this.db.set(type, element.id, {
+			await arn.db.set(type, element.id, {
 				likes: element.likes
 			})
 

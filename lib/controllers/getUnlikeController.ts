@@ -1,3 +1,5 @@
+import * as arn from 'arn'
+
 const HTTP = require('http-status-codes')
 
 export function getUnlikeController(type: string) {
@@ -21,7 +23,7 @@ export function getUnlikeController(type: string) {
 				return
 			}
 
-			let element = await this.db.get(type, id)
+			let element = await arn.db.get(type, id)
 
 			if(!element.likes)
 				element.likes = []
@@ -35,7 +37,7 @@ export function getUnlikeController(type: string) {
 
 			element.likes.splice(index, 1)
 
-			await this.db.set(type, element.id, {
+			await arn.db.set(type, element.id, {
 				likes: element.likes
 			})
 

@@ -43,31 +43,31 @@ exports.post = function*(request, response) {
 	} else if(key.startsWith('providers.')) {
 		// arn.userListCache.flushAll()
 	}
-	
+
 	if(key === 'email') {
 		if(value.endsWith('googlemail.com'))
 			value = value.replace('googlemail.com', 'gmail.com')
-		
+
 		if(!emailRegEx.test(value)) {
 			response.writeHead(HTTP.BAD_REQUEST)
 			response.end('Invalid email')
 			return
 		}
-		
+
 		try {
 			yield arn.db.get('EmailToUser', value)
-			
+
 			response.writeHead(HTTP.BAD_REQUEST)
 			response.end('Email already used by another user')
 			return
 		} catch(error) {
 			if(user.email)
 				yield arn.db.remove('EmailToUser', user.email)
-			
+
 			yield arn.db.set('EmailToUser', value, {
 				userId: user.id
 			})
-			
+
 			user.avatar = gravatar.url(value)
 		}
 	}
@@ -92,10 +92,10 @@ exports.post = function*(request, response) {
 	}
 
 	arn.db.set('Users', user.id, user)
-		.then(() => response.end())
-		.catch(error => {
-			console.error(error)
-			response.writeHead(HTTP.BAD_REQUEST)
-			response.end(error.message)
-		})
+	.then(() => response.end())
+	.catch(error => {
+		console.error(error)
+		response.writeHead(HTTP.BAD_REQUEST)
+		response.end(error.message)
+	})
 }

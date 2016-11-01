@@ -1,6 +1,13 @@
 var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var userName = $('nick').textContent.trim();
 
+const loadingMessages = [
+	'We\'re testing your patience...',
+	'The bits are flowing slowly today...',
+	'Calculating who is best girl...',
+	'Connecting to another world line...'
+]
+
 window.getWeekDay = function(timeStamp) {
 	var date = new Date(timeStamp * 1000);
 	return weekDays[date.getDay()];
@@ -11,12 +18,13 @@ window.loadAnimeList = function(clearCache) {
 
 	// Loading animation
 	animeList.innerHTML =
-		'<div class="sk-folding-cube">' +
+		'<div class="anime-list"><div class="sk-folding-cube">' +
 			'<div class="sk-cube1 sk-cube"></div>' +
 			'<div class="sk-cube2 sk-cube"></div>' +
 			'<div class="sk-cube4 sk-cube"></div>' +
 			'<div class="sk-cube3 sk-cube"></div>' +
-		'</div>';
+		'</div>' +
+		`<div class="loading-message">${loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}</div></div>`;
 
 	$.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(response => {
 		if(response && response.error) {

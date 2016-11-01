@@ -1,6 +1,8 @@
 export const listProviders = {
 	AniList: require('./AniList'),
-	MyAnimeList: require('./MyAnimeList')
+	HummingBird: require('./HummingBird'),
+	MyAnimeList: require('./MyAnimeList'),
+	AnimePlanet: require('./AnimePlanet')
 }
 
 export const animeProviders = {

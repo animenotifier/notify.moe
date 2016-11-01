@@ -1,33 +1,33 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "isolatedModules": false,
-        "jsx": "react",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "declaration": false,
-        "noImplicitAny": false,
-        "noImplicitUseStrict": false,
-        "removeComments": true,
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"isolatedModules": false,
+		"jsx": "react",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"declaration": false,
+		"noImplicitAny": false,
+		"noImplicitUseStrict": false,
+		"removeComments": true,
 		"noResolve": false,
-        "noLib": false,
-        "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true,
+		"noLib": false,
+		"preserveConstEnums": true,
+		"suppressImplicitAnyIndexErrors": true,
 		"strictNullChecks": true,
 		"baseUrl": "./"
-    },
+	},
 	"include": [
 		"lib/**/*"
 	],
-    "exclude": [
-        "typings/browser",
-        "typings/browser.d.ts"
-    ],
-    "compileOnSave": true,
-    "buildOnSave": false,
-    "atom": {
-        "rewriteTsconfig": false
-    }
+	"exclude": [
+		"typings/browser",
+		"typings/browser.d.ts"
+	],
+	"compileOnSave": true,
+	"buildOnSave": false,
+	"atom": {
+		"rewriteTsconfig": false
+	}
 }

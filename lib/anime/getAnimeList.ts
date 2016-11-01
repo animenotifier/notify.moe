@@ -40,7 +40,7 @@ async function sendNotifications(user: User, animeList, oldAnimeList) {
 	return animeList
 }
 
-export async function getAnimeList(user: User, clearCache: boolean) {
+export function getAnimeList(user: User, clearCache: boolean): Promise<any> {
 	const listProviderName = user.providers.list
 	const listProvider = arn.listProviders[listProviderName]
 	const animeProviderName = user.providers.anime
@@ -61,7 +61,7 @@ export async function getAnimeList(user: User, clearCache: boolean) {
 		.then(animeList => sendNotifications(user, animeList, oldAnimeList))
 	}
 
-	await arn.db.get('AnimeLists', user.id).then(animeList => {
+	return arn.db.get('AnimeLists', user.id).then(animeList => {
 		let now = new Date()
 		let generated = new Date(animeList.generated)
 
@@ -71,10 +71,9 @@ export async function getAnimeList(user: User, clearCache: boolean) {
 			return refresh(animeList)
 		}
 	}).catch(error => {
-		if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND') {
+		if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND')
 			return refresh(undefined)
-		} else {
-			throw error
-		}
+
+		throw error
 	})
 }

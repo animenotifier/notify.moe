@@ -1,12 +1,9 @@
 import * as arn from '../'
-import { Anime } from '../interfaces/Anime'
 import * as bluebird from 'bluebird'
 import * as xml2js from 'xml2js'
 import * as NodeCache from 'node-cache'
 import * as request from 'request-promise'
-
-const xml2jsAsync: any = bluebird.promisifyAll(xml2js)
-const NodeCacheAsync: any = bluebird.promisifyAll(NodeCache)
+import { Anime } from '../interfaces/Anime'
 
 let watch = require('node-watch')
 
@@ -28,21 +25,21 @@ class Nyaa {
 		'User-Agent': 'Anime Release Notifier'
 	}
 
-	static xmlParser = new xml2jsAsync.Parser({
+	static xmlParser: any = bluebird.promisifyAll(new xml2js.Parser({
 		explicitArray: false,
 		ignoreAttrs: true,
 		trim: true,
 		normalize: true,
 		explicitRoot: false,
 		strict: true
-	})
+	}))
 
 	static episodeRegEx = /[ _]-[ _](\d{2,3})(?:v\d)?[ _][\(\[-]/
 	static batchRegEx = /[^h\d]\d{2,3}-(\d{2,3})[^p\d]/
 
-	static cache = new NodeCacheAsync({
+	static cache: any = bluebird.promisifyAll(new NodeCache({
 		stdTTL: 20 * 60
-	})
+	}))
 
 	async getAnimeInfo(anime: Anime) {
 		let searchTitle = await arn.db.get('AnimeToNyaa', anime.id).then(match => {
