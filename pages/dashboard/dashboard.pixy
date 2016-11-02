@@ -1,2 +1,14 @@
 component Dashboard
-	h1 notify.moe
+	section
+		header
+			h1 ARN 4.0
+		p The next version of notify.moe is currently being built here!
+		hr
+		p Some test links:
+		ul
+			li
+				a.ajax(href="/anime/21499") Sousei no Onmyouji
+			li
+				a.ajax(href="/anime/1000001") RWBY
+			li
+				a(href="/api/anime/1000001") RWBY (JSON API)

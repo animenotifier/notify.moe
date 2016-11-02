@@ -1,7 +1,32 @@
 component Layout(content string, css string)
 	html
 		head
-			title Test
+			title ARN 4.0 - Beta
 			style!= css
 		body
-			main#content
+			#container
+				#header-container
+					#header.header-logged-in
+						nav#navigation
+							a.navigation-link.navigation-link-left.ajax(href="/")
+								.navigation-button
+									i.fa.fa-dashboard
+									span.navigation-text Dash
+				#content-container
+					main#content.fade!= content
+			
+			LoadingAnimation
+			
+			script(src="/scripts.js")
+
+component LoadingAnimation
+	#loading-animation.sk-cube-grid.fade
+		.sk-cube.sk-cube1
+		.sk-cube.sk-cube2
+		.sk-cube.sk-cube3
+		.sk-cube.sk-cube4
+		.sk-cube.sk-cube5
+		.sk-cube.sk-cube6
+		.sk-cube.sk-cube7
+		.sk-cube.sk-cube8
+		.sk-cube.sk-cube9
