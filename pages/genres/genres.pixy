@@ -1,0 +1,13 @@
+component GenreOverview
+	section
+		header
+			h2 Genres
+		
+		each genre in Genres
+			p
+				a(href="/genres/" + arn.FixGenre(genre))
+					Icon(GenreIcons[genre])
+					span= genre
+
+component Icon(name string)
+	i(class="fa fa-fw fa-" + name)

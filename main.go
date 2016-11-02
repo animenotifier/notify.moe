@@ -1,10 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
+	"sort"
 	"strconv"
+	"strings"
+	"time"
 
 	"github.com/aerojs/aero"
 	"github.com/animenotifier/arn"
@@ -32,6 +34,21 @@ func main() {
 
 	app.Get("/_/", func(ctx *aero.Context) {
 		ctx.HTML(Render.Dashboard())
+	})
+
+	app.Get("/all/anime", func(ctx *aero.Context) {
+		start := time.Now()
+		var titles []string
+
+		results := make(chan *arn.Anime)
+		arn.Scan("Anime", results)
+
+		for anime := range results {
+			titles = append(titles, anime.Title.Romaji)
+		}
+		sort.Strings(titles)
+
+		ctx.Text(s(len(titles)) + " anime fetched in " + s(time.Since(start)) + "\n\n" + strings.Join(titles, "\n"))
 	})
 
 	app.Get("/anime/:id", func(ctx *aero.Context) {
@@ -82,18 +99,12 @@ func main() {
 		ctx.JSON(user)
 	})
 
-	app.Get("/all", func(ctx *aero.Context) {
-		var buffer bytes.Buffer
+	app.Get("/genres", func(ctx *aero.Context) {
+		ctx.HTML(Render.Layout(Render.GenreOverview(), css))
+	})
 
-		results := make(chan *arn.Anime)
-		arn.Scan("Anime", results)
-
-		for anime := range results {
-			buffer.WriteString(anime.Title.Romaji)
-			buffer.WriteByte('\n')
-		}
-
-		ctx.Text(buffer.String())
+	app.Get("/_/genres", func(ctx *aero.Context) {
+		ctx.HTML(Render.GenreOverview())
 	})
 
 	app.Get("/scripts.js", func(ctx *aero.Context) {
