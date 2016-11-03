@@ -1,0 +1,2 @@
+component Icon(name string)
+	i(class="fa fa-fw fa-" + name)

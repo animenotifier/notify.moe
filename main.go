@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"sort"
 	"strconv"
@@ -11,10 +10,6 @@ import (
 	"github.com/aerojs/aero"
 	"github.com/animenotifier/arn"
 )
-
-func s(v interface{}) string {
-	return fmt.Sprintf("%v", v)
-}
 
 func main() {
 	app := aero.New()
@@ -107,39 +102,27 @@ func main() {
 		ctx.HTML(Render.GenreOverview())
 	})
 
+	app.Get("/genres/:name", func(ctx *aero.Context) {
+		genreName := ctx.Params.ByName("name")
+
+		var animeList []*arn.Anime
+		results := make(chan *arn.Anime)
+		arn.Scan("Anime", results)
+
+		for anime := range results {
+			genres := Map(anime.Genres, arn.FixGenre)
+			if Contains(genres, genreName) {
+				animeList = append(animeList, anime)
+			}
+		}
+
+		ctx.HTML(Render.Layout(Render.AnimeInGenre(genreName, animeList), css))
+	})
+
 	app.Get("/scripts.js", func(ctx *aero.Context) {
 		ctx.SetHeader("Content-Type", "application/javascript")
 		ctx.Respond(js)
 	})
-
-	// layout := aero.NewTemplate("layout.pug")
-	// template := aero.NewTemplate("anime.pug")
-
-	// app.Get("/anime/:id", func(ctx *aero.Context) {
-	// 	id, _ := strconv.Atoi(ctx.Params.ByName("id"))
-	// 	anime, err := arn.GetAnime(id)
-
-	// 	if err != nil {
-	// 		ctx.Respond("Anime not found")
-	// 		return
-	// 	}
-
-	// 	content := template.Render(map[string]interface{}{
-	// 		"anime": anime,
-	// 	})
-
-	// 	final := layout.Render(map[string]interface{}{
-	// 		"content": content,
-	// 	})
-
-	// 	final = strings.Replace(final, cssSearch, cssReplace, 1)
-
-	// 	ctx.Respond(final)
-	// })
-
-	// app.Get("/t", func(ctx *aero.Context) {
-	// 	ctx.Respond(templates.Hello("abc"))
-	// })
 
 	app.Run()
 }

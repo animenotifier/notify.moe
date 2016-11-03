@@ -41,8 +41,8 @@ component Anime(anime *arn.Anime)
 			.light-button-group
 				each genre in anime.Genres
 					if genre != ""
-						a.light-button.ajax(href="/anime/genres/" + arn.FixGenre(genre))
-							i(class="fa fa-" + GenreIcons[genre] + " fa-fw")
+						a.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
+							Icon(GenreIcons[genre])
 							span= genre
 		
 		if len(anime.Studios) > 0

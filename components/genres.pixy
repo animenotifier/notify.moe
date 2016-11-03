@@ -9,5 +9,7 @@ component GenreOverview
 					Icon(GenreIcons[genre])
 					span= genre
 
-component Icon(name string)
-	i(class="fa fa-fw fa-" + name)
+component AnimeInGenre(genre string, animeList []*arn.Anime)
+	h2= genre
+	each anime in animeList
+		p= anime.Title.Romaji + " (" + s(anime.Watching) + ")"
