@@ -28,6 +28,7 @@ let updateGenres = coroutine(function*() {
 			return {
 				id: anime.id,
 				title: anime.title,
+				image: anime.image ? anime.image : '',
 				watching: anime.watching,
 				startDate: anime.startDate
 			}
