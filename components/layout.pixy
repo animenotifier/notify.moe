@@ -5,19 +5,28 @@ component Layout(content string, css string)
 			style!= css
 		body
 			#container
-				#header-container
-					#header.header-logged-in
-						nav#navigation
-							a.navigation-link.navigation-link-left.ajax(href="/")
-								.navigation-button
-									i.fa.fa-dashboard
-									span.navigation-text Dash
-				#content-container
-					main#content.fade!= content
+				Header
+				Content(content)
 			
 			LoadingAnimation
 			
 			script(src="/scripts.js")
+
+component Header
+	#header-container
+		#header.header-logged-in
+			Navigation
+
+component Content(content string)
+	#content-container
+		main#content.fade!= content
+
+component Navigation
+	nav#navigation
+		a.navigation-link.navigation-link-left.ajax(href="/")
+			.navigation-button
+				i.fa.fa-dashboard
+				span.navigation-text Dash
 
 component LoadingAnimation
 	#loading-animation.sk-cube-grid.fade

@@ -23,15 +23,71 @@ func main() {
 	scripts, _ := ioutil.ReadFile("scripts.js")
 	js := string(scripts)
 
-	app.Get("/", func(ctx *aero.Context) {
-		ctx.HTML(Render.Layout(Render.Dashboard(), css))
+	// Define layout
+	app.Layout = func(ctx *aero.Context, content string) string {
+		return Render.Layout(content, css)
+	}
+
+	app.Register("/", func(ctx *aero.Context) string {
+		return ctx.HTML(Render.Dashboard())
 	})
 
-	app.Get("/_/", func(ctx *aero.Context) {
-		ctx.HTML(Render.Dashboard())
+	app.Register("/genres", func(ctx *aero.Context) string {
+		return ctx.HTML(Render.GenreOverview())
 	})
 
-	app.Get("/all/anime", func(ctx *aero.Context) {
+	type GenreInfo struct {
+		Genre     string       `json:"genre"`
+		AnimeList []*arn.Anime `json:"animeList"`
+	}
+
+	app.Register("/genres/:name", func(ctx *aero.Context) string {
+		genreName := ctx.Params.ByName("name")
+		genreInfo := new(GenreInfo)
+
+		err := arn.GetObject("Genres", genreName, genreInfo)
+
+		if err != nil {
+			return err.Error()
+		}
+
+		return ctx.HTML(Render.AnimeInGenre(genreInfo.Genre, genreInfo.AnimeList))
+
+		// var animeList []*arn.Anime
+		// results := make(chan *arn.Anime)
+		// arn.Scan("Anime", results)
+
+		// for anime := range results {
+		// 	genres := Map(anime.Genres, arn.FixGenre)
+		// 	if Contains(genres, genreName) {
+		// 		animeList = append(animeList, anime)
+		// 	}
+		// }
+
+		// return ctx.HTML(Render.AnimeInGenre(genreName, animeList))
+	})
+
+	app.Register("/anime/:id", func(ctx *aero.Context) string {
+		id, _ := strconv.Atoi(ctx.Params.ByName("id"))
+		anime, err := arn.GetAnime(id)
+
+		if err != nil {
+			return ctx.Text("Anime not found")
+		}
+
+		return ctx.HTML(Render.Anime(anime))
+	})
+
+	// ---------------------------------------------------------------
+	// API
+	// ---------------------------------------------------------------
+
+	app.Get("/scripts.js", func(ctx *aero.Context) string {
+		ctx.SetHeader("Content-Type", "application/javascript")
+		return js
+	})
+
+	app.Get("/all/anime", func(ctx *aero.Context) string {
 		start := time.Now()
 		var titles []string
 
@@ -43,85 +99,29 @@ func main() {
 		}
 		sort.Strings(titles)
 
-		ctx.Text(s(len(titles)) + " anime fetched in " + s(time.Since(start)) + "\n\n" + strings.Join(titles, "\n"))
+		return ctx.Text(s(len(titles)) + " anime fetched in " + s(time.Since(start)) + "\n\n" + strings.Join(titles, "\n"))
 	})
 
-	app.Get("/anime/:id", func(ctx *aero.Context) {
+	app.Get("/api/anime/:id", func(ctx *aero.Context) string {
 		id, _ := strconv.Atoi(ctx.Params.ByName("id"))
 		anime, err := arn.GetAnime(id)
 
 		if err != nil {
-			ctx.Text("Anime not found")
-			return
+			return ctx.Text("Anime not found")
 		}
 
-		ctx.HTML(Render.Layout(Render.Anime(anime), css))
+		return ctx.JSON(anime)
 	})
 
-	app.Get("/_/anime/:id", func(ctx *aero.Context) {
-		id, _ := strconv.Atoi(ctx.Params.ByName("id"))
-		anime, err := arn.GetAnime(id)
-
-		if err != nil {
-			ctx.Text("Anime not found")
-			return
-		}
-
-		ctx.HTML(Render.Anime(anime))
-	})
-
-	app.Get("/api/anime/:id", func(ctx *aero.Context) {
-		id, _ := strconv.Atoi(ctx.Params.ByName("id"))
-		anime, err := arn.GetAnime(id)
-
-		if err != nil {
-			ctx.Text("Anime not found")
-			return
-		}
-
-		ctx.JSON(anime)
-	})
-
-	app.Get("/api/users/:nick", func(ctx *aero.Context) {
+	app.Get("/api/users/:nick", func(ctx *aero.Context) string {
 		nick := ctx.Params.ByName("nick")
 		user, err := arn.GetUserByNick(nick)
 
 		if err != nil {
-			ctx.Text("User not found")
-			return
+			return ctx.Text("User not found")
 		}
 
-		ctx.JSON(user)
-	})
-
-	app.Get("/genres", func(ctx *aero.Context) {
-		ctx.HTML(Render.Layout(Render.GenreOverview(), css))
-	})
-
-	app.Get("/_/genres", func(ctx *aero.Context) {
-		ctx.HTML(Render.GenreOverview())
-	})
-
-	app.Get("/genres/:name", func(ctx *aero.Context) {
-		genreName := ctx.Params.ByName("name")
-
-		var animeList []*arn.Anime
-		results := make(chan *arn.Anime)
-		arn.Scan("Anime", results)
-
-		for anime := range results {
-			genres := Map(anime.Genres, arn.FixGenre)
-			if Contains(genres, genreName) {
-				animeList = append(animeList, anime)
-			}
-		}
-
-		ctx.HTML(Render.Layout(Render.AnimeInGenre(genreName, animeList), css))
-	})
-
-	app.Get("/scripts.js", func(ctx *aero.Context) {
-		ctx.SetHeader("Content-Type", "application/javascript")
-		ctx.Respond(js)
+		return ctx.JSON(user)
 	})
 
 	app.Run()

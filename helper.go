@@ -4,7 +4,7 @@ import "fmt"
 
 // Converts anything into a string
 func s(v interface{}) string {
-	return fmt.Sprintf("%v", v)
+	return fmt.Sprint(v)
 }
 
 // Contains ...
