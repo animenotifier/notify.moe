@@ -1,9 +1,8 @@
-component Layout(content string, css string)
+component Layout(content string)
 	html
 		head
 			title ARN 4.0 - Beta
 			meta(name="viewport", content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
-			style!= css
 		body
 			#container
 				Header

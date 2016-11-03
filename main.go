@@ -20,12 +20,14 @@ func main() {
 	animeCSSBytes, _ := ioutil.ReadFile("anime.css")
 	css += string(animeCSSBytes)
 
+	app.SetStyle(css)
+
 	scripts, _ := ioutil.ReadFile("scripts.js")
 	js := string(scripts)
 
 	// Define layout
 	app.Layout = func(ctx *aero.Context, content string) string {
-		return Render.Layout(content, css)
+		return Render.Layout(content)
 	}
 
 	app.Register("/", func(ctx *aero.Context) string {
