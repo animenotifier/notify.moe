@@ -3,7 +3,7 @@ mixin avatar(user, size, target)
 	a.user(class=target ? '' : 'ajax', href='/+' + user.nick, title=user.nick, target=target)
 		if user.avatar
 			if user.avatar.indexOf('gravatar.com') !== -1
-				img.user-image(src=user.avatar + `?s=${size}&r=x&d=mm`, alt=user.nick)
+				img.user-image(src=user.avatar + `?s=${size * 2}&r=x&d=mm`, alt=user.nick)
 			else
 				img.user-image(src=user.avatar, alt=user.nick)
 		else
