@@ -35,8 +35,8 @@ function subscribe() {
 
 	navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 		serviceWorkerRegistration.pushManager.subscribe({
-			userVisibleOnly: true,
-			applicationServerKey: new TextEncoder('binary').encode('BLxjquZGLvRnYGkV_xlkuAIilZzHJLDdGUZAmvq4pqev5uQHBmYRxJqfbFQFQn2kYfe5SRBwiNfuiakHn-3KR_k')
+			userVisibleOnly: true
+			// applicationServerKey: new TextEncoder('binary').encode('BLxjquZGLvRnYGkV_xlkuAIilZzHJLDdGUZAmvq4pqev5uQHBmYRxJqfbFQFQn2kYfe5SRBwiNfuiakHn-3KR_k')
 		}).then(function(subscription) {
 			// The subscription was successful
 			isPushEnabled = true;
