@@ -44,7 +44,7 @@ func main() {
 	}
 
 	app.Register("/genres/:name", func(ctx *aero.Context) string {
-		genreName := ctx.Params.ByName("name")
+		genreName := ctx.Get("name")
 		genreInfo := new(GenreInfo)
 
 		err := arn.GetObject("Genres", genreName, genreInfo)
@@ -70,7 +70,7 @@ func main() {
 	})
 
 	app.Register("/anime/:id", func(ctx *aero.Context) string {
-		id, _ := strconv.Atoi(ctx.Params.ByName("id"))
+		id, _ := strconv.Atoi(ctx.Get("id"))
 		anime, err := arn.GetAnime(id)
 
 		if err != nil {
@@ -105,7 +105,7 @@ func main() {
 	})
 
 	app.Get("/api/anime/:id", func(ctx *aero.Context) string {
-		id, _ := strconv.Atoi(ctx.Params.ByName("id"))
+		id, _ := strconv.Atoi(ctx.Get("id"))
 		anime, err := arn.GetAnime(id)
 
 		if err != nil {
@@ -116,7 +116,7 @@ func main() {
 	})
 
 	app.Get("/api/users/:nick", func(ctx *aero.Context) string {
-		nick := ctx.Params.ByName("nick")
+		nick := ctx.Get("nick")
 		user, err := arn.GetUserByNick(nick)
 
 		if err != nil {
