@@ -35,7 +35,7 @@
 		"X-Frame-Options": "ALLOWALL"
 	},
 	"database": {
-		"host": "127.0.0.1:3000",
+		"host": "138.68.5.68:3000",
 		"namespace": "arn"
 	},
 	"ports": {
