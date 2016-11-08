@@ -6,7 +6,7 @@ const loadingMessages = [
 	'The bits are flowing slowly today...',
 	'Calculating who is best girl...',
 	'Connecting to another world line...',
-	'Server-chan where are you?...',
+	'Server-chan notice me, please...',
 	'Summoning the loli queen...',
 	'20 years later...'
 ]
