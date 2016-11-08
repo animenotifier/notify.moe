@@ -5,7 +5,10 @@ const loadingMessages = [
 	'We\'re testing your patience...',
 	'The bits are flowing slowly today...',
 	'Calculating who is best girl...',
-	'Connecting to another world line...'
+	'Connecting to another world line...',
+	'Server-chan where are you?...',
+	'Summoning the loli queen...',
+	'20 years later...'
 ]
 
 window.getWeekDay = function(timeStamp) {
