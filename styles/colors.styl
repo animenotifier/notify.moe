@@ -1,0 +1,91 @@
+html, body
+	color rgb(60, 60, 60)
+	background-color rgb(254, 254, 254)
+
+a
+	color mainColor
+	&:hover
+		color hoverColor
+
+#header
+	background-color rgb(245, 245, 245)
+	background-image url("/images/characters/pencil-girl.png")
+	background-repeat no-repeat
+	background-size auto 100%
+	background-position 100% 0%
+
+#slogan
+	color rgb(120, 120, 120)
+
+#content
+	background-color transparent
+
+	a
+		color linkColor
+		&:hover
+			color linkHoverColor
+
+	.active
+		color activeLinkColor
+		&:hover
+			color @color
+
+.navigation-link
+	color rgb(160, 160, 160)
+	&.active
+	&:hover
+		color rgb(80, 80, 80)
+		text-shadow 1px 1px 3px rgba(4, 4, 4, 0.1)
+
+.saving
+	opacity 0.5 !important
+
+input[type="text"]
+input[type="email"]
+input[type="password"]
+input[type="url"]
+input[type="number"]
+textarea
+	color rgb(32, 32, 32)
+	background-color rgb(255, 255, 255)
+	box-shadow none
+	border 1px solid rgba(0, 0, 0, 0.1)
+	&:focus
+		color rgb(0, 0, 0)
+		box-shadow 0 0 6px alpha(mainColor, 20%)
+		border 1px solid mainColor
+	&:disabled
+		background-color rgb(224, 224, 224)
+		cursor not-allowed
+
+button
+select
+	border 1px solid rgb(170, 170, 170)
+	color rgb(32, 32, 32)
+	background linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%)
+	box-shadow 0 0 2px rgb(255, 255, 255), 0 -2px 5px rgba(0, 0, 0, 0.08) inset
+	&:focus
+		color rgb(0, 0, 0)
+		box-shadow 0 0 6px alpha(mainColor, 20%)
+		border 1px solid mainColor
+
+input[type="submit"]:hover
+button:hover
+.button:hover
+	cursor pointer
+	background linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%)
+	text-decoration none
+
+button[disabled]
+	opacity 0.5
+	&:hover
+		cursor not-allowed
+		color rgb(32, 32, 32)
+		background linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%)
+
+.user-name
+	a
+		color rgb(16, 16, 16)
+
+.list-provider-name-highlight
+	color rgb(48, 48, 48)

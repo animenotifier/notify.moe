@@ -1,0 +1,62 @@
+@media only screen and (max-width: 1024px)
+	#header
+		background-image none
+
+@media only screen and (max-width: 930px)
+	#title, #slogan
+		display none
+
+	.navigation-text
+		display none
+
+	.navigation-button i.fa
+		margin-right 0
+
+	.episodes-behind
+		&:before
+			content '+'
+		&:after
+			content ''
+
+	#content
+		padding 1em
+
+	#header
+		text-align center
+
+	#navigation
+		float none
+		display inline-block
+		width auto
+
+@media only screen and (min-width: 1100px)
+	.anime-list-image
+		display block
+
+@media only screen and (max-width: 560px)
+	#navigation
+		padding 0
+
+	.navigation-link-right
+		display none
+
+	.navigation-button i.fa
+		font-size 1.5em
+
+// Remove admin icon
+@media only screen and (max-width: 612px)
+	.navigation-link-right[href='/admin']
+		display none
+
+@media only screen and (max-width: 320px)
+	.navigation-button i.fa
+		font-size 1.4em
+
+@media only screen and (max-height: 700px)
+	.anime-list-image
+		top 0.5em
+		transform translate(10%, 0)
+
+	.anime:hover
+		.anime-list-image
+			transform translate(0, 0)

@@ -1,14 +1,14 @@
 component GenreOverview
-	h2 Genres
+	h2.genre-header Genres
 	
 	div
-		each genre in Genres
+		each genre in arn.Genres
 			a.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
-				Icon(GenreIcons[genre])
+				Icon(arn.GenreIcons[genre])
 				span= genre
 
 component AnimeInGenre(genre string, animeList []*arn.Anime)
-	h2= "#" + genre
+	h2.genre-header= arn.Capitalize(genre)
 	.genre-anime-list
 		each anime in animeList
 			a.genre-anime-link.ajax(href="/anime/" + s(anime.ID))

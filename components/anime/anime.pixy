@@ -22,11 +22,11 @@ component Anime(anime *arn.Anime)
 		if anime.YoutubeID != ""
 			h3.anime-header Video
 			.anime-trailer.video-container
-				iframe.video(src="https://www.youtube.com/embed/" + anime.YoutubeID + "?showinfo=0", frameborder="0", allowfullscreen="allowfullscreen")
+				iframe.video(src="https://www.youtube.com/embed/" + anime.YoutubeID + "?showinfo=0", allowfullscreen="allowfullscreen")
 
 		if anime.Tracks != nil && anime.Tracks.Opening != nil
 			h3.anime-header Tracks
-			iframe(width="100%", height="150", scrolling="no", frameborder="no", src="https://w.soundcloud.com/player/?url=" + anime.Tracks.Opening.URI + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")
+			iframe.anime-track(src="https://w.soundcloud.com/player/?url=" + anime.Tracks.Opening.URI + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")
 
 		//- if user && friendsWatching && friendsWatching.length > 0
 		//- 	include ../messages/avatar.pug
@@ -42,7 +42,7 @@ component Anime(anime *arn.Anime)
 				each genre in anime.Genres
 					if genre != ""
 						a.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
-							Icon(GenreIcons[genre])
+							Icon(arn.GenreIcons[genre])
 							span= genre
 		
 		if len(anime.Studios) > 0

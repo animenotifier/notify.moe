@@ -1,0 +1,101 @@
+.anime-list-container
+	text-align left
+
+.embedded-anime-list-container
+	.anime-list
+		width calc(100% - 225px - 1em)
+	.anime-list-image
+		display block
+
+.anime-list
+	list-style-type none
+	margin 0
+	width 100%
+	max-width 750px
+
+.anime-status-icon
+	margin 0 !important
+
+.anime-list-image
+	display none
+	position fixed
+	top 50%
+	right calc(16px + 1em)
+	z-index 9999
+	width 225px
+	margin 0
+	padding 0
+	opacity 0
+	border-radius 3px
+	box-shadow 0px 0px 8px rgba(0, 0, 0, 0.4)
+	transform translate(10%, -50%)
+	transition all 290ms ease
+	pointer-events none
+
+.anime
+	padding 0.25em 0.75em
+	border uiBorder
+	border-radius 3px
+	margin 0.25em 0
+	background uiBackground
+	display flex
+	flex-direction row
+	transition all 200ms ease
+	&:hover
+		background uiHoverBackground
+		.anime-list-image
+			opacity 1
+			transform translate(0, -50%)
+
+.anime-title
+.anime-view-link
+	color darken(mainColor, 30%) !important
+	&:hover
+		color rgb(255, 32, 12) !important
+
+.anime-title
+	flex-grow 0
+	flex-shrink 1
+	white-space nowrap
+	text-overflow ellipsis
+	overflow hidden
+
+.spacer
+	flex 1
+
+.anime-completed
+.anime-warning
+.anime-up-to-date
+.anime-download-link
+	flex 0 0 32px
+	text-align right
+
+.anime-completed
+	color blue !important
+	opacity 0.25
+	&:hover
+		opacity 0.7
+
+.anime-warning
+	color red !important
+	opacity 0.2
+	&:hover
+		opacity 0.7
+
+.anime-up-to-date
+	color green !important
+	opacity 0.7
+
+.airing-date
+.episodes-behind
+	flex-grow 0
+	flex-shrink 1
+	opacity 0.5
+	text-align right
+	white-space nowrap
+
+.episodes-behind
+	&:before
+		content '+'
+	&:after
+		content ''

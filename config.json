@@ -1,0 +1,39 @@
+{
+	"domain": "notify.moe",
+	"title": "Anime Notifier",
+	"fonts": [
+		"Ubuntu"
+	],
+	"styles": [
+		"reset",
+		"font-awesome",
+		"base",
+		"elements",
+		"layout",
+		"navigation",
+		"headers",
+		"forms",
+		"colors",
+		"animelist",
+		"forum",
+		"settings",
+		"user",
+		"video",
+		"loading",
+		"fade",
+		"mobile"
+	],
+	"static": [
+		"images"
+	],
+	"icons": [
+		"images/characters/arn-waifu.png"
+	],
+	"manifest": {
+		"gcm_sender_id": "941298467524"
+	},
+	"ports": {
+		"http": 4000,
+		"https": 4001
+	}
+}
