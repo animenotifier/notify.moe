@@ -3,7 +3,7 @@ package main
 import (
 	"strconv"
 
-	"github.com/aerojs/aero"
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 )
 

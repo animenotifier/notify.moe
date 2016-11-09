@@ -3,7 +3,7 @@ package main
 import (
 	"io/ioutil"
 
-	"github.com/aerojs/aero"
+	"github.com/aerogo/aero"
 )
 
 var app = aero.New()

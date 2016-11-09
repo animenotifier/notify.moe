@@ -2,11 +2,10 @@ package main
 
 import (
 	"sort"
-	"strconv"
 	"strings"
 	"time"
 
-	"github.com/aerojs/aero"
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 )
 
@@ -27,7 +26,7 @@ func init() {
 	})
 
 	app.Get("/api/anime/:id", func(ctx *aero.Context) string {
-		id, _ := strconv.Atoi(ctx.Get("id"))
+		id, _ := ctx.GetInt("id")
 		anime, err := arn.GetAnime(id)
 
 		if err != nil {
