@@ -15,10 +15,9 @@ else
 			if user
 				.post
 					.post-author
-						a.user.ajax(href='/+' + user.nick, title=user.nick)
-							img.user-image(src=user.avatar ? (user.avatar + '?s=50&r=x') : '/images/elements/no-gravatar.svg')
+						+avatar(user)
 					.post-content
 						textarea#post-input(placeholder='Reply...')
 				.post-input-toolbar
 					.spacer
-					button.post-submit(onclick=`window.replyToThread('${thread.id}')`) Submit
+					button.post-submit(onclick=`$.replyToThread('${thread.id}')`) Submit

@@ -4,7 +4,6 @@
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"isolatedModules": false,
-		"jsx": "react",
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"declaration": false,
@@ -19,7 +18,10 @@
 		"baseUrl": "./"
 	},
 	"include": [
-		"lib/**/*"
+		"globals.d.ts",
+		"lib/**/*",
+		"scripts/**/*",
+		"pages/**/*"
 	],
 	"exclude": [
 		"typings/browser",

@@ -14,13 +14,13 @@ html(lang='en')
 		link(rel='prefetch' href=`/api/searchlist`)
 
 		//- Open Graph
-		if request.og
-			meta(property='og:url', content=request.og.url)
-			meta(property='og:type', content=request.og.type ? request.og.type : 'website')
-			meta(property='og:title', content=request.og.title)
-			meta(property='og:description', content=request.og.description)
-			if request.og.image
-				meta(property='og:image', content=request.og.image)
+		if openGraph
+			meta(property='og:url', content=openGraph.url)
+			meta(property='og:type', content=openGraph.type ? openGraph.type : 'website')
+			meta(property='og:title', content=openGraph.title)
+			meta(property='og:description', content=openGraph.description)
+			if openGraph.image
+				meta(property='og:image', content=openGraph.image)
 		else
 			meta(property='og:url', content=app.package.homepage)
 			meta(property='og:type', content='website')
@@ -38,7 +38,7 @@ html(lang='en')
 			.region-block
 				p
 					img(src='/images/elements/gomennasai.png', alt='Anime Notifier is not available in Japan yet.')
-				p アニメNotifierはまだ日本では利用できません。申し訳ございません。
+				p アニメNotifierはまだ日本では使用できません。申し訳ございません。
 				p Anime Notifier is not available in Japan yet. I apologize for the inconvenience.
 		else if maintenance && !user
 			.maintenance

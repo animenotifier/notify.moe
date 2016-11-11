@@ -66,7 +66,7 @@ exports.render = function(request, render) {
 		nav.push({
 			title: '',
 			url: 'faq',
-			icon: 'question-circle',
+			icon: 'question',
 			float: 'right',
 			tooltip: 'FAQ'
 		})
@@ -74,7 +74,7 @@ exports.render = function(request, render) {
 		nav.push({
 			title: '',
 			url: 'others',
-			icon: 'table',
+			icon: 'th-large',
 			float: 'right',
 			tooltip: 'Others'
 		})
@@ -103,6 +103,6 @@ exports.render = function(request, render) {
 		nav,
 		maintenance: app.maintenance,
 		embedded,
-		request
+		openGraph: request.og
 	})
 }

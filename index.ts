@@ -1,11 +1,7 @@
-import * as arn from 'arn/lib'
-declare var global: any
+import * as arn from 'arn'
 
-let app = require('aero')()
-
-global.app = app
 global.arn = arn
-global.HTTP = require('http-status-codes')
+global.app = require('aero')()
 
 app.on('database ready', db => {
 	global.db = db

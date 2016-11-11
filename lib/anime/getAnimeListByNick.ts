@@ -1,8 +1,9 @@
 import * as arn from 'arn'
-import * as Promise from 'bluebird'
 
-export function getAnimeListByNick(nick: string, clearCache: boolean) {
-	return arn.getUserByNick(nick).then(user => arn.getAnimeList(user, clearCache)).catch(error => {
+export function getAnimeListByNick(nick: string, clearCache: boolean): Promise<any> {
+	return arn.getUserByNick(nick)
+	.then(user => arn.getAnimeList(user, clearCache))
+	.catch(error => {
 		if(error.message === 'AEROSPIKE_ERR_RECORD_NOT_FOUND')
 			return Promise.reject(`User '${nick}' not found`)
 

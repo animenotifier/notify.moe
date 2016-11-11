@@ -30,6 +30,11 @@ node_modules
 # Ignore .DS_Store files on OS X
 .DS_Store
 
+# Typescript folders
+/lib/**/*.js
+/pages/**/*.js
+/scripts/**/*.js
+
 # ARN specific
 /security
 /sessions

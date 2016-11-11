@@ -24,6 +24,6 @@ section
 						td.match-confirm
 							- var providerTitle = match.providerTitle.replace(/'/g, "")
 							- var arnTitle = match.title.replace(/'/g, "")
-							a(href=`javascript:if(window.confirm('Are you sure you want to confirm this match: [${providerTitle}] => [${arnTitle}] ?')) window.confirmMatch('${provider}', '${match.providerId}');`, title='Confirm that this match is correct')
+							a(href=`javascript:if($.confirm('Are you sure you want to confirm this match: [${providerTitle}] => [${arnTitle}] ?')) $.confirmMatch('${provider}', '${match.providerId}');`, title='Confirm that this match is correct')
 								.fa.fa-check
 		p 

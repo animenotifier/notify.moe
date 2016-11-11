@@ -83,8 +83,8 @@ else
 			if user && user.id !== viewUser.id
 				.user-actions
 					- var following = user.following.indexOf(viewUser.id) !== -1
-					button.user-action#follow(onclick=`window.follow('${viewUser.nick}')`, class=following ? 'hidden' : '') Follow
-					button.user-action#unfollow(onclick=`window.unfollow('${viewUser.nick}')`, class=following ? '' : 'hidden') Unfollow
+					button.user-action#follow(onclick=`$.follow('${viewUser.nick}')`, class=following ? 'hidden' : '') Follow
+					button.user-action#unfollow(onclick=`$.unfollow('${viewUser.nick}')`, class=following ? '' : 'hidden') Unfollow
 		
 		if user
 			#anime-list-container(class='category anime-list-container' + (embeddedList ? ' embedded-anime-list-container' : ''), data-logged='true')
@@ -108,7 +108,7 @@ else
 				.embedded-footer-info
 					.embedded-footer-nick= user.nick
 					div
-						a(href='javascript:window.loadAnimeList(true);', title='Refresh list')
+						a(href='javascript:$.loadAnimeList(true);', title='Refresh list')
 							span.fa.fa-refresh.fa-fw
 						span.embedded-footer-separator  / 
 						a(id='list-provider-link', href=null, target='_blank', title=user.providers.list)
