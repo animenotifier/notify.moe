@@ -1,4 +1,5 @@
-let gravatar = require('gravatar')
+import * as arn from 'arn'
+import * as gravatar from 'gravatar'
 
 exports.get = function(request, response) {
 	let user = request.user
@@ -14,13 +15,14 @@ exports.get = function(request, response) {
 			user.gravatarURL = gravatar.url(user.email, {s: '1', r: 'x', d: '404'}, true)
 
 		user.hasNick = !(user.nick.startsWith('fb') || user.nick.startsWith('g') || user.nick.startsWith('t'))
+		user.isActive = arn.isActiveUser(user)
 
 		if(user.hasNick)
-			user.welcomeLine = 'Hi ' + user.nick + ','
+			user.welcomeLine = 'Hi ' + user.nick + '!'
 		else if(user.firstName)
-			user.welcomeLine = 'Hi ' + user.firstName + ','
+			user.welcomeLine = 'Hi ' + user.firstName + '!'
 		else
-			user.welcomeLine = 'Hi,'
+			user.welcomeLine = 'Hi!'
 	}
 
 	response.render({

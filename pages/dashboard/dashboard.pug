@@ -2,75 +2,76 @@ if user
 	section
 		header
 			h2= user.welcomeLine
-
-	h3 Todo
-
-	.cards
-		.card(class=user.hasNick ? 'finished' : 'not-finished') Change your username
-		if !user.email
-			.card.not-finished Add your email address (one time change)
-		.card(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
-		if user.email
-			#gravatar-card.card.finished Add a gravatar image
-		.card(class=Object.keys(user.pushEndpoints).length > 0 ? 'finished' : 'not-finished') Activate push notifications
 	
-	if user.email
-		img#gravatar-test-image(onerror='if($.gravatarAvailable) $.gravatarAvailable(false);', onload='if($.gravatarAvailable) $.gravatarAvailable(true);', src=user.gravatarURL)
+		if !user.isActive
+			h3 Todo
+			
+			.cards
+				.card(class=user.hasNick ? 'finished' : 'not-finished') Change your username
+				if !user.email
+					.card.not-finished Add your email address (one time change)
+				.card(class=user.hasListProviderUserName ? 'finished' : 'not-finished') Set up your list provider username
+				if user.email
+					#gravatar-card.card.finished Add a gravatar image
+				.card(class=Object.keys(user.pushEndpoints).length > 0 ? 'finished' : 'not-finished') Activate push notifications
+			
+			if user.email
+				img#gravatar-test-image(onerror='if($.gravatarAvailable) $.gravatarAvailable(false);', onload='if($.gravatarAvailable) $.gravatarAvailable(true);', src=user.gravatarURL)
 
-	h3 Apps
+		h3 Apps
 
-	.cards
-		if user.agent && user.agent.family
-			if user.agent.family === 'Chrome'
+		.cards
+			if user.agent && user.agent.family
+				if user.agent.family === 'Chrome'
+					.card
+						a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
+							i.fa.fa-chrome
+							span Chrome extension
+				else if user.agent.family === 'Firefox'
+					.card
+						a(href='https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/', target='_blank')
+							i.fa.fa-firefox
+							span Firefox extension
+
 				.card
-					a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
-						i.fa.fa-chrome
-						span Chrome extension
-			else if user.agent.family === 'Firefox'
-				.card
-					a(href='https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/', target='_blank')
-						i.fa.fa-firefox
-						span Firefox extension
+					a(href='https://www.youtube.com/watch?v=opyt4cw0ep8', target='_blank')
+						i.fa.fa-android
+						span Android web app
 
+		h3 Community
+		.cards
 			.card
-				a(href='https://www.youtube.com/watch?v=opyt4cw0ep8', target='_blank')
-					i.fa.fa-android
-					span Android web app
+				a(href='https://discord.gg/0kimAmMCeXGXuzNF', target='_blank')
+					i.fa.fa-microphone
+					span Discord
+			.card
+				
+				a(href='https://www.facebook.com/animenotifier', target='_blank')
+					i.fa.fa-facebook
+					span Facebook
+			.card
+				a(href='https://twitter.com/animenotifier', target='_blank')
+					i.fa.fa-twitter
+					span Twitter
+			.card
+				
+				a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank')
+					i.fa.fa-google-plus
+					span Google+
+			.card
+				
+				a(href='https://github.com/animenotifier/notify.moe', target='_blank')
+					i.fa.fa-github
+					span GitHub
 
-	h3 Community
-	.cards
-		.card
-			a(href='https://discord.gg/0kimAmMCeXGXuzNF', target='_blank')
-				i.fa.fa-microphone
-				span Discord
-		.card
-			
-			a(href='https://www.facebook.com/animenotifier', target='_blank')
-				i.fa.fa-facebook
-				span Facebook
-		.card
-			a(href='https://twitter.com/animenotifier', target='_blank')
-				i.fa.fa-twitter
-				span Twitter
-		.card
-			
-			a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank')
-				i.fa.fa-google-plus
-				span Google+
-		.card
-			
-			a(href='https://github.com/animenotifier/notify.moe', target='_blank')
-				i.fa.fa-github
-				span GitHub
-
-	h3 Threads
-	.cards
-		.card
-			a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
-		.card
-			a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
-		.card
-			a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
+		h3 Threads
+		.cards
+			.card
+				a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
+			.card
+				a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
+			.card
+				a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
 else
 	section.category
 		header
