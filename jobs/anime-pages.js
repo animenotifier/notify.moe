@@ -1,7 +1,7 @@
 const animePageCacheTime = 120 * 60 * 1000
 
 let updateAllAnimePages = coroutine(function*() {
-	console.log(chalk.yellow('✖'), 'Updating all anime pages...')
+	console.log(chalk.cyan('↻'), 'Updating all anime pages...')
 
 	let now = new Date()
 

@@ -1,5 +1,5 @@
 let updateGenres = coroutine(function*() {
-	console.log(chalk.yellow('✖'), 'Updating genre cache...')
+	console.log(chalk.cyan('↻'), 'Updating genre cache...')
 
 	let genreText = yield fs.readFileAsync('pages/anime/genres/genres.txt', 'utf8')
 	let genreList = genreText.split('\n')

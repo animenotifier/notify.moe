@@ -10,7 +10,7 @@ let updateUserLists = coroutine(function*() {
 		let addUser = method.addUser
 		let cacheKey = `users:${orderBy}`
 
-		console.log(chalk.yellow('✖'), `Updating user list ${chalk.yellow(orderBy)}...`)
+		console.log(chalk.cyan('↻'), `Updating user list ${chalk.yellow(orderBy)}...`)
 
 		let updateUserList = coroutine(function*() {
 			let users = yield Promise.filter(allUsers, user => addUser(user, categories))

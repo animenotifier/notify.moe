@@ -4,8 +4,8 @@ let natural = require('natural')
 Promise.promisifyAll(SC)
 
 SC.init({
-	id: arn.api.soundcloud.clientID,
-	secret: arn.api.soundcloud.clientSecret,
+	id: arn.api.soundcloud.id,
+	secret: arn.api.soundcloud.secret,
 	uri: 'https://notify.moe/soundcloud/callback'
 })
 
@@ -77,7 +77,7 @@ let findTracksForAnime = anime => {
 }
 
 let updateAnimeTracks = coroutine(function*() {
-	console.log(chalk.yellow('✖'), 'Updating anime tracks...')
+	console.log(chalk.cyan('↻'), 'Updating anime tracks...')
 
 	for(let anime of arn.animeList) {
 		yield Promise.delay(1500)

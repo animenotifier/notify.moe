@@ -2,7 +2,7 @@ let RateLimiter = require('limiter').RateLimiter
 let fetchLimiter = new RateLimiter(1, 500)
 
 let checkAvatars = coroutine(function*() {
-	console.log(chalk.yellow('✖'), 'Updating user avatars...')
+	console.log(chalk.cyan('↻'), 'Updating user avatars...')
 
 	yield arn.listProviders.AniList.authorize()
 

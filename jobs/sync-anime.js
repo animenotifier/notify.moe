@@ -1,7 +1,7 @@
 const maxPage = 5
 
 let importAnimeFromAniList = coroutine(function*() {
-	console.log(chalk.yellow('✖'), 'Import anime from anilist...')
+	console.log(chalk.cyan('↻'), 'Import anime from anilist...')
 
 	// Get an access token
 	yield arn.listProviders.AniList.authorize()
@@ -14,6 +14,9 @@ let importAnimeFromAniList = coroutine(function*() {
 		let animeList = yield arn.listProviders.AniList.getAnimeFromPage(page)
 
 		for(let anime of animeList) {
+			if(!anime.id)
+				continue
+
 			let oldAnime = yield arn.db.get('Anime', anime.id).catch(error => null)
 
 			// Compare edit dates

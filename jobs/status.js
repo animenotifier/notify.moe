@@ -10,7 +10,7 @@ const hosts = [
 let updateStatus = coroutine(function*() {
 	let status = []
 	
-	console.log(chalk.yellow('✖'), 'Updating status...')
+	console.log(chalk.cyan('↻'), 'Updating status...')
 	
 	for(let host of hosts) {
 		yield Promise.delay(100)

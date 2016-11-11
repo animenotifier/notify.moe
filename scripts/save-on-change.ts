@@ -27,7 +27,7 @@ function makeSaveable(apiEndpoint: string, postSaveCallback?: (string, any) => v
 		}).then(function() {
 			$.get('/_' + location.pathname).then(function(newPageCode) {
 				var focusedElementId = document.activeElement.id;
-				var focusedElementValue = (<HTMLInputElement>document.activeElement).value;
+				var focusedElementValue = (<HTMLInputElement> document.activeElement).value;
 
 				$.setContent(newPageCode);
 
@@ -51,11 +51,11 @@ function makeSaveable(apiEndpoint: string, postSaveCallback?: (string, any) => v
 		});
 	};
 
-	var myNodeList = $.queryAll('.save-on-change');
+	var myNodeList = document.querySelectorAll('.save-on-change');
 
 	for(var i = 0; i < myNodeList.length; ++i) {
-		var element = myNodeList[i];
+		var element = <HTMLInputElement> myNodeList[i];
 		element.onchange = $.save;
-		element.dataset.old = element.value;
+		element.dataset['old'] = element.value;
 	}
 }

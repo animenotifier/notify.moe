@@ -16,9 +16,6 @@ arn.db.scanPriority = require('aerospike').scanPriority.LOW
 arn.db.ready.then(Promise.coroutine(function*() {
 	arn.animeList = yield arn.db.filter('Anime', anime => true)
 	console.log(arn.animeList.length + ' anime')
-	
-	// Build search index
-	require('../startup/search-index')
 
 	let files = yield fs.readdirAsync('jobs')
 	let filterJob = process.argv[2]
@@ -26,7 +23,7 @@ arn.db.ready.then(Promise.coroutine(function*() {
 	files.forEach(file => {
 		if(file === 'index.js')
 			return
-			
+
 		if(filterJob && file !== filterJob + '.js')
 			return
 

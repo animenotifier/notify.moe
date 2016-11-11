@@ -1,7 +1,7 @@
 const maxPopularAnime = 10
 
 let updatePopularAnime = coroutine(function*() {
-	console.log(chalk.yellow('✖'), 'Updating popular anime...')
+	console.log(chalk.cyan('↻'), 'Updating popular anime...')
 
 	let popularAnime = arn.animeList.filter(anime => anime.watching)
 	popularAnime.sort((a, b) => a.watching < b.watching ? 1 : -1)

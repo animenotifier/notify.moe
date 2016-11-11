@@ -227,7 +227,7 @@ $.loadMessages = function() {
 
 	$.get('/_/messages/user/' + $.getUserName()).then(response => {
 		posts.innerHTML = response
-		updateAvatars()
+		$.updateAvatars()
 		$.ajaxifyLinks()
 		// $.executeScripts(posts)
 		// $.emit('DOMContentLoaded')

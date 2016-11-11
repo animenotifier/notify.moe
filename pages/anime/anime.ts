@@ -1,4 +1,5 @@
 import * as arn from 'arn'
+import * as bluebird from 'bluebird'
 
 const genreIcons = {
 	'Action': 'bomb',
@@ -36,25 +37,30 @@ const genreIcons = {
 	'Vampire': 'eye'
 }
 
-exports.get = function*(request, response) {
+exports.get = async function(request, response) {
 	let user = request.user
 	let animeId = parseInt(request.params[0])
 	let category = request.params[1]
 	let categoryParameter = request.params[2]
 
+	// Render popular anime
 	if(isNaN(animeId)) {
-		let popular = yield arn.db.get('Cache', 'popularAnime')
+		let info: any = await bluebird.props({
+			popular: arn.db.get('Cache', 'popularAnime'),
+			stats: arn.db.get('Cache', 'animeStats')
+		})
 
 		return response.render({
 			user,
-			popularAnime: popular.anime,
-			animeToIdCount: arn.titleToIdCount,
+			popularAnime: info.popular.anime,
+			animeCount: info.stats.animeCount,
+			titleCount: info.stats.titleCount,
 			anime: null
 		})
 	}
 
 	try {
-		let animePage = yield arn.db.get('AnimePages', animeId)
+		let animePage = await arn.db.get('AnimePages', animeId)
 		let videoParameters = ''
 
 		if(category === 'video') {

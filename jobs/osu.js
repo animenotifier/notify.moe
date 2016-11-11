@@ -2,13 +2,13 @@ let RateLimiter = require('limiter').RateLimiter
 let osuAPILimiter = new RateLimiter(1, 200)
 
 let updateOsuDetails = function() {
-	console.log(chalk.yellow('✖'), 'Updating osu ranks...')
+	console.log(chalk.cyan('↻'), 'Updating osu ranks...')
 
 	arn.db.forEach('Users', user => {
 		if(!user.osu)
 			return
 
-		let apiURL = `https://osu.ppy.sh/api/get_user?k=${arn.api.osu.clientSecret}&u=${user.osu}`
+		let apiURL = `https://osu.ppy.sh/api/get_user?k=${arn.api.osu.secret}&u=${user.osu}`
 
 		osuAPILimiter.removeTokens(1, () => {
 			fetch({

@@ -9,7 +9,7 @@ $.clear = element => {
 if(animeContainer && animeContainer.dataset.id) {
 	makeSaveable('/api/anime/' + animeContainer.dataset.id)
 } else {
-	let search = $('search')
+	let search = <HTMLInputElement> $('search')
 	let searchResults = $('search-results')
 	let allAnimeObject = $('all-anime')
 	let lastRequest = undefined
@@ -59,7 +59,7 @@ if(animeContainer && animeContainer.dataset.id) {
 		let term = search.value.trim().toLowerCase()
 
 		if(!term) {
-			searchResults.innerHTML = animeTitles.length + ' titles in the database. Powered by Anilist.'
+			searchResults.innerHTML = search.dataset['animeCount'] + ' anime. Powered by Anilist.'
 			searchResults.className = 'anime-count'
 			return reject(new Error('no search term'))
 		}
@@ -163,7 +163,7 @@ if(animeContainer && animeContainer.dataset.id) {
 		allAnime = JSON.parse(allAnime)
 		animeTitles = Object.keys(allAnime)
 
-		if(animeTitles.length === parseInt(search.dataset.count))
+		if(animeTitles.length === parseInt(search.dataset['count']))
 			$.activateSearch()
 		else
 			$.downloadSearchList()

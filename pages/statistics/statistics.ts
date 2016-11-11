@@ -86,6 +86,8 @@ exports.get = async function(request, response) {
 	filterLessThan(browsers, onePercentMark)
 	filterLessThan(countries, onePercentMark * 4)
 
+	let animeStats = await arn.db.get('Cache', 'animeStats')
+
 	response.render({
 		users: {
 			total: recordCount,
@@ -98,7 +100,7 @@ exports.get = async function(request, response) {
 			sortBy
 		},
 		anime: {
-			total: arn.animeCount
+			total: animeStats.animeCount
 		},
 		providers
 	})

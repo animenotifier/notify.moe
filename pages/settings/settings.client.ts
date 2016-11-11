@@ -9,7 +9,7 @@ makeSaveable('/api/users/me', function(key, value) {
 
 			//window.history.pushState('', document.title, newPath);
 
-			var links = $.queryAll('a');
+			var links = document.querySelectorAll('a');
 			for(var l = 0; l < links.length; ++l) {
 				var link = links[l];
 				if(link.href.endsWith(oldPath))
@@ -21,7 +21,7 @@ makeSaveable('/api/users/me', function(key, value) {
 });
 
 // Push notifications
-var pushButton = $.query('.push-button');
+var pushButton = document.querySelector('.push-button');
 
 if(pushButton) {
 	pushButton.addEventListener('click', function() {

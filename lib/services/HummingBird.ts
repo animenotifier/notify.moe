@@ -5,8 +5,8 @@ class HummingBird {
 	static headers = {
 		'User-Agent': 'Anime Release Notifier',
 		'Accept': 'application/json',
-		'X-Client-Id': arn.api.hummingbird.v2.clientID
-		//'X-Mashape-Key': arn.api.hummingbird.v1.clientSecret
+		'X-Client-Id': arn.api.hummingbird.v2.id
+		//'X-Mashape-Key': arn.api.hummingbird.v1.secret
 	}
 
 	getAnimeListUrl(userName) {

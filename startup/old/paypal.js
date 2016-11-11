@@ -2,6 +2,6 @@
 // 
 // paypal.configure({
 // 	mode: 'sandbox',
-// 	client_id: arn.api.paypal.clientID,
-// 	client_secret: arn.api.paypal.clientSecret
+// 	client_id: arn.api.paypal.id,
+// 	client_secret: arn.api.paypal.secret
 // })
