@@ -4,10 +4,11 @@ section
 	
 	include header.pug
 	
-	h3 Resources
-	table.resources
-		tbody
-			each info in status
-				tr
-					td.resource-label= info[0]
-					td.resource-usage= info[1]
+	if status
+		h3 Resources
+		table.resources
+			tbody
+				each info in status
+					tr
+						td.resource-label= info[0]
+						td.resource-usage= info[1]

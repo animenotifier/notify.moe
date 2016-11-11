@@ -7,6 +7,6 @@ const execAsync = bluebird.promisify((command: string, callback) => {
 	})
 })
 
-export function execute(command: string) {
-	return execAsync(command) as bluebird<string>
+export function execute(command: string): bluebird<string> {
+	return <bluebird<string>> execAsync(command)
 }
