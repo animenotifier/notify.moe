@@ -1,5 +1,4 @@
-var weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-var userName = $('nick').textContent.trim();
+const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 const loadingMessages = [
 	'We\'re testing your patience...',
@@ -11,13 +10,17 @@ const loadingMessages = [
 	'20 years later...'
 ]
 
+$.getUserName = function() {
+	return $('nick').textContent.trim()
+}
+
 $.getWeekDay = function(timeStamp) {
-	var date = new Date(timeStamp * 1000);
-	return weekDays[date.getDay()];
-};
+	var date = new Date(timeStamp * 1000)
+	return weekDays[date.getDay()]
+}
 
 $.loadAnimeList = function(clearCache) {
-	var animeList = $('anime-list-container');
+	var animeList = $('anime-list-container')
 
 	// Loading animation
 	animeList.innerHTML =
@@ -27,95 +30,95 @@ $.loadAnimeList = function(clearCache) {
 			'<div class="sk-cube4 sk-cube"></div>' +
 			'<div class="sk-cube3 sk-cube"></div>' +
 		'</div>' +
-		`<div class="loading-message">${loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}</div></div>`;
+		`<div class="loading-message">${loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}</div></div>`
 
-	$.getJSON('/api/animelist/' + userName + (clearCache ? '/clearCache' : '')).then(response => {
+	$.getJSON('/api/animelist/' + $.getUserName() + (clearCache ? '/clearCache' : '')).then(response => {
 		if(response && response.error) {
-			animeList.textContent = 'Error loading your anime list: ' + response.error;
-			return;
+			animeList.textContent = 'Error loading your anime list: ' + response.error
+			return
 		}
 
 		if(!response.watching) {
-			animeList.textContent = 'There are no anime your watching list.';
-			return;
+			animeList.textContent = 'There are no anime your watching list.'
+			return
 		}
 
-		animeList.innerHTML = '';
-		var listProviderLink = $('list-provider-link');
+		animeList.innerHTML = ''
+		var listProviderLink = $('list-provider-link')
 		if(listProviderLink) {
-			listProviderLink.href = response.listUrl;
+			listProviderLink.href = response.listUrl
 		}
 
-		var list = document.createElement('ul');
-		list.className = 'anime-list';
+		var list = document.createElement('ul')
+		list.className = 'anime-list'
 
-		var loggedIn = animeList.dataset.logged === 'true';
-		var newAnimeCount = 0;
+		var loggedIn = animeList.dataset.logged === 'true'
+		var newAnimeCount = 0
 
 		response.watching.forEach(function(anime) {
-			var item = document.createElement('li');
-			item.className = 'anime';
+			var item = document.createElement('li')
+			item.className = 'anime'
 
 			// Image
-			var image = document.createElement('img');
-			image.src = anime.image;
-			image.alt = anime.preferredTitle;
-			image.className = 'anime-list-image';
-			item.appendChild(image);
+			var image = document.createElement('img')
+			image.src = anime.image
+			image.alt = anime.preferredTitle
+			image.className = 'anime-list-image'
+			item.appendChild(image)
 
 			// Link
-			var link = document.createElement('a');
-			link.appendChild(document.createTextNode(anime.title[response.titleLanguage]));
+			var link = document.createElement('a')
+			link.appendChild(document.createTextNode(anime.title[response.titleLanguage]))
 
 			if(anime.id) {
-				link.href = '/anime/' + anime.id;
-				link.className = 'anime-title ajax';
+				link.href = '/anime/' + anime.id
+				link.className = 'anime-title ajax'
 			} else {
-				link.href = anime.url;
-				link.target = '_blank';
-				link.className = 'anime-title';
+				link.href = anime.url
+				link.target = '_blank'
+				link.className = 'anime-title'
 			}
 
-			item.appendChild(link);
+			item.appendChild(link)
 
 			// Spacer
-			var spacer = document.createElement('span');
-			spacer.className = 'spacer';
-			item.appendChild(spacer);
+			var spacer = document.createElement('span')
+			spacer.className = 'spacer'
+			item.appendChild(spacer)
 
 			var addIconLink = function(iconName, url, linkClass, tooltip) {
-				var link = document.createElement(url ? 'a' : 'div');
+				var link = <HTMLLinkElement> document.createElement(url ? 'a' : 'div')
 
 				if(url) {
-					link.href = url;
-					link.target = '_blank';
+					link.href = url
+					link.target = '_blank'
 				}
 
-				link.className = linkClass;
-				link.title = tooltip;
+				link.className = linkClass
+				link.title = tooltip
 
-				var icon = document.createElement('i');
-				icon.className = 'fa fa-' + iconName + ' anime-status-icon fa-fw';
-				link.appendChild(icon);
+				var icon = document.createElement('i')
+				icon.className = 'fa fa-' + iconName + ' anime-status-icon fa-fw'
+				link.appendChild(icon)
 
-				item.appendChild(link);
-			};
+				item.appendChild(link)
+			}
 
 			var addAiringDate = function() {
 				if(anime.airingDate.remaining === null)
-					return;
+					return
 
-				var airingDate = document.createElement('span');
-				airingDate.className = 'airing-date';
+				var airingDate = document.createElement('span')
+				airingDate.className = 'airing-date'
 
-				var airingDatePrefix = document.createElement('span');
-				airingDatePrefix.className = 'airing-date-prefix';
-				airingDatePrefix.textContent = anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired ';
-				airingDate.appendChild(airingDatePrefix);
-				airingDate.appendChild(document.createTextNode(anime.airingDate.remainingString));
-				airingDate.title = $.getWeekDay(anime.airingDate.timeStamp);
-				item.appendChild(airingDate);
-			};
+				var airingDatePrefix = document.createElement('span')
+				airingDatePrefix.className = 'airing-date-prefix'
+				airingDatePrefix.textContent = anime.airingDate.remaining > 0 ? 'Airing in ' : 'Aired '
+				airingDate.appendChild(airingDatePrefix)
+				airingDate.appendChild(document.createTextNode(anime.airingDate.remainingString))
+				airingDate.title = $.getWeekDay(anime.airingDate.timeStamp)
+				item.appendChild(airingDate)
+			}
 
 			if(loggedIn) {
 				if(anime.episodes.watched > 0 && anime.episodes.watched === anime.episodes.max) {
@@ -124,16 +127,16 @@ $.loadAnimeList = function(clearCache) {
 						response.listUrl,
 						'anime-completed',
 						'You completed this anime.'
-					);
+					)
 				} else if(anime.episodes.available >= anime.episodes.next) {
-					var behind = (anime.episodes.available - anime.episodes.watched);
-					var episodes = document.createElement('span');
-					episodes.className = 'episodes-behind';
-					episodes.appendChild(document.createTextNode(behind));
-					episodes.title = behind + ' new episode' + (behind === 1 ? '' : 's');
-					item.appendChild(episodes);
+					var behind = (anime.episodes.available - anime.episodes.watched)
+					var episodes = document.createElement('span')
+					episodes.className = 'episodes-behind'
+					episodes.appendChild(document.createTextNode(behind.toString()))
+					episodes.title = behind + ' new episode' + (behind === 1 ? '' : 's')
+					item.appendChild(episodes)
 
-					var isDownload = (anime.animeProvider.type === undefined || anime.animeProvider.type === 'download');
+					var isDownload = (anime.animeProvider.type === undefined || anime.animeProvider.type === 'download')
 					var isBatch = anime.animeProvider.isBatch
 
 					addIconLink(
@@ -141,27 +144,27 @@ $.loadAnimeList = function(clearCache) {
 						anime.animeProvider.nextEpisode ? anime.animeProvider.nextEpisode.url : anime.animeProvider.url,
 						'anime-download-link',
 						isBatch ? ('You watched ' + anime.episodes.watched + ' out of ' + anime.episodes.available + ' available.') : ((isDownload ? 'Download' : 'Watch') + ' episode ' + anime.episodes.next)
-					);
+					)
 
-					newAnimeCount++;
+					newAnimeCount++
 				} else if(anime.episodes.available > 0 && anime.episodes.available === anime.episodes.watched) {
-					addAiringDate();
+					addAiringDate()
 
 					addIconLink(
 						'check',
 						anime.animeProvider.nextEpisode ? anime.animeProvider.nextEpisode.url : anime.animeProvider.url,
 						'anime-up-to-date',
 						'You watched ' + anime.episodes.watched + ' out of ' + anime.episodes.available + ' available.'
-					);
+					)
 				} else if(anime.episodes.available === 0) {
-					addAiringDate();
+					addAiringDate()
 
 					addIconLink(
 						'exclamation-circle',
 						anime.animeProvider.url,
 						'anime-warning',
 						'Could not find your anime title on the anime provider.'
-					);
+					)
 				}
 			}
 
@@ -172,11 +175,11 @@ $.loadAnimeList = function(clearCache) {
 				}), '*')
 			}
 
-			list.appendChild(item);
-		});
+			list.appendChild(item)
+		})
 
-		animeList.appendChild(list);
-		$.ajaxifyLinks();
+		animeList.appendChild(list)
+		$.ajaxifyLinks()
 	}).catch(error => {
 		error = JSON.parse(error)
 		animeList.innerHTML = '' // Remove loading animation
@@ -192,8 +195,8 @@ $.loadAnimeList = function(clearCache) {
 		p.innerHTML = 'Seems like you encountered a problem. Want to <a href="/threads/new/bug" class="ajax">report the bug</a> on the forums?'
 		animeList.appendChild(p)
 		$.ajaxifyLinks(p)
-	});
-};
+	})
+}
 
 $.editMessage = function() {
 	alert('work in progress')
@@ -202,14 +205,13 @@ $.editMessage = function() {
 $.deleteMessage = messageId => $.post('/api/messages/delete/' + messageId).then($.loadMessages)
 
 $.sendMessage = function() {
-	let userName = $('nick').textContent
 	let postInput = $('post-input')
 
 	if(!postInput.value)
 		return
 
 	$.post('/api/messages', {
-		recipient: userName,
+		recipient: $.getUserName(),
 		text: postInput.value
 	}).then(response => {
 		postInput.value = ''
@@ -223,7 +225,7 @@ $.loadMessages = function() {
 	if(!posts)
 		return
 
-	$.get('/_/messages/user/' + userName).then(response => {
+	$.get('/_/messages/user/' + $.getUserName()).then(response => {
 		posts.innerHTML = response
 		updateAvatars()
 		$.ajaxifyLinks()

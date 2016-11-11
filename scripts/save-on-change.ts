@@ -1,11 +1,11 @@
-function makeSaveable(apiEndpoint, postSaveCallback) {
+function makeSaveable(apiEndpoint: string, postSaveCallback?: (string, any) => void) {
 	$.save = function(e) {
 		var item = e.target;
 
-		if(document.saving)
+		if($.saving)
 			return;
 
-		document.saving = true;
+		$.saving = true;
 
 		var key = item.id;
 		var value = item.value ? item.value : '';
@@ -27,7 +27,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 		}).then(function() {
 			$.get('/_' + location.pathname).then(function(newPageCode) {
 				var focusedElementId = document.activeElement.id;
-				var focusedElementValue = document.activeElement.value;
+				var focusedElementValue = (<HTMLInputElement>document.activeElement).value;
 
 				$.setContent(newPageCode);
 
@@ -46,7 +46,7 @@ function makeSaveable(apiEndpoint, postSaveCallback) {
 				}
 
 				$.content.style.cursor = 'auto';
-				document.saving = false;
+				$.saving = false;
 			});
 		});
 	};

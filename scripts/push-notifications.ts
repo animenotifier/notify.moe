@@ -1,5 +1,11 @@
 var isPushEnabled = false;
 
+declare var ServiceWorkerRegistration: any
+declare var Notification: any
+interface Navigator {
+	serviceWorker: any
+}
+
 function subscribeOnServer(subscription) {
 	console.log('Send subscription to server...');
 	console.log(subscription);

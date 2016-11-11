@@ -117,6 +117,9 @@ if(animeContainer && animeContainer.dataset.id) {
 	}
 
 	$.displaySearchResults = function(results) {
+		if(!allAnime)
+			return
+
 		searchResults.className = ''
 		$.clear(searchResults)
 
