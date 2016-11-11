@@ -23,55 +23,49 @@ if user
 		.cards
 			if user.agent && user.agent.family
 				if user.agent.family === 'Chrome'
-					.card
-						a(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
-							i.fa.fa-chrome
-							span Chrome extension
+					a.card(href='javascript:chrome.webstore.install();', title='If you want a button to quickly access your list (it\'s not required for notifications)')
+						i.fa.fa-chrome
+						span Chrome extension
 				else if user.agent.family === 'Firefox'
-					.card
-						a(href='https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/', target='_blank')
-							i.fa.fa-firefox
-							span Firefox extension
+					a.card(href='https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/', target='_blank')
+						i.fa.fa-firefox
+						span Firefox extension
 
-				.card
-					a(href='https://www.youtube.com/watch?v=opyt4cw0ep8', target='_blank')
-						i.fa.fa-android
-						span Android web app
+				a.card(href='https://www.youtube.com/watch?v=opyt4cw0ep8', target='_blank')
+					i.fa.fa-android
+					span Android web app
 
 		h3 Community
 		.cards
-			.card
-				a(href='https://discord.gg/0kimAmMCeXGXuzNF', target='_blank')
-					i.fa.fa-microphone
-					span Discord
-			.card
-				
-				a(href='https://www.facebook.com/animenotifier', target='_blank')
-					i.fa.fa-facebook
-					span Facebook
-			.card
-				a(href='https://twitter.com/animenotifier', target='_blank')
-					i.fa.fa-twitter
-					span Twitter
-			.card
-				
-				a(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank')
-					i.fa.fa-google-plus
-					span Google+
-			.card
-				
-				a(href='https://github.com/animenotifier/notify.moe', target='_blank')
-					i.fa.fa-github
-					span GitHub
+			a.card(href='https://discord.gg/0kimAmMCeXGXuzNF', target='_blank')
+				i.fa.fa-microphone
+				span Discord
+	
+			
+			a.card(href='https://www.facebook.com/animenotifier', target='_blank')
+				i.fa.fa-facebook
+				span Facebook
+		
+			a.card(href='https://twitter.com/animenotifier', target='_blank')
+				i.fa.fa-twitter
+				span Twitter
+	
+			
+			a.card(href='https://plus.google.com/+AnimeReleaseNotifierOfficial', target='_blank')
+				i.fa.fa-google-plus
+				span Google+
+		
+			
+			a.card(href='https://github.com/animenotifier/notify.moe', target='_blank')
+				i.fa.fa-github
+				span GitHub
 
 		h3 Threads
+		
 		.cards
-			.card
-				a(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
-			.card
-				a(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
-			.card
-				a(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
+			a.card(href='https://anilist.co/forum/thread/64', target='_blank') anilist.co
+			a.card(href='https://forums.hummingbird.me/t/16787', target='_blank') hummingbird.me
+			a.card(href='http://myanimelist.net/forum/?topicid=1175519', target='_blank') myanimelist.net
 else
 	section.category
 		header
