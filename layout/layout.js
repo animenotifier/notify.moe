@@ -103,6 +103,6 @@ exports.render = function(request, render) {
 		nav,
 		maintenance: app.maintenance,
 		embedded,
-		openGraph: request.og
+		request // NOTE: We can't replace this with a variable holding request.og
 	})
 }
