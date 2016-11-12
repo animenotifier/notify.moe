@@ -1,8 +1,6 @@
 package main
 
 import (
-	"strconv"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -14,7 +12,7 @@ func init() {
 	})
 
 	app.Ajax("/anime/:id", func(ctx *aero.Context) string {
-		id, _ := strconv.Atoi(ctx.Get("id"))
+		id, _ := ctx.GetInt("id")
 		anime, err := arn.GetAnime(id)
 
 		if err != nil {
