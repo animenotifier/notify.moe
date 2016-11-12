@@ -4,12 +4,14 @@ import (
 	"io/ioutil"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/components"
 )
 
 var app = aero.New()
 
 func main() {
-	app.SetStyle(bundledCSS)
+	// app.SetStyle(bundledCSS)
+	app.SetStyle("")
 
 	scripts, _ := ioutil.ReadFile("temp/scripts.js")
 	js := string(scripts)
@@ -19,8 +21,12 @@ func main() {
 		return js
 	})
 
+	app.Get("/hello", func(ctx *aero.Context) string {
+		return "Hello World"
+	})
+
 	app.Layout = func(ctx *aero.Context, content string) string {
-		return Render.Layout(content)
+		return components.Layout(content)
 	}
 
 	app.Run()

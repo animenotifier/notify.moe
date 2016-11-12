@@ -34,7 +34,7 @@ node_modules/
 debug
 
 # pixy
-$.go
+/components
 
 # binaries
 /notify.moe

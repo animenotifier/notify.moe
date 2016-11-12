@@ -5,11 +5,12 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components"
 )
 
 func init() {
 	app.Ajax("/", func(ctx *aero.Context) string {
-		return ctx.HTML(Render.Dashboard())
+		return ctx.HTML(components.Dashboard())
 	})
 
 	app.Ajax("/anime/:id", func(ctx *aero.Context) string {
@@ -20,11 +21,11 @@ func init() {
 			return ctx.Text("Anime not found")
 		}
 
-		return ctx.HTML(Render.Anime(anime))
+		return ctx.HTML(components.Anime(anime))
 	})
 
 	app.Ajax("/genres", func(ctx *aero.Context) string {
-		return ctx.HTML(Render.GenreOverview())
+		return ctx.HTML(components.GenreOverview())
 	})
 
 	app.Ajax("/genres/:name", func(ctx *aero.Context) string {
@@ -37,6 +38,6 @@ func init() {
 			return err.Error()
 		}
 
-		return ctx.HTML(Render.AnimeInGenre(genreInfo.Genre, genreInfo.AnimeList))
+		return ctx.HTML(components.AnimeInGenre(genreInfo.Genre, genreInfo.AnimeList))
 	})
 }
