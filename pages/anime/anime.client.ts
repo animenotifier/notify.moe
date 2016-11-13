@@ -1,4 +1,4 @@
-let animeContainer = $('.anime-container')
+let animeContainer = document.querySelector('.anime-container')
 
 $.clear = element => {
 	while(element.lastChild) {
