@@ -17,7 +17,7 @@ component Anime(anime *arn.Anime)
 						a.second-title(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
 
 				//- h3.anime-header.anime-summary-header Summary
-				p.anime-summary= anime.Description
+				p.anime-summary= arn.FixAnimeDescription(anime.Description)
 		
 		if anime.YoutubeID != ""
 			h3.anime-header Video
@@ -42,7 +42,7 @@ component Anime(anime *arn.Anime)
 				each genre in anime.Genres
 					if genre != ""
 						a.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
-							Icon(arn.GenreIcons[genre])
+							Icon(arn.GetGenreIcon(genre))
 							span= genre
 		
 		if len(anime.Studios) > 0

@@ -10,8 +10,7 @@ import (
 var app = aero.New()
 
 func main() {
-	// app.SetStyle(bundledCSS)
-	app.SetStyle("")
+	app.SetStyle(components.BundledCSS)
 
 	scripts, _ := ioutil.ReadFile("temp/scripts.js")
 	js := string(scripts)

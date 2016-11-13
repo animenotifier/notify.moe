@@ -4,7 +4,7 @@ component GenreOverview
 	div
 		each genre in arn.Genres
 			a.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
-				Icon(arn.GenreIcons[genre])
+				Icon(arn.GetGenreIcon(genre))
 				span= genre
 
 component AnimeInGenre(genre string, animeList []*arn.Anime)
