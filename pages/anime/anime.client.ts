@@ -159,7 +159,7 @@ if(animeContainer && animeContainer.dataset.id) {
 		})
 	}
 
-	if(allAnime && allAnime !== null) {
+	if(search && allAnime) {
 		allAnime = JSON.parse(allAnime)
 		animeTitles = Object.keys(allAnime)
 
