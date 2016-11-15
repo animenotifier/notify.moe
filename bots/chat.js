@@ -16,8 +16,6 @@ let Discord = require('discord.js')
 let bot = new Discord.Client()
 let dnode = require('dnode')
 
-let generalChannel = null
-
 let sendMessage = function(channelName, message) {
 	let channel = bot.channels.find('name', channelName)
 
@@ -47,7 +45,7 @@ bot.on('message', Promise.coroutine(function*(message) {
 		let parameters = message.content.substring(command.length + 2)
 
 		if(command === 'say')
-			return bot.sendMessage(generalChannel, parameters)
+			return sendMessage('general', parameters)
 
 		if(command === 'search')
 			return message.reply('https://www.google.com/search?q=site:notify.moe+' + encodeURIComponent(parameters))
@@ -160,8 +158,6 @@ bot.on('message', Promise.coroutine(function*(message) {
 }))
 
 bot.on('ready', () => {
-	generalChannel = bot.channels.get('id', '134910939140063232')
-
 	console.log(chalk.green('Bot is ready'))
 
 	for(let channel of bot.channels.values()) {
