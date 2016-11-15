@@ -16,14 +16,19 @@ let Discord = require('discord.js')
 let bot = new Discord.Client()
 let dnode = require('dnode')
 
-let server = null
 let generalChannel = null
 
+let sendMessage = function(channelName, message) {
+	let channel = bot.channels.find('name', channelName)
+
+	if(channel)
+		channel.sendMessage(message)
+	else
+		console.error('Channel', channelName, 'not found.')
+}
+
 let nodeServer = dnode({
-	sendMessage: function(channelName, message) {
-		let channel = server.channels.get('name', channelName)
-		bot.sendMessage(channel, message)
-	}
+	sendMessage
 })
 
 nodeServer.listen(require('../config.json').ports.chatBot)
@@ -174,4 +179,5 @@ bot.on('ready', () => {
 
 bot.login(arn.api.discord.token).then(token => {
 	console.log(chalk.green('Logged in'))
+	sendMessage('log', 'I\'m online.')
 })
