@@ -38,6 +38,7 @@
 		"natural": "*",
 		"node-cache": "*",
 		"node-gcm": "*",
+		"node-opus": "*",
 		"node-soundcloud": "*",
 		"node-watch": "*",
 		"pretty-bytes": "*",

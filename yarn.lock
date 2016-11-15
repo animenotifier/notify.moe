@@ -289,7 +289,7 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bindings@^1.2.1:
+bindings@^1.2.1, bindings@~1.2.1, bindings@1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
 
@@ -513,7 +513,7 @@ date-format@^0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/date-format/-/date-format-0.0.0.tgz#09206863ab070eb459acea5542cbd856b11966b3"
 
-debug@*, debug@^2.2.0:
+debug@*, debug@^2.2.0, debug@2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.3.2.tgz#94cb466ef7d6d2c7e5245cdd6e4104f2d0d70d30"
   dependencies:
@@ -1062,7 +1062,7 @@ multi-stage-sourcemap@0.2.1:
   dependencies:
     source-map "^0.1.34"
 
-nan@^2.0.5, nan@^2.4.0:
+nan@^2.0.5, nan@^2.3.2, nan@^2.4.0, nan@2:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
 
@@ -1093,6 +1093,14 @@ node-gcm@*:
     debug "^0.8.1"
     lodash "^3.10.1"
     request "^2.27.0"
+
+node-opus:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/node-opus/-/node-opus-0.2.4.tgz#79fb35cf0e7ad04cfb9398eb362aba0774e30a61"
+  dependencies:
+    bindings "~1.2.1"
+    nan "^2.3.2"
+    ogg-packet "^1.0.0"
 
 node-soundcloud@*:
   version "0.0.6"
@@ -1135,6 +1143,12 @@ object-assign@^4.0.1, object-assign@^4.1.0:
 obuf@^1.0.0, obuf@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.1.tgz#104124b6c602c6796881a042541d36db43a5264e"
+
+ogg-packet@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ogg-packet/-/ogg-packet-1.0.0.tgz#45b885721ac8f7dd5cf22391d42106ae533ac678"
+  dependencies:
+    ref-struct "*"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -1437,6 +1451,21 @@ readable-stream@^2.0.1, readable-stream@^2.0.5:
     process-nextick-args "~1.0.6"
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
+
+ref-struct@*:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ref-struct/-/ref-struct-1.1.0.tgz#5d5ee65ad41cefc3a5c5feb40587261e479edc13"
+  dependencies:
+    debug "2"
+    ref "1"
+
+ref@1:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/ref/-/ref-1.3.3.tgz#116d1ef64f2bc56d9e54a648cea7332a36b81932"
+  dependencies:
+    bindings "1"
+    debug "2"
+    nan "2"
 
 repeat-string@^1.5.2:
   version "1.6.1"
