@@ -7,6 +7,7 @@ export const events = new EventEmitter()
 export const api = require('../security/api-keys.json')
 export const db: Database = aerospike.client(require('../config.json').database)
 export const production = process.env.NODE_ENV === 'production'
+export const chatBot: any = null
 
 // Yield handlers
 require('./utils/yield')
