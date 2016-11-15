@@ -1,4 +1,4 @@
-let animeContainer = document.querySelector('.anime-container')
+let animeContainer = <HTMLElement> document.querySelector('.anime-container')
 
 $.clear = element => {
 	while(element.lastChild) {
@@ -6,8 +6,8 @@ $.clear = element => {
 	}
 }
 
-if(animeContainer && animeContainer.dataset.id) {
-	makeSaveable('/api/anime/' + animeContainer.dataset.id)
+if(animeContainer && animeContainer.dataset['id']) {
+	makeSaveable('/api/anime/' + animeContainer.dataset['id'])
 } else {
 	let search = <HTMLInputElement> $('search')
 	let searchResults = $('search-results')
