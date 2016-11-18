@@ -553,14 +553,7 @@ discord.js@*:
     tweetnacl "^0.14.3"
     ws "^1.1.1"
 
-dnode-protocol@~0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/dnode-protocol/-/dnode-protocol-0.2.2.tgz#51151d16fc3b5f84815ee0b9497a1061d0d1949d"
-  dependencies:
-    jsonify "~0.0.0"
-    traverse "~0.6.3"
-
-dnode@*:
+dnode:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/dnode/-/dnode-1.2.2.tgz#4ac3cfe26e292b3b39b8258ae7d94edc58132efa"
   dependencies:
@@ -568,6 +561,13 @@ dnode@*:
     jsonify "~0.0.0"
   optionalDependencies:
     weak "^1.0.0"
+
+dnode-protocol@~0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/dnode-protocol/-/dnode-protocol-0.2.2.tgz#51151d16fc3b5f84815ee0b9497a1061d0d1949d"
+  dependencies:
+    jsonify "~0.0.0"
+    traverse "~0.6.3"
 
 doctypes@^1.1.0:
   version "1.1.0"

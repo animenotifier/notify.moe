@@ -6,6 +6,7 @@ exports.get = function(request, response) {
 
 	if(user) {
 		let listProviderSettings = user.listProviders[user.providers.list]
+
 		if(!listProviderSettings || !listProviderSettings.userName)
 			user.hasListProviderUserName = false
 		else
