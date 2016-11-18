@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // Converts anything into a string
-func s(v interface{}) string {
+func toString(v interface{}) string {
 	return fmt.Sprint(v)
 }
 

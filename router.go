@@ -38,4 +38,24 @@ func init() {
 
 		return ctx.HTML(components.AnimeInGenre(genreInfo.Genre, genreInfo.AnimeList))
 	})
+
+	const threadsPerPage = 12
+
+	forumHandler := func(ctx *aero.Context) string {
+		tag := ctx.Get("tag")
+		threads, _ := arn.GetThreadsByTag(tag)
+
+		if len(threads) > threadsPerPage {
+			threads = threads[:threadsPerPage]
+		}
+
+		for _, thread := range threads {
+			thread.Author, _ = arn.GetUser(thread.AuthorID)
+		}
+
+		return ctx.HTML(components.Forum(threads))
+	}
+
+	app.Ajax("/forum", forumHandler)
+	app.Ajax("/forum/:tag", forumHandler)
 }

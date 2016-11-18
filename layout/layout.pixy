@@ -23,10 +23,14 @@ component Content(content string)
 
 component Navigation
 	nav#navigation
-		a.navigation-link.navigation-link-left.ajax(href="/")
-			.navigation-button
-				i.fa.fa-dashboard
-				span.navigation-text Dash
+		NavigationButton("Dash", "/", "dashboard")
+		NavigationButton("Forum", "/forum", "comment")
+
+component NavigationButton(name string, target string, icon string)
+	a.navigation-link.navigation-link-left.ajax(href=target)
+		.navigation-button
+			i(class="fa fa-" + icon)
+			span.navigation-text= name
 
 component LoadingAnimation
 	#loading-animation.sk-cube-grid.fade

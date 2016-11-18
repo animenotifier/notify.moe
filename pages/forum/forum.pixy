@@ -1,0 +1,35 @@
+component Forum(threads []*arn.Thread)
+	h2 Forum
+	ForumHeader
+	each thread in threads
+		ThreadLink(thread)
+
+component ForumHeader
+	.forum-tags
+		a.ajax(href="/forum") All
+		span  | 
+		a.ajax(href="/forum/general") General
+		span  | 
+		a.ajax(href="/forum/news") News
+		span  | 
+		a.ajax(href="/forum/anime") Anime
+		span  | 
+		a.ajax(href="/forum/update") Updates
+		span  | 
+		a.ajax(href="/forum/suggestion") Suggestions
+		span  | 
+		a.ajax(href="/forum/bug") Bugs
+
+component ThreadLink(thread *arn.Thread)
+	.thread(data-stick=toString(thread.Sticky))
+		.post-author.thread-author
+			Avatar(thread.Author)
+		.thread-content-container
+			.post-content.thread-content
+				if thread.Sticky
+					i.fa.fa-thumb-tack.fa-fw.thread-icon
+				a.thread-title.ajax(href="/threads/" + thread.ID)= thread.Title
+				//- .thread-icons
+				//- 	each icon in thread.Icons
+				//- 		i(class='fa fa-' + icon + ' fa-fw thread-icon')
+				//- .thread-reply-count= 25

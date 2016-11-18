@@ -11,5 +11,5 @@ component AnimeInGenre(genre string, animeList []*arn.Anime)
 	h2.genre-header= arn.Capitalize(genre)
 	.genre-anime-list
 		each anime in animeList
-			a.genre-anime-link.ajax(href="/anime/" + s(anime.ID))
-				img.anime-image.genre-anime-image(src=anime.Image, alt=anime.Title.Romaji, title=anime.Title.Romaji + " (" + s(anime.Watching) + ")")
+			a.genre-anime-link.ajax(href="/anime/" + toString(anime.ID))
+				img.anime-image.genre-anime-image(src=anime.Image, alt=anime.Title.Romaji, title=anime.Title.Romaji + " (" + toString(anime.Watching) + ")")

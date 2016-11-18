@@ -49,7 +49,7 @@ component Anime(anime *arn.Anime)
 			h3.anime-header Studios
 			.light-button-group
 				each studio in anime.Studios
-					a.light-button(href="https://anilist.co/studio/" + s(studio.ID), target="_blank")
+					a.light-button(href="https://anilist.co/studio/" + toString(studio.ID), target="_blank")
 						i.fa.fa-building.fa-fw
 						span= studio.Name
 
@@ -106,7 +106,7 @@ component Anime(anime *arn.Anime)
 					a.light-button(href=link.URL, target="_blank")= link.Title
 			
 			if anime.CreatedBy == ""
-				a.light-button(href="https://anilist.co/anime/" + s(anime.ID), target="_blank") AniList
+				a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank") AniList
 
 			//- if providers.HummingBird
 			//- 	a.light-button(href="https://hummingbird.me/anime/" + providers.HummingBird.providerId, target="_blank") HummingBird

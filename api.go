@@ -3,7 +3,6 @@ package main
 import (
 	"sort"
 	"strings"
-	"time"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -11,7 +10,6 @@ import (
 
 func init() {
 	app.Get("/all/anime", func(ctx *aero.Context) string {
-		start := time.Now()
 		var titles []string
 
 		results := make(chan *arn.Anime)
@@ -22,7 +20,7 @@ func init() {
 		}
 		sort.Strings(titles)
 
-		return ctx.Text(s(len(titles)) + " anime fetched in " + s(time.Since(start)) + "\n\n" + strings.Join(titles, "\n"))
+		return ctx.Text(toString(len(titles)) + "\n\n" + strings.Join(titles, "\n"))
 	})
 
 	app.Get("/api/anime/:id", func(ctx *aero.Context) string {
@@ -45,5 +43,16 @@ func init() {
 		}
 
 		return ctx.JSON(user)
+	})
+
+	app.Get("/api/threads/:id", func(ctx *aero.Context) string {
+		id := ctx.Get("id")
+		thread, err := arn.GetThread(id)
+
+		if err != nil {
+			return ctx.Text("Thread not found")
+		}
+
+		return ctx.JSON(thread)
 	})
 }

@@ -29,6 +29,7 @@ _testmain.go
 # external packages folder
 vendor/
 node_modules/
+tmp/
 
 # debugger
 debug
