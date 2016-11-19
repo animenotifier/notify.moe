@@ -14,7 +14,6 @@ component ThreadLink(thread *arn.Thread)
 				if thread.Sticky
 					i.fa.fa-thumb-tack.fa-fw.thread-icon
 				a.thread-title.ajax(href="/threads/" + thread.ID)= thread.Title
-				//- .thread-icons
-				//- 	each icon in thread.Icons
-				//- 		i(class='fa fa-' + icon + ' fa-fw thread-icon')
-				//- .thread-reply-count= 25
+				.thread-reply-count= thread.Replies
+				.thread-icons
+					Icon(arn.GetForumIcon(thread.Tags[0]))

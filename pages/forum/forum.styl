@@ -10,15 +10,19 @@
 	flex-flow row
 	width 100%
 
-.thread-icons
 .thread-reply-count
-	flex 1
-	text-align right
+.thread-icons
 	opacity 0.5
+	text-align right
+	position relative
 
 .thread-reply-count
-	&:after
-		content " replies"
+	font-size 0.8rem
+	flex 1
+	margin 0 1rem
+
+.thread-icons
+	flex 0
 
 .thread-content-container
 	display flex
@@ -36,5 +40,5 @@
 		&:hover
 			color linkHoverColor !important
 
-.thread-icon
-	font-size 0.9em
+// .thread-icon
+// 	font-size 0.9em

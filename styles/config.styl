@@ -8,8 +8,18 @@ uiBorder = 1px solid rgba(0, 0, 0, 0.1)
 uiHoverBorder = 1px solid rgba(0, 0, 0, 0.15)
 uiBackground = linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.037) 100%)
 uiHoverBackground = linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.027) 100%)
-outlineShadowLight = 0 0 6px rgba(0, 0, 0, 0.05)
-outlineShadowMedium = 0 0 6px rgba(0, 0, 0, 0.15)
-outlineShadowHeavy = 0 0 6px rgba(0, 0, 0, 0.4)
+outlineShadowLight = 0 0 6px alpha(black, 0.05)
+outlineShadowMedium = 0 0 6px alpha(black, 0.13)
+outlineShadowHeavy = 0 0 6px alpha(black, 0.6)
 transitionSpeed = 290ms
 fadeSpeed = 200ms
+
+uiElement()
+	border uiBorder
+	background uiBackground
+	transition all transitionSpeed ease
+
+	&:hover
+		border uiHoverBorder
+		background uiHoverBackground
+		box-shadow outlineShadowMedium

@@ -7,6 +7,6 @@ component Avatar(user *arn.User)
 				img.user-image(src=user.Avatar, alt=user.Nick)
 		else
 			svg.user-image(width="50", height="50")
-				circle.head(cx="25", cy="19", r="10", fill="rgb(32, 32, 32)")
+				circle.head(cx="25", cy="19", r="10")
 				circle.body(cx="25", cy="50", r="20")
 				//- text(x="25", y="44", text-anchor="middle") TODO

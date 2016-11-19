@@ -5,6 +5,8 @@
 	float none !important
 
 .grid-cell
+	uiElement()
+	
 	flex-grow 0
 	flex-shrink 0
 
@@ -19,13 +21,8 @@
 	background-position 50% 50%
 
 	margin 0.5rem
-	border uiBorder
-	background uiBackground
 
 	&:hover
-		border uiHoverBorder
-		background uiHoverBackground
-		box-shadow outlineShadowMedium
 		transform scale(1.03)
 		// .grid-icon
 		// 	transform scale(1.3)
