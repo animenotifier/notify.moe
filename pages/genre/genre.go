@@ -15,5 +15,5 @@ func Get(ctx *aero.Context) string {
 		return err.Error()
 	}
 
-	return ctx.HTML(components.Genre(genre.Name, genre.AnimeList))
+	return ctx.HTML(components.Genre(genre))
 }
