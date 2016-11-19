@@ -1,10 +1,12 @@
-component Genres
+component Genres(genres []*arn.Genre)
 	h2 Genres
 	
 	.grid
-		each genre in arn.Genres
-			a.grid-cell.backside-card.ajax(href="/genres/" + arn.FixGenre(genre))
+		each genre in genres
+			a.grid-cell.backside-card.ajax(href="/genres/" + genre.ID)
 				.grid-text.front
-					GridIcon(arn.GetGenreIcon(genre))
-					span= genre
-				img.grid-image.back(src="https://cdn.anilist.co/img/dir/anime/reg/21519-4I676N0vzuek.jpg", alt="")
+					GridIcon(arn.GetGenreIcon(genre.Name))
+					span= genre.Name
+
+				if len(genre.AnimeList) > 0
+					img.grid-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji)

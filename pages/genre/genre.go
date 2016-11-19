@@ -9,13 +9,11 @@ import (
 // Get ...
 func Get(ctx *aero.Context) string {
 	genreName := ctx.Get("name")
-	genreInfo := new(arn.Genre)
-
-	err := arn.GetObject("Genres", genreName, genreInfo)
+	genre, err := arn.GetGenre(genreName)
 
 	if err != nil {
 		return err.Error()
 	}
 
-	return ctx.HTML(components.Genre(genreInfo.Genre, genreInfo.AnimeList))
+	return ctx.HTML(components.Genre(genre.Name, genre.AnimeList))
 }
