@@ -1,16 +1,15 @@
-component Thread(thread *arn.Thread)
+component Thread(thread *arn.Thread, posts []*arn.Post)
 	.thread
 		h2.thread-title= thread.Title
 		
 		.posts
-			Post(thread.ToPostable(), nil, "Threads", "Thread", thread.AuthorID)
-			//- +renderMessage(thread, user, "Threads", thread.author.ID)
+			Post(thread.ToPostable(), nil, "Threads", "Thread", thread.Author.ID)
 			
-			//- each post in posts
-			//- 	+renderMessage(post, user, "Posts", thread.author.ID)
+			each post in posts
+				Post(post.ToPostable(), nil, "Posts", "Post", thread.Author.ID)
 
 component Post(post arn.Postable, viewUser *arn.User, postType string, postTypeSingular string, highlightAuthorID string)
-	.post(class=[]string{"", "special-post"}[post.Author().ID == highlightAuthorID])
+	.post(data-highlight=post.Author().ID == highlightAuthorID)
 		.post-author
 			Avatar(post.Author())
 			

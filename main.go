@@ -5,6 +5,12 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/pages/anime"
+	"github.com/animenotifier/notify.moe/pages/dashboard"
+	"github.com/animenotifier/notify.moe/pages/forum"
+	"github.com/animenotifier/notify.moe/pages/genre"
+	"github.com/animenotifier/notify.moe/pages/genres"
+	"github.com/animenotifier/notify.moe/pages/threads"
 )
 
 var app = aero.New()
@@ -27,6 +33,14 @@ func main() {
 	app.Layout = func(ctx *aero.Context, content string) string {
 		return components.Layout(content)
 	}
+
+	app.Ajax("/", dashboard.Get)
+	app.Ajax("/anime/:id", anime.Get)
+	app.Ajax("/genres", genres.Get)
+	app.Ajax("/genres/:name", genre.Get)
+	app.Ajax("/forum", forum.Get)
+	app.Ajax("/forum/:tag", forum.Get)
+	app.Ajax("/threads/:id", threads.Get)
 
 	app.Run()
 }

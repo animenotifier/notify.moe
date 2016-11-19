@@ -1,0 +1,14 @@
+component Beta
+	section
+		header
+			h2 The future
+		
+		p Shht! The next version of notify.moe is currently being built here.
+		hr
+		ul
+			li
+				a.ajax(href="/anime/21499") Sousei no Onmyouji
+			li
+				a.ajax(href="/anime/1000001") RWBY
+			li
+				a(href="/api/anime/1000001") RWBY (JSON API)

@@ -1,15 +1,9 @@
-component GenreOverview
+component Genres
 	h2.genre-header Genres
 	
-	div
+	.grid
 		each genre in arn.Genres
-			a.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
-				Icon(arn.GetGenreIcon(genre))
-				span= genre
-
-component AnimeInGenre(genre string, animeList []*arn.Anime)
-	h2.genre-header= arn.Capitalize(genre)
-	.genre-anime-list
-		each anime in animeList
-			a.genre-anime-link.ajax(href="/anime/" + toString(anime.ID))
-				img.anime-image.genre-anime-image(src=anime.Image, alt=anime.Title.Romaji, title=anime.Title.Romaji + " (" + toString(anime.Watching) + ")")
+			a.grid-cell.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
+				.genre.grid-cell-content.grid-cell-text
+					Icon(arn.GetGenreIcon(genre))
+					span= genre

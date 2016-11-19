@@ -1,27 +1,24 @@
 package main
 
 import (
-	"sort"
-	"strings"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 )
 
 func init() {
-	app.Get("/all/anime", func(ctx *aero.Context) string {
-		var titles []string
+	// app.Get("/all/anime", func(ctx *aero.Context) string {
+	// 	var titles []string
 
-		results := make(chan *arn.Anime)
-		arn.Scan("Anime", results)
+	// 	results := make(chan *arn.Anime)
+	// 	arn.Scan("Anime", results)
 
-		for anime := range results {
-			titles = append(titles, anime.Title.Romaji)
-		}
-		sort.Strings(titles)
+	// 	for anime := range results {
+	// 		titles = append(titles, anime.Title.Romaji)
+	// 	}
+	// 	sort.Strings(titles)
 
-		return ctx.Text(toString(len(titles)) + "\n\n" + strings.Join(titles, "\n"))
-	})
+	// 	return ctx.Text(toString(len(titles)) + "\n\n" + strings.Join(titles, "\n"))
+	// })
 
 	app.Get("/api/anime/:id", func(ctx *aero.Context) string {
 		id, _ := ctx.GetInt("id")

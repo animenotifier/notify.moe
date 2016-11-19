@@ -23,8 +23,9 @@ component Content(content string)
 
 component Navigation
 	nav#navigation
-		NavigationButton("Dash", "/", "dashboard")
+		NavigationButton("Dash", "/", "inbox")
 		NavigationButton("Forum", "/forum", "comment")
+		NavigationButton("Genres", "/genres", "tags")
 
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.navigation-link-left.ajax(href=target)
