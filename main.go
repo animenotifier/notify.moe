@@ -8,6 +8,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
+	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/genre"
 	"github.com/animenotifier/notify.moe/pages/genres"
 	"github.com/animenotifier/notify.moe/pages/threads"
@@ -38,7 +39,7 @@ func main() {
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/genres", genres.Get)
 	app.Ajax("/genres/:name", genre.Get)
-	app.Ajax("/forum", forum.Get)
+	app.Ajax("/forum", forums.Get)
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/threads/:id", threads.Get)
 

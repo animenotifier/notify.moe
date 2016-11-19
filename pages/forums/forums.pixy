@@ -1,0 +1,26 @@
+component Forums
+	h2.forum-header Forum
+	ForumTags
+
+component ForumTags
+	.forum-tags
+		ForumCategory("All", "")
+		span  | 
+		ForumCategory("General", "/general")
+		span  | 
+		ForumCategory("News", "/news")
+		span  | 
+		ForumCategory("Anime", "/anime")
+		span  | 
+		ForumCategory("Updates", "/update")
+		span  | 
+		ForumCategory("Suggestions", "/suggestion")
+		span  | 
+		ForumCategory("Bugs", "/bug")
+
+component ForumCategory(title string, suffix string)
+	a.ajax(href="/forum" + suffix)= title
+	//- a.grid-cell.ajax(href="/forum/" + category)
+	//- 	.grid-text
+	//- 		GridIcon(arn.GetForumIcon(category))
+	//- 		span= title

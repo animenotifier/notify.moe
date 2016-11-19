@@ -1,9 +1,9 @@
 component Genres
-	h2.genre-header Genres
+	h2 Genres
 	
 	.grid
 		each genre in arn.Genres
-			a.grid-cell.light-button.ajax(href="/genres/" + arn.FixGenre(genre))
-				.genre.grid-cell-content.grid-cell-text
-					Icon(arn.GetGenreIcon(genre))
+			a.grid-cell.ajax(href="/genres/" + arn.FixGenre(genre))
+				.grid-text
+					GridIcon(arn.GetGenreIcon(genre))
 					span= genre

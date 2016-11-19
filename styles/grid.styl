@@ -1,0 +1,59 @@
+.grid
+	display flex
+	flex-flow row wrap
+	justify-content center
+	float none !important
+
+.grid-cell
+	flex-grow 0
+	flex-shrink 0
+
+	width 16vw
+	height 9vw
+	min-width 90px
+	min-height 127px
+	max-width 200px
+	max-height 282px
+	border-radius 3px
+	background-size cover
+	background-position 50% 50%
+
+	margin 0.5rem
+	border uiBorder
+	background uiBackground
+
+	&:hover
+		border uiHoverBorder
+		background uiHoverBackground
+		box-shadow outlineShadowMedium
+		transform scale(1.04)
+		// .grid-icon
+		// 	transform scale(1.3)
+
+.grid-anime
+	border none
+	&:hover
+		border none
+
+.grid-text
+	width 100%
+	height 100%
+	display flex
+	flex-flow column
+	align-items center
+	justify-content center
+	font-size 1rem
+	color rgb(160, 160, 160)
+
+.grid-icon
+	font-size 2.5rem
+	margin-top 2rem
+	margin-bottom 0.7rem
+	color linkColor
+	transition transform 200ms ease-in-out
+
+.grid-image
+	width 100%
+	height 100%
+	margin 0
+	object-fit cover

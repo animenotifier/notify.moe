@@ -25,5 +25,5 @@ func Get(ctx *aero.Context) string {
 		thread.Init()
 	}
 
-	return ctx.HTML(components.Forum(threads))
+	return ctx.HTML(components.Forum(tag, threads))
 }

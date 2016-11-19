@@ -1,24 +1,9 @@
-component Forum(threads []*arn.Thread)
-	h2 Forum
-	ForumHeader
+component Forum(tag string, threads []*arn.Thread)
+	h2.forum-header Forum
+	ForumTags
+	
 	each thread in threads
 		ThreadLink(thread)
-
-component ForumHeader
-	.forum-tags
-		a.ajax(href="/forum") All
-		span  | 
-		a.ajax(href="/forum/general") General
-		span  | 
-		a.ajax(href="/forum/news") News
-		span  | 
-		a.ajax(href="/forum/anime") Anime
-		span  | 
-		a.ajax(href="/forum/update") Updates
-		span  | 
-		a.ajax(href="/forum/suggestion") Suggestions
-		span  | 
-		a.ajax(href="/forum/bug") Bugs
 
 component ThreadLink(thread *arn.Thread)
 	.thread-link(data-sticky=thread.Sticky)
