@@ -21,7 +21,7 @@ component ForumHeader
 		a.ajax(href="/forum/bug") Bugs
 
 component ThreadLink(thread *arn.Thread)
-	.thread(data-stick=toString(thread.Sticky))
+	.thread-link(data-sticky=thread.Sticky)
 		.post-author.thread-author
 			Avatar(thread.Author)
 		.thread-content-container

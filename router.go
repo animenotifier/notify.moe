@@ -1,6 +1,8 @@
 package main
 
 import (
+	"sort"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -45,6 +47,8 @@ func init() {
 		tag := ctx.Get("tag")
 		threads, _ := arn.GetThreadsByTag(tag)
 
+		sort.Sort(threads)
+
 		if len(threads) > threadsPerPage {
 			threads = threads[:threadsPerPage]
 		}
@@ -58,4 +62,17 @@ func init() {
 
 	app.Ajax("/forum", forumHandler)
 	app.Ajax("/forum/:tag", forumHandler)
+
+	app.Ajax("/threads/:id", func(ctx *aero.Context) string {
+		id := ctx.Get("id")
+		thread, err := arn.GetThread(id)
+
+		if err != nil {
+			return ctx.Text("Thread not found")
+		}
+
+		thread.Author, _ = arn.GetUser(thread.AuthorID)
+
+		return ctx.HTML(components.Thread(thread))
+	})
 }
