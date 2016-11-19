@@ -3,7 +3,8 @@ component Genres
 	
 	.grid
 		each genre in arn.Genres
-			a.grid-cell.ajax(href="/genres/" + arn.FixGenre(genre))
-				.grid-text
+			a.grid-cell.backside-card.ajax(href="/genres/" + arn.FixGenre(genre))
+				.grid-text.front
 					GridIcon(arn.GetGenreIcon(genre))
 					span= genre
+				img.grid-image.back(src="https://cdn.anilist.co/img/dir/anime/reg/21519-4I676N0vzuek.jpg", alt="")
