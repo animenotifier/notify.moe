@@ -9,4 +9,4 @@ component Genres(genres []*arn.Genre)
 					span= genre.Name
 
 				if len(genre.AnimeList) > 0
-					img.grid-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji)
+					img.grid-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji, title=genre.AnimeList[0].Title.Romaji)
