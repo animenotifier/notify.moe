@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
@@ -11,6 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/genre"
 	"github.com/animenotifier/notify.moe/pages/genres"
+	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/threads"
 )
 
@@ -18,6 +20,12 @@ var app = aero.New()
 
 func main() {
 	app.SetStyle(components.BundledCSS)
+
+	user, _ := arn.GetUserByNick("Akyoto")
+	user.CoverImage.URL = "http://i.imgur.com/6cJrxzx.jpg"
+	user.CoverImage.Position.X = "50%"
+	user.CoverImage.Position.Y = "85%"
+	user.Save()
 
 	scripts, _ := ioutil.ReadFile("temp/scripts.js")
 	js := string(scripts)
@@ -42,6 +50,7 @@ func main() {
 	app.Ajax("/forum", forums.Get)
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/threads/:id", threads.Get)
+	app.Ajax("/user/:nick", profile.Get)
 
 	app.Run()
 }

@@ -17,7 +17,7 @@ func init() {
 	// 	}
 	// 	sort.Strings(titles)
 
-	// 	return ctx.Text(toString(len(titles)) + "\n\n" + strings.Join(titles, "\n"))
+	// 	return ctx.Error(toString(len(titles)) + "\n\n" + strings.Join(titles, "\n"))
 	// })
 
 	app.Get("/api/anime/:id", func(ctx *aero.Context) string {
@@ -25,7 +25,7 @@ func init() {
 		anime, err := arn.GetAnime(id)
 
 		if err != nil {
-			return ctx.Text("Anime not found")
+			return ctx.Error(404, "Anime not found")
 		}
 
 		return ctx.JSON(anime)
@@ -36,7 +36,7 @@ func init() {
 		user, err := arn.GetUserByNick(nick)
 
 		if err != nil {
-			return ctx.Text("User not found")
+			return ctx.Error(404, "User not found")
 		}
 
 		return ctx.JSON(user)
@@ -47,7 +47,7 @@ func init() {
 		thread, err := arn.GetThread(id)
 
 		if err != nil {
-			return ctx.Text("Thread not found")
+			return ctx.Error(404, "Thread not found")
 		}
 
 		return ctx.JSON(thread)

@@ -1,0 +1,165 @@
+.profile
+	position relative
+	left contentPadding * -1
+	top contentPadding * -1
+	min-width 100%
+	padding contentPadding
+	box-sizing content-box
+
+	color white
+	text-shadow 0px 0px 1px rgba(0, 0, 0, 0.1)
+
+	transition all transitionSpeed ease
+	animation-name appear
+	animation-duration transitionSpeed
+
+	&:hover
+		.profile-cover
+			filter brightness(28%)
+
+.profile-cover
+	position absolute
+	left 0
+	top 0
+	width 100%
+	height 100%
+	z-index -1
+	background-size cover
+
+	filter brightness(35%)
+	transition filter transitionSpeed ease
+
+@keyframes appear
+	0%
+		transform rotateX(90deg)
+		filter opacity(0) saturate(0) blur(10px)
+	100%
+		transform rotateX(0)
+		filter opacity(1) saturate(1) blur(0)
+
+.profile-image
+	border-radius 3px
+	width 320px
+	height 320px !important
+	margin contentPadding
+	object-fit cover
+
+#anime-list-container
+	flex 1.5
+
+.image-container
+	float left
+	width auto
+
+.intro-container
+	float left
+	width auto
+	display flex
+	flex-flow column
+	align-items center
+	padding 1.5em
+	max-width 900px
+
+.user-actions
+	float right
+	display flex
+	flex-flow row
+	justify-content center
+
+.user-action
+	max-width 250px
+
+#nick
+	text-align left
+	margin-top 0
+	margin-bottom 0
+
+.profile-field
+	margin-bottom 0.2em
+
+.location
+	// ...
+
+.role
+	opacity 0.6
+
+.list-provider-username
+	margin-top 0
+	margin-bottom 0
+	font-size 0.9em
+
+.main
+	// ...
+
+.alternative
+	opacity 0.4
+
+.report-bug-hint
+	//
+
+.loading-message
+	margin 0 auto
+	text-align center
+	opacity 0.4
+
+#embedded-footer
+	position fixed
+	bottom 4em
+	right calc(16px + 1em)
+	text-align right
+	z-index 1
+	font-size 0.9em
+	display flex
+	flex-flow row
+
+	.user
+		display inline-block
+		width auto
+		height auto
+		margin-right 1em
+
+.embedded-footer-info
+	display flex
+	flex-flow column
+
+.embedded-footer-nick
+	text-align left
+	opacity 0.5
+
+.embedded-footer-separator
+	opacity 0.2
+
+.appear
+	animation-name appear-animation
+	animation-duration 1s
+
+@keyframes appear-animation
+	0%
+		opacity 0
+	100%
+		opacity 1
+
+@media only screen and (max-width: 900px)
+	.intro-container
+		margin 1em 0
+		padding 0
+		width 100%
+		text-align center !important
+
+	#anime-list-container
+	.image-container
+	.user-actions
+		width 100%
+
+	#nick
+	.profile-field
+		width 100%
+		text-align center
+
+@media only screen and (min-width: 900px)
+	#posts
+		margin-left 0.5em
+
+@media only screen and (max-width: 800px)
+	.airing-date-prefix
+		display none

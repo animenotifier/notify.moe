@@ -14,7 +14,7 @@ func Get(ctx *aero.Context) string {
 	thread, err := arn.GetThread(id)
 
 	if err != nil {
-		return ctx.Text("Thread not found")
+		return ctx.Error(404, "Thread not found")
 	}
 
 	thread.Author, _ = arn.GetUser(thread.AuthorID)
@@ -26,7 +26,7 @@ func Get(ctx *aero.Context) string {
 	sort.Sort(replies)
 
 	if filterErr != nil {
-		return ctx.Text("Error fetching thread replies")
+		return ctx.Error(500, "Error fetching thread replies")
 	}
 
 	return ctx.HTML(components.Thread(thread, replies))

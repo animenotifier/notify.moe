@@ -1,0 +1,63 @@
+component Profile(viewUser *arn.User, user *arn.User)
+	.profile
+		.profile-cover(style=viewUser.CoverImageStyle())
+
+		.image-container
+			ProfileImage(viewUser)
+		
+		.intro-container
+			h2#nick= viewUser.Nick
+
+			if viewUser.Tagline != ""
+				p.profile-field.tagline
+					Icon("comment")
+					span.tagline= viewUser.Tagline
+			else
+				p.profile-field.tagline
+					Icon("comment")
+					span.tagline No tagline yet.
+			
+			//- if user != nil && viewUser.website
+			//- 	p.profile-field.website
+			//- 		Icon("home")
+			//- 		a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
+			
+			//- if user != nil && (user.osu || user.osuDetails) && viewUser.osuDetails && viewUser.osuDetails.pp >= 1000
+			//- 	p.profile-field.osu(title='osu! performance points')
+			//- 		i.fa.fa-trophy
+			//- 		span= parseInt(viewUser.osuDetails.pp) + ' pp'
+			
+			//- if viewUser.dataEditCount
+			//- 	p.profile-field.editor-contribution(title="Anime data modifications")
+			//- 		Icon("edit")
+			//- 		span= viewUser.dataEditCount
+			
+			if viewUser.Registered != ""
+				p.profile-field.registration-date(title="Member since")
+					Icon("calendar")
+					//- span= time.Parse(time.RFC3339, viewUser.Registered)
+					span= viewUser.Registered[:4]
+					//- span= monthNames[joined.getMonth()] + ' ' + joined.getFullYear()
+			
+			if viewUser.Role != ""
+				p.profile-field.role
+					Icon("rocket")
+					span= arn.Capitalize(viewUser.Role)
+
+	//- .a
+	//- 	h3 Category
+
+	//- .a
+	//- 	h3 Category
+
+	//- .a
+	//- 	h3 Category
+
+	//- .a
+	//- 	h3 Category
+
+	//- .a
+	//- 	h3 Category
+
+	//- .a
+	//- 	h3 Category

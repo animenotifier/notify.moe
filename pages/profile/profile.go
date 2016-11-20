@@ -1,4 +1,4 @@
-package anime
+package profile
 
 import (
 	"github.com/aerogo/aero"
@@ -8,12 +8,12 @@ import (
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	id, _ := ctx.GetInt("id")
-	anime, err := arn.GetAnime(id)
+	nick := ctx.Get("nick")
+	user, err := arn.GetUserByNick(nick)
 
 	if err != nil {
-		return ctx.Error(404, "Anime not found")
+		return ctx.Error(404, "User not found")
 	}
 
-	return ctx.HTML(components.Anime(anime))
+	return ctx.HTML(components.Profile(user, nil))
 }
