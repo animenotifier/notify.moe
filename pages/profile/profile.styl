@@ -2,9 +2,8 @@
 	position relative
 	left contentPadding * -1
 	top contentPadding * -1
-	min-width 100%
-	padding contentPadding
-	box-sizing content-box
+	min-width calc(100% + 3rem)
+	padding contentPadding * 2
 
 	color white
 	text-shadow 0px 0px 1px rgba(0, 0, 0, 0.1)
@@ -39,9 +38,11 @@
 
 .profile-image
 	border-radius 3px
-	width 320px
-	height 320px !important
-	margin contentPadding
+	width 100%
+	height auto
+	max-width 320px
+	max-height 320px !important
+	// padding contentPadding
 	object-fit cover
 
 #anime-list-container
@@ -50,6 +51,7 @@
 .image-container
 	float left
 	width auto
+	// padding contentPadding
 
 .intro-container
 	float left
@@ -57,7 +59,9 @@
 	display flex
 	flex-flow column
 	align-items center
-	padding 1.5em
+	padding contentPadding
+	padding-top 0
+	padding-left contentPadding * 2
 	max-width 900px
 
 .user-actions
@@ -128,16 +132,6 @@
 
 .embedded-footer-separator
 	opacity 0.2
-
-.appear
-	animation-name appear-animation
-	animation-duration 1s
-
-@keyframes appear-animation
-	0%
-		opacity 0
-	100%
-		opacity 1
 
 @media only screen and (max-width: 900px)
 	.intro-container

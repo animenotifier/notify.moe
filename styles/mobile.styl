@@ -19,7 +19,7 @@
 			content ''
 
 	#content
-		padding 1em
+		padding contentPaddingMobile
 
 	#header
 		text-align center
@@ -28,6 +28,11 @@
 		float none
 		display inline-block
 		width auto
+
+	.profile
+		left contentPaddingMobile * -1 !important
+		top contentPaddingMobile * -1 !important
+		min-width calc(100% + 2rem) !important
 
 @media only screen and (min-width: 1100px)
 	.anime-list-image

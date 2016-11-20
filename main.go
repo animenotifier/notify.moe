@@ -22,7 +22,7 @@ func main() {
 	app.SetStyle(components.BundledCSS)
 
 	user, _ := arn.GetUserByNick("Akyoto")
-	user.CoverImage.URL = "http://i.imgur.com/6cJrxzx.jpg"
+	user.CoverImage.URL = "https://i.imgur.com/6cJrxzx.jpg"
 	user.CoverImage.Position.X = "50%"
 	user.CoverImage.Position.Y = "85%"
 	user.Save()
