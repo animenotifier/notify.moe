@@ -22,9 +22,9 @@ func main() {
 	app.SetStyle(components.BundledCSS)
 
 	user, _ := arn.GetUserByNick("Akyoto")
-	user.CoverImage.URL = "https://i.imgur.com/6cJrxzx.jpg"
+	user.CoverImage.URL = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Hanyijie-sky-scenery-ship-anime-art-1920x1080.jpg"
 	user.CoverImage.Position.X = "50%"
-	user.CoverImage.Position.Y = "85%"
+	user.CoverImage.Position.Y = "0%"
 	user.Save()
 
 	scripts, _ := ioutil.ReadFile("temp/scripts.js")

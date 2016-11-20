@@ -11,11 +11,11 @@ component Profile(viewUser *arn.User, user *arn.User)
 			if viewUser.Tagline != ""
 				p.profile-field.tagline
 					Icon("comment")
-					span.tagline= viewUser.Tagline
+					span.tagline-text= viewUser.Tagline
 			else
 				p.profile-field.tagline
 					Icon("comment")
-					span.tagline No tagline yet.
+					span.tagline-text No tagline yet.
 			
 			//- if user != nil && viewUser.website
 			//- 	p.profile-field.website
