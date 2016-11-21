@@ -3,10 +3,11 @@ component Genres(genres []*arn.Genre)
 	
 	.grid
 		each genre in genres
-			a.grid-cell.backside-card.ajax(href="/genres/" + genre.ID)
-				.grid-text.front
-					GridIcon(arn.GetGenreIcon(genre.Name))
-					span= genre.Name
+			a.grid-cell.ajax(href="/genres/" + genre.ID)
+				.backside-card.ui
+					.grid-text.front
+						GridIcon(arn.GetGenreIcon(genre.Name))
+						span= genre.Name
 
-				if len(genre.AnimeList) > 0
-					img.grid-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji, title=genre.AnimeList[0].Title.Romaji)
+					if len(genre.AnimeList) > 0
+						img.grid-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji, title=genre.AnimeList[0].Title.Romaji + "\n" + genre.Name + " #1")
