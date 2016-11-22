@@ -17,8 +17,6 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(404, "Thread not found")
 	}
 
-	thread.Author, _ = arn.GetUser(thread.AuthorID)
-
 	replies, filterErr := arn.FilterPosts(func(post *arn.Post) bool {
 		return post.ThreadID == thread.ID
 	})

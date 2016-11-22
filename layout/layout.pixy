@@ -24,6 +24,7 @@ component Content(content string)
 component Navigation
 	nav#navigation
 		NavigationButton("Dash", "/", "inbox")
+		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
 		NavigationButton("Genres", "/genres", "tags")
 

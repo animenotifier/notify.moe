@@ -1,4 +1,12 @@
-component Dashboard
+component Dashboard(posts []*arn.Post)
 	section
 		header
 			h2 Dash
+	
+	.dashboard-widget
+		each post in posts
+			a.dashboard-event.ui.ajax(href=post.Link())
+				.dashboard-event-author
+					AvatarNoLink(post.Author())
+				.dashboard-event-text
+					span= post.Thread().Title

@@ -3,51 +3,7 @@ component Thread(thread *arn.Thread, posts []*arn.Post)
 		h2.thread-title= thread.Title
 		
 		.posts
-			Post(thread.ToPostable(), nil, "Threads", "Thread", thread.Author.ID)
+			Postable(thread.ToPostable(), nil, thread.Author().ID)
 			
 			each post in posts
-				Post(post.ToPostable(), nil, "Posts", "Post", thread.Author.ID)
-
-component Post(post arn.Postable, viewUser *arn.User, postType string, postTypeSingular string, highlightAuthorID string)
-	.post(data-highlight=post.Author().ID == highlightAuthorID)
-		.post-author
-			Avatar(post.Author())
-			
-			//- if post.recipient && post.recipient.ID !== post.author.ID
-			//- 	a.user.post-recipient(href="/+" + post.recipient.nick, title=post.recipient.nick)
-			//- 		img.user-image(src=post.recipient.avatar ? (post.recipient.avatar + "?s=100&r=x&d=mm") : "/images/elements/no-gravatar.svg", alt=post.recipient.nick)
-		.post-content
-			div(id="render-" + post.ID())!= aero.Markdown(post.Text())
-			
-			//- if user && user.ID === post.authorId
-			//- 	textarea.post-input.hidden(id="source-" + post.ID)= post.text
-			//- 	a.post-save.hidden(id="save-" + post.ID, onclick=`$.saveEdit("${type.toLowerCase()}", "${post.ID}")`)
-			//- 		i.fa.fa-save
-			//- 		span Save
-			
-			.post-toolbar(id="toolbar-" + post.ID())
-				.spacer
-				.post-likes(id="likes-" + post.ID())= len(post.Likes())
-				
-				//- if user != nil
-				//- 	if user.ID !== post.authorId
-				//- 		- var liked = post.likes && post.likes.indexOf(user.ID) !== -1
-						
-				//- 		a.post-tool.post-like(id="like-" + post.ID, onclick=`$.like("${type.toLowerCase()}", "${post.ID}")`, title="Like", class=liked ? "hidden" : ")
-				//- 			i.fa.fa-thumbs-up.fa-fw
-						
-				//- 		a.post-tool.post-unlike(id="unlike-" + post.ID, onclick=`$.unlike("${type.toLowerCase()}", "${post.ID}")`, title="Unlike", class=!liked ? "hidden" : ")
-				//- 			i.fa.fa-thumbs-down.fa-fw
-					
-				//- 	if type === "Posts" || type === "Threads"
-				//- 		if user.ID === post.authorId
-				//- 			a.post-tool.post-edit(onclick=`$.edit("${post.ID}")`, title="Edit")
-				//- 				i.fa.fa-pencil.fa-fw
-				
-				//- if type !== "Threads"
-				//- 	a.post-tool.post-permalink.ajax(href="/" + type.toLowerCase() + "/" + post.ID, title="Permalink")
-				//- 		i.fa.fa-link.fa-fw
-				
-				//- if type === "Messages" && user && (user.ID === post.authorId || user.ID === post.recipientId)
-				//- 	a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this ${typeSingular.toLowerCase()} from ${post.author.nick}?")) $.delete${typeSingular}("${post.ID}")`, title="Delete")
-				//- 		i.fa.fa-trash.fa-fw
+				Postable(post.ToPostable(), nil, thread.Author().ID)

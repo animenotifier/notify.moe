@@ -21,9 +21,5 @@ func Get(ctx *aero.Context) string {
 		threads = threads[:threadsPerPage]
 	}
 
-	for _, thread := range threads {
-		thread.Init()
-	}
-
 	return ctx.HTML(components.Forum(tag, threads))
 }

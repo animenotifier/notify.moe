@@ -8,7 +8,7 @@ component Forum(tag string, threads []*arn.Thread)
 component ThreadLink(thread *arn.Thread)
 	.thread-link(data-sticky=thread.Sticky)
 		.post-author.thread-author
-			Avatar(thread.Author)
+			Avatar(thread.Author())
 		.thread-content-container
 			.post-content.thread-content
 				if thread.Sticky
