@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 
-	"github.com/valyala/fasthttp"
+	"github.com/aerogo/aero"
 )
 
 func init() {
@@ -11,19 +11,19 @@ func init() {
 	plusRouteAjax := []byte("/_/+")
 
 	// This will rewrite /+UserName requests to /user/UserName
-	app.Rewrite(func(ctx *fasthttp.RequestCtx) {
-		requestURI := ctx.RequestURI()
+	app.Rewrite(func(ctx *aero.RewriteContext) {
+		requestURI := ctx.URIBytes()
 
 		if bytes.HasPrefix(requestURI, plusRoute) {
 			newURI := []byte("/user/")
 			userName := requestURI[2:]
 			newURI = append(newURI, userName...)
-			ctx.Request.SetRequestURIBytes(newURI)
+			ctx.SetURIBytes(newURI)
 		} else if bytes.HasPrefix(requestURI, plusRouteAjax) {
 			newURI := []byte("/_/user/")
 			userName := requestURI[4:]
 			newURI = append(newURI, userName...)
-			ctx.Request.SetRequestURIBytes(newURI)
+			ctx.SetURIBytes(newURI)
 		}
 	})
 }

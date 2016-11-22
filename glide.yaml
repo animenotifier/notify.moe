@@ -1,0 +1,6 @@
+package: github.com/animenotifier/notify.moe
+import:
+- package: github.com/aerogo/aero
+- package: github.com/animenotifier/arn
+- package: github.com/valyala/fasthttp
+  version: ^20160617.0.0
