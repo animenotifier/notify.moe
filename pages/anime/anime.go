@@ -12,7 +12,7 @@ func Get(ctx *aero.Context) string {
 	anime, err := arn.GetAnime(id)
 
 	if err != nil {
-		return ctx.Error(404, "Anime not found")
+		return ctx.Error(404, "Anime not found", err)
 	}
 
 	return ctx.HTML(components.Anime(anime))

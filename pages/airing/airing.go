@@ -10,20 +10,12 @@ import (
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	var animeList []*arn.Anime
+	animeList, err := arn.GetAiringAnime()
 
-	scan := make(chan *arn.Anime)
-	arn.Scan("Anime", scan)
-
-	for anime := range scan {
-		if anime.AiringStatus != "currently airing" || anime.Adult {
-			continue
-		}
-
-		animeList = append(animeList, anime)
+	if err != nil {
+		return ctx.Error(500, "Failed fetching airing anime", err)
 	}
 
 	sort.Sort(arn.AnimeByPopularity(animeList))
-
 	return ctx.HTML(components.Airing(animeList))
 }

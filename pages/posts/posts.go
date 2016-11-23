@@ -12,7 +12,7 @@ func Get(ctx *aero.Context) string {
 	post, err := arn.GetPost(id)
 
 	if err != nil {
-		return ctx.Error(404, "Post not found")
+		return ctx.Error(404, "Post not found", err)
 	}
 
 	return ctx.HTML(components.Post(post))

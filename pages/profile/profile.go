@@ -12,7 +12,7 @@ func Get(ctx *aero.Context) string {
 	user, err := arn.GetUserByNick(nick)
 
 	if err != nil {
-		return ctx.Error(404, "User not found")
+		return ctx.Error(404, "User not found", err)
 	}
 
 	return ctx.HTML(components.Profile(user, nil))

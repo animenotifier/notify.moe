@@ -25,7 +25,7 @@ func init() {
 		anime, err := arn.GetAnime(id)
 
 		if err != nil {
-			return ctx.Error(404, "Anime not found")
+			return ctx.Error(404, "Anime not found", err)
 		}
 
 		return ctx.JSON(anime)
@@ -36,7 +36,7 @@ func init() {
 		user, err := arn.GetUserByNick(nick)
 
 		if err != nil {
-			return ctx.Error(404, "User not found")
+			return ctx.Error(404, "User not found", err)
 		}
 
 		return ctx.JSON(user)
@@ -47,7 +47,7 @@ func init() {
 		thread, err := arn.GetThread(id)
 
 		if err != nil {
-			return ctx.Error(404, "Thread not found")
+			return ctx.Error(404, "Thread not found", err)
 		}
 
 		return ctx.JSON(thread)
