@@ -111,10 +111,14 @@ component Anime(anime *arn.Anime)
 		.light-button-group
 			if anime.Links != nil
 				each link in anime.Links
-					a.light-button(href=link.URL, target="_blank")= link.Title
+					a.light-button(href=link.URL, target="_blank")
+						Icon("external-link")
+						span= link.Title
 			
 			if anime.CreatedBy == ""
-				a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank") AniList
+				a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank")
+					Icon("external-link")
+					span AniList
 
 			//- if providers.HummingBird
 			//- 	a.light-button(href="https://hummingbird.me/anime/" + providers.HummingBird.providerId, target="_blank") HummingBird
