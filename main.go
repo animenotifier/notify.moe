@@ -2,6 +2,7 @@ package main
 
 import (
 	"io/ioutil"
+	"runtime"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
@@ -23,6 +24,7 @@ var app = aero.New()
 
 func main() {
 	app.SetStyle(components.BundledCSS)
+	app.Config.GZipCache = false
 
 	// user, _ := arn.GetUserByNick("Akyoto")
 	// user.CoverImage.URL = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Hanyijie-sky-scenery-ship-anime-art-1920x1080.jpg"
@@ -42,7 +44,12 @@ func main() {
 	})
 
 	app.Get("/hello", func(ctx *aero.Context) string {
-		return "Hello World"
+		return ctx.Text("Hello World")
+	})
+
+	app.Get("/gc", func(ctx *aero.Context) string {
+		runtime.GC()
+		return ctx.Text("Ran garbage collector")
 	})
 
 	app.Layout = func(ctx *aero.Context, content string) string {

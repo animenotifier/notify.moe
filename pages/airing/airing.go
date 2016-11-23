@@ -9,7 +9,12 @@ import (
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	var airingAnimeCache jobs.AiringAnimeCache
-	arn.GetObject("Cache", "airingAnime", &airingAnimeCache)
+	airingAnimeCache := new(jobs.AiringAnimeCache)
+	err := arn.GetObject("Cache", "airingAnime", airingAnimeCache)
+
+	if err != nil {
+		return ctx.Error(500, "Couldn't fetch airing anime", err)
+	}
+
 	return ctx.HTML(components.Airing(airingAnimeCache.Anime))
 }
