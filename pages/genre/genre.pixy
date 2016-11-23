@@ -1,6 +1,3 @@
 component Genre(genre *arn.Genre)
 	h2= arn.Capitalize(genre.ID)
-	.grid
-		each anime in genre.AnimeList
-			a.grid-cell.grid-anime.ajax(href="/anime/" + toString(anime.ID))
-				img.anime-image.grid-image(src=anime.Image, alt=anime.Title.Romaji, title=anime.Title.Romaji + " (" + toString(anime.Watching) + ")")
+	AnimeGrid(genre.AnimeList)

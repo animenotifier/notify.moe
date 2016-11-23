@@ -1,0 +1,3 @@
+component Airing(animeList []*arn.Anime)
+	h2 Airing
+	AnimeGrid(animeList)

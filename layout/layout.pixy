@@ -27,6 +27,7 @@ component Navigation
 		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
 		NavigationButton("Genres", "/genres", "tags")
+		NavigationButton("Airing", "/airing", "rss")
 
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.navigation-link-left.ajax(href=target)
