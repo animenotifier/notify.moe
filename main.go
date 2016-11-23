@@ -5,6 +5,7 @@ import (
 	"runtime"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/jobs"
 	"github.com/animenotifier/notify.moe/pages/airing"
@@ -24,13 +25,22 @@ var app = aero.New()
 
 func main() {
 	app.SetStyle(components.BundledCSS)
-	app.Config.GZipCache = false
 
-	// user, _ := arn.GetUserByNick("Akyoto")
-	// user.CoverImage.URL = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Hanyijie-sky-scenery-ship-anime-art-1920x1080.jpg"
-	// user.CoverImage.Position.X = "50%"
-	// user.CoverImage.Position.Y = "0%"
-	// user.Save()
+	// app.Sessions = sessions.New(sessions.Config{
+	// 	Cookie:                      "sid",
+	// 	Expires:                     time.Duration(30) * time.Second,
+	// 	GcDuration:                  time.Duration(30) * time.Second,
+	// 	DecodeCookie:                false,
+	// 	DisableSubdomainPersistence: false,
+	// })
+
+	app.Sessions.Store = aero.NewMemoryStore()
+
+	user, _ := arn.GetUserByNick("Akyoto")
+	user.CoverImage.URL = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Hanyijie-sky-scenery-ship-anime-art-1920x1080.jpg"
+	user.CoverImage.Position.X = "50%"
+	user.CoverImage.Position.Y = "0%"
+	user.Save()
 
 	// Background jobs
 	go jobs.AiringAnime()
