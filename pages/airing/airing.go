@@ -4,12 +4,11 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/jobs"
 )
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	airingAnimeCache := new(jobs.AiringAnimeCache)
+	airingAnimeCache := new(arn.AiringAnimeCache)
 	err := arn.GetObject("Cache", "airingAnime", airingAnimeCache)
 
 	if err != nil {

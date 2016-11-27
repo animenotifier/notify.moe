@@ -12,7 +12,7 @@ func Get(ctx *aero.Context) string {
 	genre, err := arn.GetGenre(genreName)
 
 	if err != nil {
-		return err.Error()
+		return ctx.Error(404, "Genre not found", err)
 	}
 
 	return ctx.HTML(components.Genre(genre))

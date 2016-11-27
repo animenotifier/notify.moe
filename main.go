@@ -5,9 +5,7 @@ import (
 	"runtime"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/jobs"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
@@ -24,7 +22,7 @@ import (
 var app = aero.New()
 
 func main() {
-	app.SetStyle(components.BundledCSS)
+	app.SetStyle(components.CSS())
 
 	// app.Sessions = sessions.New(sessions.Config{
 	// 	Cookie:                      "sid",
@@ -34,16 +32,11 @@ func main() {
 	// 	DisableSubdomainPersistence: false,
 	// })
 
-	app.Sessions.Store = aero.NewMemoryStore()
-
-	user, _ := arn.GetUserByNick("Akyoto")
-	user.CoverImage.URL = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Hanyijie-sky-scenery-ship-anime-art-1920x1080.jpg"
-	user.CoverImage.Position.X = "50%"
-	user.CoverImage.Position.Y = "0%"
-	user.Save()
-
-	// Background jobs
-	go jobs.AiringAnime()
+	// user, _ := arn.GetUserByNick("Akyoto")
+	// user.CoverImage.URL = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Hanyijie-sky-scenery-ship-anime-art-1920x1080.jpg"
+	// user.CoverImage.Position.X = "50%"
+	// user.CoverImage.Position.Y = "0%"
+	// user.Save()
 
 	scripts, _ := ioutil.ReadFile("temp/scripts.js")
 	js := string(scripts)
@@ -77,6 +70,10 @@ func main() {
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/airing", airing.Get)
+
+	app.Ajax("/test", func(ctx *aero.Context) string {
+		return ctx.HTML(components.Test("Hello World"))
+	})
 
 	app.Run()
 }

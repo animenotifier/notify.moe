@@ -1,0 +1,2 @@
+component Test(msg string)
+	h1= msg

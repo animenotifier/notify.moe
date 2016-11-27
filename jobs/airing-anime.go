@@ -1,24 +1,17 @@
-package jobs
+package main
 
 import (
+	"fmt"
 	"sort"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
 
-// AiringAnimeCache ...
-type AiringAnimeCache struct {
-	Anime []*arn.Anime `json:"anime"`
-}
-
-// AiringAnimeCacheSmall ...
-type AiringAnimeCacheSmall struct {
-	Anime []*arn.AnimeSmall `json:"anime"`
-}
-
 // AiringAnime ...
 func AiringAnime() {
+	fmt.Println("Running background job: Airing Anime")
+
 	animeList, err := arn.GetAiringAnime()
 
 	if err != nil {
@@ -41,7 +34,7 @@ func AiringAnime() {
 		})
 	}
 
-	saveErr := arn.SetObject("Cache", "airingAnime", &AiringAnimeCacheSmall{
+	saveErr := arn.SetObject("Cache", "airingAnime", &arn.AiringAnimeCacheSmall{
 		Anime: animeListSmall,
 	})
 
