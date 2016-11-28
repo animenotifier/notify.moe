@@ -1,0 +1,14 @@
+h1
+	font-size 3em
+
+h2
+	font-size 2em
+	font-weight bold
+	text-align center
+	line-height 1.2em
+
+h3
+	font-size 1.5em
+	line-height 1.6em
+	text-align left
+	margin-top 0.6em

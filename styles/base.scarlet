@@ -1,0 +1,28 @@
+html
+	height 100%
+
+body
+	font-family "Ubuntu", "Trebuchet MS", sans-serif
+	font-size 1.05rem
+	tab-size 4
+	overflow hidden
+	height 100%
+	color text-color
+
+a
+	color link-color
+	text-decoration none
+	transition all transition-speed ease
+
+	:hover
+		color link-hover-color
+		text-decoration none
+	
+	:active
+		transform translateY(3px)
+
+strong
+	font-weight bold
+
+em
+	font-style italic

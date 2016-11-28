@@ -1,0 +1,22 @@
+#navigation
+	display flex
+	flex-flow row
+	padding 0 content-padding
+	height nav-height
+	overflow hidden
+
+.navigation-link
+	color nav-link-color
+
+	:hover,
+	&.active
+		color nav-link-hover-color
+		cursor pointer
+
+	&.active
+		text-shadow 1px 1px 3px rgba(4, 4, 4, 0.5)
+
+.navigation-button
+	font-size 1.1em
+	line-height 1em
+	padding 0.75em 1em

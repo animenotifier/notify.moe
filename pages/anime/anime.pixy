@@ -1,142 +1,139 @@
 component Anime(anime *arn.Anime)
-	section.anime-container(data-id=anime.ID)
-		header.anime-header
-			if anime.Image != ""
-				.anime-image-container
-					img.anime-image(src=anime.Image, alt=anime.Title.Romaji)
-			
-			.info-column
-				h2.anime-title-db(title=anime.Type)= anime.Title.Romaji
-
-				//- if user && user.titleLanguage === "japanese"
-				//- 	p.second-title-container
-				//- 		span.second-title(title=anime.Title.English !== anime.Title.Romaji ? anime.Title.English : null)= anime.Title.Romaji
-				//- else
-				if anime.Title.Japanese != anime.Title.Romaji
-					p.second-title-container
-						a.second-title(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
-
-				//- h3.anime-header.anime-summary-header Summary
-				p.anime-summary= arn.FixAnimeDescription(anime.Description)
+	.anime-header(data-id=anime.ID)
+		if anime.Image != ""
+			.anime-image-container
+				img.anime-image(src=anime.Image, alt=anime.Title.Romaji)
 		
-		if anime.YoutubeID != ""
-			h3.anime-header Video
-			.anime-trailer.video-container
-				iframe.video(src="https://www.youtube.com/embed/" + anime.YoutubeID + "?showinfo=0", allowfullscreen="allowfullscreen")
+		.anime-info
+			h2.anime-title(title=anime.Type)= anime.Title.Romaji
 
-		if anime.Tracks != nil && anime.Tracks.Opening != nil
-			h3.anime-header Tracks
-			iframe.anime-track(src="https://w.soundcloud.com/player/?url=" + anime.Tracks.Opening.URI + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")
+			//- if user && user.titleLanguage === "japanese"
+			//- 	span.second-title(title=anime.Title.English !== anime.Title.Romaji ? anime.Title.English : null)= anime.Title.Romaji
+			//- else
+			if anime.Title.Japanese != anime.Title.Romaji
+				a.anime-alternative-title(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
 
-		//- if user && friendsWatching && friendsWatching.length > 0
-		//- 	include ../messages/avatar.pug
-			
-		//- 	h3.anime-header Watching
-		//- 	.user-list
-		//- 		each watcher in friendsWatching
-		//- 			+avatar(watcher)
+			//- h3.anime-section-name.anime-summary-header Summary
+			p.anime-summary= arn.FixAnimeDescription(anime.Description)
+	
+	if anime.YoutubeID != ""
+		h3.anime-section-name Video
+		.anime-trailer.video-container
+			iframe.video(src="https://www.youtube.com/embed/" + anime.YoutubeID + "?showinfo=0", allowfullscreen="allowfullscreen")
 
-		if len(anime.Relations) > 0
-			h3.anime-header Relations
-			.relations
-				each relation in anime.Relations
-					a.relation.ajax(href="/anime/" + toString(relation.ID), title=relation.Anime().Title.Romaji)
-						img.anime-image.relation-image(src=relation.Anime().Image, alt=relation.Anime().Title.Romaji)
-						span= arn.Capitalize(relation.Type)
+	if anime.Tracks != nil && anime.Tracks.Opening != nil
+		h3.anime-section-name Tracks
+		iframe.anime-track(src="https://w.soundcloud.com/player/?url=" + anime.Tracks.Opening.URI + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")
 
-		if len(anime.Genres) > 0
-			h3.anime-header Genres
-			.light-button-group
-				each genre in anime.Genres
-					if genre != ""
-						a.light-button.ajax(href="/genres/" + arn.GetGenreIDByName(genre))
-							Icon(arn.GetGenreIcon(genre))
-							span= genre
+	//- if user && friendsWatching && friendsWatching.length > 0
+	//- 	include ../messages/avatar.pug
 		
-		if len(anime.Studios) > 0
-			h3.anime-header Studios
-			.light-button-group
-				each studio in anime.Studios
-					a.light-button(href="https://anilist.co/studio/" + toString(studio.ID), target="_blank")
-						i.fa.fa-building.fa-fw
-						span= studio.Name
+	//- 	h3.anime-section-name Watching
+	//- 	.user-list
+	//- 		each watcher in friendsWatching
+	//- 			+avatar(watcher)
 
-		//- //-if crunchy
-		//- //-	h3.anime-header Episodes
+	if len(anime.Relations) > 0
+		h3.anime-section-name Relations
+		.relations
+			each relation in anime.Relations
+				a.relation.ajax(href="/anime/" + toString(relation.ID), title=relation.Anime().Title.Romaji)
+					img.anime-image.relation-image(src=relation.Anime().Image, alt=relation.Anime().Title.Romaji)
+					span= arn.Capitalize(relation.Type)
 
-		//- if canEdit
-		//- 	#staff-info
-		//- 		h3.anime-header Links
-		//- 		table
-		//- 			tbody
-		//- 				tr
-		//- 					td MyAnimeList
-		//- 					td
-		//- 						input.save-on-change(id="MyAnimeList", type="text", value=providers.MyAnimeList ? providers.MyAnimeList.providerId : ", disabled=(providers.MyAnimeList && providers.MyAnimeList.similarity === 1) ? true : false)
-		//- 					td
-		//- 						a(href="https://www.google.co.jp/search?q=site:myanimelist.net/anime+" + anime.title.romaji.replace(/ /g, "+"), target="_blank")
-		//- 							.fa.fa-search
-		//- 					td
-		//- 				tr
-		//- 					td HummingBird
-		//- 					td
-		//- 						input.save-on-change(id="HummingBird", type="text", value=providers.HummingBird ? providers.HummingBird.providerId : ", disabled=(providers.HummingBird && providers.HummingBird.similarity === 1) ? true : false)
-		//- 					td
-		//- 						a(href="https://www.google.co.jp/search?q=site:hummingbird.me/anime+" + anime.title.romaji.replace(/ /g, "+"), target="_blank")
-		//- 							.fa.fa-search
-		//- 					td
-		//- 				tr
-		//- 					td AnimePlanet
-		//- 					td
-		//- 						input.save-on-change(id="AnimePlanet", type="text", value=providers.AnimePlanet ? providers.AnimePlanet.providerId : ", disabled=(providers.AnimePlanet && providers.AnimePlanet.similarity === 1) ? true : false)
-		//- 					td
-		//- 						a(href="https://www.google.co.jp/search?q=site:anime-planet.com/anime+" + anime.title.english.replace(/ /g, "+"), target="_blank")
-		//- 							.fa.fa-search
-		//- 					td
-
-		//- 				- var title = providers.Nyaa ? providers.Nyaa.title : "
-		//- 				- var proposedTitle = nyaa.buildNyaaTitle(anime.title.romaji)
-		//- 				tr
-		//- 					td Nyaa
-		//- 					td
-		//- 						input.save-on-change(id="Nyaa", type="text", value=title, placeholder=proposedTitle)
-		//- 					td
-		//- 						a(href="https://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=" + (title ? title.replace(/ /g, "+") : proposedTitle), target="_blank")
-		//- 							.fa.fa-search
-		//- 					td
-		//- 						if providers.Nyaa && providers.Nyaa.episodes !== undefined
-		//- 							span(class=providers.Nyaa.episodes === 0 ? "entry-error" : "entry-ok")= providers.Nyaa.episodes + " eps"
-
-		h3.anime-header Links
+	if len(anime.Genres) > 0
+		h3.anime-section-name Genres
 		.light-button-group
-			if anime.Links != nil
-				each link in anime.Links
-					a.light-button(href=link.URL, target="_blank")
-						Icon("external-link")
-						span= link.Title
-			
-			if anime.CreatedBy == ""
-				a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank")
+			each genre in anime.Genres
+				if genre != ""
+					a.light-button.ajax(href="/genres/" + arn.GetGenreIDByName(genre))
+						Icon(arn.GetGenreIcon(genre))
+						span= genre
+	
+	if len(anime.Studios) > 0
+		h3.anime-section-name Studios
+		.light-button-group
+			each studio in anime.Studios
+				a.light-button(href="https://anilist.co/studio/" + toString(studio.ID), target="_blank")
+					i.fa.fa-building.fa-fw
+					span= studio.Name
+
+	//- //-if crunchy
+	//- //-	h3.anime-section-name Episodes
+
+	//- if canEdit
+	//- 	#staff-info
+	//- 		h3.anime-section-name Links
+	//- 		table
+	//- 			tbody
+	//- 				tr
+	//- 					td MyAnimeList
+	//- 					td
+	//- 						input.save-on-change(id="MyAnimeList", type="text", value=providers.MyAnimeList ? providers.MyAnimeList.providerId : ", disabled=(providers.MyAnimeList && providers.MyAnimeList.similarity === 1) ? true : false)
+	//- 					td
+	//- 						a(href="https://www.google.co.jp/search?q=site:myanimelist.net/anime+" + anime.title.romaji.replace(/ /g, "+"), target="_blank")
+	//- 							.fa.fa-search
+	//- 					td
+	//- 				tr
+	//- 					td HummingBird
+	//- 					td
+	//- 						input.save-on-change(id="HummingBird", type="text", value=providers.HummingBird ? providers.HummingBird.providerId : ", disabled=(providers.HummingBird && providers.HummingBird.similarity === 1) ? true : false)
+	//- 					td
+	//- 						a(href="https://www.google.co.jp/search?q=site:hummingbird.me/anime+" + anime.title.romaji.replace(/ /g, "+"), target="_blank")
+	//- 							.fa.fa-search
+	//- 					td
+	//- 				tr
+	//- 					td AnimePlanet
+	//- 					td
+	//- 						input.save-on-change(id="AnimePlanet", type="text", value=providers.AnimePlanet ? providers.AnimePlanet.providerId : ", disabled=(providers.AnimePlanet && providers.AnimePlanet.similarity === 1) ? true : false)
+	//- 					td
+	//- 						a(href="https://www.google.co.jp/search?q=site:anime-planet.com/anime+" + anime.title.english.replace(/ /g, "+"), target="_blank")
+	//- 							.fa.fa-search
+	//- 					td
+
+	//- 				- var title = providers.Nyaa ? providers.Nyaa.title : "
+	//- 				- var proposedTitle = nyaa.buildNyaaTitle(anime.title.romaji)
+	//- 				tr
+	//- 					td Nyaa
+	//- 					td
+	//- 						input.save-on-change(id="Nyaa", type="text", value=title, placeholder=proposedTitle)
+	//- 					td
+	//- 						a(href="https://www.nyaa.se/?page=search&cats=1_37&filter=0&sort=2&term=" + (title ? title.replace(/ /g, "+") : proposedTitle), target="_blank")
+	//- 							.fa.fa-search
+	//- 					td
+	//- 						if providers.Nyaa && providers.Nyaa.episodes !== undefined
+	//- 							span(class=providers.Nyaa.episodes === 0 ? "entry-error" : "entry-ok")= providers.Nyaa.episodes + " eps"
+
+	h3.anime-section-name Links
+	.light-button-group
+		if anime.Links != nil
+			each link in anime.Links
+				a.light-button(href=link.URL, target="_blank")
 					Icon("external-link")
-					span AniList
+					span= link.Title
+		
+		if anime.CreatedBy == ""
+			a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank")
+				Icon("external-link")
+				span AniList
 
-			//- if providers.HummingBird
-			//- 	a.light-button(href="https://hummingbird.me/anime/" + providers.HummingBird.providerId, target="_blank") HummingBird
+		//- if providers.HummingBird
+		//- 	a.light-button(href="https://hummingbird.me/anime/" + providers.HummingBird.providerId, target="_blank") HummingBird
 
-			//- if providers.MyAnimeList
-			//- 	a.light-button(href="http://myanimelist.net/anime/" + providers.MyAnimeList.providerId, target="_blank") MyAnimeList
+		//- if providers.MyAnimeList
+		//- 	a.light-button(href="http://myanimelist.net/anime/" + providers.MyAnimeList.providerId, target="_blank") MyAnimeList
 
-			//- if providers.AnimePlanet
-			//- 	a.light-button(href="http://www.anime-planet.com/anime/" + providers.AnimePlanet.providerId, target="_blank") AnimePlanet
+		//- if providers.AnimePlanet
+		//- 	a.light-button(href="http://www.anime-planet.com/anime/" + providers.AnimePlanet.providerId, target="_blank") AnimePlanet
 
-		.sources
-			p Powered by Anilist.
-		//- 		if descriptionSource
-		//- 			span= " Summary by " + summarySource + "."
-		//- //-
-		//- 	h3.anime-header Synonyms
-		//- 	if anime.title.synonyms
-		//- 		ul.anime-synonyms
-		//- 			li.anime-japanese-title= anime.title.japanese
-		//- 			each synonym in anime.title.synonyms
-		//- 				li= synonym
+	.sources
+		p Powered by Anilist.
+	//- 		if descriptionSource
+	//- 			span= " Summary by " + summarySource + "."
+	//- //-
+	//- 	h3.anime-section-name Synonyms
+	//- 	if anime.title.synonyms
+	//- 		ul.anime-synonyms
+	//- 			li.anime-japanese-title= anime.title.japanese
+	//- 			each synonym in anime.title.synonyms
+	//- 				li= synonym

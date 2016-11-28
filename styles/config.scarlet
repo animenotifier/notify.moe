@@ -1,1 +1,17 @@
-fade-speed = 290ms
+// Colors
+text-color = rgb(60, 60, 60)
+main-color = rgb(248, 165, 130)
+link-color = rgb(245, 126, 76)
+link-hover-color = rgb(242, 93, 30)
+header-color = rgb(60, 60, 60)
+nav-link-color = rgb(160, 160, 160)
+nav-link-hover-color = rgb(255, 255, 255)
+
+// Distances
+content-padding = 1.5rem
+hover-line-size = 2px
+nav-height = 3.11rem
+
+// Timings
+fade-speed = 200ms
+transition-speed = 290ms

@@ -2,17 +2,17 @@ profileBootDuration = 2s
 
 .profile
 	position relative
-	left contentPadding * -1
-	top contentPadding * -1
+	left content-padding * -1
+	top content-padding * -1
 	min-width calc(100% + 3rem)
-	padding contentPadding * 2
+	padding content-padding * 2
 
 	color white
 	text-shadow 0px 0px 2px rgb(0, 0, 0, 0.5)
 
-	transition all transitionSpeed ease
+	transition all transition-speed ease
 	animation-name appear
-	animation-duration transitionSpeed
+	animation-duration transition-speed
 
 	overflow hidden
 
@@ -38,7 +38,7 @@ profileBootDuration = 2s
 	background-size cover
 	overflow hidden
 	
-	transition all transitionSpeed ease
+	transition all transition-speed ease
 	animation cover-animation profileBootDuration
 	animation-fill-mode forwards
 
@@ -52,7 +52,7 @@ profileBootDuration = 2s
 	border-radius 3px
 	width 320px !important
 	height 320px !important
-	// padding contentPadding
+	// padding content-padding
 	object-fit cover
 
 #anime-list-container
@@ -74,7 +74,7 @@ profileBootDuration = 2s
 .image-container
 	float left
 	width auto
-	// padding contentPadding
+	// padding content-padding
 
 .intro-container
 	float left
@@ -82,9 +82,9 @@ profileBootDuration = 2s
 	display flex
 	flex-flow column
 	align-items center
-	padding contentPadding
+	padding content-padding
 	padding-top 0
-	padding-left contentPadding * 2
+	padding-left content-padding * 2
 	max-width 900px
 	// rotate-y()
 

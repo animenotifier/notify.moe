@@ -1,6 +1,5 @@
-fontsRoot = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/'
-woffURL = url(fontsRoot + 'fontawesome-webfont.woff')
-woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
+woffURL = url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff')
+woff2URL = url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2')
 
 @font-face
 	font-family 'FontAwesome'
@@ -29,18 +28,6 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	line-height 0.75em
 	vertical-align -15%
 
-.fa-2x
-	font-size 2em
-
-.fa-3x
-	font-size 3em
-
-.fa-4x
-	font-size 4em
-
-.fa-5x
-	font-size 5em
-
 .fa-fw
 	width 1.28571429em
 	text-align center
@@ -66,18 +53,6 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	border solid 0.08em #eeeeee
 	border-radius .1em
 
-.fa-pull-left
-	float left
-
-.fa-pull-right
-	float right
-
-.pull-right
-	float right
-
-.pull-left
-	float left
-
 .fa-spin
 	animation fa-spin 2s infinite linear
 	animation fa-spin 2s infinite linear
@@ -91,33 +66,6 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 		transform rotate(0deg)
 	100%
 		transform rotate(359deg)
-
-.fa-rotate-90
-	filter 'progid:DXImageTransform.Microsoft.BasicImage(rotation=1)'
-	transform rotate(90deg)
-
-.fa-rotate-180
-	filter 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2)'
-	transform rotate(180deg)
-
-.fa-rotate-270
-	filter 'progid:DXImageTransform.Microsoft.BasicImage(rotation=3)'
-	transform rotate(270deg)
-
-.fa-flip-horizontal
-	filter 'progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)'
-	transform scale(-1, 1)
-
-.fa-flip-vertical
-	filter 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)'
-	transform scale(1, -1)
-
-:root .fa-rotate-90,
-:root .fa-rotate-180,
-:root .fa-rotate-270,
-:root .fa-flip-horizontal,
-:root .fa-flip-vertical
-	filter none
 
 .fa-stack
 	position relative
@@ -144,55 +92,55 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	color #ffffff
 
 .fa-glass
-	&:before
+	:before
 		content '\f000'
 
 .fa-music
-	&:before
+	:before
 		content '\f001'
 
 .fa-search
-	&:before
+	:before
 		content '\f002'
 
 .fa-envelope-o
-	&:before
+	:before
 		content '\f003'
 
 .fa-heart
-	&:before
+	:before
 		content '\f004'
 
 .fa-star
-	&:before
+	:before
 		content '\f005'
 
 .fa-star-o
-	&:before
+	:before
 		content '\f006'
 
 .fa-user
-	&:before
+	:before
 		content '\f007'
 
 .fa-film
-	&:before
+	:before
 		content '\f008'
 
 .fa-th-large
-	&:before
+	:before
 		content '\f009'
 
 .fa-th
-	&:before
+	:before
 		content '\f00a'
 
 .fa-th-list
-	&:before
+	:before
 		content '\f00b'
 
 .fa-check
-	&:before
+	:before
 		content '\f00c'
 
 .fa-remove:before,
@@ -201,19 +149,19 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f00d'
 
 .fa-search-plus
-	&:before
+	:before
 		content '\f00e'
 
 .fa-search-minus
-	&:before
+	:before
 		content '\f010'
 
 .fa-power-off
-	&:before
+	:before
 		content '\f011'
 
 .fa-signal
-	&:before
+	:before
 		content '\f012'
 
 .fa-gear:before,
@@ -221,43 +169,43 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f013'
 
 .fa-trash-o
-	&:before
+	:before
 		content '\f014'
 
 .fa-home
-	&:before
+	:before
 		content '\f015'
 
 .fa-file-o
-	&:before
+	:before
 		content '\f016'
 
 .fa-clock-o
-	&:before
+	:before
 		content '\f017'
 
 .fa-road
-	&:before
+	:before
 		content '\f018'
 
 .fa-download
-	&:before
+	:before
 		content '\f019'
 
 .fa-arrow-circle-o-down
-	&:before
+	:before
 		content '\f01a'
 
 .fa-arrow-circle-o-up
-	&:before
+	:before
 		content '\f01b'
 
 .fa-inbox
-	&:before
+	:before
 		content '\f01c'
 
 .fa-play-circle-o
-	&:before
+	:before
 		content '\f01d'
 
 .fa-rotate-right:before,
@@ -265,107 +213,107 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f01e'
 
 .fa-refresh
-	&:before
+	:before
 		content '\f021'
 
 .fa-list-alt
-	&:before
+	:before
 		content '\f022'
 
 .fa-lock
-	&:before
+	:before
 		content '\f023'
 
 .fa-flag
-	&:before
+	:before
 		content '\f024'
 
 .fa-headphones
-	&:before
+	:before
 		content '\f025'
 
 .fa-volume-off
-	&:before
+	:before
 		content '\f026'
 
 .fa-volume-down
-	&:before
+	:before
 		content '\f027'
 
 .fa-volume-up
-	&:before
+	:before
 		content '\f028'
 
 .fa-qrcode
-	&:before
+	:before
 		content '\f029'
 
 .fa-barcode
-	&:before
+	:before
 		content '\f02a'
 
 .fa-tag
-	&:before
+	:before
 		content '\f02b'
 
 .fa-tags
-	&:before
+	:before
 		content '\f02c'
 
 .fa-book
-	&:before
+	:before
 		content '\f02d'
 
 .fa-bookmark
-	&:before
+	:before
 		content '\f02e'
 
 .fa-print
-	&:before
+	:before
 		content '\f02f'
 
 .fa-camera
-	&:before
+	:before
 		content '\f030'
 
 .fa-font
-	&:before
+	:before
 		content '\f031'
 
 .fa-bold
-	&:before
+	:before
 		content '\f032'
 
 .fa-italic
-	&:before
+	:before
 		content '\f033'
 
 .fa-text-height
-	&:before
+	:before
 		content '\f034'
 
 .fa-text-width
-	&:before
+	:before
 		content '\f035'
 
 .fa-align-left
-	&:before
+	:before
 		content '\f036'
 
 .fa-align-center
-	&:before
+	:before
 		content '\f037'
 
 .fa-align-right
-	&:before
+	:before
 		content '\f038'
 
 .fa-align-justify
-	&:before
+	:before
 		content '\f039'
 
 .fa-list
-	&:before
+	:before
 		content '\f03a'
 
 .fa-dedent:before,
@@ -373,11 +321,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f03b'
 
 .fa-indent
-	&:before
+	:before
 		content '\f03c'
 
 .fa-video-camera
-	&:before
+	:before
 		content '\f03d'
 
 .fa-photo:before,
@@ -386,19 +334,19 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f03e'
 
 .fa-pencil
-	&:before
+	:before
 		content '\f040'
 
 .fa-map-marker
-	&:before
+	:before
 		content '\f041'
 
 .fa-adjust
-	&:before
+	:before
 		content '\f042'
 
 .fa-tint
-	&:before
+	:before
 		content '\f043'
 
 .fa-edit:before,
@@ -406,119 +354,119 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f044'
 
 .fa-share-square-o
-	&:before
+	:before
 		content '\f045'
 
 .fa-check-square-o
-	&:before
+	:before
 		content '\f046'
 
 .fa-arrows
-	&:before
+	:before
 		content '\f047'
 
 .fa-step-backward
-	&:before
+	:before
 		content '\f048'
 
 .fa-fast-backward
-	&:before
+	:before
 		content '\f049'
 
 .fa-backward
-	&:before
+	:before
 		content '\f04a'
 
 .fa-play
-	&:before
+	:before
 		content '\f04b'
 
 .fa-pause
-	&:before
+	:before
 		content '\f04c'
 
 .fa-stop
-	&:before
+	:before
 		content '\f04d'
 
 .fa-forward
-	&:before
+	:before
 		content '\f04e'
 
 .fa-fast-forward
-	&:before
+	:before
 		content '\f050'
 
 .fa-step-forward
-	&:before
+	:before
 		content '\f051'
 
 .fa-eject
-	&:before
+	:before
 		content '\f052'
 
 .fa-chevron-left
-	&:before
+	:before
 		content '\f053'
 
 .fa-chevron-right
-	&:before
+	:before
 		content '\f054'
 
 .fa-plus-circle
-	&:before
+	:before
 		content '\f055'
 
 .fa-minus-circle
-	&:before
+	:before
 		content '\f056'
 
 .fa-times-circle
-	&:before
+	:before
 		content '\f057'
 
 .fa-check-circle
-	&:before
+	:before
 		content '\f058'
 
 .fa-question-circle
-	&:before
+	:before
 		content '\f059'
 
 .fa-info-circle
-	&:before
+	:before
 		content '\f05a'
 
 .fa-crosshairs
-	&:before
+	:before
 		content '\f05b'
 
 .fa-times-circle-o
-	&:before
+	:before
 		content '\f05c'
 
 .fa-check-circle-o
-	&:before
+	:before
 		content '\f05d'
 
 .fa-ban
-	&:before
+	:before
 		content '\f05e'
 
 .fa-arrow-left
-	&:before
+	:before
 		content '\f060'
 
 .fa-arrow-right
-	&:before
+	:before
 		content '\f061'
 
 .fa-arrow-up
-	&:before
+	:before
 		content '\f062'
 
 .fa-arrow-down
-	&:before
+	:before
 		content '\f063'
 
 .fa-mail-forward:before,
@@ -526,47 +474,47 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f064'
 
 .fa-expand
-	&:before
+	:before
 		content '\f065'
 
 .fa-compress
-	&:before
+	:before
 		content '\f066'
 
 .fa-plus
-	&:before
+	:before
 		content '\f067'
 
 .fa-minus
-	&:before
+	:before
 		content '\f068'
 
 .fa-asterisk
-	&:before
+	:before
 		content '\f069'
 
 .fa-exclamation-circle
-	&:before
+	:before
 		content '\f06a'
 
 .fa-gift
-	&:before
+	:before
 		content '\f06b'
 
 .fa-leaf
-	&:before
+	:before
 		content '\f06c'
 
 .fa-fire
-	&:before
+	:before
 		content '\f06d'
 
 .fa-eye
-	&:before
+	:before
 		content '\f06e'
 
 .fa-eye-slash
-	&:before
+	:before
 		content '\f070'
 
 .fa-warning:before,
@@ -574,55 +522,55 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f071'
 
 .fa-plane
-	&:before
+	:before
 		content '\f072'
 
 .fa-calendar
-	&:before
+	:before
 		content '\f073'
 
 .fa-random
-	&:before
+	:before
 		content '\f074'
 
 .fa-comment
-	&:before
+	:before
 		content '\f075'
 
 .fa-magnet
-	&:before
+	:before
 		content '\f076'
 
 .fa-chevron-up
-	&:before
+	:before
 		content '\f077'
 
 .fa-chevron-down
-	&:before
+	:before
 		content '\f078'
 
 .fa-retweet
-	&:before
+	:before
 		content '\f079'
 
 .fa-shopping-cart
-	&:before
+	:before
 		content '\f07a'
 
 .fa-folder
-	&:before
+	:before
 		content '\f07b'
 
 .fa-folder-open
-	&:before
+	:before
 		content '\f07c'
 
 .fa-arrows-v
-	&:before
+	:before
 		content '\f07d'
 
 .fa-arrows-h
-	&:before
+	:before
 		content '\f07e'
 
 .fa-bar-chart-o:before,
@@ -630,19 +578,19 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f080'
 
 .fa-twitter-square
-	&:before
+	:before
 		content '\f081'
 
 .fa-facebook-square
-	&:before
+	:before
 		content '\f082'
 
 .fa-camera-retro
-	&:before
+	:before
 		content '\f083'
 
 .fa-key
-	&:before
+	:before
 		content '\f084'
 
 .fa-gears:before,
@@ -650,79 +598,79 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f085'
 
 .fa-comments
-	&:before
+	:before
 		content '\f086'
 
 .fa-thumbs-o-up
-	&:before
+	:before
 		content '\f087'
 
 .fa-thumbs-o-down
-	&:before
+	:before
 		content '\f088'
 
 .fa-star-half
-	&:before
+	:before
 		content '\f089'
 
 .fa-heart-o
-	&:before
+	:before
 		content '\f08a'
 
 .fa-sign-out
-	&:before
+	:before
 		content '\f08b'
 
 .fa-linkedin-square
-	&:before
+	:before
 		content '\f08c'
 
 .fa-thumb-tack
-	&:before
+	:before
 		content '\f08d'
 
 .fa-external-link
-	&:before
+	:before
 		content '\f08e'
 
 .fa-sign-in
-	&:before
+	:before
 		content '\f090'
 
 .fa-trophy
-	&:before
+	:before
 		content '\f091'
 
 .fa-github-square
-	&:before
+	:before
 		content '\f092'
 
 .fa-upload
-	&:before
+	:before
 		content '\f093'
 
 .fa-lemon-o
-	&:before
+	:before
 		content '\f094'
 
 .fa-phone
-	&:before
+	:before
 		content '\f095'
 
 .fa-square-o
-	&:before
+	:before
 		content '\f096'
 
 .fa-bookmark-o
-	&:before
+	:before
 		content '\f097'
 
 .fa-phone-square
-	&:before
+	:before
 		content '\f098'
 
 .fa-twitter
-	&:before
+	:before
 		content '\f099'
 
 .fa-facebook-f:before,
@@ -730,15 +678,15 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f09a'
 
 .fa-github
-	&:before
+	:before
 		content '\f09b'
 
 .fa-unlock
-	&:before
+	:before
 		content '\f09c'
 
 .fa-credit-card
-	&:before
+	:before
 		content '\f09d'
 
 .fa-feed:before,
@@ -746,75 +694,75 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f09e'
 
 .fa-hdd-o
-	&:before
+	:before
 		content '\f0a0'
 
 .fa-bullhorn
-	&:before
+	:before
 		content '\f0a1'
 
 .fa-bell
-	&:before
+	:before
 		content '\f0f3'
 
 .fa-certificate
-	&:before
+	:before
 		content '\f0a3'
 
 .fa-hand-o-right
-	&:before
+	:before
 		content '\f0a4'
 
 .fa-hand-o-left
-	&:before
+	:before
 		content '\f0a5'
 
 .fa-hand-o-up
-	&:before
+	:before
 		content '\f0a6'
 
 .fa-hand-o-down
-	&:before
+	:before
 		content '\f0a7'
 
 .fa-arrow-circle-left
-	&:before
+	:before
 		content '\f0a8'
 
 .fa-arrow-circle-right
-	&:before
+	:before
 		content '\f0a9'
 
 .fa-arrow-circle-up
-	&:before
+	:before
 		content '\f0aa'
 
 .fa-arrow-circle-down
-	&:before
+	:before
 		content '\f0ab'
 
 .fa-globe
-	&:before
+	:before
 		content '\f0ac'
 
 .fa-wrench
-	&:before
+	:before
 		content '\f0ad'
 
 .fa-tasks
-	&:before
+	:before
 		content '\f0ae'
 
 .fa-filter
-	&:before
+	:before
 		content '\f0b0'
 
 .fa-briefcase
-	&:before
+	:before
 		content '\f0b1'
 
 .fa-arrows-alt
-	&:before
+	:before
 		content '\f0b2'
 
 .fa-group:before,
@@ -826,11 +774,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0c1'
 
 .fa-cloud
-	&:before
+	:before
 		content '\f0c2'
 
 .fa-flask
-	&:before
+	:before
 		content '\f0c3'
 
 .fa-cut:before,
@@ -842,7 +790,7 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0c5'
 
 .fa-paperclip
-	&:before
+	:before
 		content '\f0c6'
 
 .fa-save:before,
@@ -850,7 +798,7 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0c7'
 
 .fa-square
-	&:before
+	:before
 		content '\f0c8'
 
 .fa-navicon:before,
@@ -859,71 +807,71 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0c9'
 
 .fa-list-ul
-	&:before
+	:before
 		content '\f0ca'
 
 .fa-list-ol
-	&:before
+	:before
 		content '\f0cb'
 
 .fa-strikethrough
-	&:before
+	:before
 		content '\f0cc'
 
 .fa-underline
-	&:before
+	:before
 		content '\f0cd'
 
 .fa-table
-	&:before
+	:before
 		content '\f0ce'
 
 .fa-magic
-	&:before
+	:before
 		content '\f0d0'
 
 .fa-truck
-	&:before
+	:before
 		content '\f0d1'
 
 .fa-pinterest
-	&:before
+	:before
 		content '\f0d2'
 
 .fa-pinterest-square
-	&:before
+	:before
 		content '\f0d3'
 
 .fa-google-plus-square
-	&:before
+	:before
 		content '\f0d4'
 
 .fa-google-plus
-	&:before
+	:before
 		content '\f0d5'
 
 .fa-money
-	&:before
+	:before
 		content '\f0d6'
 
 .fa-caret-down
-	&:before
+	:before
 		content '\f0d7'
 
 .fa-caret-up
-	&:before
+	:before
 		content '\f0d8'
 
 .fa-caret-left
-	&:before
+	:before
 		content '\f0d9'
 
 .fa-caret-right
-	&:before
+	:before
 		content '\f0da'
 
 .fa-columns
-	&:before
+	:before
 		content '\f0db'
 
 .fa-unsorted:before,
@@ -939,11 +887,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0de'
 
 .fa-envelope
-	&:before
+	:before
 		content '\f0e0'
 
 .fa-linkedin
-	&:before
+	:before
 		content '\f0e1'
 
 .fa-rotate-left:before,
@@ -959,11 +907,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0e4'
 
 .fa-comment-o
-	&:before
+	:before
 		content '\f0e5'
 
 .fa-comments-o
-	&:before
+	:before
 		content '\f0e6'
 
 .fa-flash:before,
@@ -971,11 +919,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0e7'
 
 .fa-sitemap
-	&:before
+	:before
 		content '\f0e8'
 
 .fa-umbrella
-	&:before
+	:before
 		content '\f0e9'
 
 .fa-paste:before,
@@ -983,123 +931,123 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f0ea'
 
 .fa-lightbulb-o
-	&:before
+	:before
 		content '\f0eb'
 
 .fa-exchange
-	&:before
+	:before
 		content '\f0ec'
 
 .fa-cloud-download
-	&:before
+	:before
 		content '\f0ed'
 
 .fa-cloud-upload
-	&:before
+	:before
 		content '\f0ee'
 
 .fa-user-md
-	&:before
+	:before
 		content '\f0f0'
 
 .fa-stethoscope
-	&:before
+	:before
 		content '\f0f1'
 
 .fa-suitcase
-	&:before
+	:before
 		content '\f0f2'
 
 .fa-bell-o
-	&:before
+	:before
 		content '\f0a2'
 
 .fa-coffee
-	&:before
+	:before
 		content '\f0f4'
 
 .fa-cutlery
-	&:before
+	:before
 		content '\f0f5'
 
 .fa-file-text-o
-	&:before
+	:before
 		content '\f0f6'
 
 .fa-building-o
-	&:before
+	:before
 		content '\f0f7'
 
 .fa-hospital-o
-	&:before
+	:before
 		content '\f0f8'
 
 .fa-ambulance
-	&:before
+	:before
 		content '\f0f9'
 
 .fa-medkit
-	&:before
+	:before
 		content '\f0fa'
 
 .fa-fighter-jet
-	&:before
+	:before
 		content '\f0fb'
 
 .fa-beer
-	&:before
+	:before
 		content '\f0fc'
 
 .fa-h-square
-	&:before
+	:before
 		content '\f0fd'
 
 .fa-plus-square
-	&:before
+	:before
 		content '\f0fe'
 
 .fa-angle-double-left
-	&:before
+	:before
 		content '\f100'
 
 .fa-angle-double-right
-	&:before
+	:before
 		content '\f101'
 
 .fa-angle-double-up
-	&:before
+	:before
 		content '\f102'
 
 .fa-angle-double-down
-	&:before
+	:before
 		content '\f103'
 
 .fa-angle-left
-	&:before
+	:before
 		content '\f104'
 
 .fa-angle-right
-	&:before
+	:before
 		content '\f105'
 
 .fa-angle-up
-	&:before
+	:before
 		content '\f106'
 
 .fa-angle-down
-	&:before
+	:before
 		content '\f107'
 
 .fa-desktop
-	&:before
+	:before
 		content '\f108'
 
 .fa-laptop
-	&:before
+	:before
 		content '\f109'
 
 .fa-tablet
-	&:before
+	:before
 		content '\f10a'
 
 .fa-mobile-phone:before,
@@ -1107,23 +1055,23 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f10b'
 
 .fa-circle-o
-	&:before
+	:before
 		content '\f10c'
 
 .fa-quote-left
-	&:before
+	:before
 		content '\f10d'
 
 .fa-quote-right
-	&:before
+	:before
 		content '\f10e'
 
 .fa-spinner
-	&:before
+	:before
 		content '\f110'
 
 .fa-circle
-	&:before
+	:before
 		content '\f111'
 
 .fa-mail-reply:before,
@@ -1131,51 +1079,51 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f112'
 
 .fa-github-alt
-	&:before
+	:before
 		content '\f113'
 
 .fa-folder-o
-	&:before
+	:before
 		content '\f114'
 
 .fa-folder-open-o
-	&:before
+	:before
 		content '\f115'
 
 .fa-smile-o
-	&:before
+	:before
 		content '\f118'
 
 .fa-frown-o
-	&:before
+	:before
 		content '\f119'
 
 .fa-meh-o
-	&:before
+	:before
 		content '\f11a'
 
 .fa-gamepad
-	&:before
+	:before
 		content '\f11b'
 
 .fa-keyboard-o
-	&:before
+	:before
 		content '\f11c'
 
 .fa-flag-o
-	&:before
+	:before
 		content '\f11d'
 
 .fa-flag-checkered
-	&:before
+	:before
 		content '\f11e'
 
 .fa-terminal
-	&:before
+	:before
 		content '\f120'
 
 .fa-code
-	&:before
+	:before
 		content '\f121'
 
 .fa-mail-reply-all:before,
@@ -1188,15 +1136,15 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f123'
 
 .fa-location-arrow
-	&:before
+	:before
 		content '\f124'
 
 .fa-crop
-	&:before
+	:before
 		content '\f125'
 
 .fa-code-fork
-	&:before
+	:before
 		content '\f126'
 
 .fa-unlink:before,
@@ -1204,151 +1152,151 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f127'
 
 .fa-question
-	&:before
+	:before
 		content '\f128'
 
 .fa-info
-	&:before
+	:before
 		content '\f129'
 
 .fa-exclamation
-	&:before
+	:before
 		content '\f12a'
 
 .fa-superscript
-	&:before
+	:before
 		content '\f12b'
 
 .fa-subscript
-	&:before
+	:before
 		content '\f12c'
 
 .fa-eraser
-	&:before
+	:before
 		content '\f12d'
 
 .fa-puzzle-piece
-	&:before
+	:before
 		content '\f12e'
 
 .fa-microphone
-	&:before
+	:before
 		content '\f130'
 
 .fa-microphone-slash
-	&:before
+	:before
 		content '\f131'
 
 .fa-shield
-	&:before
+	:before
 		content '\f132'
 
 .fa-calendar-o
-	&:before
+	:before
 		content '\f133'
 
 .fa-fire-extinguisher
-	&:before
+	:before
 		content '\f134'
 
 .fa-rocket
-	&:before
+	:before
 		content '\f135'
 
 .fa-maxcdn
-	&:before
+	:before
 		content '\f136'
 
 .fa-chevron-circle-left
-	&:before
+	:before
 		content '\f137'
 
 .fa-chevron-circle-right
-	&:before
+	:before
 		content '\f138'
 
 .fa-chevron-circle-up
-	&:before
+	:before
 		content '\f139'
 
 .fa-chevron-circle-down
-	&:before
+	:before
 		content '\f13a'
 
 .fa-html5
-	&:before
+	:before
 		content '\f13b'
 
 .fa-css3
-	&:before
+	:before
 		content '\f13c'
 
 .fa-anchor
-	&:before
+	:before
 		content '\f13d'
 
 .fa-unlock-alt
-	&:before
+	:before
 		content '\f13e'
 
 .fa-bullseye
-	&:before
+	:before
 		content '\f140'
 
 .fa-ellipsis-h
-	&:before
+	:before
 		content '\f141'
 
 .fa-ellipsis-v
-	&:before
+	:before
 		content '\f142'
 
 .fa-rss-square
-	&:before
+	:before
 		content '\f143'
 
 .fa-play-circle
-	&:before
+	:before
 		content '\f144'
 
 .fa-ticket
-	&:before
+	:before
 		content '\f145'
 
 .fa-minus-square
-	&:before
+	:before
 		content '\f146'
 
 .fa-minus-square-o
-	&:before
+	:before
 		content '\f147'
 
 .fa-level-up
-	&:before
+	:before
 		content '\f148'
 
 .fa-level-down
-	&:before
+	:before
 		content '\f149'
 
 .fa-check-square
-	&:before
+	:before
 		content '\f14a'
 
 .fa-pencil-square
-	&:before
+	:before
 		content '\f14b'
 
 .fa-external-link-square
-	&:before
+	:before
 		content '\f14c'
 
 .fa-share-square
-	&:before
+	:before
 		content '\f14d'
 
 .fa-compass
-	&:before
+	:before
 		content '\f14e'
 
 .fa-toggle-down:before,
@@ -1368,7 +1316,7 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f153'
 
 .fa-gbp
-	&:before
+	:before
 		content '\f154'
 
 .fa-dollar:before,
@@ -1399,155 +1347,155 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f15a'
 
 .fa-file
-	&:before
+	:before
 		content '\f15b'
 
 .fa-file-text
-	&:before
+	:before
 		content '\f15c'
 
 .fa-sort-alpha-asc
-	&:before
+	:before
 		content '\f15d'
 
 .fa-sort-alpha-desc
-	&:before
+	:before
 		content '\f15e'
 
 .fa-sort-amount-asc
-	&:before
+	:before
 		content '\f160'
 
 .fa-sort-amount-desc
-	&:before
+	:before
 		content '\f161'
 
 .fa-sort-numeric-asc
-	&:before
+	:before
 		content '\f162'
 
 .fa-sort-numeric-desc
-	&:before
+	:before
 		content '\f163'
 
 .fa-thumbs-up
-	&:before
+	:before
 		content '\f164'
 
 .fa-thumbs-down
-	&:before
+	:before
 		content '\f165'
 
 .fa-youtube-square
-	&:before
+	:before
 		content '\f166'
 
 .fa-youtube
-	&:before
+	:before
 		content '\f167'
 
 .fa-xing
-	&:before
+	:before
 		content '\f168'
 
 .fa-xing-square
-	&:before
+	:before
 		content '\f169'
 
 .fa-youtube-play
-	&:before
+	:before
 		content '\f16a'
 
 .fa-dropbox
-	&:before
+	:before
 		content '\f16b'
 
 .fa-stack-overflow
-	&:before
+	:before
 		content '\f16c'
 
 .fa-instagram
-	&:before
+	:before
 		content '\f16d'
 
 .fa-flickr
-	&:before
+	:before
 		content '\f16e'
 
 .fa-adn
-	&:before
+	:before
 		content '\f170'
 
 .fa-bitbucket
-	&:before
+	:before
 		content '\f171'
 
 .fa-bitbucket-square
-	&:before
+	:before
 		content '\f172'
 
 .fa-tumblr
-	&:before
+	:before
 		content '\f173'
 
 .fa-tumblr-square
-	&:before
+	:before
 		content '\f174'
 
 .fa-long-arrow-down
-	&:before
+	:before
 		content '\f175'
 
 .fa-long-arrow-up
-	&:before
+	:before
 		content '\f176'
 
 .fa-long-arrow-left
-	&:before
+	:before
 		content '\f177'
 
 .fa-long-arrow-right
-	&:before
+	:before
 		content '\f178'
 
 .fa-apple
-	&:before
+	:before
 		content '\f179'
 
 .fa-windows
-	&:before
+	:before
 		content '\f17a'
 
 .fa-android
-	&:before
+	:before
 		content '\f17b'
 
 .fa-linux
-	&:before
+	:before
 		content '\f17c'
 
 .fa-dribbble
-	&:before
+	:before
 		content '\f17d'
 
 .fa-skype
-	&:before
+	:before
 		content '\f17e'
 
 .fa-foursquare
-	&:before
+	:before
 		content '\f180'
 
 .fa-trello
-	&:before
+	:before
 		content '\f181'
 
 .fa-female
-	&:before
+	:before
 		content '\f182'
 
 .fa-male
-	&:before
+	:before
 		content '\f183'
 
 .fa-gittip:before,
@@ -1555,47 +1503,47 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f184'
 
 .fa-sun-o
-	&:before
+	:before
 		content '\f185'
 
 .fa-moon-o
-	&:before
+	:before
 		content '\f186'
 
 .fa-archive
-	&:before
+	:before
 		content '\f187'
 
 .fa-bug
-	&:before
+	:before
 		content '\f188'
 
 .fa-vk
-	&:before
+	:before
 		content '\f189'
 
 .fa-weibo
-	&:before
+	:before
 		content '\f18a'
 
 .fa-renren
-	&:before
+	:before
 		content '\f18b'
 
 .fa-pagelines
-	&:before
+	:before
 		content '\f18c'
 
 .fa-stack-exchange
-	&:before
+	:before
 		content '\f18d'
 
 .fa-arrow-circle-o-right
-	&:before
+	:before
 		content '\f18e'
 
 .fa-arrow-circle-o-left
-	&:before
+	:before
 		content '\f190'
 
 .fa-toggle-left:before,
@@ -1603,15 +1551,15 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f191'
 
 .fa-dot-circle-o
-	&:before
+	:before
 		content '\f192'
 
 .fa-wheelchair
-	&:before
+	:before
 		content '\f193'
 
 .fa-vimeo-square
-	&:before
+	:before
 		content '\f194'
 
 .fa-turkish-lira:before,
@@ -1619,27 +1567,27 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f195'
 
 .fa-plus-square-o
-	&:before
+	:before
 		content '\f196'
 
 .fa-space-shuttle
-	&:before
+	:before
 		content '\f197'
 
 .fa-slack
-	&:before
+	:before
 		content '\f198'
 
 .fa-envelope-square
-	&:before
+	:before
 		content '\f199'
 
 .fa-wordpress
-	&:before
+	:before
 		content '\f19a'
 
 .fa-openid
-	&:before
+	:before
 		content '\f19b'
 
 .fa-institution:before,
@@ -1652,103 +1600,103 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f19d'
 
 .fa-yahoo
-	&:before
+	:before
 		content '\f19e'
 
 .fa-google
-	&:before
+	:before
 		content '\f1a0'
 
 .fa-reddit
-	&:before
+	:before
 		content '\f1a1'
 
 .fa-reddit-square
-	&:before
+	:before
 		content '\f1a2'
 
 .fa-stumbleupon-circle
-	&:before
+	:before
 		content '\f1a3'
 
 .fa-stumbleupon
-	&:before
+	:before
 		content '\f1a4'
 
 .fa-delicious
-	&:before
+	:before
 		content '\f1a5'
 
 .fa-digg
-	&:before
+	:before
 		content '\f1a6'
 
 .fa-pied-piper-pp
-	&:before
+	:before
 		content '\f1a7'
 
 .fa-pied-piper-alt
-	&:before
+	:before
 		content '\f1a8'
 
 .fa-drupal
-	&:before
+	:before
 		content '\f1a9'
 
 .fa-joomla
-	&:before
+	:before
 		content '\f1aa'
 
 .fa-language
-	&:before
+	:before
 		content '\f1ab'
 
 .fa-fax
-	&:before
+	:before
 		content '\f1ac'
 
 .fa-building
-	&:before
+	:before
 		content '\f1ad'
 
 .fa-child
-	&:before
+	:before
 		content '\f1ae'
 
 .fa-paw
-	&:before
+	:before
 		content '\f1b0'
 
 .fa-spoon
-	&:before
+	:before
 		content '\f1b1'
 
 .fa-cube
-	&:before
+	:before
 		content '\f1b2'
 
 .fa-cubes
-	&:before
+	:before
 		content '\f1b3'
 
 .fa-behance
-	&:before
+	:before
 		content '\f1b4'
 
 .fa-behance-square
-	&:before
+	:before
 		content '\f1b5'
 
 .fa-steam
-	&:before
+	:before
 		content '\f1b6'
 
 .fa-steam-square
-	&:before
+	:before
 		content '\f1b7'
 
 .fa-recycle
-	&:before
+	:before
 		content '\f1b8'
 
 .fa-automobile:before,
@@ -1760,39 +1708,39 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f1ba'
 
 .fa-tree
-	&:before
+	:before
 		content '\f1bb'
 
 .fa-spotify
-	&:before
+	:before
 		content '\f1bc'
 
 .fa-deviantart
-	&:before
+	:before
 		content '\f1bd'
 
 .fa-soundcloud
-	&:before
+	:before
 		content '\f1be'
 
 .fa-database
-	&:before
+	:before
 		content '\f1c0'
 
 .fa-file-pdf-o
-	&:before
+	:before
 		content '\f1c1'
 
 .fa-file-word-o
-	&:before
+	:before
 		content '\f1c2'
 
 .fa-file-excel-o
-	&:before
+	:before
 		content '\f1c3'
 
 .fa-file-powerpoint-o
-	&:before
+	:before
 		content '\f1c4'
 
 .fa-file-photo-o:before,
@@ -1813,19 +1761,19 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f1c8'
 
 .fa-file-code-o
-	&:before
+	:before
 		content '\f1c9'
 
 .fa-vine
-	&:before
+	:before
 		content '\f1ca'
 
 .fa-codepen
-	&:before
+	:before
 		content '\f1cb'
 
 .fa-jsfiddle
-	&:before
+	:before
 		content '\f1cc'
 
 .fa-life-bouy:before,
@@ -1836,7 +1784,7 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f1cd'
 
 .fa-circle-o-notch
-	&:before
+	:before
 		content '\f1ce'
 
 .fa-ra:before,
@@ -1849,11 +1797,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f1d1'
 
 .fa-git-square
-	&:before
+	:before
 		content '\f1d2'
 
 .fa-git
-	&:before
+	:before
 		content '\f1d3'
 
 .fa-y-combinator-square:before,
@@ -1862,11 +1810,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f1d4'
 
 .fa-tencent-weibo
-	&:before
+	:before
 		content '\f1d5'
 
 .fa-qq
-	&:before
+	:before
 		content '\f1d6'
 
 .fa-wechat:before,
@@ -1882,35 +1830,35 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f1d9'
 
 .fa-history
-	&:before
+	:before
 		content '\f1da'
 
 .fa-circle-thin
-	&:before
+	:before
 		content '\f1db'
 
 .fa-header
-	&:before
+	:before
 		content '\f1dc'
 
 .fa-paragraph
-	&:before
+	:before
 		content '\f1dd'
 
 .fa-sliders
-	&:before
+	:before
 		content '\f1de'
 
 .fa-share-alt
-	&:before
+	:before
 		content '\f1e0'
 
 .fa-share-alt-square
-	&:before
+	:before
 		content '\f1e1'
 
 .fa-bomb
-	&:before
+	:before
 		content '\f1e2'
 
 .fa-soccer-ball-o:before,
@@ -1918,151 +1866,151 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f1e3'
 
 .fa-tty
-	&:before
+	:before
 		content '\f1e4'
 
 .fa-binoculars
-	&:before
+	:before
 		content '\f1e5'
 
 .fa-plug
-	&:before
+	:before
 		content '\f1e6'
 
 .fa-slideshare
-	&:before
+	:before
 		content '\f1e7'
 
 .fa-twitch
-	&:before
+	:before
 		content '\f1e8'
 
 .fa-yelp
-	&:before
+	:before
 		content '\f1e9'
 
 .fa-newspaper-o
-	&:before
+	:before
 		content '\f1ea'
 
 .fa-wifi
-	&:before
+	:before
 		content '\f1eb'
 
 .fa-calculator
-	&:before
+	:before
 		content '\f1ec'
 
 .fa-paypal
-	&:before
+	:before
 		content '\f1ed'
 
 .fa-google-wallet
-	&:before
+	:before
 		content '\f1ee'
 
 .fa-cc-visa
-	&:before
+	:before
 		content '\f1f0'
 
 .fa-cc-mastercard
-	&:before
+	:before
 		content '\f1f1'
 
 .fa-cc-discover
-	&:before
+	:before
 		content '\f1f2'
 
 .fa-cc-amex
-	&:before
+	:before
 		content '\f1f3'
 
 .fa-cc-paypal
-	&:before
+	:before
 		content '\f1f4'
 
 .fa-cc-stripe
-	&:before
+	:before
 		content '\f1f5'
 
 .fa-bell-slash
-	&:before
+	:before
 		content '\f1f6'
 
 .fa-bell-slash-o
-	&:before
+	:before
 		content '\f1f7'
 
 .fa-trash
-	&:before
+	:before
 		content '\f1f8'
 
 .fa-copyright
-	&:before
+	:before
 		content '\f1f9'
 
 .fa-at
-	&:before
+	:before
 		content '\f1fa'
 
 .fa-eyedropper
-	&:before
+	:before
 		content '\f1fb'
 
 .fa-paint-brush
-	&:before
+	:before
 		content '\f1fc'
 
 .fa-birthday-cake
-	&:before
+	:before
 		content '\f1fd'
 
 .fa-area-chart
-	&:before
+	:before
 		content '\f1fe'
 
 .fa-pie-chart
-	&:before
+	:before
 		content '\f200'
 
 .fa-line-chart
-	&:before
+	:before
 		content '\f201'
 
 .fa-lastfm
-	&:before
+	:before
 		content '\f202'
 
 .fa-lastfm-square
-	&:before
+	:before
 		content '\f203'
 
 .fa-toggle-off
-	&:before
+	:before
 		content '\f204'
 
 .fa-toggle-on
-	&:before
+	:before
 		content '\f205'
 
 .fa-bicycle
-	&:before
+	:before
 		content '\f206'
 
 .fa-bus
-	&:before
+	:before
 		content '\f207'
 
 .fa-ioxhost
-	&:before
+	:before
 		content '\f208'
 
 .fa-angellist
-	&:before
+	:before
 		content '\f209'
 
 .fa-cc
-	&:before
+	:before
 		content '\f20a'
 
 .fa-shekel:before,
@@ -2071,87 +2019,87 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f20b'
 
 .fa-meanpath
-	&:before
+	:before
 		content '\f20c'
 
 .fa-buysellads
-	&:before
+	:before
 		content '\f20d'
 
 .fa-connectdevelop
-	&:before
+	:before
 		content '\f20e'
 
 .fa-dashcube
-	&:before
+	:before
 		content '\f210'
 
 .fa-forumbee
-	&:before
+	:before
 		content '\f211'
 
 .fa-leanpub
-	&:before
+	:before
 		content '\f212'
 
 .fa-sellsy
-	&:before
+	:before
 		content '\f213'
 
 .fa-shirtsinbulk
-	&:before
+	:before
 		content '\f214'
 
 .fa-simplybuilt
-	&:before
+	:before
 		content '\f215'
 
 .fa-skyatlas
-	&:before
+	:before
 		content '\f216'
 
 .fa-cart-plus
-	&:before
+	:before
 		content '\f217'
 
 .fa-cart-arrow-down
-	&:before
+	:before
 		content '\f218'
 
 .fa-diamond
-	&:before
+	:before
 		content '\f219'
 
 .fa-ship
-	&:before
+	:before
 		content '\f21a'
 
 .fa-user-secret
-	&:before
+	:before
 		content '\f21b'
 
 .fa-motorcycle
-	&:before
+	:before
 		content '\f21c'
 
 .fa-street-view
-	&:before
+	:before
 		content '\f21d'
 
 .fa-heartbeat
-	&:before
+	:before
 		content '\f21e'
 
 .fa-venus
-	&:before
+	:before
 		content '\f221'
 
 .fa-mars
-	&:before
+	:before
 		content '\f222'
 
 .fa-mercury
-	&:before
+	:before
 		content '\f223'
 
 .fa-intersex:before,
@@ -2159,63 +2107,63 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f224'
 
 .fa-transgender-alt
-	&:before
+	:before
 		content '\f225'
 
 .fa-venus-double
-	&:before
+	:before
 		content '\f226'
 
 .fa-mars-double
-	&:before
+	:before
 		content '\f227'
 
 .fa-venus-mars
-	&:before
+	:before
 		content '\f228'
 
 .fa-mars-stroke
-	&:before
+	:before
 		content '\f229'
 
 .fa-mars-stroke-v
-	&:before
+	:before
 		content '\f22a'
 
 .fa-mars-stroke-h
-	&:before
+	:before
 		content '\f22b'
 
 .fa-neuter
-	&:before
+	:before
 		content '\f22c'
 
 .fa-genderless
-	&:before
+	:before
 		content '\f22d'
 
 .fa-facebook-official
-	&:before
+	:before
 		content '\f230'
 
 .fa-pinterest-p
-	&:before
+	:before
 		content '\f231'
 
 .fa-whatsapp
-	&:before
+	:before
 		content '\f232'
 
 .fa-server
-	&:before
+	:before
 		content '\f233'
 
 .fa-user-plus
-	&:before
+	:before
 		content '\f234'
 
 .fa-user-times
-	&:before
+	:before
 		content '\f235'
 
 .fa-hotel:before,
@@ -2223,19 +2171,19 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f236'
 
 .fa-viacoin
-	&:before
+	:before
 		content '\f237'
 
 .fa-train
-	&:before
+	:before
 		content '\f238'
 
 .fa-subway
-	&:before
+	:before
 		content '\f239'
 
 .fa-medium
-	&:before
+	:before
 		content '\f23a'
 
 .fa-yc:before,
@@ -2243,15 +2191,15 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f23b'
 
 .fa-optin-monster
-	&:before
+	:before
 		content '\f23c'
 
 .fa-opencart
-	&:before
+	:before
 		content '\f23d'
 
 .fa-expeditedssl
-	&:before
+	:before
 		content '\f23e'
 
 .fa-battery-4:before,
@@ -2276,47 +2224,47 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f244'
 
 .fa-mouse-pointer
-	&:before
+	:before
 		content '\f245'
 
 .fa-i-cursor
-	&:before
+	:before
 		content '\f246'
 
 .fa-object-group
-	&:before
+	:before
 		content '\f247'
 
 .fa-object-ungroup
-	&:before
+	:before
 		content '\f248'
 
 .fa-sticky-note
-	&:before
+	:before
 		content '\f249'
 
 .fa-sticky-note-o
-	&:before
+	:before
 		content '\f24a'
 
 .fa-cc-jcb
-	&:before
+	:before
 		content '\f24b'
 
 .fa-cc-diners-club
-	&:before
+	:before
 		content '\f24c'
 
 .fa-clone
-	&:before
+	:before
 		content '\f24d'
 
 .fa-balance-scale
-	&:before
+	:before
 		content '\f24e'
 
 .fa-hourglass-o
-	&:before
+	:before
 		content '\f250'
 
 .fa-hourglass-1:before,
@@ -2332,7 +2280,7 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f253'
 
 .fa-hourglass
-	&:before
+	:before
 		content '\f254'
 
 .fa-hand-grab-o:before,
@@ -2344,83 +2292,83 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f256'
 
 .fa-hand-scissors-o
-	&:before
+	:before
 		content '\f257'
 
 .fa-hand-lizard-o
-	&:before
+	:before
 		content '\f258'
 
 .fa-hand-spock-o
-	&:before
+	:before
 		content '\f259'
 
 .fa-hand-pointer-o
-	&:before
+	:before
 		content '\f25a'
 
 .fa-hand-peace-o
-	&:before
+	:before
 		content '\f25b'
 
 .fa-trademark
-	&:before
+	:before
 		content '\f25c'
 
 .fa-registered
-	&:before
+	:before
 		content '\f25d'
 
 .fa-creative-commons
-	&:before
+	:before
 		content '\f25e'
 
 .fa-gg
-	&:before
+	:before
 		content '\f260'
 
 .fa-gg-circle
-	&:before
+	:before
 		content '\f261'
 
 .fa-tripadvisor
-	&:before
+	:before
 		content '\f262'
 
 .fa-odnoklassniki
-	&:before
+	:before
 		content '\f263'
 
 .fa-odnoklassniki-square
-	&:before
+	:before
 		content '\f264'
 
 .fa-get-pocket
-	&:before
+	:before
 		content '\f265'
 
 .fa-wikipedia-w
-	&:before
+	:before
 		content '\f266'
 
 .fa-safari
-	&:before
+	:before
 		content '\f267'
 
 .fa-chrome
-	&:before
+	:before
 		content '\f268'
 
 .fa-firefox
-	&:before
+	:before
 		content '\f269'
 
 .fa-opera
-	&:before
+	:before
 		content '\f26a'
 
 .fa-internet-explorer
-	&:before
+	:before
 		content '\f26b'
 
 .fa-tv:before,
@@ -2428,203 +2376,203 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f26c'
 
 .fa-contao
-	&:before
+	:before
 		content '\f26d'
 
 .fa-500px
-	&:before
+	:before
 		content '\f26e'
 
 .fa-amazon
-	&:before
+	:before
 		content '\f270'
 
 .fa-calendar-plus-o
-	&:before
+	:before
 		content '\f271'
 
 .fa-calendar-minus-o
-	&:before
+	:before
 		content '\f272'
 
 .fa-calendar-times-o
-	&:before
+	:before
 		content '\f273'
 
 .fa-calendar-check-o
-	&:before
+	:before
 		content '\f274'
 
 .fa-industry
-	&:before
+	:before
 		content '\f275'
 
 .fa-map-pin
-	&:before
+	:before
 		content '\f276'
 
 .fa-map-signs
-	&:before
+	:before
 		content '\f277'
 
 .fa-map-o
-	&:before
+	:before
 		content '\f278'
 
 .fa-map
-	&:before
+	:before
 		content '\f279'
 
 .fa-commenting
-	&:before
+	:before
 		content '\f27a'
 
 .fa-commenting-o
-	&:before
+	:before
 		content '\f27b'
 
 .fa-houzz
-	&:before
+	:before
 		content '\f27c'
 
 .fa-vimeo
-	&:before
+	:before
 		content '\f27d'
 
 .fa-black-tie
-	&:before
+	:before
 		content '\f27e'
 
 .fa-fonticons
-	&:before
+	:before
 		content '\f280'
 
 .fa-reddit-alien
-	&:before
+	:before
 		content '\f281'
 
 .fa-edge
-	&:before
+	:before
 		content '\f282'
 
 .fa-credit-card-alt
-	&:before
+	:before
 		content '\f283'
 
 .fa-codiepie
-	&:before
+	:before
 		content '\f284'
 
 .fa-modx
-	&:before
+	:before
 		content '\f285'
 
 .fa-fort-awesome
-	&:before
+	:before
 		content '\f286'
 
 .fa-usb
-	&:before
+	:before
 		content '\f287'
 
 .fa-product-hunt
-	&:before
+	:before
 		content '\f288'
 
 .fa-mixcloud
-	&:before
+	:before
 		content '\f289'
 
 .fa-scribd
-	&:before
+	:before
 		content '\f28a'
 
 .fa-pause-circle
-	&:before
+	:before
 		content '\f28b'
 
 .fa-pause-circle-o
-	&:before
+	:before
 		content '\f28c'
 
 .fa-stop-circle
-	&:before
+	:before
 		content '\f28d'
 
 .fa-stop-circle-o
-	&:before
+	:before
 		content '\f28e'
 
 .fa-shopping-bag
-	&:before
+	:before
 		content '\f290'
 
 .fa-shopping-basket
-	&:before
+	:before
 		content '\f291'
 
 .fa-hashtag
-	&:before
+	:before
 		content '\f292'
 
 .fa-bluetooth
-	&:before
+	:before
 		content '\f293'
 
 .fa-bluetooth-b
-	&:before
+	:before
 		content '\f294'
 
 .fa-percent
-	&:before
+	:before
 		content '\f295'
 
 .fa-gitlab
-	&:before
+	:before
 		content '\f296'
 
 .fa-wpbeginner
-	&:before
+	:before
 		content '\f297'
 
 .fa-wpforms
-	&:before
+	:before
 		content '\f298'
 
 .fa-envira
-	&:before
+	:before
 		content '\f299'
 
 .fa-universal-access
-	&:before
+	:before
 		content '\f29a'
 
 .fa-wheelchair-alt
-	&:before
+	:before
 		content '\f29b'
 
 .fa-question-circle-o
-	&:before
+	:before
 		content '\f29c'
 
 .fa-blind
-	&:before
+	:before
 		content '\f29d'
 
 .fa-audio-description
-	&:before
+	:before
 		content '\f29e'
 
 .fa-volume-control-phone
-	&:before
+	:before
 		content '\f2a0'
 
 .fa-braille
-	&:before
+	:before
 		content '\f2a1'
 
 .fa-assistive-listening-systems
-	&:before
+	:before
 		content '\f2a2'
 
 .fa-asl-interpreting:before,
@@ -2637,11 +2585,11 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2a4'
 
 .fa-glide
-	&:before
+	:before
 		content '\f2a5'
 
 .fa-glide-g
-	&:before
+	:before
 		content '\f2a6'
 
 .fa-signing:before,
@@ -2649,43 +2597,43 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2a7'
 
 .fa-low-vision
-	&:before
+	:before
 		content '\f2a8'
 
 .fa-viadeo
-	&:before
+	:before
 		content '\f2a9'
 
 .fa-viadeo-square
-	&:before
+	:before
 		content '\f2aa'
 
 .fa-snapchat
-	&:before
+	:before
 		content '\f2ab'
 
 .fa-snapchat-ghost
-	&:before
+	:before
 		content '\f2ac'
 
 .fa-snapchat-square
-	&:before
+	:before
 		content '\f2ad'
 
 .fa-pied-piper
-	&:before
+	:before
 		content '\f2ae'
 
 .fa-first-order
-	&:before
+	:before
 		content '\f2b0'
 
 .fa-yoast
-	&:before
+	:before
 		content '\f2b1'
 
 .fa-themeisle
-	&:before
+	:before
 		content '\f2b2'
 
 .fa-google-plus-circle:before,
@@ -2697,27 +2645,27 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2b4'
 
 .fa-handshake-o
-	&:before
+	:before
 		content '\f2b5'
 
 .fa-envelope-open
-	&:before
+	:before
 		content '\f2b6'
 
 .fa-envelope-open-o
-	&:before
+	:before
 		content '\f2b7'
 
 .fa-linode
-	&:before
+	:before
 		content '\f2b8'
 
 .fa-address-book
-	&:before
+	:before
 		content '\f2b9'
 
 .fa-address-book-o
-	&:before
+	:before
 		content '\f2ba'
 
 .fa-vcard:before,
@@ -2729,19 +2677,19 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2bc'
 
 .fa-user-circle
-	&:before
+	:before
 		content '\f2bd'
 
 .fa-user-circle-o
-	&:before
+	:before
 		content '\f2be'
 
 .fa-user-o
-	&:before
+	:before
 		content '\f2c0'
 
 .fa-id-badge
-	&:before
+	:before
 		content '\f2c1'
 
 .fa-drivers-license:before,
@@ -2753,15 +2701,15 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2c3'
 
 .fa-quora
-	&:before
+	:before
 		content '\f2c4'
 
 .fa-free-code-camp
-	&:before
+	:before
 		content '\f2c5'
 
 .fa-telegram
-	&:before
+	:before
 		content '\f2c6'
 
 .fa-thermometer-4:before,
@@ -2786,7 +2734,7 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2cb'
 
 .fa-shower
-	&:before
+	:before
 		content '\f2cc'
 
 .fa-bathtub:before,
@@ -2795,19 +2743,19 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2cd'
 
 .fa-podcast
-	&:before
+	:before
 		content '\f2ce'
 
 .fa-window-maximize
-	&:before
+	:before
 		content '\f2d0'
 
 .fa-window-minimize
-	&:before
+	:before
 		content '\f2d1'
 
 .fa-window-restore
-	&:before
+	:before
 		content '\f2d2'
 
 .fa-times-rectangle:before,
@@ -2819,47 +2767,47 @@ woff2URL = url(fontsRoot + 'fontawesome-webfont.woff2')
 	content '\f2d4'
 
 .fa-bandcamp
-	&:before
+	:before
 		content '\f2d5'
 
 .fa-grav
-	&:before
+	:before
 		content '\f2d6'
 
 .fa-etsy
-	&:before
+	:before
 		content '\f2d7'
 
 .fa-imdb
-	&:before
+	:before
 		content '\f2d8'
 
 .fa-ravelry
-	&:before
+	:before
 		content '\f2d9'
 
 .fa-eercast
-	&:before
+	:before
 		content '\f2da'
 
 .fa-microchip
-	&:before
+	:before
 		content '\f2db'
 
 .fa-snowflake-o
-	&:before
+	:before
 		content '\f2dc'
 
 .fa-superpowers
-	&:before
+	:before
 		content '\f2dd'
 
 .fa-wpexplorer
-	&:before
+	:before
 		content '\f2de'
 
 .fa-meetup
-	&:before
+	:before
 		content '\f2e0'
 
 .sr-only

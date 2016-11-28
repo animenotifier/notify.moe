@@ -1,7 +1,5 @@
 component Dashboard(posts []*arn.Post)
-	section
-		header
-			h2 Dash
+	h2 Dash
 	
 	.dashboard-widget
 		each post in posts

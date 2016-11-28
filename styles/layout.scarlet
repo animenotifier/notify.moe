@@ -1,0 +1,12 @@
+#container
+	height 100%
+	display flex
+	flex-flow column
+
+#header
+	background-color header-color
+
+#content-container
+	flex 1
+	overflow-x hidden
+	overflow-y scroll

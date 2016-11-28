@@ -2,7 +2,6 @@ package main
 
 import (
 	"io/ioutil"
-	"runtime"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
@@ -22,43 +21,15 @@ import (
 var app = aero.New()
 
 func main() {
+	// CSS
 	app.SetStyle(components.CSS())
 
-	// app.Sessions = sessions.New(sessions.Config{
-	// 	Cookie:                      "sid",
-	// 	Expires:                     time.Duration(30) * time.Second,
-	// 	GcDuration:                  time.Duration(30) * time.Second,
-	// 	DecodeCookie:                false,
-	// 	DisableSubdomainPersistence: false,
-	// })
-
-	// user, _ := arn.GetUserByNick("Akyoto")
-	// user.CoverImage.URL = "https://www.pixelstalk.net/wp-content/uploads/2016/10/Hanyijie-sky-scenery-ship-anime-art-1920x1080.jpg"
-	// user.CoverImage.Position.X = "50%"
-	// user.CoverImage.Position.Y = "0%"
-	// user.Save()
-
-	scripts, _ := ioutil.ReadFile("temp/scripts.js")
-	js := string(scripts)
-
-	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		ctx.SetHeader("Content-Type", "application/javascript")
-		return js
-	})
-
-	app.Get("/hello", func(ctx *aero.Context) string {
-		return ctx.Text("Hello World")
-	})
-
-	app.Get("/gc", func(ctx *aero.Context) string {
-		runtime.GC()
-		return ctx.Text("Ran garbage collector")
-	})
-
+	// Layout
 	app.Layout = func(ctx *aero.Context, content string) string {
 		return components.Layout(content)
 	}
 
+	// Ajax routes
 	app.Ajax("/", dashboard.Get)
 	app.Ajax("/anime", search.Get)
 	app.Ajax("/anime/:id", anime.Get)
@@ -75,5 +46,20 @@ func main() {
 		return ctx.HTML(components.Test("Hello World"))
 	})
 
+	// Scripts
+	scripts, _ := ioutil.ReadFile("temp/scripts.js")
+	js := string(scripts)
+
+	app.Get("/scripts.js", func(ctx *aero.Context) string {
+		ctx.SetHeader("Content-Type", "application/javascript")
+		return js
+	})
+
+	// For testing
+	app.Get("/hello", func(ctx *aero.Context) string {
+		return ctx.Text("Hello World")
+	})
+
+	// Let's go
 	app.Run()
 }

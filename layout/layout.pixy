@@ -1,39 +1,18 @@
 component Layout(content string)
 	html
 		head
-			title ARN 4.0 - Beta
+			title notify.moe - Beta
 			meta(name="viewport", content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 		body
 			#container
-				Header
-				Content(content)
+				#header
+					Navigation
+				#content-container
+					main#content.fade!= content
 			
 			LoadingAnimation
 			
 			script(src="/scripts.js")
-
-component Header
-	#header-container
-		#header.header-logged-in
-			Navigation
-
-component Content(content string)
-	#content-container
-		main#content.fade!= content
-
-component Navigation
-	nav#navigation
-		NavigationButton("Dash", "/", "inbox")
-		NavigationButton("Anime", "/anime", "television")
-		NavigationButton("Forum", "/forum", "comment")
-		NavigationButton("Genres", "/genres", "tags")
-		NavigationButton("Airing", "/airing", "rss")
-
-component NavigationButton(name string, target string, icon string)
-	a.navigation-link.navigation-link-left.ajax(href=target)
-		.navigation-button
-			i(class="fa fa-" + icon)
-			span.navigation-text= name
 
 component LoadingAnimation
 	#loading-animation.sk-cube-grid.fade

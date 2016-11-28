@@ -1,0 +1,55 @@
+.anime-header
+	display flex
+	flex-flow row
+
+.anime-image-container
+	flex 1
+	display flex
+	flex-flow row
+	justify-content center
+	align-items flex-start
+
+.anime-image
+	width 230px
+	height auto
+	border-radius 3px
+	box-shadow 4px 4px 8px rgba(0, 0, 0, 0.12)
+	filter saturate(100%)
+	transition all transition-speed ease
+	object-fit cover
+	:hover
+		filter saturate(150%)
+		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.2)
+
+.anime-info
+	flex 9999999
+	display flex
+	flex-flow column
+	margin-left content-padding
+
+.anime-title
+	text-align left
+
+.anime-alternative-title
+	font-size 0.9em
+	color rgba(60, 60, 60, 0.5) !important
+
+.sources
+	font-size 0.8em
+	opacity 0.5
+
+.relations
+	float left
+	display flex
+	flex-flow row wrap
+
+.relation
+	display flex
+	flex-flow column
+	font-size 0.9rem
+	align-items center
+	padding 0.5rem
+
+.relation-image
+	width 100px
+	height 141px
