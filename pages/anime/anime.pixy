@@ -39,7 +39,7 @@ component Anime(anime *arn.Anime)
 			each relation in anime.Relations
 				a.relation.ajax(href="/anime/" + toString(relation.ID), title=relation.Anime().Title.Romaji)
 					img.anime-image.relation-image(src=relation.Anime().Image, alt=relation.Anime().Title.Romaji)
-					span= arn.Capitalize(relation.Type)
+					.relation-type= arn.Capitalize(relation.Type)
 
 	if len(anime.Genres) > 0
 		h3.anime-section-name Genres

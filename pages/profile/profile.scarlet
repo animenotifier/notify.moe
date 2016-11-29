@@ -57,8 +57,7 @@ profile-boot-duration = 2s
 	// ...
 
 .intro-container
-	display flex
-	flex-flow column
+	vertical
 	align-items flex-start
 	padding content-padding
 	padding-top 0

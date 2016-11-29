@@ -1,5 +1,4 @@
 #content
-	display flex
-	flex-flow column
+	vertical
 	padding content-padding
 	line-height 1.7em

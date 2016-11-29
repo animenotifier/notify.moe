@@ -1,6 +1,5 @@
 .grid
-	display flex
-	flex-flow row wrap
+	horizontal-wrap
 	justify-content center
 
 .grid-cell
@@ -57,10 +56,9 @@
 		border none
 
 .grid-text
+	vertical
 	width 100%
 	height 100%
-	display flex
-	flex-flow column
 	align-items center
 	justify-content center
 	font-size 1rem

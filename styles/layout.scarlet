@@ -1,7 +1,6 @@
 #container
+	vertical
 	height 100%
-	display flex
-	flex-flow column
 
 #header
 	background-color header-color

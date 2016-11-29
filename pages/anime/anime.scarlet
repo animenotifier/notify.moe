@@ -1,11 +1,9 @@
 .anime-header
-	display flex
-	flex-flow row
+	horizontal
 
 .anime-image-container
+	horizontal
 	flex 1
-	display flex
-	flex-flow row
 	justify-content center
 	align-items flex-start
 
@@ -22,9 +20,8 @@
 		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.2)
 
 .anime-info
+	vertical
 	flex 9999999
-	display flex
-	flex-flow column
 	margin-left content-padding
 
 .anime-title
@@ -39,16 +36,16 @@
 	opacity 0.5
 
 .relations
-	float left
-	display flex
-	flex-flow row wrap
+	horizontal-wrap
 
 .relation
-	display flex
-	flex-flow column
-	font-size 0.9rem
+	vertical
 	align-items center
 	padding 0.5rem
+
+.relation-type
+	font-size 0.7rem
+	margin-top 0.1rem
 
 .relation-image
 	width 100px

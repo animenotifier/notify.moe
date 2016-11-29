@@ -8,6 +8,7 @@
 		"reset",
 		"font-awesome",
 		"config",
+		"mixins",
 		"base",
 		"typography",
 		"layout",

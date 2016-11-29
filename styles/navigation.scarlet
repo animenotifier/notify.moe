@@ -1,6 +1,5 @@
 #navigation
-	display flex
-	flex-flow row
+	horizontal
 	padding 0 content-padding
 	height nav-height
 	overflow hidden

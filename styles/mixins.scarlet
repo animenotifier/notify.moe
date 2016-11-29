@@ -1,0 +1,15 @@
+mixin horizontal
+	display flex
+	flex-direction row
+
+mixin horizontal-wrap
+	display flex
+	flex-flow row wrap
+
+mixin vertical
+	display flex
+	flex-direction column
+
+mixin vertical-wrap
+	display flex
+	flex-flow column wrap
