@@ -1,13 +1,13 @@
 component Genres(genres []*arn.Genre)
 	h2 Genres
 	
-	.grid
+	.genres
 		each genre in genres
-			a.grid-cell.ajax(href="/genres/" + genre.ID)
-				.backside-card.ui
-					.grid-text.front
-						GridIcon(arn.GetGenreIcon(genre.Name))
-						span= genre.Name
+			a.genre.ajax(href="/genres/" + genre.ID)
+				.genre-text.front
+					.genre-icon
+						RawIcon(arn.GetGenreIcon(genre.Name))
+					span= genre.Name
 
-					if len(genre.AnimeList) > 0
-						img.grid-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji, title=genre.AnimeList[0].Title.Romaji + "\n" + genre.Name + " #1")
+				if len(genre.AnimeList) > 0
+					img.genre-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji, title=genre.AnimeList[0].Title.Romaji + "\n" + genre.Name + " #1")

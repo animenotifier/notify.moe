@@ -1,5 +1,5 @@
 component AnimeGrid(animeList []*arn.Anime)
-	.grid
+	.anime-grid
 		each anime in animeList
-			a.grid-cell.grid-anime.ajax(href="/anime/" + toString(anime.ID))
-				img.grid-image(src=anime.Image, alt=anime.Title.Romaji, title=anime.Title.Romaji + " (" + toString(anime.Watching) + ")")
+			a.anime-grid-cell.ajax(href="/anime/" + toString(anime.ID))
+				img.anime-grid-image(src=anime.Image, alt=anime.Title.Romaji, title=anime.Title.Romaji + " (" + toString(anime.Watching) + ")")

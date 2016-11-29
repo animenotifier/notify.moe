@@ -1,8 +1,8 @@
-.grid
+mixin grid
 	horizontal-wrap
 	justify-content center
 
-.grid-cell
+mixin grid-cell
 	position relative
 	
 	flex-grow 0
@@ -21,41 +21,7 @@
 
 	margin 0.5rem
 
-	:hover
-		.backside-card
-			transform rotateY(180deg)
-			
-			.front
-				opacity 0
-			.back
-				opacity 1
-
-.backside-card
-	width 100%
-	height 100%
-	transition all transition-speed ease-in-out
-
-.front
-	position absolute
-	left 0
-	top 0
-	opacity 1
-	transition opacity transition-speed ease
-
-.back
-	position absolute
-	left 0
-	top 0
-	opacity 0
-	transition opacity transition-speed ease
-	transform rotateY(180deg)
-
-.grid-anime
-	border none
-	:hover
-		border none
-
-.grid-text
+mixin grid-text
 	vertical
 	width 100%
 	height 100%
@@ -64,15 +30,38 @@
 	font-size 1rem
 	color rgb(160, 160, 160)
 
-.grid-icon
+mixin grid-image
+	width 100%
+	height 100%
+	border-radius 3px
+	object-fit cover
+
+mixin grid-icon
 	font-size 2.5rem
 	margin-top 2rem
 	margin-bottom 0.7rem
 	color link-color
 
-.grid-image
-	width 100%
-	height 100%
-	margin 0
-	border-radius 3px
-	object-fit cover
+mixin flip-card
+	:hover
+		.front
+			transform rotateY(180deg)
+			opacity 0
+		.back
+			transform rotateY(0deg)
+			opacity 1
+
+.front
+	position absolute
+	left 0
+	top 0
+	opacity 1
+	transition all transition-speed ease
+
+.back
+	position absolute
+	left 0
+	top 0
+	opacity 0
+	transition all transition-speed ease
+	transform rotateY(180deg)

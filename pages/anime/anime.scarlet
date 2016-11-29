@@ -7,7 +7,7 @@
 	justify-content center
 	align-items flex-start
 
-.anime-image
+.anime-cover-image
 	width 230px
 	height auto
 	border-radius 3px

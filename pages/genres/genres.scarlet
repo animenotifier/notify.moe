@@ -1,0 +1,16 @@
+.genres
+	grid
+
+.genre
+	grid-cell
+	flip-card
+	ui-element
+
+.genre-text
+	grid-text
+
+.genre-icon
+	grid-icon
+
+.genre-image
+	grid-image

@@ -1,5 +1,5 @@
 component Icon(name string)
 	i(class="fa fa-fw fa-" + name)
 
-component GridIcon(name string)
-	span(class="fa fa-" + name + " grid-icon")
+component RawIcon(name string)
+	span(class="fa fa-" + name)
