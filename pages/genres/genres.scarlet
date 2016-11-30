@@ -4,7 +4,6 @@
 .genre
 	grid-cell
 	flip-card
-	ui-element
 
 .genre-text
 	grid-text
@@ -14,3 +13,10 @@
 
 .genre-image
 	grid-image
+
+.front
+	ui-element
+	shadow-up
+
+.back
+	shadow-up

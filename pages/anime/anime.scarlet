@@ -3,7 +3,6 @@
 
 .anime-image-container
 	horizontal
-	flex 1
 	justify-content center
 	align-items flex-start
 
@@ -11,17 +10,16 @@
 	width 230px
 	height auto
 	border-radius 3px
-	box-shadow 4px 4px 8px rgba(0, 0, 0, 0.12)
-	filter saturate(100%)
+	
 	transition all transition-speed ease
 	object-fit cover
-	:hover
-		filter saturate(150%)
-		box-shadow 6px 6px 12px rgba(0, 0, 0, 0.2)
 
+	saturate-up
+	shadow-up
+	
 .anime-info
 	vertical
-	flex 9999999
+	flex 1
 	margin-left content-padding
 
 .anime-title

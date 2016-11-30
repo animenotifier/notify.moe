@@ -4,9 +4,6 @@ mixin grid
 
 mixin grid-cell
 	position relative
-	
-	flex-grow 0
-	flex-shrink 0
 
 	width 16vw
 	height 9vw
@@ -20,6 +17,8 @@ mixin grid-cell
 	background-position 50% 50%
 
 	margin 0.5rem
+
+	scale-up
 
 mixin grid-text
 	vertical
@@ -57,6 +56,7 @@ mixin flip-card
 	top 0
 	opacity 1
 	transition all transition-speed ease
+	transform rotateY(0)
 
 .back
 	position absolute

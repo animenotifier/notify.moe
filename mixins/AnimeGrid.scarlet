@@ -3,6 +3,7 @@
 
 .anime-grid-cell
 	grid-cell
+	shadow-up
 
 .anime-grid-image
 	grid-image

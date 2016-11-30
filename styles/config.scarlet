@@ -13,6 +13,10 @@ ui-hover-border = 1px solid rgba(0, 0, 0, 0.15)
 ui-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.037) 100%)
 ui-hover-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.027) 100%)
 
+// Shadow
+shadow-light = 4px 4px 8px rgba(0, 0, 0, 0.05)
+shadow-medium = 6px 6px 12px rgba(0, 0, 0, 0.15)
+
 // Outline shadow
 outline-shadow-light = 0 0 6px alpha(black, 0.05)
 outline-shadow-medium = 0 0 6px alpha(black, 0.13)

@@ -20,7 +20,32 @@ mixin ui-element
 	border-radius 3px
 	transition all transition-speed ease
 
-	&:hover
+	:hover
 		border ui-hover-border
 		background ui-hover-background
 		box-shadow outline-shadow-medium
+
+mixin light-up
+	filter brightness(0.4) saturate(1)
+	:hover
+		filter brightness(1) saturate(1.3)
+
+mixin saturate-up
+	filter saturate(1)
+	:hover
+		filter saturate(1.3)
+
+mixin saturate-up
+	filter saturate(1)
+	:hover
+		filter saturate(1.3)
+
+mixin scale-up
+	transform scale(1)
+	:hover
+		transform scale(1.08)
+
+mixin shadow-up
+	box-shadow shadow-light
+	:hover
+		box-shadow shadow-medium
