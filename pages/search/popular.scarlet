@@ -14,3 +14,6 @@
 	width 100px !important
 	height 141px !important
 	border-radius 3px
+	object-fit cover
+	default-transition
+	shadow-up

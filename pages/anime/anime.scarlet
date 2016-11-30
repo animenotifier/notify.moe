@@ -1,3 +1,6 @@
+.anime-section-name
+	font-weight bold
+
 .anime-header
 	horizontal
 
@@ -11,7 +14,7 @@
 	height auto
 	border-radius 3px
 	
-	transition all transition-speed ease
+	default-transition
 	object-fit cover
 
 	saturate-up
@@ -20,7 +23,10 @@
 .anime-info
 	vertical
 	flex 1
-	margin-left content-padding
+
+.space
+	width content-padding
+	height content-padding
 
 .anime-title
 	text-align left
@@ -48,3 +54,12 @@
 .relation-image
 	width 100px
 	height 141px
+	border-radius 3px
+	object-fit cover
+	default-transition
+	scale-up
+	shadow-up
+
+< 800px
+	.anime-header
+		vertical

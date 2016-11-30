@@ -12,7 +12,7 @@ body
 a
 	color link-color
 	text-decoration none
-	transition all transition-speed ease
+	default-transition
 
 	:hover
 		color link-hover-color

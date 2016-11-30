@@ -4,6 +4,8 @@ component Anime(anime *arn.Anime)
 			.anime-image-container
 				img.anime-cover-image(src=anime.Image, alt=anime.Title.Romaji)
 		
+		.space
+
 		.anime-info
 			h2.anime-title(title=anime.Type)= anime.Title.Romaji
 
@@ -55,7 +57,7 @@ component Anime(anime *arn.Anime)
 		.light-button-group
 			each studio in anime.Studios
 				a.light-button(href="https://anilist.co/studio/" + toString(studio.ID), target="_blank")
-					i.fa.fa-building.fa-fw
+					Icon("building")
 					span= studio.Name
 
 	//- //-if crunchy

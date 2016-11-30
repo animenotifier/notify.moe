@@ -55,7 +55,7 @@ mixin flip-card
 	left 0
 	top 0
 	opacity 1
-	transition all transition-speed ease
+	default-transition
 	transform rotateY(0)
 
 .back
@@ -63,5 +63,5 @@ mixin flip-card
 	left 0
 	top 0
 	opacity 0
-	transition all transition-speed ease
+	default-transition
 	transform rotateY(180deg)

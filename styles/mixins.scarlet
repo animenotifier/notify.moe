@@ -1,3 +1,6 @@
+mixin default-transition
+	transition all transition-speed ease
+
 mixin horizontal
 	display flex
 	flex-direction row
@@ -18,8 +21,7 @@ mixin ui-element
 	border ui-border
 	background ui-background
 	border-radius 3px
-	transition all transition-speed ease
-
+	default-transition
 	:hover
 		border ui-hover-border
 		background ui-hover-background
@@ -49,3 +51,8 @@ mixin shadow-up
 	box-shadow shadow-light
 	:hover
 		box-shadow shadow-medium
+
+mixin outline-shadow-up
+	box-shadow outline-shadow-light
+	:hover
+		box-shadow outline-shadow-medium
