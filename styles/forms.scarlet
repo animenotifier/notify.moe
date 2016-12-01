@@ -1,0 +1,37 @@
+input, textarea, button, select
+	font-family inherit
+	font-size 1rem
+	padding 0.4em 0.8em
+	border-radius 3px
+	color text-color
+	default-transition
+
+input, textarea
+	border ui-border
+	background-color white
+	box-shadow none
+	:focus
+		color black
+		border 1px solid main-color
+		// TODO: Replace with alpha(main-color, 20%) function
+		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
+	:disabled
+		ui-disabled
+
+// button, select
+// 	ui-element
+// 	box-shadow 0 0 2px white, 0 -2px 5px rgba(0, 0, 0, 0.08) inset
+// 	:focus
+// 		color rgb(0, 0, 0)
+// 		box-shadow 0 0 6px alpha(mainColor, 20%)
+// 		border 1px solid mainColor
+
+// input[type="submit"]:hover,
+// button:hover
+// 	cursor pointer
+// 	text-decoration none
+
+// button[disabled]
+// 	opacity 0.5
+// 	:hover
+// 		cursor not-allowed

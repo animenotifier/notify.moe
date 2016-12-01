@@ -14,18 +14,17 @@ profile-boot-duration = 2s
 	text-shadow 0px 0px 2px rgb(0, 0, 0, 0.5)
 
 	default-transition
-	animation-name appear
-	animation-duration transition-speed
+	animation appear transition-speed
 
 	overflow hidden
 
-// @keyframes appear
-// 	0%
-// 		transform rotateX(90deg)
-// 		filter opacity(0) saturate(0) blur(10px)
-// 	100%
-// 		transform rotateX(0)
-// 		filter opacity(1) saturate(1) blur(0)
+animation appear
+	0%
+		transform rotateX(90deg)
+		filter opacity(0) saturate(0) blur(10px)
+	100%
+		transform rotateX(0)
+		filter opacity(1) saturate(1) blur(0)
 
 .profile-cover
 	position absolute
@@ -41,7 +40,7 @@ profile-boot-duration = 2s
 	animation cover-animation profile-boot-duration
 	animation-fill-mode forwards
 
-@keyframes cover-animation
+animation cover-animation
 	0%
 		filter brightness(500%) blur(5px)
 	100%

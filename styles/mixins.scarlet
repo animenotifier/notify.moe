@@ -27,6 +27,10 @@ mixin ui-element
 		background ui-hover-background
 		box-shadow outline-shadow-medium
 
+mixin ui-disabled
+	background-color ui-disabled-color
+	cursor not-allowed
+
 mixin light-up
 	filter brightness(0.4) saturate(1)
 	:hover

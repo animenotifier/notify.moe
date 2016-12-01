@@ -1,8 +1,12 @@
-.anime-section-name
-	font-weight bold
-
 .anime-header
 	horizontal
+
+< 800px
+	.anime-header
+		vertical
+
+.anime-section-name
+	font-weight bold
 
 .anime-image-container
 	horizontal
@@ -59,7 +63,3 @@
 	default-transition
 	scale-up
 	shadow-up
-
-< 800px
-	.anime-header
-		vertical

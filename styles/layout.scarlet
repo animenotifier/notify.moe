@@ -2,9 +2,6 @@
 	vertical
 	height 100%
 
-#header
-	background-color header-color
-
 #content-container
 	flex 1
 	overflow-x hidden

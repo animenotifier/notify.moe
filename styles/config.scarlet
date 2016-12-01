@@ -3,9 +3,6 @@ text-color = rgb(60, 60, 60)
 main-color = rgb(248, 165, 130)
 link-color = rgb(245, 126, 76)
 link-hover-color = rgb(242, 93, 30)
-header-color = rgb(60, 60, 60)
-nav-link-color = rgb(160, 160, 160)
-nav-link-hover-color = rgb(255, 255, 255)
 post-highlight-color = rgba(248, 165, 130, 0.7)
 
 // UI
@@ -13,6 +10,15 @@ ui-border = 1px solid rgba(0, 0, 0, 0.1)
 ui-hover-border = 1px solid rgba(0, 0, 0, 0.15)
 ui-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.037) 100%)
 ui-hover-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.027) 100%)
+ui-disabled-color = rgb(224, 224, 224)
+
+// Navigation
+nav-color = rgb(60, 60, 60)
+nav-link-color = rgb(160, 160, 160)
+nav-link-hover-color = rgb(255, 255, 255)
+// nav-color = rgb(245, 245, 245)
+// nav-link-color = rgb(160, 160, 160)
+// nav-link-hover-color = rgb(80, 80, 80)
 
 // Shadow
 shadow-light = 4px 4px 8px rgba(0, 0, 0, 0.05)

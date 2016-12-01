@@ -3,17 +3,32 @@
 	padding 0 content-padding
 	height nav-height
 	overflow hidden
+	background-color nav-color
+	// border-bottom ui-border
 
 .navigation-link
 	color nav-link-color
+
+	:after
+		content ""
+		display block
+		height 3px
+		background-color main-color
+		transform scaleX(0)
+		opacity 0
+		default-transition
 
 	:hover,
 	&.active
 		color nav-link-hover-color
 		cursor pointer
+		:after
+			transform scaleX(1.0)
+			opacity 1
 
 	&.active
-		text-shadow 1px 1px 3px rgba(4, 4, 4, 0.5)
+		// text-shadow 1px 1px 3px rgba(4, 4, 4, 0.5)
+		text-shadow 1px 1px 3px rgba(4, 4, 4, 0.1)
 
 .navigation-button
 	font-size 1.1em

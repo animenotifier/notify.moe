@@ -39,3 +39,6 @@ debug
 
 # binaries
 /notify.moe
+
+# DB
+/db
