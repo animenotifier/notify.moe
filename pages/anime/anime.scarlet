@@ -34,9 +34,11 @@
 
 .anime-title
 	text-align left
+	margin-bottom 0.5rem
 
 .anime-alternative-title
 	font-size 0.9em
+	margin-bottom 0.5rem
 	color rgba(60, 60, 60, 0.5) !important
 
 .sources
