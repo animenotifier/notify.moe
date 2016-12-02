@@ -4,6 +4,7 @@
 	height nav-height
 	overflow hidden
 	background-color nav-color
+	justify-content center
 	// border-bottom ui-border
 
 .navigation-link
@@ -34,3 +35,13 @@
 	font-size 1.1em
 	line-height 1em
 	padding 0.75em 1em
+
+.navigation-text
+	display none
+
+> 930px
+	#navigation
+		justify-content flex-start
+	
+	.navigation-text
+		display inline-block

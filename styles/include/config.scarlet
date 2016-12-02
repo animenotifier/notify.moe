@@ -3,6 +3,7 @@ text-color = rgb(60, 60, 60)
 main-color = rgb(248, 165, 130)
 link-color = rgb(245, 126, 76)
 link-hover-color = rgb(242, 93, 30)
+link-active-color = rgb(100, 149, 237)
 post-highlight-color = rgba(248, 165, 130, 0.7)
 
 // UI
@@ -30,7 +31,8 @@ outline-shadow-medium = 0 0 6px rgba(0, 0, 0, 0.13)
 outline-shadow-heavy = 0 0 6px rgba(0, 0, 0, 0.6)
 
 // Distances
-content-padding = 1.5rem
+content-padding = 1.6rem
+content-padding-top = 2rem
 hover-line-size = 2px
 nav-height = 3.11rem
 

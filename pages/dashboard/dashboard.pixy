@@ -3,7 +3,7 @@ component Dashboard(posts []*arn.Post)
 	
 	.dashboard-widget
 		each post in posts
-			a.dashboard-event.ui.ajax(href=post.Link())
+			a.dashboard-event.ajax(href=post.Link())
 				.dashboard-event-author
 					AvatarNoLink(post.Author())
 				.dashboard-event-text

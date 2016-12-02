@@ -1,23 +1,22 @@
 .dashboard-widget
-	display flex
-	flex-flow column
+	vertical
 	align-items center
 
 .dashboard-event
-	display flex
-	flex-flow column wrap
+	vertical-wrap
+	ui-element
 	margin-bottom 1rem
 	padding 0.75rem
 	width 100%
 	max-width 700px
 
 .dashboard-event-author
-	display flex
+	horizontal
 	justify-content center
 	width 100%
 
 .dashboard-event-text
-	display flex
+	horizontal
 	justify-content center
 	align-items center
 	width 100%

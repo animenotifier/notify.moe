@@ -1,7 +1,7 @@
 component Thread(thread *arn.Thread, posts []*arn.Post)
+	h2.thread-title= thread.Title
+
 	.thread
-		h2.thread-title= thread.Title
-		
 		.posts
 			Postable(thread.ToPostable(), nil, thread.Author().ID)
 			

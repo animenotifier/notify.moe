@@ -20,9 +20,15 @@ a
 	
 	:active
 		transform translateY(3px)
+	
+	&.active
+		color link-active-color
 
 strong
 	font-weight bold
 
 em
 	font-style italic
+
+.spacer
+	flex 1

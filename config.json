@@ -5,10 +5,10 @@
 		"Ubuntu"
 	],
 	"styles": [
-		"reset",
-		"font-awesome",
-		"config",
-		"mixins",
+		"libs/reset",
+		"libs/font-awesome",
+		"include/config",
+		"include/mixins",
 		"base",
 		"typography",
 		"layout",

@@ -10,10 +10,11 @@ component ThreadLink(thread *arn.Thread)
 		.post-author.thread-author
 			Avatar(thread.Author())
 		.thread-content-container
-			.post-content.thread-content
+			.thread-content
 				if thread.Sticky
-					i.fa.fa-thumb-tack.fa-fw.thread-icon
-				a.thread-title.ajax(href="/threads/" + thread.ID)= thread.Title
+					Icon("thumb-tack")
+				a.thread-link-title.ajax(href="/threads/" + thread.ID)= thread.Title
+				.spacer
 				.thread-reply-count= thread.Replies
 				.thread-icons
 					Icon(arn.GetForumIcon(thread.Tags[0]))

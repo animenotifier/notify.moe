@@ -1,25 +1,77 @@
 .forum-header
 	text-align left
+	margin-bottom 1rem
 
 .post-content
 	ui-element
+	flex-grow 1
+	padding 0.8rem 1rem
+	position relative
+
+	h1
+		font-size 1.5rem
+		line-height 2em
+
+	h2
+		font-size 1.3rem
+		line-height 2em
+		font-weight normal
+
+	h3
+		font-size 1.1rem
+		line-height 2em
+		font-weight normal
+	
+	:hover
+		.post-toolbar
+			opacity 1
+
+.thread-content
+	horizontal
+	ui-element
 	padding 0.4rem 1rem
+	align-items center
 
 .thread-link
 	horizontal
+
+.thread-icons,
+.thread-reply-count
+	opacity 0.5
+	text-align right
+	font-size 0.9rem
+
+.thread-reply-count
+	margin-right 0.5rem
 
 .thread-content-container
 	flex 1
 	vertical
 	justify-content center
 
-.thread-content
-	horizontal
+.thread-link-title
+	color text-color
 
 .forum-tags
-	margin-bottom content-padding
+	margin-bottom 1rem
+
+.post-author
+	horizontal
+	justify-content center
+	align-items flex-start
+	margin 0.25rem 0.5rem
+	margin-left 0
 
 // Toolbar
+
+.post-toolbar
+	horizontal
+	opacity 0
+	position absolute
+	bottom 3px
+	right 0
+	margin-right 0.5rem
+	default-transition
 
 .post-tool
 	opacity 0.7

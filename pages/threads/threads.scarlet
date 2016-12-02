@@ -1,0 +1,16 @@
+.thread
+	horizontal
+	justify-content center
+
+.posts
+	vertical
+	width 100%
+	max-width 830px
+
+.post
+	vertical
+	margin-bottom 1rem
+
+> 600px
+	.post
+		horizontal

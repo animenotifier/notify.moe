@@ -1,2 +1,3 @@
-i.fa
-	margin-right 0.5em
+.fa + span,
+.fa + a
+	margin-left 0.5em
