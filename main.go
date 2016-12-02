@@ -24,6 +24,10 @@ func main() {
 	// CSS
 	app.SetStyle(components.CSS())
 
+	// HTTPS
+	app.Security.Certificate, _ = ioutil.ReadFile("security/fullchain.pem")
+	app.Security.Key, _ = ioutil.ReadFile("security/privkey.pem")
+
 	// Layout
 	app.Layout = func(ctx *aero.Context, content string) string {
 		return components.Layout(content)

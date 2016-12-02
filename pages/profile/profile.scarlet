@@ -6,7 +6,7 @@ profile-boot-duration = 2s
 
 	position relative
 	left calc(content-padding * -1)
-	top calc(content-padding * -1)
+	top calc(content-padding-top * -1)
 	min-width calc(100% + content-padding * 2)
 	padding calc(content-padding * 2)
 

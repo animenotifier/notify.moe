@@ -30,5 +30,8 @@ strong
 em
 	font-style italic
 
+img
+	backface-visibility hidden
+
 .spacer
 	flex 1
