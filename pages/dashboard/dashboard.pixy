@@ -3,11 +3,12 @@ component Dashboard(posts []*arn.Post)
 	
 	.dashboard
 		.dashboard-widget
-			h3 Airing
+			h3 Schedule
 
 			for i := 1; i <= 5; i++
-				a.dashboard-event
+				.dashboard-event
 					.dashboard-event-text
+						Icon("calendar-o")
 						span ...
 		
 		.dashboard-widget
@@ -18,4 +19,60 @@ component Dashboard(posts []*arn.Post)
 					//- .dashboard-event-author
 					//- 	AvatarNoLink(post.Author())
 					.dashboard-event-text
+						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
+		
+		.dashboard-widget
+			h3 Groups
+
+			for i := 1; i <= 5; i++
+				.dashboard-event
+					.dashboard-event-text
+						Icon("group")
+						span ...
+
+		.dashboard-widget
+			h3 Messages
+
+			for i := 1; i <= 5; i++
+				.dashboard-event
+					.dashboard-event-text
+						Icon("comment")
+						span ...
+		
+		.dashboard-widget
+			h3 Contacts
+
+			for i := 1; i <= 5; i++
+				.dashboard-event
+					.dashboard-event-text
+						Icon("address-card")
+						span ...
+		
+		.dashboard-widget
+			h3 Follow
+
+			a.dashboard-event(href="https://discord.gg/0kimAmMCeXGXuzNF")
+				.dashboard-event-text
+					Icon("microphone")
+					span Discord
+			
+			a.dashboard-event(href="https://www.facebook.com/animenotifier")
+				.dashboard-event-text
+					Icon("facebook")
+					span Facebook
+			
+			a.dashboard-event(href="https://twitter.com/animenotifier")
+				.dashboard-event-text
+					Icon("twitter")
+					span Twitter
+			
+			a.dashboard-event(href="https://plus.google.com/+AnimeReleaseNotifierOfficial")
+				.dashboard-event-text
+					Icon("google-plus")
+					span Google+
+			
+			a.dashboard-event(href="https://github.com/animenotifier/notify.moe")
+				.dashboard-event-text
+					Icon("github")
+					span GitHub
