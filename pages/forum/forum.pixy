@@ -4,6 +4,8 @@ component Forum(tag string, threads []*arn.Thread)
 	
 	each thread in threads
 		ThreadLink(thread)
+	
+	button#load-more-threads Load more
 
 component ThreadLink(thread *arn.Thread)
 	.thread-link(data-sticky=thread.Sticky)

@@ -18,13 +18,19 @@ input, textarea
 	:disabled
 		ui-disabled
 
-// button, select
-// 	ui-element
-// 	box-shadow 0 0 2px white, 0 -2px 5px rgba(0, 0, 0, 0.08) inset
-// 	:focus
-// 		color rgb(0, 0, 0)
-// 		box-shadow 0 0 6px alpha(mainColor, 20%)
-// 		border 1px solid mainColor
+button, select
+	ui-element
+	max-width 600px
+	padding 0.6rem 1rem
+	margin 0 auto
+	// box-shadow 0 0 2px white, 0 -2px 5px rgba(0, 0, 0, 0.08) inset
+	// :active
+	// 	background-color black
+	// 	color white
+	// :focus
+	// 	color rgb(0, 0, 0)
+	// 	// box-shadow 0 0 6px alpha(mainColor, 20%)
+	// 	border 1px solid main-color
 
 // input[type="submit"]:hover,
 // button:hover

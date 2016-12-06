@@ -34,9 +34,9 @@ component Postable(post arn.Postable, viewUser *arn.User, highlightAuthorID stri
 				//- 			a.post-tool.post-edit(onclick=`$.edit("${post.ID}")`, title="Edit")
 				//- 				i.fa.fa-pencil.fa-fw
 				
-				//- if post.Type() != "Thread"
-				a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")
-					Icon("link")
+				if post.Type() != "Thread"
+					a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")
+						Icon("link")
 				
 				//- if type === "Messages" && user && (user.ID === post.authorId || user.ID === post.recipientId)
 				//- 	a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this ${typeSingular.toLowerCase()} from ${post.author.nick}?")) $.delete${typeSingular}("${post.ID}")`, title="Delete")

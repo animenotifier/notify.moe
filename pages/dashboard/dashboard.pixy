@@ -1,10 +1,21 @@
 component Dashboard(posts []*arn.Post)
 	h2 Dash
 	
-	.dashboard-widget
-		each post in posts
-			a.dashboard-event.ajax(href=post.Link())
-				.dashboard-event-author
-					AvatarNoLink(post.Author())
-				.dashboard-event-text
-					span= post.Thread().Title
+	.dashboard
+		.dashboard-widget
+			h3 Airing
+
+			for i := 1; i <= 5; i++
+				a.dashboard-event
+					.dashboard-event-text
+						span ...
+		
+		.dashboard-widget
+			h3 Forums
+
+			each post in posts
+				a.dashboard-event.ajax(href=post.Link())
+					//- .dashboard-event-author
+					//- 	AvatarNoLink(post.Author())
+					.dashboard-event-text
+						span= post.Thread().Title

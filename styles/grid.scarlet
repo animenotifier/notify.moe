@@ -18,8 +18,6 @@ mixin grid-cell
 
 	margin 0.5rem
 
-	scale-up
-
 mixin grid-text
 	vertical
 	width 100%

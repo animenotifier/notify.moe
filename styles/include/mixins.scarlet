@@ -25,7 +25,7 @@ mixin ui-element
 	:hover
 		border ui-hover-border
 		background ui-hover-background
-		box-shadow outline-shadow-medium
+		// box-shadow outline-shadow-medium
 
 mixin ui-disabled
 	background-color ui-disabled-color

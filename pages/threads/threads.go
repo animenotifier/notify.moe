@@ -1,8 +1,6 @@
 package threads
 
 import (
-	"sort"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -21,7 +19,7 @@ func Get(ctx *aero.Context) string {
 		return post.ThreadID == thread.ID
 	})
 
-	sort.Sort(replies)
+	arn.SortPostsLatestLast(replies)
 
 	if filterErr != nil {
 		return ctx.Error(500, "Error fetching thread replies", err)

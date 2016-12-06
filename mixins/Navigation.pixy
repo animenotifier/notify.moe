@@ -5,6 +5,7 @@ component Navigation
 		NavigationButton("Forum", "/forum", "comment")
 		NavigationButton("Genres", "/genres", "tags")
 		NavigationButton("Airing", "/airing", "rss")
+		NavigationButton("Users", "/users", "globe")
 
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.ajax(href=target)

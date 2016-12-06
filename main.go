@@ -16,6 +16,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/threads"
+	"github.com/animenotifier/notify.moe/pages/users"
 )
 
 var app = aero.New()
@@ -25,8 +26,7 @@ func main() {
 	app.SetStyle(components.CSS())
 
 	// HTTPS
-	app.Security.Certificate, _ = ioutil.ReadFile("security/fullchain.pem")
-	app.Security.Key, _ = ioutil.ReadFile("security/privkey.pem")
+	app.Security.Load("security/fullchain.pem", "security/privkey.pem")
 
 	// Layout
 	app.Layout = func(ctx *aero.Context, content string) string {
@@ -45,10 +45,7 @@ func main() {
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/airing", airing.Get)
-
-	app.Ajax("/test", func(ctx *aero.Context) string {
-		return ctx.HTML(components.Test("Hello World"))
-	})
+	app.Ajax("/users", users.Get)
 
 	// Scripts
 	scripts, _ := ioutil.ReadFile("temp/scripts.js")

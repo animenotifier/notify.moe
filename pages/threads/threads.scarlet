@@ -9,7 +9,7 @@
 
 .post
 	vertical
-	margin-bottom 1rem
+	margin-bottom 0.75rem
 
 > 600px
 	.post

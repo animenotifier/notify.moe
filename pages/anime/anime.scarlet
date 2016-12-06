@@ -63,5 +63,4 @@
 	border-radius 3px
 	object-fit cover
 	default-transition
-	scale-up
 	shadow-up
