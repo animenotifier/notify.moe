@@ -1,9 +1,11 @@
+# IMPORTANT 
+Unless somebody succesfully contacts Akyoto, notify.moe is dead. Please don't report that site doesn't work.  ~ Mr_SkiZZeX
+------------------------------------------------------------------------------------------------------------------------
+
 # Anime Notifier
 
-# UPDATE 
-Unless somebody succesfully contacts Akyoto, notify.moe is dead. Please don't report that site doesn't work.  ~ Mr_SkiZZeX
-
 Fetches your anime "watching" list and notifies you when a new anime episode is available. It also displays the time until a new episode is released.
+
 
 Supports anime lists from:
 - [anilist.co](https://anilist.co)
