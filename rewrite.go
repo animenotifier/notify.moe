@@ -1,29 +1,27 @@
 package main
 
 import (
-	"bytes"
+	"strings"
 
 	"github.com/aerogo/aero"
 )
 
 func init() {
-	plusRoute := []byte("/+")
-	plusRouteAjax := []byte("/_/+")
+	plusRoute := "/+"
+	plusRouteAjax := "/_/+"
 
 	// This will rewrite /+UserName requests to /user/UserName
 	app.Rewrite(func(ctx *aero.RewriteContext) {
-		requestURI := ctx.URIBytes()
+		requestURI := ctx.URI()
 
-		if bytes.HasPrefix(requestURI, plusRoute) {
-			newURI := []byte("/user/")
+		if strings.HasPrefix(requestURI, plusRoute) {
+			newURI := "/user/"
 			userName := requestURI[2:]
-			newURI = append(newURI, userName...)
-			ctx.SetURIBytes(newURI)
-		} else if bytes.HasPrefix(requestURI, plusRouteAjax) {
-			newURI := []byte("/_/user/")
+			ctx.SetURI(newURI + userName)
+		} else if strings.HasPrefix(requestURI, plusRouteAjax) {
+			newURI := "/_/user/"
 			userName := requestURI[4:]
-			newURI = append(newURI, userName...)
-			ctx.SetURIBytes(newURI)
+			ctx.SetURI(newURI + userName)
 		}
 	})
 }

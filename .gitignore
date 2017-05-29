@@ -42,3 +42,6 @@ debug
 
 # DB
 /db
+
+# Cert
+/security
