@@ -19,7 +19,7 @@ if [ ! -d /usr/local/go ]; then
 
 	export PATH=$PATH:/usr/local/go/bin
 	echo "Don't forget to add the following to your terminal startup scripts:"
-	echo "export PATH=\$PATH:/usr/local/go/bin"
+	echo "export PATH=\$PATH:/usr/local/go/bin\n"
 fi
 
 if [ ! -f /usr/bin/asd ]; then
@@ -38,10 +38,5 @@ if [ ! -f /usr/bin/asd ]; then
 	sudo ./asinstall
 	cd ..
 fi
-
-# if [ ! -d ./notify.moe ]; then
-#     echo "Downloading notify.moe source..."
-# 	git clone git@github.com:animenotifier/notify.moe.git
-# fi
 
 echo "Finished installing notify.moe dependencies."
