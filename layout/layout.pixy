@@ -11,7 +11,6 @@ component Layout(content string)
 					main#content.fade!= content
 			
 			LoadingAnimation
-			
 			script(src="/scripts.js")
 
 component LoadingAnimation

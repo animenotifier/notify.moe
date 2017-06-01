@@ -33,6 +33,7 @@
 		"images/characters/arn-waifu.png"
 	],
 	"manifest": {
+		"theme_color": "rgb(248, 165, 130)",
 		"gcm_sender_id": "941298467524"
 	},
 	"ports": {
