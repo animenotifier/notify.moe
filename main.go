@@ -7,7 +7,6 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
-	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/genre"
@@ -34,7 +33,9 @@ func main() {
 	}
 
 	// Ajax routes
-	app.Ajax("/", dashboard.Get)
+	app.Ajax("/", func(ctx *aero.Context) string {
+		return ctx.HTML("ARN 4.0 is currently under construction.<br><a href='https://paypal.me/blitzprog' target='_blank' rel='noopener'>Support the development</a>")
+	})
 	app.Ajax("/anime", search.Get)
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/genres", genres.Get)
@@ -46,6 +47,10 @@ func main() {
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/users", users.Get)
+
+	app.Get("/manifest.json", func(ctx *aero.Context) string {
+		return ctx.JSON(app.Config.Manifest)
+	})
 
 	// Scripts
 	scripts, _ := ioutil.ReadFile("temp/scripts.js")
