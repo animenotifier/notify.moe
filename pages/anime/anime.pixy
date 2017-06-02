@@ -7,25 +7,25 @@ component Anime(anime *arn.Anime)
 		.space
 
 		.anime-info
-			h2.anime-title(title=anime.Type)= anime.Title.Romaji
+			h2.anime-title(title=anime.Type)= anime.Title.Canonical
 
 			//- if user && user.titleLanguage === "japanese"
 			//- 	span.second-title(title=anime.Title.English !== anime.Title.Romaji ? anime.Title.English : null)= anime.Title.Romaji
 			//- else
-			if anime.Title.Japanese != anime.Title.Romaji
+			if anime.Title.Japanese != anime.Title.Canonical
 				a.anime-alternative-title(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
 
 			//- h3.anime-section-name.anime-summary-header Summary
-			p.anime-summary= arn.FixAnimeDescription(anime.Description)
+			p.anime-summary= anime.Summary
 	
-	if anime.YoutubeID != ""
+	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].VideoID != ""
 		h3.anime-section-name Video
 		.anime-trailer.video-container
-			iframe.video(src="https://www.youtube.com/embed/" + anime.YoutubeID + "?showinfo=0", allowfullscreen="allowfullscreen")
+			iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[0].VideoID + "?showinfo=0", allowfullscreen="allowfullscreen")
 
-	if anime.Tracks != nil && anime.Tracks.Opening != nil
-		h3.anime-section-name Tracks
-		iframe.anime-track(src="https://w.soundcloud.com/player/?url=" + anime.Tracks.Opening.URI + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")
+	//- if anime.Tracks != nil && anime.Tracks.Opening != nil
+	//- 	h3.anime-section-name Tracks
+	//- 	iframe.anime-track(src="https://w.soundcloud.com/player/?url=" + anime.Tracks.Opening.URI + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")
 
 	//- if user && friendsWatching && friendsWatching.length > 0
 	//- 	include ../messages/avatar.pug
@@ -35,30 +35,30 @@ component Anime(anime *arn.Anime)
 	//- 		each watcher in friendsWatching
 	//- 			+avatar(watcher)
 
-	if len(anime.Relations) > 0
-		h3.anime-section-name Relations
-		.relations
-			each relation in anime.Relations
-				a.relation.ajax(href="/anime/" + toString(relation.ID), title=relation.Anime().Title.Romaji)
-					img.anime-image.relation-image(src=relation.Anime().Image, alt=relation.Anime().Title.Romaji)
-					.relation-type= arn.Capitalize(relation.Type)
+	//- if len(anime.Relations) > 0
+	//- 	h3.anime-section-name Relations
+	//- 	.relations
+	//- 		each relation in anime.Relations
+	//- 			a.relation.ajax(href="/anime/" + toString(relation.ID), title=relation.Anime().Title.Romaji)
+	//- 				img.anime-image.relation-image(src=relation.Anime().Image, alt=relation.Anime().Title.Romaji)
+	//- 				.relation-type= arn.Capitalize(relation.Type)
 
-	if len(anime.Genres) > 0
-		h3.anime-section-name Genres
-		.light-button-group
-			each genre in anime.Genres
-				if genre != ""
-					a.light-button.ajax(href="/genres/" + arn.GetGenreIDByName(genre))
-						Icon(arn.GetGenreIcon(genre))
-						span= genre
+	//- if len(anime.Genres) > 0
+	//- 	h3.anime-section-name Genres
+	//- 	.light-button-group
+	//- 		each genre in anime.Genres
+	//- 			if genre != ""
+	//- 				a.light-button.ajax(href="/genres/" + arn.GetGenreIDByName(genre))
+	//- 					Icon(arn.GetGenreIcon(genre))
+	//- 					span= genre
 	
-	if len(anime.Studios) > 0
-		h3.anime-section-name Studios
-		.light-button-group
-			each studio in anime.Studios
-				a.light-button(href="https://anilist.co/studio/" + toString(studio.ID), target="_blank")
-					Icon("building")
-					span= studio.Name
+	//- if len(anime.Studios) > 0
+	//- 	h3.anime-section-name Studios
+	//- 	.light-button-group
+	//- 		each studio in anime.Studios
+	//- 			a.light-button(href="https://anilist.co/studio/" + toString(studio.ID), target="_blank")
+	//- 				Icon("building")
+	//- 				span= studio.Name
 
 	//- //-if crunchy
 	//- //-	h3.anime-section-name Episodes
@@ -106,18 +106,18 @@ component Anime(anime *arn.Anime)
 	//- 						if providers.Nyaa && providers.Nyaa.episodes !== undefined
 	//- 							span(class=providers.Nyaa.episodes === 0 ? "entry-error" : "entry-ok")= providers.Nyaa.episodes + " eps"
 
-	h3.anime-section-name Links
-	.light-button-group
-		if anime.Links != nil
-			each link in anime.Links
-				a.light-button(href=link.URL, target="_blank")
-					Icon("external-link")
-					span= link.Title
+	//- h3.anime-section-name Links
+	//- .light-button-group
+	//- 	if anime.Links != nil
+	//- 		each link in anime.Links
+	//- 			a.light-button(href=link.URL, target="_blank")
+	//- 				Icon("external-link")
+	//- 				span= link.Title
 		
-		if anime.CreatedBy == ""
-			a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank")
-				Icon("external-link")
-				span AniList
+	//- 	if anime.CreatedBy == ""
+	//- 		a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank")
+	//- 			Icon("external-link")
+	//- 			span AniList
 
 		//- if providers.HummingBird
 		//- 	a.light-button(href="https://hummingbird.me/anime/" + providers.HummingBird.providerId, target="_blank") HummingBird
@@ -129,7 +129,7 @@ component Anime(anime *arn.Anime)
 		//- 	a.light-button(href="http://www.anime-planet.com/anime/" + providers.AnimePlanet.providerId, target="_blank") AnimePlanet
 
 	.sources
-		p Powered by Anilist.
+		p Powered by Kitsu.
 	//- 		if descriptionSource
 	//- 			span= " Summary by " + summarySource + "."
 	//- //-
