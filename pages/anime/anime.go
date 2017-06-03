@@ -8,7 +8,7 @@ import (
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	id, _ := ctx.GetInt("id")
+	id := ctx.Get("id")
 	anime, err := arn.GetAnime(id)
 
 	if err != nil {

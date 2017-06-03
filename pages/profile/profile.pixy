@@ -1,6 +1,6 @@
 component Profile(viewUser *arn.User, user *arn.User)
 	.profile
-		.profile-cover(style=viewUser.CoverImageStyle())
+		//- .profile-cover(style=viewUser.CoverImageStyle())
 
 		.image-container
 			ProfileImage(viewUser)

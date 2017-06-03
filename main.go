@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 
 	"github.com/aerogo/aero"
@@ -49,6 +50,12 @@ func main() {
 
 	app.Get("/manifest.json", func(ctx *aero.Context) string {
 		return ctx.JSON(app.Config.Manifest)
+	})
+
+	app.Get("/ip", func(ctx *aero.Context) string {
+		ip := ctx.RealIP()
+		fmt.Println(ip)
+		return ctx.Text(ip)
 	})
 
 	// Scripts
