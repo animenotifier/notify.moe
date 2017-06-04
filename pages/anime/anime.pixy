@@ -1,8 +1,8 @@
 component Anime(anime *arn.Anime)
 	.anime-header(data-id=anime.ID)
-		if anime.Image != ""
+		if anime.Image.Small != ""
 			.anime-image-container
-				img.anime-cover-image(src=anime.Image, alt=anime.Title.Romaji)
+				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.Romaji)
 		
 		.space
 

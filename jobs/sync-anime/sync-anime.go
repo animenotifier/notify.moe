@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/animenotifier/arn"
@@ -20,23 +19,33 @@ func main() {
 	for anime := range allAnime {
 		sync(anime)
 	}
+
+	println("Finished.")
 }
 
 func sync(data *kitsu.Anime) {
 	anime := arn.Anime{}
+	attr := data.Attributes
 
-	anime.ID, _ = strconv.Atoi(data.ID)
-	anime.Type = strings.ToLower(data.Attributes.ShowType)
-	anime.Title.Canonical = data.Attributes.CanonicalTitle
-	anime.Title.English = data.Attributes.Titles.En
-	anime.Title.Japanese = data.Attributes.Titles.JaJp
-	anime.Title.Romaji = data.Attributes.Titles.EnJp
-	anime.Title.Synonyms = data.Attributes.AbbreviatedTitles
-	anime.Image = data.Attributes.PosterImage.Original
-	anime.Summary = arn.FixAnimeDescription(data.Attributes.Synopsis)
+	anime.ID = data.ID
+	anime.Type = strings.ToLower(attr.ShowType)
+	anime.Title.Canonical = attr.CanonicalTitle
+	anime.Title.English = attr.Titles.En
+	anime.Title.Japanese = attr.Titles.JaJp
+	anime.Title.Romaji = attr.Titles.EnJp
+	anime.Title.Synonyms = attr.AbbreviatedTitles
+	anime.Image.Tiny = kitsu.FixImageURL(attr.PosterImage.Tiny)
+	anime.Image.Small = kitsu.FixImageURL(attr.PosterImage.Small)
+	anime.Image.Large = kitsu.FixImageURL(attr.PosterImage.Large)
+	anime.Image.Original = kitsu.FixImageURL(attr.PosterImage.Original)
+	anime.StartDate = attr.StartDate
+	anime.EndDate = attr.EndDate
+	anime.EpisodeCount = attr.EpisodeCount
+	anime.EpisodeLength = attr.EpisodeLength
+	anime.Summary = arn.FixAnimeDescription(attr.Synopsis)
 
 	if data.Attributes.YoutubeVideoID != "" {
-		anime.Trailers = append(anime.Trailers, &arn.AnimeTrailer{
+		anime.Trailers = append(anime.Trailers, arn.AnimeTrailer{
 			Service: "Youtube",
 			VideoID: data.Attributes.YoutubeVideoID,
 		})
@@ -53,5 +62,4 @@ func sync(data *kitsu.Anime) {
 	}
 
 	fmt.Println(status, anime.ID, anime.Title.Canonical)
-
 }

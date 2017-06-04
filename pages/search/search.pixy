@@ -12,5 +12,5 @@ component Search(popularAnime []*arn.Anime, titleCount int, animeCount int)
 
 		.popular-anime-list
 			each anime in popularAnime
-				a.popular-anime.ajax(href="/anime/" + toString(anime.ID), title=anime.Title.Romaji + " (" + arn.Plural(anime.Watching, "user") + " watching)")
+				a.popular-anime.ajax(href="/anime/" + toString(anime.ID), title=anime.Title.Romaji + " (" + arn.Plural(anime.Watching(), "user") + " watching)")
 					img.anime-image.popular-anime-image(src=anime.Image, alt=anime.Title.Romaji)
