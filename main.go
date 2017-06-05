@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 
 	"github.com/aerogo/aero"
@@ -52,10 +51,15 @@ func main() {
 		return ctx.JSON(app.Config.Manifest)
 	})
 
-	app.Get("/ip", func(ctx *aero.Context) string {
-		ip := ctx.RealIP()
-		fmt.Println(ip)
-		return ctx.Text(ip)
+	app.Get("/favicon.ico", func(ctx *aero.Context) string {
+		ctx.SetHeader("Content-Type", "image/x-icon")
+		data, _ := ioutil.ReadFile("images/icons/favicon.ico")
+		return string(data)
+	})
+
+	// For benchmarks
+	app.Get("/hello", func(ctx *aero.Context) string {
+		return ctx.Text("Hello World")
 	})
 
 	// Scripts
@@ -65,11 +69,6 @@ func main() {
 	app.Get("/scripts.js", func(ctx *aero.Context) string {
 		ctx.SetHeader("Content-Type", "application/javascript")
 		return js
-	})
-
-	// For testing
-	app.Get("/hello", func(ctx *aero.Context) string {
-		return ctx.Text("Hello World")
 	})
 
 	// Let's go
