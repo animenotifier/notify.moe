@@ -42,17 +42,18 @@ func sync(data *kitsu.Anime) {
 	anime.EndDate = attr.EndDate
 	anime.EpisodeCount = attr.EpisodeCount
 	anime.EpisodeLength = attr.EpisodeLength
+	anime.Status = attr.Status
+	anime.NSFW = attr.Nsfw
 	anime.Summary = arn.FixAnimeDescription(attr.Synopsis)
 
-	if data.Attributes.YoutubeVideoID != "" {
+	if attr.YoutubeVideoID != "" {
 		anime.Trailers = append(anime.Trailers, arn.AnimeTrailer{
 			Service: "Youtube",
-			VideoID: data.Attributes.YoutubeVideoID,
+			VideoID: attr.YoutubeVideoID,
 		})
 	}
 
 	err := anime.Save()
-
 	status := ""
 
 	if err == nil {
