@@ -47,14 +47,14 @@ func main() {
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/users", users.Get)
 
-	app.Get("/manifest.json", func(ctx *aero.Context) string {
-		return ctx.JSON(app.Config.Manifest)
+	// Favicon
+	app.Get("/favicon.ico", func(ctx *aero.Context) string {
+		return ctx.File("images/icons/favicon.ico")
 	})
 
-	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		ctx.SetHeader("Content-Type", "image/x-icon")
-		data, _ := ioutil.ReadFile("images/icons/favicon.ico")
-		return string(data)
+	// Web manifest
+	app.Get("/manifest.json", func(ctx *aero.Context) string {
+		return ctx.JSON(app.Config.Manifest)
 	})
 
 	// For benchmarks
