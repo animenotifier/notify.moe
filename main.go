@@ -1,8 +1,6 @@
 package main
 
 import (
-	"io/ioutil"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/airing"
@@ -57,18 +55,14 @@ func main() {
 		return ctx.JSON(app.Config.Manifest)
 	})
 
+	// Scripts
+	app.Get("/scripts.js", func(ctx *aero.Context) string {
+		return ctx.File("temp/scripts.js")
+	})
+
 	// For benchmarks
 	app.Get("/hello", func(ctx *aero.Context) string {
 		return ctx.Text("Hello World")
-	})
-
-	// Scripts
-	scripts, _ := ioutil.ReadFile("temp/scripts.js")
-	js := string(scripts)
-
-	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		ctx.SetHeader("Content-Type", "application/javascript")
-		return js
 	})
 
 	// Let's go
