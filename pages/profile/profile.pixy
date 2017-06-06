@@ -1,6 +1,6 @@
 component Profile(viewUser *arn.User, user *arn.User)
 	.profile
-		//- .profile-cover(style=viewUser.CoverImageStyle())
+		img.profile-cover(src=viewUser.CoverImageURL())
 
 		.image-container
 			ProfileImage(viewUser)
@@ -36,7 +36,7 @@ component Profile(viewUser *arn.User, user *arn.User)
 				p.profile-field.registration-date(title="Member since")
 					Icon("calendar")
 					//- span= time.Parse(time.RFC3339, viewUser.Registered)
-					span= viewUser.Registered[:4]
+					span= viewUser.RegisteredTime().Format("Jan 2006")
 					//- span= monthNames[joined.getMonth()] + ' ' + joined.getFullYear()
 			
 			if viewUser.Role != ""

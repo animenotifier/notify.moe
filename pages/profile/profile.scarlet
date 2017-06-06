@@ -33,7 +33,8 @@ animation appear
 	width 100%
 	height 100%
 	z-index -1
-	background-size cover
+	object-fit cover
+	// background-size cover
 	overflow hidden
 	
 	default-transition

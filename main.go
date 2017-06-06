@@ -1,6 +1,8 @@
 package main
 
 import (
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/airing"
@@ -44,6 +46,17 @@ func main() {
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/users", users.Get)
+
+	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
+		format := ".jpg"
+		accept := ctx.GetRequestHeader("Accept")
+
+		if strings.Index(accept, "image/webp") != -1 {
+			format = ".webp"
+		}
+
+		return ctx.File("images/cover/" + ctx.Get("file") + format)
+	})
 
 	// Favicon
 	app.Get("/favicon.ico", func(ctx *aero.Context) string {
