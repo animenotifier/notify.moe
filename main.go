@@ -1,8 +1,6 @@
 package main
 
 import (
-	"strings"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/airing"
@@ -20,6 +18,14 @@ import (
 )
 
 var app = aero.New()
+
+// APIKeys ...
+type APIKeys struct {
+	Google struct {
+		ID     string `json:"id"`
+		Secret string `json:"secret"`
+	} `json:"google"`
+}
 
 func main() {
 	// CSS
@@ -47,11 +53,12 @@ func main() {
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/users", users.Get)
 
+	EnableGoogleLogin(app)
+
 	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
 		format := ".jpg"
-		accept := ctx.GetRequestHeader("Accept")
 
-		if strings.Index(accept, "image/webp") != -1 {
+		if ctx.CanUseWebP() {
 			format = ".webp"
 		}
 

@@ -33,6 +33,7 @@
 		"images/characters/arn-waifu.png"
 	],
 	"manifest": {
+		"short_name": "notify.moe",
 		"theme_color": "#f8a582",
 		"gcm_sender_id": "941298467524"
 	},
