@@ -40,8 +40,11 @@ debug
 # binaries
 /notify.moe
 
-# DB
+# Database
 /db
 
-# Cert
+# Certificates
 /security
+
+# Log files
+/logs

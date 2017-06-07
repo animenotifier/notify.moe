@@ -1,10 +1,8 @@
 package dashboard
 
 import (
-	"net/http"
-
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 const maxPosts = 5
@@ -24,15 +22,10 @@ func Get(ctx *aero.Context) string {
 	// }
 
 	// return ctx.HTML(components.Dashboard(posts))
-	userID := ctx.Session().GetString("userId")
 
-	if userID != "" {
-		user, err := arn.GetUser(userID)
+	user := utils.GetUser(ctx)
 
-		if err != nil {
-			return ctx.Error(http.StatusInternalServerError, "Error fetching user data", err)
-		}
-
+	if user != nil {
 		return ctx.HTML("Welcome back, " + user.Nick + "!")
 	}
 
