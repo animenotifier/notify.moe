@@ -12,3 +12,6 @@ h3
 	line-height 1.6em
 	text-align left
 	margin-top 0.6em
+
+.page-title
+	display none

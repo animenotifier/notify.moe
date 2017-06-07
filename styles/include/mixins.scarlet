@@ -31,6 +31,11 @@ mixin ui-disabled
 	background-color ui-disabled-color
 	cursor not-allowed
 
+mixin clip-long-text
+	overflow hidden
+	white-space nowrap
+	text-overflow ellipsis
+
 mixin light-up
 	filter brightness(0.4) saturate(1)
 	:hover

@@ -1,5 +1,5 @@
 component Dashboard(posts []*arn.Post)
-	h2 Dash
+	h2.page-title Dash
 	
 	.dashboard
 		.dashboard-widget

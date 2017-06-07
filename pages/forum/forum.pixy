@@ -1,5 +1,5 @@
 component Forum(tag string, threads []*arn.Thread)
-	h2.forum-header Forum
+	h2.page-title Forum
 	ForumTags
 	
 	each thread in threads

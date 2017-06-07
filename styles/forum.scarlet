@@ -1,6 +1,10 @@
-.forum-header
-	text-align left
-	margin-bottom 1rem
+// .forum-header
+// 	text-align left
+// 	margin-bottom 1rem
+
+.thread-link
+	horizontal
+	margin 0.25rem 0
 
 .post-content
 	ui-element
@@ -32,9 +36,6 @@
 	padding 0.4rem 1rem
 	align-items center
 
-.thread-link
-	horizontal
-
 .thread-icons,
 .thread-reply-count
 	opacity 0.5
@@ -59,8 +60,7 @@
 	horizontal
 	justify-content center
 	align-items flex-start
-	margin 0.25rem 0.5rem
-	margin-left 0
+	margin-right 0.5rem
 
 // Toolbar
 

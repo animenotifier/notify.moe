@@ -9,8 +9,15 @@
 
 .post
 	vertical
-	margin-bottom 0.75rem
+	margin-bottom 1.75rem
+
+	.post-author
+		margin-bottom 0.25rem
 
 > 600px
 	.post
 		horizontal
+		margin-bottom 0.75rem
+	
+		.post-author
+			margin-bottom 0

@@ -1,8 +1,7 @@
 profile-boot-duration = 2s
 
 .profile
-	display flex
-	flex-flow row
+	horizontal
 
 	position relative
 	left calc(content-padding * -1)
