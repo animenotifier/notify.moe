@@ -1,6 +1,8 @@
 package main
 
 import (
+	"sort"
+
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
@@ -16,7 +18,9 @@ func main() {
 		return
 	}
 
-	// sort.Slice
+	sort.Slice(animeList, func(i, j int) bool {
+		return animeList[i].StartDate > animeList[j].StartDate
+	})
 
 	// Convert to small anime list
 	cache := &arn.ListOfIDs{}

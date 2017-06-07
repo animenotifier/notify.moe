@@ -4,13 +4,26 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
+
+// GoogleUser is the user data we receive from Google
+type GoogleUser struct {
+	Sub           string `json:"sub"`
+	Name          string `json:"name"`
+	GivenName     string `json:"given_name"`
+	FamilyName    string `json:"family_name"`
+	Profile       string `json:"profile"`
+	Picture       string `json:"picture"`
+	Email         string `json:"email"`
+	EmailVerified bool   `json:"email_verified"`
+	Gender        string `json:"gender"`
+}
 
 // EnableGoogleLogin enables Google login for the app.
 func EnableGoogleLogin(app *aero.Application) {
@@ -30,7 +43,8 @@ func EnableGoogleLogin(app *aero.Application) {
 
 	// Auth
 	app.Get("/auth/google", func(ctx *aero.Context) string {
-		url := conf.AuthCodeURL(ctx.Session().ID())
+		sessionID := ctx.Session().ID()
+		url := conf.AuthCodeURL(sessionID)
 		ctx.Redirect(url)
 		return ""
 	})
@@ -38,11 +52,12 @@ func EnableGoogleLogin(app *aero.Application) {
 	// Auth Callback
 	app.Get("/auth/google/callback", func(ctx *aero.Context) string {
 		if ctx.Session().ID() != ctx.Query("state") {
-			return ctx.Error(http.StatusBadRequest, "Authorization not allowed for this session", errors.New("Google login failed: Incorrect state"))
+			return ctx.Error(http.StatusUnauthorized, "Authorization not allowed for this session", errors.New("Google login failed: Incorrect state"))
 		}
 
 		// Handle the exchange code to initiate a transport
 		token, err := conf.Exchange(oauth2.NoContext, ctx.Query("code"))
+
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Could not obtain OAuth token", err)
 		}
@@ -51,14 +66,30 @@ func EnableGoogleLogin(app *aero.Application) {
 		client := conf.Client(oauth2.NoContext, token)
 
 		resp, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
+
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed requesting user data from Google", err)
 		}
-		defer resp.Body.Close()
-		dataBytes, _ := ioutil.ReadAll(resp.Body)
-		data := string(dataBytes)
-		log.Println("Resp body: ", data)
 
-		return ctx.Text(data)
+		defer resp.Body.Close()
+		data, _ := ioutil.ReadAll(resp.Body)
+
+		var googleUser GoogleUser
+		err = json.Unmarshal(data, &googleUser)
+
+		if err != nil {
+			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
+		}
+
+		email := googleUser.Email
+		user, getErr := arn.GetUserByEmail(email)
+
+		if getErr != nil {
+			return ctx.Error(http.StatusForbidden, "Email not registered", err)
+		}
+
+		ctx.Session().Set("userId", user.ID)
+
+		return ctx.Redirect("/")
 	})
 }

@@ -10,6 +10,7 @@ func main() {
 
 	// Delete Nick:User records
 	arn.Truncate("NickToUser")
+	arn.Truncate("EmailToUser")
 
 	// Get a stream of all anime
 	allUsers, err := arn.AllUsers()
@@ -24,7 +25,8 @@ func main() {
 		count++
 		println(count, user.Nick)
 
-		user.ChangeNick(user.Nick)
+		user.SetNick(user.Nick)
+		user.SetEmail(user.Email)
 	}
 
 	color.Green("Finished.")
