@@ -18,6 +18,9 @@ component Anime(anime *arn.Anime)
 			//- h3.anime-section-name.anime-summary-header Summary
 			p.anime-summary= anime.Summary
 	
+	.anime-actions
+		a.light-button.action-button(href="#") Add to collection
+
 	h3.anime-section-name Ratings
 	.anime-rating-categories
 		.anime-rating-category(title=toString(anime.Rating.Overall))

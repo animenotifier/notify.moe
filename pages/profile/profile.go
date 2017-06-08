@@ -27,5 +27,7 @@ func Get(ctx *aero.Context) string {
 		threads = threads[:maxPosts]
 	}
 
-	return ctx.HTML(components.Profile(viewUser, user, threads))
+	animeList := viewUser.AnimeList()
+
+	return ctx.HTML(components.Profile(viewUser, user, animeList, threads))
 }

@@ -1,8 +1,12 @@
 package main
 
 import (
+	"errors"
+	"net/http"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 func init() {
@@ -51,5 +55,35 @@ func init() {
 		}
 
 		return ctx.JSON(thread)
+	})
+
+	app.Get("/api/anime/:id/add", func(ctx *aero.Context) string {
+		animeID := ctx.Get("id")
+		user := utils.GetUser(ctx)
+
+		if user == nil {
+			return ctx.Error(http.StatusBadRequest, "Not logged in", errors.New("User not logged in"))
+		}
+
+		animeList := user.AnimeList()
+
+		if animeList.Contains(animeID) {
+			return ctx.Error(http.StatusBadRequest, "Anime already added", errors.New("Anime has already been added"))
+		}
+
+		newItem := arn.AnimeListItem{
+			AnimeID: animeID,
+			Status:  arn.AnimeListStatusPlanned,
+		}
+
+		animeList.Items = append(animeList.Items, newItem)
+
+		saveError := animeList.Save()
+
+		if saveError != nil {
+			return ctx.Error(http.StatusInternalServerError, "Could not save anime list in database", saveError)
+		}
+
+		return ctx.JSON(animeList)
 	})
 }

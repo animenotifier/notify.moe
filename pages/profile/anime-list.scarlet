@@ -1,0 +1,15 @@
+.anime-list
+	horizontal
+
+.anime-list-item
+	padding 0.25rem
+	// padding calc(content-padding / 4) calc(content-padding / 2)
+	// margin 0.25rem 0
+	// position relative
+
+.anime-list-item-image
+	width 55px !important
+	border-radius 2px
+	// position absolute
+	// left 0
+	// top 0

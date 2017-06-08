@@ -1,13 +1,18 @@
 .light-button-group
 	horizontal-wrap
 	justify-content flex-start
-	font-size 0.9rem
 
 .light-button
 	display inline-block
 	padding 0.5rem 1rem
 	border-radius 3px
+	font-size 0.9rem
 
 	:hover
 		color white !important
 		background-color link-hover-color
+
+.action-button
+	ui-element
+	font-size 1rem
+	text-align center

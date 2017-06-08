@@ -29,5 +29,5 @@ func Get(ctx *aero.Context) string {
 		return ctx.HTML(components.Dashboard(posts))
 	}
 
-	return ctx.HTML("ARN 4.0 is currently under construction.<br><a href='https://paypal.me/blitzprog' target='_blank' rel='noopener'>Support the development</a>")
+	return ctx.HTML("ARN 4.0 is currently under construction.<br><a href='https://paypal.me/blitzprog' target='_blank' rel='noopener'>Support the development</a><br><a href='/auth/google'>Login via Google</a>")
 }

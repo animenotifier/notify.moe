@@ -1,4 +1,4 @@
-component Profile(viewUser *arn.User, user *arn.User, threads []*arn.Thread)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL())
 
@@ -49,6 +49,14 @@ component Profile(viewUser *arn.User, user *arn.User, threads []*arn.Thread)
 	//- 	a.light-button(href="#") Anime
 	//- 	a.light-button(href="#") Forum
 	
+	.profile-category
+		h3 Anime
+
+		.anime-list
+			each item in animeList.Items
+				a.anime-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episode) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+					img.anime-cover-image.anime-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
+
 	.profile-category
 		h3 Forum
 		

@@ -41,6 +41,17 @@
 	margin-bottom 0.5rem
 	color rgba(60, 60, 60, 0.5) !important
 
+.anime-actions
+	horizontal
+	justify-content center
+	margin content-padding 0
+
+> 900px
+	.anime-actions
+		position absolute
+		top 0
+		right content-padding
+
 .anime-rating-categories
 	horizontal
 	width 100%
