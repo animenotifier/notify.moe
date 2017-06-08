@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/animenotifier/arn"
@@ -27,6 +28,7 @@ func sync(data *kitsu.Anime) {
 	anime := arn.Anime{}
 	attr := data.Attributes
 
+	// General data
 	anime.ID = data.ID
 	anime.Type = strings.ToLower(attr.ShowType)
 	anime.Title.Canonical = attr.CanonicalTitle
@@ -46,6 +48,16 @@ func sync(data *kitsu.Anime) {
 	anime.NSFW = attr.Nsfw
 	anime.Summary = arn.FixAnimeDescription(attr.Synopsis)
 
+	// Rating
+	overall, convertError := strconv.ParseFloat(attr.AverageRating, 64)
+
+	if convertError != nil {
+		overall = 0
+	}
+
+	anime.Rating.Overall = overall
+
+	// Trailers
 	if attr.YoutubeVideoID != "" {
 		anime.Trailers = append(anime.Trailers, arn.AnimeTrailer{
 			Service: "Youtube",
@@ -53,6 +65,7 @@ func sync(data *kitsu.Anime) {
 		})
 	}
 
+	// Save in database
 	err := anime.Save()
 	status := ""
 
@@ -62,5 +75,6 @@ func sync(data *kitsu.Anime) {
 		status = color.RedString("✘")
 	}
 
+	// Log
 	fmt.Println(status, anime.ID, anime.Title.Canonical)
 }

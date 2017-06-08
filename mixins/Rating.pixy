@@ -1,0 +1,2 @@
+component Rating(value float64)
+	.anime-rating= arn.AnimeRatingStars(value)

@@ -19,7 +19,7 @@ func main() {
 	}
 
 	sort.Slice(animeList, func(i, j int) bool {
-		return animeList[i].StartDate > animeList[j].StartDate
+		return animeList[i].Rating.Overall > animeList[j].Rating.Overall
 	})
 
 	// Convert to small anime list

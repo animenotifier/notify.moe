@@ -6,7 +6,7 @@ mixin grid-cell
 	position relative
 
 	width 16vw
-	height 9vw
+	height 16vw
 	min-width 90px
 	min-height 127px
 	max-width 200px

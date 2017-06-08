@@ -8,7 +8,6 @@ import (
 func main() {
 	color.Yellow("Updating user references")
 
-	// Delete Nick:User records
 	arn.Truncate("NickToUser")
 	arn.Truncate("EmailToUser")
 
@@ -26,7 +25,10 @@ func main() {
 		println(count, user.Nick)
 
 		user.SetNick(user.Nick)
-		user.SetEmail(user.Email)
+
+		if user.Email != "" {
+			user.SetEmail(user.Email)
+		}
 	}
 
 	color.Green("Finished.")

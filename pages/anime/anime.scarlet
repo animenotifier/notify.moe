@@ -41,6 +41,30 @@
 	margin-bottom 0.5rem
 	color rgba(60, 60, 60, 0.5) !important
 
+.anime-rating-categories
+	horizontal
+	width 100%
+
+.anime-rating-category
+	ui-element
+	flex 1
+	text-align center
+	margin 0.5rem
+
+.anime-rating-category-name
+	font-size 1.3rem
+	margin-top 0.5rem
+
+.anime-rating
+	margin 0.5rem
+	letter-spacing 3px
+	font-size 1.3rem
+	color link-color
+
+< 800px
+	.anime-rating-categories
+		vertical
+
 .sources
 	font-size 0.8em
 	opacity 0.5

@@ -18,6 +18,21 @@ component Anime(anime *arn.Anime)
 			//- h3.anime-section-name.anime-summary-header Summary
 			p.anime-summary= anime.Summary
 	
+	h3.anime-section-name Ratings
+	.anime-rating-categories
+		.anime-rating-category(title=toString(anime.Rating.Overall))
+			.anime-rating-category-name Overall
+			Rating(anime.Rating.Overall)
+		.anime-rating-category(title=toString(anime.Rating.Story))
+			.anime-rating-category-name Story
+			Rating(anime.Rating.Story)
+		.anime-rating-category(title=toString(anime.Rating.Visuals))
+			.anime-rating-category-name Visuals
+			Rating(anime.Rating.Visuals)
+		.anime-rating-category(title=toString(anime.Rating.Music))
+			.anime-rating-category-name Music
+			Rating(anime.Rating.Music)
+
 	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].VideoID != ""
 		h3.anime-section-name Video
 		.anime-trailer.video-container
@@ -106,18 +121,17 @@ component Anime(anime *arn.Anime)
 	//- 						if providers.Nyaa && providers.Nyaa.episodes !== undefined
 	//- 							span(class=providers.Nyaa.episodes === 0 ? "entry-error" : "entry-ok")= providers.Nyaa.episodes + " eps"
 
-	//- h3.anime-section-name Links
-	//- .light-button-group
-	//- 	if anime.Links != nil
-	//- 		each link in anime.Links
-	//- 			a.light-button(href=link.URL, target="_blank")
-	//- 				Icon("external-link")
-	//- 				span= link.Title
+	h3.anime-section-name Links
+	.light-button-group
+		//- if anime.Links != nil
+		//- 	each link in anime.Links
+		//- 		a.light-button(href=link.URL, target="_blank")
+		//- 			Icon("external-link")
+		//- 			span= link.Title
 		
-	//- 	if anime.CreatedBy == ""
-	//- 		a.light-button(href="https://anilist.co/anime/" + toString(anime.ID), target="_blank")
-	//- 			Icon("external-link")
-	//- 			span AniList
+		a.light-button(href="https://kitsu.io/anime/" + anime.ID, target="_blank", rel="noopener")
+			Icon("external-link")
+			span Kitsu
 
 		//- if providers.HummingBird
 		//- 	a.light-button(href="https://hummingbird.me/anime/" + providers.HummingBird.providerId, target="_blank") HummingBird

@@ -5,6 +5,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
+	"github.com/animenotifier/notify.moe/pages/awards"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
@@ -52,6 +53,7 @@ func main() {
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/users", users.Get)
+	app.Ajax("/awards", awards.Get)
 
 	EnableGoogleLogin(app)
 
