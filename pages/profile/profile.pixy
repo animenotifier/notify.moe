@@ -53,16 +53,22 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 		h3 Anime
 
 		.anime-list
-			each item in animeList.Items
-				a.anime-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episode) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-					img.anime-cover-image.anime-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
+			if len(animeList.Items) == 0
+				p No anime in the collection.
+			else
+				each item in animeList.Items
+					a.anime-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episode) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+						img.anime-cover-image.anime-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 
 	.profile-category
 		h3 Forum
 		
-		each thread in threads
-			ThreadLink(thread)
+		if len(animeList.Items) == 0
+			p No activity on the forum.
+		else
+			each thread in threads
+				ThreadLink(thread)
 		
-		.side-note
-			a.ajax(href="/+" + viewUser.Nick + "/threads") View all threads
+			.side-note
+				a.ajax(href="/+" + viewUser.Nick + "/threads") View all threads
 	
