@@ -1,4 +1,4 @@
-component Profile(viewUser *arn.User, user *arn.User)
+component Profile(viewUser *arn.User, user *arn.User, threads []*arn.Thread)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL())
 
@@ -22,10 +22,10 @@ component Profile(viewUser *arn.User, user *arn.User)
 			//- 		Icon("home")
 			//- 		a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
 			
-			//- if user != nil && (user.osu || user.osuDetails) && viewUser.osuDetails && viewUser.osuDetails.pp >= 1000
-			//- 	p.profile-field.osu(title='osu! performance points')
-			//- 		i.fa.fa-trophy
-			//- 		span= parseInt(viewUser.osuDetails.pp) + ' pp'
+			if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 1000
+				p.profile-field.osu(title="osu! performance points")
+					Icon("trophy")
+					span= toString(int(viewUser.Accounts.Osu.PP)) + " pp"
 			
 			//- if viewUser.dataEditCount
 			//- 	p.profile-field.editor-contribution(title="Anime data modifications")
@@ -44,20 +44,17 @@ component Profile(viewUser *arn.User, user *arn.User)
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
 
-	//- .a
-	//- 	h3 Category
-
-	//- .a
-	//- 	h3 Category
-
-	//- .a
-	//- 	h3 Category
-
-	//- .a
-	//- 	h3 Category
-
-	//- .a
-	//- 	h3 Category
-
-	//- .a
-	//- 	h3 Category
+	//- nav.light-button-group
+	//- 	a.light-button(href="#") Bio
+	//- 	a.light-button(href="#") Anime
+	//- 	a.light-button(href="#") Forum
+	
+	.profile-category
+		h3 Forum
+		
+		each thread in threads
+			ThreadLink(thread)
+		
+		.side-note
+			a.ajax(href="/+" + viewUser.Nick + "/threads") View all threads
+	

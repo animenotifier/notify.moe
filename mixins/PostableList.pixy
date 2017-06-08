@@ -1,0 +1,3 @@
+component PostableList(postables []arn.Postable)
+	each post in postables
+		a.ajax(href=post.Link())= post.Title()

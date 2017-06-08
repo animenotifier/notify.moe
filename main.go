@@ -51,6 +51,7 @@ func main() {
 	app.Ajax("/threads/:id", threads.Get)
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/user/:nick", profile.Get)
+	app.Ajax("/user/:nick/threads", threads.GetByUser)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/users", users.Get)
 	app.Ajax("/awards", awards.Get)

@@ -17,6 +17,19 @@ profile-boot-duration = 2s
 
 	overflow hidden
 
+.profile-field
+	text-align center
+
+< 600px
+	.profile
+		vertical
+		align-items center
+
+	.intro-container
+		align-items center
+		margin-top calc(content-padding * 1.5)
+		padding-left content-padding
+
 animation appear
 	0%
 		transform rotateX(90deg)
@@ -48,17 +61,23 @@ animation cover-animation
 
 .profile-image
 	border-radius 3px
-	width 320px !important
-	height 320px !important
 	object-fit cover
+	width 100%
+	height auto
 
 .image-container
-	// ...
+	flex 1
+	max-width 320px
 
 .intro-container
 	vertical
 	align-items flex-start
 	padding content-padding
 	padding-top 0
-	padding-left content-padding * 2
+	padding-left calc(content-padding * 2)
 	max-width 900px
+
+// Categories
+
+.profile-category
+	// padding content-padding

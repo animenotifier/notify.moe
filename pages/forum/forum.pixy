@@ -1,11 +1,13 @@
 component Forum(tag string, threads []*arn.Thread)
 	h2.page-title Forum
 	ForumTags
-	
-	each thread in threads
-		ThreadLink(thread)
+	ThreadList(threads)
 	
 	button#load-more-threads Load more
+
+component ThreadList(threads []*arn.Thread)
+	each thread in threads
+		ThreadLink(thread)
 
 component ThreadLink(thread *arn.Thread)
 	.thread-link(data-sticky=thread.Sticky)

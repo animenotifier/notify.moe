@@ -1,5 +1,5 @@
 component Post(post *arn.Post)
 	Postable(post.ToPostable(), nil, "")
 
-	.thread-source
+	.side-note
 		a.ajax(href=post.Thread().Link())= post.Thread().Title

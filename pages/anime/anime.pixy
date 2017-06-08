@@ -121,6 +121,9 @@ component Anime(anime *arn.Anime)
 	//- 						if providers.Nyaa && providers.Nyaa.episodes !== undefined
 	//- 							span(class=providers.Nyaa.episodes === 0 ? "entry-error" : "entry-ok")= providers.Nyaa.episodes + " eps"
 
+	h3.anime-section-name Reviews
+	p Coming soon.
+
 	h3.anime-section-name Links
 	.light-button-group
 		//- if anime.Links != nil

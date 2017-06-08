@@ -66,8 +66,9 @@
 		vertical
 
 .sources
-	font-size 0.8em
+	font-size 0.8rem
 	opacity 0.5
+	margin-top 0.5rem
 
 .relations
 	horizontal-wrap
