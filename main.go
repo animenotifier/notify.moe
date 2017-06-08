@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
@@ -34,6 +35,20 @@ func main() {
 
 	// HTTPS
 	app.Security.Load("security/fullchain.pem", "security/privkey.pem")
+
+	// Session store
+	app.Sessions.Store = arn.NewAerospikeStore("Session")
+
+	// Session middleware
+	app.Use(func(ctx *aero.Context, next func()) {
+		// Handle the request first
+		next()
+
+		// Update session if it has been modified
+		if ctx.HasSession() && ctx.Session().Modified() {
+			app.Sessions.Store.Set(ctx.Session().ID(), ctx.Session())
+		}
+	})
 
 	// Layout
 	app.Layout = func(ctx *aero.Context, content string) string {

@@ -51,7 +51,9 @@ func EnableGoogleLogin(app *aero.Application) {
 
 	// Auth Callback
 	app.Get("/auth/google/callback", func(ctx *aero.Context) string {
-		if ctx.Session().ID() != ctx.Query("state") {
+		session := ctx.Session()
+
+		if session.ID() != ctx.Query("state") {
 			return ctx.Error(http.StatusUnauthorized, "Authorization not allowed for this session", errors.New("Google login failed: Incorrect state"))
 		}
 
@@ -88,7 +90,7 @@ func EnableGoogleLogin(app *aero.Application) {
 			return ctx.Error(http.StatusForbidden, "Email not registered", err)
 		}
 
-		ctx.Session().Set("userId", user.ID)
+		session.Set("userId", user.ID)
 
 		return ctx.Redirect("/")
 	})
