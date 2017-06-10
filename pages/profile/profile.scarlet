@@ -67,7 +67,7 @@ animation cover-animation
 
 .image-container
 	flex 1
-	max-width 320px
+	max-width 250px
 
 .intro-container
 	vertical
@@ -76,6 +76,9 @@ animation cover-animation
 	padding-top 0
 	padding-left calc(content-padding * 2)
 	max-width 900px
+
+#nick
+	margin-bottom 1rem
 
 // Categories
 

@@ -1,5 +1,5 @@
 component ProfileImage(user *arn.User)
 	if user.Avatar != ""
-		img.profile-image(src=user.Avatar + "?s=640&r=x&d=mm", alt="Profile image")
+		img.profile-image(src=user.Avatar + "?s=500&r=x&d=mm", alt="Profile image")
 	else
 		img.profile-image(src="/images/elements/no-gravatar.svg", alt="Profile image")

@@ -9,8 +9,8 @@ mixin grid-cell
 	height 16vw
 	min-width 90px
 	min-height 127px
-	max-width 200px
-	max-height 282px
+	max-width 142px
+	max-height 201px
 	border-radius 3px
 
 	background-size cover
