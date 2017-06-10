@@ -67,7 +67,7 @@ animation cover-animation
 
 .image-container
 	flex 1
-	max-width 250px
+	max-width 275px
 
 .intro-container
 	vertical
