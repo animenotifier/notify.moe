@@ -10,8 +10,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
-	"github.com/animenotifier/notify.moe/pages/genre"
-	"github.com/animenotifier/notify.moe/pages/genres"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
@@ -59,16 +57,16 @@ func main() {
 	app.Ajax("/", dashboard.Get)
 	app.Ajax("/anime", search.Get)
 	app.Ajax("/anime/:id", anime.Get)
-	app.Ajax("/genres", genres.Get)
-	app.Ajax("/genres/:name", genre.Get)
+	// app.Ajax("/genres", genres.Get)
+	// app.Ajax("/genres/:name", genre.Get)
 	app.Ajax("/forum", forums.Get)
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/threads/:id", threads.Get)
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/user/:nick/threads", threads.GetByUser)
-	app.Ajax("/airing", airing.Get)
 	app.Ajax("/users", users.Get)
+	app.Ajax("/airing", airing.Get)
 	app.Ajax("/awards", awards.Get)
 
 	EnableGoogleLogin(app)

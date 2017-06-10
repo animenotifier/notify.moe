@@ -3,7 +3,7 @@ component Navigation
 		NavigationButton("Dash", "/", "inbox")
 		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
-		NavigationButton("Genres", "/genres", "tags")
+		NavigationButton("Users", "/users", "globe")
 		NavigationButton("Airing", "/airing", "rss")
 		//- NavigationButton("Users", "/users", "globe")
 

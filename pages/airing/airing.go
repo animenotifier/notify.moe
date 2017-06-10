@@ -9,7 +9,7 @@ import (
 // Get ...
 func Get(ctx *aero.Context) string {
 	var cache arn.ListOfIDs
-	err := arn.GetObject("Cache", "airing anime", &cache)
+	err := arn.DB.GetObject("Cache", "airing anime", &cache)
 
 	airing, err := arn.GetAiringAnimeCached()
 

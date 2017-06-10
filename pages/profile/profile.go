@@ -13,21 +13,28 @@ const maxPosts = 5
 func Get(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)
-	user := utils.GetUser(ctx)
 
 	if err != nil {
 		return ctx.Error(404, "User not found", err)
 	}
 
-	threads := viewUser.Threads()
+	var user *arn.User
+	var threads []*arn.Thread
+	var animeList *arn.AnimeList
 
-	arn.SortThreadsByDate(threads)
+	aero.Async(func() {
+		user = utils.GetUser(ctx)
+	}, func() {
+		animeList = viewUser.AnimeList()
+	}, func() {
+		threads = viewUser.Threads()
 
-	if len(threads) > maxPosts {
-		threads = threads[:maxPosts]
-	}
+		arn.SortThreadsByDate(threads)
 
-	animeList := viewUser.AnimeList()
+		if len(threads) > maxPosts {
+			threads = threads[:maxPosts]
+		}
+	})
 
 	return ctx.HTML(components.Profile(viewUser, user, animeList, threads))
 }
