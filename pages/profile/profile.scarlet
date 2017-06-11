@@ -60,7 +60,6 @@ animation cover-animation
 		filter brightness(35%) blur(0)
 
 .profile-image
-	border-radius 3px
 	object-fit cover
 	width 100%
 	height auto
@@ -68,6 +67,9 @@ animation cover-animation
 .image-container
 	flex 1
 	max-width 275px
+	max-height 275px
+	border-radius 3px
+	overflow hidden
 
 .intro-container
 	vertical

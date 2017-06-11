@@ -52,27 +52,27 @@ component Dashboard(posts []*arn.Post)
 		.dashboard-widget
 			h3 Follow
 
-			a.dashboard-event(href="https://discord.gg/0kimAmMCeXGXuzNF")
+			a.dashboard-event(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
 				.dashboard-event-text
 					Icon("microphone")
 					span Discord
 			
-			a.dashboard-event(href="https://www.facebook.com/animenotifier")
+			a.dashboard-event(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
 				.dashboard-event-text
 					Icon("facebook")
 					span Facebook
 			
-			a.dashboard-event(href="https://twitter.com/animenotifier")
+			a.dashboard-event(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
 				.dashboard-event-text
 					Icon("twitter")
 					span Twitter
 			
-			a.dashboard-event(href="https://plus.google.com/+AnimeReleaseNotifierOfficial")
+			a.dashboard-event(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
 				.dashboard-event-text
 					Icon("google-plus")
 					span Google+
 			
-			a.dashboard-event(href="https://github.com/animenotifier/notify.moe")
+			a.dashboard-event(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
 				.dashboard-event-text
 					Icon("github")
 					span GitHub

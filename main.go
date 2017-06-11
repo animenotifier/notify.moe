@@ -19,34 +19,15 @@ import (
 
 var app = aero.New()
 
-// APIKeys ...
-type APIKeys struct {
-	Google struct {
-		ID     string `json:"id"`
-		Secret string `json:"secret"`
-	} `json:"google"`
-}
-
 func main() {
-	// CSS
-	app.SetStyle(components.CSS())
-
 	// HTTPS
 	app.Security.Load("security/fullchain.pem", "security/privkey.pem")
 
+	// CSS
+	app.SetStyle(components.CSS())
+
 	// Session store
 	app.Sessions.Store = arn.NewAerospikeStore("Session")
-
-	// Session middleware
-	app.Use(func(ctx *aero.Context, next func()) {
-		// Handle the request first
-		next()
-
-		// Update session if it has been modified
-		if ctx.HasSession() && ctx.Session().Modified() {
-			app.Sessions.Store.Set(ctx.Session().ID(), ctx.Session())
-		}
-	})
 
 	// Layout
 	app.Layout = func(ctx *aero.Context, content string) string {
@@ -57,8 +38,6 @@ func main() {
 	app.Ajax("/", dashboard.Get)
 	app.Ajax("/anime", search.Get)
 	app.Ajax("/anime/:id", anime.Get)
-	// app.Ajax("/genres", genres.Get)
-	// app.Ajax("/genres/:name", genre.Get)
 	app.Ajax("/forum", forums.Get)
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/threads/:id", threads.Get)
@@ -68,9 +47,25 @@ func main() {
 	app.Ajax("/users", users.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/awards", awards.Get)
+	// app.Ajax("/genres", genres.Get)
+	// app.Ajax("/genres/:name", genre.Get)
 
-	EnableGoogleLogin(app)
+	// Favicon
+	app.Get("/favicon.ico", func(ctx *aero.Context) string {
+		return ctx.File("images/icons/favicon.ico")
+	})
 
+	// Scripts
+	app.Get("/scripts.js", func(ctx *aero.Context) string {
+		return ctx.File("temp/scripts.js")
+	})
+
+	// Web manifest
+	app.Get("/manifest.json", func(ctx *aero.Context) string {
+		return ctx.JSON(app.Config.Manifest)
+	})
+
+	// Cover image
 	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
 		format := ".jpg"
 
@@ -79,21 +74,6 @@ func main() {
 		}
 
 		return ctx.File("images/cover/" + ctx.Get("file") + format)
-	})
-
-	// Favicon
-	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		return ctx.File("images/icons/favicon.ico")
-	})
-
-	// Web manifest
-	app.Get("/manifest.json", func(ctx *aero.Context) string {
-		return ctx.JSON(app.Config.Manifest)
-	})
-
-	// Scripts
-	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		return ctx.File("temp/scripts.js")
 	})
 
 	// For benchmarks

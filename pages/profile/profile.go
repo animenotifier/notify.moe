@@ -22,7 +22,7 @@ func Get(ctx *aero.Context) string {
 	var threads []*arn.Thread
 	var animeList *arn.AnimeList
 
-	aero.Async(func() {
+	aero.Parallel(func() {
 		user = utils.GetUser(ctx)
 	}, func() {
 		animeList = viewUser.AnimeList()

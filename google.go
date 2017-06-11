@@ -12,6 +12,14 @@ import (
 	"golang.org/x/oauth2/google"
 )
 
+// APIKeys ...
+type APIKeys struct {
+	Google struct {
+		ID     string `json:"id"`
+		Secret string `json:"secret"`
+	} `json:"google"`
+}
+
 // GoogleUser is the user data we receive from Google
 type GoogleUser struct {
 	Sub           string `json:"sub"`
