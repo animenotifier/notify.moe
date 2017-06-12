@@ -96,6 +96,23 @@ func main() {
 		return ctx.Error(http.StatusBadRequest, err.Error(), err)
 	})
 
+	// Avatars
+	app.Get("/user/:nick/avatar/small", func(ctx *aero.Context) string {
+		nick := ctx.Get("nick")
+		user, err := arn.GetUserByNick(nick)
+
+		if err != nil {
+			return ctx.Error(http.StatusNotFound, "User not found", err)
+		}
+
+		if ctx.CanUseWebP() {
+			return ctx.File("images/avatars/webp/" + user.ID + ".small.webp")
+		}
+
+		err = errors.New("Your browser doesn't support the WebP image format")
+		return ctx.Error(http.StatusBadRequest, err.Error(), err)
+	})
+
 	// Elements
 	app.Get("/images/elements/:file", func(ctx *aero.Context) string {
 		return ctx.File("images/elements/" + ctx.Get("file"))

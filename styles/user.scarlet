@@ -1,4 +1,5 @@
 .user-image
+	display block
 	width avatar-size
 	height avatar-size
 	border-radius 100%

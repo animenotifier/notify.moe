@@ -1,2 +1,7 @@
 .user-avatars
 	horizontal-wrap
+	justify-content center
+	border-radius 3px
+
+	.user-image
+		margin 0.4rem

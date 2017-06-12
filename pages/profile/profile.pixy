@@ -17,10 +17,10 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					Icon("comment")
 					span.tagline-text No tagline yet.
 			
-			//- if user != nil && viewUser.website
-			//- 	p.profile-field.website
-			//- 		Icon("home")
-			//- 		a(href=viewUser.website.startsWith('http') ? viewUser.website : 'http://' + viewUser.website, target='_blank', rel='nofollow')= viewUser.website.replace('http://', '').replace('https://', '')
+			if viewUser.Website != ""
+				p.profile-field.website
+					Icon("home")
+					a(href=viewUser.WebsiteURL(), target="_blank", rel="nofollow")= viewUser.Website
 			
 			if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 1000
 				p.profile-field.osu(title="osu! performance points")

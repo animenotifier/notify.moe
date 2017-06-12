@@ -1,40 +1,51 @@
 package main
 
 import (
-	"fmt"
-	"image"
 	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
-	"os"
+	"strings"
 
-	"github.com/chai2010/webp"
+	"github.com/animenotifier/arn"
+	"github.com/fatih/color"
+	"github.com/nfnt/resize"
 )
 
-func convertFileToWebP(in string, out string, quality float32) error {
-	f, openErr := os.Open(in)
+func makeWebPAvatar(user *arn.User) {
+	baseName := findOriginalAvatar(user)
 
-	if openErr != nil {
-		return openErr
+	if baseName == "" {
+		return
 	}
 
-	img, format, decodeErr := image.Decode(f)
+	original := avatarsDirectoryOriginal + baseName
+	outFile := avatarsDirectoryWebP + user.ID + ".webp"
 
-	if decodeErr != nil {
-		return decodeErr
+	err := avatarToWebP(original, outFile, 80)
+
+	if err != nil {
+		color.Red(user.Nick + " [WebP]")
+	} else {
+		color.Green(user.Nick + " [WebP]")
+	}
+}
+
+func avatarToWebP(in string, out string, quality float32) error {
+	img, _, loadErr := arn.LoadImage(in)
+
+	if loadErr != nil {
+		return loadErr
 	}
 
-	fmt.Println(format, img.Bounds().Dx(), img.Bounds().Dy())
+	// Big avatar
+	saveErr := arn.SaveWebP(img, out, quality)
 
-	fileOut, writeErr := os.Create(out)
-
-	if writeErr != nil {
-		return writeErr
+	if saveErr != nil {
+		return saveErr
 	}
 
-	encodeErr := webp.Encode(fileOut, img, &webp.Options{
-		Quality: quality,
-	})
-
-	return encodeErr
+	// Small avatar
+	smallImg := resize.Resize(arn.AvatarSmallSize, 0, img, resize.Lanczos3)
+	saveErr = arn.SaveWebP(smallImg, strings.Replace(out, ".webp", ".small.webp", 1), quality)
+	return saveErr
 }
