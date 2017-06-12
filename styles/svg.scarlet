@@ -1,0 +1,5 @@
+.head
+	fill text-color
+
+.body
+	fill text-color

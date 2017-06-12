@@ -76,6 +76,10 @@ func main() {
 		return ctx.File("images/cover/" + ctx.Get("file") + format)
 	})
 
+	app.Get("/images/elements/:file", func(ctx *aero.Context) string {
+		return ctx.File("images/elements/" + ctx.Get("file"))
+	})
+
 	// For benchmarks
 	app.Get("/hello", func(ctx *aero.Context) string {
 		return ctx.Text("Hello World")

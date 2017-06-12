@@ -8,8 +8,8 @@ import (
 func main() {
 	color.Yellow("Updating user references")
 
-	arn.Truncate("NickToUser")
-	arn.Truncate("EmailToUser")
+	arn.DB.DeleteTable("NickToUser")
+	arn.DB.DeleteTable("EmailToUser")
 
 	// Get a stream of all anime
 	allUsers, err := arn.AllUsers()

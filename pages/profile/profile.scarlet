@@ -66,8 +66,8 @@ animation cover-animation
 
 .image-container
 	flex 1
-	max-width 275px
-	max-height 275px
+	max-width 280px
+	max-height 280px
 	border-radius 3px
 	overflow hidden
 
