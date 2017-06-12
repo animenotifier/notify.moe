@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"runtime"
@@ -24,9 +23,14 @@ func main() {
 		go func(workerID int) {
 			for user := range usersQueue {
 				<-rateLimiter.C
-				os.Stdout.WriteString("[" + fmt.Sprint(workerID) + "] ")
-				downloadAvatar(user)
-				makeWebPAvatar(user)
+				if downloadAvatar(user) {
+					makeWebPAvatar(user)
+					user.Avatar = "/+" + user.Nick + "/avatar"
+				} else {
+					user.Avatar = ""
+				}
+
+				user.Save()
 			}
 		}(w)
 	}
@@ -37,7 +41,7 @@ func main() {
 }
 
 func findAvatar(user *arn.User, dir string) string {
-	testExtensions := []string{"", ".jpg", ".png", ".gif", ".webp"}
+	testExtensions := []string{".jpg", ".png", ".gif", ".webp", ""}
 
 	for _, testExt := range testExtensions {
 		if _, err := os.Stat(dir + user.ID + testExt); !os.IsNotExist(err) {
@@ -67,9 +71,9 @@ func makeWebPAvatar(user *arn.User) {
 	}
 }
 
-func downloadAvatar(user *arn.User) {
+func downloadAvatar(user *arn.User) bool {
 	if user.Email == "" {
-		return
+		return false
 	}
 
 	directory := "../../images/avatars/original/"
@@ -81,7 +85,7 @@ func downloadAvatar(user *arn.User) {
 	// Skip existing avatars
 	if findAvatar(user, directory) != "" {
 		color.Yellow(url)
-		return
+		return true
 	}
 
 	// Download
@@ -89,14 +93,14 @@ func downloadAvatar(user *arn.User) {
 
 	if err != nil {
 		color.Red(url)
-		return
+		return false
 	}
 
 	contentType := response.Header.Get("content-type")
 
 	if response.StatusCode != 200 {
 		color.Red(url)
-		return
+		return false
 	}
 
 	color.Green(url)
@@ -119,4 +123,6 @@ func downloadAvatar(user *arn.User) {
 
 	// Write to disk
 	ioutil.WriteFile(fileName, data, 0644)
+
+	return true
 }

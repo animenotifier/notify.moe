@@ -1,6 +1,9 @@
 package main
 
 import (
+	"errors"
+	"net/http"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -76,6 +79,24 @@ func main() {
 		return ctx.File("images/cover/" + ctx.Get("file") + format)
 	})
 
+	// Avatars
+	app.Get("/user/:nick/avatar", func(ctx *aero.Context) string {
+		nick := ctx.Get("nick")
+		user, err := arn.GetUserByNick(nick)
+
+		if err != nil {
+			return ctx.Error(http.StatusNotFound, "User not found", err)
+		}
+
+		if ctx.CanUseWebP() {
+			return ctx.File("images/avatars/webp/" + user.ID + ".webp")
+		}
+
+		err = errors.New("Your browser doesn't support the WebP image format")
+		return ctx.Error(http.StatusBadRequest, err.Error(), err)
+	})
+
+	// Elements
 	app.Get("/images/elements/:file", func(ctx *aero.Context) string {
 		return ctx.File("images/elements/" + ctx.Get("file"))
 	})
