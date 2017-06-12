@@ -46,6 +46,6 @@ func avatarToWebP(in string, out string, quality float32) error {
 
 	// Small avatar
 	smallImg := resize.Resize(arn.AvatarSmallSize, 0, img, resize.Lanczos3)
-	saveErr = arn.SaveWebP(smallImg, strings.Replace(out, ".webp", ".small.webp", 1), quality)
+	saveErr = arn.SaveWebP(smallImg, strings.Replace(out, "webp/", "webp-small/", 1), quality)
 	return saveErr
 }
