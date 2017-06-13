@@ -92,8 +92,17 @@ func main() {
 			return ctx.File("images/avatars/large/webp/" + user.ID + ".webp")
 		}
 
-		err = errors.New("Your browser doesn't support the WebP image format")
-		return ctx.Error(http.StatusBadRequest, err.Error(), err)
+		original := arn.FindFileWithExtension(
+			user.ID,
+			"images/avatars/large/original/",
+			arn.OriginalImageExtensions,
+		)
+
+		if original == "" {
+			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found for user: "+user.ID))
+		}
+
+		return ctx.File(original)
 	})
 
 	// Avatars
@@ -109,8 +118,17 @@ func main() {
 			return ctx.File("images/avatars/small/webp/" + user.ID + ".webp")
 		}
 
-		err = errors.New("Your browser doesn't support the WebP image format")
-		return ctx.Error(http.StatusBadRequest, err.Error(), err)
+		original := arn.FindFileWithExtension(
+			user.ID,
+			"images/avatars/small/original/",
+			arn.OriginalImageExtensions,
+		)
+
+		if original == "" {
+			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found for user: "+user.ID))
+		}
+
+		return ctx.File(original)
 	})
 
 	// Elements
