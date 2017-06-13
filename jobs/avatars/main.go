@@ -16,8 +16,7 @@ import (
 )
 
 const (
-	networkRateLimit = 100 * time.Millisecond
-	webPQuality      = 80
+	webPQuality = 80
 )
 
 var avatarSources []AvatarSource
@@ -30,24 +29,37 @@ func main() {
 
 	// Define the avatar sources
 	avatarSources = []AvatarSource{
-		&Gravatar{},
+		&Gravatar{
+			Rating:         "pg",
+			RequestLimiter: time.NewTicker(250 * time.Millisecond),
+		},
+		&MyAnimeList{
+			RequestLimiter: time.NewTicker(500 * time.Millisecond),
+		},
 	}
 
 	// Define the avatar outputs
 	avatarOutputs = []AvatarOutput{
+		// Original - Large
 		&AvatarOriginalFileOutput{
 			Directory: "images/avatars/large/original/",
 			Size:      arn.AvatarMaxSize,
 		},
+
+		// Original - Small
 		&AvatarOriginalFileOutput{
 			Directory: "images/avatars/small/original/",
 			Size:      arn.AvatarSmallSize,
 		},
+
+		// WebP - Large
 		&AvatarWebPFileOutput{
 			Directory: "images/avatars/large/webp/",
 			Size:      arn.AvatarMaxSize,
 			Quality:   webPQuality,
 		},
+
+		// WebP - Small
 		&AvatarWebPFileOutput{
 			Directory: "images/avatars/small/webp/",
 			Size:      arn.AvatarSmallSize,
@@ -60,7 +72,7 @@ func main() {
 
 	// Worker queue
 	usersQueue := make(chan *arn.User)
-	StartWorkers(usersQueue, networkRateLimit, Work)
+	StartWorkers(usersQueue, Work)
 
 	// We'll send each user to one of the worker threads
 	for user := range users {
@@ -69,13 +81,10 @@ func main() {
 }
 
 // StartWorkers creates multiple workers to handle a user each.
-func StartWorkers(queue chan *arn.User, rateLimit time.Duration, work func(*arn.User)) {
-	rateLimiter := time.NewTicker(rateLimit)
-
+func StartWorkers(queue chan *arn.User, work func(*arn.User)) {
 	for w := 0; w < runtime.NumCPU(); w++ {
 		go func() {
 			for user := range queue {
-				<-rateLimiter.C
 				work(user)
 			}
 		}()
@@ -90,7 +99,7 @@ func Work(user *arn.User) {
 		avatar := source.GetAvatar(user)
 
 		if avatar == nil {
-			fmt.Println(color.RedString("✘"), reflect.TypeOf(source).Elem().Name(), user.Nick)
+			// fmt.Println(color.RedString("✘"), reflect.TypeOf(source).Elem().Name(), user.Nick)
 			continue
 		}
 
@@ -102,7 +111,7 @@ func Work(user *arn.User) {
 			}
 		}
 
-		fmt.Println(color.GreenString("✔"), user.Nick, "|", avatar.Format, avatar.Image.Bounds().Dx(), avatar.Image.Bounds().Dy())
+		fmt.Println(color.GreenString("✔"), reflect.TypeOf(source).Elem().Name(), "|", user.Nick, "|", avatar)
 		user.Avatar = "/+" + user.Nick + "/avatar"
 		break
 	}
