@@ -8,7 +8,6 @@ import (
 	"image/png"
 	"io/ioutil"
 
-	"github.com/animenotifier/arn"
 	"github.com/nfnt/resize"
 )
 
@@ -39,7 +38,15 @@ func (output *AvatarOriginalFileOutput) SaveAvatar(avatar *Avatar) error {
 	img := avatar.Image
 
 	if img.Bounds().Dx() != output.Size {
-		img = resize.Resize(arn.AvatarSmallSize, 0, img, resize.Lanczos3)
+		// Use Lanczos interpolation for downscales
+		interpolation := resize.Lanczos3
+
+		// Use Mitchell interpolation for upscales
+		if output.Size > img.Bounds().Dx() {
+			interpolation = resize.MitchellNetravali
+		}
+
+		img = resize.Resize(uint(output.Size), 0, img, interpolation)
 		buffer := new(bytes.Buffer)
 
 		var err error

@@ -18,7 +18,15 @@ func (output *AvatarWebPFileOutput) SaveAvatar(avatar *Avatar) error {
 
 	// Resize if needed
 	if img.Bounds().Dx() != output.Size {
-		img = resize.Resize(arn.AvatarSmallSize, 0, img, resize.Lanczos3)
+		// Use Lanczos interpolation for downscales
+		interpolation := resize.Lanczos3
+
+		// Use Mitchell interpolation for upscales
+		if output.Size > img.Bounds().Dx() {
+			interpolation = resize.MitchellNetravali
+		}
+
+		img = resize.Resize(arn.AvatarSmallSize, 0, img, interpolation)
 	}
 
 	// Write to file
