@@ -38,6 +38,7 @@ func (source *Gravatar) GetAvatar(user *arn.User) *Avatar {
 	}
 
 	return &Avatar{
+		User:   user,
 		Image:  img,
 		Data:   data,
 		Format: format,
