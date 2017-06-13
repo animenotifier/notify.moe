@@ -89,7 +89,7 @@ func main() {
 		}
 
 		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/webp/" + user.ID + ".webp")
+			return ctx.File("images/avatars/large/webp/" + user.ID + ".webp")
 		}
 
 		err = errors.New("Your browser doesn't support the WebP image format")
@@ -106,7 +106,7 @@ func main() {
 		}
 
 		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/webp-small/" + user.ID + ".webp")
+			return ctx.File("images/avatars/small/webp/" + user.ID + ".webp")
 		}
 
 		err = errors.New("Your browser doesn't support the WebP image format")
