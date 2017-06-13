@@ -55,7 +55,11 @@ func main() {
 
 	// Favicon
 	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		return ctx.File("images/icons/favicon.ico")
+		if ctx.CanUseWebP() {
+			return ctx.File("images/icons/favicon.webp")
+		}
+
+		return ctx.File("images/icons/favicon.png")
 	})
 
 	// Scripts
