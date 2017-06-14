@@ -37,16 +37,8 @@ func (output *AvatarOriginalFileOutput) SaveAvatar(avatar *Avatar) error {
 	data := avatar.Data
 	img := avatar.Image
 
-	if img.Bounds().Dx() != output.Size {
-		// Use Lanczos interpolation for downscales
-		interpolation := resize.Lanczos3
-
-		// Use Mitchell interpolation for upscales
-		if output.Size > img.Bounds().Dx() {
-			interpolation = resize.MitchellNetravali
-		}
-
-		img = resize.Resize(uint(output.Size), 0, img, interpolation)
+	if img.Bounds().Dx() > output.Size {
+		img = resize.Resize(uint(output.Size), 0, img, resize.Lanczos3)
 		buffer := new(bytes.Buffer)
 
 		var err error
