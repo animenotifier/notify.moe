@@ -18,7 +18,7 @@ func (output *AvatarWebPFileOutput) SaveAvatar(avatar *Avatar) error {
 
 	// Resize if needed
 	if img.Bounds().Dx() > output.Size {
-		img = resize.Resize(arn.AvatarSmallSize, 0, img, resize.Lanczos3)
+		img = resize.Resize(uint(output.Size), 0, img, resize.Lanczos3)
 	}
 
 	// Write to file
