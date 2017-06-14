@@ -34,7 +34,7 @@ func main() {
 
 	// Layout
 	app.Layout = func(ctx *aero.Context, content string) string {
-		return components.Layout(content)
+		return components.Layout(app, content)
 	}
 
 	// Ajax routes

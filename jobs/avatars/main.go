@@ -24,6 +24,8 @@ var avatarOutputs []AvatarOutput
 
 // Main
 func main() {
+	color.Yellow("Generating user avatars")
+
 	// Switch to main directory
 	os.Chdir("../../")
 
@@ -78,6 +80,8 @@ func main() {
 	for user := range users {
 		usersQueue <- user
 	}
+
+	color.Green("Finished.")
 }
 
 // StartWorkers creates multiple workers to handle a user each.

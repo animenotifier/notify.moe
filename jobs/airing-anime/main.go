@@ -31,7 +31,7 @@ func main() {
 
 	println(len(cache.IDList))
 
-	saveErr := arn.SetObject("Cache", "airing anime", cache)
+	saveErr := arn.DB.Set("Cache", "airing anime", cache)
 
 	if saveErr != nil {
 		color.Red("Error saving airing anime")
