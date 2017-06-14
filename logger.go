@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -13,7 +12,7 @@ import (
 func init() {
 	err := log.NewChannel("error")
 	err.AddOutput(log.File("logs/error.log"))
-	err.AddOutput(os.Stderr)
+	// err.AddOutput(os.Stderr)
 
 	web := log.NewChannel("web")
 	web.AddOutput(log.File("logs/request.log"))

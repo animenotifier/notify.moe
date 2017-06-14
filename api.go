@@ -1,13 +1,14 @@
 package main
 
-// import (
-// 	"errors"
-// 	"net/http"
+import (
+	"github.com/aerogo/api"
+	"github.com/animenotifier/arn"
+)
 
-// 	"github.com/aerogo/aero"
-// 	"github.com/animenotifier/arn"
-// 	"github.com/animenotifier/notify.moe/utils"
-// )
+func init() {
+	api := api.New("/api/", arn.DB)
+	api.Install(app)
+}
 
 // func init() {
 // 	// app.Get("/all/anime", func(ctx *aero.Context) string {
