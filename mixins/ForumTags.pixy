@@ -1,0 +1,12 @@
+component ForumTags
+	.forum-tags.light-button-group
+		ForumTag("All", "")
+		ForumTag("General", "/general")
+		ForumTag("News", "/news")
+		ForumTag("Anime", "/anime")
+		ForumTag("Updates", "/update")
+		ForumTag("Suggestions", "/suggestion")
+		ForumTag("Bugs", "/bug")
+
+component ForumTag(title string, suffix string)
+	a.light-button.forum-tag.ajax(href="/forum" + suffix)= title

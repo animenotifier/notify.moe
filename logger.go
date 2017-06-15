@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -12,10 +14,10 @@ import (
 func init() {
 	err := log.NewChannel("error")
 	err.AddOutput(log.File("logs/error.log"))
-	// err.AddOutput(os.Stderr)
+	err.AddOutput(os.Stderr)
 
-	web := log.NewChannel("web")
-	web.AddOutput(log.File("logs/request.log"))
+	request := log.NewChannel("request")
+	request.AddOutput(log.File("logs/request.log"))
 
 	app.Use(func(ctx *aero.Context, next func()) {
 		start := time.Now()
@@ -25,11 +27,20 @@ func init() {
 		responseTimeString = strings.Repeat(" ", 8-len(responseTimeString)) + responseTimeString
 
 		// Log every request
-		web.Info(ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+		request.Info(ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+
+		// Log all requests that failed
+		switch ctx.StatusCode {
+		case http.StatusOK, http.StatusFound, http.StatusMovedPermanently, http.StatusPermanentRedirect, http.StatusTemporaryRedirect:
+			// Ok.
+
+		default:
+			err.Error(http.StatusText(ctx.StatusCode), ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+		}
 
 		// Notify us about long requests
-		if responseTime >= 100*time.Millisecond {
-			err.Error("Unusually long response time", ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+		if responseTime >= 200*time.Millisecond {
+			err.Error("Long response time", ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
 		}
 	})
 }

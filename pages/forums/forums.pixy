@@ -1,20 +1,3 @@
 component Forums
 	h2.forum-header Forum
 	ForumTags
-
-component ForumTags
-	.forum-tags.light-button-group
-		ForumCategory("All", "")
-		ForumCategory("General", "/general")
-		ForumCategory("News", "/news")
-		ForumCategory("Anime", "/anime")
-		ForumCategory("Updates", "/update")
-		ForumCategory("Suggestions", "/suggestion")
-		ForumCategory("Bugs", "/bug")
-
-component ForumCategory(title string, suffix string)
-	a.light-button.ajax(href="/forum" + suffix)= title
-	//- a.grid-cell.ajax(href="/forum/" + category)
-	//- 	.grid-text
-	//- 		GridIcon(arn.GetForumIcon(category))
-	//- 		span= title

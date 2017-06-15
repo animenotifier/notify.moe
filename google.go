@@ -12,14 +12,6 @@ import (
 	"golang.org/x/oauth2/google"
 )
 
-// APIKeys ...
-type APIKeys struct {
-	Google struct {
-		ID     string `json:"id"`
-		Secret string `json:"secret"`
-	} `json:"google"`
-}
-
 // GoogleUser is the user data we receive from Google
 type GoogleUser struct {
 	Sub           string `json:"sub"`
@@ -35,13 +27,9 @@ type GoogleUser struct {
 
 // EnableGoogleLogin enables Google login for the app.
 func EnableGoogleLogin(app *aero.Application) {
-	var api APIKeys
-	data, _ := ioutil.ReadFile("security/api-keys.json")
-	json.Unmarshal(data, &api)
-
 	conf := &oauth2.Config{
-		ClientID:     api.Google.ID,
-		ClientSecret: api.Google.Secret,
+		ClientID:     apiKeys.Google.ID,
+		ClientSecret: apiKeys.Google.Secret,
 		RedirectURL:  "https://beta.notify.moe/auth/google/callback",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email",
@@ -75,6 +63,7 @@ func EnableGoogleLogin(app *aero.Application) {
 		// Construct the OAuth client
 		client := conf.Client(oauth2.NoContext, token)
 
+		// Fetch user data from Google
 		resp, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
 
 		if err != nil {
@@ -84,6 +73,7 @@ func EnableGoogleLogin(app *aero.Application) {
 		defer resp.Body.Close()
 		data, _ := ioutil.ReadAll(resp.Body)
 
+		// Construct a GoogleUser object
 		var googleUser GoogleUser
 		err = json.Unmarshal(data, &googleUser)
 
@@ -91,6 +81,7 @@ func EnableGoogleLogin(app *aero.Application) {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
 		}
 
+		// Try to find an existing user by the associated e-mail address
 		email := googleUser.Email
 		user, getErr := arn.GetUserByEmail(email)
 
@@ -98,8 +89,10 @@ func EnableGoogleLogin(app *aero.Application) {
 			return ctx.Error(http.StatusForbidden, "Email not registered", err)
 		}
 
+		// Login
 		session.Set("userId", user.ID)
 
+		// Redirect back to frontpage
 		return ctx.Redirect("/")
 	})
 }

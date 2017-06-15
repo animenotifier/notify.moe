@@ -1,6 +1,6 @@
 component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
 	.profile
-		img.profile-cover(src=viewUser.CoverImageURL())
+		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
 
 		.image-container
 			ProfileImage(viewUser)

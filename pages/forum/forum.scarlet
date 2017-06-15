@@ -1,2 +1,7 @@
+.forum-tag
+	&.active
+		color white
+		background-color text-color
+
 #load-more-threads
 	margin-top 1rem
