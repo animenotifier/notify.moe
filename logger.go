@@ -12,11 +12,11 @@ import (
 )
 
 func init() {
-	err := log.NewChannel("error")
+	err := log.NewLog()
 	err.AddOutput(log.File("logs/error.log"))
 	err.AddOutput(os.Stderr)
 
-	request := log.NewChannel("request")
+	request := log.NewLog()
 	request.AddOutput(log.File("logs/request.log"))
 
 	app.Use(func(ctx *aero.Context, next func()) {

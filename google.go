@@ -81,18 +81,22 @@ func EnableGoogleLogin(app *aero.Application) {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
 		}
 
-		// Try to find an existing user by the associated e-mail address
-		email := googleUser.Email
-		user, getErr := arn.GetUserByEmail(email)
+		// Try to find an existing user by the Google user ID
+		user, getErr := arn.GetUserFromTable("GoogleToUser", googleUser.Sub)
 
-		if getErr != nil {
-			return ctx.Error(http.StatusForbidden, "Email not registered", err)
+		if getErr == nil && user != nil {
+			session.Set("userId", user.ID)
+			return ctx.Redirect("/")
 		}
 
-		// Login
-		session.Set("userId", user.ID)
+		// Try to find an existing user by the associated e-mail address
+		user, getErr = arn.GetUserByEmail(googleUser.Email)
 
-		// Redirect back to frontpage
-		return ctx.Redirect("/")
+		if getErr == nil && user != nil {
+			session.Set("userId", user.ID)
+			return ctx.Redirect("/")
+		}
+
+		return ctx.Error(http.StatusForbidden, "Account does not exist", err)
 	})
 }
