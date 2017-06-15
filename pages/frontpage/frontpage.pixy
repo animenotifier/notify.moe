@@ -1,0 +1,8 @@
+component FrontPage
+	p Anime Notifier 4.0 is currently under construction.
+	p
+		a(href="https://paypal.me/blitzprog", rel="noopener") Support the development
+	
+	.login-buttons
+		a.login-button(href="/auth/google")
+			img.login-button-image(src="/images/login/google", alt="Google Login", title="Login with your Google account")

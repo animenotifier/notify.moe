@@ -10,6 +10,7 @@ func main() {
 
 	arn.DB.DeleteTable("NickToUser")
 	arn.DB.DeleteTable("EmailToUser")
+	arn.DB.DeleteTable("GoogleToUser")
 
 	// Get a stream of all anime
 	allUsers, err := arn.AllUsers()
@@ -28,6 +29,13 @@ func main() {
 
 		if user.Email != "" {
 			user.SetEmail(user.Email)
+		}
+
+		if user.Accounts.Google.ID != "" {
+			arn.DB.Set("GoogleToUser", user.Accounts.Google.ID, &arn.GoogleToUser{
+				ID:     user.Accounts.Google.ID,
+				UserID: user.ID,
+			})
 		}
 	}
 

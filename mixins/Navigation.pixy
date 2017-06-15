@@ -1,14 +1,34 @@
-component Navigation
+component Navigation(user *arn.User)
+	if user == nil
+		LoggedOutMenu
+	else
+		LoggedInMenu
+
+component LoggedOutMenu
 	nav#navigation
 		NavigationButton("Dash", "/", "inbox")
 		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
 		NavigationButton("Users", "/users", "globe")
 		NavigationButton("Airing", "/airing", "rss")
-		//- NavigationButton("Users", "/users", "globe")
+
+component LoggedInMenu
+	nav#navigation
+		NavigationButton("Dash", "/", "inbox")
+		NavigationButton("Anime", "/anime", "television")
+		NavigationButton("Forum", "/forum", "comment")
+		NavigationButton("Users", "/users", "globe")
+		NavigationButton("Airing", "/airing", "rss")
+		NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
 
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.ajax(href=target)
+		.navigation-button
+			i(class="fa fa-" + icon)
+			span.navigation-text= name
+
+component NavigationButtonNoAJAX(name string, target string, icon string)
+	a.navigation-link(href=target)
 		.navigation-button
 			i(class="fa fa-" + icon)
 			span.navigation-text= name

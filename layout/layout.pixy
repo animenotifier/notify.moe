@@ -1,4 +1,4 @@
-component Layout(app *aero.Application, content string)
+component Layout(app *aero.Application, user *arn.User, content string)
 	html(lang="en")
 		head
 			title= app.Config.Title
@@ -7,7 +7,7 @@ component Layout(app *aero.Application, content string)
 		body
 			#container
 				#header
-					Navigation
+					Navigation(user)
 				#content-container
 					main#content.fade!= content
 			

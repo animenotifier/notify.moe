@@ -8,6 +8,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/awards"
@@ -34,9 +35,7 @@ func main() {
 	app.Sessions.Store = arn.NewAerospikeStore("Session")
 
 	// Layout
-	app.Layout = func(ctx *aero.Context, content string) string {
-		return components.Layout(app, content)
-	}
+	app.Layout = layout.Render
 
 	// Production or Development mode
 	host, _ := os.Hostname()
@@ -64,11 +63,7 @@ func main() {
 
 	// Favicon
 	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		if ctx.CanUseWebP() {
-			return ctx.File("images/icons/favicon.webp")
-		}
-
-		return ctx.File("images/icons/favicon.png")
+		return ctx.Image("images/icons/favicon", ".png")
 	})
 
 	// Scripts
@@ -83,13 +78,12 @@ func main() {
 
 	// Cover image
 	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
-		format := ".jpg"
+		return ctx.Image("images/cover/"+ctx.Get("file"), ".jpg")
+	})
 
-		if ctx.CanUseWebP() {
-			format = ".webp"
-		}
-
-		return ctx.File("images/cover/" + ctx.Get("file") + format)
+	// Login buttons
+	app.Get("/images/login/:file", func(ctx *aero.Context) string {
+		return ctx.File("images/login/" + ctx.Get("file") + ".png")
 	})
 
 	// Avatars
