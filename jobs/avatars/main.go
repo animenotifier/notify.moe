@@ -11,6 +11,7 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 
+	"github.com/aerogo/log"
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
@@ -21,6 +22,7 @@ const (
 
 var avatarSources []AvatarSource
 var avatarOutputs []AvatarOutput
+var avatarLog = log.NewChannel("avatar")
 
 // Main
 func main() {
@@ -28,6 +30,9 @@ func main() {
 
 	// Switch to main directory
 	os.Chdir("../../")
+
+	// Log
+	avatarLog.AddOutput(log.File("logs/avatar.log"))
 
 	// Define the avatar sources
 	avatarSources = []AvatarSource{

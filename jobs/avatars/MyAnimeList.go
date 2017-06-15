@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"regexp"
 	"time"
 
@@ -21,6 +22,7 @@ func (source *MyAnimeList) GetAvatar(user *arn.User) *Avatar {
 
 	// If the user has no username we can't get an avatar.
 	if malNick == "" {
+		avatarLog.Error("MAL", user.Nick, "No MAL nick")
 		return nil
 	}
 
@@ -28,7 +30,13 @@ func (source *MyAnimeList) GetAvatar(user *arn.User) *Avatar {
 	userInfoURL := "https://myanimelist.net/malappinfo.php?u=" + malNick
 	response, xml, networkErr := gorequest.New().Get(userInfoURL).End()
 
-	if networkErr != nil || response.StatusCode != 200 {
+	if networkErr != nil {
+		avatarLog.Error("MAL", user.Nick, userInfoURL, networkErr)
+		return nil
+	}
+
+	if response.StatusCode != http.StatusOK {
+		avatarLog.Error("MAL", user.Nick, userInfoURL, response.StatusCode)
 		return nil
 	}
 
@@ -36,6 +44,7 @@ func (source *MyAnimeList) GetAvatar(user *arn.User) *Avatar {
 	matches := userIDRegex.FindStringSubmatch(xml)
 
 	if matches == nil || len(matches) < 2 {
+		avatarLog.Error("MAL", user.Nick, "Could not find user ID")
 		return nil
 	}
 

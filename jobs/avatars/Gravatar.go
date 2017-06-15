@@ -18,6 +18,7 @@ type Gravatar struct {
 func (source *Gravatar) GetAvatar(user *arn.User) *Avatar {
 	// If the user has no Email registered we can't get a Gravatar.
 	if user.Email == "" {
+		avatarLog.Error("GRA", user.Nick, "No Email")
 		return nil
 	}
 

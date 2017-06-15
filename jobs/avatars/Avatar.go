@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"image"
+	"net/http"
 
 	"github.com/animenotifier/arn"
 	"github.com/parnurzeal/gorequest"
@@ -27,7 +28,13 @@ func AvatarFromURL(url string, user *arn.User) *Avatar {
 	// Download
 	response, data, networkErr := gorequest.New().Get(url).EndBytes()
 
-	if networkErr != nil || response.StatusCode != 200 {
+	if networkErr != nil {
+		avatarLog.Error("NET", user.Nick, url, networkErr)
+		return nil
+	}
+
+	if response.StatusCode != http.StatusOK {
+		avatarLog.Error("NET", user.Nick, url, response.StatusCode)
 		return nil
 	}
 
@@ -35,6 +42,7 @@ func AvatarFromURL(url string, user *arn.User) *Avatar {
 	img, format, decodeErr := image.Decode(bytes.NewReader(data))
 
 	if decodeErr != nil {
+		avatarLog.Error("IMG", user.Nick, url, decodeErr)
 		return nil
 	}
 
