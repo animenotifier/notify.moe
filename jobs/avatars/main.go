@@ -39,10 +39,10 @@ func main() {
 	avatarSources = []AvatarSource{
 		&Gravatar{
 			Rating:         "pg",
-			RequestLimiter: time.NewTicker(200 * time.Millisecond),
+			RequestLimiter: time.NewTicker(250 * time.Millisecond),
 		},
 		&MyAnimeList{
-			RequestLimiter: time.NewTicker(200 * time.Millisecond),
+			RequestLimiter: time.NewTicker(250 * time.Millisecond),
 		},
 	}
 
