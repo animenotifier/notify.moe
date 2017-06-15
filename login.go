@@ -2,8 +2,9 @@ package main
 
 import "github.com/aerogo/aero"
 
-func init() {
-	// Authentication
+// EnableLogin ...
+func EnableLogin(app *aero.Application) {
+	// Google
 	EnableGoogleLogin(app)
 
 	// Session middleware

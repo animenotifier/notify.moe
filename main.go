@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"net/http"
+	"os"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -35,6 +36,14 @@ func main() {
 	// Layout
 	app.Layout = func(ctx *aero.Context, content string) string {
 		return components.Layout(app, content)
+	}
+
+	// Production or Development mode
+	host, _ := os.Hostname()
+	isProduction := host != "home"
+
+	if !isProduction {
+		app.Config.Domain = "beta.notify.moe"
 	}
 
 	// Ajax routes
@@ -144,6 +153,9 @@ func main() {
 	app.Get("/hello", func(ctx *aero.Context) string {
 		return ctx.Text("Hello World")
 	})
+
+	// Authentication
+	EnableLogin(app)
 
 	// Let's go
 	app.Run()

@@ -30,7 +30,7 @@ func EnableGoogleLogin(app *aero.Application) {
 	conf := &oauth2.Config{
 		ClientID:     apiKeys.Google.ID,
 		ClientSecret: apiKeys.Google.Secret,
-		RedirectURL:  "https://beta.notify.moe/auth/google/callback",
+		RedirectURL:  "https://" + app.Config.Domain + "/auth/google/callback",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email",
 		},
