@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"image"
 	"net/http"
+	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/parnurzeal/gorequest"
@@ -28,11 +29,19 @@ func AvatarFromURL(url string, user *arn.User) *Avatar {
 	// Download
 	response, data, networkErr := gorequest.New().Get(url).EndBytes()
 
+	// Retry after 5 seconds if service unavailable
+	if response.StatusCode == http.StatusServiceUnavailable {
+		time.Sleep(5 * time.Second)
+		response, data, networkErr = gorequest.New().Get(url).EndBytes()
+	}
+
+	// Network errors
 	if networkErr != nil {
 		avatarLog.Error("NET", user.Nick, url, networkErr)
 		return nil
 	}
 
+	// Bad status codes
 	if response.StatusCode != http.StatusOK {
 		avatarLog.Error("NET", user.Nick, url, response.StatusCode)
 		return nil
