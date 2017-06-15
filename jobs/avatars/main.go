@@ -33,6 +33,7 @@ func main() {
 
 	// Log
 	avatarLog.AddOutput(log.File("logs/avatar.log"))
+	defer avatarLog.Flush()
 
 	// Define the avatar sources
 	avatarSources = []AvatarSource{
@@ -75,14 +76,19 @@ func main() {
 	}
 
 	// Stream of all users
-	users, _ := arn.AllUsers()
+	users, _ := arn.FilterUsers(func(user *arn.User) bool {
+		return true
+	})
+
+	// Log user count
+	println(len(users), "users")
 
 	// Worker queue
 	usersQueue := make(chan *arn.User)
 	StartWorkers(usersQueue, Work)
 
 	// We'll send each user to one of the worker threads
-	for user := range users {
+	for _, user := range users {
 		usersQueue <- user
 	}
 
