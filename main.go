@@ -1,14 +1,12 @@
 package main
 
 import (
-	"errors"
-	"net/http"
-	"os"
-
 	"github.com/aerogo/aero"
+	"github.com/aerogo/api"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/layout"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/awards"
@@ -20,6 +18,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/threads"
 	"github.com/animenotifier/notify.moe/pages/users"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 var app = aero.New()
@@ -37,14 +36,6 @@ func main() {
 	// Layout
 	app.Layout = layout.Render
 
-	// Production or Development mode
-	host, _ := os.Hostname()
-	isProduction := host != "home"
-
-	if !isProduction {
-		app.Config.Domain = "beta.notify.moe"
-	}
-
 	// Ajax routes
 	app.Ajax("/", dashboard.Get)
 	app.Ajax("/anime", search.Get)
@@ -61,97 +52,18 @@ func main() {
 	// app.Ajax("/genres", genres.Get)
 	// app.Ajax("/genres/:name", genre.Get)
 
-	// Favicon
-	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		return ctx.Image("images/icons/favicon", ".png")
-	})
+	// Middleware
+	app.Use(middleware.RequestLog())
+	app.Use(middleware.SaveSession())
 
-	// Scripts
-	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		return ctx.File("temp/scripts.js")
-	})
+	// API
+	api := api.New("/api/", arn.DB)
+	api.Install(app)
 
-	// Web manifest
-	app.Get("/manifest.json", func(ctx *aero.Context) string {
-		return ctx.JSON(app.Config.Manifest)
-	})
-
-	// SVG icons
-	app.Get("/icons/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/icons/svg/" + ctx.Get("file") + ".svg")
-	})
-
-	// Cover image
-	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
-		return ctx.Image("images/cover/"+ctx.Get("file"), ".jpg")
-	})
-
-	// Login buttons
-	app.Get("/images/login/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/login/" + ctx.Get("file") + ".png")
-	})
-
-	// Avatars
-	app.Get("/user/:nick/avatar", func(ctx *aero.Context) string {
-		nick := ctx.Get("nick")
-		user, err := arn.GetUserByNick(nick)
-
-		if err != nil {
-			return ctx.Error(http.StatusNotFound, "User not found", err)
-		}
-
-		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/large/webp/" + user.ID + ".webp")
-		}
-
-		original := arn.FindFileWithExtension(
-			user.ID,
-			"images/avatars/large/original/",
-			arn.OriginalImageExtensions,
-		)
-
-		if original == "" {
-			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found for user: "+user.ID))
-		}
-
-		return ctx.File(original)
-	})
-
-	// Avatars
-	app.Get("/user/:nick/avatar/small", func(ctx *aero.Context) string {
-		nick := ctx.Get("nick")
-		user, err := arn.GetUserByNick(nick)
-
-		if err != nil {
-			return ctx.Error(http.StatusNotFound, "User not found", err)
-		}
-
-		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/small/webp/" + user.ID + ".webp")
-		}
-
-		original := arn.FindFileWithExtension(
-			user.ID,
-			"images/avatars/small/original/",
-			arn.OriginalImageExtensions,
-		)
-
-		if original == "" {
-			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found for user: "+user.ID))
-		}
-
-		return ctx.File(original)
-	})
-
-	// Elements
-	app.Get("/images/elements/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/elements/" + ctx.Get("file"))
-	})
-
-	// For benchmarks
-	app.Get("/hello", func(ctx *aero.Context) string {
-		return ctx.Text("Hello World")
-	})
+	// Domain
+	if utils.IsDevelopment() {
+		app.Config.Domain = "beta.notify.moe"
+	}
 
 	// Authentication
 	EnableLogin(app)

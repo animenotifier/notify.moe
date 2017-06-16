@@ -1,4 +1,4 @@
-package main
+package middleware
 
 import (
 	"net/http"
@@ -11,7 +11,8 @@ import (
 	"github.com/aerogo/log"
 )
 
-func init() {
+// RequestLog logs every request into logs/request.log.
+func RequestLog() aero.Middleware {
 	err := log.NewLog()
 	err.AddOutput(log.File("logs/error.log"))
 	err.AddOutput(os.Stderr)
@@ -19,7 +20,7 @@ func init() {
 	request := log.NewLog()
 	request.AddOutput(log.File("logs/request.log"))
 
-	app.Use(func(ctx *aero.Context, next func()) {
+	return func(ctx *aero.Context, next func()) {
 		start := time.Now()
 		next()
 		responseTime := time.Since(start)
@@ -42,5 +43,5 @@ func init() {
 		if responseTime >= 200*time.Millisecond {
 			err.Error("Long response time", ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
 		}
-	})
+	}
 }
