@@ -31,9 +31,13 @@
 		text-shadow 1px 1px 3px rgba(4, 4, 4, 0.1)
 
 .navigation-button
+	horizontal
 	font-size 1em
 	line-height 1em
 	padding 0.75em 1em
+
+	.icon
+		margin-right 0
 
 .navigation-text
 	display none
@@ -45,6 +49,9 @@
 > 930px
 	.navigation-button
 		font-size 1.1em
+
+		.icon
+			margin-right 0.5em
 	
 	#navigation
 		justify-content flex-start

@@ -1,3 +1,10 @@
-.fa + span,
-.fa + a
-	margin-left 0.5em
+.icon
+	width 1em
+	height 1em
+	margin-right 0.5em
+	vertical-align text-bottom
+	fill currentColor
+
+.raw-icon
+	fill currentColor
+	//

@@ -6,7 +6,6 @@
 	],
 	"styles": [
 		"libs/reset",
-		"libs/font-awesome",
 		"include/config",
 		"include/mixins",
 		"base",

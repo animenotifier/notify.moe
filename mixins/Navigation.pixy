@@ -24,11 +24,11 @@ component LoggedInMenu
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.ajax(href=target)
 		.navigation-button
-			i(class="fa fa-" + icon)
+			Icon(icon)
 			span.navigation-text= name
 
 component NavigationButtonNoAJAX(name string, target string, icon string)
 	a.navigation-link(href=target)
 		.navigation-button
-			i(class="fa fa-" + icon)
+			Icon(icon)
 			span.navigation-text= name

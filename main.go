@@ -76,6 +76,11 @@ func main() {
 		return ctx.JSON(app.Config.Manifest)
 	})
 
+	// SVG icons
+	app.Get("/icons/:file", func(ctx *aero.Context) string {
+		return ctx.File("images/icons/svg/" + ctx.Get("file") + ".svg")
+	})
+
 	// Cover image
 	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
 		return ctx.Image("images/cover/"+ctx.Get("file"), ".jpg")

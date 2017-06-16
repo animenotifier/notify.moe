@@ -3,6 +3,7 @@
 	justify-content flex-start
 
 .light-button
+	horizontal
 	display inline-block
 	padding 0.5rem 1rem
 	border-radius 3px

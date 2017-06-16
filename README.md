@@ -13,7 +13,7 @@
 namespace arn {
     storage-engine device {
         file /home/YOUR_NAME/YOUR_PATH/notify.moe/db/arn-dev.dat
-        filesize 50M
+        filesize 60M
         data-in-memory true
 
         # Maximum object size. 128K is ideal for SSDs
@@ -30,11 +30,6 @@ namespace arn {
 ### Hosts
 * Add `127.0.0.1 arn-db` to `/etc/hosts`
 * Add `127.0.0.1 beta.notify.moe` to `/etc/hosts`
-* Run these commands to forward ports 80/443 to 4000/4001:
-```sh
-sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 4000
-sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 4001
-```
 
 ### Download repository
 * `go get github.com/animenotifier/notify.moe`
@@ -57,8 +52,11 @@ sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 40
 }
 ```
 
+### Build all
+* Run `make all`
+
 ### Fetch data
-* Build & run `jobs/sync-anime/sync-anime` from this repository to fetch anime data
+* Run `jobs/sync-anime/sync-anime` from this repository to fetch anime data
 
 ### Install pack & run
 * `go install github.com/aerogo/pack`
