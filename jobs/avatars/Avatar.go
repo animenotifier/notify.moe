@@ -11,6 +11,8 @@ import (
 	"github.com/parnurzeal/gorequest"
 )
 
+var netLog = avatarLog.NewChannel("NET")
+
 // Avatar represents a single image and the name of the format.
 type Avatar struct {
 	User   *arn.User
@@ -37,13 +39,13 @@ func AvatarFromURL(url string, user *arn.User) *Avatar {
 
 	// Network errors
 	if networkErr != nil {
-		avatarLog.Error("NET", user.Nick, url, networkErr)
+		netLog.Error(user.Nick, url, networkErr)
 		return nil
 	}
 
 	// Bad status codes
 	if response.StatusCode != http.StatusOK {
-		avatarLog.Error("NET", user.Nick, url, response.StatusCode)
+		netLog.Error(user.Nick, url, response.StatusCode)
 		return nil
 	}
 
@@ -51,7 +53,7 @@ func AvatarFromURL(url string, user *arn.User) *Avatar {
 	img, format, decodeErr := image.Decode(bytes.NewReader(data))
 
 	if decodeErr != nil {
-		avatarLog.Error("IMG", user.Nick, url, decodeErr)
+		netLog.Error(user.Nick, url, decodeErr)
 		return nil
 	}
 

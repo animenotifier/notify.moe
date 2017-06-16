@@ -8,6 +8,8 @@ import (
 	gravatar "github.com/ungerik/go-gravatar"
 )
 
+var gravatarLog = avatarLog.NewChannel("GRA")
+
 // Gravatar - https://gravatar.com/
 type Gravatar struct {
 	Rating         string
@@ -18,7 +20,7 @@ type Gravatar struct {
 func (source *Gravatar) GetAvatar(user *arn.User) *Avatar {
 	// If the user has no Email registered we can't get a Gravatar.
 	if user.Email == "" {
-		avatarLog.Error("GRA", user.Nick, "No Email")
+		gravatarLog.Error(user.Nick, "No Email")
 		return nil
 	}
 

@@ -22,7 +22,7 @@ const (
 
 var avatarSources []AvatarSource
 var avatarOutputs []AvatarOutput
-var avatarLog = log.NewChannel("avatar")
+var avatarLog = log.NewLog()
 
 // Main
 func main() {

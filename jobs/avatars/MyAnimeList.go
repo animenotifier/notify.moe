@@ -10,6 +10,7 @@ import (
 )
 
 var userIDRegex = regexp.MustCompile(`<user_id>(\d+)<\/user_id>`)
+var malLog = avatarLog.NewChannel("MAL")
 
 // MyAnimeList - https://myanimelist.net/
 type MyAnimeList struct {
@@ -22,7 +23,7 @@ func (source *MyAnimeList) GetAvatar(user *arn.User) *Avatar {
 
 	// If the user has no username we can't get an avatar.
 	if malNick == "" {
-		avatarLog.Error("MAL", user.Nick, "No MAL nick")
+		malLog.Error(user.Nick, "No MAL nick")
 		return nil
 	}
 
@@ -31,12 +32,12 @@ func (source *MyAnimeList) GetAvatar(user *arn.User) *Avatar {
 	response, xml, networkErr := gorequest.New().Get(userInfoURL).End()
 
 	if networkErr != nil {
-		avatarLog.Error("MAL", user.Nick, userInfoURL, networkErr)
+		malLog.Error(user.Nick, userInfoURL, networkErr)
 		return nil
 	}
 
 	if response.StatusCode != http.StatusOK {
-		avatarLog.Error("MAL", user.Nick, userInfoURL, response.StatusCode)
+		malLog.Error(user.Nick, userInfoURL, response.StatusCode)
 		return nil
 	}
 
@@ -44,7 +45,7 @@ func (source *MyAnimeList) GetAvatar(user *arn.User) *Avatar {
 	matches := userIDRegex.FindStringSubmatch(xml)
 
 	if matches == nil || len(matches) < 2 {
-		avatarLog.Error("MAL", user.Nick, "Could not find user ID")
+		malLog.Error(user.Nick, "Could not find user ID")
 		return nil
 	}
 
