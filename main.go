@@ -45,7 +45,7 @@ func main() {
 	app.Ajax("/threads/:id", threads.Get)
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/user/:nick", profile.Get)
-	app.Ajax("/user/:nick/threads", threads.GetByUser)
+	app.Ajax("/user/:nick/threads", profile.GetThreadsByUser)
 	app.Ajax("/users", users.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/awards", awards.Get)
@@ -53,8 +53,8 @@ func main() {
 	// app.Ajax("/genres/:name", genre.Get)
 
 	// Middleware
-	app.Use(middleware.RequestLog())
-	app.Use(middleware.SaveSession())
+	app.Use(middleware.Log())
+	app.Use(middleware.Session())
 
 	// API
 	api := api.New("/api/", arn.DB)

@@ -4,7 +4,7 @@ import (
 	"github.com/aerogo/aero"
 )
 
-// Get ...
+// Get search page.
 func Get(ctx *aero.Context) string {
 	// titleCount := 0
 	// animeCount := 0

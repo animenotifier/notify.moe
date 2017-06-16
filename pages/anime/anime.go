@@ -6,7 +6,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get ...
+// Get anime page.
 func Get(ctx *aero.Context) string {
 	id := ctx.Get("id")
 	anime, err := arn.GetAnime(id)

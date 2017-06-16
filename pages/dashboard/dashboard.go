@@ -10,7 +10,7 @@ import (
 
 const maxPosts = 5
 
-// Get ...
+// Get dashboard.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 

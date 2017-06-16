@@ -9,7 +9,7 @@ import (
 
 const maxPosts = 5
 
-// Get ...
+// Get user profile page.
 func Get(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)

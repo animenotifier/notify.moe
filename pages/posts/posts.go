@@ -6,7 +6,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get ...
+// Get post.
 func Get(ctx *aero.Context) string {
 	id := ctx.Get("id")
 	post, err := arn.GetPost(id)

@@ -2,8 +2,8 @@ package middleware
 
 import "github.com/aerogo/aero"
 
-// SaveSession saves an existing session if it has been modified.
-func SaveSession() aero.Middleware {
+// Session middleware saves an existing session if it has been modified.
+func Session() aero.Middleware {
 	return func(ctx *aero.Context, next func()) {
 		// Handle the request first
 		next()

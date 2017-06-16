@@ -6,7 +6,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get ...
+// Get thread.
 func Get(ctx *aero.Context) string {
 	id := ctx.Get("id")
 	thread, err := arn.GetThread(id)

@@ -11,8 +11,8 @@ import (
 	"github.com/aerogo/log"
 )
 
-// RequestLog logs every request into logs/request.log.
-func RequestLog() aero.Middleware {
+// Log middleware logs every request into logs/request.log.
+func Log() aero.Middleware {
 	err := log.NewLog()
 	err.AddOutput(log.File("logs/error.log"))
 	err.AddOutput(os.Stderr)

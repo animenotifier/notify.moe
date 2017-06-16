@@ -1,4 +1,4 @@
-package threads
+package profile
 
 import (
 	"net/http"
@@ -8,8 +8,8 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// GetByUser ...
-func GetByUser(ctx *aero.Context) string {
+// GetThreadsByUser shows all forum threads of a particular user.
+func GetThreadsByUser(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
 	user, err := arn.GetUserByNick(nick)
 

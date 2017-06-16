@@ -8,7 +8,7 @@ import (
 
 const threadsPerPage = 20
 
-// Get ...
+// Get forum category.
 func Get(ctx *aero.Context) string {
 	tag := ctx.Get("tag")
 	threads, _ := arn.GetThreadsByTag(tag)

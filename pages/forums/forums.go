@@ -5,7 +5,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/forum"
 )
 
-// Get ...
+// Get forums page.
 func Get(ctx *aero.Context) string {
 	return forum.Get(ctx)
 }
