@@ -1,4 +1,4 @@
-package main
+package auth
 
 import (
 	"encoding/json"
@@ -25,8 +25,8 @@ type GoogleUser struct {
 	Gender        string `json:"gender"`
 }
 
-// EnableGoogleLogin enables Google login for the app.
-func EnableGoogleLogin(app *aero.Application) {
+// InstallGoogleAuth enables Google login for the app.
+func InstallGoogleAuth(app *aero.Application) {
 	conf := &oauth2.Config{
 		ClientID:     apiKeys.Google.ID,
 		ClientSecret: apiKeys.Google.Secret,

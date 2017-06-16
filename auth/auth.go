@@ -1,11 +1,11 @@
-package main
+package auth
 
 import "github.com/aerogo/aero"
 
-// EnableLogin ...
-func EnableLogin(app *aero.Application) {
+// Install ...
+func Install(app *aero.Application) {
 	// Google
-	EnableGoogleLogin(app)
+	InstallGoogleAuth(app)
 
 	// Logout
 	app.Get("/logout", func(ctx *aero.Context) string {
