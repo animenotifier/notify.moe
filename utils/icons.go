@@ -5,14 +5,24 @@ import (
 	"strings"
 )
 
+var svgIcons = make(map[string]string)
+
+func init() {
+	files, _ := ioutil.ReadDir("images/icons/svg/")
+
+	for _, file := range files {
+		name := strings.Replace(file.Name(), ".svg", "", 1)
+		data, _ := ioutil.ReadFile("images/icons/svg/" + name + ".svg")
+		svgIcons[name] = strings.Replace(string(data), "<svg ", "<svg class='icon' ", 1)
+	}
+}
+
 // Icon ...
 func Icon(name string) string {
-	data, _ := ioutil.ReadFile("images/icons/svg/" + name + ".svg")
-	return strings.Replace(string(data), "<svg ", "<svg class='icon' ", 1)
+	return svgIcons[name]
 }
 
 // RawIcon ...
 func RawIcon(name string) string {
-	data, _ := ioutil.ReadFile("images/icons/svg/" + name + ".svg")
-	return strings.Replace(string(data), "<svg ", "<svg class='raw-icon' ", 1)
+	return strings.Replace(svgIcons[name], "class='icon'", "class='raw-icon'", 1)
 }
