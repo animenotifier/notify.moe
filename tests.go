@@ -60,7 +60,27 @@ func init() {
 		"/api/user/4J6qpK1ve",
 	})
 
-	// Others
+	app.Test("/api/emailtouser/:id", []string{
+		"/api/emailtouser/e.urbach@gmail.com",
+	})
+
+	app.Test("/api/googletouser/:id", []string{
+		"/api/googletouser/106530160120373282283",
+	})
+
+	app.Test("/api/nicktouser/:id", []string{
+		"/api/nicktouser/Akyoto",
+	})
+
+	// Images
+	app.Test("/icons/:file", []string{
+		"/icons/inbox",
+	})
+
+	app.Test("/images/login/:file", []string{
+		"/images/login/google",
+	})
+
 	app.Test("/images/cover/:file", []string{
 		"/images/cover/default",
 	})
