@@ -20,6 +20,8 @@ bench:
 versions:
 	@go version
 	@asd --version
+assets:
+	@pack
 depslist:
 	$(GOCMD) list -f {{.Deps}} | sed -e 's/\[//g' -e 's/\]//g' | tr " " "\n"
 ports:
