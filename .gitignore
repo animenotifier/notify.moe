@@ -43,8 +43,5 @@ debug
 # Database
 /db
 
-# Certificates
-/security
-
 # Log files
 *.log

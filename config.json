@@ -5,9 +5,9 @@
 		"Ubuntu"
 	],
 	"styles": [
-		"libs/reset",
 		"include/config",
 		"include/mixins",
+		"reset",
 		"base",
 		"typography",
 		"layout",
