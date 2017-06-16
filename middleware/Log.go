@@ -11,14 +11,14 @@ import (
 	"github.com/aerogo/log"
 )
 
-// Log middleware logs every request into logs/request.log.
+// Log middleware logs every request into logs/request.log and errors into logs/error.log.
 func Log() aero.Middleware {
+	request := log.NewLog()
+	request.AddOutput(log.File("logs/request.log"))
+
 	err := log.NewLog()
 	err.AddOutput(log.File("logs/error.log"))
 	err.AddOutput(os.Stderr)
-
-	request := log.NewLog()
-	request.AddOutput(log.File("logs/request.log"))
 
 	return func(ctx *aero.Context, next func()) {
 		start := time.Now()
