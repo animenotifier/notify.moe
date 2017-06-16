@@ -3,7 +3,7 @@
 ## Installation
 
 ### Prerequisites
-* Install [Go](https://golang.org/dl/) (1.8.3 or higher)
+* Install [Go](https://golang.org/dl/) (1.9 or higher)
 * Install [Aerospike](http://www.aerospike.com/download) (3.14.0 or higher)
 
 ### Database
