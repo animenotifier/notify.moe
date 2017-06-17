@@ -28,7 +28,7 @@ component NavigationButton(name string, target string, icon string)
 			span.navigation-text= name
 
 component NavigationButtonNoAJAX(name string, target string, icon string)
-	a.navigation-link(href=target)
+	a.navigation-link(href=target, aria-label=name)
 		.navigation-button
 			Icon(icon)
 			span.navigation-text= name
