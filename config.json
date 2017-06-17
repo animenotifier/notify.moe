@@ -33,8 +33,9 @@
 	],
 	"manifest": {
 		"short_name": "notify.moe",
+		"gcm_sender_id": "941298467524",
 		"theme_color": "#f8a582",
-		"gcm_sender_id": "941298467524"
+		"background_color": "#202020"
 	},
 	"ports": {
 		"http": 4000,

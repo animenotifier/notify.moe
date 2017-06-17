@@ -3,6 +3,7 @@ component Layout(app *aero.Application, user *arn.User, content string)
 		head
 			title= app.Config.Title
 			meta(name="viewport", content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+			meta(name="theme-color", content=app.Config.Manifest.ThemeColor)
 			link(rel="manifest", href="/manifest.json")
 		body
 			#container
