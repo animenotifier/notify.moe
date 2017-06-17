@@ -51,13 +51,13 @@ func InstallGoogleAuth(app *aero.Application) {
 	// Auth Callback
 	app.Get("/auth/google/callback", func(ctx *aero.Context) string {
 		if !ctx.HasSession() {
-			return ctx.Error(http.StatusUnauthorized, "Session does not exist", errors.New("Google login failed: Session does not exist"))
+			return ctx.Error(http.StatusUnauthorized, "Google login failed", errors.New("Session does not exist"))
 		}
 
 		session := ctx.Session()
 
 		if session.ID() != ctx.Query("state") {
-			return ctx.Error(http.StatusUnauthorized, "Authorization not allowed for this session", errors.New("Google login failed: Incorrect state"))
+			return ctx.Error(http.StatusUnauthorized, "Google login failed", errors.New("Incorrect state"))
 		}
 
 		// Handle the exchange code to initiate a transport
