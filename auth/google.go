@@ -27,12 +27,15 @@ type GoogleUser struct {
 
 // InstallGoogleAuth enables Google login for the app.
 func InstallGoogleAuth(app *aero.Application) {
-	conf := &oauth2.Config{
+	config := &oauth2.Config{
 		ClientID:     apiKeys.Google.ID,
 		ClientSecret: apiKeys.Google.Secret,
 		RedirectURL:  "https://" + app.Config.Domain + "/auth/google/callback",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email",
+			"https://www.googleapis.com/auth/userinfo.profile",
+			// "https://www.googleapis.com/auth/plus.me",
+			// "https://www.googleapis.com/auth/plus.login",
 		},
 		Endpoint: google.Endpoint,
 	}
@@ -40,7 +43,7 @@ func InstallGoogleAuth(app *aero.Application) {
 	// Auth
 	app.Get("/auth/google", func(ctx *aero.Context) string {
 		sessionID := ctx.Session().ID()
-		url := conf.AuthCodeURL(sessionID)
+		url := config.AuthCodeURL(sessionID)
 		ctx.Redirect(url)
 		return ""
 	})
@@ -54,14 +57,14 @@ func InstallGoogleAuth(app *aero.Application) {
 		}
 
 		// Handle the exchange code to initiate a transport
-		token, err := conf.Exchange(oauth2.NoContext, ctx.Query("code"))
+		token, err := config.Exchange(oauth2.NoContext, ctx.Query("code"))
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Could not obtain OAuth token", err)
 		}
 
 		// Construct the OAuth client
-		client := conf.Client(oauth2.NoContext, token)
+		client := config.Client(oauth2.NoContext, token)
 
 		// Fetch user data from Google
 		resp, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
