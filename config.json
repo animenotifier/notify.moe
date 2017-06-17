@@ -28,14 +28,25 @@
 	"static": [
 		"images"
 	],
-	"icons": [
-		"images/characters/arn-waifu.png"
-	],
 	"manifest": {
 		"short_name": "notify.moe",
 		"gcm_sender_id": "941298467524",
 		"theme_color": "#f8a582",
-		"background_color": "#ffffff"
+		"background_color": "#ffffff",
+		"icons": [
+			{
+				"src": "images/brand/64",
+				"sizes": "64x64"
+			},
+			{
+				"src": "images/brand/300",
+				"sizes": "300x300"
+			},
+			{
+				"src": "images/brand/600",
+				"sizes": "600x600"
+			}
+		]
 	},
 	"ports": {
 		"http": 4000,

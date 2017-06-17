@@ -15,7 +15,7 @@ func init() {
 	})
 
 	// Favicon
-	app.Get("/favicon/:size", func(ctx *aero.Context) string {
+	app.Get("/images/brand/:size", func(ctx *aero.Context) string {
 		return ctx.TryWebP("images/brand/"+ctx.Get("size"), ".png")
 	})
 
