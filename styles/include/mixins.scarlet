@@ -54,7 +54,7 @@ mixin saturate-up
 mixin scale-up
 	transform scale(1)
 	:hover
-		transform scale(1.08)
+		transform scale(1.06)
 
 mixin shadow-up
 	box-shadow shadow-light

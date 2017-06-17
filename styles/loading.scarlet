@@ -1,0 +1,41 @@
+duration = 0.8s
+size = 24px
+
+#loading-animation
+	position fixed
+	bottom 1.15rem
+	right calc(1.15rem + 17px)
+	pointer-events none
+
+.sk-cube-grid
+	horizontal-wrap
+	width size
+	height size
+	transform rotateZ(0deg)
+	animation sk-rotate duration infinite linear
+
+.sk-cube
+	width 33.3%
+	height 33.3%
+	background-color main-color
+	opacity 0.7
+	border-radius 100%
+	animation sk-pulse duration infinite linear
+
+.sk-cube-center
+	opacity 1.0
+
+.hide
+	visibility hidden
+
+animation sk-rotate
+	0%
+		transform rotateZ(0deg)
+	100%
+		transform rotateZ(360deg)
+
+animation sk-pulse
+	0%, 100%
+		transform scale3D(0.4, 0.4, 0.4)
+	50%
+		transform scale3D(0.9, 0.9, 0.9)

@@ -2,7 +2,7 @@
 	horizontal-wrap
 
 .anime-list-item
-	padding 0.25rem
+	margin 0.25rem
 	// padding calc(content-padding / 4) calc(content-padding / 2)
 	// margin 0.25rem 0
 	// position relative

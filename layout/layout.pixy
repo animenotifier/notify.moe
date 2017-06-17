@@ -16,12 +16,12 @@ component Layout(app *aero.Application, user *arn.User, content string)
 
 component LoadingAnimation
 	#loading-animation.sk-cube-grid.fade
-		.sk-cube.sk-cube1
-		.sk-cube.sk-cube2
-		.sk-cube.sk-cube3
-		.sk-cube.sk-cube4
-		.sk-cube.sk-cube5
-		.sk-cube.sk-cube6
-		.sk-cube.sk-cube7
-		.sk-cube.sk-cube8
-		.sk-cube.sk-cube9
+		.sk-cube.hide
+		.sk-cube
+		.sk-cube.hide
+		.sk-cube
+		.sk-cube.sk-cube-center
+		.sk-cube
+		.sk-cube.hide
+		.sk-cube
+		.sk-cube.hide
