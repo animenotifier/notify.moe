@@ -9,7 +9,10 @@ func Install(app *aero.Application) {
 
 	// Logout
 	app.Get("/logout", func(ctx *aero.Context) string {
-		ctx.Session().Set("userId", nil)
+		if ctx.HasSession() {
+			ctx.Session().Set("userId", nil)
+		}
+
 		return ctx.Redirect("/")
 	})
 }

@@ -31,8 +31,9 @@ func main() {
 	// CSS
 	app.SetStyle(components.CSS())
 
-	// Session store
-	app.Sessions.Store = arn.NewAerospikeStore("Session")
+	// Sessions
+	app.Sessions.Duration = 3600 * 24
+	app.Sessions.Store = arn.NewAerospikeStore("Session", app.Sessions.Duration)
 
 	// Layout
 	app.Layout = layout.Render
