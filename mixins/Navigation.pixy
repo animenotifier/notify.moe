@@ -22,7 +22,7 @@ component LoggedInMenu
 		NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
 
 component NavigationButton(name string, target string, icon string)
-	a.navigation-link.ajax(href=target)
+	a.navigation-link.ajax(href=target, aria-label=name)
 		.navigation-button
 			Icon(icon)
 			span.navigation-text= name
