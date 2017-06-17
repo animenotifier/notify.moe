@@ -35,7 +35,7 @@
 		"short_name": "notify.moe",
 		"gcm_sender_id": "941298467524",
 		"theme_color": "#f8a582",
-		"background_color": "#202020"
+		"background_color": "#ffffff"
 	},
 	"ports": {
 		"http": 4000,

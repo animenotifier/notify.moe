@@ -11,7 +11,12 @@ import (
 func init() {
 	// Favicon
 	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		return ctx.Image("images/icons/favicon", ".png")
+		return ctx.TryWebP("images/brand/64", ".png")
+	})
+
+	// Favicon
+	app.Get("/favicon/:size", func(ctx *aero.Context) string {
+		return ctx.TryWebP("images/brand/"+ctx.Get("size"), ".png")
 	})
 
 	// Scripts
@@ -31,7 +36,7 @@ func init() {
 
 	// Cover image
 	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
-		return ctx.Image("images/cover/"+ctx.Get("file"), ".jpg")
+		return ctx.TryWebP("images/cover/"+ctx.Get("file"), ".jpg")
 	})
 
 	// Login buttons
