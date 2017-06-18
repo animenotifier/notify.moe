@@ -104,6 +104,6 @@ func InstallGoogleAuth(app *aero.Application) {
 			return ctx.Redirect("/")
 		}
 
-		return ctx.Error(http.StatusForbidden, "Account does not exist", err)
+		return ctx.Error(http.StatusForbidden, "Account does not exist", getErr)
 	})
 }
