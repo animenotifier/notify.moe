@@ -86,7 +86,7 @@ func init() {
 	})
 
 	app.Test("/images/elements/:file", []string{
-		"/images/elements/no-gravatar.svg",
+		"/images/elements/no-avatar.svg",
 	})
 
 	// Disable
