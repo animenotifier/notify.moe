@@ -8,7 +8,7 @@ component Settings(user *arn.User)
 
 			InputText("nick", user.Nick, "Username", "Your username on notify.moe")
 			InputText("tagline", user.Tagline, "Tagline", "Text that appears below your username")
-			InputText("website", user.Website, "website", "Your homepage")
+			InputText("website", user.Website, "Website", "Your homepage")
 
 		.widget
 			h3.widget-title
