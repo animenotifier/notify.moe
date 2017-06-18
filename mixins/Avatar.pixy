@@ -3,8 +3,8 @@ component Avatar(user *arn.User)
 		AvatarNoLink(user)
 
 component AvatarNoLink(user *arn.User)
-	if user.Avatar != ""
-		img.user-image(src=user.Avatar + "/small", alt=user.Nick)
+	if user.HasAvatar()
+		img.user-image(src=user.SmallAvatar(), alt=user.Nick)
 	else
 		SVGAvatar
 

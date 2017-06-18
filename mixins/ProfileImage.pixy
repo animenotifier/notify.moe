@@ -1,6 +1,6 @@
 component ProfileImage(user *arn.User)
-	if user.Avatar != ""
-		img.profile-image(src=user.Avatar, alt="Profile image")
+	if user.HasAvatar()
+		img.profile-image(src=user.LargeAvatar(), alt="Profile image")
 	else
 		svg.profile-image(viewBox="0 0 50 50", alt="Profile image")
 			circle.head(cx="25", cy="19", r="10")
