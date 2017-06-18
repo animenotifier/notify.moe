@@ -1,0 +1,23 @@
+table
+	width 100%
+
+tr
+	border-bottom-width 1px
+	border-bottom-style solid
+	border-bottom-color rgba(0, 0, 0, 0.05)
+	:last-child
+		border none
+
+td
+	padding 0.5rem 1rem
+
+th
+	font-size 1.2em
+	text-align left
+	padding 0.5rem 1rem
+	font-weight bold
+
+tbody
+	tr
+		:hover
+			background-color rgba(0, 0, 0, 0.03)

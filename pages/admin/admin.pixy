@@ -1,6 +1,31 @@
-component Admin(user *arn.User)
-	h2.page-title Admin
+component Admin(user *arn.User, types []string)
+	h2.page-title Admin Panel
+
+	h3 Server
 	table
-		tr
-			td Go version:
-			td= runtime.Version()
+		//- thead
+		//- 	tr
+		//- 		th Metric
+		//- 		th Value
+		tbody
+			tr
+				td CPU count:
+				td= runtime.NumCPU()
+			tr
+				td Goroutines:
+				td= runtime.NumGoroutine()
+			tr
+				td Go version:
+				td= runtime.Version()
+	
+	h3 Types
+	table
+		//- thead
+		//- 	tr
+		//- 		th Table
+		tbody
+			each typeName in types
+				tr
+					td= typeName
+					td
+						a(href="/api/" + strings.ToLower(typeName) + "/")= "/api/" + strings.ToLower(typeName) + "/"
