@@ -1,0 +1,3 @@
+component Settings(user *arn.User)
+	h2.page-title Settings
+	input(type="text", value=user.Nick)

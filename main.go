@@ -8,6 +8,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/middleware"
+	"github.com/animenotifier/notify.moe/pages/admin"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/awards"
@@ -17,6 +18,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
+	"github.com/animenotifier/notify.moe/pages/settings"
 	"github.com/animenotifier/notify.moe/pages/threads"
 	"github.com/animenotifier/notify.moe/pages/users"
 	"github.com/animenotifier/notify.moe/utils"
@@ -48,6 +50,8 @@ func main() {
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/user/:nick/threads", profile.GetThreadsByUser)
+	app.Ajax("/settings", settings.Get)
+	app.Ajax("/admin", admin.Get)
 	app.Ajax("/users", users.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/awards", awards.Get)

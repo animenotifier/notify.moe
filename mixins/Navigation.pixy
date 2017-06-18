@@ -2,7 +2,7 @@ component Navigation(user *arn.User)
 	if user == nil
 		LoggedOutMenu
 	else
-		LoggedInMenu
+		LoggedInMenu(user)
 
 component LoggedOutMenu
 	nav#navigation
@@ -12,17 +12,30 @@ component LoggedOutMenu
 		NavigationButton("Users", "/users", "globe")
 		NavigationButton("Airing", "/airing", "rss")
 
-component LoggedInMenu
+component LoggedInMenu(user *arn.User)
 	nav#navigation
 		NavigationButton("Dash", "/", "inbox")
 		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
-		NavigationButton("Users", "/users", "globe")
 		NavigationButton("Airing", "/airing", "rss")
-		NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
+		NavigationButton("Settings", "/settings", "cog")
+
+		.extra-navigation
+			ExtraNavigationButton("Users", "/users", "globe")
+			
+			if user.Role == "admin"
+				ExtraNavigationButton("Admin", "/admin", "wrench")
+			
+			NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
 
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.ajax(href=target, aria-label=name)
+		.navigation-button
+			Icon(icon)
+			span.navigation-text= name
+
+component ExtraNavigationButton(name string, target string, icon string)
+	a.navigation-link.ajax(href=target, aria-label=name, title=name)
 		.navigation-button
 			Icon(icon)
 			span.navigation-text= name

@@ -39,8 +39,9 @@ func Log() aero.Middleware {
 			err.Error(http.StatusText(ctx.StatusCode), ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
 		}
 
-		// Notify us about long requests
-		if responseTime >= 200*time.Millisecond {
+		// Notify us about long requests.
+		// However ignore requests under /auth/ because those depend on 3rd party servers.
+		if responseTime >= 200*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") {
 			err.Error("Long response time", ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
 		}
 	}

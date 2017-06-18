@@ -1,0 +1,6 @@
+component Admin(user *arn.User)
+	h2.page-title Admin
+	table
+		tr
+			td Go version:
+			td= runtime.Version()

@@ -42,6 +42,16 @@
 .navigation-text
 	display none
 
+.extra-navigation
+	display none
+
+	.navigation-text
+		display none
+
+	.navigation-button
+		.icon
+			margin-right 0
+
 > 330px
 	.navigation-button
 		font-size 1.3em
@@ -58,6 +68,11 @@
 	
 	.navigation-text
 		display inline-block
+	
+	.extra-navigation
+		horizontal
+		justify-content flex-end
+		flex 1
 
 < 400px height
 	#navigation
@@ -67,3 +82,6 @@
 	
 	#container
 		horizontal
+
+	.extra-navigation
+		display none

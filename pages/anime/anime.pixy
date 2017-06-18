@@ -127,9 +127,6 @@ component Anime(anime *arn.Anime)
 	h3.anime-section-name Tracks
 	p Coming soon.
 
-	h3.anime-section-name Artwork
-	p Coming soon.
-
 	h3.anime-section-name Reviews
 	p Coming soon.
 
