@@ -1,15 +1,15 @@
-.dashboard
+.widgets
 	horizontal-wrap
 	justify-content space-around
 
-.dashboard-widget
+.widget
 	vertical
 	align-items center
 	width 100%
 	padding 0.25rem
 	max-width 600px
 
-.dashboard-event
+.widget-element
 	vertical-wrap
 	ui-element
 	margin-bottom 1rem
@@ -17,14 +17,16 @@
 	width 100%
 	max-width 700px
 
-.dashboard-event-author
-	horizontal
-	justify-content center
-	width 100%
-
-.dashboard-event-text
+.widget-element-text
 	horizontal
 	clip-long-text
 	justify-content flex-start
 	align-items center
 	width 100%
+
+.widget-input
+	vertical
+	width 100%
+
+.widget-title
+	//

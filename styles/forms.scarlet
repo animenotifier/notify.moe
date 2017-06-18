@@ -8,13 +8,15 @@ input, textarea, button, select
 
 input, textarea
 	border ui-border
-	background-color white
+	background white
 	box-shadow none
+
 	:focus
 		color black
-		border 1px solid main-color
+		border 1px solid main-color !important
 		// TODO: Replace with alpha(main-color, 20%) function
 		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
+	
 	:disabled
 		ui-disabled
 
@@ -31,6 +33,11 @@ button, select
 	// 	color rgb(0, 0, 0)
 	// 	// box-shadow 0 0 6px alpha(mainColor, 20%)
 	// 	border 1px solid main-color
+
+label
+	width 100%
+	padding 0.5rem 0
+	text-align left
 
 // input[type="submit"]:hover,
 // button:hover

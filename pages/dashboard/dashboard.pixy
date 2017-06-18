@@ -1,78 +1,76 @@
 component Dashboard(posts []*arn.Post)
 	h2.page-title Dash
 	
-	.dashboard
-		.dashboard-widget
-			h3 Schedule
+	.widgets
+		.widget
+			h3.widget-title Schedule
 
 			for i := 1; i <= 5; i++
-				.dashboard-event
-					.dashboard-event-text
+				.widget-element
+					.widget-element-text
 						Icon("calendar-o")
 						span ...
 		
-		.dashboard-widget
-			h3 Forums
+		.widget
+			h3.widget-title Forums
 
 			each post in posts
-				a.dashboard-event.ajax(href=post.Link())
-					//- .dashboard-event-author
-					//- 	AvatarNoLink(post.Author())
-					.dashboard-event-text
+				a.widget-element.ajax(href=post.Link())
+					.widget-element-text
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
 		
-		.dashboard-widget
-			h3 Groups
+		.widget
+			h3.widget-title Groups
 
 			for i := 1; i <= 5; i++
-				.dashboard-event
-					.dashboard-event-text
+				.widget-element
+					.widget-element-text
 						Icon("group")
 						span ...
 
-		.dashboard-widget
-			h3 Messages
+		.widget
+			h3.widget-title Messages
 
 			for i := 1; i <= 5; i++
-				.dashboard-event
-					.dashboard-event-text
+				.widget-element
+					.widget-element-text
 						Icon("comment")
 						span ...
 		
-		.dashboard-widget
-			h3 Contacts
+		.widget
+			h3.widget-title Contacts
 
 			for i := 1; i <= 5; i++
-				.dashboard-event
-					.dashboard-event-text
+				.widget-element
+					.widget-element-text
 						Icon("address-card")
 						span ...
 		
-		.dashboard-widget
-			h3 Follow
+		.widget
+			h3.widget-title Follow
 
-			a.dashboard-event(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
-				.dashboard-event-text
+			a.widget-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
+				.widget-element-text
 					Icon("microphone")
 					span Discord
 			
-			a.dashboard-event(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
-				.dashboard-event-text
+			a.widget-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
+				.widget-element-text
 					Icon("facebook")
 					span Facebook
 			
-			a.dashboard-event(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
-				.dashboard-event-text
+			a.widget-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
+				.widget-element-text
 					Icon("twitter")
 					span Twitter
 			
-			a.dashboard-event(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
-				.dashboard-event-text
+			a.widget-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
+				.widget-element-text
 					Icon("google-plus")
 					span Google+
 			
-			a.dashboard-event(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
-				.dashboard-event-text
+			a.widget-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
+				.widget-element-text
 					Icon("github")
 					span GitHub

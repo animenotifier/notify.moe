@@ -1,3 +1,25 @@
 component Settings(user *arn.User)
 	h2.page-title Settings
-	input(type="text", value=user.Nick)
+	.widgets
+		.widget
+			h3.widget-title
+				Icon("user")
+				span Personal
+
+			InputText("nick", user.Nick, "Username", "Your username on notify.moe")
+			InputText("tagline", user.Tagline, "Tagline", "Text that appears below your username")
+			InputText("website", user.Website, "website", "Your homepage")
+
+		.widget
+			h3.widget-title
+				Icon("cubes")
+				span Accounts
+
+			InputText("accounts.anilist.nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
+			InputText("accounts.myanimelist.nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
+			InputText("accounts.kitsu.nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
+
+component InputText(id string, value string, label string, placeholder string)
+	.widget-input
+		label(for=id)= label + ":"
+		input.widget-element(id=id, type="text", value=value, placeholder=placeholder)
