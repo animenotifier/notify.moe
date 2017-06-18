@@ -10,14 +10,6 @@ func init() {
 		"/+Akyoto/threads",
 	})
 
-	app.Test("/user/:nick/avatar", []string{
-		"/+Akyoto/avatar",
-	})
-
-	app.Test("/user/:nick/avatar/small", []string{
-		"/+Akyoto/avatar/small",
-	})
-
 	// Pages
 	app.Test("/anime/:id", []string{
 		"/anime/1",
@@ -73,8 +65,16 @@ func init() {
 	})
 
 	// Images
-	app.Test("/icons/:file", []string{
-		"/icons/inbox",
+	app.Test("/images/avatars/large/:file", []string{
+		"/images/avatars/large/4J6qpK1ve.webp",
+	})
+
+	app.Test("/images/avatars/small/:file", []string{
+		"/images/avatars/small/4J6qpK1ve.webp",
+	})
+
+	app.Test("/images/brand/:file", []string{
+		"/images/brand/64.webp",
 	})
 
 	app.Test("/images/login/:file", []string{

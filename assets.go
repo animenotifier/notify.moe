@@ -31,11 +31,6 @@ func init() {
 		return ctx.TryWebP("images/brand/"+file, ".png")
 	})
 
-	// SVG icons
-	app.Get("/icons/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/icons/svg/" + ctx.Get("file"))
-	})
-
 	// Cover image
 	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
 		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
