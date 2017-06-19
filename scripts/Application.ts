@@ -16,6 +16,12 @@ export class Application {
 		this.fadeOutClass = "fade-out"
 	}
 
+	run() {
+		this.ajaxify()
+		this.markActiveLinks()
+		this.loading.classList.add(this.fadeOutClass)
+	}
+
 	find(id: string): HTMLElement {
 		return document.getElementById(id)
 	}
@@ -48,14 +54,7 @@ export class Application {
 	
 		this.currentURL = url
 
-		// function sleep(ms) {
-		// 	return new Promise(resolve => setTimeout(resolve, ms))
-		// }
-
-		// sleep(500).then(() => {
-			
-		// })
-
+		// Start sending a network request
 		let request = this.get("/_" + url)
 
 		let onTransitionEnd = e => {
@@ -81,6 +80,9 @@ export class Application {
 				// Fade animations
 				this.content.classList.remove(this.fadeOutClass)
 				this.loading.classList.add(this.fadeOutClass)
+
+				// Send DOMContentLoaded Event
+				this.emit("DOMContentLoaded")
 			})
 		}
 
@@ -136,19 +138,13 @@ export class Application {
 				e.preventDefault()
 				e.stopPropagation()
 
-				if(!url || url === window.location.pathname)
+				if(!url || url === self.currentURL)
 					return
-
+				
 				// Load requested page
 				self.load(url, true)
 			}
 		}
-	}
-
-	run() {
-		this.ajaxify()
-		this.markActiveLinks()
-		this.loading.classList.add(this.fadeOutClass)
 	}
 
 	scrollToTop() {
@@ -157,5 +153,12 @@ export class Application {
 		while(parent = parent.parentElement) {
 			parent.scrollTop = 0
 		}
+	}
+
+	emit(eventName: string) {
+		document.dispatchEvent(new Event(eventName, {
+			"bubbles": true,
+			"cancelable": true
+		}))
 	}
 }

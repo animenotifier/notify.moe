@@ -4,11 +4,8 @@ import { AnimeNotifier } from "./AnimeNotifier"
 let app = new Application()
 let arn = new AnimeNotifier(app)
 
-document.onreadystatechange = function() {
-	if(document.readyState === "interactive") {
-		arn.run()
-	}
-}
+document.addEventListener("DOMContentLoaded", arn.onContentLoaded.bind(arn))
+document.addEventListener("readystatechange", arn.onReadyStateChange.bind(arn))
 
 window.onpopstate = e => {
 	if(e.state)
