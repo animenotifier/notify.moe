@@ -4,7 +4,6 @@ input, textarea, button, select
 	padding 0.4em 0.8em
 	border-radius 3px
 	color text-color
-	default-transition
 
 input, textarea
 	border ui-border
