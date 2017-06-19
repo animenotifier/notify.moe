@@ -5,6 +5,6 @@
 		"moduleResolution": "node",
 		"baseUrl": "./"
 	},
-	"compileOnSave": true,
+	"compileOnSave": false,
 	"buildOnSave": false
 }

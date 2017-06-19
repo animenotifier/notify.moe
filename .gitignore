@@ -45,3 +45,6 @@ debug
 
 # Log files
 *.log
+
+# JS files
+*.js

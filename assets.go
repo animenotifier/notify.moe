@@ -7,6 +7,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components"
 )
 
 func init() {
@@ -17,7 +18,8 @@ func init() {
 
 	// Scripts
 	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		return ctx.File("temp/scripts.js")
+		ctx.SetResponseHeader("Content-Type", "application/javascript")
+		return components.JS()
 	})
 
 	// Favicon

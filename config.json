@@ -25,9 +25,9 @@
 		"fade",
 		"mobile"
 	],
-	"static": [
-		"images"
-	],
+	"scripts": {
+		"main": "main"
+	},
 	"manifest": {
 		"short_name": "notify.moe",
 		"gcm_sender_id": "941298467524",
