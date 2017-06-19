@@ -3,8 +3,8 @@
 		"target": "es6",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"baseUrl": "./"
+		"baseUrl": "."
 	},
-	"compileOnSave": false,
+	"compileOnSave": true,
 	"buildOnSave": false
 }

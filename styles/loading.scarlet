@@ -1,7 +1,7 @@
 loading-anim-duration = 0.8s
 loading-anim-size = 24px
 
-#loading-animation
+#loading
 	position fixed
 	bottom 1.15rem
 	right calc(1.15rem + 17px)

@@ -1,0 +1,9 @@
+{
+	"tsimporter.emitSemicolon": false,
+	"tsimporter.doubleQuotes": true,
+	"files.exclude": {
+		"**/*.js": {
+			"when": "$(basename).ts"
+		}
+	}
+}
