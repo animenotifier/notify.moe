@@ -1,0 +1,14 @@
+component InputText(id string, value string, label string, placeholder string)
+	.widget-input
+		label(for=id)= label + ":"
+		input.widget-element(id=id, type="text", value=value, placeholder=placeholder)
+
+component InputTextArea(id string, value string, label string, placeholder string)
+	.widget-input
+		label(for=id)= label + ":"
+		textarea.widget-element(id=id, value=value, placeholder=placeholder)
+
+component InputNumber(id string, value int, label string, placeholder string, min int, max int)
+	.widget-input
+		label(for=id)= label + ":"
+		input.widget-element(id=id, type="number", value=value, min=min, max=max, placeholder=placeholder)

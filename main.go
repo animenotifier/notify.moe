@@ -11,6 +11,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/admin"
 	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
+	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/awards"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
@@ -50,6 +51,7 @@ func main() {
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/user/:nick/threads", profile.GetThreadsByUser)
+	app.Ajax("/user/:nick/animelist/:id", animelistitem.Get)
 	app.Ajax("/settings", settings.Get)
 	app.Ajax("/admin", admin.Get)
 	app.Ajax("/users", users.Get)

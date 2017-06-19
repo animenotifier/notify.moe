@@ -20,11 +20,21 @@ input, textarea
 	:disabled
 		ui-disabled
 
-button, select
+button, .button
 	ui-element
-	max-width 600px
-	padding 0.6rem 1rem
-	margin 0 auto
+	font-size 1rem
+	line-height 1rem
+	padding 0.75rem 1rem
+	color link-color
+
+	:hover
+		cursor pointer
+		color white
+		background-color link-hover-color
+
+	:active
+		transform translateY(3px)
+	
 	// box-shadow 0 0 2px white, 0 -2px 5px rgba(0, 0, 0, 0.08) inset
 	// :active
 	// 	background-color black
@@ -33,6 +43,11 @@ button, select
 	// 	color rgb(0, 0, 0)
 	// 	// box-shadow 0 0 6px alpha(mainColor, 20%)
 	// 	border 1px solid main-color
+
+// select
+// 	ui-element
+// 	font-size 1rem
+// 	padding 0.5em 1em
 
 label
 	width 100%

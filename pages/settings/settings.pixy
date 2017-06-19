@@ -18,8 +18,3 @@ component Settings(user *arn.User)
 			InputText("accounts.anilist.nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
 			InputText("accounts.myanimelist.nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
 			InputText("accounts.kitsu.nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
-
-component InputText(id string, value string, label string, placeholder string)
-	.widget-input
-		label(for=id)= label + ":"
-		input.widget-element(id=id, type="text", value=value, placeholder=placeholder)

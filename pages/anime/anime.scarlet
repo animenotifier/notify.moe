@@ -39,12 +39,14 @@
 .anime-alternative-title
 	font-size 0.9em
 	margin-bottom 0.5rem
-	color rgba(60, 60, 60, 0.5) !important
+	a
+		color rgba(60, 60, 60, 0.5) !important
 
 .anime-actions
 	horizontal
 	justify-content center
 	margin content-padding 0
+	z-index 10
 
 > 900px
 	.anime-actions

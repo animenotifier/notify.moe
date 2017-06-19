@@ -1,8 +1,8 @@
-component Anime(anime *arn.Anime)
+component Anime(anime *arn.Anime, user *arn.User)
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Small != ""
 			.anime-image-container
-				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.Romaji)
+				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.Canonical)
 		
 		.space
 
@@ -13,13 +13,18 @@ component Anime(anime *arn.Anime)
 			//- 	span.second-title(title=anime.Title.English !== anime.Title.Romaji ? anime.Title.English : null)= anime.Title.Romaji
 			//- else
 			if anime.Title.Japanese != anime.Title.Canonical
-				a.anime-alternative-title(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
+				.anime-alternative-title
+					a(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
 
 			//- h3.anime-section-name.anime-summary-header Summary
 			p.anime-summary= anime.Summary
 	
-	.anime-actions
-		a.light-button.action-button(href="#") Add to collection
+	if user != nil
+		.anime-actions
+			if user.AnimeList().Contains(anime.ID)
+				a.button.ajax(href="/+" + user.Nick + "/animelist/" + anime.ID) View in collection
+			else
+				button Add to collection
 
 	h3.anime-section-name Ratings
 	.anime-rating-categories

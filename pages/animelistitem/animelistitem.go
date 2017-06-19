@@ -1,0 +1,51 @@
+package animelistitem
+
+import (
+	"net/http"
+
+	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components"
+)
+
+// Get anime page.
+func Get(ctx *aero.Context) string {
+	// user := utils.GetUser(ctx)
+
+	nick := ctx.Get("nick")
+	viewUser, err := arn.GetUserByNick(nick)
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "User not found", err)
+	}
+
+	animeList := viewUser.AnimeList()
+
+	if animeList == nil {
+		return ctx.Error(http.StatusNotFound, "Anime list not found", err)
+	}
+
+	animeID := ctx.Get("id")
+	item := animeList.Find(animeID)
+
+	if item == nil {
+		return ctx.Error(http.StatusNotFound, "List item not found", err)
+	}
+
+	anime := item.Anime()
+
+	return ctx.HTML(components.AnimeListItem(item, anime))
+}
+
+// t := reflect.TypeOf(item).Elem()
+// v := reflect.ValueOf(item).Elem()
+
+// for i := 0; i < t.NumField(); i++ {
+// 	fieldInfo := t.Field(i)
+
+// 	if fieldInfo.Anonymous || unicode.IsLower([]rune(fieldInfo.Name)[0]) {
+// 		continue
+// 	}
+
+// 	fmt.Println(fieldInfo.Name, v.Field(i).Interface())
+// }

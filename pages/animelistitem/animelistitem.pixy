@@ -1,0 +1,12 @@
+component AnimeListItem(item *arn.AnimeListItem, anime *arn.Anime)
+	.widgets
+		.widget.anime-list-item-view
+			h2
+				a.ajax(href=anime.Link())= anime.Title.Canonical
+
+			if anime.EpisodeCount == 0
+				InputNumber("episodes", item.Episodes, "Episodes", "Number of episodes you watched", 0, 10000)
+			else
+				InputNumber("episodes", item.Episodes, "Episodes", "Number of episodes you watched", 0, anime.EpisodeCount)
+			
+			InputTextArea("notes", item.Notes, "Notes", "Notes")
