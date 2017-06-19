@@ -1,16 +1,12 @@
-import { aero as app } from "./Aero/Aero"
+import { Application } from "./Application"
+import { AnimeNotifier } from "./AnimeNotifier"
 
-class AnimeNotifier {
-	constructor() {
-		app.content = app.find("content")
-		app.loading = app.find("loading")
-		app.run()
-	}
-}
+let app = new Application()
+let arn = new AnimeNotifier(app)
 
 document.onreadystatechange = function() {
 	if(document.readyState === "interactive") {
-		let arn = new AnimeNotifier()
+		arn.run()
 	}
 }
 

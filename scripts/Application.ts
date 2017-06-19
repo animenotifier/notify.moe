@@ -1,4 +1,4 @@
-class Aero {
+export class Application {
 	ajaxClass: string
 	fadeOutClass: string
 	activeLinkClass: string
@@ -124,6 +124,8 @@ class Aero {
 			let link = links[i] as HTMLElement
 
 			link.classList.remove(this.ajaxClass)
+
+			let self = this
 			link.onclick = function(e) {
 				// Middle mouse button should have standard behaviour
 				if(e.which === 2)
@@ -138,7 +140,7 @@ class Aero {
 					return
 
 				// Load requested page
-				aero.load(url, true)
+				self.load(url, true)
 			}
 		}
 	}
@@ -157,5 +159,3 @@ class Aero {
 		}
 	}
 }
-
-export var aero = new Aero()
