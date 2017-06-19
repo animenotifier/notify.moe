@@ -1,0 +1,13 @@
+component AnimeList(animeList *arn.AnimeList)
+	table.anime-list
+		thead
+			tr
+				th Anime
+				th Progress
+				th Rating
+		tbody
+			each item in animeList.Items
+				tr.anime-list-item
+					td= item.Anime().Title.Canonical
+					td= toString(item.Episodes) + " / " + item.Anime().EpisodeCountString()
+					td= item.FinalRating()

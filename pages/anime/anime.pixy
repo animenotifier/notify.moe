@@ -28,16 +28,16 @@ component Anime(anime *arn.Anime, user *arn.User)
 
 	h3.anime-section-name Ratings
 	.anime-rating-categories
-		.anime-rating-category(title=toString(anime.Rating.Overall))
+		.anime-rating-category(title=toString(anime.Rating.Overall / 10))
 			.anime-rating-category-name Overall
 			Rating(anime.Rating.Overall)
-		.anime-rating-category(title=toString(anime.Rating.Story))
+		.anime-rating-category(title=toString(anime.Rating.Story / 10))
 			.anime-rating-category-name Story
 			Rating(anime.Rating.Story)
-		.anime-rating-category(title=toString(anime.Rating.Visuals))
+		.anime-rating-category(title=toString(anime.Rating.Visuals / 10))
 			.anime-rating-category-name Visuals
 			Rating(anime.Rating.Visuals)
-		.anime-rating-category(title=toString(anime.Rating.Music))
+		.anime-rating-category(title=toString(anime.Rating.Music / 10))
 			.anime-rating-category-name Music
 			Rating(anime.Rating.Music)
 

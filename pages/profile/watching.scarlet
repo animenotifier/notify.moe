@@ -1,0 +1,9 @@
+.profile-watching-list
+	horizontal-wrap
+
+.profile-watching-list-item
+	margin 0.25rem
+
+.profile-watching-list-item-image
+	width 55px !important
+	border-radius 2px

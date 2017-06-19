@@ -50,25 +50,24 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 	//- 	a.light-button(href="#") Forum
 	
 	.profile-category
-		h3 Anime
+		h3
+			a.ajax(href="/+" + viewUser.Nick + "/animelist", title="View all anime") Anime
 
-		.anime-list
+		.profile-watching-list
 			if len(animeList.Items) == 0
 				p No anime in the collection.
 			else
 				each item in animeList.Items
-					a.anime-list-item.ajax(href="/+" + viewUser.Nick + "/animelist/" + item.Anime().ID, title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.anime-cover-image.anime-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
+					a.profile-watching-list-item.ajax(href="/+" + viewUser.Nick + "/animelist/" + item.Anime().ID, title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+						img.anime-cover-image.profile-watching-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 
 	.profile-category
-		h3 Forum
+		h3
+			a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
 		
-		if len(animeList.Items) == 0
-			p No activity on the forum.
+		if len(threads) == 0
+			p No threads on the forum.
 		else
 			each thread in threads
 				ThreadLink(thread)
-		
-			.side-note
-				a.ajax(href="/+" + viewUser.Nick + "/threads") View all threads
 	

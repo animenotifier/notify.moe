@@ -13,7 +13,7 @@ h3
 	text-align left
 	margin-top 0.6em
 
-h2
+h2, h3
 	a
 		color text-color
 
