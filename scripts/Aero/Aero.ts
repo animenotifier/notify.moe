@@ -1,6 +1,7 @@
 class Aero {
 	ajaxClass: string
 	fadeOutClass: string
+	activeLinkClass: string
 	content: HTMLElement
 	loading: HTMLElement
 	currentURL: string
@@ -11,6 +12,7 @@ class Aero {
 		this.currentURL = window.location.pathname
 		this.originalURL = window.location.pathname
 		this.ajaxClass = "ajax"
+		this.activeLinkClass = "active"
 		this.fadeOutClass = "fade-out"
 	}
 
@@ -46,8 +48,6 @@ class Aero {
 	
 		this.currentURL = url
 
-		console.log(url)
-
 		// function sleep(ms) {
 		// 	return new Promise(resolve => setTimeout(resolve, ms))
 		// }
@@ -58,26 +58,60 @@ class Aero {
 
 		let request = this.get("/_" + url)
 
-		this.content.addEventListener("transitionend", e => {
+		let onTransitionEnd = e => {
+			// Ignore transitions of child elements.
+			// We only care about the transition event on the content element.
+			if(e.target !== this.content) {
+				return
+			}
+			
+			// Remove listener after we finally got the correct event.
+			this.content.removeEventListener("transitionend", onTransitionEnd)
+
+			// Wait for the network request to end.
 			request.then(html => {
+				// Add to browser history
 				if(addToHistory)
 					history.pushState(url, null, url)
 				
+				// Set content
 				this.setContent(html)
 				this.scrollToTop()
 
+				// Fade animations
 				this.content.classList.remove(this.fadeOutClass)
 				this.loading.classList.add(this.fadeOutClass)
 			})
-		}, { once: true })
+		}
+
+		this.content.addEventListener("transitionend", onTransitionEnd)
 
 		this.content.classList.add(this.fadeOutClass)
 		this.loading.classList.remove(this.fadeOutClass)
+		this.markActiveLinks()
 	}
 
 	setContent(html: string) {
 		this.content.innerHTML = html
 		this.ajaxify(this.content)
+		this.markActiveLinks(this.content)
+	}
+
+	markActiveLinks(element?: HTMLElement) {
+		if(element === undefined)
+			element = document.body
+
+		let links = element.querySelectorAll("a")
+
+		for(let i = 0; i < links.length; i++) {
+			let link = links[i]
+			let href = link.getAttribute("href")
+
+			if(href === this.currentURL)
+				link.classList.add(this.activeLinkClass)
+			else
+				link.classList.remove(this.activeLinkClass)
+		}
 	}
 
 	ajaxify(element?: HTMLElement) {
@@ -111,6 +145,7 @@ class Aero {
 
 	run() {
 		this.ajaxify()
+		this.markActiveLinks()
 		this.loading.classList.add(this.fadeOutClass)
 	}
 
