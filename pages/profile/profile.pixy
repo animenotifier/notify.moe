@@ -1,4 +1,4 @@
-component ProfileHeader(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
+component ProfileHeader(viewUser *arn.User, user *arn.User)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
 
@@ -45,7 +45,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, animeList *arn.Anime
 					span= arn.Capitalize(viewUser.Role)
 
 component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
-	ProfileHeader(viewUser, user, animeList, threads)
+	ProfileHeader(viewUser, user)
 	
 	.profile-category
 		h3

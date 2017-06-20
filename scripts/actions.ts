@@ -10,7 +10,8 @@ export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
 
 	fetch("/api/animelist/" + userId + "/add", {
 		method: "POST",
-		body: animeId
+		body: animeId,
+		credentials: 'same-origin'
 	})
 	.then(response => response.text())
 	.then(body => {
@@ -33,7 +34,8 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 
 	fetch("/api/animelist/" + userId + "/remove", {
 		method: "POST",
-		body: animeId
+		body: animeId,
+		credentials: 'same-origin'
 	})
 	.then(response => response.text())
 	.then(body => {
