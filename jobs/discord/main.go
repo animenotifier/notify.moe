@@ -119,11 +119,11 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		message := ""
 
 		for _, user := range userResults {
-			message += "https://notify.moe/" + user.Link() + "\n"
+			message += "https://notify.moe" + user.Link() + "\n"
 		}
 
 		for _, anime := range animeResults {
-			message += "https://notify.moe/" + anime.Link() + "\n"
+			message += "https://notify.moe" + anime.Link() + "\n"
 		}
 
 		if len(userResults) == 0 && len(animeResults) == 0 {
