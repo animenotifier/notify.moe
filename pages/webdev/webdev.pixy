@@ -1,0 +1,13 @@
+component WebDev
+	h2.page-title WebDev
+
+	.light-button-group
+		a.light-button(href="https://developers.google.com/speed/pagespeed/insights/?url=https://notify.moe/&tab=desktop", target="_blank", rel="noopener")
+			Icon("external-link")
+			span Google PageSpeed
+		a.light-button(href="https://observatory.mozilla.org/analyze.html?host=notify.moe", target="_blank", rel="noopener")
+			Icon("external-link")
+			span Mozilla Observatory
+		a.light-button(href="https://html5.validator.nu/?doc=https://notify.moe", target="_blank", rel="noopener")
+			Icon("external-link")
+			span HTML5 Validator

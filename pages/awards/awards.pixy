@@ -1,8 +1,0 @@
-component Awards
-	h2.page-title Awards
-
-	ul
-		li
-			a(href="https://developers.google.com/speed/pagespeed/insights/?url=https://notify.moe/&tab=desktop", target="_blank", rel="noopener") Google PageSpeed
-		li
-			a(href="https://observatory.mozilla.org/analyze.html?host=notify.moe", target="_blank", rel="noopener") Mozilla Observatory

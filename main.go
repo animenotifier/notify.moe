@@ -13,7 +13,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
-	"github.com/animenotifier/notify.moe/pages/awards"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
@@ -23,6 +22,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/settings"
 	"github.com/animenotifier/notify.moe/pages/threads"
 	"github.com/animenotifier/notify.moe/pages/users"
+	"github.com/animenotifier/notify.moe/pages/webdev"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
@@ -58,7 +58,7 @@ func main() {
 	app.Ajax("/admin", admin.Get)
 	app.Ajax("/users", users.Get)
 	app.Ajax("/airing", airing.Get)
-	app.Ajax("/awards", awards.Get)
+	app.Ajax("/webdev", webdev.Get)
 	// app.Ajax("/genres", genres.Get)
 	// app.Ajax("/genres/:name", genre.Get)
 

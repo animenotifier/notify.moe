@@ -58,7 +58,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 				p No anime in the collection.
 			else
 				each item in animeList.Items
-					a.profile-watching-list-item.ajax(href="/+" + viewUser.Nick + "/animelist/" + item.Anime().ID, title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
 						img.anime-cover-image.profile-watching-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 
 	.profile-category
