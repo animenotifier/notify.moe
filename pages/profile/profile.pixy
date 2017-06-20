@@ -1,4 +1,4 @@
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
+component ProfileHeader(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
 
@@ -44,10 +44,8 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
 
-	//- nav.light-button-group
-	//- 	a.light-button(href="#") Bio
-	//- 	a.light-button(href="#") Anime
-	//- 	a.light-button(href="#") Forum
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
+	ProfileHeader(viewUser, user, animeList, threads)
 	
 	.profile-category
 		h3

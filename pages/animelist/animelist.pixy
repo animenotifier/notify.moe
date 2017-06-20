@@ -8,6 +8,7 @@ component AnimeList(animeList *arn.AnimeList)
 		tbody
 			each item in animeList.Items
 				tr.anime-list-item
-					td= item.Anime().Title.Canonical
+					td
+						a.ajax(href=item.Anime().Link())= item.Anime().Title.Canonical
 					td= toString(item.Episodes) + " / " + item.Anime().EpisodeCountString()
 					td= item.FinalRating()

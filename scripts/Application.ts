@@ -4,13 +4,13 @@ export class Application {
 	activeLinkClass: string
 	content: HTMLElement
 	loading: HTMLElement
-	currentURL: string
-	originalURL: string
+	currentPath: string
+	originalPath: string
 	lastRequest: XMLHttpRequest
 
 	constructor() {
-		this.currentURL = window.location.pathname
-		this.originalURL = window.location.pathname
+		this.currentPath = window.location.pathname
+		this.originalPath = window.location.pathname
 		this.ajaxClass = "ajax"
 		this.activeLinkClass = "active"
 		this.fadeOutClass = "fade-out"
@@ -52,7 +52,7 @@ export class Application {
 			this.lastRequest = null
 		}
 	
-		this.currentURL = url
+		this.currentPath = url
 
 		// Start sending a network request
 		let request = this.get("/_" + url)
@@ -91,6 +91,8 @@ export class Application {
 		this.content.classList.add(this.fadeOutClass)
 		this.loading.classList.remove(this.fadeOutClass)
 		this.markActiveLinks()
+
+		return request
 	}
 
 	setContent(html: string) {
@@ -109,7 +111,7 @@ export class Application {
 			let link = links[i]
 			let href = link.getAttribute("href")
 
-			if(href === this.currentURL)
+			if(href === this.currentPath)
 				link.classList.add(this.activeLinkClass)
 			else
 				link.classList.remove(this.activeLinkClass)
@@ -138,7 +140,7 @@ export class Application {
 				e.preventDefault()
 				e.stopPropagation()
 
-				if(!url || url === self.currentURL)
+				if(!url || url === self.currentPath)
 					return
 				
 				// Load requested page

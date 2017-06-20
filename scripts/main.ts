@@ -10,6 +10,6 @@ document.addEventListener("readystatechange", arn.onReadyStateChange.bind(arn))
 window.onpopstate = e => {
 	if(e.state)
 		app.load(e.state, false)
-	else if(app.currentURL !== app.originalURL)
-		app.load(app.originalURL, false)
+	else if(app.currentPath !== app.originalPath)
+		app.load(app.originalPath, false)
 }

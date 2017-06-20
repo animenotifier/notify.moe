@@ -22,9 +22,11 @@ component Anime(anime *arn.Anime, user *arn.User)
 	if user != nil
 		.anime-actions
 			if user.AnimeList().Contains(anime.ID)
-				a.button.ajax(href="/+" + user.Nick + "/animelist/" + anime.ID) View in collection
+				a.button.ajax(href="/+" + user.Nick + "/animelist/" + anime.ID)
+					Icon("pencil")
+					span Edit in collection
 			else
-				button Add to collection
+				button.action(data-action="addAnimeToCollection", data-anime-id=anime.ID, data-user-id=user.ID, data-user-nick=user.Nick) Add to collection
 
 	h3.anime-section-name Ratings
 	.anime-rating-categories

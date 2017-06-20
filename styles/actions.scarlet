@@ -1,0 +1,6 @@
+.actions
+	horizontal-wrap
+	justify-content space-around
+
+	button, .button
+		margin 0.5rem

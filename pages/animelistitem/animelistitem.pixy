@@ -1,8 +1,7 @@
-component AnimeListItem(item *arn.AnimeListItem, anime *arn.Anime)
+component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
 	.widgets
 		.widget.anime-list-item-view
-			h2
-				a.ajax(href=anime.Link())= anime.Title.Canonical
+			h2= anime.Title.Canonical
 
 			if anime.EpisodeCount == 0
 				InputNumber("episodes", item.Episodes, "Episodes", "Number of episodes you watched", 0, 10000)
@@ -10,3 +9,14 @@ component AnimeListItem(item *arn.AnimeListItem, anime *arn.Anime)
 				InputNumber("episodes", item.Episodes, "Episodes", "Number of episodes you watched", 0, anime.EpisodeCount)
 			
 			InputTextArea("notes", item.Notes, "Notes", "Notes")
+
+			.actions
+				a.ajax.button(href="/+" + viewUser.Nick + "/animelist")
+					Icon("list")
+					span View collection
+				a.ajax.button(href=anime.Link())
+					Icon("search-plus")
+					span View anime
+				button.action(data-action="removeAnimeFromCollection", data-anime-id=anime.ID, data-user-id=viewUser.ID, data-user-nick=viewUser.Nick)
+					Icon("trash")
+					span Remove from collection

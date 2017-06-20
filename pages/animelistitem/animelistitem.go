@@ -1,6 +1,7 @@
 package animelistitem
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/aerogo/aero"
@@ -29,12 +30,12 @@ func Get(ctx *aero.Context) string {
 	item := animeList.Find(animeID)
 
 	if item == nil {
-		return ctx.Error(http.StatusNotFound, "List item not found", err)
+		return ctx.Error(http.StatusNotFound, "List item not found", errors.New("This anime does not exist in "+viewUser.Nick+"'s anime list"))
 	}
 
 	anime := item.Anime()
 
-	return ctx.HTML(components.AnimeListItem(item, anime))
+	return ctx.HTML(components.AnimeListItem(animeList.User(), item, anime))
 }
 
 // t := reflect.TypeOf(item).Elem()
