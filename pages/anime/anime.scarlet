@@ -46,7 +46,10 @@
 	horizontal
 	justify-content center
 	margin content-padding 0
+
+	// Setting z-index requires setting a background as well
 	z-index 10
+	background-color bg-color
 
 > 900px
 	.anime-actions

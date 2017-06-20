@@ -5,6 +5,7 @@ link-color = rgb(225, 38, 15)
 link-hover-color = rgb(242, 60, 30)
 link-active-color = rgb(100, 149, 237)
 post-highlight-color = rgba(248, 165, 130, 0.7)
+bg-color = white
 
 // UI
 ui-border = 1px solid rgba(0, 0, 0, 0.1)

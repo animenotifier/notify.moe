@@ -4,7 +4,7 @@ loading-anim-size = 24px
 #loading
 	position fixed
 	bottom 1.15rem
-	right calc(1.15rem + 17px)
+	right 1.15rem
 	pointer-events none
 
 .sk-cube-grid

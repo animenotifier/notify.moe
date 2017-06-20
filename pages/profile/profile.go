@@ -18,6 +18,11 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(404, "User not found", err)
 	}
 
+	return Profile(ctx, viewUser)
+}
+
+// Profile renders the user profile page of the given viewUser.
+func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	var user *arn.User
 	var threads []*arn.Thread
 	var animeList *arn.AnimeList

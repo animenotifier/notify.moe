@@ -55,7 +55,7 @@ export class Application {
 		this.currentPath = url
 
 		// Start sending a network request
-		let request = this.get("/_" + url)
+		let request = this.get("/_" + url).catch(error => error)
 
 		let onTransitionEnd = e => {
 			// Ignore transitions of child elements.

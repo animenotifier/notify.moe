@@ -10,6 +10,14 @@ func init() {
 		"/+Akyoto/threads",
 	})
 
+	app.Test("/user/:nick/animelist", []string{
+		"/+Akyoto/animelist",
+	})
+
+	app.Test("/user/:nick/animelist/:id", []string{
+		"/+Akyoto/animelist/7929",
+	})
+
 	// Pages
 	app.Test("/anime/:id", []string{
 		"/anime/1",
@@ -92,4 +100,5 @@ func init() {
 	// Disable
 	app.Test("/auth/google", nil)
 	app.Test("/auth/google/callback", nil)
+	app.Test("/user", nil)
 }

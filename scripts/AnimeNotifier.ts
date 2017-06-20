@@ -43,6 +43,14 @@ export class AnimeNotifier {
 		}
 	}
 
+	onPopState(e: PopStateEvent) {
+		if(e.state) {
+			this.app.load(e.state, false)
+		} else if(this.app.currentPath !== this.app.originalPath) {
+			this.app.load(this.app.originalPath, false)
+		}
+	}
+
 	updateAvatars() {
 		for(let element of findAll(".user-image")) {
 			let img = element as HTMLImageElement
@@ -60,4 +68,14 @@ export class AnimeNotifier {
 			}
 		}
 	}
+
+	// onResize(e: UIEvent) {
+	// 	let hasScrollbar = this.app.content.clientHeight === this.app.content.scrollHeight
+
+	// 	if(hasScrollbar) {
+	// 		this.app.content.classList.add("has-scrollbar")
+	// 	} else {
+	// 		this.app.content.classList.remove("has-scrollbar")
+	// 	}
+	// }
 }

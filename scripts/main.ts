@@ -7,9 +7,5 @@ let arn = new AnimeNotifier(app)
 document.addEventListener("DOMContentLoaded", arn.onContentLoaded.bind(arn))
 document.addEventListener("readystatechange", arn.onReadyStateChange.bind(arn))
 
-window.onpopstate = e => {
-	if(e.state)
-		app.load(e.state, false)
-	else if(app.currentPath !== app.originalPath)
-		app.load(app.originalPath, false)
-}
+window.addEventListener("popstate", arn.onPopState.bind(arn))
+// window.addEventListener("resize", arn.onResize.bind(arn))

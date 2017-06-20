@@ -16,12 +16,13 @@ component LoggedInMenu(user *arn.User)
 	nav#navigation
 		NavigationButton("Dash", "/", "inbox")
 		NavigationButton("Anime", "/anime", "television")
+		NavigationButton("Profile", "/+", "user")
 		NavigationButton("Forum", "/forum", "comment")
-		NavigationButton("Airing", "/airing", "rss")
 		NavigationButton("Settings", "/settings", "cog")
 
 		.extra-navigation
 			ExtraNavigationButton("Users", "/users", "globe")
+			ExtraNavigationButton("Airing", "/airing", "rss")
 			
 			if user.Role == "admin"
 				ExtraNavigationButton("Admin", "/admin", "wrench")
