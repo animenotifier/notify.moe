@@ -1,7 +1,8 @@
 component Forum(tag string, threads []*arn.Thread)
 	h2.page-title Forum
 	ForumTags
-	ThreadList(threads)
+	.forum
+		ThreadList(threads)
 	
 	.buttons
 		button

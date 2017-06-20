@@ -14,6 +14,9 @@ ui-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0,
 ui-hover-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.027) 100%)
 ui-disabled-color = rgb(224, 224, 224)
 
+// Forum
+forum-width = 830px
+
 // Avatar
 avatar-size = 50px
 

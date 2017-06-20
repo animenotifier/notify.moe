@@ -45,9 +45,13 @@ export class AnimeNotifier {
 
 	onPopState(e: PopStateEvent) {
 		if(e.state) {
-			this.app.load(e.state, false)
+			this.app.load(e.state, {
+				addToHistory: false
+			})
 		} else if(this.app.currentPath !== this.app.originalPath) {
-			this.app.load(this.app.originalPath, false)
+			this.app.load(this.app.originalPath, {
+				addToHistory: false
+			})
 		}
 	}
 

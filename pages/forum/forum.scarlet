@@ -1,6 +1,17 @@
+.forum
+	vertical
+	align-items center
+	
+	.thread-link
+		width 100%
+		max-width forum-width
+
 .forum-tag
+	color text-color !important
+	:hover
+		color white !important
 	&.active
-		color white
+		color white !important
 		background-color link-hover-color
 
 #load-more-threads

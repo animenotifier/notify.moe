@@ -5,7 +5,7 @@
 .posts
 	vertical
 	width 100%
-	max-width 830px
+	max-width forum-width
 
 .post
 	vertical

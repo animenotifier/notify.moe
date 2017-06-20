@@ -45,7 +45,9 @@
 .anime-actions
 	horizontal
 	justify-content center
-	margin content-padding 0
+
+	// Action button margin
+	margin calc(content-padding - 0.5rem) -0.5rem
 
 	// Setting z-index requires setting a background as well
 	z-index 10

@@ -1,5 +1,6 @@
 import { Application } from "./Application"
 import { AnimeNotifier } from "./AnimeNotifier"
+import { Diff } from "./Diff"
 
 // Add anime to collection
 export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
@@ -19,7 +20,11 @@ export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
 			throw body
 		}
 		
-		return arn.app.load("/+" + userNick + "/animelist/" + animeId, true)
+		return fetch("/_" + arn.app.currentPath, {
+			credentials: "same-origin"
+		})
+		.then(response => response.text())
+		.then(html => Diff.update(arn.app.content, html))
 	})
 	.catch(console.error)
 	.then(() => arn.loading(false))
@@ -43,7 +48,7 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 			throw body
 		}
 		
-		return arn.app.load("/+" + userNick + "/animelist", true)
+		return arn.app.load("/+" + userNick + "/animelist")
 	})
 	.catch(console.error)
 	.then(() => arn.loading(false))

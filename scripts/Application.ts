@@ -1,3 +1,8 @@
+class LoadOptions {
+	addToHistory?: boolean
+	forceReload?: boolean
+}
+
 export class Application {
 	ajaxClass: string
 	fadeOutClass: string
@@ -46,10 +51,18 @@ export class Application {
 		})
 	}
 
-	load(url: string, addToHistory: boolean) {
+	load(url: string, options?: LoadOptions) {
 		if(this.lastRequest) {
 			this.lastRequest.abort()
 			this.lastRequest = null
+		}
+
+		if(!options) {
+			options = new LoadOptions()
+		}
+
+		if(options.addToHistory === undefined) {
+			options.addToHistory = true
 		}
 	
 		this.currentPath = url
@@ -70,7 +83,7 @@ export class Application {
 			// Wait for the network request to end.
 			request.then(html => {
 				// Add to browser history
-				if(addToHistory)
+				if(options.addToHistory)
 					history.pushState(url, null, url)
 				
 				// Set content
@@ -144,7 +157,7 @@ export class Application {
 					return
 				
 				// Load requested page
-				self.load(url, true)
+				self.load(url)
 			}
 		}
 	}
