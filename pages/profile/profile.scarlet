@@ -12,8 +12,8 @@ profile-boot-duration = 2s
 	color white
 	text-shadow 0px 0px 2px rgb(0, 0, 0, 0.5)
 
-	default-transition
-	animation appear transition-speed
+	// default-transition
+	// animation appear transition-speed
 
 	overflow hidden
 
@@ -30,13 +30,13 @@ profile-boot-duration = 2s
 		margin-top calc(content-padding * 1.5)
 		padding-left content-padding
 
-animation appear
-	0%
-		transform rotateX(90deg)
-		filter opacity(0) saturate(0) blur(10px)
-	100%
-		transform rotateX(0)
-		filter opacity(1) saturate(1) blur(0)
+// animation appear
+// 	0%
+// 		transform rotateX(90deg)
+// 		filter opacity(0) saturate(0) blur(10px)
+// 	100%
+// 		transform rotateX(0)
+// 		filter opacity(1) saturate(1) blur(0)
 
 .profile-cover
 	position absolute
@@ -49,15 +49,16 @@ animation appear
 	// background-size cover
 	overflow hidden
 	
-	default-transition
-	animation cover-animation profile-boot-duration
-	animation-fill-mode forwards
+	// default-transition
+	// animation cover-animation profile-boot-duration
+	// animation-fill-mode forwards
+	filter brightness(35%) blur(0)
 
-animation cover-animation
-	0%
-		filter brightness(500%) blur(5px)
-	100%
-		filter brightness(35%) blur(0)
+// animation cover-animation
+// 	0%
+// 		filter brightness(500%) blur(5px)
+// 	100%
+// 		filter brightness(35%) blur(0)
 
 .profile-image
 	object-fit cover

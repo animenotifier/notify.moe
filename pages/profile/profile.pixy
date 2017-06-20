@@ -2,10 +2,10 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
 
-		.image-container
+		.image-container.mountable
 			ProfileImage(viewUser)
 		
-		.intro-container
+		.intro-container.mountable
 			h2#nick= viewUser.Nick
 
 			if viewUser.Tagline != ""
