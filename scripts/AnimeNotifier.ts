@@ -56,6 +56,19 @@ export class AnimeNotifier {
 		}
 	}
 
+	onKeyDown(e: KeyboardEvent) {
+		// Ctrl + Q = Search
+		if(e.ctrlKey && e.keyCode == 81) {
+			let search = this.app.find("search") as HTMLInputElement
+
+			search.focus()
+			search.select()
+
+			e.preventDefault()
+			e.stopPropagation()
+		}
+	}
+
 	updateAvatars() {
 		for(let element of findAll(".user-image")) {
 			let img = element as HTMLImageElement

@@ -1,6 +1,6 @@
 input, textarea, button, select
 	font-family inherit
-	font-size 1rem
+	font-size 1em
 	padding 0.4em 0.8em
 	border-radius 3px
 	color text-color

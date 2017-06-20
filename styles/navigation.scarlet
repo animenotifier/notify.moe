@@ -42,6 +42,17 @@
 .navigation-text
 	display none
 
+#search
+	display none
+	border-radius 0
+	background text-color
+	border none
+	color white
+
+	:focus
+		border none !important
+		box-shadow none
+
 .extra-navigation
 	display none
 
@@ -59,20 +70,25 @@
 > 930px
 	.navigation-button
 		font-size 1.1em
-
-		.icon
-			margin-right 0.5em
 	
 	#navigation
 		justify-content flex-start
 	
-	.navigation-text
-		display inline-block
+	.logged-out
+		.navigation-text
+			display inline-block
+		
+		.navigation-button
+			.icon
+				margin-right 0.5em
+
+	#search
+		display block
+		flex 1
 	
 	.extra-navigation
 		horizontal
 		justify-content flex-end
-		flex 1
 
 < 400px height
 	#navigation
@@ -84,4 +100,7 @@
 		horizontal
 
 	.extra-navigation
+		display none
+
+	#search
 		display none

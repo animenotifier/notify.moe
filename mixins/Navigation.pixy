@@ -5,7 +5,7 @@ component Navigation(user *arn.User)
 		LoggedInMenu(user)
 
 component LoggedOutMenu
-	nav#navigation
+	nav#navigation.logged-out
 		NavigationButton("About", "/", "question-circle")
 		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
@@ -13,21 +13,26 @@ component LoggedOutMenu
 		NavigationButton("Airing", "/airing", "th")
 
 component LoggedInMenu(user *arn.User)
-	nav#navigation
-		NavigationButton("Dash", "/", "inbox")
-		NavigationButton("Anime", "/anime", "television")
-		NavigationButton("Profile", "/+", "user")
-		NavigationButton("Forum", "/forum", "comment")
-		NavigationButton("Settings", "/settings", "cog")
+	nav#navigation.logged-in
+		ExtraNavigationButton("Dash", "/", "inbox")
+		ExtraNavigationButton("Anime", "/anime", "television")
+		ExtraNavigationButton("Profile", "/+", "user")
+		ExtraNavigationButton("Forum", "/forum", "comment")
+
+		FuzzySearch
 
 		.extra-navigation
+			//- if user.Role == "admin"
+			//- 	ExtraNavigationButton("Admin", "/admin", "wrench")
+			
 			ExtraNavigationButton("Users", "/users", "globe")
 			ExtraNavigationButton("Airing", "/airing", "th")
-			
-			if user.Role == "admin"
-				ExtraNavigationButton("Admin", "/admin", "wrench")
+			ExtraNavigationButton("Settings", "/settings", "cog")
 			
 			NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
+
+component FuzzySearch
+	input#search(type="text", placeholder="Search...", title="Shortcut: Ctrl + Q")
 
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.ajax(href=target, aria-label=name)
