@@ -1,14 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/fatih/color"
 )
 
 func main() {
+	color.Yellow("Updating search index")
+
 	aero.Parallel(updateAnimeIndex, updateUserIndex)
+
+	color.Green("Finished.")
 }
 
 func updateAnimeIndex() {
@@ -22,8 +28,16 @@ func updateAnimeIndex() {
 	}
 
 	for anime := range animeStream {
-		animeSearchIndex.TextToID[strings.ToLower(anime.Title.Canonical)] = anime.ID
+		if anime.Title.Canonical != "" {
+			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Canonical)] = anime.ID
+		}
+
+		if anime.Title.Japanese != "" {
+			animeSearchIndex.TextToID[anime.Title.Japanese] = anime.ID
+		}
 	}
+
+	fmt.Println(len(animeSearchIndex.TextToID), "anime titles")
 
 	// Save in database
 	err = arn.DB.Set("SearchIndex", "Anime", animeSearchIndex)
@@ -44,8 +58,12 @@ func updateUserIndex() {
 	}
 
 	for user := range userStream {
-		userSearchIndex.TextToID[strings.ToLower(user.Nick)] = user.ID
+		if user.IsActive() && user.Nick != "" {
+			userSearchIndex.TextToID[strings.ToLower(user.Nick)] = user.ID
+		}
 	}
+
+	fmt.Println(len(userSearchIndex.TextToID), "user names")
 
 	// Save in database
 	err = arn.DB.Set("SearchIndex", "User", userSearchIndex)
