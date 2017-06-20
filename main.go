@@ -16,6 +16,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
+	popularanime "github.com/animenotifier/notify.moe/pages/popular-anime"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
@@ -45,7 +46,7 @@ func main() {
 
 	// Ajax routes
 	app.Ajax("/", dashboard.Get)
-	app.Ajax("/anime", search.Get)
+	app.Ajax("/anime", popularanime.Get)
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/forum", forums.Get)
 	app.Ajax("/forum/:tag", forum.Get)
