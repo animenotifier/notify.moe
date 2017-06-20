@@ -58,6 +58,7 @@ func main() {
 	app.Ajax("/user/:nick/animelist/:id", animelistitem.Get)
 	app.Ajax("/settings", settings.Get)
 	app.Ajax("/admin", admin.Get)
+	app.Ajax("/search/:term", search.Get)
 	app.Ajax("/users", users.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/webdev", webdev.Get)

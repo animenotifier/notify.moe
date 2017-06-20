@@ -38,9 +38,11 @@ export class AnimeNotifier {
 		for(let element of findAll(".action")) {
 			let actionName = element.dataset.action
 
-			element.onclick = () => {
-				actions[actionName](this, element)
-			}
+			element.addEventListener(element.dataset.trigger, e => {
+				actions[actionName](this, element, e)
+			})
+
+			element.classList.remove("action")
 		}
 	}
 

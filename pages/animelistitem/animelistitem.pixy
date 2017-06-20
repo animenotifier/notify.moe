@@ -17,6 +17,6 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 				a.ajax.button(href=anime.Link())
 					Icon("search-plus")
 					span View anime
-				button.action(data-action="removeAnimeFromCollection", data-anime-id=anime.ID, data-user-id=viewUser.ID, data-user-nick=viewUser.Nick)
+				button.action(data-action="removeAnimeFromCollection", data-trigger="click", data-anime-id=anime.ID, data-user-id=viewUser.ID, data-user-nick=viewUser.Nick)
 					Icon("trash")
 					span Remove from collection

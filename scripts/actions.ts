@@ -2,6 +2,38 @@ import { Application } from "./Application"
 import { AnimeNotifier } from "./AnimeNotifier"
 import { Diff } from "./Diff"
 
+// Search
+export function search(arn: AnimeNotifier, search: HTMLInputElement, e: KeyboardEvent) {
+	if(e.ctrlKey || e.altKey) {
+		return
+	}
+
+	let term = search.value
+
+	if(!window.location.pathname.startsWith("/search/")) {
+		history.pushState("search", null, "/search/" + term)
+	} else {
+		history.replaceState("search", null, "/search/" + term)
+	}
+
+	if(!term) {
+		arn.app.content.innerHTML = "No search term."
+		return
+	}
+
+	arn.app.content.innerHTML = "<h2>" + term + "</h2><div id='results'></div>"
+
+	arn.app.get("/_/search/" + encodeURI(term))
+	.then(html => {
+		if(!search.value) {
+			return
+		}
+
+		arn.app.find("results").innerHTML = html
+		arn.app.emit("DOMContentLoaded")
+	})
+}
+
 // Add anime to collection
 export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
 	button.innerText = "Adding..."

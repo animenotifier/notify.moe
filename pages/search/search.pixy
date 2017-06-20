@@ -1,16 +1,21 @@
-component Search(popularAnime []*arn.Anime, titleCount int, animeCount int)
-	h2 Anime
-	
-	#search-container
-		input#search(type="text", placeholder="Search...", onkeyup="$.searchAnime();", onfocus="this.select();", disabled="disabled", data-count=titleCount, data-anime-count=animeCount)
-	
-	#search-results-container
-		#search-results
-
-	if popularAnime != nil
-		h3.popular-title Popular
-
-		.popular-anime-list
-			each anime in popularAnime
-				a.popular-anime.ajax(href="/anime/" + toString(anime.ID), title=anime.Title.Romaji + " (" + arn.Plural(anime.Watching(), "user") + " watching)")
-					img.anime-image.popular-anime-image(src=anime.Image, alt=anime.Title.Romaji)
+component Search(users []*arn.User, animeResults []*arn.Anime)
+	.widgets
+		.widget
+			h3 Users
+			.user-avatars.user-search
+				if len(users) == 0
+					p No users found.
+				else
+					each user in users
+						Avatar(user)
+						//- a.ajax(href=user.Link())= user.Nick
+		
+		.widget
+			h3 Anime
+			.profile-watching-list.anime-search
+				if len(animeResults) == 0
+					p No anime found.
+				else
+					each anime in animeResults
+						a.profile-watching-list-item.ajax(href=anime.Link(), title=anime.Title.Canonical)
+							img.anime-cover-image.anime-search-result(src=anime.Image.Tiny, alt=anime.Title.Canonical)

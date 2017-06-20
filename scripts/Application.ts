@@ -32,6 +32,11 @@ export class Application {
 	}
 
 	get(url: string): Promise<string> {
+		if(this.lastRequest) {
+			this.lastRequest.abort()
+			this.lastRequest = null
+		}
+		
 		return new Promise((resolve, reject) => {
 			let request = new XMLHttpRequest()
 
@@ -52,11 +57,6 @@ export class Application {
 	}
 
 	load(url: string, options?: LoadOptions) {
-		if(this.lastRequest) {
-			this.lastRequest.abort()
-			this.lastRequest = null
-		}
-
 		if(!options) {
 			options = new LoadOptions()
 		}

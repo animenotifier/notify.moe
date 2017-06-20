@@ -1,7 +1,2 @@
-// #search-container
-// 	horizontal
-// 	justify-content center
-
-// #search
-// 	width 100%
-// 	max-width 560px
+.anime-search-result
+	width 55px !important

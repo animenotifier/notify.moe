@@ -26,7 +26,7 @@ component Anime(anime *arn.Anime, user *arn.User)
 					Icon("pencil")
 					span Edit in collection
 			else
-				button.action(data-action="addAnimeToCollection", data-anime-id=anime.ID, data-user-id=user.ID, data-user-nick=user.Nick)
+				button.action(data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID, data-user-id=user.ID, data-user-nick=user.Nick)
 					Icon("plus")
 					span Add to collection
 
