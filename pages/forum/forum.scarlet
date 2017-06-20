@@ -14,5 +14,13 @@
 		color white !important
 		background-color link-hover-color
 
+< 920px
+	.forum-tag
+		.icon
+			margin-right 0
+	
+	.forum-tag-text
+		display none
+
 #load-more-threads
 	margin-top 1rem

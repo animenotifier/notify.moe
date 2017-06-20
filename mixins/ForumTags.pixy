@@ -11,4 +11,4 @@ component ForumTags
 component ForumTag(title string, category string, icon string)
 	a.button.forum-tag.ajax(href=strings.TrimSuffix("/forum/" + category, "/"))
 		Icon(arn.GetForumIcon(category))
-		span= title
+		span.forum-tag-text= title
