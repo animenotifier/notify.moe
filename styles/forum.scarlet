@@ -54,6 +54,7 @@
 	color text-color
 
 .forum-tags
+	justify-content flex-start !important
 	margin-bottom 1rem
 
 .post-author

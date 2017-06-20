@@ -10,7 +10,7 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			
 			InputTextArea("notes", item.Notes, "Notes", "Notes")
 
-			.actions
+			.buttons
 				a.ajax.button(href="/+" + viewUser.Nick + "/animelist")
 					Icon("list")
 					span View collection

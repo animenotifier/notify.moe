@@ -1,6 +1,6 @@
-.actions
+.buttons
 	horizontal-wrap
-	justify-content space-around
+	justify-content center
 
 	button, .button
 		margin 0.5rem

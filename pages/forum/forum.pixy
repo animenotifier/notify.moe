@@ -3,7 +3,10 @@ component Forum(tag string, threads []*arn.Thread)
 	ForumTags
 	ThreadList(threads)
 	
-	button#load-more-threads Load more
+	.buttons
+		button
+			Icon("refresh")
+			span Load more
 
 component ThreadList(threads []*arn.Thread)
 	each thread in threads

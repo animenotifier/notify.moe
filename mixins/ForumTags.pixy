@@ -1,12 +1,14 @@
 component ForumTags
-	.forum-tags.light-button-group
-		ForumTag("All", "")
-		ForumTag("General", "/general")
-		ForumTag("News", "/news")
-		ForumTag("Anime", "/anime")
-		ForumTag("Updates", "/update")
-		ForumTag("Suggestions", "/suggestion")
-		ForumTag("Bugs", "/bug")
+	.buttons.forum-tags
+		ForumTag("All", "", "list")
+		ForumTag("General", "general", "list")
+		ForumTag("News", "news", "list")
+		ForumTag("Anime", "anime", "list")
+		ForumTag("Updates", "update", "list")
+		ForumTag("Suggestions", "suggestion", "list")
+		ForumTag("Bugs", "bug", "list")
 
-component ForumTag(title string, suffix string)
-	a.light-button.forum-tag.ajax(href="/forum" + suffix)= title
+component ForumTag(title string, category string, icon string)
+	a.button.forum-tag.ajax(href=strings.TrimSuffix("/forum/" + category, "/"))
+		Icon(arn.GetForumIcon(category))
+		span= title
