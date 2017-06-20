@@ -21,7 +21,14 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 		return
 	}
 
-	arn.app.content.innerHTML = "<h2>" + term + "</h2><div id='results'></div>"
+	var results = arn.app.find("results")
+
+	if(!results) {
+		results = document.createElement("div")
+		results.id = "results"
+		arn.app.content.innerHTML = ""
+		arn.app.content.appendChild(results)
+	}
 
 	arn.app.get("/_/search/" + encodeURI(term))
 	.then(html => {
@@ -29,7 +36,7 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 			return
 		}
 
-		arn.app.find("results").innerHTML = html
+		results.innerHTML = html
 		arn.app.emit("DOMContentLoaded")
 	})
 }

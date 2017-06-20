@@ -8,49 +8,8 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-const maxUsers = 18
-const maxAnime = 18
-
-type AnimeID = string
-type UserID = string
-
-var animeSearchIndex = make(map[string]AnimeID)
-var userSearchIndex = make(map[string]UserID)
-
-func init() {
-	updateSearchIndex()
-}
-
-func updateSearchIndex() {
-	updateAnimeIndex()
-	updateUserIndex()
-}
-
-func updateAnimeIndex() {
-	// Anime
-	animeStream, err := arn.AllAnime()
-
-	if err != nil {
-		panic(err)
-	}
-	
-	for anime := range animeStream {
-		animeSearchIndex[strings.ToLower(anime.Title.Canonical)] = anime.ID
-	}
-}
-
-func updateUserIndex() {
-	// Users
-	userStream, err := arn.AllUsers()
-
-	if err != nil {
-		panic(err)
-	}
-
-	for user := range userStream {
-		userSearchIndex[strings.ToLower(user.Nick)] = user.ID
-	}
-}
+const maxUsers = 9 * 7
+const maxAnime = 9 * 7
 
 // Get search page.
 func Get(ctx *aero.Context) string {
@@ -59,10 +18,20 @@ func Get(ctx *aero.Context) string {
 	var users []*arn.User
 	var animeResults []*arn.Anime
 
+	// Search everything in parallel
 	aero.Parallel(func() {
-		for name, id := range userSearchIndex {
+		// Search users
+		var user *arn.User
+
+		userSearchIndex, err := arn.GetSearchIndex("User")
+
+		if err != nil {
+			return
+		}
+
+		for name, id := range userSearchIndex.TextToID {
 			if strings.Index(name, term) != -1 {
-				user, err := arn.GetUser(id)
+				user, err = arn.GetUser(id)
 
 				if err != nil {
 					continue
@@ -76,9 +45,18 @@ func Get(ctx *aero.Context) string {
 			}
 		}
 	}, func() {
-		for title, id := range animeSearchIndex {
+		// Search anime
+		var anime *arn.Anime
+
+		animeSearchIndex, err := arn.GetSearchIndex("Anime")
+
+		if err != nil {
+			return
+		}
+
+		for title, id := range animeSearchIndex.TextToID {
 			if strings.Index(title, term) != -1 {
-				anime, err := arn.GetAnime(id)
+				anime, err = arn.GetAnime(id)
 
 				if err != nil {
 					continue
