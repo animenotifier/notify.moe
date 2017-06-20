@@ -3,22 +3,11 @@ package auth
 import (
 	"encoding/json"
 	"io/ioutil"
+
+	"github.com/animenotifier/arn"
 )
 
-// APIKeys ...
-type APIKeys struct {
-	Google struct {
-		ID     string `json:"id"`
-		Secret string `json:"secret"`
-	} `json:"google"`
-
-	Facebook struct {
-		ID     string `json:"id"`
-		Secret string `json:"secret"`
-	} `json:"facebook"`
-}
-
-var apiKeys APIKeys
+var apiKeys arn.APIKeys
 
 func init() {
 	data, _ := ioutil.ReadFile("security/api-keys.json")
