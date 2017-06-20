@@ -1,13 +1,14 @@
-component Forum(tag string, threads []*arn.Thread)
+component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 	h2.page-title Forum
 	ForumTags
 	.forum
 		ThreadList(threads)
 	
-	.buttons
-		button
-			Icon("refresh")
-			span Load more
+	if len(threads) == threadsPerPage
+		.buttons
+			button
+				Icon("refresh")
+				span Load more
 
 component ThreadList(threads []*arn.Thread)
 	each thread in threads

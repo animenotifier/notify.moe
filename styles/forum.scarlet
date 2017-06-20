@@ -69,9 +69,8 @@
 	horizontal
 	opacity 0
 	position absolute
-	bottom 3px
-	right 0
-	margin-right 0.5rem
+	bottom 0.25rem
+	right 0.25rem
 	default-transition
 
 .post-tool

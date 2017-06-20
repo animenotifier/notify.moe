@@ -6,7 +6,8 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-const threadsPerPage = 20
+// ThreadsPerPage indicates how many threads are shown on one page.
+const ThreadsPerPage = 20
 
 // Get forum category.
 func Get(ctx *aero.Context) string {
@@ -14,9 +15,9 @@ func Get(ctx *aero.Context) string {
 	threads, _ := arn.GetThreadsByTag(tag)
 	arn.SortThreads(threads)
 
-	if len(threads) > threadsPerPage {
-		threads = threads[:threadsPerPage]
+	if len(threads) > ThreadsPerPage {
+		threads = threads[:ThreadsPerPage]
 	}
 
-	return ctx.HTML(components.Forum(tag, threads))
+	return ctx.HTML(components.Forum(tag, threads, ThreadsPerPage))
 }

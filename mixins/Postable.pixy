@@ -17,7 +17,7 @@ component Postable(post arn.Postable, viewUser *arn.User, highlightAuthorID stri
 			
 			.post-toolbar(id="toolbar-" + post.ID())
 				.spacer
-				.post-likes(id="likes-" + post.ID())= len(post.Likes())
+				.post-likes(id="likes-" + post.ID(), title="Likes")= len(post.Likes())
 				
 				//- if user != nil
 				//- 	if user.ID !== post.authorId
