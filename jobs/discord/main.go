@@ -112,4 +112,25 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(m.ChannelID, "https://notify.moe/forum/"+strings.ToLower(strings.Split(m.Content, " ")[1]))
 		return
 	}
+
+	if strings.HasPrefix(m.Content, "!s ") {
+		term := m.Content[len("!s "):]
+		userResults, animeResults := arn.Search(term, 10, 10)
+		message := ""
+
+		for _, user := range userResults {
+			message += "https://notify.moe/" + user.Link() + "\n"
+		}
+
+		for _, anime := range animeResults {
+			message += "https://notify.moe/" + anime.Link() + "\n"
+		}
+
+		if len(userResults) == 0 && len(animeResults) == 0 {
+			message = "Sorry, I couldn't find any anime or users with that term."
+		}
+
+		s.ChannelMessageSend(m.ChannelID, message)
+		return
+	}
 }
