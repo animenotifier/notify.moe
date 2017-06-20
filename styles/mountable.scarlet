@@ -1,0 +1,10 @@
+mountable-transition-speed = 400ms
+
+.mountable
+	opacity 0
+	transform translateY(0.85rem)
+	transition opacity mountable-transition-speed ease, transform mountable-transition-speed ease
+
+.mounted
+	opacity 1 !important
+	transform translateY(0)

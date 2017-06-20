@@ -1,7 +1,7 @@
 component Settings(user *arn.User)
 	h2.page-title Settings
 	.widgets
-		.widget
+		.widget.mountable
 			h3.widget-title
 				Icon("user")
 				span Personal
@@ -10,7 +10,7 @@ component Settings(user *arn.User)
 			InputText("tagline", user.Tagline, "Tagline", "Text that appears below your username")
 			InputText("website", user.Website, "Website", "Your homepage")
 
-		.widget
+		.widget.mountable
 			h3.widget-title
 				Icon("cubes")
 				span Accounts

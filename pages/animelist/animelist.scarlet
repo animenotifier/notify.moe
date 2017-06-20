@@ -1,2 +1,17 @@
 .anime-list
-	//
+	vertical
+	width 100%
+
+	tr
+		horizontal
+
+.anime-list-item-name
+	flex 0.8
+
+.anime-list-item-episodes
+	flex 0.1
+	text-align center
+
+.anime-list-item-rating
+	flex 0.1
+	text-align center

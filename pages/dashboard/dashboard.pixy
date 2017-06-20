@@ -2,7 +2,7 @@ component Dashboard(posts []*arn.Post)
 	h2.page-title Dash
 	
 	.widgets
-		.widget
+		.widget.mountable
 			h3.widget-title Schedule
 
 			for i := 1; i <= 5; i++
@@ -11,7 +11,7 @@ component Dashboard(posts []*arn.Post)
 						Icon("calendar-o")
 						span ...
 		
-		.widget
+		.widget.mountable
 			h3.widget-title Forums
 
 			each post in posts
@@ -20,7 +20,7 @@ component Dashboard(posts []*arn.Post)
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
 		
-		.widget
+		.widget.mountable
 			h3.widget-title Groups
 
 			for i := 1; i <= 5; i++
@@ -29,7 +29,7 @@ component Dashboard(posts []*arn.Post)
 						Icon("group")
 						span ...
 
-		.widget
+		.widget.mountable
 			h3.widget-title Messages
 
 			for i := 1; i <= 5; i++
@@ -38,7 +38,7 @@ component Dashboard(posts []*arn.Post)
 						Icon("comment")
 						span ...
 		
-		.widget
+		.widget.mountable
 			h3.widget-title Contacts
 
 			for i := 1; i <= 5; i++
@@ -47,7 +47,7 @@ component Dashboard(posts []*arn.Post)
 						Icon("address-card")
 						span ...
 		
-		.widget
+		.widget.mountable
 			h3.widget-title Follow
 
 			a.widget-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")

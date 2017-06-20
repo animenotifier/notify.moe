@@ -2,13 +2,13 @@ component AnimeList(animeList *arn.AnimeList)
 	table.anime-list
 		thead
 			tr
-				th Anime
-				th Progress
-				th Rating
+				th.anime-list-item-name Anime
+				th.anime-list-item-episodes Progress
+				th.anime-list-item-rating Rating
 		tbody
 			each item in animeList.Items
-				tr.anime-list-item
-					td
+				tr.anime-list-item.mountable
+					td.anime-list-item-name
 						a.ajax(href=item.Anime().Link())= item.Anime().Title.Canonical
-					td= toString(item.Episodes) + " / " + item.Anime().EpisodeCountString()
-					td= item.FinalRating()
+					td.anime-list-item-episodes= toString(item.Episodes) + " / " + item.Anime().EpisodeCountString()
+					td.anime-list-item-rating= item.FinalRating()

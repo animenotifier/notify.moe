@@ -1,5 +1,5 @@
 component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
-	.widgets
+	.widgets.mountable
 		.widget.anime-list-item-view
 			h2= anime.Title.Canonical
 
@@ -10,7 +10,7 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			
 			InputTextArea("notes", item.Notes, "Notes", "Notes")
 
-			.buttons
+			.buttons.mountable
 				a.ajax.button(href="/+" + viewUser.Nick + "/animelist")
 					Icon("list")
 					span View collection

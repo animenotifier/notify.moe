@@ -79,6 +79,10 @@
 	font-size 1.3rem
 	color link-color
 
+.anime-widget
+	margin-top 0.6rem
+	margin-bottom 0.4rem
+
 < 800px
 	.anime-rating-categories
 		vertical

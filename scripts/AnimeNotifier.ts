@@ -32,6 +32,7 @@ export class AnimeNotifier {
 	}
 
 	onContentLoaded() {
+		this.updateMountables()
 		this.updateAvatars()
 
 		for(let element of findAll(".action")) {
@@ -69,6 +70,25 @@ export class AnimeNotifier {
 				}
 			} else {
 				img.classList.add("user-image-found")
+			}
+		}
+	}
+
+	updateMountables() {
+		const delay = 20
+		const maxDelay = 1000
+		
+		let time = 0
+
+		for(let element of findAll(".mountable")) {
+			setTimeout(() => {
+				window.requestAnimationFrame(() => element.classList.add("mounted"))
+			}, time)
+
+			time += delay
+
+			if(time > maxDelay) {
+				time = maxDelay
 			}
 		}
 	}

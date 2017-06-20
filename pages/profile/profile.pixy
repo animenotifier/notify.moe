@@ -47,7 +47,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
 	ProfileHeader(viewUser, user)
 	
-	.profile-category
+	.profile-category.mountable
 		h3
 			a.ajax(href="/+" + viewUser.Nick + "/animelist", title="View all anime") Anime
 
@@ -59,7 +59,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
 						img.anime-cover-image.profile-watching-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 
-	.profile-category
+	.profile-category.mountable
 		h3
 			a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
 		

@@ -6,11 +6,11 @@ component Navigation(user *arn.User)
 
 component LoggedOutMenu
 	nav#navigation
-		NavigationButton("Dash", "/", "inbox")
+		NavigationButton("About", "/", "question-circle")
 		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
 		NavigationButton("Users", "/users", "globe")
-		NavigationButton("Airing", "/airing", "rss")
+		NavigationButton("Airing", "/airing", "th")
 
 component LoggedInMenu(user *arn.User)
 	nav#navigation
@@ -22,7 +22,7 @@ component LoggedInMenu(user *arn.User)
 
 		.extra-navigation
 			ExtraNavigationButton("Users", "/users", "globe")
-			ExtraNavigationButton("Airing", "/airing", "rss")
+			ExtraNavigationButton("Airing", "/airing", "th")
 			
 			if user.Role == "admin"
 				ExtraNavigationButton("Admin", "/admin", "wrench")
