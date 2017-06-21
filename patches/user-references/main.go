@@ -12,7 +12,7 @@ func main() {
 	arn.DB.DeleteTable("EmailToUser")
 	arn.DB.DeleteTable("GoogleToUser")
 
-	// Get a stream of all anime
+	// Get a stream of all users
 	allUsers, err := arn.AllUsers()
 
 	if err != nil {
