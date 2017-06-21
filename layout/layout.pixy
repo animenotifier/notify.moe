@@ -13,7 +13,7 @@ component Layout(app *aero.Application, user *arn.User, content string)
 					main#content.fade!= content
 			
 			LoadingAnimation
-			script(src="/scripts.js")
+			script(src="/scripts")
 
 component LoadingAnimation
 	#loading.sk-cube-grid.fade

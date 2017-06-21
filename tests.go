@@ -35,6 +35,10 @@ func init() {
 		"/forum/general",
 	})
 
+	app.Test("/search/:term", []string{
+		"/search/Dragon Ball",
+	})
+
 	// API
 	app.Test("/api/anime/:id", []string{
 		"/api/anime/1",
@@ -70,6 +74,10 @@ func init() {
 
 	app.Test("/api/nicktouser/:id", []string{
 		"/api/nicktouser/Akyoto",
+	})
+
+	app.Test("/api/searchindex/:id", []string{
+		"/api/searchindex/Anime",
 	})
 
 	// Images

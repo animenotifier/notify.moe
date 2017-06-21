@@ -11,15 +11,17 @@ import (
 )
 
 func init() {
+	// Scripts
+	js := components.JS()
+
+	app.Get("/scripts", func(ctx *aero.Context) string {
+		ctx.SetResponseHeader("Content-Type", "application/javascript")
+		return js
+	})
+
 	// Web manifest
 	app.Get("/manifest.json", func(ctx *aero.Context) string {
 		return ctx.JSON(app.Config.Manifest)
-	})
-
-	// Scripts
-	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return components.JS()
 	})
 
 	// Favicon
