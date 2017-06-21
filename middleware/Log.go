@@ -13,10 +13,10 @@ import (
 
 // Log middleware logs every request into logs/request.log and errors into logs/error.log.
 func Log() aero.Middleware {
-	request := log.NewLog()
+	request := log.New()
 	request.AddOutput(log.File("logs/request.log"))
 
-	err := log.NewLog()
+	err := log.New()
 	err.AddOutput(log.File("logs/error.log"))
 	err.AddOutput(os.Stderr)
 
