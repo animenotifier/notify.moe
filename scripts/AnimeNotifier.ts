@@ -32,7 +32,7 @@ export class AnimeNotifier {
 	}
 	
 	updateActions() {
-		for(let element of findAll(".action")) {
+		for(let element of findAll("action")) {
 			let actionName = element.dataset.action
 
 			element.addEventListener(element.dataset.trigger, e => {
@@ -44,7 +44,7 @@ export class AnimeNotifier {
 	}
 
 	updateAvatars() {
-		for(let element of findAll(".user-image")) {
+		for(let element of findAll("user-image")) {
 			let img = element as HTMLImageElement
 
 			if(img.naturalWidth === 0) {
@@ -67,7 +67,7 @@ export class AnimeNotifier {
 		
 		let time = 0
 
-		for(let element of findAll(".mountable")) {
+		for(let element of findAll("mountable")) {
 			setTimeout(() => {
 				window.requestAnimationFrame(() => element.classList.add("mounted"))
 			}, time)
