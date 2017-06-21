@@ -17,7 +17,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/login"
-	popularanime "github.com/animenotifier/notify.moe/pages/popular-anime"
+	"github.com/animenotifier/notify.moe/pages/popularanime"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
