@@ -5,5 +5,9 @@
 		"**/*.js": {
 			"when": "$(basename).ts"
 		}
+	},
+	"files.associations": {
+		"*.pixy": "jade",
+		"*.scarlet": "stylus"
 	}
 }
