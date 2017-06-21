@@ -41,6 +41,19 @@ namespace arn {
 
 * `go get github.com/animenotifier/notify.moe`
 
+### Install pack & run
+
+* `go get github.com/aerogo/pack`
+* `go get github.com/aerogo/run`
+* `go install github.com/aerogo/pack`
+* `go install github.com/aerogo/run`
+
+### Build all
+
+* Run `make all`
+* Run `make ports` to set up local port forwarding (80 to 4000, 443 to 4001)
+* You should be able to start the server using `run` now
+
 ### HTTPS
 
 * Create the certificate `notify.moe/security/fullchain.pem` (domain: `beta.notify.moe`)
@@ -60,19 +73,9 @@ namespace arn {
 }
 ```
 
-### Build all
-
-* Run `make all`
-* Run `make ports` to set up local port forwarding (80 to 4000, 443 to 4001)
-
 ### Fetch data
 
 * Run `jobs/sync-anime/sync-anime` from this repository to fetch anime data
-
-### Install pack & run
-
-* `go install github.com/aerogo/pack`
-* `go install github.com/aerogo/run`
 
 ### Run
 
