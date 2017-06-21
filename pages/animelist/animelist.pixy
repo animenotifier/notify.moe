@@ -7,7 +7,7 @@ component AnimeList(animeList *arn.AnimeList)
 				th.anime-list-item-rating Rating
 		tbody
 			each item in animeList.Items
-				tr.anime-list-item.mountable
+				tr.anime-list-item.mountable(title=item.Notes)
 					td.anime-list-item-name
 						a.ajax(href=item.Anime().Link())= item.Anime().Title.Canonical
 					td.anime-list-item-episodes= toString(item.Episodes) + " / " + item.Anime().EpisodeCountString()

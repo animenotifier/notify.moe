@@ -30,11 +30,8 @@ export class AnimeNotifier {
 			this.app.loading.classList.add(this.app.fadeOutClass)
 		}
 	}
-
-	onContentLoaded() {
-		this.updateMountables()
-		this.updateAvatars()
-
+	
+	updateActions() {
 		for(let element of findAll(".action")) {
 			let actionName = element.dataset.action
 
@@ -43,31 +40,6 @@ export class AnimeNotifier {
 			})
 
 			element.classList.remove("action")
-		}
-	}
-
-	onPopState(e: PopStateEvent) {
-		if(e.state) {
-			this.app.load(e.state, {
-				addToHistory: false
-			})
-		} else if(this.app.currentPath !== this.app.originalPath) {
-			this.app.load(this.app.originalPath, {
-				addToHistory: false
-			})
-		}
-	}
-
-	onKeyDown(e: KeyboardEvent) {
-		// Ctrl + Q = Search
-		if(e.ctrlKey && e.keyCode == 81) {
-			let search = this.app.find("search") as HTMLInputElement
-
-			search.focus()
-			search.select()
-
-			e.preventDefault()
-			e.stopPropagation()
 		}
 	}
 
@@ -105,6 +77,38 @@ export class AnimeNotifier {
 			if(time > maxDelay) {
 				time = maxDelay
 			}
+		}
+	}
+
+	onContentLoaded() {
+		// Update each of these asynchronously
+		Promise.resolve().then(() => this.updateMountables())
+		Promise.resolve().then(() => this.updateAvatars())
+		Promise.resolve().then(() => this.updateActions())
+	}
+
+	onPopState(e: PopStateEvent) {
+		if(e.state) {
+			this.app.load(e.state, {
+				addToHistory: false
+			})
+		} else if(this.app.currentPath !== this.app.originalPath) {
+			this.app.load(this.app.originalPath, {
+				addToHistory: false
+			})
+		}
+	}
+
+	onKeyDown(e: KeyboardEvent) {
+		// Ctrl + Q = Search
+		if(e.ctrlKey && e.keyCode == 81) {
+			let search = this.app.find("search") as HTMLInputElement
+
+			search.focus()
+			search.select()
+
+			e.preventDefault()
+			e.stopPropagation()
 		}
 	}
 

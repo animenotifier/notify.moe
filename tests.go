@@ -109,4 +109,5 @@ func init() {
 	app.Test("/auth/google", nil)
 	app.Test("/auth/google/callback", nil)
 	app.Test("/user", nil)
+	app.Test("/settings", nil)
 }

@@ -1,14 +1,12 @@
 component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
 	.widgets.mountable
-		.widget.anime-list-item-view
+		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/update/" + anime.ID)
 			h2= anime.Title.Canonical
 
-			if anime.EpisodeCount == 0
-				InputNumber("episodes", item.Episodes, "Episodes", "Number of episodes you watched", 0, 10000)
-			else
-				InputNumber("episodes", item.Episodes, "Episodes", "Number of episodes you watched", 0, anime.EpisodeCount)
+			InputNumber("Episodes", item.Episodes, "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount))
+			InputNumber("RewatchCount", item.RewatchCount, "Rewatched", "How often you rewatched this anime", "0", "100")
 			
-			InputTextArea("notes", item.Notes, "Notes", "Notes")
+			InputTextArea("Notes", item.Notes, "Notes", "Your notes")
 
 			.buttons.mountable
 				a.ajax.button(href="/+" + viewUser.Nick + "/animelist")

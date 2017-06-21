@@ -2,6 +2,55 @@ import { Application } from "./Application"
 import { AnimeNotifier } from "./AnimeNotifier"
 import { Diff } from "./Diff"
 
+// Save new data from an input field
+export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaElement) {
+	arn.loading(true)
+
+	let obj = {}
+	let value = input.value
+	
+	if(input.type === "number") {
+		obj[input.id] = parseInt(value)
+	} else {
+		obj[input.id] = value
+	}
+
+	// console.log(input.type, input.dataset.api, obj, JSON.stringify(obj))
+
+	let apiObject: HTMLElement
+	let parent = input as HTMLElement
+
+	while(parent = parent.parentElement) {
+		if(parent.dataset.api !== undefined) {
+			apiObject = parent
+			break
+		}
+	}
+
+	if(!apiObject) {
+		throw "API object not found"
+	}
+
+	input.disabled = true
+
+	fetch(apiObject.dataset.api, {
+		method: "POST",
+		body: JSON.stringify(obj),
+		credentials: "same-origin"
+	})
+	.then(response => response.text())
+	.then(body => {
+		if(body !== "ok") {
+			throw body
+		}
+	})
+	.catch(console.error)
+	.then(() => {
+		arn.loading(false)
+		input.disabled = false
+	})
+}
+
 // Search
 export function search(arn: AnimeNotifier, search: HTMLInputElement, e: KeyboardEvent) {
 	if(e.ctrlKey || e.altKey) {
