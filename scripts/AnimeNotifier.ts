@@ -1,4 +1,5 @@
 import { Application } from "./Application"
+import { Diff } from "./Diff"
 import { findAll } from "./utils"
 import * as actions from "./actions"
 
@@ -21,6 +22,14 @@ export class AnimeNotifier {
 		this.app.content = this.app.find("content")
 		this.app.loading = this.app.find("loading")
 		this.app.run()
+	}
+
+	reloadContent() {
+		return fetch("/_" + this.app.currentPath, {
+			credentials: "same-origin"
+		})
+		.then(response => response.text())
+		.then(html => Diff.innerHTML(this.app.content, html))
 	}
 
 	loading(isLoading: boolean) {

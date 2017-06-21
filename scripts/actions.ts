@@ -1,6 +1,5 @@
 import { Application } from "./Application"
 import { AnimeNotifier } from "./AnimeNotifier"
-import { Diff } from "./Diff"
 
 // Save new data from an input field
 export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaElement) {
@@ -108,11 +107,7 @@ export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
 			throw body
 		}
 		
-		return fetch("/_" + arn.app.currentPath, {
-			credentials: "same-origin"
-		})
-		.then(response => response.text())
-		.then(html => Diff.update(arn.app.content, html))
+		return arn.reloadContent()
 	})
 	.catch(console.error)
 	.then(() => arn.loading(false))

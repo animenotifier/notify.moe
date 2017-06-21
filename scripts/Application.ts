@@ -109,6 +109,7 @@ export class Application {
 	}
 
 	setContent(html: string) {
+		// Diff.innerHTML(this.content, html)
 		this.content.innerHTML = html
 		this.ajaxify(this.content)
 		this.markActiveLinks(this.content)
