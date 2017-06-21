@@ -58,13 +58,6 @@
 .extra-navigation
 	display none
 
-	.navigation-text
-		display none
-
-	.navigation-button
-		.icon
-			margin-right 0
-
 > 330px
 	.navigation-button, #search
 		font-size 1.3em
@@ -75,22 +68,13 @@
 	
 	#navigation
 		justify-content flex-start
-	
-	.logged-out
-		.navigation-text
-			display inline-block
-		
-		.navigation-button
-			.icon
-				margin-right 0.5em
 
 	#search
 		display block
 		flex 1
 	
 	.extra-navigation
-		horizontal
-		justify-content flex-end
+		display block
 
 < 400px height
 	#navigation

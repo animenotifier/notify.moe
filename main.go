@@ -16,6 +16,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
+	"github.com/animenotifier/notify.moe/pages/login"
 	popularanime "github.com/animenotifier/notify.moe/pages/popular-anime"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
@@ -61,6 +62,7 @@ func main() {
 	app.Ajax("/admin", admin.Get)
 	app.Ajax("/search/:term", search.Get)
 	app.Ajax("/users", users.Get)
+	app.Ajax("/login", login.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/webdev", webdev.Get)
 	// app.Ajax("/genres", genres.Get)
