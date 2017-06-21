@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
@@ -58,6 +59,8 @@ func sync(data *kitsu.Anime) {
 	anime.Rating.Overall = overall
 
 	// Trailers
+	anime.Trailers = []arn.AnimeTrailer{}
+
 	if attr.YoutubeVideoID != "" {
 		anime.Trailers = append(anime.Trailers, arn.AnimeTrailer{
 			Service: "Youtube",
@@ -72,6 +75,11 @@ func sync(data *kitsu.Anime) {
 	if err == nil {
 		status = color.GreenString("✔")
 	} else {
+		color.Red(err.Error())
+
+		data, _ := json.MarshalIndent(anime, "", "\t")
+		fmt.Println(string(data))
+
 		status = color.RedString("✘")
 	}
 
