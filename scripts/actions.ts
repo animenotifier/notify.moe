@@ -1,5 +1,6 @@
 import { Application } from "./Application"
 import { AnimeNotifier } from "./AnimeNotifier"
+import { Diff } from "./Diff"
 
 // Save new data from an input field
 export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaElement) {
@@ -84,7 +85,7 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 			return
 		}
 
-		results.innerHTML = html
+		Diff.innerHTML(results, html)
 		arn.app.emit("DOMContentLoaded")
 	})
 }

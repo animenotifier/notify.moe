@@ -43,9 +43,6 @@ debug
 # binaries
 /notify.moe
 
-# Database
-/db
-
 # Log files
 *.log
 
