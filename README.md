@@ -45,12 +45,12 @@ namespace arn {
 
 * Create the certificate `notify.moe/security/fullchain.pem` (domain: `beta.notify.moe`)
 * Create the private key `notify.moe/security/privkey.pem`
-* Add `notify.moe/security/fullchain.pem`
 
 ### API keys
 
 * Get a Google OAuth 2.0 client key & secret from [console.developers.google.com](https://console.developers.google.com)
 * Create the file `notify.moe/security/api-keys.json`:
+
 ```json
 {
 	"google": {
