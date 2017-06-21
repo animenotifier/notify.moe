@@ -9,8 +9,13 @@ component LoggedOutMenu
 		NavigationButton("About", "/", "question-circle")
 		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Forum", "/forum", "comment")
-		NavigationButton("Users", "/users", "globe")
-		NavigationButton("Airing", "/airing", "th")
+
+		FuzzySearch
+
+		.extra-navigation
+			NavigationButton("Users", "/users", "globe")
+			NavigationButton("Airing", "/airing", "th")
+			NavigationButton("Settings", "/settings", "cog")
 
 component LoggedInMenu(user *arn.User)
 	nav#navigation.logged-in
@@ -22,9 +27,6 @@ component LoggedInMenu(user *arn.User)
 		FuzzySearch
 
 		.extra-navigation
-			//- if user.Role == "admin"
-			//- 	ExtraNavigationButton("Admin", "/admin", "wrench")
-			
 			ExtraNavigationButton("Users", "/users", "globe")
 			ExtraNavigationButton("Airing", "/airing", "th")
 			ExtraNavigationButton("Settings", "/settings", "cog")

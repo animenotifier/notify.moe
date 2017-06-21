@@ -1,6 +1,8 @@
 package settings
 
 import (
+	"net/http"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
@@ -11,7 +13,7 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Redirect("/")
+		return ctx.Error(http.StatusForbidden, "Not logged in", nil)
 	}
 
 	return ctx.HTML(components.Settings(user))
