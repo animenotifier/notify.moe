@@ -43,7 +43,6 @@ namespace arn {
 
 ### HTTPS
 
-* Create directory `notify.moe/security`
 * Create the certificate `notify.moe/security/fullchain.pem` (domain: `beta.notify.moe`)
 * Create the private key `notify.moe/security/privkey.pem`
 * Add `notify.moe/security/fullchain.pem`
