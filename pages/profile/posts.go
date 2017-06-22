@@ -20,7 +20,7 @@ func GetPostsByUser(ctx *aero.Context) string {
 	}
 
 	posts := user.Posts()
-	arn.SortPostsLatestLast(posts)
+	arn.SortPostsLatestFirst(posts)
 
 	var postables []arn.Postable
 
