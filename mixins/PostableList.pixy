@@ -7,10 +7,10 @@ component PostableList(postables []arn.Postable)
 					.post-author
 						Avatar(post.Author())
 					.post-content
-						.p= post.Text()
+						p!= aero.Markdown(post.Text())
 						.post-toolbar
 							.spacer
 							.post-likes= len(post.Likes())
-							a.post-tool.post-permalink.ajax(href="/posts/" + post.ID())
-								svg.icon(viewBox="0 0 1792 1792")
+							a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")
+								Icon("link")
 						a.post-link.side-note.title.ajax(href="/posts/" + post.ID())= post.Title()

@@ -69,7 +69,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 			each thread in threads
 				ThreadLink(thread)
 		h3
-			a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all Posts") Posts
+			a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
 		if len(posts) == 0
 			p No posts on the forum.
 		else
@@ -78,7 +78,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					.post-author
 						Avatar(post.Author())
 					.post-content
-						.p= post.Text
+						p!= aero.Markdown(post.Text)
 						.post-toolbar.active
 							.spacer
 							.post-likes= len(post.Likes)
