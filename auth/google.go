@@ -8,6 +8,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/utils"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -88,41 +89,86 @@ func InstallGoogleAuth(app *aero.Application) {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
 		}
 
-		// Try to find an existing user by the Google user ID
-		user, getErr := arn.GetUserFromTable("GoogleToUser", googleUser.Sub)
+		// Is this an existing user connecting another social account?
+		user := utils.GetUser(ctx)
+
+		if user != nil {
+			println("Connected")
+
+			// Add GoogleToUser reference
+			err = user.ConnectGoogle(googleUser.Sub)
+
+			if err != nil {
+				ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
+			}
+
+			return ctx.Redirect("/")
+		}
+
+		var getErr error
+
+		// Try to find an existing user via the Google user ID
+		user, getErr = arn.GetUserFromTable("GoogleToUser", googleUser.Sub)
 
 		if getErr == nil && user != nil {
-			// Add GoogleToUser reference
-			user.Accounts.Google.ID = googleUser.Sub
-			arn.DB.Set("GoogleToUser", googleUser.Sub, &arn.GoogleToUser{
-				ID:     googleUser.Sub,
-				UserID: user.ID,
-			})
+			authLog.Info("User logged in via Google ID", user.ID, ctx.RealIP(), user.Email, user.RealName())
+
+			user.LastLogin = arn.DateTimeUTC()
+			user.Save()
 
 			session.Set("userId", user.ID)
 			return ctx.Redirect("/")
 		}
 
-		// Try to find an existing user by the associated e-mail address
+		// Try to find an existing user via the associated e-mail address
 		user, getErr = arn.GetUserByEmail(googleUser.Email)
 
 		if getErr == nil && user != nil {
+			authLog.Info("User logged in via Email", user.ID, ctx.RealIP(), user.Email, user.RealName())
+
+			user.LastLogin = arn.DateTimeUTC()
+			user.Save()
+
 			session.Set("userId", user.ID)
 			return ctx.Redirect("/")
 		}
 
+		// Register new user
 		user = arn.NewUser()
 		user.Nick = "g" + googleUser.Sub
 		user.Email = googleUser.Email
 		user.FirstName = googleUser.GivenName
 		user.LastName = googleUser.FamilyName
 		user.Gender = googleUser.Gender
-		user.Accounts.Google.ID = googleUser.Sub
 		user.LastLogin = arn.DateTimeUTC()
 
-		arn.PrettyPrint(user)
-		// arn.RegisterUser(user)
+		// Save basic user info already to avoid data inconsistency problems
+		user.Save()
 
-		return ctx.Error(http.StatusForbidden, "Account does not exist", nil)
+		// Register user
+		err = arn.RegisterUser(user)
+
+		if err != nil {
+			ctx.Error(http.StatusInternalServerError, "Could not register a new user", err)
+		}
+
+		// Connect account to a Google account
+		err = user.ConnectGoogle(googleUser.Sub)
+
+		if err != nil {
+			ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
+		}
+
+		// Save user object again with updated data
+		user.Save()
+
+		// Login
+		session.Set("userId", user.ID)
+
+		// Log
+		authLog.Info("Registered new user", user.ID, ctx.RealIP(), user.Email, user.RealName())
+
+		// Redirect to frontpage
+		return ctx.Redirect("/")
 	})
 }

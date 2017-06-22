@@ -11,5 +11,8 @@ component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 				span Load more
 
 component ThreadList(threads []*arn.Thread)
-	each thread in threads
-		ThreadLink(thread)
+	if len(threads) == 0
+		p No threads found.
+	else
+		each thread in threads
+			ThreadLink(thread)

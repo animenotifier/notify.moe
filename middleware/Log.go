@@ -9,6 +9,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/aerogo/log"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Log middleware logs every request into logs/request.log and errors into logs/error.log.
@@ -27,8 +28,14 @@ func Log() aero.Middleware {
 		responseTimeString := strconv.Itoa(int(responseTime.Nanoseconds()/1000000)) + " ms"
 		responseTimeString = strings.Repeat(" ", 8-len(responseTimeString)) + responseTimeString
 
+		user := utils.GetUser(ctx)
+
 		// Log every request
-		request.Info(ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+		if user != nil {
+			request.Info(user.Nick, ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+		} else {
+			request.Info("[guest]", ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+		}
 
 		// Log all requests that failed
 		switch ctx.StatusCode {
