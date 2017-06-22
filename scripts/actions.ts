@@ -65,8 +65,8 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 		history.replaceState("search", null, "/search/" + term)
 	}
 
-	if(!term) {
-		arn.app.content.innerHTML = "No search term."
+	if(!term || term.length < 2) {
+		arn.app.content.innerHTML = "Please enter at least 2 characters to start searching."
 		return
 	}
 

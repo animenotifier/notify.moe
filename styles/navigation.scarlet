@@ -47,12 +47,13 @@
 	border-radius 0
 	background text-color
 	border none
+	
 	color white
 	font-size 1em
 	min-width 0
 
 	:focus
-		border none !important
+		border none
 		box-shadow none
 
 .extra-navigation

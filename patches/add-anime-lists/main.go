@@ -19,7 +19,9 @@ func main() {
 
 	// Iterate over the stream
 	for user := range allUsers {
-		if user.AnimeList() == nil {
+		exists, err := arn.DB.Exists("AnimeList", user.ID)
+
+		if err == nil && !exists {
 			fmt.Println(user.Nick)
 
 			err := arn.DB.Set("AnimeList", user.ID, &arn.AnimeList{
