@@ -3,7 +3,7 @@ component Thread(thread *arn.Thread, posts []*arn.Post)
 
 	.thread
 		.posts
-			Postable(thread.ToPostable(), nil, thread.Author().ID)
-			
+			Postable(thread.ToPostable(), thread.Author().ID)
+
 			each post in posts
-				Postable(post.ToPostable(), nil, thread.Author().ID)
+				Postable(post.ToPostable(), thread.Author().ID)
