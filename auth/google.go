@@ -92,6 +92,13 @@ func InstallGoogleAuth(app *aero.Application) {
 		user, getErr := arn.GetUserFromTable("GoogleToUser", googleUser.Sub)
 
 		if getErr == nil && user != nil {
+			// Add GoogleToUser reference
+			user.Accounts.Google.ID = googleUser.Sub
+			arn.DB.Set("GoogleToUser", googleUser.Sub, &arn.GoogleToUser{
+				ID:     googleUser.Sub,
+				UserID: user.ID,
+			})
+
 			session.Set("userId", user.ID)
 			return ctx.Redirect("/")
 		}
@@ -104,6 +111,18 @@ func InstallGoogleAuth(app *aero.Application) {
 			return ctx.Redirect("/")
 		}
 
-		return ctx.Error(http.StatusForbidden, "Account does not exist", getErr)
+		user = arn.NewUser()
+		user.Nick = "g" + googleUser.Sub
+		user.Email = googleUser.Email
+		user.FirstName = googleUser.GivenName
+		user.LastName = googleUser.FamilyName
+		user.Gender = googleUser.Gender
+		user.Accounts.Google.ID = googleUser.Sub
+		user.LastLogin = arn.DateTimeUTC()
+
+		arn.PrettyPrint(user)
+		// arn.RegisterUser(user)
+
+		return ctx.Error(http.StatusForbidden, "Account does not exist", nil)
 	})
 }

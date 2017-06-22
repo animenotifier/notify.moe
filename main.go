@@ -77,6 +77,7 @@ func configure(app *aero.Application) *aero.Application {
 	// Middleware
 	app.Use(middleware.Log())
 	app.Use(middleware.Session())
+	app.Use(middleware.UserInfo())
 
 	// API
 	api := api.New("/api/", arn.DB)
