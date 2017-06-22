@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/aerogo/aero"
@@ -83,11 +84,18 @@ func updateUserInfo(ctx *aero.Context) {
 			return
 		}
 
-		newLocation := arn.UserLocation{}
+		newLocation := arn.IPInfoDBLocation{}
 		json.Unmarshal(data, &newLocation)
 
 		if newLocation.CountryName != "-" {
-			user.Location = newLocation
+			user.Location.CountryName = newLocation.CountryName
+			user.Location.CountryCode = newLocation.CountryCode
+			user.Location.Latitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
+			user.Location.Longitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
+			user.Location.CityName = newLocation.CityName
+			user.Location.RegionName = newLocation.RegionName
+			user.Location.TimeZone = newLocation.TimeZone
+			user.Location.ZipCode = newLocation.ZipCode
 		}
 	}
 
