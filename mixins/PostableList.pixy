@@ -2,17 +2,4 @@ component PostableList(postables []arn.Postable)
 	.thread
 		.posts
 			each post in postables
-				.post
-					.post-author
-						Avatar(post.Author())
-					
-					.post-content
-						p!= aero.Markdown(post.Text())
-
-						.post-toolbar
-							.spacer
-							.post-likes= len(post.Likes())
-							a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")
-								Icon("link")
-						
-						a.post-link.side-note.ajax(href=post.Link())= post.Title()
+				Postable(post, "")

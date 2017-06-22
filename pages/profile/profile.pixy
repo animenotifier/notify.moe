@@ -68,6 +68,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 		else
 			each thread in threads
 				ThreadLink(thread)
+	.profile-category.mountable
 		h3
 			a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
 		if len(posts) == 0
@@ -78,7 +79,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					.post-author
 						Avatar(post.Author())
 					.post-content
-						p!= aero.Markdown(post.Text)
+						.mountable!= aero.Markdown(post.Text)
 						.post-toolbar.active
 							.spacer
 							.post-likes= len(post.Likes)
