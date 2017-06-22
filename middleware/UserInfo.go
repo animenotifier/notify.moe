@@ -91,7 +91,7 @@ func updateUserInfo(ctx *aero.Context) {
 			user.Location.CountryName = newLocation.CountryName
 			user.Location.CountryCode = newLocation.CountryCode
 			user.Location.Latitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
-			user.Location.Longitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
+			user.Location.Longitude, _ = strconv.ParseFloat(newLocation.Longitude, 64)
 			user.Location.CityName = newLocation.CityName
 			user.Location.RegionName = newLocation.RegionName
 			user.Location.TimeZone = newLocation.TimeZone
