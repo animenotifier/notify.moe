@@ -34,6 +34,6 @@ func GetPostsByUser(ctx *aero.Context) string {
 		postables[i] = arn.ToPostable(post)
 	}
 
-	return ctx.HTML(components.PostableList(postables))
+	return ctx.HTML(components.LatestPosts(postables, user))
 
 }
