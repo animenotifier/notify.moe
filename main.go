@@ -32,6 +32,11 @@ import (
 var app = aero.New()
 
 func main() {
+	// Configure and start
+	configure(app).Run()
+}
+
+func configure(app *aero.Application) *aero.Application {
 	// HTTPS
 	app.Security.Load("security/fullchain.pem", "security/privkey.pem")
 
@@ -84,6 +89,5 @@ func main() {
 	// Authentication
 	auth.Install(app)
 
-	// Let's go
-	app.Run()
+	return app
 }
