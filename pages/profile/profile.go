@@ -46,7 +46,6 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		if len(posts) > maxPosts {
 			posts = posts[:maxPosts]
 		}
-
 	})
 
 	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts))

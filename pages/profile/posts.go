@@ -21,6 +21,7 @@ func GetPostsByUser(ctx *aero.Context) string {
 
 	posts := user.Posts()
 	arn.SortPostsLatestLast(posts)
+
 	var postables []arn.Postable
 
 	if len(posts) >= postLimit {
