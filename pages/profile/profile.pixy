@@ -79,7 +79,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					.post-author
 						Avatar(post.Author())
 					.post-content
-						.mountable!= aero.Markdown(post.Text)
+						div!= aero.Markdown(post.Text)
 						.post-toolbar.active
 							.spacer
 							.post-likes= len(post.Likes)
