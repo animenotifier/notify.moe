@@ -10,7 +10,7 @@ import (
 
 const postLimit = 10
 
-// GetPostsbyUser shows all forum posts of a particular user.
+// GetPostsByUser shows all forum posts of a particular user.
 func GetPostsByUser(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
 	user, err := arn.GetUserByNick(nick)
@@ -31,9 +31,7 @@ func GetPostsByUser(ctx *aero.Context) string {
 	postables = make([]arn.Postable, len(posts), len(posts))
 
 	for i, post := range posts {
-
 		postables[i] = arn.ToPostable(post)
-
 	}
 
 	return ctx.HTML(components.PostableList(postables))
