@@ -26,6 +26,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	var user *arn.User
 	var threads []*arn.Thread
 	var animeList *arn.AnimeList
+	var posts []*arn.Post
 
 	aero.Parallel(func() {
 		user = utils.GetUser(ctx)
@@ -39,7 +40,13 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		if len(threads) > maxPosts {
 			threads = threads[:maxPosts]
 		}
+	}, func() {
+		posts = viewUser.Posts()
+
+		if len(posts) > maxPosts {
+			posts = posts[:maxPosts]
+		}
 	})
 
-	return ctx.HTML(components.Profile(viewUser, user, animeList, threads))
+	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts))
 }
