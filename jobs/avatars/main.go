@@ -75,6 +75,10 @@ func main() {
 		},
 	}
 
+	if InvokeShellArgs() {
+		return
+	}
+
 	// Stream of all users
 	users, _ := arn.FilterUsers(func(user *arn.User) bool {
 		return true
