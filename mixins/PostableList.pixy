@@ -1,3 +1,16 @@
 component PostableList(postables []arn.Postable)
-	each post in postables
-		a.ajax(href=post.Link())= post.Title()
+	h2.thread-title= len(postables), " latest posts by ", postables[0].Author().Nick
+	.thread
+		.posts
+			each post in postables
+				.post
+					.post-author
+						Avatar(post.Author())
+					.post-content
+						.p= post.Text()
+						.post-toolbar
+							.spacer
+							.post-likes= len(post.Likes())
+							a.post-tool.post-permalink.ajax(href="/posts/" + post.ID())
+								svg.icon(viewBox="0 0 1792 1792")
+						a.post-link.side-note.title.ajax(href="/posts/" + post.ID())= post.Title()

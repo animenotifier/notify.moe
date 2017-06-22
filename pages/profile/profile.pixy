@@ -4,7 +4,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 
 		.image-container.mountable
 			ProfileImage(viewUser)
-		
+
 		.intro-container.mountable
 			h2#nick= viewUser.Nick
 
@@ -16,37 +16,37 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 				p.profile-field.tagline
 					Icon("comment")
 					span.tagline-text No tagline yet.
-			
+
 			if viewUser.Website != ""
 				p.profile-field.website
 					Icon("home")
 					a(href=viewUser.WebsiteURL(), target="_blank", rel="nofollow")= viewUser.Website
-			
+
 			if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 1000
 				p.profile-field.osu(title="osu! performance points")
 					Icon("trophy")
 					span= toString(int(viewUser.Accounts.Osu.PP)) + " pp"
-			
+
 			//- if viewUser.dataEditCount
 			//- 	p.profile-field.editor-contribution(title="Anime data modifications")
 			//- 		Icon("edit")
 			//- 		span= viewUser.dataEditCount
-			
+
 			if viewUser.Registered != ""
 				p.profile-field.registration-date(title="Member since")
 					Icon("calendar")
 					//- span= time.Parse(time.RFC3339, viewUser.Registered)
 					span= viewUser.RegisteredTime().Format("Jan 2006")
 					//- span= monthNames[joined.getMonth()] + ' ' + joined.getFullYear()
-			
+
 			if viewUser.Role != ""
 				p.profile-field.role
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
 
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post)
 	ProfileHeader(viewUser, user)
-	
+
 	.profile-category.mountable
 		h3
 			a.ajax(href="/+" + viewUser.Nick + "/animelist", title="View all anime") Anime
@@ -62,10 +62,23 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 	.profile-category.mountable
 		h3
 			a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
-		
+
 		if len(threads) == 0
 			p No threads on the forum.
 		else
 			each thread in threads
 				ThreadLink(thread)
-	
+		h3
+			a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all Posts") Posts
+		if len(posts) == 0
+			p No posts on the forum.
+		else
+			each post in posts
+				.post
+					.post-author
+						Avatar(post.Author())
+					.post-content
+						.p= post.Text
+						.post-toolbar.active
+							.spacer
+							.post-likes= len(post.Likes)
