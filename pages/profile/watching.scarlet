@@ -7,3 +7,7 @@
 .profile-watching-list-item-image
 	width 55px !important
 	border-radius 2px
+
+< 380px
+	.profile-watching-list
+		justify-content center
