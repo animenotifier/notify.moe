@@ -1,4 +1,6 @@
 {
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
 	"tsimporter.emitSemicolon": false,
 	"tsimporter.doubleQuotes": true,
 	"files.exclude": {

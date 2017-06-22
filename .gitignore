@@ -48,3 +48,6 @@ debug
 
 # JS files
 *.js
+
+# Personal startup settings for each contributor
+/custom.go
