@@ -42,6 +42,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		}
 	}, func() {
 		posts = viewUser.Posts()
+		arn.SortPostsLatestFirst(posts)
 
 		if len(posts) > maxPosts {
 			posts = posts[:maxPosts]

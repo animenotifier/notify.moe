@@ -1,0 +1,6 @@
+component LatestPosts(postables []arn.Postable, viewUser *arn.User)
+	if len(postables) > 0
+		h2.thread-title= len(postables), " latest posts by ", postables[0].Author().Nick
+		PostableList(postables)
+	else
+		p= viewUser.Nick + " hasn't written any posts yet."
