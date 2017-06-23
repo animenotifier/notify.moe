@@ -23,7 +23,11 @@ func IPToHost() aero.Middleware {
 func GetHostsForIP(ip string) []string {
 	hosts, found := ipToHosts.Get(ip)
 
-	if !found || hosts == nil {
+	if !found {
+		hosts = findHostsForIP(ip)
+	}
+
+	if hosts == nil {
 		return nil
 	}
 
@@ -31,17 +35,19 @@ func GetHostsForIP(ip string) []string {
 }
 
 // Finds all host names for the given IP
-func findHostsForIP(ip string) {
+func findHostsForIP(ip string) []string {
 	hosts, err := net.LookupAddr(ip)
 
 	if err != nil {
-		return
+		return nil
 	}
 
 	if len(hosts) == 0 {
-		return
+		return nil
 	}
 
 	// Cache host names
 	ipToHosts.Set(ip, hosts, cache.DefaultExpiration)
+
+	return hosts
 }

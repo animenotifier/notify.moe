@@ -12,52 +12,62 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Log middleware logs every request into logs/request.log and errors into logs/error.log.
-func Log() aero.Middleware {
-	request := log.New()
+var request = log.New()
+var err = log.New()
+
+// Initialize log files
+func init() {
 	request.AddOutput(log.File("logs/request.log"))
 
-	err := log.New()
 	err.AddOutput(log.File("logs/error.log"))
 	err.AddOutput(os.Stderr)
+}
 
+// Log middleware logs every request into logs/request.log and errors into logs/error.log.
+func Log() aero.Middleware {
 	return func(ctx *aero.Context, next func()) {
 		start := time.Now()
 		next()
 		responseTime := time.Since(start)
-		responseTimeString := strconv.Itoa(int(responseTime.Nanoseconds()/1000000)) + " ms"
-		responseTimeString = strings.Repeat(" ", 8-len(responseTimeString)) + responseTimeString
 
-		user := utils.GetUser(ctx)
-		ip := ctx.RealIP()
+		go logRequest(ctx, responseTime)
+	}
+}
 
-		hostName := ""
-		hostNames := GetHostsForIP(ip)
+// Logs a single request
+func logRequest(ctx *aero.Context, responseTime time.Duration) {
+	responseTimeString := strconv.Itoa(int(responseTime.Nanoseconds()/1000000)) + " ms"
+	responseTimeString = strings.Repeat(" ", 8-len(responseTimeString)) + responseTimeString
 
-		if len(hostNames) != 0 {
-			hostName = hostNames[0]
-		}
+	user := utils.GetUser(ctx)
+	ip := ctx.RealIP()
 
-		// Log every request
-		if user != nil {
-			request.Info(user.Nick, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
-		} else {
-			request.Info("[guest]", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
-		}
+	hostName := "<unknown host>"
+	hostNames := GetHostsForIP(ip)
 
-		// Log all requests that failed
-		switch ctx.StatusCode {
-		case http.StatusOK, http.StatusFound, http.StatusMovedPermanently, http.StatusPermanentRedirect, http.StatusTemporaryRedirect:
-			// Ok.
+	if len(hostNames) != 0 {
+		hostName = hostNames[0]
+	}
 
-		default:
-			err.Error(http.StatusText(ctx.StatusCode), ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
-		}
+	// Log every request
+	if user != nil {
+		request.Info(user.Nick, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+	} else {
+		request.Info("[guest]", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+	}
 
-		// Notify us about long requests.
-		// However ignore requests under /auth/ because those depend on 3rd party servers.
-		if responseTime >= 200*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") {
-			err.Error("Long response time", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
-		}
+	// Log all requests that failed
+	switch ctx.StatusCode {
+	case http.StatusOK, http.StatusFound, http.StatusMovedPermanently, http.StatusPermanentRedirect, http.StatusTemporaryRedirect:
+		// Ok.
+
+	default:
+		err.Error(http.StatusText(ctx.StatusCode), ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+	}
+
+	// Notify us about long requests.
+	// However ignore requests under /auth/ because those depend on 3rd party servers.
+	if responseTime >= 200*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") {
+		err.Error("Long response time", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
 	}
 }
