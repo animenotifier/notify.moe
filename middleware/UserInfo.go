@@ -31,25 +31,25 @@ func UserInfo() aero.Middleware {
 	return func(ctx *aero.Context, next func()) {
 		next()
 
+		// Ignore non-HTML requests
+		if strings.Index(ctx.GetRequestHeader("Accept"), "text/html") == -1 {
+			return
+		}
+
+		user := utils.GetUser(ctx)
+
+		// When there's no user logged in, nothing to update
+		if user == nil {
+			return
+		}
+
 		// This works asynchronously so it doesn't block the response
-		go updateUserInfo(ctx)
+		go updateUserInfo(ctx, user)
 	}
 }
 
 // updateUserInfo is started asynchronously so it doesn't block the request
-func updateUserInfo(ctx *aero.Context) {
-	user := utils.GetUser(ctx)
-
-	// When there's no user logged in, nothing to update
-	if user == nil {
-		return
-	}
-
-	// Ignore non-HTML requests
-	if strings.Index(ctx.GetRequestHeader("Accept"), "text/html") == -1 {
-		return
-	}
-
+func updateUserInfo(ctx *aero.Context, user *arn.User) {
 	newIP := ctx.RealIP()
 	newUserAgent := ctx.UserAgent()
 
@@ -69,36 +69,40 @@ func updateUserInfo(ctx *aero.Context) {
 	}
 
 	if user.IP != newIP {
-		user.IP = newIP
-		locationAPI := "https://api.ipinfodb.com/v3/ip-city/?key=" + apiKeys.IPInfoDB.ID + "&ip=" + user.IP + "&format=json"
-
-		response, data, err := gorequest.New().Get(locationAPI).EndBytes()
-
-		if len(err) > 0 && err[0] != nil {
-			color.Red("Couldn't fetch location data | Error: %s | IP: %s", err[0].Error(), user.IP)
-			return
-		}
-
-		if response.StatusCode != http.StatusOK {
-			color.Red("Couldn't fetch location data | Status: %d | IP: %s", response.StatusCode, user.IP)
-			return
-		}
-
-		newLocation := arn.IPInfoDBLocation{}
-		json.Unmarshal(data, &newLocation)
-
-		if newLocation.CountryName != "-" {
-			user.Location.CountryName = newLocation.CountryName
-			user.Location.CountryCode = newLocation.CountryCode
-			user.Location.Latitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
-			user.Location.Longitude, _ = strconv.ParseFloat(newLocation.Longitude, 64)
-			user.Location.CityName = newLocation.CityName
-			user.Location.RegionName = newLocation.RegionName
-			user.Location.TimeZone = newLocation.TimeZone
-			user.Location.ZipCode = newLocation.ZipCode
-		}
+		updateUserLocation(user, newIP)
 	}
 
 	user.LastSeen = arn.DateTimeUTC()
 	user.Save()
+}
+
+func updateUserLocation(user *arn.User, newIP string) {
+	user.IP = newIP
+	locationAPI := "https://api.ipinfodb.com/v3/ip-city/?key=" + apiKeys.IPInfoDB.ID + "&ip=" + user.IP + "&format=json"
+
+	response, data, err := gorequest.New().Get(locationAPI).EndBytes()
+
+	if len(err) > 0 && err[0] != nil {
+		color.Red("Couldn't fetch location data | Error: %s | IP: %s", err[0].Error(), user.IP)
+		return
+	}
+
+	if response.StatusCode != http.StatusOK {
+		color.Red("Couldn't fetch location data | Status: %d | IP: %s", response.StatusCode, user.IP)
+		return
+	}
+
+	newLocation := arn.IPInfoDBLocation{}
+	json.Unmarshal(data, &newLocation)
+
+	if newLocation.CountryName != "-" {
+		user.Location.CountryName = newLocation.CountryName
+		user.Location.CountryCode = newLocation.CountryCode
+		user.Location.Latitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
+		user.Location.Longitude, _ = strconv.ParseFloat(newLocation.Longitude, 64)
+		user.Location.CityName = newLocation.CityName
+		user.Location.RegionName = newLocation.RegionName
+		user.Location.TimeZone = newLocation.TimeZone
+		user.Location.ZipCode = newLocation.ZipCode
+	}
 }
