@@ -24,7 +24,15 @@ func main() {
 
 	// Sort
 	sort.Slice(users, func(i, j int) bool {
-		return users[i].LastSeen > users[j].LastSeen
+		if users[i].LastSeen < users[j].LastSeen {
+			return false
+		}
+
+		if users[i].LastSeen > users[j].LastSeen {
+			return true
+		}
+
+		return users[i].Registered > users[j].Registered
 	})
 
 	// Add users to list
