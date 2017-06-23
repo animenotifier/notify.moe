@@ -24,7 +24,7 @@ func main() {
 
 	// Sort
 	sort.Slice(users, func(i, j int) bool {
-		return users[i].Registered < users[j].Registered
+		return users[i].LastSeen > users[j].LastSeen
 	})
 
 	// Add users to list
