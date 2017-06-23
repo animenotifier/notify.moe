@@ -86,4 +86,4 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 	
 	if user != nil && user.Role == "admin"
 		.side-note
-			a(href="/api/user/" + viewUser.ID)= "API: ", user.Nick
+			a(href="/api/user/" + viewUser.ID)= "API: ", viewUser.Nick
