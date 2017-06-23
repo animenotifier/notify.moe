@@ -166,7 +166,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user", user.ID, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 		// Redirect to frontpage
 		return ctx.Redirect("/")

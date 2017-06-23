@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aerogo/aero"
+	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
@@ -12,7 +12,7 @@ import (
 func main() {
 	color.Yellow("Updating search index")
 
-	aero.Parallel(updateAnimeIndex, updateUserIndex)
+	flow.Parallel(updateAnimeIndex, updateUserIndex)
 
 	color.Green("Finished.")
 }

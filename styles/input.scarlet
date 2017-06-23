@@ -1,3 +1,10 @@
+mixin input-focus
+	:focus
+		color black
+		border 1px solid main-color
+		// TODO: Replace with alpha(main-color, 20%) function
+		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
+
 input, textarea, button, select
 	font-family inherit
 	font-size 1em
@@ -9,15 +16,14 @@ input, textarea
 	border ui-border
 	background white
 	box-shadow none
-
-	:focus
-		color black
-		border 1px solid main-color
-		// TODO: Replace with alpha(main-color, 20%) function
-		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
+	input-focus
 	
 	:disabled
 		ui-disabled
+
+// We need this to have a selector with a higher priority than .widget-element:focus
+input.widget-element
+	input-focus
 
 button, .button
 	ui-element
