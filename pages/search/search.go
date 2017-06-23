@@ -14,5 +14,5 @@ func Get(ctx *aero.Context) string {
 	term := ctx.Get("term")
 
 	userResults, animeResults := arn.Search(term, maxUsers, maxAnime)
-	return ctx.HTML(components.Search(userResults, animeResults))
+	return ctx.HTML(components.SearchResults(userResults, animeResults))
 }
