@@ -47,6 +47,7 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 
 	if len(hostNames) != 0 {
 		hostName = hostNames[0]
+		hostName = strings.TrimSuffix(hostName, ".")
 	}
 
 	// Log every request
