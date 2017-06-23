@@ -48,7 +48,7 @@ func UserInfo() aero.Middleware {
 	}
 }
 
-// updateUserInfo is started asynchronously so it doesn't block the request
+// Update browser and OS data
 func updateUserInfo(ctx *aero.Context, user *arn.User) {
 	newIP := ctx.RealIP()
 	newUserAgent := ctx.UserAgent()
@@ -76,6 +76,7 @@ func updateUserInfo(ctx *aero.Context, user *arn.User) {
 	user.Save()
 }
 
+// Updates the location of the user.
 func updateUserLocation(user *arn.User, newIP string) {
 	user.IP = newIP
 	locationAPI := "https://api.ipinfodb.com/v3/ip-city/?key=" + apiKeys.IPInfoDB.ID + "&ip=" + user.IP + "&format=json"
