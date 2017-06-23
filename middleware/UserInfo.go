@@ -32,7 +32,14 @@ func UserInfo() aero.Middleware {
 		next()
 
 		// Ignore non-HTML requests
-		if strings.Index(ctx.GetRequestHeader("Accept"), "text/html") == -1 {
+		if ctx.IsMediaResponse() {
+			return
+		}
+
+		// Ignore API requests
+		// Note that API requests can filter data (privacy) and we might accidentally save the filtered data.
+		// That's why it's very important to ignore all API requests and not call user.Save() in this context.
+		if strings.HasPrefix(ctx.URI(), "/api/") {
 			return
 		}
 
@@ -40,6 +47,11 @@ func UserInfo() aero.Middleware {
 
 		// When there's no user logged in, nothing to update
 		if user == nil {
+			return
+		}
+
+		// Let's be 100% sure we really do not accidentally save filtered data.
+		if user.Email == "" && user.IP == "" && user.FirstName == "" {
 			return
 		}
 

@@ -26,7 +26,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
 	"github.com/animenotifier/notify.moe/pages/webdev"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 var app = aero.New()
@@ -84,7 +83,7 @@ func configure(app *aero.Application) *aero.Application {
 	api.Install(app)
 
 	// Domain
-	if utils.IsDevelopment() {
+	if arn.IsDevelopment() {
 		app.Config.Domain = "beta.notify.moe"
 	}
 
