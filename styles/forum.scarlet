@@ -3,8 +3,18 @@
 // 	margin-bottom 1rem
 
 .thread-link
-	horizontal
+	vertical
 	margin 0.25rem 0
+
+	.post-author
+		margin-bottom 0.25rem
+
+> 330px
+	.thread-link
+		horizontal
+	
+		.post-author
+			margin-bottom 0
 
 .post-content
 	ui-element
