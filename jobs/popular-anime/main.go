@@ -7,6 +7,9 @@ import (
 	"github.com/fatih/color"
 )
 
+
+const maxPopularAnime = 10
+
 // Note this is using the airing-anime as a template with modfications
 // made to it.
 func main() {
@@ -29,8 +32,9 @@ func main() {
 	sort.Slice(animeList, func(i, j int) bool {
 		return animeList[i].Rating.Overall > animeList[j].Rating.Overall
 	})
+	
 	// Change size of anime list to 10
-	animeList = animeList[:10]
+	animeList = animeList[:maxPopularAnime]
 
 	// Convert to small anime list
 	cache := &arn.ListOfIDs{}
