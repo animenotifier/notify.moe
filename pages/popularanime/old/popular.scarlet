@@ -1,0 +1,19 @@
+// .popular-title
+// 	text-align center
+
+// .popular-anime-list
+// 	display flex
+// 	flex-flow row wrap
+// 	justify-content center
+
+// .popular-anime
+// 	padding 0.5em
+// 	display block
+
+// .popular-anime-image
+// 	width 100px !important
+// 	height 141px !important
+// 	border-radius 3px
+// 	object-fit cover
+// 	default-transition
+// 	shadow-up
