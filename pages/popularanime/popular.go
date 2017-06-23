@@ -2,6 +2,8 @@ package popularanime
 
 import (
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components"
 )
 
 // Get search page.
@@ -25,5 +27,11 @@ func Get(ctx *aero.Context) string {
 	// popular, _ := arn.GetPopularCache()
 
 	// return ctx.HTML(components.Search(popular.Anime, titleCount, animeCount))
-	return ctx.HTML("Coming soon.")
+	animeList, err := arn.GetPopularAnimeCached()
+
+	if err != nil {
+		return ctx.HTML("There was a problem listing anime!")
+	}
+
+	return ctx.HTML(components.AnimeGrid(animeList))
 }
