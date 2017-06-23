@@ -10,6 +10,10 @@ var tests = map[string][]string{
 		"/+Akyoto/threads",
 	},
 
+	"/user/:nick/posts": []string{
+		"/+Akyoto/posts",
+	},
+
 	"/user/:nick/animelist": []string{
 		"/+Akyoto/animelist",
 	},
@@ -54,6 +58,14 @@ var tests = map[string][]string{
 
 	"/api/animelist/:id": []string{
 		"/api/animelist/4J6qpK1ve",
+	},
+
+	"/api/animelist/:id/get/:item": []string{
+		"/api/animelist/4J6qpK1ve/get/7929",
+	},
+
+	"/api/animelist/:id/get/:item/:property": []string{
+		"/api/animelist/4J6qpK1ve/get/7929/Episodes",
 	},
 
 	"/api/settings/:id": []string{
