@@ -29,12 +29,20 @@ func Log() aero.Middleware {
 		responseTimeString = strings.Repeat(" ", 8-len(responseTimeString)) + responseTimeString
 
 		user := utils.GetUser(ctx)
+		ip := ctx.RealIP()
+
+		hostName := ""
+		hostNames := GetHostsForIP(ip)
+
+		if len(hostNames) != 0 {
+			hostName = hostNames[0]
+		}
 
 		// Log every request
 		if user != nil {
-			request.Info(user.Nick, ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+			request.Info(user.Nick, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
 		} else {
-			request.Info("[guest]", ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+			request.Info("[guest]", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
 		}
 
 		// Log all requests that failed
@@ -43,13 +51,13 @@ func Log() aero.Middleware {
 			// Ok.
 
 		default:
-			err.Error(http.StatusText(ctx.StatusCode), ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+			err.Error(http.StatusText(ctx.StatusCode), ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
 		}
 
 		// Notify us about long requests.
 		// However ignore requests under /auth/ because those depend on 3rd party servers.
 		if responseTime >= 200*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") {
-			err.Error("Long response time", ctx.RealIP(), ctx.StatusCode, responseTimeString, ctx.URI())
+			err.Error("Long response time", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
 		}
 	}
 }
