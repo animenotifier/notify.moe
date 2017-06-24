@@ -1,7 +1,7 @@
 component Settings(user *arn.User)
 	h2.page-title Settings
-	.widgets(data-api="/api/user/" + user.ID)
-		.widget.mountable
+	.widgets
+		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
 				Icon("user")
 				span Personal
@@ -10,11 +10,19 @@ component Settings(user *arn.User)
 			InputText("Tagline", user.Tagline, "Tagline", "Text that appears below your username")
 			InputText("Website", user.Website, "Website", "Your homepage")
 
-		.widget.mountable
+		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
 				Icon("cubes")
 				span Accounts
 
 			InputText("Accounts.AniList.Nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
 			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
-			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
+			InputText("Accounts.AnimePlanet.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
+			InputText("Accounts.AnimePlanet.Nick", user.Accounts.AnimePlanet.Nick, "AnimePlanet", "Your username on anime-planet.com")
+
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("cogs")
+				span Settings
+
+			InputText("TitleLanguage", user.Settings().TitleLanguage, "Title language", "Language of anime titles")

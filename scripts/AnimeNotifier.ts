@@ -5,9 +5,21 @@ import * as actions from "./actions"
 
 export class AnimeNotifier {
 	app: Application
+	visibilityObserver: IntersectionObserver
 
 	constructor(app: Application) {
 		this.app = app
+		this.visibilityObserver = new IntersectionObserver(
+			entries => {
+				for(let entry of entries) {
+					if(entry.intersectionRatio > 0) {
+						entry.target["became visible"]()
+						this.visibilityObserver.unobserve(entry.target)
+					}
+				}
+			},
+			{}
+		)
 	}
 
 	onReadyStateChange() {
@@ -22,6 +34,15 @@ export class AnimeNotifier {
 		this.app.content = this.app.find("content")
 		this.app.loading = this.app.find("loading")
 		this.app.run()
+	}
+
+	onContentLoaded() {
+		this.visibilityObserver.disconnect()
+		
+		// Update each of these asynchronously
+		Promise.resolve().then(() => this.updateMountables())
+		Promise.resolve().then(() => this.updateActions())
+		Promise.resolve().then(() => this.lazyLoadImages())
 	}
 
 	reloadContent() {
@@ -57,9 +78,24 @@ export class AnimeNotifier {
 		}
 	}
 
-	updateAvatars() {
+	lazyLoadImages() {
 		for(let element of findAll("user-image")) {
-			let img = element as HTMLImageElement
+			this.lazyLoadImage(element as HTMLImageElement)
+		}
+
+		for(let element of findAll("anime-cover-image")) {
+			this.lazyLoadImage(element as HTMLImageElement)
+		}
+	}
+
+	lazyLoadImage(img: HTMLImageElement) {
+		// Prevent browser from loading it instantly
+		img["original source"] = img.src
+		img.src = ""
+
+		// Once the image becomes visible, load it
+		img["became visible"] = () => {
+			img.src = img["original source"]
 
 			if(img.naturalWidth === 0) {
 				img.onload = function() {
@@ -73,6 +109,8 @@ export class AnimeNotifier {
 				img.classList.add("user-image-found")
 			}
 		}
+
+		this.visibilityObserver.observe(img)
 	}
 
 	updateMountables() {
@@ -92,13 +130,6 @@ export class AnimeNotifier {
 				time = maxDelay
 			}
 		}
-	}
-
-	onContentLoaded() {
-		// Update each of these asynchronously
-		Promise.resolve().then(() => this.updateMountables())
-		Promise.resolve().then(() => this.updateAvatars())
-		Promise.resolve().then(() => this.updateActions())
 	}
 
 	onPopState(e: PopStateEvent) {

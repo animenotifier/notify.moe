@@ -84,6 +84,6 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 							.spacer
 							.post-likes= len(post.Likes)
 	
-	if user != nil && user.Role == "admin"
-		.side-note
-			a(href="/api/user/" + viewUser.ID)= "API: ", viewUser.Nick
+	
+	.footer
+		a(href="/api/user/" + viewUser.ID) User API

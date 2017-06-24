@@ -159,8 +159,10 @@ component Anime(anime *arn.Anime, user *arn.User)
 			//- if providers.AnimePlanet
 			//- 	a.light-button(href="http://www.anime-planet.com/anime/" + providers.AnimePlanet.providerId, target="_blank") AnimePlanet
 
-	.sources
-		p Powered by Kitsu.
+	.footer
+		a(href="/api/anime/" + anime.ID) Anime API
+		span  | 
+		span Powered by Kitsu.
 	//- 		if descriptionSource
 	//- 			span= " Summary by " + summarySource + "."
 	//- //-
