@@ -160,8 +160,9 @@ component Anime(anime *arn.Anime, user *arn.User)
 			//- 	a.light-button(href="http://www.anime-planet.com/anime/" + providers.AnimePlanet.providerId, target="_blank") AnimePlanet
 
 	.footer
-		a(href="/api/anime/" + anime.ID) Anime API
-		span  | 
+		//- if user != nil && user.Role == "admin"
+		//- 	a(href="/api/anime/" + anime.ID) Anime API
+		//- 	span  | 
 		span Powered by Kitsu.
 	//- 		if descriptionSource
 	//- 			span= " Summary by " + summarySource + "."
