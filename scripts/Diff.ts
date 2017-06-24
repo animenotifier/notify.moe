@@ -48,6 +48,11 @@ export class Diff {
 						a.setAttribute(attrib.name, b.getAttribute(attrib.name))
 					}
 				}
+
+				// Special case: Apply state of input elements
+				if(a !== document.activeElement && a instanceof HTMLInputElement && b instanceof HTMLInputElement) {
+					a.value = b.value
+				}
 			}
 
 			Diff.childNodes(a, b)
@@ -57,7 +62,7 @@ export class Diff {
 	static innerHTML(aRoot: HTMLElement, html: string) {
 		let bRoot = document.createElement("main")
 		bRoot.innerHTML = html
-
+		
 		Diff.childNodes(aRoot, bRoot)
 	}
 }

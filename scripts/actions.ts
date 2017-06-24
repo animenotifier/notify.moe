@@ -48,6 +48,8 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 	.then(() => {
 		arn.loading(false)
 		input.disabled = false
+
+		return arn.reloadContent()
 	})
 }
 

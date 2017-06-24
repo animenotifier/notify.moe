@@ -25,7 +25,7 @@ func main() {
 		count++
 		println(count, user.Nick)
 
-		user.SetNick(user.Nick)
+		user.ForceSetNick(user.Nick)
 
 		if user.Email != "" {
 			user.SetEmail(user.Email)

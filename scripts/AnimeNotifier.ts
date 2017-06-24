@@ -30,6 +30,7 @@ export class AnimeNotifier {
 		})
 		.then(response => response.text())
 		.then(html => Diff.innerHTML(this.app.content, html))
+		.then(() => this.app.emit("DOMContentLoaded"))
 	}
 
 	loading(isLoading: boolean) {
@@ -42,13 +43,17 @@ export class AnimeNotifier {
 	
 	updateActions() {
 		for(let element of findAll("action")) {
+			if(element["action assigned"]) {
+				continue
+			}
+
 			let actionName = element.dataset.action
 
 			element.addEventListener(element.dataset.trigger, e => {
 				actions[actionName](this, element, e)
 			})
 
-			element.classList.remove("action")
+			element["action assigned"] = true
 		}
 	}
 
