@@ -158,8 +158,8 @@ export class AnimeNotifier {
 	}
 
 	onKeyDown(e: KeyboardEvent) {
-		// Ctrl + Q = Search
-		if(e.ctrlKey && e.keyCode == 81) {
+		// F = Search
+		if(e.keyCode == 70) {
 			let search = this.app.find("search") as HTMLInputElement
 
 			search.focus()
