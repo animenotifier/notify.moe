@@ -7,6 +7,9 @@
 
 .anime-list-item-name
 	flex 0.8
+	white-space nowrap
+	text-overflow ellipsis
+	overflow hidden
 
 .anime-list-item-episodes
 	flex 0.1
