@@ -1,6 +1,6 @@
-component Dashboard(posts []*arn.Post)
+component Dashboard(posts []*arn.Post, followers []*arn.User)
 	h2.page-title Dash
-	
+
 	.widgets
 		.widget.mountable
 			h3.widget-title Schedule
@@ -10,7 +10,7 @@ component Dashboard(posts []*arn.Post)
 					.widget-element-text
 						Icon("calendar-o")
 						span ...
-		
+
 		.widget.mountable
 			h3.widget-title Forums
 
@@ -19,7 +19,7 @@ component Dashboard(posts []*arn.Post)
 					.widget-element-text
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
-		
+
 		.widget.mountable
 			h3.widget-title Groups
 
@@ -37,16 +37,16 @@ component Dashboard(posts []*arn.Post)
 					.widget-element-text
 						Icon("comment")
 						span ...
-		
+
 		.widget.mountable
 			h3.widget-title Contacts
 
-			for i := 1; i <= 5; i++
-				.widget-element
+			each follower in followers
+				a.widget-element.ajax(href="/+" + follower.Nick)
 					.widget-element-text
 						Icon("address-card")
-						span ...
-		
+						span!= follower.Nick
+
 		.widget.mountable
 			h3.widget-title Follow
 
@@ -54,22 +54,22 @@ component Dashboard(posts []*arn.Post)
 				.widget-element-text
 					Icon("microphone")
 					span Discord
-			
+
 			a.widget-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
 				.widget-element-text
 					Icon("facebook")
 					span Facebook
-			
+
 			a.widget-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
 				.widget-element-text
 					Icon("twitter")
 					span Twitter
-			
+
 			a.widget-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
 				.widget-element-text
 					Icon("google-plus")
 					span Google+
-			
+
 			a.widget-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
 				.widget-element-text
 					Icon("github")

@@ -9,6 +9,7 @@ import (
 )
 
 const maxPosts = 5
+const maxFollowing = 5
 
 // Get dashboard.
 func Get(ctx *aero.Context) string {
@@ -30,5 +31,13 @@ func Get(ctx *aero.Context) string {
 		posts = posts[:maxPosts]
 	}
 
-	return ctx.HTML(components.Dashboard(posts))
+	userList, err := arn.DB.GetMany("User", user.Following[:maxFollowing])
+
+	if err != nil {
+		return ctx.Error(500, "Error fetching following", err)
+	}
+
+	followingList := userList.([]*arn.User)
+
+	return ctx.HTML(components.Dashboard(posts, followingList))
 }
