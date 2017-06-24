@@ -4,13 +4,6 @@
 	height avatar-size
 	border-radius 100%
 	object-fit cover
-	opacity 0
 	default-transition
 	:hover
 		box-shadow outline-shadow-heavy
-
-.user-image-found
-	opacity 1 !important
-
-.user-image-not-found
-	opacity 0 !important

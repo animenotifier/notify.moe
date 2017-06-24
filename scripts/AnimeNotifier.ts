@@ -87,39 +87,34 @@ export class AnimeNotifier {
 				actions[actionName](this, element, e)
 			})
 
+			// Use "action assigned" flag instead of removing the class.
+			// This will make sure that DOM diffs which restore the class name
+			// will not assign the action multiple times to the same element.
 			element["action assigned"] = true
 		}
 	}
 
 	lazyLoadImages() {
-		for(let element of findAll("user-image")) {
-			this.lazyLoadImage(element as HTMLImageElement)
-		}
-
-		for(let element of findAll("anime-cover-image")) {
+		for(let element of findAll("lazy")) {
 			this.lazyLoadImage(element as HTMLImageElement)
 		}
 	}
 
 	lazyLoadImage(img: HTMLImageElement) {
-		// Prevent browser from loading it instantly
-		img["original source"] = img.src
-		img.src = ""
-
 		// Once the image becomes visible, load it
 		img["became visible"] = () => {
-			img.src = img["original source"]
+			img.src = img.dataset.src
 
 			if(img.naturalWidth === 0) {
 				img.onload = function() {
-					this.classList.add("user-image-found")
+					this.classList.add("image-found")
 				}
 
 				img.onerror = function() {
-					this.classList.add("user-image-not-found")
+					this.classList.add("image-not-found")
 				}
 			} else {
-				img.classList.add("user-image-found")
+				img.classList.add("image-found")
 			}
 		}
 
