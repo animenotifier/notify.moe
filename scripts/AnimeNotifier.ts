@@ -9,17 +9,30 @@ export class AnimeNotifier {
 
 	constructor(app: Application) {
 		this.app = app
-		this.visibilityObserver = new IntersectionObserver(
-			entries => {
-				for(let entry of entries) {
-					if(entry.intersectionRatio > 0) {
-						entry.target["became visible"]()
-						this.visibilityObserver.unobserve(entry.target)
+
+		if("IntersectionObserver" in window) {
+			// Enable lazy load
+			this.visibilityObserver = new IntersectionObserver(
+				entries => {
+					for(let entry of entries) {
+						if(entry.intersectionRatio > 0) {
+							entry.target["became visible"]()
+							this.visibilityObserver.unobserve(entry.target)
+						}
 					}
-				}
-			},
-			{}
-		)
+				},
+				{}
+			)
+		} else {
+			// Disable lazy load feature
+			this.visibilityObserver = {
+				disconnect: () => {},
+				observe: (elem: HTMLElement) => {
+					elem["became visible"]()
+				},
+				unobserve: (elem: HTMLElement) => {}
+			} as IntersectionObserver
+		}
 	}
 
 	onReadyStateChange() {
