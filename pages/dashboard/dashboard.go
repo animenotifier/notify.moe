@@ -31,10 +31,16 @@ func Get(ctx *aero.Context) string {
 		posts = posts[:maxPosts]
 	}
 
-	userList, err := arn.DB.GetMany("User", user.Following[:maxFollowing])
+	followIDList := user.Following
+
+	if len(followIDList) > maxFollowing {
+		followIDList = followIDList[:maxFollowing]
+	}
+
+	userList, err := arn.DB.GetMany("User", followIDList)
 
 	if err != nil {
-		return ctx.Error(500, "Error fetching following", err)
+		return ctx.Error(500, "Error fetching followers", err)
 	}
 
 	followingList := userList.([]*arn.User)
