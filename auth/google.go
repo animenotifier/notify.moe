@@ -111,7 +111,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		user, getErr = arn.GetUserFromTable("GoogleToUser", googleUser.Sub)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Google ID", user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Google ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
@@ -124,7 +124,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByEmail(googleUser.Email)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Email", user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Email", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
