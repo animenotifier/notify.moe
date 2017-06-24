@@ -158,6 +158,13 @@ export class AnimeNotifier {
 	}
 
 	onKeyDown(e: KeyboardEvent) {
+		// Ignore hotkeys on input elements
+		switch(document.activeElement.tagName) {
+			case "INPUT":
+			case "TEXTAREA":
+				return
+		}
+
 		// F = Search
 		if(e.keyCode == 70) {
 			let search = this.app.find("search") as HTMLInputElement
