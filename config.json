@@ -21,7 +21,8 @@
 		"video",
 		"loading",
 		"fade",
-		"mobile"
+		"mobile",
+		"extension"
 	],
 	"scripts": {
 		"main": "main"

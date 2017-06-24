@@ -1,4 +1,4 @@
-component Layout(app *aero.Application, user *arn.User, content string)
+component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, content string)
 	html(lang="en")
 		head
 			title= app.Config.Title
@@ -6,7 +6,7 @@ component Layout(app *aero.Application, user *arn.User, content string)
 			meta(name="theme-color", content=app.Config.Manifest.ThemeColor)
 			link(rel="manifest", href="/manifest.json")
 		body
-			#container
+			#container(class=utils.GetContainerClass(ctx))
 				#header
 					Navigation(user)
 				#content-container

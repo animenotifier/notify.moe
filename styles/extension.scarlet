@@ -1,0 +1,10 @@
+.embedded
+	.anime-list
+		th
+			display none
+	
+	#content
+		// font-size 0.9em
+	
+	#header
+		display none
