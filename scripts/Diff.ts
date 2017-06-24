@@ -25,6 +25,10 @@ export class Diff {
 			}
 
 			if(a.nodeType === Node.ELEMENT_NODE) {
+				if(a.tagName === "IFRAME") {
+					continue
+				}
+
 				let removeAttributes: Attr[] = []
 				
 				for(let x = 0; x < a.attributes.length; x++) {
