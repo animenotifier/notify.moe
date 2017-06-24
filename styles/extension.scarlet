@@ -1,0 +1,36 @@
+.embedded
+	flex-direction column-reverse !important
+
+	.anime-list
+		max-width 500px
+		margin -1.1rem
+
+		thead
+			display none
+
+		.anime-list-item
+			// ui-element
+			// margin-bottom 0.5rem
+
+		.anime-list-item-episodes
+			horizontal
+			text-align right
+			white-space nowrap
+			flex 0.2
+
+			.anime-list-item-episodes-watched
+				flex 0.4
+			
+			.anime-list-item-episodes-max
+				opacity 0.5
+				flex 0.4
+
+			.anime-list-item-episodes-separator
+				opacity 0.5
+				flex 0.2
+
+		.anime-list-item-rating
+			display none
+	
+	#navigation
+		font-size 0.9rem

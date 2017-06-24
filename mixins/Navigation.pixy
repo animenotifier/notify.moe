@@ -39,7 +39,7 @@ component LoggedInMenu(user *arn.User)
 			NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
 
 component FuzzySearch
-	input#search.action(data-action="search", data-trigger="input", type="text", placeholder="Search...", title="Shortcut: Ctrl + Q")
+	input#search.action(data-action="search", data-trigger="input", type="text", placeholder="Search...", title="Shortcut: F")
 
 component NavigationButton(name string, target string, icon string)
 	a.navigation-link.ajax(href=target, aria-label=name, title=name)

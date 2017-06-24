@@ -5,9 +5,34 @@ import * as actions from "./actions"
 
 export class AnimeNotifier {
 	app: Application
+	visibilityObserver: IntersectionObserver
 
 	constructor(app: Application) {
 		this.app = app
+
+		if("IntersectionObserver" in window) {
+			// Enable lazy load
+			this.visibilityObserver = new IntersectionObserver(
+				entries => {
+					for(let entry of entries) {
+						if(entry.intersectionRatio > 0) {
+							entry.target["became visible"]()
+							this.visibilityObserver.unobserve(entry.target)
+						}
+					}
+				},
+				{}
+			)
+		} else {
+			// Disable lazy load feature
+			this.visibilityObserver = {
+				disconnect: () => {},
+				observe: (elem: HTMLElement) => {
+					elem["became visible"]()
+				},
+				unobserve: (elem: HTMLElement) => {}
+			} as IntersectionObserver
+		}
 	}
 
 	onReadyStateChange() {
@@ -24,12 +49,22 @@ export class AnimeNotifier {
 		this.app.run()
 	}
 
+	onContentLoaded() {
+		this.visibilityObserver.disconnect()
+		
+		// Update each of these asynchronously
+		Promise.resolve().then(() => this.updateMountables())
+		Promise.resolve().then(() => this.updateActions())
+		Promise.resolve().then(() => this.lazyLoadImages())
+	}
+
 	reloadContent() {
 		return fetch("/_" + this.app.currentPath, {
 			credentials: "same-origin"
 		})
 		.then(response => response.text())
 		.then(html => Diff.innerHTML(this.app.content, html))
+		.then(() => this.app.emit("DOMContentLoaded"))
 	}
 
 	loading(isLoading: boolean) {
@@ -42,32 +77,48 @@ export class AnimeNotifier {
 	
 	updateActions() {
 		for(let element of findAll("action")) {
+			if(element["action assigned"]) {
+				continue
+			}
+
 			let actionName = element.dataset.action
 
 			element.addEventListener(element.dataset.trigger, e => {
 				actions[actionName](this, element, e)
 			})
 
-			element.classList.remove("action")
+			// Use "action assigned" flag instead of removing the class.
+			// This will make sure that DOM diffs which restore the class name
+			// will not assign the action multiple times to the same element.
+			element["action assigned"] = true
 		}
 	}
 
-	updateAvatars() {
-		for(let element of findAll("user-image")) {
-			let img = element as HTMLImageElement
+	lazyLoadImages() {
+		for(let element of findAll("lazy")) {
+			this.lazyLoadImage(element as HTMLImageElement)
+		}
+	}
+
+	lazyLoadImage(img: HTMLImageElement) {
+		// Once the image becomes visible, load it
+		img["became visible"] = () => {
+			img.src = img.dataset.src
 
 			if(img.naturalWidth === 0) {
 				img.onload = function() {
-					this.classList.add("user-image-found")
+					this.classList.add("image-found")
 				}
 
 				img.onerror = function() {
-					this.classList.add("user-image-not-found")
+					this.classList.add("image-not-found")
 				}
 			} else {
-				img.classList.add("user-image-found")
+				img.classList.add("image-found")
 			}
 		}
+
+		this.visibilityObserver.observe(img)
 	}
 
 	updateMountables() {
@@ -89,13 +140,6 @@ export class AnimeNotifier {
 		}
 	}
 
-	onContentLoaded() {
-		// Update each of these asynchronously
-		Promise.resolve().then(() => this.updateMountables())
-		Promise.resolve().then(() => this.updateAvatars())
-		Promise.resolve().then(() => this.updateActions())
-	}
-
 	onPopState(e: PopStateEvent) {
 		if(e.state) {
 			this.app.load(e.state, {
@@ -109,8 +153,15 @@ export class AnimeNotifier {
 	}
 
 	onKeyDown(e: KeyboardEvent) {
-		// Ctrl + Q = Search
-		if(e.ctrlKey && e.keyCode == 81) {
+		// Ignore hotkeys on input elements
+		switch(document.activeElement.tagName) {
+			case "INPUT":
+			case "TEXTAREA":
+				return
+		}
+
+		// F = Search
+		if(e.keyCode == 70) {
 			let search = this.app.find("search") as HTMLInputElement
 
 			search.focus()

@@ -14,6 +14,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
+	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/login"
@@ -26,7 +27,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
 	"github.com/animenotifier/notify.moe/pages/webdev"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 var app = aero.New()
@@ -71,19 +71,21 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/login", login.Get)
 	app.Ajax("/airing", airing.Get)
 	app.Ajax("/webdev", webdev.Get)
+	app.Ajax("/extension/embed", embed.Get)
 	// app.Ajax("/genres", genres.Get)
 	// app.Ajax("/genres/:name", genre.Get)
 
 	// Middleware
 	app.Use(middleware.Log())
 	app.Use(middleware.Session())
+	app.Use(middleware.UserInfo())
 
 	// API
 	api := api.New("/api/", arn.DB)
 	api.Install(app)
 
 	// Domain
-	if utils.IsDevelopment() {
+	if arn.IsDevelopment() {
 		app.Config.Domain = "beta.notify.moe"
 	}
 

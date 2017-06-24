@@ -1,24 +1,23 @@
-package animelist
+package embed
 
 import (
 	"net/http"
 	"sort"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get anime list.
+// Get anime list in the browser extension.
 func Get(ctx *aero.Context) string {
-	nick := ctx.Get("nick")
-	viewUser, err := arn.GetUserByNick(nick)
+	user := utils.GetUser(ctx)
 
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "User not found", err)
+	if user == nil {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	animeList := viewUser.AnimeList()
+	animeList := user.AnimeList()
 
 	if animeList == nil {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
@@ -28,5 +27,5 @@ func Get(ctx *aero.Context) string {
 		return animeList.Items[i].FinalRating() < animeList.Items[j].FinalRating()
 	})
 
-	return ctx.HTML(components.AnimeList(animeList))
+	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(animeList)))
 }

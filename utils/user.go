@@ -5,23 +5,7 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-// GetUser ...
+// GetUser returns the logged in user for the given context.
 func GetUser(ctx *aero.Context) *arn.User {
-	if !ctx.HasSession() {
-		return nil
-	}
-
-	userID := ctx.Session().GetString("userId")
-
-	if userID == "" {
-		return nil
-	}
-
-	user, err := arn.GetUser(userID)
-
-	if err != nil {
-		return nil
-	}
-
-	return user
+	return arn.GetUserFromContext(ctx)
 }

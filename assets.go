@@ -19,6 +19,11 @@ func init() {
 		return js
 	})
 
+	app.Get("/scripts.js", func(ctx *aero.Context) string {
+		ctx.SetResponseHeader("Content-Type", "application/javascript")
+		return js
+	})
+
 	// Web manifest
 	app.Get("/manifest.json", func(ctx *aero.Context) string {
 		return ctx.JSON(app.Config.Manifest)

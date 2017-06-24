@@ -14,17 +14,15 @@
 		"layout",
 		"navigation",
 		"headers",
-		"forms",
+		"input",
 		"grid",
-		"colors",
-		"animelist",
 		"forum",
-		"settings",
 		"user",
 		"video",
 		"loading",
 		"fade",
-		"mobile"
+		"mobile",
+		"extension"
 	],
 	"scripts": {
 		"main": "main"

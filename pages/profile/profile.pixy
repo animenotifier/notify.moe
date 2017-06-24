@@ -57,7 +57,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 			else
 				each item in animeList.Items
 					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.anime-cover-image.profile-watching-list-item-image(src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
+						img.anime-cover-image.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 
 	.profile-category.mountable
 		h3
@@ -79,7 +79,11 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					.post-author
 						Avatar(post.Author())
 					.post-content
-						.mountable!= aero.Markdown(post.Text)
+						div!= aero.Markdown(post.Text)
 						.post-toolbar.active
 							.spacer
 							.post-likes= len(post.Likes)
+	
+	//- if user != nil && user.Role == "admin"
+	//- 	.footer
+	//- 		a(href="/api/user/" + viewUser.ID) User API

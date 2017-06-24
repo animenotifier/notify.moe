@@ -1,0 +1,11 @@
+.lazy
+	visibility hidden
+	opacity 0
+
+.image-found
+	visibility visible
+	opacity 1 !important
+
+.image-not-found
+	visibility hidden
+	opacity 0 !important

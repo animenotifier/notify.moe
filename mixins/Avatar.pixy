@@ -4,7 +4,7 @@ component Avatar(user *arn.User)
 
 component AvatarNoLink(user *arn.User)
 	if user.HasAvatar()
-		img.user-image(src=user.SmallAvatar(), alt=user.Nick)
+		img.user-image.lazy(data-src=user.SmallAvatar(), alt=user.Nick)
 	else
 		SVGAvatar
 

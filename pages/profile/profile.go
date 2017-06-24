@@ -2,6 +2,7 @@ package profile
 
 import (
 	"github.com/aerogo/aero"
+	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
@@ -28,7 +29,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	var animeList *arn.AnimeList
 	var posts []*arn.Post
 
-	aero.Parallel(func() {
+	flow.Parallel(func() {
 		user = utils.GetUser(ctx)
 	}, func() {
 		animeList = viewUser.AnimeList()

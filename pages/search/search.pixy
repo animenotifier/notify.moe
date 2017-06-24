@@ -1,4 +1,4 @@
-component Search(users []*arn.User, animeResults []*arn.Anime)
+component SearchResults(users []*arn.User, animeResults []*arn.Anime)
 	.widgets
 		.widget
 			h3 Users
