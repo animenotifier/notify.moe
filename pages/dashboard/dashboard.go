@@ -40,7 +40,7 @@ func Get(ctx *aero.Context) string {
 	userList, err := arn.DB.GetMany("User", followIDList)
 
 	if err != nil {
-		return ctx.Error(500, "Error fetching followers", err)
+		return ctx.Error(500, "Error fetching followed users", err)
 	}
 
 	followingList := userList.([]*arn.User)

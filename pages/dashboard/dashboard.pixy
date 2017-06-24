@@ -1,4 +1,4 @@
-component Dashboard(posts []*arn.Post, followers []*arn.User)
+component Dashboard(posts []*arn.Post, following []*arn.User)
 	h2.page-title Dash
 
 	.widgets
@@ -38,15 +38,15 @@ component Dashboard(posts []*arn.Post, followers []*arn.User)
 						Icon("comment")
 						span ...
 
-		if len(followers) > 0
+		if len(following) > 0
 			.widget.mountable
 				h3.widget-title Contacts
 
-				each follower in followers
-					a.widget-element.ajax(href="/+" + follower.Nick)
+				each user in following
+					a.widget-element.ajax(href="/+" + user.Nick)
 						.widget-element-text
 							Icon("address-card")
-							span= follower.Nick
+							span= user.Nick
 
 		.widget.mountable
 			h3.widget-title Follow
