@@ -12,3 +12,8 @@ component InputNumber(id string, value int, label string, placeholder string, mi
 	.widget-input
 		label(for=id)= label + ":"
 		input.widget-element.action(id=id, type="number", value=value, min=min, max=max, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
+
+component InputSelection(id string, value string, label string, placeholder string)
+	.widget-input
+		label(for=id)= label + ":"
+		select.widget-element.action(id=id, value=value, title=placeholder, data-action="save", data-trigger="change")
