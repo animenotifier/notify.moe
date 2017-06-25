@@ -34,19 +34,17 @@ func Get(ctx *aero.Context) string {
 	followIDList := user.Following
 	var followingList []*arn.User
 
-	if len(followIDList) > 0 {
-		if len(followIDList) > maxFollowing {
-			followIDList = followIDList[:maxFollowing]
-		}
-
-		userList, err := arn.DB.GetMany("User", followIDList)
-
-		if err != nil {
-			return ctx.Error(500, "Error fetching followed users", err)
-		}
-
-		followingList = userList.([]*arn.User)
+	if len(followIDList) > maxFollowing {
+		followIDList = followIDList[:maxFollowing]
 	}
+
+	userList, err := arn.DB.GetMany("User", followIDList)
+
+	if err != nil {
+		return ctx.Error(500, "Error fetching followed users", err)
+	}
+
+	followingList = userList.([]*arn.User)
 
 	return ctx.HTML(components.Dashboard(posts, followingList))
 }
