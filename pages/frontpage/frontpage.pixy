@@ -1,7 +1,12 @@
 component FrontPage
-	p Anime Notifier 4.0 is currently under construction.
-	p
-		a(href="https://paypal.me/blitzprog", target="_blank", rel="noopener") Support the development
+	.frontpage
+		h2 notify.moe
 
-	p
-		a(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener") Source on GitHub
+		img.screenshot(src="/images/elements/extension-screenshot.png", alt="Screenshot of the browser extension")
+		
+		Login
+
+		.footer
+			a(href="https://paypal.me/blitzprog", target="_blank", rel="noopener") Support the development
+			span  | 
+			a(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener") Source on GitHub

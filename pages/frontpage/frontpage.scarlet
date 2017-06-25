@@ -1,11 +1,19 @@
-.login-buttons
-	horizontal-wrap
-	width 100%
-	justify-content center
+.frontpage
+	vertical
+	align-items center
 
-.login-button
-	//
+	h2
+		font-size 2.5rem
+		font-weight normal
+		letter-spacing 3px
+		text-transform uppercase
+	
+	.footer
+		text-align center
+		margin-top content-padding
 
-.login-button-image
-	max-width 236px
-	max-height 44px
+.screenshot
+	max-width 100%
+	border-radius 3px
+	box-shadow shadow-medium
+	margin-bottom 2rem

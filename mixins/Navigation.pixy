@@ -24,9 +24,9 @@ component LoggedInMenu(user *arn.User)
 			NavigationButton("Watching list", "/extension/embed", "home")
 
 		NavigationButton("Dash", "/", "dashboard")
-		NavigationButton("Anime", "/anime", "television")
 		NavigationButton("Profile", "/+", "user")
 		NavigationButton("Forum", "/forum", "comment")
+		NavigationButton("Anime", "/anime", "television")
 
 		FuzzySearch
 
