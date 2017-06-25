@@ -139,3 +139,9 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 	.catch(console.error)
 	.then(() => arn.loading(false))
 }
+
+// Chrome extension installation
+export function installExtension(arn: AnimeNotifier, button: HTMLElement) {
+	let browser: any = window["chrome"]
+	browser.webstore.install()
+}

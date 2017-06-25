@@ -17,3 +17,6 @@
 	border-radius 3px
 	box-shadow shadow-medium
 	margin-bottom 2rem
+
+	:hover
+		cursor pointer
