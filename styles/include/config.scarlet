@@ -1,6 +1,6 @@
 // Colors
 text-color = rgb(60, 60, 60)
-main-color = rgb(225, 38, 15)
+main-color = rgb(215, 38, 15)
 link-color = main-color
 link-hover-color = rgb(242, 60, 30)
 link-active-color = link-hover-color
