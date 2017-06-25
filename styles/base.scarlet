@@ -8,6 +8,7 @@ body
 	overflow hidden
 	height 100%
 	color text-color
+	background-color bg-color
 
 a
 	color link-color
@@ -21,8 +22,8 @@ a
 	:active
 		transform translateY(3px)
 	
-	&.active
-		color link-active-color
+	// &.active
+	// 	color link-active-color
 
 strong
 	font-weight bold

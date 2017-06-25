@@ -1,7 +1,7 @@
 mixin input-focus
 	:focus
 		color black
-		border 1px solid main-color
+		border 1px solid input-focus-border-color
 		// TODO: Replace with alpha(main-color, 20%) function
 		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
 
@@ -17,12 +17,16 @@ input, textarea
 	background white
 	box-shadow none
 	input-focus
+
+	:active
+		transform translateY(3px)
 	
 	:disabled
 		ui-disabled
 
 // We need this to have a selector with a higher priority than .widget-element:focus
-input.widget-element
+input.widget-element,
+textarea.widget-element
 	input-focus
 
 button, .button
@@ -33,10 +37,11 @@ button, .button
 	padding 0.75rem 1rem
 	color link-color
 
-	:hover
+	:hover,
+	&.active
 		cursor pointer
 		color white
-		background-color link-hover-color
+		background-color button-hover-color
 
 	:active
 		transform translateY(3px)

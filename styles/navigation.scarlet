@@ -12,8 +12,8 @@
 	:after
 		content ""
 		display block
-		height 3px
-		background-color main-color
+		height hover-line-size
+		background-color nav-link-hover-slide-color
 		transform scaleX(0)
 		opacity 0
 		default-transition
@@ -45,12 +45,15 @@
 #search
 	display none
 	border-radius 0
-	background text-color
+	background transparent
 	border none
 	
-	color white
+	color nav-link-hover-color
 	font-size 1em
 	min-width 0
+
+	::placeholder
+		color nav-link-color
 
 	:focus
 		border none
