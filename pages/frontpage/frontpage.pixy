@@ -2,7 +2,7 @@ component FrontPage
 	.frontpage
 		h2 notify.moe
 
-		img.screenshot(src="//media.notify.moe/images/elements/extension-screenshot.png", alt="Screenshot of the browser extension")
+		img.screenshot(src="/images/elements/extension-screenshot.png", alt="Screenshot of the browser extension")
 		
 		Login
 
