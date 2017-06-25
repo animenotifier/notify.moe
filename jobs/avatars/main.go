@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path"
 	"reflect"
 	"runtime"
 	"time"
@@ -29,7 +30,14 @@ func main() {
 	color.Yellow("Generating user avatars")
 
 	// Switch to main directory
-	os.Chdir("../../")
+	exe, err := os.Executable()
+
+	if err != nil {
+		panic(err)
+	}
+
+	root := path.Dir(exe)
+	os.Chdir(path.Join(root, "../../"))
 
 	// Log
 	avatarLog.AddOutput(log.File("logs/avatar.log"))
