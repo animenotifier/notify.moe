@@ -27,5 +27,5 @@ func Get(ctx *aero.Context) string {
 		return animeList.Items[i].FinalRating() < animeList.Items[j].FinalRating()
 	})
 
-	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(animeList)))
+	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(animeList, user)))
 }

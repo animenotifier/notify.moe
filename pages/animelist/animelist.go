@@ -7,11 +7,13 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get anime list.
 func Get(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
+	user := utils.GetUser(ctx)
 	viewUser, err := arn.GetUserByNick(nick)
 
 	if err != nil {
@@ -28,5 +30,5 @@ func Get(ctx *aero.Context) string {
 		return animeList.Items[i].FinalRating() < animeList.Items[j].FinalRating()
 	})
 
-	return ctx.HTML(components.AnimeList(animeList))
+	return ctx.HTML(components.AnimeList(animeList, user))
 }
