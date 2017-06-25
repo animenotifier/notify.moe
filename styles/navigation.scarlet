@@ -59,6 +59,9 @@
 .extra-navigation
 	display none
 
+.extension-navigation
+	display none
+
 > 330px
 	.navigation-button, #search
 		font-size 1.3em
