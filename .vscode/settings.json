@@ -6,10 +6,15 @@
 	"files.exclude": {
 		"**/*.js": {
 			"when": "$(basename).ts"
-		}
+		},
+		"components/": true
 	},
 	"files.associations": {
 		"*.pixy": "jade",
 		"*.scarlet": "stylus"
+	},
+	"search.exclude": {
+		"components/": true,
+		"**/*.svg": true
 	}
 }
