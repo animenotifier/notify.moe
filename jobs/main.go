@@ -14,16 +14,21 @@ import (
 )
 
 var colorPool = []*color.Color{
-	color.New(color.FgCyan),
-	color.New(color.FgYellow),
+	color.New(color.FgHiGreen),
+	color.New(color.FgHiYellow),
+	color.New(color.FgHiBlue),
+	color.New(color.FgHiMagenta),
+	color.New(color.FgHiCyan),
 	color.New(color.FgGreen),
-	color.New(color.FgBlue),
-	color.New(color.FgMagenta),
 }
 
 var jobs = map[string]time.Duration{
-	"popular-anime": 5 * time.Second,
-	"search-index":  15 * time.Second,
+	"active-users":  1 * time.Minute,
+	"avatars":       1 * time.Hour,
+	"sync-anime":    10 * time.Hour,
+	"popular-anime": 11 * time.Hour,
+	"airing-anime":  12 * time.Hour,
+	"search-index":  13 * time.Hour,
 }
 
 func main() {
@@ -77,6 +82,10 @@ func startJobs() {
 			var err error
 
 			for {
+				// Wait for the given interval first
+				<-ticker.C
+
+				// Now start
 				schedulerLog.Info("Starting " + jobColor(jobName))
 
 				cmd := exec.Command(executable)
@@ -86,19 +95,17 @@ func startJobs() {
 				err = cmd.Start()
 
 				if err != nil {
-					color.Red(err.Error())
+					schedulerLog.Error("Error starting job", jobColor(jobName), err)
 				}
 
 				err = cmd.Wait()
 
 				if err != nil {
-					color.Red(err.Error())
+					schedulerLog.Error("Job exited with error", jobColor(jobName), err)
 				}
 
 				schedulerLog.Info("Finished " + jobColor(jobName))
 				jobLog.Info("--------------------------------------------------------------------------------")
-
-				<-ticker.C
 			}
 		}()
 
