@@ -27,7 +27,7 @@ func Get(ctx *aero.Context) string {
 	}
 
 	sort.Slice(animeList.Items, func(i, j int) bool {
-		return animeList.Items[i].FinalRating() < animeList.Items[j].FinalRating()
+		return animeList.Items[i].FinalRating() > animeList.Items[j].FinalRating()
 	})
 
 	return ctx.HTML(components.AnimeList(animeList, user))
