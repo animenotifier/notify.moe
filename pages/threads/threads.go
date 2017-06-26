@@ -1,7 +1,7 @@
 package threads
 
 import (
-	"strings"
+	"net/http"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -12,28 +12,26 @@ import (
 // Get thread.
 func Get(ctx *aero.Context) string {
 	id := ctx.Get("id")
-	thread, err := arn.GetThread(id)
 	user := utils.GetUser(ctx)
 
+	// Fetch thread
+	thread, err := arn.GetThread(id)
+
 	if err != nil {
-		return ctx.Error(404, "Thread not found", err)
+		return ctx.Error(http.StatusNotFound, "Thread not found", err)
 	}
 
-	replies, filterErr := arn.FilterPosts(func(post *arn.Post) bool {
-		post.Text = strings.Replace(post.Text, "http://", "https://", -1)
-		return post.ThreadID == thread.ID
-	})
+	// Fetch posts
+	postObjects, getErr := arn.DB.GetMany("Post", thread.Posts)
 
-	arn.SortPostsLatestLast(replies)
-
-	// Benchmark
-	// for i := 0; i < 7; i++ {
-	// 	replies = append(replies, replies...)
-	// }
-
-	if filterErr != nil {
-		return ctx.Error(500, "Error fetching thread replies", err)
+	if getErr != nil {
+		return ctx.Error(http.StatusInternalServerError, "Could not retrieve posts", getErr)
 	}
 
-	return ctx.HTML(components.Thread(thread, replies, user))
+	posts := postObjects.([]*arn.Post)
+
+	// Sort posts
+	arn.SortPostsLatestLast(posts)
+
+	return ctx.HTML(components.Thread(thread, posts, user))
 }

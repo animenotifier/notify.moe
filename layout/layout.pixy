@@ -12,8 +12,7 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, conte
 					Navigation(user)
 				#content-container
 					main#content.fade!= content
-			
-			LoadingAnimation
+					LoadingAnimation
 			script(src="/scripts")
 
 component LoadingAnimation

@@ -40,6 +40,9 @@ nav-link-hover-slide-color = rgb(248, 165, 130)
 // nav-link-color = rgb(160, 160, 160)
 // nav-link-hover-color = rgb(80, 80, 80)
 
+// Loading animation
+loading-anim-color = nav-link-hover-slide-color
+
 // Shadow
 shadow-light = 4px 4px 8px rgba(0, 0, 0, 0.05)
 shadow-medium = 6px 6px 12px rgba(0, 0, 0, 0.13)
