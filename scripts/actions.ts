@@ -11,7 +11,11 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 	let value = input.value
 	
 	if(input.type === "number") {
-		obj[input.id] = parseInt(value)
+		if(input.getAttribute("step") === "1") {
+			obj[input.id] = parseInt(value)
+		} else {
+			obj[input.id] = parseFloat(value)
+		}
 	} else {
 		obj[input.id] = value
 	}
