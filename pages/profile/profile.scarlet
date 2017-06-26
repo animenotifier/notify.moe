@@ -52,7 +52,7 @@ profile-boot-duration = 2s
 	// default-transition
 	// animation cover-animation profile-boot-duration
 	// animation-fill-mode forwards
-	filter brightness(35%) blur(0)
+	filter brightness(30%) blur(0)
 
 // animation cover-animation
 // 	0%
