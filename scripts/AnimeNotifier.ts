@@ -53,8 +53,8 @@ export class AnimeNotifier {
 		this.visibilityObserver.disconnect()
 		
 		// Update each of these asynchronously
-		Promise.resolve().then(() => this.updateMountables())
-		Promise.resolve().then(() => this.updateActions())
+		Promise.resolve().then(() => this.mountMountables())
+		Promise.resolve().then(() => this.assignActions())
 		Promise.resolve().then(() => this.lazyLoadImages())
 	}
 
@@ -75,7 +75,7 @@ export class AnimeNotifier {
 		}
 	}
 	
-	updateActions() {
+	assignActions() {
 		for(let element of findAll("action")) {
 			if(element["action assigned"]) {
 				continue
@@ -85,6 +85,9 @@ export class AnimeNotifier {
 
 			element.addEventListener(element.dataset.trigger, e => {
 				actions[actionName](this, element, e)
+
+				e.stopPropagation()
+				e.preventDefault()
 			})
 
 			// Use "action assigned" flag instead of removing the class.
@@ -121,15 +124,25 @@ export class AnimeNotifier {
 		this.visibilityObserver.observe(img)
 	}
 
-	updateMountables() {
+	mountMountables() {
+		this.modifyDelayed("mountable", element => element.classList.add("mounted"))
+	}
+
+	unmountMountables() {
+		for(let element of findAll("mounted")) {
+			element.classList.remove("mounted")
+		}
+	}
+
+	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
 		const delay = 20
 		const maxDelay = 1000
 		
 		let time = 0
 
-		for(let element of findAll("mountable")) {
+		for(let element of findAll(className)) {
 			setTimeout(() => {
-				window.requestAnimationFrame(() => element.classList.add("mounted"))
+				window.requestAnimationFrame(() => func(element))
 			}, time)
 
 			time += delay

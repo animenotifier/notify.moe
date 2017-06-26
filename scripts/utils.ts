@@ -7,3 +7,7 @@ export function* findAll(className: string) {
 		yield elements[i] as HTMLElement
 	}
 }
+
+export function delay<T>(millis: number, value?: T): Promise<T> {
+	return new Promise(resolve => setTimeout(() => resolve(value), millis))
+}

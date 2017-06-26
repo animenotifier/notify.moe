@@ -1,3 +1,5 @@
+import { Diff } from "./Diff"
+
 class LoadOptions {
 	addToHistory?: boolean
 	forceReload?: boolean
@@ -57,6 +59,10 @@ export class Application {
 	}
 
 	load(url: string, options?: LoadOptions) {
+		// Start sending a network request
+		let request = this.get("/_" + url).catch(error => error)
+
+		// Parse options
 		if(!options) {
 			options = new LoadOptions()
 		}
@@ -64,11 +70,13 @@ export class Application {
 		if(options.addToHistory === undefined) {
 			options.addToHistory = true
 		}
-	
+		
+		// Set current path
 		this.currentPath = url
 
-		// Start sending a network request
-		let request = this.get("/_" + url).catch(error => error)
+		// Add to browser history
+		if(options.addToHistory)
+			history.pushState(url, null, url)
 
 		let onTransitionEnd = e => {
 			// Ignore transitions of child elements.
@@ -82,13 +90,8 @@ export class Application {
 
 			// Wait for the network request to end.
 			request.then(html => {
-				// Add to browser history
-				if(options.addToHistory)
-					history.pushState(url, null, url)
-				
 				// Set content
-				this.setContent(html)
-				this.scrollToTop()
+				this.setContent(html, false)
 
 				// Fade animations
 				this.content.classList.remove(this.fadeOutClass)
@@ -108,11 +111,16 @@ export class Application {
 		return request
 	}
 
-	setContent(html: string) {
-		// Diff.innerHTML(this.content, html)
-		this.content.innerHTML = html
+	setContent(html: string, diff: boolean) {
+		if(diff) {
+			Diff.innerHTML(this.content, html)
+		} else {
+			this.content.innerHTML = html
+		}
+
 		this.ajaxify(this.content)
 		this.markActiveLinks(this.content)
+		this.scrollToTop()
 	}
 
 	markActiveLinks(element?: HTMLElement) {
