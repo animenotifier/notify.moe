@@ -129,7 +129,7 @@ export class AnimeNotifier {
 	}
 
 	unmountMountables() {
-		for(let element of findAll("mounted")) {
+		for(let element of findAll("mountable")) {
 			element.classList.remove("mounted")
 		}
 	}
