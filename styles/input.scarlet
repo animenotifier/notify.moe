@@ -16,18 +16,25 @@ input, textarea
 	border ui-border
 	background white
 	box-shadow none
+	width 100%
 	input-focus
-
-	:active
-		transform translateY(3px)
 	
 	:disabled
 		ui-disabled
+
+input
+	default-transition
+
+	:active
+		transform translateY(3px)
 
 // We need this to have a selector with a higher priority than .widget-element:focus
 input.widget-element,
 textarea.widget-element
 	input-focus
+
+textarea
+	height 10rem
 
 button, .button
 	ui-element

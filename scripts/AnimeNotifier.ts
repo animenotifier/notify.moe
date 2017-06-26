@@ -136,19 +136,19 @@ export class AnimeNotifier {
 
 	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
 		const delay = 20
-		const maxDelay = 1000
+		const maxDelay = 500
 		
 		let time = 0
 
 		for(let element of findAll(className)) {
-			setTimeout(() => {
-				window.requestAnimationFrame(() => func(element))
-			}, time)
-
 			time += delay
 
 			if(time > maxDelay) {
-				time = maxDelay
+				func(element)
+			} else {
+				setTimeout(() => {
+					window.requestAnimationFrame(() => func(element))
+				}, time)
 			}
 		}
 	}

@@ -8,10 +8,10 @@ post-highlight-color = rgba(248, 165, 130, 0.7)
 bg-color = rgb(246, 246, 246)
 
 // UI
-ui-border = 1px solid rgba(0, 0, 0, 0.1)
-ui-hover-border = 1px solid rgba(0, 0, 0, 0.15)
+ui-border-color = rgba(0, 0, 0, 0.1)
+ui-hover-border-color = rgba(0, 0, 0, 0.15)
 ui-background = rgb(254, 254, 254)
-ui-hover-background = rgb(255, 255, 255)
+// ui-hover-background = rgb(254, 254, 254)
 // ui-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.037) 100%)
 // ui-hover-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.027) 100%)
 ui-disabled-color = rgb(224, 224, 224)

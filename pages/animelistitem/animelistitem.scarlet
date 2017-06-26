@@ -1,7 +1,3 @@
-.anime-list-item-view
-	textarea
-		height 10rem
-
 .anime-list-item-view-image
 	max-width 55px
 	margin-bottom 1rem
