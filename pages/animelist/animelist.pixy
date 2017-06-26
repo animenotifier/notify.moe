@@ -11,14 +11,14 @@ component AnimeList(animeList *arn.AnimeList, user *arn.User)
 			each item in animeList.Items
 				tr.anime-list-item.mountable(title=item.Notes)
 					td.anime-list-item-name
-						a.ajax(href=item.Anime().Link())= item.Anime().Title.Canonical
+						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
 					td.anime-list-item-episodes
 						.anime-list-item-episodes-watched= item.Episodes
 						.anime-list-item-episodes-separator /
 						.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
-						.anime-list-item-episodes-edit
-							a.ajax(href=item.Link(animeList.User().Nick), title="Edit anime")
-								RawIcon("pencil")
+						//- .anime-list-item-episodes-edit
+						//- 	a.ajax(href=, title="Edit anime")
+						//- 		RawIcon("pencil")
 					td.anime-list-item-rating= item.FinalRating()
 					if user != nil
 						td.anime-list-item-actions

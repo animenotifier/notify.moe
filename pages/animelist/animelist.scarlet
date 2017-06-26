@@ -32,12 +32,12 @@
 	flex 0.4
 	opacity 0.5
 
-.anime-list-item-episodes-edit
-	flex 0.5
+// .anime-list-item-episodes-edit
+// 	flex 0.5
 
-	// Beautify icon alignment
-	.raw-icon
-		margin-bottom -2px
+// 	// Beautify icon alignment
+// 	.raw-icon
+// 		margin-bottom -2px
 
 .anime-list-item-rating
 	flex-basis 100px
