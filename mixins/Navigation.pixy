@@ -20,10 +20,13 @@ component LoggedOutMenu
 
 component LoggedInMenu(user *arn.User)
 	nav#navigation.logged-in
-		NavigationButton("Dash", "/", "inbox")
-		NavigationButton("Anime", "/anime", "television")
+		.extension-navigation
+			NavigationButton("Watching list", "/extension/embed", "home")
+
+		NavigationButton("Dash", "/", "dashboard")
 		NavigationButton("Profile", "/+", "user")
 		NavigationButton("Forum", "/forum", "comment")
+		NavigationButton("Anime", "/anime", "television")
 
 		FuzzySearch
 

@@ -16,5 +16,5 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching popular anime", err)
 	}
 
-	return ctx.HTML(components.AnimeGrid(animeList))
+	return ctx.HTML(components.PopularAnime(animeList))
 }

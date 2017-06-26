@@ -1,5 +1,9 @@
 # Anime Notifier
 
+## Info
+
+notify.moe is powered by the [Aero framework](https://github.com/aerogo/aero) from the same author. The project also uses Go and Aerospike.
+
 ## Installation
 
 ### Prerequisites

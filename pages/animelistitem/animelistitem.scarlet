@@ -1,7 +1,10 @@
-.anime-list-item-view
-	textarea
-		height 10rem
-
 .anime-list-item-view-image
 	max-width 55px
 	margin-bottom 1rem
+
+.anime-list-item-rating-edit
+	horizontal-wrap
+	justify-content space-between
+	width 100%
+	.widget-input
+		max-width 120px

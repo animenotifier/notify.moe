@@ -122,6 +122,7 @@ var tests = map[string][]string{
 	"/auth/google/callback": nil,
 	"/user":                 nil,
 	"/settings":             nil,
+	"/extension/embed":      nil,
 }
 
 func init() {

@@ -7,21 +7,21 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
-	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/components/js"
 )
 
 func init() {
 	// Scripts
-	js := components.JS()
+	scripts := js.Bundle()
 
 	app.Get("/scripts", func(ctx *aero.Context) string {
 		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return js
+		return scripts
 	})
 
 	app.Get("/scripts.js", func(ctx *aero.Context) string {
 		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return js
+		return scripts
 	})
 
 	// Web manifest

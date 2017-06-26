@@ -3,8 +3,15 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/update/" + anime.ID)
 			h2= anime.Title.Canonical
 
-			InputNumber("Episodes", item.Episodes, "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount))
-			InputNumber("RewatchCount", item.RewatchCount, "Rewatched", "How often you rewatched this anime", "0", "100")
+			InputNumber("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
+			
+			.anime-list-item-rating-edit
+				InputNumber("Rating.Overall", item.Rating.Overall, "Overall", "Overall rating on a scale of 0 to 10", "0", "10", "0.1")
+				InputNumber("Rating.Story", item.Rating.Story, "Story", "Story rating on a scale of 0 to 10", "0", "10", "0.1")
+				InputNumber("Rating.Visuals", item.Rating.Visuals, "Visuals", "Visuals rating on a scale of 0 to 10", "0", "10", "0.1")
+				InputNumber("Rating.Soundtrack", item.Rating.Soundtrack, "Soundtrack", "Soundtrack rating on a scale of 0 to 10", "0", "10", "0.1")
+			
+			InputNumber("RewatchCount", float64(item.RewatchCount), "Rewatched", "How often you rewatched this anime", "0", "100", "1")
 			
 			InputTextArea("Notes", item.Notes, "Notes", "Your notes")
 

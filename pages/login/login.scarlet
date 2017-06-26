@@ -1,0 +1,11 @@
+.login-buttons
+	horizontal-wrap
+	width 100%
+	justify-content center
+
+.login-button
+	//
+
+.login-button-image
+	max-width 236px
+	max-height 44px

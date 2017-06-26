@@ -14,7 +14,7 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		return utils.AllowEmbed(ctx, ctx.HTML(components.Login()))
 	}
 
 	animeList := user.AnimeList()
@@ -24,8 +24,8 @@ func Get(ctx *aero.Context) string {
 	}
 
 	sort.Slice(animeList.Items, func(i, j int) bool {
-		return animeList.Items[i].FinalRating() < animeList.Items[j].FinalRating()
+		return animeList.Items[i].FinalRating() > animeList.Items[j].FinalRating()
 	})
 
-	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(animeList)))
+	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(animeList, user)))
 }

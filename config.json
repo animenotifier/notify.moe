@@ -22,7 +22,7 @@
 		"loading",
 		"fade",
 		"mobile",
-		"extension"
+		"embedded"
 	],
 	"scripts": {
 		"main": "main"

@@ -1,18 +1,18 @@
 export class Diff {
-	static childNodes(aRoot: HTMLElement, bRoot: HTMLElement) {
+	static childNodes(aRoot: Node, bRoot: Node) {
 		let aChild = [...aRoot.childNodes]
 		let bChild = [...bRoot.childNodes]
 		let numNodes = Math.max(aChild.length, bChild.length)
 		
 		for(let i = 0; i < numNodes; i++) {
-			let a = aChild[i] as HTMLElement
+			let a = aChild[i]
 
 			if(i >= bChild.length) {
 				aRoot.removeChild(a)
 				continue
 			}
 
-			let b = bChild[i] as HTMLElement
+			let b = bChild[i]
 
 			if(i >= aChild.length) {
 				aRoot.appendChild(b)
@@ -24,38 +24,46 @@ export class Diff {
 				continue
 			}
 
+			if(a.nodeType === Node.TEXT_NODE) {
+				a.textContent = b.textContent
+				continue
+			}
+
 			if(a.nodeType === Node.ELEMENT_NODE) {
-				if(a.tagName === "IFRAME") {
+				let elemA = a as HTMLElement
+				let elemB = b as HTMLElement
+
+				if(elemA.tagName === "IFRAME") {
 					continue
 				}
 
 				let removeAttributes: Attr[] = []
 				
-				for(let x = 0; x < a.attributes.length; x++) {
-					let attrib = a.attributes[x]
+				for(let x = 0; x < elemA.attributes.length; x++) {
+					let attrib = elemA.attributes[x]
 
 					if(attrib.specified) {
-						if(!b.hasAttribute(attrib.name)) {
+						if(!elemB.hasAttribute(attrib.name)) {
 							removeAttributes.push(attrib)
 						}
 					}
 				}
 
 				for(let attr of removeAttributes) {
-					a.removeAttributeNode(attr)
+					elemA.removeAttributeNode(attr)
 				}
 
-				for(let x = 0; x < b.attributes.length; x++) {
-					let attrib = b.attributes[x]
+				for(let x = 0; x < elemB.attributes.length; x++) {
+					let attrib = elemB.attributes[x]
 
 					if(attrib.specified) {
-						a.setAttribute(attrib.name, b.getAttribute(attrib.name))
+						elemA.setAttribute(attrib.name, elemB.getAttribute(attrib.name))
 					}
 				}
 
 				// Special case: Apply state of input elements
-				if(a !== document.activeElement && a instanceof HTMLInputElement && b instanceof HTMLInputElement) {
-					a.value = b.value
+				if(elemA !== document.activeElement && elemA instanceof HTMLInputElement && elemB instanceof HTMLInputElement) {
+					elemA.value = elemB.value
 				}
 			}
 

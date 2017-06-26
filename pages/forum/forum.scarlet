@@ -8,11 +8,18 @@
 
 .forum-tag
 	color text-color !important
-	:hover
-		color white !important
+
+	:hover,
 	&.active
 		color white !important
-		background-color link-hover-color
+		background-color forum-tag-hover-color !important
+
+	// color text-color !important
+	// :hover
+	// 	color white !important
+	// &.active
+	// 	color white !important
+	// 	background-color link-hover-color
 
 < 920px
 	.forum-tag

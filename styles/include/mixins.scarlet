@@ -18,13 +18,13 @@ mixin vertical-wrap
 	flex-flow column wrap
 
 mixin ui-element
-	border ui-border
+	border 1px solid ui-border-color
 	background ui-background
 	border-radius 3px
 	default-transition
 	:hover
-		border ui-hover-border
-		background ui-hover-background
+		border-color ui-hover-border-color
+		// background ui-hover-background
 		// box-shadow outline-shadow-medium
 
 mixin ui-disabled

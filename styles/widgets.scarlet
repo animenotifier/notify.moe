@@ -12,7 +12,7 @@
 .widget-element
 	vertical-wrap
 	ui-element
-	transition border transition-speed ease, background transition-speed ease, transform transition-speed ease
+	transition border transition-speed ease, background transition-speed ease, transform transition-speed ease, transform color ease
 	margin-bottom 1rem
 	padding 0.5rem 1rem
 	width 100%

@@ -5,7 +5,7 @@ import (
 	"github.com/aerogo/api"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
-	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages/admin"
@@ -41,7 +41,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Security.Load("security/fullchain.pem", "security/privkey.pem")
 
 	// CSS
-	app.SetStyle(components.CSS())
+	app.SetStyle(css.Bundle())
 
 	// Sessions
 	app.Sessions.Duration = 3600 * 24

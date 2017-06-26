@@ -1,0 +1,6 @@
+component PopularAnime(animeList []*arn.Anime)
+	h2 Top 3
+	AnimeGrid(animeList[:3])
+
+	h2 Popular
+	AnimeGrid(animeList[3:])

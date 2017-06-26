@@ -4,17 +4,53 @@
 
 	tr
 		horizontal
+	
+	thead
+		display none
 
 .anime-list-item-name
-	flex 0.8
+	flex 1
 	white-space nowrap
 	text-overflow ellipsis
 	overflow hidden
 
 .anime-list-item-episodes
-	flex 0.1
-	text-align center
+	horizontal
+	justify-content flex-end
+	text-align right
+	white-space nowrap
+	flex-basis 120px
+
+.anime-list-item-episodes-watched
+	flex 0.4
+
+.anime-list-item-episodes-separator
+	flex 0.2
+	opacity 0.5
+
+.anime-list-item-episodes-max
+	flex 0.4
+	opacity 0.5
+
+// .anime-list-item-episodes-edit
+// 	flex 0.5
+
+// 	// Beautify icon alignment
+// 	.raw-icon
+// 		margin-bottom -2px
 
 .anime-list-item-rating
-	flex 0.1
+	flex-basis 100px
 	text-align center
+
+.anime-list-item-actions
+	flex-basis 40px
+	text-align right
+
+	// Beautify icon alignment
+	.raw-icon
+		margin-bottom -4px
+
+< 1100px
+	.anime-list-item-rating
+		display none

@@ -19,7 +19,7 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
-	posts, err := arn.GetPosts()
+	posts, err := arn.AllPostsSlice()
 
 	if err != nil {
 		return ctx.Error(500, "Error fetching posts", err)
@@ -32,6 +32,7 @@ func Get(ctx *aero.Context) string {
 	}
 
 	followIDList := user.Following
+	var followingList []*arn.User
 
 	if len(followIDList) > maxFollowing {
 		followIDList = followIDList[:maxFollowing]
@@ -43,7 +44,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(500, "Error fetching followed users", err)
 	}
 
-	followingList := userList.([]*arn.User)
+	followingList = userList.([]*arn.User)
 
 	return ctx.HTML(components.Dashboard(posts, followingList))
 }

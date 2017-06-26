@@ -9,19 +9,22 @@ import (
 )
 
 func TestRoutes(t *testing.T) {
-	expectedStatus := http.StatusOK
-
 	app := configure(aero.New())
-	request, err := http.NewRequest("GET", "/", nil)
 
-	if err != nil {
-		t.Fatal(err)
-	}
+	for _, examples := range tests {
+		for _, example := range examples {
+			request, err := http.NewRequest("GET", example, nil)
 
-	responseRecorder := httptest.NewRecorder()
-	app.Handler().ServeHTTP(responseRecorder, request)
+			if err != nil {
+				t.Fatal(err)
+			}
 
-	if status := responseRecorder.Code; status != expectedStatus {
-		t.Errorf("Wrong status code: %v instead of %v", status, expectedStatus)
+			responseRecorder := httptest.NewRecorder()
+			app.Handler().ServeHTTP(responseRecorder, request)
+
+			if status := responseRecorder.Code; status != http.StatusOK {
+				t.Errorf("%s | Wrong status code | %v instead of %v", example, status, http.StatusOK)
+			}
+		}
 	}
 }

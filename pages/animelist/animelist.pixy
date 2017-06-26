@@ -1,17 +1,26 @@
-component AnimeList(animeList *arn.AnimeList)
+component AnimeList(animeList *arn.AnimeList, user *arn.User)
 	table.anime-list
 		thead
 			tr
 				th.anime-list-item-name Anime
-				th.anime-list-item-episodes Progress
+				th.anime-list-item-episodes Episodes
 				th.anime-list-item-rating Rating
+				if user != nil
+					th.anime-list-item-actions Actions
 		tbody
 			each item in animeList.Items
 				tr.anime-list-item.mountable(title=item.Notes)
 					td.anime-list-item-name
-						a.ajax(href=item.Anime().Link())= item.Anime().Title.Canonical
+						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
 					td.anime-list-item-episodes
-						span.anime-list-item-episodes-watched= item.Episodes
-						span.anime-list-item-episodes-separator  / 
-						span.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
+						.anime-list-item-episodes-watched= item.Episodes
+						.anime-list-item-episodes-separator /
+						.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
+						//- .anime-list-item-episodes-edit
+						//- 	a.ajax(href=, title="Edit anime")
+						//- 		RawIcon("pencil")
 					td.anime-list-item-rating= item.FinalRating()
+					if user != nil
+						td.anime-list-item-actions
+							a(href=arn.Nyaa.GetLink(item.Anime()), title="Search on Nyaa", target="_blank", rel="noopener")
+								RawIcon("download")
