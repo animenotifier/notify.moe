@@ -153,7 +153,7 @@ export class AnimeNotifier {
 		}
 	}
 
-	diffURL(url: string) {
+	load(url: string) {
 		let request = fetch("/_" + url, {
 			credentials: "same-origin"
 		})
@@ -165,7 +165,7 @@ export class AnimeNotifier {
 		this.unmountMountables()
 		this.loading(true)
 
-		delay(300).then(() => {
+		return delay(300).then(() => {
 			request
 			.then(html => this.app.setContent(html, true))
 			.then(() => this.app.markActiveLinks())

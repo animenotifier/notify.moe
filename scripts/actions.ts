@@ -60,15 +60,35 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 // Diff
 export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
-	arn.diffURL(url)
+	arn.load(url)
 }
 
 // Forum reply
 export function forumReply(arn: AnimeNotifier) {
 	let textarea = arn.app.find("new-reply") as HTMLTextAreaElement
+	let thread = arn.app.find("thread")
 
-	console.log(textarea.value)
-	arn.diffURL(arn.app.currentPath)
+	let post = {
+		text: textarea.value,
+		threadId: thread.dataset.id,
+		tags: []
+	}
+
+	fetch("/api/post/new", {
+		method: "POST",
+		body: JSON.stringify(post),
+		credentials: "same-origin"
+	})
+	.then(response => response.text())
+	.then(body => {
+		if(body !== "ok") {
+			throw body
+		}
+
+		textarea.value = ""
+	})
+	.then(() => arn.reloadContent())
+	.catch(console.error)
 }
 
 // Search
