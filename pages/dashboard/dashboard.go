@@ -24,12 +24,12 @@ func Get(ctx *aero.Context) string {
 
 // Get dashboard.
 func Dashboard(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
 	var posts []*arn.Post
 	var err error
 	var followIDList []string
 	var userList interface{}
 	var followingList []*arn.User
+	user := utils.GetUser(ctx)
 
 	flow.Parallel(func() {
 		posts, err = arn.AllPostsSlice()
