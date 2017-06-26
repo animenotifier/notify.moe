@@ -1,6 +1,6 @@
 import { Application } from "./Application"
 import { Diff } from "./Diff"
-import { findAll } from "./utils"
+import { findAll, delay } from "./utils"
 import * as actions from "./actions"
 
 export class AnimeNotifier {
@@ -151,6 +151,34 @@ export class AnimeNotifier {
 				}, time)
 			}
 		}
+	}
+
+	diffURL(url: string) {
+		let request = fetch("/_" + url).then(response => response.text())
+
+		history.pushState(url, null, url)
+		this.app.currentPath = url
+		this.app.markActiveLinks()
+		this.loading(true)
+		this.unmountMountables()
+
+		// for(let element of findAll("mountable")) {
+		// 	element.classList.remove("mountable")
+		// }
+
+		delay(300).then(() => {
+			request
+			.then(html => this.app.setContent(html, true))
+			.then(() => this.app.markActiveLinks())
+			// .then(() => {
+			// 	for(let element of findAll("mountable")) {
+			// 		element.classList.remove("mountable")
+			// 	}
+			// })
+			.then(() => this.app.emit("DOMContentLoaded"))
+			.then(() => this.loading(false))
+			.catch(console.error)
+		})
 	}
 
 	onPopState(e: PopStateEvent) {

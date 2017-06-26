@@ -1,7 +1,6 @@
 import { Application } from "./Application"
 import { AnimeNotifier } from "./AnimeNotifier"
 import { Diff } from "./Diff"
-import { delay, findAll } from "./utils"
 
 // Save new data from an input field
 export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaElement) {
@@ -61,31 +60,15 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 // Diff
 export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
-	let request = fetch("/_" + url).then(response => response.text())
+	arn.diffURL(url)
+}
 
-	history.pushState(url, null, url)
-	arn.app.currentPath = url
-	arn.app.markActiveLinks()
-	arn.loading(true)
-	arn.unmountMountables()
+// Forum reply
+export function forumReply(arn: AnimeNotifier) {
+	let textarea = arn.app.find("new-reply") as HTMLTextAreaElement
 
-	// for(let element of findAll("mountable")) {
-	// 	element.classList.remove("mountable")
-	// }
-
-	delay(300).then(() => {
-		request
-		.then(html => arn.app.setContent(html, true))
-		.then(() => arn.app.markActiveLinks())
-		// .then(() => {
-		// 	for(let element of findAll("mountable")) {
-		// 		element.classList.remove("mountable")
-		// 	}
-		// })
-		.then(() => arn.app.emit("DOMContentLoaded"))
-		.then(() => arn.loading(false))
-		.catch(console.error)
-	})
+	console.log(textarea.value)
+	arn.diffURL(arn.app.currentPath)
 }
 
 // Search

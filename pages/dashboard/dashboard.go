@@ -12,6 +12,7 @@ import (
 const maxPosts = 5
 const maxFollowing = 5
 
+// Get the dashboard or the frontpage when logged out.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
@@ -19,16 +20,17 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
-	return Dashboard(ctx)
+	return dashboard(ctx)
 }
 
-// Get dashboard.
-func Dashboard(ctx *aero.Context) string {
+// Render the dashboard.
+func dashboard(ctx *aero.Context) string {
 	var posts []*arn.Post
 	var err error
 	var followIDList []string
 	var userList interface{}
 	var followingList []*arn.User
+
 	user := utils.GetUser(ctx)
 
 	flow.Parallel(func() {
@@ -38,7 +40,6 @@ func Dashboard(ctx *aero.Context) string {
 		if len(posts) > maxPosts {
 			posts = posts[:maxPosts]
 		}
-
 	}, func() {
 		followIDList = user.Following
 		userList, err = arn.DB.GetMany("User", followIDList)
@@ -48,7 +49,6 @@ func Dashboard(ctx *aero.Context) string {
 		if len(followingList) > maxFollowing {
 			followingList = followingList[:maxFollowing]
 		}
-
 	})
 
 	if err != nil {
