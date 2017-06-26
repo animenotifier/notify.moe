@@ -1,5 +1,5 @@
 component Postable(post arn.Postable, highlightAuthorID string)
-	.post.mountable(data-highlight=post.Author().ID == highlightAuthorID)
+	.post.mountable(id=post.ID(), data-highlight=post.Author().ID == highlightAuthorID)
 		.post-author
 			Avatar(post.Author())
 
