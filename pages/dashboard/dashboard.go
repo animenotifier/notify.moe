@@ -19,7 +19,7 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
-	posts, err := arn.GetPosts()
+	posts, err := arn.AllPostsSlice()
 
 	if err != nil {
 		return ctx.Error(500, "Error fetching posts", err)
