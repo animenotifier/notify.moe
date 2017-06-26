@@ -26,30 +26,10 @@ func Get(ctx *aero.Context) string {
 
 	arn.SortPostsLatestLast(replies)
 
-	for i := 0; i < 7; i++ {
-		replies = append(replies, replies...)
-	}
-
-	println(len(replies))
-
-	// Pre-render markdown
-	// flow.Parallel(func() {
-	// 	for _, reply := range replies[0:256] {
-	// 		reply.HTML()
-	// 	}
-	// }, func() {
-	// 	for _, reply := range replies[256:512] {
-	// 		reply.HTML()
-	// 	}
-	// }, func() {
-	// 	for _, reply := range replies[512:768] {
-	// 		reply.HTML()
-	// 	}
-	// }, func() {
-	// 	for _, reply := range replies[768:1024] {
-	// 		reply.HTML()
-	// 	}
-	// })
+	// Benchmark
+	// for i := 0; i < 7; i++ {
+	// 	replies = append(replies, replies...)
+	// }
 
 	if filterErr != nil {
 		return ctx.Error(500, "Error fetching thread replies", err)
