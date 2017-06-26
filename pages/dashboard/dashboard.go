@@ -24,13 +24,14 @@ func Get(ctx *aero.Context) string {
 
 // Get dashboard.
 func Dashboard(ctx *aero.Context) string {
-	var user *arn.User
+	user := utils.GetUser(ctx)
 	var posts []*arn.Post
 	var err error
+	var followIDList []string
+	var userList interface{}
+	var followingList []*arn.User
 
 	flow.Parallel(func() {
-		user = utils.GetUser(ctx)
-	}, func() {
 		posts, err = arn.AllPostsSlice()
 		arn.SortPostsLatestFirst(posts)
 
@@ -38,20 +39,20 @@ func Dashboard(ctx *aero.Context) string {
 			posts = posts[:maxPosts]
 		}
 
-	})
+	}, func() {
+		followIDList = user.Following
+		userList, err = arn.DB.GetMany("User", followIDList)
+		followingList = userList.([]*arn.User)
+		followingList = arn.SortUsersLastSeen(followingList)
 
-	followIDList := user.Following
-	userList, err := arn.DB.GetMany("User", followIDList)
+		if len(followingList) > maxFollowing {
+			followingList = followingList[:maxFollowing]
+		}
+
+	})
 
 	if err != nil {
 		return ctx.Error(500, "Error displaying dashboard", err)
-	}
-
-	followingList := userList.([]*arn.User)
-	followingList = arn.SortByLastSeen(followingList)
-
-	if len(followingList) > maxFollowing {
-		followingList = followingList[:maxFollowing]
 	}
 
 	return ctx.HTML(components.Dashboard(posts, followingList))
