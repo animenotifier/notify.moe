@@ -38,15 +38,20 @@ component Dashboard(posts []*arn.Post, following []*arn.User)
 						Icon("comment")
 						span ...
 
-		if len(following) > 0
-			.widget.mountable
-				h3.widget-title Contacts
+		.widget.mountable
+			h3.widget-title Contacts
 
-				each user in following
-					a.widget-element.ajax(href="/+" + user.Nick)
+			for i := 0; i <= 4; i++
+				if i < len(following)
+					a.widget-element.ajax(href="/+" + following[i].Nick)
 						.widget-element-text
 							Icon("address-card")
-							span= user.Nick
+							span= following[i].Nick
+				else
+					.widget-element
+						.widget-element-text
+							Icon("address-card")
+							span ...
 
 		.widget.mountable
 			h3.widget-title Follow

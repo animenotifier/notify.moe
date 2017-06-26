@@ -27,7 +27,6 @@ func Get(ctx *aero.Context) string {
 func dashboard(ctx *aero.Context) string {
 	var posts []*arn.Post
 	var err error
-	var followIDList []string
 	var userList interface{}
 	var followingList []*arn.User
 
@@ -38,8 +37,7 @@ func dashboard(ctx *aero.Context) string {
 		arn.SortPostsLatestFirst(posts)
 		posts = arn.FilterPostsWithUniqueThreads(posts, maxPosts)
 	}, func() {
-		followIDList = user.Following
-		userList, err = arn.DB.GetMany("User", followIDList)
+		userList, err = arn.DB.GetMany("User", user.Following)
 		followingList = userList.([]*arn.User)
 		followingList = arn.SortUsersLastSeen(followingList)
 
