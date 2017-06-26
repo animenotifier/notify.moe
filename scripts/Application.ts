@@ -92,6 +92,7 @@ export class Application {
 			request.then(html => {
 				// Set content
 				this.setContent(html, false)
+				this.scrollToTop()
 
 				// Fade animations
 				this.content.classList.remove(this.fadeOutClass)
@@ -120,7 +121,6 @@ export class Application {
 
 		this.ajaxify(this.content)
 		this.markActiveLinks(this.content)
-		this.scrollToTop()
 	}
 
 	markActiveLinks(element?: HTMLElement) {

@@ -154,27 +154,21 @@ export class AnimeNotifier {
 	}
 
 	diffURL(url: string) {
-		let request = fetch("/_" + url).then(response => response.text())
-
+		let request = fetch("/_" + url, {
+			credentials: "same-origin"
+		})
+		.then(response => response.text())
+		
 		history.pushState(url, null, url)
 		this.app.currentPath = url
 		this.app.markActiveLinks()
-		this.loading(true)
 		this.unmountMountables()
-
-		// for(let element of findAll("mountable")) {
-		// 	element.classList.remove("mountable")
-		// }
+		this.loading(true)
 
 		delay(300).then(() => {
 			request
 			.then(html => this.app.setContent(html, true))
 			.then(() => this.app.markActiveLinks())
-			// .then(() => {
-			// 	for(let element of findAll("mountable")) {
-			// 		element.classList.remove("mountable")
-			// 	}
-			// })
 			.then(() => this.app.emit("DOMContentLoaded"))
 			.then(() => this.loading(false))
 			.catch(console.error)
