@@ -2,6 +2,7 @@ package dashboard
 
 import (
 	"github.com/aerogo/aero"
+	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/pages/frontpage"
@@ -11,7 +12,6 @@ import (
 const maxPosts = 5
 const maxFollowing = 5
 
-// Get dashboard.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
@@ -19,32 +19,40 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
-	posts, err := arn.AllPostsSlice()
+	return Dashboard(ctx)
+}
 
-	if err != nil {
-		return ctx.Error(500, "Error fetching posts", err)
-	}
+// Get dashboard.
+func Dashboard(ctx *aero.Context) string {
+	var user *arn.User
+	var posts []*arn.Post
+	var err error
 
-	arn.SortPostsLatestFirst(posts)
+	flow.Parallel(func() {
+		user = utils.GetUser(ctx)
+	}, func() {
+		posts, err = arn.AllPostsSlice()
+		arn.SortPostsLatestFirst(posts)
 
-	if len(posts) > maxPosts {
-		posts = posts[:maxPosts]
-	}
+		if len(posts) > maxPosts {
+			posts = posts[:maxPosts]
+		}
+
+	})
 
 	followIDList := user.Following
-	var followingList []*arn.User
-
-	if len(followIDList) > maxFollowing {
-		followIDList = followIDList[:maxFollowing]
-	}
-
 	userList, err := arn.DB.GetMany("User", followIDList)
 
 	if err != nil {
-		return ctx.Error(500, "Error fetching followed users", err)
+		return ctx.Error(500, "Error displaying dashboard", err)
 	}
 
-	followingList = userList.([]*arn.User)
+	followingList := userList.([]*arn.User)
+	followingList = arn.SortByLastSeen(followingList)
+
+	if len(followingList) > maxFollowing {
+		followingList = followingList[:maxFollowing]
+	}
 
 	return ctx.HTML(components.Dashboard(posts, followingList))
 }
