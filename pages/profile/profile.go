@@ -9,7 +9,7 @@ import (
 )
 
 const maxPosts = 5
-const maxTracks = 4
+const maxTracks = 3
 
 // Get user profile page.
 func Get(ctx *aero.Context) string {
