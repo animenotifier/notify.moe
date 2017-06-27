@@ -8,6 +8,8 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
+const maxTracks = 10
+
 // Get renders the music page.
 func Get(ctx *aero.Context) string {
 	tracks := []*arn.SoundTrack{}
@@ -41,6 +43,10 @@ func Get(ctx *aero.Context) string {
 		Created:   arn.DateTimeUTC(),
 		CreatedBy: "4J6qpK1ve",
 	})
+
+	if len(tracks) > maxTracks {
+		tracks = tracks[:maxTracks]
+	}
 
 	sort.Slice(tracks, func(i, j int) bool {
 		return tracks[i].Created > tracks[j].Created
