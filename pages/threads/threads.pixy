@@ -17,7 +17,7 @@ component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
 					.post-content
 						textarea#new-reply(placeholder="Reply...")
 			
-			.buttons
-				button.action(data-action="forumReply", data-trigger="click")
-					Icon("mail-reply")
-					span Reply
+				.buttons
+					button.action(data-action="forumReply", data-trigger="click")
+						Icon("mail-reply")
+						span Reply
