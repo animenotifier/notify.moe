@@ -1,0 +1,10 @@
+component NewSoundTrack(user *arn.User)
+	.widgets
+		.widget
+			input#soundcloud-link.widget-element(type="text", placeholder="Soundcloud link or ID")
+			input#anime-link.widget-element(type="text", placeholder="Anime link or ID")
+			input#osu-link.widget-element(type="text", placeholder="Osu beatmap link (optional)")
+			
+			button.action(data-action="createSoundTrack", data-trigger="click")
+				Icon("check")
+				span Add soundtrack

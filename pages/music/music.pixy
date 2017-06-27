@@ -1,5 +1,10 @@
 component Music(tracks []*arn.SoundTrack)
-	h2.page-title Music
+	h2 Soundtracks
+
+	.music-buttons
+		a.button.ajax(href="/new/soundtrack")
+			Icon("plus")
+			span Add soundtrack
 
 	.sound-tracks
 		each track in tracks

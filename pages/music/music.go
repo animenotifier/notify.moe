@@ -15,7 +15,7 @@ func Get(ctx *aero.Context) string {
 	tracks := []*arn.SoundTrack{}
 
 	tracks = append(tracks, &arn.SoundTrack{
-		ID: "0",
+		ID: arn.GenerateID("SoundTrack"),
 		Media: []arn.ExternalMedia{
 			arn.ExternalMedia{
 				Service:   "Soundcloud",
@@ -30,7 +30,7 @@ func Get(ctx *aero.Context) string {
 	})
 
 	tracks = append(tracks, &arn.SoundTrack{
-		ID: "1",
+		ID: arn.GenerateID("SoundTrack"),
 		Media: []arn.ExternalMedia{
 			arn.ExternalMedia{
 				Service:   "Soundcloud",
@@ -45,7 +45,7 @@ func Get(ctx *aero.Context) string {
 	})
 
 	tracks = append(tracks, &arn.SoundTrack{
-		ID: "2",
+		ID: arn.GenerateID("SoundTrack"),
 		Media: []arn.ExternalMedia{
 			arn.ExternalMedia{
 				Service:   "Soundcloud",
@@ -60,7 +60,7 @@ func Get(ctx *aero.Context) string {
 	})
 
 	tracks = append(tracks, &arn.SoundTrack{
-		ID: "3",
+		ID: arn.GenerateID("SoundTrack"),
 		Media: []arn.ExternalMedia{
 			arn.ExternalMedia{
 				Service:   "Soundcloud",
@@ -75,7 +75,7 @@ func Get(ctx *aero.Context) string {
 	})
 
 	tracks = append(tracks, &arn.SoundTrack{
-		ID: "3",
+		ID: arn.GenerateID("SoundTrack"),
 		Media: []arn.ExternalMedia{
 			arn.ExternalMedia{
 				Service:   "Soundcloud",
@@ -90,7 +90,7 @@ func Get(ctx *aero.Context) string {
 	})
 
 	tracks = append(tracks, &arn.SoundTrack{
-		ID: "3",
+		ID: arn.GenerateID("SoundTrack"),
 		Media: []arn.ExternalMedia{
 			arn.ExternalMedia{
 				Service:   "Soundcloud",
