@@ -8,7 +8,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-const maxTracks = 10
+const maxTracks = 9
 
 // Get renders the music page.
 func Get(ctx *aero.Context) string {

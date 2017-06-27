@@ -91,21 +91,3 @@ profile-boot-duration = 2s
 
 .profile-category
 	margin-bottom content-padding
-
-	.sound-tracks
-		horizontal-wrap
-		justify-content space-around
-
-		.sound-track-anime-link
-			display none
-		
-		.sound-track
-			flex 1
-			flex-basis 500px
-			padding 1rem
-
-> 800px
-	.profile-category
-		.sound-tracks
-			.sound-track-anime-link
-				display block

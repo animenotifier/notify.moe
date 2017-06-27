@@ -1,8 +1,13 @@
 .sound-tracks
-	vertical
+	horizontal-wrap
+	justify-content space-around
 
 .sound-track
 	vertical
+	flex 1
+	flex-basis 500px
+	padding 1rem
+
 
 .sound-track-content
 	horizontal
@@ -21,7 +26,11 @@
 		opacity 0.65
 
 .sound-track-anime-link
-	//
+	display none
+
+> 800px
+	.sound-track-anime-link
+		display block
 
 .sound-track-anime-image
 	max-width 142px
