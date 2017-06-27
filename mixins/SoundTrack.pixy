@@ -1,0 +1,10 @@
+component SoundTrack(track *arn.SoundTrack)
+	.sound-track.mountable(id=track.ID)
+		.sound-track-content
+			a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
+				img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image.Small, alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
+			
+			iframe.lazy(data-src=track.Media[0].EmbedLink())
+		.sound-track-footer
+			span posted by 
+			a.ajax(href=track.CreatedByUser().Link())= track.CreatedByUser().Nick

@@ -121,6 +121,7 @@ var tests = map[string][]string{
 	"/auth/google":          nil,
 	"/auth/google/callback": nil,
 	"/new/thread":           nil,
+	"/new/soundtrack":       nil,
 	"/user":                 nil,
 	"/settings":             nil,
 	"/extension/embed":      nil,

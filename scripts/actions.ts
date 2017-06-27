@@ -106,11 +106,13 @@ export function createThread(arn: AnimeNotifier) {
 // Create soundtrack
 export function createSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) {
 	let soundcloud = arn.app.find("soundcloud-link") as HTMLInputElement
+	let youtube = arn.app.find("youtube-link") as HTMLInputElement
 	let anime = arn.app.find("anime-link") as HTMLInputElement
 	let osu = arn.app.find("osu-link") as HTMLInputElement
 
 	let soundtrack = {
 		soundcloud: soundcloud.value,
+		youtube: youtube.value,
 		tags: [anime.value, osu.value],
 	}
 
