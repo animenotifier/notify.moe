@@ -18,6 +18,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/login"
+	"github.com/animenotifier/notify.moe/pages/newthread"
 	"github.com/animenotifier/notify.moe/pages/popularanime"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
@@ -64,6 +65,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/user/:nick/posts", profile.GetPostsByUser)
 	app.Ajax("/user/:nick/animelist", animelist.Get)
 	app.Ajax("/user/:nick/animelist/:id", animelistitem.Get)
+	app.Ajax("/new/thread", newthread.Get)
 	app.Ajax("/settings", settings.Get)
 	app.Ajax("/admin", admin.Get)
 	app.Ajax("/search/:term", search.Get)

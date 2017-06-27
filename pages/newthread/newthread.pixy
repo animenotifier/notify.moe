@@ -1,0 +1,20 @@
+component NewThread(user *arn.User)
+	.widgets
+		.widget
+			input#title.widget-element(type="text", placeholder="Title")
+			
+			textarea#text.widget-element(placeholder="Content")
+
+			select#tag.widget-element
+				option(value="general") General
+				option(value="news") News
+				option(value="anime") Anime
+				option(value="bug") Bug
+				option(value="suggestion") Suggestion
+
+				if user.Role == "admin"
+					option(value="update") Update
+			
+			button.action(data-action="createThread", data-trigger="click")
+				Icon("check")
+				span Create thread

@@ -29,5 +29,8 @@
 	.forum-tag-text
 		display none
 
-#load-more-threads
-	margin-top 1rem
+> 1250px
+	#new-thread
+		position fixed
+		right content-padding
+		bottom content-padding

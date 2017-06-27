@@ -4,8 +4,12 @@ component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 	.forum
 		ThreadList(threads)
 	
-	if len(threads) == threadsPerPage
-		.buttons
+	
+	.buttons
+		button#new-thread.action(data-action="load", data-trigger="click", data-url="/new/thread")
+			Icon("plus")
+			span New thread
+		if len(threads) == threadsPerPage
 			button
 				Icon("refresh")
 				span Load more

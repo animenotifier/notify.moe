@@ -57,10 +57,16 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 	})
 }
 
+// Load
+export function load(arn: AnimeNotifier, element: HTMLElement) {
+	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
+	arn.app.load(url)
+}
+
 // Diff
 export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
-	arn.load(url)
+	arn.diff(url)
 }
 
 // Forum reply
@@ -74,20 +80,26 @@ export function forumReply(arn: AnimeNotifier) {
 		tags: []
 	}
 
-	fetch("/api/post/new", {
-		method: "POST",
-		body: JSON.stringify(post),
-		credentials: "same-origin"
-	})
-	.then(response => response.text())
-	.then(body => {
-		if(body !== "ok") {
-			throw body
-		}
-
-		textarea.value = ""
-	})
+	arn.post("/api/post/new", post)
 	.then(() => arn.reloadContent())
+	.then(() => textarea.value = "")
+	.catch(console.error)
+}
+
+// Create thread
+export function createThread(arn: AnimeNotifier) {
+	let title = arn.app.find("title") as HTMLInputElement
+	let text = arn.app.find("text") as HTMLTextAreaElement
+	let category = arn.app.find("tag") as HTMLInputElement
+
+	let thread = {
+		title: title.value,
+		text: text.value,
+		tags: [category.value]
+	}
+
+	arn.post("/api/thread/new", thread)
+	.then(() => arn.app.load("/forum/" + thread.tags[0]))
 	.catch(console.error)
 }
 

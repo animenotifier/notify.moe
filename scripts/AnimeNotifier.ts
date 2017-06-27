@@ -153,7 +153,7 @@ export class AnimeNotifier {
 		}
 	}
 
-	load(url: string) {
+	diff(url: string) {
 		let request = fetch("/_" + url, {
 			credentials: "same-origin"
 		})
@@ -172,6 +172,20 @@ export class AnimeNotifier {
 			.then(() => this.app.emit("DOMContentLoaded"))
 			.then(() => this.loading(false))
 			.catch(console.error)
+		})
+	}
+
+	post(url, obj) {
+		return fetch(url, {
+			method: "POST",
+			body: JSON.stringify(obj),
+			credentials: "same-origin"
+		})
+		.then(response => response.text())
+		.then(body => {
+			if(body !== "ok") {
+				throw body
+			}
 		})
 	}
 
