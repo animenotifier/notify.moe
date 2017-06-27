@@ -1,5 +1,11 @@
-component Music
+component Music(tracks []*arn.SoundTrack)
 	h2.page-title Music
 
-	iframe(src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/127672476&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true")
-	//- <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/127672476&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+	.sound-tracks
+		each track in tracks
+			.sound-track
+				each anime in track.Anime()
+					a.sound-track-anime-link.ajax(href="/anime/" + anime.ID)
+						img.sound-track-anime-image(src=anime.Image.Small, alt=anime.Title.Canonical, title=anime.Title.Canonical)
+				
+				iframe(src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/" + track.Media[0].ServiceID + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")

@@ -45,10 +45,10 @@ component Anime(anime *arn.Anime, user *arn.User)
 			.anime-rating-category-name Soundtrack
 			Rating(anime.Rating.Soundtrack)
 
-	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].VideoID != ""
+	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].ServiceID != ""
 		h3.anime-section-name Video
 		.anime-trailer.video-container
-			iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[0].VideoID + "?showinfo=0", allowfullscreen="allowfullscreen")
+			iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[0].ServiceID + "?showinfo=0", allowfullscreen="allowfullscreen")
 
 	//- if anime.Tracks != nil && anime.Tracks.Opening != nil
 	//- 	h3.anime-section-name Tracks

@@ -1,0 +1,15 @@
+.sound-tracks
+	vertical
+
+.sound-track
+	horizontal
+	margin-bottom 1rem
+
+	iframe
+		width 100%
+
+.sound-track-anime-link
+	//
+
+.sound-track-anime-image
+	max-width 142px

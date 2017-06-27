@@ -59,12 +59,12 @@ func sync(data *kitsu.Anime) {
 	anime.Rating.Overall = overall
 
 	// Trailers
-	anime.Trailers = []arn.AnimeTrailer{}
+	anime.Trailers = []arn.ExternalMedia{}
 
 	if attr.YoutubeVideoID != "" {
-		anime.Trailers = append(anime.Trailers, arn.AnimeTrailer{
-			Service: "Youtube",
-			VideoID: attr.YoutubeVideoID,
+		anime.Trailers = append(anime.Trailers, arn.ExternalMedia{
+			Service:   "Youtube",
+			ServiceID: attr.YoutubeVideoID,
 		})
 	}
 
