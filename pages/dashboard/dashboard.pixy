@@ -15,7 +15,7 @@ component Dashboard(posts []*arn.Post, following []*arn.User)
 			h3.widget-title Forums
 
 			each post in posts
-				a.widget-element.ajax(href=post.Thread().Link() + "#" + post.ID)
+				a.widget-element.ajax(href=post.Thread().Link())
 					.widget-element-text
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title

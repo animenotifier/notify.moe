@@ -6,7 +6,7 @@ import (
 
 func main() {
 	// Get a stream of all posts
-	allPosts, err := arn.AllPosts()
+	allPosts, err := arn.StreamPosts()
 	arn.PanicOnError(err)
 
 	threadToPosts := make(map[string][]string)

@@ -33,9 +33,13 @@ func dashboard(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	flow.Parallel(func() {
-		posts, err = arn.AllPostsSlice()
+		posts, err = arn.AllPosts()
 		arn.SortPostsLatestFirst(posts)
 		posts = arn.FilterPostsWithUniqueThreads(posts, maxPosts)
+	}, func() {
+		// threads, err = arn.AllThreadsSlice()
+		// arn.SortPostsLatestFirst(posts)
+		// posts = arn.FilterPostsWithUniqueThreads(posts, maxPosts)
 	}, func() {
 		userList, err = arn.DB.GetMany("User", user.Following)
 		followingList = userList.([]*arn.User)

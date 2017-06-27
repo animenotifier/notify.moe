@@ -15,7 +15,7 @@ func main() {
 	color.Yellow("Syncing Anime")
 
 	// Get a stream of all anime
-	allAnime := kitsu.AllAnime()
+	allAnime := kitsu.StreamAnime()
 
 	// Iterate over the stream
 	for anime := range allAnime {

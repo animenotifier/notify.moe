@@ -21,7 +21,7 @@ func updateAnimeIndex() {
 	animeSearchIndex := arn.NewSearchIndex()
 
 	// Anime
-	animeStream, err := arn.AllAnime()
+	animeStream, err := arn.StreamAnime()
 
 	if err != nil {
 		panic(err)

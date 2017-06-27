@@ -14,18 +14,12 @@ const maxPopularAnime = 10
 func main() {
 	color.Yellow("Caching popular anime")
 
-	animeChan, err := arn.AllAnime()
+	animeList, err := arn.AllAnime()
 
 	if err != nil {
 		color.Red("Failed fetching anime channel")
 		color.Red(err.Error())
 		return
-	}
-
-	var animeList []*arn.Anime
-
-	for anime := range animeChan {
-		animeList = append(animeList, anime)
 	}
 
 	sort.Slice(animeList, func(i, j int) bool {
