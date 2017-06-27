@@ -44,7 +44,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
 
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack)
 	ProfileHeader(viewUser, user)
 
 	.profile-category.mountable
@@ -58,7 +58,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 				each item in animeList.Items
 					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
 						img.anime-cover-image.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
-
+	
 	.profile-category.mountable
 		h3
 			a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
@@ -68,6 +68,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 		else
 			each thread in threads
 				ThreadLink(thread)
+	
 	.profile-category.mountable
 		h3
 			a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
@@ -84,6 +85,16 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 							.spacer
 							.post-likes= len(post.Likes)
 	
+	.profile-category.mountable
+		h3 Tracks
+
+		if len(tracks) == 0
+			p No soundtracks posted yet.
+		else
+			.sound-tracks
+				each track in tracks
+					SoundTrack(track)
+
 	//- if user != nil && user.Role == "admin"
 	//- 	.footer
 	//- 		a(href="/api/user/" + viewUser.ID) User API

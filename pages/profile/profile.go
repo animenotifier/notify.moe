@@ -9,6 +9,7 @@ import (
 )
 
 const maxPosts = 5
+const maxTracks = 5
 
 // Get user profile page.
 func Get(ctx *aero.Context) string {
@@ -27,6 +28,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	var user *arn.User
 	var threads []*arn.Thread
 	var animeList *arn.AnimeList
+	var tracks []*arn.SoundTrack
 	var posts []*arn.Post
 
 	flow.Parallel(func() {
@@ -48,7 +50,14 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		if len(posts) > maxPosts {
 			posts = posts[:maxPosts]
 		}
+	}, func() {
+		tracks = viewUser.SoundTracks()
+		arn.SortSoundTracksLatestFirst(tracks)
+
+		if len(tracks) > maxTracks {
+			tracks = tracks[:maxTracks]
+		}
 	})
 
-	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts))
+	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks))
 }
