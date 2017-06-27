@@ -46,8 +46,14 @@ func sync(data *kitsu.Anime) {
 	anime.EpisodeCount = attr.EpisodeCount
 	anime.EpisodeLength = attr.EpisodeLength
 	anime.Status = attr.Status
-	anime.NSFW = attr.Nsfw
 	anime.Summary = arn.FixAnimeDescription(attr.Synopsis)
+
+	// NSFW
+	if attr.Nsfw {
+		anime.NSFW = 1
+	} else {
+		anime.NSFW = 0
+	}
 
 	// Rating
 	overall, convertError := strconv.ParseFloat(attr.AverageRating, 64)
@@ -59,10 +65,10 @@ func sync(data *kitsu.Anime) {
 	anime.Rating.Overall = overall
 
 	// Trailers
-	anime.Trailers = []arn.ExternalMedia{}
+	anime.Trailers = []*arn.ExternalMedia{}
 
 	if attr.YoutubeVideoID != "" {
-		anime.Trailers = append(anime.Trailers, arn.ExternalMedia{
+		anime.Trailers = append(anime.Trailers, &arn.ExternalMedia{
 			Service:   "Youtube",
 			ServiceID: attr.YoutubeVideoID,
 		})

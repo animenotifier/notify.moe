@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
@@ -14,17 +13,6 @@ import (
 	"github.com/mssola/user_agent"
 	"github.com/parnurzeal/gorequest"
 )
-
-var apiKeys arn.APIKeys
-
-func init() {
-	data, _ := ioutil.ReadFile("security/api-keys.json")
-	err := json.Unmarshal(data, &apiKeys)
-
-	if err != nil {
-		panic(err)
-	}
-}
 
 // UserInfo updates user related information after each request.
 func UserInfo() aero.Middleware {
@@ -84,7 +72,7 @@ func updateUserInfo(ctx *aero.Context, user *arn.User) {
 // Updates the location of the user.
 func updateUserLocation(user *arn.User, newIP string) {
 	user.IP = newIP
-	locationAPI := "https://api.ipinfodb.com/v3/ip-city/?key=" + apiKeys.IPInfoDB.ID + "&ip=" + user.IP + "&format=json"
+	locationAPI := "https://api.ipinfodb.com/v3/ip-city/?key=" + arn.APIKeys.IPInfoDB.ID + "&ip=" + user.IP + "&format=json"
 
 	response, data, err := gorequest.New().Get(locationAPI).EndBytes()
 

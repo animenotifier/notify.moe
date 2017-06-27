@@ -1,8 +1,8 @@
 component NewSoundTrack(user *arn.User)
 	.widgets
 		.widget
-			input#soundcloud-link.widget-element(type="text", placeholder="Soundcloud link or ID")
-			input#anime-link.widget-element(type="text", placeholder="Anime link or ID")
+			input#soundcloud-link.widget-element(type="text", placeholder="Soundcloud link")
+			input#anime-link.widget-element(type="text", placeholder="Anime link")
 			input#osu-link.widget-element(type="text", placeholder="Osu beatmap link (optional)")
 			
 			button.action(data-action="createSoundTrack", data-trigger="click")

@@ -103,6 +103,28 @@ export function createThread(arn: AnimeNotifier) {
 	.catch(console.error)
 }
 
+// Create soundtrack
+export function createSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let soundcloud = arn.app.find("soundcloud-link") as HTMLInputElement
+	let anime = arn.app.find("anime-link") as HTMLInputElement
+	let osu = arn.app.find("osu-link") as HTMLInputElement
+
+	let soundtrack = {
+		soundcloud: soundcloud.value,
+		tags: [anime.value, osu.value],
+	}
+
+	button.innerText = "Adding..."
+	button.disabled = true
+
+	arn.post("/api/soundtrack/new", soundtrack)
+	.then(() => arn.app.load("/music"))
+	.catch(err => {
+		console.error(err)
+		arn.reloadContent()
+	})
+}
+
 // Search
 export function search(arn: AnimeNotifier, search: HTMLInputElement, e: KeyboardEvent) {
 	if(e.ctrlKey || e.altKey) {

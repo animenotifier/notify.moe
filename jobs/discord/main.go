@@ -1,13 +1,9 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
-	"path"
-	"path/filepath"
 	"strings"
 	"syscall"
 
@@ -21,30 +17,8 @@ var discord *discordgo.Session
 func main() {
 	var err error
 
-	exe, err := os.Executable()
-
-	if err != nil {
-		panic(err)
-	}
-
-	dir := path.Dir(exe)
-	var apiKeysPath string
-	apiKeysPath, err = filepath.Abs(dir + "/../../security/api-keys.json")
-
-	if err != nil {
-		panic(err)
-	}
-
-	var apiKeys arn.APIKeys
-	data, _ := ioutil.ReadFile(apiKeysPath)
-	err = json.Unmarshal(data, &apiKeys)
-
-	if err != nil {
-		panic(err)
-	}
-
 	discord, _ = discordgo.New()
-	discord.Token = "Bot " + apiKeys.Discord.Token
+	discord.Token = "Bot " + arn.APIKeys.Discord.Token
 
 	// Verify a Token was provided
 	if discord.Token == "" {

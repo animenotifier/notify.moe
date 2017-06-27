@@ -29,8 +29,8 @@ type GoogleUser struct {
 // InstallGoogleAuth enables Google login for the app.
 func InstallGoogleAuth(app *aero.Application) {
 	config := &oauth2.Config{
-		ClientID:     apiKeys.Google.ID,
-		ClientSecret: apiKeys.Google.Secret,
+		ClientID:     arn.APIKeys.Google.ID,
+		ClientSecret: arn.APIKeys.Google.Secret,
 		RedirectURL:  "https://" + app.Config.Domain + "/auth/google/callback",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email",
