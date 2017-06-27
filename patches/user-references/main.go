@@ -13,7 +13,7 @@ func main() {
 	arn.DB.DeleteTable("GoogleToUser")
 
 	// Get a stream of all users
-	allUsers, err := arn.AllUsers()
+	allUsers, err := arn.StreamUsers()
 
 	if err != nil {
 		panic(err)

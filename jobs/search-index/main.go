@@ -51,7 +51,7 @@ func updateUserIndex() {
 	userSearchIndex := arn.NewSearchIndex()
 
 	// Users
-	userStream, err := arn.AllUsers()
+	userStream, err := arn.StreamUsers()
 
 	if err != nil {
 		panic(err)

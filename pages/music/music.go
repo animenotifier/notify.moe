@@ -15,6 +15,21 @@ func Get(ctx *aero.Context) string {
 	tracks := []*arn.SoundTrack{}
 
 	tracks = append(tracks, &arn.SoundTrack{
+		ID: "0",
+		Media: []arn.ExternalMedia{
+			arn.ExternalMedia{
+				Service:   "Soundcloud",
+				ServiceID: "145918628",
+			},
+		},
+		Tags: []string{
+			"anime:2357",
+		},
+		Created:   arn.DateTimeUTC(),
+		CreatedBy: "4J6qpK1ve",
+	})
+
+	tracks = append(tracks, &arn.SoundTrack{
 		ID: "1",
 		Media: []arn.ExternalMedia{
 			arn.ExternalMedia{
@@ -39,6 +54,51 @@ func Get(ctx *aero.Context) string {
 		},
 		Tags: []string{
 			"anime:11469",
+		},
+		Created:   arn.DateTimeUTC(),
+		CreatedBy: "4J6qpK1ve",
+	})
+
+	tracks = append(tracks, &arn.SoundTrack{
+		ID: "3",
+		Media: []arn.ExternalMedia{
+			arn.ExternalMedia{
+				Service:   "Soundcloud",
+				ServiceID: "243839100",
+			},
+		},
+		Tags: []string{
+			"anime:9962",
+		},
+		Created:   arn.DateTimeUTC(),
+		CreatedBy: "4J6qpK1ve",
+	})
+
+	tracks = append(tracks, &arn.SoundTrack{
+		ID: "3",
+		Media: []arn.ExternalMedia{
+			arn.ExternalMedia{
+				Service:   "Soundcloud",
+				ServiceID: "207355237",
+			},
+		},
+		Tags: []string{
+			"anime:6589",
+		},
+		Created:   arn.DateTimeUTC(),
+		CreatedBy: "4J6qpK1ve",
+	})
+
+	tracks = append(tracks, &arn.SoundTrack{
+		ID: "3",
+		Media: []arn.ExternalMedia{
+			arn.ExternalMedia{
+				Service:   "Soundcloud",
+				ServiceID: "242172944",
+			},
+		},
+		Tags: []string{
+			"anime:10740",
 		},
 		Created:   arn.DateTimeUTC(),
 		CreatedBy: "4J6qpK1ve",

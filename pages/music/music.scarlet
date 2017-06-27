@@ -6,6 +6,8 @@
 
 	iframe
 		width 100%
+	
+	box-shadow shadow-light
 
 .sound-track-footer
 	text-align right

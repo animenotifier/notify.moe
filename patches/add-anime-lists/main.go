@@ -11,7 +11,7 @@ func main() {
 	color.Yellow("Adding empty anime lists to users who don't have one")
 
 	// Get a stream of all users
-	allUsers, err := arn.AllUsers()
+	allUsers, err := arn.StreamUsers()
 
 	if err != nil {
 		panic(err)
