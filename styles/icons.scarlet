@@ -11,3 +11,6 @@
 	height 1em
 	min-width 1em
 	fill currentColor
+
+.icon-headphones
+	transform translateY(2px)

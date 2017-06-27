@@ -11,9 +11,9 @@ func init() {
 	files, _ := ioutil.ReadDir("images/icons/")
 
 	for _, file := range files {
-		name := strings.Replace(file.Name(), ".svg", "", 1)
+		name := strings.TrimSuffix(file.Name(), ".svg")
 		data, _ := ioutil.ReadFile("images/icons/" + name + ".svg")
-		svgIcons[name] = strings.Replace(string(data), "<svg ", "<svg class='icon' ", 1)
+		svgIcons[name] = strings.Replace(string(data), "<svg ", "<svg class='icon icon-"+name+"' ", 1)
 	}
 }
 
