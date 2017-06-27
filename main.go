@@ -65,6 +65,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/user/:nick/threads", profile.GetThreadsByUser)
 	app.Ajax("/user/:nick/posts", profile.GetPostsByUser)
+	app.Ajax("/user/:nick/tracks", profile.GetSoundTracksByUser)
 	app.Ajax("/user/:nick/animelist", animelist.Get)
 	app.Ajax("/user/:nick/animelist/:id", animelistitem.Get)
 	app.Ajax("/new/thread", newthread.Get)

@@ -1,0 +1,6 @@
+component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, user *arn.User)
+	h2= "Tracks added by " + viewUser.Nick
+	.sound-tracks
+		each track in tracks
+			SoundTrack(track)
+	

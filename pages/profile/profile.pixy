@@ -86,7 +86,8 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 							.post-likes= len(post.Likes)
 	
 	.profile-category.mountable
-		h3 Tracks
+		h3
+			a.ajax(href="/+" + viewUser.Nick + "/tracks", title="View all tracks") Tracks
 
 		if len(tracks) == 0
 			p No soundtracks posted yet.
