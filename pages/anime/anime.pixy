@@ -1,4 +1,4 @@
-component Anime(anime *arn.Anime, user *arn.User)
+component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User)
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Small != ""
 			.anime-image-container
@@ -133,11 +133,14 @@ component Anime(anime *arn.Anime, user *arn.User)
 	//- 						if providers.Nyaa && providers.Nyaa.episodes !== undefined
 	//- 							span(class=providers.Nyaa.episodes === 0 ? "entry-error" : "entry-ok")= providers.Nyaa.episodes + " eps"
 
-	h3.anime-section-name Tracks
-	p Coming soon.
+	if len(tracks) > 0
+		h3.anime-section-name Tracks
+		.sound-tracks
+			each track in tracks
+				SoundTrack(track)
 
-	h3.anime-section-name Reviews
-	p Coming soon.
+	//- h3.anime-section-name Reviews
+	//- p Coming soon.
 
 	h3.anime-section-name Links
 	.light-button-group
