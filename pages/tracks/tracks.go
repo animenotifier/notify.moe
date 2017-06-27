@@ -1,4 +1,4 @@
-package posts
+package tracks
 
 import (
 	"net/http"
@@ -11,11 +11,11 @@ import (
 // Get post.
 func Get(ctx *aero.Context) string {
 	id := ctx.Get("id")
-	post, err := arn.GetPost(id)
+	track, err := arn.GetSoundTrack(id)
 
 	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Post not found", err)
+		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
-	return ctx.HTML(components.Post(post))
+	return ctx.HTML(components.Track(track))
 }

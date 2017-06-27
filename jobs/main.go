@@ -23,12 +23,13 @@ var colorPool = []*color.Color{
 }
 
 var jobs = map[string]time.Duration{
-	"active-users":  1 * time.Minute,
-	"avatars":       1 * time.Hour,
-	"sync-anime":    10 * time.Hour,
-	"popular-anime": 11 * time.Hour,
-	"airing-anime":  12 * time.Hour,
-	"search-index":  13 * time.Hour,
+	"active-users":         1 * time.Minute,
+	"avatars":              1 * time.Hour,
+	"refresh-track-titles": 10 * time.Hour,
+	"sync-anime":           12 * time.Hour,
+	"popular-anime":        12 * time.Hour,
+	"airing-anime":         12 * time.Hour,
+	"search-index":         12 * time.Hour,
 }
 
 func main() {

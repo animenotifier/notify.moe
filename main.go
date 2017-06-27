@@ -27,6 +27,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/settings"
 	"github.com/animenotifier/notify.moe/pages/threads"
+	"github.com/animenotifier/notify.moe/pages/tracks"
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
 	"github.com/animenotifier/notify.moe/pages/webdev"
@@ -61,6 +62,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/threads/:id", threads.Get)
 	app.Ajax("/posts/:id", posts.Get)
+	app.Ajax("/tracks/:id", tracks.Get)
 	app.Ajax("/user", user.Get)
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/user/:nick/threads", profile.GetThreadsByUser)

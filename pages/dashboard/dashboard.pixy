@@ -34,10 +34,10 @@ component Dashboard(posts []*arn.Post, soundTracks []*arn.SoundTrack, following 
 
 			for i := 0; i <= 4; i++
 				if i < len(soundTracks)
-					a.widget-element.ajax(href="/music")
+					a.widget-element.ajax(href=soundTracks[i].Link())
 						.widget-element-text
 							Icon("music")
-							span= soundTracks[i].MainAnime().Title.Canonical
+							span= soundTracks[i].Media[0].Title
 				else
 					.widget-element
 						.widget-element-text

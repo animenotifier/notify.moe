@@ -22,7 +22,7 @@ func main() {
 		sync(anime)
 	}
 
-	println("Finished.")
+	color.Green("Finished.")
 }
 
 func sync(data *kitsu.Anime) {
