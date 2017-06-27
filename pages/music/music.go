@@ -1,8 +1,12 @@
 package music
 
-import "github.com/aerogo/aero"
-import "github.com/animenotifier/notify.moe/components"
-import "github.com/animenotifier/arn"
+import (
+	"sort"
+
+	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components"
+)
 
 // Get renders the music page.
 func Get(ctx *aero.Context) string {
@@ -19,6 +23,8 @@ func Get(ctx *aero.Context) string {
 		Tags: []string{
 			"anime:7622",
 		},
+		Created:   arn.DateTimeUTC(),
+		CreatedBy: "4J6qpK1ve",
 	})
 
 	tracks = append(tracks, &arn.SoundTrack{
@@ -32,6 +38,12 @@ func Get(ctx *aero.Context) string {
 		Tags: []string{
 			"anime:11469",
 		},
+		Created:   arn.DateTimeUTC(),
+		CreatedBy: "4J6qpK1ve",
+	})
+
+	sort.Slice(tracks, func(i, j int) bool {
+		return tracks[i].Created > tracks[j].Created
 	})
 
 	return ctx.HTML(components.Music(tracks))

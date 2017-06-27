@@ -3,10 +3,17 @@
 
 .sound-track
 	horizontal
-	margin-bottom 1rem
 
 	iframe
 		width 100%
+
+.sound-track-footer
+	text-align right
+	margin-bottom content-padding
+	font-size 0.9em
+
+	span
+		opacity 0.65
 
 .sound-track-anime-link
 	//

@@ -4,8 +4,10 @@ component Music(tracks []*arn.SoundTrack)
 	.sound-tracks
 		each track in tracks
 			.sound-track
-				each anime in track.Anime()
-					a.sound-track-anime-link.ajax(href="/anime/" + anime.ID)
-						img.sound-track-anime-image(src=anime.Image.Small, alt=anime.Title.Canonical, title=anime.Title.Canonical)
+				a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
+					img.sound-track-anime-image(src=track.MainAnime().Image.Small, alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 				
 				iframe(src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/" + track.Media[0].ServiceID + "?auto_play=false&hide_related=true&show_comments=true&show_user=true&show_reposts=false&visual=true")
+			.sound-track-footer
+				span posted by 
+				a.ajax(href=track.CreatedByUser().Link())= track.CreatedByUser().Nick
