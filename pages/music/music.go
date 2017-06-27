@@ -2,7 +2,6 @@ package music
 
 import (
 	"net/http"
-	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -18,10 +17,6 @@ func Get(ctx *aero.Context) string {
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching soundtracks", err)
 	}
-
-	sort.Slice(tracks, func(i, j int) bool {
-		return tracks[i].Created > tracks[j].Created
-	})
 
 	if len(tracks) > maxTracks {
 		tracks = tracks[:maxTracks]

@@ -1,4 +1,4 @@
-component Dashboard(posts []*arn.Post, following []*arn.User)
+component Dashboard(posts []*arn.Post, soundTracks []*arn.SoundTrack, following []*arn.User)
 	h2.page-title Dash
 
 	.widgets
@@ -30,13 +30,19 @@ component Dashboard(posts []*arn.Post, following []*arn.User)
 						span ...
 
 		.widget.mountable
-			h3.widget-title Messages
+			h3.widget-title Soundtracks
 
-			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
-						Icon("comment")
-						span ...
+			for i := 0; i <= 4; i++
+				if i < len(soundTracks)
+					a.widget-element.ajax(href="/music")
+						.widget-element-text
+							Icon("music")
+							span= soundTracks[i].MainAnime().Title.Canonical
+				else
+					.widget-element
+						.widget-element-text
+							Icon("music")
+							span ...
 
 		.widget.mountable
 			h3.widget-title Contacts

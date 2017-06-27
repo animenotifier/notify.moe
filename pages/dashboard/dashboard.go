@@ -11,6 +11,7 @@ import (
 
 const maxPosts = 5
 const maxFollowing = 5
+const maxSoundTracks = 5
 
 // Get the dashboard or the frontpage when logged out.
 func Get(ctx *aero.Context) string {
@@ -26,22 +27,43 @@ func Get(ctx *aero.Context) string {
 // Render the dashboard.
 func dashboard(ctx *aero.Context) string {
 	var posts []*arn.Post
-	var err error
 	var userList interface{}
 	var followingList []*arn.User
+	var soundTracks []*arn.SoundTrack
 
 	user := utils.GetUser(ctx)
 
 	flow.Parallel(func() {
+		var err error
 		posts, err = arn.AllPosts()
+
+		if err != nil {
+			return
+		}
+
 		arn.SortPostsLatestFirst(posts)
 		posts = arn.FilterPostsWithUniqueThreads(posts, maxPosts)
 	}, func() {
-		// threads, err = arn.AllThreadsSlice()
-		// arn.SortPostsLatestFirst(posts)
-		// posts = arn.FilterPostsWithUniqueThreads(posts, maxPosts)
+		var err error
+		soundTracks, err = arn.AllSoundTracks()
+
+		if err != nil {
+			return
+		}
+
+		arn.SortSoundTracksLatestFirst(soundTracks)
+
+		if len(soundTracks) > maxSoundTracks {
+			soundTracks = soundTracks[:maxSoundTracks]
+		}
 	}, func() {
+		var err error
 		userList, err = arn.DB.GetMany("User", user.Following)
+
+		if err != nil {
+			return
+		}
+
 		followingList = userList.([]*arn.User)
 		followingList = arn.SortUsersLastSeen(followingList)
 
@@ -50,9 +72,5 @@ func dashboard(ctx *aero.Context) string {
 		}
 	})
 
-	if err != nil {
-		return ctx.Error(500, "Error displaying dashboard", err)
-	}
-
-	return ctx.HTML(components.Dashboard(posts, followingList))
+	return ctx.HTML(components.Dashboard(posts, soundTracks, followingList))
 }
