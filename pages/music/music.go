@@ -18,6 +18,8 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching soundtracks", err)
 	}
 
+	arn.SortSoundTracksLatestFirst(tracks)
+
 	if len(tracks) > maxTracks {
 		tracks = tracks[:maxTracks]
 	}
