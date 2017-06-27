@@ -8,7 +8,7 @@ component Music(tracks []*arn.SoundTrack)
 
 	.sound-tracks
 		each track in tracks
-			.sound-track
+			.sound-track(id=track.ID)
 				a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
 					img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image.Small, alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 				
