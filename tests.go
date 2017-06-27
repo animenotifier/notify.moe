@@ -120,6 +120,7 @@ var tests = map[string][]string{
 	// Disable
 	"/auth/google":          nil,
 	"/auth/google/callback": nil,
+	"/new/thread":           nil,
 	"/user":                 nil,
 	"/settings":             nil,
 	"/extension/embed":      nil,
