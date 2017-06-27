@@ -47,7 +47,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.SetStyle(css.Bundle())
 
 	// Sessions
-	app.Sessions.Duration = 3600 * 24
+	app.Sessions.Duration = 3600 * 24 * 7
 	app.Sessions.Store = arn.NewAerospikeStore("Session", app.Sessions.Duration)
 
 	// Layout
