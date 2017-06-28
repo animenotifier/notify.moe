@@ -1,4 +1,4 @@
-component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User)
+component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, episodesReversed bool)
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Small != ""
 			.anime-image-container
@@ -145,7 +145,10 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User)
 				SoundTrack(track)
 	
 	if len(anime.Episodes) > 0
-		h3.anime-section-name Episodes
+		if episodesReversed
+			h3.anime-section-name Latest episodes
+		else
+			h3.anime-section-name Episodes
 		table
 			tbody.episodes
 				each episode in anime.Episodes
@@ -155,7 +158,7 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User)
 						td.episode-actions
 							a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
 								RawIcon("google")
-						td.episode-airing-date-start= episode.AiringDate.StartDateHuman()
+						td.episode-airing-date-start(title=episode.AiringDate.StartTimeHuman())= episode.AiringDate.StartDateHuman()
 
 	//- h3.anime-section-name Reviews
 	//- p Coming soon.
