@@ -28,8 +28,12 @@ func updateAnimeIndex() {
 	}
 
 	for anime := range animeStream {
-		if anime.Title.Canonical != "" {
-			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Canonical)] = anime.ID
+		if anime.Title.Romaji != "" {
+			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Romaji)] = anime.ID
+		}
+
+		if anime.Title.English != "" {
+			animeSearchIndex.TextToID[strings.ToLower(anime.Title.English)] = anime.ID
 		}
 
 		if anime.Title.Japanese != "" {
