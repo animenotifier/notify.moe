@@ -1,15 +1,22 @@
-component Dashboard(posts []*arn.Post, soundTracks []*arn.SoundTrack, following []*arn.User)
+component Dashboard(schedule []*arn.UpcomingEpisode, posts []*arn.Post, soundTracks []*arn.SoundTrack, following []*arn.User)
 	h2.page-title Dash
 
 	.widgets
 		.widget.mountable
 			h3.widget-title Schedule
 
-			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
-						Icon("calendar-o")
-						span ...
+			for i := 0; i <= 4; i++
+				if i < len(schedule)
+					a.widget-element.ajax(href=schedule[i].Anime.Link())
+						.widget-element-text
+							Icon("calendar-o")
+							.schedule-item-title= schedule[i].Anime.Title.Canonical
+							.schedule-item-episode= "# " + toString(schedule[i].Episode.Number)
+				else
+					.widget-element
+						.widget-element-text
+							Icon("calendar-o")
+							span ...
 
 		.widget.mountable
 			h3.widget-title Forums

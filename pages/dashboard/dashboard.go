@@ -1,6 +1,8 @@
 package dashboard
 
 import (
+	"time"
+
 	"github.com/aerogo/aero"
 	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
@@ -12,6 +14,7 @@ import (
 const maxPosts = 5
 const maxFollowing = 5
 const maxSoundTracks = 5
+const maxScheduleItems = 5
 
 // Get the dashboard or the frontpage when logged out.
 func Get(ctx *aero.Context) string {
@@ -30,6 +33,7 @@ func dashboard(ctx *aero.Context) string {
 	var userList interface{}
 	var followingList []*arn.User
 	var soundTracks []*arn.SoundTrack
+	var upcomingEpisodes []*arn.UpcomingEpisode
 
 	user := utils.GetUser(ctx)
 
@@ -43,6 +47,43 @@ func dashboard(ctx *aero.Context) string {
 
 		arn.SortPostsLatestFirst(posts)
 		posts = arn.FilterPostsWithUniqueThreads(posts, maxPosts)
+	}, func() {
+		animeList, err := arn.GetAnimeList(user)
+
+		if err != nil {
+			return
+		}
+
+		var keys []string
+
+		for _, item := range animeList.Items {
+			keys = append(keys, item.AnimeID)
+		}
+
+		objects, getErr := arn.DB.GetMany("Anime", keys)
+
+		if getErr != nil {
+			return
+		}
+
+		allAnimeInList := objects.([]*arn.Anime)
+		now := time.Now().UTC().Format(time.RFC3339)
+
+		for _, anime := range allAnimeInList {
+			if len(upcomingEpisodes) >= maxScheduleItems {
+				break
+			}
+
+			for _, episode := range anime.Episodes {
+				if episode.AiringDate.Start > now {
+					upcomingEpisodes = append(upcomingEpisodes, &arn.UpcomingEpisode{
+						Anime:   anime,
+						Episode: episode,
+					})
+					continue
+				}
+			}
+		}
 	}, func() {
 		var err error
 		soundTracks, err = arn.AllSoundTracks()
@@ -72,5 +113,5 @@ func dashboard(ctx *aero.Context) string {
 		}
 	})
 
-	return ctx.HTML(components.Dashboard(posts, soundTracks, followingList))
+	return ctx.HTML(components.Dashboard(upcomingEpisodes, posts, soundTracks, followingList))
 }

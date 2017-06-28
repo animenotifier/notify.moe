@@ -1,0 +1,5 @@
+.schedule-item-title
+	flex 1
+
+.schedule-item-episode
+	text-align right
