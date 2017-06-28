@@ -1,6 +1,7 @@
 package dashboard
 
 import (
+	"sort"
 	"time"
 
 	"github.com/aerogo/aero"
@@ -84,6 +85,10 @@ func dashboard(ctx *aero.Context) string {
 				}
 			}
 		}
+
+		sort.Slice(upcomingEpisodes, func(i, j int) bool {
+			return upcomingEpisodes[i].Episode.AiringDate.Start < upcomingEpisodes[j].Episode.AiringDate.Start
+		})
 	}, func() {
 		var err error
 		soundTracks, err = arn.AllSoundTracks()
