@@ -23,7 +23,7 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User)
 		.buttons.anime-actions
 			if user.Role == "editor" || user.Role == "admin"
 				a.button.ajax(href=anime.Link() + "/edit")
-					Icon("database")
+					Icon("pencil-square-o")
 					span Edit anime
 
 			if user.AnimeList().Contains(anime.ID)

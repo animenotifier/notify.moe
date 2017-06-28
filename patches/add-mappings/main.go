@@ -22,7 +22,7 @@ func main() {
 		}
 
 		fmt.Println(anime.ID, "=", mapping.Service, mapping.ServiceID)
-		anime.AddMapping(mapping.Service, mapping.ServiceID)
+		anime.AddMapping(mapping.Service, mapping.ServiceID, "4J6qpK1ve")
 		anime.Save()
 	}
 }

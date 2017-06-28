@@ -4,4 +4,13 @@ component EditAnime(anime *arn.Anime)
 	.widgets
 		.widget(data-api="/api/anime/" + anime.ID)
 			h3.anime-section-name Mappings
-			InputText("ShoboiID", anime.GetMapping("shoboi/anime"), "Shoboi TID", "TID on http://cal.syoboi.jp")
+			InputText("Custom:ShoboiID", anime.GetMapping("shoboi/anime"), "Shoboi TID", "TID on http://cal.syoboi.jp")
+
+			.buttons
+				a.button.ajax(href="/anime/" + anime.ID)
+					Icon("arrow-left")
+					span View anime
+				
+				a.button(href="/api/anime/" + anime.ID, target="_blank")
+					Icon("search-plus")
+					span JSON API
