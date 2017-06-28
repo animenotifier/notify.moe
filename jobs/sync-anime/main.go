@@ -26,7 +26,16 @@ func main() {
 }
 
 func sync(data *kitsu.Anime) {
-	anime := arn.Anime{}
+	anime, err := arn.GetAnime(data.ID)
+
+	if err != nil {
+		if strings.Contains(err.Error(), "not found") {
+			anime = &arn.Anime{}
+		} else {
+			panic(err)
+		}
+	}
+
 	attr := data.Attributes
 
 	// General data
@@ -47,6 +56,10 @@ func sync(data *kitsu.Anime) {
 	anime.EpisodeLength = attr.EpisodeLength
 	anime.Status = attr.Status
 	anime.Summary = arn.FixAnimeDescription(attr.Synopsis)
+
+	if anime.Mappings == nil {
+		anime.Mappings = []*arn.Mapping{}
+	}
 
 	// NSFW
 	if attr.Nsfw {
@@ -75,7 +88,7 @@ func sync(data *kitsu.Anime) {
 	}
 
 	// Save in database
-	err := anime.Save()
+	err = anime.Save()
 	status := ""
 
 	if err == nil {
