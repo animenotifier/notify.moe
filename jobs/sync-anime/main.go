@@ -61,6 +61,10 @@ func sync(data *kitsu.Anime) {
 		anime.Mappings = []*arn.Mapping{}
 	}
 
+	if anime.Episodes == nil {
+		anime.Episodes = []*arn.AnimeEpisode{}
+	}
+
 	// NSFW
 	if attr.Nsfw {
 		anime.NSFW = 1

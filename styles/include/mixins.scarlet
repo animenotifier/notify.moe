@@ -36,6 +36,11 @@ mixin clip-long-text
 	white-space nowrap
 	text-overflow ellipsis
 
+mixin bg-dark-up
+	background-color transparent
+	:hover
+		background-color rgba(0, 0, 0, 0.015)
+
 mixin light-up
 	filter brightness(0.4) saturate(1)
 	:hover

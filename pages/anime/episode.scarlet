@@ -1,0 +1,21 @@
+.episode
+	horizontal
+
+.episode-number
+	flex-basis 3.2rem
+	// text-align right
+
+.episode-title
+	flex 1
+
+.episode-airing-date-start
+	flex-basis 270px
+	text-align right
+
+< 800px
+	.episode-airing-date-start
+		display none
+
+< 500px
+	.episode-actions
+		display none
