@@ -1,5 +1,9 @@
 .schedule-item-title
 	flex 1
+	white-space nowrap
+	text-overflow ellipsis
+	overflow hidden
 
 .schedule-item-episode
 	text-align right
+	flex-basis 50px
