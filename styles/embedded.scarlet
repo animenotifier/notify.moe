@@ -16,5 +16,8 @@ remove-margin = 1.1rem
 		td
 			padding 0.25rem 0.5rem
 	
+	.anime-list-owner
+		display none
+	
 	#navigation
 		font-size 0.9rem

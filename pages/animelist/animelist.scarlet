@@ -3,9 +3,6 @@
 	width 100%
 	max-width 1100px
 	margin 0 auto
-	// border ui-border
-	// background rgb(249, 249, 249)
-	// border-radius 3px
 
 	tr
 		horizontal
