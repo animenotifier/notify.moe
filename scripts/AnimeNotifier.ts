@@ -100,10 +100,13 @@ export class AnimeNotifier {
 			switch(dayDifference) {
 				case 0:
 					element.innerText = "Today"
+					break
 				case 1:
 					element.innerText = "Tomorrow"
+					break
 				case -1:
 					element.innerText = "Yesterday"
+					break
 				default:
 					let text = Math.abs(dayDifference) + " days"
 
