@@ -3,6 +3,23 @@ import { Diff } from "./Diff"
 import { findAll, delay } from "./utils"
 import * as actions from "./actions"
 
+var monthNames = [
+	"January", "February", "March",
+	"April", "May", "June", "July",
+	"August", "September", "October",
+	"November", "December"
+]
+
+var dayNames = [
+	"Sunday",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday"
+]
+
 export class AnimeNotifier {
 	app: Application
 	visibilityObserver: IntersectionObserver
@@ -56,6 +73,38 @@ export class AnimeNotifier {
 		Promise.resolve().then(() => this.mountMountables())
 		Promise.resolve().then(() => this.assignActions())
 		Promise.resolve().then(() => this.lazyLoadImages())
+		Promise.resolve().then(() => this.displayLocalDates())
+	}
+
+	displayLocalDates() {
+		const oneDay = 24 * 60 * 60 * 1000
+		const now = new Date()
+
+		for(let element of findAll("utc-date")) {
+			let startDate = new Date(element.dataset.startDate)
+			let endDate = new Date(element.dataset.endDate)
+
+			let h = startDate.getHours()
+			let m = startDate.getMinutes()
+			let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+
+			h = endDate.getHours()
+			m = endDate.getMinutes()
+			let endTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+			
+			let dayDifference = Math.round(Math.abs((startDate.getTime() - now.getTime()) / oneDay))
+			let dayInfo = dayNames[startDate.getDay()] + ", " + monthNames[startDate.getMonth()] + " " + startDate.getDate()
+
+			if(dayDifference > 1) {
+				element.innerText = dayDifference + " day" + (dayDifference == 1 ? "" : "s")
+			} else if(dayDifference == 1) {
+				element.innerText = "Tomorrow"
+			} else {
+				element.innerText = "Today"
+			}
+
+			element.title = "Episode " + element.dataset.episodeNumber + " will be airing " + startTime + " - " + endTime + " your time"
+		}
 	}
 
 	reloadContent() {

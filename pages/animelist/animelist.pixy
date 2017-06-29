@@ -3,6 +3,7 @@ component AnimeList(animeList *arn.AnimeList, user *arn.User)
 		thead
 			tr
 				th.anime-list-item-name Anime
+				th.anime-list-item-airing-date Airing
 				th.anime-list-item-episodes Episodes
 				th.anime-list-item-rating Rating
 				if user != nil
@@ -12,6 +13,9 @@ component AnimeList(animeList *arn.AnimeList, user *arn.User)
 				tr.anime-list-item.mountable(title=item.Notes)
 					td.anime-list-item-name
 						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
+					td.anime-list-item-airing-date
+						if item.Anime().UpcomingEpisode() != nil
+							span.utc-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
 					td.anime-list-item-episodes
 						.anime-list-item-episodes-watched= item.Episodes
 						.anime-list-item-episodes-separator /

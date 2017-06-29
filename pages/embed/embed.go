@@ -2,7 +2,6 @@ package embed
 
 import (
 	"net/http"
-	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
@@ -23,9 +22,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	sort.Slice(animeList.Items, func(i, j int) bool {
-		return animeList.Items[i].FinalRating() > animeList.Items[j].FinalRating()
-	})
+	animeList.Sort()
 
 	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(animeList, user)))
 }

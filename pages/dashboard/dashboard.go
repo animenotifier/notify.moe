@@ -2,7 +2,6 @@ package dashboard
 
 import (
 	"sort"
-	"time"
 
 	"github.com/aerogo/aero"
 	"github.com/aerogo/flow"
@@ -68,22 +67,19 @@ func dashboard(ctx *aero.Context) string {
 		}
 
 		allAnimeInList := objects.([]*arn.Anime)
-		now := time.Now().UTC().Format(time.RFC3339)
 
 		for _, anime := range allAnimeInList {
 			if len(upcomingEpisodes) >= maxScheduleItems {
 				break
 			}
 
-			for _, episode := range anime.Episodes {
-				if episode.AiringDate.Start > now {
-					upcomingEpisodes = append(upcomingEpisodes, &arn.UpcomingEpisode{
-						Anime:   anime,
-						Episode: episode,
-					})
-					continue
-				}
+			futureEpisodes := anime.UpcomingEpisodes()
+
+			if len(futureEpisodes) == 0 {
+				continue
 			}
+
+			upcomingEpisodes = append(upcomingEpisodes, futureEpisodes...)
 		}
 
 		sort.Slice(upcomingEpisodes, func(i, j int) bool {

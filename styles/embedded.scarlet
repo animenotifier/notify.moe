@@ -1,3 +1,5 @@
+remove-margin = 1.1rem
+
 .embedded
 	// Put navigation to the bottom of the screen
 	flex-direction column-reverse !important
@@ -6,8 +8,13 @@
 		display inline-block
 
 	.anime-list
-		max-width 500px
-		margin -1.1rem
+		// max-width 500px
+		margin-left calc(remove-margin * -1)
+		margin-top calc(remove-margin * -1)
+		width calc(100% + remove-margin * 2)
+
+		td
+			padding 0.25rem 0.5rem
 	
 	#navigation
 		font-size 0.9rem

@@ -51,6 +51,13 @@
 	.raw-icon
 		margin-bottom -4px
 
+.anime-list-item-airing-date
+	display none
+
+> 700px
+	.anime-list-item-airing-date
+		display block
+
 < 1100px
 	.anime-list-item-rating
 		display none
