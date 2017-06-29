@@ -1,8 +1,12 @@
-.anime-list
+.anime-list-container
 	vertical
 	width 100%
 	max-width 1200px
 	margin 0 auto
+	margin-bottom 1rem
+
+.anime-list
+	vertical
 
 	tr
 		horizontal

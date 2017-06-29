@@ -27,5 +27,5 @@ func Get(ctx *aero.Context) string {
 
 	animeList.Sort()
 
-	return ctx.HTML(components.AnimeList(animeList, user))
+	return ctx.HTML(components.AnimeLists(animeList.SplitByStatus(), animeList.User(), user))
 }

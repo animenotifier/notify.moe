@@ -1,5 +1,36 @@
+component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, user *arn.User)
+	h2.anime-list-owner= viewUser.Nick + "'s collection"
+
+	if len(animeLists[arn.AnimeListStatusWatching].Items) > 0
+		.anime-list-container
+			h3.status-name Watching
+			AnimeList(animeLists[arn.AnimeListStatusWatching], user)
+
+	if len(animeLists[arn.AnimeListStatusCompleted].Items) > 0
+		.anime-list-container
+			h3.status-name Completed
+			AnimeList(animeLists[arn.AnimeListStatusCompleted], user)
+
+	if len(animeLists[arn.AnimeListStatusPlanned].Items) > 0
+		.anime-list-container
+			h3.status-name Planned
+			AnimeList(animeLists[arn.AnimeListStatusPlanned], user)
+
+	if len(animeLists[arn.AnimeListStatusHold].Items) > 0
+		.anime-list-container
+			h3.status-name On hold
+			AnimeList(animeLists[arn.AnimeListStatusHold], user)
+
+	if len(animeLists[arn.AnimeListStatusDropped].Items) > 0
+		.anime-list-container
+			h3.status-name Dropped
+			AnimeList(animeLists[arn.AnimeListStatusDropped], user)
+	
+	//- for status, animeList := range animeLists
+	//- 	h3= status
+	//- 	AnimeList(animeList, user)
+
 component AnimeList(animeList *arn.AnimeList, user *arn.User)
-	h2.anime-list-owner= animeList.User().Nick + "'s collection"
 	table.anime-list
 		thead
 			tr
