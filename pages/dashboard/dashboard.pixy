@@ -7,11 +7,13 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 
 			for i := 0; i <= 4; i++
 				if i < len(schedule)
-					a.widget-element.ajax(href=schedule[i].Anime.Link())
+					.widget-element
 						.widget-element-text
-							Icon("calendar-o")
-							.schedule-item-title= schedule[i].Anime.Title.Canonical
-							.schedule-item-episode= "# " + toString(schedule[i].Episode.Number)
+							a.schedule-item-link.ajax(href=schedule[i].Anime.Link())
+								Icon("calendar-o")
+								.schedule-item-title= schedule[i].Anime.Title.Canonical
+							.spacer
+							.schedule-item-date.utc-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
 				else
 					.widget-element
 						.widget-element-text
