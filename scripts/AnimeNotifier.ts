@@ -236,7 +236,8 @@ export class AnimeNotifier {
 		this.unmountMountables()
 		this.loading(true)
 
-		return delay(330).then(() => {
+		// Delay by transition-speed
+		return delay(300).then(() => {
 			request
 			.then(html => this.app.setContent(html, true))
 			.then(() => this.app.markActiveLinks())
