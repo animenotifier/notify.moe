@@ -92,18 +92,30 @@ export class AnimeNotifier {
 			m = endDate.getMinutes()
 			let endTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
 			
-			let dayDifference = Math.round(Math.abs((startDate.getTime() - now.getTime()) / oneDay))
+			let dayDifference = Math.round((startDate.getTime() - now.getTime()) / oneDay)
 			let dayInfo = dayNames[startDate.getDay()] + ", " + monthNames[startDate.getMonth()] + " " + startDate.getDate()
 
-			if(dayDifference > 1) {
-				element.innerText = dayDifference + " day" + (dayDifference == 1 ? "" : "s")
-			} else if(dayDifference == 1) {
-				element.innerText = "Tomorrow"
-			} else {
-				element.innerText = "Today"
+			let airingVerb = "will be airing"
+
+			switch(dayDifference) {
+				case 0:
+					element.innerText = "Today"
+				case 1:
+					element.innerText = "Tomorrow"
+				case -1:
+					element.innerText = "Yesterday"
+				default:
+					let text = Math.abs(dayDifference) + " days"
+
+					if(dayDifference < 0) {
+						text += " ago"
+						airingVerb = "aired"
+					} else {
+						element.innerText = text
+					}
 			}
 
-			element.title = "Episode " + element.dataset.episodeNumber + " will be airing " + startTime + " - " + endTime + " your time"
+			element.title = "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + startTime + " - " + endTime + " your time"
 		}
 	}
 
