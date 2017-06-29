@@ -1,4 +1,5 @@
 component AnimeList(animeList *arn.AnimeList, user *arn.User)
+	h2= animeList.User().Nick + "'s collection"
 	table.anime-list
 		thead
 			tr
