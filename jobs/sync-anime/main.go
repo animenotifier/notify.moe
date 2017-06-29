@@ -43,7 +43,6 @@ func sync(data *kitsu.Anime) {
 	anime.Type = strings.ToLower(attr.ShowType)
 	anime.Title.Canonical = attr.CanonicalTitle
 	anime.Title.English = attr.Titles.En
-	anime.Title.Japanese = attr.Titles.JaJp
 	anime.Title.Romaji = attr.Titles.EnJp
 	anime.Title.Synonyms = attr.AbbreviatedTitles
 	anime.Image.Tiny = kitsu.FixImageURL(attr.PosterImage.Tiny)
@@ -63,6 +62,17 @@ func sync(data *kitsu.Anime) {
 
 	if anime.Episodes == nil {
 		anime.Episodes = []*arn.AnimeEpisode{}
+	}
+
+	// Prefer Shoboi Japanese titles over Kitsu JP titles
+	if anime.GetMapping("shoboi/anime") != "" {
+		// Only take Kitsu title when our JP title is empty
+		if anime.Title.Japanese == "" {
+			anime.Title.Japanese = attr.Titles.JaJp
+		}
+	} else {
+		// Update JP title with Kitsu JP title
+		anime.Title.Japanese = attr.Titles.JaJp
 	}
 
 	// NSFW
