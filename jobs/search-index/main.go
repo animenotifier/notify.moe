@@ -37,7 +37,15 @@ func updateAnimeIndex() {
 		}
 
 		if anime.Title.Japanese != "" {
-			animeSearchIndex.TextToID[anime.Title.Japanese] = anime.ID
+			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Japanese)] = anime.ID
+		}
+
+		for _, synonym := range anime.Title.Synonyms {
+			synonym = strings.ToLower(synonym)
+
+			if synonym != "" && len(synonym) <= 10 {
+				animeSearchIndex.TextToID[synonym] = anime.ID
+			}
 		}
 	}
 
