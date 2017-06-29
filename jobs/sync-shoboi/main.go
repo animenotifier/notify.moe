@@ -64,17 +64,30 @@ func sync(anime *arn.Anime) bool {
 
 // Search for a specific title
 func search(anime *arn.Anime, title string) {
-	tid, err := shoboi.SearchAnime(title)
+	shoboi, err := shoboi.SearchAnime(title)
 
 	if err != nil {
 		color.Red(err.Error())
 		return
 	}
 
-	if tid == "" {
+	if shoboi == nil {
 		return
 	}
 
+	// Copy titles
+	if shoboi.TitleJapanese != "" {
+		anime.Title.Japanese = shoboi.TitleJapanese
+	}
+
+	if shoboi.TitleHiragana != "" {
+		anime.Title.Hiragana = shoboi.TitleHiragana
+	}
+
+	if shoboi.FirstChannel != "" {
+		anime.FirstChannel = shoboi.FirstChannel
+	}
+
 	// This will start a goroutine that saves the anime
-	anime.AddMapping("shoboi/anime", tid, "")
+	anime.AddMapping("shoboi/anime", shoboi.TID, "")
 }
