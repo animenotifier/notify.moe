@@ -44,7 +44,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 					a.widget-element.ajax(href=soundTracks[i].Link())
 						.widget-element-text
 							Icon("music")
-							span= soundTracks[i].Media[0].Title
+							span(title=soundTracks[i].Media[0].Title)= soundTracks[i].Anime()[0].Title.Canonical
 				else
 					.widget-element
 						.widget-element-text
