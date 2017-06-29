@@ -100,6 +100,12 @@ export class AnimeNotifier {
 			let endTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
 			
 			let dayDifference = Math.round((startDate.getTime() - now.getTime()) / oneDay)
+
+			if(isNaN(dayDifference)) {
+				element.style.opacity = "0"
+				continue
+			}
+
 			let dayInfo = dayNames[startDate.getDay()] + ", " + monthNames[startDate.getMonth()] + " " + startDate.getDate()
 
 			let airingVerb = "will be airing"

@@ -38,7 +38,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	}, func() {
 		threads = viewUser.Threads()
 
-		arn.SortThreadsByDate(threads)
+		arn.SortThreadsLatestFirst(threads)
 
 		if len(threads) > maxPosts {
 			threads = threads[:maxPosts]

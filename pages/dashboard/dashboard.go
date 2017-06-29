@@ -29,8 +29,7 @@ func Get(ctx *aero.Context) string {
 
 // Render the dashboard.
 func dashboard(ctx *aero.Context) string {
-	var forumPosts []arn.Postable
-	var forumThreads []arn.Postable
+	var forumActivity []arn.Postable
 	var userList interface{}
 	var followingList []*arn.User
 	var soundTracks []*arn.SoundTrack
@@ -39,21 +38,7 @@ func dashboard(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	flow.Parallel(func() {
-		posts, err := arn.AllPosts()
-
-		if err != nil {
-			return
-		}
-
-		forumPosts = arn.ToPostables(posts)
-	}, func() {
-		threads, err := arn.AllThreads()
-
-		if err != nil {
-			return
-		}
-
-		forumThreads = arn.ToPostables(threads)
+		forumActivity, _ = arn.GetForumActivityCached()
 	}, func() {
 		animeList, err := arn.GetAnimeList(user)
 
@@ -120,14 +105,6 @@ func dashboard(ctx *aero.Context) string {
 			followingList = followingList[:maxFollowing]
 		}
 	})
-
-	forumActivity := append(forumPosts, forumThreads...)
-
-	sort.Slice(forumActivity, func(i, j int) bool {
-		return forumActivity[i].Created() > forumActivity[j].Created()
-	})
-
-	forumActivity = arn.FilterPostablesWithUniqueThreads(forumActivity, maxPosts)
 
 	return ctx.HTML(components.Dashboard(upcomingEpisodes, forumActivity, soundTracks, followingList))
 }

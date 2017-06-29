@@ -18,7 +18,7 @@ func GetThreadsByUser(ctx *aero.Context) string {
 	}
 
 	threads := user.Threads()
-	arn.SortThreadsByDate(threads)
+	arn.SortThreadsLatestFirst(threads)
 
 	return ctx.HTML(components.ThreadList(threads))
 }
