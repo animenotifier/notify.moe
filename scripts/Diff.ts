@@ -57,6 +57,11 @@ export class Diff {
 					let attrib = elemB.attributes[x]
 
 					if(attrib.specified) {
+						// Skip mountables
+						if(attrib.name == "class" && elemA.classList.contains("mounted")) {
+							continue
+						}
+
 						elemA.setAttribute(attrib.name, elemB.getAttribute(attrib.name))
 					}
 				}

@@ -5,7 +5,7 @@ component NewThread(user *arn.User)
 			
 			textarea#text.widget-element(placeholder="Content")
 
-			select#tag.widget-element
+			select#tag.widget-element(value="general")
 				option(value="general") General
 				option(value="news") News
 				option(value="anime") Anime

@@ -71,9 +71,16 @@ export class AnimeNotifier {
 		
 		// Update each of these asynchronously
 		Promise.resolve().then(() => this.mountMountables())
-		Promise.resolve().then(() => this.assignActions())
 		Promise.resolve().then(() => this.lazyLoadImages())
 		Promise.resolve().then(() => this.displayLocalDates())
+		Promise.resolve().then(() => this.setSelectBoxValue())
+		Promise.resolve().then(() => this.assignActions())
+	}
+
+	setSelectBoxValue() {
+		for(let element of document.getElementsByTagName("select")) {
+			element.value = element.getAttribute("value")
+		}
 	}
 
 	displayLocalDates() {
@@ -229,7 +236,7 @@ export class AnimeNotifier {
 		this.unmountMountables()
 		this.loading(true)
 
-		return delay(300).then(() => {
+		return delay(330).then(() => {
 			request
 			.then(html => this.app.setContent(html, true))
 			.then(() => this.app.markActiveLinks())
