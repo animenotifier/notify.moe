@@ -67,6 +67,14 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 **!tag** [forum tag]`)
 	}
 
+	// Has the bot been mentioned?
+	for _, user := range m.Mentions {
+		if user.ID == discord.State.User.ID {
+			s.ChannelMessageSend(m.ChannelID, m.Author.Mention()+" :heart:")
+			return
+		}
+	}
+
 	if strings.HasPrefix(m.Content, "!user ") {
 		s.ChannelMessageSend(m.ChannelID, "https://notify.moe/+"+strings.Split(m.Content, " ")[1])
 		return
