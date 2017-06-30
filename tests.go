@@ -1,6 +1,14 @@
 package main
 
-var tests = map[string][]string{
+import (
+	"errors"
+	"reflect"
+
+	"github.com/aerogo/api"
+	"github.com/animenotifier/arn"
+)
+
+var routeTests = map[string][]string{
 	// User
 	"/user/:nick": []string{
 		"/+Akyoto",
@@ -12,6 +20,10 @@ var tests = map[string][]string{
 
 	"/user/:nick/posts": []string{
 		"/+Akyoto/posts",
+	},
+
+	"/user/:nick/tracks": []string{
+		"/+Akyoto/tracks",
 	},
 
 	"/user/:nick/animelist": []string{
@@ -41,6 +53,10 @@ var tests = map[string][]string{
 
 	"/search/:term": []string{
 		"/search/Dragon Ball",
+	},
+
+	"/tracks/:id": []string{
+		"/tracks/h0ac8sKkg",
 	},
 
 	// API
@@ -92,6 +108,22 @@ var tests = map[string][]string{
 		"/api/searchindex/Anime",
 	},
 
+	"/api/analytics/:id": []string{
+		"/api/analytics/4J6qpK1ve",
+	},
+
+	"/api/soundtrack/:id": []string{
+		"/api/soundtrack/h0ac8sKkg",
+	},
+
+	"/api/soundcloudtosoundtrack/:id": []string{
+		"/api/soundcloudtosoundtrack/145918628",
+	},
+
+	"/api/youtubetosoundtrack/:id": []string{
+		"/api/youtubetosoundtrack/hU2wqJuOIp4",
+	},
+
 	// Images
 	"/images/avatars/large/:file": []string{
 		"/images/avatars/large/4J6qpK1ve.webp",
@@ -117,9 +149,10 @@ var tests = map[string][]string{
 		"/images/elements/no-avatar.svg",
 	},
 
-	// Disable
+	// Disable these tests because they require authorization
 	"/auth/google":          nil,
 	"/auth/google/callback": nil,
+	"/anime/:id/edit":       nil,
 	"/new/thread":           nil,
 	"/new/soundtrack":       nil,
 	"/user":                 nil,
@@ -127,9 +160,45 @@ var tests = map[string][]string{
 	"/extension/embed":      nil,
 }
 
+// API interfaces
+var creatable = reflect.TypeOf((*api.Creatable)(nil)).Elem()
+var updatable = reflect.TypeOf((*api.Updatable)(nil)).Elem()
+var collection = reflect.TypeOf((*api.Collection)(nil)).Elem()
+
+// Required interface implementations
+var interfaceImplementations = map[string][]reflect.Type{
+	"User": []reflect.Type{
+		updatable,
+	},
+	"Thread": []reflect.Type{
+		creatable,
+	},
+	"Post": []reflect.Type{
+		creatable,
+	},
+	"SoundTrack": []reflect.Type{
+		creatable,
+	},
+	"Analytics": []reflect.Type{
+		creatable,
+	},
+	"AnimeList": []reflect.Type{
+		collection,
+	},
+}
+
 func init() {
 	// Specify test routes
-	for route, examples := range tests {
+	for route, examples := range routeTests {
 		app.Test(route, examples)
+	}
+
+	// Check interface implementations
+	for typeName, interfaces := range interfaceImplementations {
+		for _, requiredInterface := range interfaces {
+			if !reflect.PtrTo(arn.DB.Type(typeName)).Implements(requiredInterface) {
+				panic(errors.New(typeName + " does not implement interface " + requiredInterface.Name()))
+			}
+		}
 	}
 }
