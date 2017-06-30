@@ -25,12 +25,12 @@ var colorPool = []*color.Color{
 var jobs = map[string]time.Duration{
 	"active-users":         1 * time.Minute,
 	"forum-activity":       1 * time.Minute,
-	"anime-ratings":        15 * time.Minute,
+	"anime-ratings":        10 * time.Minute,
+	"airing-anime":         10 * time.Minute,
 	"avatars":              30 * time.Minute,
 	"refresh-track-titles": 10 * time.Hour,
 	"sync-anime":           12 * time.Hour,
 	"popular-anime":        12 * time.Hour,
-	"airing-anime":         12 * time.Hour,
 	"search-index":         12 * time.Hour,
 }
 
