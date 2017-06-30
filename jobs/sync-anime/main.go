@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/animenotifier/arn"
@@ -83,13 +82,13 @@ func sync(data *kitsu.Anime) {
 	}
 
 	// Rating
-	overall, convertError := strconv.ParseFloat(attr.AverageRating, 64)
-
-	if convertError != nil {
-		overall = 0
+	if anime.Rating == nil {
+		anime.Rating = &arn.AnimeRating{}
 	}
 
-	anime.Rating.Overall = overall
+	if anime.Rating.IsNotRated() {
+		anime.Rating.Reset()
+	}
 
 	// Trailers
 	anime.Trailers = []*arn.ExternalMedia{}

@@ -1,2 +1,2 @@
 component Rating(value float64)
-	.anime-rating= int(value / 10 + 0.5)
+	.anime-rating= int(value + 0.5)
