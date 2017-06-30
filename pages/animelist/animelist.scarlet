@@ -46,7 +46,7 @@
 // 		margin-bottom -2px
 
 .anime-list-item-rating
-	flex-basis 100px
+	flex-basis 50px
 	text-align center
 
 .anime-list-item-actions

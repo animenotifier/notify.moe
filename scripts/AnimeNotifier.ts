@@ -265,11 +265,24 @@ export class AnimeNotifier {
 	}
 
 	onKeyDown(e: KeyboardEvent) {
+		let activeElement = document.activeElement
+
 		// Ignore hotkeys on input elements
-		switch(document.activeElement.tagName) {
+		switch(activeElement.tagName) {
 			case "INPUT":
 			case "TEXTAREA":
 				return
+		}
+
+		// Disallow Enter key in contenteditables
+		if(activeElement.getAttribute("contenteditable") === "true" && e.keyCode == 13) {
+			if("blur" in activeElement) {
+				activeElement["blur"]()
+			}
+			
+			e.preventDefault()
+			e.stopPropagation()
+			return
 		}
 
 		// F = Search
@@ -281,6 +294,7 @@ export class AnimeNotifier {
 
 			e.preventDefault()
 			e.stopPropagation()
+			return
 		}
 	}
 }

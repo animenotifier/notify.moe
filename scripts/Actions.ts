@@ -6,17 +6,18 @@ import { Diff } from "./Diff"
 export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaElement) {
 	arn.loading(true)
 
+	let isContentEditable = input.isContentEditable
 	let obj = {}
-	let value = input.value
+	let value = isContentEditable ? input.innerText : input.value
 	
-	if(input.type === "number") {
-		if(input.getAttribute("step") === "1") {
-			obj[input.id] = parseInt(value)
+	if(input.type === "number" || input.dataset.type === "number") {
+		if(input.getAttribute("step") === "1" || input.dataset.step === "1") {
+			obj[input.dataset.field] = parseInt(value)
 		} else {
-			obj[input.id] = parseFloat(value)
+			obj[input.dataset.field] = parseFloat(value)
 		}
 	} else {
-		obj[input.id] = value
+		obj[input.dataset.field] = value
 	}
 
 	// console.log(input.type, input.dataset.api, obj, JSON.stringify(obj))
@@ -35,7 +36,11 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 		throw "API object not found"
 	}
 
-	input.disabled = true
+	if(isContentEditable) {
+		input.contentEditable = "false"
+	} else {
+		input.disabled = true
+	}
 
 	fetch(apiObject.dataset.api, {
 		method: "POST",
@@ -51,7 +56,12 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 	.catch(console.error)
 	.then(() => {
 		arn.loading(false)
-		input.disabled = false
+
+		if(isContentEditable) {
+			input.contentEditable = "true"
+		} else {
+			input.disabled = false
+		}
 
 		return arn.reloadContent()
 	})

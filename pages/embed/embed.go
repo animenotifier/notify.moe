@@ -26,5 +26,5 @@ func Get(ctx *aero.Context) string {
 	animeList.Sort()
 	watchingList := animeList.SplitByStatus()[arn.AnimeListStatusWatching]
 
-	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(watchingList, user)))
+	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(watchingList, animeList.User(), user)))
 }
