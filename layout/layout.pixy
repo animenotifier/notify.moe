@@ -13,6 +13,8 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, conte
 				#content-container
 					main#content.fade!= content
 					LoadingAnimation
+			if user != nil
+				#user(data-id=user.ID)
 			script(src="/scripts")
 
 component LoadingAnimation

@@ -1,31 +1,17 @@
 import { Application } from "./Application"
 import { Diff } from "./Diff"
-import { findAll, delay } from "./utils"
-import * as actions from "./actions"
-
-var monthNames = [
-	"January", "February", "March",
-	"April", "May", "June", "July",
-	"August", "September", "October",
-	"November", "December"
-]
-
-var dayNames = [
-	"Sunday",
-	"Monday",
-	"Tuesday",
-	"Wednesday",
-	"Thursday",
-	"Friday",
-	"Saturday"
-]
+import { displayLocalDate } from "./DateView"
+import { findAll, delay } from "./Utils"
+import * as actions from "./Actions"
 
 export class AnimeNotifier {
 	app: Application
 	visibilityObserver: IntersectionObserver
+	user: HTMLElement
 
 	constructor(app: Application) {
 		this.app = app
+		this.user = null
 
 		if("IntersectionObserver" in window) {
 			// Enable lazy load
@@ -52,6 +38,19 @@ export class AnimeNotifier {
 		}
 	}
 
+	init() {
+		document.addEventListener("readystatechange", this.onReadyStateChange.bind(this))
+		document.addEventListener("DOMContentLoaded", this.onContentLoaded.bind(this))
+		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
+		window.addEventListener("popstate", this.onPopState.bind(this))
+
+		if("requestIdleCallback" in window) {
+			window["requestIdleCallback"](this.onIdle.bind(this))
+		} else {
+			this.onIdle()
+		}
+	}
+
 	onReadyStateChange() {
 		if(document.readyState !== "interactive") {
 			return
@@ -61,20 +60,50 @@ export class AnimeNotifier {
 	}
 
 	run() {
+		this.user = this.app.find("user")
 		this.app.content = this.app.find("content")
 		this.app.loading = this.app.find("loading")
 		this.app.run()
 	}
 
 	onContentLoaded() {
+		// Stop watching all the objects from the previous page.
 		this.visibilityObserver.disconnect()
 		
-		// Update each of these asynchronously
-		Promise.resolve().then(() => this.mountMountables())
-		Promise.resolve().then(() => this.lazyLoadImages())
-		Promise.resolve().then(() => this.displayLocalDates())
-		Promise.resolve().then(() => this.setSelectBoxValue())
+		Promise.resolve().then(() => this.mountMountables()),
+		Promise.resolve().then(() => this.lazyLoadImages()),
+		Promise.resolve().then(() => this.displayLocalDates()),
+		Promise.resolve().then(() => this.setSelectBoxValue()),
 		Promise.resolve().then(() => this.assignActions())
+	}
+
+	onIdle() {
+		if(!this.user) {
+			return
+		}
+
+		let analytics = {
+			general: {
+				timezoneOffset: new Date().getTimezoneOffset()
+			},
+			screen: {
+				width: screen.width,
+				height: screen.height,
+				availableWidth: screen.availWidth,
+				availableHeight: screen.availHeight,
+				pixelRatio: window.devicePixelRatio
+			},
+			system: {
+				cpuCount: navigator.hardwareConcurrency,
+				platform: navigator.platform
+			}
+		}
+
+		fetch("/api/analytics/new", {
+			method: "POST",
+			credentials: "same-origin",
+			body: JSON.stringify(analytics)
+		})
 	}
 
 	setSelectBoxValue() {
@@ -84,54 +113,10 @@ export class AnimeNotifier {
 	}
 
 	displayLocalDates() {
-		const oneDay = 24 * 60 * 60 * 1000
 		const now = new Date()
 
 		for(let element of findAll("utc-date")) {
-			let startDate = new Date(element.dataset.startDate)
-			let endDate = new Date(element.dataset.endDate)
-
-			let h = startDate.getHours()
-			let m = startDate.getMinutes()
-			let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
-
-			h = endDate.getHours()
-			m = endDate.getMinutes()
-			let endTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
-			
-			let dayDifference = Math.round((startDate.getTime() - now.getTime()) / oneDay)
-
-			if(isNaN(dayDifference)) {
-				element.style.opacity = "0"
-				continue
-			}
-
-			let dayInfo = dayNames[startDate.getDay()] + ", " + monthNames[startDate.getMonth()] + " " + startDate.getDate()
-
-			let airingVerb = "will be airing"
-
-			switch(dayDifference) {
-				case 0:
-					element.innerText = "Today"
-					break
-				case 1:
-					element.innerText = "Tomorrow"
-					break
-				case -1:
-					element.innerText = "Yesterday"
-					break
-				default:
-					let text = Math.abs(dayDifference) + " days"
-
-					if(dayDifference < 0) {
-						text += " ago"
-						airingVerb = "aired"
-					} else {
-						element.innerText = text
-					}
-			}
-
-			element.title = "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + startTime + " - " + endTime + " your time"
+			displayLocalDate(element, now)
 		}
 	}
 
@@ -298,14 +283,4 @@ export class AnimeNotifier {
 			e.stopPropagation()
 		}
 	}
-
-	// onResize(e: UIEvent) {
-	// 	let hasScrollbar = this.app.content.clientHeight === this.app.content.scrollHeight
-
-	// 	if(hasScrollbar) {
-	// 		this.app.content.classList.add("has-scrollbar")
-	// 	} else {
-	// 		this.app.content.classList.remove("has-scrollbar")
-	// 	}
-	// }
 }
