@@ -16,13 +16,13 @@ import (
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/embed"
+	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/login"
 	"github.com/animenotifier/notify.moe/pages/music"
 	"github.com/animenotifier/notify.moe/pages/newsoundtrack"
 	"github.com/animenotifier/notify.moe/pages/newthread"
-	"github.com/animenotifier/notify.moe/pages/popularanime"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
@@ -57,7 +57,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Ajax routes
 	app.Ajax("/", dashboard.Get)
-	app.Ajax("/anime", popularanime.Get)
+	app.Ajax("/anime", explore.Get)
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/anime/:id/edit", editanime.Get)
 	app.Ajax("/forum", forums.Get)

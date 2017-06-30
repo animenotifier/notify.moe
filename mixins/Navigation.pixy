@@ -15,7 +15,7 @@ component LoggedOutMenu
 		.extra-navigation
 			NavigationButton("Users", "/users", "globe")
 		
-		NavigationButton("Airing", "/airing", "th")
+		NavigationButton("Anime", "/anime", "th")
 		NavigationButton("Login", "/login", "sign-in")
 
 component LoggedInMenu(user *arn.User)
@@ -34,7 +34,7 @@ component LoggedInMenu(user *arn.User)
 			NavigationButton("Users", "/users", "globe")
 
 		.extra-navigation
-			NavigationButton("Airing", "/airing", "th")
+			NavigationButton("Anime", "/anime", "th")
 		
 		NavigationButton("Settings", "/settings", "cog")
 		

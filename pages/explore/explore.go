@@ -1,4 +1,4 @@
-package popularanime
+package explore
 
 import (
 	"net/http"
@@ -16,5 +16,5 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching popular anime", err)
 	}
 
-	return ctx.HTML(components.PopularAnime(animeList))
+	return ctx.HTML(components.ExploreAnime(nil, nil, animeList))
 }
