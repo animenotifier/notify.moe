@@ -26,15 +26,16 @@ component LoggedInMenu(user *arn.User)
 		NavigationButton("Dash", "/", "dashboard")
 		NavigationButton("Profile", "/+", "user")
 		NavigationButton("Forum", "/forum", "comment")
-		NavigationButton("Music", "/music", "headphones")
+
+		.extra-navigation
+			NavigationButton("Music", "/music", "headphones")
 
 		FuzzySearch
 
 		.extra-navigation
 			NavigationButton("Users", "/users", "globe")
 
-		.extra-navigation
-			NavigationButton("Explore", "/explore", "th")
+		NavigationButton("Explore", "/explore", "th")
 		
 		NavigationButton("Settings", "/settings", "cog")
 		
