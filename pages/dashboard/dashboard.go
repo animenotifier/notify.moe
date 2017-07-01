@@ -46,6 +46,8 @@ func dashboard(ctx *aero.Context) string {
 			return
 		}
 
+		animeList = animeList.WatchingAndPlanned()
+
 		var keys []string
 
 		for _, item := range animeList.Items {

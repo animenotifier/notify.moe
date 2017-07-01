@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -23,8 +22,8 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	animeList.Sort()
-	watchingList := animeList.SplitByStatus()[arn.AnimeListStatusWatching]
+	watchingList := animeList.WatchingAndPlanned()
+	watchingList.Sort()
 
 	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(watchingList, animeList.User(), user)))
 }
