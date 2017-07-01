@@ -1,7 +1,6 @@
 component API(types []string)
-	h2.page-title API
+	h3 API
 	
-	h3 Types
 	table
 		//- thead
 		//- 	tr
