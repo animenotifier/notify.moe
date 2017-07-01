@@ -40,6 +40,10 @@ func updateAnimeIndex() {
 			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Japanese)] = anime.ID
 		}
 
+		if anime.Title.Canonical != "" {
+			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Canonical)] = anime.ID
+		}
+
 		for _, synonym := range anime.Title.Synonyms {
 			synonym = strings.ToLower(synonym)
 
