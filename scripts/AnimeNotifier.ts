@@ -131,8 +131,10 @@ export class AnimeNotifier {
 
 	loading(isLoading: boolean) {
 		if(isLoading) {
+			document.body.style.cursor = "progress"
 			this.app.loading.classList.remove(this.app.fadeOutClass)
 		} else {
+			document.body.style.cursor = "auto"
 			this.app.loading.classList.add(this.app.fadeOutClass)
 		}
 	}

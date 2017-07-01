@@ -1,7 +1,4 @@
-export function* findAll(className: string) {
-	// getElementsByClassName failed for some reason.
-	// TODO: Test getElementsByClassName again.
-	// let elements = document.querySelectorAll("." + className)
+export function* findAll(className: string): IterableIterator<HTMLElement> {
 	let elements = document.getElementsByClassName(className)
 	
 	for(let i = 0; i < elements.length; ++i) {
@@ -11,4 +8,8 @@ export function* findAll(className: string) {
 
 export function delay<T>(millis: number, value?: T): Promise<T> {
 	return new Promise(resolve => setTimeout(() => resolve(value), millis))
+}
+
+export function plural(count: number, singular: string): string {
+	return (count === 1 || count === -1) ? (count + ' ' + singular) : (count + ' ' + singular + 's')
 }

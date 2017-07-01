@@ -12,7 +12,7 @@
 	flex 1
 
 .episode-airing-date-start
-	flex-basis 180px
+	flex-basis 150px
 	text-align right
 
 < 800px

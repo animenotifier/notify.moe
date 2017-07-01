@@ -53,14 +53,14 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 							span.utc-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
 					td.anime-list-item-episodes
 						.anime-list-item-episodes-watched
-							.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
+							.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save", title="Click to edit episodes")= item.Episodes
 						.anime-list-item-episodes-separator /
 						.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
 						//- .anime-list-item-episodes-edit
 						//- 	a.ajax(href=, title="Edit anime")
 						//- 		RawIcon("pencil")
 					td.anime-list-item-rating(title="Overall rating")
-						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Overall)
+						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save", title="Click to edit overall rating")= fmt.Sprintf("%.1f", item.Rating.Overall)
 					//- td.anime-list-item-rating(title="Story rating")
 					//- 	.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Story", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Story)
 					//- td.anime-list-item-rating(title="Visuals rating")

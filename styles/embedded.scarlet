@@ -14,7 +14,7 @@ remove-margin = 1.1rem
 		width calc(100% + remove-margin * 2)
 
 		td
-			padding 0.25rem 0.5rem
+			padding 0.4rem 0.8rem
 	
 	.anime-list-owner
 		display none
