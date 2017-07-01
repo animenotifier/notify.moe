@@ -1,0 +1,14 @@
+component API(types []string)
+	h2.page-title API
+	
+	h3 Types
+	table
+		//- thead
+		//- 	tr
+		//- 		th Table
+		tbody
+			each typeName in types
+				tr
+					td= typeName
+					td
+						a(href="/api/" + strings.ToLower(typeName) + "/")= "/api/" + strings.ToLower(typeName) + "/"

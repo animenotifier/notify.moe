@@ -12,6 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
+	"github.com/animenotifier/notify.moe/pages/apiview"
 	"github.com/animenotifier/notify.moe/pages/best"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
@@ -59,6 +60,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/", dashboard.Get)
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/anime/:id/edit", editanime.Get)
+	app.Ajax("/api", apiview.Get)
 	app.Ajax("/best/anime", best.Get)
 	app.Ajax("/explore", explore.Get)
 	app.Ajax("/forum", forums.Get)

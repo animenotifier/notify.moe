@@ -1,4 +1,4 @@
-component Admin(user *arn.User, types []string)
+component Admin(user *arn.User)
 	h2.page-title Admin Panel
 
 	h3 Server
@@ -17,15 +17,3 @@ component Admin(user *arn.User, types []string)
 			tr
 				td Go version:
 				td= runtime.Version()
-	
-	h3 Types
-	table
-		//- thead
-		//- 	tr
-		//- 		th Table
-		tbody
-			each typeName in types
-				tr
-					td= typeName
-					td
-						a(href="/api/" + strings.ToLower(typeName) + "/")= "/api/" + strings.ToLower(typeName) + "/"
