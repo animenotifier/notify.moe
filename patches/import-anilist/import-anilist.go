@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/animenotifier/arn"
@@ -30,7 +30,7 @@ func importList(animeListItems []*arn.AniListAnimeListItem) {
 	imported := []*arn.Anime{}
 
 	for _, item := range animeListItems {
-		anime := findAnimeByName(item.Anime)
+		anime := findAniListAnime(item.Anime)
 		if anime != nil {
 			// fmt.Println(item.Anime.TitleRomaji, "=>", anime.Title.Romaji)
 			imported = append(imported, anime)
@@ -40,7 +40,14 @@ func importList(animeListItems []*arn.AniListAnimeListItem) {
 	color.Green("%d / %d", len(imported), len(animeListItems))
 }
 
-func findAnimeByName(search *arn.AniListAnime) *arn.Anime {
+func findAniListAnime(search *arn.AniListAnime) *arn.Anime {
+	match, err := arn.GetAniListToAnime(strconv.Itoa(search.ID))
+
+	if err == nil {
+		anime, _ := arn.GetAnime(match.AnimeID)
+		return anime
+	}
+
 	var mostSimilar *arn.Anime
 	var similarity float64
 
@@ -75,7 +82,7 @@ func findAnimeByName(search *arn.AniListAnime) *arn.Anime {
 	}
 
 	if similarity >= 0.92 {
-		fmt.Printf("MATCH:    %s => %s (%.2f)\n", search.TitleRomaji, mostSimilar.Title.Romaji, similarity)
+		// fmt.Printf("MATCH:    %s => %s (%.2f)\n", search.TitleRomaji, mostSimilar.Title.Romaji, similarity)
 		return mostSimilar
 	}
 
