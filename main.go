@@ -99,6 +99,8 @@ func configure(app *aero.Application) *aero.Application {
 	// Domain
 	if arn.IsDevelopment() {
 		app.Config.Domain = "beta.notify.moe"
+	} else {
+		arn.DB.SetScanPriority("high")
 	}
 
 	// Authentication
