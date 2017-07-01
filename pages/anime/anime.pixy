@@ -38,7 +38,10 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 	h3.anime-section-name Ratings
 	.anime-rating-categories
 		.anime-rating-category(title=toString(anime.Rating.Overall))
-			.anime-rating-category-name Overall
+			if anime.Status == "upcoming"
+				.anime-rating-category-name Hype
+			else
+				.anime-rating-category-name Overall
 			Rating(anime.Rating.Overall)
 		.anime-rating-category(title=toString(anime.Rating.Story))
 			.anime-rating-category-name Story

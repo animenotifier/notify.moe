@@ -14,37 +14,49 @@ const maxPopularAnime = 10
 func main() {
 	color.Yellow("Caching popular anime")
 
+	// Fetch all anime
 	animeList, err := arn.AllAnime()
+	arn.PanicOnError(err)
 
-	if err != nil {
-		color.Red("Failed fetching anime channel")
-		color.Red(err.Error())
-		return
-	}
-
+	// Overall
 	sort.Slice(animeList, func(i, j int) bool {
 		return animeList[i].Rating.Overall > animeList[j].Rating.Overall
 	})
 
-	// Change size of anime list to 10
-	animeList = animeList[:maxPopularAnime]
+	saveAs(animeList[:maxPopularAnime], "best anime overall")
 
-	// Convert to small anime list
+	// Story
+	sort.Slice(animeList, func(i, j int) bool {
+		return animeList[i].Rating.Story > animeList[j].Rating.Story
+	})
+
+	saveAs(animeList[:maxPopularAnime], "best anime story")
+
+	// Visuals
+	sort.Slice(animeList, func(i, j int) bool {
+		return animeList[i].Rating.Visuals > animeList[j].Rating.Visuals
+	})
+
+	saveAs(animeList[:maxPopularAnime], "best anime visuals")
+
+	// Soundtrack
+	sort.Slice(animeList, func(i, j int) bool {
+		return animeList[i].Rating.Soundtrack > animeList[j].Rating.Soundtrack
+	})
+
+	saveAs(animeList[:maxPopularAnime], "best anime soundtrack")
+
+	// Done.
+	color.Green("Finished.")
+}
+
+// Convert to ListOfIDs and save in cache.
+func saveAs(list []*arn.Anime, cacheKey string) {
 	cache := &arn.ListOfIDs{}
 
-	for _, anime := range animeList {
+	for _, anime := range list {
 		cache.IDList = append(cache.IDList, anime.ID)
 	}
 
-	println(len(cache.IDList))
-
-	saveErr := arn.DB.Set("Cache", "popular anime", cache)
-
-	if saveErr != nil {
-		color.Red("Error saving popular anime")
-		color.Red(saveErr.Error())
-		return
-	}
-
-	color.Green("Finished.")
+	arn.PanicOnError(arn.DB.Set("Cache", cacheKey, cache))
 }

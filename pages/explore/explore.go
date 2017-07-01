@@ -1,20 +1,21 @@
 package explore
 
 import (
-	"net/http"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get search page.
+// Get ...
 func Get(ctx *aero.Context) string {
-	animeList, err := arn.GetPopularAnimeCached()
+	var cache arn.ListOfIDs
+	err := arn.DB.GetObject("Cache", "airing anime", &cache)
+
+	airing, err := arn.GetAiringAnimeCached()
 
 	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error fetching popular anime", err)
+		return ctx.Error(500, "Couldn't fetch airing anime", err)
 	}
 
-	return ctx.HTML(components.ExploreAnime(nil, nil, animeList))
+	return ctx.HTML(components.Airing(airing))
 }

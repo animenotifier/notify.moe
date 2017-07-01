@@ -1,9 +1,3 @@
-component ExploreAnime(overall []*arn.Anime, story []*arn.Anime, airing []*arn.Anime)
-	h2 Highest Rating
-	AnimeGrid(overall)
-
-	h2 Best Story
-	AnimeGrid(story)
-
-	h2 Currently Airing
-	AnimeGrid(airing)
+component Airing(animeList []*arn.Anime)
+	h2.page-title(title=toString(len(animeList)) + " anime") Explore
+	AnimeGrid(animeList)

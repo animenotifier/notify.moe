@@ -9,10 +9,10 @@ import (
 	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages/admin"
-	"github.com/animenotifier/notify.moe/pages/airing"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
+	"github.com/animenotifier/notify.moe/pages/best"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/embed"
@@ -57,9 +57,10 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Ajax routes
 	app.Ajax("/", dashboard.Get)
-	app.Ajax("/anime", explore.Get)
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/anime/:id/edit", editanime.Get)
+	app.Ajax("/best/anime", best.Get)
+	app.Ajax("/explore", explore.Get)
 	app.Ajax("/forum", forums.Get)
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/threads/:id", threads.Get)
@@ -81,7 +82,6 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/search/:term", search.Get)
 	app.Ajax("/users", users.Get)
 	app.Ajax("/login", login.Get)
-	app.Ajax("/airing", airing.Get)
 	app.Ajax("/webdev", webdev.Get)
 	app.Ajax("/extension/embed", embed.Get)
 	// app.Ajax("/genres", genres.Get)
