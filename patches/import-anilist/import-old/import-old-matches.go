@@ -11,25 +11,14 @@ import (
 
 // OldMatch ...
 type OldMatch struct {
-	ID            int     `json:"id"`
-	ProviderID    int     `json:"providerId"`
-	Title         string  `json:"title"`
-	ProviderTitle string  `json:"providerTitle"`
-	Similarity    float64 `json:"similarity"`
-	Edited        string  `json:"edited"`
-	EditedBy      string  `json:"editedBy"`
+	ID           int     `json:"id"`
+	ServiceID    int     `json:"providerId"`
+	Title        string  `json:"title"`
+	ServiceTitle string  `json:"providerTitle"`
+	Similarity   float64 `json:"similarity"`
+	Edited       string  `json:"edited"`
+	EditedBy     string  `json:"editedBy"`
 }
-
-// ProviderMatch ...
-type ProviderMatch struct {
-	AnimeID    string `json:"animeId"`
-	ProviderID string `json:"providerId"`
-	Edited     string `json:"edited"`
-	EditedBy   string `json:"editedBy"`
-}
-
-// AniListToAnime ...
-type AniListToAnime ProviderMatch
 
 func main() {
 	matches := []OldMatch{}
@@ -43,9 +32,10 @@ func main() {
 		}
 
 		// New match type
-		newMatch := &ProviderMatch{
-			AnimeID:    strconv.Itoa(match.ProviderID),
-			ProviderID: strconv.Itoa(match.ID),
+		newMatch := &arn.AniListToAnime{
+			AnimeID:    strconv.Itoa(match.ServiceID),
+			ServiceID:  strconv.Itoa(match.ID),
+			Similarity: match.Similarity,
 			Edited:     match.Edited,
 			EditedBy:   match.EditedBy,
 		}
@@ -57,9 +47,13 @@ func main() {
 			continue
 		}
 
+		if anime.GetMapping("anilist/anime") != "" {
+			continue
+		}
+
 		anime.Mappings = append(anime.Mappings, &arn.Mapping{
 			Service:   "anilist/anime",
-			ServiceID: newMatch.ProviderID,
+			ServiceID: newMatch.ServiceID,
 			Created:   newMatch.Edited,
 			CreatedBy: newMatch.EditedBy,
 		})
@@ -67,13 +61,13 @@ func main() {
 		// Save
 		fmt.Println(anime.Title.Canonical)
 		arn.PanicOnError(anime.Save())
-		arn.PanicOnError(arn.DB.Set("AniListToAnime", newMatch.ProviderID, newMatch))
+		arn.PanicOnError(arn.DB.Set("AniListToAnime", newMatch.ServiceID, newMatch))
 	}
 }
 
 // AnilistToAnime
 /*
 AnimeID
-ProviderID
+ServiceID
 
 */
