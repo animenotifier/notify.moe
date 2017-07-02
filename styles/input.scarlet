@@ -49,5 +49,8 @@ label
 	text-align left
 
 textarea
+	padding 0.4em 0.8em
+	width 100%
 	line-height 1.5em
 	height 10rem
+	transition none
