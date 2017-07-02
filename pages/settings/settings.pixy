@@ -21,6 +21,34 @@ component Settings(user *arn.User)
 			InputText("Accounts.AnimePlanet.Nick", user.Accounts.AnimePlanet.Nick, "AnimePlanet", "Your username on anime-planet.com")
 			InputText("Accounts.Osu.Nick", user.Accounts.Osu.Nick, "Osu", "Your username on osu.ppy.sh")
 
+		.widget.mountable
+			h3.widget-title
+				Icon("user-plus")
+				span Connect
+
+			.widget-input.social-account
+				label(for="google") Google:
+				
+				a#google.button.social-account-button(href="/auth/google")
+					if user.Accounts.Google.ID != ""
+						Icon("check")
+						span Connected
+					else
+						Icon("circle-o")
+						span Not connected
+			
+			.widget-input.social-account
+				label(for="facebook") Facebook:
+
+				a#facebook.button.social-account-button(href="/auth/facebook")
+					if user.Accounts.Facebook.ID != ""
+						Icon("check")
+						span Connected
+					else
+						
+						Icon("circle-o")
+						span Not connected
+
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
 		//- 		Icon("cogs")

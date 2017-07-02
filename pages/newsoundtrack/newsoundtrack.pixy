@@ -2,17 +2,22 @@ component NewSoundTrack(user *arn.User)
 	.widgets
 		.widget
 			h3 New soundtrack
-			label(for="soundcloud-link") Soundcloud link:
-			input#soundcloud-link.widget-element(type="text", placeholder="https://soundcloud.com/abc/123")
 
-			label(for="youtube-link") Youtube link:
-			input#youtube-link.widget-element(type="text", placeholder="https://www.youtube.com/watch?v=123")
+			.widget-input
+				label(for="soundcloud-link") Soundcloud link:
+				input#soundcloud-link.widget-element(type="text", placeholder="https://soundcloud.com/abc/123")
 
-			label(for="anime-link") Anime link:
-			input#anime-link.widget-element(type="text", placeholder="https://notify.moe/anime/123")
+			.widget-input
+				label(for="youtube-link") Youtube link:
+				input#youtube-link.widget-element(type="text", placeholder="https://www.youtube.com/watch?v=123")
 
-			label(for="osu-link") Osu beatmap (optional):
-			input#osu-link.widget-element(type="text", placeholder="https://osu.ppy.sh/s/123")
+			.widget-input
+				label(for="anime-link") Anime link:
+				input#anime-link.widget-element(type="text", placeholder="https://notify.moe/anime/123")
+
+			.widget-input
+				label(for="osu-link") Osu beatmap (optional):
+				input#osu-link.widget-element(type="text", placeholder="https://osu.ppy.sh/s/123")
 			
 			.buttons
 				button.action(data-action="createSoundTrack", data-trigger="click")

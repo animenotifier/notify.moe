@@ -11,6 +11,7 @@ func main() {
 	arn.DB.DeleteTable("NickToUser")
 	arn.DB.DeleteTable("EmailToUser")
 	arn.DB.DeleteTable("GoogleToUser")
+	arn.DB.DeleteTable("FacebookToUser")
 
 	// Get a stream of all users
 	allUsers, err := arn.StreamUsers()
@@ -32,10 +33,11 @@ func main() {
 		}
 
 		if user.Accounts.Google.ID != "" {
-			arn.DB.Set("GoogleToUser", user.Accounts.Google.ID, &arn.GoogleToUser{
-				ID:     user.Accounts.Google.ID,
-				UserID: user.ID,
-			})
+			user.ConnectGoogle(user.Accounts.Google.ID)
+		}
+
+		if user.Accounts.Facebook.ID != "" {
+			user.ConnectFacebook(user.Accounts.Facebook.ID)
 		}
 	}
 

@@ -4,7 +4,7 @@
 	justify-content center
 
 .login-button
-	//
+	padding 0.5rem
 
 .login-button-image
 	max-width 236px

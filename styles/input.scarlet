@@ -5,44 +5,29 @@ mixin input-focus
 		// TODO: Replace with alpha(main-color, 20%) function
 		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
 
-input, textarea, button, select
+input, textarea, button, .button, select
+	ui-element
 	font-family inherit
 	font-size 1em
-	padding 0.4em 0.8em
-	border-radius 3px
+	line-height 1.25em
 	color text-color
 
-input, textarea
-	border ui-border
-	background white
-	box-shadow none
-	width 100%
+input, textarea, select
 	input-focus
-	
+
 	:disabled
 		ui-disabled
 
 input
-	default-transition
-
 	:active
 		transform translateY(3px)
 
-// We need this to have a selector with a higher priority than .widget-element:focus
-input.widget-element,
-textarea.widget-element
-	input-focus
-
-textarea
-	height 10rem
-
 button, .button
-	ui-element
 	horizontal
-	font-size 1rem
-	line-height 1rem
-	padding 0.75rem 1rem
+	line-height 1.5em
+	padding 0.5rem 1rem
 	color link-color
+	align-items center
 
 	:hover,
 	&.active
@@ -52,35 +37,17 @@ button, .button
 
 	:active
 		transform translateY(3px)
-	
-	// box-shadow 0 0 2px white, 0 -2px 5px rgba(0, 0, 0, 0.08) inset
-	// :active
-	// 	background-color black
-	// 	color white
-	// :focus
-	// 	color rgb(0, 0, 0)
-	// 	// box-shadow 0 0 6px alpha(mainColor, 20%)
-	// 	border 1px solid main-color
 
 select
-	ui-element
 	appearance none
 	-webkit-appearance none
 	-moz-appearance none
-	font-size 1rem
-	// padding 0.5em 1em
 
 label
 	width 100%
 	padding 0.5rem 0
 	text-align left
 
-// input[type="submit"]:hover,
-// button:hover
-// 	cursor pointer
-// 	text-decoration none
-
-// button[disabled]
-// 	opacity 0.5
-// 	:hover
-// 		cursor not-allowed
+textarea
+	line-height 1.5em
+	height 10rem

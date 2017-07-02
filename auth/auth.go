@@ -8,6 +8,9 @@ func Install(app *aero.Application) {
 	// Google
 	InstallGoogleAuth(app)
 
+	// Facebook
+	InstallFacebookAuth(app)
+
 	// Logout
 	app.Get("/logout", func(ctx *aero.Context) string {
 		if ctx.HasSession() {

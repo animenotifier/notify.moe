@@ -150,14 +150,16 @@ var routeTests = map[string][]string{
 	},
 
 	// Disable these tests because they require authorization
-	"/auth/google":          nil,
-	"/auth/google/callback": nil,
-	"/anime/:id/edit":       nil,
-	"/new/thread":           nil,
-	"/new/soundtrack":       nil,
-	"/user":                 nil,
-	"/settings":             nil,
-	"/extension/embed":      nil,
+	"/auth/google":            nil,
+	"/auth/google/callback":   nil,
+	"/auth/facebook":          nil,
+	"/auth/facebook/callback": nil,
+	"/anime/:id/edit":         nil,
+	"/new/thread":             nil,
+	"/new/soundtrack":         nil,
+	"/user":                   nil,
+	"/settings":               nil,
+	"/extension/embed":        nil,
 }
 
 // API interfaces

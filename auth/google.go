@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -43,8 +44,8 @@ func InstallGoogleAuth(app *aero.Application) {
 
 	// Auth
 	app.Get("/auth/google", func(ctx *aero.Context) string {
-		sessionID := ctx.Session().ID()
-		url := config.AuthCodeURL(sessionID)
+		state := ctx.Session().ID()
+		url := config.AuthCodeURL(state)
 		ctx.Redirect(url)
 		return ""
 	})
@@ -89,18 +90,21 @@ func InstallGoogleAuth(app *aero.Application) {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
 		}
 
+		// Change googlemail.com to gmail.com
+		googleUser.Email = strings.Replace(googleUser.Email, "googlemail.com", "gmail.com", 1)
+
 		// Is this an existing user connecting another social account?
 		user := utils.GetUser(ctx)
 
 		if user != nil {
-			println("Connected")
-
 			// Add GoogleToUser reference
 			err = user.ConnectGoogle(googleUser.Sub)
 
 			if err != nil {
 				ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
 			}
+
+			authLog.Info("Added Google ID to existing account", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 			return ctx.Redirect("/")
 		}
@@ -166,7 +170,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Google", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 		// Redirect to frontpage
 		return ctx.Redirect("/")
