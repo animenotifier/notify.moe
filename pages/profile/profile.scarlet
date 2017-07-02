@@ -20,6 +20,9 @@ profile-boot-duration = 2s
 .profile-field
 	text-align center
 
+	a
+		color white
+
 < 600px
 	.profile
 		vertical
@@ -79,10 +82,6 @@ profile-boot-duration = 2s
 	padding-top 0
 	padding-left calc(content-padding * 2)
 	max-width 900px
-
-.website
-	a
-		color white
 
 #nick
 	margin-bottom 1rem
