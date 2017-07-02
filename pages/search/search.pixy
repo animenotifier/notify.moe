@@ -7,7 +7,8 @@ component SearchResults(users []*arn.User, animeResults []*arn.Anime)
 					p No users found.
 				else
 					each user in users
-						Avatar(user)
+						.mountable(data-mountable-type="user")
+							Avatar(user)
 						//- a.ajax(href=user.Link())= user.Nick
 		
 		.widget
@@ -17,5 +18,5 @@ component SearchResults(users []*arn.User, animeResults []*arn.Anime)
 					p No anime found.
 				else
 					each anime in animeResults
-						a.profile-watching-list-item.ajax(href=anime.Link(), title=anime.Title.Canonical)
+						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
 							img.anime-cover-image.anime-search-result(src=anime.Image.Tiny, alt=anime.Title.Canonical)

@@ -6,12 +6,12 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-const maxUsers = 9 * 7
-const maxAnime = 9 * 7
+const maxUsers = 9 * 4
+const maxAnime = 9 * 4
 
 // Get search page.
 func Get(ctx *aero.Context) string {
-	term := ctx.Get("term")
+	term := ctx.Query("q")
 
 	userResults, animeResults := arn.Search(term, maxUsers, maxAnime)
 	return ctx.HTML(components.SearchResults(userResults, animeResults))

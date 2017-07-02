@@ -199,13 +199,23 @@ export class AnimeNotifier {
 	}
 
 	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
+		let mountableTypes = {
+			general: 0
+		}
+
 		const delay = 20
-		const maxDelay = 500
+		const maxDelay = 1000
 		
 		let time = 0
 
 		for(let element of findAll(className)) {
-			time += delay
+			let type = element.dataset.mountableType || "general"
+
+			if(type in mountableTypes) {
+				time = mountableTypes[element.dataset.mountableType] += delay
+			} else {
+				time = mountableTypes[element.dataset.mountableType] = 0
+			}
 
 			if(time > maxDelay) {
 				func(element)

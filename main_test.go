@@ -11,7 +11,7 @@ import (
 func TestRoutes(t *testing.T) {
 	app := configure(aero.New())
 
-	for _, examples := range tests {
+	for _, examples := range routeTests {
 		for _, example := range examples {
 			request, err := http.NewRequest("GET", example, nil)
 

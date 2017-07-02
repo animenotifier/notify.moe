@@ -18,10 +18,26 @@ func init() {
 			newURI := "/user/"
 			userName := requestURI[2:]
 			ctx.SetURI(newURI + userName)
-		} else if strings.HasPrefix(requestURI, plusRouteAjax) {
+			return
+		}
+
+		if strings.HasPrefix(requestURI, plusRouteAjax) {
 			newURI := "/_/user/"
 			userName := requestURI[4:]
 			ctx.SetURI(newURI + userName)
+			return
+		}
+
+		if strings.HasPrefix(requestURI, "/search/") {
+			searchTerm := requestURI[len("/search/"):]
+			ctx.Request.URL.RawQuery = "q=" + searchTerm
+			ctx.SetURI("/search")
+		}
+
+		if strings.HasPrefix(requestURI, "/_/search/") {
+			searchTerm := requestURI[len("/_/search/"):]
+			ctx.Request.URL.RawQuery = "q=" + searchTerm
+			ctx.SetURI("/_/search")
 		}
 	})
 }

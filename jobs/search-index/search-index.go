@@ -36,7 +36,9 @@ func updateAnimeIndex() {
 			animeSearchIndex.TextToID[strings.ToLower(anime.Title.English)] = anime.ID
 		}
 
-		if anime.Title.Japanese != "" {
+		// Make sure we only include Japanese titles that actually contain unicode letters
+		// because otherwise they might overlap with the English titles.
+		if anime.Title.Japanese != "" && arn.ContainsUnicodeLetters(anime.Title.Japanese) {
 			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Japanese)] = anime.ID
 		}
 

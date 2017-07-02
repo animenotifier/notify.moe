@@ -145,10 +145,10 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 
 	let term = search.value
 
-	if(!window.location.pathname.startsWith("/search/")) {
-		history.pushState("search", null, "/search/" + term)
-	} else {
+	if(window.location.pathname.startsWith("/search/")) {
 		history.replaceState("search", null, "/search/" + term)
+	} else {
+		history.pushState("search", null, "/search/" + term)
 	}
 
 	if(!term || term.length < 2) {
@@ -165,7 +165,7 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 		arn.app.content.appendChild(results)
 	}
 
-	arn.app.get("/_/search/" + encodeURI(term))
+	arn.app.get("/_/search/" + term)
 	.then(html => {
 		if(!search.value) {
 			return
