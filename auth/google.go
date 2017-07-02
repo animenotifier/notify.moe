@@ -104,6 +104,10 @@ func InstallGoogleAuth(app *aero.Application) {
 				ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
 			}
 
+			// Save in DB
+			user.Save()
+
+			// Log
 			authLog.Info("Added Google ID to existing account", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 			return ctx.Redirect("/")

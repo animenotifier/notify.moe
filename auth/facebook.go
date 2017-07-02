@@ -98,6 +98,10 @@ func InstallFacebookAuth(app *aero.Application) {
 				ctx.Error(http.StatusInternalServerError, "Could not connect account to Facebook account", err)
 			}
 
+			// Save in DB
+			user.Save()
+
+			// Log
 			authLog.Info("Added Facebook ID to existing account", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 			return ctx.Redirect("/")
