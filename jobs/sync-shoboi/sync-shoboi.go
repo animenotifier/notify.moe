@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os"
 	"time"
 
 	"github.com/animenotifier/arn"
@@ -39,7 +38,7 @@ func sync(anime *arn.Anime) bool {
 	}
 
 	// Log ID and title
-	os.Stdout.Write([]byte(anime.ID + " | [JP] " + anime.Title.Japanese + " | [EN] " + anime.Title.English))
+	print(anime.ID + " | [JP] " + anime.Title.Japanese + " | [EN] " + anime.Title.Canonical)
 
 	// Search Japanese title
 	if anime.GetMapping("shoboi/anime") == "" && anime.Title.Japanese != "" {
