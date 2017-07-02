@@ -212,9 +212,9 @@ export class AnimeNotifier {
 			let type = element.dataset.mountableType || "general"
 
 			if(type in mountableTypes) {
-				time = mountableTypes[element.dataset.mountableType] += delay
+				time = mountableTypes[type] += delay
 			} else {
-				time = mountableTypes[element.dataset.mountableType] = 0
+				time = mountableTypes[type] = 0
 			}
 
 			if(time > maxDelay) {
