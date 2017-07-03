@@ -45,6 +45,11 @@ export class AnimeNotifier {
 		window.addEventListener("popstate", this.onPopState.bind(this))
 
 		this.requestIdleCallback(this.onIdle.bind(this))
+
+		// Add "osx" class on macs so we can set a proper font-size
+		if(navigator.platform.includes("Mac")) {
+			document.rootElement.classList.add("osx")
+		}
 	}
 
 	requestIdleCallback(func: Function) {

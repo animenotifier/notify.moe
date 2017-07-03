@@ -9,10 +9,11 @@ body
 	height 100%
 	color text-color
 	background-color bg-color
+	font-size 1.05rem
 
-> 1400px
+.osx
 	body
-		font-size 105%
+		font-size 1rem
 
 a
 	color link-color
