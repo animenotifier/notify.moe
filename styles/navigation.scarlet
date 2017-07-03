@@ -83,7 +83,7 @@
 	.extra-navigation
 		display block
 
-< 400px height
+< 380px height
 	#navigation
 		vertical
 		height 100%

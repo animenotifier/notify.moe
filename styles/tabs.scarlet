@@ -1,0 +1,26 @@
+.tab
+	color text-color !important
+
+	:hover,
+	&.active
+		color white !important
+		background-color forum-tag-hover-color !important
+
+	// color text-color !important
+	// :hover
+	// 	color white !important
+	// &.active
+	// 	color white !important
+	// 	background-color link-hover-color
+
+< 920px
+	.tab
+		.icon
+			margin-right 0
+	
+	.tab-text
+		display none
+
+.tabs
+	// justify-content flex-start !important
+	margin-bottom 1rem
