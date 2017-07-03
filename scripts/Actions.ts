@@ -88,7 +88,7 @@ export function diff(arn: AnimeNotifier, element: HTMLElement) {
 			const steps = 60
 			const interval = duration / steps
 			const fullSin = Math.PI / 2
-			const contentPadding = 25
+			const contentPadding = 24
 			
 			let target = element
 			let scrollHandle: number
