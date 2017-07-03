@@ -20,6 +20,8 @@ import (
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
+	"github.com/animenotifier/notify.moe/pages/listimport"
+	"github.com/animenotifier/notify.moe/pages/listimport/listimportanilist"
 	"github.com/animenotifier/notify.moe/pages/login"
 	"github.com/animenotifier/notify.moe/pages/music"
 	"github.com/animenotifier/notify.moe/pages/newsoundtrack"
@@ -79,6 +81,8 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/settings", settings.Get)
 	app.Ajax("/music", music.Get)
+	app.Ajax("/import", listimport.Get)
+	app.Ajax("/import/anilist/animelist", listimportanilist.Get)
 	app.Ajax("/admin", admin.Get)
 	app.Ajax("/search", search.Get)
 	app.Ajax("/search/:term", search.Get)

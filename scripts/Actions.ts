@@ -73,6 +73,11 @@ export function load(arn: AnimeNotifier, element: HTMLElement) {
 	arn.app.load(url)
 }
 
+// Soon
+export function soon() {
+	alert("Coming Soon™")
+}
+
 // Diff
 export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")

@@ -48,6 +48,13 @@ component Settings(user *arn.User)
 						
 						Icon("circle-o")
 						span Not connected
+		
+		.widget.mountable
+			h3.widget-title
+				Icon("refresh")
+				span Import
+			
+			ImportLists(user)
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title

@@ -1,0 +1,8 @@
+component ImportLists(user *arn.User)
+	.buttons
+		if user.Accounts.AniList.Nick != ""
+			a.button.mountable.ajax(href="/import/anilist/animelist")
+				Icon("refresh")
+				span Import AniList Anime List
+		else
+			p No imports available.
