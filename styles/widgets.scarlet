@@ -7,7 +7,11 @@
 	align-items center
 	width 100%
 	padding 0.25rem
-	max-width 600px
+	max-width 400px
+
+> 1240px
+	.widget
+		max-width 30vw
 
 .widget-element
 	vertical-wrap
