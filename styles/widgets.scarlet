@@ -13,6 +13,10 @@
 	.widget
 		max-width 30vw
 
+< 810px
+	.widget
+		max-width 600px
+
 .widget-element
 	vertical-wrap
 	ui-element
