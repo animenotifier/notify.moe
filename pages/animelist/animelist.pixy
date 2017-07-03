@@ -1,30 +1,35 @@
 component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, user *arn.User)
-	h2.anime-list-owner= viewUser.Nick + "'s collection"
+	ProfileHeader(viewUser, user)
 
-	if len(animeLists[arn.AnimeListStatusWatching].Items) > 0
-		.anime-list-container
-			h3.status-name Watching
-			AnimeList(animeLists[arn.AnimeListStatusWatching], viewUser, user)
+	h2.page-title.anime-list-owner= viewUser.Nick + "'s collection"
 
-	if len(animeLists[arn.AnimeListStatusCompleted].Items) > 0
-		.anime-list-container
-			h3.status-name Completed
-			AnimeList(animeLists[arn.AnimeListStatusCompleted], viewUser, user)
+	if len(animeLists[arn.AnimeListStatusWatching].Items) == 0 && len(animeLists[arn.AnimeListStatusCompleted].Items) == 0 && len(animeLists[arn.AnimeListStatusPlanned].Items) == 0 && len(animeLists[arn.AnimeListStatusHold].Items) == 0 && len(animeLists[arn.AnimeListStatusDropped].Items) == 0
+		p.no-data No anime in the collection.
+	else
+		if len(animeLists[arn.AnimeListStatusWatching].Items) > 0
+			.anime-list-container
+				h3.status-name Watching
+				AnimeList(animeLists[arn.AnimeListStatusWatching], viewUser, user)
 
-	if len(animeLists[arn.AnimeListStatusPlanned].Items) > 0
-		.anime-list-container
-			h3.status-name Planned
-			AnimeList(animeLists[arn.AnimeListStatusPlanned], viewUser, user)
+		if len(animeLists[arn.AnimeListStatusCompleted].Items) > 0
+			.anime-list-container
+				h3.status-name Completed
+				AnimeList(animeLists[arn.AnimeListStatusCompleted], viewUser, user)
 
-	if len(animeLists[arn.AnimeListStatusHold].Items) > 0
-		.anime-list-container
-			h3.status-name On hold
-			AnimeList(animeLists[arn.AnimeListStatusHold], viewUser, user)
+		if len(animeLists[arn.AnimeListStatusPlanned].Items) > 0
+			.anime-list-container
+				h3.status-name Planned
+				AnimeList(animeLists[arn.AnimeListStatusPlanned], viewUser, user)
 
-	if len(animeLists[arn.AnimeListStatusDropped].Items) > 0
-		.anime-list-container
-			h3.status-name Dropped
-			AnimeList(animeLists[arn.AnimeListStatusDropped], viewUser, user)
+		if len(animeLists[arn.AnimeListStatusHold].Items) > 0
+			.anime-list-container
+				h3.status-name On hold
+				AnimeList(animeLists[arn.AnimeListStatusHold], viewUser, user)
+
+		if len(animeLists[arn.AnimeListStatusDropped].Items) > 0
+			.anime-list-container
+				h3.status-name Dropped
+				AnimeList(animeLists[arn.AnimeListStatusDropped], viewUser, user)
 	
 	//- for status, animeList := range animeLists
 	//- 	h3= status

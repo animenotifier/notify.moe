@@ -6,6 +6,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 const postLimit = 10
@@ -13,13 +14,13 @@ const postLimit = 10
 // GetPostsByUser shows all forum posts of a particular user.
 func GetPostsByUser(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
-	user, err := arn.GetUserByNick(nick)
+	viewUser, err := arn.GetUserByNick(nick)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "User not found", err)
 	}
 
-	posts := user.Posts()
+	posts := viewUser.Posts()
 	arn.SortPostsLatestFirst(posts)
 
 	var postables []arn.Postable
@@ -34,6 +35,6 @@ func GetPostsByUser(ctx *aero.Context) string {
 		postables[i] = arn.ToPostable(post)
 	}
 
-	return ctx.HTML(components.LatestPosts(postables, user))
+	return ctx.HTML(components.LatestPosts(postables, viewUser, utils.GetUser(ctx)))
 
 }

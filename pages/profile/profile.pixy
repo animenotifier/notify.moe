@@ -2,10 +2,10 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
 
-		.image-container.mountable
+		.image-container.mountable.never-unmount
 			ProfileImage(viewUser)
 
-		.intro-container.mountable
+		.intro-container.mountable.never-unmount
 			h2#nick= viewUser.Nick
 
 			if viewUser.Tagline != ""
@@ -43,58 +43,78 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 				p.profile-field.role
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
+	
+	ProfileNavigation(viewUser)
+
+component ProfileNavigation(viewUser *arn.User)
+	.buttons.tabs
+		a.button.tab.action(href="/+" + viewUser.Nick, data-action="diff", data-trigger="click")
+			Icon("th")
+			span.tab-text Anime
+
+		a.button.tab.action(href="/+" + viewUser.Nick + "/animelist", data-action="diff", data-trigger="click")
+			Icon("list")
+			span.tab-text List
+
+		a.button.tab.action(href="/+" + viewUser.Nick + "/threads", data-action="diff", data-trigger="click")
+			Icon("comment")
+			span.tab-text Threads
+
+		a.button.tab.action(href="/+" + viewUser.Nick + "/posts", data-action="diff", data-trigger="click")
+			Icon("comments")
+			span.tab-text Posts
+
+		a.button.tab.action(href="/+" + viewUser.Nick + "/tracks", data-action="diff", data-trigger="click")
+			Icon("music")
+			span.tab-text Tracks
 
 component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack)
 	ProfileHeader(viewUser, user)
 
-	.profile-category.mountable
-		h3
-			a.ajax(href="/+" + viewUser.Nick + "/animelist", title="View all anime") Anime
-
-		.profile-watching-list
-			if len(animeList.Items) == 0
-				p No anime in the collection.
-			else
-				each item in animeList.Items
-					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.anime-cover-image.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
-	
-	.profile-category.mountable
-		h3
-			a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
-
-		if len(threads) == 0
-			p No threads on the forum.
+	.profile-watching-list.mountable
+		if len(animeList.Items) == 0
+			p.no-data No anime in the collection.
 		else
-			each thread in threads
-				ThreadLink(thread)
+			each item in animeList.Items
+				a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+					img.anime-cover-image.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 	
-	.profile-category.mountable
-		h3
-			a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
-		if len(posts) == 0
-			p No posts on the forum.
-		else
-			each post in posts
-				.post
-					.post-author
-						Avatar(post.Author())
-					.post-content
-						div!= post.HTML()
-						.post-toolbar.active
-							.spacer
-							.post-likes= len(post.Likes)
-	
-	.profile-category.mountable
-		h3
-			a.ajax(href="/+" + viewUser.Nick + "/tracks", title="View all tracks") Tracks
+	//- .profile-category.mountable
+	//- 	h3
+	//- 		a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
 
-		if len(tracks) == 0
-			p No soundtracks posted yet.
-		else
-			.sound-tracks
-				each track in tracks
-					SoundTrack(track)
+	//- 	if len(threads) == 0
+	//- 		p No threads on the forum.
+	//- 	else
+	//- 		each thread in threads
+	//- 			ThreadLink(thread)
+	
+	//- .profile-category.mountable
+	//- 	h3
+	//- 		a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
+	//- 	if len(posts) == 0
+	//- 		p No posts on the forum.
+	//- 	else
+	//- 		each post in posts
+	//- 			.post
+	//- 				.post-author
+	//- 					Avatar(post.Author())
+	//- 				.post-content
+	//- 					div!= post.HTML()
+	//- 					.post-toolbar.active
+	//- 						.spacer
+	//- 						.post-likes= len(post.Likes)
+	
+	//- .profile-category.mountable
+	//- 	h3
+	//- 		a.ajax(href="/+" + viewUser.Nick + "/tracks", title="View all tracks") Tracks
+
+	//- 	if len(tracks) == 0
+	//- 		p No soundtracks posted yet.
+	//- 	else
+	//- 		.sound-tracks
+	//- 			each track in tracks
+	//- 				SoundTrack(track)
 
 	//- if user != nil && user.Role == "admin"
 	//- 	.footer

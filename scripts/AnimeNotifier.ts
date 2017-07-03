@@ -44,10 +44,14 @@ export class AnimeNotifier {
 		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
 		window.addEventListener("popstate", this.onPopState.bind(this))
 
+		this.requestIdleCallback(this.onIdle.bind(this))
+	}
+
+	requestIdleCallback(func: Function) {
 		if("requestIdleCallback" in window) {
-			window["requestIdleCallback"](this.onIdle.bind(this))
+			window["requestIdleCallback"](func)
 		} else {
-			this.onIdle()
+			func()
 		}
 	}
 
@@ -194,6 +198,10 @@ export class AnimeNotifier {
 
 	unmountMountables() {
 		for(let element of findAll("mountable")) {
+			if(element.classList.contains("never-unmount")) {
+				continue
+			}
+
 			element.classList.remove("mounted")
 		}
 	}
@@ -228,6 +236,10 @@ export class AnimeNotifier {
 	}
 
 	diff(url: string) {
+		if(url == this.app.currentPath) {
+			return
+		}
+
 		let request = fetch("/_" + url, {
 			credentials: "same-origin"
 		})

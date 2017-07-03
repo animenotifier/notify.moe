@@ -16,7 +16,7 @@ component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 
 component ThreadList(threads []*arn.Thread)
 	if len(threads) == 0
-		p No threads found.
+		p.no-data No threads found.
 	else
 		each thread in threads
 			ThreadLink(thread)

@@ -76,7 +76,41 @@ export function load(arn: AnimeNotifier, element: HTMLElement) {
 // Diff
 export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
-	arn.diff(url)
+	
+	arn.diff(url).then(() => {
+		arn.requestIdleCallback(() => {
+			const duration = 300.0
+			const steps = 60
+			const interval = duration / steps
+			const fullSin = Math.PI / 2
+			const contentPadding = 25
+			
+			let target = element
+			let scrollHandle: number
+			let oldScroll = arn.app.content.parentElement.scrollTop
+			let newScroll = Math.max(target.offsetTop - contentPadding, 0)
+			let scrollDistance = newScroll - oldScroll
+			let timeStart = performance.now()
+			let timeEnd = timeStart + duration
+
+			let scroll = () => {
+				let time = performance.now()
+				let progress = (time - timeStart) / duration
+
+				if(progress > 1.0) {
+					progress = 1.0
+				}
+
+				arn.app.content.parentElement.scrollTop = oldScroll + scrollDistance * Math.sin(progress * fullSin)
+
+				if(time >= timeEnd || arn.app.content.parentElement.scrollTop == newScroll) {
+					clearInterval(scrollHandle)
+				}
+			}
+
+			scrollHandle = setInterval(scroll, interval)
+		})
+	})
 }
 
 // Forum reply

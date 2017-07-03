@@ -1,6 +1,12 @@
 component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, user *arn.User)
-	h2= "Tracks added by " + viewUser.Nick
-	.sound-tracks
-		each track in tracks
-			SoundTrack(track)
+	ProfileHeader(viewUser, user)
+
+	h2.page-title= "Tracks added by " + viewUser.Nick
+	
+	if len(tracks) == 0
+		p.no-data No tracks added.
+	else
+		.sound-tracks
+			each track in tracks
+				SoundTrack(track)
 	

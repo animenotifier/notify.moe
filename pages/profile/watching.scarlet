@@ -1,5 +1,6 @@
 .profile-watching-list
 	horizontal-wrap
+	justify-content center
 
 .profile-watching-list-item
 	margin 0.25rem
@@ -8,6 +9,6 @@
 	width 55px !important
 	border-radius 2px
 
-< 380px
-	.profile-watching-list
-		justify-content center
+// < 380px
+// 	.profile-watching-list
+// 		justify-content center

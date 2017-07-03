@@ -88,5 +88,5 @@ profile-boot-duration = 2s
 
 // Categories
 
-.profile-category
-	margin-bottom content-padding
+// .profile-category
+// 	margin-bottom content-padding

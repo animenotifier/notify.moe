@@ -4,7 +4,7 @@ component SearchResults(users []*arn.User, animeResults []*arn.Anime)
 			h3 Users
 			.user-avatars.user-search
 				if len(users) == 0
-					p No users found.
+					p.no-data No users found.
 				else
 					each user in users
 						.mountable(data-mountable-type="user")
@@ -15,7 +15,7 @@ component SearchResults(users []*arn.User, animeResults []*arn.Anime)
 			h3 Anime
 			.profile-watching-list.anime-search
 				if len(animeResults) == 0
-					p No anime found.
+					p.no-data No anime found.
 				else
 					each anime in animeResults
 						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
