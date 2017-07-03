@@ -100,6 +100,10 @@ var routeTests = map[string][]string{
 		"/api/googletouser/106530160120373282283",
 	},
 
+	"/api/facebooktouser/:id": []string{
+		"/api/facebooktouser/10207576239700188",
+	},
+
 	"/api/nicktouser/:id": []string{
 		"/api/nicktouser/Akyoto",
 	},
@@ -150,16 +154,18 @@ var routeTests = map[string][]string{
 	},
 
 	// Disable these tests because they require authorization
-	"/auth/google":            nil,
-	"/auth/google/callback":   nil,
-	"/auth/facebook":          nil,
-	"/auth/facebook/callback": nil,
-	"/anime/:id/edit":         nil,
-	"/new/thread":             nil,
-	"/new/soundtrack":         nil,
-	"/user":                   nil,
-	"/settings":               nil,
-	"/extension/embed":        nil,
+	"/auth/google":              nil,
+	"/auth/google/callback":     nil,
+	"/auth/facebook":            nil,
+	"/auth/facebook/callback":   nil,
+	"/import":                   nil,
+	"/import/anilist/animelist": nil,
+	"/anime/:id/edit":           nil,
+	"/new/thread":               nil,
+	"/new/soundtrack":           nil,
+	"/user":                     nil,
+	"/settings":                 nil,
+	"/extension/embed":          nil,
 }
 
 // API interfaces
