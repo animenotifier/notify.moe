@@ -66,7 +66,7 @@ export class AnimeNotifier {
 	run() {
 		// Add "osx" class on macs so we can set a proper font-size
 		if(navigator.platform.includes("Mac")) {
-			document.rootElement.classList.add("osx")
+			document.documentElement.classList.add("osx")
 		}
 
 		// Initiate the elements we need

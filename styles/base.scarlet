@@ -3,6 +3,9 @@ html
 	font-family "Ubuntu", "Trebuchet MS", sans-serif
 	font-size 100%
 
+.osx
+	font-size 95%
+
 body
 	tab-size 4
 	overflow hidden
@@ -10,10 +13,6 @@ body
 	color text-color
 	background-color bg-color
 	font-size 1.05rem
-
-.osx
-	body
-		font-size 1rem
 
 a
 	color link-color
