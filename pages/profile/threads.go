@@ -9,6 +9,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
+const maxThreads = 20
+
 // GetThreadsByUser shows all forum threads of a particular user.
 func GetThreadsByUser(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
@@ -20,6 +22,10 @@ func GetThreadsByUser(ctx *aero.Context) string {
 
 	threads := viewUser.Threads()
 	arn.SortThreadsLatestFirst(threads)
+
+	if len(threads) > maxThreads {
+		threads = threads[:maxThreads]
+	}
 
 	return ctx.HTML(components.ProfileThreads(threads, viewUser, utils.GetUser(ctx)))
 }

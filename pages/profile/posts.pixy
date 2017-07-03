@@ -5,4 +5,4 @@ component LatestPosts(postables []arn.Postable, viewUser *arn.User, user *arn.Us
 		h2.page-title= len(postables), " latest posts by ", postables[0].Author().Nick
 		PostableList(postables)
 	else
-		p= viewUser.Nick + " hasn't written any posts yet."
+		p.no-data.mountable= viewUser.Nick + " hasn't written any posts yet."

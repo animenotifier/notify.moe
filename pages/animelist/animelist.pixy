@@ -4,7 +4,7 @@ component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, u
 	h2.page-title.anime-list-owner= viewUser.Nick + "'s collection"
 
 	if len(animeLists[arn.AnimeListStatusWatching].Items) == 0 && len(animeLists[arn.AnimeListStatusCompleted].Items) == 0 && len(animeLists[arn.AnimeListStatusPlanned].Items) == 0 && len(animeLists[arn.AnimeListStatusHold].Items) == 0 && len(animeLists[arn.AnimeListStatusDropped].Items) == 0
-		p.no-data No anime in the collection.
+		p.no-data.mountable= viewUser.Nick + " hasn't added any anime yet."
 	else
 		if len(animeLists[arn.AnimeListStatusWatching].Items) > 0
 			.anime-list-container

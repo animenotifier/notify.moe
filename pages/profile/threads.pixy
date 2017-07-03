@@ -1,5 +1,8 @@
 component ProfileThreads(threads []*arn.Thread, viewUser *arn.User, user *arn.User)
 	ProfileHeader(viewUser, user)
 
-	.forum
-		ThreadList(threads)
+	if len(threads) == 0
+		p.no-data.mountable= viewUser.Nick + " hasn't written any threads yet."
+	else
+		.forum
+			ThreadList(threads)
