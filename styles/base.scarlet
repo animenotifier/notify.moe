@@ -1,14 +1,18 @@
 html
 	height 100%
+	font-family "Ubuntu", "Trebuchet MS", sans-serif
+	font-size 100%
 
 body
-	font-family "Ubuntu", "Trebuchet MS", sans-serif
-	font-size 1.05rem
 	tab-size 4
 	overflow hidden
 	height 100%
 	color text-color
 	background-color bg-color
+
+> 1400px
+	body
+		font-size 105%
 
 a
 	color link-color
