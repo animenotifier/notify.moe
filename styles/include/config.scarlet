@@ -41,6 +41,9 @@ nav-link-hover-slide-color = main-color
 // nav-link-color = rgb(160, 160, 160)
 // nav-link-hover-color = rgb(80, 80, 80)
 
+// Tables
+table-width-normal = 1200px
+
 // Loading animation
 loading-anim-color = nav-link-hover-slide-color
 
