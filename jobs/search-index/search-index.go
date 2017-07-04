@@ -28,22 +28,23 @@ func updateAnimeIndex() {
 	}
 
 	for anime := range animeStream {
+		if anime.Title.Canonical != "" {
+			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Canonical)] = anime.ID
+		}
+
 		if anime.Title.Romaji != "" {
 			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Romaji)] = anime.ID
 		}
 
-		if anime.Title.English != "" {
-			animeSearchIndex.TextToID[strings.ToLower(anime.Title.English)] = anime.ID
-		}
-
-		// Make sure we only include Japanese titles that actually contain unicode letters
-		// because otherwise they might overlap with the English titles.
-		if anime.Title.Japanese != "" && arn.ContainsUnicodeLetters(anime.Title.Japanese) {
+		// Make sure we only include Japanese titles that
+		// don't overlap with the English titles.
+		if anime.Title.Japanese != "" && animeSearchIndex.TextToID[strings.ToLower(anime.Title.Japanese)] == "" {
 			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Japanese)] = anime.ID
 		}
 
-		if anime.Title.Canonical != "" {
-			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Canonical)] = anime.ID
+		// Same with English titles, don't overwrite other stuff.
+		if anime.Title.English != "" && animeSearchIndex.TextToID[strings.ToLower(anime.Title.English)] == "" {
+			animeSearchIndex.TextToID[strings.ToLower(anime.Title.English)] = anime.ID
 		}
 
 		for _, synonym := range anime.Title.Synonyms {
