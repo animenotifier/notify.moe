@@ -2,6 +2,10 @@ component FrontPage
 	.frontpage
 		h2 notify.moe
 
+		video.bg-video(autoplay="true", loop="true")
+			source(src="//s1.webmshare.com/ZrK1J.webm")
+
+
 		img.action.screenshot(src="/images/elements/extension-screenshot.png", alt="Screenshot of the browser extension", title="Click to install the Chrome Extension", data-action="installExtension", data-trigger="click")
 		
 		Login

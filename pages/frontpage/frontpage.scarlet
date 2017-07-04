@@ -7,10 +7,22 @@
 		font-weight normal
 		letter-spacing 3px
 		text-transform uppercase
+		color white
 	
 	.footer
 		text-align center
 		margin-top content-padding
+
+.bg-video
+	position absolute
+	top 50%
+	left 50%
+	transform translateX(-50%) translateY(-50%)
+	min-width 100%
+	min-height 100%
+	width auto
+	height auto
+	z-index -100
 
 .screenshot
 	max-width 100%

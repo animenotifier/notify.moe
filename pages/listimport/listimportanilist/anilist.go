@@ -35,6 +35,13 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
 	}
 
+	matches := findAllMatches(allAnime, animeList)
+
+	return ctx.HTML(components.ImportAnilist(user, matches))
+}
+
+// findAllMatches returns all matches for the anime inside an anilist anime list.
+func findAllMatches(allAnime []*arn.Anime, animeList *arn.AniListAnimeList) []*arn.AniListMatch {
 	matches := []*arn.AniListMatch{}
 
 	matches = importList(matches, allAnime, animeList.Lists.Watching)
@@ -47,9 +54,10 @@ func Get(ctx *aero.Context) string {
 		matches = importList(matches, allAnime, list)
 	}
 
-	return ctx.HTML(components.ImportAnilist(user, matches))
+	return matches
 }
 
+// importList imports a single list inside an anilist anime list collection.
 func importList(matches []*arn.AniListMatch, allAnime []*arn.Anime, animeListItems []*arn.AniListAnimeListItem) []*arn.AniListMatch {
 	for _, item := range animeListItems {
 		matches = append(matches, &arn.AniListMatch{
