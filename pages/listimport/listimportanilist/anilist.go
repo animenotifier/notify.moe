@@ -50,7 +50,13 @@ func findAllMatches(allAnime []*arn.Anime, animeList *arn.AniListAnimeList) []*a
 	matches = importList(matches, allAnime, animeList.Lists.OnHold)
 	matches = importList(matches, allAnime, animeList.Lists.Dropped)
 
-	for _, list := range animeList.CustomLists {
+	custom, ok := animeList.CustomLists.(map[string][]*arn.AniListAnimeListItem)
+
+	if !ok {
+		return matches
+	}
+
+	for _, list := range custom {
 		matches = importList(matches, allAnime, list)
 	}
 

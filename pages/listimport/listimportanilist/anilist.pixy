@@ -1,7 +1,7 @@
 component ImportAnilist(user *arn.User, matches []*arn.AniListMatch)
-	h2= "Import: anilist.co"
+	h2= "anilist.co Import (" + user.Accounts.AniList.Nick + ", " + toString(len(matches)) + " anime)"
 
-	table
+	table.import-list
 		thead
 			tr
 				th anilist.co
