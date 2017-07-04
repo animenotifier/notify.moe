@@ -35,28 +35,6 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		user = utils.GetUser(ctx)
 	}, func() {
 		animeList = viewUser.AnimeList()
-	}, func() {
-		// threads = viewUser.Threads()
-
-		// arn.SortThreadsLatestFirst(threads)
-
-		// if len(threads) > maxPosts {
-		// 	threads = threads[:maxPosts]
-		// }
-	}, func() {
-		// posts = viewUser.Posts()
-		// arn.SortPostsLatestFirst(posts)
-
-		// if len(posts) > maxPosts {
-		// 	posts = posts[:maxPosts]
-		// }
-	}, func() {
-		// tracks = viewUser.SoundTracks()
-		// arn.SortSoundTracksLatestFirst(tracks)
-
-		// if len(tracks) > maxTracks {
-		// 	tracks = tracks[:maxTracks]
-		// }
 	})
 
 	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks))

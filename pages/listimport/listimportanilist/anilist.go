@@ -9,35 +9,87 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get ...
-func Get(ctx *aero.Context) string {
+func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return nil, ctx.Error(http.StatusBadRequest, "Not logged in", nil)
 	}
 
 	authErr := arn.AniList.Authorize()
 
 	if authErr != nil {
-		return ctx.Error(http.StatusBadRequest, "Couldn't authorize the Anime Notifier app on AniList", authErr)
+		return nil, ctx.Error(http.StatusBadRequest, "Couldn't authorize the Anime Notifier app on AniList", authErr)
 	}
 
 	allAnime, allErr := arn.AllAnime()
 
 	if allErr != nil {
-		return ctx.Error(http.StatusBadRequest, "Couldn't load notify.moe list of all anime", allErr)
+		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load notify.moe list of all anime", allErr)
 	}
 
-	animeList, err := arn.AniList.GetAnimeList(user)
+	anilistAnimeList, err := arn.AniList.GetAnimeList(user)
 
 	if err != nil {
-		return ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
+		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
 	}
 
-	matches := findAllMatches(allAnime, animeList)
+	matches := findAllMatches(allAnime, anilistAnimeList)
+
+	return matches, ""
+}
+
+// Preview ...
+func Preview(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
+	matches, response := getMatches(ctx)
+
+	if response != "" {
+		return response
+	}
 
 	return ctx.HTML(components.ImportAnilist(user, matches))
+}
+
+// Finish ...
+func Finish(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
+	matches, response := getMatches(ctx)
+
+	if response != "" {
+		return response
+	}
+
+	animeList := user.AnimeList()
+
+	for _, match := range matches {
+		if match.ARNAnime == nil || match.AniListItem == nil {
+			continue
+		}
+
+		item := &arn.AnimeListItem{
+			AnimeID:  match.ARNAnime.ID,
+			Status:   match.AniListItem.AnimeListStatus(),
+			Episodes: match.AniListItem.EpisodesWatched,
+			Notes:    match.AniListItem.Notes,
+			Rating: &arn.AnimeRating{
+				Overall: float64(match.AniListItem.ScoreRaw) / 10.0,
+			},
+			RewatchCount: match.AniListItem.Rewatched,
+			Created:      arn.DateTimeUTC(),
+			Edited:       arn.DateTimeUTC(),
+		}
+
+		animeList.Import(item)
+	}
+
+	err := animeList.Save()
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Error saving your anime list", err)
+	}
+
+	return ctx.Redirect("/+" + user.Nick + "/animelist")
 }
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.
@@ -67,8 +119,8 @@ func findAllMatches(allAnime []*arn.Anime, animeList *arn.AniListAnimeList) []*a
 func importList(matches []*arn.AniListMatch, allAnime []*arn.Anime, animeListItems []*arn.AniListAnimeListItem) []*arn.AniListMatch {
 	for _, item := range animeListItems {
 		matches = append(matches, &arn.AniListMatch{
-			AniListAnime: item.Anime,
-			ARNAnime:     arn.FindAniListAnime(item.Anime, allAnime),
+			AniListItem: item,
+			ARNAnime:    arn.FindAniListAnime(item.Anime, allAnime),
 		})
 	}
 

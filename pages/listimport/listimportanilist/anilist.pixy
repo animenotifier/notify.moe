@@ -10,14 +10,14 @@ component ImportAnilist(user *arn.User, matches []*arn.AniListMatch)
 			each match in matches
 				tr
 					td
-						a(href=match.AniListAnime.Link(), target="_blank", rel="noopener")= match.AniListAnime.TitleRomaji
+						a(href=match.AniListItem.Anime.Link(), target="_blank", rel="noopener")= match.AniListItem.Anime.TitleRomaji
 					td
 						if match.ARNAnime == nil
 							span.import-error Not found on notify.moe
 						else
 							a(href=match.ARNAnime.Link(), target="_blank", rel="noopener")= match.ARNAnime.Title.Canonical
-
+	
 	.buttons
-		.button.mountable.action(data-action="soon", data-trigger="click")
+		a.button.mountable(href="/import/anilist/animelist/finish")
 			Icon("refresh")
 			span Import
