@@ -15,3 +15,4 @@ component FrontPage
 	
 	video.bg-video(autoplay="true", loop="true")
 		source(src="//s1.webmshare.com/nZVby.webm", type="video/webm")
+		source(src="//cdn-e2.streamable.com/video/mp4/e5mx7.mp4?token=1500414089_8b2b3b0665984dcf4dc8d33e534bc1c8881b2da1", type="video/mp4")
