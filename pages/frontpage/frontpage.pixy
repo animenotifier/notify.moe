@@ -14,5 +14,5 @@ component FrontPage
 			a(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener") Source on GitHub
 	
 	video.bg-video(autoplay="true", loop="true")
-		source(src="//s1.webmshare.com/qN3a9.webm", type="video/webm")
-		source(src="//s1.webmshare.com/f/qN3a9.mp4", type="video/mp4")
+		source(src="//s1.webmshare.com/3yAQj.webm", type="video/webm")
+		source(src="//s1.webmshare.com/f/3yAQj.mp4", type="video/mp4")
