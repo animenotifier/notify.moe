@@ -2,11 +2,9 @@ component FrontPage
 	.frontpage
 		h2 notify.moe
 
-		video.bg-video(autoplay="true", loop="true")
-			source(src="//s1.webmshare.com/ZrK1J.webm")
+		p Your home for everything about anime.
 
-
-		img.action.screenshot(src="/images/elements/extension-screenshot.png", alt="Screenshot of the browser extension", title="Click to install the Chrome Extension", data-action="installExtension", data-trigger="click")
+		//- img.action.screenshot(src="/images/elements/extension-screenshot.png", alt="Screenshot of the browser extension", title="Click to install the Chrome Extension", data-action="installExtension", data-trigger="click")
 		
 		Login
 
@@ -14,3 +12,7 @@ component FrontPage
 			a(href="https://paypal.me/blitzprog", target="_blank", rel="noopener") Support the development
 			span  | 
 			a(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener") Source on GitHub
+	
+	video.bg-video(autoplay="true", loop="true")
+		source(src="//s1.webmshare.com/nZVby.webm", type="video/webm")
+		source(src="//s1.webmshare.com/f/nZVby.mp4", type="video/mp4")
