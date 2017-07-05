@@ -64,4 +64,4 @@ nav-height = 3.11rem
 
 // Timings
 fade-speed = 200ms
-transition-speed = 270ms
+transition-speed = 250ms
