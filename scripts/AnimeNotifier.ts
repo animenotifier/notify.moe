@@ -120,7 +120,7 @@ export class AnimeNotifier {
 			}
 		}
 
-		fetch("/api/analytics/new", {
+		fetch("/dark-flame-master", {
 			method: "POST",
 			credentials: "same-origin",
 			body: JSON.stringify(analytics)

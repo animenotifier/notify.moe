@@ -32,12 +32,19 @@ func init() {
 			searchTerm := requestURI[len("/search/"):]
 			ctx.Request.URL.RawQuery = "q=" + searchTerm
 			ctx.SetURI("/search")
+			return
 		}
 
 		if strings.HasPrefix(requestURI, "/_/search/") {
 			searchTerm := requestURI[len("/_/search/"):]
 			ctx.Request.URL.RawQuery = "q=" + searchTerm
 			ctx.SetURI("/_/search")
+			return
+		}
+
+		if requestURI == "/dark-flame-master" {
+			ctx.SetURI("/api/analytics/new")
+			return
 		}
 	})
 }
