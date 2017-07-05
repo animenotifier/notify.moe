@@ -25,3 +25,17 @@ func BenchmarkThread(b *testing.B) {
 		}
 	})
 }
+
+func BenchmarkAnimeList(b *testing.B) {
+	user, _ := arn.GetUser("4J6qpK1ve")
+	animeList := user.AnimeList()
+
+	b.ReportAllocs()
+	b.ResetTimer()
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			components.AnimeList(animeList, user, user)
+		}
+	})
+}

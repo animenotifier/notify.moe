@@ -38,4 +38,5 @@
 	width 100%
 
 .widget-title
-	//
+	// We need !important here to overwrite the h3:first-child rule
+	margin 1rem 0 !important

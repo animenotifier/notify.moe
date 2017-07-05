@@ -56,6 +56,16 @@ component Settings(user *arn.User)
 			
 			ImportLists(user)
 
+		.widget.mountable
+			h3.widget-title
+				Icon("puzzle-piece")
+				span Extensions
+			
+			.buttons
+				button.action(data-action="installExtension", data-trigger="click")
+					Icon("chrome")
+					span Get the Chrome Extension
+
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
 		//- 		Icon("cogs")
