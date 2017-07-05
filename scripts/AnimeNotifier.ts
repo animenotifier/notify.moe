@@ -2,16 +2,25 @@ import { Application } from "./Application"
 import { Diff } from "./Diff"
 import { displayLocalDate } from "./DateView"
 import { findAll, delay } from "./Utils"
+import { MutationQueue } from "./MutationQueue"
 import * as actions from "./Actions"
 
 export class AnimeNotifier {
 	app: Application
-	visibilityObserver: IntersectionObserver
 	user: HTMLElement
+	visibilityObserver: IntersectionObserver
+
+	imageFound: MutationQueue
+	imageNotFound: MutationQueue
+	unmount: MutationQueue
 
 	constructor(app: Application) {
 		this.app = app
 		this.user = null
+
+		this.imageFound = new MutationQueue(elem => elem.classList.add("image-found"))
+		this.imageNotFound = new MutationQueue(elem => elem.classList.add("image-not-found"))
+		this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
 
 		if("IntersectionObserver" in window) {
 			// Enable lazy load
@@ -185,15 +194,15 @@ export class AnimeNotifier {
 			img.src = img.dataset.src
 
 			if(img.naturalWidth === 0) {
-				img.onload = function() {
-					this.classList.add("image-found")
+				img.onload = () => {
+					this.imageFound.queue(img)
 				}
 
-				img.onerror = function() {
-					this.classList.add("image-not-found")
+				img.onerror = () => {
+					this.imageNotFound.queue(img)
 				}
 			} else {
-				img.classList.add("image-found")
+				this.imageFound.queue(img)
 			}
 		}
 
@@ -210,7 +219,7 @@ export class AnimeNotifier {
 				continue
 			}
 
-			element.classList.remove("mounted")
+			this.unmount.queue(element)
 		}
 	}
 

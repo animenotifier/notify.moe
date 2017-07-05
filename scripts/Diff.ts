@@ -1,4 +1,18 @@
 export class Diff {
+	// Reuse container for diffs to avoid memory allocation
+	static container: HTMLElement
+
+	// innerHTML will diff the element with the given HTML string and apply DOM mutations.
+	static innerHTML(aRoot: HTMLElement, html: string) {
+		if(!Diff.container) {
+			Diff.container = document.createElement("main")
+		}
+		
+		Diff.container.innerHTML = html
+		Diff.childNodes(aRoot, Diff.container)
+	}
+
+	// childNodes diffs the child nodes of 2 given elements and applies DOM mutations.
 	static childNodes(aRoot: Node, bRoot: Node) {
 		let aChild = [...aRoot.childNodes]
 		let bChild = [...bRoot.childNodes]
@@ -33,6 +47,7 @@ export class Diff {
 				let elemA = a as HTMLElement
 				let elemB = b as HTMLElement
 
+				// Skip iframes
 				if(elemA.tagName === "IFRAME") {
 					continue
 				}
@@ -74,12 +89,5 @@ export class Diff {
 
 			Diff.childNodes(a, b)
 		}
-	}
-
-	static innerHTML(aRoot: HTMLElement, html: string) {
-		let bRoot = document.createElement("main")
-		bRoot.innerHTML = html
-		
-		Diff.childNodes(aRoot, bRoot)
 	}
 }
