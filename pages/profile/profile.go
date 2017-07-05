@@ -35,6 +35,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		user = utils.GetUser(ctx)
 	}, func() {
 		animeList = viewUser.AnimeList()
+		animeList.PrefetchAnime()
 	})
 
 	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks))

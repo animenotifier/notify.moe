@@ -47,27 +47,14 @@ func dashboard(ctx *aero.Context) string {
 		}
 
 		animeList = animeList.WatchingAndPlanned()
-
-		var keys []string
+		animeList.PrefetchAnime()
 
 		for _, item := range animeList.Items {
-			keys = append(keys, item.AnimeID)
-		}
-
-		objects, getErr := arn.DB.GetMany("Anime", keys)
-
-		if getErr != nil {
-			return
-		}
-
-		allAnimeInList := objects.([]*arn.Anime)
-
-		for _, anime := range allAnimeInList {
 			if len(upcomingEpisodes) >= maxScheduleItems {
 				break
 			}
 
-			futureEpisodes := anime.UpcomingEpisodes()
+			futureEpisodes := item.Anime().UpcomingEpisodes()
 
 			if len(futureEpisodes) == 0 {
 				continue

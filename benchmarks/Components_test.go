@@ -29,6 +29,7 @@ func BenchmarkRenderThread(b *testing.B) {
 func BenchmarkRenderAnimeList(b *testing.B) {
 	user, _ := arn.GetUser("4J6qpK1ve")
 	animeList := user.AnimeList()
+	animeList.PrefetchAnime()
 
 	b.ReportAllocs()
 	b.ResetTimer()
