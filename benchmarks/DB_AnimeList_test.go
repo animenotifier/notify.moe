@@ -6,7 +6,7 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-func BenchmarkDBGetMap(b *testing.B) {
+func BenchmarkDBAnimeListGetMap(b *testing.B) {
 	user, _ := arn.GetUser("4J6qpK1ve")
 
 	b.ReportAllocs()
@@ -20,7 +20,7 @@ func BenchmarkDBGetMap(b *testing.B) {
 	})
 }
 
-func BenchmarkDBGet(b *testing.B) {
+func BenchmarkDBAnimeListGet(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()
 
