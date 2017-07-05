@@ -30,8 +30,28 @@ var routeTests = map[string][]string{
 		"/+Akyoto/animelist",
 	},
 
-	"/user/:nick/animelist/:id": []string{
+	"/user/:nick/animelist/anime/:id": []string{
 		"/+Akyoto/animelist/7929",
+	},
+
+	"/user/:nick/animelist/watching": []string{
+		"/+Akyoto/animelist/watching",
+	},
+
+	"/user/:nick/animelist/completed": []string{
+		"/+Akyoto/animelist/completed",
+	},
+
+	"/user/:nick/animelist/planned": []string{
+		"/+Akyoto/animelist/planned",
+	},
+
+	"/user/:nick/animelist/hold": []string{
+		"/+Akyoto/animelist/hold",
+	},
+
+	"/user/:nick/animelist/dropped": []string{
+		"/+Akyoto/animelist/dropped",
 	},
 
 	// Pages
