@@ -249,7 +249,6 @@ export class AnimeNotifier {
 
 			for(; mutationIndex < mutations.length; mutationIndex++) {
 				let mutation = mutations[mutationIndex]
-				console.log(mutation.time - now)
 
 				if(mutation.time > now) {
 					break
