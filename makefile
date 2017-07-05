@@ -6,6 +6,7 @@ GOINSTALL=$(GOCMD) install
 GOTEST=$(GOCMD) test
 BUILDJOBS=@./jobs/build.sh
 BUILDPATCHES=@./patches/build.sh
+TSCMD=@tsc
 IPTABLES=@sudo iptables
 
 server:
@@ -14,6 +15,8 @@ jobs:
 	$(BUILDJOBS)
 patches:
 	$(BUILDPATCHES)
+js:
+	$(TSCMD)
 install:
 	$(GOINSTALL)
 test:
@@ -24,6 +27,7 @@ versions:
 	@go version
 	@asd --version
 assets:
+	$(TSCMD)
 	@pack
 depslist:
 	$(GOCMD) list -f {{.Deps}} | sed -e 's/\[//g' -e 's/\]//g' | tr " " "\n"
