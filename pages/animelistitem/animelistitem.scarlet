@@ -1,7 +1,3 @@
-.anime-list-item-view-image
-	max-width 55px
-	margin-bottom 1rem
-
 .anime-list-item-rating-edit
 	horizontal-wrap
 	justify-content space-between
