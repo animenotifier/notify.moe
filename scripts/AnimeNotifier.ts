@@ -223,8 +223,10 @@ export class AnimeNotifier {
 		const maxDelay = 1000
 		
 		let time = 0
+		let collection = document.getElementsByClassName(className)
 
-		for(let element of findAll(className)) {
+		for(let i = 0; i < collection.length; i++) {
+			let element = collection.item(i) as HTMLElement
 			let type = element.dataset.mountableType || "general"
 
 			if(type in mountableTypes) {
