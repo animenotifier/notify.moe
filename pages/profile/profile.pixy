@@ -67,6 +67,30 @@ component ProfileNavigation(viewUser *arn.User)
 		a.button.tab.action(href="/+" + viewUser.Nick + "/tracks", data-action="diff", data-trigger="click")
 			Icon("music")
 			span.tab-text Tracks
+	
+	StatusTabs("/+" + viewUser.Nick + "/animelist")
+	
+component StatusTabs(urlPrefix string)
+	.buttons.tabs
+		a.button.tab.action(href=urlPrefix + "/watching", data-action="diff", data-trigger="click")
+			Icon("play")
+			span.tab-text Watching
+		
+		a.button.tab.action(href=urlPrefix + "/completed", data-action="diff", data-trigger="click")
+			Icon("check")
+			span.tab-text Completed
+
+		a.button.tab.action(href=urlPrefix + "/planned", data-action="diff", data-trigger="click")
+			Icon("forward")
+			span.tab-text Planned
+
+		a.button.tab.action(href=urlPrefix + "/hold", data-action="diff", data-trigger="click")
+			Icon("pause")
+			span.tab-text On Hold
+
+		a.button.tab.action(href=urlPrefix + "/dropped", data-action="diff", data-trigger="click")
+			Icon("stop")
+			span.tab-text Dropped
 
 component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack)
 	ProfileHeader(viewUser, user)

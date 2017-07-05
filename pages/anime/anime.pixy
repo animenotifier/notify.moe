@@ -27,7 +27,7 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 					span Edit anime
 
 			if user.AnimeList().Contains(anime.ID)
-				a.button.ajax(href="/+" + user.Nick + "/animelist/" + anime.ID)
+				a.button.ajax(href="/+" + user.Nick + "/animelist/anime/" + anime.ID)
 					Icon("pencil")
 					span Edit in collection
 			else
