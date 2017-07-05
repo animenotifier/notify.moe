@@ -215,15 +215,16 @@ export class AnimeNotifier {
 	}
 
 	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
-		let mountableTypes = {
-			general: 0
-		}
-
 		const delay = 20
-		const maxDelay = 1000
 		
 		let time = 0
+		let start = Date.now()
 		let collection = document.getElementsByClassName(className)
+		let mutations = []
+
+		let mountableTypes = {
+			general: start
+		}
 
 		for(let i = 0; i < collection.length; i++) {
 			let element = collection.item(i) as HTMLElement
@@ -232,17 +233,37 @@ export class AnimeNotifier {
 			if(type in mountableTypes) {
 				time = mountableTypes[type] += delay
 			} else {
-				time = mountableTypes[type] = 0
+				time = mountableTypes[type] = start
 			}
 
-			if(time > maxDelay) {
-				func(element)
-			} else {
-				setTimeout(() => {
-					window.requestAnimationFrame(() => func(element))
-				}, time)
+			mutations.push({
+				element,
+				time
+			})
+		}
+
+		let mutationIndex = 0
+
+		let updateBatch = () => {
+			let now = Date.now()
+
+			for(; mutationIndex < mutations.length; mutationIndex++) {
+				let mutation = mutations[mutationIndex]
+				console.log(mutation.time - now)
+
+				if(mutation.time > now) {
+					break
+				}
+
+				func(mutation.element)
+			}
+
+			if(mutationIndex < mutations.length) {
+				window.requestAnimationFrame(updateBatch)
 			}
 		}
+
+		window.requestAnimationFrame(updateBatch)
 	}
 
 	diff(url: string) {

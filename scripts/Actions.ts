@@ -95,11 +95,11 @@ export function diff(arn: AnimeNotifier, element: HTMLElement) {
 			let oldScroll = arn.app.content.parentElement.scrollTop
 			let newScroll = Math.max(target.offsetTop - contentPadding, 0)
 			let scrollDistance = newScroll - oldScroll
-			let timeStart = performance.now()
+			let timeStart = Date.now()
 			let timeEnd = timeStart + duration
 
 			let scroll = () => {
-				let time = performance.now()
+				let time = Date.now()
 				let progress = (time - timeStart) / duration
 
 				if(progress > 1.0) {
