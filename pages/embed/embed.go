@@ -22,7 +22,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	watchingList := animeList.WatchingAndPlanned()
+	watchingList := animeList.Watching()
 	watchingList.PrefetchAnime()
 	watchingList.Sort()
 

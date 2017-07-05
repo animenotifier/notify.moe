@@ -46,7 +46,7 @@ func dashboard(ctx *aero.Context) string {
 			return
 		}
 
-		animeList = animeList.WatchingAndPlanned()
+		animeList = animeList.Watching()
 		animeList.PrefetchAnime()
 
 		for _, item := range animeList.Items {
