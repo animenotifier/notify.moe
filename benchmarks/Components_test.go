@@ -30,11 +30,6 @@ func BenchmarkRenderAnimeList(b *testing.B) {
 	user, _ := arn.GetUser("4J6qpK1ve")
 	animeList := user.AnimeList()
 
-	// Prefetch
-	for _, item := range animeList.Items {
-		item.Anime()
-	}
-
 	b.ReportAllocs()
 	b.ResetTimer()
 
