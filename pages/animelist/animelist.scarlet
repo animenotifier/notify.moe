@@ -52,10 +52,15 @@
 .anime-list-item-actions
 	flex-basis 40px
 	text-align right
+	display none
 
 	// Beautify icon alignment
 	.raw-icon
 		margin-bottom -4px
+
+> 740px
+	.anime-list-item-actions
+		display block
 
 .anime-list-item-airing-date
 	display none
