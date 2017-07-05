@@ -68,7 +68,7 @@ component ProfileNavigation(viewUser *arn.User)
 			Icon("music")
 			span.tab-text Tracks
 	
-	StatusTabs("/+" + viewUser.Nick + "/animelist")
+	//- StatusTabs("/+" + viewUser.Nick + "/animelist")
 	
 component StatusTabs(urlPrefix string)
 	.buttons.tabs
