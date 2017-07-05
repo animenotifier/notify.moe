@@ -29,7 +29,10 @@ func sync(data *kitsu.Anime) {
 
 	if err != nil {
 		if strings.Contains(err.Error(), "not found") {
-			anime = &arn.Anime{}
+			anime = &arn.Anime{
+				Title: &arn.AnimeTitle{},
+				Image: &arn.AnimeImageTypes{},
+			}
 		} else {
 			panic(err)
 		}
