@@ -23,6 +23,12 @@ test:
 	$(GOTEST)
 bench:
 	$(GOTEST) -bench .
+tools:
+	go get -u golang.org/x/tools/cmd/goimports
+	go get -u github.com/aerogo/pack
+	go get -u github.com/aerogo/run
+	go install github.com/aerogo/pack
+	go install github.com/aerogo/run
 versions:
 	@go version
 	@asd --version

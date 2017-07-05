@@ -16,15 +16,9 @@ notify.moe is powered by the [Aero framework](https://github.com/aerogo/aero) fr
 
 * `go get github.com/animenotifier/notify.moe`
 
-### Install pack & run
-
-* `go get github.com/aerogo/pack`
-* `go get github.com/aerogo/run`
-* `go install github.com/aerogo/pack`
-* `go install github.com/aerogo/run`
-
 ### Build all
 
+* Run `make tools` to install [pack](https://github.com/aerogo/pack) & [run](https://github.com/aerogo/run)
 * Run `make all`
 * Run `make ports` to set up local port forwarding *(80 to 4000, 443 to 4001)*
 * You should be able to start the server by executing `run` now
