@@ -83,7 +83,7 @@ export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
 	
 	arn.diff(url).then(() => {
-		const duration = 300.0
+		const duration = 250.0
 		const steps = 60
 		const interval = duration / steps
 		const fullSin = Math.PI / 2

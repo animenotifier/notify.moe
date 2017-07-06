@@ -27,6 +27,6 @@ func GetSoundTracksByUser(ctx *aero.Context) string {
 
 	arn.SortSoundTracksLatestFirst(tracks)
 
-	return ctx.HTML(components.TrackList(tracks, viewUser, user))
+	return ctx.HTML(components.TrackList(tracks, viewUser, user, ctx.URI()))
 
 }

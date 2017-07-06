@@ -1,5 +1,5 @@
-component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, user *arn.User)
-	ProfileHeader(viewUser, user)
+component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, user *arn.User, uri string)
+	ProfileHeader(viewUser, user, uri)
 
 	h2.page-title= "Tracks added by " + viewUser.Nick
 	

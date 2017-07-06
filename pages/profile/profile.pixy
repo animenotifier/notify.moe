@@ -1,4 +1,4 @@
-component ProfileHeader(viewUser *arn.User, user *arn.User)
+component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
 
@@ -44,9 +44,9 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
 	
-	ProfileNavigation(viewUser)
+	ProfileNavigation(viewUser, uri)
 
-component ProfileNavigation(viewUser *arn.User)
+component ProfileNavigation(viewUser *arn.User, uri string)
 	.buttons.tabs
 		a.button.tab.action(href="/+" + viewUser.Nick, data-action="diff", data-trigger="click")
 			Icon("th")
@@ -68,32 +68,33 @@ component ProfileNavigation(viewUser *arn.User)
 			Icon("music")
 			span.tab-text Tracks
 	
-	//- StatusTabs("/+" + viewUser.Nick + "/animelist")
+	//- if strings.Contains(uri, "/animelist")
+	//- 	StatusTabs("/+" + viewUser.Nick + "/animelist")
 	
 component StatusTabs(urlPrefix string)
-	.buttons.tabs
-		a.button.tab.action(href=urlPrefix + "/watching", data-action="diff", data-trigger="click")
+	.buttons.tabs.status-tabs
+		a.button.status-tab.action(href=urlPrefix + "/watching", data-action="diff", data-trigger="click")
 			Icon("play")
 			span.tab-text Watching
 		
-		a.button.tab.action(href=urlPrefix + "/completed", data-action="diff", data-trigger="click")
+		a.button.status-tab.action(href=urlPrefix + "/completed", data-action="diff", data-trigger="click")
 			Icon("check")
 			span.tab-text Completed
 
-		a.button.tab.action(href=urlPrefix + "/planned", data-action="diff", data-trigger="click")
+		a.button.status-tab.action(href=urlPrefix + "/planned", data-action="diff", data-trigger="click")
 			Icon("forward")
 			span.tab-text Planned
 
-		a.button.tab.action(href=urlPrefix + "/hold", data-action="diff", data-trigger="click")
+		a.button.status-tab.action(href=urlPrefix + "/hold", data-action="diff", data-trigger="click")
 			Icon("pause")
 			span.tab-text On Hold
 
-		a.button.tab.action(href=urlPrefix + "/dropped", data-action="diff", data-trigger="click")
+		a.button.status-tab.action(href=urlPrefix + "/dropped", data-action="diff", data-trigger="click")
 			Icon("stop")
 			span.tab-text Dropped
 
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack)
-	ProfileHeader(viewUser, user)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack, uri string)
+	ProfileHeader(viewUser, user, uri)
 
 	if len(animeList.Items) == 0
 		p.no-data.mountable= viewUser.Nick + " hasn't added any anime yet."

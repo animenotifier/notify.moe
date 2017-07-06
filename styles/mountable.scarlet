@@ -1,5 +1,3 @@
-mountable-transition-speed = 400ms
-
 .mountable
 	opacity 0
 	transform translateY(0.85rem)

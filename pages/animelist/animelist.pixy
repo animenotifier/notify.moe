@@ -1,5 +1,5 @@
-component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, user *arn.User)
-	ProfileHeader(viewUser, user)
+component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, user *arn.User, uri string)
+	ProfileHeader(viewUser, user, uri)
 
 	h2.page-title.anime-list-owner= viewUser.Nick + "'s collection"
 
@@ -49,8 +49,8 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 				if user != nil
 					th.anime-list-item-actions Actions
 		tbody
-			for i, item := range animeList.Items
-				tr(class=utils.ItemCSSClass(animeList, i), title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/update/" + item.AnimeID)
+			each item in animeList.Items
+				tr.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/update/" + item.AnimeID)
 					td.anime-list-item-name
 						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
 					td.anime-list-item-airing-date

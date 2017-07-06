@@ -27,5 +27,5 @@ func GetThreadsByUser(ctx *aero.Context) string {
 		threads = threads[:maxThreads]
 	}
 
-	return ctx.HTML(components.ProfileThreads(threads, viewUser, utils.GetUser(ctx)))
+	return ctx.HTML(components.ProfileThreads(threads, viewUser, utils.GetUser(ctx), ctx.URI()))
 }

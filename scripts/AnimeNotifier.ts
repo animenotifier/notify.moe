@@ -225,9 +225,11 @@ export class AnimeNotifier {
 
 	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
 		const delay = 20
+		const maxDelay = 1000
 		
 		let time = 0
 		let start = Date.now()
+		let maxTime = start + maxDelay
 		let collection = document.getElementsByClassName(className)
 		let mutations = []
 
@@ -243,6 +245,10 @@ export class AnimeNotifier {
 				time = mountableTypes[type] += delay
 			} else {
 				time = mountableTypes[type] = start
+			}
+
+			if(time > maxTime) {
+				time = maxTime
 			}
 
 			mutations.push({
@@ -276,7 +282,7 @@ export class AnimeNotifier {
 
 	diff(url: string) {
 		if(url == this.app.currentPath) {
-			return
+			return Promise.reject(null)
 		}
 
 		let request = fetch("/_" + url, {
@@ -292,7 +298,7 @@ export class AnimeNotifier {
 
 		// Delay by transition-speed
 		return delay(300).then(() => {
-			request
+			return request
 			.then(html => this.app.setContent(html, true))
 			.then(() => this.app.markActiveLinks())
 			.then(() => this.app.emit("DOMContentLoaded"))

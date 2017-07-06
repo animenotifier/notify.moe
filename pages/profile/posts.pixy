@@ -1,5 +1,5 @@
-component LatestPosts(postables []arn.Postable, viewUser *arn.User, user *arn.User)
-	ProfileHeader(viewUser, user)
+component LatestPosts(postables []arn.Postable, viewUser *arn.User, user *arn.User, uri string)
+	ProfileHeader(viewUser, user, uri)
 	
 	if len(postables) > 0
 		h2.page-title= len(postables), " latest posts by ", postables[0].Author().Nick

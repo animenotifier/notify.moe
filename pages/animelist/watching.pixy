@@ -1,8 +1,0 @@
-component AnimeListFilteredByStatus(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User)
-	ProfileHeader(viewUser, user)
-
-	if len(animeList.Items) == 0
-		p.no-data.mountable= viewUser.Nick + " hasn't added any anime to this list yet."
-	else
-		.anime-list-container
-			AnimeList(animeList, viewUser, user)

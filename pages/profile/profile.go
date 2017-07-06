@@ -1,6 +1,8 @@
 package profile
 
 import (
+	"sort"
+
 	"github.com/aerogo/aero"
 	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
@@ -36,7 +38,12 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	}, func() {
 		animeList = viewUser.AnimeList()
 		animeList.PrefetchAnime()
+
+		// Sort by rating
+		sort.Slice(animeList.Items, func(i, j int) bool {
+			return animeList.Items[i].Rating.Overall > animeList.Items[j].Rating.Overall
+		})
 	})
 
-	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks))
+	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks, ctx.URI()))
 }

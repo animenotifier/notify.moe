@@ -11,6 +11,18 @@ h2
 	margin-top content-padding
 	margin-bottom content-padding
 
+strong
+	font-weight bold
+
+em
+	font-style italic
+
+hr
+	border none
+	border-bottom 1px solid text-color
+	opacity 0.1
+	margin-bottom content-padding
+
 p > img
 	max-width 100%
 	border-radius 3px

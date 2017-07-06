@@ -10,6 +10,15 @@
 	height 78px !important
 	border-radius 2px
 
+// .status-tabs
+// 	position fixed
+// 	top 4.6rem
+// 	right 1.6rem
+// 	flex-direction column
+
+// .status-tab
+// 	font-size 0.9rem
+
 // < 380px
 // 	.profile-watching-list
 // 		justify-content center

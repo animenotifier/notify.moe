@@ -72,3 +72,6 @@
 < 1100px
 	.anime-list-item-rating
 		display none
+
+.fill-screen
+	min-height calc(100vh - nav-height - content-padding * 2 - 1rem - 43px - 23px)

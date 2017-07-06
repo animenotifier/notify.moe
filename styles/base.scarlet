@@ -29,12 +29,6 @@ a
 	// &.active
 	// 	color link-active-color
 
-strong
-	font-weight bold
-
-em
-	font-style italic
-
 img
 	backface-visibility hidden
 
