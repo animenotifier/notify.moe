@@ -6,7 +6,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 			ProfileImage(viewUser)
 
 		.intro-container.mountable.never-unmount
-			h2#nick= viewUser.Nick
+			h1#nick= viewUser.Nick
 
 			if viewUser.Tagline != ""
 				p.profile-field.tagline
