@@ -11,6 +11,7 @@ import (
 
 const maxEpisodes = 26
 const maxEpisodesLongSeries = 5
+const maxDescriptionLength = 170
 
 // Get anime page.
 func Get(ctx *aero.Context) string {
@@ -40,16 +41,23 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Open Graph
+	description := anime.Summary
+
+	if len(description) > maxDescriptionLength {
+		description = description[:maxDescriptionLength-3] + "..."
+	}
+
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       anime.Title.Canonical,
 			"og:image":       anime.Image.Large,
 			"og:url":         "https://" + ctx.App.Config.Domain + anime.Link(),
 			"og:site_name":   "notify.moe",
-			"og:description": anime.Summary,
+			"og:description": description,
 		},
 		Meta: map[string]string{
-			"description": anime.Summary,
+			"description": description,
+			"keywords":    anime.Title.Canonical + ",anime",
 		},
 	}
 

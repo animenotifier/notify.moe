@@ -1,8 +1,8 @@
 component FrontPage
 	.frontpage.mountable
-		h2 notify.moe
+		h1 notify.moe
 
-		p Your home for everything about anime.
+		h2 Your home for everything about anime.
 
 		//- img.action.screenshot(src="/images/elements/extension-screenshot.png", alt="Screenshot of the browser extension", title="Click to install the Chrome Extension", data-action="installExtension", data-trigger="click")
 		

@@ -38,7 +38,11 @@
 
 .anime-alternative-title
 	font-size 0.9em
+	margin-top 0
 	margin-bottom 0.5rem
+	text-align left
+	font-weight normal
+	line-height content-line-height
 	a
 		color rgba(60, 60, 60, 0.5) !important
 

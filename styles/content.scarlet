@@ -2,4 +2,4 @@
 	vertical
 	padding content-padding
 	padding-top content-padding-top
-	line-height 1.7em
+	line-height content-line-height

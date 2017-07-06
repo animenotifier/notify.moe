@@ -59,8 +59,10 @@ outline-shadow-heavy = 0 0 6px rgba(0, 0, 0, 0.6)
 // Distances
 content-padding = 1.6rem
 content-padding-top = 1.6rem
+content-line-height = 1.7em
 hover-line-size = 3px
 nav-height = 3.11rem
+typography-margin = 0.4rem
 
 // Timings
 fade-speed = 200ms

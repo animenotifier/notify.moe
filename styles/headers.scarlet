@@ -1,7 +1,4 @@
-h1
-	font-size 3em
-
-h2
+h1, h2
 	font-size 2em
 	font-weight bold
 	text-align center
@@ -13,7 +10,7 @@ h3
 	text-align left
 	margin-top 0.6em
 
-h2, h3
+h1, h2, h3
 	a
 		color text-color
 

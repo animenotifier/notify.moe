@@ -7,13 +7,13 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 		.space
 
 		.anime-info
-			h2.anime-title(title=anime.Type)= anime.Title.Canonical
+			h1.anime-title(title=anime.Type)= anime.Title.Canonical
 
 			//- if user && user.titleLanguage === "japanese"
 			//- 	span.second-title(title=anime.Title.English !== anime.Title.Romaji ? anime.Title.English : null)= anime.Title.Romaji
 			//- else
 			if anime.Title.Japanese != anime.Title.Canonical
-				.anime-alternative-title
+				h2.anime-alternative-title
 					a(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
 
 			//- h3.anime-section-name.anime-summary-header Summary
