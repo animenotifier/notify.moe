@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/aerogo/aero"
 	"github.com/aerogo/api"
+	"github.com/aerogo/session-store-aerospike"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/components/css"
@@ -53,7 +54,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Sessions
 	app.Sessions.Duration = 3600 * 24 * 7
-	app.Sessions.Store = arn.NewAerospikeStore("Session", app.Sessions.Duration)
+	app.Sessions.Store = aerospikestore.New(arn.DB, "Session", app.Sessions.Duration)
 
 	// Layout
 	app.Layout = layout.Render
