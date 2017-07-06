@@ -1,6 +1,7 @@
 // .forum-header
 // 	text-align left
 // 	margin-bottom 1rem
+post-content-padding-y = 0.75rem
 
 .thread-link
 	vertical
@@ -108,7 +109,13 @@
 .post-save
 	//
 
-.post-input
+.post-edit-interface
+	vertical
+
+.post-title-input
+	margin-bottom post-content-padding-y
+
+.post-text-input
 	min-height 200px
 
 // Old

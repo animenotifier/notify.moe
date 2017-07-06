@@ -78,19 +78,17 @@ export function editPost(arn: AnimeNotifier, element: HTMLElement) {
 
 	let render = arn.app.find("render-" + postId)
 	let toolbar = arn.app.find("toolbar-" + postId)
+	let title = arn.app.find("title-" + postId)
 	let source = arn.app.find("source-" + postId)
 	let edit = arn.app.find("edit-toolbar-" + postId)
 
-	if(!render.classList.contains("hidden")) {
-		render.classList.add("hidden")
-		toolbar.classList.add("hidden")
-		source.classList.remove("hidden")
-		edit.classList.remove("hidden")
-	} else {
-		render.classList.remove("hidden")
-		toolbar.classList.remove("hidden")
-		source.classList.add("hidden")
-		edit.classList.add("hidden")
+	render.classList.toggle("hidden")
+	toolbar.classList.toggle("hidden")
+	source.classList.toggle("hidden")
+	edit.classList.toggle("hidden")
+
+	if(title) {
+		title.classList.toggle("hidden")
 	}
 }
 
@@ -98,10 +96,16 @@ export function editPost(arn: AnimeNotifier, element: HTMLElement) {
 export function savePost(arn: AnimeNotifier, element: HTMLElement) {
 	let postId = element.dataset.id
 	let source = arn.app.find("source-" + postId) as HTMLTextAreaElement
+	let title = arn.app.find("title-" + postId) as HTMLInputElement
 	let text = source.value
 
-	let updates = {
+	let updates: any = {
 		Text: text,
+	}
+
+	// Add title for threads only
+	if(title) {
+		updates.Title = title.value
 	}
 
 	let apiEndpoint = arn.findAPIEndpoint(element)

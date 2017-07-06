@@ -10,15 +10,18 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 			div(id="render-" + post.ID())!= post.HTML()
 
 			if user != nil && user.ID == post.Author().ID
-				textarea.post-input.hidden(id="source-" + post.ID())= post.Text()
-				.buttons.hidden(id="edit-toolbar-" + post.ID())
-					a.button.post-save.action(data-action="savePost", data-trigger="click", data-id=post.ID())
-						Icon("save")
-						span Save
+				.post-edit-interface
+					if post.Type() == "Thread"
+						input.post-title-input.hidden(id="title-" + post.ID(), value=post.Title(), type="text", placeholder="Thread title")
+					textarea.post-text-input.hidden(id="source-" + post.ID())= post.Text()
+					.buttons.hidden(id="edit-toolbar-" + post.ID())
+						a.button.post-save.action(data-action="savePost", data-trigger="click", data-id=post.ID())
+							Icon("save")
+							span Save
 
-					a.button.post-cancel-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID())
-						Icon("close")
-						span Cancel
+						a.button.post-cancel-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID())
+							Icon("close")
+							span Cancel
 
 			.post-toolbar(id="toolbar-" + post.ID())
 				.spacer
