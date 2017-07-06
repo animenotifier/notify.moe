@@ -9,5 +9,6 @@ import (
 // Render layout.
 func Render(ctx *aero.Context, content string) string {
 	user := utils.GetUser(ctx)
-	return components.Layout(ctx.App, ctx, user, content)
+	meta, _ := ctx.Data.(map[string]string)
+	return components.Layout(ctx.App, ctx, user, meta, content)
 }
