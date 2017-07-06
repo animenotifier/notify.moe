@@ -1,5 +1,5 @@
 component Admin(user *arn.User)
-	h2.page-title Admin Panel
+	h1.page-title Admin Panel
 
 	h3 Server
 	table

@@ -1,5 +1,5 @@
 component Users(users []*arn.User)
-	h2.page-title Users
+	h1.page-title Users
 
 	.user-avatars
 		each user in users

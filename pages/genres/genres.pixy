@@ -1,5 +1,5 @@
 component Genres(genres []*arn.Genre)
-	h2.page-title Genres
+	h1.page-title Genres
 	
 	.genres
 		each genre in genres

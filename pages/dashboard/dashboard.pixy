@@ -1,5 +1,5 @@
 component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, soundTracks []*arn.SoundTrack, following []*arn.User)
-	h2.page-title Dash
+	h1.page-title Dashboard
 
 	.widgets
 		.widget.mountable
