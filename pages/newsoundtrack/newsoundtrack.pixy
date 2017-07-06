@@ -1,7 +1,7 @@
 component NewSoundTrack(user *arn.User)
 	.widgets
 		.widget
-			h3 New soundtrack
+			h1 New soundtrack
 
 			.widget-input
 				label(for="soundcloud-link") Soundcloud link:
