@@ -40,22 +40,27 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Open Graph
-	meta := map[string]string{
-		"og:title":     anime.Title.Canonical,
-		"og:image":     anime.Image.Large,
-		"og:url":       "https://" + ctx.App.Config.Domain + anime.Link(),
-		"og:site_name": "notify.moe",
-		"description":  anime.Summary,
+	openGraph := &arn.OpenGraph{
+		Tags: map[string]string{
+			"og:title":       anime.Title.Canonical,
+			"og:image":       anime.Image.Large,
+			"og:url":         "https://" + ctx.App.Config.Domain + anime.Link(),
+			"og:site_name":   "notify.moe",
+			"og:description": anime.Summary,
+		},
+		Meta: map[string]string{
+			"description": anime.Summary,
+		},
 	}
 
 	switch anime.Type {
 	case "tv":
-		meta["og:type"] = "video.tv_show"
+		openGraph.Tags["og:type"] = "video.tv_show"
 	case "movie":
-		meta["og:type"] = "video.movie"
+		openGraph.Tags["og:type"] = "video.movie"
 	}
 
-	ctx.Data = meta
+	ctx.Data = openGraph
 
 	return ctx.HTML(components.Anime(anime, tracks, user, episodesReversed))
 }
