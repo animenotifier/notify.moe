@@ -1,4 +1,6 @@
-component SearchResults(users []*arn.User, animeResults []*arn.Anime)
+component SearchResults(term string, users []*arn.User, animeResults []*arn.Anime)
+	h1.page-title= "Search: " + term
+
 	.widgets
 		.widget
 			h3 Users
