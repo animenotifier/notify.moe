@@ -1,6 +1,7 @@
 import { Application } from "./Application"
 import { AnimeNotifier } from "./AnimeNotifier"
 import { Diff } from "./Diff"
+import { findAll } from "./Utils"
 
 // Save new data from an input field
 export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaElement) {
@@ -20,29 +21,15 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 		obj[input.dataset.field] = value
 	}
 
-	// console.log(input.type, input.dataset.api, obj, JSON.stringify(obj))
-
-	let apiObject: HTMLElement
-	let parent = input as HTMLElement
-
-	while(parent = parent.parentElement) {
-		if(parent.dataset.api !== undefined) {
-			apiObject = parent
-			break
-		}
-	}
-
-	if(!apiObject) {
-		throw "API object not found"
-	}
-
 	if(isContentEditable) {
 		input.contentEditable = "false"
 	} else {
 		input.disabled = true
 	}
 
-	fetch(apiObject.dataset.api, {
+	let apiEndpoint = arn.findAPIEndpoint(input)
+
+	fetch(apiEndpoint, {
 		method: "POST",
 		body: JSON.stringify(obj),
 		credentials: "same-origin"
@@ -82,40 +69,46 @@ export function soon() {
 export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
 	
-	arn.diff(url).then(() => {
-		const duration = 250.0
-		const steps = 60
-		const interval = duration / steps
-		const fullSin = Math.PI / 2
-		const contentPadding = 24
-		
-		let target = element
-		let scrollHandle: number
-		let oldScroll = arn.app.content.parentElement.scrollTop
-		let newScroll = 0
-		let finalScroll = Math.max(target.offsetTop - contentPadding, 0)
-		let scrollDistance = finalScroll - oldScroll
-		let timeStart = Date.now()
-		let timeEnd = timeStart + duration
+	arn.diff(url).then(() => arn.scrollTo(element))
+}
 
-		let scroll = () => {
-			let time = Date.now()
-			let progress = (time - timeStart) / duration
+// Edit post
+export function editPost(arn: AnimeNotifier, element: HTMLElement) {
+	let postId = element.dataset.id
 
-			if(progress > 1.0) {
-				progress = 1.0
-			}
+	let render = arn.app.find("render-" + postId)
+	let toolbar = arn.app.find("toolbar-" + postId)
+	let source = arn.app.find("source-" + postId)
+	let edit = arn.app.find("edit-toolbar-" + postId)
 
-			newScroll = oldScroll + scrollDistance * Math.sin(progress * fullSin)
-			arn.app.content.parentElement.scrollTop = newScroll
+	if(!render.classList.contains("hidden")) {
+		render.classList.add("hidden")
+		toolbar.classList.add("hidden")
+		source.classList.remove("hidden")
+		edit.classList.remove("hidden")
+	} else {
+		render.classList.remove("hidden")
+		toolbar.classList.remove("hidden")
+		source.classList.add("hidden")
+		edit.classList.add("hidden")
+	}
+}
 
-			if(time < timeEnd && newScroll != finalScroll) {
-				window.requestAnimationFrame(scroll)
-			}
-		}
+// Save post
+export function savePost(arn: AnimeNotifier, element: HTMLElement) {
+	let postId = element.dataset.id
+	let source = arn.app.find("source-" + postId) as HTMLTextAreaElement
+	let text = source.value
 
-		window.requestAnimationFrame(scroll)
-	})
+	let updates = {
+		Text: text,
+	}
+
+	let apiEndpoint = arn.findAPIEndpoint(element)
+
+	arn.post(apiEndpoint, updates)
+	.then(() => arn.reloadContent())
+	.catch(console.error)
 }
 
 // Forum reply
@@ -129,7 +122,7 @@ export function forumReply(arn: AnimeNotifier) {
 		tags: []
 	}
 
-	arn.post("/api/post/new", post)
+	arn.post("/api/new/post", post)
 	.then(() => arn.reloadContent())
 	.then(() => textarea.value = "")
 	.catch(console.error)
@@ -147,7 +140,7 @@ export function createThread(arn: AnimeNotifier) {
 		tags: [category.value]
 	}
 
-	arn.post("/api/thread/new", thread)
+	arn.post("/api/new/thread", thread)
 	.then(() => arn.app.load("/forum/" + thread.tags[0]))
 	.catch(console.error)
 }
@@ -168,7 +161,7 @@ export function createSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) 
 	button.innerText = "Adding..."
 	button.disabled = true
 
-	arn.post("/api/soundtrack/new", soundtrack)
+	arn.post("/api/new/soundtrack", soundtrack)
 	.then(() => arn.app.load("/music"))
 	.catch(err => {
 		console.error(err)

@@ -201,9 +201,11 @@ var interfaceImplementations = map[string][]reflect.Type{
 	},
 	"Thread": []reflect.Type{
 		creatable,
+		updatable,
 	},
 	"Post": []reflect.Type{
 		creatable,
+		updatable,
 	},
 	"SoundTrack": []reflect.Type{
 		creatable,

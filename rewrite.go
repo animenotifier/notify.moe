@@ -43,7 +43,7 @@ func init() {
 		}
 
 		if requestURI == "/dark-flame-master" {
-			ctx.SetURI("/api/analytics/new")
+			ctx.SetURI("/api/new/analytics")
 			return
 		}
 	})

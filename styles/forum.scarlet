@@ -105,6 +105,12 @@
 .post-unlike
 	color rgb(255, 32, 12) !important
 
+.post-save
+	//
+
+.post-input
+	min-height 200px
+
 // Old
 
 // #posts

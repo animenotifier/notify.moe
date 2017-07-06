@@ -32,5 +32,8 @@ a
 img
 	backface-visibility hidden
 
+.hidden
+	display none !important
+
 .spacer
 	flex 1

@@ -321,6 +321,58 @@ export class AnimeNotifier {
 		})
 	}
 
+	scrollTo(target: HTMLElement) {
+		const duration = 250.0
+		const steps = 60
+		const interval = duration / steps
+		const fullSin = Math.PI / 2
+		const contentPadding = 24
+		
+		let scrollHandle: number
+		let oldScroll = this.app.content.parentElement.scrollTop
+		let newScroll = 0
+		let finalScroll = Math.max(target.offsetTop - contentPadding, 0)
+		let scrollDistance = finalScroll - oldScroll
+		let timeStart = Date.now()
+		let timeEnd = timeStart + duration
+
+		let scroll = () => {
+			let time = Date.now()
+			let progress = (time - timeStart) / duration
+
+			if(progress > 1.0) {
+				progress = 1.0
+			}
+
+			newScroll = oldScroll + scrollDistance * Math.sin(progress * fullSin)
+			this.app.content.parentElement.scrollTop = newScroll
+
+			if(time < timeEnd && newScroll != finalScroll) {
+				window.requestAnimationFrame(scroll)
+			}
+		}
+
+		window.requestAnimationFrame(scroll)
+	}
+
+	findAPIEndpoint(element: HTMLElement) {
+		let apiObject: HTMLElement
+		let parent = element
+
+		while(parent = parent.parentElement) {
+			if(parent.dataset.api !== undefined) {
+				apiObject = parent
+				break
+			}
+		}
+
+		if(!apiObject) {
+			throw "API object not found"
+		}
+
+		return apiObject.dataset.api
+	}
+
 	onPopState(e: PopStateEvent) {
 		if(e.state) {
 			this.app.load(e.state, {
