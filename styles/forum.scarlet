@@ -48,6 +48,8 @@
 
 .thread-icons,
 .thread-reply-count
+	horizontal
+	align-items center
 	opacity 0.5
 	text-align right
 	font-size 0.9rem

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/arn/autocorrect"
 	"github.com/fatih/color"
 )
 
@@ -14,7 +15,7 @@ func main() {
 	for post := range allPosts {
 		// Fix text
 		color.Yellow(post.Text)
-		post.Text = arn.FixPostText(post.Text)
+		post.Text = autocorrect.FixPostText(post.Text)
 		color.Green(post.Text)
 
 		// Tags
