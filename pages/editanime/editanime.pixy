@@ -1,5 +1,5 @@
 component EditAnime(anime *arn.Anime)
-	h2= anime.Title.Canonical
+	h1= anime.Title.Canonical
 
 	.widgets
 		.widget(data-api="/api/anime/" + anime.ID)

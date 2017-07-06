@@ -1,5 +1,5 @@
 component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
-	h2.thread-title= thread.Title
+	h1.thread-title= thread.Title
 
 	#thread.thread(data-id=thread.ID)
 		.posts

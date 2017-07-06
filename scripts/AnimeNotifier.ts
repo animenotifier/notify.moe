@@ -8,6 +8,7 @@ import * as actions from "./Actions"
 export class AnimeNotifier {
 	app: Application
 	user: HTMLElement
+	title: string
 	visibilityObserver: IntersectionObserver
 
 	imageFound: MutationQueue
@@ -17,6 +18,7 @@ export class AnimeNotifier {
 	constructor(app: Application) {
 		this.app = app
 		this.user = null
+		this.title = "Anime Notifier"
 
 		this.imageFound = new MutationQueue(elem => elem.classList.add("image-found"))
 		this.imageNotFound = new MutationQueue(elem => elem.classList.add("image-not-found"))
@@ -96,6 +98,16 @@ export class AnimeNotifier {
 		Promise.resolve().then(() => this.displayLocalDates()),
 		Promise.resolve().then(() => this.setSelectBoxValue()),
 		Promise.resolve().then(() => this.assignActions())
+
+		let headers = document.getElementsByTagName("h1")
+
+		if(this.app.currentPath === "/" || headers.length === 0) {
+			if(document.title !== this.title) {
+				document.title = this.title
+			}
+		} else {
+			document.title = headers[0].innerText
+		}
 	}
 
 	onIdle() {

@@ -1,5 +1,5 @@
 component Music(tracks []*arn.SoundTrack)
-	h2 Soundtracks
+	h1 Soundtracks
 
 	.music-buttons
 		a.button.ajax(href="/new/soundtrack")

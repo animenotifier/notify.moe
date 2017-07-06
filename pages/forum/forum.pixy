@@ -1,5 +1,5 @@
 component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
-	h2.page-title Forum
+	h1.page-title Forum
 	ForumTags
 	.forum
 		ThreadList(threads)

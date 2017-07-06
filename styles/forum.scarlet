@@ -23,24 +23,20 @@ post-content-padding-y = 0.75rem
 	padding 0.75rem 1rem
 	position relative
 
+	h1, h2, h3
+		font-weight normal
+		text-align left
+		line-height 1.5em
+		margin typography-margin 0
+
 	h1
 		font-size 1.5rem
-		line-height 1.5em
-		text-align left
-		margin typography-margin 0
 
 	h2
 		font-size 1.3rem
-		line-height 1.5em
-		font-weight normal
-		text-align left
-		margin typography-margin 0
 
 	h3
 		font-size 1.1rem
-		line-height 1.5em
-		font-weight normal
-		text-align left
 	
 	:hover
 		.post-toolbar

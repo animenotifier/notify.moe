@@ -1,7 +1,7 @@
 component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
 	.widgets.mountable
 		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/update/" + anime.ID)
-			h2= anime.Title.Canonical
+			h1= anime.Title.Canonical
 
 			InputNumber("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
 			

@@ -1,5 +1,5 @@
 component Track(track *arn.SoundTrack)
-	h2= track.Media[0].Title
+	h1= track.Media[0].Title
 
 	.sound-tracks
 		SoundTrackAllMedia(track)
