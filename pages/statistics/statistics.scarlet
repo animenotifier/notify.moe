@@ -1,0 +1,24 @@
+.statistics
+	vertical
+	align-items center
+
+.graph
+	transform rotate(-90deg)
+	width 250px
+	height 250px
+
+.slice
+	color black
+	default-transition
+	transform scale(1)
+	:hover
+		transform scale(1.05)
+
+.slice-1
+	opacity 0.8
+
+.slice-2
+	opacity 0.6
+
+.slice-3
+	opacity 0.4

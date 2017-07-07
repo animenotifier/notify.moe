@@ -31,6 +31,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/settings"
+	"github.com/animenotifier/notify.moe/pages/statistics"
 	"github.com/animenotifier/notify.moe/pages/threads"
 	"github.com/animenotifier/notify.moe/pages/tracks"
 	"github.com/animenotifier/notify.moe/pages/user"
@@ -91,6 +92,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/import/anilist/animelist", listimportanilist.Preview)
 	app.Ajax("/import/anilist/animelist/finish", listimportanilist.Finish)
 	app.Ajax("/admin", admin.Get)
+	app.Ajax("/statistics", statistics.Get)
 	app.Ajax("/search", search.Get)
 	app.Ajax("/search/:term", search.Get)
 	app.Ajax("/users", users.Get)

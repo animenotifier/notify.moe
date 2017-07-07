@@ -1,0 +1,13 @@
+component Statistics(screenSizes []*utils.AnalyticsItem)
+	h1 Statistics
+
+	.statistics
+		h3 Screen size
+		PieChart
+		//- canvas#screen-sizes.graph(data-values=utils.ToJSON(screenSizes))
+
+component PieChart
+	svg.graph(viewBox="-1.05 -1.05 2.1 2.1")
+		path.slice.slice-1(d=utils.SVGSlicePath(0, 0.5))
+		path.slice.slice-2(d=utils.SVGSlicePath(0.5, 0.8))
+		path.slice.slice-3(d=utils.SVGSlicePath(0.8, 1.0))
