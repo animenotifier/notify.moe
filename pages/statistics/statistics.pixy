@@ -13,7 +13,7 @@ component StatisticsHeader
 	.buttons.tabs
 		a.button.tab.action(href="/statistics", data-action="diff", data-trigger="click")
 			Icon("user")
-			span User
+			span Users
 
 		a.button.tab.action(href="/statistics/anime", data-action="diff", data-trigger="click")
 			Icon("tv")
