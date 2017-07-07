@@ -27,6 +27,7 @@ var jobs = map[string]time.Duration{
 	"forum-activity":       1 * time.Minute,
 	"anime-ratings":        10 * time.Minute,
 	"airing-anime":         10 * time.Minute,
+	"statistics":           15 * time.Minute,
 	"popular-anime":        20 * time.Minute,
 	"avatars":              30 * time.Minute,
 	"sync-shoboi":          8 * time.Hour,
