@@ -9,39 +9,14 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
+// Preview shows an import preview.
+func Preview(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
 	}
 
-	authErr := arn.AniList.Authorize()
-
-	if authErr != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Couldn't authorize the Anime Notifier app on AniList", authErr)
-	}
-
-	allAnime, allErr := arn.AllAnime()
-
-	if allErr != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load notify.moe list of all anime", allErr)
-	}
-
-	anilistAnimeList, err := arn.AniList.GetAnimeList(user)
-
-	if err != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
-	}
-
-	matches := findAllMatches(allAnime, anilistAnimeList)
-
-	return matches, ""
-}
-
-// Preview ...
-func Preview(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
 	matches, response := getMatches(ctx)
 
 	if response != "" {
@@ -54,6 +29,11 @@ func Preview(ctx *aero.Context) string {
 // Finish ...
 func Finish(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
+
+	if user == nil {
+		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+	}
+
 	matches, response := getMatches(ctx)
 
 	if response != "" {
@@ -90,6 +70,37 @@ func Finish(ctx *aero.Context) string {
 	}
 
 	return ctx.Redirect("/+" + user.Nick + "/animelist")
+}
+
+// getMatches finds and returns all matches for the logged in user.
+func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
+	user := utils.GetUser(ctx)
+
+	if user == nil {
+		return nil, ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+	}
+
+	authErr := arn.AniList.Authorize()
+
+	if authErr != nil {
+		return nil, ctx.Error(http.StatusBadRequest, "Couldn't authorize the Anime Notifier app on AniList", authErr)
+	}
+
+	allAnime, allErr := arn.AllAnime()
+
+	if allErr != nil {
+		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load notify.moe list of all anime", allErr)
+	}
+
+	anilistAnimeList, err := arn.AniList.GetAnimeList(user)
+
+	if err != nil {
+		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
+	}
+
+	matches := findAllMatches(allAnime, anilistAnimeList)
+
+	return matches, ""
 }
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.

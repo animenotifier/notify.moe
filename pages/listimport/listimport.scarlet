@@ -1,3 +1,6 @@
+.buttons-vertical
+	width 100%
+
 .import-list
 	max-width table-width-normal
 	margin 0 auto

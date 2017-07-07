@@ -1,0 +1,23 @@
+component ImportMyAnimeList(user *arn.User, matches []*arn.MyAnimeListMatch)
+	h1= "myanimelist.net Import (" + user.Accounts.MyAnimeList.Nick + ", " + toString(len(matches)) + " anime)"
+
+	table.import-list
+		thead
+			tr
+				th myanimelist.net
+				th notify.moe
+		tbody
+			each match in matches
+				tr
+					td
+						a(href=match.MyAnimeListItem.AnimeLink(), target="_blank", rel="noopener")= match.MyAnimeListItem.AnimeTitle
+					td
+						if match.ARNAnime == nil
+							span.import-error Not found on notify.moe
+						else
+							a(href=match.ARNAnime.Link(), target="_blank", rel="noopener")= match.ARNAnime.Title.Canonical
+	
+	.buttons
+		a.button.mountable(href="/import/myanimelist/animelist/finish")
+			Icon("refresh")
+			span Import

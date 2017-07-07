@@ -1,8 +1,13 @@
 component ImportLists(user *arn.User)
-	.buttons
+	.buttons.buttons-vertical
 		if user.Accounts.AniList.Nick != ""
-			a.button.mountable.ajax(href="/import/anilist/animelist")
-				Icon("refresh")
-				span Import AniList Anime List
-		else
-			p No imports available.
+			.widget-input
+				a.button.mountable.ajax(href="/import/anilist/animelist")
+					Icon("download")
+					span Import AniList
+		
+		if user.Accounts.MyAnimeList.Nick != ""
+			.widget-input
+				a.button.mountable.ajax(href="/import/myanimelist/animelist")
+					Icon("download")
+					span Import MyAnimeList
