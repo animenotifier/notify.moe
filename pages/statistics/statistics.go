@@ -18,69 +18,21 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Couldn't retrieve analytics", err)
 	}
 
-	screenSizes := map[string]int{}
+	screenSize := map[string]float64{}
+	platform := map[string]float64{}
+	pixelRatio := map[string]float64{}
 
 	for _, info := range analytics {
+		platform[info.System.Platform]++
+		pixelRatio[fmt.Sprintf("%.1f", info.Screen.PixelRatio)]++
+
 		size := arn.ToString(info.Screen.Width) + " x " + arn.ToString(info.Screen.Height)
-		screenSizes[size]++
+		screenSize[size]++
 	}
 
-	screenSizesSorted := []*utils.AnalyticsItem{}
-
-	for size, count := range screenSizes {
-		item := &utils.AnalyticsItem{
-			Key:   size,
-			Value: count,
-		}
-
-		if len(screenSizesSorted) == 0 {
-			screenSizesSorted = append(screenSizesSorted, item)
-			continue
-		}
-
-		found := false
-
-		for i := 0; i < len(screenSizesSorted); i++ {
-			if count >= screenSizesSorted[i].Value {
-				// Append empty element
-				screenSizesSorted = append(screenSizesSorted, nil)
-
-				// Move all elements after index "i" 1 position up
-				copy(screenSizesSorted[i+1:], screenSizesSorted[i:])
-
-				// Set value for index "i"
-				screenSizesSorted[i] = item
-
-				// Set flag
-				found = true
-
-				// Leave loop
-				break
-			}
-		}
-
-		if !found {
-			screenSizesSorted = append(screenSizesSorted, item)
-		}
-	}
-
-	slices := []*utils.PieChartSlice{}
-	current := 0.0
-	hueOffset := 0.0
-	hueScaling := 60.0
-
-	for _, item := range screenSizesSorted {
-		percentage := float64(item.Value) / float64(len(analytics))
-
-		slices = append(slices, &utils.PieChartSlice{
-			From:  current,
-			To:    current + percentage,
-			Title: fmt.Sprintf("%s (%d%%)", item.Key, int(percentage*100+0.5)),
-			Color: fmt.Sprintf("hsl(%.1f, 75%%, 50%%)", current*hueScaling+hueOffset),
-		})
-
-		current += percentage
-	}
-
-	return ctx.HTML(components.Statistics(slices))
+	return ctx.HTML(components.Statistics(
+		utils.NewPieChart("Screen sizes", screenSize),
+		utils.NewPieChart("Platforms", platform),
+		utils.NewPieChart("Pixel ratios", pixelRatio),
+	))
 }

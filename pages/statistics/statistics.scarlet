@@ -1,11 +1,8 @@
 .statistics
-	vertical
-	align-items center
+	//
 
-.graph
+.pie-chart
 	transform rotate(-90deg)
-	width 250px
-	height 250px
 
 .slice
 	color black

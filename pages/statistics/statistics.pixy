@@ -1,13 +1,14 @@
-component Statistics(screenSizes []*utils.PieChartSlice)
+component Statistics(pieCharts ...*utils.PieChart)
 	h1 Statistics
 
-	.statistics
-		h3 Screen size
-		PieChart(screenSizes)
-		//- canvas#screen-sizes.graph(data-values=utils.ToJSON(screenSizes))
+	.widgets.statistics
+		each pie in pieCharts
+			.widget
+				h3.widget-title= pie.Title
+				PieChart(pie.Slices)
 
 component PieChart(slices []*utils.PieChartSlice)
-	svg.graph(viewBox="-1.05 -1.05 2.1 2.1")
+	svg.pie-chart(viewBox="-1.1 -1.1 2.2 2.2")
 		each slice in slices
 			g
 				title= slice.Title
