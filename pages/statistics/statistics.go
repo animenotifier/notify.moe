@@ -1,6 +1,7 @@
 package statistics
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/aerogo/aero"
@@ -63,9 +64,21 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
-	if len(screenSizesSorted) > 5 {
-		screenSizesSorted = screenSizesSorted[:5]
+	slices := []*utils.PieChartSlice{}
+	current := 0.0
+
+	for _, item := range screenSizesSorted {
+		percentage := float64(item.Value) / float64(len(analytics))
+
+		slices = append(slices, &utils.PieChartSlice{
+			From:  current,
+			To:    current + percentage,
+			Title: fmt.Sprintf("%s (%d%%)", item.Key, int(percentage*100+0.5)),
+			Color: fmt.Sprintf("rgba(255, 64, 0, %.3f)", 0.8-current*0.8),
+		})
+
+		current += percentage
 	}
 
-	return ctx.HTML(components.Statistics(screenSizesSorted))
+	return ctx.HTML(components.Statistics(slices))
 }

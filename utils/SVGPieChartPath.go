@@ -5,6 +5,14 @@ import (
 	"math"
 )
 
+// PieChartSlice ...
+type PieChartSlice struct {
+	From  float64
+	To    float64
+	Title string
+	Color string
+}
+
 // coords returns the coordinates for the given percentage.
 func coords(percent float64) (float64, float64) {
 	x := math.Cos(2 * math.Pi * percent)
