@@ -20,8 +20,8 @@ func main() {
 	for aniListAnime := range stream {
 		anime := arn.FindAniListAnime(aniListAnime, allAnime)
 
-		if anime != nil {
-			fmt.Println(aniListAnime.TitleRomaji, "=>", anime.Title.Canonical)
+		if anime == nil {
+			fmt.Println(anime.ID, aniListAnime.TitleRomaji)
 		}
 
 		count++

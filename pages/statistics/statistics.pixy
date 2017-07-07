@@ -1,4 +1,4 @@
-component Statistics(pieCharts ...*utils.PieChart)
+component Statistics(pieCharts ...*arn.PieChart)
 	h1 Statistics
 
 	StatisticsHeader
@@ -19,7 +19,7 @@ component StatisticsHeader
 			Icon("tv")
 			span Anime
 
-component PieChart(slices []*utils.PieChartSlice)
+component PieChart(slices []*arn.PieChartSlice)
 	svg.pie-chart(viewBox="-1.1 -1.1 2.2 2.2")
 		each slice in slices
 			g
