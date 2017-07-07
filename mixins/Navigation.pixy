@@ -38,8 +38,8 @@ component LoggedInMenu(user *arn.User)
 		
 		NavigationButton("Explore", "/explore", "th")
 
-		.extra-navigation
-			NavigationButton("Statistics", "/statistics", "pie-chart")
+		//- .extra-navigation
+		//- 	NavigationButton("Statistics", "/statistics", "pie-chart")
 		
 		NavigationButton("Settings", "/settings", "cog")
 		
