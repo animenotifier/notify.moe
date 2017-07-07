@@ -90,17 +90,21 @@ func getAnimeStats() []*arn.PieChart {
 
 	shoboi := stats{}
 	anilist := stats{}
+	mal := stats{}
+	anidb := stats{}
 	status := stats{}
 	types := stats{}
 	shoboiEdits := stats{}
 	anilistEdits := stats{}
+	malEdits := stats{}
+	anidbEdits := stats{}
 	rating := stats{}
 
 	for _, anime := range allAnime {
 		for _, external := range anime.Mappings {
 			if external.Service == "shoboi/anime" {
 				if external.CreatedBy == "" {
-					shoboiEdits["Bot"]++
+					shoboiEdits["(auto-generated)"]++
 				} else {
 					user, err := arn.GetUser(external.CreatedBy)
 					arn.PanicOnError(err)
@@ -110,11 +114,31 @@ func getAnimeStats() []*arn.PieChart {
 
 			if external.Service == "anilist/anime" {
 				if external.CreatedBy == "" {
-					anilistEdits["Bot"]++
+					anilistEdits["(auto-generated)"]++
 				} else {
 					user, err := arn.GetUser(external.CreatedBy)
 					arn.PanicOnError(err)
 					anilistEdits[user.Nick]++
+				}
+			}
+
+			if external.Service == "myanimelist/anime" {
+				if external.CreatedBy == "" {
+					malEdits["(auto-generated)"]++
+				} else {
+					user, err := arn.GetUser(external.CreatedBy)
+					arn.PanicOnError(err)
+					malEdits[user.Nick]++
+				}
+			}
+
+			if external.Service == "anidb/anime" {
+				if external.CreatedBy == "" {
+					anidbEdits["(auto-generated)"]++
+				} else {
+					user, err := arn.GetUser(external.CreatedBy)
+					arn.PanicOnError(err)
+					anidbEdits[user.Nick]++
 				}
 			}
 		}
@@ -126,9 +150,21 @@ func getAnimeStats() []*arn.PieChart {
 		}
 
 		if anime.GetMapping("anilist/anime") != "" {
-			anilist["Connected with Anilist"]++
+			anilist["Connected with AniList"]++
 		} else {
-			anilist["Not connected with Anilist"]++
+			anilist["Not connected with AniList"]++
+		}
+
+		if anime.GetMapping("myanimelist/anime") != "" {
+			mal["Connected with MyAnimeList"]++
+		} else {
+			mal["Not connected with MyAnimeList"]++
+		}
+
+		if anime.GetMapping("anidb/anime") != "" {
+			anidb["Connected with AniDB"]++
+		} else {
+			anidb["Not connected with AniDB"]++
 		}
 
 		rating[arn.ToString(int(anime.Rating.Overall+0.5))]++
@@ -143,9 +179,13 @@ func getAnimeStats() []*arn.PieChart {
 		arn.NewPieChart("Type", types),
 		arn.NewPieChart("Status", status),
 		arn.NewPieChart("Rating", rating),
-		arn.NewPieChart("Anilist", anilist),
+		arn.NewPieChart("MyAnimeList", mal),
+		arn.NewPieChart("AniList", anilist),
+		arn.NewPieChart("AniDB", anidb),
 		arn.NewPieChart("Shoboi", shoboi),
-		arn.NewPieChart("Anilist Editors", anilistEdits),
+		// arn.NewPieChart("MyAnimeList Editors", malEdits),
+		arn.NewPieChart("AniList Editors", anilistEdits),
+		// arn.NewPieChart("AniDB Editors", anidbEdits),
 		arn.NewPieChart("Shoboi Editors", shoboiEdits),
 	}
 }
