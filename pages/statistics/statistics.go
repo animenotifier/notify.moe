@@ -66,6 +66,8 @@ func Get(ctx *aero.Context) string {
 
 	slices := []*utils.PieChartSlice{}
 	current := 0.0
+	hueOffset := 0.0
+	hueScaling := 60.0
 
 	for _, item := range screenSizesSorted {
 		percentage := float64(item.Value) / float64(len(analytics))
@@ -74,7 +76,7 @@ func Get(ctx *aero.Context) string {
 			From:  current,
 			To:    current + percentage,
 			Title: fmt.Sprintf("%s (%d%%)", item.Key, int(percentage*100+0.5)),
-			Color: fmt.Sprintf("rgba(255, 64, 0, %.3f)", 0.8-current*0.8),
+			Color: fmt.Sprintf("hsl(%.1f, 75%%, 50%%)", current*hueScaling+hueOffset),
 		})
 
 		current += percentage
