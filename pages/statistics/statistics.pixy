@@ -11,7 +11,7 @@ component Statistics(pieCharts ...*arn.PieChart)
 					PieChart(pie.Slices)
 		
 		.footer
-			p Data is collected for statistical purposes only. We respect user privacy and we will never display or sell data to 3rd party services.
+			p Data is collected for statistical purposes only. We respect user privacy and we will never display or sell critical data to 3rd party services.
 
 component StatisticsHeader
 	.buttons.tabs
