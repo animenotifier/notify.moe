@@ -18,7 +18,7 @@ func Get(ctx *aero.Context) string {
 	analytics, err := arn.AllAnalytics()
 
 	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Couldn't retrieve analytics", err)
+		return ctx.Error(http.StatusInternalServerError, "Couldn't fetch analytics", err)
 	}
 
 	screenSize := stats{}
@@ -63,9 +63,9 @@ func Get(ctx *aero.Context) string {
 		utils.NewPieChart("OS", os),
 		// utils.NewPieChart("Platform", platform),
 		utils.NewPieChart("Screen size", screenSize),
-		utils.NewPieChart("Pixel ratio", pixelRatio),
 		utils.NewPieChart("Browser", browser),
 		utils.NewPieChart("Country", country),
 		utils.NewPieChart("Gender", gender),
+		utils.NewPieChart("Pixel ratio", pixelRatio),
 	))
 }

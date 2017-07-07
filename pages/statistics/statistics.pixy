@@ -1,11 +1,23 @@
 component Statistics(pieCharts ...*utils.PieChart)
 	h1 Statistics
 
+	StatisticsHeader
+
 	.widgets.statistics
 		each pie in pieCharts
 			.widget
 				h3.widget-title= pie.Title
 				PieChart(pie.Slices)
+
+component StatisticsHeader
+	.buttons.tabs
+		a.button.tab.action(href="/statistics", data-action="diff", data-trigger="click")
+			Icon("user")
+			span User
+
+		a.button.tab.action(href="/statistics/anime", data-action="diff", data-trigger="click")
+			Icon("tv")
+			span Anime
 
 component PieChart(slices []*utils.PieChartSlice)
 	svg.pie-chart(viewBox="-1.1 -1.1 2.2 2.2")
