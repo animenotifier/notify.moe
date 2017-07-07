@@ -1,5 +1,5 @@
 component Statistics(pieCharts ...*arn.PieChart)
-	h1 Statistics
+	h1.page-title Statistics
 
 	StatisticsHeader
 

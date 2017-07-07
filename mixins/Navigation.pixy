@@ -7,7 +7,7 @@ component Navigation(user *arn.User)
 component LoggedOutMenu
 	nav#navigation.logged-out
 		NavigationButton("About", "/", "question-circle")
-		NavigationButton("Music", "/music", "headphones")
+		NavigationButton("Explore", "/explore", "th")
 		NavigationButton("Forum", "/forum", "comment")
 
 		FuzzySearch
@@ -15,7 +15,8 @@ component LoggedOutMenu
 		.extra-navigation
 			NavigationButton("Users", "/users", "globe")
 		
-		NavigationButton("Explore", "/explore", "th")
+		NavigationButton("Music", "/music", "headphones")
+		
 		NavigationButton("Login", "/login", "sign-in")
 
 component LoggedInMenu(user *arn.User)
@@ -34,8 +35,11 @@ component LoggedInMenu(user *arn.User)
 
 		.extra-navigation
 			NavigationButton("Users", "/users", "globe")
-
+		
 		NavigationButton("Explore", "/explore", "th")
+
+		.extra-navigation
+			NavigationButton("Statistics", "/statistics", "pie-chart")
 		
 		NavigationButton("Settings", "/settings", "cog")
 		
