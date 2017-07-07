@@ -1,5 +1,5 @@
 .statistics
-	//
+	text-align center
 
 .pie-chart
 	transform rotate(-90deg)

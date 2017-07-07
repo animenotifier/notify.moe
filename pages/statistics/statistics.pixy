@@ -3,11 +3,15 @@ component Statistics(pieCharts ...*arn.PieChart)
 
 	StatisticsHeader
 
-	.widgets.statistics
-		each pie in pieCharts
-			.widget
-				h3.widget-title= pie.Title
-				PieChart(pie.Slices)
+	.statistics
+		.widgets
+			each pie in pieCharts
+				.widget
+					h3.widget-title= pie.Title
+					PieChart(pie.Slices)
+		
+		.footer
+			p Data is collected for statistical purposes only. We respect user privacy and we will never display or sell data to 3rd party services.
 
 component StatisticsHeader
 	.buttons.tabs
