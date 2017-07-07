@@ -98,17 +98,17 @@ func ToPieChartSlices(data map[string]float64) []*PieChartSlice {
 
 	slices := []*PieChartSlice{}
 	current := 0.0
-	hueOffset := 0.0
-	hueScaling := 60.0
+	hueOffset := 230.0
+	hueScaling := -30.0
 
-	for _, item := range dataSorted {
+	for i, item := range dataSorted {
 		percentage := float64(item.Value) / sum
 
 		slices = append(slices, &PieChartSlice{
 			From:  current,
 			To:    current + percentage,
 			Title: fmt.Sprintf("%s (%d%%)", item.Key, int(percentage*100+0.5)),
-			Color: fmt.Sprintf("hsl(%.2f, 75%%, 50%%)", current*hueScaling+hueOffset),
+			Color: fmt.Sprintf("hsl(%.2f, 75%%, 50%%)", float64(i)*hueScaling+hueOffset),
 		})
 
 		current += percentage
