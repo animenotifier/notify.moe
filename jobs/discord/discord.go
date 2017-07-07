@@ -97,7 +97,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(m.Content, "!s ") {
 		term := m.Content[len("!s "):]
-		userResults, animeResults := arn.Search(term, 10, 10)
+		userResults, animeResults := arn.Search(term, 3, 3)
 		message := ""
 
 		for _, user := range userResults {
