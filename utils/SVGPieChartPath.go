@@ -23,5 +23,5 @@ func SVGSlicePath(from float64, to float64) string {
 		largeArc = "1"
 	}
 
-	return fmt.Sprintf("M %.2f %.2f A 1 1 0 %s 1 %.2f %.2f L 0 0", x1, y1, largeArc, x2, y2)
+	return fmt.Sprintf("M %.3f %.3f A 1 1 0 %s 1 %.3f %.3f L 0 0", x1, y1, largeArc, x2, y2)
 }

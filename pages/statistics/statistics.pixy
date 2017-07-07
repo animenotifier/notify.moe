@@ -8,6 +8,12 @@ component Statistics(screenSizes []*utils.AnalyticsItem)
 
 component PieChart
 	svg.graph(viewBox="-1.05 -1.05 2.1 2.1")
-		path.slice.slice-1(d=utils.SVGSlicePath(0, 0.5))
-		path.slice.slice-2(d=utils.SVGSlicePath(0.5, 0.8))
-		path.slice.slice-3(d=utils.SVGSlicePath(0.8, 1.0))
+		g
+			title Demo (50%)
+			path.slice.slice-1(d=utils.SVGSlicePath(0, 0.5))
+		g
+			title Demo (30%)
+			path.slice.slice-2(d=utils.SVGSlicePath(0.5, 0.8))
+		g
+			title Demo (20%)
+			path.slice.slice-3(d=utils.SVGSlicePath(0.8, 1.0))
