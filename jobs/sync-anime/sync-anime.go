@@ -13,6 +13,12 @@ import (
 func main() {
 	color.Yellow("Syncing Anime")
 
+	// In case we refresh only one anime
+	if InvokeShellArgs() {
+		color.Green("Finished.")
+		return
+	}
+
 	// Get a stream of all anime
 	allAnime := kitsu.StreamAnimeWithMappings()
 
@@ -24,7 +30,7 @@ func main() {
 	color.Green("Finished.")
 }
 
-func sync(data *kitsu.Anime) {
+func sync(data *kitsu.Anime) *arn.Anime {
 	anime, err := arn.GetAnime(data.ID)
 
 	if err != nil {
@@ -136,4 +142,6 @@ func sync(data *kitsu.Anime) {
 
 	// Log
 	fmt.Println(status, anime.ID, anime.Title.Canonical)
+
+	return anime
 }
