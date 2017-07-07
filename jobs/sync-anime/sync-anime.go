@@ -14,7 +14,7 @@ func main() {
 	color.Yellow("Syncing Anime")
 
 	// Get a stream of all anime
-	allAnime := kitsu.StreamAnime()
+	allAnime := kitsu.StreamAnimeWithMappings()
 
 	// Iterate over the stream
 	for anime := range allAnime {
@@ -75,6 +75,22 @@ func sync(data *kitsu.Anime) {
 	} else {
 		// Update JP title with Kitsu JP title
 		anime.Title.Japanese = attr.Titles.JaJp
+	}
+
+	// Import mappings
+	for _, mapping := range data.Mappings {
+		switch mapping.Attributes.ExternalSite {
+		case "myanimelist/anime":
+			anime.AddMapping("myanimelist/anime", mapping.Attributes.ExternalID, "")
+		case "anidb":
+			anime.AddMapping("anidb/anime", mapping.Attributes.ExternalID, "")
+		case "thetvdb/series":
+			anime.AddMapping("thetvdb/anime", mapping.Attributes.ExternalID, "")
+		case "thetvdb/season":
+			// Ignore
+		default:
+			color.Yellow("Unknown mapping: %s %s", mapping.Attributes.ExternalSite, mapping.Attributes.ExternalID)
+		}
 	}
 
 	// NSFW
