@@ -161,7 +161,7 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 						td.episode-actions
 							a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
 								RawIcon("google")
-						td.episode-airing-date-start.utc-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
+						td.episode-airing-date-start.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 
 	//- h3.anime-section-name Reviews
 	//- p Coming soon.

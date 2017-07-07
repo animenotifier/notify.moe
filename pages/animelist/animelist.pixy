@@ -55,7 +55,7 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
 					td.anime-list-item-airing-date
 						if item.Anime().UpcomingEpisode() != nil
-							span.utc-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
+							span.utc-airing-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
 					td.anime-list-item-episodes
 						.anime-list-item-episodes-watched
 							.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes

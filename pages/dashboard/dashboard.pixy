@@ -13,7 +13,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 								Icon("calendar-o")
 								.schedule-item-title= schedule[i].Anime.Title.Canonical
 							.spacer
-							.schedule-item-date.utc-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
+							.schedule-item-date.utc-airing-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
 				else
 					.widget-element
 						.widget-element-text

@@ -41,6 +41,9 @@ post-content-padding-y = 0.75rem
 	:hover
 		.post-toolbar
 			opacity 1
+		
+		.post-date
+			opacity 0.25
 
 .thread-content
 	horizontal
@@ -118,6 +121,15 @@ post-content-padding-y = 0.75rem
 
 .post-text-input
 	min-height 200px
+
+.post-date
+	position absolute
+	right -1rem
+	top 0.25rem
+	white-space nowrap
+	opacity 0
+	transform translateX(100%)
+	default-transition
 
 // Old
 

@@ -1,6 +1,6 @@
 import { Application } from "./Application"
 import { Diff } from "./Diff"
-import { displayLocalDate } from "./DateView"
+import { displayAiringDate, displayDate } from "./DateView"
 import { findAll, delay } from "./Utils"
 import { MutationQueue } from "./MutationQueue"
 import * as actions from "./Actions"
@@ -148,8 +148,12 @@ export class AnimeNotifier {
 	displayLocalDates() {
 		const now = new Date()
 
+		for(let element of findAll("utc-airing-date")) {
+			displayAiringDate(element, now)
+		}
+
 		for(let element of findAll("utc-date")) {
-			displayLocalDate(element, now)
+			displayDate(element, now)
 		}
 	}
 

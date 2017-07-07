@@ -59,7 +59,7 @@ function getRemainingTime(remaining: number): string {
 	return "Just now"
 }
 
-export function displayLocalDate(element: HTMLElement, now: Date) {
+export function displayAiringDate(element: HTMLElement, now: Date) {
 	let startDate = new Date(element.dataset.startDate)
 	let endDate = new Date(element.dataset.endDate)
 
@@ -73,9 +73,6 @@ export function displayLocalDate(element: HTMLElement, now: Date) {
 	
 	let airingVerb = "will be airing"
 
-
-	// let dayInfo = dayNames[startDate.getDay()] + ", " + monthNames[startDate.getMonth()] + " " + startDate.getDate()
-
 	let remaining = startDate.getTime() - now.getTime()
 	let remainingString = getRemainingTime(remaining)
 
@@ -86,55 +83,29 @@ export function displayLocalDate(element: HTMLElement, now: Date) {
 
 	element.innerText = remainingString
 
-	// let remainingString = seconds + plural(seconds, 'second')
-
-	// let days = seconds / (60 * )
-	// if(Math.abs(days) >= 1) {
-	// 	remainingString = plural(days, 'day')
-	// } else {
-	// 	let hours = arn.inHours(now, timeStamp)
-	// 	if(Math.abs(hours) >= 1) {
-	// 		remainingString = plural(hours, 'hour')
-	// 	} else {
-	// 		let minutes = arn.inMinutes(now, timeStamp)
-	// 		if(Math.abs(minutes) >= 1) {
-	// 			remainingString = plural(minutes, 'minute')
-	// 		} else {
-	// 			let seconds = arn.inSeconds(now, timeStamp)
-	// 			remainingString = plural(seconds, 'second')
-	// 		}
-	// 	}
-	// }
-
-	// if(isNaN(oneHour)) {
-	// 	element.style.opacity = "0"
-	// 	return
-	// }
-
-	// switch(Math.floor(dayDifference)) {
-	// 	case 0:
-	// 		element.innerText = "Today"
-	// 		break
-	// 	case 1:
-	// 		element.innerText = "Tomorrow"
-	// 		break
-	// 	case -1:
-	// 		element.innerText = "Yesterday"
-	// 		break
-	// 	default:
-	// 		let text = Math.abs(dayDifference) + " days"
-
-	// 		if(dayDifference < 0) {
-	// 			text += " ago"
-	// 			airingVerb = "aired"
-	// 		} else {
-	// 			element.innerText = text
-	// 		}
-	// }
-
 	if(remaining < 0) {
 		airingVerb = "aired"
 	}
 
 	element.title = "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + dayNames[startDate.getDay()] + " from " + startTime + " - " + endTime
+}
+
+export function displayDate(element: HTMLElement, now: Date) {
+	let startDate = new Date(element.dataset.date)
+
+	let h = startDate.getHours()
+	let m = startDate.getMinutes()
+	let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+	
+	let remaining = startDate.getTime() - now.getTime()
+	let remainingString = getRemainingTime(remaining)
+
+	// Add "ago" if the date is in the past
+	if(remainingString.startsWith("-")) {
+		remainingString = remainingString.substring(1) + " ago"
+	}
+
+	element.innerText = remainingString
+
+	element.title = dayNames[startDate.getDay()] + " " + startTime
 }

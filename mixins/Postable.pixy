@@ -22,6 +22,8 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 						a.button.post-cancel-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID())
 							Icon("close")
 							span Cancel
+			
+			.post-date.utc-date(data-date=post.Created())
 
 			.post-toolbar(id="toolbar-" + post.ID())
 				.spacer
