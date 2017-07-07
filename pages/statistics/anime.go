@@ -69,8 +69,8 @@ func Anime(ctx *aero.Context) string {
 		utils.NewPieChart("Status", status),
 		utils.NewPieChart("Rating", rating),
 		utils.NewPieChart("Anilist", anilist),
-		utils.NewPieChart("Anilist Editors", anilistEdits),
 		utils.NewPieChart("Shoboi", shoboi),
+		utils.NewPieChart("Anilist Editors", anilistEdits),
 		utils.NewPieChart("Shoboi Editors", shoboiEdits),
 	))
 }
