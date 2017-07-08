@@ -47,8 +47,8 @@ export class Diff {
 				let elemA = a as HTMLElement
 				let elemB = b as HTMLElement
 
-				// Skip iframes
-				if(elemA.tagName === "IFRAME") {
+				// Skip iframes and lazy loaded images
+				if(elemA.tagName === "IFRAME" || elemA.classList.contains("lazy")) {
 					continue
 				}
 

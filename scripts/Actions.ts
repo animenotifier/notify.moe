@@ -115,6 +115,24 @@ export function savePost(arn: AnimeNotifier, element: HTMLElement) {
 	.catch(console.error)
 }
 
+// like
+export function like(arn: AnimeNotifier, element: HTMLElement) {
+	let apiEndpoint = arn.findAPIEndpoint(element)
+
+	arn.post(apiEndpoint + "/like", null)
+	.then(() => arn.reloadContent())
+	.catch(console.error)
+}
+
+// unlike
+export function unlike(arn: AnimeNotifier, element: HTMLElement) {
+	let apiEndpoint = arn.findAPIEndpoint(element)
+
+	arn.post(apiEndpoint + "/unlike", null)
+	.then(() => arn.reloadContent())
+	.catch(console.error)
+}
+
 // Forum reply
 export function forumReply(arn: AnimeNotifier) {
 	let textarea = arn.app.find("new-reply") as HTMLTextAreaElement

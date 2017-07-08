@@ -186,6 +186,7 @@ var routeTests = map[string][]string{
 	"/anime/:id/edit":                      nil,
 	"/new/thread":                          nil,
 	"/new/soundtrack":                      nil,
+	"/editor":                              nil,
 	"/user":                                nil,
 	"/settings":                            nil,
 	"/extension/embed":                     nil,
@@ -194,6 +195,7 @@ var routeTests = map[string][]string{
 // API interfaces
 var creatable = reflect.TypeOf((*api.Creatable)(nil)).Elem()
 var updatable = reflect.TypeOf((*api.Updatable)(nil)).Elem()
+var actionable = reflect.TypeOf((*api.Actionable)(nil)).Elem()
 var collection = reflect.TypeOf((*api.Collection)(nil)).Elem()
 
 // Required interface implementations
@@ -204,10 +206,12 @@ var interfaceImplementations = map[string][]reflect.Type{
 	"Thread": []reflect.Type{
 		creatable,
 		updatable,
+		actionable,
 	},
 	"Post": []reflect.Type{
 		creatable,
 		updatable,
+		actionable,
 	},
 	"SoundTrack": []reflect.Type{
 		creatable,

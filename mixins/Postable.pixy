@@ -30,14 +30,13 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 				.post-likes(id="likes-" + post.ID(), title="Likes")= len(post.Likes())
 
 				if user != nil
-					//- if user.ID !== post.authorId
-					//- 	- var liked = post.likes && post.likes.indexOf(user.ID) !== -1
-
-					//- 	a.post-tool.post-like(id="like-" + post.ID, onclick=`$.like("${type.toLowerCase()}", "${post.ID}")`, title="Like", class=liked ? "hidden" : ")
-					//- 		i.fa.fa-thumbs-up.fa-fw
-
-					//- 	a.post-tool.post-unlike(id="unlike-" + post.ID, onclick=`$.unlike("${type.toLowerCase()}", "${post.ID}")`, title="Unlike", class=!liked ? "hidden" : ")
-					//- 		i.fa.fa-thumbs-down.fa-fw
+					if user.ID != post.Author().ID
+						if post.LikedBy(user.ID)
+							a.post-tool.post-unlike.action(id="unlike-" + post.ID(), title="Unlike", data-action="unlike", data-trigger="click")
+								RawIcon("thumbs-down")
+						else
+							a.post-tool.post-like.action(id="like-" + post.ID(), title="Like", data-action="like", data-trigger="click")
+								RawIcon("thumbs-up")
 
 					if user.ID == post.Author().ID
 						a.post-tool.post-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID(), title="Edit")
