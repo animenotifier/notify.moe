@@ -131,11 +131,16 @@ func Work(user *arn.User) {
 			continue
 		}
 
+		// Name of source
 		sourceType := reflect.TypeOf(source).Elem().Name()
+
+		// Log
+		fmt.Println(color.GreenString("✔"), sourceType, "|", user.Nick, "|", avatar)
 
 		// Avoid quality loss (if it's on the file system, we don't need to write it again)
 		if sourceType == "FileSystem" {
-			continue
+			user.AvatarExtension = avatar.Extension()
+			break
 		}
 
 		for _, writer := range avatarOutputs {
@@ -146,7 +151,6 @@ func Work(user *arn.User) {
 			}
 		}
 
-		fmt.Println(color.GreenString("✔"), sourceType, "|", user.Nick, "|", avatar)
 		break
 	}
 
