@@ -152,8 +152,8 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 			h3.anime-section-name Latest episodes
 		else
 			h3.anime-section-name Episodes
-		table
-			tbody.episodes
+		table.episodes
+			tbody
 				each episode in anime.Episodes
 					tr.episode
 						td.episode-number= episode.Number

@@ -1,0 +1,14 @@
+component AniListMissingMapping(missing []*arn.Anime)
+	h1 Anime without Anilist links
+
+	table
+		tbody
+			each anime in missing
+				tr
+					td
+						if len(anime.StartDate) >= 4
+							span= anime.StartDate[:4]
+					td
+						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
+					td
+						a(href="https://anilist.co/search?type=anime&q=" + anime.Title.Canonical, target="_blank", rel="noopener") Search

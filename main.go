@@ -17,6 +17,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/best"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
+	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
@@ -73,6 +74,14 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/threads/:id", threads.Get)
 	app.Ajax("/posts/:id", posts.Get)
 	app.Ajax("/tracks/:id", tracks.Get)
+	app.Ajax("/new/thread", newthread.Get)
+	app.Ajax("/new/soundtrack", newsoundtrack.Get)
+	app.Ajax("/settings", settings.Get)
+	app.Ajax("/music", music.Get)
+	app.Ajax("/users", users.Get)
+	app.Ajax("/login", login.Get)
+
+	// User profiles
 	app.Ajax("/user", user.Get)
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/user/:nick/threads", profile.GetThreadsByUser)
@@ -85,26 +94,31 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/user/:nick/animelist/hold", animelist.FilterByStatus(arn.AnimeListStatusHold))
 	app.Ajax("/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
 	app.Ajax("/user/:nick/animelist/anime/:id", animelistitem.Get)
-	app.Ajax("/new/thread", newthread.Get)
-	app.Ajax("/new/soundtrack", newsoundtrack.Get)
-	app.Ajax("/settings", settings.Get)
-	app.Ajax("/music", music.Get)
+
+	// Search
+	app.Ajax("/search", search.Get)
+	app.Ajax("/search/:term", search.Get)
+
+	// Admin
+	app.Ajax("/admin", admin.Get)
+	app.Ajax("/editor", editor.Get)
+	app.Ajax("/statistics", statistics.Get)
+	app.Ajax("/statistics/anime", statistics.Anime)
+	app.Ajax("/webdev", webdev.Get)
+
+	// Import
 	app.Ajax("/import", listimport.Get)
 	app.Ajax("/import/anilist/animelist", listimportanilist.Preview)
 	app.Ajax("/import/anilist/animelist/finish", listimportanilist.Finish)
 	app.Ajax("/import/myanimelist/animelist", listimportmyanimelist.Preview)
 	app.Ajax("/import/myanimelist/animelist/finish", listimportmyanimelist.Finish)
-	app.Ajax("/admin", admin.Get)
-	app.Ajax("/statistics", statistics.Get)
-	app.Ajax("/statistics/anime", statistics.Anime)
-	app.Ajax("/search", search.Get)
-	app.Ajax("/search/:term", search.Get)
-	app.Ajax("/users", users.Get)
-	app.Ajax("/login", login.Get)
-	app.Ajax("/webdev", webdev.Get)
-	app.Ajax("/extension/embed", embed.Get)
+
+	// Genres
 	// app.Ajax("/genres", genres.Get)
 	// app.Ajax("/genres/:name", genre.Get)
+
+	// Browser extension
+	app.Ajax("/extension/embed", embed.Get)
 
 	// Middleware
 	app.Use(middleware.Log())
