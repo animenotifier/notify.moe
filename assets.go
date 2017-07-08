@@ -1,12 +1,9 @@
 package main
 
 import (
-	"errors"
-	"net/http"
 	"strings"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components/js"
 )
 
@@ -53,44 +50,12 @@ func init() {
 
 	// Avatars
 	app.Get("/images/avatars/large/:file", func(ctx *aero.Context) string {
-		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
-
-		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/large/webp/" + file + ".webp")
-		}
-
-		original := arn.FindFileWithExtension(
-			file,
-			"images/avatars/large/original/",
-			arn.OriginalImageExtensions,
-		)
-
-		if original == "" {
-			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found: "+file))
-		}
-
-		return ctx.File(original)
+		return ctx.File("images/avatars/large/" + ctx.Get("file"))
 	})
 
 	// Avatars
 	app.Get("/images/avatars/small/:file", func(ctx *aero.Context) string {
-		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
-
-		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/small/webp/" + file + ".webp")
-		}
-
-		original := arn.FindFileWithExtension(
-			file,
-			"images/avatars/small/original/",
-			arn.OriginalImageExtensions,
-		)
-
-		if original == "" {
-			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found: "+file))
-		}
-
-		return ctx.File(original)
+		return ctx.File("images/avatars/large/" + ctx.Get("file"))
 	})
 
 	// Elements

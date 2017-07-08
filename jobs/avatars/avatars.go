@@ -58,26 +58,26 @@ func main() {
 	avatarOutputs = []AvatarOutput{
 		// Original - Large
 		&AvatarOriginalFileOutput{
-			Directory: "images/avatars/large/original/",
+			Directory: "images/avatars/large/",
 			Size:      arn.AvatarMaxSize,
 		},
 
 		// Original - Small
 		&AvatarOriginalFileOutput{
-			Directory: "images/avatars/small/original/",
+			Directory: "images/avatars/small/",
 			Size:      arn.AvatarSmallSize,
 		},
 
 		// WebP - Large
 		&AvatarWebPFileOutput{
-			Directory: "images/avatars/large/webp/",
+			Directory: "images/avatars/large/",
 			Size:      arn.AvatarMaxSize,
 			Quality:   webPQuality,
 		},
 
 		// WebP - Small
 		&AvatarWebPFileOutput{
-			Directory: "images/avatars/small/webp/",
+			Directory: "images/avatars/small/",
 			Size:      arn.AvatarSmallSize,
 			Quality:   webPQuality,
 		},
@@ -87,20 +87,12 @@ func main() {
 		return
 	}
 
-	// Stream of all users
-	users, _ := arn.FilterUsers(func(user *arn.User) bool {
-		return true
-	})
-
-	// Log user count
-	println(len(users), "users")
-
 	// Worker queue
-	usersQueue := make(chan *arn.User)
+	usersQueue := make(chan *arn.User, 512)
 	StartWorkers(usersQueue, Work)
 
 	// We'll send each user to one of the worker threads
-	for _, user := range users {
+	for user := range arn.MustStreamUsers() {
 		usersQueue <- user
 	}
 
@@ -120,7 +112,7 @@ func StartWorkers(queue chan *arn.User, work func(*arn.User)) {
 
 // Work handles a single user.
 func Work(user *arn.User) {
-	user.Avatar = ""
+	user.AvatarExtension = ""
 
 	for _, source := range avatarSources {
 		avatar := source.GetAvatar(user)
@@ -139,10 +131,19 @@ func Work(user *arn.User) {
 		}
 
 		fmt.Println(color.GreenString("✔"), reflect.TypeOf(source).Elem().Name(), "|", user.Nick, "|", avatar)
-		user.Avatar = "/+" + user.Nick + "/avatar"
 		break
 	}
 
+	// Since this a very long running job, refresh user data before saving it.
+	avatarExt := user.AvatarExtension
+	user, err := arn.GetUser(user.ID)
+
+	if err != nil {
+		avatarLog.Error("Can't refresh user info:", user.ID, user.Nick)
+		return
+	}
+
 	// Save avatar data
+	user.AvatarExtension = avatarExt
 	user.Save()
 }

@@ -1,7 +1,7 @@
 import { Application } from "./Application"
 import { Diff } from "./Diff"
 import { displayAiringDate, displayDate } from "./DateView"
-import { findAll, delay } from "./Utils"
+import { findAll, delay, canUseWebP } from "./Utils"
 import { MutationQueue } from "./MutationQueue"
 import * as actions from "./Actions"
 
@@ -9,6 +9,7 @@ export class AnimeNotifier {
 	app: Application
 	user: HTMLElement
 	title: string
+	webpEnabled: boolean
 	visibilityObserver: IntersectionObserver
 
 	imageFound: MutationQueue
@@ -79,6 +80,9 @@ export class AnimeNotifier {
 		if(navigator.platform.includes("Mac")) {
 			document.documentElement.classList.add("osx")
 		}
+
+		// Check for WebP support
+		this.webpEnabled = canUseWebP()
 
 		// Initiate the elements we need
 		this.user = this.app.find("user")
@@ -207,7 +211,13 @@ export class AnimeNotifier {
 	lazyLoadImage(img: HTMLImageElement) {
 		// Once the image becomes visible, load it
 		img["became visible"] = () => {
-			img.src = img.dataset.src
+			// Replace URL with WebP if supported
+			if(this.webpEnabled && img.dataset.webp) {
+				let dot = img.dataset.src.lastIndexOf(".")
+				img.src = img.dataset.src.substring(0, dot) + ".webp"
+			} else {
+				img.src = img.dataset.src
+			}
 
 			if(img.naturalWidth === 0) {
 				img.onload = () => {

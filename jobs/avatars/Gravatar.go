@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/animenotifier/arn"
@@ -26,6 +27,7 @@ func (source *Gravatar) GetAvatar(user *arn.User) *Avatar {
 
 	// Build URL
 	gravatarURL := gravatar.Url(user.Email) + "?s=" + fmt.Sprint(arn.AvatarMaxSize) + "&d=404&r=" + source.Rating
+	gravatarURL = strings.Replace(gravatarURL, "http://", "https://", 1)
 
 	// Wait for request limiter to allow us to send a request
 	<-source.RequestLimiter.C

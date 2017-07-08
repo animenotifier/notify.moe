@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"image"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/animenotifier/arn"
@@ -21,6 +22,20 @@ type Avatar struct {
 	Format string
 }
 
+// Extension ...
+func (avatar *Avatar) Extension() string {
+	switch avatar.Format {
+	case "jpg", "jpeg":
+		return ".jpg"
+	case "png":
+		return ".png"
+	case "gif":
+		return ".gif"
+	default:
+		return ""
+	}
+}
+
 // String returns a text representation of the format, width and height.
 func (avatar *Avatar) String() string {
 	return fmt.Sprint(avatar.Format, " | ", avatar.Image.Bounds().Dx(), "x", avatar.Image.Bounds().Dy())
@@ -29,17 +44,23 @@ func (avatar *Avatar) String() string {
 // AvatarFromURL downloads and decodes the image from an URL and creates an Avatar.
 func AvatarFromURL(url string, user *arn.User) *Avatar {
 	// Download
-	response, data, networkErr := gorequest.New().Get(url).EndBytes()
-
-	// Retry after 5 seconds if service unavailable
-	if response.StatusCode == http.StatusServiceUnavailable {
-		time.Sleep(5 * time.Second)
-		response, data, networkErr = gorequest.New().Get(url).EndBytes()
-	}
+	response, data, networkErrs := gorequest.New().Get(url).EndBytes()
 
 	// Network errors
-	if networkErr != nil {
-		netLog.Error(user.Nick, url, networkErr)
+	if len(networkErrs) > 0 {
+		netLog.Error(user.Nick, url, networkErrs[0])
+		return nil
+	}
+
+	// Retry HTTP only version after 5 seconds if service unavailable
+	if response == nil || response.StatusCode == http.StatusServiceUnavailable {
+		time.Sleep(5 * time.Second)
+		response, data, networkErrs = gorequest.New().Get(strings.Replace(url, "https://", "http://", 1)).EndBytes()
+	}
+
+	// Network errors on 2nd try
+	if len(networkErrs) > 0 {
+		netLog.Error(user.Nick, url, networkErrs[0])
 		return nil
 	}
 

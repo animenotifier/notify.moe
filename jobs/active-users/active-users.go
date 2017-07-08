@@ -15,7 +15,7 @@ func main() {
 
 	// Filter out active users with an avatar
 	users, err := arn.FilterUsers(func(user *arn.User) bool {
-		return user.IsActive() && user.Avatar != ""
+		return user.IsActive() && user.AvatarExtension != ""
 	})
 
 	if err != nil {

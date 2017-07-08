@@ -20,16 +20,9 @@ type AvatarOriginalFileOutput struct {
 // SaveAvatar writes the original avatar to the file system.
 func (output *AvatarOriginalFileOutput) SaveAvatar(avatar *Avatar) error {
 	// Determine file extension
-	extension := ""
+	extension := avatar.Extension()
 
-	switch avatar.Format {
-	case "jpg", "jpeg":
-		extension = ".jpg"
-	case "png":
-		extension = ".png"
-	case "gif":
-		extension = ".gif"
-	default:
+	if extension == "" {
 		return errors.New("Unknown format: " + avatar.Format)
 	}
 
@@ -57,6 +50,9 @@ func (output *AvatarOriginalFileOutput) SaveAvatar(avatar *Avatar) error {
 
 		data = buffer.Bytes()
 	}
+
+	// Set user avatar
+	avatar.User.AvatarExtension = extension
 
 	// Write to file
 	fileName := output.Directory + avatar.User.ID + extension
