@@ -2,6 +2,7 @@ package listimportmyanimelist
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -33,6 +34,49 @@ func Finish(ctx *aero.Context) string {
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+	}
+
+	matches, response := getMatches(ctx)
+
+	if response != "" {
+		return response
+	}
+
+	animeList := user.AnimeList()
+
+	for _, match := range matches {
+		if match.ARNAnime == nil || match.MyAnimeListItem == nil {
+			continue
+		}
+
+		rating, _ := strconv.ParseFloat(match.MyAnimeListItem.MyScore, 64)
+		episodesWatched, _ := strconv.Atoi(match.MyAnimeListItem.MyWatchedEpisodes)
+		rewatchCount, convErr := strconv.Atoi(match.MyAnimeListItem.MyRewatching)
+
+		if convErr != nil {
+			rewatchCount = 0
+		}
+
+		item := &arn.AnimeListItem{
+			AnimeID:  match.ARNAnime.ID,
+			Status:   arn.MyAnimeListStatusToARNStatus(match.MyAnimeListItem.MyStatus),
+			Episodes: episodesWatched,
+			Notes:    "",
+			Rating: &arn.AnimeRating{
+				Overall: rating,
+			},
+			RewatchCount: rewatchCount,
+			Created:      arn.DateTimeUTC(),
+			Edited:       arn.DateTimeUTC(),
+		}
+
+		animeList.Import(item)
+	}
+
+	err := animeList.Save()
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Error saving your anime list", err)
 	}
 
 	return ctx.Redirect("/+" + user.Nick + "/animelist")
