@@ -54,6 +54,9 @@ func main() {
 		&MyAnimeList{
 			RequestLimiter: time.NewTicker(250 * time.Millisecond),
 		},
+		&FileSystem{
+			Directory: "images/avatars/large/",
+		},
 	}
 
 	// Define the avatar outputs
@@ -118,7 +121,6 @@ func StartWorkers(queue chan *arn.User, work func(*arn.User)) {
 
 // Work handles a single user.
 func Work(user *arn.User) {
-	fmt.Println(user.ID, "|", user.Nick)
 	user.AvatarExtension = ""
 
 	for _, source := range avatarSources {
@@ -126,6 +128,13 @@ func Work(user *arn.User) {
 
 		if avatar == nil {
 			// fmt.Println(color.RedString("✘"), reflect.TypeOf(source).Elem().Name(), user.Nick)
+			continue
+		}
+
+		sourceType := reflect.TypeOf(source).Elem().Name()
+
+		// Avoid quality loss (if it's on the file system, we don't need to write it again)
+		if sourceType == "FileSystem" {
 			continue
 		}
 
@@ -137,7 +146,7 @@ func Work(user *arn.User) {
 			}
 		}
 
-		fmt.Println(color.GreenString("✔"), reflect.TypeOf(source).Elem().Name(), "|", user.Nick, "|", avatar)
+		fmt.Println(color.GreenString("✔"), sourceType, "|", user.Nick, "|", avatar)
 		break
 	}
 
