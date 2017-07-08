@@ -6,6 +6,7 @@ import (
 	"path"
 	"reflect"
 	"runtime"
+	"sync"
 	"time"
 
 	_ "image/gif"
@@ -24,6 +25,7 @@ const (
 var avatarSources []AvatarSource
 var avatarOutputs []AvatarOutput
 var avatarLog = log.New()
+var wg sync.WaitGroup
 
 // Main
 func main() {
@@ -88,13 +90,16 @@ func main() {
 	}
 
 	// Worker queue
-	usersQueue := make(chan *arn.User, 512)
+	usersQueue := make(chan *arn.User, runtime.NumCPU())
 	StartWorkers(usersQueue, Work)
 
 	// We'll send each user to one of the worker threads
 	for user := range arn.MustStreamUsers() {
+		wg.Add(1)
 		usersQueue <- user
 	}
+
+	wg.Wait()
 
 	color.Green("Finished.")
 }
@@ -112,6 +117,7 @@ func StartWorkers(queue chan *arn.User, work func(*arn.User)) {
 
 // Work handles a single user.
 func Work(user *arn.User) {
+	fmt.Println(user.ID, "|", user.Nick)
 	user.AvatarExtension = ""
 
 	for _, source := range avatarSources {
