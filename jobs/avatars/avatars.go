@@ -110,6 +110,7 @@ func StartWorkers(queue chan *arn.User, work func(*arn.User)) {
 		go func() {
 			for user := range queue {
 				work(user)
+				wg.Done()
 			}
 		}()
 	}
