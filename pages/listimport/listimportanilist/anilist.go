@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/anilist"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
@@ -49,7 +50,7 @@ func Finish(ctx *aero.Context) string {
 
 		item := &arn.AnimeListItem{
 			AnimeID:  match.ARNAnime.ID,
-			Status:   match.AniListItem.AnimeListStatus(),
+			Status:   arn.AniListAnimeListStatus(match.AniListItem),
 			Episodes: match.AniListItem.EpisodesWatched,
 			Notes:    match.AniListItem.Notes,
 			Rating: &arn.AnimeRating{
@@ -80,7 +81,7 @@ func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
 		return nil, ctx.Error(http.StatusBadRequest, "Not logged in", nil)
 	}
 
-	authErr := arn.AniList.Authorize()
+	authErr := anilist.Authorize()
 
 	if authErr != nil {
 		return nil, ctx.Error(http.StatusBadRequest, "Couldn't authorize the Anime Notifier app on AniList", authErr)
@@ -92,7 +93,7 @@ func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
 		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load notify.moe list of all anime", allErr)
 	}
 
-	anilistAnimeList, err := arn.AniList.GetAnimeList(user)
+	anilistAnimeList, err := anilist.GetAnimeList(user.Accounts.AniList.Nick)
 
 	if err != nil {
 		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
@@ -104,7 +105,7 @@ func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
 }
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.
-func findAllMatches(allAnime []*arn.Anime, animeList *arn.AniListAnimeList) []*arn.AniListMatch {
+func findAllMatches(allAnime []*arn.Anime, animeList *anilist.AnimeList) []*arn.AniListMatch {
 	matches := []*arn.AniListMatch{}
 
 	matches = importList(matches, allAnime, animeList.Lists.Watching)
@@ -113,7 +114,7 @@ func findAllMatches(allAnime []*arn.Anime, animeList *arn.AniListAnimeList) []*a
 	matches = importList(matches, allAnime, animeList.Lists.OnHold)
 	matches = importList(matches, allAnime, animeList.Lists.Dropped)
 
-	custom, ok := animeList.CustomLists.(map[string][]*arn.AniListAnimeListItem)
+	custom, ok := animeList.CustomLists.(map[string][]*anilist.AnimeListItem)
 
 	if !ok {
 		return matches
@@ -127,7 +128,7 @@ func findAllMatches(allAnime []*arn.Anime, animeList *arn.AniListAnimeList) []*a
 }
 
 // importList imports a single list inside an anilist anime list collection.
-func importList(matches []*arn.AniListMatch, allAnime []*arn.Anime, animeListItems []*arn.AniListAnimeListItem) []*arn.AniListMatch {
+func importList(matches []*arn.AniListMatch, allAnime []*arn.Anime, animeListItems []*anilist.AnimeListItem) []*arn.AniListMatch {
 	for _, item := range animeListItems {
 		matches = append(matches, &arn.AniListMatch{
 			AniListItem: item,

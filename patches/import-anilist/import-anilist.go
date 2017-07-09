@@ -3,19 +3,20 @@ package main
 import (
 	"fmt"
 
+	"github.com/animenotifier/anilist"
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
 
 func main() {
-	arn.PanicOnError(arn.AniList.Authorize())
-	color.Green(arn.AniList.AccessToken)
+	arn.PanicOnError(anilist.Authorize())
+	color.Green(anilist.AccessToken)
 
 	allAnime, err := arn.AllAnime()
 	arn.PanicOnError(err)
 
 	count := 0
-	stream := arn.AniList.StreamAnime()
+	stream := anilist.StreamAnime()
 
 	for aniListAnime := range stream {
 		anime := arn.FindAniListAnime(aniListAnime, allAnime)

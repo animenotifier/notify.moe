@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/animenotifier/anilist"
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
@@ -15,18 +16,18 @@ func init() {
 }
 
 func main() {
-	arn.PanicOnError(arn.AniList.Authorize())
-	println(arn.AniList.AccessToken)
+	arn.PanicOnError(anilist.Authorize())
+	println(anilist.AccessToken)
 
 	user, _ := arn.GetUserByNick(userName)
-	animeList, err := arn.AniList.GetAnimeList(user)
+	animeList, err := anilist.GetAnimeList(user.Accounts.AniList.Nick)
 	arn.PanicOnError(err)
 
 	importList(animeList.Lists.Watching)
 	importList(animeList.Lists.Completed)
 }
 
-func importList(animeListItems []*arn.AniListAnimeListItem) {
+func importList(animeListItems []*anilist.AnimeListItem) {
 	imported := []*arn.Anime{}
 
 	for _, item := range animeListItems {
