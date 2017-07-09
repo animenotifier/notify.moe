@@ -18,6 +18,7 @@
 .widget
 	vertical
 	margin-bottom content-padding
+	overflow hidden
 
 .widget-element
 	vertical-wrap
