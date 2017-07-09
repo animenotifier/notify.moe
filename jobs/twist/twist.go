@@ -2,7 +2,6 @@ package main
 
 import (
 	"sort"
-	"strconv"
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/twist"
@@ -28,9 +27,7 @@ func main() {
 
 		// Sort by episode number
 		sort.Slice(episodes, func(a, b int) bool {
-			epsA, _ := strconv.Atoi(episodes[a].Number)
-			epsB, _ := strconv.Atoi(episodes[b].Number)
-			return epsA < epsB
+			return episodes[a].Number < episodes[b].Number
 		})
 
 		arn.PrettyPrint(episodes)
