@@ -51,7 +51,7 @@ component Settings(user *arn.User)
 		
 		.widget.mountable
 			h3.widget-title
-				Icon("refresh")
+				Icon("download")
 				span Import
 			
 			ImportLists(user)
@@ -61,7 +61,8 @@ component Settings(user *arn.User)
 				Icon("puzzle-piece")
 				span Extensions
 			
-			.buttons
+			.widget-input
+				label Chrome Extension:
 				button.action(data-action="installExtension", data-trigger="click")
 					Icon("chrome")
 					span Get the Chrome Extension

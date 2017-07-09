@@ -1,5 +1,5 @@
 component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
-	.widgets.mountable
+	.widget-form.mountable
 		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/update/" + anime.ID)
 			h1= anime.Title.Canonical
 

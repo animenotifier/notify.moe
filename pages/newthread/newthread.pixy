@@ -1,5 +1,5 @@
 component NewThread(user *arn.User)
-	.widgets
+	.widget-form
 		.widget
 			input#title.widget-element(type="text", placeholder="Title")
 			
@@ -15,6 +15,7 @@ component NewThread(user *arn.User)
 				if user.Role == "admin"
 					option(value="update") Update
 			
-			button.action(data-action="createThread", data-trigger="click")
-				Icon("check")
-				span Create thread
+			.buttons
+				button.action(data-action="createThread", data-trigger="click")
+					Icon("check")
+					span Create thread

@@ -28,14 +28,14 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 					.widget-element-text
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
-
+		
 		.widget.mountable
-			h3.widget-title Groups
+			h3.widget-title Artworks
 
 			for i := 1; i <= 5; i++
 				.widget-element
 					.widget-element-text
-						Icon("group")
+						Icon("paint-brush")
 						span ...
 
 		.widget.mountable
@@ -52,7 +52,25 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 						.widget-element-text
 							Icon("music")
 							span ...
+		
+		.widget.mountable
+			h3.widget-title AMVs
 
+			for i := 1; i <= 5; i++
+				.widget-element
+					.widget-element-text
+						Icon("video-camera")
+						span ...
+		
+		.widget.mountable
+			h3.widget-title Groups
+
+			for i := 1; i <= 5; i++
+				.widget-element
+					.widget-element-text
+						Icon("group")
+						span ...
+		
 		.widget.mountable
 			h3.widget-title Contacts
 

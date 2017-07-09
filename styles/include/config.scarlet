@@ -67,4 +67,4 @@ typography-margin = 0.4rem
 // Timings
 fade-speed = 200ms
 transition-speed = 250ms
-mountable-transition-speed = 400ms
+mountable-transition-speed = 300ms

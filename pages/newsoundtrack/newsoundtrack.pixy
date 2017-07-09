@@ -1,5 +1,5 @@
 component NewSoundTrack(user *arn.User)
-	.widgets
+	.widget-form
 		.widget
 			h1 New soundtrack
 

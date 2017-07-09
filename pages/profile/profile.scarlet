@@ -87,7 +87,8 @@ profile-boot-duration = 2s
 	margin-bottom 1rem
 
 .no-data
-	text-align center
+	width 100%
+	text-align left
 
 // Categories
 

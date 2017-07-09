@@ -1,21 +1,23 @@
 .widgets
-	horizontal-wrap
-	justify-content space-around
+	display grid
+	grid-template-columns 1fr
+
+> 810px
+	.widgets
+		grid-template-columns repeat(2, 1fr)
+		grid-gap content-padding
+
+> 1240px
+	.widgets
+		grid-template-columns repeat(3, 1fr)
+
+> 1640px
+	.widgets
+		grid-template-columns repeat(4, 1fr)
 
 .widget
 	vertical
-	align-items center
-	width 100%
-	padding 0.25rem
-	max-width 400px
-
-> 1240px
-	.widget
-		max-width 30vw
-
-< 810px
-	.widget
-		max-width 600px
+	margin-bottom content-padding
 
 .widget-element
 	vertical-wrap
@@ -24,7 +26,7 @@
 	margin-bottom 1rem
 	padding 0.5rem 1rem
 	width 100%
-	max-width 700px
+	// max-width 700px
 
 .widget-element-text
 	horizontal
@@ -38,5 +40,13 @@
 	width 100%
 
 .widget-title
+	text-align left
+	padding-bottom 0.5rem
+	border-bottom 1px solid rgba(0, 0, 0, 0.1)
 	// We need !important here to overwrite the h3:first-child rule
 	margin 1rem 0 !important
+
+.widget-form
+	width 100%
+	max-width 650px
+	margin 0 auto

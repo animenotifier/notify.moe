@@ -1,13 +1,15 @@
 component ImportLists(user *arn.User)
-	.buttons.buttons-vertical
-		if user.Accounts.AniList.Nick != ""
-			.widget-input
-				a.button.mountable.ajax(href="/import/anilist/animelist")
-					Icon("download")
-					span Import AniList
-		
-		if user.Accounts.MyAnimeList.Nick != ""
-			.widget-input
-				a.button.mountable.ajax(href="/import/myanimelist/animelist")
-					Icon("download")
-					span Import MyAnimeList
+	if user.Accounts.AniList.Nick != ""
+		label AniList:
+
+		.widget-input
+			a.button.mountable.ajax(href="/import/anilist/animelist")
+				Icon("download")
+				span Import AniList
+	
+	if user.Accounts.MyAnimeList.Nick != ""
+		label MyAnimeList:
+		.widget-input
+			a.button.mountable.ajax(href="/import/myanimelist/animelist")
+				Icon("download")
+				span Import MyAnimeList

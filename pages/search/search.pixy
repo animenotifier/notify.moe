@@ -3,7 +3,10 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 
 	.widgets
 		.widget
-			h3 Users
+			h3.widget-title
+				Icon("user")
+				span Users
+			
 			.user-avatars.user-search
 				if len(users) == 0
 					p.no-data.mountable No users found.
@@ -14,7 +17,10 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 						//- a.ajax(href=user.Link())= user.Nick
 		
 		.widget
-			h3 Anime
+			h3.widget-title
+				Icon("tv")
+				span Anime
+			
 			.profile-watching-list.anime-search
 				if len(animeResults) == 0
 					p.no-data.mountable No anime found.
@@ -22,3 +28,17 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 					each anime in animeResults
 						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
 							img.anime-cover-image.anime-search-result(src=anime.Image.Tiny, alt=anime.Title.Canonical)
+		
+		.widget
+			h3.widget-title
+				Icon("comment")
+				span Forums
+			
+			p.no-data.mountable Forums search coming soon.
+		
+		.widget
+			h3.widget-title
+				Icon("music")
+				span Soundtracks
+			
+			p.no-data.mountable Soundtrack search coming soon.

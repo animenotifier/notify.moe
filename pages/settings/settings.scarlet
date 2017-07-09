@@ -1,2 +1,4 @@
-.social-account-button
-	margin-bottom 1rem
+.widget-input
+	button,
+	.button
+		margin-bottom 1rem
