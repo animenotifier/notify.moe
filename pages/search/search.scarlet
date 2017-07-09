@@ -1,3 +1,6 @@
 .anime-search-result
 	width 55px !important
 	height 78px !important
+
+.no-search-results
+	text-align left

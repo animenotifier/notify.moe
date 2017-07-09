@@ -9,7 +9,7 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 			
 			.user-avatars.user-search
 				if len(users) == 0
-					p.no-data.mountable No users found.
+					p.no-search-results.mountable No users found.
 				else
 					each user in users
 						.mountable(data-mountable-type="user")
@@ -23,7 +23,7 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 			
 			.profile-watching-list.anime-search
 				if len(animeResults) == 0
-					p.no-data.mountable No anime found.
+					p.no-search-results.mountable No anime found.
 				else
 					each anime in animeResults
 						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
@@ -34,11 +34,11 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 				Icon("comment")
 				span Forums
 			
-			p.no-data.mountable Forums search coming soon.
+			p.no-search-results.mountable Forums search coming soon.
 		
 		.widget
 			h3.widget-title
 				Icon("music")
 				span Soundtracks
 			
-			p.no-data.mountable Soundtrack search coming soon.
+			p.no-search-results.mountable Soundtrack search coming soon.

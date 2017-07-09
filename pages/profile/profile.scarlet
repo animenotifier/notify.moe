@@ -88,7 +88,7 @@ profile-boot-duration = 2s
 
 .no-data
 	width 100%
-	text-align left
+	text-align center
 
 // Categories
 
