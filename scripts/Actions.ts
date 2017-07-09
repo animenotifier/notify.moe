@@ -272,7 +272,7 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 			throw body
 		}
 		
-		return arn.app.load("/+" + userNick + "/animelist/watching")
+		return arn.app.load("/+" + userNick + "/animelist")
 	})
 	.catch(console.error)
 	.then(() => arn.loading(false))
