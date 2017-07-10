@@ -9,6 +9,11 @@
 	width 55px !important
 	height 78px !important
 	border-radius 2px
+	filter none
+	transition filter transition-speed ease
+	
+	:hover
+		filter saturate(1.3)
 
 // .status-tabs
 // 	position fixed

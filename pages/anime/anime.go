@@ -31,12 +31,12 @@ func Get(ctx *aero.Context) string {
 
 	episodesReversed := false
 
-	if len(anime.Episodes) > maxEpisodes {
+	if len(anime.Episodes().Items) > maxEpisodes {
 		episodesReversed = true
-		anime.Episodes = anime.Episodes[len(anime.Episodes)-maxEpisodesLongSeries:]
+		anime.Episodes().Items = anime.Episodes().Items[len(anime.Episodes().Items)-maxEpisodesLongSeries:]
 
-		for i, j := 0, len(anime.Episodes)-1; i < j; i, j = i+1, j-1 {
-			anime.Episodes[i], anime.Episodes[j] = anime.Episodes[j], anime.Episodes[i]
+		for i, j := 0, len(anime.Episodes().Items)-1; i < j; i, j = i+1, j-1 {
+			anime.Episodes().Items[i], anime.Episodes().Items[j] = anime.Episodes().Items[j], anime.Episodes().Items[i]
 		}
 	}
 

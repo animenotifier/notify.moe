@@ -147,20 +147,23 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 			each track in tracks
 				SoundTrack(track)
 	
-	if len(anime.Episodes) > 0
+	if len(anime.Episodes().Items) > 0
 		if episodesReversed
 			h3.anime-section-name Latest episodes
 		else
 			h3.anime-section-name Episodes
 		table.episodes
 			tbody
-				each episode in anime.Episodes
+				each episode in anime.Episodes().Items
 					tr.episode
 						td.episode-number= episode.Number
 						td.episode-title= episode.Title.Japanese
 						td.episode-actions
-							a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
-								RawIcon("google")
+							for name, link := range episode.Links
+								a(href=link, target="_blank", rel="noopener", title="Watch episode " + toString(episode.Number) + " on " + name)
+									RawIcon("eye")
+							//- a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
+							//- 	RawIcon("google")
 						td.episode-airing-date-start.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 
 	//- h3.anime-section-name Reviews

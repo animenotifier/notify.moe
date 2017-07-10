@@ -8,11 +8,8 @@
 .anime-list
 	vertical
 
-	tr
-		horizontal
-	
-	thead
-		display none
+.anime-list-item
+	horizontal
 
 .anime-list-item-name
 	flex 1
@@ -38,25 +35,16 @@
 	flex 0.4
 	opacity 0.5
 
-// .anime-list-item-episodes-edit
-// 	flex 0.5
+.anime-list-item-rating
+	text-align right
+
+.anime-list-item-actions
+	display none
+	flex-basis 30px
 
 // 	// Beautify icon alignment
 // 	.raw-icon
-// 		margin-bottom -2px
-
-.anime-list-item-rating
-	flex-basis 50px
-	text-align center
-
-.anime-list-item-actions
-	flex-basis 40px
-	text-align right
-	display none
-
-	// Beautify icon alignment
-	.raw-icon
-		margin-bottom -4px
+// 		margin-bottom -4px
 
 > 740px
 	.anime-list-item-actions
@@ -68,6 +56,8 @@
 > 700px
 	.anime-list-item-airing-date
 		display block
+		text-align right
+		flex-basis 100px
 
 < 1100px
 	.anime-list-item-rating

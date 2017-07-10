@@ -59,12 +59,12 @@ var routeTests = map[string][]string{
 		"/anime/1",
 	},
 
-	"/threads/:id": []string{
-		"/threads/HJgS7c2K",
+	"/thread/:id": []string{
+		"/thread/HJgS7c2K",
 	},
 
-	"/posts/:id": []string{
-		"/posts/B1RzshnK",
+	"/post/:id": []string{
+		"/post/B1RzshnK",
 	},
 
 	"/forum/:tag": []string{
