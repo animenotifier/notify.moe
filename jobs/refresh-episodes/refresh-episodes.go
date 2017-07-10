@@ -13,6 +13,7 @@ func main() {
 	color.Yellow("Refreshing episode information for each anime.")
 
 	highPriority := []*arn.Anime{}
+	mediumPriority := []*arn.Anime{}
 	lowPriority := []*arn.Anime{}
 
 	for anime := range arn.MustStreamAnime() {
@@ -20,15 +21,21 @@ func main() {
 			continue
 		}
 
-		if anime.Status == "current" || anime.Status == "upcoming" {
+		switch anime.Status {
+		case "current":
 			highPriority = append(highPriority, anime)
-		} else {
+		case "upcoming":
+			mediumPriority = append(mediumPriority, anime)
+		default:
 			lowPriority = append(lowPriority, anime)
 		}
 	}
 
 	color.Cyan("High priority queue:")
 	refresh(highPriority)
+
+	color.Cyan("Medium priority queue:")
+	refresh(mediumPriority)
 
 	color.Cyan("Low priority queue:")
 	refresh(lowPriority)
@@ -38,7 +45,8 @@ func main() {
 
 func refresh(queue []*arn.Anime) {
 	for _, anime := range queue {
-		episodeCount := len(anime.Episodes)
+		episodeCount := len(anime.Episodes().Items)
+		availableEpisodeCount := anime.Episodes().AvailableCount()
 
 		err := anime.RefreshEpisodes()
 
@@ -49,7 +57,7 @@ func refresh(queue []*arn.Anime) {
 
 			color.Red(err.Error())
 		} else {
-			fmt.Println(anime.ID, "|", anime.Title.Canonical, "+"+strconv.Itoa(len(anime.Episodes)-episodeCount))
+			fmt.Println(anime.ID, "|", anime.Title.Canonical, "|", "+"+strconv.Itoa(len(anime.Episodes().Items)-episodeCount)+" airing", "|", "+"+strconv.Itoa(anime.Episodes().AvailableCount()-availableEpisodeCount)+" available")
 		}
 	}
 }
