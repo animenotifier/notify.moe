@@ -136,6 +136,13 @@ func sync(data *kitsu.Anime) *arn.Anime {
 		status = color.RedString("✘")
 	}
 
+	// Episodes
+	episodes, err := arn.GetAnimeEpisodes(anime.ID)
+
+	if err != nil || episodes == nil {
+		anime.RefreshEpisodes()
+	}
+
 	// Log
 	fmt.Println(status, anime.ID, anime.Title.Canonical)
 
