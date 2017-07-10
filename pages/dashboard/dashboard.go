@@ -50,10 +50,6 @@ func dashboard(ctx *aero.Context) string {
 		animeList.PrefetchAnime()
 
 		for _, item := range animeList.Items {
-			if len(upcomingEpisodes) >= maxScheduleItems {
-				break
-			}
-
 			futureEpisodes := item.Anime().UpcomingEpisodes()
 
 			if len(futureEpisodes) == 0 {
@@ -66,6 +62,10 @@ func dashboard(ctx *aero.Context) string {
 		sort.Slice(upcomingEpisodes, func(i, j int) bool {
 			return upcomingEpisodes[i].Episode.AiringDate.Start < upcomingEpisodes[j].Episode.AiringDate.Start
 		})
+
+		if len(upcomingEpisodes) >= maxScheduleItems {
+			upcomingEpisodes = upcomingEpisodes[:maxScheduleItems]
+		}
 	}, func() {
 		var err error
 		soundTracks, err = arn.AllSoundTracks()
