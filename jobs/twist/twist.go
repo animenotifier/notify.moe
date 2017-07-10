@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"sort"
 	"strings"
 	"time"
 
@@ -48,10 +47,10 @@ func main() {
 
 		episodes := feed.Episodes
 
-		// Sort by episode number
-		sort.Slice(episodes, func(a, b int) bool {
-			return episodes[a].Number < episodes[b].Number
-		})
+		// // Sort by episode number
+		// sort.Slice(episodes, func(a, b int) bool {
+		// 	return episodes[a].Number < episodes[b].Number
+		// })
 
 		for _, episode := range episodes {
 			arnEpisode := anime.EpisodeByNumber(episode.Number)

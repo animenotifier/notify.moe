@@ -1,5 +1,5 @@
 component API(types []string)
-	h3 API
+	h1 API
 	
 	table
 		//- thead

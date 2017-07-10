@@ -1,4 +1,6 @@
 component NewThread(user *arn.User)
+	h1 New thread
+	
 	.widget-form
 		.widget
 			input#title.widget-element(type="text", placeholder="Title")

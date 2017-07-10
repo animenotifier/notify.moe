@@ -68,10 +68,6 @@ func sync(data *kitsu.Anime) *arn.Anime {
 		anime.Mappings = []*arn.Mapping{}
 	}
 
-	if anime.Episodes == nil {
-		anime.Episodes = []*arn.AnimeEpisode{}
-	}
-
 	// Prefer Shoboi Japanese titles over Kitsu JP titles
 	if anime.GetMapping("shoboi/anime") != "" {
 		// Only take Kitsu title when our JP title is empty

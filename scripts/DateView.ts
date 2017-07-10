@@ -60,6 +60,11 @@ function getRemainingTime(remaining: number): string {
 }
 
 export function displayAiringDate(element: HTMLElement, now: Date) {
+	if(element.dataset.startDate === "") {
+		element.innerText = ""
+		return
+	}
+
 	let startDate = new Date(element.dataset.startDate)
 	let endDate = new Date(element.dataset.endDate)
 
@@ -91,6 +96,11 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 }
 
 export function displayDate(element: HTMLElement, now: Date) {
+	if(element.dataset.date === "") {
+		element.innerText = ""
+		return
+	}
+
 	let startDate = new Date(element.dataset.date)
 
 	let h = startDate.getHours()
