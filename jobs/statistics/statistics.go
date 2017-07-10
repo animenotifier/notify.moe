@@ -99,6 +99,7 @@ func getAnimeStats() []*arn.PieChart {
 	malEdits := stats{}
 	anidbEdits := stats{}
 	rating := stats{}
+	twist := stats{}
 
 	for _, anime := range allAnime {
 		for _, external := range anime.Mappings {
@@ -169,6 +170,20 @@ func getAnimeStats() []*arn.PieChart {
 
 		rating[arn.ToString(int(anime.Rating.Overall+0.5))]++
 
+		found := false
+		for _, episode := range anime.Episodes().Items {
+			if episode.Links != nil && episode.Links["twist.moe"] != "" {
+				found = true
+				break
+			}
+		}
+
+		if found {
+			twist["Connected with AnimeTwist"]++
+		} else {
+			twist["Not connected with AnimeTwist"]++
+		}
+
 		status[anime.Status]++
 		types[anime.Type]++
 	}
@@ -183,6 +198,7 @@ func getAnimeStats() []*arn.PieChart {
 		arn.NewPieChart("AniList", anilist),
 		arn.NewPieChart("AniDB", anidb),
 		arn.NewPieChart("Shoboi", shoboi),
+		arn.NewPieChart("AnimeTwist", twist),
 		// arn.NewPieChart("MyAnimeList Editors", malEdits),
 		arn.NewPieChart("AniList Editors", anilistEdits),
 		// arn.NewPieChart("AniDB Editors", anidbEdits),
