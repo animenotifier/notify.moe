@@ -51,13 +51,6 @@ component Settings(user *arn.User)
 		
 		.widget.mountable
 			h3.widget-title
-				Icon("download")
-				span Import
-			
-			ImportLists(user)
-
-		.widget.mountable
-			h3.widget-title
 				Icon("puzzle-piece")
 				span Extensions
 			
@@ -66,6 +59,24 @@ component Settings(user *arn.User)
 				button.action(data-action="installExtension", data-trigger="click")
 					Icon("chrome")
 					span Get the Chrome Extension
+
+		.widget.mountable
+			h3.widget-title
+				Icon("download")
+				span Import
+			
+			ImportLists(user)
+
+		.widget.mountable
+			h3.widget-title
+				Icon("upload")
+				span Export
+			
+			.widget-input
+				label JSON:
+				a.button(href="/api/animelist/" + user.ID)
+					Icon("upload")
+					span Export anime list as JSON
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
