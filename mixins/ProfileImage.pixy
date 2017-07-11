@@ -1,6 +1,6 @@
 component ProfileImage(user *arn.User)
 	if user.HasAvatar()
-		img.profile-image.lazy(data-src=user.LargeAvatar(), data-webp="true", alt="Profile image")
+		img.profile-image.lazy(src="", data-src=user.LargeAvatar(), data-webp="true", alt="Profile image")
 	else
 		svg.profile-image(viewBox="0 0 50 50", alt="Profile image")
 			circle.head(cx="25", cy="19", r="10")
