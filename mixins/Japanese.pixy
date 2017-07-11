@@ -1,6 +1,6 @@
 component Japanese(text string)
 	if arn.ContainsUnicodeLetters(text)
-		for _, token := range arn.TokenizeJapanese(text)
+		for _, token := range japanese.Tokenize(text)
 			if token.NeedsFurigana()
 				a.japanese(href="http://jisho.org/search/" + token.Original, target="_blank", rel="noopener")
 					ruby(title=token.Romaji)= token.Original
