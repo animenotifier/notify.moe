@@ -7,5 +7,6 @@ component Japanese(text string)
 						rt.furigana= token.Hiragana
 			else
 				ruby.japanese(title=token.Romaji)= token.Original
+					rt.furigana
 	else
 		span.japanese= text
