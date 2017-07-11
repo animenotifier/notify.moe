@@ -15,27 +15,25 @@ var rateLimiter = time.NewTicker(500 * time.Millisecond)
 
 func main() {
 	// Replace this with ID list from twist.moe later
-	currentAnime, err := arn.FilterAnime(func(anime *arn.Anime) bool {
-		return anime.Status == "current"
-	})
+	twistAnime, err := twist.GetAnimeIndex()
 	arn.PanicOnError(err)
+	idList := twistAnime.KitsuIDs()
 
-	color.Yellow("Refreshing twist.moe links for %d anime", len(currentAnime))
+	color.Yellow("Refreshing twist.moe links for %d anime", len(idList))
 
-	for count, anime := range currentAnime {
+	for count, animeID := range idList {
 		// Wait for rate limiter
 		<-rateLimiter.C
 
-		// anime, animeErr := arn.GetAnime(animeID)
+		anime, animeErr := arn.GetAnime(animeID)
 
-		// if animeErr != nil {
-		// 	color.Red("Error fetching anime from the database with ID %s: %v", animeID, animeErr)
-		// 	continue
-		// }
-		animeID := anime.ID
+		if animeErr != nil {
+			color.Red("Error fetching anime from the database with ID %s: %v", animeID, animeErr)
+			continue
+		}
 
 		// Log
-		fmt.Fprintf(os.Stdout, "[%d / %d] ", count+1, len(currentAnime))
+		fmt.Fprintf(os.Stdout, "[%d / %d] ", count+1, len(idList))
 
 		// Get twist.moe feed
 		feed, err := twist.GetFeedByKitsuID(animeID)
