@@ -43,7 +43,8 @@
 	text-align left
 	font-weight normal
 	line-height content-line-height
-	a
+	
+	.japanese
 		color rgba(60, 60, 60, 0.5) !important
 
 .anime-actions

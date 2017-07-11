@@ -14,7 +14,7 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 			//- else
 			if anime.Title.Japanese != anime.Title.Canonical
 				h2.anime-alternative-title
-					a(href="http://jisho.org/search/" + anime.Title.Japanese, target="_blank", title="Look up reading on jisho.org", rel="nofollow")= anime.Title.Japanese
+					Japanese(anime.Title.Japanese)
 
 			//- h3.anime-section-name.anime-summary-header Summary
 			p.anime-summary= anime.Summary
@@ -161,7 +161,7 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 								span= episode.Number
 						td.episode-title
 							if episode.Title.Japanese != ""
-								span= episode.Title.Japanese
+								Japanese(episode.Title.Japanese)
 							else
 								span -
 						td.episode-actions

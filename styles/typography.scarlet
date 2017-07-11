@@ -28,3 +28,15 @@ p > img
 	border-radius 3px
 	display inherit
 	margin 0 auto
+
+.furigana
+	opacity 0.25
+	transition opacity transition-speed ease, transform transition-speed ease
+	transform translateY(0)
+
+.japanese
+	color text-color
+	:hover
+		.furigana
+			opacity 1
+			transform translateY(-2px)
