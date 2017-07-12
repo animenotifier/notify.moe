@@ -24,8 +24,21 @@
 	white-space nowrap
 	flex-basis 120px
 
+	:hover
+		.plus-episode
+			opacity 1
+
 .anime-list-item-episodes-watched
 	flex 0.4
+	horizontal
+	justify-content flex-end
+
+.plus-episode
+	display inline-block
+	cursor pointer
+	opacity 0
+	margin-left 1px
+	transition opacity transition-speed ease
 
 .anime-list-item-episodes-separator
 	flex 0.2
@@ -37,6 +50,7 @@
 
 .anime-list-item-rating
 	text-align right
+	flex-basis 70px
 
 .anime-list-item-actions
 	display none

@@ -36,8 +36,8 @@ component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, u
 	//- 	AnimeList(animeList, user)
 
 component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User)
-	table
-		tbody.anime-list
+	table.anime-list
+		tbody
 			each item in animeList.Items
 				tr.anime-list-item(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/update/" + item.AnimeID)
 					td.anime-list-item-name
@@ -58,6 +58,8 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 					td.anime-list-item-episodes
 						.anime-list-item-episodes-watched
 							.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
+							if item.Status == arn.AnimeListStatusWatching
+								.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
 						.anime-list-item-episodes-separator /
 						.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
 						//- .anime-list-item-episodes-edit
@@ -65,7 +67,7 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 						//- 		RawIcon("pencil")
 					
 					td.anime-list-item-rating(title="Overall rating")
-						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Overall)
+						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= utils.FormatRating(item.Rating.Overall)
 					//- td.anime-list-item-rating(title="Story rating")
 					//- 	.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Story", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Story)
 					//- td.anime-list-item-rating(title="Visuals rating")

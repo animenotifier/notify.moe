@@ -4,14 +4,14 @@ import { Diff } from "./Diff"
 import { findAll } from "./Utils"
 
 // Save new data from an input field
-export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaElement) {
+export function save(arn: AnimeNotifier, input: HTMLElement) {
 	arn.loading(true)
 
 	let isContentEditable = input.isContentEditable
 	let obj = {}
-	let value = isContentEditable ? input.innerText : input.value
+	let value = isContentEditable ? input.innerText : (input as HTMLInputElement).value
 	
-	if(input.type === "number" || input.dataset.type === "number") {
+	if((input as HTMLInputElement).type === "number" || input.dataset.type === "number") {
 		if(input.getAttribute("step") === "1" || input.dataset.step === "1") {
 			obj[input.dataset.field] = parseInt(value)
 		} else {
@@ -24,7 +24,7 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 	if(isContentEditable) {
 		input.contentEditable = "false"
 	} else {
-		input.disabled = true
+		(input as HTMLInputElement).disabled = true
 	}
 
 	let apiEndpoint = arn.findAPIEndpoint(input)
@@ -47,7 +47,7 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 		if(isContentEditable) {
 			input.contentEditable = "true"
 		} else {
-			input.disabled = false
+			(input as HTMLInputElement).disabled = false
 		}
 
 		return arn.reloadContent()
@@ -57,6 +57,14 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 // Close status message
 export function closeStatusMessage(arn: AnimeNotifier) {
 	arn.statusMessage.close()
+}
+
+// Increase episode
+export function increaseEpisode(arn: AnimeNotifier, element: HTMLElement) {
+	let prev = element.previousSibling as HTMLElement
+	let episodes = parseInt(prev.innerText)
+	prev.innerText = String(episodes + 1)
+	save(arn, prev)
 }
 
 // Load
@@ -271,7 +279,7 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 			throw body
 		}
 		
-		return arn.app.load("/+" + userNick + "/animelist")
+		return arn.app.load("/+" + userNick + "/animelist/" + (arn.app.find("Status") as HTMLSelectElement).value)
 	})
 	.catch(err => arn.statusMessage.showError(err))
 	.then(() => arn.loading(false))

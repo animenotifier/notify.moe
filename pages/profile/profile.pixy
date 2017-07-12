@@ -52,7 +52,7 @@ component ProfileNavigation(viewUser *arn.User, uri string)
 			Icon("th")
 			span.tab-text Anime
 
-		a.button.tab.action(href="/+" + viewUser.Nick + "/animelist", data-action="diff", data-trigger="click")
+		a.button.tab.action(href="/+" + viewUser.Nick + "/animelist/watching", data-action="diff", data-trigger="click")
 			Icon("list")
 			span.tab-text Collection
 
@@ -68,28 +68,29 @@ component ProfileNavigation(viewUser *arn.User, uri string)
 			Icon("music")
 			span.tab-text Tracks
 	
-	//- if strings.Contains(uri, "/animelist")
-	//- 	StatusTabs("/+" + viewUser.Nick + "/animelist")
+	if strings.Contains(uri, "/animelist")
+		hr
+		StatusTabs("/+" + viewUser.Nick + "/animelist")
 	
 component StatusTabs(urlPrefix string)
 	.buttons.tabs.status-tabs
-		a.button.status-tab.action(href=urlPrefix + "/watching", data-action="diff", data-trigger="click")
+		a.button.tab.status-tab.action(href=urlPrefix + "/watching", data-action="diff", data-trigger="click")
 			Icon("play")
 			span.tab-text Watching
 		
-		a.button.status-tab.action(href=urlPrefix + "/completed", data-action="diff", data-trigger="click")
+		a.button.tab.status-tab.action(href=urlPrefix + "/completed", data-action="diff", data-trigger="click")
 			Icon("check")
 			span.tab-text Completed
 
-		a.button.status-tab.action(href=urlPrefix + "/planned", data-action="diff", data-trigger="click")
+		a.button.tab.status-tab.action(href=urlPrefix + "/planned", data-action="diff", data-trigger="click")
 			Icon("forward")
 			span.tab-text Planned
 
-		a.button.status-tab.action(href=urlPrefix + "/hold", data-action="diff", data-trigger="click")
+		a.button.tab.status-tab.action(href=urlPrefix + "/hold", data-action="diff", data-trigger="click")
 			Icon("pause")
 			span.tab-text On Hold
 
-		a.button.status-tab.action(href=urlPrefix + "/dropped", data-action="diff", data-trigger="click")
+		a.button.tab.status-tab.action(href=urlPrefix + "/dropped", data-action="diff", data-trigger="click")
 			Icon("stop")
 			span.tab-text Dropped
 
@@ -101,8 +102,9 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 	else
 		.profile-watching-list.mountable
 			each item in animeList.Items
-				a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-					img.profile-watching-list-item-image.lazy(src="", data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
+				if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
+					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+						img.profile-watching-list-item-image.lazy(src="", data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 	
 	//- .profile-category.mountable
 	//- 	h3
