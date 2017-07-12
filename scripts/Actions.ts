@@ -40,7 +40,7 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 			throw body
 		}
 	})
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 	.then(() => {
 		arn.loading(false)
 
@@ -52,6 +52,11 @@ export function save(arn: AnimeNotifier, input: HTMLInputElement | HTMLTextAreaE
 
 		return arn.reloadContent()
 	})
+}
+
+// Close status message
+export function closeStatusMessage(arn: AnimeNotifier) {
+	arn.statusMessage.close()
 }
 
 // Load
@@ -112,7 +117,7 @@ export function savePost(arn: AnimeNotifier, element: HTMLElement) {
 
 	arn.post(apiEndpoint, updates)
 	.then(() => arn.reloadContent())
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 }
 
 // like
@@ -121,7 +126,7 @@ export function like(arn: AnimeNotifier, element: HTMLElement) {
 
 	arn.post(apiEndpoint + "/like", null)
 	.then(() => arn.reloadContent())
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 }
 
 // unlike
@@ -130,7 +135,7 @@ export function unlike(arn: AnimeNotifier, element: HTMLElement) {
 
 	arn.post(apiEndpoint + "/unlike", null)
 	.then(() => arn.reloadContent())
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 }
 
 // Forum reply
@@ -147,7 +152,7 @@ export function forumReply(arn: AnimeNotifier) {
 	arn.post("/api/new/post", post)
 	.then(() => arn.reloadContent())
 	.then(() => textarea.value = "")
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 }
 
 // Create thread
@@ -164,7 +169,7 @@ export function createThread(arn: AnimeNotifier) {
 
 	arn.post("/api/new/thread", thread)
 	.then(() => arn.app.load("/forum/" + thread.tags[0]))
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 }
 
 // Create soundtrack
@@ -180,15 +185,9 @@ export function createSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) 
 		tags: [anime.value, osu.value],
 	}
 
-	button.innerText = "Adding..."
-	button.disabled = true
-
 	arn.post("/api/new/soundtrack", soundtrack)
 	.then(() => arn.app.load("/music"))
-	.catch(err => {
-		console.error(err)
-		arn.reloadContent()
-	})
+	.catch(err => arn.statusMessage.showError(err))
 }
 
 // Search
@@ -250,7 +249,7 @@ export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
 		
 		return arn.reloadContent()
 	})
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 	.then(() => arn.loading(false))
 }
 
@@ -274,7 +273,7 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 		
 		return arn.app.load("/+" + userNick + "/animelist")
 	})
-	.catch(console.error)
+	.catch(err => arn.statusMessage.showError(err))
 	.then(() => arn.loading(false))
 }
 

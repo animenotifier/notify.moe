@@ -3,6 +3,7 @@ import { Diff } from "./Diff"
 import { displayAiringDate, displayDate } from "./DateView"
 import { findAll, delay, canUseWebP } from "./Utils"
 import { MutationQueue } from "./MutationQueue"
+import { StatusMessage } from "./StatusMessage"
 import * as actions from "./Actions"
 
 export class AnimeNotifier {
@@ -10,6 +11,7 @@ export class AnimeNotifier {
 	user: HTMLElement
 	title: string
 	webpEnabled: boolean
+	statusMessage: StatusMessage
 	visibilityObserver: IntersectionObserver
 
 	imageFound: MutationQueue
@@ -88,6 +90,12 @@ export class AnimeNotifier {
 		this.user = this.app.find("user")
 		this.app.content = this.app.find("content")
 		this.app.loading = this.app.find("loading")
+
+		// Status message
+		this.statusMessage = new StatusMessage(
+			this.app.find("status-message"),
+			this.app.find("status-message-text")
+		)
 
 		// Let's start
 		this.app.run()

@@ -1,40 +1,43 @@
 package main
 
-// This patch is disabled because it would be dangerous to run it accidentally.
+import (
+	"github.com/animenotifier/arn"
+	"github.com/fatih/color"
+)
 
 func main() {
-	// color.Yellow("Deleting private user data")
+	color.Yellow("Deleting private user data")
 
-	// // Get a stream of all users
-	// allUsers, err := arn.StreamUsers()
+	// Get a stream of all users
+	allUsers, err := arn.StreamUsers()
 
-	// if err != nil {
-	// 	panic(err)
-	// }
+	if err != nil {
+		panic(err)
+	}
 
-	// arn.DB.DeleteTable("EmailToUser")
-	// arn.DB.DeleteTable("GoogleToUser")
+	arn.DB.DeleteTable("EmailToUser")
+	arn.DB.DeleteTable("GoogleToUser")
 
-	// // Iterate over the stream
-	// count := 0
-	// for user := range allUsers {
-	// 	count++
-	// 	println(count, user.Nick)
+	// Iterate over the stream
+	count := 0
+	for user := range allUsers {
+		count++
+		println(count, user.Nick)
 
-	// 	// Delete private data
-	// 	user.Email = ""
-	// 	user.Gender = ""
-	// 	user.FirstName = ""
-	// 	user.LastName = ""
-	// 	user.IP = ""
-	// 	user.Accounts.Facebook.ID = ""
-	// 	user.Accounts.Google.ID = ""
-	// 	user.AgeRange = arn.UserAgeRange{}
-	// 	user.Location = arn.UserLocation{}
+		// Delete private data
+		user.Email = ""
+		user.Gender = ""
+		user.FirstName = ""
+		user.LastName = ""
+		user.IP = ""
+		user.Accounts.Facebook.ID = ""
+		user.Accounts.Google.ID = ""
+		user.AgeRange = arn.UserAgeRange{}
+		user.Location = arn.UserLocation{}
 
-	// 	// Save in DB
-	// 	user.Save()
-	// }
+		// Save in DB
+		user.Save()
+	}
 
-	// color.Green("Finished.")
+	color.Green("Finished.")
 }

@@ -1,0 +1,18 @@
+#status-message
+	horizontal
+	position fixed
+	bottom 0
+	left 0
+	width 100%
+	padding calc(content-padding / 2) content-padding
+
+#status-message-text
+	flex 1
+	text-align center
+
+.status-message-action
+	color white !important
+
+.error-message
+	color white
+	background-color hsl(0, 75%, 50%)

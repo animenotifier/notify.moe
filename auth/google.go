@@ -90,6 +90,10 @@ func InstallGoogleAuth(app *aero.Application) {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
 		}
 
+		if googleUser.Sub == "" {
+			return ctx.Error(http.StatusBadRequest, "Failed retrieving Google data", errors.New("Empty ID"))
+		}
+
 		// Change googlemail.com to gmail.com
 		googleUser.Email = strings.Replace(googleUser.Email, "googlemail.com", "gmail.com", 1)
 

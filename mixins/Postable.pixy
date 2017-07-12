@@ -33,18 +33,18 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 					if user.ID != post.Author().ID
 						if post.LikedBy(user.ID)
 							a.post-tool.post-unlike.action(id="unlike-" + post.ID(), title="Unlike", data-action="unlike", data-trigger="click")
-								RawIcon("thumbs-down")
+								Icon("thumbs-down")
 						else
 							a.post-tool.post-like.action(id="like-" + post.ID(), title="Like", data-action="like", data-trigger="click")
-								RawIcon("thumbs-up")
+								Icon("thumbs-up")
 
 					if user.ID == post.Author().ID
 						a.post-tool.post-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID(), title="Edit")
-							RawIcon("pencil")
+							Icon("pencil")
 
 				if post.Type() != "Thread"
 					a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")
-						RawIcon("link")
+						Icon("link")
 
 				//- if type === "Messages" && user && (user.ID === post.authorId || user.ID === post.recipientId)
 				//- 	a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this ${typeSingular.toLowerCase()} from ${post.author.nick}?")) $.delete${typeSingular}("${post.ID}")`, title="Delete")

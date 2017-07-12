@@ -24,5 +24,5 @@ func Icon(name string) string {
 
 // RawIcon ...
 func RawIcon(name string) string {
-	return strings.Replace(svgIcons[name], "class='icon'", "class='raw-icon'", 1)
+	return strings.Replace(svgIcons[name], "class='icon", "class='raw-icon", 1)
 }
