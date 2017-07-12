@@ -183,6 +183,8 @@ var routeTests = map[string][]string{
 	"/import/anilist/animelist/finish":     nil,
 	"/import/myanimelist/animelist":        nil,
 	"/import/myanimelist/animelist/finish": nil,
+	"/import/kitsu/animelist":              nil,
+	"/import/kitsu/animelist/finish":       nil,
 	"/anime/:id/edit":                      nil,
 	"/new/thread":                          nil,
 	"/new/soundtrack":                      nil,
