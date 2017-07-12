@@ -18,6 +18,11 @@ func main() {
 	arn.PanicOnError(err)
 	idList := twistAnime.KitsuIDs()
 
+	// Save index in cache
+	arn.PanicOnError(arn.DB.Set("Cache", "animetwist index", &arn.ListOfIDs{
+		IDList: idList,
+	}))
+
 	color.Yellow("Refreshing twist.moe links for %d anime", len(idList))
 
 	for count, animeID := range idList {
