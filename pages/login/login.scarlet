@@ -5,7 +5,7 @@
 
 .login-button
 	padding 0.5rem
+	color white
 
-.login-button-image
-	max-width 236px
-	max-height 44px
+	:hover
+		color white

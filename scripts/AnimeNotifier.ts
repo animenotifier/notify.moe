@@ -99,6 +99,9 @@ export class AnimeNotifier {
 
 		// Let"s start
 		this.app.run()
+
+		// Service worker
+		this.registerServiceWorker()
 	}
 
 	onContentLoaded() {
@@ -123,18 +126,50 @@ export class AnimeNotifier {
 	}
 
 	onIdle() {
-		this.registerServiceWorker()
 		this.pushAnalytics()
 	}
 
 	registerServiceWorker() {
+		if(!("serviceWorker" in navigator)) {
+			return
+		}
+
 		navigator.serviceWorker.register("service-worker", {
 			scope: "./"
+		}).then(registration => {
+			registration.update()
 		})
 
-		// navigator.serviceWorker.ready.then(() => {
-		// 	console.log("Service worker registered.")
-		// })
+		navigator.serviceWorker.onmessage = evt => {
+			this.onServiceWorkerMessage(evt)
+		}
+	}
+
+	onServiceWorkerMessage(evt: ServiceWorkerMessageEvent) {
+		let message = JSON.parse(evt.data)
+		console.log(message.url, this.app.eTag, message.eTag)
+
+		switch(message.type) {
+			case "content changed":
+				// If we don't have an etag it means it was a full page refresh.
+				// In this case we don't need to reload anything.
+				if(!this.app.eTag) {
+					this.app.eTag = message.eTag
+					return
+				}
+
+				if(this.app.eTag !== message.eTag) {
+					if(message.url.includes("/_/")) {
+						// Content reload
+						this.reloadContent()
+					} else {
+						// Full page reload
+						this.reloadPage()
+					}
+				}
+				
+				break
+		}
 	}
 
 	pushAnalytics() {
@@ -185,11 +220,36 @@ export class AnimeNotifier {
 	}
 
 	reloadContent() {
+		let headers = new Headers()
+		headers.append("X-Reload", "true")
+
 		return fetch("/_" + this.app.currentPath, {
-			credentials: "same-origin"
+			credentials: "same-origin",
+			headers
+		})
+		.then(response => {
+			this.app.eTag = response.headers.get("ETag")
+			return response
 		})
 		.then(response => response.text())
 		.then(html => Diff.innerHTML(this.app.content, html))
+		.then(() => this.app.emit("DOMContentLoaded"))
+	}
+
+	reloadPage() {
+		let headers = new Headers()
+		headers.append("X-Reload", "true")
+
+		return fetch(this.app.currentPath, {
+			credentials: "same-origin",
+			headers
+		})
+		.then(response => {
+			this.app.eTag = response.headers.get("ETag")
+			return response
+		})
+		.then(response => response.text())
+		.then(html => Diff.innerHTML(document.body, html))
 		.then(() => this.app.emit("DOMContentLoaded"))
 	}
 
