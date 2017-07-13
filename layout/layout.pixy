@@ -33,7 +33,7 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 component StatusMessage
 	#status-message.fade.fade-out
 		#status-message-text
-		a.status-message-action.action(href="#", data-trigger="click", data-action="closeStatusMessage")
+		a.status-message-action.action(href="#", data-trigger="click", data-action="closeStatusMessage", aria-label="Close status message")
 			RawIcon("close")
 
 component LoadingAnimation

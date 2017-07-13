@@ -97,7 +97,7 @@ export class AnimeNotifier {
 			this.app.find("status-message-text")
 		)
 
-		// Let's start
+		// Let"s start
 		this.app.run()
 	}
 
@@ -123,6 +123,21 @@ export class AnimeNotifier {
 	}
 
 	onIdle() {
+		this.registerServiceWorker()
+		this.pushAnalytics()
+	}
+
+	registerServiceWorker() {
+		navigator.serviceWorker.register("service-worker", {
+			scope: "/"
+		})
+
+		navigator.serviceWorker.ready.then(() => {
+			console.log("Service worker registered.")
+		})
+	}
+
+	pushAnalytics() {
 		if(!this.user) {
 			return
 		}

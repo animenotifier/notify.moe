@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io/ioutil"
 	"strings"
 
 	"github.com/aerogo/aero"
@@ -10,6 +11,12 @@ import (
 func init() {
 	// Scripts
 	scripts := js.Bundle()
+	serviceWorkerBytes, err := ioutil.ReadFile("sw/service-worker.js")
+	serviceWorker := string(serviceWorkerBytes)
+
+	if err != nil {
+		panic("Couldn't load service worker")
+	}
 
 	app.Get("/scripts", func(ctx *aero.Context) string {
 		ctx.SetResponseHeader("Content-Type", "application/javascript")
@@ -19,6 +26,11 @@ func init() {
 	app.Get("/scripts.js", func(ctx *aero.Context) string {
 		ctx.SetResponseHeader("Content-Type", "application/javascript")
 		return scripts
+	})
+
+	app.Get("/service-worker", func(ctx *aero.Context) string {
+		ctx.SetResponseHeader("Content-Type", "application/javascript")
+		return serviceWorker
 	})
 
 	// Web manifest
