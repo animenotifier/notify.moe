@@ -19,6 +19,6 @@
 	.episode-airing-date-start
 		display none
 
-< 500px
+< 320px
 	.episode-actions
 		display none
