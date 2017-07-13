@@ -5,8 +5,12 @@
 	vertical
 	align-items center
 	margin 0.5rem
+	default-transition
+	transform scale(1)
 
 	:hover
+		transform scale(1.05)
+
 		.character-name
 			opacity 1
 
@@ -15,10 +19,10 @@
 	object-fit cover
 
 .character-name
-	font-size 0.8rem
+	font-size 0.75rem
 	color text-color
 	opacity 0.5
-	default-transition
+	transition opacity transition-speed ease
 
 .character-image
 	width 112px
