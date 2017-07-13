@@ -39,7 +39,7 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 	table.anime-list
 		tbody
 			each item in animeList.Items
-				tr.anime-list-item(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/update/" + item.AnimeID)
+				tr.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/update/" + item.AnimeID)
 					td.anime-list-item-name
 						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
 					
