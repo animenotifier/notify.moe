@@ -206,10 +206,12 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 
 	let term = search.value
 
+	arn.app.currentPath = "/search/" + term
+
 	if(window.location.pathname.startsWith("/search/")) {
-		history.replaceState("search", null, "/search/" + term)
+		history.replaceState("search", null, arn.app.currentPath)
 	} else {
-		history.pushState("search", null, "/search/" + term)
+		history.pushState("search", null, arn.app.currentPath)
 	}
 
 	if(!term || term.length < 2) {
@@ -217,24 +219,7 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 		return
 	}
 
-	var results = arn.app.find("results")
-
-	if(!results) {
-		results = document.createElement("div")
-		results.id = "results"
-		arn.app.content.innerHTML = ""
-		arn.app.content.appendChild(results)
-	}
-
-	arn.app.get("/_/search/" + term)
-	.then(html => {
-		if(!search.value) {
-			return
-		}
-
-		Diff.innerHTML(results, html)
-		arn.app.emit("DOMContentLoaded")
-	})
+	arn.reloadContent()
 }
 
 // Add anime to collection
