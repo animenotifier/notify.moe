@@ -129,12 +129,12 @@ export class AnimeNotifier {
 
 	registerServiceWorker() {
 		navigator.serviceWorker.register("service-worker", {
-			scope: "/"
+			scope: "./"
 		})
 
-		navigator.serviceWorker.ready.then(() => {
-			console.log("Service worker registered.")
-		})
+		// navigator.serviceWorker.ready.then(() => {
+		// 	console.log("Service worker registered.")
+		// })
 	}
 
 	pushAnalytics() {

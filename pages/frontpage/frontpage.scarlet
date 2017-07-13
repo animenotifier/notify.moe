@@ -39,6 +39,30 @@
 	width auto
 	height auto
 	z-index -100
+	background rgb(32, 32, 32)
+
+.login-button
+	horizontal
+	align-items center
+	border-radius 3px
+	padding 0.75rem 1.25rem
+	margin 0.5rem
+	font-size 1.2rem
+	text-shadow none !important
+	box-shadow shadow-medium
+	default-transition
+
+.login-button-google
+	background hsl(8, 75%, 43%)
+
+	:hover
+		background hsl(8, 75%, 48%)
+
+.login-button-facebook
+	background hsl(222, 67%, 42%)
+
+	:hover
+		background hsl(222, 67%, 47%)
 
 .screenshot
 	max-width 100%
