@@ -11,9 +11,10 @@ import (
 func main() {
 	color.Yellow("Refreshing anime characters...")
 
+	allAnime, _ := arn.AllAnime()
 	rateLimiter := time.NewTicker(500 * time.Millisecond)
 
-	for anime := range arn.MustStreamAnime() {
+	for _, anime := range allAnime {
 		<-rateLimiter.C
 
 		chars, err := anime.RefreshAnimeCharacters()

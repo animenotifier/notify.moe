@@ -96,8 +96,10 @@ func main() {
 	usersQueue := make(chan *arn.User, runtime.NumCPU())
 	StartWorkers(usersQueue, Work)
 
+	allUsers, _ := arn.AllUsers()
+
 	// We'll send each user to one of the worker threads
-	for user := range arn.MustStreamUsers() {
+	for _, user := range allUsers {
 		wg.Add(1)
 		usersQueue <- user
 	}
