@@ -35,5 +35,8 @@ img
 .hidden
 	display none !important
 
+.text-center
+	text-align center
+
 .spacer
 	flex 1
