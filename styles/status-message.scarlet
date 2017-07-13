@@ -5,6 +5,7 @@
 	left 0
 	width 100%
 	padding calc(content-padding / 2) content-padding
+	pointer-events none
 
 #status-message-text
 	flex 1
