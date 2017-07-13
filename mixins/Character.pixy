@@ -1,0 +1,4 @@
+component Character(character *arn.Character)
+	a.character(href="#")
+		img.character-image.lazy(src="", data-src=character.Image, alt=character.Name, title=character.Name)
+		span.character-name= character.Name

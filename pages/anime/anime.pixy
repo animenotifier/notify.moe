@@ -147,6 +147,13 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 			each track in tracks
 				SoundTrack(track)
 	
+	if anime.Characters() != nil && len(anime.Characters().Items) > 0
+		h3.anime-section-name Characters
+		.characters
+			each character in anime.Characters().Items
+				if character.Character() != nil
+					Character(character.Character())
+	
 	if len(anime.Episodes().Items) > 0
 		if episodesReversed
 			h3.anime-section-name Latest episodes
