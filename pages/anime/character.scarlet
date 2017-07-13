@@ -16,6 +16,7 @@
 
 .character-image
 	border-radius 3px
+	box-shadow shadow-medium
 	object-fit cover
 
 .character-name

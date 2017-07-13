@@ -75,8 +75,8 @@ var routeTests = map[string][]string{
 		"/search/Dragon Ball",
 	},
 
-	"/tracks/:id": []string{
-		"/tracks/h0ac8sKkg",
+	"/track/:id": []string{
+		"/track/h0ac8sKkg",
 	},
 
 	// API

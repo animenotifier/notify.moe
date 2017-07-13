@@ -1,4 +1,4 @@
-package tracks
+package character
 
 import (
 	"net/http"
@@ -8,14 +8,14 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get track.
+// Get character.
 func Get(ctx *aero.Context) string {
 	id := ctx.Get("id")
-	track, err := arn.GetSoundTrack(id)
+	character, err := arn.GetCharacter(id)
 
 	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Track not found", err)
+		return ctx.Error(http.StatusNotFound, "Character not found", err)
 	}
 
-	return ctx.HTML(components.Track(track))
+	return ctx.HTML(components.CharacterDetails(character))
 }

@@ -18,7 +18,7 @@ func main() {
 			ID:          kitsuCharacter.ID,
 			Name:        kitsuCharacter.Attributes.Name,
 			Image:       kitsu.FixImageURL(kitsuCharacter.Attributes.Image.Original),
-			Description: kitsuCharacter.Attributes.Description,
+			Description: arn.FixAnimeDescription(kitsuCharacter.Attributes.Description),
 		}
 
 		fmt.Printf("%s %s\n", character.ID, character.Name)

@@ -15,6 +15,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/apiview"
 	"github.com/animenotifier/notify.moe/pages/best"
+	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editor"
@@ -74,7 +75,8 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/thread/:id", threads.Get)
 	app.Ajax("/post/:id", posts.Get)
-	app.Ajax("/tracks/:id", tracks.Get)
+	app.Ajax("/track/:id", tracks.Get)
+	app.Ajax("/character/:id", character.Get)
 	app.Ajax("/new/thread", newthread.Get)
 	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/settings", settings.Get)
