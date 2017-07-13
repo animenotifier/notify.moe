@@ -26,7 +26,7 @@ self.addEventListener("fetch", async (evt: any) => {
 	}
 
 	// Do not use cache in some cases
-	if(request.method !== "GET" || isAuth || request.url.includes("chrome-extension")) {
+	if(request.method !== "GET" || isAuth) {
 		return evt.waitUntil(evt.respondWith(fetch(request)))
 	}
 

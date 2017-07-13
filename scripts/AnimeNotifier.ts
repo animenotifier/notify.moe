@@ -134,9 +134,7 @@ export class AnimeNotifier {
 			return
 		}
 
-		navigator.serviceWorker.register("service-worker", {
-			scope: "./"
-		}).then(registration => {
+		navigator.serviceWorker.register("/service-worker").then(registration => {
 			registration.update()
 		})
 
@@ -409,7 +407,7 @@ export class AnimeNotifier {
 	}
 
 	diff(url: string) {
-		if(url == this.app.currentPath) {
+		if(url === this.app.currentPath) {
 			return Promise.reject(null)
 		}
 

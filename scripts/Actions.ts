@@ -206,20 +206,12 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 
 	let term = search.value
 
-	arn.app.currentPath = "/search/" + term
-
-	if(window.location.pathname.startsWith("/search/")) {
-		history.replaceState("search", null, arn.app.currentPath)
-	} else {
-		history.pushState("search", null, arn.app.currentPath)
-	}
-
 	if(!term || term.length < 2) {
 		arn.app.content.innerHTML = "Please enter at least 2 characters to start searching."
 		return
 	}
 
-	arn.reloadContent()
+	arn.diff("/search/" + term)
 }
 
 // Add anime to collection
