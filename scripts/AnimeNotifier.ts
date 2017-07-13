@@ -223,13 +223,19 @@ export class AnimeNotifier {
 		let headers = new Headers()
 		headers.append("X-Reload", "true")
 
-		return fetch("/_" + this.app.currentPath, {
+		let path = this.app.currentPath
+
+		return fetch("/_" + path, {
 			credentials: "same-origin",
 			headers
 		})
 		.then(response => {
+			if(this.app.currentPath !== path) {
+				return Promise.reject("old request")
+			}
+
 			this.app.eTag = response.headers.get("ETag")
-			return response
+			return Promise.resolve(response)
 		})
 		.then(response => response.text())
 		.then(html => Diff.innerHTML(this.app.content, html))
