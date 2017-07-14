@@ -3,6 +3,7 @@
 const CACHE = "v-1"
 const RELOADS = new Map<string, Promise<Response>>()
 const ETAGS = new Map<string, string>()
+const CACHEREFRESH = new Map<string, Promise<void>>()
 
 self.addEventListener("install", (evt: InstallEvent) => {
 	console.log("Service worker install")
@@ -72,7 +73,15 @@ self.addEventListener("message", (evt: any) => {
 				url
 			}
 
-			return evt.source.postMessage(JSON.stringify(message))
+			let cacheRefresh = CACHEREFRESH.get(url)
+
+			if(!cacheRefresh) {
+				return evt.source.postMessage(JSON.stringify(message))
+			}
+
+			return cacheRefresh.then(() => {
+				evt.source.postMessage(JSON.stringify(message))
+			})
 		})
 	)
 })
@@ -99,9 +108,11 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 		let clone = response.clone()
 
 		// Save the new version of the resource in the cache
-		caches.open(CACHE).then(cache => {
+		let cacheRefresh = caches.open(CACHE).then(cache => {
 			return cache.put(request, clone)
 		})
+
+		CACHEREFRESH.set(request.url, cacheRefresh)
 
 		return response
 	})
