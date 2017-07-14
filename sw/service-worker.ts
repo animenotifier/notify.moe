@@ -17,8 +17,25 @@ self.addEventListener("install", (evt: InstallEvent) => {
 self.addEventListener("activate", (evt: any) => {
 	console.log("Service worker activate")
 
+	// Delete old cache
+	let cacheWhitelist = [CACHE]
+
+	let deleteOldCache = caches.keys().then(keyList => {
+		return Promise.all(keyList.map(key => {
+			if(cacheWhitelist.indexOf(key) === -1) {
+				return caches.delete(key)
+			}
+		}))
+	})
+
+	let immediateClaim = (self as any).clients.claim()
+
+	// Immediate claim
 	evt.waitUntil(
-		(self as any).clients.claim()
+		Promise.all([
+			deleteOldCache,
+			immediateClaim
+		])
 	)
 })
 
@@ -111,11 +128,13 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 })
 
 self.addEventListener("push", (evt: PushEvent) => {
-	var payload = evt.data ? evt.data.text() : "no payload"
+	var payload = evt.data ? evt.data.json() : {}
 
 	evt.waitUntil(
-		(self as any).registration.showNotification("beta.notify.moe Service Worker", {
-			body: payload
+		(self as any).registration.showNotification(payload.title, {
+			body: payload.message,
+			icon: payload.icon,
+			image: payload.image
 		})
 	)
 })

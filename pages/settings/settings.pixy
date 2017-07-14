@@ -26,19 +26,19 @@ component Settings(user *arn.User)
 				Icon("bell")
 				span Notifications
 			
-			.widget-input
+			#enable-notifications.widget-input
 				label Enable:
 				button.action(data-action="enableNotifications", data-trigger="click")
-					Icon("toggle-on")
+					Icon("toggle-off")
 					span Enable notifications
 
-			.widget-input
+			#disable-notifications.widget-input
 				label Disable:
 				button.action(data-action="disableNotifications", data-trigger="click")
-					Icon("toggle-off")
+					Icon("toggle-on")
 					span Disable notifications
 
-			.widget-input
+			#test-notification.widget-input
 				label Test:
 				button.action(data-action="testNotification", data-trigger="click")
 					Icon("paper-plane")

@@ -111,7 +111,7 @@ export class AnimeNotifier {
 		this.pushManager = new PushManager()
 	}
 
-	onContentLoaded() {
+	async onContentLoaded() {
 		// Stop watching all the objects from the previous page.
 		this.visibilityObserver.disconnect()
 		
@@ -120,9 +120,11 @@ export class AnimeNotifier {
 			Promise.resolve().then(() => this.lazyLoadImages()),
 			Promise.resolve().then(() => this.displayLocalDates()),
 			Promise.resolve().then(() => this.setSelectBoxValue()),
-			Promise.resolve().then(() => this.assignActions())
+			Promise.resolve().then(() => this.assignActions()),
+			Promise.resolve().then(() => this.updatePushUI())
 		])
 
+		// Apply page title
 		let headers = document.getElementsByTagName("h1")
 
 		if(this.app.currentPath === "/" || headers.length === 0) {
@@ -131,6 +133,22 @@ export class AnimeNotifier {
 			}
 		} else {
 			document.title = headers[0].innerText
+		}
+	}
+
+	async updatePushUI() {
+		if(!this.pushManager.pushSupported) {
+			return
+		}
+		
+		let subscription = await this.pushManager.subscription()
+
+		if(subscription) {
+			this.app.find("enable-notifications").style.display = "none"
+			this.app.find("disable-notifications").style.display = "flex"
+		} else {
+			this.app.find("enable-notifications").style.display = "flex"
+			this.app.find("disable-notifications").style.display = "none"
 		}
 	}
 

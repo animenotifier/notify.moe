@@ -1,10 +1,10 @@
 package notifications
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
@@ -16,13 +16,13 @@ func Test(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
 	}
 
-	for _, sub := range user.PushSubscriptions().Items {
-		err := sub.SendNotification("Yay, it works!")
-
-		if err != nil {
-			fmt.Println(err)
-		}
+	notification := &arn.Notification{
+		Title:   "Anime Notifier",
+		Message: "Yay, it works!",
+		Icon:    "https://" + ctx.App.Config.Domain + "/images/brand/300",
 	}
+
+	user.SendNotification(notification)
 
 	return "ok"
 }

@@ -5,6 +5,21 @@ export class PushManager {
 		this.pushSupported = ("serviceWorker" in navigator) && ("PushManager" in window)
 	}
 
+	async subscription(): Promise<PushSubscription> {
+		if(!this.pushSupported) {
+			return Promise.resolve(null)
+		}
+
+		let registration = await navigator.serviceWorker.ready
+		let subscription = await registration.pushManager.getSubscription()
+
+		if(subscription) {
+			return Promise.resolve(subscription)
+		}
+
+		return Promise.resolve(null)
+	}
+
 	async subscribe(userId: string) {
 		if(!this.pushSupported) {
 			return
@@ -59,6 +74,7 @@ export class PushManager {
 			p256dh: key,
 			auth: secret,
 			platform: navigator.platform,
+			userAgent: navigator.userAgent,
 			screen: {
 				width: window.screen.width,
 				height: window.screen.height

@@ -185,6 +185,7 @@ var routeTests = map[string][]string{
 	"/import/myanimelist/animelist/finish": nil,
 	"/import/kitsu/animelist":              nil,
 	"/import/kitsu/animelist/finish":       nil,
+	"/api/test/notification":               nil,
 	"/anime/:id/edit":                      nil,
 	"/new/thread":                          nil,
 	"/new/soundtrack":                      nil,

@@ -215,13 +215,15 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 }
 
 // Enable notifications
-export function enableNotifications(arn: AnimeNotifier, button: HTMLElement) {
-	arn.pushManager.subscribe(arn.user.dataset.id)
+export async function enableNotifications(arn: AnimeNotifier, button: HTMLElement) {
+	await arn.pushManager.subscribe(arn.user.dataset.id)
+	arn.updatePushUI()
 }
 
 // Disable notifications
-export function disableNotifications(arn: AnimeNotifier, button: HTMLElement) {
-	arn.pushManager.unsubscribe(arn.user.dataset.id)
+export async function disableNotifications(arn: AnimeNotifier, button: HTMLElement) {
+	await arn.pushManager.unsubscribe(arn.user.dataset.id)
+	arn.updatePushUI()
 }
 
 // Test notification
