@@ -11,6 +11,7 @@ export class AnimeNotifier {
 	user: HTMLElement
 	title: string
 	webpEnabled: boolean
+	contentLoadedActions: Promise<any>
 	statusMessage: StatusMessage
 	visibilityObserver: IntersectionObserver
 
@@ -58,6 +59,7 @@ export class AnimeNotifier {
 		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
 		window.addEventListener("popstate", this.onPopState.bind(this))
 
+		// Idle
 		this.requestIdleCallback(this.onIdle.bind(this))
 	}
 
@@ -108,11 +110,13 @@ export class AnimeNotifier {
 		// Stop watching all the objects from the previous page.
 		this.visibilityObserver.disconnect()
 		
-		Promise.resolve().then(() => this.mountMountables()),
-		Promise.resolve().then(() => this.lazyLoadImages()),
-		Promise.resolve().then(() => this.displayLocalDates()),
-		Promise.resolve().then(() => this.setSelectBoxValue()),
-		Promise.resolve().then(() => this.assignActions())
+		this.contentLoadedActions = Promise.all([
+			Promise.resolve().then(() => this.mountMountables()),
+			Promise.resolve().then(() => this.lazyLoadImages()),
+			Promise.resolve().then(() => this.displayLocalDates()),
+			Promise.resolve().then(() => this.setSelectBoxValue()),
+			Promise.resolve().then(() => this.assignActions())
+		])
 
 		let headers = document.getElementsByTagName("h1")
 
@@ -138,32 +142,45 @@ export class AnimeNotifier {
 			registration.update()
 		})
 
-		navigator.serviceWorker.onmessage = evt => {
+		navigator.serviceWorker.addEventListener("message", evt => {
 			this.onServiceWorkerMessage(evt)
-		}
+		})
+
+		document.addEventListener("DOMContentLoaded", () => {
+			if(!navigator.serviceWorker.controller) {
+				return
+			}
+
+			let message = {
+				type: "loaded",
+				url: ""
+			}
+
+			if(this.app.lastRequest) {
+				message.url = this.app.lastRequest.responseURL
+			} else {
+				message.url = window.location.href
+			}
+
+			navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
+		})
 	}
 
 	onServiceWorkerMessage(evt: ServiceWorkerMessageEvent) {
 		let message = JSON.parse(evt.data)
-		console.log(message.url, this.app.eTag, message.eTag)
 
 		switch(message.type) {
-			case "content changed":
-				// If we don't have an etag it means it was a full page refresh.
-				// In this case we don't need to reload anything.
-				if(!this.app.eTag) {
-					this.app.eTag = message.eTag
-					return
-				}
-
-				if(this.app.eTag !== message.eTag) {
-					if(message.url.includes("/_/")) {
-						// Content reload
+			case "new content":
+				if(message.url.includes("/_/")) {
+					// Content reload
+					this.contentLoadedActions.then(() => {
 						this.reloadContent()
-					} else {
-						// Full page reload
+					})
+				} else {
+					// Full page reload
+					this.contentLoadedActions.then(() => {
 						this.reloadPage()
-					}
+					})
 				}
 				
 				break
@@ -241,20 +258,7 @@ export class AnimeNotifier {
 	}
 
 	reloadPage() {
-		let headers = new Headers()
-		headers.append("X-Reload", "true")
-
-		return fetch(this.app.currentPath, {
-			credentials: "same-origin",
-			headers
-		})
-		.then(response => {
-			this.app.eTag = response.headers.get("ETag")
-			return response
-		})
-		.then(response => response.text())
-		.then(html => Diff.innerHTML(document.body, html))
-		.then(() => this.app.emit("DOMContentLoaded"))
+		location.reload()
 	}
 
 	loading(isLoading: boolean) {
@@ -414,7 +418,10 @@ export class AnimeNotifier {
 		let request = fetch("/_" + url, {
 			credentials: "same-origin"
 		})
-		.then(response => response.text())
+		.then(response => {
+			this.app.eTag = response.headers.get("ETag")
+			return response.text()
+		})
 		
 		history.pushState(url, null, url)
 		this.app.currentPath = url
