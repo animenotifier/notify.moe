@@ -4,7 +4,7 @@ const CACHE = "v-1"
 const RELOADS = new Map<string, Promise<Response>>()
 const ETAGS = new Map<string, string>()
 
-self.addEventListener("install", (evt: any) => {
+self.addEventListener("install", (evt: InstallEvent) => {
 	console.log("Service worker install")
 
 	evt.waitUntil(
@@ -37,7 +37,7 @@ self.addEventListener("message", (evt: any) => {
 	evt.waitUntil(
 		refresh.then((response: Response) => {
 			// If the fresh copy was used to serve the request instead of the cache,
-			// we don't need to tell the client to do a refresh.
+			// we don"t need to tell the client to do a refresh.
 			if(response.bodyUsed) {
 				return
 			}
@@ -60,9 +60,10 @@ self.addEventListener("message", (evt: any) => {
 	)
 })
 
-self.addEventListener("fetch", async (evt: any) => {
+self.addEventListener("fetch", async (evt: FetchEvent) => {
 	let request = evt.request
 	let isAuth = request.url.includes("/auth/") || request.url.includes("/logout")
+	let ignoreCache = request.url.includes("/api/") || request.url.includes("chrome-extension")
 
 	// Delete existing cache on authentication
 	if(isAuth) {
@@ -70,7 +71,7 @@ self.addEventListener("fetch", async (evt: any) => {
 	}
 
 	// Do not use cache in some cases
-	if(request.method !== "GET" || isAuth || request.url.includes("chrome-extension")) {
+	if(request.method !== "GET" || isAuth || ignoreCache) {
 		return evt.waitUntil(evt.respondWith(fetch(request)))
 	}
 
@@ -107,6 +108,38 @@ self.addEventListener("fetch", async (evt: any) => {
 	})
 
 	return evt.waitUntil(evt.respondWith(networkOrCache))
+})
+
+self.addEventListener("push", (evt: PushEvent) => {
+	var payload = evt.data ? evt.data.text() : "no payload"
+
+	evt.waitUntil(
+		(self as any).registration.showNotification("beta.notify.moe Service Worker", {
+			body: payload
+		})
+	)
+})
+
+self.addEventListener("pushsubscriptionchange", (evt: any) => {
+	console.log("pushsubscriptionchange", evt)
+})
+
+self.addEventListener("notificationclick", (evt: NotificationEvent) => {
+	console.log(evt)
+
+	evt.notification.close()
+
+	evt.waitUntil(
+		(self as any).clients.matchAll().then(function(clientList) {
+			// If there is at least one client, focus it.
+			if(clientList.length > 0) {
+				return clientList[0].focus()
+			}
+
+			// Otherwise open a new window
+			return (self as any).clients.openWindow("https://notify.moe")
+		})
+	)
 })
 
 function installCache() {

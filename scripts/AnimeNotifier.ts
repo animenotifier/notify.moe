@@ -1,10 +1,11 @@
-import { Application } from "./Application"
-import { Diff } from "./Diff"
+import * as actions from "./Actions"
 import { displayAiringDate, displayDate } from "./DateView"
 import { findAll, delay, canUseWebP } from "./Utils"
+import { Application } from "./Application"
+import { Diff } from "./Diff"
 import { MutationQueue } from "./MutationQueue"
 import { StatusMessage } from "./StatusMessage"
-import * as actions from "./Actions"
+import { PushManager } from "./PushManager"
 
 export class AnimeNotifier {
 	app: Application
@@ -14,6 +15,7 @@ export class AnimeNotifier {
 	contentLoadedActions: Promise<any>
 	statusMessage: StatusMessage
 	visibilityObserver: IntersectionObserver
+	pushManager: PushManager
 
 	imageFound: MutationQueue
 	imageNotFound: MutationQueue
@@ -104,6 +106,9 @@ export class AnimeNotifier {
 
 		// Service worker
 		this.registerServiceWorker()
+
+		// Push manager
+		this.pushManager = new PushManager()
 	}
 
 	onContentLoaded() {

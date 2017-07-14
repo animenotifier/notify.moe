@@ -31,6 +31,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/music"
 	"github.com/animenotifier/notify.moe/pages/newsoundtrack"
 	"github.com/animenotifier/notify.moe/pages/newthread"
+	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
@@ -125,6 +126,9 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Browser extension
 	app.Ajax("/extension/embed", embed.Get)
+
+	// API
+	app.Get("/api/test/notification", notifications.Test)
 
 	// Middleware
 	app.Use(middleware.Log())

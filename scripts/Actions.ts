@@ -214,6 +214,23 @@ export function search(arn: AnimeNotifier, search: HTMLInputElement, e: Keyboard
 	arn.diff("/search/" + term)
 }
 
+// Enable notifications
+export function enableNotifications(arn: AnimeNotifier, button: HTMLElement) {
+	arn.pushManager.subscribe(arn.user.dataset.id)
+}
+
+// Disable notifications
+export function disableNotifications(arn: AnimeNotifier, button: HTMLElement) {
+	arn.pushManager.unsubscribe(arn.user.dataset.id)
+}
+
+// Test notification
+export function testNotification(arn: AnimeNotifier) {
+	fetch("/api/test/notification", {
+		credentials: "same-origin"
+	})
+}
+
 // Add anime to collection
 export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
 	button.innerText = "Adding..."

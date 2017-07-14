@@ -23,6 +23,29 @@ component Settings(user *arn.User)
 
 		.widget.mountable
 			h3.widget-title
+				Icon("bell")
+				span Notifications
+			
+			.widget-input
+				label Enable:
+				button.action(data-action="enableNotifications", data-trigger="click")
+					Icon("toggle-on")
+					span Enable notifications
+
+			.widget-input
+				label Disable:
+				button.action(data-action="disableNotifications", data-trigger="click")
+					Icon("toggle-off")
+					span Disable notifications
+
+			.widget-input
+				label Test:
+				button.action(data-action="testNotification", data-trigger="click")
+					Icon("paper-plane")
+					span Send test notification
+
+		.widget.mountable
+			h3.widget-title
 				Icon("user-plus")
 				span Connect
 
@@ -51,17 +74,6 @@ component Settings(user *arn.User)
 		
 		.widget.mountable
 			h3.widget-title
-				Icon("puzzle-piece")
-				span Extensions
-			
-			.widget-input
-				label Chrome Extension:
-				button.action(data-action="installExtension", data-trigger="click")
-					Icon("chrome")
-					span Get the Chrome Extension
-
-		.widget.mountable
-			h3.widget-title
 				Icon("download")
 				span Import
 			
@@ -77,6 +89,17 @@ component Settings(user *arn.User)
 				a.button(href="/api/animelist/" + user.ID)
 					Icon("upload")
 					span Export anime list as JSON
+
+		.widget.mountable
+			h3.widget-title
+				Icon("puzzle-piece")
+				span Extensions
+			
+			.widget-input
+				label Chrome Extension:
+				button.action(data-action="installExtension", data-trigger="click")
+					Icon("chrome")
+					span Get the Chrome Extension
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
