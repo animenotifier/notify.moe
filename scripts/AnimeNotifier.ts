@@ -154,6 +154,10 @@ export class AnimeNotifier {
 
 	onIdle() {
 		this.pushAnalytics()
+
+		if(navigator.onLine === false) {
+			this.statusMessage.showError("You are viewing an offline version of the site now.")
+		}
 	}
 
 	registerServiceWorker() {

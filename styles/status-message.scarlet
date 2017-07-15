@@ -13,6 +13,7 @@
 
 .status-message-action
 	color white !important
+	pointer-events all !important
 
 .error-message
 	color white
