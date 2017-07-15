@@ -93,13 +93,19 @@ component Settings(user *arn.User)
 		.widget.mountable
 			h3.widget-title
 				Icon("puzzle-piece")
-				span Extensions
+				span Apps
 			
 			.widget-input
 				label Chrome Extension:
 				button.action(data-action="installExtension", data-trigger="click")
 					Icon("chrome")
 					span Get the Chrome Extension
+
+			.widget-input
+				label Android App:
+				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
+					Icon("android")
+					span Get the Android App
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
