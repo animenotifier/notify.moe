@@ -17,7 +17,7 @@
 
 .widget
 	vertical
-	margin-bottom content-padding
+	margin-bottom 1rem
 	overflow hidden
 
 .widget-element

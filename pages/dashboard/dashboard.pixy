@@ -86,30 +86,62 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 							Icon("address-card")
 							span ...
 
-		.widget.mountable
-			h3.widget-title Follow
+		//- .widget.mountable
+		//- 	h3.widget-title Follow
 
-			a.widget-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("microphone")
-					span Discord
+		//- 	a.widget-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
+		//- 		.widget-element-text
+		//- 			Icon("microphone")
+		//- 			span Discord
 
-			a.widget-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("facebook")
-					span Facebook
+		//- 	a.widget-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
+		//- 		.widget-element-text
+		//- 			Icon("facebook")
+		//- 			span Facebook
 
-			a.widget-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("twitter")
-					span Twitter
+		//- 	a.widget-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
+		//- 		.widget-element-text
+		//- 			Icon("twitter")
+		//- 			span Twitter
 
-			a.widget-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("google-plus")
-					span Google+
+		//- 	a.widget-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
+		//- 		.widget-element-text
+		//- 			Icon("google-plus")
+		//- 			span Google+
 
-			a.widget-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("github")
-					span GitHub
+		//- 	a.widget-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
+		//- 		.widget-element-text
+		//- 			Icon("github")
+		//- 			span GitHub
+	
+	.footer
+		span Anime Notifier
+		span  | 
+
+		a(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
+			Icon("microphone")
+			span Discord
+		
+		span  | 
+
+		a(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
+			Icon("facebook")
+			span Facebook
+
+		span  | 
+
+		a(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
+			Icon("twitter")
+			span Twitter
+
+		span  | 
+
+		a(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
+			Icon("google-plus")
+			span Google+
+
+		span  | 
+
+		a(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
+			Icon("github")
+			span GitHub
