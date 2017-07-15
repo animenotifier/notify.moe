@@ -43,6 +43,8 @@ component Settings(user *arn.User)
 				button.action(data-action="testNotification", data-trigger="click")
 					Icon("paper-plane")
 					span Send test notification
+			
+			p Notifications are currently used for forum replies only.
 
 		.widget.mountable
 			h3.widget-title

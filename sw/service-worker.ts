@@ -145,7 +145,8 @@ self.addEventListener("push", (evt: PushEvent) => {
 		(self as any).registration.showNotification(payload.title, {
 			body: payload.message,
 			icon: payload.icon,
-			image: payload.image
+			image: payload.image,
+			data: payload.link
 		})
 	)
 })
@@ -155,12 +156,18 @@ self.addEventListener("pushsubscriptionchange", (evt: any) => {
 })
 
 self.addEventListener("notificationclick", (evt: NotificationEvent) => {
-	console.log(evt)
-
-	evt.notification.close()
+	let notification = evt.notification
+	notification.close()
 
 	evt.waitUntil(
 		(self as any).clients.matchAll().then(function(clientList) {
+			// If we have a link, use that link to open a new window.
+			let url = notification.data
+
+			if(url) {
+				return (self as any).clients.openWindow(url)
+			}
+
 			// If there is at least one client, focus it.
 			if(clientList.length > 0) {
 				return clientList[0].focus()
