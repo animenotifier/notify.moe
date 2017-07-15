@@ -73,6 +73,11 @@ self.addEventListener("message", (evt: any) => {
 				url
 			}
 
+			// If a subpage has refreshed, refresh the main page cache, too.
+			if(url.includes("/_/")) {
+				
+			}
+
 			let cacheRefresh = CACHEREFRESH.get(url)
 
 			if(!cacheRefresh) {
@@ -87,7 +92,7 @@ self.addEventListener("message", (evt: any) => {
 })
 
 self.addEventListener("fetch", async (evt: FetchEvent) => {
-	let request = evt.request
+	let request = evt.request as Request
 	let isAuth = request.url.includes("/auth/") || request.url.includes("/logout")
 	let ignoreCache = request.url.includes("/api/") || request.url.includes("chrome-extension")
 

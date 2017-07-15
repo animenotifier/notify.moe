@@ -53,7 +53,9 @@ export class Diff {
 				}
 
 				// Ignore lazy images if they have the same source
-				if(elemA.classList.contains("lazy") && elemA.dataset.src === elemB.dataset.src) {
+				if(elemA.classList.contains("lazy")) {
+					elemA.dataset.src = elemB.dataset.src
+					elemA.title = elemB.title
 					continue
 				}
 
