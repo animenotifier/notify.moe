@@ -20,6 +20,7 @@ func main() {
 		Name:      "Users",
 		PieCharts: userStats,
 	}))
+
 	arn.PanicOnError(arn.DB.Set("Cache", "anime statistics", &arn.StatisticsCategory{
 		Name:      "Anime",
 		PieCharts: animeStats,
@@ -40,6 +41,8 @@ func getUserStats() []*arn.PieChart {
 	country := stats{}
 	gender := stats{}
 	os := stats{}
+	notifications := stats{}
+	activity := stats{}
 
 	for _, info := range analytics {
 		pixelRatio[fmt.Sprintf("%.1f", info.Screen.PixelRatio)]++
@@ -68,6 +71,18 @@ func getUserStats() []*arn.PieChart {
 
 			os[user.OS.Name]++
 		}
+
+		if len(user.PushSubscriptions().Items) > 0 {
+			notifications["Enabled"]++
+		} else {
+			notifications["Disabled"]++
+		}
+
+		if user.IsActive() {
+			activity["Active last week"]++
+		} else {
+			activity["Inactive"]++
+		}
 	}
 
 	println("Finished user statistics")
@@ -77,6 +92,8 @@ func getUserStats() []*arn.PieChart {
 		arn.NewPieChart("Screen size", screenSize),
 		arn.NewPieChart("Browser", browser),
 		arn.NewPieChart("Country", country),
+		arn.NewPieChart("Activity", activity),
+		arn.NewPieChart("Notifications", notifications),
 		arn.NewPieChart("Gender", gender),
 		arn.NewPieChart("Pixel ratio", pixelRatio),
 	}
