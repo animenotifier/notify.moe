@@ -47,15 +47,19 @@ export class Diff {
 				let elemA = a as HTMLElement
 				let elemB = b as HTMLElement
 
-				// Skip iframes
-				if(elemA.tagName === "IFRAME") {
+				// Ignore lazy images if they have the same source
+				if(elemA.classList.contains("lazy")) {
+					if(elemA.dataset.src !== elemB.dataset.src) {
+						elemA.dataset.src = elemB.dataset.src
+						elemA.title = elemB.title
+					}
 					continue
 				}
 
-				// Ignore lazy images if they have the same source
-				if(elemA.classList.contains("lazy")) {
-					elemA.dataset.src = elemB.dataset.src
-					elemA.title = elemB.title
+				// Skip iframes
+				// This part needs to be executed AFTER lazy images check
+				// to allow lazily loaded iframes to update their data src.
+				if(elemA.tagName === "IFRAME") {
 					continue
 				}
 
