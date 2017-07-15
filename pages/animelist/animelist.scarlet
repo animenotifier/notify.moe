@@ -71,7 +71,7 @@
 	.anime-list-item-airing-date
 		display block
 		text-align right
-		flex-basis 120px
+		flex-basis 150px
 
 < 1100px
 	.anime-list-item-rating

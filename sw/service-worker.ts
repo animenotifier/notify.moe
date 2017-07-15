@@ -74,9 +74,9 @@ self.addEventListener("message", (evt: any) => {
 			}
 
 			// If a subpage has refreshed, refresh the main page cache, too.
-			if(url.includes("/_/")) {
+			// if(url.includes("/_/")) {
 				
-			}
+			// }
 
 			let cacheRefresh = CACHEREFRESH.get(url)
 
