@@ -194,7 +194,7 @@ export function createSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) 
 	}
 
 	arn.post("/api/new/soundtrack", soundtrack)
-	.then(() => arn.app.load("/music"))
+	.then(() => arn.app.load("/soundtracks"))
 	.catch(err => arn.statusMessage.showError(err))
 }
 

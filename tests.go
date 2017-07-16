@@ -22,8 +22,8 @@ var routeTests = map[string][]string{
 		"/+Akyoto/posts",
 	},
 
-	"/user/:nick/tracks": []string{
-		"/+Akyoto/tracks",
+	"/user/:nick/soundtracks": []string{
+		"/+Akyoto/soundtracks",
 	},
 
 	"/user/:nick/animelist": []string{
@@ -75,8 +75,8 @@ var routeTests = map[string][]string{
 		"/search/Dragon Ball",
 	},
 
-	"/track/:id": []string{
-		"/track/h0ac8sKkg",
+	"/soundtrack/:id": []string{
+		"/soundtrack/h0ac8sKkg",
 	},
 
 	// API
@@ -186,6 +186,7 @@ var routeTests = map[string][]string{
 	"/import/kitsu/animelist":              nil,
 	"/import/kitsu/animelist/finish":       nil,
 	"/api/test/notification":               nil,
+	"/api/paypal/payment/create":           nil,
 	"/anime/:id/edit":                      nil,
 	"/new/thread":                          nil,
 	"/new/soundtrack":                      nil,

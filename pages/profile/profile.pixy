@@ -64,7 +64,7 @@ component ProfileNavigation(viewUser *arn.User, uri string)
 			Icon("comments")
 			span.tab-text Posts
 
-		a.button.tab.action(href="/+" + viewUser.Nick + "/tracks", data-action="diff", data-trigger="click")
+		a.button.tab.action(href="/+" + viewUser.Nick + "/soundtracks", data-action="diff", data-trigger="click")
 			Icon("music")
 			span.tab-text Tracks
 

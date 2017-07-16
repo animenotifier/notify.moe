@@ -32,6 +32,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/newsoundtrack"
 	"github.com/animenotifier/notify.moe/pages/newthread"
 	"github.com/animenotifier/notify.moe/pages/notifications"
+	"github.com/animenotifier/notify.moe/pages/paypal"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
@@ -76,12 +77,12 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/thread/:id", threads.Get)
 	app.Ajax("/post/:id", posts.Get)
-	app.Ajax("/track/:id", tracks.Get)
+	app.Ajax("/soundtrack/:id", tracks.Get)
 	app.Ajax("/character/:id", character.Get)
 	app.Ajax("/new/thread", newthread.Get)
 	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/settings", settings.Get)
-	app.Ajax("/music", music.Get)
+	app.Ajax("/soundtracks", music.Get)
 	app.Ajax("/users", users.Get)
 	app.Ajax("/login", login.Get)
 
@@ -90,7 +91,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/user/:nick", profile.Get)
 	app.Ajax("/user/:nick/threads", profile.GetThreadsByUser)
 	app.Ajax("/user/:nick/posts", profile.GetPostsByUser)
-	app.Ajax("/user/:nick/tracks", profile.GetSoundTracksByUser)
+	app.Ajax("/user/:nick/soundtracks", profile.GetSoundTracksByUser)
 	app.Ajax("/user/:nick/stats", profile.GetStatsByUser)
 	app.Ajax("/user/:nick/animelist", animelist.Get)
 	app.Ajax("/user/:nick/animelist/watching", animelist.FilterByStatus(arn.AnimeListStatusWatching))
@@ -129,6 +130,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// API
 	app.Get("/api/test/notification", notifications.Test)
+	app.Get("/api/paypal/payment/create", paypal.CreatePayment)
 
 	// Middleware
 	app.Use(middleware.Log())
