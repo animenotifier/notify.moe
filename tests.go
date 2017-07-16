@@ -187,6 +187,8 @@ var routeTests = map[string][]string{
 	"/import/kitsu/animelist/finish":       nil,
 	"/api/test/notification":               nil,
 	"/api/paypal/payment/create":           nil,
+	"/paypal/success":                      nil,
+	"/paypal/cancel":                       nil,
 	"/anime/:id/edit":                      nil,
 	"/new/thread":                          nil,
 	"/new/soundtrack":                      nil,

@@ -130,6 +130,10 @@ func configure(app *aero.Application) *aero.Application {
 
 	// API
 	app.Get("/api/test/notification", notifications.Test)
+
+	// PayPal
+	app.Ajax("/paypal/success", paypal.Success)
+	app.Ajax("/paypal/cancel", paypal.Cancel)
 	app.Get("/api/paypal/payment/create", paypal.CreatePayment)
 
 	// Middleware

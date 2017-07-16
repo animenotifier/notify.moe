@@ -2,17 +2,15 @@ package paypal
 
 import (
 	"net/http"
-	"os"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"github.com/logpacker/PayPal-Go-SDK"
 )
 
 // CreatePayment ...
 func CreatePayment(ctx *aero.Context) string {
-	// Create a client instance
-	c, err := paypalsdk.NewClient("clientID", "secretID", paypalsdk.APIBaseSandBox)
-	c.SetLog(os.Stdout) // Set log to terminal stdout
+	c, err := arn.PayPal()
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Could not initiate PayPal client", err)
@@ -24,18 +22,55 @@ func CreatePayment(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Could not get PayPal access token", err)
 	}
 
-	amount := paypalsdk.Amount{
-		Total:    "7.00",
-		Currency: "USD",
+	// webprofile := paypalsdk.WebProfile{
+	// 	Name: "Anime Notifier",
+	// 	Presentation: paypalsdk.Presentation{
+	// 		BrandName:  "Anime Notifier",
+	// 		LogoImage:  "https://notify.moe/brand/300",
+	// 		LocaleCode: "US",
+	// 	},
+
+	// 	InputFields: paypalsdk.InputFields{
+	// 		AllowNote:       true,
+	// 		NoShipping:      paypalsdk.NoShippingDisplay,
+	// 		AddressOverride: paypalsdk.AddrOverrideFromCall,
+	// 	},
+
+	// 	FlowConfig: paypalsdk.FlowConfig{
+	// 		LandingPageType: paypalsdk.LandingPageTypeBilling,
+	// 	},
+	// }
+
+	// result, err := c.CreateWebProfile(webprofile)
+	// c.SetWebProfile(*result)
+
+	// if err != nil {
+	// 	return ctx.Error(http.StatusInternalServerError, "Could not create PayPal web profile", err)
+	// }
+
+	p := paypalsdk.Payment{
+		Intent: "sale",
+		Payer: &paypalsdk.Payer{
+			PaymentMethod: "paypal",
+		},
+		Transactions: []paypalsdk.Transaction{paypalsdk.Transaction{
+			Amount: &paypalsdk.Amount{
+				Currency: "USD",
+				Total:    "7.00",
+			},
+			Description: "Pro Account",
+		}},
+		RedirectURLs: &paypalsdk.RedirectURLs{
+			ReturnURL: "https://" + ctx.App.Config.Domain + "/paypal/success",
+			CancelURL: "https://" + ctx.App.Config.Domain + "/paypal/cancel",
+		},
 	}
-	redirectURI := "http://example.com/redirect-uri"
-	cancelURI := "http://example.com/cancel-uri"
-	description := "Description for this payment"
-	paymentResult, err := c.CreateDirectPaypalPayment(amount, redirectURI, cancelURI, description)
+
+	paymentResponse, err := c.CreatePayment(p)
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Could not create PayPal payment", err)
 	}
 
-	return ctx.JSON(paymentResult)
+	return ctx.JSON(paymentResponse)
 }
