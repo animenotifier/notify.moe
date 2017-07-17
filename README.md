@@ -1,82 +1,57 @@
 # Anime Notifier
 
-## Info
+## What kind of website is this?
 
-notify.moe is powered by the [Aero framework](https://github.com/aerogo/aero) from the same author. The project also uses Go and Aerospike.
+An anime tracker where you can add anime to your list and edit your episode progress using either the website, the chrome extension or the mobile app.
 
-## Installation
+## Why is it called notify.moe?
 
-### Prerequisites
+Because we made a notifier that takes your watching list, checks it against external websites (currently twist.moe) and notifies you when there is a new episode on that external site.
 
-* Install a Debian based operating system
-* Install [Go](https://golang.org/dl/) (1.9 or higher)
-* Install [Aerospike](http://www.aerospike.com/download) (3.14.0 or higher)
+## So it's just a notifier?
 
-### Download the repository and its dependencies
+In the past it was, but we're growing bigger by establishing a database that combines information from multiple sources. We also have our own anime lists now due to popular requests of adding episode progress changes to our browser extension.
 
-* `go get github.com/animenotifier/notify.moe`
+## How does the rating system work?
 
-### Build all
+You can rate each entry in your anime list in 4 different categories:
 
-* Run `make tools` to install [pack](https://github.com/aerogo/pack) & [run](https://github.com/aerogo/run)
-* Run `make all`
-* Run `make ports` to set up local port forwarding *(80 to 4000, 443 to 4001)*
-* You should be able to start the server by executing `run` now
+* Overall (this will determine the sorting order)
+* Story (how interesting was the story/plot?)
+* Visuals (art & effect & animation quality)
+* Soundtrack (music rating)
 
-### Database
+Each rating is a number on a scale of 0 to 10. A rating of 0 counts as "not rated" and will be ignored in average rating calculations for that anime. Thus the lowest possible rating you can assign to an anime is 0.1. The highest possible rating is 10. The average is close to the number 5.
 
-* Remove all namespaces in `/etc/aerospike/aerospike.conf`
-* Add a namespace called `arn`:
+## How do I use the search?
 
-```
-namespace arn {
-    storage-engine device {
-        file /home/YOUR_NAME/YOUR_PATH/notify.moe/db/arn-dev.dat
-        filesize 64M
-        data-in-memory true
+Press the "F" key and start searching for anime.
 
-        # Maximum object size. 128K is ideal for SSDs but we need 1M for search indices.
-        write-block-size 1M
+## How do I add an anime to my list?
 
-        # Write block size x Post write queue = Cache memory usage (for write block buffers)
-        post-write-queue 1
-    }
-}
-```
+Once you open the anime page you should see a button called "Add to my collection". Clicking that will add the anime to your "Plan to watch" list. To move it to your current "Watching" list, you need to click "Edit in collection" and change the status to "Watching".
 
-* Download the [database for developers](https://mega.nz/#!iN4WTRxb!R_cRjBbnUUvGeXdtRGiqbZRrnvy0CHc2MjlyiGBxdP4) to notify.moe/db/arn-dev.dat
-* Start the database using `sudo service aerospike start`
-* Confirm that the status is "green": `sudo service aerospike status`
+## How do notifications work from a technical perspective?
 
-### Hosts
+There are many, many ways how notifications can be implemented from a technical standpoint. There is e.g. "polling" which means that an app periodically checks external sites and tells you when something new is available. We are not using polling because these periodic checks can quickly drain your battery on a mobile phone. We are using so-called "push notifications" instead. The advantage of push notifications is that your mobile phone or desktop PC doesn't have to do periodic checks anymore - instead the website will send new episode releases to all of your registered devices. This consumes less CPU/network resources and is much more battery friendly for mobile devices.
 
-* Add `127.0.0.1 arn-db` to `/etc/hosts`
-* Add `127.0.0.1 beta.notify.moe` to `/etc/hosts`
+## Can you tell me more about the history of this software?
 
-### HTTPS
+From a technological standpoint we went through quite a few different approaches:
 
-* Create the certificate `notify.moe/security/fullchain.pem` (domain: `beta.notify.moe`)
-* Create the private key `notify.moe/security/privkey.pem`
+* Version 1.0: This version was just a browser extension with **client-side JS**.
+* Version 2.0: To decrease the number of requests/pressure on external sites we made a central website. It was written in **PHP**.
+* Version 3.0: A complete remake of the website in **node.js** supporting 4 different list providers and 2 anime providers. Episode changes were not possible.
+* Version 4.0: We switched to our own hosted anime lists to make episode updates in the extension as smooth as possible. The website is now written in **Go**.
 
-### API keys
+## How many developers are working on this?
 
-* Get a Google OAuth 2.0 client key & secret from [console.developers.google.com](https://console.developers.google.com)
-* Create the file `notify.moe/security/api-keys.json`:
+Since 2014 it's been just me, though I do plan to start a company and hire talented people to help me out with this project once the stars align.
 
-```json
-{
-	"google": {
-		"id": "YOUR_KEY",
-		"secret": "YOUR_SECRET"
-	}
-}
-```
+## Can I help with coding or change stuff as this is Open Source?
 
-### Fetch data
+Sure, the setup to start contributing is not that hard. Try to get in contact with me on Discord.
 
-* Run `jobs/sync-anime/sync-anime` from this repository to fetch anime data
+## Can I apply to be a data mod / editor?
 
-### Run
-
-* Start the web server in notify.moe directory: `run`
-* Open `https://beta.notify.moe` which should now resolve to localhost
+Sure, just contact me on Discord if you want to help out with the database.
