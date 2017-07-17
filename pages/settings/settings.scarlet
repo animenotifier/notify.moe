@@ -2,3 +2,6 @@
 	button,
 	.button
 		margin-bottom 1rem
+
+.avatar-preview
+	margin 0 auto

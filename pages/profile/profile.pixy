@@ -2,7 +2,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	.profile
 		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
 
-		.image-container.mountable.never-unmount
+		.profile-image-container.mountable.never-unmount
 			ProfileImage(viewUser)
 
 		.intro-container.mountable.never-unmount

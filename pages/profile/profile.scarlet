@@ -68,7 +68,7 @@ profile-boot-duration = 2s
 	width 100%
 	height auto
 
-.image-container
+.profile-image-container
 	flex 1
 	max-width 280px
 	max-height 280px

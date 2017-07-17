@@ -106,6 +106,20 @@ component Settings(user *arn.User)
 				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
 					Icon("android")
 					span Get the Android App
+		
+		.widget.mountable
+			h3.widget-title
+				Icon("picture-o")
+				span Avatar
+			
+			.widget-input
+				label(for="AvatarSource") Source:
+				select.widget-element.action(id="AvatarSource", data-field="AvatarSource", value="Gravatar", data-action="save", data-trigger="change")
+					option(value="Gravatar") Gravatar
+				
+				if "Gravatar" == "Gravatar"
+					.profile-image-container.avatar-preview
+						img.profile-image(src=user.Gravatar(), alt="Gravatar")
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
