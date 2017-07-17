@@ -6,6 +6,7 @@ GOINSTALL=$(GOCMD) install
 GOTEST=$(GOCMD) test
 BUILDJOBS=@./jobs/build.sh
 BUILDPATCHES=@./patches/build.sh
+BUILDBOTS=@./bots/build.sh
 TSCMD=@tsc
 IPTABLES=@sudo iptables
 
@@ -13,6 +14,8 @@ server:
 	$(GOBUILD)
 jobs:
 	$(BUILDJOBS)
+bots:
+	$(BUILDBOTS)
 patches:
 	$(BUILDPATCHES)
 js:
@@ -42,6 +45,6 @@ clean:
 ports:
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 4000
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 4001
-all: assets server jobs patches
+all: assets server bots jobs patches
 
-.PHONY: jobs patches ports
+.PHONY: bots jobs patches ports
