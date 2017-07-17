@@ -123,7 +123,7 @@ func StartWorkers(queue chan *arn.User, work func(*arn.User)) {
 
 // Work handles a single user.
 func Work(user *arn.User) {
-	user.AvatarExtension = ""
+	user.Avatar.Extension = ""
 
 	for _, source := range avatarSources {
 		avatar := source.GetAvatar(user)
@@ -141,7 +141,7 @@ func Work(user *arn.User) {
 
 		// Avoid quality loss (if it's on the file system, we don't need to write it again)
 		if sourceType == "FileSystem" {
-			user.AvatarExtension = avatar.Extension()
+			user.Avatar.Extension = avatar.Extension()
 			break
 		}
 
@@ -157,7 +157,7 @@ func Work(user *arn.User) {
 	}
 
 	// Since this a very long running job, refresh user data before saving it.
-	avatarExt := user.AvatarExtension
+	avatarExt := user.Avatar.Extension
 	user, err := arn.GetUser(user.ID)
 
 	if err != nil {
@@ -166,6 +166,6 @@ func Work(user *arn.User) {
 	}
 
 	// Save avatar data
-	user.AvatarExtension = avatarExt
+	user.Avatar.Extension = avatarExt
 	user.Save()
 }

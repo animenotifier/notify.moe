@@ -52,7 +52,7 @@ func (output *AvatarOriginalFileOutput) SaveAvatar(avatar *Avatar) error {
 	}
 
 	// Set user avatar
-	avatar.User.AvatarExtension = extension
+	avatar.User.Avatar.Extension = extension
 
 	// Write to file
 	fileName := output.Directory + avatar.User.ID + extension
