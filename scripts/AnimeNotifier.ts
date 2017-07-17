@@ -121,7 +121,8 @@ export class AnimeNotifier {
 			Promise.resolve().then(() => this.displayLocalDates()),
 			Promise.resolve().then(() => this.setSelectBoxValue()),
 			Promise.resolve().then(() => this.assignActions()),
-			Promise.resolve().then(() => this.updatePushUI())
+			Promise.resolve().then(() => this.updatePushUI()),
+			Promise.resolve().then(() => this.countUp())
 		])
 
 		// Apply page title
@@ -211,6 +212,32 @@ export class AnimeNotifier {
 				}
 				
 				break
+		}
+	}
+
+	countUp() {
+		for(let element of findAll("count-up")) {
+			let final = parseInt(element.innerText)
+			let duration = 2000.0
+			let start = Date.now()
+
+			element.innerText = "0"
+
+			let callback = () => {
+				let progress = (Date.now() - start) / duration
+
+				if(progress > 1) {
+					progress = 1
+				}
+
+				element.innerText = String(Math.round(progress * final))
+
+				if(progress < 1) {
+					window.requestAnimationFrame(callback)
+				}
+			}
+
+			window.requestAnimationFrame(callback)
 		}
 	}
 

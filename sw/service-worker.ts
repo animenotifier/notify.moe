@@ -94,7 +94,7 @@ self.addEventListener("message", (evt: any) => {
 self.addEventListener("fetch", async (evt: FetchEvent) => {
 	let request = evt.request as Request
 	let isAuth = request.url.includes("/auth/") || request.url.includes("/logout")
-	let ignoreCache = request.url.includes("/api/") || request.url.includes("chrome-extension")
+	let ignoreCache = request.url.includes("/api/") || request.url.includes("/paypal/") || request.url.includes("chrome-extension")
 
 	// Delete existing cache on authentication
 	if(isAuth) {

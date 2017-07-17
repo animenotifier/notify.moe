@@ -5,11 +5,18 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/utils"
 	"github.com/logpacker/PayPal-Go-SDK"
 )
 
 // CreatePayment ...
 func CreatePayment(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
+
+	if user == nil {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+	}
+
 	c, err := arn.PayPal()
 
 	if err != nil {
@@ -56,9 +63,9 @@ func CreatePayment(ctx *aero.Context) string {
 		Transactions: []paypalsdk.Transaction{paypalsdk.Transaction{
 			Amount: &paypalsdk.Amount{
 				Currency: "USD",
-				Total:    "7.00",
+				Total:    "10.00",
 			},
-			Description: "Pro Account",
+			Description: "Top Up Balance",
 		}},
 		RedirectURLs: &paypalsdk.RedirectURLs{
 			ReturnURL: "https://" + ctx.App.Config.Domain + "/paypal/success",

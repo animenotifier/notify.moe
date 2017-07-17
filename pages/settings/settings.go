@@ -13,7 +13,7 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusForbidden, "Not logged in", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
 	return utils.AllowEmbed(ctx, ctx.HTML(components.Settings(user)))

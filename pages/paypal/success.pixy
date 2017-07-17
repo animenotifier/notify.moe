@@ -1,0 +1,10 @@
+component PayPalSuccess(payment *arn.PayPalPayment)
+	h1 Thank you for your support!
+
+	.new-payment.mountable
+		span +
+		.new-payment-amount.count-up= payment.AnimeDollar()
+		span.new-payment-currency AD
+	
+	p.mountable
+		img.new-payment-thank-you-image(src="/images/elements/thank-you.jpg", alt="Thank you!")
