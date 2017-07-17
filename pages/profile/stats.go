@@ -27,7 +27,7 @@ func GetStatsByUser(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "User not found", err)
 	}
 
-	animeList, err := arn.GetAnimeList(viewUser)
+	animeList, err := arn.GetAnimeList(viewUser.ID)
 	animeList.PrefetchAnime()
 
 	if err != nil {

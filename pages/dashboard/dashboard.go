@@ -40,7 +40,7 @@ func dashboard(ctx *aero.Context) string {
 	flow.Parallel(func() {
 		forumActivity, _ = arn.GetForumActivityCached()
 	}, func() {
-		animeList, err := arn.GetAnimeList(user)
+		animeList, err := arn.GetAnimeList(user.ID)
 
 		if err != nil {
 			return
