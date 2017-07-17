@@ -108,7 +108,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 			each item in animeList.Items
 				if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
 					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.profile-watching-list-item-image.lazy(src="", data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
+						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
 	
 	//- .profile-category.mountable
 	//- 	h3

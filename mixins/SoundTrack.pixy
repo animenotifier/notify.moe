@@ -9,9 +9,9 @@ component SoundTrackMedia(track *arn.SoundTrack, media *arn.ExternalMedia)
 	.sound-track.mountable(id=track.ID)
 		.sound-track-content
 			a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
-				img.sound-track-anime-image.lazy(src="", data-src=track.MainAnime().Image.Small, alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
+				img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image.Small, alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 			
-			iframe.lazy(src="", data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
+			iframe.lazy(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
 		.sound-track-footer
 			a.ajax(href=track.Link())
 				Icon("music")
