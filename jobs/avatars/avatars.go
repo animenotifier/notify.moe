@@ -134,13 +134,13 @@ func Work(user *arn.User) {
 		}
 
 		// Name of source
-		sourceType := reflect.TypeOf(source).Elem().Name()
+		user.Avatar.Source = reflect.TypeOf(source).Elem().Name()
 
 		// Log
-		fmt.Println(color.GreenString("✔"), sourceType, "|", user.Nick, "|", avatar)
+		fmt.Println(color.GreenString("✔"), user.Avatar.Source, "|", user.Nick, "|", avatar)
 
-		// Avoid quality loss (if it's on the file system, we don't need to write it again)
-		if sourceType == "FileSystem" {
+		// Avoid JPG quality loss (if it's on the file system, we don't need to write it again)
+		if user.Avatar.Source == "FileSystem" {
 			user.Avatar.Extension = avatar.Extension()
 			break
 		}
@@ -158,6 +158,7 @@ func Work(user *arn.User) {
 
 	// Since this a very long running job, refresh user data before saving it.
 	avatarExt := user.Avatar.Extension
+	avatarSrc := user.Avatar.Source
 	user, err := arn.GetUser(user.ID)
 
 	if err != nil {
@@ -167,5 +168,6 @@ func Work(user *arn.User) {
 
 	// Save avatar data
 	user.Avatar.Extension = avatarExt
+	user.Avatar.Source = avatarSrc
 	user.Save()
 }
