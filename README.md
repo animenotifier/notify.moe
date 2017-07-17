@@ -6,17 +6,44 @@ An anime tracker where you can add anime to your list and edit your episode prog
 
 ## Why is it called notify.moe?
 
-Because we made a notifier that takes your watching list, checks it against external websites (currently twist.moe) and notifies you when there is a new episode on that external site.
+Because we made a notifier that takes your watching list, checks it against external websites and notifies you when there is a new episode on that external site. It's also a terrible wordplay combining "notify me!" and [moe](https://en.wikipedia.org/wiki/Moe_(slang)).
 
 ## So it's just a notifier?
 
 In the past it was, but we're growing bigger by establishing a database that combines information from multiple sources and also growing as a community. Many of us are hanging out on Discord and you are welcome to join us. We also have our own anime lists now due to popular request of adding episode progress changes to our browser extension.
 
+## What does the current feature set look like?
+
+* [Chrome extension](https://chrome.google.com/webstore/detail/anime-notifier/hajchfikckiofgilinkpifobdbiajfch) for quick watching list access and episode updates
+* Edit episode progress and rating by clicking on the number
+* Airing dates
+* Offline browsing
+* Push notifications
+* Soundtracks
+* Anime & user search
+* Anime rating system
+* [twist.moe](https://twist.moe) integration
+* [anilist.co](https://anilist.co/), [myanimelist.net](https://myanimelist.net/) and [kitsu.io](https://kitsu.io/) import
+* [osu](https://osu.ppy.sh/) ranking view
+* [Gravatar](https://gravatar.com) support
+* User profiles
+* Dashboard
+* Forums
+* Responsive layout (looks good on 1080p and on mobile devices)
+
+## How do I enable notifications?
+
+Use a browser that supports push notifications (Chrome or Firefox). Then go to your [settings](/settings) and click "Enable notifications". This might take a while, especially on mobile devices. After that you can press "Send test notification". If you get a notification saying "Yay, it works!" then everything's fine. The real thing looks like this:
+
+![Anime Notifications](https://puu.sh/wKpcm/304a4441a0.png)
+
 ## How do I use the search?
 
-Press the "F" key while you're browsing the site and start searching for an anime title.
+Press the "F" key and start searching for an anime title.
 
-## How do I add an anime to my list?
+![Anime search](https://puu.sh/wM45s/ffe5025c63.png)
+
+## How do I add anime to my list?
 
 Once you open the anime page you should see a button called "Add to my collection". Clicking that will add the anime to your "Plan to watch" list. To move it to your current "Watching" list, you need to click "Edit in collection" and change the status to "Watching".
 
@@ -42,13 +69,23 @@ You can rate each entry in your anime list in 4 different categories:
 
 Each rating is a number on a scale of 0 to 10. A rating of 0 counts as "not rated" and will be ignored in average rating calculations for that anime. Thus the lowest possible rating you can assign to an anime is 0.1. The highest possible rating is 10. The average is close to the number 5.
 
+## What does the Chrome extension offer me?
+
+A quick access to your watching list:
+
+![Anime Notifier Chrome extension](https://puu.sh/wM47V/af25b23755.png)
+
+## How can I format text and include images in the forum?
+
+You need to use [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+
 ## What are the community rules for conversations on the forum?
 
 * Be respectful to each other.
 * Realize that every person has his or her own opinion and that you should treat that opinion with respect. You do not have to agree with strangers on the internet but it's worth thinking about their viewpoint.
 * Do not spam.
 * Do not advertise unrelated products. If anything it needs to be related to anime or the site itself.
-* We absolutely do not mind links to competitors or similar websites. Feel free to post them.
+* We do not mind links to competitors or similar websites. Feel free to post them.
 
 ## How do I import my former anime list?
 
@@ -60,22 +97,44 @@ We added importers for what we consider to be the 3 most popular list providers:
 
 To use an importer, enter your nickname for the site you want to import from and click the "Import" button with the list provider name that just appeared.
 
-## How do I install the site as an Android App?
+![Anime list import](https://puu.sh/wM4dP/11d43e5f71.png)
 
-This website uses a very recent and modern technology that allows you to install websites as local apps. To install notify.moe as a mobile app, do the following:
+## How do I install the site as an Android app?
+
+This website uses a modern technology that allows you to install websites as local apps. To install notify.moe as a mobile app, do the following:
 
 1. Go to https://notify.moe on your Android device.
 2. Open the menu by tapping the top right part of your browser.
 3. Choose "Add to Home screen" and confirm it.
 4. Now you can access your anime list easily from your home screen and get notified about new episodes.
 
-## How do I install the site as a PC/Desktop App?
+You need to enable notifications on each device separately. To receive notifications on both desktop and mobile phone you need to click "Enable notifications" on both.
+
+## How do I install the site as a PC/desktop app?
 
 In Chrome, open the top right menu and go to **More tools > Add to desktop**.
+
+![Anime Notifier desktop app](https://puu.sh/wM4pB/542add3113.png)
+
+## What do I get notified about?
+
+At the time of writing this, you get notified when:
+
+* A new episode from your watching list is released on twist.moe
+* Somebody replies in a thread you have participated in
+* Somebody likes your post
 
 ## How do notifications work from a technical perspective?
 
 There are many, many ways how notifications can be implemented from a technical standpoint. There is e.g. "polling" which means that an app periodically checks external sites and tells you when something new is available. We are not using polling because these periodic checks can quickly drain your battery on a mobile phone. We are using so-called "push notifications" instead. The advantage of push notifications is that your mobile phone or desktop PC doesn't have to do periodic checks anymore - instead the website will send new episode releases to all of your registered devices. This consumes less CPU/network resources and is much more battery friendly for mobile devices.
+
+## Is this website well-optimized for performance?
+
+You are free to [judge it yourself](https://twitter.com/eduardurbach/status/885631801171091460).
+
+![Anime Notifier - Lighthouse](https://pbs.twimg.com/media/DEplUsNXgAEF-UT.jpg:large)
+
+![Anime Notifier - PageSpeed](https://pbs.twimg.com/media/DEplXmpWsAAPzb6.jpg:large)
 
 ## Can you tell me more about the history of this software?
 

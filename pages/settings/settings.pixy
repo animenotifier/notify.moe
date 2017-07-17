@@ -112,10 +112,10 @@ component Settings(user *arn.User)
 				Icon("picture-o")
 				span Avatar
 			
-			.widget-input(data-api="/api/user/" + user.ID)
+			.widget-input(data-api="/api/settings/" + user.ID)
 				label(for="Avatar.Source") Source:
-				select.widget-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Avatar.Source, data-action="save", data-trigger="change")
-					option(value="") Automatic
+				select.widget-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
+					option(value="") Automatic 
 					option(value="Gravatar") Gravatar
 				
 				if "Gravatar" == "Gravatar"
