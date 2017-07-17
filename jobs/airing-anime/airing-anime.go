@@ -7,6 +7,8 @@ import (
 	"github.com/fatih/color"
 )
 
+const currentlyAiringBonus = 4.0
+
 func main() {
 	color.Yellow("Caching airing anime")
 
@@ -19,7 +21,18 @@ func main() {
 	}
 
 	sort.Slice(animeList, func(i, j int) bool {
-		return animeList[i].Rating.Overall > animeList[j].Rating.Overall
+		scoreA := animeList[i].Rating.Overall
+		scoreB := animeList[j].Rating.Overall
+
+		if animeList[i].Status == "current" {
+			scoreA += currentlyAiringBonus
+		}
+
+		if animeList[j].Status == "current" {
+			scoreB += currentlyAiringBonus
+		}
+
+		return scoreA > scoreB
 	})
 
 	// Convert to small anime list
