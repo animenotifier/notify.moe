@@ -48,10 +48,10 @@ export class Diff {
 				let elemB = b as HTMLElement
 
 				// Ignore lazy images if they have the same source
-				if(elemA.classList.contains("lazy")) {
+				if(elemA.classList.contains("lazy") && elemB.classList.contains("lazy")) {
 					if(elemA.dataset.src !== elemB.dataset.src) {
 						elemA.dataset.src = elemB.dataset.src
-						elemA.setAttribute("title", elemB.getAttribute("title"))
+						elemA.title = elemB.title
 					}
 					continue
 				}
