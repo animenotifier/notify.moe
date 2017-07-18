@@ -51,7 +51,7 @@ export class Diff {
 				if(elemA.classList.contains("lazy")) {
 					if(elemA.dataset.src !== elemB.dataset.src) {
 						elemA.dataset.src = elemB.dataset.src
-						elemA.title = elemB.title
+						elemA.setAttribute("title", elemB.getAttribute("title"))
 					}
 					continue
 				}
