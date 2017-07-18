@@ -15,6 +15,9 @@ import (
 
 	"github.com/aerogo/log"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/avatar"
+	"github.com/animenotifier/avatar/outputs"
+	"github.com/animenotifier/avatar/sources"
 	"github.com/fatih/color"
 )
 
@@ -22,8 +25,8 @@ const (
 	webPQuality = 80
 )
 
-var avatarSources []AvatarSource
-var avatarOutputs []AvatarOutput
+var avatarSources []avatar.Source
+var avatarOutputs []avatar.Output
 var avatarLog = log.New()
 var wg sync.WaitGroup
 
@@ -46,42 +49,42 @@ func main() {
 	defer avatarLog.Flush()
 
 	// Define the avatar sources
-	avatarSources = []AvatarSource{
-		&Gravatar{
+	avatarSources = []avatar.Source{
+		&sources.Gravatar{
 			Rating:         "pg",
+			RequestLimiter: time.NewTicker(100 * time.Millisecond),
+		},
+		&sources.MyAnimeList{
 			RequestLimiter: time.NewTicker(250 * time.Millisecond),
 		},
-		&MyAnimeList{
-			RequestLimiter: time.NewTicker(250 * time.Millisecond),
-		},
-		&FileSystem{
+		&sources.FileSystem{
 			Directory: "images/avatars/large/",
 		},
 	}
 
 	// Define the avatar outputs
-	avatarOutputs = []AvatarOutput{
+	avatarOutputs = []avatar.Output{
 		// Original - Large
-		&AvatarOriginalFileOutput{
+		&outputs.OriginalFile{
 			Directory: "images/avatars/large/",
 			Size:      arn.AvatarMaxSize,
 		},
 
 		// Original - Small
-		&AvatarOriginalFileOutput{
+		&outputs.OriginalFile{
 			Directory: "images/avatars/small/",
 			Size:      arn.AvatarSmallSize,
 		},
 
 		// WebP - Large
-		&AvatarWebPFileOutput{
+		&outputs.WebPFile{
 			Directory: "images/avatars/large/",
 			Size:      arn.AvatarMaxSize,
 			Quality:   webPQuality,
 		},
 
 		// WebP - Small
-		&AvatarWebPFileOutput{
+		&outputs.WebPFile{
 			Directory: "images/avatars/small/",
 			Size:      arn.AvatarSmallSize,
 			Quality:   webPQuality,
@@ -126,7 +129,12 @@ func Work(user *arn.User) {
 	user.Avatar.Extension = ""
 
 	for _, source := range avatarSources {
-		avatar := source.GetAvatar(user)
+		avatar, err := source.GetAvatar(user)
+
+		if err != nil {
+			avatarLog.Error(err)
+			continue
+		}
 
 		if avatar == nil {
 			// fmt.Println(color.RedString("✘"), reflect.TypeOf(source).Elem().Name(), user.Nick)
