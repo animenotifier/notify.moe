@@ -107,29 +107,29 @@ component Settings(user *arn.User)
 					Icon("android")
 					span Get the Android App
 		
-		.widget.mountable
+		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
 				Icon("picture-o")
 				span Avatar
-			
-			.widget-input(data-api="/api/settings/" + user.ID)
+
+			.widget-input
 				label(for="Avatar.Source") Source:
 				select.widget-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
-					option(value="") Automatic 
+					option(value="") Automatic
 					option(value="Gravatar") Gravatar
 					option(value="URL") Link
 					//- option(value="FileSystem") Upload
-				
-				if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
-					.profile-image-container.avatar-preview
-						img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar")
-				
-				if user.Settings().Avatar.Source == "URL"
-					InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
 
-					if user.Settings().Avatar.SourceURL != ""
-						.profile-image-container.avatar-preview
-							img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
+			if user.Settings().Avatar.Source == "URL"
+				InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
+
+			if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
+				.profile-image-container.avatar-preview
+					img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar")
+			
+			if user.Settings().Avatar.Source == "URL" &&  user.Settings().Avatar.SourceURL != ""
+				.profile-image-container.avatar-preview
+					img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
