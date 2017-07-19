@@ -468,18 +468,25 @@ export class AnimeNotifier {
 	}
 
 	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
-		const delay = 20
 		const maxDelay = 1000
+		const delay = 20
 		
 		let time = 0
 		let start = Date.now()
 		let maxTime = start + maxDelay
-		let collection = document.getElementsByClassName(className)
 		let mutations = []
 
 		let mountableTypes = {
 			general: start
 		}
+
+		let collection = document.getElementsByClassName(className)
+
+		if(collection.length === 0) {
+			return
+		}
+
+		// let delay = Math.min(maxDelay / collection.length, 20)
 
 		for(let i = 0; i < collection.length; i++) {
 			let element = collection.item(i) as HTMLElement

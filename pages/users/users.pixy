@@ -20,4 +20,5 @@ component Users(users []*arn.User)
 
 	.user-avatars
 		each user in users
-			Avatar(user)
+			.mountable
+				Avatar(user)
