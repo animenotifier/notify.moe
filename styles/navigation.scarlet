@@ -82,7 +82,7 @@
 	.extra-navigation
 		display block
 
-< 400px height
+@media screen and (max-device-height: 500px)
 	#navigation
 		vertical
 		height 100%
