@@ -43,10 +43,28 @@ self.addEventListener("activate", (evt: any) => {
 // controlling service worker
 self.addEventListener("message", (evt: any) => {
 	let message = JSON.parse(evt.data)
-	
+
 	let url = message.url
 	let refresh = RELOADS.get(url)
 	let servedETag = ETAGS.get(url)
+
+	// If the user requests a sub-page we should prefetch the full page, too.
+	if(url.includes("/_/")) {
+		let fullPage = new Request(url.replace("/_/", "/"))
+
+		fetch(fullPage, {
+			credentials: "same-origin"
+		})
+		.then(response => {
+			// Save the new version of the resource in the cache
+			let cacheRefresh = caches.open(CACHE).then(cache => {
+				return cache.put(fullPage, response)
+			})
+
+			CACHEREFRESH.set(fullPage.url, cacheRefresh)
+			return cacheRefresh
+		})
+	}
 
 	if(!refresh || !servedETag) {
 		return
@@ -73,11 +91,6 @@ self.addEventListener("message", (evt: any) => {
 				url
 			}
 
-			// If a subpage has refreshed, refresh the main page cache, too.
-			// if(url.includes("/_/")) {
-				
-			// }
-
 			let cacheRefresh = CACHEREFRESH.get(url)
 
 			if(!cacheRefresh) {
@@ -90,6 +103,21 @@ self.addEventListener("message", (evt: any) => {
 		})
 	)
 })
+
+// self.addEventListener("sync", (evt: any) => {
+// 	console.log(evt.tag)
+
+// 	let fetches = new Array<Promise<void>>()
+
+// 	for(let url of BACKGROUNDFETCHES.keys()) {
+		
+// 	}
+
+// 	console.log("background fetching:", BACKGROUNDFETCHES.keys())
+// 	BACKGROUNDFETCHES.clear()
+
+// 	evt.waitUntil(Promise.all(fetches))
+// })
 
 self.addEventListener("fetch", async (evt: FetchEvent) => {
 	let request = evt.request as Request

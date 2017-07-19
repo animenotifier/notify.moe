@@ -16,6 +16,7 @@ export class AnimeNotifier {
 	statusMessage: StatusMessage
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
+	lastRequestURL: string
 
 	imageFound: MutationQueue
 	imageNotFound: MutationQueue
@@ -176,12 +177,18 @@ export class AnimeNotifier {
 
 		navigator.serviceWorker.register("/service-worker").then(registration => {
 			registration.update()
+			// if("sync" in registration) {
+			// 	registration.sync.register("background sync")
+			// } else {
+			// 	console.log("background sync not supported")
+			// }
 		})
 
 		navigator.serviceWorker.addEventListener("message", evt => {
 			this.onServiceWorkerMessage(evt)
 		})
 
+		// This will send a message to the service worker that the DOM has been loaded
 		let sendContentLoadedEvent = () => {
 			if(!navigator.serviceWorker.controller) {
 				return
@@ -192,13 +199,13 @@ export class AnimeNotifier {
 				url: ""
 			}
 
-			if(this.app.lastRequest) {
+			if(this.lastRequestURL) {
+				message.url = this.lastRequestURL
+			} else if(this.app.lastRequest) {
 				message.url = this.app.lastRequest.responseURL
 			} else {
 				message.url = window.location.href
 			}
-
-			console.log("send loaded event to service worker")
 
 			navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
 		}
@@ -311,8 +318,9 @@ export class AnimeNotifier {
 		headers.append("X-Reload", "true")
 
 		let path = this.app.currentPath
+		this.lastRequestURL = location.origin + "/_" + path
 
-		return fetch("/_" + path, {
+		return fetch(this.lastRequestURL, {
 			credentials: "same-origin",
 			headers
 		})
@@ -330,15 +338,11 @@ export class AnimeNotifier {
 
 	reloadPage() {
 		console.log("reload page")
-		
-		let headers = new Headers()
-		headers.append("X-Reload", "true")
 
 		let path = this.app.currentPath
 
 		return fetch(path, {
-			credentials: "same-origin",
-			headers
+			credentials: "same-origin"
 		})
 		.then(response => {
 			if(this.app.currentPath !== path) {
@@ -509,7 +513,10 @@ export class AnimeNotifier {
 			return Promise.reject(null)
 		}
 
-		let request = fetch("/_" + url, {
+		let path = "/_" + url
+		this.lastRequestURL = location.origin + "/_" + path
+
+		let request = fetch(path, {
 			credentials: "same-origin"
 		})
 		.then(response => {
