@@ -17,6 +17,7 @@ export class AnimeNotifier {
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
 	mainPageLoaded: boolean
+	lastReloadContentPath: string
 
 	imageFound: MutationQueue
 	imageNotFound: MutationQueue
@@ -176,12 +177,7 @@ export class AnimeNotifier {
 		console.log("register service worker")
 
 		navigator.serviceWorker.register("/service-worker").then(registration => {
-			registration.update()
-			// if("sync" in registration) {
-			// 	registration.sync.register("background sync")
-			// } else {
-			// 	console.log("background sync not supported")
-			// }
+			// registration.update()
 		})
 
 		navigator.serviceWorker.addEventListener("message", evt => {
@@ -191,6 +187,13 @@ export class AnimeNotifier {
 		// This will send a message to the service worker that the DOM has been loaded
 		let sendContentLoadedEvent = () => {
 			if(!navigator.serviceWorker.controller) {
+				return
+			}
+
+			// A reloadContent call should never trigger another reload
+			if(this.app.currentPath === this.lastReloadContentPath) {
+				console.log("reload finished.")
+				this.lastReloadContentPath = ""
 				return
 			}
 
@@ -207,7 +210,7 @@ export class AnimeNotifier {
 				message.url = window.location.href
 			}
 
-			console.log("Loaded", message.url)
+			console.log("checking for updates:", message.url)
 
 			navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
 		}
@@ -316,10 +319,13 @@ export class AnimeNotifier {
 	}
 
 	reloadContent() {
+		console.log("reload content", "/_" + this.app.currentPath)
+
 		let headers = new Headers()
 		headers.append("X-Reload", "true")
 
 		let path = this.app.currentPath
+		this.lastReloadContentPath = path
 
 		return fetch("/_" + path, {
 			credentials: "same-origin",
@@ -338,9 +344,10 @@ export class AnimeNotifier {
 	}
 
 	reloadPage() {
-		console.log("reload page")
+		console.log("reload page", this.app.currentPath)
 
 		let path = this.app.currentPath
+		this.lastReloadContentPath = path
 
 		return fetch(path, {
 			credentials: "same-origin"

@@ -4,9 +4,15 @@ const CACHE = "v-1"
 const RELOADS = new Map<string, Promise<Response>>()
 const ETAGS = new Map<string, string>()
 const CACHEREFRESH = new Map<string, Promise<void>>()
+const EXCLUDECACHE = new Set<string>([
+	"/api/",
+	"/paypal/",
+	"/import/",
+	"chrome-extension"
+])
 
 self.addEventListener("install", (evt: InstallEvent) => {
-	console.log("Service worker install")
+	console.log("service worker install")
 
 	evt.waitUntil(
 		(self as any).skipWaiting().then(() => {
@@ -16,7 +22,7 @@ self.addEventListener("install", (evt: InstallEvent) => {
 })
 
 self.addEventListener("activate", (evt: any) => {
-	console.log("Service worker activate")
+	console.log("service worker activate")
 
 	// Delete old cache
 	let cacheWhitelist = [CACHE]
@@ -94,35 +100,32 @@ self.addEventListener("message", (evt: any) => {
 			let cacheRefresh = CACHEREFRESH.get(url)
 
 			if(!cacheRefresh) {
+				console.log("forcing reload, cache refresh null")
 				return evt.source.postMessage(JSON.stringify(message))
 			}
 
 			return cacheRefresh.then(() => {
+				console.log("forcing reload after cache refresh")
 				evt.source.postMessage(JSON.stringify(message))
 			})
 		})
 	)
 })
 
-// self.addEventListener("sync", (evt: any) => {
-// 	console.log(evt.tag)
-
-// 	let fetches = new Array<Promise<void>>()
-
-// 	for(let url of BACKGROUNDFETCHES.keys()) {
-		
-// 	}
-
-// 	console.log("background fetching:", BACKGROUNDFETCHES.keys())
-// 	BACKGROUNDFETCHES.clear()
-
-// 	evt.waitUntil(Promise.all(fetches))
-// })
-
 self.addEventListener("fetch", async (evt: FetchEvent) => {
 	let request = evt.request as Request
 	let isAuth = request.url.includes("/auth/") || request.url.includes("/logout")
-	let ignoreCache = request.url.includes("/api/") || request.url.includes("/paypal/") || request.url.includes("chrome-extension")
+	let ignoreCache = false
+
+	console.log("fetch:", request.url)
+
+	// Exclude certain URLs from being cached
+	for(let pattern of EXCLUDECACHE.keys()) {
+		if(request.url.includes(pattern)) {
+			ignoreCache = true
+			break
+		}
+	}
 
 	// Delete existing cache on authentication
 	if(isAuth) {
@@ -155,11 +158,16 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 
 	// Forced reload
 	if(request.headers.get("X-Reload") === "true") {
-		return evt.waitUntil(refresh)
+		return evt.waitUntil(refresh.then(response => {
+			servedETag = response.headers.get("ETag")
+			ETAGS.set(request.url, servedETag)
+			return response
+		}))
 	}
 
 	// Try to serve cache first and fall back to network response
 	let networkOrCache = fromCache(request).then(response => {
+		console.log("served from cache:", request.url)
 		servedETag = response.headers.get("ETag")
 		ETAGS.set(request.url, servedETag)
 		return response
@@ -187,7 +195,7 @@ self.addEventListener("push", (evt: PushEvent) => {
 self.addEventListener("pushsubscriptionchange", (evt: any) => {
 	evt.waitUntil((self as any).registration.pushManager.subscribe(evt.oldSubscription.options)
 	.then(async subscription => {
-		console.log("Send subscription to server...")
+		console.log("send subscription to server...")
 
 		let rawKey = subscription.getKey("p256dh")
 		let key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
