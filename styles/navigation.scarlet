@@ -1,6 +1,5 @@
 #navigation
 	horizontal
-	padding 0 content-padding
 	overflow hidden
 	background-color nav-color
 	justify-content center
@@ -68,6 +67,10 @@
 > 330px
 	.navigation-button, #search
 		font-size 1.3em
+
+> 550px
+	#navigation
+		padding 0 content-padding
 
 > 930px
 	.navigation-button, #search
