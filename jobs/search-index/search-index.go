@@ -77,7 +77,7 @@ func updateUserIndex() {
 	}
 
 	for user := range userStream {
-		if user.IsActive() && user.Nick != "" {
+		if user.HasNick() {
 			userSearchIndex.TextToID[strings.ToLower(user.Nick)] = user.ID
 		}
 	}
