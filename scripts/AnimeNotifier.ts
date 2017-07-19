@@ -352,6 +352,7 @@ export class AnimeNotifier {
 			Diff.root(document.documentElement, html)
 		})
 		.then(() => this.app.emit("DOMContentLoaded"))
+		.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
 	}
 
 	loading(isLoading: boolean) {
