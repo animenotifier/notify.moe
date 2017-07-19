@@ -17,11 +17,11 @@ component StatisticsHeader
 	.buttons.tabs
 		a.button.tab.action(href="/statistics", data-action="diff", data-trigger="click")
 			Icon("user")
-			span Users
+			span.tab-text Users
 
 		a.button.tab.action(href="/statistics/anime", data-action="diff", data-trigger="click")
 			Icon("tv")
-			span Anime
+			span.tab-text Anime
 
 component PieChart(slices []*arn.PieChartSlice)
 	svg.pie-chart(viewBox="-1.1 -1.1 2.2 2.2")
