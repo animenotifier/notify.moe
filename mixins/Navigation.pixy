@@ -6,7 +6,7 @@ component Navigation(user *arn.User)
 
 component LoggedOutMenu
 	nav#navigation.logged-out
-		NavigationButton("About", "/", "question-circle")
+		NavigationButton("About", "/", "home")
 		NavigationButton("Explore", "/explore", "th")
 		NavigationButton("Forum", "/forum", "comment")
 
