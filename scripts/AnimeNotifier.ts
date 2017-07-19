@@ -30,6 +30,10 @@ export class AnimeNotifier {
 		this.imageNotFound = new MutationQueue(elem => elem.classList.add("image-not-found"))
 		this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
 
+		// These classes will never be removed on DOM diffs
+		Diff.persistentClasses.add("mounted")
+		Diff.persistentClasses.add("image-found")
+
 		if("IntersectionObserver" in window) {
 			// Enable lazy load
 			this.visibilityObserver = new IntersectionObserver(

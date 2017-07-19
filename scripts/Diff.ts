@@ -1,4 +1,6 @@
 export class Diff {
+	static persistentClasses = new Set<string>()
+
 	// Reuse container for diffs to avoid memory allocation
 	static container: HTMLElement
 
@@ -82,7 +84,22 @@ export class Diff {
 
 					if(attrib.specified) {
 						// Skip mountables
-						if(attrib.name == "class" && (elemA.classList.contains("mounted") || elemA.classList.contains("image-found"))) {
+						if(attrib.name == "class") {
+							let classesA = elemA.classList
+							let classesB = elemB.classList
+
+							for(let className of classesA) {
+								if(!classesB.contains(className) && !Diff.persistentClasses.has(className)) {
+									classesA.remove(className)
+								}
+							}
+
+							for(let className of classesB) {
+								if(!classesA.contains(className)) {
+									classesA.add(className)
+								}
+							}
+
 							continue
 						}
 
