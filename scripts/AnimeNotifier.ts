@@ -319,7 +319,7 @@ export class AnimeNotifier {
 	}
 
 	reloadContent(cached?: boolean) {
-		console.log("reload content", "/_" + this.app.currentPath)
+		// console.log("reload content", "/_" + this.app.currentPath)
 
 		let headers = new Headers()
 

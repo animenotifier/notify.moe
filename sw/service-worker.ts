@@ -117,7 +117,7 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 	let isAuth = request.url.includes("/auth/") || request.url.includes("/logout")
 	let ignoreCache = false
 
-	console.log("fetch:", request.url)
+	// console.log("fetch:", request.url)
 
 	// Exclude certain URLs from being cached
 	for(let pattern of EXCLUDECACHE.keys()) {
@@ -139,7 +139,7 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 
 	// Forced cache response?
 	if(request.headers.get("X-CacheOnly") === "true") {
-		console.log("forced cache response")
+		// console.log("forced cache response")
 		return evt.waitUntil(fromCache(request))
 	}
 
@@ -147,7 +147,7 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 	
 	// Start fetching the request
 	let refresh = fetch(request).then(response => {
-		console.log(response)
+		// console.log(response)
 		let clone = response.clone()
 
 		// Save the new version of the resource in the cache
@@ -174,7 +174,7 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 
 	// Try to serve cache first and fall back to network response
 	let networkOrCache = fromCache(request).then(response => {
-		console.log("served from cache:", request.url)
+		// console.log("served from cache:", request.url)
 		servedETag = response.headers.get("ETag")
 		ETAGS.set(request.url, servedETag)
 		return response
