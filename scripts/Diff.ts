@@ -21,6 +21,7 @@ export class Diff {
 		for(let i = 0; i < numNodes; i++) {
 			let a = aChild[i]
 
+			// Remove nodes at the end of a that do not exist in b
 			if(i >= bChild.length) {
 				aRoot.removeChild(a)
 				continue
@@ -28,33 +29,30 @@ export class Diff {
 
 			let b = bChild[i]
 
+			// If a doesn't have that many nodes, simply append at the end of a
 			if(i >= aChild.length) {
 				aRoot.appendChild(b)
 				continue
 			}
 
+			// If it's a completely different HTML tag or node type, replace it
 			if(a.nodeName !== b.nodeName || a.nodeType !== b.nodeType) {
 				aRoot.replaceChild(b, a)
 				continue
 			}
 
+			// Text node:
+			// We don't need to check for b to be a text node as well because
+			// we eliminated different node types in the previous condition.
 			if(a.nodeType === Node.TEXT_NODE) {
 				a.textContent = b.textContent
 				continue
 			}
 
+			// HTML element:
 			if(a.nodeType === Node.ELEMENT_NODE) {
 				let elemA = a as HTMLElement
 				let elemB = b as HTMLElement
-
-				// Ignore lazy images if they have the same source
-				if(elemA.classList.contains("lazy") && elemB.classList.contains("lazy")) {
-					if(elemA.dataset.src !== elemB.dataset.src) {
-						elemA.dataset.src = elemB.dataset.src
-						elemA.title = elemB.title
-					}
-					continue
-				}
 
 				// Skip iframes
 				// This part needs to be executed AFTER lazy images check
@@ -84,7 +82,7 @@ export class Diff {
 
 					if(attrib.specified) {
 						// Skip mountables
-						if(attrib.name == "class" && elemA.classList.contains("mounted")) {
+						if(attrib.name == "class" && (elemA.classList.contains("mounted") || elemA.classList.contains("image-found"))) {
 							continue
 						}
 
