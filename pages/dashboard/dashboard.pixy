@@ -3,7 +3,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 
 	.widgets
 		.widget.mountable
-			h3.widget-title Schedule 123
+			h3.widget-title Schedule
 
 			for i := 0; i <= 4; i++
 				if i < len(schedule)
