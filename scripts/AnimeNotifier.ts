@@ -36,6 +36,9 @@ export class AnimeNotifier {
 		Diff.persistentClasses.add("mounted")
 		Diff.persistentClasses.add("image-found")
 
+		// Never remove src property on diffs
+		Diff.persistentAttributes.add("src")
+
 		if("IntersectionObserver" in window) {
 			// Enable lazy load
 			this.visibilityObserver = new IntersectionObserver(
@@ -374,10 +377,10 @@ export class AnimeNotifier {
 
 	loading(isLoading: boolean) {
 		if(isLoading) {
-			document.body.style.cursor = "progress"
+			document.documentElement.style.cursor = "progress"
 			this.app.loading.classList.remove(this.app.fadeOutClass)
 		} else {
-			document.body.style.cursor = "auto"
+			document.documentElement.style.cursor = "auto"
 			this.app.loading.classList.add(this.app.fadeOutClass)
 		}
 	}

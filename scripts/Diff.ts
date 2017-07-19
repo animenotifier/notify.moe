@@ -1,5 +1,6 @@
 export class Diff {
 	static persistentClasses = new Set<string>()
+	static persistentAttributes = new Set<string>()
 
 	// Reuse container for diffs to avoid memory allocation
 	static container: HTMLElement
@@ -22,7 +23,9 @@ export class Diff {
 		}
 		
 		Diff.rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
-		Diff.childNodes(aRoot, Diff.rootContainer)
+		console.log(aRoot.getElementsByTagName("body")[0])
+		console.log(Diff.rootContainer.getElementsByTagName("body")[0])
+		Diff.childNodes(aRoot.getElementsByTagName("body")[0], Diff.rootContainer.getElementsByTagName("body")[0])
 	}
 
 	// childNodes diffs the child nodes of 2 given elements and applies DOM mutations.
@@ -80,7 +83,7 @@ export class Diff {
 					let attrib = elemA.attributes[x]
 
 					if(attrib.specified) {
-						if(!elemB.hasAttribute(attrib.name)) {
+						if(!elemB.hasAttribute(attrib.name) && !Diff.persistentAttributes.has(attrib.name)) {
 							removeAttributes.push(attrib)
 						}
 					}
