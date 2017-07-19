@@ -42,7 +42,6 @@ func getUserStats() []*arn.PieChart {
 	gender := stats{}
 	os := stats{}
 	notifications := stats{}
-	activity := stats{}
 	avatar := stats{}
 
 	for _, info := range analytics {
@@ -53,6 +52,10 @@ func getUserStats() []*arn.PieChart {
 	}
 
 	for user := range arn.MustStreamUsers() {
+		if !user.IsActive() {
+			continue
+		}
+
 		if user.Gender != "" && user.Gender != "other" {
 			gender[user.Gender]++
 		}
@@ -79,12 +82,6 @@ func getUserStats() []*arn.PieChart {
 			notifications["Disabled"]++
 		}
 
-		if user.IsActive() {
-			activity["Active last week"]++
-		} else {
-			activity["Inactive"]++
-		}
-
 		if user.Avatar.Source == "" {
 			avatar["none"]++
 		} else {
@@ -100,7 +97,6 @@ func getUserStats() []*arn.PieChart {
 		arn.NewPieChart("Browser", browser),
 		arn.NewPieChart("Country", country),
 		arn.NewPieChart("Avatar", avatar),
-		arn.NewPieChart("Activity", activity),
 		arn.NewPieChart("Notifications", notifications),
 		arn.NewPieChart("Gender", gender),
 		arn.NewPieChart("Pixel ratio", pixelRatio),
