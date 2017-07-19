@@ -232,7 +232,7 @@ export class AnimeNotifier {
 				if(message.url.includes("/_/")) {
 					// Content reload
 					this.contentLoadedActions.then(() => {
-						this.reloadContent()
+						this.reloadContent(true)
 					})
 				} else {
 					// Full page reload
@@ -318,11 +318,16 @@ export class AnimeNotifier {
 		}
 	}
 
-	reloadContent() {
+	reloadContent(cached?: boolean) {
 		console.log("reload content", "/_" + this.app.currentPath)
 
 		let headers = new Headers()
-		headers.append("X-Reload", "true")
+
+		if(!cached) {
+			headers.append("X-Reload", "true")
+		} else {
+			headers.append("X-CacheOnly", "true")
+		}
 
 		let path = this.app.currentPath
 		this.lastReloadContentPath = path

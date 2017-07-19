@@ -137,10 +137,17 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 		return evt.waitUntil(evt.respondWith(fetch(request)))
 	}
 
+	// Forced cache response?
+	if(request.headers.get("X-CacheOnly") === "true") {
+		console.log("forced cache response")
+		return evt.waitUntil(fromCache(request))
+	}
+
 	let servedETag = undefined
 	
 	// Start fetching the request
 	let refresh = fetch(request).then(response => {
+		console.log(response)
 		let clone = response.clone()
 
 		// Save the new version of the resource in the cache
@@ -158,11 +165,11 @@ self.addEventListener("fetch", async (evt: FetchEvent) => {
 
 	// Forced reload
 	if(request.headers.get("X-Reload") === "true") {
-		return evt.waitUntil(refresh.then(response => {
+		return evt.waitUntil(evt.respondWith(refresh.then(response => {
 			servedETag = response.headers.get("ETag")
 			ETAGS.set(request.url, servedETag)
 			return response
-		}))
+		})))
 	}
 
 	// Try to serve cache first and fall back to network response
