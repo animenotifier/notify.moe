@@ -18,7 +18,7 @@ profile-boot-duration = 2s
 	overflow hidden
 
 .profile-field
-	text-align center
+	text-align left
 
 	a
 		color white
@@ -27,6 +27,9 @@ profile-boot-duration = 2s
 	.profile
 		vertical
 		align-items center
+	
+	.profile-field
+		text-align center
 
 	.intro-container
 		align-items center
