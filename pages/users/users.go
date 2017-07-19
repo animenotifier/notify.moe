@@ -8,9 +8,42 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get ...
-func Get(ctx *aero.Context) string {
-	users, err := arn.GetActiveUsersCached()
+// Active ...
+func Active(ctx *aero.Context) string {
+	users, err := arn.GetListOfUsersCached("active users")
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
+	}
+
+	return ctx.HTML(components.Users(users))
+}
+
+// Osu ...
+func Osu(ctx *aero.Context) string {
+	users, err := arn.GetListOfUsersCached("active osu users")
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
+	}
+
+	return ctx.HTML(components.Users(users))
+}
+
+// Staff ...
+func Staff(ctx *aero.Context) string {
+	users, err := arn.GetListOfUsersCached("active staff users")
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
+	}
+
+	return ctx.HTML(components.Users(users))
+}
+
+// AnimeWatching ...
+func AnimeWatching(ctx *aero.Context) string {
+	users, err := arn.GetListOfUsersCached("active anime watching users")
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)

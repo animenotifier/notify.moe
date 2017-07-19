@@ -84,7 +84,10 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/settings", settings.Get)
 	app.Ajax("/soundtracks", music.Get)
-	app.Ajax("/users", users.Get)
+	app.Ajax("/users", users.Active)
+	app.Ajax("/users/osu", users.Osu)
+	app.Ajax("/users/staff", users.Staff)
+	app.Ajax("/users/anime/watching", users.AnimeWatching)
 	app.Ajax("/login", login.Get)
 
 	// User profiles
