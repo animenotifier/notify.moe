@@ -22,8 +22,6 @@ export class Diff {
 		}
 		
 		Diff.rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
-		
-		console.log(Diff.rootContainer)
 		Diff.childNodes(aRoot, Diff.rootContainer)
 	}
 
