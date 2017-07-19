@@ -1,5 +1,7 @@
 component CharacterDetails(character *arn.Character)
 	h1= character.Name
+	
 	p
 		img(src=character.Image, alt=character.Name)
-	p= character.Description
+	
+	p.character-description= character.Description
