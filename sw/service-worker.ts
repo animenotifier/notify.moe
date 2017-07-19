@@ -194,7 +194,8 @@ self.addEventListener("push", (evt: PushEvent) => {
 			body: payload.message,
 			icon: payload.icon,
 			image: payload.image,
-			data: payload.link
+			data: payload.link,
+			badge: "https://notify.moe/brand/64"
 		})
 	)
 })
