@@ -28,6 +28,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportkitsu"
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportmyanimelist"
 	"github.com/animenotifier/notify.moe/pages/login"
+	"github.com/animenotifier/notify.moe/pages/me"
 	"github.com/animenotifier/notify.moe/pages/music"
 	"github.com/animenotifier/notify.moe/pages/newsoundtrack"
 	"github.com/animenotifier/notify.moe/pages/newthread"
@@ -129,6 +130,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/extension/embed", embed.Get)
 
 	// API
+	app.Get("/api/me", me.Get)
 	app.Get("/api/test/notification", notifications.Test)
 
 	// PayPal

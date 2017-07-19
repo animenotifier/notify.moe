@@ -157,7 +157,38 @@ self.addEventListener("push", (evt: PushEvent) => {
 })
 
 self.addEventListener("pushsubscriptionchange", (evt: any) => {
-	console.log("pushsubscriptionchange", evt)
+	evt.waitUntil((self as any).registration.pushManager.subscribe(evt.oldSubscription.options)
+	.then(async subscription => {
+		console.log("Send subscription to server...")
+
+		let rawKey = subscription.getKey("p256dh")
+		let key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
+
+		let rawSecret = subscription.getKey("auth")
+		let secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
+
+		let endpoint = subscription.endpoint
+
+		let pushSubscription = {
+			endpoint,
+			p256dh: key,
+			auth: secret,
+			platform: navigator.platform,
+			userAgent: navigator.userAgent,
+			screen: {
+				width: window.screen.width,
+				height: window.screen.height
+			}
+		}
+
+		let user = await fetch("/api/me").then(response => response.json())
+
+		return fetch("/api/pushsubscriptions/" + user.id + "/add", {
+			method: "POST",
+			credentials: "same-origin",
+			body: JSON.stringify(pushSubscription)
+		})
+	}))
 })
 
 self.addEventListener("notificationclick", (evt: NotificationEvent) => {
