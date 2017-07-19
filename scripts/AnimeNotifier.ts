@@ -16,7 +16,7 @@ export class AnimeNotifier {
 	statusMessage: StatusMessage
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
-	lastRequestURL: string
+	mainPageLoaded: boolean
 
 	imageFound: MutationQueue
 	imageNotFound: MutationQueue
@@ -199,13 +199,15 @@ export class AnimeNotifier {
 				url: ""
 			}
 
-			if(this.lastRequestURL) {
-				message.url = this.lastRequestURL
-			} else if(this.app.lastRequest) {
-				message.url = this.app.lastRequest.responseURL
+			// If mainPageLoaded is set, it means every single request is now an AJAX request for the /_/ prefixed page
+			if(this.mainPageLoaded) {
+				message.url = window.location.origin + "/_" + window.location.pathname
 			} else {
+				this.mainPageLoaded = true
 				message.url = window.location.href
 			}
+
+			console.log("Loaded", message.url)
 
 			navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
 		}
@@ -318,9 +320,8 @@ export class AnimeNotifier {
 		headers.append("X-Reload", "true")
 
 		let path = this.app.currentPath
-		this.lastRequestURL = location.origin + "/_" + path
 
-		return fetch(this.lastRequestURL, {
+		return fetch("/_" + path, {
 			credentials: "same-origin",
 			headers
 		})
@@ -514,7 +515,6 @@ export class AnimeNotifier {
 		}
 
 		let path = "/_" + url
-		this.lastRequestURL = location.origin + "/_" + path
 
 		let request = fetch(path, {
 			credentials: "same-origin"
