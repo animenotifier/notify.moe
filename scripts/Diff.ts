@@ -82,29 +82,35 @@ export class Diff {
 				for(let x = 0; x < elemB.attributes.length; x++) {
 					let attrib = elemB.attributes[x]
 
-					if(attrib.specified) {
-						// Skip mountables
-						if(attrib.name == "class") {
-							let classesA = elemA.classList
-							let classesB = elemB.classList
+					if(!attrib.specified) {
+						continue
+					}
 
-							for(let className of classesA) {
-								if(!classesB.contains(className) && !Diff.persistentClasses.has(className)) {
-									classesA.remove(className)
-								}
-							}
-
-							for(let className of classesB) {
-								if(!classesA.contains(className)) {
-									classesA.add(className)
-								}
-							}
-
+					if(attrib.name === "class") {
+						// If the class is exactly the same, skip this attribute.
+						if(elemA.getAttribute("class") === attrib.value) {
 							continue
 						}
 
-						elemA.setAttribute(attrib.name, elemB.getAttribute(attrib.name))
+						let classesA = elemA.classList
+						let classesB = elemB.classList
+
+						for(let className of classesA) {
+							if(!classesB.contains(className) && !Diff.persistentClasses.has(className)) {
+								classesA.remove(className)
+							}
+						}
+
+						for(let className of classesB) {
+							if(!classesA.contains(className)) {
+								classesA.add(className)
+							}
+						}
+
+						continue
 					}
+
+					elemA.setAttribute(attrib.name, elemB.getAttribute(attrib.name))
 				}
 
 				// Special case: Apply state of input elements

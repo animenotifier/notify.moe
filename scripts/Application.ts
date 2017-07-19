@@ -152,7 +152,7 @@ export class Application {
 		for(let i = 0; i < links.length; i++) {
 			let link = links[i] as HTMLElement
 
-			link.classList.remove(this.ajaxClass)
+			// link.classList.remove(this.ajaxClass)
 
 			let self = this
 			link.onclick = function(e) {

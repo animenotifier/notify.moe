@@ -43,8 +43,8 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 					td.anime-list-item-name
 						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
 					
-					if user != nil && item.Status == arn.AnimeListStatusWatching && item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
-						td.anime-list-item-actions
+					td.anime-list-item-actions
+						if user != nil && item.Status == arn.AnimeListStatusWatching && item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
 							for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
 								a(href=link, title="Watch episode " + toString(item.Episodes + 1) + " on twist.moe", target="_blank", rel="noopener")
 									RawIcon("eye")
