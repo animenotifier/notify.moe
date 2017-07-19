@@ -6,6 +6,7 @@ import { Diff } from "./Diff"
 import { MutationQueue } from "./MutationQueue"
 import { StatusMessage } from "./StatusMessage"
 import { PushManager } from "./PushManager"
+import { TouchController } from "./TouchController"
 
 export class AnimeNotifier {
 	app: Application
@@ -16,6 +17,8 @@ export class AnimeNotifier {
 	statusMessage: StatusMessage
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
+	touchController: TouchController
+	sideBar: HTMLElement
 	mainPageLoaded: boolean
 	lastReloadContentPath: string
 
@@ -117,9 +120,15 @@ export class AnimeNotifier {
 		this.pushManager = new PushManager()
 
 		// Sidebar control
+		this.sideBar = this.app.find("sidebar")
+
 		document.body.addEventListener("click", e => {
-			this.app.find("sidebar").classList.remove("sidebar-visible")
+			this.sideBar.classList.remove("sidebar-visible")
 		})
+
+		this.touchController = new TouchController()
+		this.touchController.leftSwipe = () => this.sideBar.classList.remove("sidebar-visible")
+		this.touchController.rightSwipe = () => this.sideBar.classList.add("sidebar-visible")
 	}
 
 	async onContentLoaded() {
