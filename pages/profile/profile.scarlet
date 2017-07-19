@@ -23,7 +23,7 @@ profile-boot-duration = 2s
 	a
 		color white
 
-< 600px
+< 740px
 	.profile
 		vertical
 		align-items center

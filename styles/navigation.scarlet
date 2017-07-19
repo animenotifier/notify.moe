@@ -82,7 +82,7 @@
 	.extra-navigation
 		display block
 
-< 380px height
+< 400px height
 	#navigation
 		vertical
 		height 100%
@@ -92,7 +92,11 @@
 		horizontal
 
 	.extra-navigation
-		display none
+		display block
+
+	#sidebar-toggle,
+	.hide-landscape
+		display none !important
 
 	#search
 		display none

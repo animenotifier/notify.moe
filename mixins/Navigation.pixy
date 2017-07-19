@@ -6,7 +6,7 @@ component Navigation(user *arn.User)
 
 component LoggedOutMenu
 	nav#navigation.logged-out
-		.navigation-link.action(data-action="toggleSidebar", data-trigger="click", aria-label="Menu", title="Menu")
+		#sidebar-toggle.navigation-link.action(data-action="toggleSidebar", data-trigger="click", aria-label="Menu", title="Menu")
 			.navigation-button
 				Icon("bars")
 				span.navigation-text Menu
@@ -28,7 +28,7 @@ component LoggedInMenu(user *arn.User)
 		.extension-navigation
 			NavigationButton("Watching list", "/extension/embed", "home")
 
-		.navigation-link.action(data-action="toggleSidebar", data-trigger="click", aria-label="Menu", title="Menu")
+		#sidebar-toggle.navigation-link.action(data-action="toggleSidebar", data-trigger="click", aria-label="Menu", title="Menu")
 			.navigation-button
 				Icon("bars")
 				span.navigation-text Menu
@@ -39,7 +39,7 @@ component LoggedInMenu(user *arn.User)
 		.extra-navigation
 			NavigationButton("Forum", "/forum", "comment")
 
-		.extra-navigation
+		.extra-navigation.hide-landscape
 			NavigationButton("Soundtracks", "/soundtracks", "headphones")
 
 		FuzzySearch
@@ -55,7 +55,7 @@ component LoggedInMenu(user *arn.User)
 		
 		NavigationButton("Settings", "/settings", "cog")
 		
-		.extra-navigation
+		.extra-navigation.hide-landscape
 			NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
 
 component FuzzySearch
