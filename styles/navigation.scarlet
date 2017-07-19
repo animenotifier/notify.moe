@@ -43,7 +43,7 @@
 	display none
 
 #search
-	display none
+	flex 1
 	border-radius 0
 	background transparent
 	border none
@@ -75,10 +75,6 @@
 	
 	#navigation
 		justify-content flex-start
-
-	#search
-		display block
-		flex 1
 	
 	.extra-navigation
 		display block

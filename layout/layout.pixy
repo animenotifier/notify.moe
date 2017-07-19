@@ -26,9 +26,33 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 					main#content.fade!= content
 					LoadingAnimation
 					StatusMessage
+				aside#sidebar
+					Sidebar(user)
 			if user != nil
 				#user(data-id=user.ID)
 			script(src="/scripts")
+
+component Sidebar(user *arn.User)
+	.user-image-container
+		if user != nil
+			Avatar(user)
+		else
+			img.user-image.lazy(data-src="/images/brand/64", alt="Anime Notifier")
+	
+	SidebarButton("Home", "/", "home")
+	SidebarButton("Forum", "/forum", "comment")
+	SidebarButton("Explore", "/explore", "th")
+	SidebarButton("Soundtracks", "/soundtracks", "headphones")
+	SidebarButton("Users", "/users", "globe")
+
+	if user != nil
+		if user.Role != ""
+			SidebarButton("Statistics", "/statistics", "pie-chart")
+		
+		SidebarButton("Settings", "/settings", "cog")
+		SidebarButtonNoAJAX("Logout", "/logout", "sign-out")
+	else
+		SidebarButton("Login", "/login", "sign-in")
 
 component StatusMessage
 	#status-message.fade.fade-out

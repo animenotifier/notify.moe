@@ -115,6 +115,11 @@ export class AnimeNotifier {
 
 		// Push manager
 		this.pushManager = new PushManager()
+
+		// Sidebar control
+		document.body.addEventListener("click", e => {
+			this.app.find("sidebar").classList.remove("sidebar-visible")
+		})
 	}
 
 	async onContentLoaded() {

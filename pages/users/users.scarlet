@@ -5,3 +5,6 @@
 
 	.user-image
 		margin 0.4rem
+
+.user
+	display flex

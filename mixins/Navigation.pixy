@@ -6,16 +6,20 @@ component Navigation(user *arn.User)
 
 component LoggedOutMenu
 	nav#navigation.logged-out
-		NavigationButton("About", "/", "home")
-		NavigationButton("Explore", "/explore", "th")
-		NavigationButton("Forum", "/forum", "comment")
+		.navigation-link.action(data-action="toggleSidebar", data-trigger="click", aria-label="Menu", title="Menu")
+			.navigation-button
+				Icon("bars")
+				span.navigation-text Menu
+		
+		//- NavigationButton("Explore", "/explore", "th")
+		//- NavigationButton("Forum", "/forum", "comment")
 
 		FuzzySearch
 
-		.extra-navigation
-			NavigationButton("Users", "/users", "globe")
+		//- .extra-navigation
+		//- 	NavigationButton("Users", "/users", "globe")
 		
-		NavigationButton("Soundtracks", "/soundtracks", "headphones")
+		//- NavigationButton("Soundtracks", "/soundtracks", "headphones")
 		
 		NavigationButton("Login", "/login", "sign-in")
 
@@ -24,9 +28,16 @@ component LoggedInMenu(user *arn.User)
 		.extension-navigation
 			NavigationButton("Watching list", "/extension/embed", "home")
 
-		NavigationButton("Dash", "/", "dashboard")
-		NavigationButton("Profile", "/+", "user")
-		NavigationButton("Forum", "/forum", "comment")
+		.navigation-link.action(data-action="toggleSidebar", data-trigger="click", aria-label="Menu", title="Menu")
+			.navigation-button
+				Icon("bars")
+				span.navigation-text Menu
+
+		.extra-navigation
+			NavigationButton("Profile", "/+", "user")
+
+		.extra-navigation
+			NavigationButton("Forum", "/forum", "comment")
 
 		.extra-navigation
 			NavigationButton("Soundtracks", "/soundtracks", "headphones")
@@ -36,7 +47,8 @@ component LoggedInMenu(user *arn.User)
 		.extra-navigation
 			NavigationButton("Users", "/users", "globe")
 		
-		NavigationButton("Explore", "/explore", "th")
+		.extra-navigation
+			NavigationButton("Explore", "/explore", "th")
 
 		//- .extra-navigation
 		//- 	NavigationButton("Statistics", "/statistics", "pie-chart")
@@ -55,8 +67,20 @@ component NavigationButton(name string, target string, icon string)
 			Icon(icon)
 			span.navigation-text= name
 
+component SidebarButton(name string, target string, icon string)
+	a.sidebar-link.ajax(href=target, aria-label=name, title=name, data-bubble="true")
+		.sidebar-button
+			Icon(icon)
+			span.sidebar-text= name
+
 component NavigationButtonNoAJAX(name string, target string, icon string)
 	a.navigation-link(href=target, aria-label=name)
 		.navigation-button
 			Icon(icon)
 			span.navigation-text= name
+
+component SidebarButtonNoAJAX(name string, target string, icon string)
+	a.sidebar-link(href=target, aria-label=name, data-bubble="true")
+		.sidebar-button
+			Icon(icon)
+			span.sidebar-text= name

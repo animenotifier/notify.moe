@@ -1,0 +1,44 @@
+sidebar-spacing-y = 0.75rem
+
+#sidebar
+	vertical
+	position fixed
+	left 0
+	top 0
+	min-width 265px
+	height 100%
+	background ui-background
+	transform translateX(-100%)
+	overflow-x hidden
+	overflow-y auto
+	opacity 0
+	pointer-events none
+	box-shadow shadow-medium
+	transition opacity transition-speed ease, transform transition-speed ease
+	will-change opacity transition
+
+	.user-image-container
+		horizontal
+		justify-content center
+		margin 0.8rem 0
+
+.sidebar-visible
+	transform translateX(0) !important
+	pointer-events all !important
+	opacity 1 !important
+
+.sidebar-link
+	// color text-color
+	&.active
+		.sidebar-button
+			background rgb(245, 245, 245)
+
+.sidebar-button
+	horizontal
+	align-items center
+	padding sidebar-spacing-y content-padding
+	// background ui-background
+
+	.icon
+		font-size 1.3rem
+		margin-right content-padding

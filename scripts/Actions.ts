@@ -3,6 +3,11 @@ import { AnimeNotifier } from "./AnimeNotifier"
 import { Diff } from "./Diff"
 import { findAll } from "./Utils"
 
+// Toggle sidebar
+export function toggleSidebar(arn: AnimeNotifier) {
+	arn.app.find("sidebar").classList.toggle("sidebar-visible")
+}
+
 // Save new data from an input field
 export function save(arn: AnimeNotifier, input: HTMLElement) {
 	arn.loading(true)

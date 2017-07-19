@@ -160,7 +160,10 @@ export class Application {
 				let url = this.getAttribute("href")
 
 				e.preventDefault()
-				e.stopPropagation()
+
+				// if(this.dataset.bubble !== "true") {
+				// 	e.stopPropagation()
+				// }
 
 				if(!url || url === self.currentPath)
 					return
