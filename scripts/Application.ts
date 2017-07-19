@@ -13,7 +13,6 @@ export class Application {
 	loading: HTMLElement
 	currentPath: string
 	originalPath: string
-	eTag: string
 	lastRequest: XMLHttpRequest
 
 	constructor() {
@@ -46,8 +45,6 @@ export class Application {
 			request.onerror = () => reject(new Error("You are either offline or the requested page doesn't exist."))
 			request.ontimeout = () => reject(new Error("The page took too much time to respond."))
 			request.onload = () => {
-				this.eTag = request.getResponseHeader("ETag")
-
 				if(request.status < 200 || request.status >= 400)
 					reject(request.responseText)
 				else

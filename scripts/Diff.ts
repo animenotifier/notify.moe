@@ -3,6 +3,7 @@ export class Diff {
 
 	// Reuse container for diffs to avoid memory allocation
 	static container: HTMLElement
+	static rootContainer: HTMLElement
 
 	// innerHTML will diff the element with the given HTML string and apply DOM mutations.
 	static innerHTML(aRoot: HTMLElement, html: string) {
@@ -12,6 +13,18 @@ export class Diff {
 		
 		Diff.container.innerHTML = html
 		Diff.childNodes(aRoot, Diff.container)
+	}
+
+	// root will diff the document root element with the given HTML string and apply DOM mutations.
+	static root(aRoot: HTMLElement, html: string) {
+		if(!Diff.rootContainer) {
+			Diff.rootContainer = document.createElement("html")
+		}
+		
+		Diff.rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
+		
+		console.log(Diff.rootContainer)
+		Diff.childNodes(aRoot, Diff.rootContainer)
 	}
 
 	// childNodes diffs the child nodes of 2 given elements and applies DOM mutations.

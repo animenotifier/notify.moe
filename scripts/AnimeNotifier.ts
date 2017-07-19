@@ -108,9 +108,6 @@ export class AnimeNotifier {
 		// Let"s start
 		this.app.run()
 
-		// Service worker
-		this.registerServiceWorker()
-
 		// Push manager
 		this.pushManager = new PushManager()
 	}
@@ -158,8 +155,13 @@ export class AnimeNotifier {
 	}
 
 	onIdle() {
+		// Service worker
+		this.registerServiceWorker()
+
+		// Analytics
 		this.pushAnalytics()
 
+		// Offline message
 		if(navigator.onLine === false) {
 			this.statusMessage.showError("You are viewing an offline version of the site now.")
 		}
@@ -170,6 +172,8 @@ export class AnimeNotifier {
 			return
 		}
 
+		console.log("register service worker")
+
 		navigator.serviceWorker.register("/service-worker").then(registration => {
 			registration.update()
 		})
@@ -178,7 +182,7 @@ export class AnimeNotifier {
 			this.onServiceWorkerMessage(evt)
 		})
 
-		document.addEventListener("DOMContentLoaded", () => {
+		let sendContentLoadedEvent = () => {
 			if(!navigator.serviceWorker.controller) {
 				return
 			}
@@ -194,8 +198,18 @@ export class AnimeNotifier {
 				message.url = window.location.href
 			}
 
+			console.log("send loaded event to service worker")
+
 			navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
-		})
+		}
+
+		// For future loaded events
+		document.addEventListener("DOMContentLoaded", sendContentLoadedEvent)
+
+		// If the page is loaded already, send the loaded event right now.
+		if(document.readyState !== "loading") {
+			sendContentLoadedEvent()
+		}
 	}
 
 	onServiceWorkerMessage(evt: ServiceWorkerMessageEvent) {
@@ -307,7 +321,6 @@ export class AnimeNotifier {
 				return Promise.reject("old request")
 			}
 
-			this.app.eTag = response.headers.get("ETag")
 			return Promise.resolve(response)
 		})
 		.then(response => response.text())
@@ -316,7 +329,29 @@ export class AnimeNotifier {
 	}
 
 	reloadPage() {
-		location.reload()
+		console.log("reload page")
+		
+		let headers = new Headers()
+		headers.append("X-Reload", "true")
+
+		let path = this.app.currentPath
+
+		return fetch(path, {
+			credentials: "same-origin",
+			headers
+		})
+		.then(response => {
+			if(this.app.currentPath !== path) {
+				return Promise.reject("old request")
+			}
+
+			return Promise.resolve(response)
+		})
+		.then(response => response.text())
+		.then(html => {
+			Diff.root(document.documentElement, html)
+		})
+		.then(() => this.app.emit("DOMContentLoaded"))
 	}
 
 	loading(isLoading: boolean) {
@@ -477,7 +512,6 @@ export class AnimeNotifier {
 			credentials: "same-origin"
 		})
 		.then(response => {
-			this.app.eTag = response.headers.get("ETag")
 			return response.text()
 		})
 		
