@@ -26,10 +26,10 @@ func Firewall() aero.Middleware {
 		ip := ctx.RealIP()
 
 		// Allow localhost
-		// if ip == "127.0.0.1" {
-		// 	next()
-		// 	return
-		// }
+		if ip == "127.0.0.1" {
+			next()
+			return
+		}
 
 		statsObj, found := ipToStats.Get(ip)
 
