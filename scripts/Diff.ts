@@ -13,7 +13,7 @@ export class Diff {
 		}
 		
 		Diff.container.innerHTML = html
-		Diff.childNodes(aRoot, Diff.container)
+		Diff.childNodes(aRoot.getElementsByTagName("body")[0], Diff.container.getElementsByTagName("body")[0])
 	}
 
 	// root will diff the document root element with the given HTML string and apply DOM mutations.
