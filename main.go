@@ -142,6 +142,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Get("/api/paypal/payment/create", paypal.CreatePayment)
 
 	// Middleware
+	app.Use(middleware.Firewall())
 	app.Use(middleware.Log())
 	app.Use(middleware.Session())
 	app.Use(middleware.UserInfo())
