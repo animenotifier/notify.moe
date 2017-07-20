@@ -2,5 +2,21 @@
 	width 55px !important
 	height 78px !important
 
+.forum-search-result
+	horizontal
+
+.forum-search-result-title
+	flex 1
+	clip-long-text
+
+.forum-search-result-author
+	text-align right
+	opacity 0.5
+
+.forum-search-result-sample
+	clip-long-text
+	margin-bottom 1rem
+	opacity 0.8
+
 .no-search-results
 	text-align left

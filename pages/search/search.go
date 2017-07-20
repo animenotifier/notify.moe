@@ -8,11 +8,13 @@ import (
 
 const maxUsers = 6 * 6
 const maxAnime = 5 * 6
+const maxPosts = 3
+const maxThreads = 3
 
 // Get search page.
 func Get(ctx *aero.Context) string {
 	term := ctx.Query("q")
 
-	userResults, animeResults := arn.Search(term, maxUsers, maxAnime)
-	return ctx.HTML(components.SearchResults(term, userResults, animeResults))
+	userResults, animeResults, postResults, threadResults := arn.Search(term, maxUsers, maxAnime, maxPosts, maxThreads)
+	return ctx.HTML(components.SearchResults(term, userResults, animeResults, postResults, threadResults))
 }

@@ -1,8 +1,6 @@
 .schedule-item-link,
 .schedule-item-title
-	white-space nowrap
-	text-overflow ellipsis
-	overflow hidden
+	clip-long-text
 
 .schedule-item-link
 	horizontal

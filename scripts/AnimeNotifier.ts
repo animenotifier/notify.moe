@@ -488,11 +488,9 @@ export class AnimeNotifier {
 		let time = 0
 		let start = Date.now()
 		let maxTime = start + maxDelay
-		let mutations = []
 
-		let mountableTypes = {
-			general: start
-		}
+		let mountableTypes = new Map<string, number>()
+		let mountableTypeMutations = new Map<string, Array<any>>()
 
 		let collection = document.getElementsByClassName(className)
 
@@ -506,43 +504,49 @@ export class AnimeNotifier {
 			let element = collection.item(i) as HTMLElement
 			let type = element.dataset.mountableType || "general"
 
-			if(type in mountableTypes) {
-				time = mountableTypes[type] += delay
+			if(mountableTypes.has(type)) {
+				time = mountableTypes.get(type) + delay
+				mountableTypes.set(type, time)
 			} else {
-				time = mountableTypes[type] = start
+				time = start
+				mountableTypes.set(type, time)
+				mountableTypeMutations.set(type, [])
 			}
 
 			if(time > maxTime) {
 				time = maxTime
 			}
 
-			mutations.push({
+			mountableTypeMutations.get(type).push({
 				element,
 				time
 			})
 		}
 
-		let mutationIndex = 0
+		for(let mountableType of mountableTypeMutations.keys()) {
+			let mutations = mountableTypeMutations.get(mountableType)
+			let mutationIndex = 0
 
-		let updateBatch = () => {
-			let now = Date.now()
+			let updateBatch = () => {
+				let now = Date.now()
 
-			for(; mutationIndex < mutations.length; mutationIndex++) {
-				let mutation = mutations[mutationIndex]
+				for(; mutationIndex < mutations.length; mutationIndex++) {
+					let mutation = mutations[mutationIndex]
 
-				if(mutation.time > now) {
-					break
+					if(mutation.time > now) {
+						break
+					}
+
+					func(mutation.element)
 				}
 
-				func(mutation.element)
+				if(mutationIndex < mutations.length) {
+					window.requestAnimationFrame(updateBatch)
+				}
 			}
 
-			if(mutationIndex < mutations.length) {
-				window.requestAnimationFrame(updateBatch)
-			}
+			window.requestAnimationFrame(updateBatch)
 		}
-
-		window.requestAnimationFrame(updateBatch)
 	}
 
 	diff(url: string) {

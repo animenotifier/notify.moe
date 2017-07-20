@@ -31,12 +31,12 @@ var jobs = map[string]time.Duration{
 	"popular-anime":        20 * time.Minute,
 	"avatars":              30 * time.Minute,
 	"twist":                1 * time.Hour,
+	"search-index":         2 * time.Hour,
 	"sync-shoboi":          8 * time.Hour,
 	"refresh-episodes":     10 * time.Hour,
 	"refresh-track-titles": 10 * time.Hour,
 	"refresh-osu":          12 * time.Hour,
 	"sync-anime":           12 * time.Hour,
-	"search-index":         12 * time.Hour,
 }
 
 func main() {

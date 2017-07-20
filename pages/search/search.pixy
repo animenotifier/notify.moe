@@ -1,4 +1,4 @@
-component SearchResults(term string, users []*arn.User, animeResults []*arn.Anime)
+component SearchResults(term string, users []*arn.User, animeResults []*arn.Anime, postResults []*arn.Post, threadResults []*arn.Thread)
 	h1.page-title= "Search: " + term
 
 	.widgets
@@ -32,9 +32,26 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 		.widget
 			h3.widget-title
 				Icon("comment")
-				span Forums
+				span Forum
 			
-			p.no-search-results.mountable Forums search coming soon.
+			if len(postResults) == 0 && len(threadResults) == 0
+				p.no-search-results.mountable No posts found.
+			else
+				each thread in threadResults
+					.mountable(data-mountable-type="forum")
+						.forum-search-result
+							a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
+							if thread.Author().HasNick()
+								.forum-search-result-author= thread.Author().Nick
+						.forum-search-result-sample= thread.Text
+				
+				each post in postResults
+					.mountable(data-mountable-type="forum")
+						.forum-search-result
+							a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
+							if post.Author().HasNick()
+								.forum-search-result-author= post.Author().Nick
+						.forum-search-result-sample= post.Text
 		
 		.widget
 			h3.widget-title

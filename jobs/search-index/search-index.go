@@ -12,7 +12,12 @@ import (
 func main() {
 	color.Yellow("Updating search index")
 
-	flow.Parallel(updateAnimeIndex, updateUserIndex)
+	flow.Parallel(
+		updateAnimeIndex,
+		updateUserIndex,
+		updatePostIndex,
+		updateThreadIndex,
+	)
 
 	color.Green("Finished.")
 }
@@ -71,10 +76,7 @@ func updateUserIndex() {
 
 	// Users
 	userStream, err := arn.StreamUsers()
-
-	if err != nil {
-		panic(err)
-	}
+	arn.PanicOnError(err)
 
 	for user := range userStream {
 		if user.HasNick() {
@@ -86,8 +88,42 @@ func updateUserIndex() {
 
 	// Save in database
 	err = arn.DB.Set("SearchIndex", "User", userSearchIndex)
+	arn.PanicOnError(err)
+}
 
-	if err != nil {
-		panic(err)
+func updatePostIndex() {
+	postSearchIndex := arn.NewSearchIndex()
+
+	// Users
+	postStream, err := arn.StreamPosts()
+	arn.PanicOnError(err)
+
+	for post := range postStream {
+		postSearchIndex.TextToID[strings.ToLower(post.Text)] = post.ID
 	}
+
+	fmt.Println(len(postSearchIndex.TextToID), "posts")
+
+	// Save in database
+	err = arn.DB.Set("SearchIndex", "Post", postSearchIndex)
+	arn.PanicOnError(err)
+}
+
+func updateThreadIndex() {
+	threadSearchIndex := arn.NewSearchIndex()
+
+	// Users
+	threadStream, err := arn.StreamThreads()
+	arn.PanicOnError(err)
+
+	for thread := range threadStream {
+		threadSearchIndex.TextToID[strings.ToLower(thread.Title)] = thread.ID
+		threadSearchIndex.TextToID[strings.ToLower(thread.Text)] = thread.ID
+	}
+
+	fmt.Println(len(threadSearchIndex.TextToID)/2, "threads")
+
+	// Save in database
+	err = arn.DB.Set("SearchIndex", "Thread", threadSearchIndex)
+	arn.PanicOnError(err)
 }

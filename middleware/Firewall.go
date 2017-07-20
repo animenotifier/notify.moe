@@ -11,7 +11,7 @@ import (
 
 const requestThreshold = 10
 
-var ipToStats = cache.New(30*time.Minute, 15*time.Minute)
+var ipToStats = cache.New(15*time.Minute, 15*time.Minute)
 
 // IPStats captures the statistics for a single IP.
 type IPStats struct {

@@ -23,9 +23,7 @@ export class Diff {
 		}
 		
 		Diff.rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
-		console.log(aRoot.getElementsByTagName("body")[0])
-		console.log(Diff.rootContainer.getElementsByTagName("body")[0])
-		Diff.childNodes(aRoot.getElementsByTagName("body")[0], Diff.rootContainer.getElementsByTagName("body")[0])
+		Diff.childNodes(aRoot, Diff.rootContainer)
 	}
 
 	// childNodes diffs the child nodes of 2 given elements and applies DOM mutations.
