@@ -43,6 +43,11 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 				p.profile-field.role
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
+		
+		//- .profile-actions
+		//- 	button.action(data-action="followUser", data-trigger="click")
+		//- 		Icon("user-plus")
+		//- 		span Follow
 	
 	ProfileNavigation(viewUser, uri)
 

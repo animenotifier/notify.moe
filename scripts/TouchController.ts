@@ -14,7 +14,7 @@ export class TouchController {
 		document.addEventListener("touchmove", evt => this.handleTouchMove(evt), false)
 
 		this.downSwipe = this.upSwipe = this.rightSwipe = this.leftSwipe = () => null
-		this.threshold = 5
+		this.threshold = 3
 	}
 
 	handleTouchStart(evt) {

@@ -1,7 +1,8 @@
 profile-boot-duration = 2s
 
 .profile
-	horizontal
+	vertical
+	align-items center
 
 	position relative
 	left calc(content-padding * -1)
@@ -18,23 +19,42 @@ profile-boot-duration = 2s
 	overflow hidden
 
 .profile-field
-	text-align left
+	text-align center
+	
 
 	a
 		color white
 
-< 740px
+.intro-container
+	vertical
+	align-items center
+	margin-top calc(content-padding * 1.5)
+
+.profile-actions
+	horizontal
+
+> 740px
 	.profile
-		vertical
-		align-items center
+		horizontal
+		align-items flex-start
 	
 	.profile-field
-		text-align center
+		text-align left
 
 	.intro-container
-		align-items center
-		margin-top calc(content-padding * 1.5)
-		padding-left content-padding
+		align-items flex-start
+		margin-top 0
+		padding content-padding
+		padding-top 0
+		padding-left calc(content-padding * 2)
+		max-width 900px
+
+	.profile-actions
+		vertical
+		position absolute
+		top 0
+		right 0
+		padding content-padding
 
 // animation appear
 // 	0%
@@ -77,14 +97,6 @@ profile-boot-duration = 2s
 	max-height 280px
 	border-radius 3px
 	overflow hidden
-
-.intro-container
-	vertical
-	align-items flex-start
-	padding content-padding
-	padding-top 0
-	padding-left calc(content-padding * 2)
-	max-width 900px
 
 #nick
 	margin-bottom 1rem

@@ -19,9 +19,10 @@
 	padding 0
 
 .anime-list-item-image
-	width 27px
+	width 39px
 	height 39px
 	border-radius 2px
+	object-fit cover
 
 .anime-list-item-name
 	flex 1

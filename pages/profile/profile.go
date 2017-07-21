@@ -45,5 +45,23 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		})
 	})
 
+	openGraph := &arn.OpenGraph{
+		Tags: map[string]string{
+			"og:title":         viewUser.Nick,
+			"og:image":         viewUser.LargeAvatar(),
+			"og:url":           "https://" + ctx.App.Config.Domain + viewUser.Link(),
+			"og:site_name":     "notify.moe",
+			"og:description":   viewUser.Tagline,
+			"og:type":          "profile",
+			"profile:username": viewUser.Nick,
+		},
+		Meta: map[string]string{
+			"description": viewUser.Tagline,
+			"keywords":    viewUser.Nick + ",profile",
+		},
+	}
+
+	ctx.Data = openGraph
+
 	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks, ctx.URI()))
 }
