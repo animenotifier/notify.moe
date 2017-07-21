@@ -97,6 +97,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/user/:nick/posts", profile.GetPostsByUser)
 	app.Ajax("/user/:nick/soundtracks", profile.GetSoundTracksByUser)
 	app.Ajax("/user/:nick/stats", profile.GetStatsByUser)
+	app.Ajax("/user/:nick/followers", profile.GetFollowers)
 	app.Ajax("/user/:nick/animelist", animelist.Get)
 	app.Ajax("/user/:nick/animelist/watching", animelist.FilterByStatus(arn.AnimeListStatusWatching))
 	app.Ajax("/user/:nick/animelist/completed", animelist.FilterByStatus(arn.AnimeListStatusCompleted))

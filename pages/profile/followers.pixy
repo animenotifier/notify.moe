@@ -1,0 +1,11 @@
+component ProfileFollowers(followers []*arn.User, viewUser *arn.User, user *arn.User, uri string)
+	ProfileHeader(viewUser, user, uri)
+	
+	if len(followers) > 0
+		.user-avatars
+			each user in followers
+				if user.Nick != ""
+					.mountable
+						Avatar(user)
+	else
+		p.no-data.mountable= viewUser.Nick + " doesn't have a follower yet."

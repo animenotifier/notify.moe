@@ -88,6 +88,10 @@ component ProfileNavigation(viewUser *arn.User, uri string)
 		a.button.tab.action(href="/+" + viewUser.Nick + "/stats", data-action="diff", data-trigger="click")
 			Icon("area-chart")
 			span.tab-text Stats
+
+		a.button.tab.action(href="/+" + viewUser.Nick + "/followers", data-action="diff", data-trigger="click")
+			Icon("users")
+			span.tab-text Followers
 	
 	if strings.Contains(uri, "/animelist")
 		hr
