@@ -580,17 +580,29 @@ export class AnimeNotifier {
 		})
 	}
 
-	post(url, obj) {
+	post(url, body) {
+		if(typeof body !== "string") {
+			body = JSON.stringify(body)
+		}
+
+		this.loading(true)
+
 		return fetch(url, {
 			method: "POST",
-			body: JSON.stringify(obj),
+			body,
 			credentials: "same-origin"
 		})
 		.then(response => response.text())
 		.then(body => {
+			this.loading(false)
+
 			if(body !== "ok") {
 				throw body
 			}
+		})
+		.catch(err => {
+			this.loading(false)
+			throw err
 		})
 	}
 

@@ -3,6 +3,22 @@ import { AnimeNotifier } from "./AnimeNotifier"
 import { Diff } from "./Diff"
 import { findAll } from "./Utils"
 
+// Follow user
+export function followUser(arn: AnimeNotifier, elem: HTMLElement) {
+	return arn.post(elem.dataset.api, elem.dataset.viewUserId)
+	.then(() => arn.reloadContent())
+	.then(() => arn.statusMessage.showInfo("You are now following " + arn.app.find("nick").innerText + "."))
+	.catch(err => arn.statusMessage.showError(err))
+}
+
+// Unfollow user
+export function unfollowUser(arn: AnimeNotifier, elem: HTMLElement) {
+	return arn.post(elem.dataset.api, elem.dataset.viewUserId)
+	.then(() => arn.reloadContent())
+	.then(() => arn.statusMessage.showInfo("You stopped following " + arn.app.find("nick").innerText + "."))
+	.catch(err => arn.statusMessage.showError(err))
+}
+
 // Toggle sidebar
 export function toggleSidebar(arn: AnimeNotifier) {
 	arn.app.find("sidebar").classList.toggle("sidebar-visible")

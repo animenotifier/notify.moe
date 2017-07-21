@@ -228,6 +228,12 @@ var interfaceImplementations = map[string][]reflect.Type{
 	"AnimeList": []reflect.Type{
 		collection,
 	},
+	"PushSubscriptions": []reflect.Type{
+		collection,
+	},
+	"UserFollows": []reflect.Type{
+		collection,
+	},
 }
 
 func init() {

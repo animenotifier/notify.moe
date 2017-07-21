@@ -39,8 +39,8 @@ component LoggedInMenu(user *arn.User)
 		.extra-navigation
 			NavigationButton("Forum", "/forum", "comment")
 
-		.extra-navigation
-			NavigationButton("Soundtracks", "/soundtracks", "headphones")
+		//- .extra-navigation
+		//- 	NavigationButton("Soundtracks", "/soundtracks", "headphones")
 
 		FuzzySearch
 
@@ -56,8 +56,8 @@ component LoggedInMenu(user *arn.User)
 		.hide-landscape
 			NavigationButton("Settings", "/settings", "cog")
 		
-		.extra-navigation.hide-landscape
-			NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
+		//- .extra-navigation.hide-landscape
+		//- 	NavigationButtonNoAJAX("Logout", "/logout", "sign-out")
 
 component FuzzySearch
 	input#search.action(data-action="search", data-trigger="input", type="text", placeholder="Search...", title="Shortcut: F")

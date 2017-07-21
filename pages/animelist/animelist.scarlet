@@ -65,8 +65,7 @@
 	width 65px
 
 .anime-list-item-actions
-	display none
-	width 30px
+	display none !important
 
 // 	// Beautify icon alignment
 // 	.raw-icon
@@ -74,7 +73,11 @@
 
 > 740px
 	.anime-list-item-actions
-		display block
+		display flex !important
+		width 30px
+
+		:empty
+			display none !important
 
 .anime-list-item-airing-date
 	display none !important

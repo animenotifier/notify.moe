@@ -31,7 +31,15 @@ profile-boot-duration = 2s
 	margin-top calc(content-padding * 1.5)
 
 .profile-actions
-	horizontal
+	vertical
+	margin-top content-padding
+
+	:empty
+		display none
+
+.profile-action
+	margin-bottom 0.5rem
+	text-shadow none !important
 
 > 740px
 	.profile
@@ -50,11 +58,11 @@ profile-boot-duration = 2s
 		max-width 900px
 
 	.profile-actions
-		vertical
 		position absolute
 		top 0
 		right 0
 		padding content-padding
+		margin-top 0
 
 // animation appear
 // 	0%

@@ -18,3 +18,7 @@
 .error-message
 	color white
 	background-color hsl(0, 75%, 50%)
+
+.info-message
+	color white
+	background-color forum-tag-hover-color
