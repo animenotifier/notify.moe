@@ -88,7 +88,7 @@ func dashboard(ctx *aero.Context) string {
 		}
 
 		followingList = userList.([]*arn.User)
-		followingList = arn.SortUsersLastSeen(followingList)
+		arn.SortUsersLastSeen(followingList)
 
 		if len(followingList) > maxFollowing {
 			followingList = followingList[:maxFollowing]

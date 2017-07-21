@@ -40,6 +40,24 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
+	// Friends watching
+	var friends []*arn.User
+
+	if user != nil {
+		friends = user.Follows().Users()
+
+		deleted := 0
+		for i := range friends {
+			j := i - deleted
+			if !friends[j].AnimeList().Contains(anime.ID) {
+				friends = friends[:j+copy(friends[j:], friends[j+1:])]
+				deleted++
+			}
+		}
+
+		arn.SortUsersLastSeen(friends)
+	}
+
 	// Open Graph
 	description := anime.Summary
 
@@ -70,5 +88,5 @@ func Get(ctx *aero.Context) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Anime(anime, tracks, user, episodesReversed))
+	return ctx.HTML(components.Anime(anime, friends, tracks, user, episodesReversed))
 }

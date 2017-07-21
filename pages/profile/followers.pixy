@@ -2,10 +2,18 @@ component ProfileFollowers(followers []*arn.User, viewUser *arn.User, user *arn.
 	ProfileHeader(viewUser, user, uri)
 	
 	if len(followers) > 0
-		.user-avatars
-			each user in followers
-				if user.Nick != ""
-					.mountable
-						Avatar(user)
+		UserGrid(followers)
 	else
 		p.no-data.mountable= viewUser.Nick + " doesn't have a follower yet."
+
+component UserGrid(users []*arn.User)
+	.user-avatars
+		each user in users
+			if user.Nick != ""
+				if user.IsActive()
+					.mountable
+						Avatar(user)
+				else
+					.mountable
+						.inactive-user
+							Avatar(user)

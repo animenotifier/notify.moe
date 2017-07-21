@@ -2,7 +2,6 @@ package profile
 
 import (
 	"net/http"
-	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -20,10 +19,7 @@ func GetFollowers(ctx *aero.Context) string {
 	}
 
 	followers := viewUser.Followers()
-
-	sort.Slice(followers, func(i, j int) bool {
-		return followers[i].LastSeen > followers[j].LastSeen
-	})
+	arn.SortUsersLastSeen(followers)
 
 	return ctx.HTML(components.ProfileFollowers(followers, viewUser, utils.GetUser(ctx), ctx.URI()))
 

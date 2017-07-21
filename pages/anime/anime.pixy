@@ -1,4 +1,4 @@
-component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, episodesReversed bool)
+component Anime(anime *arn.Anime, friends []*arn.User, tracks []*arn.SoundTrack, user *arn.User, episodesReversed bool)
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Small != ""
 			.anime-image-container
@@ -34,6 +34,12 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, epis
 				button.action(data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID, data-user-id=user.ID, data-user-nick=user.Nick)
 					Icon("plus")
 					span Add to collection
+
+	if len(friends) > 0
+		h3.anime-section-name Friends
+		
+		.anime-friends
+			UserGrid(friends)
 
 	h3.anime-section-name Ratings
 	.anime-rating-categories
