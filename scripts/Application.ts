@@ -23,9 +23,14 @@ export class Application {
 		this.fadeOutClass = "fade-out"
 	}
 
+	init() {
+		document.addEventListener("DOMContentLoaded", () => {
+			this.ajaxify()
+			this.markActiveLinks()
+		})
+	}
+
 	run() {
-		this.ajaxify()
-		this.markActiveLinks()
 		this.loading.classList.add(this.fadeOutClass)
 	}
 
@@ -118,9 +123,6 @@ export class Application {
 		} else {
 			this.content.innerHTML = html
 		}
-
-		this.ajaxify(this.content)
-		this.markActiveLinks(this.content)
 	}
 
 	markActiveLinks(element?: HTMLElement) {

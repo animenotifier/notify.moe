@@ -68,6 +68,10 @@ export class AnimeNotifier {
 	}
 
 	init() {
+		// App init
+		this.app.init()
+
+		// Event listeners
 		document.addEventListener("readystatechange", this.onReadyStateChange.bind(this))
 		document.addEventListener("DOMContentLoaded", this.onContentLoaded.bind(this))
 		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
@@ -573,7 +577,6 @@ export class AnimeNotifier {
 		return delay(300).then(() => {
 			return request
 			.then(html => this.app.setContent(html, true))
-			.then(() => this.app.markActiveLinks())
 			.then(() => this.app.emit("DOMContentLoaded"))
 			.then(() => this.loading(false))
 			.catch(console.error)

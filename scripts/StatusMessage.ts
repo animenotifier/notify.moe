@@ -26,12 +26,19 @@ export class StatusMessage {
 		})
 	}
 
+	clearStyle() {
+		this.container.classList.remove("info-message")
+		this.container.classList.remove("error-message")
+	}
+
 	showError(message: string, duration?: number) {
+		this.clearStyle()
 		this.show(message, duration || 4000)
 		this.container.classList.add("error-message")
 	}
 
 	showInfo(message: string, duration?: number) {
+		this.clearStyle()
 		this.show(message, duration || 2000)
 		this.container.classList.add("info-message")
 	}
