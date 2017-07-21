@@ -30,7 +30,6 @@ func Get(ctx *aero.Context) string {
 // Render the dashboard.
 func dashboard(ctx *aero.Context) string {
 	var forumActivity []arn.Postable
-	var userList interface{}
 	var followingList []*arn.User
 	var soundTracks []*arn.SoundTrack
 	var upcomingEpisodes []*arn.UpcomingEpisode
@@ -80,14 +79,7 @@ func dashboard(ctx *aero.Context) string {
 			soundTracks = soundTracks[:maxSoundTracks]
 		}
 	}, func() {
-		var err error
-		userList, err = arn.DB.GetMany("User", user.Following)
-
-		if err != nil {
-			return
-		}
-
-		followingList = userList.([]*arn.User)
+		followingList = user.Follows().Users()
 		arn.SortUsersLastSeen(followingList)
 
 		if len(followingList) > maxFollowing {
