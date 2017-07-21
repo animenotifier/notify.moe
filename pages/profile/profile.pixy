@@ -59,7 +59,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 				if user.Role == "admin" || user.Role == "editor"
 					a.button.profile-action(href="/api/user/" + viewUser.ID)
 						Icon("search-plus")
-						span API
+						span JSON
 	
 	ProfileNavigation(viewUser, uri)
 
