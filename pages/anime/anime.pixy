@@ -1,4 +1,4 @@
-component Anime(anime *arn.Anime, friends []*arn.User, tracks []*arn.SoundTrack, user *arn.User, episodesReversed bool)
+component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, tracks []*arn.SoundTrack, user *arn.User, episodesReversed bool)
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Small != ""
 			.anime-image-container
@@ -39,7 +39,16 @@ component Anime(anime *arn.Anime, friends []*arn.User, tracks []*arn.SoundTrack,
 		h3.anime-section-name Friends
 		
 		.anime-friends
-			UserGrid(friends)
+			.user-avatars
+				each friend in friends
+					if friend.Nick != ""
+						if friend.IsActive()
+							.mountable
+								CustomAvatar(friend, listItems[friend].Link(friend.Nick), friend.Nick + " => " + listItems[friend].Status + " | " + toString(listItems[friend].Episodes) + " eps | " + fmt.Sprintf("%.1f", listItems[friend].Rating.Overall) + " rating")
+						else
+							.mountable
+								.inactive-user
+									Avatar(friend)
 
 	h3.anime-section-name Ratings
 	.anime-rating-categories
