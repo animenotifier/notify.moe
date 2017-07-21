@@ -76,11 +76,11 @@
 		display block
 
 .anime-list-item-airing-date
-	display none
+	display none !important
 
 > 700px
 	.anime-list-item-airing-date
-		display block
+		display flex !important
 		text-align right
 		width 150px
 		opacity 0.8

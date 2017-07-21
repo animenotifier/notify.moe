@@ -64,11 +64,9 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 							.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
 							if item.Status == arn.AnimeListStatusWatching
 								.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
+						
 						.anime-list-item-episodes-separator /
 						.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
-						//- .anime-list-item-episodes-edit
-						//- 	a.ajax(href=, title="Edit anime")
-						//- 		RawIcon("pencil")
 					
 					td.anime-list-item-rating(title="Overall rating")
 						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= utils.FormatRating(item.Rating.Overall)

@@ -15,7 +15,7 @@ component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
 						Avatar(user)
 					
 					.post-content
-						textarea#new-reply(placeholder="Reply...")
+						textarea#new-reply(placeholder="Reply...", aria-label="Reply")
 			
 				.buttons
 					button.action(data-action="forumReply", data-trigger="click")
