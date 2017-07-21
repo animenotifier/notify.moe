@@ -44,11 +44,11 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 					if friend.Nick != ""
 						if friend.IsActive()
 							.mountable
-								CustomAvatar(friend, listItems[friend].Link(friend.Nick), friend.Nick + " => " + listItems[friend].Status + " | " + toString(listItems[friend].Episodes) + " eps | " + fmt.Sprintf("%.1f", listItems[friend].Rating.Overall) + " rating")
+								FriendEntry(friend, listItems)
 						else
 							.mountable
 								.inactive-user
-									Avatar(friend)
+									FriendEntry(friend, listItems)
 
 	h3.anime-section-name Ratings
 	.anime-rating-categories
@@ -236,3 +236,6 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 	//- 			li.anime-japanese-title= anime.title.japanese
 	//- 			each synonym in anime.title.synonyms
 	//- 				li= synonym
+
+component FriendEntry(friend *arn.User, listItems map[*arn.User]*arn.AnimeListItem)
+	CustomAvatar(friend, listItems[friend].Link(friend.Nick), friend.Nick + " => " + listItems[friend].Status + " | " + toString(listItems[friend].Episodes) + " eps | " + fmt.Sprintf("%.1f", listItems[friend].Rating.Overall) + " rating")
