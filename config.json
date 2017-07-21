@@ -39,6 +39,11 @@
 				"sizes": "64x64"
 			},
 			{
+				"src": "images/brand/144",
+				"sizes": "144x144",
+				"type": "image/png"
+			},
+			{
 				"src": "images/brand/300",
 				"sizes": "300x300"
 			},

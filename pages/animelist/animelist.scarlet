@@ -11,6 +11,18 @@
 .anime-list-item
 	horizontal
 
+	td
+		display flex
+		align-items center
+
+.anime-list-item-image-container
+	padding 0
+
+.anime-list-item-image
+	width 27px
+	height 39px
+	border-radius 2px
+
 .anime-list-item-name
 	flex 1
 	clip-long-text
@@ -20,7 +32,7 @@
 	justify-content flex-end
 	text-align right
 	white-space nowrap
-	flex-basis 120px
+	width 130px
 
 	:hover
 		.plus-episode
@@ -48,11 +60,12 @@
 
 .anime-list-item-rating
 	text-align right
-	flex-basis 70px
+	justify-content flex-end
+	width 65px
 
 .anime-list-item-actions
 	display none
-	flex-basis 30px
+	width 30px
 
 // 	// Beautify icon alignment
 // 	.raw-icon
@@ -69,11 +82,13 @@
 	.anime-list-item-airing-date
 		display block
 		text-align right
-		flex-basis 150px
+		width 150px
+		opacity 0.8
+		justify-content flex-end
 
 < 1100px
 	.anime-list-item-rating
-		display none
+		display none !important
 
 .fill-screen
 	min-height calc(100vh - nav-height - content-padding * 2 - 1rem - 43px - 23px)
