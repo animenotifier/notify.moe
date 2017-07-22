@@ -7,7 +7,6 @@ import (
 	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/pages/frontpage"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
@@ -16,19 +15,8 @@ const maxFollowing = 5
 const maxSoundTracks = 5
 const maxScheduleItems = 5
 
-// Get the dashboard or the frontpage when logged out.
+// Get the dashboard.
 func Get(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
-
-	if user == nil {
-		return frontpage.Get(ctx)
-	}
-
-	return dashboard(ctx)
-}
-
-// Render the dashboard.
-func dashboard(ctx *aero.Context) string {
 	var forumActivity []arn.Postable
 	var followingList []*arn.User
 	var soundTracks []*arn.SoundTrack

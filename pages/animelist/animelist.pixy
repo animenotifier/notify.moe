@@ -1,8 +1,15 @@
-component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, user *arn.User, uri string)
+component ProfileAnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, user *arn.User, uri string)
 	ProfileHeader(viewUser, user, uri)
 
 	h1.page-title.anime-list-owner= viewUser.Nick + "'s collection"
 
+	AnimeLists(animeLists, viewUser, user)
+
+	//- for status, animeList := range animeLists
+	//- 	h3= status
+	//- 	AnimeList(animeList, user)
+
+component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, user *arn.User)
 	if len(animeLists[arn.AnimeListStatusWatching].Items) == 0 && len(animeLists[arn.AnimeListStatusCompleted].Items) == 0 && len(animeLists[arn.AnimeListStatusPlanned].Items) == 0 && len(animeLists[arn.AnimeListStatusHold].Items) == 0 && len(animeLists[arn.AnimeListStatusDropped].Items) == 0
 		p.no-data.mountable= viewUser.Nick + " hasn't added any anime yet."
 	else
@@ -30,10 +37,6 @@ component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, u
 			.anime-list-container
 				h3.status-name Dropped
 				AnimeList(animeLists[arn.AnimeListStatusDropped], viewUser, user)
-	
-	//- for status, animeList := range animeLists
-	//- 	h3= status
-	//- 	AnimeList(animeList, user)
 
 component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User)
 	table.anime-list

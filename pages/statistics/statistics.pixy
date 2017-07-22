@@ -14,12 +14,12 @@ component Statistics(pieCharts ...*arn.PieChart)
 			p Data is collected for statistical purposes only. We respect user privacy and we will never display or sell critical data to 3rd party services.
 
 component StatisticsHeader
-	.buttons.tabs
-		a.button.tab.action(href="/statistics", data-action="diff", data-trigger="click")
+	.tabs
+		a.tab.action(href="/statistics", data-action="diff", data-trigger="click")
 			Icon("user")
 			span.tab-text Users
 
-		a.button.tab.action(href="/statistics/anime", data-action="diff", data-trigger="click")
+		a.tab.action(href="/statistics/anime", data-action="diff", data-trigger="click")
 			Icon("tv")
 			span.tab-text Anime
 

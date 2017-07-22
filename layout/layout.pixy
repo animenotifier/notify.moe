@@ -20,14 +20,15 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 			link(rel="manifest", href="/manifest.json")
 		body
 			#container(class=utils.GetContainerClass(ctx))
-				#header
-					Navigation(user)
-				#content-container
-					main#content.fade!= content
-					LoadingAnimation
-					StatusMessage
-				aside#sidebar
-					Sidebar(user)
+				//- #header
+				//- 	Navigation(user)
+				#columns
+					aside#sidebar
+						Sidebar(user)
+					#content-container
+						main#content.fade!= content
+				LoadingAnimation
+				StatusMessage
 			if user != nil
 				#user(data-id=user.ID)
 			script(src="/scripts")

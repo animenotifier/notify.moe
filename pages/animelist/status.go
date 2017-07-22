@@ -19,7 +19,7 @@ func FilterByStatus(status string) aero.Handle {
 			return response
 		}
 
-		return ctx.HTML(components.AnimeListFilteredByStatus(list, list.User(), user, status, ctx.URI()))
+		return ctx.HTML(components.ProfileAnimeListFilteredByStatus(list, list.User(), user, status, ctx.URI()))
 	}
 }
 

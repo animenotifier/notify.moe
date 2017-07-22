@@ -1,20 +1,20 @@
 component Users(users []*arn.User)
 	h1.page-title Users
 
-	.buttons.tabs
-		a.button.tab.action(href="/users", data-action="diff", data-trigger="click")
+	.tabs
+		a.tab.action(href="/users", data-action="diff", data-trigger="click")
 			Icon("users")
 			span.tab-text Active
 
-		a.button.tab.action(href="/users/anime/watching", data-action="diff", data-trigger="click")
+		a.tab.action(href="/users/anime/watching", data-action="diff", data-trigger="click")
 			Icon("tv")
 			span.tab-text Watching
 
-		a.button.tab.action(href="/users/osu", data-action="diff", data-trigger="click")
+		a.tab.action(href="/users/osu", data-action="diff", data-trigger="click")
 			Icon("gamepad")
 			span.tab-text Osu
 
-		a.button.tab.action(href="/users/staff", data-action="diff", data-trigger="click")
+		a.tab.action(href="/users/staff", data-action="diff", data-trigger="click")
 			Icon("user-secret")
 			span.tab-text Staff
 

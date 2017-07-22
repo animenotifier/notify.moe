@@ -8,3 +8,7 @@
 	overflow-y scroll
 	position relative
 	// will-change transform
+
+#columns
+	horizontal
+	height 100%

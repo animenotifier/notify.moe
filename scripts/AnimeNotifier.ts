@@ -24,7 +24,7 @@ export class AnimeNotifier {
 
 	imageFound: MutationQueue
 	imageNotFound: MutationQueue
-	unmount: MutationQueue
+	// unmount: MutationQueue
 
 	constructor(app: Application) {
 		this.app = app
@@ -33,7 +33,7 @@ export class AnimeNotifier {
 
 		this.imageFound = new MutationQueue(elem => elem.classList.add("image-found"))
 		this.imageNotFound = new MutationQueue(elem => elem.classList.add("image-not-found"))
-		this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
+		// this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
 
 		// These classes will never be removed on DOM diffs
 		Diff.persistentClasses.add("mounted")
@@ -140,7 +140,7 @@ export class AnimeNotifier {
 		this.visibilityObserver.disconnect()
 		
 		this.contentLoadedActions = Promise.all([
-			Promise.resolve().then(() => this.mountMountables()),
+			// Promise.resolve().then(() => this.mountMountables()),
 			Promise.resolve().then(() => this.lazyLoadImages()),
 			Promise.resolve().then(() => this.displayLocalDates()),
 			Promise.resolve().then(() => this.setSelectBoxValue()),
@@ -471,87 +471,87 @@ export class AnimeNotifier {
 		this.visibilityObserver.observe(img)
 	}
 
-	mountMountables() {
-		this.modifyDelayed("mountable", element => element.classList.add("mounted"))
-	}
+	// mountMountables() {
+	// 	this.modifyDelayed("mountable", element => element.classList.add("mounted"))
+	// }
 
-	unmountMountables() {
-		for(let element of findAll("mountable")) {
-			if(element.classList.contains("never-unmount")) {
-				continue
-			}
+	// unmountMountables() {
+	// 	for(let element of findAll("mountable")) {
+	// 		if(element.classList.contains("never-unmount")) {
+	// 			continue
+	// 		}
 
-			this.unmount.queue(element)
-		}
-	}
+	// 		this.unmount.queue(element)
+	// 	}
+	// }
 
-	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
-		const maxDelay = 1000
-		const delay = 20
+	// modifyDelayed(className: string, func: (element: HTMLElement) => void) {
+	// 	const maxDelay = 1000
+	// 	const delay = 20
 		
-		let time = 0
-		let start = Date.now()
-		let maxTime = start + maxDelay
+	// 	let time = 0
+	// 	let start = Date.now()
+	// 	let maxTime = start + maxDelay
 
-		let mountableTypes = new Map<string, number>()
-		let mountableTypeMutations = new Map<string, Array<any>>()
+	// 	let mountableTypes = new Map<string, number>()
+	// 	let mountableTypeMutations = new Map<string, Array<any>>()
 
-		let collection = document.getElementsByClassName(className)
+	// 	let collection = document.getElementsByClassName(className)
 
-		if(collection.length === 0) {
-			return
-		}
+	// 	if(collection.length === 0) {
+	// 		return
+	// 	}
 
-		// let delay = Math.min(maxDelay / collection.length, 20)
+	// 	// let delay = Math.min(maxDelay / collection.length, 20)
 
-		for(let i = 0; i < collection.length; i++) {
-			let element = collection.item(i) as HTMLElement
-			let type = element.dataset.mountableType || "general"
+	// 	for(let i = 0; i < collection.length; i++) {
+	// 		let element = collection.item(i) as HTMLElement
+	// 		let type = element.dataset.mountableType || "general"
 
-			if(mountableTypes.has(type)) {
-				time = mountableTypes.get(type) + delay
-				mountableTypes.set(type, time)
-			} else {
-				time = start
-				mountableTypes.set(type, time)
-				mountableTypeMutations.set(type, [])
-			}
+	// 		if(mountableTypes.has(type)) {
+	// 			time = mountableTypes.get(type) + delay
+	// 			mountableTypes.set(type, time)
+	// 		} else {
+	// 			time = start
+	// 			mountableTypes.set(type, time)
+	// 			mountableTypeMutations.set(type, [])
+	// 		}
 
-			if(time > maxTime) {
-				time = maxTime
-			}
+	// 		if(time > maxTime) {
+	// 			time = maxTime
+	// 		}
 
-			mountableTypeMutations.get(type).push({
-				element,
-				time
-			})
-		}
+	// 		mountableTypeMutations.get(type).push({
+	// 			element,
+	// 			time
+	// 		})
+	// 	}
 
-		for(let mountableType of mountableTypeMutations.keys()) {
-			let mutations = mountableTypeMutations.get(mountableType)
-			let mutationIndex = 0
+	// 	for(let mountableType of mountableTypeMutations.keys()) {
+	// 		let mutations = mountableTypeMutations.get(mountableType)
+	// 		let mutationIndex = 0
 
-			let updateBatch = () => {
-				let now = Date.now()
+	// 		let updateBatch = () => {
+	// 			let now = Date.now()
 
-				for(; mutationIndex < mutations.length; mutationIndex++) {
-					let mutation = mutations[mutationIndex]
+	// 			for(; mutationIndex < mutations.length; mutationIndex++) {
+	// 				let mutation = mutations[mutationIndex]
 
-					if(mutation.time > now) {
-						break
-					}
+	// 				if(mutation.time > now) {
+	// 					break
+	// 				}
 
-					func(mutation.element)
-				}
+	// 				func(mutation.element)
+	// 			}
 
-				if(mutationIndex < mutations.length) {
-					window.requestAnimationFrame(updateBatch)
-				}
-			}
+	// 			if(mutationIndex < mutations.length) {
+	// 				window.requestAnimationFrame(updateBatch)
+	// 			}
+	// 		}
 
-			window.requestAnimationFrame(updateBatch)
-		}
-	}
+	// 		window.requestAnimationFrame(updateBatch)
+	// 	}
+	// }
 
 	diff(url: string) {
 		if(url === this.app.currentPath) {
@@ -570,17 +570,15 @@ export class AnimeNotifier {
 		history.pushState(url, null, url)
 		this.app.currentPath = url
 		this.app.markActiveLinks()
-		this.unmountMountables()
+		// this.unmountMountables()
 		this.loading(true)
 
 		// Delay by transition-speed
-		return delay(300).then(() => {
-			return request
-			.then(html => this.app.setContent(html, true))
-			.then(() => this.app.emit("DOMContentLoaded"))
-			.then(() => this.loading(false))
-			.catch(console.error)
-		})
+		return request
+		.then(html => this.app.setContent(html, true))
+		.then(() => this.app.emit("DOMContentLoaded"))
+		.then(() => this.loading(false))
+		.catch(console.error)
 	}
 
 	post(url, body) {

@@ -10,19 +10,21 @@ import (
 	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages/admin"
+	"github.com/animenotifier/notify.moe/pages/amvs"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/apiview"
+	"github.com/animenotifier/notify.moe/pages/artworks"
 	"github.com/animenotifier/notify.moe/pages/best"
 	"github.com/animenotifier/notify.moe/pages/character"
-	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
+	"github.com/animenotifier/notify.moe/pages/home"
 	"github.com/animenotifier/notify.moe/pages/listimport"
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportanilist"
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportkitsu"
@@ -68,7 +70,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Layout = layout.Render
 
 	// Ajax routes
-	app.Ajax("/", dashboard.Get)
+	app.Ajax("/", home.Get)
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/anime/:id/edit", editanime.Get)
 	app.Ajax("/api", apiview.Get)
@@ -84,6 +86,8 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/settings", settings.Get)
 	app.Ajax("/soundtracks", music.Get)
+	app.Ajax("/artworks", artworks.Get)
+	app.Ajax("/amvs", amvs.Get)
 	app.Ajax("/users", users.Active)
 	app.Ajax("/users/osu", users.Osu)
 	app.Ajax("/users/staff", users.Staff)

@@ -33,28 +33,28 @@ component LoggedInMenu(user *arn.User)
 				Icon("bars")
 				span.navigation-text Menu
 
-		.extra-navigation
-			NavigationButton("Profile", "/+", "user")
+		//- .extra-navigation
+		//- 	NavigationButton("Profile", "/+", "user")
 
-		.extra-navigation
-			NavigationButton("Forum", "/forum", "comment")
+		//- .extra-navigation
+		//- 	NavigationButton("Forum", "/forum", "comment")
 
 		//- .extra-navigation
 		//- 	NavigationButton("Soundtracks", "/soundtracks", "headphones")
 
 		FuzzySearch
 
-		.extra-navigation
-			NavigationButton("Users", "/users", "globe")
+		//- .extra-navigation
+		//- 	NavigationButton("Users", "/users", "globe")
 		
-		.extra-navigation
-			NavigationButton("Explore", "/explore", "th")
+		//- .extra-navigation
+		//- 	NavigationButton("Explore", "/explore", "th")
 
 		//- .extra-navigation
 		//- 	NavigationButton("Statistics", "/statistics", "pie-chart")
 		
-		.hide-landscape
-			NavigationButton("Settings", "/settings", "cog")
+		//- .hide-landscape
+		//- 	NavigationButton("Settings", "/settings", "cog")
 		
 		//- .extra-navigation.hide-landscape
 		//- 	NavigationButtonNoAJAX("Logout", "/logout", "sign-out")

@@ -68,9 +68,9 @@
 	.navigation-button, #search
 		font-size 1.3em
 
-> 550px
-	#navigation
-		padding 0 content-padding
+// > 550px
+// 	#navigation
+// 		padding 0 content-padding
 
 > 930px
 	.navigation-button, #search

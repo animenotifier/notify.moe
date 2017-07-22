@@ -1,10 +1,13 @@
 .tab
 	color text-color !important
+	padding 0.5rem 1rem
+	border-right ui-border
+	background-color rgb(224, 224, 224) !important
 
 	:hover,
 	&.active
-		color white !important
-		background-color forum-tag-hover-color !important
+		background-color bg-color !important
+		transform none
 
 	// color text-color !important
 	// :hover
@@ -22,6 +25,11 @@
 		display none
 
 .tabs
+	horizontal
+	margin-left calc(content-padding * -1)
+	margin-top calc(content-padding * -1)
+	margin-right calc(content-padding * -2)
+	border-bottom ui-border
 	// justify-content flex-start !important
-	margin-bottom 1rem
-	margin-top -0.6rem
+	// margin-bottom 1rem
+	// margin-top -0.6rem

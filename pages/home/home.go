@@ -1,24 +1,23 @@
-package animelist
+package home
 
 import (
 	"net/http"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/pages/frontpage"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get anime list.
+// Get the dashboard or the frontpage when logged out.
 func Get(ctx *aero.Context) string {
-	nick := ctx.Get("nick")
 	user := utils.GetUser(ctx)
-	viewUser, err := arn.GetUserByNick(nick)
 
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "User not found", err)
+	if user == nil {
+		return frontpage.Get(ctx)
 	}
 
+	viewUser := user
 	animeList := viewUser.AnimeList()
 
 	if animeList == nil {
@@ -28,5 +27,5 @@ func Get(ctx *aero.Context) string {
 	animeList.PrefetchAnime()
 	animeList.Sort()
 
-	return ctx.HTML(components.ProfileAnimeLists(animeList.SplitByStatus(), animeList.User(), user, ctx.URI()))
+	return ctx.HTML(components.AnimeLists(animeList.SplitByStatus(), animeList.User(), user))
 }

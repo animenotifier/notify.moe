@@ -1,0 +1,21 @@
+component StatusTabs(urlPrefix string)
+	.tabs.status-tabs
+		a.tab.status-tab.action(href=urlPrefix + "/watching", data-action="diff", data-trigger="click")
+			Icon("play")
+			span.tab-text Watching
+		
+		a.tab.status-tab.action(href=urlPrefix + "/completed", data-action="diff", data-trigger="click")
+			Icon("check")
+			span.tab-text Completed
+
+		a.tab.status-tab.action(href=urlPrefix + "/planned", data-action="diff", data-trigger="click")
+			Icon("forward")
+			span.tab-text Planned
+
+		a.tab.status-tab.action(href=urlPrefix + "/hold", data-action="diff", data-trigger="click")
+			Icon("pause")
+			span.tab-text On Hold
+
+		a.tab.status-tab.action(href=urlPrefix + "/dropped", data-action="diff", data-trigger="click")
+			Icon("stop")
+			span.tab-text Dropped

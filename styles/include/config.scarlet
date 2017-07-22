@@ -23,7 +23,8 @@ input-focus-border-color = rgb(248, 165, 130)
 
 // Button
 button-hover-color = link-hover-color
-forum-tag-hover-color = rgb(46, 85, 160)
+forum-tag-hover-color = #225db5
+// forum-tag-hover-color = rgb(46, 85, 160)
 
 // Forum
 forum-width = 830px
@@ -42,7 +43,7 @@ nav-link-hover-slide-color = main-color
 // nav-link-hover-color = rgb(80, 80, 80)
 
 // Tables
-table-width-normal = 1200px
+table-width-normal = 900px
 
 // Loading animation
 loading-anim-color = nav-link-hover-slide-color
@@ -65,6 +66,6 @@ nav-height = 3.11rem
 typography-margin = 0.4rem
 
 // Timings
-fade-speed = 200ms
-transition-speed = 250ms
-mountable-transition-speed = 300ms
+fade-speed = 1ms
+transition-speed = 200ms
+// mountable-transition-speed = 300ms

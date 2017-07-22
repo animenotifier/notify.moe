@@ -8,7 +8,9 @@ component Sidebar(user *arn.User)
 	SidebarButton("Home", "/", "home")
 	SidebarButton("Forum", "/forum", "comment")
 	SidebarButton("Explore", "/explore", "th")
+	SidebarButton("Artworks", "/artworks", "paint-brush")
 	SidebarButton("Soundtracks", "/soundtracks", "headphones")
+	SidebarButton("AMVs", "/amvs", "video-camera")
 	SidebarButton("Users", "/users", "globe")
 
 	if user != nil
@@ -16,6 +18,8 @@ component Sidebar(user *arn.User)
 			SidebarButton("Statistics", "/statistics", "pie-chart")
 		
 		SidebarButton("Settings", "/settings", "cog")
+
+	.spacer
 
 	SidebarButton("Help", "/thread/I3MMiOtzR", "question")
 

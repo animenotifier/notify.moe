@@ -1,11 +1,12 @@
-sidebar-spacing-y = 0.75rem
+sidebar-spacing-y = 0.7rem
 
 #sidebar
 	vertical
 	position fixed
 	left 0
 	top 0
-	min-width 265px
+	z-index 10
+	min-width 200px
 	height 100%
 	background ui-background
 	transform translateX(-100%)
@@ -22,23 +23,34 @@ sidebar-spacing-y = 0.75rem
 		justify-content center
 		margin 0.8rem 0
 
+> 700px
+	#sidebar
+		opacity 1
+		transform none
+		position static
+		pointer-events all
+		box-shadow none
+		border-right ui-border
+
 .sidebar-visible
 	transform translateX(0) !important
 	pointer-events all !important
 	opacity 1 !important
 
 .sidebar-link
-	// color text-color
+	color text-color
 	&.active
 		.sidebar-button
-			background rgb(245, 245, 245)
+			background forum-tag-hover-color
+			color white
 
 .sidebar-button
 	horizontal
 	align-items center
-	padding sidebar-spacing-y content-padding
+	padding sidebar-spacing-y 1rem
+	font-size 0.92rem
 	// background ui-background
 
 	.icon
-		font-size 1.3rem
-		margin-right content-padding
+		font-size 1rem
+		margin-right 0.75rem
