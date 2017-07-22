@@ -1,7 +1,7 @@
 table
 	width 100%
 	max-width table-width-normal
-	// margin 0 auto
+	margin 0 auto
 
 tr
 	border-bottom-width 1px

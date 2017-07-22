@@ -1,13 +1,21 @@
 .tab
 	color text-color !important
 	padding 0.5rem 1rem
+	background-color rgb(238, 238, 238)
 	border-right ui-border
-	background-color rgb(224, 224, 224) !important
+	border-bottom ui-border
+	white-space nowrap
 
 	:hover,
 	&.active
 		background-color bg-color !important
 		transform none
+	
+	&.active
+		border-bottom-color transparent
+
+	:first-child
+		border-left ui-border
 
 	// color text-color !important
 	// :hover
@@ -26,10 +34,12 @@
 
 .tabs
 	horizontal
-	margin-left calc(content-padding * -1)
-	margin-top calc(content-padding * -1)
-	margin-right calc(content-padding * -2)
-	border-bottom ui-border
+	justify-content center
+	// margin-left calc(content-padding * -1)
+	// margin-top calc(content-padding * -1)
+	// margin-right calc(content-padding * -2)
+	margin-bottom content-padding
+	// background-color rgba(0, 0, 0, 0.02)
 	// justify-content flex-start !important
 	// margin-bottom 1rem
 	// margin-top -0.6rem

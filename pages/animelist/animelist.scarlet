@@ -2,7 +2,7 @@
 	vertical
 	width 100%
 	max-width table-width-normal
-	// margin 0 auto
+	margin 0 auto
 	margin-bottom 1rem
 
 .anime-list

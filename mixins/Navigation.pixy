@@ -69,7 +69,7 @@ component NavigationButton(name string, target string, icon string)
 			span.navigation-text= name
 
 component SidebarButton(name string, target string, icon string)
-	a.sidebar-link.ajax(href=target, aria-label=name, title=name, data-bubble="true")
+	a.sidebar-link.ajax(href=target, aria-label=name, data-bubble="true")
 		.sidebar-button
 			Icon(icon)
 			span.sidebar-text= name

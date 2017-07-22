@@ -9,7 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get the dashboard or the frontpage when logged out.
+// Get the anime list or the frontpage when logged out.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
@@ -27,5 +27,5 @@ func Get(ctx *aero.Context) string {
 	animeList.PrefetchAnime()
 	animeList.Sort()
 
-	return ctx.HTML(components.AnimeLists(animeList.SplitByStatus(), animeList.User(), user))
+	return ctx.HTML(components.Home(animeList.Watching(), animeList.User(), user, "watching"))
 }
