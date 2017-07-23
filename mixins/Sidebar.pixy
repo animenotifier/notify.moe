@@ -21,7 +21,7 @@ component Sidebar(user *arn.User)
 
 	.spacer
 
-	SidebarButton("Help", "/thread/I3MMiOtzR", "question")
+	SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
 
 	if user != nil
 		SidebarButtonNoAJAX("Logout", "/logout", "sign-out")
