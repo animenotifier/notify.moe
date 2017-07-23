@@ -3,6 +3,7 @@
 	width avatar-size
 	height avatar-size
 	border-radius 100%
+	box-shadow outline-shadow-medium
 	object-fit cover
 	default-transition
 	:hover

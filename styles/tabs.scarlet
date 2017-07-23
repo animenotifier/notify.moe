@@ -1,18 +1,21 @@
 .tab
-	color text-color !important
+	color text-color
 	padding 0.5rem 1rem
-	background-color rgb(238, 238, 238)
-	border-right ui-border
-	border-bottom ui-border
+	background-color rgba(0, 0, 0, 0.02)
+	border ui-border
+	border-left none
 	white-space nowrap
 
-	:hover,
-	&.active
-		background-color bg-color !important
+	:hover
+		color text-color
+		background-color bg-color
+
+	:active
 		transform none
-	
+
 	&.active
-		border-bottom-color transparent
+		background-color forum-tag-hover-color
+		color white
 
 	:first-child
 		border-left ui-border
