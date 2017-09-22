@@ -95,4 +95,4 @@
 		display none !important
 
 .fill-screen
-	min-height calc(100vh - nav-height - content-padding * 2 - 1rem - 43px - 23px)
+	min-height calc(100vh - content-padding * 2 - 1rem - 43px - 23px)

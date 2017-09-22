@@ -110,6 +110,13 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
 	app.Ajax("/user/:nick/animelist/anime/:id", animelistitem.Get)
 
+	// Anime list
+	app.Ajax("/animelist/watching", home.FilterByStatus(arn.AnimeListStatusWatching))
+	app.Ajax("/animelist/completed", home.FilterByStatus(arn.AnimeListStatusCompleted))
+	app.Ajax("/animelist/planned", home.FilterByStatus(arn.AnimeListStatusPlanned))
+	app.Ajax("/animelist/hold", home.FilterByStatus(arn.AnimeListStatusHold))
+	app.Ajax("/animelist/dropped", home.FilterByStatus(arn.AnimeListStatusDropped))
+
 	// Search
 	app.Ajax("/search", search.Get)
 	app.Ajax("/search/:term", search.Get)

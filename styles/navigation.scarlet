@@ -82,21 +82,21 @@
 	.extra-navigation
 		display block
 
-@media screen and (max-device-height: 500px)
-	#navigation
-		vertical
-		height 100%
-		padding content-padding 0
+// @media screen and (max-device-height: 500px)
+// 	#navigation
+// 		vertical
+// 		height 100%
+// 		padding content-padding 0
 	
-	#container
-		horizontal
+// 	#container
+// 		horizontal
 
-	.extra-navigation
-		display block
+// 	.extra-navigation
+// 		display block
 
-	#sidebar-toggle,
-	.hide-landscape
-		display none !important
+// 	#sidebar-toggle,
+// 	.hide-landscape
+// 		display none !important
 
-	#search
-		display none
+// 	#search
+// 		display none

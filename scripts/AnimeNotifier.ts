@@ -619,6 +619,11 @@ export class AnimeNotifier {
 		let newScroll = 0
 		let finalScroll = Math.max(target.offsetTop - contentPadding, 0)
 		let scrollDistance = finalScroll - oldScroll
+
+		if(scrollDistance > 0 && scrollDistance < 4) {
+			return
+		}
+
 		let timeStart = Date.now()
 		let timeEnd = timeStart + duration
 
