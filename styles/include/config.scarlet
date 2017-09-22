@@ -66,6 +66,6 @@ nav-height = 3.11rem
 typography-margin = 0.4rem
 
 // Timings
-fade-speed = 1ms
+fade-speed = 300ms
 transition-speed = 200ms
-// mountable-transition-speed = 300ms
+mountable-transition-speed = 300ms
