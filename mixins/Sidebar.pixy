@@ -5,7 +5,11 @@ component Sidebar(user *arn.User)
 		else
 			img.user-image.lazy(data-src="/images/brand/64", alt="Anime Notifier")
 	
-	SidebarButton("Home", "/", "home")
+	if user != nil
+		SidebarButton("Home", "/animelist/watching", "home")
+	else
+		SidebarButton("Home", "/", "home")
+	
 	SidebarButton("Forum", "/forum", "comment")
 	SidebarButton("Explore", "/explore", "th")
 	SidebarButton("Artworks", "/artworks", "paint-brush")

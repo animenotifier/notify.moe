@@ -1,8 +1,6 @@
 package home
 
 import (
-	"github.com/animenotifier/arn"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/frontpage"
 	"github.com/animenotifier/notify.moe/utils"
@@ -16,5 +14,6 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
-	return AnimeList(ctx, user, arn.AnimeListStatusWatching)
+	return ctx.Redirect("/animelist/watching")
+	//return AnimeList(ctx, user, arn.AnimeListStatusWatching)
 }
