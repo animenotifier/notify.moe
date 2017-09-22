@@ -42,45 +42,53 @@
 	display none
 
 #search
-	flex 1
-	border-radius 0
 	background transparent
 	border none
-	
-	color nav-link-hover-color
 	font-size 1em
-	min-width 0
+	padding 0
+	width 0
+	flex-grow 1
 
-	::placeholder
-		color nav-link-color
+// #search
+// 	flex 1
+// 	border-radius 0
+// 	background transparent
+// 	border none
+	
+// 	color nav-link-hover-color
+// 	font-size 1em
+// 	min-width 0
 
-	:focus
-		border none
-		box-shadow none
+// 	::placeholder
+// 		color nav-link-color
 
-.extra-navigation
-	display none
+// 	:focus
+// 		border none
+// 		box-shadow none
 
-.extension-navigation
-	display none
+// .extra-navigation
+// 	display none
 
-> 330px
-	.navigation-button, #search
-		font-size 1.3em
+// .extension-navigation
+// 	display none
+
+// > 330px
+// 	.navigation-button, #search
+// 		font-size 1.3em
 
 // > 550px
 // 	#navigation
 // 		padding 0 content-padding
 
-> 930px
-	.navigation-button, #search
-		font-size 1.2em
+// > 930px
+// 	.navigation-button, #search
+// 		font-size 1.2em
 	
-	#navigation
-		justify-content flex-start
+// 	#navigation
+// 		justify-content flex-start
 	
-	.extra-navigation
-		display block
+// 	.extra-navigation
+// 		display block
 
 // @media screen and (max-device-height: 500px)
 // 	#navigation

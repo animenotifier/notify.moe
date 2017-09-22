@@ -98,11 +98,6 @@ export class AnimeNotifier {
 	}
 
 	run() {
-		// Add "osx" class on macs so we can set a proper font-size
-		if(navigator.platform.includes("Mac")) {
-			document.documentElement.classList.add("osx")
-		}
-
 		// Check for WebP support
 		this.webpEnabled = canUseWebP()
 
@@ -127,6 +122,9 @@ export class AnimeNotifier {
 		this.sideBar = this.app.find("sidebar")
 
 		document.body.addEventListener("click", e => {
+			if(document.activeElement.id === "search")
+				return;
+
 			this.sideBar.classList.remove("sidebar-visible")
 		})
 

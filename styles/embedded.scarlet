@@ -4,8 +4,8 @@ remove-margin = 1.1rem
 	// Put navigation to the bottom of the screen
 	flex-direction column-reverse !important
 
-	.extension-navigation
-		display inline-block
+	// .extension-navigation
+	// 	display inline-block
 
 	.anime-list
 		// max-width 500px

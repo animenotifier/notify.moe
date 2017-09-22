@@ -15,15 +15,20 @@ component Sidebar(user *arn.User)
 	SidebarButton("Artworks", "/artworks", "paint-brush")
 	SidebarButton("Soundtracks", "/soundtracks", "headphones")
 	SidebarButton("AMVs", "/amvs", "video-camera")
+	//- SidebarButton("Games", "/games", "gamepad")
 	SidebarButton("Users", "/users", "globe")
+	//- SidebarButton("Search", "/search", "search")
 
 	if user != nil
-		if user.Role != ""
-			SidebarButton("Statistics", "/statistics", "pie-chart")
-		
+		SidebarButton("Statistics", "/statistics", "pie-chart")
 		SidebarButton("Settings", "/settings", "cog")
 
 	.spacer
+
+	.sidebar-link(aria-label="Search")
+		.sidebar-button
+			Icon("search")
+			FuzzySearch
 
 	SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
 
