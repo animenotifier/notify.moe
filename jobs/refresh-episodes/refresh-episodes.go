@@ -31,13 +31,13 @@ func main() {
 		}
 	}
 
-	color.Cyan("High priority queue:")
+	color.Cyan("High priority queue (%d):", len(highPriority))
 	refresh(highPriority)
 
-	color.Cyan("Medium priority queue:")
+	color.Cyan("Medium priority queue (%d):", len(mediumPriority))
 	refresh(mediumPriority)
 
-	color.Cyan("Low priority queue:")
+	color.Cyan("Low priority queue (%d):", len(lowPriority))
 	refresh(lowPriority)
 
 	color.Green("Finished.")
@@ -45,6 +45,8 @@ func main() {
 
 func refresh(queue []*arn.Anime) {
 	for _, anime := range queue {
+		fmt.Println(anime.ID, "|", anime.Title.Canonical, "|", anime.GetMapping("shoboi/anime"))
+
 		episodeCount := len(anime.Episodes().Items)
 		availableEpisodeCount := anime.Episodes().AvailableCount()
 
@@ -57,7 +59,7 @@ func refresh(queue []*arn.Anime) {
 
 			color.Red(err.Error())
 		} else {
-			fmt.Println(anime.ID, "|", anime.Title.Canonical, "|", "+"+strconv.Itoa(len(anime.Episodes().Items)-episodeCount)+" airing", "|", "+"+strconv.Itoa(anime.Episodes().AvailableCount()-availableEpisodeCount)+" available")
+			fmt.Println("+"+strconv.Itoa(len(anime.Episodes().Items)-episodeCount)+" airing", "|", "+"+strconv.Itoa(anime.Episodes().AvailableCount()-availableEpisodeCount)+" available")
 		}
 	}
 }
