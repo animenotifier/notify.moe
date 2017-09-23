@@ -45,6 +45,13 @@ func getUserStats() []*arn.PieChart {
 	avatar := stats{}
 
 	for _, info := range analytics {
+		user, err := arn.GetUser(info.UserID)
+		arn.PanicOnError(err)
+
+		if !user.IsActive() {
+			continue
+		}
+
 		pixelRatio[fmt.Sprintf("%.1f", info.Screen.PixelRatio)]++
 
 		size := arn.ToString(info.Screen.Width) + " x " + arn.ToString(info.Screen.Height)
