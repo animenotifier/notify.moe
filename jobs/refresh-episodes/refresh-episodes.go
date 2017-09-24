@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
+	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -50,6 +50,9 @@ func main() {
 func refreshQueue(queue []*arn.Anime) {
 	for _, anime := range queue {
 		refresh(anime)
+
+		// Lower the request interval
+		time.Sleep(5 * time.Second)
 	}
 }
 
@@ -68,6 +71,11 @@ func refresh(anime *arn.Anime) {
 
 		color.Red(err.Error())
 	} else {
-		fmt.Println("+"+strconv.Itoa(len(anime.Episodes().Items)-episodeCount)+" airing", "|", "+"+strconv.Itoa(anime.Episodes().AvailableCount()-availableEpisodeCount)+" available")
+		faint := color.New(color.Faint).SprintFunc()
+		episodes := anime.Episodes()
+
+		fmt.Println(faint(episodes))
+		fmt.Printf("+%d airing | +%d available (%d total)\n", len(episodes.Items), len(episodes.Items)-episodeCount, episodes.AvailableCount()-availableEpisodeCount)
+		println()
 	}
 }

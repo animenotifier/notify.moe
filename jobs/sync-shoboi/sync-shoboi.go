@@ -20,6 +20,9 @@ func main() {
 		if sync(anime) {
 			count++
 		}
+
+		// Lower the request interval
+		time.Sleep(2 * time.Second)
 	}
 
 	// Log
@@ -53,7 +56,6 @@ func sync(anime *arn.Anime) bool {
 	// Did we get the ID?
 	if anime.GetMapping("shoboi/anime") != "" {
 		println(color.GreenString("✔"))
-		time.Sleep(2 * time.Second)
 		return true
 	}
 
