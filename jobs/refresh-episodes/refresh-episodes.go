@@ -12,6 +12,10 @@ import (
 func main() {
 	color.Yellow("Refreshing episode information for each anime.")
 
+	if InvokeShellArgs() {
+		return
+	}
+
 	highPriority := []*arn.Anime{}
 	mediumPriority := []*arn.Anime{}
 	lowPriority := []*arn.Anime{}
@@ -32,34 +36,38 @@ func main() {
 	}
 
 	color.Cyan("High priority queue (%d):", len(highPriority))
-	refresh(highPriority)
+	refreshQueue(highPriority)
 
 	color.Cyan("Medium priority queue (%d):", len(mediumPriority))
-	refresh(mediumPriority)
+	refreshQueue(mediumPriority)
 
 	color.Cyan("Low priority queue (%d):", len(lowPriority))
-	refresh(lowPriority)
+	refreshQueue(lowPriority)
 
 	color.Green("Finished.")
 }
 
-func refresh(queue []*arn.Anime) {
+func refreshQueue(queue []*arn.Anime) {
 	for _, anime := range queue {
-		fmt.Println(anime.ID, "|", anime.Title.Canonical, "|", anime.GetMapping("shoboi/anime"))
+		refresh(anime)
+	}
+}
 
-		episodeCount := len(anime.Episodes().Items)
-		availableEpisodeCount := anime.Episodes().AvailableCount()
+func refresh(anime *arn.Anime) {
+	fmt.Println(anime.ID, "|", anime.Title.Canonical, "|", anime.GetMapping("shoboi/anime"))
 
-		err := anime.RefreshEpisodes()
+	episodeCount := len(anime.Episodes().Items)
+	availableEpisodeCount := anime.Episodes().AvailableCount()
 
-		if err != nil {
-			if strings.Contains(err.Error(), "missing a Shoboi ID") {
-				continue
-			}
+	err := anime.RefreshEpisodes()
 
-			color.Red(err.Error())
-		} else {
-			fmt.Println("+"+strconv.Itoa(len(anime.Episodes().Items)-episodeCount)+" airing", "|", "+"+strconv.Itoa(anime.Episodes().AvailableCount()-availableEpisodeCount)+" available")
+	if err != nil {
+		if strings.Contains(err.Error(), "missing a Shoboi ID") {
+			return
 		}
+
+		color.Red(err.Error())
+	} else {
+		fmt.Println("+"+strconv.Itoa(len(anime.Episodes().Items)-episodeCount)+" airing", "|", "+"+strconv.Itoa(anime.Episodes().AvailableCount()-availableEpisodeCount)+" available")
 	}
 }
