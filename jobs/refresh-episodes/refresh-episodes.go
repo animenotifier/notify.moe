@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -50,9 +49,6 @@ func main() {
 func refreshQueue(queue []*arn.Anime) {
 	for _, anime := range queue {
 		refresh(anime)
-
-		// Lower the request interval
-		time.Sleep(5 * time.Second)
 	}
 }
 
