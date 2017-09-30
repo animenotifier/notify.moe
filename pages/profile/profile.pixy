@@ -89,7 +89,6 @@ component ProfileNavigation(viewUser *arn.User, uri string)
 			span.tab-text Followers
 	
 	if strings.Contains(uri, "/animelist")
-		hr
 		StatusTabs("/+" + viewUser.Nick + "/animelist")
 
 component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack, uri string)
