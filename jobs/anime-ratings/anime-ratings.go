@@ -7,6 +7,7 @@ import (
 
 var ratings = map[string][]*arn.AnimeRating{}
 var finalRating = map[string]*arn.AnimeRating{}
+var popularity = map[string]*arn.AnimePopularity{}
 
 // Note this is using the airing-anime as a template with modfications
 // made to it.
@@ -18,9 +19,10 @@ func main() {
 
 	for _, animeList := range allAnimeLists {
 		extractRatings(animeList)
+		extractPopularity(animeList)
 	}
 
-	// Calculate
+	// Calculate rating
 	for animeID := range finalRating {
 		overall := []float64{}
 		story := []float64{}
@@ -59,6 +61,14 @@ func main() {
 		arn.PanicOnError(anime.Save())
 	}
 
+	// Save popularity
+	for animeID := range popularity {
+		anime, err := arn.GetAnime(animeID)
+		arn.PanicOnError(err)
+		anime.Popularity = popularity[animeID]
+		arn.PanicOnError(anime.Save())
+	}
+
 	color.Green("Finished.")
 }
 
@@ -90,5 +100,30 @@ func extractRatings(animeList *arn.AnimeList) {
 		}
 
 		ratings[item.AnimeID] = append(ratings[item.AnimeID], item.Rating)
+	}
+}
+
+func extractPopularity(animeList *arn.AnimeList) {
+	for _, item := range animeList.Items {
+		_, found := popularity[item.AnimeID]
+
+		if !found {
+			popularity[item.AnimeID] = &arn.AnimePopularity{}
+		}
+
+		counter := popularity[item.AnimeID]
+
+		switch item.Status {
+		case arn.AnimeListStatusWatching:
+			counter.Watching++
+		case arn.AnimeListStatusCompleted:
+			counter.Completed++
+		case arn.AnimeListStatusPlanned:
+			counter.Planned++
+		case arn.AnimeListStatusHold:
+			counter.Hold++
+		case arn.AnimeListStatusDropped:
+			counter.Dropped++
+		}
 	}
 }

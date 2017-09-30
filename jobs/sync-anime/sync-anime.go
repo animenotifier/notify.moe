@@ -111,6 +111,11 @@ func sync(data *kitsu.Anime) *arn.Anime {
 		anime.Rating.Reset()
 	}
 
+	// Popularity
+	if anime.Popularity == nil {
+		anime.Popularity = &arn.AnimePopularity{}
+	}
+
 	// Trailers
 	anime.Trailers = []*arn.ExternalMedia{}
 

@@ -169,6 +169,24 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 				if character.Character() != nil
 					Character(character.Character())
 	
+	h3.anime-section-name Popularity
+	.anime-rating-categories
+		.anime-rating-category
+			.anime-rating-category-name Watching
+			.anime-rating= anime.Popularity.Watching
+		.anime-rating-category
+			.anime-rating-category-name Completed
+			.anime-rating= anime.Popularity.Completed
+		.anime-rating-category
+			.anime-rating-category-name Planned
+			.anime-rating= anime.Popularity.Planned
+		.anime-rating-category
+			.anime-rating-category-name Hold
+			.anime-rating= anime.Popularity.Hold
+		.anime-rating-category
+			.anime-rating-category-name Dropped
+			.anime-rating= anime.Popularity.Dropped
+
 	if len(anime.Episodes().Items) > 0
 		if episodesReversed
 			h3.anime-section-name Latest episodes

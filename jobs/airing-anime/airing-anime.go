@@ -7,7 +7,12 @@ import (
 	"github.com/fatih/color"
 )
 
-const currentlyAiringBonus = 4.0
+const (
+	currentlyAiringBonus     = 4.0
+	popularityThreshold      = 5
+	popularityPenalty        = 4.0
+	watchingPopularityWeight = 0.1
+)
 
 func main() {
 	color.Yellow("Caching airing anime")
@@ -21,16 +26,29 @@ func main() {
 	}
 
 	sort.Slice(animeList, func(i, j int) bool {
-		scoreA := animeList[i].Rating.Overall
-		scoreB := animeList[j].Rating.Overall
+		a := animeList[i]
+		b := animeList[j]
+		scoreA := a.Rating.Overall
+		scoreB := b.Rating.Overall
 
-		if animeList[i].Status == "current" {
+		if a.Status == "current" {
 			scoreA += currentlyAiringBonus
 		}
 
-		if animeList[j].Status == "current" {
+		if b.Status == "current" {
 			scoreB += currentlyAiringBonus
 		}
+
+		if a.Popularity.Total() < popularityThreshold {
+			scoreA -= popularityPenalty
+		}
+
+		if b.Popularity.Total() < popularityThreshold {
+			scoreB -= popularityPenalty
+		}
+
+		scoreA += float64(a.Popularity.Watching) * watchingPopularityWeight
+		scoreB += float64(b.Popularity.Watching) * watchingPopularityWeight
 
 		return scoreA > scoreB
 	})
