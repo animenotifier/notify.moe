@@ -97,19 +97,27 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(m.Content, "!s ") {
 		term := m.Content[len("!s "):]
-		userResults, animeResults := arn.Search(term, 3, 3)
+		users, animes, posts, threads := arn.Search(term, 3, 3, 3, 3)
 		message := ""
 
-		for _, user := range userResults {
+		for _, user := range users {
 			message += "https://notify.moe" + user.Link() + "\n"
 		}
 
-		for _, anime := range animeResults {
+		for _, anime := range animes {
 			message += "https://notify.moe" + anime.Link() + "\n"
 		}
 
-		if len(userResults) == 0 && len(animeResults) == 0 {
-			message = "Sorry, I couldn't find any anime or users with that term."
+		for _, post := range posts {
+			message += "https://notify.moe" + post.Link() + "\n"
+		}
+
+		for _, thread := range threads {
+			message += "https://notify.moe" + thread.Link() + "\n"
+		}
+
+		if len(users) == 0 && len(animes) == 0 && len(posts) == 0 && len(threads) == 0 {
+			message = "Sorry, I couldn't find anything using that term."
 		}
 
 		s.ChannelMessageSend(m.ChannelID, message)
