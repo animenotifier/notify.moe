@@ -11,7 +11,7 @@ const (
 	currentlyAiringBonus     = 4.0
 	popularityThreshold      = 5
 	popularityPenalty        = 4.0
-	watchingPopularityWeight = 0.1
+	watchingPopularityWeight = 0.2
 )
 
 func main() {
