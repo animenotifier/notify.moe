@@ -9,8 +9,10 @@ import (
 )
 
 func init() {
-	// Scripts
-	scripts := js.Bundle()
+	// Script bundle
+	scriptBundle := js.Bundle()
+
+	// Service worker
 	serviceWorkerBytes, err := ioutil.ReadFile("sw/service-worker.js")
 	serviceWorker := string(serviceWorkerBytes)
 
@@ -19,18 +21,15 @@ func init() {
 	}
 
 	app.Get("/scripts", func(ctx *aero.Context) string {
-		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return scripts
+		return ctx.JavaScript(scriptBundle)
 	})
 
 	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return scripts
+		return ctx.JavaScript(scriptBundle)
 	})
 
 	app.Get("/service-worker", func(ctx *aero.Context) string {
-		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return serviceWorker
+		return ctx.JavaScript(serviceWorker)
 	})
 
 	// Web manifest

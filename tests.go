@@ -1,13 +1,5 @@
 package main
 
-import (
-	"errors"
-	"reflect"
-
-	"github.com/aerogo/api"
-	"github.com/animenotifier/arn"
-)
-
 var routeTests = map[string][]string{
 	// User
 	"/user/:nick": []string{
@@ -240,58 +232,4 @@ var routeTests = map[string][]string{
 	"/user":                                          nil,
 	"/settings":                                      nil,
 	"/extension/embed":                               nil,
-}
-
-// API interfaces
-var creatable = reflect.TypeOf((*api.Creatable)(nil)).Elem()
-var updatable = reflect.TypeOf((*api.Updatable)(nil)).Elem()
-var actionable = reflect.TypeOf((*api.Actionable)(nil)).Elem()
-var collection = reflect.TypeOf((*api.Collection)(nil)).Elem()
-
-// Required interface implementations
-var interfaceImplementations = map[string][]reflect.Type{
-	"User": []reflect.Type{
-		updatable,
-	},
-	"Thread": []reflect.Type{
-		creatable,
-		updatable,
-		actionable,
-	},
-	"Post": []reflect.Type{
-		creatable,
-		updatable,
-		actionable,
-	},
-	"SoundTrack": []reflect.Type{
-		creatable,
-	},
-	"Analytics": []reflect.Type{
-		creatable,
-	},
-	"AnimeList": []reflect.Type{
-		collection,
-	},
-	"PushSubscriptions": []reflect.Type{
-		collection,
-	},
-	"UserFollows": []reflect.Type{
-		collection,
-	},
-}
-
-func init() {
-	// Specify test routes
-	for route, examples := range routeTests {
-		app.Test(route, examples)
-	}
-
-	// Check interface implementations
-	for typeName, interfaces := range interfaceImplementations {
-		for _, requiredInterface := range interfaces {
-			if !reflect.PtrTo(arn.DB.Type(typeName)).Implements(requiredInterface) {
-				panic(errors.New(typeName + " does not implement interface " + requiredInterface.Name()))
-			}
-		}
-	}
 }

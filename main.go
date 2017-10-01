@@ -153,6 +153,9 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/paypal/cancel", paypal.Cancel)
 	app.Get("/api/paypal/payment/create", paypal.CreatePayment)
 
+	// Rewrite
+	app.Rewrite(Rewrite)
+
 	// Middleware
 	app.Use(middleware.Firewall())
 	app.Use(middleware.Log())
@@ -172,6 +175,11 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Authentication
 	auth.Install(app)
+
+	// Specify test routes
+	for route, examples := range routeTests {
+		app.Test(route, examples)
+	}
 
 	return app
 }
