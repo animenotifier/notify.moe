@@ -23,7 +23,7 @@ js:
 install:
 	$(GOINSTALL)
 test:
-	$(GOTEST)
+	$(GOTEST) github.com/animenotifier/... -v
 bench:
 	$(GOTEST) -bench .
 tools:

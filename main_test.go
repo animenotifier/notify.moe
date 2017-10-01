@@ -24,6 +24,8 @@ func TestRoutes(t *testing.T) {
 
 			if status := responseRecorder.Code; status != http.StatusOK {
 				t.Errorf("%s | Wrong status code | %v instead of %v", example, status, http.StatusOK)
+			} else {
+				t.Logf("%s | Correct status code | %v == %v", example, status, http.StatusOK)
 			}
 		}
 	}

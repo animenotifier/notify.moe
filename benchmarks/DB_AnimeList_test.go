@@ -14,7 +14,7 @@ func BenchmarkDBAnimeListGetMap(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			animeList, _ := arn.GetAnimeList(user)
+			animeList, _ := arn.GetAnimeList(user.ID)
 			noop(animeList)
 		}
 	})
