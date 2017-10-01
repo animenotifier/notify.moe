@@ -68,13 +68,6 @@ export class Diff {
 				let elemA = a as HTMLElement
 				let elemB = b as HTMLElement
 
-				// Skip iframes
-				// This part needs to be executed AFTER lazy images check
-				// to allow lazily loaded iframes to update their data src.
-				if(elemA.tagName === "IFRAME") {
-					continue
-				}
-
 				let removeAttributes: Attr[] = []
 				
 				for(let x = 0; x < elemA.attributes.length; x++) {

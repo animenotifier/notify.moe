@@ -7,9 +7,11 @@ import { MutationQueue } from "./MutationQueue"
 import { StatusMessage } from "./StatusMessage"
 import { PushManager } from "./PushManager"
 import { TouchController } from "./TouchController"
+import { Analytics } from "./Analytics"
 
 export class AnimeNotifier {
 	app: Application
+	analytics: Analytics
 	user: HTMLElement
 	title: string
 	webpEnabled: boolean
@@ -118,6 +120,9 @@ export class AnimeNotifier {
 		// Push manager
 		this.pushManager = new PushManager()
 
+		// Analytics
+		this.analytics = new Analytics()
+
 		// Sidebar control
 		this.sideBar = this.app.find("sidebar")
 
@@ -180,7 +185,9 @@ export class AnimeNotifier {
 		this.registerServiceWorker()
 
 		// Analytics
-		this.pushAnalytics()
+		if(this.user) {
+			this.analytics.push()
+		}
 
 		// Offline message
 		if(navigator.onLine === false) {
@@ -288,35 +295,6 @@ export class AnimeNotifier {
 
 			window.requestAnimationFrame(callback)
 		}
-	}
-
-	pushAnalytics() {
-		if(!this.user) {
-			return
-		}
-
-		let analytics = {
-			general: {
-				timezoneOffset: new Date().getTimezoneOffset()
-			},
-			screen: {
-				width: screen.width,
-				height: screen.height,
-				availableWidth: screen.availWidth,
-				availableHeight: screen.availHeight,
-				pixelRatio: window.devicePixelRatio
-			},
-			system: {
-				cpuCount: navigator.hardwareConcurrency,
-				platform: navigator.platform
-			}
-		}
-
-		fetch("/dark-flame-master", {
-			method: "POST",
-			credentials: "same-origin",
-			body: JSON.stringify(analytics)
-		})
 	}
 
 	setSelectBoxValue() {
