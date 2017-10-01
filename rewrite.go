@@ -14,6 +14,7 @@ func init() {
 	app.Rewrite(func(ctx *aero.RewriteContext) {
 		requestURI := ctx.URI()
 
+		// User profiles
 		if strings.HasPrefix(requestURI, plusRoute) {
 			newURI := "/user/"
 			userName := requestURI[2:]
@@ -28,6 +29,7 @@ func init() {
 			return
 		}
 
+		// Search
 		if strings.HasPrefix(requestURI, "/search/") {
 			searchTerm := requestURI[len("/search/"):]
 			ctx.Request.URL.RawQuery = "q=" + searchTerm
@@ -42,6 +44,7 @@ func init() {
 			return
 		}
 
+		// Analytics
 		if requestURI == "/dark-flame-master" {
 			ctx.SetURI("/api/new/analytics")
 			return
