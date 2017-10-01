@@ -138,7 +138,7 @@ export class AnimeNotifier {
 		this.touchController.rightSwipe = () => this.sideBar.classList.add("sidebar-visible")
 	}
 
-	async onContentLoaded() {
+	onContentLoaded() {
 		// Stop watching all the objects from the previous page.
 		this.visibilityObserver.disconnect()
 		
