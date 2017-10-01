@@ -35,20 +35,20 @@
 		"background_color": "#ffffff",
 		"icons": [
 			{
-				"src": "images/brand/64",
+				"src": "images/brand/64.png",
 				"sizes": "64x64"
 			},
 			{
-				"src": "images/brand/144",
+				"src": "images/brand/144.png",
 				"sizes": "144x144",
 				"type": "image/png"
 			},
 			{
-				"src": "images/brand/300",
+				"src": "images/brand/300.png",
 				"sizes": "300x300"
 			},
 			{
-				"src": "images/brand/600",
+				"src": "images/brand/600.png",
 				"sizes": "600x600"
 			}
 		]

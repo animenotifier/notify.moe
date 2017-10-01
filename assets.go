@@ -44,8 +44,7 @@ func init() {
 
 	// Brand icons
 	app.Get("/images/brand/:file", func(ctx *aero.Context) string {
-		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
-		return ctx.TryWebP("images/brand/"+file, ".png")
+		return ctx.File("images/brand/" + ctx.Get("file"))
 	})
 
 	// Cover image
