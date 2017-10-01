@@ -102,6 +102,12 @@ component Settings(user *arn.User)
 					span Get the Chrome Extension
 
 			.widget-input
+				label Desktop App:
+				button.action(data-action="installApp", data-trigger="click")
+					Icon("desktop")
+					span Get the Desktop App
+
+			.widget-input
 				label Android App:
 				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
 					Icon("android")
