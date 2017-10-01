@@ -8,10 +8,11 @@ import (
 )
 
 const (
-	currentlyAiringBonus     = 4.0
+	currentlyAiringBonus     = 5.0
 	popularityThreshold      = 5
-	popularityPenalty        = 4.0
-	watchingPopularityWeight = 0.2
+	popularityPenalty        = 8.0
+	watchingPopularityWeight = 0.3
+	plannedPopularityWeight  = 0.2
 )
 
 func main() {
@@ -49,6 +50,9 @@ func main() {
 
 		scoreA += float64(a.Popularity.Watching) * watchingPopularityWeight
 		scoreB += float64(b.Popularity.Watching) * watchingPopularityWeight
+
+		scoreA += float64(a.Popularity.Planned) * plannedPopularityWeight
+		scoreB += float64(b.Popularity.Planned) * plannedPopularityWeight
 
 		return scoreA > scoreB
 	})
