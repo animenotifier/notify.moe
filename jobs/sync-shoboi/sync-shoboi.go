@@ -11,27 +11,51 @@ import (
 func main() {
 	color.Yellow("Syncing Shoboi Anime")
 
-	// Get a slice of all anime
-	allAnime, _ := arn.AllAnime()
+	// Priority queues
+	highPriority := []*arn.Anime{}
+	mediumPriority := []*arn.Anime{}
+	lowPriority := []*arn.Anime{}
 
-	// Iterate over the slice
-	count := 0
-	for _, anime := range allAnime {
-		if sync(anime) {
-			count++
+	for anime := range arn.MustStreamAnime() {
+		if anime.GetMapping("shoboi/anime") != "" {
+			continue
 		}
 
-		// Lower the request interval
-		time.Sleep(2 * time.Second)
+		switch anime.Status {
+		case "current":
+			highPriority = append(highPriority, anime)
+		case "upcoming":
+			mediumPriority = append(mediumPriority, anime)
+		default:
+			lowPriority = append(lowPriority, anime)
+		}
 	}
 
-	// Log
-	color.Green("Successfully added Shoboi IDs for %d anime", count)
+	color.Cyan("High priority queue (%d):", len(highPriority))
+	refreshQueue(highPriority)
+
+	color.Cyan("Medium priority queue (%d):", len(mediumPriority))
+	refreshQueue(mediumPriority)
+
+	color.Cyan("Low priority queue (%d):", len(lowPriority))
+	refreshQueue(lowPriority)
 
 	// This is a lazy hack: Wait 5 minutes for goroutines to finish their remaining work.
 	time.Sleep(5 * time.Minute)
 
 	color.Green("Finished.")
+}
+
+func refreshQueue(queue []*arn.Anime) {
+	count := 0
+
+	for _, anime := range queue {
+		if sync(anime) {
+			count++
+		}
+	}
+
+	color.Green("Added Shoboi IDs for %d anime", count)
 }
 
 func sync(anime *arn.Anime) bool {
