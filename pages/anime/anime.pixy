@@ -210,7 +210,7 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 									RawIcon("eye")
 							//- a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
 							//- 	RawIcon("google")
-						if episode.AiringDate.IsValid()
+						if validator.IsValidDate(episode.AiringDate.Start)
 							td.episode-airing-date-start.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 						else
 							td.episode-airing-date-start
