@@ -1,14 +1,46 @@
 package main
 
 import (
-	"os"
 	"os/exec"
+	"sync"
+
+	"github.com/animenotifier/arn"
+
+	"github.com/fatih/color"
 )
 
+var packages = []string{
+	"github.com/animenotifier/notify.moe",
+	"github.com/animenotifier/arn",
+	"github.com/animenotifier/kitsu",
+	"github.com/animenotifier/anilist",
+	"github.com/animenotifier/mal",
+	"github.com/animenotifier/shoboi",
+	"github.com/animenotifier/twist",
+	"github.com/animenotifier/avatar",
+	"github.com/animenotifier/japanese",
+	// "github.com/animenotifier/osu",
+}
+
 func main() {
-	cmd := exec.Command("go", "test", "github.com/animenotifier/notify.moe")
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	wg := sync.WaitGroup{}
+
+	for _, pkg := range packages {
+		wg.Add(1)
+
+		go func(pkgLocal string) {
+			testPackage(pkgLocal)
+			wg.Done()
+		}(pkg)
+	}
+
+	wg.Wait()
+}
+
+func testPackage(pkg string) {
+	cmd := exec.Command("go", "test", pkg+"/...")
+	// cmd.Stdout = os.Stdout
+	// cmd.Stderr = os.Stderr
 
 	err := cmd.Start()
 
@@ -16,5 +48,21 @@ func main() {
 		panic(err)
 	}
 
-	cmd.Wait()
+	err = cmd.Wait()
+
+	if err != nil {
+		color.Red("%s", pkg)
+
+		// Send notification to the admin
+		admin, _ := arn.GetUser("4J6qpK1ve")
+		admin.SendNotification(&arn.Notification{
+			Title:   pkg,
+			Message: "Test failed",
+			Link:    "https://" + pkg,
+			Icon:    "https://notify.moe/images/brand/300.png",
+		})
+		return
+	}
+
+	color.Green("%s", pkg)
 }
