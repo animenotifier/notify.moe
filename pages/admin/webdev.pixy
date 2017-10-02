@@ -1,6 +1,8 @@
 component WebDev
 	h1.page-title WebDev
 
+	AdminTabs
+
 	.light-button-group
 		a.light-button(href="https://developers.google.com/speed/pagespeed/insights/?url=https://notify.moe/&tab=desktop", target="_blank", rel="noopener")
 			Icon("external-link")

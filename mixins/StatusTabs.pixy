@@ -1,12 +1,7 @@
 component StatusTabs(urlPrefix string)
-	.tabs.status-tabs
-		StatusTab("Watching", "play", urlPrefix + "/watching")
-		StatusTab("Completed", "check", urlPrefix + "/completed")
-		StatusTab("Planned", "forward", urlPrefix + "/planned")
-		StatusTab("On Hold", "pause", urlPrefix + "/hold")
-		StatusTab("Dropped", "stop", urlPrefix + "/dropped")
-
-component StatusTab(label string, icon string, url string)
-	a.tab.status-tab.action(href=url, data-action="diff", data-trigger="click", aria-label=label)
-		Icon(icon)
-		span.tab-text= label
+	.tabs
+		Tab("Watching", "play", urlPrefix + "/watching")
+		Tab("Completed", "check", urlPrefix + "/completed")
+		Tab("Planned", "forward", urlPrefix + "/planned")
+		Tab("On Hold", "pause", urlPrefix + "/hold")
+		Tab("Dropped", "stop", urlPrefix + "/dropped")

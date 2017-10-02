@@ -1,4 +1,4 @@
-package editor
+package admin
 
 import (
 	"net/http"
@@ -9,8 +9,8 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get ...
-func Get(ctx *aero.Context) string {
+// AniList ...
+func AniList(ctx *aero.Context) string {
 	missing, err := arn.FilterAnime(func(anime *arn.Anime) bool {
 		return anime.GetMapping("anilist/anime") == ""
 	})

@@ -1,5 +1,7 @@
 component AniListMissingMapping(missing []*arn.Anime)
-	h1 Anime without Anilist links
+	h1.page-title Anime without Anilist links
+
+	AdminTabs
 
 	table
 		tbody

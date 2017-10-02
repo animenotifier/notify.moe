@@ -1,5 +1,13 @@
+component AdminTabs
+	.tabs
+		Tab("Server", "server", "/admin")
+		Tab("AniList", "list", "/admin/anilist")
+		Tab("WebDev", "html5", "/admin/webdev")
+
 component Admin(user *arn.User, cpuUsage, memUsage, diskUsage float64, platform, family, platformVersion, kernelVersion string)
 	h1.page-title Admin Panel
+
+	AdminTabs
 
 	.widgets
 		.widget.mountable

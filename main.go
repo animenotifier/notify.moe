@@ -20,7 +20,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
-	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
@@ -46,7 +45,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/threads"
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
-	"github.com/animenotifier/notify.moe/pages/webdev"
 )
 
 var app = aero.New()
@@ -94,6 +92,8 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/users/osu", users.Osu)
 	app.Ajax("/users/staff", users.Staff)
 	app.Ajax("/users/anime/watching", users.AnimeWatching)
+	app.Ajax("/statistics", statistics.Get)
+	app.Ajax("/statistics/anime", statistics.Anime)
 	app.Ajax("/login", login.Get)
 
 	// User profiles
@@ -125,10 +125,8 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Admin
 	app.Ajax("/admin", admin.Get)
-	app.Ajax("/editor", editor.Get)
-	app.Ajax("/statistics", statistics.Get)
-	app.Ajax("/statistics/anime", statistics.Anime)
-	app.Ajax("/webdev", webdev.Get)
+	app.Ajax("/admin/anilist", admin.AniList)
+	app.Ajax("/admin/webdev", admin.WebDev)
 
 	// Import
 	app.Ajax("/import", listimport.Get)

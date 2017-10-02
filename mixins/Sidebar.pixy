@@ -23,7 +23,7 @@ component Sidebar(user *arn.User)
 		SidebarButton("Statistics", "/statistics", "pie-chart")
 		SidebarButton("Settings", "/settings", "cog")
 
-		if user.Role == "admin"
+		if user.Role == "admin" || user.Role == "editor"
 			SidebarButton("Admin", "/admin", "wrench")
 
 	.spacer

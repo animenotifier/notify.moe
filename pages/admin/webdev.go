@@ -1,9 +1,9 @@
-package webdev
+package admin
 
 import "github.com/aerogo/aero"
 import "github.com/animenotifier/notify.moe/components"
 
-// Get ...
-func Get(ctx *aero.Context) string {
+// WebDev ...
+func WebDev(ctx *aero.Context) string {
 	return ctx.HTML(components.WebDev())
 }

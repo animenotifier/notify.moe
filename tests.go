@@ -229,7 +229,7 @@ var routeTests = map[string][]string{
 	"/anime/:id/edit":                                nil,
 	"/new/thread":                                    nil,
 	"/new/soundtrack":                                nil,
-	"/editor":                                        nil,
+	"/admin/anilist":                                 nil,
 	"/user":                                          nil,
 	"/settings":                                      nil,
 	"/extension/embed":                               nil,
