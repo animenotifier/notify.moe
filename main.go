@@ -153,8 +153,11 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/paypal/cancel", paypal.Cancel)
 	app.Get("/api/paypal/payment/create", paypal.CreatePayment)
 
+	// Assets
+	configureAssets(app)
+
 	// Rewrite
-	app.Rewrite(Rewrite)
+	app.Rewrite(rewrite)
 
 	// Middleware
 	app.Use(middleware.Firewall())

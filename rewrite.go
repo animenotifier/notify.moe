@@ -6,8 +6,8 @@ import (
 	"github.com/aerogo/aero"
 )
 
-// Rewrite will rewrite certain routes
-func Rewrite(ctx *aero.RewriteContext) {
+// rewrite will rewrite certain routes
+func rewrite(ctx *aero.RewriteContext) {
 	requestURI := ctx.URI()
 
 	// User profiles

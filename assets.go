@@ -8,7 +8,8 @@ import (
 	"github.com/animenotifier/notify.moe/components/js"
 )
 
-func init() {
+// configureAssets adds all the routes used for media assets.
+func configureAssets(app *aero.Application) {
 	// Script bundle
 	scriptBundle := js.Bundle()
 
