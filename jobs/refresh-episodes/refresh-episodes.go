@@ -71,7 +71,7 @@ func refresh(anime *arn.Anime) {
 		episodes := anime.Episodes()
 
 		fmt.Println(faint(episodes))
-		fmt.Printf("+%d airing | +%d available (%d total)\n", len(episodes.Items), len(episodes.Items)-episodeCount, episodes.AvailableCount()-availableEpisodeCount)
+		fmt.Printf("+%d episodes | +%d available (%d total)\n", len(episodes.Items)-episodeCount, len(episodes.Items)-episodeCount, episodes.AvailableCount()-availableEpisodeCount)
 		println()
 	}
 }
