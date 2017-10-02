@@ -3,7 +3,7 @@
 GOCMD=@go
 GOBUILD=$(GOCMD) build
 GOINSTALL=$(GOCMD) install
-GOTEST=$(GOCMD) test
+GOTEST=@./go-test-color.sh
 BUILDJOBS=@./jobs/build.sh
 BUILDPATCHES=@./patches/build.sh
 BUILDBOTS=@./bots/build.sh
@@ -23,7 +23,7 @@ js:
 install:
 	$(GOINSTALL)
 test:
-	$(GOTEST) github.com/animenotifier/... -v
+	$(GOTEST) github.com/animenotifier/... -v -cover
 bench:
 	$(GOTEST) -bench .
 tools:
