@@ -51,6 +51,7 @@ func refreshQueue(queue []*arn.Anime) {
 
 	for _, anime := range queue {
 		if sync(anime) {
+			arn.PanicOnError(anime.Save())
 			count++
 		}
 	}
