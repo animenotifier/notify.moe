@@ -230,6 +230,7 @@ var routeTests = map[string][]string{
 	"/new/thread":                                    nil,
 	"/new/soundtrack":                                nil,
 	"/admin/anilist":                                 nil,
+	"/admin/shoboi":                                  nil,
 	"/user":                                          nil,
 	"/settings":                                      nil,
 	"/extension/embed":                               nil,

@@ -1,0 +1,16 @@
+component ShoboiMissingMapping(missing []*arn.Anime)
+	h1.page-title Anime without Shoboi links
+
+	AdminTabs
+
+	table
+		tbody
+			each anime in missing
+				tr
+					td
+						if len(anime.StartDate) >= 4
+							span= anime.StartDate[:4]
+					td
+						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
+					td
+						a(href="http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese, target="_blank", rel="noopener") Search

@@ -126,6 +126,7 @@ func configure(app *aero.Application) *aero.Application {
 	// Admin
 	app.Ajax("/admin", admin.Get)
 	app.Ajax("/admin/anilist", admin.AniList)
+	app.Ajax("/admin/shoboi", admin.Shoboi)
 	app.Ajax("/admin/webdev", admin.WebDev)
 
 	// Import
