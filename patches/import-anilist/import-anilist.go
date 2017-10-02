@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/animenotifier/anilist"
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -19,12 +17,17 @@ func main() {
 	stream := anilist.StreamAnime()
 
 	for aniListAnime := range stream {
+		println(aniListAnime.TitleRomaji)
+
 		anime := arn.FindAniListAnime(aniListAnime, allAnime)
 
-		if anime == nil {
-			fmt.Println(anime.ID, aniListAnime.TitleRomaji)
+		if anime != nil {
+			color.Green("%s %s", anime.ID, aniListAnime.TitleRomaji)
+			count++
+		} else {
+			color.Red("Not found")
 		}
-
-		count++
 	}
+
+	color.Green("%d anime are connected with AniList", count)
 }
