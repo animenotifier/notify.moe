@@ -1,4 +1,4 @@
-package music
+package soundtracks
 
 import (
 	"net/http"

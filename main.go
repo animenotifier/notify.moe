@@ -18,6 +18,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/artworks"
 	"github.com/animenotifier/notify.moe/pages/best"
 	"github.com/animenotifier/notify.moe/pages/character"
+	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
@@ -31,7 +32,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportmyanimelist"
 	"github.com/animenotifier/notify.moe/pages/login"
 	"github.com/animenotifier/notify.moe/pages/me"
-	"github.com/animenotifier/notify.moe/pages/music"
 	"github.com/animenotifier/notify.moe/pages/newsoundtrack"
 	"github.com/animenotifier/notify.moe/pages/newthread"
 	"github.com/animenotifier/notify.moe/pages/notifications"
@@ -40,9 +40,10 @@ import (
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/settings"
+	"github.com/animenotifier/notify.moe/pages/soundtrack"
+	"github.com/animenotifier/notify.moe/pages/soundtracks"
 	"github.com/animenotifier/notify.moe/pages/statistics"
 	"github.com/animenotifier/notify.moe/pages/threads"
-	"github.com/animenotifier/notify.moe/pages/tracks"
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
 	"github.com/animenotifier/notify.moe/pages/webdev"
@@ -71,6 +72,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Ajax routes
 	app.Ajax("/", home.Get)
+	app.Ajax("/dashboard", dashboard.Get)
 	app.Ajax("/anime/:id", anime.Get)
 	app.Ajax("/anime/:id/edit", editanime.Get)
 	app.Ajax("/api", apiview.Get)
@@ -80,12 +82,12 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/thread/:id", threads.Get)
 	app.Ajax("/post/:id", posts.Get)
-	app.Ajax("/soundtrack/:id", tracks.Get)
+	app.Ajax("/soundtrack/:id", soundtrack.Get)
 	app.Ajax("/character/:id", character.Get)
 	app.Ajax("/new/thread", newthread.Get)
 	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/settings", settings.Get)
-	app.Ajax("/soundtracks", music.Get)
+	app.Ajax("/soundtracks", soundtracks.Get)
 	app.Ajax("/artworks", artworks.Get)
 	app.Ajax("/amvs", amvs.Get)
 	app.Ajax("/users", users.Active)

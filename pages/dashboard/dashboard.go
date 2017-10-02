@@ -1,6 +1,7 @@
 package dashboard
 
 import (
+	"net/http"
 	"sort"
 
 	"github.com/aerogo/aero"
@@ -23,6 +24,10 @@ func Get(ctx *aero.Context) string {
 	var upcomingEpisodes []*arn.UpcomingEpisode
 
 	user := utils.GetUser(ctx)
+
+	if user == nil {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+	}
 
 	flow.Parallel(func() {
 		forumActivity, _ = arn.GetForumActivityCached()

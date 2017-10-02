@@ -23,6 +23,9 @@ component Sidebar(user *arn.User)
 		SidebarButton("Statistics", "/statistics", "pie-chart")
 		SidebarButton("Settings", "/settings", "cog")
 
+		if user.Role == "admin"
+			SidebarButton("Admin", "/admin", "wrench")
+
 	.spacer
 
 	.sidebar-link(aria-label="Search")

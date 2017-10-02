@@ -122,7 +122,8 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 		//- 		.widget-element-text
 		//- 			Icon("github")
 		//- 			span GitHub
-	
+
+component Footer
 	.footer.text-center
 		span.footer-element Anime Notifier
 
