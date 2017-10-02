@@ -59,7 +59,7 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 								//- 	RawIcon("download")
 					
 					td.anime-list-item-airing-date
-						if item.Status == arn.AnimeListStatusWatching && item.Anime().UpcomingEpisode() != nil
+						if (item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusPlanned) && item.Anime().UpcomingEpisode() != nil
 							span.utc-airing-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
 					
 					td.anime-list-item-episodes
