@@ -6,6 +6,7 @@ const ETAGS = new Map<string, string>()
 const CACHEREFRESH = new Map<string, Promise<void>>()
 const EXCLUDECACHE = new Set<string>([
 	"/api/",
+	"/admin/",
 	"/paypal/",
 	"/import/",
 	"chrome-extension"
