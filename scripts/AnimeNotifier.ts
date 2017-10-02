@@ -8,6 +8,7 @@ import { StatusMessage } from "./StatusMessage"
 import { PushManager } from "./PushManager"
 import { TouchController } from "./TouchController"
 import { Analytics } from "./Analytics"
+import { SideBar } from "./SideBar"
 
 export class AnimeNotifier {
 	app: Application
@@ -20,7 +21,7 @@ export class AnimeNotifier {
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
 	touchController: TouchController
-	sideBar: HTMLElement
+	sideBar: SideBar
 	mainPageLoaded: boolean
 	lastReloadContentPath: string
 
@@ -114,9 +115,6 @@ export class AnimeNotifier {
 			this.app.find("status-message-text")
 		)
 
-		// Let"s start
-		this.app.run()
-
 		// Push manager
 		this.pushManager = new PushManager()
 
@@ -124,18 +122,10 @@ export class AnimeNotifier {
 		this.analytics = new Analytics()
 
 		// Sidebar control
-		this.sideBar = this.app.find("sidebar")
+		this.sideBar = new SideBar(this.app.find("sidebar"))
 
-		document.body.addEventListener("click", e => {
-			if(document.activeElement.id === "search")
-				return;
-
-			this.sideBar.classList.remove("sidebar-visible")
-		})
-
-		this.touchController = new TouchController()
-		this.touchController.leftSwipe = () => this.sideBar.classList.remove("sidebar-visible")
-		this.touchController.rightSwipe = () => this.sideBar.classList.add("sidebar-visible")
+		// Let"s start
+		this.app.run()
 	}
 
 	onContentLoaded() {
