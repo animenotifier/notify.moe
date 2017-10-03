@@ -205,6 +205,19 @@ var routeTests = map[string][]string{
 		"/images/elements/no-avatar.svg",
 	},
 
+	// Extra tests for higher coverage
+	"/_/+Akyoto": []string{
+		"/_/+Akyoto",
+	},
+
+	"/_/search/dragon": []string{
+		"/_/search/dragon",
+	},
+
+	"/dark-flame-master": []string{
+		"/dark-flame-master",
+	},
+
 	// Disable these tests because they require authorization
 	"/auth/google":                                   nil,
 	"/auth/google/callback":                          nil,
