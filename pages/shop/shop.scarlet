@@ -1,0 +1,33 @@
+.shop-items
+	// ...
+
+.shop-item
+	// ...
+
+.shop-item-name
+	// ...
+
+.shop-item-price
+	// ...
+
+.shop-item-price-currency
+	margin-left 0.3rem
+	margin-right 0
+
+.shop-item-duration
+	opacity 0.5
+	text-align right
+	float right
+
+.shop-buttons
+	margin-top 1rem
+
+.shop-button-buy
+	.icon-diamond
+		margin-left 0.3rem
+		margin-right 0
+
+.user-balance-bar
+	text-align center
+	font-size 2.5rem
+	margin-bottom 2rem

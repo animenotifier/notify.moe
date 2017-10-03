@@ -39,6 +39,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/settings"
+	"github.com/animenotifier/notify.moe/pages/shop"
 	"github.com/animenotifier/notify.moe/pages/soundtrack"
 	"github.com/animenotifier/notify.moe/pages/soundtracks"
 	"github.com/animenotifier/notify.moe/pages/statistics"
@@ -94,6 +95,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/users/anime/watching", users.AnimeWatching)
 	app.Ajax("/statistics", statistics.Get)
 	app.Ajax("/statistics/anime", statistics.Anime)
+	app.Ajax("/shop", shop.Get)
 	app.Ajax("/login", login.Get)
 
 	// User profiles

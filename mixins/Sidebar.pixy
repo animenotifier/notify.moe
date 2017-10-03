@@ -20,11 +20,9 @@ component Sidebar(user *arn.User)
 	//- SidebarButton("Search", "/search", "search")
 
 	if user != nil
+		SidebarButton("Shop", "/shop", "shopping-cart")
 		SidebarButton("Statistics", "/statistics", "pie-chart")
 		SidebarButton("Settings", "/settings", "cog")
-
-		if user.Role == "admin" || user.Role == "editor"
-			SidebarButton("Admin", "/admin", "wrench")
 
 	.spacer
 
@@ -32,6 +30,9 @@ component Sidebar(user *arn.User)
 		.sidebar-button
 			Icon("search")
 			FuzzySearch
+
+	if user != nil && (user.Role == "admin" || user.Role == "editor")
+		SidebarButton("Admin", "/admin", "wrench")
 
 	SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
 
