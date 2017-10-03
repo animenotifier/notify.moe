@@ -3,7 +3,7 @@ component Sidebar(user *arn.User)
 		if user != nil
 			Avatar(user)
 		else
-			img.user-image.lazy(data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
+			img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
 	
 	if user != nil
 		SidebarButton("Home", "/animelist/watching", "home")
