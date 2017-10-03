@@ -24,6 +24,7 @@ func main() {
 			continue
 		}
 
+		// The rest gets sorted by airing status
 		switch anime.Status {
 		case "current":
 			highPriority = append(highPriority, anime)
