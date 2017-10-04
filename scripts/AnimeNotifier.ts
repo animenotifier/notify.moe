@@ -1,6 +1,6 @@
 import * as actions from "./Actions"
 import { displayAiringDate, displayDate } from "./DateView"
-import { findAll, delay, canUseWebP } from "./Utils"
+import { findAll, delay, canUseWebP, swapElements } from "./Utils"
 import { Application } from "./Application"
 import { Diff } from "./Diff"
 import { MutationQueue } from "./MutationQueue"
@@ -139,6 +139,7 @@ export class AnimeNotifier {
 			Promise.resolve().then(() => this.setSelectBoxValue()),
 			Promise.resolve().then(() => this.assignActions()),
 			Promise.resolve().then(() => this.updatePushUI()),
+			Promise.resolve().then(() => this.dragAndDrop()),
 			Promise.resolve().then(() => this.countUp())
 		])
 
@@ -151,22 +152,6 @@ export class AnimeNotifier {
 			}
 		} else {
 			document.title = headers[0].innerText
-		}
-	}
-
-	async updatePushUI() {
-		if(!this.pushManager.pushSupported || !this.app.currentPath.includes("/settings")) {
-			return
-		}
-		
-		let subscription = await this.pushManager.subscription()
-
-		if(subscription) {
-			this.app.find("enable-notifications").style.display = "none"
-			this.app.find("disable-notifications").style.display = "flex"
-		} else {
-			this.app.find("enable-notifications").style.display = "flex"
-			this.app.find("disable-notifications").style.display = "none"
 		}
 	}
 
@@ -258,6 +243,68 @@ export class AnimeNotifier {
 				}
 				
 				break
+		}
+	}
+
+	dragAndDrop() {
+		for(let element of findAll("inventory-slot")) {
+			if(element.draggable) {
+				element.addEventListener("dragstart", e => {
+					let element = e.target as HTMLElement
+					e.dataTransfer.setData("text", element.dataset.index)
+				}, false)
+			}
+
+			element.addEventListener("dragenter", e => {
+				let element = e.target as HTMLElement
+				element.classList.add("drag-enter")
+			}, false)
+
+			element.addEventListener("dragleave", e => {
+				let element = e.target as HTMLElement
+				element.classList.remove("drag-enter")
+			}, false)
+
+			element.addEventListener("dragover", e => {
+				e.preventDefault()
+			}, false)
+
+			element.addEventListener("drop", e => {
+				let inventory = e.toElement.parentElement
+				let fromIndex = e.dataTransfer.getData("text")
+				let fromElement = inventory.childNodes[fromIndex] as HTMLElement
+				let toElement = e.toElement as HTMLElement
+				let toIndex = toElement.dataset.index
+
+				e.stopPropagation()
+				e.preventDefault()
+
+				if(fromElement === toElement || fromIndex === toIndex) {
+					return
+				}
+
+				toElement.classList.remove("drag-enter")
+				swapElements(fromElement, toElement)
+				
+				fromElement.dataset.index = toIndex
+				toElement.dataset.index = fromIndex
+			}, false)
+		}
+	}
+
+	async updatePushUI() {
+		if(!this.pushManager.pushSupported || !this.app.currentPath.includes("/settings")) {
+			return
+		}
+		
+		let subscription = await this.pushManager.subscription()
+
+		if(subscription) {
+			this.app.find("enable-notifications").style.display = "none"
+			this.app.find("disable-notifications").style.display = "flex"
+		} else {
+			this.app.find("enable-notifications").style.display = "flex"
+			this.app.find("disable-notifications").style.display = "none"
 		}
 	}
 

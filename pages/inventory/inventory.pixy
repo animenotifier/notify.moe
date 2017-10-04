@@ -1,7 +1,11 @@
 component Inventory(inventory *arn.Inventory)
 	ShopTabs
 	.inventory
-		each slot in inventory.Slots
-			.inventory-slot
-				span= slot.ItemID
-	p Coming soon.
+		for index, slot := range inventory.Slots
+			if slot.ItemID == ""
+				.inventory-slot.mountable(draggable="false", data-index=index)
+			else
+				.inventory-slot.mountable(title=slot.Item().Name, draggable="true", data-index=index)
+					Icon(slot.Item().Icon)
+					if slot.Quantity > 1
+						.inventory-slot-quantity= slot.Quantity

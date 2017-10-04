@@ -1,0 +1,35 @@
+inventory-slot-size = 64px
+
+.inventory
+	display grid
+	grid-gap 0.25rem
+	grid-template-columns repeat(auto-fit, inventory-slot-size)
+	grid-auto-rows inventory-slot-size
+	justify-content center
+	width 100%
+	max-width 450px
+	margin 0 auto
+
+.inventory-slot
+	ui-element
+	position relative
+	display flex
+	align-items center
+	justify-content center
+	font-size 2rem
+	
+	.icon
+		margin 0
+		pointer-events none
+
+.inventory-slot-quantity
+	position absolute
+	bottom 0.25rem
+	right 0.25rem
+	font-size 0.8rem
+	line-height 1em
+	opacity 0.5
+	pointer-events none
+
+.drag-enter
+	border-style dashed

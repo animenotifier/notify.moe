@@ -25,5 +25,11 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching inventory data", err)
 	}
 
+	// TEST
+	inventory.AddItem("anime-support-ticket", 35)
+	inventory.AddItem("pro-account-24", 20)
+	inventory.AddItem("anime-support-ticket", 15)
+	inventory.AddItem("pro-account-24", 10)
+
 	return ctx.HTML(components.Inventory(inventory))
 }

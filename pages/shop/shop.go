@@ -2,6 +2,7 @@ package shop
 
 import (
 	"net/http"
+	"sort"
 
 	"github.com/animenotifier/arn"
 
@@ -18,7 +19,15 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	items := arn.AllItems()
+	items, err := arn.AllItems()
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Error fetching shop item data", err)
+	}
+
+	sort.Slice(items, func(i, j int) bool {
+		return items[i].Order < items[j].Order
+	})
 
 	return ctx.HTML(components.Shop(user, items))
 }
