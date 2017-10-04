@@ -1,29 +1,26 @@
-component Shop(user *arn.User, proAccountMarkdown string)
+component Shop(user *arn.User, items []*arn.Item)
 	h1.page-title Shop
-
-	.user-balance-bar
-		Icon("diamond")
-		span.user-balance 0
 	
-	.tabs
-		.tab Goods
-		.tab Top-Up
+	ShopTabs
 
 	.widgets.shop-items
-		ShopItem("PRO Account", "3 months", "900", "star", proAccountMarkdown)
-		ShopItem("PRO Account", "6 months", "1700", "star", strings.Replace(strings.Replace(proAccountMarkdown, "3 months", "6 months", 1), "1 anime season", "2 anime seasons", 1))
-		ShopItem("PRO Account", "1 year", "3000", "star", strings.Replace(strings.Replace(proAccountMarkdown, "3 months", "12 months", 1), "1 anime season", "4 anime seasons", 1))
-		ShopItem("PRO Account", "2 years", "5900", "star", strings.Replace(strings.Replace(proAccountMarkdown, "3 months", "24 months", 1), "1 anime season", "8 anime seasons", 1))
-		ShopItem("Anime Support Ticket", "", "100", "ticket", "Support the makers of your favourite anime by using an anime support ticket. Anime Notifier uses 8% of the money to handle the transaction fees while the remaining 92% go directly to the studios involved in the creation of your favourite anime.")
+		each item in items
+			ShopItem(item)
 
-component ShopItem(name string, duration string, price string, icon string, description string)
-	.widget.shop-item
+component ShopTabs
+	.tabs
+		Tab("Shop", "shopping-cart", "/shop")
+		Tab("Inventory", "briefcase", "/inventory")
+		Tab("0", "diamond", "/charge")
+
+component ShopItem(item *arn.Item)
+	.widget.shop-item.mountable
 		h3.widget-title.shop-item-name
-			Icon(icon)
-			span= name
-			span.shop-item-duration= " " + duration
-		.shop-item-description!= aero.Markdown(description)
+			Icon(item.Icon)
+			span= item.Name
+			//- span.shop-item-duration= " " + duration
+		.shop-item-description!= aero.Markdown(item.Description)
 		.buttons.shop-buttons
 			button.shop-button-buy
-				span.shop-item-price= price
+				span.shop-item-price= item.Price
 				Icon("diamond")

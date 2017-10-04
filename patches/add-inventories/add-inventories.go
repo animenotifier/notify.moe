@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	color.Yellow("Adding user follows to users who don't have one")
+	color.Yellow("Adding inventories to users who don't have one")
 
 	// Get a stream of all users
 	allUsers, err := arn.StreamUsers()
@@ -16,7 +16,7 @@ func main() {
 
 	// Iterate over the stream
 	for user := range allUsers {
-		exists, err := arn.DB.Exists("UserFollows", user.ID)
+		exists, err := arn.DB.Exists("Inventory", user.ID)
 
 		if err != nil || exists {
 			continue
@@ -24,11 +24,8 @@ func main() {
 
 		fmt.Println(user.Nick)
 
-		follows := &arn.UserFollows{}
-		follows.UserID = user.ID
-		follows.Items = user.Following
-
-		err = arn.DB.Set("UserFollows", follows.UserID, follows)
+		inventory := arn.NewInventory(user.ID)
+		err = arn.DB.Set("Inventory", inventory.UserID, inventory)
 
 		if err != nil {
 			color.Red(err.Error())

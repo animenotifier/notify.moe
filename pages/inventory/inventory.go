@@ -1,16 +1,17 @@
-package shop
+package inventory
 
 import (
 	"net/http"
 
 	"github.com/animenotifier/arn"
 
-	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
+
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get shop page.
+// Get inventory page.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
@@ -18,7 +19,11 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	items := arn.AllItems()
+	inventory, err := arn.GetInventory(user.ID)
 
-	return ctx.HTML(components.Shop(user, items))
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Error fetching inventory data", err)
+	}
+
+	return ctx.HTML(components.Inventory(inventory))
 }

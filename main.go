@@ -18,6 +18,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/artworks"
 	"github.com/animenotifier/notify.moe/pages/best"
 	"github.com/animenotifier/notify.moe/pages/character"
+	"github.com/animenotifier/notify.moe/pages/charge"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/embed"
@@ -25,6 +26,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/home"
+	"github.com/animenotifier/notify.moe/pages/inventory"
 	"github.com/animenotifier/notify.moe/pages/listimport"
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportanilist"
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportkitsu"
@@ -95,7 +97,6 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/users/anime/watching", users.AnimeWatching)
 	app.Ajax("/statistics", statistics.Get)
 	app.Ajax("/statistics/anime", statistics.Anime)
-	app.Ajax("/shop", shop.Get)
 	app.Ajax("/login", login.Get)
 
 	// User profiles
@@ -124,6 +125,11 @@ func configure(app *aero.Application) *aero.Application {
 	// Search
 	app.Ajax("/search", search.Get)
 	app.Ajax("/search/:term", search.Get)
+
+	// Shop
+	app.Ajax("/shop", shop.Get)
+	app.Ajax("/inventory", inventory.Get)
+	app.Ajax("/charge", charge.Get)
 
 	// Admin
 	app.Ajax("/admin", admin.Get)

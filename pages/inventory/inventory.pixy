@@ -1,0 +1,7 @@
+component Inventory(inventory *arn.Inventory)
+	ShopTabs
+	.inventory
+		each slot in inventory.Slots
+			.inventory-slot
+				span= slot.ItemID
+	p Coming soon.

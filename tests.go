@@ -246,5 +246,8 @@ var routeTests = map[string][]string{
 	"/admin/shoboi":                                  nil,
 	"/user":                                          nil,
 	"/settings":                                      nil,
+	"/shop":                                          nil,
+	"/charge":                                        nil,
+	"/inventory":                                     nil,
 	"/extension/embed":                               nil,
 }
