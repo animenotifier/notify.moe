@@ -302,24 +302,39 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 	.then(() => arn.loading(false))
 }
 
-// Use item
-// export function useItem(arn: AnimeNotifier, button: HTMLElement) {
-// 	let slotIndex = ""
-// 	let parent = button
+// Charge up
+export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
+	let amount = button.dataset.amount
 
-// 	while(parent = parent.parentElement) {
-// 		if(parent.dataset.index !== undefined) {
-// 			slotIndex = parent.dataset.index
-// 			break
-// 		}
-// 	}
+	arn.loading(true)
+	arn.statusMessage.showInfo("Creating PayPal transaction... This might take a few seconds.")
 
-// 	let apiEndpoint = arn.findAPIEndpoint(button)
-	
-// 	arn.post(apiEndpoint + "/use/" + slotIndex, "")
-// 	.then(() => arn.reloadContent())
-// 	.catch(err => arn.statusMessage.showError(err))
-// }
+	fetch("/api/paypal/payment/create", {
+		method: "POST",
+		body: amount,
+		credentials: "same-origin"
+	})
+	.then(response => response.json())
+	.then(payment => {
+		if(!payment || !payment.links) {
+			throw "Error creating PayPal payment"
+		}
+
+		console.log(payment)
+		let link = payment.links.find(link => link.rel === "approval_url")
+
+		if(!link) {
+			throw "Error finding PayPal payment link"
+		}
+
+		let url = link.href
+		console.log(url)
+
+		window.open(url, "_blank")
+	})
+	.catch(err => arn.statusMessage.showError(err))
+	.then(() => arn.loading(false))
+}
 
 // Chrome extension installation
 export function installExtension(arn: AnimeNotifier, button: HTMLElement) {

@@ -17,12 +17,24 @@ func CreatePayment(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
+	amount := string(ctx.RequestBody())
+
+	// Verify amount
+	switch amount {
+	case "1000", "2000", "3000", "6000", "12000":
+		// OK
+	default:
+		return ctx.Error(http.StatusBadRequest, "Incorrect amount", nil)
+	}
+
+	// Initiate PayPal client
 	c, err := arn.PayPal()
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Could not initiate PayPal client", err)
 	}
 
+	// Get access token
 	_, err = c.GetAccessToken()
 
 	if err != nil {
@@ -55,6 +67,9 @@ func CreatePayment(ctx *aero.Context) string {
 	// 	return ctx.Error(http.StatusInternalServerError, "Could not create PayPal web profile", err)
 	// }
 
+	total := amount[:len(amount)-2] + "." + amount[len(amount)-2:]
+
+	// Create payment
 	p := paypalsdk.Payment{
 		Intent: "sale",
 		Payer: &paypalsdk.Payer{
@@ -63,7 +78,7 @@ func CreatePayment(ctx *aero.Context) string {
 		Transactions: []paypalsdk.Transaction{paypalsdk.Transaction{
 			Amount: &paypalsdk.Amount{
 				Currency: "USD",
-				Total:    "10.00",
+				Total:    total,
 			},
 			Description: "Top Up Balance",
 		}},

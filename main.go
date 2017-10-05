@@ -159,7 +159,7 @@ func configure(app *aero.Application) *aero.Application {
 	// PayPal
 	app.Ajax("/paypal/success", paypal.Success)
 	app.Ajax("/paypal/cancel", paypal.Cancel)
-	app.Get("/api/paypal/payment/create", paypal.CreatePayment)
+	app.Post("/api/paypal/payment/create", paypal.CreatePayment)
 
 	// Assets
 	configureAssets(app)
