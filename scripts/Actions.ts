@@ -302,6 +302,25 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 	.then(() => arn.loading(false))
 }
 
+// Use item
+// export function useItem(arn: AnimeNotifier, button: HTMLElement) {
+// 	let slotIndex = ""
+// 	let parent = button
+
+// 	while(parent = parent.parentElement) {
+// 		if(parent.dataset.index !== undefined) {
+// 			slotIndex = parent.dataset.index
+// 			break
+// 		}
+// 	}
+
+// 	let apiEndpoint = arn.findAPIEndpoint(button)
+	
+// 	arn.post(apiEndpoint + "/use/" + slotIndex, "")
+// 	.then(() => arn.reloadContent())
+// 	.catch(err => arn.statusMessage.showError(err))
+// }
+
 // Chrome extension installation
 export function installExtension(arn: AnimeNotifier, button: HTMLElement) {
 	let browser: any = window["chrome"]

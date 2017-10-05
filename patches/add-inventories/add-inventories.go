@@ -16,15 +16,20 @@ func main() {
 
 	// Iterate over the stream
 	for user := range allUsers {
-		exists, err := arn.DB.Exists("Inventory", user.ID)
+		// exists, err := arn.DB.Exists("Inventory", user.ID)
 
-		if err != nil || exists {
-			continue
-		}
+		// if err != nil || exists {
+		// 	continue
+		// }
 
 		fmt.Println(user.Nick)
 
 		inventory := arn.NewInventory(user.ID)
+
+		// TEST
+		inventory.AddItem("anime-support-ticket", 50)
+		inventory.AddItem("pro-account-24", 30)
+
 		err = arn.DB.Set("Inventory", inventory.UserID, inventory)
 
 		if err != nil {

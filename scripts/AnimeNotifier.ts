@@ -248,10 +248,31 @@ export class AnimeNotifier {
 
 	dragAndDrop() {
 		for(let element of findAll("inventory-slot")) {
+			// Skip elements that have their event listeners attached already
+			if(element["listeners-attached"]) {
+				continue
+			}
+
+			// If the slot has an item and is therefore draggable
 			if(element.draggable) {
 				element.addEventListener("dragstart", e => {
 					let element = e.target as HTMLElement
 					e.dataTransfer.setData("text", element.dataset.index)
+				}, false)
+
+				element.addEventListener("dblclick", e => {
+					let itemName = element.title
+
+					if(element.dataset.consumable !== "true") {
+						return this.statusMessage.showError(itemName + " is not a consumable item.")
+					}
+					
+					let apiEndpoint = this.findAPIEndpoint(element)
+					
+					this.post(apiEndpoint + "/use/" + element.dataset.index, "")
+					.then(() => this.reloadContent())
+					.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
+					.catch(err => this.statusMessage.showError(err))
 				}, false)
 			}
 
@@ -283,12 +304,22 @@ export class AnimeNotifier {
 					return
 				}
 
+				// Swap in database
+				let apiEndpoint = this.findAPIEndpoint(inventory)
+				
+				this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex, "")
+				.catch(err => this.statusMessage.showError(err))
+
+				// Swap in UI
 				toElement.classList.remove("drag-enter")
 				swapElements(fromElement, toElement)
 				
 				fromElement.dataset.index = toIndex
 				toElement.dataset.index = fromIndex
 			}, false)
+
+			// Prevent re-attaching the same listeners
+			element["listeners-attached"] = true
 		}
 	}
 
@@ -660,6 +691,10 @@ export class AnimeNotifier {
 	}
 
 	findAPIEndpoint(element: HTMLElement) {
+		if(element.dataset.api !== undefined) {
+			return element.dataset.api
+		}
+
 		let apiObject: HTMLElement
 		let parent = element
 
