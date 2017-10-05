@@ -17,6 +17,10 @@
 	[data-highlight="true"]
 		.post-content
 			border 2px solid post-highlight-color
+	
+	[data-pro="true"]
+		.post-content
+			border 2px solid pro-color
 
 > 600px
 	.post

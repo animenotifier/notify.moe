@@ -4,8 +4,8 @@ main-color = rgb(248, 165, 130)
 link-color = rgb(215, 38, 15)
 link-hover-color = rgb(242, 60, 30)
 link-active-color = link-hover-color
-
 bg-color = rgb(246, 246, 246)
+pro-color = hsla(0, 100%, 77%, 0.87)
 
 // UI
 ui-border-color = rgba(0, 0, 0, 0.1)

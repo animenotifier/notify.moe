@@ -461,6 +461,10 @@ export class AnimeNotifier {
 			let actionTrigger = element.dataset.trigger
 			let actionName = element.dataset.action
 
+			if(!actionTrigger || !actionName) {
+				continue
+			}
+
 			let oldAction = element["action assigned"]
 
 			if(oldAction) {
@@ -473,6 +477,8 @@ export class AnimeNotifier {
 
 			if(!(actionName in actions)) {
 				this.statusMessage.showError(`Action '${actionName}' has not been defined`)
+				console.error(element)
+				continue
 			}
 
 			let actionHandler = e => {
