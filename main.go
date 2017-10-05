@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/aerogo/api"
 	"github.com/aerogo/session-store-aerospike"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
@@ -175,8 +174,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Use(middleware.UserInfo())
 
 	// API
-	api := api.New("/api/", arn.DB)
-	api.Install(app)
+	arn.API.Install(app)
 
 	// Domain
 	if arn.IsDevelopment() {
