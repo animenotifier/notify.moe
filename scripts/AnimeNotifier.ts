@@ -253,36 +253,38 @@ export class AnimeNotifier {
 				continue
 			}
 
-			// If the slot has an item and is therefore draggable
-			if(element.draggable) {
-				element.addEventListener("dragstart", e => {
-					let element = e.target as HTMLElement
-					e.dataTransfer.setData("text", element.dataset.index)
-				}, false)
+			element.addEventListener("dragstart", e => {
+				if(!element.draggable) {
+					return
+				}
 
-				element.addEventListener("dblclick", e => {
-					let itemName = element.title
+				e.dataTransfer.setData("text", element.dataset.index)
+			}, false)
 
-					if(element.dataset.consumable !== "true") {
-						return this.statusMessage.showError(itemName + " is not a consumable item.")
-					}
-					
-					let apiEndpoint = this.findAPIEndpoint(element)
-					
-					this.post(apiEndpoint + "/use/" + element.dataset.index, "")
-					.then(() => this.reloadContent())
-					.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
-					.catch(err => this.statusMessage.showError(err))
-				}, false)
-			}
+			element.addEventListener("dblclick", e => {
+				if(!element.draggable) {
+					return
+				}
+
+				let itemName = element.title
+
+				if(element.dataset.consumable !== "true") {
+					return this.statusMessage.showError(itemName + " is not a consumable item.")
+				}
+				
+				let apiEndpoint = this.findAPIEndpoint(element)
+				
+				this.post(apiEndpoint + "/use/" + element.dataset.index, "")
+				.then(() => this.reloadContent())
+				.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
+				.catch(err => this.statusMessage.showError(err))
+			}, false)
 
 			element.addEventListener("dragenter", e => {
-				let element = e.target as HTMLElement
 				element.classList.add("drag-enter")
 			}, false)
 
 			element.addEventListener("dragleave", e => {
-				let element = e.target as HTMLElement
 				element.classList.remove("drag-enter")
 			}, false)
 
@@ -291,14 +293,22 @@ export class AnimeNotifier {
 			}, false)
 
 			element.addEventListener("drop", e => {
-				let inventory = e.toElement.parentElement
-				let fromIndex = e.dataTransfer.getData("text")
-				let fromElement = inventory.childNodes[fromIndex] as HTMLElement
 				let toElement = e.toElement as HTMLElement
-				let toIndex = toElement.dataset.index
+				toElement.classList.remove("drag-enter")
 
 				e.stopPropagation()
 				e.preventDefault()
+
+				let inventory = e.toElement.parentElement
+				let fromIndex = e.dataTransfer.getData("text")
+
+				if(!fromIndex) {
+					return
+				}
+
+				let fromElement = inventory.childNodes[fromIndex] as HTMLElement
+				
+				let toIndex = toElement.dataset.index
 
 				if(fromElement === toElement || fromIndex === toIndex) {
 					return
@@ -311,7 +321,6 @@ export class AnimeNotifier {
 				.catch(err => this.statusMessage.showError(err))
 
 				// Swap in UI
-				toElement.classList.remove("drag-enter")
 				swapElements(fromElement, toElement)
 				
 				fromElement.dataset.index = toIndex
