@@ -1,6 +1,8 @@
 component Inventory(inventory *arn.Inventory, viewUser *arn.User, user *arn.User)
 	ShopTabs(user)
 	
+	h1.page-title Inventory
+
 	.inventory(data-api="/api/inventory/" + viewUser.ID)
 		for index, slot := range inventory.Slots
 			if slot.ItemID == ""

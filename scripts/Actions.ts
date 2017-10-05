@@ -336,6 +336,35 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 	.then(() => arn.loading(false))
 }
 
+// Buy item
+export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
+	let itemId = button.dataset.itemId
+	let itemName = button.dataset.itemName
+	let price = button.dataset.price
+
+	if(!confirm(`Would you like to buy ${itemName} for ${price} gems?`)) {
+		return
+	}
+
+	arn.loading(true)
+
+	fetch(`/api/shop/buy/${itemId}/1`, {
+		method: "POST",
+		credentials: "same-origin"
+	})
+	.then(response => response.text())
+	.then(body => {
+		if(body !== "ok") {
+			throw body
+		}
+		
+		return arn.reloadContent()
+	})
+	.then(() => arn.statusMessage.showInfo(`You bought ${itemName} for ${price} gems. Check out your inventory to confirm the purchase.`, 4000))
+	.catch(err => arn.statusMessage.showError(err))
+	.then(() => arn.loading(false))
+}
+
 // Chrome extension installation
 export function installExtension(arn: AnimeNotifier, button: HTMLElement) {
 	let browser: any = window["chrome"]

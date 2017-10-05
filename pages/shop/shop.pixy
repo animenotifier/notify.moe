@@ -1,7 +1,7 @@
 component Shop(user *arn.User, items []*arn.Item)
-	h1.page-title Shop
-	
 	ShopTabs(user)
+
+	h1.page-title Shop
 
 	.widgets.shop-items
 		each item in items
@@ -21,6 +21,6 @@ component ShopItem(item *arn.Item)
 			//- span.shop-item-duration= " " + duration
 		.shop-item-description!= aero.Markdown(item.Description)
 		.buttons.shop-buttons
-			button.shop-button-buy
+			button.shop-button-buy.action(data-item-id=item.ID, data-item-name=item.Name, data-price=item.Price, data-trigger="click", data-action="buyItem")
 				span.shop-item-price= item.Price
 				Icon("diamond")

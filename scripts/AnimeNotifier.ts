@@ -471,6 +471,10 @@ export class AnimeNotifier {
 				element.removeEventListener(oldAction.trigger, oldAction.handler)
 			}
 
+			if(!(actionName in actions)) {
+				this.statusMessage.showError(`Action '${actionName}' has not been defined`)
+			}
+
 			let actionHandler = e => {
 				actions[actionName](this, element, e)
 
