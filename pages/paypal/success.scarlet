@@ -2,6 +2,7 @@
 	horizontal
 	margin 2rem auto
 	font-size 4rem
+	line-height 1em
 	color green
 
 .new-payment-currency

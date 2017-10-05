@@ -73,7 +73,7 @@ func Success(ctx *aero.Context) string {
 	}
 
 	// Increase user's balance
-	user.Balance += payment.AnimeDollar()
+	user.Balance += payment.Gems()
 
 	// Save in DB
 	err = user.Save()
@@ -86,7 +86,7 @@ func Success(ctx *aero.Context) string {
 	go func() {
 		admin, _ := arn.GetUser(adminID)
 		admin.SendNotification(&arn.Notification{
-			Title:   user.Nick + " bought " + strconv.Itoa(payment.AnimeDollar()) + " AD",
+			Title:   user.Nick + " bought " + strconv.Itoa(payment.Gems()) + " AD",
 			Message: user.Nick + " paid " + payment.Amount + " " + payment.Currency + " making his new balance " + strconv.Itoa(user.Balance),
 			Icon:    user.LargeAvatar(),
 			Link:    "https://" + ctx.App.Config.Domain + "/api/paypalpayment/" + payment.ID,

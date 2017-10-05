@@ -17,5 +17,5 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	return ctx.HTML(components.Charge())
+	return ctx.HTML(components.Charge(user))
 }

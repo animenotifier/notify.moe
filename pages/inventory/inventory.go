@@ -26,5 +26,5 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching inventory data", err)
 	}
 
-	return ctx.HTML(components.Inventory(inventory, viewUser))
+	return ctx.HTML(components.Inventory(inventory, viewUser, user))
 }
