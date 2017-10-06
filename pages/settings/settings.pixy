@@ -141,11 +141,8 @@ component Settings(user *arn.User)
 			h3.widget-title
 				Icon("star")
 				span PRO
-
 			
 			if user.IsPro()
-				p Thank you for your support! 
-				
 				.widget-input
 					label
 						span Your PRO account expires in 

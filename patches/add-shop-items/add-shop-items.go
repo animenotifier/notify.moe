@@ -9,6 +9,8 @@ var items = []*arn.Item{
 		Price: 900,
 		Description: `PRO account for 1 anime season (3 months).
 
+1 month equals 300 gems.
+
 Includes:
 
 * Special highlight on the forums
@@ -25,6 +27,8 @@ Includes:
 		Name:  "PRO Account (2 seasons)",
 		Price: 1600,
 		Description: `PRO account for 2 anime seasons (6 months).
+
+11% less monthly costs compared to standard.
 
 Includes:
 
@@ -43,6 +47,8 @@ Includes:
 		Price: 3000,
 		Description: `PRO account for 4 anime seasons (12 months).
 
+16% less monthly costs compared to standard.
+
 Includes:
 
 * Special highlight on the forums
@@ -59,6 +65,8 @@ Includes:
 		Name:  "PRO Account (8 seasons)",
 		Price: 5900,
 		Description: `PRO account for 8 anime seasons (24 months).
+
+18% less monthly costs compared to standard.
 
 Includes:
 
