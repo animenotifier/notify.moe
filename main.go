@@ -20,6 +20,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/charge"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/editanime"
+	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
@@ -134,9 +135,12 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Admin
 	app.Ajax("/admin", admin.Get)
-	app.Ajax("/admin/anilist", admin.AniList)
-	app.Ajax("/admin/shoboi", admin.Shoboi)
 	app.Ajax("/admin/webdev", admin.WebDev)
+
+	// Editor
+	app.Ajax("/editor", editor.Get)
+	app.Ajax("/editor/anilist", editor.AniList)
+	app.Ajax("/editor/shoboi", editor.Shoboi)
 
 	// Import
 	app.Ajax("/import", listimport.Get)

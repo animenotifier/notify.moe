@@ -1,0 +1,16 @@
+component Editor
+	h1.page-title Editor Panel
+
+	EditorTabs
+	
+	p Welcome to the Editor Panel!
+
+component EditorTabs
+	.tabs
+		Tab("Editor", "pencil", "/editor")
+		Tab("Shoboi", "calendar", "/editor/shoboi")
+		Tab("AniList", "list", "/editor/anilist")
+
+		a.tab.ajax(href="/admin", aria-label="Admin")
+			Icon("wrench")
+			span.tab-text Admin

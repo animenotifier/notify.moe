@@ -1,4 +1,4 @@
-package admin
+package editor
 
 import (
 	"net/http"
@@ -8,6 +8,8 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 )
+
+const maxAniListEntries = 70
 
 // AniList ...
 func AniList(ctx *aero.Context) string {
@@ -20,8 +22,22 @@ func AniList(ctx *aero.Context) string {
 	}
 
 	sort.Slice(missing, func(i, j int) bool {
-		return missing[i].StartDate > missing[j].StartDate
+		a := missing[i]
+		b := missing[j]
+
+		aPop := a.Popularity.Total()
+		bPop := b.Popularity.Total()
+
+		if aPop == bPop {
+			return a.Title.Canonical < b.Title.Canonical
+		}
+
+		return aPop > bPop
 	})
+
+	if len(missing) > maxAniListEntries {
+		missing = missing[:maxAniListEntries]
+	}
 
 	return ctx.HTML(components.AniListMissingMapping(missing))
 }

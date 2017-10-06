@@ -2,8 +2,10 @@ component AdminTabs
 	.tabs
 		Tab("Server", "server", "/admin")
 		Tab("WebDev", "html5", "/admin/webdev")
-		Tab("Shoboi", "calendar", "/admin/shoboi")
-		Tab("AniList", "list", "/admin/anilist")
+
+		a.tab.ajax(href="/editor", aria-label="Editor")
+			Icon("pencil")
+			span.tab-text Editor
 
 component Admin(user *arn.User, cpuUsage, memUsage, diskUsage float64, platform, family, platformVersion, kernelVersion string)
 	h1.page-title Admin Panel
