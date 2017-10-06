@@ -1,14 +1,29 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
 
+// Shell parameters
+var confirmed bool
+
+// Shell flags
+func init() {
+	flag.BoolVar(&confirmed, "confirm", false, "Confirm that you really want to execute this.")
+	flag.Parse()
+}
+
 func main() {
-	color.Yellow("Adding inventories to users who don't have one")
+	if !confirmed {
+		color.Green("Please run this command with -confirm option.")
+		return
+	}
+
+	color.Yellow("Resetting all inventories")
 
 	// Get a stream of all users
 	allUsers, err := arn.StreamUsers()
@@ -16,20 +31,9 @@ func main() {
 
 	// Iterate over the stream
 	for user := range allUsers {
-		exists, err := arn.DB.Exists("Inventory", user.ID)
-
-		if err != nil || exists {
-			continue
-		}
-
 		fmt.Println(user.Nick)
 
 		inventory := arn.NewInventory(user.ID)
-
-		// // TEST
-		// inventory.AddItem("anime-support-ticket", 50)
-		// inventory.AddItem("pro-account-24", 30)
-
 		err = arn.DB.Set("Inventory", inventory.UserID, inventory)
 
 		if err != nil {

@@ -11,12 +11,14 @@ component ShopTabs(user *arn.User)
 	.tabs
 		Tab("Shop", "shopping-cart", "/shop")
 		Tab("Inventory", "briefcase", "/inventory")
+		Tab("History", "history", "/shop/history")
 		Tab(strconv.Itoa(user.Balance), "diamond", "/charge")
 
 component ShopItem(item *arn.Item)
-	.widget.shop-item.mountable
+	.widget.shop-item.mountable(data-item-id=item.ID)
 		h3.widget-title.shop-item-name
-			Icon(item.Icon)
+			.item-icon
+				Icon(item.Icon)
 			span= item.Name
 			//- span.shop-item-duration= " " + duration
 		.shop-item-description!= aero.Markdown(item.Description)

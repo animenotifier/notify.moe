@@ -85,7 +85,9 @@ Includes:
 		Price: 100,
 		Description: `Support the makers of your favourite anime by using an anime support ticket.
 Anime Notifier uses 10% of the money to handle the transaction fees while the remaining 90% go directly
-to the studios involved in the creation of your favourite anime.`,
+to the studios involved in the creation of your favourite anime.
+
+*This feature is work in progress.*`,
 		Icon:       "ticket",
 		Rarity:     arn.ItemRarityRare,
 		Order:      5,

@@ -1,11 +1,33 @@
+item-color-pro-account = hsl(0, 100%, 71%)
+item-color-anime-support-ticket = hsl(217, 64%, 50%)
+
 .shop-items
 	// ...
 
-.shop-item
-	// ...
+.item-icon
+	display inline-block
 
-.shop-item-name
-	// ...
+// Colors
+.shop-item, .inventory-slot
+	[data-item-id="pro-account-3"]
+		.item-icon
+			color item-color-pro-account
+
+	[data-item-id="pro-account-6"]
+		.item-icon
+			color item-color-pro-account
+
+	[data-item-id="pro-account-12"]
+		.item-icon
+			color item-color-pro-account
+	
+	[data-item-id="pro-account-24"]
+		.item-icon
+			color item-color-pro-account
+
+	[data-item-id="anime-support-ticket"]
+		.item-icon
+			color item-color-anime-support-ticket
 
 .shop-item-price
 	// ...

@@ -129,6 +129,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/shop", shop.Get)
 	app.Ajax("/inventory", inventory.Get)
 	app.Ajax("/charge", charge.Get)
+	app.Ajax("/shop/history", shop.PurchaseHistory)
 	app.Post("/api/shop/buy/:item/:quantity", shop.BuyItem)
 
 	// Admin

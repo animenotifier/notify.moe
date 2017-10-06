@@ -4,30 +4,29 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/animenotifier/arn"
-
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get shop page.
-func Get(ctx *aero.Context) string {
+// PurchaseHistory ...
+func PurchaseHistory(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	items, err := arn.AllItems()
+	purchases, err := arn.AllPurchases()
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching shop item data", err)
 	}
 
-	sort.Slice(items, func(i, j int) bool {
-		return items[i].Order < items[j].Order
+	sort.Slice(purchases, func(i, j int) bool {
+		return purchases[i].Date > purchases[j].Date
 	})
 
-	return ctx.HTML(components.Shop(user, items))
+	return ctx.HTML(components.PurchaseHistory(purchases, user))
 }

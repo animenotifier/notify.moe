@@ -9,7 +9,8 @@ component Inventory(inventory *arn.Inventory, viewUser *arn.User, user *arn.User
 				.inventory-slot.mountable(draggable="false", data-index=index)
 			else
 				.inventory-slot.mountable(title=slot.Item().Name, draggable="true", data-index=index, data-item-id=slot.ItemID, data-consumable=slot.Item().Consumable)
-					Icon(slot.Item().Icon)
+					.item-icon
+						Icon(slot.Item().Icon)
 					if slot.Quantity > 1
 						.inventory-slot-quantity= slot.Quantity
 	
