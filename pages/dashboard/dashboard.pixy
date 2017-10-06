@@ -122,27 +122,3 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 		//- 		.widget-element-text
 		//- 			Icon("github")
 		//- 			span GitHub
-
-component Footer
-	.footer.text-center
-		span.footer-element Anime Notifier
-
-		a.footer-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
-			Icon("microphone")
-			span Discord
-
-		a.footer-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
-			Icon("facebook")
-			span Facebook
-
-		a.footer-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
-			Icon("twitter")
-			span Twitter
-
-		a.footer-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
-			Icon("google-plus")
-			span Google+
-
-		a.footer-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
-			Icon("github")
-			span GitHub

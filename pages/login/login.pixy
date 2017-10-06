@@ -1,5 +1,5 @@
 component Login
-	.login-buttons
+	.login-buttons.mountable
 		a.login-button.login-button-google(href="/auth/google")
 			Icon("google")
 			span Sign in via Google

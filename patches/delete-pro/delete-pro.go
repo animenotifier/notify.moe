@@ -24,13 +24,8 @@ func main() {
 
 	color.Yellow("Deleting all pro subscriptions")
 
-	// Get a stream of all users
-	allUsers, err := arn.StreamUsers()
-	arn.PanicOnError(err)
-
-	// Iterate over the stream
-	for user := range allUsers {
-		user.Balance = 0
+	for user := range arn.MustStreamUsers() {
+		user.ProExpires = ""
 		arn.PanicOnError(user.Save())
 	}
 
