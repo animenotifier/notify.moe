@@ -1,4 +1,6 @@
 component FrontPage
+	.frontpage-background
+	
 	.frontpage.mountable
 		h1 notify.moe
 
@@ -9,9 +11,25 @@ component FrontPage
 		Login
 
 		.footer
-			a(href="https://paypal.me/blitzprog", target="_blank", rel="noopener") Support the development
-			span  | 
-			a(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener") Source on GitHub
+			a.footer-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
+				Icon("microphone")
+				span Discord
+
+			a.footer-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
+				Icon("facebook")
+				span Facebook
+
+			a.footer-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
+				Icon("twitter")
+				span Twitter
+
+			a.footer-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
+				Icon("google-plus")
+				span Google+
+
+			a.footer-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
+				Icon("github")
+				span GitHub
 	
 	video.bg-video(autoplay="autoplay", loop="loop")
 		source(src="//s1.webmshare.com/nZVby.webm", type="video/webm")
