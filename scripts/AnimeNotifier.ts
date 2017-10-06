@@ -477,7 +477,6 @@ export class AnimeNotifier {
 
 			if(!(actionName in actions)) {
 				this.statusMessage.showError(`Action '${actionName}' has not been defined`)
-				console.error(element)
 				continue
 			}
 

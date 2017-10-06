@@ -181,6 +181,6 @@ func InstallGoogleAuth(app *aero.Application) {
 		authLog.Info("Registered new user via Google", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 		// Redirect to frontpage
-		return ctx.Redirect("/")
+		return ctx.Redirect(newUserStartRoute)
 	})
 }

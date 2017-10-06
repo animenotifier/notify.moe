@@ -327,10 +327,10 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 			throw "Error finding PayPal payment link"
 		}
 
-		let url = link.href
-		console.log(url)
+		arn.statusMessage.showInfo("Redirecting to PayPal...", 5000)
 
-		window.open(url, "_blank")
+		let url = link.href
+		window.location.href = url
 	})
 	.catch(err => arn.statusMessage.showError(err))
 	.then(() => arn.loading(false))

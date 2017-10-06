@@ -170,7 +170,7 @@ func InstallFacebookAuth(app *aero.Application) {
 		// Log
 		authLog.Info("Registered new user via Facebook", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
-		// Redirect to frontpage
-		return ctx.Redirect("/")
+		// Redirect to settings
+		return ctx.Redirect(newUserStartRoute)
 	})
 }

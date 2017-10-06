@@ -1,0 +1,2 @@
+component FuzzySearch
+	input#search.action(data-action="search", data-trigger="input", type="text", placeholder="Search...", title="Shortcut: F")

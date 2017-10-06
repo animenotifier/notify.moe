@@ -3,6 +3,8 @@ package auth
 import "github.com/aerogo/aero"
 import "github.com/animenotifier/notify.moe/utils"
 
+const newUserStartRoute = "/settings"
+
 // Install ...
 func Install(app *aero.Application) {
 	// Google

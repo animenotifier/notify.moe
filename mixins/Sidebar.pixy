@@ -42,3 +42,15 @@ component Sidebar(user *arn.User)
 		SidebarButtonNoAJAX("Logout", "/logout", "sign-out")
 	else
 		SidebarButton("Login", "/login", "sign-in")
+
+component SidebarButton(name string, target string, icon string)
+	a.sidebar-link.ajax(href=target, aria-label=name, data-bubble="true")
+		.sidebar-button
+			Icon(icon)
+			span.sidebar-text= name
+
+component SidebarButtonNoAJAX(name string, target string, icon string)
+	a.sidebar-link(href=target, aria-label=name, data-bubble="true")
+		.sidebar-button
+			Icon(icon)
+			span.sidebar-text= name

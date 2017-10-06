@@ -67,7 +67,7 @@ func CreatePayment(ctx *aero.Context) string {
 	// 	return ctx.Error(http.StatusInternalServerError, "Could not create PayPal web profile", err)
 	// }
 
-	total := amount[:len(amount)-2] + "." + amount[len(amount)-2:]
+	// total := amount[:len(amount)-2] + "." + amount[len(amount)-2:]
 
 	// Create payment
 	p := paypalsdk.Payment{
@@ -77,8 +77,8 @@ func CreatePayment(ctx *aero.Context) string {
 		},
 		Transactions: []paypalsdk.Transaction{paypalsdk.Transaction{
 			Amount: &paypalsdk.Amount{
-				Currency: "USD",
-				Total:    total,
+				Currency: "JPY",
+				Total:    amount,
 			},
 			Description: "Top Up Balance",
 		}},

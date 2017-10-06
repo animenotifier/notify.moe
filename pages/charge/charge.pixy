@@ -3,7 +3,7 @@ component Charge(user *arn.User)
 
 	h1.mountable Charge up
 
-	p.text-center.mountable You can charge up your balance via PayPal. 1 USD equals 100 gems.
+	p.text-center.mountable You can add balance via PayPal. 1 Japanese Yen equals 1 Gem.
 
 	.buttons
 		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=1000)
@@ -26,4 +26,4 @@ component Charge(user *arn.User)
 			Icon("diamond")
 			span 12000
 	
-	.footer.text-center.mountable You need to enable popup windows in your browser.
+	.footer.text-center.mountable Different currencies will automatically be converted.
