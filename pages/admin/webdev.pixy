@@ -3,6 +3,8 @@ component WebDev
 
 	h1.page-title WebDev
 
+	h2 Tests
+
 	.buttons
 		a.button.mountable(href="https://developers.google.com/speed/pagespeed/insights/?url=https://notify.moe/&tab=desktop", target="_blank", rel="noopener")
 			Icon("external-link")
@@ -13,3 +15,22 @@ component WebDev
 		a.button.mountable(href="https://html5.validator.nu/?doc=https://notify.moe", target="_blank", rel="noopener")
 			Icon("external-link")
 			span HTML5 Validator
+	
+	h2 Browser Support
+
+	.buttons
+		a.button.mountable(href="http://caniuse.com/#feat=webp", target="_blank", rel="noopener")
+			Icon("external-link")
+			span WebP
+		a.button.mountable(href="http://caniuse.com/#feat=push-api", target="_blank", rel="noopener")
+			Icon("external-link")
+			span Push API
+		a.button.mountable(href="http://caniuse.com/#feat=serviceworkers", target="_blank", rel="noopener")
+			Icon("external-link")
+			span Service Worker
+		a.button.mountable(href="http://caniuse.com/#feat=intersectionobserver", target="_blank", rel="noopener")
+			Icon("external-link")
+			span Intersection Observer
+		a.button.mountable(href="http://caniuse.com/#feat=requestidlecallback", target="_blank", rel="noopener")
+			Icon("external-link")
+			span Request Idle Callback

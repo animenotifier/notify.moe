@@ -12,10 +12,9 @@ var items = []*arn.Item{
 Includes:
 
 * Special highlight on the forums
-* Customizable cover image for your profile
-* Custom title for profile and forums
-* Your suggestions will have a high priority
-* Access to the VIP channel on Discord`,
+* High priority for your personal suggestions
+* Access to the VIP channel on Discord
+* Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRaritySuperior,
 		Order:      1,
@@ -30,10 +29,9 @@ Includes:
 Includes:
 
 * Special highlight on the forums
-* Customizable cover image for your profile
-* Custom title for profile and forums
-* Your suggestions will have a high priority
-* Access to the VIP channel on Discord`,
+* High priority for your personal suggestions
+* Access to the VIP channel on Discord
+* Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityRare,
 		Order:      2,
@@ -48,10 +46,9 @@ Includes:
 Includes:
 
 * Special highlight on the forums
-* Customizable cover image for your profile
-* Custom title for profile and forums
-* Your suggestions will have a high priority
-* Access to the VIP channel on Discord`,
+* High priority for your personal suggestions
+* Access to the VIP channel on Discord
+* Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityUnique,
 		Order:      3,
@@ -66,10 +63,9 @@ Includes:
 Includes:
 
 * Special highlight on the forums
-* Customizable cover image for your profile
-* Custom title for profile and forums
-* Your suggestions will have a high priority
-* Access to the VIP channel on Discord`,
+* High priority for your personal suggestions
+* Access to the VIP channel on Discord
+* Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityLegendary,
 		Order:      4,
@@ -80,7 +76,7 @@ Includes:
 		Name:  "Anime Support Ticket",
 		Price: 100,
 		Description: `Support the makers of your favourite anime by using an anime support ticket.
-Anime Notifier uses 8% of the money to handle the transaction fees while the remaining 92% go directly
+Anime Notifier uses 10% of the money to handle the transaction fees while the remaining 90% go directly
 to the studios involved in the creation of your favourite anime.`,
 		Icon:       "ticket",
 		Rarity:     arn.ItemRarityRare,
