@@ -12,3 +12,6 @@ component Inventory(inventory *arn.Inventory, viewUser *arn.User, user *arn.User
 					Icon(slot.Item().Icon)
 					if slot.Quantity > 1
 						.inventory-slot-quantity= slot.Quantity
+	
+	.footer.text-center.mountable
+		p You can consume items by double-clicking them.

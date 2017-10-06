@@ -137,6 +137,30 @@ component Settings(user *arn.User)
 				.profile-image-container.avatar-preview
 					img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
 
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("star")
+				span PRO
+
+			
+			if user.IsPro()
+				p Thank you for your support! 
+				
+				.widget-input
+					label
+						span Your PRO account expires in 
+						span.utc-date(data-date=user.ProExpires)
+						span .
+					a.button.ajax(href="/shop")
+						Icon("star")
+						span Extend PRO account duration
+			else
+				.widget-input
+					label Would you like to support the site development?
+					a.button.ajax(href="/shop")
+						Icon("star")
+						span Go PRO
+
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
 		//- 		Icon("cogs")
