@@ -18,7 +18,9 @@ func PurchaseHistory(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	purchases, err := arn.AllPurchases()
+	purchases, err := arn.FilterPurchases(func(purchase *arn.Purchase) bool {
+		return purchase.UserID == user.ID
+	})
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching shop item data", err)
