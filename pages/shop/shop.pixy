@@ -21,7 +21,7 @@ component ShopItem(item *arn.Item)
 				Icon(item.Icon)
 			span= item.Name
 			//- span.shop-item-duration= " " + duration
-		.shop-item-description!= aero.Markdown(item.Description)
+		.shop-item-description!= markdown.Render(item.Description)
 		.buttons.shop-buttons
 			button.shop-button-buy.action(data-item-id=item.ID, data-item-name=item.Name, data-price=item.Price, data-trigger="click", data-action="buyItem")
 				span.shop-item-price= item.Price
