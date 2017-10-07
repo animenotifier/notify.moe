@@ -14,8 +14,9 @@ var items = []*arn.Item{
 Includes:
 
 * Special highlight on the forums
-* High priority for your personal suggestions
 * Access to the VIP channel on Discord
+* PRO star on your profile
+* High priority for your personal suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRaritySuperior,
@@ -33,8 +34,9 @@ Includes:
 Includes:
 
 * Special highlight on the forums
-* High priority for your personal suggestions
 * Access to the VIP channel on Discord
+* PRO star on your profile
+* High priority for your personal suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityRare,
@@ -52,8 +54,9 @@ Includes:
 Includes:
 
 * Special highlight on the forums
-* High priority for your personal suggestions
 * Access to the VIP channel on Discord
+* PRO star on your profile
+* High priority for your personal suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityUnique,
@@ -71,8 +74,9 @@ Includes:
 Includes:
 
 * Special highlight on the forums
-* High priority for your personal suggestions
 * Access to the VIP channel on Discord
+* PRO star on your profile
+* High priority for your personal suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityLegendary,
