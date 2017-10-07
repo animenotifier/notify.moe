@@ -27,7 +27,11 @@ func Osu(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
 	}
 
-	return ctx.HTML(components.Users(users))
+	if len(users) > 50 {
+		users = users[:50]
+	}
+
+	return ctx.HTML(components.OsuRankingList(users))
 }
 
 // Staff ...

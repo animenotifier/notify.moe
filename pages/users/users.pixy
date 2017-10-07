@@ -1,24 +1,16 @@
 component Users(users []*arn.User)
 	h1.page-title Users
 
-	.tabs
-		a.tab.action(href="/users", data-action="diff", data-trigger="click")
-			Icon("users")
-			span.tab-text Active
-
-		a.tab.action(href="/users/anime/watching", data-action="diff", data-trigger="click")
-			Icon("tv")
-			span.tab-text Watching
-
-		a.tab.action(href="/users/osu", data-action="diff", data-trigger="click")
-			Icon("gamepad")
-			span.tab-text Osu
-
-		a.tab.action(href="/users/staff", data-action="diff", data-trigger="click")
-			Icon("user-secret")
-			span.tab-text Staff
+	UsersTabs
 
 	.user-avatars
 		each user in users
 			.mountable
 				Avatar(user)
+
+component UsersTabs
+	.tabs
+		Tab("Active", "users", "/users")
+		Tab("Watching", "tv", "/users/anime/watching")
+		Tab("Osu", "gamepad", "/users/osu")
+		Tab("Staff", "user-secret", "/users/staff")
