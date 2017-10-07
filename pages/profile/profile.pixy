@@ -44,6 +44,12 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
 		
+		if viewUser.IsPro()
+			p.profile-field.profile-pro-status
+				a.ajax(href="/shop", title="PRO user")
+					Icon("star")
+					span.profile-pro-status-text PRO
+		
 		if user != nil
 			.profile-actions
 				if user.ID != viewUser.ID

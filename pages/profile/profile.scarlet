@@ -20,7 +20,6 @@ profile-boot-duration = 2s
 
 .profile-field
 	text-align center
-	
 
 	a
 		color white
@@ -40,6 +39,13 @@ profile-boot-duration = 2s
 .profile-action
 	margin-bottom 0.5rem
 	text-shadow none !important
+
+.profile-pro-status
+	margin-top calc(typography-margin * 2)
+
+	.icon
+		color pro-color
+		animation sk-pulse 1.5s infinite linear
 
 > 740px
 	.profile
@@ -63,6 +69,16 @@ profile-boot-duration = 2s
 		right 0
 		padding content-padding
 		margin-top 0
+	
+	.profile-pro-status
+		position absolute
+		right 0
+		bottom 0
+		padding content-padding
+		margin-top 0
+	
+	// .profile-pro-status-text
+	// 	display none
 
 // animation appear
 // 	0%
@@ -112,8 +128,3 @@ profile-boot-duration = 2s
 .no-data
 	width 100%
 	text-align center
-
-// Categories
-
-// .profile-category
-// 	margin-bottom content-padding
