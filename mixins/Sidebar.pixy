@@ -32,8 +32,12 @@ component Sidebar(user *arn.User)
 			Icon("search")
 			FuzzySearch
 
-	if user != nil && (user.Role == "admin" || user.Role == "editor")
-		SidebarButton("Admin", "/admin", "wrench")
+	if user != nil
+		if user.Role == "admin"
+			SidebarButton("Admin", "/admin", "wrench")
+		
+		if user.Role == "editor"
+			SidebarButton("Editor", "/editor", "pencil")
 
 	SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
 

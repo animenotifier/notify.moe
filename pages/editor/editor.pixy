@@ -11,6 +11,6 @@ component EditorTabs
 		Tab("Shoboi", "calendar", "/editor/shoboi")
 		Tab("AniList", "list", "/editor/anilist")
 
-		a.tab.ajax(href="/admin", aria-label="Admin")
-			Icon("wrench")
-			span.tab-text Admin
+		//- a.tab.ajax(href="/admin", aria-label="Admin")
+		//- 	Icon("wrench")
+		//- 	span.tab-text Admin

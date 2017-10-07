@@ -136,6 +136,7 @@ func configure(app *aero.Application) *aero.Application {
 	// Admin
 	app.Ajax("/admin", admin.Get)
 	app.Ajax("/admin/webdev", admin.WebDev)
+	app.Ajax("/admin/purchases", admin.PurchaseHistory)
 
 	// Editor
 	app.Ajax("/editor", editor.Get)
