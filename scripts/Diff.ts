@@ -99,11 +99,16 @@ export class Diff {
 
 						let classesA = elemA.classList
 						let classesB = elemB.classList
+						let removeClasses: string[] = []
 
 						for(let className of classesA) {
 							if(!classesB.contains(className) && !Diff.persistentClasses.has(className)) {
-								classesA.remove(className)
+								removeClasses.push(className)
 							}
+						}
+
+						for(let className of removeClasses) {
+							classesA.remove(className)
 						}
 
 						for(let className of classesB) {
