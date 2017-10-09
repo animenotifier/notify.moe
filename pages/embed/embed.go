@@ -2,6 +2,7 @@ package embed
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
@@ -14,6 +15,10 @@ func Get(ctx *aero.Context) string {
 
 	if user == nil {
 		return utils.AllowEmbed(ctx, ctx.HTML(components.Login()))
+	}
+
+	if !user.IsPro() && user.TimeSinceRegistered() > 14*24*time.Hour {
+		return utils.AllowEmbed(ctx, ctx.HTML(components.EmbedProNotice(user)))
 	}
 
 	animeList := user.AnimeList()

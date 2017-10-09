@@ -1,0 +1,8 @@
+component EmbedProNotice(user *arn.User)
+	h1 notify.moe is in a financial crisis right now
+	p
+		spa If we don't get the necessary funding to keep it alive, the site needs to shut down. The developer works 12 hours per day on this project and doesn't receive a single cent. Please help us fund the project and get yourself a 
+		a(href="https://notify.moe/shop", target="_blank") PRO account 
+		span to support the site. It only costs about 2.6 USD per month. Read more about it 
+		a(href="https://notify.moe/thread/A9nC8uakR", target="_blank") here
+		span .
