@@ -23,7 +23,7 @@ func Edit(ctx *aero.Context) string {
 
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":     track.Media[0].Title,
+			"og:title":     track.Title,
 			"og:image":     track.MainAnime().Image.Large,
 			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
 			"og:site_name": "notify.moe",
@@ -63,6 +63,10 @@ func EditForm(obj interface{}, title string) string {
 			b.WriteString(components.InputText(field.Name, fieldValue.String(), field.Name, ""))
 		case "[]string":
 			b.WriteString(components.InputTags(field.Name, fieldValue.Interface().([]string), field.Name))
+		case "[]*arn.ExternalMedia":
+			for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
+				b.WriteString(EditForm(fieldValue.Index(sliceIndex).Interface(), "External Media"))
+			}
 		default:
 			panic("No edit form implementation for " + field.Name + " with type " + field.Type.String())
 		}

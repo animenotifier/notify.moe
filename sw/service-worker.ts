@@ -1,6 +1,6 @@
 // pack:ignore
 
-const CACHE = "v-1"
+const CACHE = "v-2"
 const RELOADS = new Map<string, Promise<Response>>()
 const ETAGS = new Map<string, string>()
 const CACHEREFRESH = new Map<string, Promise<void>>()
