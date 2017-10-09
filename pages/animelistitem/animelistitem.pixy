@@ -7,9 +7,9 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 				.anime-list-item-episodes-edit
 					InputNumber("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
 				
-				.widget-input.anime-list-item-status-edit
+				.widget-section.anime-list-item-status-edit
 					label(for="Status") Status:
-					select.widget-element.action(id="Status", data-field="Status", value=item.Status, data-action="save", data-trigger="change")
+					select.widget-ui-element.action(id="Status", data-field="Status", value=item.Status, data-action="save", data-trigger="change")
 						option(value=arn.AnimeListStatusWatching) Watching
 						option(value=arn.AnimeListStatusCompleted) Completed
 						option(value=arn.AnimeListStatusPlanned) Plan to watch

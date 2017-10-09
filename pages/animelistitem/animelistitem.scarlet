@@ -14,5 +14,5 @@
 	horizontal-wrap
 	justify-content space-between
 	width 100%
-	.widget-input
+	.widget-section
 		max-width 20%

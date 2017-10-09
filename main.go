@@ -83,12 +83,9 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/forum/:tag", forum.Get)
 	app.Ajax("/thread/:id", threads.Get)
 	app.Ajax("/post/:id", posts.Get)
-	app.Ajax("/soundtrack/:id", soundtrack.Get)
 	app.Ajax("/character/:id", character.Get)
 	app.Ajax("/new/thread", newthread.Get)
-	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/settings", settings.Get)
-	app.Ajax("/soundtracks", soundtracks.Get)
 	app.Ajax("/artworks", artworks.Get)
 	app.Ajax("/amvs", amvs.Get)
 	app.Ajax("/users", users.Active)
@@ -98,6 +95,12 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/statistics", statistics.Get)
 	app.Ajax("/statistics/anime", statistics.Anime)
 	app.Ajax("/login", login.Get)
+
+	// Soundtracks
+	app.Ajax("/soundtracks", soundtracks.Get)
+	app.Ajax("/new/soundtrack", newsoundtrack.Get)
+	app.Ajax("/soundtrack/:id", soundtrack.Get)
+	app.Ajax("/soundtrack/:id/edit", soundtrack.Edit)
 
 	// User profiles
 	app.Ajax("/user", user.Get)

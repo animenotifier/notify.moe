@@ -1,4 +1,4 @@
-component Music(tracks []*arn.SoundTrack)
+component SoundTracks(tracks []*arn.SoundTrack)
 	h1 Soundtracks
 
 	.music-buttons

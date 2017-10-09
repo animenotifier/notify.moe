@@ -7,16 +7,16 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 
 			for i := 0; i <= 4; i++
 				if i < len(schedule)
-					.widget-element
-						.widget-element-text
+					.widget-ui-element
+						.widget-ui-element-text
 							a.schedule-item-link.ajax(href=schedule[i].Anime.Link())
 								Icon("calendar-o")
 								.schedule-item-title= schedule[i].Anime.Title.Canonical
 							.spacer
 							.schedule-item-date.utc-airing-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
 				else
-					.widget-element
-						.widget-element-text
+					.widget-ui-element
+						.widget-ui-element-text
 							Icon("calendar-o")
 							span ...
 
@@ -24,8 +24,8 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 			h3.widget-title Forums
 
 			each post in posts
-				a.widget-element.ajax(href=post.Thread().Link())
-					.widget-element-text
+				a.widget-ui-element.ajax(href=post.Thread().Link())
+					.widget-ui-element-text
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
 		
@@ -33,8 +33,8 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 			h3.widget-title Artworks
 
 			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
+				.widget-ui-element
+					.widget-ui-element-text
 						Icon("paint-brush")
 						span ...
 
@@ -43,13 +43,13 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 
 			for i := 0; i <= 4; i++
 				if i < len(soundTracks)
-					a.widget-element.ajax(href=soundTracks[i].Link())
-						.widget-element-text
+					a.widget-ui-element.ajax(href=soundTracks[i].Link())
+						.widget-ui-element-text
 							Icon("music")
 							span(title=soundTracks[i].Media[0].Title)= soundTracks[i].Anime()[0].Title.Canonical
 				else
-					.widget-element
-						.widget-element-text
+					.widget-ui-element
+						.widget-ui-element-text
 							Icon("music")
 							span ...
 		
@@ -57,8 +57,8 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 			h3.widget-title AMVs
 
 			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
+				.widget-ui-element
+					.widget-ui-element-text
 						Icon("video-camera")
 						span ...
 		
@@ -66,8 +66,8 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 			h3.widget-title Reviews
 
 			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
+				.widget-ui-element
+					.widget-ui-element-text
 						Icon("book")
 						span ...
 
@@ -75,8 +75,8 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 			h3.widget-title Groups
 
 			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
+				.widget-ui-element
+					.widget-ui-element-text
 						Icon("group")
 						span ...
 		
@@ -85,13 +85,13 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 
 			for i := 0; i <= 4; i++
 				if i < len(following)
-					a.widget-element.ajax(href="/+" + following[i].Nick)
-						.widget-element-text
+					a.widget-ui-element.ajax(href="/+" + following[i].Nick)
+						.widget-ui-element-text
 							Icon("address-card")
 							span= following[i].Nick
 				else
-					.widget-element
-						.widget-element-text
+					.widget-ui-element
+						.widget-ui-element-text
 							Icon("address-card")
 							span ...
 

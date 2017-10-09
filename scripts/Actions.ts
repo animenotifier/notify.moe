@@ -365,6 +365,15 @@ export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
 	.then(() => arn.loading(false))
 }
 
+// Remove tag
+export function removeTag(arn: AnimeNotifier, element: HTMLElement) {
+	let tag = element.dataset.tag
+	
+	// arn.loading(true)
+
+	alert("Remove " + tag)
+}
+
 // Chrome extension installation
 export function installExtension(arn: AnimeNotifier, button: HTMLElement) {
 	let browser: any = window["chrome"]

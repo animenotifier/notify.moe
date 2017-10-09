@@ -1,19 +1,32 @@
 component InputText(id string, value string, label string, placeholder string)
-	.widget-input
+	.widget-section
 		label(for=id)= label + ":"
-		input.widget-element.action(id=id, data-field=id, type="text", value=value, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
+		input.widget-ui-element.action(id=id, data-field=id, type="text", value=value, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
 
 component InputTextArea(id string, value string, label string, placeholder string)
-	.widget-input
+	.widget-section
 		label(for=id)= label + ":"
-		textarea.widget-element.action(id=id, data-field=id, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")= value
+		textarea.widget-ui-element.action(id=id, data-field=id, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")= value
 
 component InputNumber(id string, value float64, label string, placeholder string, min string, max string, step string)
-	.widget-input
+	.widget-section
 		label(for=id)= label + ":"
-		input.widget-element.action(id=id, data-field=id, type="number", value=value, min=min, max=max, step=step, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
+		input.widget-ui-element.action(id=id, data-field=id, type="number", value=value, min=min, max=max, step=step, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
 
 component InputSelection(id string, value string, label string, placeholder string, values []string)
-	.widget-input
+	.widget-section
 		label(for=id)= label + ":"
-		select.widget-element.action(id=id, data-field=id, value=value, title=placeholder, data-action="save", data-trigger="change")
+		select.widget-ui-element.action(id=id, data-field=id, value=value, title=placeholder, data-action="save", data-trigger="change")
+
+component InputTags(id string, value []string, label string)
+	.widget-section
+		label(for=id)= label + ":"
+		.tags(id=id)
+			each tag in value
+				.tag
+					span.tag-title= tag
+					.tag-remove.action(data-action="removeTag", data-trigger="click", data-tag=tag) x
+			
+			button.tag-add
+				RawIcon("plus")
+			

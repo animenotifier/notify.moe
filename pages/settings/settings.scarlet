@@ -1,4 +1,4 @@
-.widget-input
+.widget-section
 	button,
 	.button
 		margin-bottom 1rem

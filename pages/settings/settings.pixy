@@ -26,19 +26,19 @@ component Settings(user *arn.User)
 				Icon("bell")
 				span Notifications
 			
-			#enable-notifications.widget-input
+			#enable-notifications.widget-section
 				label Enable:
 				button.action(data-action="enableNotifications", data-trigger="click")
 					Icon("toggle-off")
 					span Enable notifications
 
-			#disable-notifications.widget-input
+			#disable-notifications.widget-section
 				label Disable:
 				button.action(data-action="disableNotifications", data-trigger="click")
 					Icon("toggle-on")
 					span Disable notifications
 
-			#test-notification.widget-input
+			#test-notification.widget-section
 				label Test:
 				button.action(data-action="testNotification", data-trigger="click")
 					Icon("paper-plane")
@@ -49,7 +49,7 @@ component Settings(user *arn.User)
 				Icon("user-plus")
 				span Connect
 
-			.widget-input.social-account
+			.widget-section.social-account
 				label(for="google") Google:
 				
 				a#google.button.social-account-button(href="/auth/google")
@@ -60,7 +60,7 @@ component Settings(user *arn.User)
 						Icon("circle-o")
 						span Not connected
 			
-			.widget-input.social-account
+			.widget-section.social-account
 				label(for="facebook") Facebook:
 
 				a#facebook.button.social-account-button(href="/auth/facebook")
@@ -84,7 +84,7 @@ component Settings(user *arn.User)
 				Icon("upload")
 				span Export
 			
-			.widget-input
+			.widget-section
 				label JSON:
 				a.button(href="/api/animelist/" + user.ID)
 					Icon("upload")
@@ -95,19 +95,19 @@ component Settings(user *arn.User)
 				Icon("puzzle-piece")
 				span Apps
 			
-			.widget-input
+			.widget-section
 				label Chrome Extension:
 				button.action(data-action="installExtension", data-trigger="click")
 					Icon("chrome")
 					span Get the Chrome Extension
 
-			.widget-input
+			.widget-section
 				label Desktop App:
 				button.action(data-action="installApp", data-trigger="click")
 					Icon("desktop")
 					span Get the Desktop App
 
-			.widget-input
+			.widget-section
 				label Android App:
 				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
 					Icon("android")
@@ -118,9 +118,9 @@ component Settings(user *arn.User)
 				Icon("picture-o")
 				span Avatar
 
-			.widget-input
+			.widget-section
 				label(for="Avatar.Source") Source:
-				select.widget-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
+				select.widget-ui-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
 					option(value="") Automatic
 					option(value="Gravatar") Gravatar
 					option(value="URL") Link
@@ -143,7 +143,7 @@ component Settings(user *arn.User)
 				span PRO
 			
 			if user.IsPro()
-				.widget-input
+				.widget-section
 					label
 						span Your PRO account expires in 
 						span.utc-date(data-date=user.ProExpires)
@@ -152,7 +152,7 @@ component Settings(user *arn.User)
 						Icon("star")
 						span Extend PRO account duration
 			else
-				.widget-input
+				.widget-section
 					label Would you like to support the site development?
 					a.button.ajax(href="/shop")
 						Icon("star")

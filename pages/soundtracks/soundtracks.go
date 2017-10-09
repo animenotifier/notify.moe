@@ -10,9 +10,11 @@ import (
 
 const maxTracks = 9
 
-// Get renders the music page.
+// Get renders the soundtracks page.
 func Get(ctx *aero.Context) string {
-	tracks, err := arn.AllSoundTracks()
+	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+		return !track.IsDraft
+	})
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching soundtracks", err)
@@ -24,5 +26,5 @@ func Get(ctx *aero.Context) string {
 		tracks = tracks[:maxTracks]
 	}
 
-	return ctx.HTML(components.Music(tracks))
+	return ctx.HTML(components.SoundTracks(tracks))
 }

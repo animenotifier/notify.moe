@@ -34,7 +34,7 @@ func main() {
 		fmt.Println(user.Nick)
 
 		inventory := arn.NewInventory(user.ID)
-		err = arn.DB.Set("Inventory", inventory.UserID, inventory)
+		err = inventory.Save()
 
 		if err != nil {
 			color.Red(err.Error())

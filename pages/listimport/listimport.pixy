@@ -2,21 +2,21 @@ component ImportLists(user *arn.User)
 	if user.Accounts.AniList.Nick != ""
 		label AniList:
 
-		.widget-input
+		.widget-section
 			a.button.mountable.ajax(href="/import/anilist/animelist")
 				Icon("download")
 				span Import AniList
 
 	if user.Accounts.Kitsu.Nick != ""
 		label Kitsu:
-		.widget-input
+		.widget-section
 			a.button.mountable.ajax(href="/import/kitsu/animelist")
 				Icon("download")
 				span Import Kitsu
 	
 	if user.Accounts.MyAnimeList.Nick != ""
 		label MyAnimeList:
-		.widget-input
+		.widget-section
 			a.button.mountable.ajax(href="/import/myanimelist/animelist")
 				Icon("download")
 				span Import MyAnimeList

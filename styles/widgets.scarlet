@@ -20,7 +20,7 @@
 	margin-bottom 1rem
 	overflow hidden
 
-.widget-element
+.widget-ui-element
 	vertical-wrap
 	ui-element
 	transition border transition-speed ease, background transition-speed ease, transform transition-speed ease, transform color ease
@@ -29,14 +29,14 @@
 	width 100%
 	// max-width 700px
 
-.widget-element-text
+.widget-ui-element-text
 	horizontal
 	clip-long-text
 	justify-content flex-start
 	align-items center
 	width 100%
 
-.widget-input
+.widget-section
 	vertical
 	width 100%
 

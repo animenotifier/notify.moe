@@ -1,0 +1,24 @@
+.tags
+	horizontal-wrap
+
+.tag
+	ui-element
+	padding 0.4rem 0.8rem
+	margin 0.4rem
+
+.tag-input
+	horizontal
+
+	button
+		margin-left 0.8rem
+
+.tag-remove
+	display inline-block
+	margin-left 0.4rem
+	opacity 0.5
+
+	:hover
+		cursor pointer
+
+.tag-add
+	margin 0.4rem !important

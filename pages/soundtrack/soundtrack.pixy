@@ -1,5 +1,8 @@
 component Track(track *arn.SoundTrack)
-	h1= track.Media[0].Title
+	h1= track.Title
 
 	.sound-tracks
 		SoundTrackAllMedia(track)
+	
+	p
+		a.ajax(href=track.Link() + "/edit") Edit
