@@ -10,7 +10,7 @@ Because we made a notifier that takes your watching list, checks it against exte
 
 ## So it's just a notifier?
 
-In the past it was, but we're growing bigger by establishing a database that combines information from multiple sources and also growing as a community. Many of us are hanging out on Discord and you are welcome to join us. We also have our own anime lists now due to popular request of adding episode progress changes to our browser extension.
+In the past it was, but not anymore. We're growing bigger by establishing a database that combines information from multiple sources and also growing as a community. Many of us are hanging out on Discord and you are welcome to join us. We also have our own anime lists now due to popular request of adding episode progress changes to our browser extension.
 
 ## What does the current feature set look like?
 
@@ -31,9 +31,17 @@ In the past it was, but we're growing bigger by establishing a database that com
 * Forums
 * Responsive layout (looks good on 1080p and on mobile devices)
 
+## Can I follow the project on social media?
+
+* [Facebook](https://www.facebook.com/animenotifier)
+* [Twitter](https://twitter.com/animenotifier)
+* [Google+](https://plus.google.com/+AnimeReleaseNotifierOfficial)
+* [GitHub](https://github.com/animenotifier/notify.moe)
+* [Discord](https://discord.gg/0kimAmMCeXGXuzNF)
+
 ## How do I enable notifications?
 
-Use a browser that supports push notifications (Chrome or Firefox). Then go to your [settings](/settings) and click "Enable notifications". This might take a while, especially on mobile devices. After that you can press "Send test notification". If you get a notification saying "Yay, it works!" then everything's fine. The real thing looks like this:
+Use a browser that supports push notifications (Chrome or Firefox). Then go to your [settings](https://notify.moe/settings) and click "Enable notifications". This might take a while, especially on mobile devices. After that you can press "Send test notification". If you get a notification saying "Yay, it works!" then everything's fine. The real thing looks like this:
 
 ![Anime Notifications](https://puu.sh/wKpcm/304a4441a0.png)
 
@@ -79,6 +87,14 @@ A quick access to your watching list:
 
 You need to use [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
+## What is offline mode?
+
+This website / app is accessible even when you go offline. You can keep browsing the pages you visited earlier which is especially useful for mobile phones or when you're traveling with an unstable connection. Feel free to try it by disabling your WiFi and opening the site while offline.
+
+## Do I need to keep the site open to receive notifications?
+
+No, you can close the site and still receive notifications after you enabled them.
+
 ## What are the community rules for conversations on the forum?
 
 * Be respectful to each other.
@@ -99,6 +115,12 @@ To use an importer, enter your nickname for the site you want to import from and
 
 ![Anime list import](https://puu.sh/wM4dP/11d43e5f71.png)
 
+## What does following a person do?
+
+You will be able to see their progress and ratings on anime pages:
+
+![Anime pages friends](https://puu.sh/wPfE2/d65ef4f771.png)
+
 ## How do I install the site as an Android app?
 
 This website uses a modern technology that allows you to install websites as local apps. To install notify.moe as a mobile app, do the following:
@@ -112,7 +134,7 @@ You need to enable notifications on each device separately. To receive notificat
 
 ## How do I install the site as a PC/desktop app?
 
-In Chrome, open the top right menu and go to **More tools > Add to desktop**.
+In Chrome, open the top right menu and go to **More tools > Add to desktop**. Make sure that "Open as window" is checked.
 
 ![Anime Notifier desktop app](https://puu.sh/wM4pB/542add3113.png)
 
@@ -123,18 +145,55 @@ At the time of writing this, you get notified when:
 * A new episode from your watching list is released on twist.moe
 * Somebody replies in a thread you have participated in
 * Somebody likes your post
+* You get a new follower
 
 ## How do notifications work from a technical perspective?
 
 There are many, many ways how notifications can be implemented from a technical standpoint. There is e.g. "polling" which means that an app periodically checks external sites and tells you when something new is available. We are not using polling because these periodic checks can quickly drain your battery on a mobile phone. We are using so-called "push notifications" instead. The advantage of push notifications is that your mobile phone or desktop PC doesn't have to do periodic checks anymore - instead the website will send new episode releases to all of your registered devices. This consumes less CPU/network resources and is much more battery friendly for mobile devices.
 
-## Is this website well-optimized for performance?
+## How can I confirm I'm a PRO user now?
 
-You are free to [judge it yourself](https://twitter.com/eduardurbach/status/885631801171091460).
+Go to your [settings](https://notify.moe/settings), it should show you the remaining duration for your [PRO](https://notify.moe/shop) account.
+
+## Is this website well-optimized?
 
 ![Anime Notifier - Lighthouse](https://pbs.twimg.com/media/DEplUsNXgAEF-UT.jpg:large)
 
 ![Anime Notifier - PageSpeed](https://pbs.twimg.com/media/DEplXmpWsAAPzb6.jpg:large)
+
+## Is this website secure?
+
+* The site is not storing passwords which means there is no password that could be stolen
+* The site uses HTTPS, CSP and CSS hashing to improve overall security
+* The site functionality is 99.9% server-sided which is a requirement for any security related app
+* The site is using only the most modern and secure SSL ciphers
+
+## Is this website mobile-friendly?
+
+Yes, we have a dynamic layout that works on everything from 320p to full HD (1080p). Larger sizes should work well due to automatic layout. On smartphones you can use the sidebar by sliding with your finger to the right side.
+
+## Which platforms and browsers do you officially support?
+
+OS:
+
+* Windows
+* Linux
+* Mac
+
+Browsers:
+
+* Chrome
+* Firefox
+* Safari
+
+The most modern browser is [without question](https://html5test.com/compare/browser/chrome-58/firefox-53/safari-10.2.html) Chrome and I highly recommend everyone to switch to Chrome if you're not using it already. Chrome has WebP support which *drastically* reduces page loading times and also lazy loading support which loads images only when they appear in your current viewport, reducing both your bandwidth and your initial loading times.
+
+Firefox and Safari are supported but I do not recommend using them. See these for more information:
+
+* [WebP support](http://caniuse.com/#feat=webp)
+* [Push notifications](http://caniuse.com/#feat=push-api)
+* [Intersection Observer support](http://caniuse.com/#feat=intersectionobserver) (lazy loading)
+* [RequestIdleCallback](http://caniuse.com/#feat=requestidlecallback) (defer unimportant requests to idle times)
 
 ## Can you tell me more about the history of this software?
 
@@ -149,9 +208,13 @@ From a technological standpoint we went through quite a few different approaches
 
 Since 2014 it's been just me, though I do plan to start a company and hire talented people to help me out with this project once the stars align.
 
+## Is there an API for this site?
+
+Yes, the [API](https://notify.moe/api) is an on-going effort and subject to change.
+
 ## Can I show my support for this site? Do you accept donations?
 
-I'm planning to add "pro accounts" for an extended feature set. You do not have to donate without getting something back, instead I'd rather be happy to see you profit from the donation as well. It would be my dream to work on this full-time.
+I recently added [PRO](https://notify.moe/shop) accounts for an extended feature set. You do not have to donate without getting something back, instead I'd rather be happy to see you profit from the donation as well. It would be my dream to work on this full-time.
 
 ## Can I help with coding or change stuff as this is Open Source?
 
