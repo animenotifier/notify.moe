@@ -2,6 +2,7 @@ package soundtrack
 
 import (
 	"bytes"
+	"fmt"
 	"net/http"
 	"reflect"
 	"strings"
@@ -38,8 +39,8 @@ func Edit(ctx *aero.Context) string {
 func EditForm(obj interface{}, title string) string {
 	t := reflect.TypeOf(obj).Elem()
 	v := reflect.ValueOf(obj).Elem()
-	lowerCaseTypeName := strings.ToLower(t.Name())
 	id := reflect.Indirect(v.FieldByName("ID"))
+	lowerCaseTypeName := strings.ToLower(t.Name())
 
 	var b bytes.Buffer
 	b.WriteString(`<div class="widget-form">`)
@@ -48,31 +49,46 @@ func EditForm(obj interface{}, title string) string {
 	b.WriteString(title)
 	b.WriteString(`</h1>`)
 
+	RenderObject(&b, obj, "")
+
+	b.WriteString("</div>")
+	b.WriteString("</div>")
+
+	return b.String()
+}
+
+// RenderObject ...
+func RenderObject(b *bytes.Buffer, obj interface{}, idPrefix string) {
+	t := reflect.TypeOf(obj).Elem()
+	v := reflect.ValueOf(obj).Elem()
+
 	// Fields
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
+		RenderField(b, &v, field, idPrefix)
+	}
+}
 
-		if field.Anonymous || field.Tag.Get("editable") != "true" {
-			continue
-		}
-
-		fieldValue := reflect.Indirect(v.FieldByName(field.Name))
-
-		switch field.Type.String() {
-		case "string":
-			b.WriteString(components.InputText(field.Name, fieldValue.String(), field.Name, ""))
-		case "[]string":
-			b.WriteString(components.InputTags(field.Name, fieldValue.Interface().([]string), field.Name))
-		case "[]*arn.ExternalMedia":
-			for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
-				b.WriteString(EditForm(fieldValue.Index(sliceIndex).Interface(), "External Media"))
-			}
-		default:
-			panic("No edit form implementation for " + field.Name + " with type " + field.Type.String())
-		}
+// RenderField ...
+func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, idPrefix string) {
+	if field.Anonymous || field.Tag.Get("editable") != "true" {
+		return
 	}
 
-	b.WriteString("</div>")
-	b.WriteString("</div>")
-	return b.String()
+	fieldValue := reflect.Indirect(v.FieldByName(field.Name))
+
+	switch field.Type.String() {
+	case "string":
+		b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, ""))
+	case "[]string":
+		b.WriteString(components.InputTags(idPrefix+field.Name, fieldValue.Interface().([]string), field.Name))
+	case "[]*arn.ExternalMedia":
+		for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
+			arrayObj := fieldValue.Index(sliceIndex).Interface()
+			arrayIDPrefix := fmt.Sprintf("%s[%d].", field.Name, sliceIndex)
+			RenderObject(b, arrayObj, arrayIDPrefix)
+		}
+	default:
+		panic("No edit form implementation for " + idPrefix + field.Name + " with type " + field.Type.String())
+	}
 }
