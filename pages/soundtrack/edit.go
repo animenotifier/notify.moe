@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -88,6 +89,8 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			arrayIDPrefix := fmt.Sprintf("%s[%d].", field.Name, sliceIndex)
 			RenderObject(b, arrayObj, arrayIDPrefix)
 		}
+
+		b.WriteString(`<div class="buttons"><button>` + utils.Icon("plus") + `Add ` + field.Name + `</button></div>`)
 	default:
 		panic("No edit form implementation for " + idPrefix + field.Name + " with type " + field.Type.String())
 	}
