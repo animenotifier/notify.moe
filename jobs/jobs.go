@@ -23,21 +23,20 @@ var colorPool = []*color.Color{
 }
 
 var jobs = map[string]time.Duration{
-	"forum-activity":       1 * time.Minute,
-	"active-users":         5 * time.Minute,
-	"anime-ratings":        10 * time.Minute,
-	"airing-anime":         10 * time.Minute,
-	"statistics":           15 * time.Minute,
-	"popular-anime":        20 * time.Minute,
-	"avatars":              1 * time.Hour,
-	"test":                 1 * time.Hour,
-	"twist":                2 * time.Hour,
-	"search-index":         2 * time.Hour,
-	"refresh-episodes":     10 * time.Hour,
-	"refresh-track-titles": 10 * time.Hour,
-	"refresh-osu":          12 * time.Hour,
-	"sync-anime":           12 * time.Hour,
-	"sync-shoboi":          24 * time.Hour,
+	"forum-activity":   1 * time.Minute,
+	"active-users":     5 * time.Minute,
+	"anime-ratings":    10 * time.Minute,
+	"airing-anime":     10 * time.Minute,
+	"statistics":       15 * time.Minute,
+	"popular-anime":    20 * time.Minute,
+	"avatars":          1 * time.Hour,
+	"test":             1 * time.Hour,
+	"twist":            2 * time.Hour,
+	"search-index":     2 * time.Hour,
+	"refresh-episodes": 10 * time.Hour,
+	"refresh-osu":      12 * time.Hour,
+	"sync-anime":       12 * time.Hour,
+	"sync-shoboi":      24 * time.Hour,
 }
 
 func main() {

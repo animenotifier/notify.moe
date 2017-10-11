@@ -37,23 +37,23 @@ func TestRoutes(t *testing.T) {
 func TestInterfaceImplementations(t *testing.T) {
 	// API interfaces
 	var creatable = reflect.TypeOf((*api.Creatable)(nil)).Elem()
-	var updatable = reflect.TypeOf((*api.Updatable)(nil)).Elem()
+	var editable = reflect.TypeOf((*api.Editable)(nil)).Elem()
 	var actionable = reflect.TypeOf((*api.Actionable)(nil)).Elem()
 	var collection = reflect.TypeOf((*api.Collection)(nil)).Elem()
 
 	// Required interface implementations
 	var interfaceImplementations = map[string][]reflect.Type{
 		"User": []reflect.Type{
-			updatable,
+			editable,
 		},
 		"Thread": []reflect.Type{
 			creatable,
-			updatable,
+			editable,
 			actionable,
 		},
 		"Post": []reflect.Type{
 			creatable,
-			updatable,
+			editable,
 			actionable,
 		},
 		"SoundTrack": []reflect.Type{

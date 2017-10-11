@@ -24,14 +24,14 @@ func main() {
 }
 
 func sync(track *arn.SoundTrack) {
-	for _, media := range track.Media {
-		media.RefreshMetaData()
-		println(media.Service, media.Title)
-	}
+	// for _, media := range track.Media {
+	// 	media.RefreshMetaData()
+	// 	println(media.Service, media.Title)
+	// }
 
-	err := track.Save()
+	// err := track.Save()
 
-	if err != nil {
-		panic(err)
-	}
+	// if err != nil {
+	// 	panic(err)
+	// }
 }
