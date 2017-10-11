@@ -214,10 +214,6 @@ var routeTests = map[string][]string{
 		"/_/search/dragon",
 	},
 
-	"/dark-flame-master": []string{
-		"/dark-flame-master",
-	},
-
 	// Disable these tests because they require authorization
 	"/auth/google":                                   nil,
 	"/auth/google/callback":                          nil,
@@ -245,6 +241,7 @@ var routeTests = map[string][]string{
 	"/admin/purchases":                               nil,
 	"/editor/anilist":                                nil,
 	"/editor/shoboi":                                 nil,
+	"/dark-flame-master":                             nil,
 	"/user":                                          nil,
 	"/settings":                                      nil,
 	"/shop":                                          nil,

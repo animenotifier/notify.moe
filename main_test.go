@@ -58,6 +58,7 @@ func TestInterfaceImplementations(t *testing.T) {
 		},
 		"SoundTrack": []reflect.Type{
 			creatable,
+			editable,
 		},
 		"Analytics": []reflect.Type{
 			creatable,
