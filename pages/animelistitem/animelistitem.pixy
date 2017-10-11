@@ -1,6 +1,6 @@
 component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
 	.widget-form.mountable
-		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/update/" + anime.ID)
+		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/field/Items[AnimeID=\"" + anime.ID + "\"]")
 			h1= anime.Title.Canonical
 			
 			.anime-list-item-progress-edit

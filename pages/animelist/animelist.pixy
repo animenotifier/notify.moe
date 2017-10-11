@@ -42,7 +42,7 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 	table.anime-list
 		tbody
 			each item in animeList.Items
-				tr.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/update/" + item.AnimeID)
+				tr.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/field/Items[AnimeID=\"" + item.AnimeID + "\"]")
 					td.anime-list-item-image-container
 						a.ajax(href=item.Anime().Link())
 							img.anime-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
