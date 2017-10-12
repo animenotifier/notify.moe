@@ -365,13 +365,26 @@ export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
 	.then(() => arn.loading(false))
 }
 
-// Remove tag
-export function removeTag(arn: AnimeNotifier, element: HTMLElement) {
-	let tag = element.dataset.tag
-	
-	// arn.loading(true)
+// Append new element to array
+export function arrayAppend(arn: AnimeNotifier, element: HTMLElement) {
+	let field = element.dataset.field
+	let object = element.dataset.object ? JSON.parse(element.dataset.object) : {}
+	let apiEndpoint = arn.findAPIEndpoint(element)
 
-	alert("Remove " + tag)
+	arn.post(apiEndpoint + "/field/" + field + "/append", object)
+	.then(() => arn.reloadContent())
+	.catch(err => arn.statusMessage.showError(err))
+}
+
+// Remove element from array
+export function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
+	let field = element.dataset.field
+	let index = element.dataset.index
+	let apiEndpoint = arn.findAPIEndpoint(element)
+
+	arn.post(apiEndpoint + "/field/" + field + "/remove/" + index, "")
+	.then(() => arn.reloadContent())
+	.catch(err => arn.statusMessage.showError(err))
 }
 
 // Chrome extension installation

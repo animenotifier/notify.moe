@@ -22,11 +22,11 @@ component InputTags(id string, value []string, label string)
 	.widget-section
 		label(for=id)= label + ":"
 		.tags(id=id)
-			each tag in value
+			for index, tag := range value
 				.tag
 					span.tag-title= tag
-					.tag-remove.action(data-action="removeTag", data-trigger="click", data-tag=tag) x
+					.tag-remove.action(data-action="arrayRemove", data-trigger="click", data-field=id, data-index=index) x
 			
-			button.tag-add
+			button.tag-add.action(data-action="arrayAppend", data-trigger="click", data-field=id)
 				RawIcon("plus")
 			

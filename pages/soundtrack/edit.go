@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strconv"
 	"strings"
 
 	"github.com/animenotifier/notify.moe/components"
@@ -88,9 +89,14 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			arrayObj := fieldValue.Index(sliceIndex).Interface()
 			arrayIDPrefix := fmt.Sprintf("%s[%d].", field.Name, sliceIndex)
 			RenderObject(b, arrayObj, arrayIDPrefix)
+
+			// Remove button
+			b.WriteString(`<div class="buttons"><button class="action" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
+			b.WriteString(strconv.Itoa(sliceIndex))
+			b.WriteString(`">` + utils.RawIcon("trash") + `</button></div>`)
 		}
 
-		b.WriteString(`<div class="buttons"><button>` + utils.Icon("plus") + `Add ` + field.Name + `</button></div>`)
+		b.WriteString(`<div class="buttons"><button class="action" data-action="arrayAppend" data-trigger="click" data-field="` + field.Name + `">` + utils.Icon("plus") + `Add ` + field.Name + `</button></div>`)
 	default:
 		panic("No edit form implementation for " + idPrefix + field.Name + " with type " + field.Type.String())
 	}
