@@ -25,8 +25,8 @@ export class AnimeNotifier {
 	mainPageLoaded: boolean
 	lastReloadContentPath: string
 
-	imageFound: MutationQueue
-	imageNotFound: MutationQueue
+	elementFound: MutationQueue
+	elementNotFound: MutationQueue
 	unmount: MutationQueue
 
 	constructor(app: Application) {
@@ -34,13 +34,13 @@ export class AnimeNotifier {
 		this.user = null
 		this.title = "Anime Notifier"
 
-		this.imageFound = new MutationQueue(elem => elem.classList.add("image-found"))
-		this.imageNotFound = new MutationQueue(elem => elem.classList.add("image-not-found"))
+		this.elementFound = new MutationQueue(elem => elem.classList.add("element-found"))
+		this.elementNotFound = new MutationQueue(elem => elem.classList.add("element-not-found"))
 		this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
 
 		// These classes will never be removed on DOM diffs
 		Diff.persistentClasses.add("mounted")
-		Diff.persistentClasses.add("image-found")
+		Diff.persistentClasses.add("element-found")
 
 		// Never remove src property on diffs
 		Diff.persistentAttributes.add("src")
@@ -134,7 +134,7 @@ export class AnimeNotifier {
 		
 		this.contentLoadedActions = Promise.all([
 			Promise.resolve().then(() => this.mountMountables()),
-			Promise.resolve().then(() => this.lazyLoadImages()),
+			Promise.resolve().then(() => this.lazyLoad()),
 			Promise.resolve().then(() => this.displayLocalDates()),
 			Promise.resolve().then(() => this.setSelectBoxValue()),
 			Promise.resolve().then(() => this.assignActions()),
@@ -500,37 +500,59 @@ export class AnimeNotifier {
 		}
 	}
 
-	lazyLoadImages() {
+	lazyLoad() {
 		for(let element of findAll("lazy")) {
-			this.lazyLoadImage(element as HTMLImageElement)
+			switch(element.tagName) {
+				case "IMG":
+					this.lazyLoadImage(element as HTMLImageElement)
+					break
+				
+				case "IFRAME":
+					this.lazyLoadIFrame(element as HTMLIFrameElement)
+					break
+			}
 		}
 	}
 
-	lazyLoadImage(img: HTMLImageElement) {
+	lazyLoadImage(element: HTMLImageElement) {
 		// Once the image becomes visible, load it
-		img["became visible"] = () => {
+		element["became visible"] = () => {
 			// Replace URL with WebP if supported
-			if(this.webpEnabled && img.dataset.webp) {
-				let dot = img.dataset.src.lastIndexOf(".")
-				img.src = img.dataset.src.substring(0, dot) + ".webp"
+			if(this.webpEnabled && element.dataset.webp) {
+				let dot = element.dataset.src.lastIndexOf(".")
+				element.src = element.dataset.src.substring(0, dot) + ".webp"
 			} else {
-				img.src = img.dataset.src
+				element.src = element.dataset.src
 			}
 
-			if(img.naturalWidth === 0) {
-				img.onload = () => {
-					this.imageFound.queue(img)
+			if(element.naturalWidth === 0) {
+				element.onload = () => {
+					this.elementFound.queue(element)
 				}
 
-				img.onerror = () => {
-					this.imageNotFound.queue(img)
+				element.onerror = () => {
+					this.elementNotFound.queue(element)
 				}
 			} else {
-				this.imageFound.queue(img)
+				this.elementFound.queue(element)
 			}
 		}
 
-		this.visibilityObserver.observe(img)
+		this.visibilityObserver.observe(element)
+	}
+
+	lazyLoadIFrame(element: HTMLIFrameElement) {
+		// Once the iframe becomes visible, load it
+		element["became visible"] = () => {
+			// If the source is already set correctly, don't set it again to avoid iframe flickering.
+			if(element.src !== element.dataset.src) {
+				element.src = element.dataset.src
+			}
+
+			this.elementFound.queue(element)
+		}
+
+		this.visibilityObserver.observe(element)
 	}
 
 	mountMountables() {
@@ -752,14 +774,18 @@ export class AnimeNotifier {
 				return
 		}
 
-		// Disallow Enter key in contenteditables
-		if(activeElement.getAttribute("contenteditable") === "true" && e.keyCode == 13) {
-			if("blur" in activeElement) {
-				activeElement["blur"]()
+		// Ignore hotkeys on contentEditable elements
+		if(activeElement.getAttribute("contenteditable") === "true") {
+			// Disallow Enter key in contenteditables and make it blur the element instead
+			if(e.keyCode == 13) {
+				if("blur" in activeElement) {
+					activeElement["blur"]()
+				}
+				
+				e.preventDefault()
+				e.stopPropagation()
 			}
 			
-			e.preventDefault()
-			e.stopPropagation()
 			return
 		}
 

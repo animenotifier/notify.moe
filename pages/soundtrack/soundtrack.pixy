@@ -1,8 +1,29 @@
 component Track(track *arn.SoundTrack)
-	h1= track.Title
+	SoundTrackTabs(track)
+	
+	if track.Title == ""
+		h1 untitled
+	else
+		h1= track.Title
 
 	.sound-tracks
 		SoundTrackAllMedia(track)
-	
-	p
-		a.ajax(href=track.Link() + "/edit") Edit
+
+	.footer.text-center
+		if track.EditedBy != ""
+			span Edited 
+			span.utc-date(data-date=track.Edited)
+			span  by 
+			span= track.EditedByUser().Nick
+		else
+			span Posted 
+			span.utc-date(data-date=track.Created)
+			span  by 
+			span= track.CreatedByUser().Nick
+		
+		span .
+
+component SoundTrackTabs(track *arn.SoundTrack)
+	.tabs
+		Tab("Soundtrack", "music", track.Link())
+		Tab("Edit", "pencil", track.Link() + "/edit")

@@ -1,6 +1,9 @@
+iframe
+	min-height 200px
+
 .video-container
 	width 100%
 
 .video
 	width 100%
-	height calc(100vh - nav-height)
+	height 100vh

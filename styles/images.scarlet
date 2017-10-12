@@ -2,10 +2,10 @@
 	visibility hidden
 	opacity 0
 
-.image-found
+.element-found
 	visibility visible
 	opacity 1 !important
 
-.image-not-found
+.element-not-found
 	visibility hidden
 	opacity 0 !important

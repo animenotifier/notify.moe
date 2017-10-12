@@ -1,7 +1,6 @@
-.widget-section
-	button,
-	.button
-		margin-bottom 1rem
+.widget-section > button,
+.widget-section > .button
+	margin-bottom 1rem
 
 .avatar-preview
 	margin 0 auto

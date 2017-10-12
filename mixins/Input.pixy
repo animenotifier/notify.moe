@@ -24,8 +24,9 @@ component InputTags(id string, value []string, label string)
 		.tags(id=id)
 			for index, tag := range value
 				.tag
-					span.tag-title= tag
-					.tag-remove.action(data-action="arrayRemove", data-trigger="click", data-field=id, data-index=index) x
+					span.tag-title.action(contenteditable="true", data-trigger="focusout", data-action="save", data-field=id + "[" + strconv.Itoa(index) + "]")= tag
+				button.tag-remove.action(data-action="arrayRemove", data-trigger="click", data-field=id, data-index=index)
+					RawIcon("trash")
 			
 			button.tag-add.action(data-action="arrayAppend", data-trigger="click", data-field=id)
 				RawIcon("plus")

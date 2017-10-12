@@ -1,24 +1,24 @@
+mixin tag-dimensions
+	padding 0.4rem 0.8rem
+	margin 0.4rem
+	height 40px
+
 .tags
 	horizontal-wrap
 
 .tag
 	ui-element
-	padding 0.4rem 0.8rem
-	margin 0.4rem
-
-.tag-input
-	horizontal
-
-	button
-		margin-left 0.8rem
+	tag-dimensions
+	margin-right 0
+	border-right none
+	border-top-right-radius 0
+	border-bottom-right-radius 0
 
 .tag-remove
-	display inline-block
-	margin-left 0.4rem
-	opacity 0.5
-
-	:hover
-		cursor pointer
+	tag-dimensions
+	margin-left 0
+	border-top-left-radius 0
+	border-bottom-left-radius 0
 
 .tag-add
-	margin 0.4rem !important
+	tag-dimensions
