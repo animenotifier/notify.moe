@@ -20,6 +20,17 @@
 	margin-bottom 1rem
 	overflow hidden
 
+.widget-section
+	vertical
+	width 100%
+
+.widget-title
+	text-align left
+	padding-bottom 0.5rem
+	border-bottom 1px solid rgba(0, 0, 0, 0.1)
+	// We need !important here to overwrite the h3:first-child rule
+	margin 1rem 0 !important
+
 .widget-ui-element
 	vertical-wrap
 	ui-element
@@ -35,17 +46,6 @@
 	justify-content flex-start
 	align-items center
 	width 100%
-
-.widget-section
-	vertical
-	width 100%
-
-.widget-title
-	text-align left
-	padding-bottom 0.5rem
-	border-bottom 1px solid rgba(0, 0, 0, 0.1)
-	// We need !important here to overwrite the h3:first-child rule
-	margin 1rem 0 !important
 
 .widget-form
 	width 100%

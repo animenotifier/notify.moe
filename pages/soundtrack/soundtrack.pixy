@@ -1,27 +1,32 @@
 component Track(track *arn.SoundTrack)
 	SoundTrackTabs(track)
 	
-	if track.Title == ""
-		h1 untitled
-	else
-		h1= track.Title
-
-	.sound-tracks
-		SoundTrackAllMedia(track)
-
-	.footer.text-center
-		if track.EditedBy != ""
-			span Edited 
-			span.utc-date(data-date=track.Edited)
-			span  by 
-			span= track.EditedByUser().Nick
+	.sound-track-full-page
+		if track.Title == ""
+			h1.mountable untitled
 		else
-			span Posted 
-			span.utc-date(data-date=track.Created)
-			span  by 
-			span= track.CreatedByUser().Nick
-		
-		span .
+			h1.mountable= track.Title
+
+		.widget-form.sound-track-media-list
+			each media in track.Media
+				.widget.mountable
+					h3.widget-title= media.Service
+					.sound-track-media
+						ExternalMedia(media)
+
+		.footer.text-center.mountable
+			if track.EditedBy != ""
+				span Edited 
+				span.utc-date(data-date=track.Edited)
+				span  by 
+				span= track.EditedByUser().Nick
+			else
+				span Posted 
+				span.utc-date(data-date=track.Created)
+				span  by 
+				span= track.CreatedByUser().Nick
+			
+			span .
 
 component SoundTrackTabs(track *arn.SoundTrack)
 	.tabs

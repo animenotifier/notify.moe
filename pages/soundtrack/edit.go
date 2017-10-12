@@ -49,8 +49,10 @@ func EditForm(obj interface{}, title string) string {
 	endpoint := `/api/` + lowerCaseTypeName + `/` + id.String()
 
 	var b bytes.Buffer
+
 	b.WriteString(`<div class="widget-form">`)
 	b.WriteString(`<div class="widget" data-api="` + endpoint + `">`)
+
 	b.WriteString(`<h1>`)
 	b.WriteString(title)
 	b.WriteString(`</h1>`)

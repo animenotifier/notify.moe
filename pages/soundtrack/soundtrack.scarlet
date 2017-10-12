@@ -1,0 +1,6 @@
+.sound-track-media-list
+	vertical
+
+.sound-track-media
+	iframe
+		width 100%
