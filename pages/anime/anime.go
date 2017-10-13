@@ -51,13 +51,13 @@ func Get(ctx *aero.Context) string {
 		for i := range friends {
 			j := i - deleted
 			friendAnimeList := friends[j].AnimeList()
-			obj, err := friendAnimeList.Get(anime.ID)
+			friendAnimeListItem := friendAnimeList.Find(anime.ID)
 
-			if err != nil {
+			if friendAnimeListItem == nil {
 				friends = friends[:j+copy(friends[j:], friends[j+1:])]
 				deleted++
 			} else {
-				friendsAnimeListItems[friends[j]] = obj.(*arn.AnimeListItem)
+				friendsAnimeListItems[friends[j]] = friendAnimeListItem
 			}
 		}
 

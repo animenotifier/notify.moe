@@ -665,7 +665,7 @@ export class AnimeNotifier {
 		.catch(console.error)
 	}
 
-	post(url, body) {
+	post(url: string, body: any) {
 		if(typeof body !== "string") {
 			body = JSON.stringify(body)
 		}

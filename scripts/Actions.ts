@@ -5,7 +5,7 @@ import { findAll } from "./Utils"
 
 // Follow user
 export function followUser(arn: AnimeNotifier, elem: HTMLElement) {
-	return arn.post(elem.dataset.api, elem.dataset.viewUserId)
+	return arn.post(elem.dataset.api, "")
 	.then(() => arn.reloadContent())
 	.then(() => arn.statusMessage.showInfo("You are now following " + arn.app.find("nick").innerText + "."))
 	.catch(err => arn.statusMessage.showError(err))
@@ -13,7 +13,7 @@ export function followUser(arn: AnimeNotifier, elem: HTMLElement) {
 
 // Unfollow user
 export function unfollowUser(arn: AnimeNotifier, elem: HTMLElement) {
-	return arn.post(elem.dataset.api, elem.dataset.viewUserId)
+	return arn.post(elem.dataset.api, "")
 	.then(() => arn.reloadContent())
 	.then(() => arn.statusMessage.showInfo("You stopped following " + arn.app.find("nick").innerText + "."))
 	.catch(err => arn.statusMessage.showError(err))
@@ -254,52 +254,14 @@ export function testNotification(arn: AnimeNotifier) {
 	})
 }
 
-// Add anime to collection
-export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
-	button.innerText = "Adding..."
-	arn.loading(true)
-
-	let {animeId, userId, userNick} = button.dataset
-
-	fetch("/api/animelist/" + userId + "/add", {
-		method: "POST",
-		body: animeId,
-		credentials: "same-origin"
-	})
-	.then(response => response.text())
-	.then(body => {
-		if(body !== "ok") {
-			throw body
-		}
-		
-		return arn.reloadContent()
-	})
-	.catch(err => arn.statusMessage.showError(err))
-	.then(() => arn.loading(false))
-}
-
 // Remove anime from collection
-export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElement) {
-	button.innerText = "Removing..."
-	arn.loading(true)
+export function removeAnimeFromCollection(arn: AnimeNotifier, element: HTMLElement) {
+	let {field, index, nick} = element.dataset
+	let apiEndpoint = arn.findAPIEndpoint(element)
 
-	let {animeId, userId, userNick} = button.dataset
-
-	fetch("/api/animelist/" + userId + "/remove", {
-		method: "POST",
-		body: animeId,
-		credentials: "same-origin"
-	})
-	.then(response => response.text())
-	.then(body => {
-		if(body !== "ok") {
-			throw body
-		}
-		
-		return arn.app.load("/+" + userNick + "/animelist/" + (arn.app.find("Status") as HTMLSelectElement).value)
-	})
+	arn.post(apiEndpoint + "/field/" + field + "/remove/" + index, "")
+	.then(() => arn.app.load("/+" + nick + "/animelist/" + (arn.app.find("Status") as HTMLSelectElement).value))
 	.catch(err => arn.statusMessage.showError(err))
-	.then(() => arn.loading(false))
 }
 
 // Charge up
@@ -368,7 +330,7 @@ export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
 // Append new element to array
 export function arrayAppend(arn: AnimeNotifier, element: HTMLElement) {
 	let field = element.dataset.field
-	let object = element.dataset.object ? JSON.parse(element.dataset.object) : {}
+	let object = element.dataset.object || ""
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
 	arn.post(apiEndpoint + "/field/" + field + "/append", object)

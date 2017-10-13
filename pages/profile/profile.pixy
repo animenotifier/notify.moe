@@ -54,11 +54,11 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 			.profile-actions
 				if user.ID != viewUser.ID
 					if !user.Follows().Contains(viewUser.ID)
-						button.profile-action.action(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add", data-view-user-id=viewUser.ID)
+						button.profile-action.action(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add/" + viewUser.ID)
 							Icon("user-plus")
 							span Follow
 					else
-						button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove", data-view-user-id=viewUser.ID)
+						button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
 							Icon("user-times")
 							span Unfollow
 	
