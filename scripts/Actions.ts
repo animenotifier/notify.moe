@@ -260,7 +260,7 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, element: HTMLEleme
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
 	arn.post(apiEndpoint + "/field/" + field + "/remove/" + index, "")
-	.then(() => arn.app.load("/+" + nick + "/animelist/" + (arn.app.find("Status") as HTMLSelectElement).value))
+	.then(() => arn.app.load("/animelist/" + (arn.app.find("Status") as HTMLSelectElement).value))
 	.catch(err => arn.statusMessage.showError(err))
 }
 
