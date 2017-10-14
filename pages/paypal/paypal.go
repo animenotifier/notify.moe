@@ -17,7 +17,11 @@ func CreatePayment(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	amount := string(ctx.RequestBody())
+	amount, err := ctx.Request().Body().String()
+
+	if err != nil {
+		return ctx.Error(http.StatusBadRequest, "Could not read amount", err)
+	}
 
 	// Verify amount
 	switch amount {
