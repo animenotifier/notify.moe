@@ -30,10 +30,6 @@ export class Application {
 		})
 	}
 
-	run() {
-		this.loading.classList.add(this.fadeOutClass)
-	}
-
 	find(id: string): HTMLElement {
 		return document.getElementById(id)
 	}

@@ -26,12 +26,14 @@ export function toggleSidebar(arn: AnimeNotifier) {
 
 // Save new data from an input field
 export function save(arn: AnimeNotifier, input: HTMLElement) {
-	arn.loading(true)
-
-	let isContentEditable = input.isContentEditable
 	let obj = {}
+	let isContentEditable = input.isContentEditable
 	let value = isContentEditable ? input.innerText : (input as HTMLInputElement).value
 	
+	if(value === undefined) {
+		return
+	}
+
 	if((input as HTMLInputElement).type === "number" || input.dataset.type === "number") {
 		if(input.getAttribute("step") === "1" || input.dataset.step === "1") {
 			obj[input.dataset.field] = parseInt(value)
@@ -50,21 +52,9 @@ export function save(arn: AnimeNotifier, input: HTMLElement) {
 
 	let apiEndpoint = arn.findAPIEndpoint(input)
 
-	fetch(apiEndpoint, {
-		method: "POST",
-		body: JSON.stringify(obj),
-		credentials: "same-origin"
-	})
-	.then(response => response.text())
-	.then(body => {
-		if(body !== "ok") {
-			throw body
-		}
-	})
+	arn.post(apiEndpoint, obj)
 	.catch(err => arn.statusMessage.showError(err))
 	.then(() => {
-		arn.loading(false)
-
 		if(isContentEditable) {
 			input.contentEditable = "true"
 		} else {
@@ -82,6 +72,10 @@ export function closeStatusMessage(arn: AnimeNotifier) {
 
 // Increase episode
 export function increaseEpisode(arn: AnimeNotifier, element: HTMLElement) {
+	if(arn.isLoading) {
+		return
+	}
+
 	let prev = element.previousSibling as HTMLElement
 	let episodes = parseInt(prev.innerText)
 	prev.innerText = String(episodes + 1)
@@ -254,12 +248,26 @@ export function testNotification(arn: AnimeNotifier) {
 	})
 }
 
-// Remove anime from collection
-export function removeAnimeFromCollection(arn: AnimeNotifier, element: HTMLElement) {
-	let {field, index, nick} = element.dataset
-	let apiEndpoint = arn.findAPIEndpoint(element)
+// Add anime to collection
+export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
+	button.innerText = "Adding..."
+	
+	let {animeId} = button.dataset
+	let apiEndpoint = arn.findAPIEndpoint(button)
 
-	arn.post(apiEndpoint + "/field/" + field + "/remove/" + index, "")
+	arn.post(apiEndpoint + "/add/" + animeId, "")
+	.then(() => arn.reloadContent())
+	.catch(err => arn.statusMessage.showError(err))
+}
+
+// Remove anime from collection
+export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElement) {
+	button.innerText = "Removing..."
+
+	let {animeId, nick} = button.dataset
+	let apiEndpoint = arn.findAPIEndpoint(button)
+
+	arn.post(apiEndpoint + "/remove/" + animeId, "")
 	.then(() => arn.app.load("/animelist/" + (arn.app.find("Status") as HTMLSelectElement).value))
 	.catch(err => arn.statusMessage.showError(err))
 }

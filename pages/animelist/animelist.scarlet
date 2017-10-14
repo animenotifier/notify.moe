@@ -38,6 +38,7 @@
 	:hover
 		.plus-episode
 			opacity 1
+			pointer-events all
 
 .anime-list-item-episodes-watched
 	flex 0.4
@@ -48,6 +49,7 @@
 	display inline-block
 	cursor pointer
 	opacity 0
+	pointer-events none
 	margin-left 1px
 	transition opacity transition-speed ease
 

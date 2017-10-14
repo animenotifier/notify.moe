@@ -31,7 +31,7 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 					Icon("pencil")
 					span Edit in collection
 			else
-				button.action(data-api="/api/animelist/" + user.ID, data-action="arrayAppend", data-trigger="click", data-field="Items", data-object="{\"AnimeID\": \"" + anime.ID + "\"}")
+				button.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID)
 					Icon("plus")
 					span Add to collection
 

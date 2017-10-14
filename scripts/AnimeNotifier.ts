@@ -23,6 +23,7 @@ export class AnimeNotifier {
 	touchController: TouchController
 	sideBar: SideBar
 	mainPageLoaded: boolean
+	isLoading: boolean
 	lastReloadContentPath: string
 
 	elementFound: MutationQueue
@@ -33,6 +34,7 @@ export class AnimeNotifier {
 		this.app = app
 		this.user = null
 		this.title = "Anime Notifier"
+		this.isLoading = true
 
 		this.elementFound = new MutationQueue(elem => elem.classList.add("element-found"))
 		this.elementNotFound = new MutationQueue(elem => elem.classList.add("element-not-found"))
@@ -123,9 +125,9 @@ export class AnimeNotifier {
 
 		// Sidebar control
 		this.sideBar = new SideBar(this.app.find("sidebar"))
-
-		// Let"s start
-		this.app.run()
+		
+		// Loading
+		this.loading(false)
 	}
 
 	onContentLoaded() {
@@ -446,8 +448,10 @@ export class AnimeNotifier {
 		.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
 	}
 
-	loading(isLoading: boolean) {
-		if(isLoading) {
+	loading(newState: boolean) {
+		this.isLoading = newState
+
+		if(this.isLoading) {
 			document.documentElement.style.cursor = "progress"
 			this.app.loading.classList.remove(this.app.fadeOutClass)
 		} else {
@@ -666,6 +670,10 @@ export class AnimeNotifier {
 	}
 
 	post(url: string, body: any) {
+		if(this.isLoading) {
+			return Promise.resolve()
+		}
+
 		if(typeof body !== "string") {
 			body = JSON.stringify(body)
 		}
