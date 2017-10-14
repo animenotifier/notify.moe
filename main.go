@@ -178,10 +178,12 @@ func configure(app *aero.Application) *aero.Application {
 	app.Rewrite(rewrite)
 
 	// Middleware
-	app.Use(middleware.Firewall())
-	app.Use(middleware.Log())
-	app.Use(middleware.Session())
-	app.Use(middleware.UserInfo())
+	app.Use(
+		middleware.Firewall(),
+		middleware.Log(),
+		middleware.Session(),
+		middleware.UserInfo()
+	)
 
 	// API
 	arn.API.Install(app)
