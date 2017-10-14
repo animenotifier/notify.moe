@@ -22,6 +22,7 @@ sidebar-spacing-y = 0.7rem
 		horizontal
 		justify-content center
 		margin 0.8rem 0
+		flex-shrink 0
 
 > 800px
 	#sidebar
