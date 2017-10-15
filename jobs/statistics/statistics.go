@@ -43,6 +43,8 @@ func getUserStats() []*arn.PieChart {
 	os := stats{}
 	notifications := stats{}
 	avatar := stats{}
+	ip := stats{}
+	pro := stats{}
 
 	for _, info := range analytics {
 		user, err := arn.GetUser(info.UserID)
@@ -52,7 +54,7 @@ func getUserStats() []*arn.PieChart {
 			continue
 		}
 
-		pixelRatio[fmt.Sprintf("%.1f", info.Screen.PixelRatio)]++
+		pixelRatio[fmt.Sprintf("%.0f", info.Screen.PixelRatio)]++
 
 		size := arn.ToString(info.Screen.Width) + " x " + arn.ToString(info.Screen.Height)
 		screenSize[size]++
@@ -94,6 +96,18 @@ func getUserStats() []*arn.PieChart {
 		} else {
 			avatar[user.Avatar.Source]++
 		}
+
+		if arn.IsIPv6(user.IP) {
+			ip["IPv6"]++
+		} else {
+			ip["IPv4"]++
+		}
+
+		if user.IsPro() {
+			pro["PRO account"]++
+		} else {
+			pro["Free account"]++
+		}
 	}
 
 	println("Finished user statistics")
@@ -107,6 +121,8 @@ func getUserStats() []*arn.PieChart {
 		arn.NewPieChart("Notifications", notifications),
 		arn.NewPieChart("Gender", gender),
 		arn.NewPieChart("Pixel ratio", pixelRatio),
+		arn.NewPieChart("IP version", ip),
+		arn.NewPieChart("PRO accounts", pro),
 	}
 }
 

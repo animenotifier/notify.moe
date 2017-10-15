@@ -100,14 +100,6 @@ var routeTests = map[string][]string{
 		"/api/animelist/4J6qpK1ve",
 	},
 
-	"/api/animelist/:id/get/:item": []string{
-		"/api/animelist/4J6qpK1ve/get/7929",
-	},
-
-	"/api/animelist/:id/get/:item/:property": []string{
-		"/api/animelist/4J6qpK1ve/get/7929/Episodes",
-	},
-
 	"/api/settings/:id": []string{
 		"/api/settings/4J6qpK1ve",
 	},
@@ -142,14 +134,6 @@ var routeTests = map[string][]string{
 
 	"/api/soundtrack/:id": []string{
 		"/api/soundtrack/h0ac8sKkg",
-	},
-
-	"/api/soundcloudtosoundtrack/:id": []string{
-		"/api/soundcloudtosoundtrack/145918628",
-	},
-
-	"/api/youtubetosoundtrack/:id": []string{
-		"/api/youtubetosoundtrack/hU2wqJuOIp4",
 	},
 
 	"/api/userfollows/:id": []string{

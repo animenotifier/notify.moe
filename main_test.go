@@ -1,12 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/aerogo/aero"
-	"github.com/fatih/color"
 )
 
 func TestRoutes(t *testing.T) {
@@ -24,7 +24,7 @@ func TestRoutes(t *testing.T) {
 			app.Handler().ServeHTTP(responseRecorder, request)
 
 			if status := responseRecorder.Code; status != http.StatusOK {
-				color.Red("%s | Wrong status code | %v instead of %v", example, status, http.StatusOK)
+				panic(fmt.Errorf("%s | Wrong status code | %v instead of %v", example, status, http.StatusOK))
 			}
 		}
 	}
