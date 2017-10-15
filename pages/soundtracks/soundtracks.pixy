@@ -1,10 +1,16 @@
-component SoundTracks(tracks []*arn.SoundTrack)
+component SoundTracks(tracks []*arn.SoundTrack, user *arn.User)
 	h1 Soundtracks
 
 	.music-buttons
-		a.button.action(data-action="newSoundTrack", data-trigger="click")
-			Icon("plus")
-			span Add soundtrack
+		if user != nil
+			if user.DraftIndex().SoundTrackID == ""
+				button.action(data-action="newSoundTrack", data-trigger="click")
+					Icon("plus")
+					span Add soundtrack
+			else
+				a.button.ajax(href="/soundtrack/" + user.DraftIndex().SoundTrackID + "/edit")
+					Icon("pencil")
+					span Edit draft
 
 	.sound-tracks
 		each track in tracks

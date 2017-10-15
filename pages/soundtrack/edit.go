@@ -94,9 +94,10 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		if field.Name == "IsDraft" {
 			if fieldValue.Bool() {
 				b.WriteString(`<div class="buttons"><button class="action" data-action="publish" data-trigger="click">` + utils.Icon("unlock-alt") + `Publish</button></div>`)
-			} else {
-				b.WriteString(`<div class="buttons"><button class="action" data-action="unpublish" data-trigger="click">` + utils.Icon("lock") + `Unpublish</button></div>`)
 			}
+			// else {
+			// 	b.WriteString(`<div class="buttons"><button class="action" data-action="unpublish" data-trigger="click">` + utils.Icon("lock") + `Unpublish</button></div>`)
+			// }
 		}
 	case "[]*arn.ExternalMedia":
 		for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {

@@ -199,7 +199,7 @@ export function createThread(arn: AnimeNotifier) {
 export function newSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) {
 	arn.post("/api/new/soundtrack", "")
 	.then(response => response.json())
-	.then(response => console.log(response))
+	.then(track => arn.app.load(`/soundtrack/${track.id}/edit`))
 	.catch(err => arn.statusMessage.showError(err))
 }
 
@@ -208,7 +208,7 @@ export function publish(arn: AnimeNotifier, button: HTMLButtonElement) {
 	let endpoint = arn.findAPIEndpoint(button)
 
 	arn.post(endpoint + "/publish", "")
-	.then(() => arn.reloadContent())
+	.then(() => arn.app.load(arn.app.currentPath.replace("/edit", "")))
 	.catch(err => arn.statusMessage.showError(err))
 }
 
@@ -356,6 +356,10 @@ export function arrayAppend(arn: AnimeNotifier, element: HTMLElement) {
 
 // Remove element from array
 export function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
+	if(!confirm("Are you sure you want to remove this element?")) {
+		return
+	}
+
 	let field = element.dataset.field
 	let index = element.dataset.index
 	let apiEndpoint = arn.findAPIEndpoint(element)
