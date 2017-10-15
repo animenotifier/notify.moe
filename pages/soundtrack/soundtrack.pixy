@@ -13,6 +13,12 @@ component Track(track *arn.SoundTrack)
 					h3.widget-title= media.Service
 					.sound-track-media
 						ExternalMedia(media)
+			
+			.widget.mountable
+				h3.widget-title Tags
+				ul
+					each tag in track.Tags
+						li= tag
 
 		.footer.text-center.mountable
 			if track.EditedBy != ""

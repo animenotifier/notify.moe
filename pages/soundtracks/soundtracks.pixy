@@ -2,7 +2,7 @@ component SoundTracks(tracks []*arn.SoundTrack)
 	h1 Soundtracks
 
 	.music-buttons
-		a.button.ajax(href="/new/soundtrack")
+		a.button.action(data-action="newSoundTrack", data-trigger="click")
 			Icon("plus")
 			span Add soundtrack
 

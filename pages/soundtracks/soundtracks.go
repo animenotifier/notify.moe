@@ -13,7 +13,7 @@ const maxTracks = 9
 // Get renders the soundtracks page.
 func Get(ctx *aero.Context) string {
 	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft
+		return !track.IsDraft && len(track.Media) > 0
 	})
 
 	if err != nil {

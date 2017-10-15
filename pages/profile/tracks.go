@@ -19,7 +19,9 @@ func GetSoundTracksByUser(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "User not found", err)
 	}
 
-	tracks, err := arn.GetSoundTracksByUser(viewUser)
+	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+		return !track.IsDraft && len(track.Media) > 0 && track.CreatedBy == viewUser.ID
+	})
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching soundtracks", err)

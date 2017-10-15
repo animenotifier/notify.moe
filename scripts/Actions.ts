@@ -195,21 +195,29 @@ export function createThread(arn: AnimeNotifier) {
 	.catch(err => arn.statusMessage.showError(err))
 }
 
-// Create soundtrack
-export function createSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let soundcloud = arn.app.find("soundcloud-link") as HTMLInputElement
-	let youtube = arn.app.find("youtube-link") as HTMLInputElement
-	let anime = arn.app.find("anime-link") as HTMLInputElement
-	let osu = arn.app.find("osu-link") as HTMLInputElement
+// New soundtrack
+export function newSoundTrack(arn: AnimeNotifier, button: HTMLButtonElement) {
+	arn.post("/api/new/soundtrack", "")
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => arn.statusMessage.showError(err))
+}
 
-	let soundtrack = {
-		soundcloud: soundcloud.value,
-		youtube: youtube.value,
-		tags: [anime.value, osu.value],
-	}
+// Publish
+export function publish(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let endpoint = arn.findAPIEndpoint(button)
 
-	arn.post("/api/new/soundtrack", soundtrack)
-	.then(() => arn.app.load("/soundtracks"))
+	arn.post(endpoint + "/publish", "")
+	.then(() => arn.reloadContent())
+	.catch(err => arn.statusMessage.showError(err))
+}
+
+// Unpublish
+export function unpublish(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let endpoint = arn.findAPIEndpoint(button)
+
+	arn.post(endpoint + "/unpublish", "")
+	.then(() => arn.reloadContent())
 	.catch(err => arn.statusMessage.showError(err))
 }
 

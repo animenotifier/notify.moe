@@ -671,7 +671,7 @@ export class AnimeNotifier {
 
 	post(url: string, body: any) {
 		if(this.isLoading) {
-			return Promise.resolve()
+			return Promise.resolve(null)
 		}
 
 		if(typeof body !== "string") {
@@ -685,13 +685,16 @@ export class AnimeNotifier {
 			body,
 			credentials: "same-origin"
 		})
-		.then(response => response.text())
-		.then(body => {
+		.then(response => {
 			this.loading(false)
 
-			if(body !== "ok") {
-				throw body
+			if(response.status === 200) {
+				return Promise.resolve(response)
 			}
+
+			return response.text().then(err => {
+				throw err
+			})
 		})
 		.catch(err => {
 			this.loading(false)

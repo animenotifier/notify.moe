@@ -182,7 +182,7 @@ func configure(app *aero.Application) *aero.Application {
 		middleware.Firewall(),
 		middleware.Log(),
 		middleware.Session(),
-		middleware.UserInfo()
+		middleware.UserInfo(),
 	)
 
 	// API

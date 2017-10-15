@@ -89,7 +89,15 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 	case "string":
 		b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, ""))
 	case "[]string":
-		b.WriteString(components.InputTags(idPrefix+field.Name, fieldValue.Interface().([]string), field.Name))
+		b.WriteString(components.InputTags(idPrefix+field.Name, fieldValue.Interface().([]string), field.Name, field.Tag.Get("tooltip")))
+	case "bool":
+		if field.Name == "IsDraft" {
+			if fieldValue.Bool() {
+				b.WriteString(`<div class="buttons"><button class="action" data-action="publish" data-trigger="click">` + utils.Icon("unlock-alt") + `Publish</button></div>`)
+			} else {
+				b.WriteString(`<div class="buttons"><button class="action" data-action="unpublish" data-trigger="click">` + utils.Icon("lock") + `Unpublish</button></div>`)
+			}
+		}
 	case "[]*arn.ExternalMedia":
 		for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
 			b.WriteString(`<div class="widget-section">`)

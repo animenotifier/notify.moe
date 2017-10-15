@@ -18,7 +18,7 @@ component InputSelection(id string, value string, label string, placeholder stri
 		label(for=id)= label + ":"
 		select.widget-ui-element.action(id=id, data-field=id, value=value, title=placeholder, data-action="save", data-trigger="change")
 
-component InputTags(id string, value []string, label string)
+component InputTags(id string, value []string, label string, tooltip string)
 	.widget-section
 		label(for=id)= label + ":"
 		.tags(id=id)
@@ -30,4 +30,6 @@ component InputTags(id string, value []string, label string)
 			
 			button.tag-add.action(data-action="arrayAppend", data-trigger="click", data-field=id)
 				RawIcon("plus")
+		
+		p!= tooltip
 			
