@@ -23,7 +23,7 @@ component InputTags(id string, value []string, label string, tooltip string)
 		label(for=id)= label + ":"
 		.tags(id=id)
 			for index, tag := range value
-				.tag
+				.tag.tag-edit
 					span.tag-title.action(contenteditable="true", data-trigger="focusout", data-action="save", data-field=id + "[" + strconv.Itoa(index) + "]")= tag
 				button.tag-remove.action(data-action="arrayRemove", data-trigger="click", data-field=id, data-index=index)
 					RawIcon("trash")

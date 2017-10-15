@@ -24,9 +24,9 @@ component Track(track *arn.SoundTrack)
 			
 			.widget.mountable
 				h3.widget-title Tags
-				ul
+				.tags
 					each tag in track.Tags
-						li= tag
+						.tag= tag
 
 		.footer.text-center.mountable
 			if track.EditedBy != ""
