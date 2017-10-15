@@ -60,7 +60,9 @@ func Get(ctx *aero.Context) string {
 		}
 	}, func() {
 		var err error
-		soundTracks, err = arn.AllSoundTracks()
+		soundTracks, err = arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+			return !track.IsDraft && len(track.Media) > 0
+		})
 
 		if err != nil {
 			return
