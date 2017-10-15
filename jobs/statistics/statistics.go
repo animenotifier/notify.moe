@@ -104,9 +104,9 @@ func getUserStats() []*arn.PieChart {
 		}
 
 		if user.IsPro() {
-			pro["PRO account"]++
+			pro["PRO accounts"]++
 		} else {
-			pro["Free account"]++
+			pro["Free accounts"]++
 		}
 	}
 
