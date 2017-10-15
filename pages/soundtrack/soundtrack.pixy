@@ -15,6 +15,14 @@ component Track(track *arn.SoundTrack)
 						ExternalMedia(media)
 			
 			.widget.mountable
+				h3.widget-title Anime
+
+				.sound-track-anime-list
+					each anime in track.Anime()
+						a.sound-track-anime-list-item.ajax(href=anime.Link(), title=anime.Title.Canonical)
+							img.sound-track-anime-list-item-image.lazy(data-src=anime.Image.Tiny, alt=anime.Title.Canonical)
+			
+			.widget.mountable
 				h3.widget-title Tags
 				ul
 					each tag in track.Tags

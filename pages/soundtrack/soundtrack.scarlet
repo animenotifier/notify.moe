@@ -4,3 +4,12 @@
 .sound-track-media
 	iframe
 		width 100%
+
+.sound-track-anime-list
+	horizontal-wrap
+
+.sound-track-anime-list-item
+	//
+
+.sound-track-anime-list-item-image
+	anime-cover-image-mini

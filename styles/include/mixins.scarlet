@@ -42,6 +42,16 @@ mixin clip-long-text
 	white-space nowrap
 	text-overflow ellipsis
 
+mixin anime-cover-image-mini
+	width 55px !important
+	height 78px !important
+	border-radius 2px
+	filter none
+	transition filter transition-speed ease, opacity transition-speed ease
+	
+	:hover
+		filter saturate(1.3)
+
 mixin bg-dark-up
 	background-color transparent
 	:hover
