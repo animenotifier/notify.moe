@@ -8,8 +8,8 @@ component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 		button#new-thread.action(data-action="load", data-trigger="click", data-url="/new/thread")
 			Icon("plus")
 			span New thread
-		if len(threads) == threadsPerPage
-			LoadMore
+		//- if len(threads) == threadsPerPage
+		//- 	LoadMore
 
 component ThreadList(threads []*arn.Thread)
 	if len(threads) == 0

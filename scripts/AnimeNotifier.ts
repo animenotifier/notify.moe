@@ -9,6 +9,7 @@ import { PushManager } from "./PushManager"
 import { TouchController } from "./TouchController"
 import { Analytics } from "./Analytics"
 import { SideBar } from "./SideBar"
+import { InfiniteScroller } from "./InfiniteScroller"
 
 export class AnimeNotifier {
 	app: Application
@@ -22,6 +23,7 @@ export class AnimeNotifier {
 	pushManager: PushManager
 	touchController: TouchController
 	sideBar: SideBar
+	infiniteScroller: InfiniteScroller
 	mainPageLoaded: boolean
 	isLoading: boolean
 	lastReloadContentPath: string
@@ -125,6 +127,9 @@ export class AnimeNotifier {
 
 		// Sidebar control
 		this.sideBar = new SideBar(this.app.find("sidebar"))
+
+		// Infinite scrolling
+		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 100)
 		
 		// Loading
 		this.loading(false)
