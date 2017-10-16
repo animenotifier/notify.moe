@@ -9,9 +9,7 @@ component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 			Icon("plus")
 			span New thread
 		if len(threads) == threadsPerPage
-			button
-				Icon("refresh")
-				span Load more
+			LoadMore
 
 component ThreadList(threads []*arn.Thread)
 	if len(threads) == 0

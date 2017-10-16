@@ -1,0 +1,4 @@
+component LoadMore
+	button.action(data-action="loadMore", data-trigger="click")
+		Icon("refresh")
+		span Load more

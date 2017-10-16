@@ -369,6 +369,20 @@ export function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
 	.catch(err => arn.statusMessage.showError(err))
 }
 
+// Load more
+export function loadMore(arn: AnimeNotifier, element: HTMLElement) {
+	let target = arn.app.find("load-more-target")
+	let index = "9"
+	
+	fetch("/_" + arn.app.currentPath + "/from/" + index)
+	.then(response => response.text())
+	.then(body => {
+		target.innerHTML += body
+		arn.app.emit("DOMContentLoaded")
+	})
+	.catch(err => arn.statusMessage.showError(err))
+}
+
 // Chrome extension installation
 export function installExtension(arn: AnimeNotifier, button: HTMLElement) {
 	let browser: any = window["chrome"]

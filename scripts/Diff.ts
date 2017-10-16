@@ -91,12 +91,12 @@ export class Diff {
 						continue
 					}
 
-					if(attrib.name === "class") {
-						// If the class is exactly the same, skip this attribute.
-						if(elemA.getAttribute("class") === attrib.value) {
-							continue
-						}
+					// If the attribute value is exactly the same, skip this attribute.
+					if(elemA.getAttribute(attrib.name) === attrib.value) {
+						continue
+					}
 
+					if(attrib.name === "class") {
 						let classesA = elemA.classList
 						let classesB = elemB.classList
 						let removeClasses: string[] = []
@@ -119,8 +119,8 @@ export class Diff {
 
 						continue
 					}
-
-					elemA.setAttribute(attrib.name, elemB.getAttribute(attrib.name))
+					
+					elemA.setAttribute(attrib.name, attrib.value)
 				}
 
 				// Special case: Apply state of input elements

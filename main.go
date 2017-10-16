@@ -98,6 +98,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Soundtracks
 	app.Ajax("/soundtracks", soundtracks.Get)
+	app.Ajax("/soundtracks/from/:index", soundtracks.From)
 	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/soundtrack/:id", soundtrack.Get)
 	app.Ajax("/soundtrack/:id/edit", soundtrack.Edit)

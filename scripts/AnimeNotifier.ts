@@ -549,7 +549,7 @@ export class AnimeNotifier {
 		// Once the iframe becomes visible, load it
 		element["became visible"] = () => {
 			// If the source is already set correctly, don't set it again to avoid iframe flickering.
-			if(element.src !== element.dataset.src) {
+			if(element.src !== element.dataset.src && element.src !== (window.location.protocol + element.dataset.src)) {
 				element.src = element.dataset.src
 			}
 

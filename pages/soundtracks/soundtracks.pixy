@@ -12,6 +12,12 @@ component SoundTracks(tracks []*arn.SoundTrack, user *arn.User)
 					Icon("pencil")
 					span Edit draft
 
-	.sound-tracks
-		each track in tracks
-			SoundTrack(track)
+	#load-more-target.sound-tracks
+		SoundTracksScrollable(tracks, user)
+	
+	//- .buttons
+	//- 	LoadMore
+
+component SoundTracksScrollable(tracks []*arn.SoundTrack, user *arn.User)
+	each track in tracks
+		SoundTrack(track)
