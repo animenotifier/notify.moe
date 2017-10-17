@@ -816,5 +816,14 @@ export class AnimeNotifier {
 			e.stopPropagation()
 			return
 		}
+
+		// Ctrl + , = Settings
+		if(e.ctrlKey && e.keyCode == 188) {
+			this.app.load("/settings")
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
 	}
 }
