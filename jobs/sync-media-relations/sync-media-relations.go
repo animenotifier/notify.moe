@@ -26,6 +26,19 @@ func main() {
 		animeID := mediaRelation.Relationships.Source.Data.ID
 		destinationAnimeID := mediaRelation.Relationships.Destination.Data.ID
 
+		// Confirm that the anime IDs are valid
+		exists, _ := arn.DB.Exists("Anime", animeID)
+
+		if !exists {
+			continue
+		}
+
+		exists, _ = arn.DB.Exists("Anime", destinationAnimeID)
+
+		if !exists {
+			continue
+		}
+
 		fmt.Printf(
 			"%s %s has %s which is %s %s\n",
 			mediaRelation.Relationships.Source.Data.Type,
@@ -35,6 +48,7 @@ func main() {
 			destinationAnimeID,
 		)
 
+		// Add anime to the global map
 		relationsList, found := relations[animeID]
 
 		if !found {

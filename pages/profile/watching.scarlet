@@ -3,7 +3,7 @@
 	justify-content center
 
 .profile-watching-list-item
-	margin 0.25rem
+	anime-mini-item
 
 .profile-watching-list-item-image
-	anime-cover-image-mini
+	anime-mini-item-image

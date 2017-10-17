@@ -9,9 +9,15 @@
 	font-weight bold
 
 .anime-image-container
-	horizontal
-	justify-content center
-	align-items flex-start
+	vertical
+	justify-content flex-start
+	align-items center
+
+.anime-start-date
+	font-size 0.7rem
+	line-height 1.7em
+	opacity 0.65
+	margin-top 0.5rem
 
 .anime-cover-image
 	width 142px

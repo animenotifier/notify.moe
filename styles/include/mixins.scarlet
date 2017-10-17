@@ -42,7 +42,10 @@ mixin clip-long-text
 	white-space nowrap
 	text-overflow ellipsis
 
-mixin anime-cover-image-mini
+mixin anime-mini-item
+	margin 0.25rem
+
+mixin anime-mini-item-image
 	width 55px !important
 	height 78px !important
 	border-radius 2px

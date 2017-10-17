@@ -2,6 +2,7 @@ package anime
 
 import (
 	"net/http"
+	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -64,6 +65,17 @@ func Get(ctx *aero.Context) string {
 		}
 
 		arn.SortUsersLastSeen(friends)
+	}
+
+	// Sort relations by start date
+	relations := anime.Relations()
+
+	if relations != nil {
+		items := relations.Items
+
+		sort.Slice(items, func(i, j int) bool {
+			return items[i].Anime().StartDate < items[j].Anime().StartDate
+		})
 	}
 
 	// Open Graph

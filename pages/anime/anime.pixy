@@ -3,6 +3,9 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 		if anime.Image.Small != ""
 			.anime-image-container
 				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.Canonical)
+
+				if anime.StartDate != ""
+					.anime-start-date(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
 		
 		.space
 
@@ -35,21 +38,6 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 					Icon("plus")
 					span Add to collection
 
-	if len(friends) > 0
-		h3.anime-section-name Friends
-		
-		.anime-friends
-			.user-avatars
-				each friend in friends
-					if friend.Nick != ""
-						if friend.IsActive()
-							.mountable
-								FriendEntry(friend, listItems)
-						else
-							.mountable
-								.inactive-user
-									FriendEntry(friend, listItems)
-
 	h3.anime-section-name Ratings
 	.anime-rating-categories
 		.anime-rating-category(title=toString(anime.Rating.Overall))
@@ -67,6 +55,32 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 		.anime-rating-category(title=toString(anime.Rating.Soundtrack))
 			.anime-rating-category-name Soundtrack
 			Rating(anime.Rating.Soundtrack)
+
+	if len(friends) > 0
+		h3.anime-section-name Friends
+		
+		.anime-friends
+			.user-avatars
+				each friend in friends
+					if friend.Nick != ""
+						if friend.IsActive()
+							.mountable
+								FriendEntry(friend, listItems)
+						else
+							.mountable
+								.inactive-user
+									FriendEntry(friend, listItems)
+
+	if anime.Relations() != nil && len(anime.Relations().Items) > 0
+		h3.anime-section-name Relations
+		.anime-relations
+			each relation in anime.Relations().Items
+				a.anime-relation.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.Canonical)
+					img.anime-relation-image.lazy(data-src=relation.Anime().Image.Tiny, alt=relation.Anime().Title.Canonical)
+					.anime-relation-type= relation.HumanReadableType()
+					.anime-relation-year
+						if relation.Anime().StartDate != ""
+							span= relation.Anime().StartDate[:4]
 
 	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].ServiceID != ""
 		h3.anime-section-name Video
@@ -156,19 +170,6 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 	//- 						if providers.Nyaa && providers.Nyaa.episodes !== undefined
 	//- 							span(class=providers.Nyaa.episodes === 0 ? "entry-error" : "entry-ok")= providers.Nyaa.episodes + " eps"
 
-	if len(tracks) > 0
-		h3.anime-section-name Tracks
-		.sound-tracks
-			each track in tracks
-				SoundTrack(track)
-	
-	if anime.Characters() != nil && len(anime.Characters().Items) > 0
-		h3.anime-section-name Characters
-		.characters
-			each character in anime.Characters().Items
-				if character.Character() != nil
-					Character(character.Character())
-	
 	h3.anime-section-name Popularity
 	.anime-rating-categories
 		.anime-rating-category
@@ -186,6 +187,19 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 		.anime-rating-category
 			.anime-rating-category-name Dropped
 			.anime-rating= anime.Popularity.Dropped
+
+	if len(tracks) > 0
+		h3.anime-section-name Tracks
+		.sound-tracks
+			each track in tracks
+				SoundTrack(track)
+
+	if anime.Characters() != nil && len(anime.Characters().Items) > 0
+		h3.anime-section-name Characters
+		.characters
+			each character in anime.Characters().Items
+				if character.Character() != nil
+					Character(character.Character())
 
 	if len(anime.Episodes().Items) > 0
 		if episodesReversed

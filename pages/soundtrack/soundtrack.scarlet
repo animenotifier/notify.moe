@@ -9,7 +9,7 @@
 	horizontal-wrap
 
 .sound-track-anime-list-item
-	//
+	anime-mini-item
 
 .sound-track-anime-list-item-image
-	anime-cover-image-mini
+	anime-mini-item-image
