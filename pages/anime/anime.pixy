@@ -5,7 +5,11 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.Canonical)
 
 				if anime.StartDate != ""
-					.anime-start-date(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
+					.anime-start-date
+						span(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
+						if anime.EndDate != "" && anime.StartDate[:4] != anime.EndDate[:4]
+							span  - 
+							span(title="End date: " + anime.EndDate)= anime.EndDate[:4]
 		
 		.space
 
