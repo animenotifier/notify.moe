@@ -1,0 +1,15 @@
+component Group(group *arn.Group)
+	GroupTabs(group)
+	
+	if group.Name != ""
+		h1= group.Name
+	else
+		h1 untitled
+
+	p= len(group.Members)
+	p= group.CreatedBy
+
+component GroupTabs(group *arn.Group)
+	.tabs
+		Tab("Group", "users", group.Link())
+		Tab("Edit", "pencil", group.Link() + "/edit")

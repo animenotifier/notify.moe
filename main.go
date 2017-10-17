@@ -25,6 +25,8 @@ import (
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/forums"
+	"github.com/animenotifier/notify.moe/pages/group"
+	"github.com/animenotifier/notify.moe/pages/groups"
 	"github.com/animenotifier/notify.moe/pages/home"
 	"github.com/animenotifier/notify.moe/pages/inventory"
 	"github.com/animenotifier/notify.moe/pages/listimport"
@@ -33,7 +35,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/listimport/listimportmyanimelist"
 	"github.com/animenotifier/notify.moe/pages/login"
 	"github.com/animenotifier/notify.moe/pages/me"
-	"github.com/animenotifier/notify.moe/pages/newsoundtrack"
 	"github.com/animenotifier/notify.moe/pages/newthread"
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/paypal"
@@ -99,9 +100,13 @@ func configure(app *aero.Application) *aero.Application {
 	// Soundtracks
 	app.Ajax("/soundtracks", soundtracks.Get)
 	app.Ajax("/soundtracks/from/:index", soundtracks.From)
-	app.Ajax("/new/soundtrack", newsoundtrack.Get)
 	app.Ajax("/soundtrack/:id", soundtrack.Get)
 	app.Ajax("/soundtrack/:id/edit", soundtrack.Edit)
+
+	// Groups
+	app.Ajax("/groups", groups.Get)
+	app.Ajax("/group/:id", group.Get)
+	app.Ajax("/group/:id/edit", group.Edit)
 
 	// User profiles
 	app.Ajax("/user", user.Get)

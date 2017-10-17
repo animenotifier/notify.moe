@@ -21,6 +21,9 @@ component Sidebar(user *arn.User)
 	//- SidebarButton("Search", "/search", "search")
 
 	if user != nil
+		if user.Role == "admin"
+			SidebarButton("Groups", "/groups", "users")
+		
 		SidebarButton("Shop", "/shop", "shopping-cart")
 		SidebarButton("Statistics", "/statistics", "pie-chart")
 		SidebarButton("Settings", "/settings", "cog")

@@ -4,7 +4,7 @@ component SoundTracks(tracks []*arn.SoundTrack, tracksPerPage int, user *arn.Use
 	.music-buttons
 		if user != nil
 			if user.DraftIndex().SoundTrackID == ""
-				button.action(data-action="newSoundTrack", data-trigger="click")
+				button.action(data-action="newObject", data-trigger="click", data-type="soundtrack")
 					Icon("plus")
 					span Add soundtrack
 			else

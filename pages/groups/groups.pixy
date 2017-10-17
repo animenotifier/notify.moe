@@ -1,0 +1,21 @@
+component Groups(groups []*arn.Group, user *arn.User)
+	.tabs
+		Tab("Groups", "users", "/groups")
+
+	h1.page-title Groups
+	
+	.buttons
+		if user != nil
+			if user.DraftIndex().GroupID == ""
+				button.action(data-action="newObject", data-trigger="click", data-type="group")
+					Icon("plus")
+					span New group
+			else
+				a.button.ajax(href="/group/" + user.DraftIndex().GroupID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+	.groups
+		each group in groups
+			.group
+				h3= group.Name
