@@ -5,9 +5,19 @@ const RELOADS = new Map<string, Promise<Response>>()
 const ETAGS = new Map<string, string>()
 const CACHEREFRESH = new Map<string, Promise<void>>()
 const EXCLUDECACHE = new Set<string>([
+	// API requests
 	"/api/",
+
+	// PayPal stuff
 	"/paypal/",
+
+	// List imports
 	"/import/",
+
+	// Infinite scrolling
+	"/from/",
+
+	// Chrome extension
 	"chrome-extension"
 ])
 
