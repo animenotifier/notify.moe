@@ -19,6 +19,7 @@ import (
 func Edit(ctx *aero.Context) string {
 	id := ctx.Get("id")
 	track, err := arn.GetSoundTrack(id)
+	user := utils.GetUser(ctx)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
@@ -37,11 +38,11 @@ func Edit(ctx *aero.Context) string {
 		ctx.Data.(*arn.OpenGraph).Tags["og:image"] = track.MainAnime().Image.Large
 	}
 
-	return ctx.HTML(components.SoundTrackTabs(track) + EditForm(track, "Edit soundtrack"))
+	return ctx.HTML(components.SoundTrackTabs(track) + EditForm(track, "Edit soundtrack", user))
 }
 
 // EditForm ...
-func EditForm(obj interface{}, title string) string {
+func EditForm(obj interface{}, title string, user *arn.User) string {
 	t := reflect.TypeOf(obj).Elem()
 	v := reflect.ValueOf(obj).Elem()
 	id := reflect.Indirect(v.FieldByName("ID"))
@@ -58,6 +59,12 @@ func EditForm(obj interface{}, title string) string {
 	b.WriteString(`</h1>`)
 
 	RenderObject(&b, obj, "")
+
+	if user != nil && (user.Role == "editor" || user.Role == "admin") {
+		b.WriteString(`<div class="buttons">`)
+		b.WriteString(`<button class="action" data-action="deleteObject" data-trigger="click" data-return-path="/soundtracks" data-confirm-type="soundtrack">` + utils.Icon("trash") + `Delete ` + t.Name() + `</button>`)
+		b.WriteString(`</div>`)
+	}
 
 	b.WriteString("</div>")
 	b.WriteString("</div>")
@@ -119,7 +126,9 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			b.WriteString(`</div>`)
 		}
 
-		b.WriteString(`<div class="buttons"><button class="action" data-action="arrayAppend" data-trigger="click" data-field="` + field.Name + `">` + utils.Icon("plus") + `Add ` + field.Name + `</button></div>`)
+		b.WriteString(`<div class="buttons">`)
+		b.WriteString(`<button class="action" data-action="arrayAppend" data-trigger="click" data-field="` + field.Name + `">` + utils.Icon("plus") + `Add ` + field.Name + `</button>`)
+		b.WriteString(`</div>`)
 	default:
 		panic("No edit form implementation for " + idPrefix + field.Name + " with type " + field.Type.String())
 	}

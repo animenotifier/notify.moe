@@ -1,4 +1,5 @@
 export * from "./Actions/AnimeList"
+export * from "./Actions/Delete"
 export * from "./Actions/Diff"
 export * from "./Actions/FollowUser"
 export * from "./Actions/Forum"
