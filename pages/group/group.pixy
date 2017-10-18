@@ -2,12 +2,28 @@ component Group(group *arn.Group)
 	GroupTabs(group)
 	
 	if group.Name != ""
-		h1= group.Name
+		h1.mountable= group.Name
 	else
-		h1 untitled
+		h1.mountable untitled
 
-	p= len(group.Members)
-	p= group.CreatedBy
+	.group-view
+		.group-sidebar.mountable
+			.group-sidebar-section
+				h3 Description
+				.group-description!= markdown.Render(group.Description)
+
+			.group-sidebar-section
+				h3 Rules
+				.group-rules!= markdown.Render(group.Rules)
+
+			.group-sidebar-section
+				h3 Members
+				.user-avatars.group-members
+					each member in group.Members
+						Avatar(member.User())
+		
+		.group-feed.mountable
+			p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum tellus congue, placerat augue vel, porta tortor. Nunc in elementum enim. Vestibulum ut arcu sed diam dapibus feugiat. Nam posuere, lectus et pellentesque interdum, mi orci aliquet lacus, a posuere lacus mi ac urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec suscipit enim nec dui consectetur, vitae pulvinar urna commodo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 
 component GroupTabs(group *arn.Group)
 	.tabs

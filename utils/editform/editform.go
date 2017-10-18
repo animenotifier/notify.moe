@@ -66,7 +66,11 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 
 	switch field.Type.String() {
 	case "string":
-		b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, ""))
+		if field.Tag.Get("type") == "textarea" {
+			b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, ""))
+		} else {
+			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, ""))
+		}
 	case "[]string":
 		b.WriteString(components.InputTags(idPrefix+field.Name, fieldValue.Interface().([]string), field.Name, field.Tag.Get("tooltip")))
 	case "bool":
