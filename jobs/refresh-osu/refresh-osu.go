@@ -12,11 +12,17 @@ func main() {
 
 	ticker := time.NewTicker(500 * time.Millisecond)
 
-	for user := range arn.MustStreamUsers() {
+	allUsers, _ := arn.AllUsers()
+
+	for _, user := range allUsers {
 		// Get osu info
 		if user.RefreshOsuInfo() == nil {
 			arn.PrettyPrint(user.Accounts.Osu)
-			user.Save()
+
+			// Fetch user again to prevent writing old data
+			updatedUser, _ := arn.GetUser(user.ID)
+			updatedUser.Accounts.Osu = user.Accounts.Osu
+			updatedUser.Save()
 		}
 
 		// Wait for rate limiter

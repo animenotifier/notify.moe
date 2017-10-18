@@ -1,4 +1,4 @@
-component Groups(groups []*arn.Group, user *arn.User)
+component Groups(groups []*arn.Group, groupsPerPage int, user *arn.User)
 	.tabs
 		Tab("Groups", "users", "/groups")
 
@@ -15,11 +15,17 @@ component Groups(groups []*arn.Group, user *arn.User)
 					Icon("pencil")
 					span Edit draft
 
-	.groups
+	#load-more-target.groups
 		each group in groups
-			.group
-				h3.group-name= group.Name
-				.group-tagline= group.Tagline
-				.group-member-count
-					Icon("user")
-					span= len(group.Members)
+			a.group.mountable.ajax(href=group.Link())
+				img.group-image.lazy(data-src=group.ImageURL(), alt=group.Name)
+				.group-info
+					h3.group-name= group.Name
+					.group-tagline= group.Tagline
+					.group-member-count
+						Icon("user")
+						span= len(group.Members)
+	
+	if len(groups) == groupsPerPage
+		.buttons
+			LoadMore(groupsPerPage)

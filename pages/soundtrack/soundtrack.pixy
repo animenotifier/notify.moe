@@ -38,7 +38,7 @@ component Track(track *arn.SoundTrack)
 				span Posted 
 				span.utc-date(data-date=track.Created)
 				span  by 
-				span= track.CreatedByUser().Nick
+				span= track.Creator().Nick
 			
 			span .
 

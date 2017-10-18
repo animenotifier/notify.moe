@@ -27,7 +27,7 @@ component SoundTrackFooter(track *arn.SoundTrack)
 		span  posted 
 		span.utc-date(data-date=track.Created)
 		span  by 
-		a.ajax(href=track.CreatedByUser().Link())= track.CreatedByUser().Nick + " "
+		a.ajax(href=track.Creator().Link())= track.Creator().Nick + " "
 
 component ExternalMedia(media *arn.ExternalMedia)
 	iframe.lazy(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")

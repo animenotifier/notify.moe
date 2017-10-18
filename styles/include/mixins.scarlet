@@ -26,7 +26,7 @@ mixin noise-strong
 mixin ui-element
 	border 1px solid ui-border-color
 	background ui-background
-	border-radius 3px
+	border-radius ui-element-border-radius
 	default-transition
 	:hover
 		border-color ui-hover-border-color
