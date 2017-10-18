@@ -17,7 +17,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
-	ctx.Data = &arn.OpenGraph{
+	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     track.Title,
 			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
@@ -27,8 +27,16 @@ func Get(ctx *aero.Context) string {
 	}
 
 	if track.MainAnime() != nil {
-		ctx.Data.(*arn.OpenGraph).Tags["og:image"] = track.MainAnime().Image.Large
+		openGraph.Tags["og:image"] = track.MainAnime().Image.Large
 	}
+
+	// Set video so that it can be played
+	youtube := track.MediaByName("Youtube")
+	if len(youtube) > 0 {
+		openGraph.Tags["og:video"] = "https://www.youtube.com/v/" + youtube[0].ServiceID
+	}
+
+	ctx.Data = openGraph
 
 	return ctx.HTML(components.Track(track))
 }

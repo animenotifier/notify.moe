@@ -8,13 +8,15 @@ component Group(group *arn.Group)
 
 	.group-view
 		.group-sidebar.mountable
-			.group-sidebar-section
-				h3 Description
-				.group-description!= markdown.Render(group.Description)
+			if group.Description != ""
+				.group-sidebar-section
+					h3 Description
+					.group-description!= markdown.Render(group.Description)
 
-			.group-sidebar-section
-				h3 Rules
-				.group-rules!= markdown.Render(group.Rules)
+			if group.Rules != ""
+				.group-sidebar-section
+					h3 Rules
+					.group-rules!= markdown.Render(group.Rules)
 
 			.group-sidebar-section
 				h3 Members
