@@ -107,6 +107,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/groups", groups.Get)
 	app.Ajax("/group/:id", group.Get)
 	app.Ajax("/group/:id/edit", group.Edit)
+	app.Ajax("/group/:id/forum", group.Forum)
 
 	// User profiles
 	app.Ajax("/user", user.Get)
