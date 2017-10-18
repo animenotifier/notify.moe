@@ -18,4 +18,8 @@ component Groups(groups []*arn.Group, user *arn.User)
 	.groups
 		each group in groups
 			.group
-				h3= group.Name
+				h3.group-name= group.Name
+				.group-tagline= group.Tagline
+				.group-member-count
+					Icon("user")
+					span= len(group.Members)
