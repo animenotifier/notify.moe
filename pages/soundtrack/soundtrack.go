@@ -31,7 +31,8 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Set video so that it can be played
-	youtube := track.MediaByName("Youtube")
+	youtube := track.MediaByService("Youtube")
+
 	if len(youtube) > 0 {
 		openGraph.Tags["og:video"] = "https://www.youtube.com/v/" + youtube[0].ServiceID
 	}
