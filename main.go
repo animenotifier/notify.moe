@@ -19,6 +19,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/charge"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
+	"github.com/animenotifier/notify.moe/pages/database"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
@@ -152,6 +153,10 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/editor", editor.Get)
 	app.Ajax("/editor/anilist", editor.AniList)
 	app.Ajax("/editor/shoboi", editor.Shoboi)
+
+	// Mixed
+	app.Ajax("/database", database.Get)
+	app.Get("/api/select/:data-type/where/:field/is/:field-value", database.Select)
 
 	// Import
 	app.Ajax("/import", listimport.Get)

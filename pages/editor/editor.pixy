@@ -3,11 +3,12 @@ component Editor
 
 	EditorTabs
 	
-	p Welcome to the Editor Panel!
+	p.text-center.mountable Welcome to the Editor Panel!
 
 component EditorTabs
 	.tabs
 		Tab("Editor", "pencil", "/editor")
+		Tab("Search", "search", "/database")
 		Tab("Shoboi", "calendar", "/editor/shoboi")
 		Tab("AniList", "list", "/editor/anilist")
 
