@@ -252,7 +252,8 @@ export class AnimeNotifier {
 				break
 			
 			case "reload page":
-				location.reload(true)
+				console.log("service worker instructed to reload page...disobeying in test mode")
+				// location.reload(true)
 				break
 		}
 	}
