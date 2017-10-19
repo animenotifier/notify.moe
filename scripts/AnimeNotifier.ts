@@ -250,6 +250,10 @@ export class AnimeNotifier {
 				}
 				
 				break
+			
+			case "reload page":
+				location.reload(true)
+				break
 		}
 	}
 
