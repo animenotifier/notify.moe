@@ -16,7 +16,7 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 		.space
 
 		.anime-info
-			h1.anime-title(title=anime.Type)= anime.Title.Canonical
+			h1.anime-title(title=anime.Type)= anime.Title.ByUser(user)
 
 			//- if user && user.titleLanguage === "japanese"
 			//- 	span.second-title(title=anime.Title.English !== anime.Title.Romaji ? anime.Title.English : null)= anime.Title.Romaji

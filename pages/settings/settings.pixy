@@ -164,7 +164,15 @@ component Settings(user *arn.User)
 				span Formatting
 			
 			.widget-section
-				InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
+				label(for="TitleLanguage")= "Title language:"
+				select.widget-ui-element.action(id="TitleLanguage", data-field="TitleLanguage", value=user.Settings().TitleLanguage, title="Language of anime titles", data-action="save", data-trigger="change")
+					option(value="canonical") Canonical
+					option(value="english") English
+					option(value="japanese") Japanese
+					option(value="romaji") Romaji
+
+			InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
+
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
