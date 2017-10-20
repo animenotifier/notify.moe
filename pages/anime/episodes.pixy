@@ -6,7 +6,7 @@ component AnimeEpisodes(anime *arn.Anime)
 	table.episodes
 		tbody
 			each episode in anime.Episodes().Items
-				tr.episode
+				tr.episode.mountable
 					td.episode-number
 						if episode.Number != -1
 							span= episode.Number

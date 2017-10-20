@@ -5,4 +5,5 @@ component AnimeCharacters(anime *arn.Anime)
 	.characters
 		each character in anime.Characters().Items
 			if character.Character() != nil
-				Character(character.Character())
+				.mountable
+					Character(character.Character())
