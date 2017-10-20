@@ -1,2 +1,2 @@
-component Rating(value float64)
-	.anime-rating= int(value + 0.5)
+component Rating(value float64, user *arn.User)
+	.anime-rating= fmt.Sprintf("%." + strconv.Itoa(user.Settings().Format.RatingsPrecision) + "f", value)

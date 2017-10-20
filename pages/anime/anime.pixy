@@ -51,16 +51,16 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 				.anime-rating-category-name Hype
 			else
 				.anime-rating-category-name Overall
-			Rating(anime.Rating.Overall)
+			Rating(anime.Rating.Overall, user)
 		.anime-rating-category(title=toString(anime.Rating.Story))
 			.anime-rating-category-name Story
-			Rating(anime.Rating.Story)
+			Rating(anime.Rating.Story, user)
 		.anime-rating-category(title=toString(anime.Rating.Visuals))
 			.anime-rating-category-name Visuals
-			Rating(anime.Rating.Visuals)
+			Rating(anime.Rating.Visuals, user)
 		.anime-rating-category(title=toString(anime.Rating.Soundtrack))
 			.anime-rating-category-name Soundtrack
-			Rating(anime.Rating.Soundtrack)
+			Rating(anime.Rating.Soundtrack, user)
 
 	if len(friends) > 0
 		h3.anime-section-name Friends
