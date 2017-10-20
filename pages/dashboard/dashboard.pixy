@@ -1,4 +1,4 @@
-component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, soundTracks []*arn.SoundTrack, following []*arn.User)
+component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, soundTracks []*arn.SoundTrack, following []*arn.User, user *arn.User)
 	h1.page-title Dashboard
 
 	.widgets
@@ -11,7 +11,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 						.widget-ui-element-text
 							a.schedule-item-link.ajax(href=schedule[i].Anime.Link())
 								Icon("calendar-o")
-								.schedule-item-title= schedule[i].Anime.Title.Canonical
+								.schedule-item-title= schedule[i].Anime.Title.ByUser(user)
 							.spacer
 							.schedule-item-date.utc-airing-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
 				else

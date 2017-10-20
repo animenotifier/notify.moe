@@ -4,7 +4,7 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Small != ""
 			.anime-image-container
-				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.Canonical)
+				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.ByUser(user))
 
 				if anime.StartDate != ""
 					.anime-start-date

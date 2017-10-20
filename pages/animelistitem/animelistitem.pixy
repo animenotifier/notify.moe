@@ -1,7 +1,7 @@
-component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
+component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime, user *arn.User)
 	.widget-form.mountable
 		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/field/Items[AnimeID=\"" + anime.ID + "\"]")
-			h1= anime.Title.Canonical
+			h1= anime.Title.ByUser(user)
 			
 			.anime-list-item-progress-edit
 				.anime-list-item-episodes-edit

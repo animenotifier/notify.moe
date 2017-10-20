@@ -45,10 +45,10 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 				tr.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/field/Items[AnimeID=\"" + item.AnimeID + "\"]")
 					td.anime-list-item-image-container
 						a.ajax(href=item.Anime().Link())
-							img.anime-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
+							img.anime-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.ByUser(user))
 					
 					td.anime-list-item-name
-						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.Canonical
+						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.ByUser(user)
 					
 					td.anime-list-item-actions
 						if user != nil && item.Status == arn.AnimeListStatusWatching && item.Anime().EpisodeByNumber(item.Episodes + 1) != nil

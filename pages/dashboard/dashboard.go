@@ -82,5 +82,5 @@ func Get(ctx *aero.Context) string {
 		}
 	})
 
-	return ctx.HTML(components.Dashboard(upcomingEpisodes, forumActivity, soundTracks, followingList))
+	return ctx.HTML(components.Dashboard(upcomingEpisodes, forumActivity, soundTracks, followingList, user))
 }
