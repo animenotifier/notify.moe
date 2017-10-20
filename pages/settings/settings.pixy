@@ -1,5 +1,6 @@
 component Settings(user *arn.User)
 	h1.page-title Settings
+	
 	.widgets
 		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
@@ -168,8 +169,8 @@ component Settings(user *arn.User)
 				select.widget-ui-element.action(id="TitleLanguage", data-field="TitleLanguage", value=user.Settings().TitleLanguage, title="Language of anime titles", data-action="save", data-trigger="change")
 					option(value="canonical") Canonical
 					option(value="english") English
-					option(value="japanese") Japanese
 					option(value="romaji") Romaji
+					option(value="japanese") 日本語
 
 			InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
 

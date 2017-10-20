@@ -81,8 +81,8 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 		h3.anime-section-name Relations
 		.anime-relations
 			each relation in anime.Relations().Items
-				a.anime-relation.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.Canonical)
-					img.anime-relation-image.lazy(data-src=relation.Anime().Image.Tiny, alt=relation.Anime().Title.Canonical)
+				a.anime-relation.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user))
+					img.anime-relation-image.lazy(data-src=relation.Anime().Image.Tiny, alt=relation.Anime().Title.ByUser(user))
 					.anime-relation-type= relation.HumanReadableType()
 					.anime-relation-year
 						if relation.Anime().StartDate != ""
