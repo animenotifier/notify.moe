@@ -38,7 +38,7 @@
 	:hover
 		.plus-episode
 			opacity 1
-			pointer-events all
+			pointer-events auto
 
 .anime-list-item-episodes-watched
 	flex 0.4

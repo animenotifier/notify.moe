@@ -1,6 +1,3 @@
-import * as actions from "./Actions"
-import { displayAiringDate, displayDate } from "./DateView"
-import { findAll, delay, canUseWebP, swapElements } from "./Utils"
 import { Application } from "./Application"
 import { Diff } from "./Diff"
 import { MutationQueue } from "./MutationQueue"
@@ -10,6 +7,10 @@ import { TouchController } from "./TouchController"
 import { Analytics } from "./Analytics"
 import { SideBar } from "./SideBar"
 import { InfiniteScroller } from "./InfiniteScroller"
+import { ServiceWorkerManager } from "./ServiceWorkerManager"
+import { displayAiringDate, displayDate } from "./DateView"
+import { findAll, delay, canUseWebP, swapElements } from "./Utils"
+import * as actions from "./Actions"
 
 export class AnimeNotifier {
 	app: Application
@@ -21,6 +22,7 @@ export class AnimeNotifier {
 	statusMessage: StatusMessage
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
+	serviceWorkerManager: ServiceWorkerManager
 	touchController: TouchController
 	sideBar: SideBar
 	infiniteScroller: InfiniteScroller
@@ -122,6 +124,9 @@ export class AnimeNotifier {
 		// Push manager
 		this.pushManager = new PushManager()
 
+		// Service worker
+		this.serviceWorkerManager = new ServiceWorkerManager(this, "/service-worker")
+
 		// Analytics
 		this.analytics = new Analytics()
 
@@ -164,7 +169,7 @@ export class AnimeNotifier {
 
 	onIdle() {
 		// Service worker
-		this.registerServiceWorker()
+		this.serviceWorkerManager.register()
 
 		// Analytics
 		if(this.user) {
@@ -174,87 +179,6 @@ export class AnimeNotifier {
 		// Offline message
 		if(navigator.onLine === false) {
 			this.statusMessage.showError("You are viewing an offline version of the site now.")
-		}
-	}
-
-	registerServiceWorker() {
-		if(!("serviceWorker" in navigator)) {
-			return
-		}
-
-		console.log("register service worker")
-
-		navigator.serviceWorker.register("/service-worker").then(registration => {
-			// registration.update()
-		})
-
-		navigator.serviceWorker.addEventListener("message", evt => {
-			this.onServiceWorkerMessage(evt)
-		})
-
-		// This will send a message to the service worker that the DOM has been loaded
-		let sendContentLoadedEvent = () => {
-			if(!navigator.serviceWorker.controller) {
-				return
-			}
-
-			// A reloadContent call should never trigger another reload
-			if(this.app.currentPath === this.lastReloadContentPath) {
-				console.log("reload finished.")
-				this.lastReloadContentPath = ""
-				return
-			}
-
-			let message = {
-				type: "loaded",
-				url: ""
-			}
-
-			// If mainPageLoaded is set, it means every single request is now an AJAX request for the /_/ prefixed page
-			if(this.mainPageLoaded) {
-				message.url = window.location.origin + "/_" + window.location.pathname
-			} else {
-				this.mainPageLoaded = true
-				message.url = window.location.href
-			}
-
-			console.log("checking for updates:", message.url)
-
-			navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
-		}
-
-		// For future loaded events
-		document.addEventListener("DOMContentLoaded", sendContentLoadedEvent)
-
-		// If the page is loaded already, send the loaded event right now.
-		if(document.readyState !== "loading") {
-			sendContentLoadedEvent()
-		}
-	}
-
-	onServiceWorkerMessage(evt: ServiceWorkerMessageEvent) {
-		let message = JSON.parse(evt.data)
-
-		switch(message.type) {
-			case "new content":
-				if(message.url.includes("/_/")) {
-					// Content reload
-					this.contentLoadedActions.then(() => {
-						this.reloadContent(true)
-					})
-				} else {
-					// Full page reload
-					this.contentLoadedActions.then(() => {
-						this.reloadPage()
-					})
-				}
-				
-				break
-			
-			case "reload page":
-				console.log("service worker instructed to reload page...disobeying in test mode")
-				// location.reload(true)
-				break
 		}
 	}
 

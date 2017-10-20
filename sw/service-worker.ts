@@ -151,29 +151,23 @@ class MyServiceWorker {
 
 	onMessage(evt: any) {
 		let message = JSON.parse(evt.data)
-	
-		let url = message.url
+
+		switch(message.type) {
+			case "loaded":
+				this.onDOMContentLoaded(evt, message.url)
+				break
+		}
+	}
+
+	// onDOMContentLoaded is called when the client sent this service worker
+	// a message that the page has been loaded.
+	onDOMContentLoaded(evt: any, url: string) {
 		let refresh = RELOADS.get(url)
 		let servedETag = ETAGS.get(url)
 	
 		// If the user requests a sub-page we should prefetch the full page, too.
 		if(url.includes("/_/")) {
-			let fullPage = new Request(url.replace("/_/", "/"))
-	
-			let fullPageRefresh = fetch(fullPage, {
-				credentials: "same-origin"
-			}).then(response => {
-				// Save the new version of the resource in the cache
-				let cacheRefresh = caches.open(this.cache.version).then(cache => {
-					return cache.put(fullPage, response)
-				})
-	
-				CACHEREFRESH.set(fullPage.url, cacheRefresh)
-				return response
-			})
-
-			// Save in map
-			RELOADS.set(fullPage.url, fullPageRefresh)
+			this.prefetchFullPage(url)
 		}
 	
 		if(!refresh || !servedETag) {
@@ -181,13 +175,13 @@ class MyServiceWorker {
 		}
 
 		return refresh.then((response: Response) => {
-			// If the fresh copy was used to serve the request instead of the cache,
-			// we don"t need to tell the client to do a refresh.
+			// When the actual network request was used by the client, response.bodyUsed is set.
+			// In that case the client is already up to date and we don"t need to tell the client to do a refresh.
 			if(response.bodyUsed) {
 				return
 			}
 			
-			// Get ETag
+			// Get the ETag of the cached response we sent to the client earlier.
 			let eTag = response.headers.get("ETag")
 
 			// Update ETag
@@ -197,6 +191,7 @@ class MyServiceWorker {
 			let oldCSP = this.currentCSP
 			let csp = response.headers.get("Content-Security-Policy")
 
+			// If the CSP and therefore the sha-1 hash of the CSS changed, we need to do a reload.
 			if(csp != oldCSP) {
 				this.currentCSP = csp
 
@@ -206,7 +201,6 @@ class MyServiceWorker {
 			}
 
 			// If the ETag changed, we need to do a reload.
-			// If the CSP and therefore the sha-1 hash of the CSS changed, we need to do a reload.
 			if(eTag !== servedETag) {
 				return this.forceClientReloadContent(url, evt.source)
 			}
@@ -214,6 +208,25 @@ class MyServiceWorker {
 			// Do nothing
 			return Promise.resolve()
 		})
+	}
+
+	prefetchFullPage(url: string) {
+		let fullPage = new Request(url.replace("/_/", "/"))
+		
+		let fullPageRefresh = fetch(fullPage, {
+			credentials: "same-origin"
+		}).then(response => {
+			// Save the new version of the resource in the cache
+			let cacheRefresh = caches.open(this.cache.version).then(cache => {
+				return cache.put(fullPage, response)
+			})
+
+			CACHEREFRESH.set(fullPage.url, cacheRefresh)
+			return response
+		})
+
+		// Save in map
+		RELOADS.set(fullPage.url, fullPageRefresh)
 	}
 
 	onPush(evt: PushEvent) {
@@ -320,7 +333,7 @@ class MyServiceWorker {
 			return cache.addAll([
 				"./",
 				"./scripts",
-				"https://fonts.gstatic.com/s/ubuntu/v10/2Q-AW1e_taO6pHwMXcXW5w.ttf"
+				"https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw7z.ttf"
 			])
 		})
 	}

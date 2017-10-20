@@ -14,7 +14,7 @@
 
 .status-message-action
 	color white !important
-	pointer-events all !important
+	pointer-events auto !important
 
 .error-message
 	color white
