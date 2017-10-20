@@ -25,7 +25,11 @@ component Group(group *arn.Group)
 						Avatar(member.User())
 		
 		.group-feed.mountable
-			p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fermentum tellus congue, placerat augue vel, porta tortor. Nunc in elementum enim. Vestibulum ut arcu sed diam dapibus feugiat. Nam posuere, lectus et pellentesque interdum, mi orci aliquet lacus, a posuere lacus mi ac urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec suscipit enim nec dui consectetur, vitae pulvinar urna commodo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+			if len(group.Posts()) == 0
+				p.text-center.mountable No posts in this group yet.
+			else
+				each post in group.Posts()
+					p!= post.HTML()
 
 component GroupTabs(group *arn.Group)
 	.tabs
