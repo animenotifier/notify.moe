@@ -62,9 +62,8 @@
 
 	// Setting z-index requires setting a background as well
 	z-index 10
-	background-color bg-color
 
-> 900px
+> 1450px
 	.anime-actions
 		position absolute
 		top 0
