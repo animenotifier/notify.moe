@@ -1,0 +1,6 @@
+component AnimeTabs(anime *arn.Anime)
+	.tabs
+		Tab("Anime", "tv", anime.Link())
+		Tab("Episodes", "list-ol", anime.Link() + "/episodes")
+		Tab("Characters", "male", anime.Link() + "/characters")
+		Tab("Tracks", "music", anime.Link() + "/tracks")

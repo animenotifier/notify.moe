@@ -1,4 +1,6 @@
-component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, tracks []*arn.SoundTrack, user *arn.User, episodesReversed bool)
+component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+	AnimeTabs(anime)
+	
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Small != ""
 			.anime-image-container
@@ -191,47 +193,7 @@ component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*
 		.anime-rating-category
 			.anime-rating-category-name Dropped
 			.anime-rating= anime.Popularity.Dropped
-
-	if len(tracks) > 0
-		h3.anime-section-name Tracks
-		.sound-tracks
-			each track in tracks
-				SoundTrack(track)
-
-	if anime.Characters() != nil && len(anime.Characters().Items) > 0
-		h3.anime-section-name Characters
-		.characters
-			each character in anime.Characters().Items
-				if character.Character() != nil
-					Character(character.Character())
-
-	if len(anime.Episodes().Items) > 0
-		if episodesReversed
-			h3.anime-section-name Latest episodes
-		else
-			h3.anime-section-name Episodes
-		table.episodes
-			tbody
-				each episode in anime.Episodes().Items
-					tr.episode
-						td.episode-number
-							if episode.Number != -1
-								span= episode.Number
-						td.episode-title
-							if episode.Title.Japanese != ""
-								Japanese(episode.Title.Japanese)
-							else
-								span -
-						td.episode-actions
-							for name, link := range episode.Links
-								a(href=link, target="_blank", rel="noopener", title="Watch episode " + toString(episode.Number) + " on " + name)
-									RawIcon("eye")
-							//- a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
-							//- 	RawIcon("google")
-						if validator.IsValidDate(episode.AiringDate.Start)
-							td.episode-airing-date-start.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
-						else
-							td.episode-airing-date-start
+	
 	//- h3.anime-section-name Reviews
 	//- p Coming soon.
 

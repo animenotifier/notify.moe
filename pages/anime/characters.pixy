@@ -1,0 +1,8 @@
+component AnimeCharacters(anime *arn.Anime)
+	AnimeTabs(anime)
+
+	h3.anime-section-name Characters
+	.characters
+		each character in anime.Characters().Items
+			if character.Character() != nil
+				Character(character.Character())

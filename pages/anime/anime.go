@@ -10,8 +10,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxEpisodes = 26
-const maxEpisodesLongSeries = 5
+// const maxEpisodes = 26
+// const maxEpisodesLongSeries = 5
 const maxDescriptionLength = 170
 
 // Get anime page.
@@ -24,24 +24,16 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
-	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft && len(track.Media) > 0 && arn.Contains(track.Tags, "anime:"+anime.ID)
-	})
+	// episodesReversed := false
 
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Error fetching soundtracks", err)
-	}
+	// if len(anime.Episodes().Items) > maxEpisodes {
+	// 	episodesReversed = true
+	// 	anime.Episodes().Items = anime.Episodes().Items[len(anime.Episodes().Items)-maxEpisodesLongSeries:]
 
-	episodesReversed := false
-
-	if len(anime.Episodes().Items) > maxEpisodes {
-		episodesReversed = true
-		anime.Episodes().Items = anime.Episodes().Items[len(anime.Episodes().Items)-maxEpisodesLongSeries:]
-
-		for i, j := 0, len(anime.Episodes().Items)-1; i < j; i, j = i+1, j-1 {
-			anime.Episodes().Items[i], anime.Episodes().Items[j] = anime.Episodes().Items[j], anime.Episodes().Items[i]
-		}
-	}
+	// 	for i, j := 0, len(anime.Episodes().Items)-1; i < j; i, j = i+1, j-1 {
+	// 		anime.Episodes().Items[i], anime.Episodes().Items[j] = anime.Episodes().Items[j], anime.Episodes().Items[i]
+	// 	}
+	// }
 
 	// Friends watching
 	var friends []*arn.User
@@ -108,5 +100,5 @@ func Get(ctx *aero.Context) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Anime(anime, friends, friendsAnimeListItems, tracks, user, episodesReversed))
+	return ctx.HTML(components.Anime(anime, friends, friendsAnimeListItems, user))
 }
