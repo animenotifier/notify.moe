@@ -66,10 +66,14 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 
 	switch field.Type.String() {
 	case "string":
-		if field.Tag.Get("type") == "textarea" {
-			b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, ""))
+		if field.Tag.Get("datalist") != "" {
+			dataList := field.Tag.Get("datalist")
+			values := arn.DataLists[dataList]
+			b.WriteString(components.InputSelection(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), values))
+		} else if field.Tag.Get("type") == "textarea" {
+			b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 		} else {
-			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, ""))
+			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 		}
 	case "[]string":
 		b.WriteString(components.InputTags(idPrefix+field.Name, fieldValue.Interface().([]string), field.Name, field.Tag.Get("tooltip")))
