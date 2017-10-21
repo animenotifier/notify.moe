@@ -19,7 +19,8 @@ remove-margin = 1.1rem
 	.anime-list-owner
 		display none
 
-	.anime-list-item-image
+	.anime-list-item-image,
+	.anime-list-item-image-container
 		width 27px
 	
 	#navigation
