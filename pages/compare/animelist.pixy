@@ -1,5 +1,7 @@
-component CompareAnimeList(a *arn.User, b *arn.User, comparisons []*utils.Comparison, user *arn.User)
-	h1= "Anime list comparison between " + a.Nick + " and " + b.Nick
+component CompareAnimeList(a *arn.User, b *arn.User, countA int, countB int, comparisons []*utils.Comparison, user *arn.User)
+	h1 Anime list comparison
+
+	p.comparison-info= a.Nick + "'s list contains " + strconv.Itoa(countA) + " anime and " + b.Nick + "'s list contains " + strconv.Itoa(countB) + " anime."
 
 	table.anime-list
 		thead

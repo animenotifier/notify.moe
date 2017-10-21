@@ -30,11 +30,15 @@ func AnimeList(ctx *aero.Context) string {
 	}
 
 	comparisons := []*utils.Comparison{}
+	countA := 0
+	countB := 0
 
 	for _, item := range a.AnimeList().Items {
 		if item.Status == arn.AnimeListStatusPlanned {
 			continue
 		}
+
+		countA++
 
 		comparisons = append(comparisons, &utils.Comparison{
 			Anime: item.Anime(),
@@ -44,7 +48,13 @@ func AnimeList(ctx *aero.Context) string {
 	}
 
 	for _, item := range b.AnimeList().Items {
-		if Contains(comparisons, item.AnimeID) || item.Status == arn.AnimeListStatusPlanned {
+		if item.Status == arn.AnimeListStatusPlanned {
+			continue
+		}
+
+		countB++
+
+		if Contains(comparisons, item.AnimeID) {
 			continue
 		}
 
@@ -59,7 +69,7 @@ func AnimeList(ctx *aero.Context) string {
 		return comparisons[i].Anime.Popularity.Total() > comparisons[j].Anime.Popularity.Total()
 	})
 
-	return ctx.HTML(components.CompareAnimeList(a, b, comparisons, user))
+	return ctx.HTML(components.CompareAnimeList(a, b, countA, countB, comparisons, user))
 }
 
 // Contains ...

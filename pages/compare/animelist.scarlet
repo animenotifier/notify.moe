@@ -1,3 +1,10 @@
+.comparison-info
+	text-align center
+	font-size 0.9rem
+	opacity 0.5
+	margin-top 0
+	margin-bottom content-padding
+
 .comparison
 	width 100px
 	text-align center
