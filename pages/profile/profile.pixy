@@ -61,6 +61,10 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 						button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
 							Icon("user-times")
 							span Unfollow
+					
+					a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
+						Icon("exchange")
+						span Compare
 	
 	ProfileNavigation(viewUser, uri)
 

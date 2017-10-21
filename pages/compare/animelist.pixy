@@ -1,0 +1,65 @@
+component CompareAnimeList(a *arn.User, b *arn.User, comparisons []*utils.Comparison, user *arn.User)
+	h1= "Anime list comparison between " + a.Nick + " and " + b.Nick
+
+	table.anime-list
+		thead
+			tr.anime-list-item.mountable
+				th.anime-list-item-image-container
+				th.anime-list-item-name
+				th.comparison
+					Avatar(a)
+				th.comparison
+				th.comparison
+					Avatar(b)
+				th.comparison
+		
+		tbody
+			each comparison in comparisons
+				tr.anime-list-item.mountable
+					td.anime-list-item-image-container
+						a.ajax(href=comparison.Anime.Link())
+							img.anime-list-item-image.lazy(data-src=comparison.Anime.Image.Tiny, alt=comparison.Anime.Title.ByUser(user))
+					
+					td.anime-list-item-name
+						a.ajax(href=comparison.Anime.Link())= comparison.Anime.Title.ByUser(user)
+					
+					td.comparison
+						if comparison.ItemA != nil
+							span= comparison.ItemA.Status
+						else
+							span -
+					
+					td.comparison
+						if comparison.ItemA != nil
+							if comparison.ItemA.Rating.Overall != 0
+								if comparison.ItemB != nil && comparison.ItemB.Rating.Overall != 0 && comparison.ItemA.Rating.Overall == comparison.ItemB.Rating.Overall
+									span.comparison-rating-equal= utils.FormatRating(comparison.ItemA.Rating.Overall)
+								else
+									span= utils.FormatRating(comparison.ItemA.Rating.Overall)
+							else
+								span -
+						else
+							span -
+					
+					td.comparison
+						if comparison.ItemB != nil
+							span= comparison.ItemB.Status
+						else
+							span -
+					
+					td.comparison
+						if comparison.ItemB != nil
+							if comparison.ItemB.Rating.Overall != 0
+								if comparison.ItemA != nil && comparison.ItemA.Rating.Overall != 0
+									if comparison.ItemA.Rating.Overall == comparison.ItemB.Rating.Overall
+										span.comparison-rating-equal= utils.FormatRating(comparison.ItemB.Rating.Overall)
+									else if comparison.ItemB.Rating.Overall > comparison.ItemA.Rating.Overall
+										span.comparison-rating-higher(title=utils.FormatRating(comparison.ItemB.Rating.Overall))= "+" + utils.FormatRating(comparison.ItemB.Rating.Overall - comparison.ItemA.Rating.Overall)
+									else
+										span.comparison-rating-lower(title=utils.FormatRating(comparison.ItemB.Rating.Overall))= "-" + utils.FormatRating(comparison.ItemA.Rating.Overall - comparison.ItemB.Rating.Overall)
+								else
+									span= utils.FormatRating(comparison.ItemB.Rating.Overall)
+							else
+								span -
+						else
+							span -

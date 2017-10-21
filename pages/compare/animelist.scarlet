@@ -1,0 +1,14 @@
+.comparison
+	width 100px
+	text-align center
+	horizontal
+	justify-content center
+
+.comparison-rating-equal
+	// ...
+
+.comparison-rating-lower
+	color red
+
+.comparison-rating-higher
+	color green

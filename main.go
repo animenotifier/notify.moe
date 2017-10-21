@@ -18,6 +18,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/best"
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/charge"
+	"github.com/animenotifier/notify.moe/pages/compare"
 	"github.com/animenotifier/notify.moe/pages/dashboard"
 	"github.com/animenotifier/notify.moe/pages/database"
 	"github.com/animenotifier/notify.moe/pages/editanime"
@@ -135,6 +136,9 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/animelist/planned", home.FilterByStatus(arn.AnimeListStatusPlanned))
 	app.Ajax("/animelist/hold", home.FilterByStatus(arn.AnimeListStatusHold))
 	app.Ajax("/animelist/dropped", home.FilterByStatus(arn.AnimeListStatusDropped))
+
+	// Compare
+	app.Ajax("/compare/animelist/:nick-1/:nick-2", compare.AnimeList)
 
 	// Search
 	app.Ajax("/search", search.Get)
