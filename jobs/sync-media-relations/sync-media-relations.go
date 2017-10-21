@@ -14,7 +14,7 @@ func main() {
 	color.Yellow("Syncing media relations with Kitsu DB")
 
 	kitsuMediaRelations := kitsu.StreamMediaRelations()
-	relations := map[arn.AnimeID]*arn.AnimeRelations{}
+	relations := map[string]*arn.AnimeRelations{}
 
 	for mediaRelation := range kitsuMediaRelations {
 		// We only care about anime for now
