@@ -95,6 +95,11 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	if strings.HasPrefix(m.Content, "!play ") {
+		s.UpdateStatus(0, strings.Split(m.Content, " ")[1])
+		return
+	}
+
 	if strings.HasPrefix(m.Content, "!s ") {
 		term := m.Content[len("!s "):]
 		users, animes, posts, threads := arn.Search(term, 3, 3, 3, 3)
