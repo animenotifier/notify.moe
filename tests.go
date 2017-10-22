@@ -59,6 +59,18 @@ var routeTests = map[string][]string{
 		"/anime/1",
 	},
 
+	"/anime/:id/characters": []string{
+		"/anime/1/characters",
+	},
+
+	"/anime/:id/episodes": []string{
+		"/anime/1/episodes",
+	},
+
+	"/anime/:id/tracks": []string{
+		"/anime/1/tracks",
+	},
+
 	"/thread/:id": []string{
 		"/thread/HJgS7c2K",
 	},
@@ -79,8 +91,20 @@ var routeTests = map[string][]string{
 		"/soundtrack/h0ac8sKkg",
 	},
 
+	"/soundtrack/:id/edit": []string{
+		"/soundtrack/h0ac8sKkg/edit",
+	},
+
+	"/soundtracks/from/:index": []string{
+		"/soundtracks/from/12",
+	},
+
 	"/character/:id": []string{
 		"/character/6556",
+	},
+
+	"/compare/animelist/:nick-1/:nick-2": []string{
+		"/compare/animelist/Akyoto/Scott",
 	},
 
 	// API
