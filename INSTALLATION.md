@@ -28,7 +28,7 @@
 namespace arn {
     storage-engine device {
         file /home/YOUR_NAME/YOUR_PATH/notify.moe/db/arn-dev.dat
-        filesize 64M
+        filesize 300M
         data-in-memory true
 
         # Maximum object size. 128K is ideal for SSDs but we need 1M for search indices.
