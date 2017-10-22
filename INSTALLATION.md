@@ -40,7 +40,7 @@ namespace arn {
 }
 ```
 
-* Download the [database for developers](https://mega.nz/#!iN4WTRxb!R_cRjBbnUUvGeXdtRGiqbZRrnvy0CHc2MjlyiGBxdP4) to notify.moe/db/arn-dev.dat
+* Download the [database for developers](https://mega.nz/#!yFAiSIzI!rlbM4_3WK9hH2OfAt44xGWnWMWs-kVHhvC_DTKyRMBQ) to notify.moe/db/arn-dev.dat
 * Start the database using `sudo service aerospike start`
 * Confirm that the status is "green": `sudo service aerospike status`
 
