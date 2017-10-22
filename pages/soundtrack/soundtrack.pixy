@@ -22,6 +22,14 @@ component Track(track *arn.SoundTrack)
 						a.sound-track-anime-list-item.ajax(href=anime.Link(), title=anime.Title.Canonical)
 							img.sound-track-anime-list-item-image.lazy(data-src=anime.Image.Tiny, alt=anime.Title.Canonical)
 			
+			if len(track.Beatmaps()) > 0
+				.widget.mountable
+					h3.widget-title Beatmaps
+					ul.beatmaps
+						for index, beatmap := range track.Beatmaps()
+							li
+								a.beatmap(href="https://osu.ppy.sh/s/" + beatmap, target="_blank")= "Beatmap #" + strconv.Itoa(index + 1)
+			
 			.widget.mountable
 				h3.widget-title Tags
 				.tags
