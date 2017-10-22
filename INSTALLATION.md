@@ -6,6 +6,7 @@
 
 * Install a Debian based operating system
 * Install [Go](https://golang.org/dl/) (1.9 or higher)
+* Install [TypeScript](https://www.typescriptlang.org/) (2.5 or higher)
 * Install [Aerospike](http://www.aerospike.com/download) (3.14.0 or higher)
 
 ### Download the repository and its dependencies
