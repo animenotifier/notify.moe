@@ -31,7 +31,7 @@ func main() {
 func work(job interface{}) interface{} {
 	anime := job.(*arn.Anime)
 
-	if !strings.HasPrefix(anime.Image.Original, "https://media.kitsu.io/anime/") {
+	if !strings.HasPrefix(anime.Image.Original, "//media.kitsu.io/anime/") {
 		return nil
 	}
 
