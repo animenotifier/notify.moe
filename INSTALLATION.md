@@ -69,10 +69,6 @@ namespace arn {
 }
 ```
 
-### Fetch data
-
-* Run `jobs/sync-anime/sync-anime` from this repository to fetch anime data
-
 ### Run
 
 * Start the web server in notify.moe directory: `run`
