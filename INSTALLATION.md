@@ -23,8 +23,8 @@
 * Add the following lines to `/etc/hosts`:
 
 ```
-127.0.0.1     arn-db
-45.32.159.101 beta.notify.moe
+45.32.159.101 arn-db
+127.0.0.1     beta.notify.moe
 ```
 
 ### HTTPS
