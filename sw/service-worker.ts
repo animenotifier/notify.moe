@@ -329,13 +329,16 @@ class MyServiceWorker {
 	}
 
 	installCache() {
-		return caches.open(this.cache.version).then(cache => {
-			return cache.addAll([
-				"./",
-				"./scripts",
-				"https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw7z.ttf"
-			])
-		})
+		// TODO: Implement a solution that caches resources with credentials: "same-origin"
+		return Promise.resolve()
+		
+		// return caches.open(this.cache.version).then(cache => {
+		// 	return cache.addAll([
+		// 		"./",
+		// 		"./scripts",
+		// 		"https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw7z.ttf"
+		// 	])
+		// })
 	}
 	
 	fromCache(request) {
