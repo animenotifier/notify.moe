@@ -66,21 +66,13 @@ func Success(ctx *aero.Context) string {
 		Created:  arn.DateTimeUTC(),
 	}
 
-	err = payment.Save()
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not save payment in the database", err)
-	}
+	payment.Save()
 
 	// Increase user's balance
 	user.Balance += payment.Gems()
 
 	// Save in DB
-	err = user.Save()
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not save new balance", err)
-	}
+	user.Save()
 
 	// Notify admin
 	go func() {

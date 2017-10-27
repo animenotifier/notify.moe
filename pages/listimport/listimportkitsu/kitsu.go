@@ -77,11 +77,7 @@ func Finish(ctx *aero.Context) string {
 		animeList.Import(item)
 	}
 
-	err := animeList.Save()
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error saving your anime list", err)
-	}
+	animeList.Save()
 
 	return ctx.Redirect("/+" + user.Nick + "/animelist")
 }

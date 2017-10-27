@@ -11,7 +11,7 @@ import (
 func main() {
 	arn.DB.SetScanPriority("high")
 
-	aeroDB := database.New("db", arn.DBTypes)
+	aeroDB := database.New("arn", arn.DBTypes)
 	defer aeroDB.Close()
 
 	for typeName := range arn.DB.Types() {

@@ -92,11 +92,7 @@ func InstallFacebookAuth(app *aero.Application) {
 
 		if user != nil {
 			// Add FacebookToUser reference
-			err = user.ConnectFacebook(fbUser.ID)
-
-			if err != nil {
-				ctx.Error(http.StatusInternalServerError, "Could not connect account to Facebook account", err)
-			}
+			user.ConnectFacebook(fbUser.ID)
 
 			// Save in DB
 			user.Save()
@@ -110,7 +106,7 @@ func InstallFacebookAuth(app *aero.Application) {
 		var getErr error
 
 		// Try to find an existing user via the Facebook user ID
-		user, getErr = arn.GetUserFromTable("FacebookToUser", fbUser.ID)
+		user, getErr = arn.GetUserByFacebookID(fbUser.ID)
 
 		if getErr == nil && user != nil {
 			authLog.Info("User logged in via Facebook ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
@@ -148,18 +144,10 @@ func InstallFacebookAuth(app *aero.Application) {
 		user.Save()
 
 		// Register user
-		err = arn.RegisterUser(user)
-
-		if err != nil {
-			ctx.Error(http.StatusInternalServerError, "Could not register a new user", err)
-		}
+		arn.RegisterUser(user)
 
 		// Connect account to a Facebook account
-		err = user.ConnectFacebook(fbUser.ID)
-
-		if err != nil {
-			ctx.Error(http.StatusInternalServerError, "Could not connect account to Facebook account", err)
-		}
+		user.ConnectFacebook(fbUser.ID)
 
 		// Save user object again with updated data
 		user.Save()

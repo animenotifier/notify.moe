@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/aerogo/session-store-aerospike"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/components/css"
@@ -69,7 +68,10 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Sessions
 	app.Sessions.Duration = 3600 * 24 * 30 * 6
-	app.Sessions.Store = aerospikestore.New(arn.DB, "Session", app.Sessions.Duration)
+
+	// TODO: ...
+	println("Using memory session store")
+	// app.Sessions.Store = aerospikestore.New(arn.DB, "Session", app.Sessions.Duration)
 
 	// Layout
 	app.Layout = layout.Render
@@ -210,8 +212,6 @@ func configure(app *aero.Application) *aero.Application {
 	// Domain
 	if arn.IsDevelopment() {
 		app.Config.Domain = "beta.notify.moe"
-	} else {
-		arn.DB.SetScanPriority("high")
 	}
 
 	// Authentication

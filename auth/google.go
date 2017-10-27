@@ -102,11 +102,7 @@ func InstallGoogleAuth(app *aero.Application) {
 
 		if user != nil {
 			// Add GoogleToUser reference
-			err = user.ConnectGoogle(googleUser.Sub)
-
-			if err != nil {
-				ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
-			}
+			user.ConnectGoogle(googleUser.Sub)
 
 			// Save in DB
 			user.Save()
@@ -120,7 +116,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		var getErr error
 
 		// Try to find an existing user via the Google user ID
-		user, getErr = arn.GetUserFromTable("GoogleToUser", googleUser.Sub)
+		user, getErr = arn.GetUserByGoogleID(googleUser.Sub)
 
 		if getErr == nil && user != nil {
 			authLog.Info("User logged in via Google ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
@@ -158,18 +154,10 @@ func InstallGoogleAuth(app *aero.Application) {
 		user.Save()
 
 		// Register user
-		err = arn.RegisterUser(user)
-
-		if err != nil {
-			ctx.Error(http.StatusInternalServerError, "Could not register a new user", err)
-		}
+		arn.RegisterUser(user)
 
 		// Connect account to a Google account
-		err = user.ConnectGoogle(googleUser.Sub)
-
-		if err != nil {
-			ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
-		}
+		user.ConnectGoogle(googleUser.Sub)
 
 		// Save user object again with updated data
 		user.Save()

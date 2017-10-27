@@ -46,27 +46,16 @@ func BuyItem(ctx *aero.Context) string {
 	}
 
 	user.Balance -= totalPrice
-	err = user.Save()
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error saving user data", err)
-	}
+	user.Save()
 
 	// Add item to user inventory
 	inventory := user.Inventory()
 	inventory.AddItem(itemID, uint(quantity))
-	err = inventory.Save()
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error saving inventory", err)
-	}
+	inventory.Save()
 
 	// Save purchase
-	err = arn.NewPurchase(user.ID, itemID, quantity, int(item.Price), "gem").Save()
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error saving purchase", err)
-	}
+	purchase := arn.NewPurchase(user.ID, itemID, quantity, int(item.Price), "gem")
+	purchase.Save()
 
 	return "ok"
 }

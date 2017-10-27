@@ -10,11 +10,11 @@ import (
 
 // Active ...
 func Active(ctx *aero.Context) string {
-	users, err := arn.GetListOfUsersCached("active users")
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsActive() && user.HasAvatar()
+	})
 
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
-	}
+	arn.SortUsersLastSeen(users)
 
 	return ctx.HTML(components.Users(users))
 }

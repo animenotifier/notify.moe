@@ -22,13 +22,12 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Fetch posts
-	postObjects, getErr := arn.DB.GetMany("Post", thread.Posts)
+	postObjects := arn.DB.GetMany("Post", thread.Posts)
+	posts := make([]*arn.Post, len(postObjects), len(postObjects))
 
-	if getErr != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not retrieve posts", getErr)
+	for i, obj := range postObjects {
+		posts[i] = obj.(*arn.Post)
 	}
-
-	posts := postObjects.([]*arn.Post)
 
 	// Sort posts
 	arn.SortPostsLatestLast(posts)
