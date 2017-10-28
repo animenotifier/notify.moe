@@ -31,10 +31,14 @@ func Render(obj interface{}, title string, user *arn.User) string {
 
 	RenderObject(&b, obj, "")
 
-	if user != nil && (user.Role == "editor" || user.Role == "admin") {
+	if user != nil {
 		b.WriteString(`<div class="buttons">`)
 		b.WriteString(`<div class="buttons"><button class="action" data-action="publish" data-trigger="click">` + utils.Icon("share-alt") + `Publish</button></div>`)
-		b.WriteString(`<button class="action" data-action="deleteObject" data-trigger="click" data-return-path="/` + lowerCaseTypeName + "s" + `" data-confirm-type="` + lowerCaseTypeName + `">` + utils.Icon("trash") + `Delete</button>`)
+
+		if user.Role == "editor" || user.Role == "admin" {
+			b.WriteString(`<button class="action" data-action="deleteObject" data-trigger="click" data-return-path="/` + lowerCaseTypeName + "s" + `" data-confirm-type="` + lowerCaseTypeName + `">` + utils.Icon("trash") + `Delete</button>`)
+		}
+
 		b.WriteString(`</div>`)
 	}
 
