@@ -1,4 +1,4 @@
-component Statistics(pieCharts ...*arn.PieChart)
+component Statistics(pieCharts []*arn.PieChart)
 	h1.page-title Statistics
 
 	StatisticsHeader

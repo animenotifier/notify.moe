@@ -1,7 +1,7 @@
 package users
 
 import (
-	"net/http"
+	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -21,11 +21,14 @@ func Active(ctx *aero.Context) string {
 
 // Osu ...
 func Osu(ctx *aero.Context) string {
-	users, err := arn.GetListOfUsersCached("active osu users")
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsActive() && user.HasAvatar() && user.Accounts.Osu.PP > 0
+	})
 
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
-	}
+	// Sort by pp
+	sort.Slice(users, func(i, j int) bool {
+		return users[i].Accounts.Osu.PP > users[j].Accounts.Osu.PP
+	})
 
 	if len(users) > 50 {
 		users = users[:50]
@@ -36,22 +39,34 @@ func Osu(ctx *aero.Context) string {
 
 // Staff ...
 func Staff(ctx *aero.Context) string {
-	users, err := arn.GetListOfUsersCached("active staff users")
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsActive() && user.HasAvatar() && user.Role != ""
+	})
 
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
-	}
+	sort.Slice(users, func(i, j int) bool {
+		if users[i].Role == "" {
+			return false
+		}
+
+		if users[j].Role == "" {
+			return true
+		}
+
+		return users[i].Role == "admin"
+	})
 
 	return ctx.HTML(components.Users(users))
 }
 
 // AnimeWatching ...
 func AnimeWatching(ctx *aero.Context) string {
-	users, err := arn.GetListOfUsersCached("active anime watching users")
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsActive() && user.HasAvatar()
+	})
 
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
-	}
+	sort.Slice(users, func(i, j int) bool {
+		return len(users[i].AnimeList().Watching().Items) > len(users[j].AnimeList().Watching().Items)
+	})
 
 	return ctx.HTML(components.Users(users))
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/aerogo/aero"
+	"github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/components/css"
@@ -70,8 +71,8 @@ func configure(app *aero.Application) *aero.Application {
 	app.Sessions.Duration = 3600 * 24 * 30 * 6
 
 	// TODO: ...
-	println("Using memory session store")
 	// app.Sessions.Store = aerospikestore.New(arn.DB, "Session", app.Sessions.Duration)
+	app.Sessions.Store = nanostore.New(arn.DB, "Session")
 
 	// Layout
 	app.Layout = layout.Render

@@ -87,8 +87,6 @@ class MyServiceWorker {
 	onRequest(evt: FetchEvent) {
 		let request = evt.request as Request
 
-		// console.log("fetch:", request.url)
-
 		// If it's not a GET request, fetch it normally
 		if(request.method !== "GET") {
 			return evt.respondWith(fetch(request))
@@ -96,7 +94,7 @@ class MyServiceWorker {
 
 		// Clear cache on authentication and fetch it normally
 		if(request.url.includes("/auth/") || request.url.includes("/logout")) {
-			return caches.delete(this.cache.version).then(() => evt.respondWith(fetch(request)))
+			return evt.respondWith(caches.delete(this.cache.version).then(() => fetch(request)))
 		}
 
 		// Exclude certain URLs from being cached
@@ -109,7 +107,7 @@ class MyServiceWorker {
 		// If the request included the header "X-CacheOnly", return a cache-only response.
 		// This is used in reloads to avoid generating a 2nd request after a cache refresh.
 		if(request.headers.get("X-CacheOnly") === "true") {
-			return this.fromCache(request)
+			return evt.respondWith(this.fromCache(request))
 		}
 		
 		// Start fetching the request

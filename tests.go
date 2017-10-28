@@ -245,7 +245,6 @@ var routeTests = map[string][]string{
 	"/paypal/cancel":                                 nil,
 	"/anime/:id/edit":                                nil,
 	"/new/thread":                                    nil,
-	"/new/soundtrack":                                nil,
 	"/admin/purchases":                               nil,
 	"/editor/anilist":                                nil,
 	"/editor/shoboi":                                 nil,
