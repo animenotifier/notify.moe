@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	for anime := range arn.MustStreamAnime() {
+	for anime := range arn.StreamAnime() {
 		if anime.NSFW == 1 || anime.Status != "current" || anime.StartDate == "" || anime.StartDate < "2017-09" || anime.StartDate > "2017-10-17" {
 			continue
 		}

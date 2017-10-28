@@ -207,6 +207,9 @@ func configure(app *aero.Application) *aero.Application {
 		middleware.UserInfo(),
 	)
 
+	// Database
+	arn.DB.LoadCollections()
+
 	// API
 	arn.API.Install(app)
 
