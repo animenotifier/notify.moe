@@ -208,7 +208,7 @@ func configure(app *aero.Application) *aero.Application {
 	)
 
 	// Database
-	arn.DB.LoadCollections()
+	arn.DB.PrefetchData()
 
 	// API
 	arn.API.Install(app)
