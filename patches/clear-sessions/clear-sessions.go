@@ -7,6 +7,6 @@ import (
 
 func main() {
 	color.Yellow("Deleting all sessions...")
-	arn.DB.DeleteTable("Session")
+	arn.DB.Clear("Session")
 	color.Green("Finished.")
 }

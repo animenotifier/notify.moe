@@ -72,7 +72,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// TODO: ...
 	// app.Sessions.Store = aerospikestore.New(arn.DB, "Session", app.Sessions.Duration)
-	app.Sessions.Store = nanostore.New(arn.DB, "Session")
+	app.Sessions.Store = nanostore.New(arn.DB.Collection("Session"))
 
 	// Layout
 	app.Layout = layout.Render
