@@ -23,15 +23,12 @@ func main() {
 	}
 
 	color.Yellow("Resetting balance of all users to 0")
-
-	// Get a stream of all users
-	allUsers, err := arn.StreamUsers()
-	arn.PanicOnError(err)
+	defer arn.Node.Close()
 
 	// Iterate over the stream
-	for user := range allUsers {
+	for user := range arn.StreamUsers() {
 		user.Balance = 0
-		arn.PanicOnError(user.Save())
+		user.Save()
 	}
 
 	color.Green("Finished.")

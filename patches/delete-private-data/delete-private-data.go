@@ -7,20 +7,15 @@ import (
 
 func main() {
 	color.Yellow("Deleting private user data")
+	defer arn.Node.Close()
 
-	// Get a stream of all users
-	allUsers, err := arn.StreamUsers()
-
-	if err != nil {
-		panic(err)
-	}
-
-	arn.DB.DeleteTable("EmailToUser")
-	arn.DB.DeleteTable("GoogleToUser")
+	arn.DB.Clear("EmailToUser")
+	arn.DB.Clear("GoogleToUser")
 
 	// Iterate over the stream
 	count := 0
-	for user := range allUsers {
+
+	for user := range arn.StreamUsers() {
 		count++
 		println(count, user.Nick)
 

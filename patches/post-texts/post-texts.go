@@ -7,12 +7,10 @@ import (
 )
 
 func main() {
-	// Get a stream of all posts
-	allPosts, err := arn.StreamPosts()
-	arn.PanicOnError(err)
+	defer arn.Node.Close()
 
 	// Iterate over the stream
-	for post := range allPosts {
+	for post := range arn.StreamPosts() {
 		// Fix text
 		color.Yellow(post.Text)
 		post.Text = autocorrect.FixPostText(post.Text)
@@ -24,7 +22,6 @@ func main() {
 		}
 
 		// Save
-		err = post.Save()
-		arn.PanicOnError(err)
+		post.Save()
 	}
 }

@@ -9,10 +9,12 @@ import (
 )
 
 func main() {
+	defer arn.Node.Close()
+
 	now := time.Now()
 	futureThreshold := 8 * 7 * 24 * time.Hour
 
-	for anime := range arn.MustStreamAnime() {
+	for anime := range arn.StreamAnime() {
 		modified := false
 
 		// Try to find incorrect airing dates
@@ -38,7 +40,7 @@ func main() {
 		}
 
 		if modified == true {
-			arn.PanicOnError(anime.Episodes().Save())
+			anime.Episodes().Save()
 		}
 	}
 }

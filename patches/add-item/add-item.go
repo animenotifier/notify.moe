@@ -19,6 +19,8 @@ func init() {
 }
 
 func main() {
+	defer arn.Node.Close()
+
 	if nick == "" || itemID == "" {
 		color.Red("Missing parameters")
 		return
@@ -38,6 +40,5 @@ func main() {
 	// Add to user inventory
 	inventory := user.Inventory()
 	inventory.AddItem(itemID, uint(quantity))
-	err = inventory.Save()
-	arn.PanicOnError(err)
+	inventory.Save()
 }

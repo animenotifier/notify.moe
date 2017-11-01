@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	defer arn.Node.Close()
+
 	arn.PanicOnError(anilist.Authorize())
 	color.Green(anilist.AccessToken)
 
@@ -14,9 +16,8 @@ func main() {
 	arn.PanicOnError(err)
 
 	count := 0
-	stream := anilist.StreamAnime()
 
-	for aniListAnime := range stream {
+	for aniListAnime := range anilist.StreamAnime() {
 		println(aniListAnime.TitleRomaji)
 
 		anime := arn.FindAniListAnime(aniListAnime, allAnime)

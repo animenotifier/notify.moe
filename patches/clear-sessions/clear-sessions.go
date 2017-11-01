@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	defer arn.Node.Close()
+
 	color.Yellow("Deleting all sessions...")
 	arn.DB.Clear("Session")
 	color.Green("Finished.")

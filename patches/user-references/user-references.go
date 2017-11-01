@@ -7,22 +7,17 @@ import (
 
 func main() {
 	color.Yellow("Updating user references")
+	defer arn.Node.Close()
 
-	arn.DB.DeleteTable("NickToUser")
-	arn.DB.DeleteTable("EmailToUser")
-	arn.DB.DeleteTable("GoogleToUser")
-	arn.DB.DeleteTable("FacebookToUser")
-
-	// Get a stream of all users
-	allUsers, err := arn.StreamUsers()
-
-	if err != nil {
-		panic(err)
-	}
+	arn.DB.Clear("NickToUser")
+	arn.DB.Clear("EmailToUser")
+	arn.DB.Clear("GoogleToUser")
+	arn.DB.Clear("FacebookToUser")
 
 	// Iterate over the stream
 	count := 0
-	for user := range allUsers {
+
+	for user := range arn.StreamUsers() {
 		count++
 		println(count, user.Nick)
 

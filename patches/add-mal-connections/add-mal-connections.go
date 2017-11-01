@@ -8,7 +8,9 @@ import (
 )
 
 func main() {
-	for anime := range arn.MustStreamAnime() {
+	defer arn.Node.Close()
+
+	for anime := range arn.StreamAnime() {
 		malID := anime.GetMapping("myanimelist/anime")
 
 		if malID == "" {
@@ -25,11 +27,11 @@ func main() {
 		}
 
 		// Save
-		arn.PanicOnError(arn.DB.Set("MyAnimeListToAnime", malID, &arn.MyAnimeListToAnime{
+		arn.DB.Set("MyAnimeListToAnime", malID, &arn.MyAnimeListToAnime{
 			AnimeID:   anime.ID,
 			ServiceID: malID,
 			Edited:    arn.DateTimeUTC(),
 			EditedBy:  "",
-		}))
+		})
 	}
 }

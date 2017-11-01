@@ -23,10 +23,11 @@ func main() {
 	}
 
 	color.Yellow("Deleting all pro subscriptions")
+	defer arn.Node.Close()
 
-	for user := range arn.MustStreamUsers() {
+	for user := range arn.StreamUsers() {
 		user.ProExpires = ""
-		arn.PanicOnError(user.Save())
+		user.Save()
 	}
 
 	color.Green("Finished.")

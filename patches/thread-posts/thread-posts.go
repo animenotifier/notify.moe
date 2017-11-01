@@ -5,14 +5,13 @@ import (
 )
 
 func main() {
-	// Get a stream of all posts
-	allPosts, err := arn.StreamPosts()
-	arn.PanicOnError(err)
+	defer arn.Node.Close()
 
+	// Get a stream of all posts
 	threadToPosts := make(map[string][]string)
 
 	// Iterate over the stream
-	for post := range allPosts {
+	for post := range arn.StreamPosts() {
 		_, found := threadToPosts[post.ThreadID]
 
 		if !found {
@@ -28,7 +27,6 @@ func main() {
 		arn.PanicOnError(err)
 
 		thread.Posts = posts
-		err = thread.Save()
-		arn.PanicOnError(err)
+		thread.Save()
 	}
 }

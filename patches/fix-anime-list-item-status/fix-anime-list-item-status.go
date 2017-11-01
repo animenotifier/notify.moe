@@ -9,16 +9,10 @@ import (
 
 func main() {
 	color.Yellow("Setting list item status to correct value")
-
-	// Get a stream of all anime lists
-	allAnimeLists, err := arn.StreamAnimeLists()
-
-	if err != nil {
-		panic(err)
-	}
+	defer arn.Node.Close()
 
 	// Iterate over the stream
-	for animeList := range allAnimeLists {
+	for animeList := range arn.StreamAnimeLists() {
 		fmt.Println(animeList.User().Nick)
 
 		for _, item := range animeList.Items {
@@ -32,8 +26,7 @@ func main() {
 			}
 		}
 
-		err := animeList.Save()
-		arn.PanicOnError(err)
+		animeList.Save()
 	}
 
 	color.Green("Finished.")

@@ -24,21 +24,14 @@ func main() {
 	}
 
 	color.Yellow("Resetting all inventories")
-
-	// Get a stream of all users
-	allUsers, err := arn.StreamUsers()
-	arn.PanicOnError(err)
+	defer arn.Node.Close()
 
 	// Iterate over the stream
-	for user := range allUsers {
+	for user := range arn.StreamUsers() {
 		fmt.Println(user.Nick)
 
 		inventory := arn.NewInventory(user.ID)
-		err = inventory.Save()
-
-		if err != nil {
-			color.Red(err.Error())
-		}
+		inventory.Save()
 	}
 
 	color.Green("Finished.")

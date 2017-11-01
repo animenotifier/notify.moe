@@ -5,11 +5,12 @@ import (
 )
 
 func main() {
-	for anime := range arn.MustStreamAnime() {
+	defer arn.Node.Close()
+
+	for anime := range arn.StreamAnime() {
 		providerID := anime.GetMapping("anilist/anime")
-		_, err := arn.DB.Delete("AniListToAnime", providerID)
-		arn.PanicOnError(err)
+		arn.DB.Delete("AniListToAnime", providerID)
 		anime.RemoveMapping("anilist/anime", providerID)
-		arn.PanicOnError(anime.Save())
+		anime.Save()
 	}
 }
