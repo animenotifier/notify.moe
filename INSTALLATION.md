@@ -23,7 +23,7 @@
 
 ## HTTPS
 
-* Create the certificate `notify.moe/security/fullchain.pem` (domain: `beta.notify.moe`)
+* [Create the certificate](https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl) `notify.moe/security/fullchain.pem` (domain: `beta.notify.moe`)
 * Create the private key `notify.moe/security/privkey.pem`
 
 ## Browser
