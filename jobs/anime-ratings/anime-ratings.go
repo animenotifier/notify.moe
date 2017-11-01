@@ -13,6 +13,7 @@ var popularity = map[string]*arn.AnimePopularity{}
 // made to it.
 func main() {
 	color.Yellow("Updating anime ratings")
+	defer arn.Node.Close()
 
 	allAnimeLists, err := arn.AllAnimeLists()
 	arn.PanicOnError(err)
@@ -58,7 +59,7 @@ func main() {
 		anime, err := arn.GetAnime(animeID)
 		arn.PanicOnError(err)
 		anime.Rating = finalRating[animeID]
-		arn.PanicOnError(anime.Save())
+		anime.Save()
 	}
 
 	// Save popularity
@@ -66,7 +67,7 @@ func main() {
 		anime, err := arn.GetAnime(animeID)
 		arn.PanicOnError(err)
 		anime.Popularity = popularity[animeID]
-		arn.PanicOnError(anime.Save())
+		anime.Save()
 	}
 
 	color.Green("Finished.")

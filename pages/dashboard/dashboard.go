@@ -11,7 +11,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxPosts = 5
+const maxForumActivity = 5
 const maxFollowing = 5
 const maxSoundTracks = 5
 const maxScheduleItems = 5
@@ -30,7 +30,21 @@ func Get(ctx *aero.Context) string {
 	}
 
 	flow.Parallel(func() {
-		forumActivity, _ = arn.GetForumActivityCached()
+		posts := arn.AllPosts()
+		threads := arn.AllThreads()
+
+		arn.SortPostsLatestFirst(posts)
+		arn.SortThreadsLatestFirst(threads)
+
+		posts = arn.FilterPostsWithUniqueThreads(posts, maxForumActivity)
+
+		postPostables := arn.ToPostables(posts)
+		threadPostables := arn.ToPostables(threads)
+
+		allPostables := append(postPostables, threadPostables...)
+
+		arn.SortPostablesLatestFirst(allPostables)
+		forumActivity = arn.FilterPostablesWithUniqueThreads(allPostables, maxForumActivity)
 	}, func() {
 		animeList, err := arn.GetAnimeList(user.ID)
 

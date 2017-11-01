@@ -18,7 +18,7 @@ var packages = []string{
 	"github.com/animenotifier/shoboi",
 	"github.com/animenotifier/twist",
 	"github.com/animenotifier/avatar",
-	"github.com/animenotifier/japanese",
+	// "github.com/animenotifier/japanese",
 	// "github.com/animenotifier/osu",
 }
 

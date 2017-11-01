@@ -21,6 +21,7 @@ var wg sync.WaitGroup
 // Main
 func main() {
 	color.Yellow("Generating user avatars")
+	defer arn.Node.Close()
 
 	// Switch to main directory
 	exe, err := os.Executable()

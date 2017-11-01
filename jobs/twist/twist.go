@@ -13,15 +13,17 @@ import (
 var rateLimiter = time.NewTicker(500 * time.Millisecond)
 
 func main() {
+	defer arn.Node.Close()
+
 	// Replace this with ID list from twist.moe later
 	twistAnime, err := twist.GetAnimeIndex()
 	arn.PanicOnError(err)
 	idList := twistAnime.KitsuIDs()
 
 	// Save index in cache
-	arn.PanicOnError(arn.DB.Set("Cache", "animetwist index", &arn.ListOfIDs{
+	arn.DB.Set("Cache", "animetwist index", &arn.ListOfIDs{
 		IDList: idList,
-	}))
+	})
 
 	color.Yellow("Refreshing twist.moe links for %d anime", len(idList))
 
