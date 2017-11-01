@@ -11,6 +11,7 @@ import (
 
 func main() {
 	color.Yellow("Updating search index")
+	defer arn.Node.Close()
 
 	flow.Parallel(
 		updateAnimeIndex,
@@ -26,13 +27,7 @@ func updateAnimeIndex() {
 	animeSearchIndex := arn.NewSearchIndex()
 
 	// Anime
-	animeStream, err := arn.StreamAnime()
-
-	if err != nil {
-		panic(err)
-	}
-
-	for anime := range animeStream {
+	for anime := range arn.StreamAnime() {
 		if anime.Title.Canonical != "" {
 			animeSearchIndex.TextToID[strings.ToLower(anime.Title.Canonical)] = anime.ID
 		}
@@ -64,21 +59,14 @@ func updateAnimeIndex() {
 	fmt.Println(len(animeSearchIndex.TextToID), "anime titles")
 
 	// Save in database
-	err = arn.DB.Set("SearchIndex", "Anime", animeSearchIndex)
-
-	if err != nil {
-		panic(err)
-	}
+	arn.DB.Set("SearchIndex", "Anime", animeSearchIndex)
 }
 
 func updateUserIndex() {
 	userSearchIndex := arn.NewSearchIndex()
 
 	// Users
-	userStream, err := arn.StreamUsers()
-	arn.PanicOnError(err)
-
-	for user := range userStream {
+	for user := range arn.StreamUsers() {
 		if user.HasNick() {
 			userSearchIndex.TextToID[strings.ToLower(user.Nick)] = user.ID
 		}
@@ -87,36 +75,28 @@ func updateUserIndex() {
 	fmt.Println(len(userSearchIndex.TextToID), "user names")
 
 	// Save in database
-	err = arn.DB.Set("SearchIndex", "User", userSearchIndex)
-	arn.PanicOnError(err)
+	arn.DB.Set("SearchIndex", "User", userSearchIndex)
 }
 
 func updatePostIndex() {
 	postSearchIndex := arn.NewSearchIndex()
 
 	// Users
-	postStream, err := arn.StreamPosts()
-	arn.PanicOnError(err)
-
-	for post := range postStream {
+	for post := range arn.StreamPosts() {
 		postSearchIndex.TextToID[strings.ToLower(post.Text)] = post.ID
 	}
 
 	fmt.Println(len(postSearchIndex.TextToID), "posts")
 
 	// Save in database
-	err = arn.DB.Set("SearchIndex", "Post", postSearchIndex)
-	arn.PanicOnError(err)
+	arn.DB.Set("SearchIndex", "Post", postSearchIndex)
 }
 
 func updateThreadIndex() {
 	threadSearchIndex := arn.NewSearchIndex()
 
 	// Users
-	threadStream, err := arn.StreamThreads()
-	arn.PanicOnError(err)
-
-	for thread := range threadStream {
+	for thread := range arn.StreamThreads() {
 		threadSearchIndex.TextToID[strings.ToLower(thread.Title)] = thread.ID
 		threadSearchIndex.TextToID[strings.ToLower(thread.Text)] = thread.ID
 	}
@@ -124,6 +104,5 @@ func updateThreadIndex() {
 	fmt.Println(len(threadSearchIndex.TextToID)/2, "threads")
 
 	// Save in database
-	err = arn.DB.Set("SearchIndex", "Thread", threadSearchIndex)
-	arn.PanicOnError(err)
+	arn.DB.Set("SearchIndex", "Thread", threadSearchIndex)
 }

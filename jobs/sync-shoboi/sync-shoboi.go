@@ -10,13 +10,14 @@ import (
 
 func main() {
 	color.Yellow("Syncing Shoboi Anime")
+	defer arn.Node.Close()
 
 	// Priority queues
 	highPriority := []*arn.Anime{}
 	mediumPriority := []*arn.Anime{}
 	lowPriority := []*arn.Anime{}
 
-	for anime := range arn.MustStreamAnime() {
+	for anime := range arn.StreamAnime() {
 		if anime.GetMapping("shoboi/anime") != "" {
 			continue
 		}
@@ -51,7 +52,7 @@ func refreshQueue(queue []*arn.Anime) {
 
 	for _, anime := range queue {
 		if sync(anime) {
-			arn.PanicOnError(anime.Save())
+			anime.Save()
 			count++
 		}
 	}

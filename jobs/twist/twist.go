@@ -21,9 +21,7 @@ func main() {
 	idList := twistAnime.KitsuIDs()
 
 	// Save index in cache
-	arn.DB.Set("Cache", "animetwist index", &arn.ListOfIDs{
-		IDList: idList,
-	})
+	arn.DB.Set("IDList", "animetwist index", idList)
 
 	color.Yellow("Refreshing twist.moe links for %d anime", len(idList))
 

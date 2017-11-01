@@ -10,6 +10,7 @@ import (
 
 func main() {
 	color.Yellow("Refreshing episode information for each anime.")
+	defer arn.Node.Close()
 
 	if InvokeShellArgs() {
 		return
@@ -19,7 +20,7 @@ func main() {
 	mediumPriority := []*arn.Anime{}
 	lowPriority := []*arn.Anime{}
 
-	for anime := range arn.MustStreamAnime() {
+	for anime := range arn.StreamAnime() {
 		if anime.GetMapping("shoboi/anime") == "" {
 			continue
 		}

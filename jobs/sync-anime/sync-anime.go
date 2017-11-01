@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -12,6 +11,7 @@ import (
 
 func main() {
 	color.Yellow("Syncing Anime")
+	defer arn.Node.Close()
 
 	// In case we refresh only one anime
 	if InvokeShellArgs() {
@@ -127,19 +127,7 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	}
 
 	// Save in database
-	err = anime.Save()
-	status := ""
-
-	if err == nil {
-		status = color.GreenString("✔")
-	} else {
-		color.Red(err.Error())
-
-		data, _ := json.MarshalIndent(anime, "", "\t")
-		fmt.Println(string(data))
-
-		status = color.RedString("✘")
-	}
+	anime.Save()
 
 	// Episodes
 	episodes, err := arn.GetAnimeEpisodes(anime.ID)
@@ -149,7 +137,7 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	}
 
 	// Log
-	fmt.Println(status, anime.ID, anime.Title.Canonical)
+	fmt.Println(color.GreenString("✔"), anime.ID, anime.Title.Canonical)
 
 	return anime
 }

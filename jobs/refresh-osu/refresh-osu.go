@@ -9,6 +9,7 @@ import (
 
 func main() {
 	color.Yellow("Refreshing osu information")
+	defer arn.Node.Close()
 
 	ticker := time.NewTicker(500 * time.Millisecond)
 
