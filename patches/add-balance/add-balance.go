@@ -8,14 +8,10 @@ import (
 func main() {
 	color.Yellow("Adding balance to all users")
 
-	// Get a stream of all users
-	allUsers, err := arn.StreamUsers()
-	arn.PanicOnError(err)
-
 	// Iterate over the stream
-	for user := range allUsers {
+	for user := range arn.StreamUsers() {
 		user.Balance += 100000
-		arn.PanicOnError(user.Save())
+		user.Save()
 	}
 
 	color.Green("Finished.")

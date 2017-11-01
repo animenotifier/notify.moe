@@ -12,6 +12,7 @@ import (
 
 func main() {
 	color.Yellow("Syncing media relations with Kitsu DB")
+	defer arn.Node.Close()
 
 	kitsuMediaRelations := kitsu.StreamMediaRelations()
 	relations := map[string]*arn.AnimeRelations{}
@@ -27,15 +28,11 @@ func main() {
 		destinationAnimeID := mediaRelation.Relationships.Destination.Data.ID
 
 		// Confirm that the anime IDs are valid
-		exists, _ := arn.DB.Exists("Anime", animeID)
-
-		if !exists {
+		if !arn.DB.Exists("Anime", animeID) {
 			continue
 		}
 
-		exists, _ = arn.DB.Exists("Anime", destinationAnimeID)
-
-		if !exists {
+		if !arn.DB.Exists("Anime", destinationAnimeID) {
 			continue
 		}
 
@@ -71,11 +68,7 @@ func main() {
 
 	// Save relations map
 	for _, animeRelations := range relations {
-		err := animeRelations.Save()
-
-		if err != nil {
-			color.Red(err.Error())
-		}
+		animeRelations.Save()
 	}
 
 	color.Green("Finished.")

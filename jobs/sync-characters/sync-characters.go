@@ -10,6 +10,7 @@ import (
 
 func main() {
 	color.Yellow("Syncing characters with Kitsu DB")
+	defer arn.Node.Close()
 
 	kitsuCharacters := kitsu.StreamCharacters()
 
@@ -23,7 +24,7 @@ func main() {
 
 		fmt.Printf("%s %s\n", character.ID, character.Name)
 
-		arn.PanicOnError(character.Save())
+		character.Save()
 	}
 
 	color.Green("Finished.")
