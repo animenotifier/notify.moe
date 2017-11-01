@@ -17,6 +17,8 @@ var ticker = time.NewTicker(50 * time.Millisecond)
 
 func main() {
 	color.Yellow("Downloading anime images")
+	defer arn.Node.Close()
+
 	jobs := jobqueue.New(work)
 	allAnime, _ := arn.AllAnime()
 

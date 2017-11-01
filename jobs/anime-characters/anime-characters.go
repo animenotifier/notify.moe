@@ -10,6 +10,7 @@ import (
 
 func main() {
 	color.Yellow("Refreshing anime characters...")
+	defer arn.Node.Close()
 
 	allAnime, _ := arn.AllAnime()
 	rateLimiter := time.NewTicker(500 * time.Millisecond)
