@@ -13,7 +13,7 @@ component AniListMissingMapping(missing []*arn.Anime)
 				th Tools
 		tbody
 			each anime in missing
-				tr
+				tr.mountable
 					td= anime.Popularity.Total()
 					td
 						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
