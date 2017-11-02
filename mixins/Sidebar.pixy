@@ -25,7 +25,10 @@ component Sidebar(user *arn.User)
 			SidebarButton("Groups", "/groups", "users")
 		
 		SidebarButton("Shop", "/shop", "shopping-cart")
-		SidebarButton("Statistics", "/statistics", "pie-chart")
+
+		if user.Role == "admin" || user.Role == "editor"
+			SidebarButton("Statistics", "/statistics", "pie-chart")
+
 		SidebarButton("Settings", "/settings", "cog")
 
 	.spacer
