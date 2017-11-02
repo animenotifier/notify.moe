@@ -66,7 +66,7 @@ func configureAssets(app *aero.Application) {
 
 	// Avatars
 	app.Get("/images/avatars/small/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/avatars/large/" + ctx.Get("file"))
+		return ctx.File("images/avatars/small/" + ctx.Get("file"))
 	})
 
 	// Elements
