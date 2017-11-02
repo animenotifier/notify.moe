@@ -45,10 +45,8 @@ func main() {
 	usersQueue := make(chan *arn.User, runtime.NumCPU())
 	StartWorkers(usersQueue, lib.RefreshAvatar)
 
-	allUsers, _ := arn.AllUsers()
-
 	// We'll send each user to one of the worker threads
-	for _, user := range allUsers {
+	for user := range arn.StreamUsers() {
 		wg.Add(1)
 		usersQueue <- user
 	}
