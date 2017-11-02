@@ -18,10 +18,10 @@ func main() {
 	// Replace this with ID list from twist.moe later
 	twistAnime, err := twist.GetAnimeIndex()
 	arn.PanicOnError(err)
-	idList := twistAnime.KitsuIDs()
+	idList := arn.IDList(twistAnime.KitsuIDs())
 
 	// Save index in cache
-	arn.DB.Set("IDList", "animetwist index", idList)
+	arn.DB.Set("IDList", "animetwist index", &idList)
 
 	color.Yellow("Refreshing twist.moe links for %d anime", len(idList))
 
