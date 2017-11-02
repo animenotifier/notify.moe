@@ -13,9 +13,7 @@ func main() {
 
 	ticker := time.NewTicker(500 * time.Millisecond)
 
-	allUsers, _ := arn.AllUsers()
-
-	for _, user := range allUsers {
+	for user := range arn.StreamUsers() {
 		// Get osu info
 		if user.RefreshOsuInfo() == nil {
 			arn.PrettyPrint(user.Accounts.Osu)
