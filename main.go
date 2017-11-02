@@ -207,9 +207,6 @@ func configure(app *aero.Application) *aero.Application {
 		middleware.UserInfo(),
 	)
 
-	// Database
-	arn.DB.PrefetchData()
-
 	// API
 	arn.API.Install(app)
 
@@ -220,6 +217,12 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Authentication
 	auth.Install(app)
+
+	// Close the database node on shutdown
+	app.OnShutdown(arn.Node.Close)
+
+	// Prefetch data from all collections
+	arn.DB.PrefetchData()
 
 	// Specify test routes
 	for route, examples := range routeTests {
