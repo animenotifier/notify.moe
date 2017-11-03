@@ -1,3 +1,6 @@
+.settings
+	horizontal-wrap-center
+
 .widget-section > button,
 .widget-section > .button
 	margin-bottom 1rem

@@ -2,7 +2,7 @@ h1, h2
 	font-size 2em
 	font-weight bold
 	text-align center
-	line-height 1.2em
+	line-height 1.3em
 
 h3
 	font-size 1.5em

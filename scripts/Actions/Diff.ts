@@ -10,5 +10,7 @@ export function load(arn: AnimeNotifier, element: HTMLElement) {
 export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
 	
-	arn.diff(url).then(() => arn.scrollTo(element))
+	arn.diff(url)
+	.then(() => arn.scrollTo(element))
+	.catch(console.error)
 }

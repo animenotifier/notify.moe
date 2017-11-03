@@ -7,6 +7,10 @@ link-hover-color = rgb(242, 60, 30)
 link-active-color = link-hover-color
 pro-color = hsla(0, 100%, 73%, 0.87)
 
+theme-white = bg-color
+theme-black = text-color
+link-hover-text-shadow = none
+
 // UI
 ui-border-color = rgba(0, 0, 0, 0.1)
 ui-border = 1px solid ui-border-color
@@ -68,6 +72,6 @@ typography-margin = 0.4rem
 // nav-height = 3.11rem
 
 // Timings
-fade-speed = 250ms
-transition-speed = 200ms
-mountable-transition-speed = 250ms
+fade-speed = 200ms
+transition-speed = 150ms
+mountable-transition-speed = 200ms

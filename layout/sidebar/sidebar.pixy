@@ -8,7 +8,7 @@ component Sidebar(user *arn.User)
 		
 		if user != nil
 			SidebarButton("Home", "/animelist/watching", "home")
-			SidebarButton("Dash", "/dashboard", "tachometer")
+			//- SidebarButton("Dash", "/dashboard", "tachometer")
 		else
 			SidebarButton("Home", "/", "home")
 		
@@ -22,13 +22,13 @@ component Sidebar(user *arn.User)
 		//- SidebarButton("Search", "/search", "search")
 
 		if user != nil
-			if user.Role == "admin"
-				SidebarButton("Groups", "/groups", "users")
+			//- if user.Role == "admin"
+			//- 	SidebarButton("Groups", "/groups", "users")
 			
 			SidebarButton("Shop", "/shop", "shopping-cart")
 
-			if user.Role == "admin" || user.Role == "editor"
-				SidebarButton("Statistics", "/statistics", "pie-chart")
+			//- if user.Role == "admin" || user.Role == "editor"
+			//- 	SidebarButton("Statistics", "/statistics", "pie-chart")
 
 			SidebarButton("Settings", "/settings", "cog")
 

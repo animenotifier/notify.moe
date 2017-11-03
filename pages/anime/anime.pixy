@@ -1,134 +1,133 @@
 component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	//- AnimeTabs(anime)
-	
-	.anime-header(data-id=anime.ID)
-		if anime.Image.Small != ""
-			.anime-image-container
-				img.anime-cover-image(src=anime.Image.Small, alt=anime.Title.ByUser(user))
+	.anime
+		.anime-header(data-id=anime.ID)
+			if anime.Image.Large != ""
+				.anime-image-container
+					img.anime-cover-image(src=anime.Image.Large, alt=anime.Title.ByUser(user))
 
-				if anime.StartDate != ""
-					.anime-start-date
-						span(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
-						if anime.EndDate != "" && anime.StartDate[:4] != anime.EndDate[:4]
-							span  - 
-							span(title="End date: " + anime.EndDate)= anime.EndDate[:4]
-		
-		.space
+					//- if anime.StartDate != ""
+					//- 	.anime-start-date
+					//- 		span(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
+					//- 		if anime.EndDate != "" && anime.StartDate[:4] != anime.EndDate[:4]
+					//- 			span  - 
+					//- 			span(title="End date: " + anime.EndDate)= anime.EndDate[:4]
+			
+			.space
 
-		.anime-info
-			h1.anime-title(title=anime.Type)= anime.Title.ByUser(user)
+			.anime-info
+				h1.anime-title(title=anime.Type)= anime.Title.ByUser(user)
 
-			if anime.Title.Japanese != anime.Title.Canonical
 				h2.anime-alternative-title
 					Japanese(anime.Title.Japanese)
 
-			//- h3.anime-section-name.anime-summary-header Summary
-			p.anime-summary= anime.Summary
-	
-	if user != nil
-		.buttons.anime-actions
-			if user.Role == "editor" || user.Role == "admin"
-				a.button.ajax(href=anime.Link() + "/edit")
-					Icon("pencil-square-o")
-					span Edit anime
-
-			if user.AnimeList().Contains(anime.ID)
-				a.button.ajax(href="/+" + user.Nick + "/animelist/anime/" + anime.ID)
-					Icon("pencil")
-					span Edit in collection
-			else
-				button.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID)
-					Icon("plus")
-					span Add to collection
-
-	//- h3.anime-section-name Ratings
-	//- .anime-rating-categories
-	//- 	.anime-rating-category(title=toString(anime.Rating.Overall))
-	//- 		if anime.Status == "upcoming"
-	//- 			.anime-rating-category-name Hype
-	//- 		else
-	//- 			.anime-rating-category-name Overall
-	//- 		Rating(anime.Rating.Overall, user)
-	//- 	.anime-rating-category(title=toString(anime.Rating.Story))
-	//- 		.anime-rating-category-name Story
-	//- 		Rating(anime.Rating.Story, user)
-	//- 	.anime-rating-category(title=toString(anime.Rating.Visuals))
-	//- 		.anime-rating-category-name Visuals
-	//- 		Rating(anime.Rating.Visuals, user)
-	//- 	.anime-rating-category(title=toString(anime.Rating.Soundtrack))
-	//- 		.anime-rating-category-name Soundtrack
-	//- 		Rating(anime.Rating.Soundtrack, user)
-
-	//- if len(friends) > 0
-	//- 	h3.anime-section-name Friends
+				//- h3.anime-section-name.anime-summary-header Summary
+				p.anime-summary= anime.Summary
 		
-	//- 	.anime-friends
-	//- 		.user-avatars
-	//- 			each friend in friends
-	//- 				if friend.Nick != ""
-	//- 					if friend.IsActive()
-	//- 						.mountable
-	//- 							FriendEntry(friend, listItems)
-	//- 					else
-	//- 						.mountable
-	//- 							.inactive-user
-	//- 								FriendEntry(friend, listItems)
+		if user != nil
+			.buttons.anime-actions
+				if user.Role == "editor" || user.Role == "admin"
+					a.button.ajax(href=anime.Link() + "/edit")
+						Icon("pencil-square-o")
+						span Edit anime
 
-	//- if anime.Relations() != nil && len(anime.Relations().Items) > 0
-	//- 	h3.anime-section-name Relations
-	//- 	.anime-relations
-	//- 		each relation in anime.Relations().Items
-	//- 			a.anime-relation.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user))
-	//- 				img.anime-relation-image.lazy(data-src=relation.Anime().Image.Tiny, alt=relation.Anime().Title.ByUser(user))
-	//- 				.anime-relation-type= relation.HumanReadableType()
-	//- 				.anime-relation-year
-	//- 					if relation.Anime().StartDate != ""
-	//- 						span= relation.Anime().StartDate[:4]
+				if user.AnimeList().Contains(anime.ID)
+					a.button.ajax(href="/+" + user.Nick + "/animelist/anime/" + anime.ID)
+						Icon("pencil")
+						span Edit in collection
+				else
+					button.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID)
+						Icon("plus")
+						span Add to collection
 
-	//- if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].ServiceID != ""
-	//- 	h3.anime-section-name Video
-	//- 	.anime-trailer.video-container
-	//- 		iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[0].ServiceID + "?showinfo=0", allowfullscreen="allowfullscreen")
+		//- h3.anime-section-name Ratings
+		//- .anime-rating-categories
+		//- 	.anime-rating-category(title=toString(anime.Rating.Overall))
+		//- 		if anime.Status == "upcoming"
+		//- 			.anime-rating-category-name Hype
+		//- 		else
+		//- 			.anime-rating-category-name Overall
+		//- 		Rating(anime.Rating.Overall, user)
+		//- 	.anime-rating-category(title=toString(anime.Rating.Story))
+		//- 		.anime-rating-category-name Story
+		//- 		Rating(anime.Rating.Story, user)
+		//- 	.anime-rating-category(title=toString(anime.Rating.Visuals))
+		//- 		.anime-rating-category-name Visuals
+		//- 		Rating(anime.Rating.Visuals, user)
+		//- 	.anime-rating-category(title=toString(anime.Rating.Soundtrack))
+		//- 		.anime-rating-category-name Soundtrack
+		//- 		Rating(anime.Rating.Soundtrack, user)
 
-	//- h3.anime-section-name Popularity
-	//- .anime-rating-categories
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Watching
-	//- 		.anime-rating= anime.Popularity.Watching
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Completed
-	//- 		.anime-rating= anime.Popularity.Completed
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Planned
-	//- 		.anime-rating= anime.Popularity.Planned
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Hold
-	//- 		.anime-rating= anime.Popularity.Hold
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Dropped
-	//- 		.anime-rating= anime.Popularity.Dropped
-	
-	//- //- h3.anime-section-name Reviews
-	//- //- p Coming soon.
+		//- if len(friends) > 0
+		//- 	h3.anime-section-name Friends
+			
+		//- 	.anime-friends
+		//- 		.user-avatars
+		//- 			each friend in friends
+		//- 				if friend.Nick != ""
+		//- 					if friend.IsActive()
+		//- 						.mountable
+		//- 							FriendEntry(friend, listItems)
+		//- 					else
+		//- 						.mountable
+		//- 							.inactive-user
+		//- 								FriendEntry(friend, listItems)
 
-	//- h3.anime-section-name Links
-	//- .light-button-group
-	//- 	//- if anime.Links != nil
-	//- 	//- 	each link in anime.Links
-	//- 	//- 		a.light-button(href=link.URL, target="_blank")
-	//- 	//- 			Icon("external-link")
-	//- 	//- 			span= link.Title
-	//- 	a.light-button(href="https://kitsu.io/anime/" + anime.ID, target="_blank", rel="noopener")
-	//- 		Icon("external-link")
-	//- 		span Kitsu
+		//- if anime.Relations() != nil && len(anime.Relations().Items) > 0
+		//- 	h3.anime-section-name Relations
+		//- 	.anime-relations
+		//- 		each relation in anime.Relations().Items
+		//- 			a.anime-relation.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user))
+		//- 				img.anime-relation-image.lazy(data-src=relation.Anime().Image.Tiny, alt=relation.Anime().Title.ByUser(user))
+		//- 				.anime-relation-type= relation.HumanReadableType()
+		//- 				.anime-relation-year
+		//- 					if relation.Anime().StartDate != ""
+		//- 						span= relation.Anime().StartDate[:4]
+
+		//- if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].ServiceID != ""
+		//- 	h3.anime-section-name Video
+		//- 	.anime-trailer.video-container
+		//- 		iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[0].ServiceID + "?showinfo=0", allowfullscreen="allowfullscreen")
+
+		//- h3.anime-section-name Popularity
+		//- .anime-rating-categories
+		//- 	.anime-rating-category
+		//- 		.anime-rating-category-name Watching
+		//- 		.anime-rating= anime.Popularity.Watching
+		//- 	.anime-rating-category
+		//- 		.anime-rating-category-name Completed
+		//- 		.anime-rating= anime.Popularity.Completed
+		//- 	.anime-rating-category
+		//- 		.anime-rating-category-name Planned
+		//- 		.anime-rating= anime.Popularity.Planned
+		//- 	.anime-rating-category
+		//- 		.anime-rating-category-name Hold
+		//- 		.anime-rating= anime.Popularity.Hold
+		//- 	.anime-rating-category
+		//- 		.anime-rating-category-name Dropped
+		//- 		.anime-rating= anime.Popularity.Dropped
 		
-	//- 	each mapping in anime.Mappings
-	//- 		a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
-	//- 			Icon("external-link")
-	//- 			span= mapping.Name()
+		//- //- h3.anime-section-name Reviews
+		//- //- p Coming soon.
 
-	//- .footer
-	//- 	span Powered by Kitsu.
+		//- h3.anime-section-name Links
+		//- .light-button-group
+		//- 	//- if anime.Links != nil
+		//- 	//- 	each link in anime.Links
+		//- 	//- 		a.light-button(href=link.URL, target="_blank")
+		//- 	//- 			Icon("external-link")
+		//- 	//- 			span= link.Title
+		//- 	a.light-button(href="https://kitsu.io/anime/" + anime.ID, target="_blank", rel="noopener")
+		//- 		Icon("external-link")
+		//- 		span Kitsu
+			
+		//- 	each mapping in anime.Mappings
+		//- 		a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
+		//- 			Icon("external-link")
+		//- 			span= mapping.Name()
+
+		//- .footer
+		//- 	span Powered by Kitsu.
 
 component FriendEntry(friend *arn.User, listItems map[*arn.User]*arn.AnimeListItem)
 	CustomAvatar(friend, listItems[friend].Link(friend.Nick), friend.Nick + " => " + listItems[friend].Status + " | " + toString(listItems[friend].Episodes) + " eps | " + fmt.Sprintf("%.1f", listItems[friend].Rating.Overall) + " rating")

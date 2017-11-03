@@ -1,9 +1,20 @@
-.anime-header
-	horizontal
+.anime
+	max-width 1100px
+	margin 0 auto
 
-< 800px
+.anime-header
+	vertical
+
+.anime-title
+	text-align center
+	margin-bottom 0.5rem
+
+> 800px
 	.anime-header
-		vertical
+		horizontal
+	
+	.anime-title
+		text-align left
 
 .anime-section-name
 	font-weight bold
@@ -21,7 +32,7 @@
 
 .anime-cover-image
 	// width 142px
-	width 180px
+	width 225px
 	height auto
 	border-radius 3px
 	
@@ -30,7 +41,10 @@
 
 	saturate-up
 	shadow-up
-	
+
+.anime-summary
+	// ...
+
 .anime-info
 	vertical
 	flex 1
@@ -38,10 +52,6 @@
 .space
 	width content-padding
 	height content-padding
-
-.anime-title
-	text-align left
-	margin-bottom 0.5rem
 
 .anime-alternative-title
 	font-size 0.9em
@@ -55,20 +65,23 @@
 		color rgba(255, 255, 255, 0.5) !important
 
 .anime-actions
-	horizontal
-	justify-content center
+	display none !important
 
-	// Action button margin
-	margin calc(content-padding - 0.5rem) -0.5rem
+// .anime-actions
+// 	horizontal
+// 	justify-content center
 
-	// Setting z-index requires setting a background as well
-	z-index 10
+// 	// Action button margin
+// 	margin calc(content-padding - 0.5rem) -0.5rem
 
-> 1450px
-	.anime-actions
-		position absolute
-		top 0
-		right content-padding
+// 	// Setting z-index requires setting a background as well
+// 	z-index 10
+
+// > 1450px
+// 	.anime-actions
+// 		position absolute
+// 		top 0
+// 		right content-padding
 
 .anime-rating-categories
 	horizontal

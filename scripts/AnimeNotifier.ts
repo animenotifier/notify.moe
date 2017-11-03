@@ -509,7 +509,7 @@ export class AnimeNotifier {
 
 	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
 		const maxDelay = 1000
-		const delay = 20
+		const delay = 18
 		
 		let time = 0
 		let start = Date.now()
@@ -596,7 +596,7 @@ export class AnimeNotifier {
 		this.loading(true)
 
 		// Delay by transition-speed
-		return delay(300).then(() => request)
+		return delay(200).then(() => request)
 		.then(html => this.app.setContent(html, true))
 		.then(() => this.app.emit("DOMContentLoaded"))
 		.then(() => this.loading(false))
