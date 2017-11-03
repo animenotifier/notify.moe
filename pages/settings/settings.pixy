@@ -1,7 +1,7 @@
 component Settings(user *arn.User)
 	h1.page-title Settings
 	
-	.widgets
+	.settings
 		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
 				Icon("user")

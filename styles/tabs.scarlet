@@ -14,8 +14,8 @@
 		transform none
 
 	&.active
-		background-color forum-tag-hover-color
-		color white
+		background tab-hover-background
+		color theme-white
 
 	:first-child
 		border-left ui-border

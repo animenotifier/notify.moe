@@ -1,7 +1,7 @@
 component ProfileStats(stats *utils.UserStats, viewUser *arn.User, user *arn.User, uri string)
 	ProfileHeader(viewUser, user, uri)
 
-	.widgets
+	.stats
 		each pie in stats.PieCharts
 			.widget.mountable
 				h3.widget-title

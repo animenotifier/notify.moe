@@ -13,7 +13,7 @@ component Admin(user *arn.User, platform, family, platformVersion, kernelVersion
 
 	AdminTabs
 
-	.widgets
+	.admin
 		//- .widget.mountable
 		//- 	h3.widget-title Usage
 

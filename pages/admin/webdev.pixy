@@ -3,7 +3,7 @@ component WebDev
 
 	h1.page-title WebDev
 	
-	.widgets
+	.webdev
 		.widget.mountable
 			h3.widget-title Tests
 

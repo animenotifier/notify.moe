@@ -3,12 +3,16 @@ text-color = hsl(0, 0%, 90%)
 bg-color = hsl(0, 0%, 24%)
 link-color = hsl(81, 100%, 56%)
 link-hover-color = hsl(81, 100%, 66%)
-ui-background = hsl(0, 0%, 18%)
+ui-background = hsla(0, 0%, 18%, 0.5)
+tab-hover-background = link-hover-color
+
+theme-white = bg-color
+theme-black = text-color
 
 link-hover-text-shadow = 0 0 8px hsla(81, 100%, 56%, 0.5)
 
 main-color = link-color
 link-active-color = link-hover-color
-button-hover-color = bg-color
-button-hover-background = link-hover-color
+button-hover-color = link-hover-color
+button-hover-background = hsla(0, 0%, 12%, 0.5)
 loading-anim-color = link-color

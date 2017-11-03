@@ -1,4 +1,6 @@
-// package main
+package main
+
+func main() {}
 
 // import (
 // 	"time"

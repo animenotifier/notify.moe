@@ -3,7 +3,7 @@ component Shop(user *arn.User, items []*arn.Item)
 
 	h1.page-title Shop
 
-	.widgets.shop-items
+	.shop-items
 		each item in items
 			ShopItem(item)
 

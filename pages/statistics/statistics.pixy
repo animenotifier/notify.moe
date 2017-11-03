@@ -4,11 +4,10 @@ component Statistics(pieCharts []*arn.PieChart)
 	StatisticsHeader
 
 	.statistics
-		.widgets
-			each pie in pieCharts
-				.widget
-					h3.widget-title= pie.Title
-					PieChart(pie.Slices)
+		each pie in pieCharts
+			.widget
+				h3.widget-title= pie.Title
+				PieChart(pie.Slices)
 		
 		.footer
 			p Data is collected for statistical purposes only. We respect user privacy and we will never display or sell critical data to 3rd party services.

@@ -20,7 +20,8 @@
 	margin-top 0.5rem
 
 .anime-cover-image
-	width 142px
+	// width 142px
+	width 180px
 	height auto
 	border-radius 3px
 	

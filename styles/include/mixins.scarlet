@@ -9,6 +9,10 @@ mixin horizontal-wrap
 	display flex
 	flex-flow row wrap
 
+mixin horizontal-wrap-center
+	horizontal-wrap
+	justify-content center
+
 mixin vertical
 	display flex
 	flex-direction column
@@ -16,6 +20,10 @@ mixin vertical
 mixin vertical-wrap
 	display flex
 	flex-flow column wrap
+
+mixin vertical-wrap-center
+	horizontal-wrap
+	align-items center
 
 mixin noise-light
 	background-image url("/images/elements/noise-light.png")

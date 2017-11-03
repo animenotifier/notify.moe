@@ -1,7 +1,7 @@
 component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, soundTracks []*arn.SoundTrack, following []*arn.User, user *arn.User)
 	h1.page-title Dashboard
 
-	.widgets
+	.dashboard
 		.widget.mountable
 			h3.widget-title Schedule
 

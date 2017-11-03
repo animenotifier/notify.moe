@@ -44,7 +44,7 @@ sidebar-spacing-y = 0.7rem
 	
 	&.active
 		.sidebar-button
-			// background forum-tag-hover-color
+			// background tab-hover-background
 			// color white
 			color link-color
 			text-shadow link-hover-text-shadow

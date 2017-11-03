@@ -1,7 +1,7 @@
 component SearchResults(term string, users []*arn.User, animeResults []*arn.Anime, postResults []*arn.Post, threadResults []*arn.Thread)
 	h1.page-title= "Search: " + term
 
-	.widgets
+	.search
 		.widget
 			h3.widget-title
 				Icon("user")
