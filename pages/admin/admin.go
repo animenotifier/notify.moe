@@ -1,16 +1,10 @@
 package admin
 
 import (
-	"time"
-
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
-	"github.com/shirou/gopsutil/cpu"
-	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/host"
-	"github.com/shirou/gopsutil/mem"
 )
 
 // Get admin page.
@@ -21,40 +15,40 @@ func Get(ctx *aero.Context) string {
 		return ctx.Redirect("/")
 	}
 
-	// CPU
-	cpuUsage := 0.0
-	cpuUsages, err := cpu.Percent(1*time.Second, false)
+	// // CPU
+	// cpuUsage := 0.0
+	// cpuUsages, err := cpu.Percent(1*time.Second, false)
 
-	if err == nil {
-		cpuUsage = cpuUsages[0]
-	}
+	// if err == nil {
+	// 	cpuUsage = cpuUsages[0]
+	// }
 
-	// Memory
-	memUsage := 0.0
-	memInfo, _ := mem.VirtualMemory()
+	// // Memory
+	// memUsage := 0.0
+	// memInfo, _ := mem.VirtualMemory()
 
-	if err == nil {
-		memUsage = memInfo.UsedPercent
-	}
+	// if err == nil {
+	// 	memUsage = memInfo.UsedPercent
+	// }
 
-	// Disk
-	diskUsage := 0.0
-	diskInfo, err := disk.Usage("/")
+	// // Disk
+	// diskUsage := 0.0
+	// diskInfo, err := disk.Usage("/")
 
-	if err == nil {
-		diskUsage = diskInfo.UsedPercent
-	}
+	// if err == nil {
+	// 	diskUsage = diskInfo.UsedPercent
+	// }
 
 	// Host
 	platform, family, platformVersion, _ := host.PlatformInformation()
-	kernelVersion, err := host.KernelVersion()
+	kernelVersion, _ := host.KernelVersion()
 
-	return ctx.HTML(components.Admin(user, cpuUsage, memUsage, diskUsage, platform, family, platformVersion, kernelVersion))
+	return ctx.HTML(components.Admin(user, platform, family, platformVersion, kernelVersion))
 }
 
 func average(floatSlice []float64) float64 {
 	if len(floatSlice) == 0 {
-		return arn.DefaultAverageRating
+		return 0
 	}
 
 	var sum float64

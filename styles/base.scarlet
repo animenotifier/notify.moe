@@ -18,6 +18,7 @@ a
 
 	:hover
 		color link-hover-color
+		text-shadow link-hover-text-shadow
 		text-decoration none
 	
 	:active

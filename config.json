@@ -6,6 +6,7 @@
 	],
 	"styles": [
 		"include/config",
+		"include/dark",
 		"include/mixins",
 		"reset",
 		"base",

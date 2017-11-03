@@ -11,6 +11,5 @@ component Users(users []*arn.User)
 component UsersTabs
 	.tabs
 		Tab("Active", "users", "/users")
-		Tab("Watching", "tv", "/users/anime/watching")
 		Tab("Osu", "gamepad", "/users/osu")
 		Tab("Staff", "user-secret", "/users/staff")

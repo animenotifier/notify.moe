@@ -51,7 +51,7 @@
 	line-height content-line-height
 	
 	.japanese
-		color rgba(60, 60, 60, 0.5) !important
+		color rgba(255, 255, 255, 0.5) !important
 
 .anime-actions
 	horizontal

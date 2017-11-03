@@ -1,23 +1,29 @@
+// .widgets
+// 	display grid
+// 	grid-template-columns 1fr
+
+// > 810px
+// 	.widgets
+// 		grid-template-columns repeat(2, 1fr)
+// 		grid-gap content-padding
+
+// > 1240px
+// 	.widgets
+// 		grid-template-columns repeat(3, 1fr)
+
+// > 1640px
+// 	.widgets
+// 		grid-template-columns repeat(4, 1fr)
+
 .widgets
-	display grid
-	grid-template-columns 1fr
-
-> 810px
-	.widgets
-		grid-template-columns repeat(2, 1fr)
-		grid-gap content-padding
-
-> 1240px
-	.widgets
-		grid-template-columns repeat(3, 1fr)
-
-> 1640px
-	.widgets
-		grid-template-columns repeat(4, 1fr)
+	horizontal-wrap
+	justify-content center
 
 .widget
 	vertical
-	margin-bottom 1rem
+	width 100%
+	max-width 300px
+	margin calc(content-padding / 2)
 	overflow hidden
 
 .widget-section

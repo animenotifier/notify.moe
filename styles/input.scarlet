@@ -35,8 +35,8 @@ button, .button
 	:hover,
 	&.active
 		cursor pointer
-		color white
-		background-color button-hover-color
+		color button-hover-color
+		background button-hover-background
 
 	:active
 		transform translateY(3px)

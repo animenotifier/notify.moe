@@ -1,56 +1,57 @@
 component Sidebar(user *arn.User)
-	.user-image-container
+	aside#sidebar
+		.user-image-container
+			if user != nil
+				Avatar(user)
+			else
+				img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
+		
 		if user != nil
-			Avatar(user)
+			SidebarButton("Home", "/animelist/watching", "home")
+			SidebarButton("Dash", "/dashboard", "tachometer")
 		else
-			img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
-	
-	if user != nil
-		SidebarButton("Home", "/animelist/watching", "home")
-		SidebarButton("Dash", "/dashboard", "tachometer")
-	else
-		SidebarButton("Home", "/", "home")
-	
-	SidebarButton("Forum", "/forum", "comment")
-	SidebarButton("Explore", "/explore", "th")
-	//- SidebarButton("Artworks", "/artworks", "paint-brush")
-	SidebarButton("Soundtracks", "/soundtracks", "headphones")
-	//- SidebarButton("AMVs", "/amvs", "video-camera")
-	//- SidebarButton("Games", "/games", "gamepad")
-	SidebarButton("Users", "/users", "globe")
-	//- SidebarButton("Search", "/search", "search")
-
-	if user != nil
-		if user.Role == "admin"
-			SidebarButton("Groups", "/groups", "users")
+			SidebarButton("Home", "/", "home")
 		
-		SidebarButton("Shop", "/shop", "shopping-cart")
+		SidebarButton("Forum", "/forum", "comment")
+		SidebarButton("Explore", "/explore", "th")
+		//- SidebarButton("Artworks", "/artworks", "paint-brush")
+		SidebarButton("Soundtracks", "/soundtracks", "headphones")
+		//- SidebarButton("AMVs", "/amvs", "video-camera")
+		//- SidebarButton("Games", "/games", "gamepad")
+		SidebarButton("Users", "/users", "globe")
+		//- SidebarButton("Search", "/search", "search")
 
-		if user.Role == "admin" || user.Role == "editor"
-			SidebarButton("Statistics", "/statistics", "pie-chart")
+		if user != nil
+			if user.Role == "admin"
+				SidebarButton("Groups", "/groups", "users")
+			
+			SidebarButton("Shop", "/shop", "shopping-cart")
 
-		SidebarButton("Settings", "/settings", "cog")
+			if user.Role == "admin" || user.Role == "editor"
+				SidebarButton("Statistics", "/statistics", "pie-chart")
 
-	.spacer
+			SidebarButton("Settings", "/settings", "cog")
 
-	.sidebar-link(aria-label="Search")
-		.sidebar-button
-			Icon("search")
-			FuzzySearch
+		.spacer
 
-	if user != nil
-		if user.Role == "admin"
-			SidebarButton("Admin", "/admin", "wrench")
-		
-		if user.Role == "editor"
-			SidebarButton("Editor", "/editor", "pencil")
+		.sidebar-link(aria-label="Search")
+			.sidebar-button
+				Icon("search")
+				FuzzySearch
 
-	SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
+		if user != nil
+			if user.Role == "admin"
+				SidebarButton("Admin", "/admin", "wrench")
+			
+			if user.Role == "editor"
+				SidebarButton("Editor", "/editor", "pencil")
 
-	if user != nil
-		SidebarButtonNoAJAX("Logout", "/logout", "sign-out")
-	else
-		SidebarButton("Login", "/login", "sign-in")
+		SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
+
+		if user != nil
+			SidebarButtonNoAJAX("Logout", "/logout", "sign-out")
+		else
+			SidebarButton("Login", "/login", "sign-in")
 
 component SidebarButton(name string, target string, icon string)
 	a.sidebar-link.ajax(href=target, aria-label=name, data-bubble="true")

@@ -100,7 +100,6 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/users", users.Active)
 	app.Ajax("/users/osu", users.Osu)
 	app.Ajax("/users/staff", users.Staff)
-	app.Ajax("/users/anime/watching", users.AnimeWatching)
 	app.Ajax("/statistics", statistics.Get)
 	app.Ajax("/statistics/anime", statistics.Anime)
 	app.Ajax("/login", login.Get)

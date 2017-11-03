@@ -14,7 +14,11 @@ func Active(ctx *aero.Context) string {
 		return user.IsActive() && user.HasAvatar()
 	})
 
-	arn.SortUsersLastSeen(users)
+	sort.Slice(users, func(i, j int) bool {
+		return len(users[i].AnimeList().Watching().Items) > len(users[j].AnimeList().Watching().Items)
+	})
+
+	// arn.SortUsersLastSeen(users)
 
 	return ctx.HTML(components.Users(users))
 }
@@ -53,19 +57,6 @@ func Staff(ctx *aero.Context) string {
 		}
 
 		return users[i].Role == "admin"
-	})
-
-	return ctx.HTML(components.Users(users))
-}
-
-// AnimeWatching ...
-func AnimeWatching(ctx *aero.Context) string {
-	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.IsActive() && user.HasAvatar()
-	})
-
-	sort.Slice(users, func(i, j int) bool {
-		return len(users[i].AnimeList().Watching().Items) > len(users[j].AnimeList().Watching().Items)
 	})
 
 	return ctx.HTML(components.Users(users))

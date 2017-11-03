@@ -1,0 +1,14 @@
+// Dark theme
+text-color = hsl(0, 0%, 90%)
+bg-color = hsl(0, 0%, 24%)
+link-color = hsl(81, 100%, 56%)
+link-hover-color = hsl(81, 100%, 66%)
+ui-background = hsl(0, 0%, 18%)
+
+link-hover-text-shadow = 0 0 8px hsla(81, 100%, 56%, 0.5)
+
+main-color = link-color
+link-active-color = link-hover-color
+button-hover-color = bg-color
+button-hover-background = link-hover-color
+loading-anim-color = link-color

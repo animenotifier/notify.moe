@@ -8,32 +8,32 @@ component AdminTabs
 			Icon("pencil")
 			span.tab-text Editor
 
-component Admin(user *arn.User, cpuUsage, memUsage, diskUsage float64, platform, family, platformVersion, kernelVersion string)
+component Admin(user *arn.User, platform, family, platformVersion, kernelVersion string)
 	h1.page-title Admin Panel
 
 	AdminTabs
 
 	.widgets
-		.widget.mountable
-			h3.widget-title Usage
+		//- .widget.mountable
+		//- 	h3.widget-title Usage
 
-			table
-				tbody
-					tr
-						td CPU usage:
-						td
-							span= int(cpuUsage + 0.5)
-							span %
-					tr
-						td Memory usage:
-						td
-							span= int(memUsage + 0.5)
-							span %
-					tr
-						td Disk usage:
-						td
-							span= int(diskUsage + 0.5)
-							span %
+		//- 	table
+		//- 		tbody
+		//- 			tr
+		//- 				td CPU usage:
+		//- 				td
+		//- 					span= int(cpuUsage + 0.5)
+		//- 					span %
+		//- 			tr
+		//- 				td Memory usage:
+		//- 				td
+		//- 					span= int(memUsage + 0.5)
+		//- 					span %
+		//- 			tr
+		//- 				td Disk usage:
+		//- 				td
+		//- 					span= int(diskUsage + 0.5)
+		//- 					span %
 		
 		.widget.mountable
 			h3.widget-title OS
