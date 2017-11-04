@@ -1,11 +1,11 @@
-component Anime(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	.anime
 		.anime-main-column
-			AnimeMainColumn(anime, user)
+			AnimeMainColumn(anime, tracks, user)
 		.anime-side-column
 			AnimeSideColumn(anime, friends, listItems, user)
 
-component AnimeMainColumn(anime *arn.Anime, user *arn.User)
+component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User)
 	.anime-header(data-id=anime.ID)
 		if anime.Image.Large != ""
 			.anime-image-container.mountable
@@ -47,88 +47,119 @@ component AnimeMainColumn(anime *arn.Anime, user *arn.User)
 					Icon("plus")
 					span Add to collection
 
-	//- h3.anime-section-name Ratings
-	//- .anime-rating-categories
-	//- 	.anime-rating-category(title=toString(anime.Rating.Overall))
-	//- 		if anime.Status == "upcoming"
-	//- 			.anime-rating-category-name Hype
-	//- 		else
-	//- 			.anime-rating-category-name Overall
-	//- 		Rating(anime.Rating.Overall, user)
-	//- 	.anime-rating-category(title=toString(anime.Rating.Story))
-	//- 		.anime-rating-category-name Story
-	//- 		Rating(anime.Rating.Story, user)
-	//- 	.anime-rating-category(title=toString(anime.Rating.Visuals))
-	//- 		.anime-rating-category-name Visuals
-	//- 		Rating(anime.Rating.Visuals, user)
-	//- 	.anime-rating-category(title=toString(anime.Rating.Soundtrack))
-	//- 		.anime-rating-category-name Soundtrack
-	//- 		Rating(anime.Rating.Soundtrack, user)
+	AnimeCharacters(anime)
+	AnimeRelations(anime, user)
+	AnimeTracks(anime, tracks)
+	
+	//- //- h3.anime-section-name Reviews
+	//- //- p Coming soon.
 
+	//- .footer
+	//- 	span Powered by Kitsu.
+
+component AnimeRatings(anime *arn.Anime, user *arn.User)
+	section.anime-section.mountable
+		h3.anime-section-name Ratings
+
+		table.anime-info-table
+			tr.mountable(data-mountable-type="info")
+				td.anime-info-key
+					if anime.Status == "upcoming"
+						span Hype:
+					else
+						span Overall:
+				td.anime-info-value
+					Rating(anime.Rating.Overall, user)
+
+			if anime.Rating.Story > 0
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Story:
+					td.anime-info-value
+						Rating(anime.Rating.Story, user)
+
+			if anime.Rating.Visuals > 0
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Visuals:
+					td.anime-info-value
+						Rating(anime.Rating.Visuals, user)
+
+			if anime.Rating.Soundtrack > 0
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Soundtrack:
+					td.anime-info-value
+						Rating(anime.Rating.Soundtrack, user)
+
+component AnimePopularity(anime *arn.Anime)
+	if anime.Popularity.Total() > 0
+		section.anime-section.mountable
+			h3.anime-section-name Popularity
+
+			table.anime-info-table
+				if anime.Popularity.Watching > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Watching:
+						td.anime-info-value= anime.Popularity.Watching
+
+				if anime.Popularity.Completed > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Completed:
+						td.anime-info-value= anime.Popularity.Completed
+				
+				if anime.Popularity.Planned > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Planned:
+						td.anime-info-value= anime.Popularity.Planned
+
+				if anime.Popularity.Hold > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key On hold:
+						td.anime-info-value= anime.Popularity.Hold
+
+				if anime.Popularity.Dropped > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Dropped:
+						td.anime-info-value= anime.Popularity.Dropped
+
+component AnimeLinks(anime *arn.Anime)
+	section.anime-section.mountable
+		h3.anime-section-name Links
+		.light-button-group
+			a.light-button(href="https://kitsu.io/anime/" + anime.ID, target="_blank", rel="noopener")
+				Icon("external-link")
+				span Kitsu
+			
+			each mapping in anime.Mappings
+				a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
+					Icon("external-link")
+					span= mapping.Name()
+
+component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+	AnimeTrailer(anime)
+	AnimeInformation(anime)
+	AnimeRatings(anime, user)
+	AnimePopularity(anime)
+	AnimeFriends(friends, listItems)
+	AnimeLinks(anime)
+
+component AnimeRelations(anime *arn.Anime, user *arn.User)
 	if anime.Relations() != nil && len(anime.Relations().Items) > 0
 		section.anime-section.mountable
 			h3.anime-section-name Relations
 			.anime-relations
 				each relation in anime.Relations().Items
-					a.anime-relation.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user))
+					a.anime-relation.mountable.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user), data-mountable-type="relation")
 						img.anime-relation-image.lazy(data-src=relation.Anime().Image.Tiny, alt=relation.Anime().Title.ByUser(user))
 						.anime-relation-type= relation.HumanReadableType()
 						.anime-relation-year
 							if relation.Anime().StartDate != ""
 								span= relation.Anime().StartDate[:4]
 
-	AnimeCharacters(anime)
-
-	//- h3.anime-section-name Popularity
-	//- .anime-rating-categories
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Watching
-	//- 		.anime-rating= anime.Popularity.Watching
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Completed
-	//- 		.anime-rating= anime.Popularity.Completed
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Planned
-	//- 		.anime-rating= anime.Popularity.Planned
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Hold
-	//- 		.anime-rating= anime.Popularity.Hold
-	//- 	.anime-rating-category
-	//- 		.anime-rating-category-name Dropped
-	//- 		.anime-rating= anime.Popularity.Dropped
-	
-	//- //- h3.anime-section-name Reviews
-	//- //- p Coming soon.
-
-	//- h3.anime-section-name Links
-	//- .light-button-group
-	//- 	//- if anime.Links != nil
-	//- 	//- 	each link in anime.Links
-	//- 	//- 		a.light-button(href=link.URL, target="_blank")
-	//- 	//- 			Icon("external-link")
-	//- 	//- 			span= link.Title
-	//- 	a.light-button(href="https://kitsu.io/anime/" + anime.ID, target="_blank", rel="noopener")
-	//- 		Icon("external-link")
-	//- 		span Kitsu
-		
-	//- 	each mapping in anime.Mappings
-	//- 		a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
-	//- 			Icon("external-link")
-	//- 			span= mapping.Name()
-
-	//- .footer
-	//- 	span Powered by Kitsu.
-
-component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
-	AnimeTrailer(anime)
-	AnimeInformation(anime)
-	AnimeFriends(friends, listItems)
-
 component AnimeTrailer(anime *arn.Anime)
 	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].ServiceID != ""
-		h3.anime-section-name Trailer
-		.anime-trailer.video-container
-			iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[0].ServiceID + "?showinfo=0", allowfullscreen="allowfullscreen")
+		section.anime-section.mountable
+			h3.anime-section-name Trailer
+			.anime-trailer.video-container
+				iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[0].ServiceID + "?showinfo=0", allowfullscreen="allowfullscreen")
 
 component AnimeFriends(friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem)
 	if len(friends) > 0
@@ -139,54 +170,55 @@ component AnimeFriends(friends []*arn.User, listItems map[*arn.User]*arn.AnimeLi
 				.user-avatars
 					each friend in friends
 						if friend.Nick != ""
-							if friend.IsActive()
-								FriendEntry(friend, listItems)
-							else
-								.inactive-user
+							.mountable(data-mountable-type="friend")
+								if friend.IsActive()
 									FriendEntry(friend, listItems)
+								else
+									.inactive-user
+										FriendEntry(friend, listItems)
 
 component AnimeInformation(anime *arn.Anime)
 	section.anime-section.mountable
 		h3.anime-section-name Information
 		table.anime-info-table
-			tr
-				td Type:
-				td= anime.TypeHumanReadable()
+			tr.mountable(data-mountable-type="info")
+				td.anime-info-key Type:
+				td.anime-info-value= anime.TypeHumanReadable()
 
 			if anime.EpisodeCount != 0
-				tr
-					td Episodes:
-					td= anime.EpisodeCount
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Episodes:
+					td.anime-info-value= anime.EpisodeCount
 
 			if anime.EpisodeLength != 0
-				tr
-					td Episode length:
-					td= strconv.Itoa(anime.EpisodeLength) + " min."
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Episode length:
+					td.anime-info-value= strconv.Itoa(anime.EpisodeLength) + " min."
 
-			tr
-				td Status:
-				td= anime.StatusHumanReadable()
+			tr.mountable(data-mountable-type="info")
+				td.anime-info-key Status:
+				td.anime-info-value= anime.StatusHumanReadable()
 			
 			if anime.StartDate == anime.EndDate && anime.StartDate != "" && anime.EndDate != ""
 				if anime.StartDate != ""
-					tr
-						td Airing date:
-						td= anime.StartDate
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Airing date:
+						td.anime-info-value= anime.StartDate
 			else
 				if anime.StartDate != ""
-					tr
-						td Start date:
-						td= anime.StartDate
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Start date:
+						td.anime-info-value= anime.StartDate
 
 				if anime.EndDate != ""
-					tr
-						td End date:
-						td= anime.EndDate
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key End date:
+						td.anime-info-value= anime.EndDate
 
 			if anime.FirstChannel != ""
-				tr
-					td Channel:
-					td= anime.FirstChannel
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Channel:
+					td.anime-info-value= anime.FirstChannel
 
 component FriendEntry(friend *arn.User, listItems map[*arn.User]*arn.AnimeListItem)
 	CustomAvatar(friend, listItems[friend].Link(friend.Nick), friend.Nick + " => " + listItems[friend].Status + " | " + toString(listItems[friend].Episodes) + " eps | " + fmt.Sprintf("%.1f", listItems[friend].Rating.Overall) + " rating")

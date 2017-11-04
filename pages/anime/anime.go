@@ -70,6 +70,15 @@ func Get(ctx *aero.Context) string {
 		})
 	}
 
+	// Soundtracks
+	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+		return !track.IsDraft && len(track.Media) > 0 && arn.Contains(track.Tags, "anime:"+anime.ID)
+	})
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "Error fetching soundtracks", err)
+	}
+
 	// Open Graph
 	description := anime.Summary
 
@@ -100,5 +109,5 @@ func Get(ctx *aero.Context) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Anime(anime, friends, friendsAnimeListItems, user))
+	return ctx.HTML(components.Anime(anime, tracks, friends, friendsAnimeListItems, user))
 }

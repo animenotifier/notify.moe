@@ -38,8 +38,11 @@
 
 .anime-info-table
 	margin 0
-	width 100%
-	max-width 600px
+	// width 100%
+	// max-width 600px
+
+.anime-info-value
+	text-align right
 
 .anime-section
 	margin-top 1rem
@@ -112,25 +115,25 @@
 		bottom 0
 		right content-padding
 
-.anime-rating-categories
-	horizontal
-	width 100%
+// .anime-rating-categories
+// 	horizontal
+// 	width 100%
 
-.anime-rating-category
-	ui-element
-	flex 1
-	text-align center
-	margin 0.5rem
+// .anime-rating-category
+// 	ui-element
+// 	flex 1
+// 	text-align center
+// 	margin 0.5rem
 
-.anime-rating-category-name
-	font-size 1.3rem
-	margin-top 0.5rem
+// .anime-rating-category-name
+// 	font-size 1.3rem
+// 	margin-top 0.5rem
 
-.anime-rating
-	margin 0.5rem
-	letter-spacing 3px
-	font-size 1.3rem
-	color link-color
+// .anime-rating
+// 	margin 0.5rem
+// 	letter-spacing 3px
+// 	font-size 1.3rem
+// 	color link-color
 
 .anime-widget
 	margin-top 0.6rem

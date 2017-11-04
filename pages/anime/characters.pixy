@@ -7,5 +7,5 @@ component AnimeCharacters(anime *arn.Anime)
 			.characters
 				each character in anime.Characters().Items
 					if character.Role == "main" && character.Character() != nil
-						.mountable
+						.mountable(data-mountable-type="character")
 							Character(character.Character())
