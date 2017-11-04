@@ -11,7 +11,7 @@
 	margin-top 1rem
 	flex-basis 300px
 
-> 1500px
+> 1400px
 	.anime
 		horizontal
 
@@ -43,6 +43,32 @@
 
 .anime-info-value
 	text-align right
+
+.anime-soundtracks
+	vertical
+	margin-top 1rem
+
+.anime-soundtrack
+	vertical
+	width 100%
+	margin-bottom 0.5rem
+
+> 500px
+	.anime-soundtracks
+		horizontal-wrap
+		justify-content flex-start
+		margin-top 0
+
+	.anime-soundtrack
+		max-width 200px
+		margin calc(content-padding / 2)
+
+// .anime-soundtracks
+// 	horizontal-wrap
+
+// .anime-soundtrack
+// 	flex-basis 400px
+// 	padding-bottom video-padding
 
 .anime-section
 	margin-top 1rem

@@ -1,7 +1,7 @@
 component AnimeCharacters(anime *arn.Anime)
 	//- AnimeTabs(anime)
 
-	if len(anime.Characters().Items) > 0
+	if anime.Characters() != nil && len(anime.Characters().Items) > 0
 		.anime-section
 			h3.anime-section-name Characters
 			.characters

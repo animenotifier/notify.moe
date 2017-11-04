@@ -1,21 +1,23 @@
 .tab
 	color text-color
 	padding 0.5rem 1rem
-	background-color rgba(0, 0, 0, 0.02)
+	background-color tab-background
 	border ui-border
 	border-left none
 	white-space nowrap
 
 	:hover
 		color text-color
-		background-color bg-color
+		background-color tab-hover-background
+		text-shadow none
 
 	:active
 		transform none
 
 	&.active
-		background tab-active-background
-		color theme-white
+		background-color tab-active-background
+		color tab-active-color
+		text-shadow tab-active-text-shadow
 
 	:first-child
 		border-left ui-border

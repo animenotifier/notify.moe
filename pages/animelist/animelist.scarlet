@@ -29,6 +29,11 @@
 	flex 1
 	clip-long-text
 
+	a
+		color text-color
+		:hover
+			color link-hover-color
+
 .anime-list-item-episodes
 	horizontal
 	justify-content flex-end

@@ -6,4 +6,7 @@ component AnimeTracks(anime *arn.Anime, tracks []*arn.SoundTrack)
 			h3.anime-section-name Tracks
 			.anime-soundtracks
 				each track in tracks
-					ExternalMedia(track.Media[0])
+					.anime-soundtrack.mountable(data-mountable-type="track")
+						.video-container
+							iframe.video.lazy(data-src=track.Media[0].EmbedLink(), allowfullscreen="allowfullscreen")
+						a.sound-track-footer.ajax(href=track.Link())= track.Title

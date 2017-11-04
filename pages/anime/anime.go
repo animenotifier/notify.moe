@@ -75,6 +75,10 @@ func Get(ctx *aero.Context) string {
 		return !track.IsDraft && len(track.Media) > 0 && arn.Contains(track.Tags, "anime:"+anime.ID)
 	})
 
+	sort.Slice(tracks, func(i, j int) bool {
+		return tracks[i].Title < tracks[j].Title
+	})
+
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Error fetching soundtracks", err)
 	}

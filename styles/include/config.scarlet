@@ -11,6 +11,7 @@ anime-alternative-title-color = hsla(0, 0%, 0%, 0.5)
 theme-white = bg-color
 theme-black = text-color
 link-hover-text-shadow = none
+tab-active-text-shadow = none
 
 // UI
 ui-border-color = rgba(0, 0, 0, 0.1)
@@ -30,6 +31,8 @@ input-focus-border-color = rgb(248, 165, 130)
 // Button
 button-hover-color = white
 button-hover-background = link-hover-color
+tab-background = rgba(0, 0, 0, 0.02)
+tab-hover-background = bg-color
 tab-active-color = white
 tab-active-background = hsl(216, 68%, 42%)
 // tab-active-background = rgb(46, 85, 160)

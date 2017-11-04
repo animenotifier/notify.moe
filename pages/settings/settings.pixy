@@ -75,24 +75,6 @@ component Settings(user *arn.User)
 		
 		.widget.mountable
 			h3.widget-title
-				Icon("download")
-				span Import
-			
-			ImportLists(user)
-
-		.widget.mountable
-			h3.widget-title
-				Icon("upload")
-				span Export
-			
-			.widget-section
-				label JSON:
-				a.button(href="/api/animelist/" + user.ID)
-					Icon("upload")
-					span Export anime list as JSON
-
-		.widget.mountable
-			h3.widget-title
 				Icon("puzzle-piece")
 				span Apps
 			
@@ -113,6 +95,24 @@ component Settings(user *arn.User)
 				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
 					Icon("android")
 					span Get the Android App
+
+		.widget.mountable
+			h3.widget-title
+				Icon("download")
+				span Import
+			
+			ImportLists(user)
+
+		.widget.mountable
+			h3.widget-title
+				Icon("upload")
+				span Export
+			
+			.widget-section
+				label JSON:
+				a.button(href="/api/animelist/" + user.ID)
+					Icon("upload")
+					span Export anime list as JSON
 		
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
@@ -140,6 +140,21 @@ component Settings(user *arn.User)
 
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
+				Icon("font")
+				span Formatting
+			
+			.widget-section
+				label(for="TitleLanguage")= "Title language:"
+				select.widget-ui-element.action(id="TitleLanguage", data-field="TitleLanguage", value=user.Settings().TitleLanguage, title="Language of anime titles", data-action="save", data-trigger="change")
+					option(value="canonical") Canonical
+					option(value="english") English
+					option(value="romaji") Romaji
+					option(value="japanese") 日本語
+
+			InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
+
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
 				Icon("star")
 				span PRO
 			
@@ -158,22 +173,6 @@ component Settings(user *arn.User)
 					a.button.ajax(href="/shop")
 						Icon("star")
 						span Go PRO
-		
-		.widget.mountable(data-api="/api/settings/" + user.ID)
-			h3.widget-title
-				Icon("font")
-				span Formatting
-			
-			.widget-section
-				label(for="TitleLanguage")= "Title language:"
-				select.widget-ui-element.action(id="TitleLanguage", data-field="TitleLanguage", value=user.Settings().TitleLanguage, title="Language of anime titles", data-action="save", data-trigger="change")
-					option(value="canonical") Canonical
-					option(value="english") English
-					option(value="romaji") Romaji
-					option(value="japanese") 日本語
-
-			InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
-
 
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title
