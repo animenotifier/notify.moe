@@ -1,9 +1,11 @@
 component AnimeCharacters(anime *arn.Anime)
-	AnimeTabs(anime)
+	//- AnimeTabs(anime)
 
-	h3.anime-section-name Characters
-	.characters
-		each character in anime.Characters().Items
-			if character.Character() != nil
-				.mountable
-					Character(character.Character())
+	if len(anime.Characters().Items) > 0
+		.anime-section
+			h3.anime-section-name Characters
+			.characters
+				each character in anime.Characters().Items
+					if character.Role == "main" && character.Character() != nil
+						.mountable
+							Character(character.Character())

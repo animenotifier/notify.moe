@@ -27,4 +27,5 @@
 
 .character-image
 	width 112px
-	height 175px
+	height 112px
+	border-radius 10%

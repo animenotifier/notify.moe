@@ -14,7 +14,7 @@
 		transform none
 
 	&.active
-		background tab-hover-background
+		background tab-active-background
 		color theme-white
 
 	:first-child

@@ -44,14 +44,13 @@ sidebar-spacing-y = 0.7rem
 	
 	&.active
 		.sidebar-button
-			// background tab-hover-background
-			// color white
-			color link-color
+			color tab-active-color
+			background tab-active-background
 			text-shadow link-hover-text-shadow
+			background tab-active-background
 
 .sidebar-button
 	horizontal
-	default-transition
 	align-items center
 	padding sidebar-spacing-y 1rem
 	// background ui-background

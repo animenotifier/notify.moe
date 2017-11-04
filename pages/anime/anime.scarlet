@@ -1,6 +1,23 @@
 .anime
-	max-width 1100px
-	margin 0 auto
+	vertical
+
+.anime-main-column
+	vertical
+	flex 1
+
+.anime-side-column
+	vertical
+	margin-left 0
+	margin-top 1rem
+	flex-basis 300px
+
+> 1500px
+	.anime
+		horizontal
+
+	.anime-side-column
+		margin-left content-padding
+		margin-top 0
 
 .anime-header
 	vertical
@@ -15,6 +32,20 @@
 	
 	.anime-title
 		text-align left
+
+	.anime-alternative-title
+		text-align left
+
+.anime-info-table
+	margin 0
+	width 100%
+	max-width 600px
+
+.anime-section
+	margin-top 1rem
+
+	:first-child
+		margin-top 0 !important
 
 .anime-section-name
 	font-weight bold
@@ -32,7 +63,7 @@
 
 .anime-cover-image
 	// width 142px
-	width 225px
+	width 250px
 	height auto
 	border-radius 3px
 	
@@ -57,31 +88,29 @@
 	font-size 0.9em
 	margin-top 0
 	margin-bottom 0.5rem
-	text-align left
+	text-align center
 	font-weight normal
 	line-height content-line-height
 	
 	.japanese
-		color rgba(255, 255, 255, 0.5) !important
+		color anime-alternative-title-color !important
 
 .anime-actions
 	display none !important
+	// horizontal
+	// justify-content center
 
-// .anime-actions
-// 	horizontal
-// 	justify-content center
+	// // Action button margin
+	// margin calc(content-padding - 0.5rem) -0.5rem
 
-// 	// Action button margin
-// 	margin calc(content-padding - 0.5rem) -0.5rem
+	// // Setting z-index requires setting a background as well
+	// z-index 10
 
-// 	// Setting z-index requires setting a background as well
-// 	z-index 10
-
-// > 1450px
-// 	.anime-actions
-// 		position absolute
-// 		top 0
-// 		right content-padding
+> 1450px
+	.anime-actions
+		position absolute
+		bottom 0
+		right content-padding
 
 .anime-rating-categories
 	horizontal

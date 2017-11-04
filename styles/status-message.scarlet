@@ -22,4 +22,4 @@
 
 .info-message
 	color white
-	background tab-hover-background
+	background tab-active-background

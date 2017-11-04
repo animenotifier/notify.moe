@@ -1,18 +1,26 @@
 // Dark theme
+
+// Main color
+hue = 45
+saturation = 100%
+
+// Derived colors
 text-color = hsl(0, 0%, 90%)
 bg-color = hsl(0, 0%, 24%)
-link-color = hsl(81, 100%, 56%)
-link-hover-color = hsl(81, 100%, 66%)
+link-color = hsl(hue, saturation, 56%)
+link-hover-color = hsl(hue, saturation, 66%)
 ui-background = hsla(0, 0%, 8%, 0.5)
 
 theme-white = bg-color
 theme-black = text-color
 
-link-hover-text-shadow = 0 0 8px hsla(81, 100%, 56%, 0.5)
+link-hover-text-shadow = 0 0 8px hsla(hue, saturation, 56%, 0.5)
 
 main-color = link-color
 link-active-color = link-hover-color
 button-hover-color = link-hover-color
 button-hover-background = hsla(0, 0%, 12%, 0.5)
-tab-hover-background = link-hover-color
+tab-active-color = bg-color
+tab-active-background = white
 loading-anim-color = link-color
+anime-alternative-title-color = hsla(0, 0%, 100%, 0.5)
