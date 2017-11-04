@@ -53,6 +53,11 @@ nav-link-hover-slide-color = main-color
 // nav-link-color = rgb(160, 160, 160)
 // nav-link-hover-color = rgb(80, 80, 80)
 
+// Forum
+post-like-color = green
+post-unlike-color = rgb(255, 32, 12)
+post-permalink-color = blue
+
 // Tables
 table-width-normal = 900px
 

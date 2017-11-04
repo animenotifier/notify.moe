@@ -98,17 +98,14 @@ post-content-padding-y = 0.75rem
 	&:before
 		content "+"
 
-.post-permalink
-	color blue !important
+// .post-permalink
+// 	color post-permalink-color !important
 
-.post-delete
-	color rgb(255, 32, 12) !important
+// .post-like
+// 	color post-like-color !important
 
-.post-like
-	color green !important
-
-.post-unlike
-	color rgb(255, 32, 12) !important
+// .post-unlike
+// 	color post-unlike-color !important
 
 .post-save
 	//

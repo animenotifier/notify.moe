@@ -4,17 +4,17 @@
 hue = 45
 saturation = 100%
 
-// Derived colors
+// Main
 text-color = hsl(0, 0%, 90%)
 bg-color = hsl(0, 0%, 24%)
 link-color = hsl(hue, saturation, 66%)
 link-hover-color = hsl(hue, saturation, 76%)
+link-hover-text-shadow = 0 0 8px hsla(hue, saturation, 66%, 0.5)
 ui-background = hsla(0, 0%, 8%, 0.3)
 
+// White/black
 theme-white = bg-color
 theme-black = text-color
-
-link-hover-text-shadow = 0 0 8px hsla(hue, saturation, 66%, 0.5)
 
 main-color = link-color
 link-active-color = link-hover-color
@@ -26,3 +26,8 @@ tab-active-color = hsl(0, 0%, 95%)
 tab-active-background = hsla(0, 0%, 2%, 0.5)
 loading-anim-color = link-color
 anime-alternative-title-color = hsla(0, 0%, 100%, 0.5)
+
+// Forum
+post-like-color = green
+post-unlike-color = rgb(255, 32, 12)
+post-permalink-color = blue
