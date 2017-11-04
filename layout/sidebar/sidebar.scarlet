@@ -32,7 +32,8 @@ sidebar-spacing-y = 0.7rem
 		pointer-events auto
 		box-shadow none
 		border-right ui-border
-		background rgba(0, 0, 0, 0.03)
+		// background rgba(0, 0, 0, 0.03)
+		background rgba(0, 0, 0, 0.2)
 
 .sidebar-visible
 	transform translateX(0) !important

@@ -19,7 +19,7 @@ func Test(ctx *aero.Context) string {
 	notification := &arn.Notification{
 		Title:   "Anime Notifier",
 		Message: "Yay, it works!",
-		Icon:    "https://" + ctx.App.Config.Domain + "/images/brand/300.png",
+		Icon:    "https://" + ctx.App.Config.Domain + "/images/brand/220.png",
 	}
 
 	user.SendNotification(notification)

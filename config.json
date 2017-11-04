@@ -32,12 +32,18 @@
 	"manifest": {
 		"short_name": "notify.moe",
 		"gcm_sender_id": "941298467524",
-		"theme_color": "#f8a582",
+		"theme_color": "#f0c7bb",
 		"background_color": "#ffffff",
 		"icons": [
 			{
 				"src": "images/brand/64.png",
-				"sizes": "64x64"
+				"sizes": "64x64",
+				"type": "image/png"
+			},
+			{
+				"src": "images/brand/128.png",
+				"sizes": "128x128",
+				"type": "image/png"
 			},
 			{
 				"src": "images/brand/144.png",
@@ -45,12 +51,9 @@
 				"type": "image/png"
 			},
 			{
-				"src": "images/brand/300.png",
-				"sizes": "300x300"
-			},
-			{
-				"src": "images/brand/600.png",
-				"sizes": "600x600"
+				"src": "images/brand/220.png",
+				"sizes": "220x220",
+				"type": "image/png"
 			}
 		]
 	},

@@ -16,7 +16,7 @@ func Get(ctx *aero.Context) string {
 			"og:description": description,
 			"og:type":        "website",
 			"og:url":         "https://" + ctx.App.Config.Domain,
-			"og:image":       "https://" + ctx.App.Config.Domain + "/images/brand/600.png",
+			"og:image":       "https://" + ctx.App.Config.Domain + "/images/brand/220.png",
 		},
 		Meta: map[string]string{
 			"description": description,

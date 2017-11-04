@@ -59,7 +59,7 @@ func testPackage(pkg string) {
 			Title:   pkg,
 			Message: "Test failed",
 			Link:    "https://" + pkg,
-			Icon:    "https://notify.moe/images/brand/300.png",
+			Icon:    "https://notify.moe/images/brand/220.png",
 		})
 		return
 	}

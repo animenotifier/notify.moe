@@ -49,7 +49,7 @@ func CreatePayment(ctx *aero.Context) string {
 	// 	Name: "Anime Notifier",
 	// 	Presentation: paypalsdk.Presentation{
 	// 		BrandName:  "Anime Notifier",
-	// 		LogoImage:  "https://notify.moe/brand/300",
+	// 		LogoImage:  "https://notify.moe/brand/220",
 	// 		LocaleCode: "US",
 	// 	},
 

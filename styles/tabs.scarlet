@@ -21,6 +21,12 @@
 
 	:first-child
 		border-left ui-border
+		border-top-left-radius ui-element-border-radius
+		border-bottom-left-radius ui-element-border-radius
+
+	:last-child
+		border-top-right-radius ui-element-border-radius
+		border-bottom-right-radius ui-element-border-radius
 
 	// color text-color !important
 	// :hover

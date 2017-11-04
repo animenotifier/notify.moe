@@ -9,7 +9,7 @@ text-color = hsl(0, 0%, 90%)
 bg-color = hsl(0, 0%, 24%)
 link-color = hsl(hue, saturation, 66%)
 link-hover-color = hsl(hue, saturation, 76%)
-ui-background = hsla(0, 0%, 8%, 0.5)
+ui-background = hsla(0, 0%, 8%, 0.3)
 
 theme-white = bg-color
 theme-black = text-color
