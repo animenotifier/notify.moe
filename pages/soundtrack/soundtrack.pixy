@@ -1,6 +1,6 @@
-component Track(track *arn.SoundTrack)
-	SoundTrackTabs(track)
-	
+component Track(track *arn.SoundTrack, user *arn.User)
+	SoundTrackTabs(track, user)
+
 	.sound-track-full-page
 		if track.Title == ""
 			h1.mountable untitled
@@ -13,7 +13,7 @@ component Track(track *arn.SoundTrack)
 					h3.widget-title= media.Service
 					.sound-track-media
 						ExternalMedia(media)
-			
+
 			.widget.mountable
 				h3.widget-title Anime
 
@@ -21,7 +21,7 @@ component Track(track *arn.SoundTrack)
 					each anime in track.Anime()
 						a.sound-track-anime-list-item.ajax(href=anime.Link(), title=anime.Title.Canonical)
 							img.sound-track-anime-list-item-image.lazy(data-src=anime.Image.Tiny, alt=anime.Title.Canonical)
-			
+
 			if len(track.Beatmaps()) > 0
 				.widget.mountable
 					h3.widget-title Beatmaps
@@ -29,28 +29,27 @@ component Track(track *arn.SoundTrack)
 						for index, beatmap := range track.Beatmaps()
 							li
 								a.beatmap(href="https://osu.ppy.sh/s/" + beatmap, target="_blank")= "Beatmap #" + strconv.Itoa(index + 1)
-			
 			.widget.mountable
 				h3.widget-title Tags
 				.tags
 					each tag in track.Tags
 						.tag= tag
-
 		.footer.text-center.mountable
 			if track.EditedBy != ""
-				span Edited 
+				span Edited
 				span.utc-date(data-date=track.Edited)
-				span  by 
+				span  by
 				span= track.EditedByUser().Nick
 			else
-				span Posted 
+				span Posted
 				span.utc-date(data-date=track.Created)
-				span  by 
+				span  by
 				span= track.Creator().Nick
-			
+
 			span .
 
-component SoundTrackTabs(track *arn.SoundTrack)
+component SoundTrackTabs(track *arn.SoundTrack, user *arn.User)
 	.tabs
 		Tab("Soundtrack", "music", track.Link())
 		Tab("Edit", "pencil", track.Link() + "/edit")
+		TabLike(strconv.Itoa(len(track.Likes)), "heart", track, user)
