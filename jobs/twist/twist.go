@@ -36,6 +36,11 @@ func main() {
 		// Log
 		fmt.Fprintf(os.Stdout, "[%d / %d] ", count+1, len(idList))
 
+		if anime.Status != "current" {
+			fmt.Println("Not currently airing - skipping")
+			continue
+		}
+
 		// Refresh
 		anime.RefreshEpisodes()
 
