@@ -1,6 +1,10 @@
 .statistics
-	horizontal-wrap-center
+	horizontal-wrap
+	justify-content space-around
 	text-align center
+
+	.widget
+		max-width 300px
 
 .pie-chart
 	transform rotate(-90deg)
