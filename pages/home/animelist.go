@@ -32,7 +32,6 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	animeList.PrefetchAnime()
 	animeList.Sort()
 
 	return ctx.HTML(components.Home(animeList.FilterStatus(status), viewUser, user, status))

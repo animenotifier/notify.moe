@@ -39,7 +39,6 @@ func statusList(ctx *aero.Context, status string) (*arn.AnimeList, string) {
 	}
 
 	watchingList := animeList.FilterStatus(status)
-	watchingList.PrefetchAnime()
 	watchingList.Sort()
 
 	return watchingList, ""
