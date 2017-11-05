@@ -125,21 +125,20 @@
 		color anime-alternative-title-color !important
 
 .anime-actions
-	display none !important
-	// horizontal
-	// justify-content center
+	horizontal
+	justify-content flex-end
 
-	// // Action button margin
+	// Action button margin
 	// margin calc(content-padding - 0.5rem) -0.5rem
 
-	// // Setting z-index requires setting a background as well
+	// Setting z-index requires setting a background as well
 	// z-index 10
 
-> 1450px
-	.anime-actions
-		position absolute
-		bottom 0
-		right content-padding
+// > 1450px
+// 	.anime-actions
+// 		position fixed
+// 		bottom 0
+// 		right content-padding
 
 // .anime-rating-categories
 // 	horizontal

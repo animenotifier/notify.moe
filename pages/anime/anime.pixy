@@ -29,24 +29,10 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 			//- h3.anime-section-name.anime-summary-header Summary
 			p.anime-summary.mountable= anime.Summary
 
+			//- AnimeActions(anime, user)
+
 			//- AnimeTabs(anime)
 	
-	if user != nil
-		.buttons.anime-actions
-			if user.Role == "editor" || user.Role == "admin"
-				a.button.ajax(href=anime.Link() + "/edit")
-					Icon("pencil-square-o")
-					span Edit anime
-
-			if user.AnimeList().Contains(anime.ID)
-				a.button.ajax(href="/+" + user.Nick + "/animelist/anime/" + anime.ID)
-					Icon("pencil")
-					span Edit in collection
-			else
-				button.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID)
-					Icon("plus")
-					span Add to collection
-
 	AnimeCharacters(anime)
 	AnimeRelations(anime, user)
 	AnimeTracks(anime, tracks)
@@ -57,6 +43,31 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 
 	//- .footer
 	//- 	span Powered by Kitsu.
+
+component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+	AnimeTrailer(anime)
+	AnimeInformation(anime)
+	AnimeRatings(anime, user)
+	AnimePopularity(anime)
+	AnimeFriends(friends, listItems)
+	AnimeLinks(anime)
+
+component AnimeActions(anime *arn.Anime, user *arn.User)
+	if user != nil
+		.buttons.anime-actions
+			//- if user.Role == "editor" || user.Role == "admin"
+			//- 	a.button.ajax(href=anime.Link() + "/edit")
+			//- 		Icon("pencil-square-o")
+			//- 		span Edit anime
+
+			if user.AnimeList().Contains(anime.ID)
+				a.button.ajax(href="/+" + user.Nick + "/animelist/anime/" + anime.ID)
+					Icon("pencil")
+					span Edit in collection
+			else
+				button.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID)
+					Icon("plus")
+					span Add to collection
 
 component AnimeRatings(anime *arn.Anime, user *arn.User)
 	section.anime-section.mountable
@@ -133,14 +144,6 @@ component AnimeLinks(anime *arn.Anime)
 				a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
 					Icon("external-link")
 					span= mapping.Name()
-
-component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
-	AnimeTrailer(anime)
-	AnimeInformation(anime)
-	AnimeRatings(anime, user)
-	AnimePopularity(anime)
-	AnimeFriends(friends, listItems)
-	AnimeLinks(anime)
 
 component AnimeRelations(anime *arn.Anime, user *arn.User)
 	if anime.Relations() != nil && len(anime.Relations().Items) > 0
