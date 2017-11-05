@@ -1,0 +1,14 @@
+component TabLikeTrack(label string, icon string, track *arn.SoundTrack, user *arn.User)
+	if user == nil
+		.tab.action(aria-label=label, title="Login to like this track")
+			Icon(icon)
+			span.tab-text= label
+	else
+		if track.LikedBy(user.ID)
+			.tab.action(data-api="/api" + track.Link(), data-action="unlike", data-trigger="click", aria-label=label, title="Click to unlike this track")
+				Icon(icon)
+				span.tab-text= label
+		else
+			.tab.action(data-api="/api" + track.Link(), data-action="like", data-trigger="click", aria-label=label, title="Click to like this track")
+				Icon(icon + "-o")
+				span.tab-text= label

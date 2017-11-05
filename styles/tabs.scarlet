@@ -10,6 +10,7 @@
 		color text-color
 		background-color tab-hover-background
 		text-shadow none
+		cursor pointer
 
 	:active
 		transform none
