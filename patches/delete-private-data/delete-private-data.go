@@ -10,7 +10,6 @@ func main() {
 	defer arn.Node.Close()
 
 	arn.DB.Clear("EmailToUser")
-	arn.DB.Clear("GoogleToUser")
 
 	// Iterate over the stream
 	count := 0
@@ -29,6 +28,9 @@ func main() {
 		user.Accounts.Google.ID = ""
 		user.AgeRange = arn.UserAgeRange{}
 		user.Location = arn.UserLocation{}
+
+		user.PushSubscriptions().Items = []*arn.PushSubscription{}
+		user.PushSubscriptions().Save()
 
 		// Save in DB
 		user.Save()
