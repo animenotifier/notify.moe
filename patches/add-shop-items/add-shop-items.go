@@ -13,8 +13,8 @@ var items = []*arn.Item{
 
 Includes:
 
-* Special highlight on the forums
 * Chrome extension for quick list access
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
 * High priority for your personal suggestions
@@ -34,8 +34,8 @@ Includes:
 
 Includes:
 
-* Special highlight on the forums
 * Chrome extension for quick list access
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
 * High priority for your personal suggestions
@@ -55,8 +55,8 @@ Includes:
 
 Includes:
 
-* Special highlight on the forums
 * Chrome extension for quick list access
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
 * High priority for your personal suggestions
@@ -76,8 +76,8 @@ Includes:
 
 Includes:
 
-* Special highlight on the forums
 * Chrome extension for quick list access
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
 * High priority for your personal suggestions

@@ -5,6 +5,7 @@ import (
 	"github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
+	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/middleware"
@@ -94,7 +95,6 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/post/:id", posts.Get)
 	app.Ajax("/character/:id", character.Get)
 	app.Ajax("/new/thread", newthread.Get)
-	app.Ajax("/settings", settings.Get)
 	app.Ajax("/artworks", artworks.Get)
 	app.Ajax("/amvs", amvs.Get)
 	app.Ajax("/users", users.Active)
@@ -103,6 +103,15 @@ func configure(app *aero.Application) *aero.Application {
 	app.Ajax("/statistics", statistics.Get)
 	app.Ajax("/statistics/anime", statistics.Anime)
 	app.Ajax("/login", login.Get)
+
+	// Settings
+	app.Ajax("/settings", settings.Get(components.SettingsPersonal))
+	app.Ajax("/settings/accounts", settings.Get(components.SettingsAccounts))
+	app.Ajax("/settings/notifications", settings.Get(components.SettingsNotifications))
+	app.Ajax("/settings/apps", settings.Get(components.SettingsApps))
+	app.Ajax("/settings/avatar", settings.Get(components.SettingsAvatar))
+	app.Ajax("/settings/formatting", settings.Get(components.SettingsFormatting))
+	app.Ajax("/settings/pro", settings.Get(components.SettingsPro))
 
 	// Soundtracks
 	app.Ajax("/soundtracks", soundtracks.Get)
