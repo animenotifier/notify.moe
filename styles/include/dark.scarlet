@@ -11,6 +11,9 @@ link-color = hsl(hue, saturation, 66%)
 link-hover-color = hsl(hue, saturation, 76%)
 link-hover-text-shadow = 0 0 8px hsla(hue, saturation, 66%, 0.5)
 ui-background = hsla(0, 0%, 8%, 0.3)
+sidebar-background = rgba(0, 0, 0, 0.2)
+sidebar-opaque-background = ui-background
+table-row-hover-background = hsla(0, 0%, 100%, 0.01)
 
 // White/black
 theme-white = bg-color
@@ -26,8 +29,9 @@ tab-active-color = hsl(0, 0%, 95%)
 tab-active-background = hsla(0, 0%, 2%, 0.5)
 loading-anim-color = link-color
 anime-alternative-title-color = hsla(0, 0%, 100%, 0.5)
+anime-list-item-name-color = text-color
 
 // Forum
-post-like-color = green
-post-unlike-color = rgb(255, 32, 12)
-post-permalink-color = blue
+post-like-color = link-color
+post-unlike-color = link-color
+post-permalink-color = link-color

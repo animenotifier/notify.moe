@@ -1,8 +1,8 @@
 mixin input-focus
 	:focus
-		border 1px solid input-focus-border-color
+		border 1px solid input-focus-border-color !important
 		// TODO: Replace with alpha(main-color, 20%) function
-		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
+		box-shadow 0 0 6px rgba(248, 165, 130, 0.2) !important
 
 input, textarea, button, .button, select
 	ui-element

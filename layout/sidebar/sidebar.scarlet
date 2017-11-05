@@ -8,7 +8,7 @@ sidebar-spacing-y = 0.7rem
 	z-index 10
 	min-width 200px
 	height 100%
-	background ui-background
+	background sidebar-opaque-background
 	transform translateX(-100%)
 	overflow-x hidden
 	overflow-y auto
@@ -32,8 +32,7 @@ sidebar-spacing-y = 0.7rem
 		pointer-events auto
 		box-shadow none
 		border-right ui-border
-		// background rgba(0, 0, 0, 0.03)
-		background rgba(0, 0, 0, 0.2)
+		background sidebar-background
 
 .sidebar-visible
 	transform translateX(0) !important

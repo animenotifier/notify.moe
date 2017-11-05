@@ -21,4 +21,7 @@ th
 
 tbody
 	tr
-		bg-light-up
+		background-color transparent
+		
+		:hover
+			background-color table-row-hover-background

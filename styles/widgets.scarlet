@@ -22,7 +22,6 @@
 .widget
 	vertical
 	width 100%
-	max-width 300px
 	margin calc(content-padding / 2)
 	overflow hidden
 

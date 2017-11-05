@@ -98,14 +98,14 @@ post-content-padding-y = 0.75rem
 	&:before
 		content "+"
 
-// .post-permalink
-// 	color post-permalink-color !important
+.post-permalink
+	color post-permalink-color
 
-// .post-like
-// 	color post-like-color !important
+.post-like
+	color post-like-color
 
-// .post-unlike
-// 	color post-unlike-color !important
+.post-unlike
+	color post-unlike-color
 
 .post-save
 	//

@@ -37,6 +37,9 @@ tab-active-color = white
 tab-active-background = hsl(216, 68%, 42%)
 // tab-active-background = rgb(46, 85, 160)
 
+sidebar-background = rgba(0, 0, 0, 0.03)
+sidebar-opaque-background = ui-background
+
 // Forum
 forum-width = 830px
 post-highlight-color = rgba(248, 165, 130, 0.7)
@@ -54,9 +57,12 @@ nav-link-hover-slide-color = main-color
 // nav-link-hover-color = rgb(80, 80, 80)
 
 // Forum
-post-like-color = green
-post-unlike-color = rgb(255, 32, 12)
-post-permalink-color = blue
+post-like-color = green !important
+post-unlike-color = rgb(255, 32, 12) !important
+post-permalink-color = blue !important
+
+table-row-hover-background = hsla(0, 0%, 0%, 0.01)
+anime-list-item-name-color = link-color
 
 // Tables
 table-width-normal = 900px

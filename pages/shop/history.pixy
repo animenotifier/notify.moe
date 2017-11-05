@@ -3,18 +3,21 @@ component PurchaseHistory(purchases []*arn.Purchase, user *arn.User)
 
 	h1.page-title Purchase History
 
-	table
-		thead
-			tr.mountable
-				th Icon
-				th Item
-				th.history-quantity Quantity
-				th.history-price Price
-				th.history-date Date
-		tbody
-			each purchase in purchases
-				tr.shop-item.mountable(data-item-id=purchase.ItemID)
-					PurchaseInfo(purchase)
+	if len(purchases) == 0
+		p.text-center.mountable You haven't bought anything yet.
+	else
+		table
+			thead
+				tr.mountable
+					th Icon
+					th Item
+					th.history-quantity Quantity
+					th.history-price Price
+					th.history-date Date
+			tbody
+				each purchase in purchases
+					tr.shop-item.mountable(data-item-id=purchase.ItemID)
+						PurchaseInfo(purchase)
 
 component PurchaseInfo(purchase *arn.Purchase)
 	td.item-icon

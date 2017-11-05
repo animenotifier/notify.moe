@@ -30,7 +30,7 @@
 	clip-long-text
 
 	a
-		color text-color
+		color anime-list-item-name-color
 		:hover
 			color link-hover-color
 
