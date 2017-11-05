@@ -30,9 +30,15 @@
 
 * Start Chrome via `google-chrome --ignore-certificate-errors`
 
+## Database
+
+* `go get github.com/animenotifier/database`
+* `ln -s $GOPATH/src/github.com/animenotifier/database ~/.aero/db/arn`
+
 ## API keys
 
 * Get a Google OAuth 2.0 client key & secret from [console.developers.google.com](https://console.developers.google.com)
+* Add `https://beta.notify.moe/auth/google/callback` as an authorized redirect URI
 * Create the file `notify.moe/security/api-keys.json`:
 
 ```json
