@@ -1,3 +1,7 @@
+component SettingsTabs
+	.tabs
+		Tab("Personal", "user", "/settings/personal")
+
 component Settings(user *arn.User)
 	h1.page-title Settings
 	

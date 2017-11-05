@@ -4,7 +4,7 @@ component PurchaseHistory(purchases []*arn.Purchase, user *arn.User)
 	h1.page-title Purchase History
 
 	if len(purchases) == 0
-		p.text-center.mountable You haven't bought anything yet.
+		p.text-center.mountable You haven't bought any items yet.
 	else
 		table
 			thead

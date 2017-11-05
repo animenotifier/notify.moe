@@ -15,8 +15,8 @@ component ShopTabs(user *arn.User)
 		Tab(strconv.Itoa(user.Balance), "diamond", "/charge")
 
 component ShopItem(item *arn.Item)
-	.widget.shop-item.mountable(data-item-id=item.ID)
-		h3.widget-title.shop-item-name
+	.shop-item.mountable(data-item-id=item.ID)
+		h3.shop-item-name
 			.item-icon
 				Icon(item.Icon)
 			span= item.Name
@@ -24,5 +24,5 @@ component ShopItem(item *arn.Item)
 		.shop-item-description!= markdown.Render(item.Description)
 		.buttons.shop-buttons
 			button.shop-button-buy.action(data-item-id=item.ID, data-item-name=item.Name, data-price=item.Price, data-trigger="click", data-action="buyItem")
-				span.shop-item-price= item.Price
+				span.shop-item-price= "Buy for " + toString(item.Price)
 				Icon("diamond")
