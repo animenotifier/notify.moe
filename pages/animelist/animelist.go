@@ -25,7 +25,6 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	animeList.PrefetchAnime()
 	animeList.Sort()
 
 	return ctx.HTML(components.ProfileAnimeLists(animeList.SplitByStatus(), animeList.User(), user, ctx.URI()))

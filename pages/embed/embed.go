@@ -28,7 +28,6 @@ func Get(ctx *aero.Context) string {
 	}
 
 	watchingList := animeList.Watching()
-	watchingList.PrefetchAnime()
 	watchingList.Sort()
 
 	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(watchingList, animeList.User(), user)))

@@ -37,7 +37,6 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		user = utils.GetUser(ctx)
 	}, func() {
 		animeList = viewUser.AnimeList()
-		animeList.PrefetchAnime()
 
 		// Sort by rating
 		sort.Slice(animeList.Items, func(i, j int) bool {

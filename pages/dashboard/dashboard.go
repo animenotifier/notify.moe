@@ -53,7 +53,6 @@ func Get(ctx *aero.Context) string {
 		}
 
 		animeList = animeList.Watching()
-		animeList.PrefetchAnime()
 
 		for _, item := range animeList.Items {
 			futureEpisodes := item.Anime().UpcomingEpisodes()
