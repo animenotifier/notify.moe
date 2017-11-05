@@ -1,0 +1,6 @@
+*
+!*/
+!*.go
+!*.sh
+!README.md
+!.gitignore
