@@ -16,7 +16,7 @@ component PurchaseHistory(purchases []*arn.Purchase, user *arn.User)
 					th.history-date Date
 			tbody
 				each purchase in purchases
-					tr.shop-item.mountable(data-item-id=purchase.ItemID)
+					tr.shop-history-item.mountable(data-item-id=purchase.ItemID)
 						PurchaseInfo(purchase)
 
 component PurchaseInfo(purchase *arn.Purchase)

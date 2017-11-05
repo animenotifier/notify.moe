@@ -6,8 +6,8 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-const maxUsers = 6 * 6
-const maxAnime = 5 * 6
+const maxUsers = 36
+const maxAnime = 26
 const maxPosts = 3
 const maxThreads = 3
 

@@ -10,8 +10,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// const maxEpisodes = 26
-// const maxEpisodesLongSeries = 5
+const maxEpisodes = 26
+const maxEpisodesLongSeries = 10
 const maxDescriptionLength = 170
 
 // Get anime page.
@@ -24,16 +24,17 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
+	episodes := anime.Episodes().Items
 	// episodesReversed := false
 
-	// if len(anime.Episodes().Items) > maxEpisodes {
-	// 	episodesReversed = true
-	// 	anime.Episodes().Items = anime.Episodes().Items[len(anime.Episodes().Items)-maxEpisodesLongSeries:]
+	if len(episodes) > maxEpisodes {
+		// episodesReversed = true
+		episodes = episodes[len(episodes)-maxEpisodesLongSeries:]
 
-	// 	for i, j := 0, len(anime.Episodes().Items)-1; i < j; i, j = i+1, j-1 {
-	// 		anime.Episodes().Items[i], anime.Episodes().Items[j] = anime.Episodes().Items[j], anime.Episodes().Items[i]
-	// 	}
-	// }
+		for i, j := 0, len(episodes)-1; i < j; i, j = i+1, j-1 {
+			episodes[i], episodes[j] = episodes[j], episodes[i]
+		}
+	}
 
 	// Friends watching
 	var friends []*arn.User
@@ -113,5 +114,5 @@ func Get(ctx *aero.Context) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Anime(anime, tracks, friends, friendsAnimeListItems, user))
+	return ctx.HTML(components.Anime(anime, tracks, episodes, friends, friendsAnimeListItems, user))
 }

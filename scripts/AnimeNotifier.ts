@@ -269,7 +269,7 @@ export class AnimeNotifier {
 	}
 
 	async updatePushUI() {
-		if(!this.pushManager.pushSupported || !this.app.currentPath.includes("/settings")) {
+		if(!this.pushManager.pushSupported || !this.app.currentPath.includes("/settings/notifications")) {
 			return
 		}
 		

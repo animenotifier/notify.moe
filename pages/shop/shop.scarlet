@@ -22,7 +22,7 @@ item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	display inline-block
 
 // Colors
-.shop-item, .inventory-slot
+.shop-item, .inventory-slot, .shop-history-item
 	[data-item-id="pro-account-3"]
 		.item-icon
 			color item-color-pro-account
