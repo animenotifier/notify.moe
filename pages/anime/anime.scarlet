@@ -29,12 +29,24 @@
 > 800px
 	.anime-header
 		horizontal
+		padding-bottom content-padding
+		border-bottom 1px solid rgba(0, 0, 0, 0.05)
 	
 	.anime-title
 		text-align left
 
 	.anime-alternative-title
 		text-align left
+
+	.anime-actions
+		flex 1
+		justify-content flex-end
+		align-items flex-end
+
+		button,
+		.button
+			margin-right 0
+			margin-bottom 0
 
 .anime-info-table
 	margin 0
@@ -126,7 +138,7 @@
 
 .anime-actions
 	horizontal
-	justify-content flex-end
+	justify-content center
 
 	// Action button margin
 	// margin calc(content-padding - 0.5rem) -0.5rem

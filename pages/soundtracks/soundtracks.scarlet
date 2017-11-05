@@ -35,6 +35,10 @@
 .sound-track-anime-image
 	max-width 142px
 
+.music-buttons
+	display flex
+	justify-content center
+
 > 600px
 	.music-buttons
 		position absolute

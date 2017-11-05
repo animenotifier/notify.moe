@@ -1,4 +1,5 @@
-.anime-search
+.anime-search,
+.user-search
 	justify-content flex-start
 
 .anime-search-result

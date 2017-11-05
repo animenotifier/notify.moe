@@ -1,11 +1,11 @@
 component AnimeEpisodes(episodes []*arn.AnimeEpisode)
 	if len(episodes) > 0
-		.anime-section
+		.anime-section.mountable
 			h3.anime-section-name Episodes
 			table.episodes
 				tbody
 					each episode in episodes
-						tr.episode.mountable
+						tr.episode.mountable(data-mountable-type="episode")
 							td.episode-number
 								if episode.Number != -1
 									span= episode.Number
