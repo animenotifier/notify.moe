@@ -1,0 +1,13 @@
+.new-payment
+	horizontal
+	margin 2rem auto
+	font-size 4rem
+	line-height 1em
+	color green
+
+.new-payment-currency
+	margin-left 1rem
+	margin-bottom content-padding
+
+.new-payment-thank-you-image
+	width 683px

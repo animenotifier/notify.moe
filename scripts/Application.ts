@@ -23,10 +23,11 @@ export class Application {
 		this.fadeOutClass = "fade-out"
 	}
 
-	run() {
-		this.ajaxify()
-		this.markActiveLinks()
-		this.loading.classList.add(this.fadeOutClass)
+	init() {
+		document.addEventListener("DOMContentLoaded", () => {
+			this.ajaxify()
+			this.markActiveLinks()
+		})
 	}
 
 	find(id: string): HTMLElement {
@@ -92,6 +93,7 @@ export class Application {
 			request.then(html => {
 				// Set content
 				this.setContent(html, false)
+				this.scrollToTop()
 
 				// Fade animations
 				this.content.classList.remove(this.fadeOutClass)
@@ -117,10 +119,6 @@ export class Application {
 		} else {
 			this.content.innerHTML = html
 		}
-
-		this.ajaxify(this.content)
-		this.markActiveLinks(this.content)
-		this.scrollToTop()
 	}
 
 	markActiveLinks(element?: HTMLElement) {
@@ -149,7 +147,7 @@ export class Application {
 		for(let i = 0; i < links.length; i++) {
 			let link = links[i] as HTMLElement
 
-			link.classList.remove(this.ajaxClass)
+			// link.classList.remove(this.ajaxClass)
 
 			let self = this
 			link.onclick = function(e) {
@@ -160,7 +158,10 @@ export class Application {
 				let url = this.getAttribute("href")
 
 				e.preventDefault()
-				e.stopPropagation()
+
+				// if(this.dataset.bubble !== "true") {
+				// 	e.stopPropagation()
+				// }
 
 				if(!url || url === self.currentPath)
 					return

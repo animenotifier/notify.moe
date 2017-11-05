@@ -1,0 +1,31 @@
+.characters
+	horizontal-wrap
+
+.character
+	vertical
+	align-items center
+	margin 0.5rem
+	default-transition
+	transform scale(1)
+
+	:hover
+		transform scale(1.05)
+
+		// .character-name
+		// 	opacity 1
+
+.character-image
+	border-radius 3px
+	box-shadow shadow-medium
+	object-fit cover
+
+// .character-name
+// 	font-size 0.75rem
+// 	color text-color
+// 	opacity 0.5
+// 	transition opacity transition-speed ease
+
+.character-image
+	width 112px
+	height 112px
+	border-radius 10%

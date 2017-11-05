@@ -1,0 +1,30 @@
+component Statistics(pieCharts []*arn.PieChart)
+	h1.page-title Statistics
+
+	StatisticsHeader
+
+	.statistics
+		each pie in pieCharts
+			.widget
+				h3.widget-title= pie.Title
+				PieChart(pie.Slices)
+		
+		.footer
+			p Data is collected for statistical purposes only. We respect user privacy and we will never display or sell critical data to 3rd party services.
+
+component StatisticsHeader
+	.tabs
+		a.tab.action(href="/statistics", data-action="diff", data-trigger="click")
+			Icon("user")
+			span.tab-text Users
+
+		a.tab.action(href="/statistics/anime", data-action="diff", data-trigger="click")
+			Icon("tv")
+			span.tab-text Anime
+
+component PieChart(slices []*arn.PieChartSlice)
+	svg.pie-chart(viewBox="-1.1 -1.1 2.2 2.2")
+		each slice in slices
+			g
+				title= slice.Title
+				path.slice(d=utils.SVGSlicePath(slice.From, slice.To), fill=slice.Color)

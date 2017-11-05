@@ -1,0 +1,46 @@
+.sound-tracks
+	horizontal-wrap
+	justify-content space-around
+
+.sound-track
+	vertical
+	flex 1
+	flex-basis 500px
+	padding 1rem
+
+.sound-track-content
+	horizontal
+
+	iframe
+		width 100%
+	
+	box-shadow shadow-light
+
+.sound-track-footer
+	text-align center
+	margin-bottom 1rem
+	margin-top 0.4rem
+	font-size 0.9em
+
+	span
+		opacity 0.65
+
+.sound-track-anime-link
+	display none
+
+> 800px
+	.sound-track-anime-link
+		display block
+
+.sound-track-anime-image
+	max-width 142px
+
+.music-buttons
+	display flex
+	justify-content center
+
+> 600px
+	.music-buttons
+		position absolute
+		top content-padding
+		right content-padding

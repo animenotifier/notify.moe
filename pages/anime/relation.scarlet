@@ -1,0 +1,24 @@
+.anime-relations
+	horizontal-wrap
+
+.anime-relation
+	anime-mini-item
+	vertical
+
+.anime-relation-image
+	anime-mini-item-image
+
+.anime-relation-type,
+.anime-relation-year
+	font-size 0.7rem
+	line-height 1.7em
+	text-align center
+	color text-color
+	opacity 0.8
+
+.anime-relation-type
+	margin-top 0.2rem
+
+.anime-relation-year
+	font-size 0.6rem
+	opacity 0.65

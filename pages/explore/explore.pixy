@@ -1,0 +1,3 @@
+component Explore(animeList []*arn.Anime)
+	h1.page-title(title=toString(len(animeList)) + " anime") Explore
+	AnimeGrid(animeList)

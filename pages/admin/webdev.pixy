@@ -1,0 +1,48 @@
+component WebDev
+	AdminTabs
+
+	h1.page-title WebDev
+	
+	.webdev
+		.widget.mountable
+			h3.widget-title Tests
+
+			.buttons
+				a.button.mountable(href="https://developers.google.com/speed/pagespeed/insights/?url=https://notify.moe/&tab=desktop", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Google PageSpeed
+				a.button.mountable(href="https://observatory.mozilla.org/analyze.html?host=notify.moe", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Mozilla Observatory
+				a.button.mountable(href="https://html5.validator.nu/?doc=https://notify.moe", target="_blank", rel="noopener")
+					Icon("external-link")
+					span HTML5 Validator
+				a.button.mountable(href="https://testmysite.withgoogle.com/", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Mobile Speed
+				a.button.mountable(href="https://www.webpagetest.org/", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Web Page Test
+
+		.widget.mountable
+			h3.widget-title Browser Support
+
+			.buttons
+				a.button.mountable(href="http://caniuse.com/#feat=webp", target="_blank", rel="noopener")
+					Icon("external-link")
+					span WebP
+				a.button.mountable(href="http://caniuse.com/#feat=push-api", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Push API
+				a.button.mountable(href="http://caniuse.com/#feat=serviceworkers", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Service Worker
+				a.button.mountable(href="http://caniuse.com/#feat=intersectionobserver", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Intersection Observer
+				a.button.mountable(href="http://caniuse.com/#feat=requestidlecallback", target="_blank", rel="noopener")
+					Icon("external-link")
+					span Request Idle Callback
+				a.button.mountable(href="http://caniuse.com/#feat=css-variables", target="_blank", rel="noopener")
+					Icon("external-link")
+					span CSS Variables

@@ -6,28 +6,8 @@
 		width 100%
 		max-width forum-width
 
-.forum-tag
-	color text-color !important
-
-	:hover,
-	&.active
-		color white !important
-		background-color forum-tag-hover-color !important
-
-	// color text-color !important
-	// :hover
-	// 	color white !important
-	// &.active
-	// 	color white !important
-	// 	background-color link-hover-color
-
-< 920px
-	.forum-tag
-		.icon
-			margin-right 0
-	
-	.forum-tag-text
-		display none
-
-#load-more-threads
-	margin-top 1rem
+> 1250px
+	#new-thread
+		position fixed
+		right content-padding
+		bottom content-padding

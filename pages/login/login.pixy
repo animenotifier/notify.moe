@@ -1,4 +1,9 @@
 component Login
-	.login-buttons
-		a.login-button(href="/auth/google")
-			img.login-button-image(src="/images/login/google", alt="Google Login", title="Login with your Google account")
+	.login-buttons.mountable
+		a.login-button.login-button-google(href="/auth/google")
+			Icon("google")
+			span Sign in via Google
+
+		a.login-button.login-button-facebook(href="/auth/facebook")
+			Icon("facebook")
+			span Sign in via Facebook

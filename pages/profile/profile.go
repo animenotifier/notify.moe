@@ -1,6 +1,8 @@
 package profile
 
 import (
+	"sort"
+
 	"github.com/aerogo/aero"
 	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
@@ -9,6 +11,7 @@ import (
 )
 
 const maxPosts = 5
+const maxTracks = 3
 
 // Get user profile page.
 func Get(ctx *aero.Context) string {
@@ -27,28 +30,38 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	var user *arn.User
 	var threads []*arn.Thread
 	var animeList *arn.AnimeList
+	var tracks []*arn.SoundTrack
 	var posts []*arn.Post
 
 	flow.Parallel(func() {
 		user = utils.GetUser(ctx)
 	}, func() {
 		animeList = viewUser.AnimeList()
-	}, func() {
-		threads = viewUser.Threads()
+		animeList.PrefetchAnime()
 
-		arn.SortThreadsByDate(threads)
-
-		if len(threads) > maxPosts {
-			threads = threads[:maxPosts]
-		}
-	}, func() {
-		posts = viewUser.Posts()
-		arn.SortPostsLatestFirst(posts)
-
-		if len(posts) > maxPosts {
-			posts = posts[:maxPosts]
-		}
+		// Sort by rating
+		sort.Slice(animeList.Items, func(i, j int) bool {
+			return animeList.Items[i].Rating.Overall > animeList.Items[j].Rating.Overall
+		})
 	})
 
-	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts))
+	openGraph := &arn.OpenGraph{
+		Tags: map[string]string{
+			"og:title":         viewUser.Nick,
+			"og:image":         viewUser.LargeAvatar(),
+			"og:url":           "https://" + ctx.App.Config.Domain + viewUser.Link(),
+			"og:site_name":     "notify.moe",
+			"og:description":   viewUser.Tagline,
+			"og:type":          "profile",
+			"profile:username": viewUser.Nick,
+		},
+		Meta: map[string]string{
+			"description": viewUser.Tagline,
+			"keywords":    viewUser.Nick + ",profile",
+		},
+	}
+
+	ctx.Data = openGraph
+
+	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks, ctx.URI()))
 }

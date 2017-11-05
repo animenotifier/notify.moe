@@ -1,27 +1,36 @@
 package main
 
 import (
-	"errors"
-	"net/http"
+	"io/ioutil"
 	"strings"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components/js"
 )
 
-func init() {
-	// Scripts
-	scripts := js.Bundle()
+// configureAssets adds all the routes used for media assets.
+func configureAssets(app *aero.Application) {
+	// Script bundle
+	scriptBundle := js.Bundle()
+
+	// Service worker
+	serviceWorkerBytes, err := ioutil.ReadFile("sw/service-worker.js")
+	serviceWorker := string(serviceWorkerBytes)
+
+	if err != nil {
+		panic("Couldn't load service worker")
+	}
 
 	app.Get("/scripts", func(ctx *aero.Context) string {
-		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return scripts
+		return ctx.JavaScript(scriptBundle)
 	})
 
 	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		ctx.SetResponseHeader("Content-Type", "application/javascript")
-		return scripts
+		return ctx.JavaScript(scriptBundle)
+	})
+
+	app.Get("/service-worker", func(ctx *aero.Context) string {
+		return ctx.JavaScript(serviceWorker)
 	})
 
 	// Web manifest
@@ -36,8 +45,7 @@ func init() {
 
 	// Brand icons
 	app.Get("/images/brand/:file", func(ctx *aero.Context) string {
-		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
-		return ctx.TryWebP("images/brand/"+file, ".png")
+		return ctx.File("images/brand/" + ctx.Get("file"))
 	})
 
 	// Cover image
@@ -53,44 +61,12 @@ func init() {
 
 	// Avatars
 	app.Get("/images/avatars/large/:file", func(ctx *aero.Context) string {
-		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
-
-		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/large/webp/" + file + ".webp")
-		}
-
-		original := arn.FindFileWithExtension(
-			file,
-			"images/avatars/large/original/",
-			arn.OriginalImageExtensions,
-		)
-
-		if original == "" {
-			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found: "+file))
-		}
-
-		return ctx.File(original)
+		return ctx.File("images/avatars/large/" + ctx.Get("file"))
 	})
 
 	// Avatars
 	app.Get("/images/avatars/small/:file", func(ctx *aero.Context) string {
-		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
-
-		if ctx.CanUseWebP() {
-			return ctx.File("images/avatars/small/webp/" + file + ".webp")
-		}
-
-		original := arn.FindFileWithExtension(
-			file,
-			"images/avatars/small/original/",
-			arn.OriginalImageExtensions,
-		)
-
-		if original == "" {
-			return ctx.Error(http.StatusNotFound, "Avatar not found", errors.New("Image not found: "+file))
-		}
-
-		return ctx.File(original)
+		return ctx.File("images/avatars/small/" + ctx.Get("file"))
 	})
 
 	// Elements

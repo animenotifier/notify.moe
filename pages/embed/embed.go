@@ -2,7 +2,7 @@ package embed
 
 import (
 	"net/http"
-	"sort"
+	"time"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
@@ -17,15 +17,19 @@ func Get(ctx *aero.Context) string {
 		return utils.AllowEmbed(ctx, ctx.HTML(components.Login()))
 	}
 
+	if !user.IsPro() && user.TimeSinceRegistered() > 14*24*time.Hour {
+		return utils.AllowEmbed(ctx, ctx.HTML(components.EmbedProNotice(user)))
+	}
+
 	animeList := user.AnimeList()
 
 	if animeList == nil {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	sort.Slice(animeList.Items, func(i, j int) bool {
-		return animeList.Items[i].FinalRating() > animeList.Items[j].FinalRating()
-	})
+	watchingList := animeList.Watching()
+	watchingList.PrefetchAnime()
+	watchingList.Sort()
 
-	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(animeList, user)))
+	return utils.AllowEmbed(ctx, ctx.HTML(components.AnimeList(watchingList, animeList.User(), user)))
 }

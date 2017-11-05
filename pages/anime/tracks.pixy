@@ -1,0 +1,12 @@
+component AnimeTracks(anime *arn.Anime, tracks []*arn.SoundTrack)
+	//- AnimeTabs(anime)
+
+	if len(tracks) > 0
+		.anime-section.mountable
+			h3.anime-section-name Tracks
+			.anime-soundtracks
+				each track in tracks
+					.anime-soundtrack.mountable(data-mountable-type="track")
+						.video-container
+							iframe.video.lazy(data-src=track.Media[0].EmbedLink(), allowfullscreen="allowfullscreen")
+						a.sound-track-footer.ajax(href=track.Link())= track.Title

@@ -17,7 +17,7 @@ loading-anim-size = 24px
 .sk-cube
 	width 33.3%
 	height 33.3%
-	background-color main-color
+	background-color loading-anim-color
 	opacity 0.7
 	border-radius 100%
 	animation sk-pulse loading-anim-duration infinite linear

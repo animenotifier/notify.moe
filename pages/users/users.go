@@ -1,20 +1,63 @@
 package users
 
 import (
-	"net/http"
+	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 )
 
-// Get ...
-func Get(ctx *aero.Context) string {
-	users, err := arn.GetActiveUsersCached()
+// Active ...
+func Active(ctx *aero.Context) string {
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsActive() && user.HasAvatar()
+	})
 
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not fetch user data", err)
+	sort.Slice(users, func(i, j int) bool {
+		return len(users[i].AnimeList().Watching().Items) > len(users[j].AnimeList().Watching().Items)
+	})
+
+	// arn.SortUsersLastSeen(users)
+
+	return ctx.HTML(components.Users(users))
+}
+
+// Osu ...
+func Osu(ctx *aero.Context) string {
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsActive() && user.HasAvatar() && user.Accounts.Osu.PP > 0
+	})
+
+	// Sort by pp
+	sort.Slice(users, func(i, j int) bool {
+		return users[i].Accounts.Osu.PP > users[j].Accounts.Osu.PP
+	})
+
+	if len(users) > 50 {
+		users = users[:50]
 	}
+
+	return ctx.HTML(components.OsuRankingList(users))
+}
+
+// Staff ...
+func Staff(ctx *aero.Context) string {
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsActive() && user.HasAvatar() && user.Role != ""
+	})
+
+	sort.Slice(users, func(i, j int) bool {
+		if users[i].Role == "" {
+			return false
+		}
+
+		if users[j].Role == "" {
+			return true
+		}
+
+		return users[i].Role == "admin"
+	})
 
 	return ctx.HTML(components.Users(users))
 }

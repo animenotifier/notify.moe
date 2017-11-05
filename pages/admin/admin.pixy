@@ -1,31 +1,75 @@
-component Admin(user *arn.User, types []string)
-	h2.page-title Admin Panel
+component AdminTabs
+	.tabs
+		Tab("Server", "server", "/admin")
+		Tab("WebDev", "html5", "/admin/webdev")
+		Tab("Purchases", "shopping-cart", "/admin/purchases")
 
-	h3 Server
-	table
-		//- thead
-		//- 	tr
-		//- 		th Metric
-		//- 		th Value
-		tbody
-			tr
-				td CPU count:
-				td= runtime.NumCPU()
-			tr
-				td Goroutines:
-				td= runtime.NumGoroutine()
-			tr
-				td Go version:
-				td= runtime.Version()
-	
-	h3 Types
-	table
-		//- thead
-		//- 	tr
-		//- 		th Table
-		tbody
-			each typeName in types
-				tr
-					td= typeName
-					td
-						a(href="/api/" + strings.ToLower(typeName) + "/")= "/api/" + strings.ToLower(typeName) + "/"
+		a.tab.ajax(href="/editor", aria-label="Editor")
+			Icon("pencil")
+			span.tab-text Editor
+
+component Admin(user *arn.User, platform, family, platformVersion, kernelVersion string)
+	h1.page-title Admin Panel
+
+	AdminTabs
+
+	.admin
+		//- .widget.mountable
+		//- 	h3.widget-title Usage
+
+		//- 	table
+		//- 		tbody
+		//- 			tr
+		//- 				td CPU usage:
+		//- 				td
+		//- 					span= int(cpuUsage + 0.5)
+		//- 					span %
+		//- 			tr
+		//- 				td Memory usage:
+		//- 				td
+		//- 					span= int(memUsage + 0.5)
+		//- 					span %
+		//- 			tr
+		//- 				td Disk usage:
+		//- 				td
+		//- 					span= int(diskUsage + 0.5)
+		//- 					span %
+		
+		.widget.mountable
+			h3.widget-title OS
+
+			table
+				tbody
+					tr
+						td Platform:
+						td= platform
+					tr
+						td Family:
+						td= family
+					tr
+						td Version:
+						td= platformVersion
+					tr
+						td Kernel:
+						td= kernelVersion
+
+		.widget.mountable
+			h3.widget-title Hardware
+
+			table
+				tbody
+					tr
+						td CPUs:
+						td= runtime.NumCPU()
+
+		.widget.mountable
+			h3.widget-title Go
+
+			table
+				tbody
+					tr
+						td Version:
+						td= runtime.Version()
+					tr
+						td Goroutines:
+						td= runtime.NumGoroutine()

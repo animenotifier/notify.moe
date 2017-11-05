@@ -1,10 +1,18 @@
-.anime-list-item-view-image
-	max-width 55px
-	margin-bottom 1rem
+// .anime-list-item-progress-edit
+// 	horizontal-wrap
+// 	justify-content space-between
+// 	width 100%
+
+// .anime-list-item-episodes-edit
+// 	flex 1
+// 	margin-right content-padding
+
+// .anime-list-item-status-edit
+// 	flex-basis 50%
 
 .anime-list-item-rating-edit
 	horizontal-wrap
 	justify-content space-between
 	width 100%
-	.widget-input
-		max-width 120px
+	.widget-section
+		max-width 20%

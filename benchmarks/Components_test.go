@@ -7,7 +7,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-func BenchmarkThread(b *testing.B) {
+func BenchmarkRenderThread(b *testing.B) {
 	thread, _ := arn.GetThread("HJgS7c2K")
 	thread.HTML() // Pre-render markdown
 
@@ -22,6 +22,21 @@ func BenchmarkThread(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			components.Thread(thread, replies, nil)
+		}
+	})
+}
+
+func BenchmarkRenderAnimeList(b *testing.B) {
+	user, _ := arn.GetUser("4J6qpK1ve")
+	animeList := user.AnimeList()
+	animeList.PrefetchAnime()
+
+	b.ReportAllocs()
+	b.ResetTimer()
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			components.AnimeList(animeList, user, user)
 		}
 	})
 }

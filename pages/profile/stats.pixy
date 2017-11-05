@@ -1,0 +1,15 @@
+component ProfileStats(stats *utils.UserStats, viewUser *arn.User, user *arn.User, uri string)
+	ProfileHeader(viewUser, user, uri)
+
+	.stats
+		each pie in stats.PieCharts
+			.widget.mountable
+				h3.widget-title
+					Icon("pie-chart")
+					span= pie.Title
+				PieChart(pie.Slices)
+	
+	.footer.text-center
+		span= viewUser.Nick + " spent "
+		span= int(stats.AnimeWatchingTime / time.Hour / 24)
+		span  days watching anime.

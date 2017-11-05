@@ -1,12 +1,23 @@
-component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime)
-	.widgets.mountable
-		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/update/" + anime.ID)
-			h2= anime.Title.Canonical
-
-			InputNumber("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
+component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime, user *arn.User)
+	.widget-form.mountable
+		.widget.anime-list-item-view(data-api="/api/animelist/" + viewUser.ID + "/field/Items[AnimeID=\"" + anime.ID + "\"]")
+			h1= anime.Title.ByUser(user)
 			
+			.anime-list-item-progress-edit
+				.anime-list-item-episodes-edit
+					InputNumber("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
+				
+				.widget-section.anime-list-item-status-edit
+					label(for="Status") Status:
+					select.widget-ui-element.action(id="Status", data-field="Status", value=item.Status, data-action="save", data-trigger="change")
+						option(value=arn.AnimeListStatusWatching) Watching
+						option(value=arn.AnimeListStatusCompleted) Completed
+						option(value=arn.AnimeListStatusPlanned) Plan to watch
+						option(value=arn.AnimeListStatusHold) On hold
+						option(value=arn.AnimeListStatusDropped) Dropped
+
 			.anime-list-item-rating-edit
-				InputNumber("Rating.Overall", item.Rating.Overall, "Overall", "Overall rating on a scale of 0 to 10", "0", "10", "0.1")
+				InputNumber("Rating.Overall", item.Rating.Overall, arn.OverallRatingName(item.Episodes), "Overall rating on a scale of 0 to 10", "0", "10", "0.1")
 				InputNumber("Rating.Story", item.Rating.Story, "Story", "Story rating on a scale of 0 to 10", "0", "10", "0.1")
 				InputNumber("Rating.Visuals", item.Rating.Visuals, "Visuals", "Visuals rating on a scale of 0 to 10", "0", "10", "0.1")
 				InputNumber("Rating.Soundtrack", item.Rating.Soundtrack, "Soundtrack", "Soundtrack rating on a scale of 0 to 10", "0", "10", "0.1")
@@ -16,12 +27,12 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			InputTextArea("Notes", item.Notes, "Notes", "Your notes")
 
 			.buttons.mountable
-				a.ajax.button(href="/+" + viewUser.Nick + "/animelist")
+				a.ajax.button(href="/animelist/" + item.Status)
 					Icon("list")
 					span View collection
 				a.ajax.button(href=anime.Link())
 					Icon("search-plus")
 					span View anime
-				button.action(data-action="removeAnimeFromCollection", data-trigger="click", data-anime-id=anime.ID, data-user-id=viewUser.ID, data-user-nick=viewUser.Nick)
+				button.action(data-action="removeAnimeFromCollection", data-trigger="click", data-api="/api/animelist/" + viewUser.ID, data-anime-id=anime.ID, data-nick=viewUser.Nick)
 					Icon("trash")
 					span Remove from collection

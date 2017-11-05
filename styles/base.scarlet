@@ -1,14 +1,15 @@
 html
 	height 100%
+	font-family "Ubuntu", "Trebuchet MS", sans-serif
+	font-size 100%
 
 body
-	font-family "Ubuntu", "Trebuchet MS", sans-serif
-	font-size 1.05rem
 	tab-size 4
 	overflow hidden
 	height 100%
 	color text-color
 	background-color bg-color
+	noise-strong
 
 a
 	color link-color
@@ -17,6 +18,7 @@ a
 
 	:hover
 		color link-hover-color
+		text-shadow link-hover-text-shadow
 		text-decoration none
 	
 	:active
@@ -25,14 +27,14 @@ a
 	// &.active
 	// 	color link-active-color
 
-strong
-	font-weight bold
-
-em
-	font-style italic
-
 img
 	backface-visibility hidden
+
+.hidden
+	display none !important
+
+.text-center
+	text-align center
 
 .spacer
 	flex 1

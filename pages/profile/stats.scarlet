@@ -1,0 +1,6 @@
+.stats
+	horizontal-wrap
+	justify-content space-around
+
+	.widget
+		max-width 300px

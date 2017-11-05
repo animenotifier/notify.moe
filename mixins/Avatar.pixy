@@ -1,10 +1,13 @@
 component Avatar(user *arn.User)
-	a.user.ajax(href="/+" + user.Nick, title=user.Nick)
+	CustomAvatar(user, user.Link(), user.Nick)
+
+component CustomAvatar(user *arn.User, link string, title string)
+	a.user.ajax(href=link, title=title)
 		AvatarNoLink(user)
 
 component AvatarNoLink(user *arn.User)
 	if user.HasAvatar()
-		img.user-image.lazy(data-src=user.SmallAvatar(), alt=user.Nick)
+		img.user-image.lazy(data-src=user.SmallAvatar(), data-webp="true", alt=user.Nick)
 	else
 		SVGAvatar
 

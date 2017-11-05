@@ -1,5 +1,5 @@
 component ForumTags
-	.buttons.forum-tags
+	.tabs
 		ForumTag("All", "", "list")
 		ForumTag("General", "general", "list")
 		ForumTag("News", "news", "list")
@@ -9,6 +9,6 @@ component ForumTags
 		ForumTag("Bugs", "bug", "list")
 
 component ForumTag(title string, category string, icon string)
-	a.button.forum-tag.action(href=strings.TrimSuffix("/forum/" + category, "/"), data-action="diff", data-trigger="click")
+	a.tab.action(href=strings.TrimSuffix("/forum/" + category, "/"), data-action="diff", data-trigger="click")
 		Icon(arn.GetForumIcon(category))
-		span.forum-tag-text= title
+		span.tab-text= title

@@ -1,6 +1,5 @@
 #navigation
 	horizontal
-	padding 0 content-padding
 	overflow hidden
 	background-color nav-color
 	justify-content center
@@ -43,57 +42,70 @@
 	display none
 
 #search
-	display none
-	border-radius 0
 	background transparent
-	border none
-	
-	color nav-link-hover-color
+	border none !important
+	box-shadow none !important
 	font-size 1em
-	min-width 0
+	padding 0
+	width 0
+	flex-grow 1
 
-	::placeholder
-		color nav-link-color
-
-	:focus
-		border none
-		box-shadow none
-
-.extra-navigation
-	display none
-
-.extension-navigation
-	display none
-
-> 330px
-	.navigation-button, #search
-		font-size 1.3em
-
-> 930px
-	.navigation-button, #search
-		font-size 1.2em
+// #search
+// 	flex 1
+// 	border-radius 0
+// 	background transparent
+// 	border none
 	
-	#navigation
-		justify-content flex-start
+// 	color nav-link-hover-color
+// 	font-size 1em
+// 	min-width 0
 
-	#search
-		display block
-		flex 1
+// 	::placeholder
+// 		color nav-link-color
+
+// 	:focus
+// 		border none
+// 		box-shadow none
+
+// .extra-navigation
+// 	display none
+
+// .extension-navigation
+// 	display none
+
+// > 330px
+// 	.navigation-button, #search
+// 		font-size 1.3em
+
+// > 550px
+// 	#navigation
+// 		padding 0 content-padding
+
+// > 930px
+// 	.navigation-button, #search
+// 		font-size 1.2em
 	
-	.extra-navigation
-		display block
-
-< 400px height
-	#navigation
-		vertical
-		height 100%
-		padding content-padding 0
+// 	#navigation
+// 		justify-content flex-start
 	
-	#container
-		horizontal
+// 	.extra-navigation
+// 		display block
 
-	.extra-navigation
-		display none
+// @media screen and (max-device-height: 500px)
+// 	#navigation
+// 		vertical
+// 		height 100%
+// 		padding content-padding 0
+	
+// 	#container
+// 		horizontal
 
-	#search
-		display none
+// 	.extra-navigation
+// 		display block
+
+// 	#sidebar-toggle,
+// 	.hide-landscape
+// 		display none !important
+
+// 	#search
+// 		display none

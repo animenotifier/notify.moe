@@ -12,7 +12,7 @@ const ThreadsPerPage = 20
 // Get forum category.
 func Get(ctx *aero.Context) string {
 	tag := ctx.Get("tag")
-	threads, _ := arn.GetThreadsByTag(tag)
+	threads := arn.GetThreadsByTag(tag)
 	arn.SortThreads(threads)
 
 	if len(threads) > ThreadsPerPage {

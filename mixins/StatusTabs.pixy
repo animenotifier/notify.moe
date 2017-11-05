@@ -1,0 +1,7 @@
+component StatusTabs(urlPrefix string)
+	.tabs
+		Tab("Watching", "play", urlPrefix + "/watching")
+		Tab("Completed", "check", urlPrefix + "/completed")
+		Tab("Planned", "forward", urlPrefix + "/planned")
+		Tab("On Hold", "pause", urlPrefix + "/hold")
+		Tab("Dropped", "stop", urlPrefix + "/dropped")

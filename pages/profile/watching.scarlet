@@ -1,13 +1,9 @@
 .profile-watching-list
 	horizontal-wrap
+	justify-content center
 
 .profile-watching-list-item
-	margin 0.25rem
+	anime-mini-item
 
 .profile-watching-list-item-image
-	width 55px !important
-	border-radius 2px
-
-< 380px
-	.profile-watching-list
-		justify-content center
+	anime-mini-item-image

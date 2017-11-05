@@ -1,0 +1,29 @@
+component Charge(user *arn.User)
+	ShopTabs(user)
+
+	h1.mountable Charge up
+
+	p.text-center.mountable You can add balance via PayPal. 1 Japanese Yen equals 1 Gem.
+
+	.buttons
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=1000)
+			Icon("diamond")
+			span 1000
+
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=2000)
+			Icon("diamond")
+			span 2000
+
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=3000)
+			Icon("diamond")
+			span 3000
+
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=6000)
+			Icon("diamond")
+			span 6000
+
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=12000)
+			Icon("diamond")
+			span 12000
+	
+	.footer.text-center.mountable Different currencies will automatically be converted.

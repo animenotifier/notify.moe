@@ -1,7 +1,8 @@
 profile-boot-duration = 2s
 
 .profile
-	horizontal
+	vertical
+	align-items center
 
 	position relative
 	left calc(content-padding * -1)
@@ -20,15 +21,64 @@ profile-boot-duration = 2s
 .profile-field
 	text-align center
 
-< 600px
+	a
+		color white
+
+.intro-container
+	vertical
+	align-items center
+	margin-top calc(content-padding * 1.5)
+
+.profile-actions
+	vertical
+	margin-top content-padding
+
+	:empty
+		display none
+
+.profile-action
+	margin-bottom 0.5rem
+	text-shadow none !important
+
+.profile-pro-status
+	margin-top calc(typography-margin * 2)
+
+	.icon
+		color pro-color
+		animation sk-pulse 1.5s infinite linear
+
+> 740px
 	.profile
-		vertical
-		align-items center
+		horizontal
+		align-items flex-start
+	
+	.profile-field
+		text-align left
 
 	.intro-container
-		align-items center
-		margin-top calc(content-padding * 1.5)
-		padding-left content-padding
+		align-items flex-start
+		margin-top 0
+		padding content-padding
+		padding-top 0
+		padding-left calc(content-padding * 2)
+		max-width 900px
+
+	.profile-actions
+		position absolute
+		top 0
+		right 0
+		padding content-padding
+		margin-top 0
+	
+	.profile-pro-status
+		position absolute
+		right 0
+		bottom 0
+		padding content-padding
+		margin-top 0
+	
+	// .profile-pro-status-text
+	// 	display none
 
 // animation appear
 // 	0%
@@ -52,7 +102,7 @@ profile-boot-duration = 2s
 	// default-transition
 	// animation cover-animation profile-boot-duration
 	// animation-fill-mode forwards
-	filter brightness(35%) blur(0)
+	filter brightness(30%) blur(0)
 
 // animation cover-animation
 // 	0%
@@ -65,29 +115,16 @@ profile-boot-duration = 2s
 	width 100%
 	height auto
 
-.image-container
+.profile-image-container
 	flex 1
 	max-width 280px
 	max-height 280px
 	border-radius 3px
 	overflow hidden
 
-.intro-container
-	vertical
-	align-items flex-start
-	padding content-padding
-	padding-top 0
-	padding-left calc(content-padding * 2)
-	max-width 900px
-
-.website
-	a
-		color white
-
 #nick
 	margin-bottom 1rem
 
-// Categories
-
-.profile-category
-	margin-bottom content-padding
+.no-data
+	width 100%
+	text-align center

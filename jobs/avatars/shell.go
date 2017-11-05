@@ -4,6 +4,7 @@ import (
 	"flag"
 
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/avatar/lib"
 )
 
 // Shell parameters
@@ -26,7 +27,7 @@ func InvokeShellArgs() bool {
 			panic(err)
 		}
 
-		Work(user)
+		lib.RefreshAvatar(user)
 		return true
 	}
 
@@ -37,7 +38,7 @@ func InvokeShellArgs() bool {
 			panic(err)
 		}
 
-		Work(user)
+		lib.RefreshAvatar(user)
 		return true
 	}
 

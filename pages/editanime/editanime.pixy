@@ -1,0 +1,17 @@
+component EditAnime(anime *arn.Anime)
+	h1= anime.Title.Canonical
+
+	.widget-form.mountable
+		.widget(data-api="/api/anime/" + anime.ID)
+			h3.widget-title Mappings
+			InputText("Virtual:ShoboiID", anime.GetMapping("shoboi/anime"), "Shoboi TID", "TID on cal.syoboi.jp")
+			InputText("Virtual:AniListID", anime.GetMapping("anilist/anime"), "AniList ID", "ID on anilist.co")
+
+			.buttons
+				a.button.ajax(href="/anime/" + anime.ID)
+					Icon("arrow-left")
+					span View anime
+				
+				a.button(href="/api/anime/" + anime.ID, target="_blank")
+					Icon("search-plus")
+					span JSON API

@@ -1,28 +1,63 @@
-.anime-list
+.anime-list-container
 	vertical
 	width 100%
+	max-width table-width-normal
+	margin 0 auto
+	margin-bottom 1rem
 
-	tr
-		horizontal
-	
-	thead
-		display none
+.anime-list
+	vertical
+
+.anime-list-item
+	horizontal
+
+	td
+		display flex
+		align-items center
+
+.anime-list-item-image-container
+	padding 0
+	width 39px
+
+.anime-list-item-image
+	width 39px
+	height 39px
+	border-radius 2px
+	object-fit cover
 
 .anime-list-item-name
 	flex 1
-	white-space nowrap
-	text-overflow ellipsis
-	overflow hidden
+	clip-long-text
+
+	a
+		color anime-list-item-name-color
+		:hover
+			color link-hover-color
 
 .anime-list-item-episodes
 	horizontal
 	justify-content flex-end
 	text-align right
 	white-space nowrap
-	flex-basis 120px
+	width 130px
+
+	:hover
+		.plus-episode
+			opacity 1
+			pointer-events auto
 
 .anime-list-item-episodes-watched
 	flex 0.4
+	horizontal
+	justify-content flex-end
+
+.plus-episode
+	display inline-block
+	cursor pointer
+	opacity 0
+	pointer-events none
+	margin-left 1px
+	transition opacity transition-speed ease
 
 .anime-list-item-episodes-separator
 	flex 0.2
@@ -32,25 +67,40 @@
 	flex 0.4
 	opacity 0.5
 
-// .anime-list-item-episodes-edit
-// 	flex 0.5
+.anime-list-item-rating
+	text-align right
+	justify-content flex-end
+	width 65px
+
+.anime-list-item-actions
+	display none !important
 
 // 	// Beautify icon alignment
 // 	.raw-icon
-// 		margin-bottom -2px
+// 		margin-bottom -4px
 
-.anime-list-item-rating
-	flex-basis 100px
-	text-align center
+> 740px
+	.anime-list-item-actions
+		display flex !important
+		width 30px
 
-.anime-list-item-actions
-	flex-basis 40px
-	text-align right
+		:empty
+			display none !important
 
-	// Beautify icon alignment
-	.raw-icon
-		margin-bottom -4px
+.anime-list-item-airing-date
+	display none !important
+
+> 700px
+	.anime-list-item-airing-date
+		display flex !important
+		text-align right
+		width 150px
+		opacity 0.8
+		justify-content flex-end
 
 < 1100px
 	.anime-list-item-rating
-		display none
+		display none !important
+
+.fill-screen
+	min-height calc(100vh - content-padding * 2 - 1rem - 43px - 23px)

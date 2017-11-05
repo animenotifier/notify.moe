@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -29,8 +30,8 @@ type GoogleUser struct {
 // InstallGoogleAuth enables Google login for the app.
 func InstallGoogleAuth(app *aero.Application) {
 	config := &oauth2.Config{
-		ClientID:     apiKeys.Google.ID,
-		ClientSecret: apiKeys.Google.Secret,
+		ClientID:     arn.APIKeys.Google.ID,
+		ClientSecret: arn.APIKeys.Google.Secret,
 		RedirectURL:  "https://" + app.Config.Domain + "/auth/google/callback",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email",
@@ -43,8 +44,8 @@ func InstallGoogleAuth(app *aero.Application) {
 
 	// Auth
 	app.Get("/auth/google", func(ctx *aero.Context) string {
-		sessionID := ctx.Session().ID()
-		url := config.AuthCodeURL(sessionID)
+		state := ctx.Session().ID()
+		url := config.AuthCodeURL(state)
 		ctx.Redirect(url)
 		return ""
 	})
@@ -89,18 +90,25 @@ func InstallGoogleAuth(app *aero.Application) {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
 		}
 
+		if googleUser.Sub == "" {
+			return ctx.Error(http.StatusBadRequest, "Failed retrieving Google data", errors.New("Empty ID"))
+		}
+
+		// Change googlemail.com to gmail.com
+		googleUser.Email = strings.Replace(googleUser.Email, "googlemail.com", "gmail.com", 1)
+
 		// Is this an existing user connecting another social account?
 		user := utils.GetUser(ctx)
 
 		if user != nil {
-			println("Connected")
-
 			// Add GoogleToUser reference
-			err = user.ConnectGoogle(googleUser.Sub)
+			user.ConnectGoogle(googleUser.Sub)
 
-			if err != nil {
-				ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
-			}
+			// Save in DB
+			user.Save()
+
+			// Log
+			authLog.Info("Added Google ID to existing account", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 			return ctx.Redirect("/")
 		}
@@ -108,7 +116,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		var getErr error
 
 		// Try to find an existing user via the Google user ID
-		user, getErr = arn.GetUserFromTable("GoogleToUser", googleUser.Sub)
+		user, getErr = arn.GetUserByGoogleID(googleUser.Sub)
 
 		if getErr == nil && user != nil {
 			authLog.Info("User logged in via Google ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
@@ -146,18 +154,10 @@ func InstallGoogleAuth(app *aero.Application) {
 		user.Save()
 
 		// Register user
-		err = arn.RegisterUser(user)
-
-		if err != nil {
-			ctx.Error(http.StatusInternalServerError, "Could not register a new user", err)
-		}
+		arn.RegisterUser(user)
 
 		// Connect account to a Google account
-		err = user.ConnectGoogle(googleUser.Sub)
-
-		if err != nil {
-			ctx.Error(http.StatusInternalServerError, "Could not connect account to Google account", err)
-		}
+		user.ConnectGoogle(googleUser.Sub)
 
 		// Save user object again with updated data
 		user.Save()
@@ -166,9 +166,9 @@ func InstallGoogleAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Google", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
 		// Redirect to frontpage
-		return ctx.Redirect("/")
+		return ctx.Redirect(newUserStartRoute)
 	})
 }

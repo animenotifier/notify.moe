@@ -1,0 +1,28 @@
+component PurchaseHistory(purchases []*arn.Purchase, user *arn.User)
+	ShopTabs(user)
+
+	h1.page-title Purchase History
+
+	if len(purchases) == 0
+		p.text-center.mountable You haven't bought any items yet.
+	else
+		table
+			thead
+				tr.mountable
+					th Icon
+					th Item
+					th.history-quantity Quantity
+					th.history-price Price
+					th.history-date Date
+			tbody
+				each purchase in purchases
+					tr.shop-history-item.mountable(data-item-id=purchase.ItemID)
+						PurchaseInfo(purchase)
+
+component PurchaseInfo(purchase *arn.Purchase)
+	td.item-icon
+		Icon(purchase.Item().Icon)
+	td= purchase.Item().Name
+	td.history-quantity= purchase.Quantity
+	td.history-price= purchase.Price
+	td.history-date.utc-date(data-date=purchase.Date)

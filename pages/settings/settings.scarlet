@@ -1,0 +1,16 @@
+.settings
+	horizontal-wrap-center
+	// vertical
+	// margin 0 auto
+	// width 100%
+	// max-width 400px
+
+	.widget
+		max-width 400px
+
+.widget-section > button,
+.widget-section > .button
+	margin-bottom 1rem
+
+.avatar-preview
+	margin 0 auto

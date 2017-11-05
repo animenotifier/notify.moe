@@ -1,0 +1,5 @@
+component StatusMessage
+	#status-message.fade.fade-out
+		#status-message-text
+		a.status-message-action.action(href="#", data-trigger="click", data-action="closeStatusMessage", aria-label="Close status message")
+			RawIcon("close")

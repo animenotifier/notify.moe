@@ -1,6 +1,19 @@
-component Settings(user *arn.User)
-	h2.page-title Settings
-	.widgets
+component SettingsTabs
+	.tabs
+		Tab("Personal", "user", "/settings")
+		Tab("Accounts", "cubes", "/settings/accounts")
+		Tab("Notifications", "bell", "/settings/notifications")
+		Tab("Apps", "puzzle-piece", "/settings/apps")
+		Tab("Avatar", "picture-o", "/settings/avatar")
+		Tab("Formatting", "font", "/settings/formatting")
+		Tab("PRO", "star", "/settings/pro")
+
+component SettingsPersonal(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Personal settings
+	
+	.settings
 		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
 				Icon("user")
@@ -10,6 +23,148 @@ component Settings(user *arn.User)
 			InputText("Tagline", user.Tagline, "Tagline", "Text that appears below your username")
 			InputText("Website", user.Website, "Website", "Your homepage")
 
+component SettingsNotifications(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Notification settings
+
+	.settings
+		.widget.mountable
+			h3.widget-title
+				Icon("bell")
+				span Notifications
+			
+			#enable-notifications.widget-section
+				label Enable:
+				button.action(data-action="enableNotifications", data-trigger="click")
+					Icon("toggle-off")
+					span Enable notifications
+
+			#disable-notifications.widget-section
+				label Disable:
+				button.action(data-action="disableNotifications", data-trigger="click")
+					Icon("toggle-on")
+					span Disable notifications
+
+			#test-notification.widget-section
+				label Test:
+				button.action(data-action="testNotification", data-trigger="click")
+					Icon("paper-plane")
+					span Send test notification
+
+component SettingsApps(user *arn.User)
+	SettingsTabs
+
+	h1.page-title App settings
+
+	.settings
+		.widget.mountable
+			h3.widget-title
+				Icon("puzzle-piece")
+				span Apps
+			
+			.widget-section
+				label Chrome Extension:
+				button.action(data-action="installExtension", data-trigger="click")
+					Icon("chrome")
+					span Get the Chrome Extension
+
+			.widget-section
+				label Desktop App:
+				button.action(data-action="installApp", data-trigger="click")
+					Icon("desktop")
+					span Get the Desktop App
+
+			.widget-section
+				label Android App:
+				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
+					Icon("android")
+					span Get the Android App
+
+component SettingsAvatar(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Avatar settings
+
+	.settings
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("picture-o")
+				span Avatar
+
+			.widget-section
+				label(for="Avatar.Source") Source:
+				select.widget-ui-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
+					option(value="") Automatic
+					option(value="Gravatar") Gravatar
+					option(value="URL") Link
+					//- option(value="FileSystem") Upload
+
+			if user.Settings().Avatar.Source == "URL"
+				InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
+
+			if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
+				.profile-image-container.avatar-preview
+					img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar")
+			
+			if user.Settings().Avatar.Source == "URL" &&  user.Settings().Avatar.SourceURL != ""
+				.profile-image-container.avatar-preview
+					img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
+
+component SettingsFormatting(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Formatting settings
+
+	.settings
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("font")
+				span Formatting
+			
+			.widget-section
+				label(for="TitleLanguage")= "Title language:"
+				select.widget-ui-element.action(id="TitleLanguage", data-field="TitleLanguage", value=user.Settings().TitleLanguage, title="Language of anime titles", data-action="save", data-trigger="change")
+					option(value="canonical") Canonical
+					option(value="english") English
+					option(value="romaji") Romaji
+					option(value="japanese") 日本語
+
+			InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
+
+component SettingsPro(user *arn.User)
+	SettingsTabs
+
+	h1.page-title PRO settings
+
+	.settings
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("star")
+				span PRO
+			
+			if user.IsPro()
+				.widget-section
+					label
+						span Your PRO account expires in 
+						span.utc-date(data-date=user.ProExpires)
+						span .
+					a.button.ajax(href="/shop")
+						Icon("star")
+						span Extend PRO account duration
+			else
+				.widget-section
+					label Would you like to support the site development?
+					a.button.ajax(href="/shop")
+						Icon("star")
+						span Go PRO
+
+component SettingsAccounts(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Accounts settings
+
+	.settings
 		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
 				Icon("cubes")
@@ -18,11 +173,51 @@ component Settings(user *arn.User)
 			InputText("Accounts.AniList.Nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
 			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
 			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
-			InputText("Accounts.AnimePlanet.Nick", user.Accounts.AnimePlanet.Nick, "AnimePlanet", "Your username on anime-planet.com")
+			InputText("Accounts.Osu.Nick", user.Accounts.Osu.Nick, "Osu", "Your username on osu.ppy.sh")
+			//- InputText("Accounts.AnimePlanet.Nick", user.Accounts.AnimePlanet.Nick, "AnimePlanet", "Your username on anime-planet.com")
 
-		//- .widget.mountable(data-api="/api/settings/" + user.ID)
-		//- 	h3.widget-title
-		//- 		Icon("cogs")
-		//- 		span Settings
+		.widget.mountable
+			h3.widget-title
+				Icon("user-plus")
+				span Connect
 
-		//- 	InputText("TitleLanguage", user.Settings().TitleLanguage, "Title language", "Language of anime titles")
+			.widget-section.social-account
+				label(for="google") Google:
+				
+				a#google.button.social-account-button(href="/auth/google")
+					if user.Accounts.Google.ID != ""
+						Icon("check")
+						span Connected
+					else
+						Icon("circle-o")
+						span Not connected
+			
+			.widget-section.social-account
+				label(for="facebook") Facebook:
+
+				a#facebook.button.social-account-button(href="/auth/facebook")
+					if user.Accounts.Facebook.ID != ""
+						Icon("check")
+						span Connected
+					else
+						
+						Icon("circle-o")
+						span Not connected
+
+		.widget.mountable
+			h3.widget-title
+				Icon("download")
+				span Import
+			
+			ImportLists(user)
+
+		.widget.mountable
+			h3.widget-title
+				Icon("upload")
+				span Export
+			
+			.widget-section
+				label JSON:
+				a.button(href="/api/animelist/" + user.ID)
+					Icon("upload")
+					span Export anime list as JSON

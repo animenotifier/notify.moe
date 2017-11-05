@@ -1,0 +1,29 @@
+component SoundTrack(track *arn.SoundTrack)
+	SoundTrackMedia(track, track.Media[0])
+
+component SoundTrackMedia(track *arn.SoundTrack, media *arn.ExternalMedia)
+	.sound-track.mountable(id=track.ID)
+		SoundTrackContent(track, media)
+		SoundTrackFooter(track)
+
+component SoundTrackContent(track *arn.SoundTrack, media *arn.ExternalMedia)
+	.sound-track-content
+		if track.MainAnime() != nil
+			a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
+				img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image.Small, alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
+		
+		ExternalMedia(media)
+
+component SoundTrackFooter(track *arn.SoundTrack)
+	.sound-track-footer
+		if track.Title == ""
+			a.ajax(href=track.Link() + "/edit") untitled
+		else
+			a.ajax(href=track.Link())= track.Title
+		span  posted 
+		span.utc-date(data-date=track.Created)
+		span  by 
+		a.ajax(href=track.Creator().Link())= track.Creator().Nick + " "
+
+component ExternalMedia(media *arn.ExternalMedia)
+	iframe.lazy(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")

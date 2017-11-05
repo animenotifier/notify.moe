@@ -1,0 +1,20 @@
+component GlobalPurchaseHistory(purchases []*arn.Purchase)
+	AdminTabs
+
+	h1.page-title All Purchases
+
+	table
+		thead
+			tr.mountable
+				th User
+				th Icon
+				th Item
+				th.history-quantity Quantity
+				th.history-price Price
+				th.history-date Date
+		tbody
+			each purchase in purchases
+				tr.shop-history-item.mountable(data-item-id=purchase.ItemID)
+					td
+						a.ajax(href=purchase.User().Link())= purchase.User().Nick
+					PurchaseInfo(purchase)

@@ -1,0 +1,23 @@
+.group-view
+	horizontal-wrap
+	width 100%
+
+< 1100px
+	.group-view
+		vertical
+
+.group-feed
+	flex 0.75
+	padding 1rem
+
+.group-sidebar
+	flex 0.25
+
+.group-sidebar-section
+	ui-element
+	padding 0.5rem 1rem
+	margin-bottom content-padding
+
+.group-members
+	margin-bottom 0.5rem
+	justify-content flex-start

@@ -10,5 +10,5 @@
 	font-size 0.9rem
 
 	:hover
-		color white !important
+		color theme-white !important
 		background-color link-hover-color

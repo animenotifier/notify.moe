@@ -1,18 +1,19 @@
 component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
-	h2.page-title Forum
+	h1.page-title Forum
 	ForumTags
 	.forum
 		ThreadList(threads)
 	
-	if len(threads) == threadsPerPage
-		.buttons
-			button
-				Icon("refresh")
-				span Load more
+	.buttons
+		button#new-thread.action(data-action="load", data-trigger="click", data-url="/new/thread")
+			Icon("plus")
+			span New thread
+		//- if len(threads) == threadsPerPage
+		//- 	LoadMore
 
 component ThreadList(threads []*arn.Thread)
 	if len(threads) == 0
-		p No threads found.
+		p.no-data.mountable No threads found.
 	else
 		each thread in threads
 			ThreadLink(thread)

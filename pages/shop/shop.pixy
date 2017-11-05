@@ -1,0 +1,28 @@
+component Shop(user *arn.User, items []*arn.Item)
+	ShopTabs(user)
+
+	h1.page-title Shop
+
+	.shop-items
+		each item in items
+			ShopItem(item)
+
+component ShopTabs(user *arn.User)
+	.tabs
+		Tab("Shop", "shopping-cart", "/shop")
+		Tab("Inventory", "briefcase", "/inventory")
+		Tab("History", "history", "/shop/history")
+		Tab(strconv.Itoa(user.Balance), "diamond", "/charge")
+
+component ShopItem(item *arn.Item)
+	.shop-item.mountable(data-item-id=item.ID)
+		h3.shop-item-name
+			.item-icon
+				Icon(item.Icon)
+			span= item.Name
+			//- span.shop-item-duration= " " + duration
+		.shop-item-description!= markdown.Render(item.Description)
+		.buttons.shop-buttons
+			button.shop-button-buy.action(data-item-id=item.ID, data-item-name=item.Name, data-price=item.Price, data-trigger="click", data-action="buyItem")
+				span.shop-item-price= "Buy for " + toString(item.Price)
+				Icon("diamond")

@@ -1,0 +1,38 @@
+component Group(group *arn.Group)
+	GroupTabs(group)
+	
+	if group.Name != ""
+		h1.mountable= group.Name
+	else
+		h1.mountable untitled
+
+	.group-view
+		.group-sidebar.mountable
+			if group.Description != ""
+				.group-sidebar-section
+					h3 Description
+					.group-description!= markdown.Render(group.Description)
+
+			if group.Rules != ""
+				.group-sidebar-section
+					h3 Rules
+					.group-rules!= markdown.Render(group.Rules)
+
+			.group-sidebar-section
+				h3 Members
+				.user-avatars.group-members
+					each member in group.Members
+						Avatar(member.User())
+		
+		.group-feed.mountable
+			if len(group.Posts()) == 0
+				p.text-center.mountable No posts in this group yet.
+			else
+				each post in group.Posts()
+					p!= post.HTML()
+
+component GroupTabs(group *arn.Group)
+	.tabs
+		Tab("Group", "users", group.Link())
+		Tab("Forum", "comment", group.Link() + "/forum")
+		Tab("Edit", "pencil", group.Link() + "/edit")

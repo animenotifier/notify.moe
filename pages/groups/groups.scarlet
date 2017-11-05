@@ -1,0 +1,44 @@
+group-padding-y = 0.75rem
+group-padding-x = 0.75rem
+
+.groups
+	horizontal-wrap
+	justify-content space-around
+
+.group
+	horizontal
+	ui-element
+	position relative
+	width 100%
+	max-width 520px
+	padding group-padding-y group-padding-x
+	margin calc(content-padding / 2)
+	color text-color
+
+	:hover
+		color white
+		background-color rgb(60, 60, 60)
+
+.group-image
+	width 70px
+	height 70px
+	margin-right 1rem
+	border-radius ui-element-border-radius
+
+.group-info
+	vertical
+
+.group-name
+	horizontal
+	align-items center
+
+.group-tagline
+	opacity 0.6
+
+.group-member-count
+	position absolute
+	top 0.5rem
+	right 1rem
+	text-align right
+	font-size 0.8rem
+	opacity 0.5

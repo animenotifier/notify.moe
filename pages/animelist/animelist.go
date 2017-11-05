@@ -2,7 +2,6 @@ package animelist
 
 import (
 	"net/http"
-	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -26,9 +25,8 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	sort.Slice(animeList.Items, func(i, j int) bool {
-		return animeList.Items[i].FinalRating() > animeList.Items[j].FinalRating()
-	})
+	animeList.PrefetchAnime()
+	animeList.Sort()
 
-	return ctx.HTML(components.AnimeList(animeList, user))
+	return ctx.HTML(components.ProfileAnimeLists(animeList.SplitByStatus(), animeList.User(), user, ctx.URI()))
 }

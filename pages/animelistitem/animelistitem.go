@@ -7,12 +7,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get anime page.
 func Get(ctx *aero.Context) string {
-	// user := utils.GetUser(ctx)
-
+	user := utils.GetUser(ctx)
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)
 
@@ -35,7 +35,7 @@ func Get(ctx *aero.Context) string {
 
 	anime := item.Anime()
 
-	return ctx.HTML(components.AnimeListItem(animeList.User(), item, anime))
+	return ctx.HTML(components.AnimeListItem(animeList.User(), item, anime, user))
 }
 
 // t := reflect.TypeOf(item).Elem()

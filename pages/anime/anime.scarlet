@@ -1,20 +1,110 @@
-.anime-header
-	horizontal
+.anime
+	vertical
 
-< 800px
+.anime-main-column
+	vertical
+	flex 1
+
+.anime-side-column
+	vertical
+	margin-left 0
+	margin-top 1rem
+	flex-basis 300px
+
+> 1350px
+	.anime
+		horizontal
+
+	.anime-side-column
+		margin-left content-padding
+		margin-top 0
+
+.anime-header
+	vertical
+
+.anime-title
+	text-align center
+	margin-bottom 0.5rem
+
+> 800px
 	.anime-header
-		vertical
+		horizontal
+		padding-bottom content-padding
+		border-bottom 1px solid rgba(0, 0, 0, 0.05)
+	
+	.anime-title
+		text-align left
+
+	.anime-alternative-title
+		text-align left
+
+	.anime-actions
+		flex 1
+		justify-content flex-end
+		align-items flex-end
+
+		button,
+		.button
+			margin-right 0
+			margin-bottom 0
+
+.anime-info-table
+	margin 0
+	// width 100%
+	// max-width 600px
+
+.anime-info-value
+	text-align right
+
+.anime-soundtracks
+	vertical
+	margin-top 1rem
+
+.anime-soundtrack
+	vertical
+	width 100%
+	margin-bottom 0.5rem
+
+> 500px
+	.anime-soundtracks
+		horizontal-wrap
+		justify-content flex-start
+		margin-top 0
+
+	.anime-soundtrack
+		max-width 200px
+		margin calc(content-padding / 2)
+
+// .anime-soundtracks
+// 	horizontal-wrap
+
+// .anime-soundtrack
+// 	flex-basis 400px
+// 	padding-bottom video-padding
+
+.anime-section
+	margin-top 1rem
+
+	:first-child
+		margin-top 0 !important
 
 .anime-section-name
 	font-weight bold
 
 .anime-image-container
-	horizontal
-	justify-content center
-	align-items flex-start
+	vertical
+	justify-content flex-start
+	align-items center
+
+.anime-start-date
+	font-size 0.7rem
+	line-height 1.7em
+	opacity 0.65
+	margin-top 0.5rem
 
 .anime-cover-image
-	width 230px
+	// width 142px
+	width 250px
 	height auto
 	border-radius 3px
 	
@@ -23,7 +113,10 @@
 
 	saturate-up
 	shadow-up
-	
+
+.anime-summary
+	// ...
+
 .anime-info
 	vertical
 	flex 1
@@ -32,52 +125,52 @@
 	width content-padding
 	height content-padding
 
-.anime-title
-	text-align left
-	margin-bottom 0.5rem
-
 .anime-alternative-title
 	font-size 0.9em
+	margin-top 0
 	margin-bottom 0.5rem
-	a
-		color rgba(60, 60, 60, 0.5) !important
+	text-align center
+	font-weight normal
+	line-height content-line-height
+	
+	.japanese
+		color anime-alternative-title-color !important
 
 .anime-actions
 	horizontal
 	justify-content center
 
 	// Action button margin
-	margin calc(content-padding - 0.5rem) -0.5rem
+	// margin calc(content-padding - 0.5rem) -0.5rem
 
 	// Setting z-index requires setting a background as well
-	z-index 10
-	background-color bg-color
+	// z-index 10
 
-> 900px
-	.anime-actions
-		position absolute
-		top 0
-		right content-padding
+// > 1450px
+// 	.anime-actions
+// 		position fixed
+// 		bottom 0
+// 		right content-padding
 
-.anime-rating-categories
-	horizontal
-	width 100%
+// .anime-rating-categories
+// 	horizontal
+// 	width 100%
 
-.anime-rating-category
-	ui-element
-	flex 1
-	text-align center
-	margin 0.5rem
+// .anime-rating-category
+// 	ui-element
+// 	flex 1
+// 	text-align center
+// 	margin 0.5rem
 
-.anime-rating-category-name
-	font-size 1.3rem
-	margin-top 0.5rem
+// .anime-rating-category-name
+// 	font-size 1.3rem
+// 	margin-top 0.5rem
 
-.anime-rating
-	margin 0.5rem
-	letter-spacing 3px
-	font-size 1.3rem
-	color link-color
+// .anime-rating
+// 	margin 0.5rem
+// 	letter-spacing 3px
+// 	font-size 1.3rem
+// 	color link-color
 
 .anime-widget
 	margin-top 0.6rem
@@ -87,10 +180,20 @@
 	.anime-rating-categories
 		vertical
 
+.anime-friends
+	.user-avatars
+		justify-content flex-start
+
 .footer
 	font-size 0.8rem
 	opacity 0.7
 	margin-top 0.5rem
+
+	&.mountable
+		opacity 0 !important
+
+	&.mounted
+		opacity 0.7 !important
 
 .relations
 	horizontal-wrap

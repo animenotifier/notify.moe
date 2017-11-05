@@ -4,17 +4,19 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get user settings page.
-func Get(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
+// Get settings.
+func Get(component func(*arn.User) string) func(*aero.Context) string {
+	return func(ctx *aero.Context) string {
+		user := utils.GetUser(ctx)
 
-	if user == nil {
-		return ctx.Error(http.StatusForbidden, "Not logged in", nil)
+		if user == nil {
+			return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		}
+
+		return ctx.HTML(component(user))
 	}
-
-	return utils.AllowEmbed(ctx, ctx.HTML(components.Settings(user)))
 }

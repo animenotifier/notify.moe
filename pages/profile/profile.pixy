@@ -1,12 +1,12 @@
-component ProfileHeader(viewUser *arn.User, user *arn.User)
+component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	.profile
-		img.profile-cover(src=viewUser.CoverImageURL(), alt="Cover image")
+		img.profile-cover.lazy(data-src=viewUser.CoverImageURL(), data-webp="true", alt="Cover image")
 
-		.image-container.mountable
+		.profile-image-container.mountable.never-unmount
 			ProfileImage(viewUser)
 
-		.intro-container.mountable
-			h2#nick= viewUser.Nick
+		.intro-container.mountable.never-unmount
+			h1#nick= viewUser.Nick
 
 			if viewUser.Tagline != ""
 				p.profile-field.tagline
@@ -20,12 +20,12 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 			if viewUser.Website != ""
 				p.profile-field.website
 					Icon("home")
-					a(href=viewUser.WebsiteURL(), target="_blank", rel="nofollow")= viewUser.Website
+					a(href=viewUser.WebsiteURL(), target="_blank", rel="nofollow")= viewUser.WebsiteShortURL()
 
-			if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 1000
-				p.profile-field.osu(title="osu! performance points")
+			if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 100
+				p.profile-field.osu(title="osu! Level " + toString(int(viewUser.Accounts.Osu.Level)) + " | Accuracy: " + fmt.Sprintf("%.1f", viewUser.Accounts.Osu.Accuracy) + "%")
 					Icon("trophy")
-					span= toString(int(viewUser.Accounts.Osu.PP)) + " pp"
+					a(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, target="_blank", rel="noopener")= toString(int(viewUser.Accounts.Osu.PP)) + " pp"
 
 			//- if viewUser.dataEditCount
 			//- 	p.profile-field.editor-contribution(title="Anime data modifications")
@@ -43,47 +43,120 @@ component ProfileHeader(viewUser *arn.User, user *arn.User)
 				p.profile-field.role
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
-
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post)
-	ProfileHeader(viewUser, user)
-
-	.profile-category.mountable
-		h3
-			a.ajax(href="/+" + viewUser.Nick + "/animelist", title="View all anime") Anime
-
-		.profile-watching-list
-			if len(animeList.Items) == 0
-				p No anime in the collection.
-			else
-				each item in animeList.Items
-					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.Canonical + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.anime-cover-image.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.Canonical)
-
-	.profile-category.mountable
-		h3
-			a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
-
-		if len(threads) == 0
-			p No threads on the forum.
-		else
-			each thread in threads
-				ThreadLink(thread)
-	.profile-category.mountable
-		h3
-			a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
-		if len(posts) == 0
-			p No posts on the forum.
-		else
-			each post in posts
-				.post
-					.post-author
-						Avatar(post.Author())
-					.post-content
-						div!= post.HTML()
-						.post-toolbar.active
-							.spacer
-							.post-likes= len(post.Likes)
+		
+		if viewUser.IsPro()
+			p.profile-field.profile-pro-status
+				a.ajax(href="/shop", title="PRO user")
+					Icon("star")
+					span.profile-pro-status-text PRO
+		
+		if user != nil
+			.profile-actions
+				if user.ID != viewUser.ID
+					if !user.Follows().Contains(viewUser.ID)
+						button.profile-action.action(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add/" + viewUser.ID)
+							Icon("user-plus")
+							span Follow
+					else
+						button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
+							Icon("user-times")
+							span Unfollow
+					
+					a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
+						Icon("exchange")
+						span Compare
 	
+	ProfileNavigation(viewUser, uri)
+
+component ProfileNavigation(viewUser *arn.User, uri string)
+	.tabs
+		a.tab.action(href="/+" + viewUser.Nick, data-action="diff", data-trigger="click")
+			Icon("th")
+			span.tab-text Anime
+
+		a.tab.action(href="/+" + viewUser.Nick + "/animelist/watching", data-action="diff", data-trigger="click")
+			Icon("list")
+			span.tab-text Collection
+
+		a.tab.action(href="/+" + viewUser.Nick + "/threads", data-action="diff", data-trigger="click")
+			Icon("comment")
+			span.tab-text Threads
+
+		a.tab.action(href="/+" + viewUser.Nick + "/posts", data-action="diff", data-trigger="click")
+			Icon("comments")
+			span.tab-text Posts
+
+		a.tab.action(href="/+" + viewUser.Nick + "/soundtracks", data-action="diff", data-trigger="click")
+			Icon("music")
+			span.tab-text Tracks
+
+		a.tab.action(href="/+" + viewUser.Nick + "/stats", data-action="diff", data-trigger="click")
+			Icon("area-chart")
+			span.tab-text Stats
+
+		a.tab.action(href="/+" + viewUser.Nick + "/followers", data-action="diff", data-trigger="click")
+			Icon("users")
+			span.tab-text Followers
+	
+	if strings.Contains(uri, "/animelist")
+		StatusTabs("/+" + viewUser.Nick + "/animelist")
+
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack, uri string)
+	ProfileHeader(viewUser, user, uri)
+
+	if len(animeList.Items) == 0
+		p.no-data.mountable= viewUser.Nick + " hasn't added any anime yet."
+	else
+		.profile-watching-list.mountable
+			each item in animeList.Items
+				if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
+					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.ByUser(user) + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.ByUser(user))
+	
+	if user != nil && (user.Role == "admin" || user.Role == "editor")
+		.footer
+			.buttons
+				a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
+					Icon("search-plus")
+					span JSON
+	
+	//- .profile-category.mountable
+	//- 	h3
+	//- 		a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
+
+	//- 	if len(threads) == 0
+	//- 		p No threads on the forum.
+	//- 	else
+	//- 		each thread in threads
+	//- 			ThreadLink(thread)
+	
+	//- .profile-category.mountable
+	//- 	h3
+	//- 		a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
+	//- 	if len(posts) == 0
+	//- 		p No posts on the forum.
+	//- 	else
+	//- 		each post in posts
+	//- 			.post
+	//- 				.post-author
+	//- 					Avatar(post.Author())
+	//- 				.post-content
+	//- 					div!= post.HTML()
+	//- 					.post-toolbar.active
+	//- 						.spacer
+	//- 						.post-likes= len(post.Likes)
+	
+	//- .profile-category.mountable
+	//- 	h3
+	//- 		a.ajax(href="/+" + viewUser.Nick + "/tracks", title="View all tracks") Tracks
+
+	//- 	if len(tracks) == 0
+	//- 		p No soundtracks posted yet.
+	//- 	else
+	//- 		.sound-tracks
+	//- 			each track in tracks
+	//- 				SoundTrack(track)
+
 	//- if user != nil && user.Role == "admin"
 	//- 	.footer
 	//- 		a(href="/api/user/" + viewUser.ID) User API

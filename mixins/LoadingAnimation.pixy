@@ -1,0 +1,11 @@
+component LoadingAnimation
+	#loading.sk-cube-grid.fade
+		.sk-cube.hide
+		.sk-cube
+		.sk-cube.hide
+		.sk-cube
+		.sk-cube.sk-cube-center
+		.sk-cube
+		.sk-cube.hide
+		.sk-cube
+		.sk-cube.hide

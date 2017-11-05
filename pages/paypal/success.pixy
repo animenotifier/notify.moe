@@ -1,0 +1,16 @@
+component PayPalSuccess(payment *arn.PayPalPayment)
+	h1 Thank you for your support!
+
+	.new-payment.mountable
+		span +
+		.new-payment-amount.count-up= payment.Gems()
+		span.new-payment-currency
+			Icon("diamond")
+	
+	p.mountable
+		img.new-payment-thank-you-image(src="/images/elements/thank-you.jpg", alt="Thank you!")
+	
+	.buttons
+		a.button.ajax(href="/shop")
+			Icon("shopping-cart")
+			span Return to the shop

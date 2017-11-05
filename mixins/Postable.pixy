@@ -1,5 +1,5 @@
-component Postable(post arn.Postable, highlightAuthorID string)
-	.post.mountable(data-highlight=post.Author().ID == highlightAuthorID)
+component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
+	.post.mountable(id=strings.ToLower(post.Type()) + "-" + toString(post.ID()), data-highlight=post.Author().ID == highlightAuthorID, data-pro=post.Author().IsPro(), data-api="/api/" + strings.ToLower(post.Type()) + "/" + post.ID())
 		.post-author
 			Avatar(post.Author())
 
@@ -9,30 +9,38 @@ component Postable(post arn.Postable, highlightAuthorID string)
 		.post-content
 			div(id="render-" + post.ID())!= post.HTML()
 
-			//- if user && user.ID === post.authorId
-			//- 	textarea.post-input.hidden(id="source-" + post.ID)= post.text
-			//- 	a.post-save.hidden(id="save-" + post.ID, onclick=`$.saveEdit("${type.toLowerCase()}", "${post.ID}")`)
-			//- 		i.fa.fa-save
-			//- 		span Save
+			if user != nil && user.ID == post.Author().ID
+				.post-edit-interface
+					if post.Type() == "Thread"
+						input.post-title-input.hidden(id="title-" + post.ID(), value=post.Title(), type="text", placeholder="Thread title")
+					textarea.post-text-input.hidden(id="source-" + post.ID())= post.Text()
+					.buttons.hidden(id="edit-toolbar-" + post.ID())
+						a.button.post-save.action(data-action="savePost", data-trigger="click", data-id=post.ID())
+							Icon("save")
+							span Save
+
+						a.button.post-cancel-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID())
+							Icon("close")
+							span Cancel
+			
+			.post-date.utc-date(data-date=post.Created())
 
 			.post-toolbar(id="toolbar-" + post.ID())
 				.spacer
 				.post-likes(id="likes-" + post.ID(), title="Likes")= len(post.Likes())
 
-				//- if user != nil
-				//- 	if user.ID !== post.authorId
-				//- 		- var liked = post.likes && post.likes.indexOf(user.ID) !== -1
+				if user != nil
+					if user.ID != post.Author().ID
+						if post.LikedBy(user.ID)
+							a.post-tool.post-unlike.action(id="unlike-" + post.ID(), title="Unlike", data-action="unlike", data-trigger="click")
+								Icon("thumbs-down")
+						else
+							a.post-tool.post-like.action(id="like-" + post.ID(), title="Like", data-action="like", data-trigger="click")
+								Icon("thumbs-up")
 
-				//- 		a.post-tool.post-like(id="like-" + post.ID, onclick=`$.like("${type.toLowerCase()}", "${post.ID}")`, title="Like", class=liked ? "hidden" : ")
-				//- 			i.fa.fa-thumbs-up.fa-fw
-
-				//- 		a.post-tool.post-unlike(id="unlike-" + post.ID, onclick=`$.unlike("${type.toLowerCase()}", "${post.ID}")`, title="Unlike", class=!liked ? "hidden" : ")
-				//- 			i.fa.fa-thumbs-down.fa-fw
-
-				//- 	if type === "Posts" || type === "Threads"
-				//- 		if user.ID === post.authorId
-				//- 			a.post-tool.post-edit(onclick=`$.edit("${post.ID}")`, title="Edit")
-				//- 				i.fa.fa-pencil.fa-fw
+					if user.ID == post.Author().ID
+						a.post-tool.post-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID(), title="Edit")
+							Icon("pencil")
 
 				if post.Type() != "Thread"
 					a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")

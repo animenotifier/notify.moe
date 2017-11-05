@@ -1,21 +1,61 @@
-component SearchResults(users []*arn.User, animeResults []*arn.Anime)
-	.widgets
+component SearchResults(term string, users []*arn.User, animeResults []*arn.Anime, postResults []*arn.Post, threadResults []*arn.Thread)
+	h1.page-title= "Search: " + term
+
+	.search
 		.widget
-			h3 Users
-			.user-avatars.user-search
-				if len(users) == 0
-					p No users found.
-				else
-					each user in users
-						Avatar(user)
-						//- a.ajax(href=user.Link())= user.Nick
-		
-		.widget
-			h3 Anime
+			h3.widget-title
+				Icon("tv")
+				span Anime
+			
 			.profile-watching-list.anime-search
 				if len(animeResults) == 0
-					p No anime found.
+					p.no-search-results.mountable No anime found.
 				else
 					each anime in animeResults
-						a.profile-watching-list-item.ajax(href=anime.Link(), title=anime.Title.Canonical)
+						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
 							img.anime-cover-image.anime-search-result(src=anime.Image.Tiny, alt=anime.Title.Canonical)
+
+		.widget
+			h3.widget-title
+				Icon("comment")
+				span Forum
+			
+			if len(postResults) == 0 && len(threadResults) == 0
+				p.no-search-results.mountable No posts found.
+			else
+				each thread in threadResults
+					.mountable(data-mountable-type="forum")
+						.forum-search-result
+							a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
+							if thread.Author().HasNick()
+								.forum-search-result-author= thread.Author().Nick
+						.forum-search-result-sample= thread.Text
+				
+				each post in postResults
+					.mountable(data-mountable-type="forum")
+						.forum-search-result
+							a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
+							if post.Author().HasNick()
+								.forum-search-result-author= post.Author().Nick
+						.forum-search-result-sample= post.Text
+		
+		.widget
+			h3.widget-title
+				Icon("music")
+				span Soundtracks
+			
+			p.no-search-results.mountable Soundtrack search coming soon.
+
+		.widget
+			h3.widget-title
+				Icon("user")
+				span Users
+			
+			.user-avatars.user-search
+				if len(users) == 0
+					p.no-search-results.mountable No users found.
+				else
+					each user in users
+						.mountable(data-mountable-type="user")
+							Avatar(user)
+						//- a.ajax(href=user.Link())= user.Nick

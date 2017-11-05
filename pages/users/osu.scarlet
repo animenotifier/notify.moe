@@ -1,0 +1,12 @@
+.osu-ranking-list
+	max-width 400px
+
+.osu-ranking
+	width 100%
+
+	td
+		vertical-align middle
+
+.osu-ranking-pp,
+.osu-ranking-accuracy
+	text-align right

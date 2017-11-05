@@ -1,3 +1,0 @@
-component Airing(animeList []*arn.Anime)
-	h2.page-title(title=toString(len(animeList)) + " anime") Airing
-	AnimeGrid(animeList)

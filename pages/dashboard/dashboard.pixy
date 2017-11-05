@@ -1,77 +1,101 @@
-component Dashboard(posts []*arn.Post, following []*arn.User)
-	h2.page-title Dash
+component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, soundTracks []*arn.SoundTrack, following []*arn.User, user *arn.User)
+	h1.page-title Dashboard
 
-	.widgets
+	.dashboard
 		.widget.mountable
 			h3.widget-title Schedule
 
-			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
-						Icon("calendar-o")
-						span ...
+			for i := 0; i <= 4; i++
+				if i < len(schedule)
+					.widget-ui-element
+						.widget-ui-element-text
+							a.schedule-item-link.ajax(href=schedule[i].Anime.Link())
+								Icon("calendar-o")
+								.schedule-item-title= schedule[i].Anime.Title.ByUser(user)
+							.spacer
+							.schedule-item-date.utc-airing-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
+				else
+					.widget-ui-element
+						.widget-ui-element-text
+							Icon("calendar-o")
+							span ...
 
 		.widget.mountable
 			h3.widget-title Forums
 
 			each post in posts
-				a.widget-element.ajax(href=post.Link())
-					.widget-element-text
+				a.widget-ui-element.ajax(href=post.Thread().Link())
+					.widget-ui-element-text
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
+		
+		.widget.mountable
+			h3.widget-title Artworks
+
+			for i := 1; i <= 5; i++
+				.widget-ui-element
+					.widget-ui-element-text
+						Icon("paint-brush")
+						span ...
+
+		.widget.mountable
+			h3.widget-title Soundtracks
+
+			for i := 0; i <= 4; i++
+				if i < len(soundTracks)
+					a.widget-ui-element.ajax(href=soundTracks[i].Link())
+						.widget-ui-element-text
+							Icon("music")
+							if soundTracks[i].Title == ""
+								span untitled
+							else
+								span= soundTracks[i].Title
+				else
+					.widget-ui-element
+						.widget-ui-element-text
+							Icon("music")
+							span ...
+		
+		.widget.mountable
+			h3.widget-title AMVs
+
+			for i := 1; i <= 5; i++
+				.widget-ui-element
+					.widget-ui-element-text
+						Icon("video-camera")
+						span ...
+		
+		.widget.mountable
+			h3.widget-title Reviews
+
+			for i := 1; i <= 5; i++
+				.widget-ui-element
+					.widget-ui-element-text
+						Icon("book")
+						span ...
 
 		.widget.mountable
 			h3.widget-title Groups
 
 			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
+				.widget-ui-element
+					.widget-ui-element-text
 						Icon("group")
 						span ...
-
+		
 		.widget.mountable
-			h3.widget-title Messages
+			h3.widget-title Contacts
 
-			for i := 1; i <= 5; i++
-				.widget-element
-					.widget-element-text
-						Icon("comment")
-						span ...
-
-		if len(following) > 0
-			.widget.mountable
-				h3.widget-title Contacts
-
-				each user in following
-					a.widget-element.ajax(href="/+" + user.Nick)
-						.widget-element-text
+			for i := 0; i <= 4; i++
+				if i < len(following)
+					a.widget-ui-element.ajax(href="/+" + following[i].Nick)
+						.widget-ui-element-text
 							Icon("address-card")
-							span= user.Nick
+							span= following[i].Nick
+				else
+					.widget-ui-element
+						.widget-ui-element-text
+							Icon("address-card")
+							span ...
 
-		.widget.mountable
-			h3.widget-title Follow
-
-			a.widget-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("microphone")
-					span Discord
-
-			a.widget-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("facebook")
-					span Facebook
-
-			a.widget-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("twitter")
-					span Twitter
-
-			a.widget-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("google-plus")
-					span Google+
-
-			a.widget-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
-				.widget-element-text
-					Icon("github")
-					span GitHub
+	Footer

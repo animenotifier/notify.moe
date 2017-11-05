@@ -1,0 +1,24 @@
+component SoundTracks(tracks []*arn.SoundTrack, tracksPerPage int, user *arn.User)
+	h1 Soundtracks
+
+	.music-buttons
+		if user != nil
+			if user.DraftIndex().SoundTrackID == ""
+				button.action(data-action="newObject", data-trigger="click", data-type="soundtrack")
+					Icon("plus")
+					span Add soundtrack
+			else
+				a.button.ajax(href="/soundtrack/" + user.DraftIndex().SoundTrackID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+	#load-more-target.sound-tracks
+		SoundTracksScrollable(tracks, user)
+	
+	if len(tracks) == tracksPerPage
+		.buttons
+			LoadMore(tracksPerPage)
+
+component SoundTracksScrollable(tracks []*arn.SoundTrack, user *arn.User)
+	each track in tracks
+		SoundTrack(track)

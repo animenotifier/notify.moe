@@ -1,0 +1,31 @@
+component Groups(groups []*arn.Group, groupsPerPage int, user *arn.User)
+	.tabs
+		Tab("Groups", "users", "/groups")
+
+	h1.page-title Groups
+	
+	.buttons
+		if user != nil
+			if user.DraftIndex().GroupID == ""
+				button.action(data-action="newObject", data-trigger="click", data-type="group")
+					Icon("plus")
+					span New group
+			else
+				a.button.ajax(href="/group/" + user.DraftIndex().GroupID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+	#load-more-target.groups
+		each group in groups
+			a.group.mountable.ajax(href=group.Link())
+				img.group-image.lazy(data-src=group.ImageURL(), alt=group.Name)
+				.group-info
+					h3.group-name= group.Name
+					.group-tagline= group.Tagline
+					.group-member-count
+						Icon("user")
+						span= len(group.Members)
+	
+	if len(groups) == groupsPerPage
+		.buttons
+			LoadMore(groupsPerPage)

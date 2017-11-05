@@ -1,6 +1,15 @@
 component Users(users []*arn.User)
-	h2.page-title Users
+	h1.page-title Users
+
+	UsersTabs
 
 	.user-avatars
 		each user in users
-			Avatar(user)
+			.mountable
+				Avatar(user)
+
+component UsersTabs
+	.tabs
+		Tab("Active", "users", "/users")
+		Tab("Osu", "gamepad", "/users/osu")
+		Tab("Staff", "user-secret", "/users/staff")

@@ -1,0 +1,56 @@
+.tab
+	color text-color
+	padding 0.5rem 1rem
+	background-color tab-background
+	border ui-border
+	border-left none
+	white-space nowrap
+
+	:hover
+		color text-color
+		background-color tab-hover-background
+		text-shadow none
+
+	:active
+		transform none
+
+	&.active
+		background-color tab-active-background
+		color tab-active-color
+		text-shadow tab-active-text-shadow
+
+	:first-child
+		border-left ui-border
+		border-top-left-radius ui-element-border-radius
+		border-bottom-left-radius ui-element-border-radius
+
+	:last-child
+		border-top-right-radius ui-element-border-radius
+		border-bottom-right-radius ui-element-border-radius
+
+	// color text-color !important
+	// :hover
+	// 	color white !important
+	// &.active
+	// 	color white !important
+	// 	background-color link-hover-color
+
+< 920px
+	.tab
+		.icon
+			margin-right 0
+	
+	.tab-text
+		display none
+
+.tabs
+	horizontal
+	justify-content center
+	// margin-left calc(content-padding * -1)
+	// margin-top calc(content-padding * -1)
+	// margin-right calc(content-padding * -2)
+	margin-bottom content-padding
+	// background-color rgba(0, 0, 0, 0.02)
+	// justify-content flex-start !important
+	// margin-bottom 1rem
+	// margin-top -0.6rem

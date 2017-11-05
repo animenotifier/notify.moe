@@ -1,0 +1,2 @@
+.history-price, .history-date, .history-quantity
+	text-align right

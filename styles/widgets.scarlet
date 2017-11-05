@@ -1,33 +1,58 @@
+// .widgets
+// 	display grid
+// 	grid-template-columns 1fr
+
+// > 810px
+// 	.widgets
+// 		grid-template-columns repeat(2, 1fr)
+// 		grid-gap content-padding
+
+// > 1240px
+// 	.widgets
+// 		grid-template-columns repeat(3, 1fr)
+
+// > 1640px
+// 	.widgets
+// 		grid-template-columns repeat(4, 1fr)
+
 .widgets
 	horizontal-wrap
-	justify-content space-around
+	justify-content center
 
 .widget
 	vertical
-	align-items center
 	width 100%
-	padding 0.25rem
-	max-width 600px
+	margin calc(content-padding / 2)
+	overflow hidden
 
-.widget-element
+.widget-section
+	vertical
+	width 100%
+
+.widget-title
+	text-align left
+	padding-bottom 0.5rem
+	border-bottom 1px solid rgba(0, 0, 0, 0.1)
+	// We need !important here to overwrite the h3:first-child rule
+	margin 1rem 0 !important
+
+.widget-ui-element
 	vertical-wrap
 	ui-element
-	transition border transition-speed ease, background transition-speed ease, transform transition-speed ease, transform color ease
+	transition border transition-speed ease, background transition-speed ease, transform transition-speed ease, color transition-speed ease
 	margin-bottom 1rem
 	padding 0.5rem 1rem
 	width 100%
-	max-width 700px
+	// max-width 700px
 
-.widget-element-text
+.widget-ui-element-text
 	horizontal
 	clip-long-text
 	justify-content flex-start
 	align-items center
 	width 100%
 
-.widget-input
-	vertical
+.widget-form
 	width 100%
-
-.widget-title
-	//
+	max-width 650px
+	margin 0 auto

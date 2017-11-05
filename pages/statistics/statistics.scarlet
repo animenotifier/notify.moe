@@ -1,0 +1,17 @@
+.statistics
+	horizontal-wrap
+	justify-content space-around
+	text-align center
+
+	.widget
+		max-width 300px
+
+.pie-chart
+	transform rotate(-90deg)
+
+.slice
+	color black
+	default-transition
+	transform scale(1)
+	:hover
+		transform scale(1.05)

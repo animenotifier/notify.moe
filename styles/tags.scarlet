@@ -1,0 +1,26 @@
+mixin tag-dimensions
+	padding 0.4rem 0.8rem
+	margin 0.4rem
+	height 40px
+
+.tags
+	horizontal-wrap
+
+.tag
+	ui-element
+	tag-dimensions
+	margin-right 0
+
+.tag-edit
+	border-right none
+	border-top-right-radius 0
+	border-bottom-right-radius 0
+
+.tag-remove
+	tag-dimensions
+	margin-left 0
+	border-top-left-radius 0
+	border-bottom-left-radius 0
+
+.tag-add
+	tag-dimensions
