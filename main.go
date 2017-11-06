@@ -230,7 +230,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.OnShutdown(arn.Node.Close)
 
 	// Prefetch data from all collections
-	arn.DB.PrefetchData()
+	arn.DB.Prefetch()
 
 	// Specify test routes
 	for route, examples := range routeTests {
