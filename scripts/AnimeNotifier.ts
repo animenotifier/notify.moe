@@ -124,9 +124,6 @@ export class AnimeNotifier {
 		// Push manager
 		this.pushManager = new PushManager()
 
-		// Service worker
-		this.serviceWorkerManager = new ServiceWorkerManager(this, "/service-worker")
-
 		// Analytics
 		this.analytics = new Analytics()
 
@@ -169,6 +166,7 @@ export class AnimeNotifier {
 
 	onIdle() {
 		// Service worker
+		this.serviceWorkerManager = new ServiceWorkerManager(this, "/service-worker")
 		this.serviceWorkerManager.register()
 
 		// Analytics
