@@ -49,7 +49,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			else
 				ul.soundtrack-search
 					each track in tracks
-						li
+						li.mountable(data-mountable-type="track")
 							a.ajax(href=track.Link())= track.Title
 
 		.widget
