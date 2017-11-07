@@ -24,3 +24,4 @@
 
 .no-search-results
 	text-align left
+	padding-bottom typography-margin
