@@ -76,16 +76,16 @@ component SettingsApps(user *arn.User)
 					span Get the Firefox Extension
 
 			.widget-section
-				label Android App:
+				label Android Web App:
 				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
 					Icon("android")
-					span Get the Android App
+					span Get the Android Web App
 
 			.widget-section
-				label Desktop App:
+				label Desktop Web App:
 				button.action(data-action="installApp", data-trigger="click")
 					Icon("desktop")
-					span Get the Desktop App
+					span Get the Desktop Web App
 
 component SettingsAvatar(user *arn.User)
 	SettingsTabs
