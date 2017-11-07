@@ -10,7 +10,7 @@ const maxUsers = 25
 const maxAnime = 25
 const maxPosts = 3
 const maxThreads = 3
-const maxTracks = 5
+const maxTracks = 4
 
 // Get search page.
 func Get(ctx *aero.Context) string {
