@@ -1,4 +1,4 @@
-component SearchResults(term string, users []*arn.User, animeResults []*arn.Anime, postResults []*arn.Post, threadResults []*arn.Thread)
+component SearchResults(term string, users []*arn.User, animes []*arn.Anime, posts []*arn.Post, threads []*arn.Thread, tracks []*arn.SoundTrack)
 	h1.page-title= "Search: " + term
 
 	.search
@@ -8,10 +8,10 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 				span Anime
 			
 			.profile-watching-list.anime-search
-				if len(animeResults) == 0
+				if len(animes) == 0
 					p.no-search-results.mountable No anime found.
 				else
-					each anime in animeResults
+					each anime in animes
 						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
 							img.anime-cover-image.anime-search-result(src=anime.Image.Tiny, alt=anime.Title.Canonical)
 
@@ -20,10 +20,10 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 				Icon("comment")
 				span Forum
 			
-			if len(postResults) == 0 && len(threadResults) == 0
+			if len(posts) == 0 && len(threads) == 0
 				p.no-search-results.mountable No posts found.
 			else
-				each thread in threadResults
+				each thread in threads
 					.mountable(data-mountable-type="forum")
 						.forum-search-result
 							a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
@@ -31,7 +31,7 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 								.forum-search-result-author= thread.Author().Nick
 						.forum-search-result-sample= thread.Text
 				
-				each post in postResults
+				each post in posts
 					.mountable(data-mountable-type="forum")
 						.forum-search-result
 							a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
@@ -44,7 +44,13 @@ component SearchResults(term string, users []*arn.User, animeResults []*arn.Anim
 				Icon("music")
 				span Soundtracks
 			
-			p.no-search-results.mountable Soundtrack search coming soon.
+			if len(tracks) == 0
+				p.no-search-results.mountable No soundtracks found.
+			else
+				ul.soundtrack-search
+					each track in tracks
+						li
+							a.ajax(href=track.Link())= track.Title
 
 		.widget
 			h3.widget-title

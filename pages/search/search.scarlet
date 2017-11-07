@@ -1,5 +1,6 @@
 .anime-search,
-.user-search
+.user-search,
+.soundtrack-search
 	justify-content flex-start
 
 .anime-search-result
