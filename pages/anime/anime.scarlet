@@ -65,6 +65,7 @@
 	// flex-basis 100%
 	flex-grow 1
 	margin-bottom 0.5rem
+	min-width 200px
 
 > 500px
 	.anime-soundtracks
