@@ -11,7 +11,7 @@
 // 	flex-basis 50%
 
 .anime-list-item-rating-edit
-	horizontal-wrap
+	horizontal
 	justify-content space-between
 	width 100%
 	.widget-section
