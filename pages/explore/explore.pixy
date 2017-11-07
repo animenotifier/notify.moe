@@ -3,7 +3,10 @@ component ExploreAnime(animeList []*arn.Anime, year string, status string, typ s
 
 	h1.page-title Explore
 
-	AnimeGrid(animeList)
+	if len(animeList) == 0
+		p.no-data.mountable No anime found using the above filters.
+	else
+		AnimeGrid(animeList)
 
 component ExploreFilters(year string, status string, typ string)
 	.explore-filters
