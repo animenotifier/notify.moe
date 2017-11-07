@@ -11,6 +11,7 @@ export class ServiceWorkerManager {
 
 	register() {
 		if(!("serviceWorker" in navigator)) {
+			console.log("service worker not supported, skipping registration")
 			return
 		}
 
