@@ -70,16 +70,22 @@ component SettingsApps(user *arn.User)
 					span Get the Chrome Extension
 
 			.widget-section
-				label Desktop App:
-				button.action(data-action="installApp", data-trigger="click")
-					Icon("desktop")
-					span Get the Desktop App
+				label Firefox Extension:
+				a.button(href="https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/", target="_blank", rel="nofollow")
+					Icon("firefox")
+					span Get the Firefox Extension
 
 			.widget-section
 				label Android App:
 				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
 					Icon("android")
 					span Get the Android App
+
+			.widget-section
+				label Desktop App:
+				button.action(data-action="installApp", data-trigger="click")
+					Icon("desktop")
+					span Get the Desktop App
 
 component SettingsAvatar(user *arn.User)
 	SettingsTabs
