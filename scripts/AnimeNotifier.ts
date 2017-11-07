@@ -273,11 +273,12 @@ export class AnimeNotifier {
 
 		let enableButton = this.app.find("enable-notifications") as HTMLButtonElement
 		let disableButton = this.app.find("disable-notifications") as HTMLButtonElement
+		let testButton = this.app.find("test-notification") as HTMLButtonElement
 
 		if(!this.pushManager.pushSupported) {
-			enableButton.disabled = true
-			enableButton.title = "Your browser doesn't support push notifications!"
+			enableButton.style.display = "none"
 			disableButton.style.display = "none"
+			testButton.innerHTML = "Your browser doesn't support push notifications!"
 			return
 		}
 		
