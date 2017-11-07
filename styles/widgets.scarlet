@@ -21,7 +21,8 @@
 
 .widget
 	vertical
-	width 100%
+	flex-basis 100%
+	flex-grow 1
 	margin calc(content-padding / 2)
 	overflow hidden
 

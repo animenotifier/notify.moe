@@ -10,11 +10,12 @@
 
 .sound-track-content
 	horizontal
+	border-radius 3px
+	overflow hidden
+	box-shadow shadow-light
 
 	iframe
 		width 100%
-	
-	box-shadow shadow-light
 
 .sound-track-footer
 	text-align center
