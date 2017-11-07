@@ -155,7 +155,7 @@ export class AnimeNotifier {
 		// Apply page title
 		let headers = document.getElementsByTagName("h1")
 
-		if(this.app.currentPath === "/" || headers.length === 0) {
+		if(this.app.currentPath === "/" || headers.length === 0 || headers[0].innerText === "NOTIFY.MOE") {
 			if(document.title !== this.title) {
 				document.title = this.title
 			}
