@@ -33,7 +33,7 @@
 		"short_name": "notify.moe",
 		"gcm_sender_id": "941298467524",
 		"theme_color": "#f0c7bb",
-		"background_color": "rgba(255, 255, 255, 0.5)",
+		"background_color": "#f6f6f6",
 		"icons": [
 			{
 				"src": "images/brand/64.png",
