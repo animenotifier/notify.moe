@@ -1,3 +1,24 @@
-component Explore(animeList []*arn.Anime)
-	h1.page-title(title=toString(len(animeList)) + " anime") Explore
+component ExploreAnime(animeList []*arn.Anime, year string, status string, typ string)
+	ExploreFilters(year, status, typ)
+
+	h1.page-title Explore
+
 	AnimeGrid(animeList)
+
+component ExploreFilters(year string, status string, typ string)
+	.explore-filters
+		select#filter-year.action(value=year, data-action="filterAnime", data-trigger="change")
+			for year := time.Now().Year()+1; year >= 1951; year--
+				option(value=year)= year
+
+		select#filter-status.action(value=status, data-action="filterAnime", data-trigger="change")
+			option(value="current") Current
+			option(value="upcoming") Upcoming
+			option(value="finished") Finished
+
+		select#filter-type.action(value=typ, data-action="filterAnime", data-trigger="change")
+			option(value="tv") TV
+			option(value="movie") Movie
+			option(value="ova") OVA
+			option(value="ona") ONA
+			option(value="special") Special

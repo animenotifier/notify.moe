@@ -1,5 +1,6 @@
 export * from "./Actions/AnimeList"
 export * from "./Actions/Diff"
+export * from "./Actions/Explore"
 export * from "./Actions/FollowUser"
 export * from "./Actions/Forum"
 export * from "./Actions/InfiniteScroller"

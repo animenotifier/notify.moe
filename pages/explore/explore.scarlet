@@ -1,0 +1,16 @@
+.explore-filters
+	horizontal
+	justify-content center
+	margin-bottom content-padding
+
+	select
+		margin 0.05rem
+
+#filter-year
+	max-width 80px
+
+#filter-status
+	max-width 120px
+
+#filter-type
+	max-width 80px

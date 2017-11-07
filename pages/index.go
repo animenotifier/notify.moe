@@ -50,7 +50,7 @@ func Configure(app *aero.Application) {
 	// Main menu
 	app.Ajax("/", home.Get)
 	app.Ajax("/explore", explore.Get)
-	app.Ajax("/explore/:year/:status", explore.Filter)
+	app.Ajax("/explore/anime/:year/:status/:type", explore.Filter)
 	app.Ajax("/login", login.Get)
 	app.Ajax("/api", apiview.Get)
 	// app.Ajax("/dashboard", dashboard.Get)
