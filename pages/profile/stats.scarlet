@@ -3,4 +3,5 @@
 	justify-content space-around
 
 	.widget
+		min-width 200px
 		max-width 300px
