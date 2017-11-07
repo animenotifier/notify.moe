@@ -267,18 +267,28 @@ export class AnimeNotifier {
 	}
 
 	async updatePushUI() {
-		if(!this.pushManager.pushSupported || !this.app.currentPath.includes("/settings/notifications")) {
+		if(!this.app.currentPath.includes("/settings/notifications")) {
+			return
+		}
+
+		let enableButton = this.app.find("enable-notifications") as HTMLButtonElement
+		let disableButton = this.app.find("disable-notifications") as HTMLButtonElement
+
+		if(!this.pushManager.pushSupported) {
+			enableButton.disabled = true
+			enableButton.title = "Your browser doesn't support push notifications!"
+			disableButton.style.display = "none"
 			return
 		}
 		
 		let subscription = await this.pushManager.subscription()
 
 		if(subscription) {
-			this.app.find("enable-notifications").style.display = "none"
-			this.app.find("disable-notifications").style.display = "flex"
+			enableButton.style.display = "none"
+			disableButton.style.display = "flex"
 		} else {
-			this.app.find("enable-notifications").style.display = "flex"
-			this.app.find("disable-notifications").style.display = "none"
+			enableButton.style.display = "flex"
+			disableButton.style.display = "none"
 		}
 	}
 
