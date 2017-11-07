@@ -53,3 +53,28 @@ func Get(ctx *aero.Context) string {
 
 	return ctx.HTML(components.Explore(animeList))
 }
+
+// Filter ...
+func Filter(ctx *aero.Context) string {
+	year := ctx.Get("year")
+	status := ctx.Get("status")
+
+	var results []*arn.Anime
+
+	for anime := range arn.StreamAnime() {
+		if len(anime.StartDate) < 4 {
+			continue
+		}
+
+		if anime.StartDate[:4] != year {
+			continue
+		}
+
+		if anime.Status != status {
+			continue
+		}
+
+	}
+
+	return ctx.HTML(components.Explore(results))
+}

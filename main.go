@@ -63,7 +63,7 @@ func configure(app *aero.Application) *aero.Application {
 	// Close the database node on shutdown
 	app.OnShutdown(arn.Node.Close)
 
-	// Prefetch data from all collections
+	// Prefetch all collections
 	arn.DB.Prefetch()
 
 	// Specify test routes
