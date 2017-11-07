@@ -5,8 +5,8 @@ mixin grid
 mixin grid-cell
 	position relative
 
-	flex-basis 16vw
-	height 16vw
+	// flex-basis 16vw
+	// height 16vw
 	min-width 90px
 	min-height 127px
 	max-width 142px
