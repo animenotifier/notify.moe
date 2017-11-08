@@ -125,7 +125,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 			message += "https://notify.moe" + track.Link() + "\n"
 		}
 
-		if len(users) == 0 && len(animes) == 0 && len(posts) == 0 && len(threads) == 0 {
+		if len(users) == 0 && len(animes) == 0 && len(posts) == 0 && len(threads) == 0 && len(tracks) == 0 {
 			message = "Sorry, I couldn't find anything using that term."
 		}
 
