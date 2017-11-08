@@ -2,9 +2,9 @@
 
 ## Prerequisites
 
-* Install [Ubuntu](https://www.ubuntu.com/) or any of its derivates
+* Install [Ubuntu](https://www.ubuntu.com/) or [MacOS](https://en.wikipedia.org/wiki/MacOS)
 * Install [Go](https://golang.org/dl/) (1.9 or higher)
-* Install [TypeScript](https://www.typescriptlang.org/) (2.5 or higher)
+* Install [TypeScript](https://www.typescriptlang.org/) (2.6 or higher)
 
 ## Download the repository
 
