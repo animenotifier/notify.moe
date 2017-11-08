@@ -21,11 +21,6 @@
 
 * Add `127.0.0.1 beta.notify.moe` to `/etc/hosts`
 
-## HTTPS
-
-* [Create the certificate](https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl) `notify.moe/security/fullchain.pem` (domain: `beta.notify.moe`)
-* Create the private key `notify.moe/security/privkey.pem`
-
 ## Browser
 
 * Start Chrome via `google-chrome --ignore-certificate-errors`
@@ -34,21 +29,6 @@
 
 * `go get github.com/animenotifier/database`
 * `ln -s $GOPATH/src/github.com/animenotifier/database ~/.aero/db/arn`
-
-## API keys
-
-* Get a Google OAuth 2.0 client key & secret from [console.developers.google.com](https://console.developers.google.com)
-* Add `https://beta.notify.moe/auth/google/callback` as an authorized redirect URI
-* Create the file `notify.moe/security/api-keys.json`:
-
-```json
-{
-	"google": {
-		"id": "YOUR_KEY",
-		"secret": "YOUR_SECRET"
-	}
-}
-```
 
 ## Run
 
