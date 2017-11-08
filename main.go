@@ -19,12 +19,6 @@ func main() {
 }
 
 func configure(app *aero.Application) *aero.Application {
-	// HTTPS
-	app.Security.Load("security/fullchain.pem", "security/privkey.pem")
-
-	// CSS
-	app.SetStyle(css.Bundle())
-
 	// Sessions
 	app.Sessions.Duration = 3600 * 24 * 30 * 6
 	app.Sessions.Store = nanostore.New(arn.DB.Collection("Session"))
@@ -32,11 +26,17 @@ func configure(app *aero.Application) *aero.Application {
 	// Layout
 	app.Layout = layout.Render
 
-	// Pages
-	pages.Configure(app)
+	// CSS
+	app.SetStyle(css.Bundle())
+
+	// Security
+	configureHTTPS(app)
 
 	// Assets
 	configureAssets(app)
+
+	// Pages
+	pages.Configure(app)
 
 	// Rewrite
 	app.Rewrite(rewrite)
