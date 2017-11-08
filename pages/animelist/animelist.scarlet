@@ -1,7 +1,7 @@
 .anime-list-container
 	vertical
 	width 100%
-	max-width table-width-normal
+	max-width 800px
 	margin 0 auto
 	margin-bottom 1rem
 
