@@ -34,7 +34,7 @@
 		display block
 
 .sound-track-anime-image
-	max-width 142px
+	width 142px
 
 .music-buttons
 	display flex
