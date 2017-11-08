@@ -1,2 +1,4 @@
 *
 !.gitignore
+!default-api-keys.json
+!README.md
