@@ -27,13 +27,17 @@ sidebar-spacing-y = 0.7rem
 > 800px
 	#sidebar
 		opacity 1
-		min-width 200px
+		min-width 180px
 		transform none
 		position static
 		pointer-events auto
 		box-shadow none
 		border-right ui-border
 		background sidebar-background
+
+> 1400px
+	#sidebar
+		min-width 200px
 
 .sidebar-visible
 	transform translateX(0) !important
@@ -42,7 +46,7 @@ sidebar-spacing-y = 0.7rem
 
 .sidebar-link
 	color text-color
-	
+
 	&.active
 		.sidebar-button
 			color tab-active-color

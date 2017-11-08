@@ -3,6 +3,14 @@ html
 	font-family "Ubuntu", "Trebuchet MS", sans-serif
 	font-size 100%
 
+> 900px
+	html
+		font-size 90%
+
+> 1400px
+	html
+		font-size 100%
+
 body
 	tab-size 4
 	overflow hidden
@@ -20,10 +28,10 @@ a
 		color link-hover-color
 		text-shadow link-hover-text-shadow
 		text-decoration none
-	
+
 	:active
 		transform translateY(3px)
-	
+
 	// &.active
 	// 	color link-active-color
 
