@@ -9,6 +9,19 @@ BUILDPATCHES=@./patches/build.sh
 BUILDBOTS=@./bots/build.sh
 TSCMD=@tsc
 IPTABLES=@sudo iptables
+OSNAME=
+
+ifeq ($(OS),Windows_NT)
+	OSNAME = WINDOWS
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		OSNAME = LINUX
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		OSNAME = OSX
+	endif
+endif
 
 server:
 	$(GOBUILD)
@@ -43,8 +56,20 @@ depslist:
 clean:
 	find . -type f | xargs file | grep "ELF.*executable" | awk -F: '{print $1}' | xargs rm
 ports:
+ifeq ($(OSNAME),LINUX)
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 4000
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 4001
+endif
+ifeq ($(OSNAME),OSX)
+	@echo "rdr pass inet proto tcp from any to any port 443 -> 127.0.0.1 port 4001" | sudo pfctl -ef -
+endif
+browser:
+ifeq ($(OSNAME),LINUX)
+	@google-chrome --ignore-certificate-errors
+endif
+ifeq ($(OSNAME),OSX)
+	@/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors
+endif
 all: assets server bots jobs patches
 
 .PHONY: bots jobs patches ports

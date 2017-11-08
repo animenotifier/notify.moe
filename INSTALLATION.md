@@ -14,8 +14,12 @@
 
 * `cd $GOPATH/src/github.com/animenotifier/notify.moe`
 * `make tools` to install [pack](https://github.com/aerogo/pack) & [run](https://github.com/aerogo/run)
-* `make ports` to set up local port forwarding *(80 to 4000, 443 to 4001)*
 * `make all`
+
+## Browser
+
+* `make ports` to set up local port forwarding *(80 to 4000, 443 to 4001)*
+* `make browser` to start Google Chrome
 
 ## Database
 
@@ -24,10 +28,6 @@
 ## Hosts
 
 * Add `127.0.0.1 beta.notify.moe` to `/etc/hosts`
-
-## Browser
-
-* Start Chrome via `google-chrome --ignore-certificate-errors`
 
 ## Run
 
