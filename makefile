@@ -40,6 +40,9 @@ test:
 bench:
 	$(GOTEST) -bench .
 tools:
+ifeq ($(OSNAME),OSX)
+	brew install coreutils
+endif
 	go get -u golang.org/x/tools/cmd/goimports
 	go get -u github.com/aerogo/pack
 	go get -u github.com/aerogo/run
