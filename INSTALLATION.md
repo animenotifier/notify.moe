@@ -27,7 +27,7 @@
 
 ## Database
 
-* `go get github.com/animenotifier/database`
+* `git clone https://github.com/animenotifier/database $GOPATH/src/github.com/animenotifier/database`
 * `ln -s $GOPATH/src/github.com/animenotifier/database ~/.aero/db/arn`
 
 ## Run
