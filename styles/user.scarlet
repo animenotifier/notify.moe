@@ -8,3 +8,13 @@
 	default-transition
 	:hover
 		box-shadow outline-shadow-heavy
+
+> 900px
+	.user-image
+		width 42px
+		height 42px
+
+> 1400px
+	.user-image
+		width avatar-size
+		height avatar-size
