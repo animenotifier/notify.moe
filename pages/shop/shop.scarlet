@@ -10,7 +10,7 @@ item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	flex 1
 	flex-basis 380px
 	margin calc(content-padding / 2)
-	padding 0.5rem 1rem
+	padding 0.5rem content-padding
 
 .shop-item-name
 	font-size 1.6rem
@@ -34,7 +34,7 @@ item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	[data-item-id="pro-account-12"]
 		.item-icon
 			color item-color-pro-account
-	
+
 	[data-item-id="pro-account-24"]
 		.item-icon
 			color item-color-pro-account
