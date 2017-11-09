@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 	"runtime"
-	"sort"
+	"strconv"
 	"time"
 
 	_ "image/gif"
@@ -37,21 +37,14 @@ func main() {
 	color.Yellow("Downloading anime images")
 	defer arn.Node.Close()
 
-	allAnime := arn.AllAnime()
-
-	sort.Slice(allAnime, func(i, j int) bool {
-		return allAnime[i].Title.Canonical < allAnime[j].Title.Canonical
-	})
-
 	if from < 0 {
 		from = 0
 	}
 
-	if to > len(allAnime) {
-		to = len(allAnime)
-	}
-
-	allAnime = allAnime[from:to]
+	allAnime := arn.FilterAnime(func(anime *arn.Anime) bool {
+		id, _ := strconv.Atoi(anime.ID)
+		return id >= from && id <= to
+	})
 
 	for index, anime := range allAnime {
 		fmt.Printf("%d / %d\n", index+1, len(allAnime))
