@@ -43,24 +43,18 @@ func work(job interface{}) interface{} {
 	}
 
 	<-ticker.C
-	// resp, body, errs := gorequest.New().Get(anime.Image.Original).End()
-
-	// if len(errs) > 0 {
-	// 	color.Red(errs[0].Error())
-	// 	return errs[0]
-	// }
-
-	// if resp.StatusCode != http.StatusOK {
-	// 	color.Red("Status %d", resp.StatusCode)
-	// }
-
-	// extension := anime.Image.Original[strings.LastIndex(anime.Image.Original, "."):]
-	// fileName := "anime/" + anime.ID + extension
-	// fmt.Println(fileName)
-
-	// ioutil.WriteFile(fileName, []byte(body), 0644)
 
 	originals := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/original/")
+	large := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/large/")
+	medium := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/medium/")
+	small := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/small/")
+
+	largeSize := 250
+	mediumSize := 142
+	smallSize := 55
+
+	webpQuality := 85
+	jpegQuality := 85
 
 	system := &ipo.System{
 		Inputs: []ipo.Input{
@@ -69,19 +63,98 @@ func work(job interface{}) interface{} {
 			},
 		},
 		Outputs: []ipo.Output{
+			// Original
 			&outputs.ImageFile{
 				Directory: originals,
 				BaseName:  anime.ID,
 			},
+
+			// Large
 			&outputs.ImageFile{
-				Directory: originals,
+				Directory: large,
 				BaseName:  anime.ID,
+				Size:      largeSize,
+				Quality:   jpegQuality,
+			},
+			&outputs.ImageFile{
+				Directory: large,
+				BaseName:  anime.ID + "@2",
+				Size:      largeSize * 2,
+				Quality:   jpegQuality,
+			},
+			&outputs.ImageFile{
+				Directory: large,
+				BaseName:  anime.ID,
+				Size:      largeSize,
 				Format:    "webp",
-				Quality:   85,
+				Quality:   webpQuality,
+			},
+			&outputs.ImageFile{
+				Directory: large,
+				BaseName:  anime.ID + "@2",
+				Size:      largeSize * 2,
+				Format:    "webp",
+				Quality:   webpQuality,
+			},
+
+			// Medium
+			&outputs.ImageFile{
+				Directory: medium,
+				BaseName:  anime.ID,
+				Size:      mediumSize,
+				Quality:   jpegQuality,
+			},
+			&outputs.ImageFile{
+				Directory: medium,
+				BaseName:  anime.ID + "@2",
+				Size:      mediumSize * 2,
+				Quality:   jpegQuality,
+			},
+			&outputs.ImageFile{
+				Directory: medium,
+				BaseName:  anime.ID,
+				Size:      mediumSize,
+				Format:    "webp",
+				Quality:   webpQuality,
+			},
+			&outputs.ImageFile{
+				Directory: medium,
+				BaseName:  anime.ID + "@2",
+				Size:      mediumSize * 2,
+				Format:    "webp",
+				Quality:   webpQuality,
+			},
+
+			// Small
+			&outputs.ImageFile{
+				Directory: small,
+				BaseName:  anime.ID,
+				Size:      smallSize,
+				Quality:   jpegQuality,
+			},
+			&outputs.ImageFile{
+				Directory: small,
+				BaseName:  anime.ID + "@2",
+				Size:      smallSize * 2,
+				Quality:   jpegQuality,
+			},
+			&outputs.ImageFile{
+				Directory: small,
+				BaseName:  anime.ID,
+				Size:      smallSize,
+				Format:    "webp",
+				Quality:   webpQuality,
+			},
+			&outputs.ImageFile{
+				Directory: small,
+				BaseName:  anime.ID + "@2",
+				Size:      smallSize * 2,
+				Format:    "webp",
+				Quality:   webpQuality,
 			},
 		},
 		InputProcessor:  ipo.SequentialInputs,
-		OutputProcessor: ipo.SequentialOutputs,
+		OutputProcessor: ipo.ParallelOutputs,
 	}
 
 	err := system.Run()
