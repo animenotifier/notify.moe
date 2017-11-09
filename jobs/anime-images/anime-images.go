@@ -1,10 +1,12 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path"
 	"runtime"
+	"sort"
 	"strings"
 	"time"
 
@@ -19,13 +21,38 @@ import (
 	"github.com/fatih/color"
 )
 
-var ticker = time.NewTicker(100 * time.Millisecond)
+var ticker = time.NewTicker(200 * time.Millisecond)
+
+// Shell parameters
+var from int
+var to int
+
+// Shell flags
+func init() {
+	flag.IntVar(&from, "from", 0, "From index")
+	flag.IntVar(&to, "to", 0, "To index")
+	flag.Parse()
+}
 
 func main() {
 	color.Yellow("Downloading anime images")
 	defer arn.Node.Close()
 
 	allAnime := arn.AllAnime()
+
+	sort.Slice(allAnime, func(i, j int) bool {
+		return allAnime[i].Title.Canonical < allAnime[j].Title.Canonical
+	})
+
+	if from < 0 {
+		from = 0
+	}
+
+	if to > len(allAnime) {
+		to = len(allAnime)
+	}
+
+	allAnime = allAnime[from:to]
 
 	for index, anime := range allAnime {
 		fmt.Printf("%d / %d\n", index+1, len(allAnime))
