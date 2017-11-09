@@ -132,7 +132,7 @@ export class AnimeNotifier {
 
 		// Infinite scrolling
 		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 100)
-		
+
 		// Loading
 		this.loading(false)
 	}
@@ -140,7 +140,7 @@ export class AnimeNotifier {
 	onContentLoaded() {
 		// Stop watching all the objects from the previous page.
 		this.visibilityObserver.disconnect()
-		
+
 		this.contentLoadedActions = Promise.all([
 			Promise.resolve().then(() => this.mountMountables()),
 			Promise.resolve().then(() => this.lazyLoad()),
@@ -205,9 +205,9 @@ export class AnimeNotifier {
 				if(element.dataset.consumable !== "true") {
 					return this.statusMessage.showError(itemName + " is not a consumable item.")
 				}
-				
+
 				let apiEndpoint = this.findAPIEndpoint(element)
-				
+
 				this.post(apiEndpoint + "/use/" + element.dataset.index, "")
 				.then(() => this.reloadContent())
 				.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
@@ -241,7 +241,7 @@ export class AnimeNotifier {
 				}
 
 				let fromElement = inventory.childNodes[fromIndex] as HTMLElement
-				
+
 				let toIndex = toElement.dataset.index
 
 				if(fromElement === toElement || fromIndex === toIndex) {
@@ -250,13 +250,13 @@ export class AnimeNotifier {
 
 				// Swap in database
 				let apiEndpoint = this.findAPIEndpoint(inventory)
-				
+
 				this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex, "")
 				.catch(err => this.statusMessage.showError(err))
 
 				// Swap in UI
 				swapElements(fromElement, toElement)
-				
+
 				fromElement.dataset.index = toIndex
 				toElement.dataset.index = fromIndex
 			}, false)
@@ -281,7 +281,7 @@ export class AnimeNotifier {
 			testButton.innerHTML = "Your browser doesn't support push notifications!"
 			return
 		}
-		
+
 		let subscription = await this.pushManager.subscription()
 
 		if(subscription) {
@@ -402,7 +402,7 @@ export class AnimeNotifier {
 			this.app.loading.classList.add(this.app.fadeOutClass)
 		}
 	}
-	
+
 	assignActions() {
 		for(let element of findAll("action")) {
 			let actionTrigger = element.dataset.trigger
@@ -453,7 +453,7 @@ export class AnimeNotifier {
 				case "IMG":
 					this.lazyLoadImage(element as HTMLImageElement)
 					break
-				
+
 				case "IFRAME":
 					this.lazyLoadIFrame(element as HTMLIFrameElement)
 					break
@@ -519,7 +519,7 @@ export class AnimeNotifier {
 	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
 		const maxDelay = 1000
 		const delay = 18
-		
+
 		let time = 0
 		let start = Date.now()
 		let maxTime = start + maxDelay
@@ -597,7 +597,7 @@ export class AnimeNotifier {
 		.then(response => {
 			return response.text()
 		})
-		
+
 		history.pushState(url, null, url)
 		this.app.currentPath = url
 		this.app.markActiveLinks()
@@ -651,7 +651,7 @@ export class AnimeNotifier {
 		const interval = duration / steps
 		const fullSin = Math.PI / 2
 		const contentPadding = 24
-		
+
 		let scrollHandle: number
 		let oldScroll = this.app.content.parentElement.scrollTop
 		let newScroll = 0
@@ -735,11 +735,11 @@ export class AnimeNotifier {
 				if("blur" in activeElement) {
 					activeElement["blur"]()
 				}
-				
+
 				e.preventDefault()
 				e.stopPropagation()
 			}
-			
+
 			return
 		}
 
