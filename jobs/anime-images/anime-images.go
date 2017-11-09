@@ -81,8 +81,8 @@ func work(anime *arn.Anime) error {
 	mediumSize := 142
 	smallSize := 55
 
-	webpQuality := 80
-	jpegQuality := 80
+	webpQuality := 70
+	jpegQuality := 70
 
 	system := ipo.System{
 		Inputs: []ipo.Input{
