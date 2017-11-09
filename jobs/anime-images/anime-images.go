@@ -2,15 +2,21 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
+	"os"
+	"path"
 	"strings"
 	"time"
 
+	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
+
 	"github.com/aerogo/flow/jobqueue"
+	"github.com/aerogo/ipo"
+	"github.com/aerogo/ipo/inputs"
+	"github.com/aerogo/ipo/outputs"
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
-	"github.com/parnurzeal/gorequest"
 )
 
 var ticker = time.NewTicker(50 * time.Millisecond)
@@ -20,9 +26,8 @@ func main() {
 	defer arn.Node.Close()
 
 	jobs := jobqueue.New(work)
-	allAnime, _ := arn.AllAnime()
 
-	for _, anime := range allAnime {
+	for anime := range arn.StreamAnime() {
 		jobs.Queue(anime)
 	}
 
@@ -38,22 +43,52 @@ func work(job interface{}) interface{} {
 	}
 
 	<-ticker.C
-	resp, body, errs := gorequest.New().Get(anime.Image.Original).End()
+	// resp, body, errs := gorequest.New().Get(anime.Image.Original).End()
 
-	if len(errs) > 0 {
-		color.Red(errs[0].Error())
-		return errs[0]
+	// if len(errs) > 0 {
+	// 	color.Red(errs[0].Error())
+	// 	return errs[0]
+	// }
+
+	// if resp.StatusCode != http.StatusOK {
+	// 	color.Red("Status %d", resp.StatusCode)
+	// }
+
+	// extension := anime.Image.Original[strings.LastIndex(anime.Image.Original, "."):]
+	// fileName := "anime/" + anime.ID + extension
+	// fmt.Println(fileName)
+
+	// ioutil.WriteFile(fileName, []byte(body), 0644)
+
+	originals := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/original/")
+
+	system := &ipo.System{
+		Inputs: []ipo.Input{
+			&inputs.NetworkImage{
+				URL: anime.Image.Original,
+			},
+		},
+		Outputs: []ipo.Output{
+			&outputs.ImageFile{
+				Directory: originals,
+				BaseName:  anime.ID,
+			},
+			&outputs.ImageFile{
+				Directory: originals,
+				BaseName:  anime.ID,
+				Format:    "webp",
+				Quality:   85,
+			},
+		},
+		InputProcessor:  ipo.SequentialInputs,
+		OutputProcessor: ipo.SequentialOutputs,
 	}
 
-	if resp.StatusCode != http.StatusOK {
-		color.Red("Status %d", resp.StatusCode)
+	err := system.Run()
+
+	if err != nil {
+		fmt.Println(err)
 	}
-
-	extension := anime.Image.Original[strings.LastIndex(anime.Image.Original, "."):]
-	fileName := "anime/" + anime.ID + extension
-	fmt.Println(fileName)
-
-	ioutil.WriteFile(fileName, []byte(body), 0644)
 
 	return nil
 }
