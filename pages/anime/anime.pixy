@@ -7,17 +7,16 @@ component Anime(anime *arn.Anime, tracks []*arn.SoundTrack, episodes []*arn.Anim
 
 component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes []*arn.AnimeEpisode, user *arn.User)
 	.anime-header(data-id=anime.ID)
-		if anime.Image.Large != ""
-			.anime-image-container.mountable
-				img.anime-cover-image(src=anime.Image.Large, alt=anime.Title.ByUser(user))
+		.anime-image-container.mountable
+			img.anime-cover-image.lazy(data-src=anime.Image("large"), data-webp="true", alt=anime.Title.ByUser(user))
 
-				//- if anime.StartDate != ""
-				//- 	.anime-start-date
-				//- 		span(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
-				//- 		if anime.EndDate != "" && anime.StartDate[:4] != anime.EndDate[:4]
-				//- 			span  - 
-				//- 			span(title="End date: " + anime.EndDate)= anime.EndDate[:4]
-		
+			//- if anime.StartDate != ""
+			//- 	.anime-start-date
+			//- 		span(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
+			//- 		if anime.EndDate != "" && anime.StartDate[:4] != anime.EndDate[:4]
+			//- 			span  -
+			//- 			span(title="End date: " + anime.EndDate)= anime.EndDate[:4]
+
 		.space
 
 		.anime-info
@@ -28,14 +27,14 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 
 			//- h3.anime-section-name.anime-summary-header Summary
 			p.anime-summary.mountable= anime.Summary
-			
+
 			AnimeActions(anime, user)
-	
+
 	AnimeCharacters(anime)
 	AnimeRelations(anime, user)
 	AnimeTracks(anime, tracks)
 	AnimeEpisodes(episodes)
-	
+
 	//- //- h3.anime-section-name Reviews
 	//- //- p Coming soon.
 
@@ -114,7 +113,7 @@ component AnimePopularity(anime *arn.Anime)
 					tr.mountable(data-mountable-type="info")
 						td.anime-info-key Completed:
 						td.anime-info-value= anime.Popularity.Completed
-				
+
 				if anime.Popularity.Planned > 0
 					tr.mountable(data-mountable-type="info")
 						td.anime-info-key Planned:
@@ -137,7 +136,7 @@ component AnimeLinks(anime *arn.Anime)
 			a.light-button(href="https://kitsu.io/anime/" + anime.ID, target="_blank", rel="noopener")
 				Icon("external-link")
 				span Kitsu
-			
+
 			each mapping in anime.Mappings
 				a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
 					Icon("external-link")
@@ -167,7 +166,7 @@ component AnimeFriends(friends []*arn.User, listItems map[*arn.User]*arn.AnimeLi
 	if len(friends) > 0
 		section.anime-section.mountable
 			h3.anime-section-name Friends
-			
+
 			.anime-friends
 				.user-avatars
 					each friend in friends
@@ -200,7 +199,7 @@ component AnimeInformation(anime *arn.Anime)
 			tr.mountable(data-mountable-type="info")
 				td.anime-info-key Status:
 				td.anime-info-value= anime.StatusHumanReadable()
-			
+
 			if anime.StartDate == anime.EndDate && anime.StartDate != "" && anime.EndDate != ""
 				if anime.StartDate != ""
 					tr.mountable(data-mountable-type="info")

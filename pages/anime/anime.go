@@ -94,7 +94,7 @@ func Get(ctx *aero.Context) string {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       anime.Title.Canonical,
-			"og:image":       anime.Image.Large,
+			"og:image":       anime.Image("large"),
 			"og:url":         "https://" + ctx.App.Config.Domain + anime.Link(),
 			"og:site_name":   "notify.moe",
 			"og:description": description,

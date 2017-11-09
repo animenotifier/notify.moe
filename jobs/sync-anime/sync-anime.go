@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"path/filepath"
 	"strings"
 
 	"github.com/animenotifier/arn"
@@ -53,10 +54,7 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	anime.Title.English = attr.Titles.En
 	anime.Title.Romaji = attr.Titles.EnJp
 	anime.Title.Synonyms = attr.AbbreviatedTitles
-	anime.Image.Tiny = kitsu.FixImageURL(attr.PosterImage.Tiny)
-	anime.Image.Small = kitsu.FixImageURL(attr.PosterImage.Small)
-	anime.Image.Large = kitsu.FixImageURL(attr.PosterImage.Large)
-	anime.Image.Original = kitsu.FixImageURL(attr.PosterImage.Original)
+	anime.ImageExtension = filepath.Ext(kitsu.FixImageURL(attr.PosterImage.Original))
 	anime.StartDate = attr.StartDate
 	anime.EndDate = attr.EndDate
 	anime.EpisodeCount = attr.EpisodeCount

@@ -464,13 +464,24 @@ export class AnimeNotifier {
 	lazyLoadImage(element: HTMLImageElement) {
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
+			let dataSrc = element.dataset.src
+			let dot = dataSrc.lastIndexOf(".")
+			let base = dataSrc.substring(0, dot)
+			let extension = ""
+
 			// Replace URL with WebP if supported
 			if(this.webpEnabled && element.dataset.webp) {
-				let dot = element.dataset.src.lastIndexOf(".")
-				element.src = element.dataset.src.substring(0, dot) + ".webp"
+				extension = ".webp"
 			} else {
-				element.src = element.dataset.src
+				extension = dataSrc.substring(dot)
 			}
+
+			// Anime images on Retina displays
+			if(base.includes("/anime/") && window.devicePixelRatio >= 2) {
+				base += "@2"
+			}
+
+			element.src = base + extension
 
 			if(element.naturalWidth === 0) {
 				element.onload = () => {
