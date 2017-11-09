@@ -33,6 +33,9 @@ func main() {
 
 	results := jobs.Wait()
 	color.Green("Finished downloading %d anime images.", len(results))
+
+	// Give file buffers some time, just to be safe
+	time.Sleep(time.Second)
 }
 
 func work(job interface{}) interface{} {
@@ -53,8 +56,8 @@ func work(job interface{}) interface{} {
 	mediumSize := 142
 	smallSize := 55
 
-	webpQuality := 85
-	jpegQuality := 85
+	webpQuality := 80
+	jpegQuality := 80
 
 	system := &ipo.System{
 		Inputs: []ipo.Input{
