@@ -1,4 +1,4 @@
-component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, content string)
+component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, meta, tags []string, content string)
 	html(lang="en")
 		head
 			if openGraph != nil
@@ -8,14 +8,14 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 
 			meta(name="viewport", content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 			meta(name="theme-color", content=app.Config.Manifest.ThemeColor)
-			
+
 			if openGraph != nil
-				for name, value := range openGraph.Meta
-					meta(name=name, content=value)
-				
-				for property, content := range openGraph.Tags
-					meta(property=property, content=content)
-			
+				for _, name := range meta
+					meta(name=name, content=openGraph.Meta[name])
+
+				for _, name := range tags
+					meta(property=name, content=openGraph.Tags[name])
+
 			link(rel="chrome-webstore-item", href="https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch")
 			link(rel="manifest", href="/manifest.json")
 		body
