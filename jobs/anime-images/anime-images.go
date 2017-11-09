@@ -21,7 +21,7 @@ import (
 	"github.com/fatih/color"
 )
 
-var ticker = time.NewTicker(200 * time.Millisecond)
+var ticker = time.NewTicker(50 * time.Millisecond)
 
 // Shell parameters
 var from int
@@ -86,6 +86,18 @@ func work(anime *arn.Anime) error {
 
 	system := ipo.System{
 		Inputs: []ipo.Input{
+			&inputs.FileSystemImage{
+				URL: path.Join(originals, anime.ID+".png"),
+			},
+			&inputs.FileSystemImage{
+				URL: path.Join(originals, anime.ID+".jpg"),
+			},
+			&inputs.FileSystemImage{
+				URL: path.Join(originals, anime.ID+".jpeg"),
+			},
+			&inputs.FileSystemImage{
+				URL: path.Join(originals, anime.ID+".gif"),
+			},
 			&inputs.NetworkImage{
 				URL: anime.Image.Original,
 			},
