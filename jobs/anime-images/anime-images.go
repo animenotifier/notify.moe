@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"runtime"
 	"strings"
 	"time"
 
@@ -11,7 +12,6 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 
-	"github.com/aerogo/flow/jobqueue"
 	"github.com/aerogo/ipo"
 	"github.com/aerogo/ipo/inputs"
 	"github.com/aerogo/ipo/outputs"
@@ -19,28 +19,26 @@ import (
 	"github.com/fatih/color"
 )
 
-var ticker = time.NewTicker(50 * time.Millisecond)
+var ticker = time.NewTicker(100 * time.Millisecond)
 
 func main() {
 	color.Yellow("Downloading anime images")
 	defer arn.Node.Close()
 
-	jobs := jobqueue.New(work)
+	allAnime := arn.AllAnime()
 
-	for anime := range arn.StreamAnime() {
-		jobs.Queue(anime)
+	for index, anime := range allAnime {
+		fmt.Printf("%d / %d\n", index, len(allAnime))
+		work(anime)
 	}
 
-	results := jobs.Wait()
-	color.Green("Finished downloading %d anime images.", len(results))
+	color.Green("Finished downloading anime images.")
 
 	// Give file buffers some time, just to be safe
 	time.Sleep(time.Second)
 }
 
-func work(job interface{}) interface{} {
-	anime := job.(*arn.Anime)
-
+func work(anime *arn.Anime) error {
 	if !strings.HasPrefix(anime.Image.Original, "//media.kitsu.io/anime/") {
 		return nil
 	}
@@ -59,7 +57,7 @@ func work(job interface{}) interface{} {
 	webpQuality := 80
 	jpegQuality := 80
 
-	system := &ipo.System{
+	system := ipo.System{
 		Inputs: []ipo.Input{
 			&inputs.NetworkImage{
 				URL: anime.Image.Original,
@@ -165,6 +163,11 @@ func work(job interface{}) interface{} {
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	// Try to free up some memory
+	system.Inputs = nil
+	system.Outputs = nil
+	runtime.GC()
 
 	return nil
 }
