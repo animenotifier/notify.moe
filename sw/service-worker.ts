@@ -41,9 +41,9 @@ class MyServiceWorker {
 	currentCSP: string
 
 	constructor() {
-		this.cache = new MyCache("v-3")
+		this.cache = new MyCache("v-4")
 		this.currentCSP = ""
-		
+
 		self.addEventListener("install", (evt: InstallEvent) => evt.waitUntil(this.onInstall(evt)))
 		self.addEventListener("activate", (evt: any) => evt.waitUntil(this.onActivate(evt)))
 		self.addEventListener("fetch", (evt: FetchEvent) => evt.waitUntil(this.onRequest(evt)))
@@ -55,7 +55,7 @@ class MyServiceWorker {
 
 	onInstall(evt: InstallEvent) {
 		console.log("service worker install")
-	
+
 		return (self as any).skipWaiting().then(() => {
 			return this.installCache()
 		})
@@ -63,10 +63,10 @@ class MyServiceWorker {
 
 	onActivate(evt: any) {
 		console.log("service worker activate")
-	
+
 		// Only keep current version of the cache and delete old caches
 		let cacheWhitelist = [this.cache.version]
-	
+
 		let deleteOldCache = caches.keys().then(keyList => {
 			return Promise.all(keyList.map(key => {
 				if(cacheWhitelist.indexOf(key) === -1) {
@@ -74,10 +74,10 @@ class MyServiceWorker {
 				}
 			}))
 		})
-		
+
 		// Immediate claim helps us gain control over a new client immediately
 		let immediateClaim = (self as any).clients.claim()
-	
+
 		return Promise.all([
 			deleteOldCache,
 			immediateClaim
@@ -103,28 +103,28 @@ class MyServiceWorker {
 				return evt.respondWith(fetch(request))
 			}
 		}
-	
+
 		// If the request included the header "X-CacheOnly", return a cache-only response.
 		// This is used in reloads to avoid generating a 2nd request after a cache refresh.
 		if(request.headers.get("X-CacheOnly") === "true") {
 			return evt.respondWith(this.fromCache(request))
 		}
-		
+
 		// Start fetching the request
 		let refresh = fetch(request).then(response => {
 			let clone = response.clone()
-	
+
 			// Save the new version of the resource in the cache
 			let cacheRefresh = this.cache.store(request, clone)
-	
+
 			CACHEREFRESH.set(request.url, cacheRefresh)
-	
+
 			return response
 		})
-	
+
 		// Save in map
 		RELOADS.set(request.url, refresh)
-	
+
 		// Forced reload
 		let servedETag = undefined
 
@@ -137,13 +137,13 @@ class MyServiceWorker {
 		if(request.headers.get("X-Reload") === "true") {
 			return evt.respondWith(refresh.then(onResponse))
 		}
-	
+
 		// Try to serve cache first and fall back to network response
 		let networkOrCache = this.fromCache(request).then(onResponse).catch(error => {
 			// console.log("Cache MISS:", request.url)
 			return refresh
 		})
-	
+
 		return evt.respondWith(networkOrCache)
 	}
 
@@ -162,12 +162,12 @@ class MyServiceWorker {
 	onDOMContentLoaded(evt: any, url: string) {
 		let refresh = RELOADS.get(url)
 		let servedETag = ETAGS.get(url)
-	
+
 		// If the user requests a sub-page we should prefetch the full page, too.
 		if(url.includes("/_/")) {
 			this.prefetchFullPage(url)
 		}
-	
+
 		if(!refresh || !servedETag) {
 			return Promise.resolve()
 		}
@@ -178,7 +178,7 @@ class MyServiceWorker {
 			if(response.bodyUsed) {
 				return
 			}
-			
+
 			// Get the ETag of the cached response we sent to the client earlier.
 			let eTag = response.headers.get("ETag")
 
@@ -202,7 +202,7 @@ class MyServiceWorker {
 			if(eTag !== servedETag) {
 				return this.forceClientReloadContent(url, evt.source)
 			}
-			
+
 			// Do nothing
 			return Promise.resolve()
 		})
@@ -210,7 +210,7 @@ class MyServiceWorker {
 
 	prefetchFullPage(url: string) {
 		let fullPage = new Request(url.replace("/_/", "/"))
-		
+
 		let fullPageRefresh = fetch(fullPage, {
 			credentials: "same-origin"
 		}).then(response => {
@@ -229,7 +229,7 @@ class MyServiceWorker {
 
 	onPush(evt: PushEvent) {
 		var payload = evt.data ? evt.data.json() : {}
-	
+
 		return (self as any).registration.showNotification(payload.title, {
 			body: payload.message,
 			icon: payload.icon,
@@ -243,15 +243,15 @@ class MyServiceWorker {
 		return (self as any).registration.pushManager.subscribe(evt.oldSubscription.options)
 		.then(async subscription => {
 			console.log("send subscription to server...")
-	
+
 			let rawKey = subscription.getKey("p256dh")
 			let key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
-	
+
 			let rawSecret = subscription.getKey("auth")
 			let secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
-	
+
 			let endpoint = subscription.endpoint
-	
+
 			let pushSubscription = {
 				endpoint,
 				p256dh: key,
@@ -263,9 +263,9 @@ class MyServiceWorker {
 					height: window.screen.height
 				}
 			}
-	
+
 			let user = await fetch("/api/me").then(response => response.json())
-	
+
 			return fetch("/api/pushsubscriptions/" + user.id + "/add", {
 				method: "POST",
 				credentials: "same-origin",
@@ -277,7 +277,7 @@ class MyServiceWorker {
 	onNotificationClick(evt: NotificationEvent) {
 		let notification = evt.notification
 		notification.close()
-	
+
 		return (self as any).clients.matchAll().then(function(clientList) {
 			// If we have a link, use that link to open a new window.
 			let url = notification.data
@@ -329,7 +329,7 @@ class MyServiceWorker {
 	installCache() {
 		// TODO: Implement a solution that caches resources with credentials: "same-origin"
 		return Promise.resolve()
-		
+
 		// return caches.open(this.cache.version).then(cache => {
 		// 	return cache.addAll([
 		// 		"./",
@@ -338,7 +338,7 @@ class MyServiceWorker {
 		// 	])
 		// })
 	}
-	
+
 	fromCache(request) {
 		return caches.open(this.cache.version).then(cache => {
 			return cache.match(request).then(matching => {
@@ -346,7 +346,7 @@ class MyServiceWorker {
 					// console.log("Cache HIT:", request.url)
 					return Promise.resolve(matching)
 				}
-	
+
 				return Promise.reject("no-match")
 			})
 		})
