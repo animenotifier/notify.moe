@@ -91,6 +91,15 @@ func work(anime *arn.Anime) error {
 			&inputs.NetworkImage{
 				URL: kitsuOriginal + anime.ImageExtension,
 			},
+			&inputs.NetworkImage{
+				URL: kitsuOriginal + ".png",
+			},
+			&inputs.NetworkImage{
+				URL: kitsuOriginal + ".jpg",
+			},
+			&inputs.NetworkImage{
+				URL: kitsuOriginal + ".jpeg",
+			},
 		},
 		Outputs: []ipo.Output{
 			// Original
