@@ -83,12 +83,7 @@ func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
 		return nil, ctx.Error(http.StatusBadRequest, "Couldn't authorize the Anime Notifier app on AniList", authErr)
 	}
 
-	allAnime, allErr := arn.AllAnime()
-
-	if allErr != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load notify.moe list of all anime", allErr)
-	}
-
+	allAnime := arn.AllAnime()
 	anilistAnimeList, err := anilist.GetAnimeList(user.Accounts.AniList.Nick)
 
 	if err != nil {

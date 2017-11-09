@@ -43,13 +43,13 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 				p.profile-field.role
 					Icon("rocket")
 					span= arn.Capitalize(viewUser.Role)
-		
+
 		if viewUser.IsPro()
 			p.profile-field.profile-pro-status
 				a.ajax(href="/shop", title="PRO user")
 					Icon("star")
 					span.profile-pro-status-text PRO
-		
+
 		if user != nil
 			.profile-actions
 				if user.ID != viewUser.ID
@@ -61,11 +61,11 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 						button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
 							Icon("user-times")
 							span Unfollow
-					
+
 					a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
 						Icon("exchange")
 						span Compare
-	
+
 	ProfileNavigation(viewUser, uri)
 
 component ProfileNavigation(viewUser *arn.User, uri string)
@@ -97,7 +97,7 @@ component ProfileNavigation(viewUser *arn.User, uri string)
 		a.tab.action(href="/+" + viewUser.Nick + "/followers", data-action="diff", data-trigger="click")
 			Icon("users")
 			span.tab-text Followers
-	
+
 	if strings.Contains(uri, "/animelist")
 		StatusTabs("/+" + viewUser.Nick + "/animelist")
 
@@ -111,15 +111,15 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 			each item in animeList.Items
 				if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
 					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.ByUser(user) + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image.Tiny, alt=item.Anime().Title.ByUser(user))
-	
+						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image("small"), alt=item.Anime().Title.ByUser(user))
+
 	if user != nil && (user.Role == "admin" || user.Role == "editor")
 		.footer
 			.buttons
 				a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
 					Icon("search-plus")
 					span JSON
-	
+
 	//- .profile-category.mountable
 	//- 	h3
 	//- 		a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
@@ -129,7 +129,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 	//- 	else
 	//- 		each thread in threads
 	//- 			ThreadLink(thread)
-	
+
 	//- .profile-category.mountable
 	//- 	h3
 	//- 		a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
@@ -145,7 +145,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 	//- 					.post-toolbar.active
 	//- 						.spacer
 	//- 						.post-likes= len(post.Likes)
-	
+
 	//- .profile-category.mountable
 	//- 	h3
 	//- 		a.ajax(href="/+" + viewUser.Nick + "/tracks", title="View all tracks") Tracks
