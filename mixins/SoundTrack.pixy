@@ -20,9 +20,9 @@ component SoundTrackFooter(track *arn.SoundTrack)
 			a.ajax(href=track.Link() + "/edit") untitled
 		else
 			a.ajax(href=track.Link())= track.Title
-		span  posted
+		span  posted 
 		span.utc-date(data-date=track.Created)
-		span  by
+		span  by 
 		a.ajax(href=track.Creator().Link())= track.Creator().Nick + " "
 
 component ExternalMedia(media *arn.ExternalMedia)

@@ -1,7 +1,7 @@
 {
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
-	"files.trimTrailingWhitespace": false,
+	"files.trimTrailingWhitespace": true,
 	"tsimporter.emitSemicolon": false,
 	"tsimporter.doubleQuotes": true,
 	"files.exclude": {
