@@ -7,7 +7,6 @@ import (
 	"path"
 	"runtime"
 	"sort"
-	"strings"
 	"time"
 
 	_ "image/gif"
@@ -66,10 +65,6 @@ func main() {
 }
 
 func work(anime *arn.Anime) error {
-	if !strings.HasPrefix(anime.Image.Original, "//media.kitsu.io/anime/") {
-		return nil
-	}
-
 	<-ticker.C
 
 	originals := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/original/")
@@ -83,6 +78,8 @@ func work(anime *arn.Anime) error {
 
 	webpQuality := 70
 	jpegQuality := 70
+
+	kitsuOriginal := fmt.Sprintf("https://media.kitsu.io/anime/poster_images/%s/original", anime.ID)
 
 	system := ipo.System{
 		Inputs: []ipo.Input{
@@ -99,7 +96,7 @@ func work(anime *arn.Anime) error {
 				URL: path.Join(originals, anime.ID+".gif"),
 			},
 			&inputs.NetworkImage{
-				URL: anime.Image.Original,
+				URL: kitsuOriginal + anime.ImageExtension,
 			},
 		},
 		Outputs: []ipo.Output{

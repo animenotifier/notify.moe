@@ -38,7 +38,6 @@ func sync(data *kitsu.Anime) *arn.Anime {
 		if strings.Contains(err.Error(), "not found") {
 			anime = &arn.Anime{
 				Title: &arn.AnimeTitle{},
-				Image: &arn.AnimeImageTypes{},
 			}
 		} else {
 			panic(err)
@@ -84,7 +83,7 @@ func sync(data *kitsu.Anime) *arn.Anime {
 			anime.AddMapping("myanimelist/anime", mapping.Attributes.ExternalID, "")
 		case "anidb":
 			anime.AddMapping("anidb/anime", mapping.Attributes.ExternalID, "")
-		case "thetvdb/series":
+		case "thetvdb", "thetvdb/series":
 			anime.AddMapping("thetvdb/anime", mapping.Attributes.ExternalID, "")
 		case "thetvdb/season":
 			// Ignore
