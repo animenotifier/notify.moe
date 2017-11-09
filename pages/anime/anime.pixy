@@ -149,7 +149,7 @@ component AnimeRelations(anime *arn.Anime, user *arn.User)
 			.anime-relations
 				each relation in anime.Relations().Items
 					a.anime-relation.mountable.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user), data-mountable-type="relation")
-						img.anime-relation-image.lazy(data-src=relation.Anime().Image("small"), , data-webp="true", alt=relation.Anime().Title.ByUser(user))
+						img.anime-relation-image.lazy(data-src=relation.Anime().Image("small"), data-webp="true", alt=relation.Anime().Title.ByUser(user))
 						.anime-relation-type= relation.HumanReadableType()
 						.anime-relation-year
 							if relation.Anime().StartDate != ""
