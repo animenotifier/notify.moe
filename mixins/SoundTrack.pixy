@@ -10,7 +10,7 @@ component SoundTrackContent(track *arn.SoundTrack, media *arn.ExternalMedia)
 	.sound-track-content
 		if track.MainAnime() != nil
 			a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
-				img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image("medium"), alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
+				img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image("medium"), data-webp="true", alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 
 		ExternalMedia(media)
 
