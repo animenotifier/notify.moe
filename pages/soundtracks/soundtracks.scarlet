@@ -35,6 +35,7 @@
 
 .sound-track-anime-image
 	width 142px
+	height 201px
 
 .music-buttons
 	display flex
