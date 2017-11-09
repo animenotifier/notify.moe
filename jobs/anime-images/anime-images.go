@@ -28,7 +28,7 @@ func main() {
 	allAnime := arn.AllAnime()
 
 	for index, anime := range allAnime {
-		fmt.Printf("%d / %d\n", index, len(allAnime))
+		fmt.Printf("%d / %d\n", index+1, len(allAnime))
 		work(anime)
 	}
 
