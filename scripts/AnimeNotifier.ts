@@ -477,7 +477,7 @@ export class AnimeNotifier {
 			}
 
 			// Anime images on Retina displays
-			if(base.includes("/anime/") && window.devicePixelRatio >= 2) {
+			if(base.includes("/anime/") && window.devicePixelRatio > 1) {
 				base += "@2"
 			}
 
