@@ -66,8 +66,11 @@ func work(anime *arn.Anime) error {
 	small := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/small/")
 
 	largeSize := 250
-	mediumSize := 150
+	mediumSize := 142
 	smallSize := 55
+
+	mediumSizeBonusLowDPI := 8
+	smallSizeBonusLowDPI := 5
 
 	webpQuality := 70
 	jpegQuality := 70
@@ -144,7 +147,7 @@ func work(anime *arn.Anime) error {
 			&outputs.ImageFile{
 				Directory: medium,
 				BaseName:  anime.ID,
-				Size:      mediumSize,
+				Size:      mediumSize + mediumSizeBonusLowDPI,
 				Quality:   jpegQuality + qualityBonusLowDPI + qualityBonusMedium,
 			},
 			&outputs.ImageFile{
@@ -156,7 +159,7 @@ func work(anime *arn.Anime) error {
 			&outputs.ImageFile{
 				Directory: medium,
 				BaseName:  anime.ID,
-				Size:      mediumSize,
+				Size:      mediumSize + mediumSizeBonusLowDPI,
 				Format:    "webp",
 				Quality:   webpQuality + qualityBonusLowDPI + qualityBonusMedium,
 			},
@@ -172,7 +175,7 @@ func work(anime *arn.Anime) error {
 			&outputs.ImageFile{
 				Directory: small,
 				BaseName:  anime.ID,
-				Size:      smallSize,
+				Size:      smallSize + smallSizeBonusLowDPI,
 				Quality:   jpegQuality + qualityBonusLowDPI + qualityBonusSmall,
 			},
 			&outputs.ImageFile{
@@ -184,7 +187,7 @@ func work(anime *arn.Anime) error {
 			&outputs.ImageFile{
 				Directory: small,
 				BaseName:  anime.ID,
-				Size:      smallSize,
+				Size:      smallSize + smallSizeBonusLowDPI,
 				Format:    "webp",
 				Quality:   webpQuality + qualityBonusLowDPI + qualityBonusSmall,
 			},
