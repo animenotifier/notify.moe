@@ -2,6 +2,15 @@
 
 This document is only meant to teach you the code style used in this project and will not explain *why* this coding style is used.
 
+* [Tabs vs Spaces](#tabs-vs-spaces)
+* [Empty line between blocks and statements](#empty-line-between-blocks-and-statements)
+* [Variable names](#variable-names)
+* [Types at the top](#types-at-the-top)
+* [Private fields at the end of a struct](#private-fields-at-the-end-of-a-struct)
+* [Package names](#package-names)
+* [Use gofmt](#use-gofmt)
+* [Code editor](#code-editor)
+
 ## Tabs vs Spaces
 
 Use tabs for indentation and spaces for alignment:
@@ -16,7 +25,7 @@ type AnimeTitle struct {
 }
 ```
 
-## Add an empty line between blocks and other statements
+## Empty line between blocks and statements
 
 Bad:
 
