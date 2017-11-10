@@ -1,13 +1,13 @@
 component Genres(genres []*arn.Genre)
-	h1.page-title Genres
-	
-	.genres
-		each genre in genres
-			a.genre.ajax(href="/genres/" + genre.ID)
-				.genre-text.front
-					.genre-icon
-						RawIcon(arn.GetGenreIcon(genre.Name))
-					span= genre.Name
+	//- h1.page-title Genres
 
-				if len(genre.AnimeList) > 0
-					img.genre-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji, title=genre.AnimeList[0].Title.Romaji + "\n" + genre.Name + " #1")
+	//- .genres
+	//- 	each genre in genres
+	//- 		a.genre.ajax(href="/genres/" + genre.ID)
+	//- 			.genre-text.front
+	//- 				.genre-icon
+	//- 					RawIcon(arn.GetGenreIcon(genre.Name))
+	//- 				span= genre.Name
+
+	//- 			if len(genre.AnimeList) > 0
+	//- 				img.genre-image.back(src=genre.AnimeList[0].Image, alt=genre.AnimeList[0].Title.Romaji, title=genre.AnimeList[0].Title.Romaji + "\n" + genre.Name + " #1")
