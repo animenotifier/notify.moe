@@ -2,6 +2,7 @@ package explore
 
 import (
 	"sort"
+	"time"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -15,6 +16,8 @@ const (
 	watchingPopularityWeight  = 0.3
 	completedPopularityWeight = 0.3
 	plannedPopularityWeight   = 0.2
+	agePenalty                = 11.0
+	ageThreshold              = 6 * 30 * 24 * time.Hour
 )
 
 // Get ...
@@ -61,11 +64,11 @@ func filterAnime(year, status, typ string) []*arn.Anime {
 		results = append(results, anime)
 	}
 
-	sortAnime(results)
+	sortAnime(results, status)
 	return results
 }
 
-func sortAnime(animeList []*arn.Anime) {
+func sortAnime(animeList []*arn.Anime, filterStatus string) {
 	sort.Slice(animeList, func(i, j int) bool {
 		a := animeList[i]
 		b := animeList[j]
@@ -87,6 +90,17 @@ func sortAnime(animeList []*arn.Anime) {
 
 		if b.Popularity.Total() < popularityThreshold {
 			scoreB -= popularityPenalty
+		}
+
+		// If we show current shows, rank old shows a bit lower
+		if filterStatus == "current" {
+			if a.StartDate != "" && time.Since(a.StartDateTime()) > ageThreshold {
+				scoreA -= agePenalty
+			}
+
+			if b.StartDate != "" && time.Since(b.StartDateTime()) > ageThreshold {
+				scoreB -= agePenalty
+			}
 		}
 
 		scoreA += float64(a.Popularity.Watching) * watchingPopularityWeight
