@@ -39,7 +39,7 @@ export class Application {
 			this.lastRequest.abort()
 			this.lastRequest = null
 		}
-		
+
 		return new Promise((resolve, reject) => {
 			let request = new XMLHttpRequest()
 
@@ -71,7 +71,7 @@ export class Application {
 		if(options.addToHistory === undefined) {
 			options.addToHistory = true
 		}
-		
+
 		// Set current path
 		this.currentPath = url
 
@@ -85,14 +85,14 @@ export class Application {
 			if(e.target !== this.content) {
 				return
 			}
-			
+
 			// Remove listener after we finally got the correct event.
 			this.content.removeEventListener("transitionend", onTransitionEnd)
 
 			// Wait for the network request to end.
 			request.then(html => {
 				// Set content
-				this.setContent(html, false)
+				this.setContent(html)
 				this.scrollToTop()
 
 				// Fade animations
@@ -113,19 +113,15 @@ export class Application {
 		return request
 	}
 
-	setContent(html: string, diff: boolean) {
-		if(diff) {
-			Diff.innerHTML(this.content, html)
-		} else {
-			this.content.innerHTML = html
-		}
+	setContent(html: string) {
+		this.content.innerHTML = html
 	}
 
 	markActiveLinks(element?: HTMLElement) {
 		if(element === undefined)
 			element = document.body
 
-		let links = element.querySelectorAll("a")
+		let links = element.getElementsByTagName("a")
 
 		for(let i = 0; i < links.length; i++) {
 			let link = links[i]
@@ -165,7 +161,7 @@ export class Application {
 
 				if(!url || url === self.currentPath)
 					return
-				
+
 				// Load requested page
 				self.load(url)
 			}

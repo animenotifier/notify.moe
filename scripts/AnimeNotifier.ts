@@ -294,6 +294,10 @@ export class AnimeNotifier {
 	}
 
 	countUp() {
+		if(!this.app.currentPath.includes("/paypal/success")) {
+			return
+		}
+
 		for(let element of findAll("count-up")) {
 			let final = parseInt(element.innerText)
 			let duration = 2000.0
@@ -384,9 +388,7 @@ export class AnimeNotifier {
 			return Promise.resolve(response)
 		})
 		.then(response => response.text())
-		.then(html => {
-			Diff.root(document.documentElement, html)
-		})
+		.then(html => Diff.root(document.documentElement, html))
 		.then(() => this.app.emit("DOMContentLoaded"))
 		.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
 	}
@@ -605,9 +607,7 @@ export class AnimeNotifier {
 		let request = fetch(path, {
 			credentials: "same-origin"
 		})
-		.then(response => {
-			return response.text()
-		})
+		.then(response => response.text())
 
 		history.pushState(url, null, url)
 		this.app.currentPath = url
@@ -617,7 +617,7 @@ export class AnimeNotifier {
 
 		// Delay by transition-speed
 		return delay(200).then(() => request)
-		.then(html => this.app.setContent(html, true))
+		.then(html => Diff.innerHTML(this.app.content, html))
 		.then(() => this.app.emit("DOMContentLoaded"))
 		.then(() => this.loading(false))
 		.catch(console.error)
@@ -664,9 +664,11 @@ export class AnimeNotifier {
 		const contentPadding = 24
 
 		let scrollHandle: number
-		let oldScroll = this.app.content.parentElement.scrollTop
 		let newScroll = 0
 		let finalScroll = Math.max(target.offsetTop - contentPadding, 0)
+
+		// Calculating scrollTop will force a layout - careful!
+		let oldScroll = this.app.content.parentElement.scrollTop
 		let scrollDistance = finalScroll - oldScroll
 
 		if(scrollDistance > 0 && scrollDistance < 4) {
