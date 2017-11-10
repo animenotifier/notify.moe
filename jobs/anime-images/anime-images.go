@@ -72,6 +72,10 @@ func work(anime *arn.Anime) error {
 	webpQuality := 70
 	jpegQuality := 70
 
+	qualityBonusLowDPI := 10
+	qualityBonusMedium := 10
+	qualityBonusSmall := 10
+
 	kitsuOriginal := fmt.Sprintf("https://media.kitsu.io/anime/poster_images/%s/original", anime.ID)
 
 	system := ipo.System{
@@ -113,7 +117,7 @@ func work(anime *arn.Anime) error {
 				Directory: large,
 				BaseName:  anime.ID,
 				Size:      largeSize,
-				Quality:   jpegQuality,
+				Quality:   jpegQuality + qualityBonusLowDPI,
 			},
 			&outputs.ImageFile{
 				Directory: large,
@@ -126,7 +130,7 @@ func work(anime *arn.Anime) error {
 				BaseName:  anime.ID,
 				Size:      largeSize,
 				Format:    "webp",
-				Quality:   webpQuality,
+				Quality:   webpQuality + qualityBonusLowDPI,
 			},
 			&outputs.ImageFile{
 				Directory: large,
@@ -141,7 +145,7 @@ func work(anime *arn.Anime) error {
 				Directory: medium,
 				BaseName:  anime.ID,
 				Size:      mediumSize,
-				Quality:   jpegQuality,
+				Quality:   jpegQuality + qualityBonusLowDPI + qualityBonusMedium,
 			},
 			&outputs.ImageFile{
 				Directory: medium,
@@ -154,7 +158,7 @@ func work(anime *arn.Anime) error {
 				BaseName:  anime.ID,
 				Size:      mediumSize,
 				Format:    "webp",
-				Quality:   webpQuality,
+				Quality:   webpQuality + qualityBonusLowDPI + qualityBonusMedium,
 			},
 			&outputs.ImageFile{
 				Directory: medium,
@@ -169,7 +173,7 @@ func work(anime *arn.Anime) error {
 				Directory: small,
 				BaseName:  anime.ID,
 				Size:      smallSize,
-				Quality:   jpegQuality,
+				Quality:   jpegQuality + qualityBonusLowDPI + qualityBonusSmall,
 			},
 			&outputs.ImageFile{
 				Directory: small,
@@ -182,7 +186,7 @@ func work(anime *arn.Anime) error {
 				BaseName:  anime.ID,
 				Size:      smallSize,
 				Format:    "webp",
-				Quality:   webpQuality,
+				Quality:   webpQuality + qualityBonusLowDPI + qualityBonusSmall,
 			},
 			&outputs.ImageFile{
 				Directory: small,

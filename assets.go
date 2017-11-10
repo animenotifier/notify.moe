@@ -48,6 +48,11 @@ func configureAssets(app *aero.Application) {
 		return ctx.File("images/brand/" + ctx.Get("file"))
 	})
 
+	// Anime images
+	app.Get("/images/anime/*file", func(ctx *aero.Context) string {
+		return ctx.File("images/anime/" + ctx.Get("file"))
+	})
+
 	// Cover image
 	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
 		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
