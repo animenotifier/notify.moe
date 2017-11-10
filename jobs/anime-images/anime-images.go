@@ -66,7 +66,7 @@ func work(anime *arn.Anime) error {
 	small := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/small/")
 
 	largeSize := 250
-	mediumSize := 142
+	mediumSize := 150
 	smallSize := 55
 
 	webpQuality := 70
