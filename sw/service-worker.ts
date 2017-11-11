@@ -164,7 +164,7 @@ class MyServiceWorker {
 		let servedETag = ETAGS.get(url)
 
 		// If the user requests a sub-page we should prefetch the full page, too.
-		if(url.includes("/_/")) {
+		if(url.includes("/_/") && !url.includes("/_/search/")) {
 			this.prefetchFullPage(url)
 		}
 
