@@ -45,9 +45,19 @@
 				"type": "image/png"
 			},
 			{
+				"src": "images/brand/64.webp",
+				"sizes": "64x64",
+				"type": "image/webp"
+			},
+			{
 				"src": "images/brand/128.png",
 				"sizes": "128x128",
 				"type": "image/png"
+			},
+			{
+				"src": "images/brand/128.webp",
+				"sizes": "128x128",
+				"type": "image/webp"
 			},
 			{
 				"src": "images/brand/144.png",
@@ -55,9 +65,29 @@
 				"type": "image/png"
 			},
 			{
+				"src": "images/brand/144.webp",
+				"sizes": "144x144",
+				"type": "image/webp"
+			},
+			{
 				"src": "images/brand/220.png",
 				"sizes": "220x220",
 				"type": "image/png"
+			},
+			{
+				"src": "images/brand/220.webp",
+				"sizes": "220x220",
+				"type": "image/webp"
+			},
+			{
+				"src": "images/brand/512.png",
+				"sizes": "512x512",
+				"type": "image/png"
+			},
+			{
+				"src": "images/brand/512.webp",
+				"sizes": "512x512",
+				"type": "image/webp"
 			}
 		]
 	},
