@@ -25,21 +25,6 @@ func rewrite(ctx *aero.RewriteContext) {
 		return
 	}
 
-	// Search
-	if strings.HasPrefix(requestURI, "/search/") {
-		searchTerm := requestURI[len("/search/"):]
-		ctx.Request.URL.RawQuery = "q=" + searchTerm
-		ctx.SetURI("/search")
-		return
-	}
-
-	if strings.HasPrefix(requestURI, "/_/search/") {
-		searchTerm := requestURI[len("/_/search/"):]
-		ctx.Request.URL.RawQuery = "q=" + searchTerm
-		ctx.SetURI("/_/search")
-		return
-	}
-
 	// Analytics
 	if requestURI == "/dark-flame-master" {
 		ctx.SetURI("/api/new/analytics")

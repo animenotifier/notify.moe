@@ -139,8 +139,7 @@ func Configure(app *aero.Application) {
 	l.Page("/compare/animelist/:nick-1/:nick-2", compare.AnimeList)
 
 	// Search
-	l.Page("/search", search.Get)
-	l.Page("/search/:term", search.Get)
+	l.Page("/search/*term", search.Get)
 
 	// Shop
 	l.Page("/shop", shop.Get)
