@@ -49,142 +49,142 @@ import (
 
 // Configure registers the page routes in the application.
 func Configure(app *aero.Application) {
-	layout := layout.New(app)
+	l := layout.New(app)
 
 	// Set render function for the layout
-	layout.Render = fullpage.Render
+	l.Render = fullpage.Render
 
 	// Main menu
-	layout.Page("/", home.Get)
-	layout.Page("/explore", explore.Get)
-	layout.Page("/explore/anime/:year/:status/:type", explore.Filter)
-	layout.Page("/login", login.Get)
-	layout.Page("/api", apiview.Get)
-	// layout.Ajax("/dashboard", dashboard.Get)
-	// layout.Ajax("/best/anime", best.Get)
-	// layout.Ajax("/artworks", artworks.Get)
-	// layout.Ajax("/amvs", amvs.Get)
+	l.Page("/", home.Get)
+	l.Page("/explore", explore.Get)
+	l.Page("/explore/anime/:year/:status/:type", explore.Filter)
+	l.Page("/login", login.Get)
+	l.Page("/api", apiview.Get)
+	// l.Ajax("/dashboard", dashboard.Get)
+	// l.Ajax("/best/anime", best.Get)
+	// l.Ajax("/artworks", artworks.Get)
+	// l.Ajax("/amvs", amvs.Get)
 
 	// Forum
-	layout.Page("/forum", forums.Get)
-	layout.Page("/forum/:tag", forum.Get)
-	layout.Page("/thread/:id", threads.Get)
-	layout.Page("/post/:id", posts.Get)
-	layout.Page("/new/thread", newthread.Get)
+	l.Page("/forum", forums.Get)
+	l.Page("/forum/:tag", forum.Get)
+	l.Page("/thread/:id", threads.Get)
+	l.Page("/post/:id", posts.Get)
+	l.Page("/new/thread", newthread.Get)
 
 	// User lists
-	layout.Page("/users", users.Active)
-	layout.Page("/users/osu", users.Osu)
-	layout.Page("/users/staff", users.Staff)
+	l.Page("/users", users.Active)
+	l.Page("/users/osu", users.Osu)
+	l.Page("/users/staff", users.Staff)
 
 	// Statistics
-	layout.Page("/statistics", statistics.Get)
-	layout.Page("/statistics/anime", statistics.Anime)
+	l.Page("/statistics", statistics.Get)
+	l.Page("/statistics/anime", statistics.Anime)
 
 	// Anime
-	layout.Page("/anime/:id", anime.Get)
-	layout.Page("/anime/:id/episodes", anime.Episodes)
-	layout.Page("/anime/:id/characters", anime.Characters)
-	layout.Page("/anime/:id/tracks", anime.Tracks)
-	layout.Page("/anime/:id/edit", editanime.Get)
+	l.Page("/anime/:id", anime.Get)
+	l.Page("/anime/:id/episodes", anime.Episodes)
+	l.Page("/anime/:id/characters", anime.Characters)
+	l.Page("/anime/:id/tracks", anime.Tracks)
+	l.Page("/anime/:id/edit", editanime.Get)
 
 	// Characters
-	layout.Page("/character/:id", character.Get)
+	l.Page("/character/:id", character.Get)
 
 	// Settings
-	layout.Page("/settings", settings.Get(components.SettingsPersonal))
-	layout.Page("/settings/accounts", settings.Get(components.SettingsAccounts))
-	layout.Page("/settings/notifications", settings.Get(components.SettingsNotifications))
-	layout.Page("/settings/apps", settings.Get(components.SettingsApps))
-	layout.Page("/settings/avatar", settings.Get(components.SettingsAvatar))
-	layout.Page("/settings/formatting", settings.Get(components.SettingsFormatting))
-	layout.Page("/settings/pro", settings.Get(components.SettingsPro))
+	l.Page("/settings", settings.Get(components.SettingsPersonal))
+	l.Page("/settings/accounts", settings.Get(components.SettingsAccounts))
+	l.Page("/settings/notifications", settings.Get(components.SettingsNotifications))
+	l.Page("/settings/apps", settings.Get(components.SettingsApps))
+	l.Page("/settings/avatar", settings.Get(components.SettingsAvatar))
+	l.Page("/settings/formatting", settings.Get(components.SettingsFormatting))
+	l.Page("/settings/pro", settings.Get(components.SettingsPro))
 
 	// Soundtracks
-	layout.Page("/soundtracks", soundtracks.Get)
-	layout.Page("/soundtracks/from/:index", soundtracks.From)
-	layout.Page("/soundtrack/:id", soundtrack.Get)
-	layout.Page("/soundtrack/:id/edit", soundtrack.Edit)
+	l.Page("/soundtracks", soundtracks.Get)
+	l.Page("/soundtracks/from/:index", soundtracks.From)
+	l.Page("/soundtrack/:id", soundtrack.Get)
+	l.Page("/soundtrack/:id/edit", soundtrack.Edit)
 
 	// Groups
-	layout.Page("/groups", groups.Get)
-	layout.Page("/group/:id", group.Get)
-	layout.Page("/group/:id/edit", group.Edit)
-	layout.Page("/group/:id/forum", group.Forum)
+	l.Page("/groups", groups.Get)
+	l.Page("/group/:id", group.Get)
+	l.Page("/group/:id/edit", group.Edit)
+	l.Page("/group/:id/forum", group.Forum)
 
 	// User profiles
-	layout.Page("/user", user.Get)
-	layout.Page("/user/:nick", profile.Get)
-	layout.Page("/user/:nick/threads", profile.GetThreadsByUser)
-	layout.Page("/user/:nick/posts", profile.GetPostsByUser)
-	layout.Page("/user/:nick/soundtracks", profile.GetSoundTracksByUser)
-	layout.Page("/user/:nick/stats", profile.GetStatsByUser)
-	layout.Page("/user/:nick/followers", profile.GetFollowers)
-	layout.Page("/user/:nick/animelist", animelist.Get)
-	layout.Page("/user/:nick/animelist/watching", animelist.FilterByStatus(arn.AnimeListStatusWatching))
-	layout.Page("/user/:nick/animelist/completed", animelist.FilterByStatus(arn.AnimeListStatusCompleted))
-	layout.Page("/user/:nick/animelist/planned", animelist.FilterByStatus(arn.AnimeListStatusPlanned))
-	layout.Page("/user/:nick/animelist/hold", animelist.FilterByStatus(arn.AnimeListStatusHold))
-	layout.Page("/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
-	layout.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
+	l.Page("/user", user.Get)
+	l.Page("/user/:nick", profile.Get)
+	l.Page("/user/:nick/threads", profile.GetThreadsByUser)
+	l.Page("/user/:nick/posts", profile.GetPostsByUser)
+	l.Page("/user/:nick/soundtracks", profile.GetSoundTracksByUser)
+	l.Page("/user/:nick/stats", profile.GetStatsByUser)
+	l.Page("/user/:nick/followers", profile.GetFollowers)
+	l.Page("/user/:nick/animelist", animelist.Get)
+	l.Page("/user/:nick/animelist/watching", animelist.FilterByStatus(arn.AnimeListStatusWatching))
+	l.Page("/user/:nick/animelist/completed", animelist.FilterByStatus(arn.AnimeListStatusCompleted))
+	l.Page("/user/:nick/animelist/planned", animelist.FilterByStatus(arn.AnimeListStatusPlanned))
+	l.Page("/user/:nick/animelist/hold", animelist.FilterByStatus(arn.AnimeListStatusHold))
+	l.Page("/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
+	l.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
 
 	// Anime list
-	layout.Page("/animelist/watching", home.FilterByStatus(arn.AnimeListStatusWatching))
-	layout.Page("/animelist/completed", home.FilterByStatus(arn.AnimeListStatusCompleted))
-	layout.Page("/animelist/planned", home.FilterByStatus(arn.AnimeListStatusPlanned))
-	layout.Page("/animelist/hold", home.FilterByStatus(arn.AnimeListStatusHold))
-	layout.Page("/animelist/dropped", home.FilterByStatus(arn.AnimeListStatusDropped))
+	l.Page("/animelist/watching", home.FilterByStatus(arn.AnimeListStatusWatching))
+	l.Page("/animelist/completed", home.FilterByStatus(arn.AnimeListStatusCompleted))
+	l.Page("/animelist/planned", home.FilterByStatus(arn.AnimeListStatusPlanned))
+	l.Page("/animelist/hold", home.FilterByStatus(arn.AnimeListStatusHold))
+	l.Page("/animelist/dropped", home.FilterByStatus(arn.AnimeListStatusDropped))
 
 	// Compare
-	layout.Page("/compare/animelist/:nick-1/:nick-2", compare.AnimeList)
+	l.Page("/compare/animelist/:nick-1/:nick-2", compare.AnimeList)
 
 	// Search
-	layout.Page("/search", search.Get)
-	layout.Page("/search/:term", search.Get)
+	l.Page("/search", search.Get)
+	l.Page("/search/:term", search.Get)
 
 	// Shop
-	layout.Page("/shop", shop.Get)
-	layout.Page("/inventory", inventory.Get)
-	layout.Page("/charge", charge.Get)
-	layout.Page("/shop/history", shop.PurchaseHistory)
+	l.Page("/shop", shop.Get)
+	l.Page("/inventory", inventory.Get)
+	l.Page("/charge", charge.Get)
+	l.Page("/shop/history", shop.PurchaseHistory)
 	app.Post("/api/shop/buy/:item/:quantity", shop.BuyItem)
 
 	// Admin
-	layout.Page("/admin", admin.Get)
-	layout.Page("/admin/webdev", admin.WebDev)
-	layout.Page("/admin/purchases", admin.PurchaseHistory)
+	l.Page("/admin", admin.Get)
+	l.Page("/admin/webdev", admin.WebDev)
+	l.Page("/admin/purchases", admin.PurchaseHistory)
 
 	// Editor
-	layout.Page("/editor", editor.Get)
-	layout.Page("/editor/anilist", editor.AniList)
-	layout.Page("/editor/shoboi", editor.Shoboi)
+	l.Page("/editor", editor.Get)
+	l.Page("/editor/anilist", editor.AniList)
+	l.Page("/editor/shoboi", editor.Shoboi)
 
 	// Mixed
-	layout.Page("/database", database.Get)
+	l.Page("/database", database.Get)
 	app.Get("/api/select/:data-type/where/:field/is/:field-value", database.Select)
 
 	// Import
-	layout.Page("/import", listimport.Get)
-	layout.Page("/import/anilist/animelist", listimportanilist.Preview)
-	layout.Page("/import/anilist/animelist/finish", listimportanilist.Finish)
-	layout.Page("/import/myanimelist/animelist", listimportmyanimelist.Preview)
-	layout.Page("/import/myanimelist/animelist/finish", listimportmyanimelist.Finish)
-	layout.Page("/import/kitsu/animelist", listimportkitsu.Preview)
-	layout.Page("/import/kitsu/animelist/finish", listimportkitsu.Finish)
+	l.Page("/import", listimport.Get)
+	l.Page("/import/anilist/animelist", listimportanilist.Preview)
+	l.Page("/import/anilist/animelist/finish", listimportanilist.Finish)
+	l.Page("/import/myanimelist/animelist", listimportmyanimelist.Preview)
+	l.Page("/import/myanimelist/animelist/finish", listimportmyanimelist.Finish)
+	l.Page("/import/kitsu/animelist", listimportkitsu.Preview)
+	l.Page("/import/kitsu/animelist/finish", listimportkitsu.Finish)
 
 	// Browser extension
-	layout.Page("/extension/embed", embed.Get)
+	l.Page("/extension/embed", embed.Get)
 
 	// API
 	app.Get("/api/me", me.Get)
 	app.Get("/api/test/notification", notifications.Test)
 
 	// PayPal
-	layout.Page("/paypal/success", paypal.Success)
-	layout.Page("/paypal/cancel", paypal.Cancel)
+	l.Page("/paypal/success", paypal.Success)
+	l.Page("/paypal/cancel", paypal.Cancel)
 	app.Post("/api/paypal/payment/create", paypal.CreatePayment)
 
 	// Genres
-	// layout.Ajax("/genres", genres.Get)
-	// layout.Ajax("/genres/:name", genre.Get)
+	// l.Ajax("/genres", genres.Get)
+	// l.Ajax("/genres/:name", genre.Get)
 }
