@@ -62,6 +62,11 @@ func configure(app *aero.Application) *aero.Application {
 	// Prefetch all collections
 	arn.DB.Prefetch()
 
+	// Do not use HTTP/2 push on service worker requests
+	app.AddPushCondition(func(ctx *aero.Context) bool {
+		return ctx.Request().Header().Get("X-Source") != "service-worker"
+	})
+
 	// Specify test routes
 	for route, examples := range routeTests {
 		app.Test(route, examples)
