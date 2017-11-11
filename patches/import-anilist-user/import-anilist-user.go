@@ -12,7 +12,7 @@ var userName = "Akyoto"
 var allAnime []*arn.Anime
 
 func init() {
-	allAnime, _ = arn.AllAnime()
+	allAnime = arn.AllAnime()
 }
 
 func main() {

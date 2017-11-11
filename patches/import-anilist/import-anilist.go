@@ -12,8 +12,7 @@ func main() {
 	arn.PanicOnError(anilist.Authorize())
 	color.Green(anilist.AccessToken)
 
-	allAnime, err := arn.AllAnime()
-	arn.PanicOnError(err)
+	allAnime := arn.AllAnime()
 
 	count := 0
 
