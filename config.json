@@ -29,6 +29,10 @@
 	"scripts": {
 		"main": "main"
 	},
+	"push": [
+		"/scripts",
+		"/images/elements/noise-strong.png"
+	],
 	"manifest": {
 		"short_name": "notify.moe",
 		"gcm_sender_id": "941298467524",

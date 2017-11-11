@@ -19,7 +19,7 @@ func UserInfo() aero.Middleware {
 		next()
 
 		// Ignore non-HTML requests
-		if ctx.IsMediaResponse() {
+		if aero.IsMediaType(ctx.Response().Header().Get("Content-Type")) {
 			return
 		}
 
