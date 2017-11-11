@@ -51,7 +51,7 @@ func Firewall() aero.Middleware {
 
 			for _, uri := range stats.Requests {
 				// Allow request
-				if strings.Contains(uri, "/_/") || strings.Contains(uri, "/api/") || strings.Contains(uri, "/scripts") || strings.Contains(uri, "/service-worker") || strings.Contains(uri, "/favicon.ico") || strings.Contains(uri, "/extension/embed") {
+				if strings.Contains(uri, "/_/") || strings.Contains(uri, "/api/") || strings.Contains(uri, "/scripts") || strings.Contains(uri, "/service-worker") || strings.Contains(uri, "/images/") || strings.Contains(uri, "/favicon.ico") || strings.Contains(uri, "/extension/embed") {
 					next()
 					return
 				}
