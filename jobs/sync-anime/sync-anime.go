@@ -60,7 +60,7 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	anime.EpisodeLength = attr.EpisodeLength
 	anime.Status = attr.Status
 
-	if attr.Status == "tba"  || attr.Status == "unreleased" {
+	if anime.Status == "tba" || anime.Status == "unreleased" {
 		anime.Status = "upcoming"
 	}
 
