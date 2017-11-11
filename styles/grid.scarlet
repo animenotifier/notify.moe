@@ -6,15 +6,13 @@ mixin grid-cell
 	position relative
 
 	width 142px
-	height 16vw
-	min-width 90px
-	min-height 127px
-	max-width 142px
-	max-height 201px
+	height 200px
+	// min-width 90px
+	// min-height 127px
 	border-radius 3px
 
-	background-size cover
-	background-position 50% 50%
+	// background-size cover
+	// background-position 50% 50%
 
 	margin 0.5rem
 

@@ -3,7 +3,7 @@
 
 .anime-grid-cell
 	grid-cell
-	scale-up
+	saturate-up
 	shadow-up
 
 .anime-grid-image

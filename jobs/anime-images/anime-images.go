@@ -65,12 +65,14 @@ func work(anime *arn.Anime) error {
 	medium := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/medium/")
 	small := path.Join(os.Getenv("GOPATH"), "/src/github.com/animenotifier/notify.moe/images/anime/small/")
 
-	largeSize := 250
-	mediumSize := 142
-	smallSize := 55
+	largeSizeX := 250
+	largeSizeY := 0
 
-	mediumSizeBonusLowDPI := 8
-	smallSizeBonusLowDPI := 5
+	mediumSizeX := 142
+	mediumSizeY := 200
+
+	smallSizeX := 55
+	smallSizeY := 78
 
 	webpQuality := 70
 	jpegQuality := 70
@@ -119,26 +121,30 @@ func work(anime *arn.Anime) error {
 			&outputs.ImageFile{
 				Directory: large,
 				BaseName:  anime.ID,
-				Size:      largeSize,
+				Width:     largeSizeX,
+				Height:    largeSizeY,
 				Quality:   jpegQuality + qualityBonusLowDPI,
 			},
 			&outputs.ImageFile{
 				Directory: large,
 				BaseName:  anime.ID + "@2",
-				Size:      largeSize * 2,
+				Width:     largeSizeX * 2,
+				Height:    largeSizeY * 2,
 				Quality:   jpegQuality,
 			},
 			&outputs.ImageFile{
 				Directory: large,
 				BaseName:  anime.ID,
-				Size:      largeSize,
+				Width:     largeSizeX,
+				Height:    largeSizeY,
 				Format:    "webp",
 				Quality:   webpQuality + qualityBonusLowDPI,
 			},
 			&outputs.ImageFile{
 				Directory: large,
 				BaseName:  anime.ID + "@2",
-				Size:      largeSize * 2,
+				Width:     largeSizeX * 2,
+				Height:    largeSizeY * 2,
 				Format:    "webp",
 				Quality:   webpQuality,
 			},
@@ -147,26 +153,30 @@ func work(anime *arn.Anime) error {
 			&outputs.ImageFile{
 				Directory: medium,
 				BaseName:  anime.ID,
-				Size:      mediumSize + mediumSizeBonusLowDPI,
+				Width:     mediumSizeX,
+				Height:    mediumSizeY,
 				Quality:   jpegQuality + qualityBonusLowDPI + qualityBonusMedium,
 			},
 			&outputs.ImageFile{
 				Directory: medium,
 				BaseName:  anime.ID + "@2",
-				Size:      mediumSize * 2,
+				Width:     mediumSizeX * 2,
+				Height:    mediumSizeY * 2,
 				Quality:   jpegQuality,
 			},
 			&outputs.ImageFile{
 				Directory: medium,
 				BaseName:  anime.ID,
-				Size:      mediumSize + mediumSizeBonusLowDPI,
+				Width:     mediumSizeX,
+				Height:    mediumSizeY,
 				Format:    "webp",
 				Quality:   webpQuality + qualityBonusLowDPI + qualityBonusMedium,
 			},
 			&outputs.ImageFile{
 				Directory: medium,
 				BaseName:  anime.ID + "@2",
-				Size:      mediumSize * 2,
+				Width:     mediumSizeX * 2,
+				Height:    mediumSizeY * 2,
 				Format:    "webp",
 				Quality:   webpQuality,
 			},
@@ -175,26 +185,30 @@ func work(anime *arn.Anime) error {
 			&outputs.ImageFile{
 				Directory: small,
 				BaseName:  anime.ID,
-				Size:      smallSize + smallSizeBonusLowDPI,
+				Width:     smallSizeX,
+				Height:    smallSizeY,
 				Quality:   jpegQuality + qualityBonusLowDPI + qualityBonusSmall,
 			},
 			&outputs.ImageFile{
 				Directory: small,
 				BaseName:  anime.ID + "@2",
-				Size:      smallSize * 2,
+				Width:     smallSizeX * 2,
+				Height:    smallSizeY * 2,
 				Quality:   jpegQuality,
 			},
 			&outputs.ImageFile{
 				Directory: small,
 				BaseName:  anime.ID,
-				Size:      smallSize + smallSizeBonusLowDPI,
+				Width:     smallSizeX,
+				Height:    smallSizeY,
 				Format:    "webp",
 				Quality:   webpQuality + qualityBonusLowDPI + qualityBonusSmall,
 			},
 			&outputs.ImageFile{
 				Directory: small,
 				BaseName:  anime.ID + "@2",
-				Size:      smallSize * 2,
+				Width:     smallSizeX * 2,
+				Height:    smallSizeY * 2,
 				Format:    "webp",
 				Quality:   webpQuality,
 			},
