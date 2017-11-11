@@ -12,11 +12,12 @@ import (
 
 func main() {
 	color.Yellow("Syncing Anime")
+
 	defer arn.Node.Close()
+	defer color.Green("Finished.")
 
 	// In case we refresh only one anime
 	if InvokeShellArgs() {
-		color.Green("Finished.")
 		return
 	}
 
@@ -27,8 +28,6 @@ func main() {
 	for anime := range allAnime {
 		sync(anime)
 	}
-
-	color.Green("Finished.")
 }
 
 func sync(data *kitsu.Anime) *arn.Anime {
@@ -60,7 +59,8 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	anime.EpisodeLength = attr.EpisodeLength
 	anime.Status = attr.Status
 
-	if anime.Status == "tba" || anime.Status == "unreleased" {
+	// Status "unreleased" means the same as "upcoming" so we should normalize it
+	if anime.Status == "unreleased" {
 		anime.Status = "upcoming"
 	}
 
