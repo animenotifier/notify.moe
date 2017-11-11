@@ -1,4 +1,40 @@
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack, uri string)
+	ProfileHeader(viewUser, user, uri)
+
+	if len(animeList.Items) == 0
+		p.no-data.mountable= viewUser.Nick + " hasn't added any anime yet."
+	else
+		.profile-watching-list.mountable
+			each item in animeList.Items
+				if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
+					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.ByUser(user) + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
+						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
+
+	if user != nil && (user.Role == "admin" || user.Role == "editor")
+		.footer
+			.buttons
+				a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
+					Icon("search-plus")
+					span JSON
+
+component ProfileTabs(viewUser *arn.User, uri string)
+	.tabs
+		Tab("Anime", "th", "/+" + viewUser.Nick)
+		Tab("Collection", "list", "/+" + viewUser.Nick + "/animelist/watching")
+		Tab("Threads", "comment", "/+" + viewUser.Nick + "/threads")
+		Tab("Posts", "comments", "/+" + viewUser.Nick + "/posts")
+		Tab("Tracks", "music", "/+" + viewUser.Nick + "/soundtracks")
+		Tab("Stats", "area-chart", "/+" + viewUser.Nick + "/stats")
+		Tab("Followers", "users", "/+" + viewUser.Nick + "/followers")
+
+	if strings.Contains(uri, "/animelist")
+		StatusTabs("/+" + viewUser.Nick + "/animelist")
+
 component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
+	ProfileHead(viewUser, user, uri)
+	ProfileTabs(viewUser, uri)
+
+component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 	.profile
 		img.profile-cover.lazy(data-src=viewUser.CoverImageURL(), data-webp="true", alt="Cover image")
 
@@ -65,98 +101,3 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 					a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
 						Icon("exchange")
 						span Compare
-
-	ProfileNavigation(viewUser, uri)
-
-component ProfileNavigation(viewUser *arn.User, uri string)
-	.tabs
-		a.tab.action(href="/+" + viewUser.Nick, data-action="diff", data-trigger="click")
-			Icon("th")
-			span.tab-text Anime
-
-		a.tab.action(href="/+" + viewUser.Nick + "/animelist/watching", data-action="diff", data-trigger="click")
-			Icon("list")
-			span.tab-text Collection
-
-		a.tab.action(href="/+" + viewUser.Nick + "/threads", data-action="diff", data-trigger="click")
-			Icon("comment")
-			span.tab-text Threads
-
-		a.tab.action(href="/+" + viewUser.Nick + "/posts", data-action="diff", data-trigger="click")
-			Icon("comments")
-			span.tab-text Posts
-
-		a.tab.action(href="/+" + viewUser.Nick + "/soundtracks", data-action="diff", data-trigger="click")
-			Icon("music")
-			span.tab-text Tracks
-
-		a.tab.action(href="/+" + viewUser.Nick + "/stats", data-action="diff", data-trigger="click")
-			Icon("area-chart")
-			span.tab-text Stats
-
-		a.tab.action(href="/+" + viewUser.Nick + "/followers", data-action="diff", data-trigger="click")
-			Icon("users")
-			span.tab-text Followers
-
-	if strings.Contains(uri, "/animelist")
-		StatusTabs("/+" + viewUser.Nick + "/animelist")
-
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack, uri string)
-	ProfileHeader(viewUser, user, uri)
-
-	if len(animeList.Items) == 0
-		p.no-data.mountable= viewUser.Nick + " hasn't added any anime yet."
-	else
-		.profile-watching-list.mountable
-			each item in animeList.Items
-				if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
-					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.ByUser(user) + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
-
-	if user != nil && (user.Role == "admin" || user.Role == "editor")
-		.footer
-			.buttons
-				a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
-					Icon("search-plus")
-					span JSON
-
-	//- .profile-category.mountable
-	//- 	h3
-	//- 		a.ajax(href="/+" + viewUser.Nick + "/threads", title="View all threads") Threads
-
-	//- 	if len(threads) == 0
-	//- 		p No threads on the forum.
-	//- 	else
-	//- 		each thread in threads
-	//- 			ThreadLink(thread)
-
-	//- .profile-category.mountable
-	//- 	h3
-	//- 		a.ajax(href="/+" + viewUser.Nick + "/posts", title="View all posts") Posts
-	//- 	if len(posts) == 0
-	//- 		p No posts on the forum.
-	//- 	else
-	//- 		each post in posts
-	//- 			.post
-	//- 				.post-author
-	//- 					Avatar(post.Author())
-	//- 				.post-content
-	//- 					div!= post.HTML()
-	//- 					.post-toolbar.active
-	//- 						.spacer
-	//- 						.post-likes= len(post.Likes)
-
-	//- .profile-category.mountable
-	//- 	h3
-	//- 		a.ajax(href="/+" + viewUser.Nick + "/tracks", title="View all tracks") Tracks
-
-	//- 	if len(tracks) == 0
-	//- 		p No soundtracks posted yet.
-	//- 	else
-	//- 		.sound-tracks
-	//- 			each track in tracks
-	//- 				SoundTrack(track)
-
-	//- if user != nil && user.Role == "admin"
-	//- 	.footer
-	//- 		a(href="/api/user/" + viewUser.ID) User API
