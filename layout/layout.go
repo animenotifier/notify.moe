@@ -1,4 +1,4 @@
-package layout
+package fullpage
 
 import (
 	"sort"

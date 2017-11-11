@@ -6,7 +6,6 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/components/css"
-	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages"
 )
@@ -22,9 +21,6 @@ func configure(app *aero.Application) *aero.Application {
 	// Sessions
 	app.Sessions.Duration = 3600 * 24 * 30 * 6
 	app.Sessions.Store = nanostore.New(arn.DB.Collection("Session"))
-
-	// Layout
-	app.Layout = layout.Render
 
 	// CSS
 	app.SetStyle(css.Bundle())
