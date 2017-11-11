@@ -2,7 +2,6 @@ package main
 
 import (
 	"io/ioutil"
-	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components/js"
@@ -43,40 +42,9 @@ func configureAssets(app *aero.Application) {
 		return ctx.TryWebP("images/brand/64", ".png")
 	})
 
-	// Brand icons
-	app.Get("/images/brand/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/brand/" + ctx.Get("file"))
-	})
-
-	// Anime images
-	app.Get("/images/anime/*file", func(ctx *aero.Context) string {
-		return ctx.File("images/anime/" + ctx.Get("file"))
-	})
-
-	// Cover image
-	app.Get("/images/cover/:file", func(ctx *aero.Context) string {
-		file := strings.TrimSuffix(ctx.Get("file"), ".webp")
-		return ctx.TryWebP("images/cover/"+file, ".jpg")
-	})
-
-	// Login buttons
-	app.Get("/images/login/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/login/" + ctx.Get("file") + ".png")
-	})
-
-	// Avatars
-	app.Get("/images/avatars/large/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/avatars/large/" + ctx.Get("file"))
-	})
-
-	// Avatars
-	app.Get("/images/avatars/small/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/avatars/small/" + ctx.Get("file"))
-	})
-
-	// Elements
-	app.Get("/images/elements/:file", func(ctx *aero.Context) string {
-		return ctx.File("images/elements/" + ctx.Get("file"))
+	// Images
+	app.Get("/images/*file", func(ctx *aero.Context) string {
+		return ctx.File("images" + ctx.Get("file"))
 	})
 
 	// For benchmarks
