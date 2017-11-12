@@ -1,10 +1,20 @@
 component CharacterDetails(character *arn.Character)
-	.character-header
-		.character-image-container
-			img.character-image-fullsize(src=character.Image, alt=character.Name)
-		.character-description-container
-			h1.character-name= character.Name
-			.anime-alternative-title
-				Japanese("日本語の名前無し")
-			.character-description!= markdown.Render(character.Description)
+	.character-page
+		.character-header
+			.character-image-container
+				img.character-image-fullsize(src=character.Image, alt=character.Name)
+			.character-description-container
+				h1.character-name= character.Name
+				.anime-alternative-title
+					Japanese("日本語の名前無し")
+				.character-description!= markdown.Render(character.Description)
+
+		if len(character.Attributes) > 0
+			.character-sidebar
+				h3 Information
+				table.character-attributes
+					each attribute in character.Attributes
+						tr.mountable(data-mountable-type="info")
+							td.character-attributes-name= attribute.Name + ":"
+							td.character-attributes-value= attribute.Value
 

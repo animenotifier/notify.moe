@@ -21,6 +21,7 @@ func main() {
 			Name:        kitsuCharacter.Attributes.Name,
 			Image:       kitsu.FixImageURL(kitsuCharacter.Attributes.Image.Original),
 			Description: kitsuCharacter.Attributes.Description,
+			Attributes:  []*arn.CharacterAttribute{},
 		}
 
 		// We use markdown, so replace <br/> with two line breaks.
@@ -58,6 +59,11 @@ func main() {
 			value := line[colonPos+1:]
 
 			value = strings.TrimSpace(value)
+
+			character.Attributes = append(character.Attributes, &arn.CharacterAttribute{
+				Name:  key,
+				Value: value,
+			})
 
 			fmt.Println(color.CyanString(key), color.YellowString(value))
 		}

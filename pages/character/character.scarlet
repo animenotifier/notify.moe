@@ -1,3 +1,6 @@
+.character-page
+	vertical
+
 .character-header
 	vertical
 
@@ -12,10 +15,26 @@
 	margin-bottom 1rem
 
 .character-description
-	max-width 700px
 	margin-top 1.6rem
 
+.character-sidebar
+	vertical
+	margin-left 0
+	margin-top 1rem
+
+.character-attributes
+	margin 0
+
+.character-attributes-name
+	opacity 0.8
+
+.character-attributes-value
+	text-align right
+
 > 1250px
+	.character-page
+		horizontal
+
 	.character-header
 		horizontal
 
@@ -27,3 +46,12 @@
 
 	.character-description
 		margin-top typography-margin
+
+	.character-sidebar
+		margin-left content-padding
+		margin-top 0
+		min-width 270px
+
+> 1400px
+	.character-sidebar
+		min-width 300px
