@@ -30,8 +30,7 @@
 		"main": "main"
 	},
 	"push": [
-		"/scripts",
-		"/images/elements/noise-strong.png"
+		"/scripts"
 	],
 	"manifest": {
 		"short_name": "notify.moe",
