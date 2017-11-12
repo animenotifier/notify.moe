@@ -6,5 +6,23 @@
 	saturate-up
 	shadow-up
 
+	:hover
+		.anime-grid-title
+			opacity 1
+
 .anime-grid-image
 	grid-image
+
+.anime-grid-title
+	opacity 0
+	position absolute
+	bottom 0
+	left 0
+	width 100%
+	padding 0.5rem
+	font-size 90%
+	text-align center
+	background linear-gradient(to top, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 0%, 0))
+	color white
+	text-shadow 0 0 3px black
+	transition opacity transition-speed ease

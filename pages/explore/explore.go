@@ -7,6 +7,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 const (
@@ -26,8 +27,9 @@ func Get(ctx *aero.Context) string {
 	status := "current"
 	typ := "tv"
 	results := filterAnime(year, status, typ)
+	user := utils.GetUser(ctx)
 
-	return ctx.HTML(components.ExploreAnime(results, year, status, typ))
+	return ctx.HTML(components.ExploreAnime(results, year, status, typ, user))
 }
 
 // Filter ...
@@ -35,10 +37,11 @@ func Filter(ctx *aero.Context) string {
 	year := ctx.Get("year")
 	status := ctx.Get("status")
 	typ := ctx.Get("type")
+	user := utils.GetUser(ctx)
 
 	results := filterAnime(year, status, typ)
 
-	return ctx.HTML(components.ExploreAnime(results, year, status, typ))
+	return ctx.HTML(components.ExploreAnime(results, year, status, typ, user))
 }
 
 func filterAnime(year, status, typ string) []*arn.Anime {
