@@ -20,9 +20,11 @@
 	left 0
 	width 100%
 	padding 0.5rem
-	font-size 80%
+	background linear-gradient(to top, hsla(0, 0%, 0%, 0.8), hsla(0, 0%, 0%, 0))
+	default-transition
+
+.anime-grid-title-text
 	text-align center
-	background linear-gradient(to top, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 0%, 0))
 	color white
 	text-shadow 0 0 3px black
-	transition opacity transition-speed ease
+	font-size 80%

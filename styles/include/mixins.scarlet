@@ -59,7 +59,7 @@ mixin anime-mini-item-image
 	border-radius 2px
 	filter none
 	transition filter transition-speed ease, opacity transition-speed ease
-	
+
 	:hover
 		filter saturate(1.3)
 
