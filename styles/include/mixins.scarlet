@@ -56,6 +56,7 @@ mixin anime-mini-item
 mixin anime-mini-item-image
 	width 55px !important
 	height 78px !important
+	object-fit cover
 	border-radius 2px
 	filter none
 	transition filter transition-speed ease, opacity transition-speed ease
