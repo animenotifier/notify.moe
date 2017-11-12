@@ -1,5 +1,9 @@
 # Installation
 
+## Youtube guide
+
+[![notify.moe Source Code Guide](https://i1.ytimg.com/vi/c6e-F51e_8w/maxresdefault.jpg)](https://www.youtube.com/watch?v=c6e-F51e_8w&amp=&t=3m42s)
+
 ## Prerequisites
 
 * Install [Ubuntu](https://www.ubuntu.com/) or [MacOS](https://en.wikipedia.org/wiki/MacOS)
