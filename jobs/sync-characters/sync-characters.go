@@ -50,7 +50,7 @@ func main() {
 
 			colonPos := strings.Index(line, ":")
 
-			if colonPos == -1 || colonPos > 25 {
+			if colonPos == -1 || colonPos < 2 || colonPos > 25 {
 				finalLines = append(finalLines, originalLine)
 				continue
 			}
@@ -59,6 +59,10 @@ func main() {
 			value := line[colonPos+1:]
 
 			value = strings.TrimSpace(value)
+
+			if key == "source" {
+				key = "Source"
+			}
 
 			character.Attributes = append(character.Attributes, &arn.CharacterAttribute{
 				Name:  key,

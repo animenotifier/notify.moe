@@ -16,5 +16,9 @@ component CharacterDetails(character *arn.Character)
 					each attribute in character.Attributes
 						tr.mountable(data-mountable-type="info")
 							td.character-attributes-name= attribute.Name + ":"
-							td.character-attributes-value= attribute.Value
+
+							if strings.Contains(attribute.Value, "<")
+								td.character-attributes-value!= markdown.Render(attribute.Value)
+							else
+								td.character-attributes-value= attribute.Value
 
