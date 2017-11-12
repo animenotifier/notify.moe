@@ -20,7 +20,7 @@
 	left 0
 	width 100%
 	padding 0.5rem
-	font-size 90%
+	font-size 80%
 	text-align center
 	background linear-gradient(to top, hsla(0, 0%, 0%, 0.5), hsla(0, 0%, 0%, 0))
 	color white
