@@ -1,7 +1,10 @@
 component CharacterDetails(character *arn.Character)
-	h1= character.Name
-	
-	p
-		img(src=character.Image, alt=character.Name)
-	
-	p.character-description= character.Description
+	.character-header
+		.character-image-container
+			img.character-image-fullsize(src=character.Image, alt=character.Name)
+		.character-description-container
+			h1.character-name= character.Name
+			.anime-alternative-title
+				Japanese("日本語の名前無し")
+			.character-description!= markdown.Render(character.Description)
+

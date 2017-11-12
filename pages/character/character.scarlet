@@ -1,4 +1,29 @@
+.character-header
+	vertical
+
+.character-name
+	text-align center
+	margin-bottom 0.5rem
+
+.character-image-container
+	vertical
+	justify-content flex-start
+	align-items center
+	margin-bottom 1rem
+
 .character-description
-	max-width 800px
-	margin 0 auto
+	max-width 700px
 	margin-top 1.6rem
+
+> 1250px
+	.character-header
+		horizontal
+
+	.character-name
+		text-align left
+
+	.character-description-container
+		padding 0 content-padding
+
+	.character-description
+		margin-top typography-margin

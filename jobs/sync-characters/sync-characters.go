@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/kitsu"
@@ -19,12 +20,14 @@ func main() {
 			ID:          kitsuCharacter.ID,
 			Name:        kitsuCharacter.Attributes.Name,
 			Image:       kitsu.FixImageURL(kitsuCharacter.Attributes.Image.Original),
-			Description: arn.FixAnimeDescription(kitsuCharacter.Attributes.Description),
+			Description: kitsuCharacter.Attributes.Description,
 		}
 
-		fmt.Printf("%s %s\n", character.ID, character.Name)
-
+		// We use markdown, so replace <br/> with two line breaks.
+		character.Description = strings.Replace(character.Description, "<br/>", "\n\n", -1)
 		character.Save()
+
+		fmt.Printf("%s %s %s\n", color.GreenString("✔"), character.ID, character.Name)
 	}
 
 	color.Green("Finished.")
