@@ -47,6 +47,11 @@ func configureAssets(app *aero.Application) {
 		return ctx.File("images" + ctx.Get("file"))
 	})
 
+	// Videos
+	app.Get("/videos/*file", func(ctx *aero.Context) string {
+		return ctx.File("videos" + ctx.Get("file"))
+	})
+
 	// For benchmarks
 	app.Get("/hello", func(ctx *aero.Context) string {
 		return ctx.Text("Hello World")
