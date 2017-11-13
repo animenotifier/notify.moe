@@ -12,6 +12,9 @@
 		transform scale(1.1)
 		opacity 1
 
+.icon-discord
+	transform scale(1.1)
+
 // .sidebar-social-media
 // 	position relative
 // 	width 6rem

@@ -1,6 +1,6 @@
 component SocialMediaLinks
 	a.footer-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
-		Icon("microphone")
+		Icon("discord")
 		span Discord
 
 	a.footer-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
@@ -21,7 +21,7 @@ component SocialMediaLinks
 
 component SocialMediaButtons
 	a.social-media-button.circle-1(href="https://discord.gg/0kimAmMCeXGXuzNF", title="Discord", target="_blank", rel="noopener")
-		RawIcon("microphone")
+		RawIcon("discord")
 
 	a.social-media-button.circle-2(href="https://www.facebook.com/animenotifier", title="Facebook", target="_blank", rel="noopener")
 		RawIcon("facebook-square")
