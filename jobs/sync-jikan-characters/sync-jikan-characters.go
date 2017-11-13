@@ -59,5 +59,5 @@ func fetchCharacter(malCharacterID string) {
 		return
 	}
 
-	fmt.Printf("Error fetching %s: %v", malCharacterID, err)
+	fmt.Printf("Error fetching %s: %v\n", malCharacterID, err)
 }

@@ -48,5 +48,5 @@ func sync(anime *arn.Anime, malID string) {
 		return
 	}
 
-	fmt.Printf("Error fetching %s: %v", malID, err)
+	fmt.Printf("Error fetching %s: %v\n", malID, err)
 }
