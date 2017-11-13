@@ -36,14 +36,14 @@ component Track(track *arn.SoundTrack, user *arn.User)
 						.tag= tag
 		.footer.mountable
 			if track.EditedBy != ""
-				span Edited
+				span Edited 
 				span.utc-date(data-date=track.Edited)
-				span  by
+				span  by 
 				span= track.EditedByUser().Nick
 			else
-				span Posted
+				span Posted 
 				span.utc-date(data-date=track.Created)
-				span  by
+				span  by 
 				span= track.Creator().Nick
 
 			span .

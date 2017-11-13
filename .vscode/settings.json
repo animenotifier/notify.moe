@@ -17,5 +17,8 @@
 	"search.exclude": {
 		"components/": true,
 		"**/*.svg": true
+	},
+	"[jade]": {
+		"files.trimTrailingWhitespace": false
 	}
 }
