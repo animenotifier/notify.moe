@@ -10,8 +10,6 @@ import (
 	"github.com/fatih/color"
 )
 
-const maxRetries = 3
-
 var jikanDB = arn.Node.Namespace("jikan")
 
 func main() {
@@ -49,23 +47,17 @@ func main() {
 func fetchCharacter(malCharacterID string) {
 	fmt.Printf("Fetching character ID %s\n", malCharacterID)
 
-	if !jikanDB.Exists("Character", malCharacterID) {
-		var character *jikan.Character
-		var err error
-
-		for try := 1; try <= maxRetries; try++ {
-			time.Sleep(time.Second)
-			character, err = jikan.GetCharacter(malCharacterID)
-
-			if err == nil {
-				jikanDB.Set("Character", malCharacterID, character)
-				return
-			}
-
-			fmt.Printf("Error fetching %s on try %d: %v", malCharacterID, try, err)
-
-			// Wait an additional second
-			time.Sleep(time.Second)
-		}
+	if jikanDB.Exists("Character", malCharacterID) {
+		return
 	}
+
+	time.Sleep(time.Second)
+	character, err := jikan.GetCharacter(malCharacterID)
+
+	if err == nil {
+		jikanDB.Set("Character", malCharacterID, character)
+		return
+	}
+
+	fmt.Printf("Error fetching %s: %v", malCharacterID, err)
 }
