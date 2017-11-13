@@ -1,36 +1,34 @@
 component Sidebar(user *arn.User)
 	aside#sidebar
+		//- User avatar
 		.user-image-container
 			if user != nil
 				Avatar(user)
 			else
 				img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
-		
+
+		//- Sidebar buttons
 		if user != nil
 			SidebarButton("Home", "/animelist/watching", "home")
-			//- SidebarButton("Dash", "/dashboard", "tachometer")
 		else
 			SidebarButton("Home", "/", "home")
-		
+
 		SidebarButton("Forum", "/forum", "comment")
 		SidebarButton("Explore", "/explore", "th")
-		//- SidebarButton("Artworks", "/artworks", "paint-brush")
 		SidebarButton("Soundtracks", "/soundtracks", "headphones")
-		//- SidebarButton("AMVs", "/amvs", "video-camera")
-		//- SidebarButton("Games", "/games", "gamepad")
 		SidebarButton("Users", "/users", "globe")
-		//- SidebarButton("Search", "/search", "search")
 
 		if user != nil
-			//- if user.Role == "admin"
-			//- 	SidebarButton("Groups", "/groups", "users")
-			
 			SidebarButton("Shop", "/shop", "shopping-cart")
-
-			//- if user.Role == "admin" || user.Role == "editor"
-			//- 	SidebarButton("Statistics", "/statistics", "pie-chart")
-
 			SidebarButton("Settings", "/settings", "cog")
+
+		//- Disabled:
+		//- SidebarButton("Dash", "/dashboard", "tachometer")
+		//- SidebarButton("Artworks", "/artworks", "paint-brush")
+		//- SidebarButton("AMVs", "/amvs", "video-camera")
+		//- SidebarButton("Games", "/games", "gamepad")
+		//- SidebarButton("Groups", "/groups", "users")
+		//- SidebarButton("Statistics", "/statistics", "pie-chart")
 
 		.spacer
 
@@ -42,7 +40,7 @@ component Sidebar(user *arn.User)
 		if user != nil
 			if user.Role == "admin"
 				SidebarButton("Admin", "/admin", "wrench")
-			
+
 			if user.Role == "editor"
 				SidebarButton("Editor", "/editor", "pencil")
 
