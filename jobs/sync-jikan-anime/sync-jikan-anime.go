@@ -43,7 +43,7 @@ func sync(anime *arn.Anime, malID string) {
 		var err error
 
 		for try := 1; try <= maxRetries; try++ {
-			time.Sleep(1 * time.Second)
+			time.Sleep(time.Second)
 			anime, err = jikan.GetAnime(malID)
 
 			if err == nil {
@@ -52,6 +52,9 @@ func sync(anime *arn.Anime, malID string) {
 			}
 
 			fmt.Printf("Error fetching %s on try %d: %v", malID, try, err)
+
+			// Wait an additional second
+			time.Sleep(time.Second)
 		}
 	}
 }
