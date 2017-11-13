@@ -51,6 +51,9 @@ component Sidebar(user *arn.User)
 		else
 			SidebarButton("Login", "/login", "sign-in")
 
+		.sidebar-social-media
+			SocialMediaButtons
+
 component SidebarButton(name string, target string, icon string)
 	a.sidebar-link.ajax(href=target, aria-label=name, data-bubble="true")
 		.sidebar-button

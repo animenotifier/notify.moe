@@ -1,0 +1,11 @@
+.footer
+	text-align center
+	font-size 0.8rem
+	opacity 0.7
+	margin-top 0.5rem
+
+	&.mountable
+		opacity 0 !important
+
+	&.mounted
+		opacity 0.7 !important

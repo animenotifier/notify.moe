@@ -1,6 +1,6 @@
 component Inventory(inventory *arn.Inventory, viewUser *arn.User, user *arn.User)
 	ShopTabs(user)
-	
+
 	h1.page-title Inventory
 
 	.inventory(data-api="/api/inventory/" + viewUser.ID)
@@ -13,6 +13,6 @@ component Inventory(inventory *arn.Inventory, viewUser *arn.User, user *arn.User
 						Icon(slot.Item().Icon)
 					if slot.Quantity > 1
 						.inventory-slot-quantity= slot.Quantity
-	
-	.footer.text-center.mountable
+
+	.footer.mountable
 		p You can consume items by double-clicking them.

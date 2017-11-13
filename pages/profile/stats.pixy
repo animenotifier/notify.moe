@@ -8,8 +8,8 @@ component ProfileStats(stats *utils.UserStats, viewUser *arn.User, user *arn.Use
 					Icon("pie-chart")
 					span= pie.Title
 				PieChart(pie.Slices)
-	
-	.footer.text-center
+
+	.footer
 		span= viewUser.Nick + " spent "
 		span= int(stats.AnimeWatchingTime / time.Hour / 24)
 		span  days watching anime.

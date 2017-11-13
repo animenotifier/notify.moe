@@ -1,0 +1,36 @@
+component SocialMediaLinks
+	a.footer-element(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener")
+		Icon("microphone")
+		span Discord
+
+	a.footer-element(href="https://www.facebook.com/animenotifier", target="_blank", rel="noopener")
+		Icon("facebook")
+		span Facebook
+
+	a.footer-element(href="https://twitter.com/animenotifier", target="_blank", rel="noopener")
+		Icon("twitter")
+		span Twitter
+
+	a.footer-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
+		Icon("google-plus")
+		span Google+
+
+	a.footer-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
+		Icon("github")
+		span GitHub
+
+component SocialMediaButtons
+	a.social-media-button.circle-1(href="https://discord.gg/0kimAmMCeXGXuzNF", title="Discord", target="_blank", rel="noopener")
+		RawIcon("microphone")
+
+	a.social-media-button.circle-2(href="https://www.facebook.com/animenotifier", title="Facebook", target="_blank", rel="noopener")
+		RawIcon("facebook-square")
+
+	a.social-media-button.circle-3(href="https://twitter.com/animenotifier", title="Twitter", target="_blank", rel="noopener")
+		RawIcon("twitter-square")
+
+	a.social-media-button.circle-4(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", title="Google+", target="_blank", rel="noopener")
+		RawIcon("google-plus-square")
+
+	a.social-media-button.circle-5(href="https://github.com/animenotifier/notify.moe", title="GitHub", target="_blank", rel="noopener")
+		RawIcon("github")

@@ -1,0 +1,52 @@
+.sidebar-social-media
+	horizontal
+	justify-content space-around
+	padding 0.6rem 0
+	border-top 1px solid rgba(0, 0, 0, 0.1)
+
+.social-media-button
+	opacity 0.25
+	color text-color
+
+	:hover
+		transform scale(1.1)
+		opacity 1
+
+// .sidebar-social-media
+// 	position relative
+// 	width 6rem
+// 	height 6rem
+// 	// border dashed 1px
+// 	// border-radius 50%
+// 	margin content-padding auto
+// 	default-transition
+
+// 	:hover
+// 		transform scale(1.2)
+
+// .social-media-button
+// 	display block
+// 	position absolute
+// 	left 50%
+// 	top 50%
+// 	width 4rem
+// 	height 4rem
+// 	margin -0.5rem
+// 	color text-color
+
+// circle-start = 160deg
+
+// .circle-1
+// 	transform rotate(circle-start) translate(2rem) rotate(calc(circle-start * -1))
+
+// .circle-2
+// 	transform rotate(calc(circle-start + 72deg)) translate(2rem) rotate(calc((circle-start + 72deg) * -1))
+
+// .circle-3
+// 	transform rotate(calc(circle-start + 144deg)) translate(2rem) rotate(calc((circle-start + 144deg) * -1))
+
+// .circle-4
+// 	transform rotate(calc(circle-start + 216deg)) translate(2rem) rotate(calc((circle-start + 216deg) * -1))
+
+// .circle-5
+// 	transform rotate(calc(circle-start + 288deg)) translate(2rem) rotate(calc((circle-start + 288deg) * -1))
