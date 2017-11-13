@@ -1,5 +1,12 @@
 # Anime Notifier
 
+## Overview
+
+- [Installation](INSTALLATION.md)
+- [Contributing](CONTRIBUTING.md)
+- [Code Style](CODE_STYLE.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+
 ## What kind of website is this?
 
 An anime tracker where you can add anime to your list and edit your episode progress using either the website, the chrome extension or the mobile app.
@@ -26,6 +33,7 @@ In the past it was, but not anymore. We're growing bigger by establishing a data
 * [anilist.co](https://anilist.co/), [myanimelist.net](https://myanimelist.net/) and [kitsu.io](https://kitsu.io/) import
 * [osu](https://osu.ppy.sh/) ranking view
 * [Gravatar](https://gravatar.com) support
+* High quality images that are small in file size (WebP)
 * User profiles
 * Dashboard
 * Forums
@@ -81,7 +89,7 @@ Each rating is a number on a scale of 0 to 10. A rating of 0 counts as "not rate
 
 A quick access to your watching list:
 
-![Anime Notifier Chrome extension](https://puu.sh/wM47V/af25b23755.png)
+![Anime Notifier Chrome extension](https://puu.sh/xTIJV/3ca46b7a4a.png)
 
 ## How can I format text and include images in the forum?
 
@@ -155,7 +163,13 @@ There are many, many ways how notifications can be implemented from a technical 
 
 Go to your [settings](https://notify.moe/settings), it should show you the remaining duration for your [PRO](https://notify.moe/shop) account.
 
+## Are there any hotkeys?
+
+* Press "F" to search the site for anime or other content
+
 ## Is this website well-optimized?
+
+Take a look at the comparison of [notify.moe, kitsu.io, anilist.co and myanimelist.net](https://www.webpagetest.org/video/compare.php?tests=171111_CA_e6d20ca33741ffb9e7e61456b588111d,171111_NW_15a380b66a64fe57bad2f656bcec3bf9,171111_SD_2bced86a01dc94a9608385beeb823230,171111_EC_381395feb27de2e8047cd821b8add5bf) loading speeds.
 
 ![Anime Notifier - Lighthouse](https://pbs.twimg.com/media/DEplUsNXgAEF-UT.jpg:large)
 
