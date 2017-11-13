@@ -1,9 +1,11 @@
 component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 	h1.page-title Forum
-	ForumTags
+
+	ForumTabs
+
 	.forum
 		ThreadList(threads)
-	
+
 	.buttons
 		button#new-thread.action(data-action="load", data-trigger="click", data-url="/new/thread")
 			Icon("plus")
@@ -17,3 +19,18 @@ component ThreadList(threads []*arn.Thread)
 	else
 		each thread in threads
 			ThreadLink(thread)
+
+component ForumTabs
+	.tabs
+		ForumTab("All", "", "list")
+		ForumTab("General", "general", "list")
+		ForumTab("News", "news", "list")
+		ForumTab("Anime", "anime", "list")
+		ForumTab("Updates", "update", "list")
+		ForumTab("Suggestions", "suggestion", "list")
+		ForumTab("Bugs", "bug", "list")
+
+component ForumTab(title string, category string, icon string)
+	a.tab.action(href=strings.TrimSuffix("/forum/" + category, "/"), data-action="diff", data-trigger="click")
+		Icon(arn.GetForumIcon(category))
+		span.tab-text= title

@@ -20,7 +20,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
-	"github.com/animenotifier/notify.moe/pages/forums"
 	"github.com/animenotifier/notify.moe/pages/group"
 	"github.com/animenotifier/notify.moe/pages/groups"
 	"github.com/animenotifier/notify.moe/pages/home"
@@ -66,7 +65,7 @@ func Configure(app *aero.Application) {
 	// l.Ajax("/amvs", amvs.Get)
 
 	// Forum
-	l.Page("/forum", forums.Get)
+	l.Page("/forum", forum.Get)
 	l.Page("/forum/:tag", forum.Get)
 	l.Page("/thread/:id", threads.Get)
 	l.Page("/post/:id", posts.Get)
