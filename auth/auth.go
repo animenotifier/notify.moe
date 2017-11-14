@@ -5,7 +5,7 @@ import "github.com/animenotifier/notify.moe/utils"
 
 const newUserStartRoute = "/settings"
 
-// Install ...
+// Install installs the authentication routes in the application.
 func Install(app *aero.Application) {
 	// Google
 	InstallGoogleAuth(app)
