@@ -30,6 +30,12 @@ func main() {
 				Japanese: jikanCharacter.NameJapanese,
 			},
 			Image: jikanCharacter.Image,
+			// Mappings: []*arn.Mapping{
+			// 	&arn.Mapping{
+			// 		Service: "myanimelist/character",
+			// 		ServiceID: jikanCharacter.
+			// 	}
+			// },
 		}
 
 		if strings.HasPrefix(character.Name.Japanese, "(") {
