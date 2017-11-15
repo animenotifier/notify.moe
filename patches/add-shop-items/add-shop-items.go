@@ -104,6 +104,8 @@ to the studios involved in the creation of your favourite anime.
 }
 
 func main() {
+	defer arn.Node.Close()
+
 	for _, item := range items {
 		item.Save()
 	}
