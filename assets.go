@@ -39,7 +39,7 @@ func configureAssets(app *aero.Application) {
 
 	// Favicon
 	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		return ctx.TryWebP("images/brand/64", ".png")
+		return ctx.File("images/brand/64.png")
 	})
 
 	// Images
