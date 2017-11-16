@@ -31,10 +31,7 @@ component Sidebar(user *arn.User)
 		//- SidebarButton("Statistics", "/statistics", "pie-chart")
 
 		.spacer
-
-		//- .theme-switcher
-		//- 	button.theme-switcher-button.action(data-action="toggleTheme", data-trigger="click") Switch theme
-
+		
 		.sidebar-link(aria-label="Search")
 			.sidebar-button
 				Icon("search")
