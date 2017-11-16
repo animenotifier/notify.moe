@@ -33,6 +33,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/newthread"
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/paypal"
+	"github.com/animenotifier/notify.moe/pages/popular"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/search"
@@ -175,6 +176,7 @@ func Configure(app *aero.Application) {
 
 	// API
 	app.Get("/api/me", me.Get)
+	app.Get("/api/popular/anime/titles/:count", popular.AnimeTitles)
 	app.Get("/api/test/notification", notifications.Test)
 
 	// PayPal
