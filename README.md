@@ -3,8 +3,9 @@
 ## Overview
 
 - [Installation](INSTALLATION.md)
-- [Contributing](CONTRIBUTING.md)
+- [Project Management](https://github.com/animenotifier/notify.moe/projects/10)
 - [Code Style](CODE_STYLE.md)
+- [Contributing](CONTRIBUTING.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## What kind of website is this?
