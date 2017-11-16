@@ -5,7 +5,7 @@ export function save(arn: AnimeNotifier, input: HTMLElement) {
 	let obj = {}
 	let isContentEditable = input.isContentEditable
 	let value = isContentEditable ? input.innerText : (input as HTMLInputElement).value
-	
+
 	if(value === undefined) {
 		return
 	}
@@ -77,4 +77,17 @@ export function increaseEpisode(arn: AnimeNotifier, element: HTMLElement) {
 	let episodes = parseInt(prev.innerText)
 	prev.innerText = String(episodes + 1)
 	save(arn, prev)
+}
+
+// Add number
+export function addNumber(arn: AnimeNotifier, element: HTMLElement) {
+	if(arn.isLoading) {
+		return
+	}
+
+	let input = arn.app.find(element.dataset.id) as HTMLInputElement
+	let add = parseInt(element.dataset.add)
+	let num = parseInt(input.value)
+	input.value = (num + add).toString()
+	save(arn, input)
 }
