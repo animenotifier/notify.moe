@@ -41,7 +41,7 @@ class MyServiceWorker {
 	currentCSP: string
 
 	constructor() {
-		this.cache = new MyCache("v-4")
+		this.cache = new MyCache("v-5")
 		this.currentCSP = ""
 
 		self.addEventListener("install", (evt: InstallEvent) => evt.waitUntil(this.onInstall(evt)))

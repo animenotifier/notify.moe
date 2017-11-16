@@ -1,5 +1,6 @@
 import { AnimeNotifier } from "../AnimeNotifier"
 
+let currentTheme = "light"
 let light = {}
 let dark = {
 	"hue": "45",
@@ -35,10 +36,18 @@ let dark = {
 	"post-permalink-color": "var(--link-color)"
 }
 
+// Toggle theme
+export function toggleTheme() {
+	if(currentTheme === "light") {
+		darkTheme()
+		return
+	}
+
+	lightTheme()
+}
+
 // Light theme
 export function lightTheme() {
-	console.log("Light")
-
 	let root = document.documentElement
 
 	for(let property in light) {
@@ -48,12 +57,12 @@ export function lightTheme() {
 
 		root.style.setProperty(`--${property}`, light[property])
 	}
+
+	currentTheme = "light"
 }
 
 // Dark theme
 export function darkTheme() {
-	console.log("Dark")
-
 	let root = document.documentElement
 
 	for(let property in dark) {
@@ -61,7 +70,12 @@ export function darkTheme() {
 			continue
 		}
 
-		light[property] = root.style.getPropertyValue(`--${property}`)
+		if(light[property] === undefined) {
+			light[property] = root.style.getPropertyValue(`--${property}`)
+		}
+
 		root.style.setProperty(`--${property}`, dark[property])
 	}
+
+	currentTheme = "dark"
 }

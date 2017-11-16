@@ -47,6 +47,9 @@ sidebar-spacing-y = 0.7rem
 .sidebar-link
 	color text-color
 
+	:hover
+		cursor pointer
+
 	&.active
 		.sidebar-button
 			color tab-active-color

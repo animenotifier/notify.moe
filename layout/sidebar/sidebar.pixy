@@ -30,11 +30,10 @@ component Sidebar(user *arn.User)
 		//- SidebarButton("Groups", "/groups", "users")
 		//- SidebarButton("Statistics", "/statistics", "pie-chart")
 
-		.buttons
-			button.action(data-action="lightTheme", data-trigger="click") Light
-			button.action(data-action="darkTheme", data-trigger="click") Dark
-
 		.spacer
+
+		//- .theme-switcher
+		//- 	button.theme-switcher-button.action(data-action="toggleTheme", data-trigger="click") Switch theme
 
 		.sidebar-link(aria-label="Search")
 			.sidebar-button
@@ -47,6 +46,11 @@ component Sidebar(user *arn.User)
 
 			if user.Role == "editor"
 				SidebarButton("Editor", "/editor", "pencil")
+
+		a.sidebar-link.action(href="#", data-action="toggleTheme", data-trigger="click")
+			.sidebar-button
+				Icon("paint-brush")
+				span.sidebar-text Theme
 
 		SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
 
