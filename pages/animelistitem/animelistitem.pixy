@@ -5,7 +5,7 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			
 			.anime-list-item-progress-edit
 				.anime-list-item-episodes-edit
-					InputNumber("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
+					InputNumberWithButtons("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
 				
 				.widget-section.anime-list-item-status-edit
 					label(for="Status") Status:

@@ -48,6 +48,7 @@
 	font-size 1em
 	padding 0
 	width 0
+	height auto
 	flex-grow 1
 
 // #search
@@ -55,7 +56,7 @@
 // 	border-radius 0
 // 	background transparent
 // 	border none
-	
+
 // 	color nav-link-hover-color
 // 	font-size 1em
 // 	min-width 0
@@ -84,10 +85,10 @@
 // > 930px
 // 	.navigation-button, #search
 // 		font-size 1.2em
-	
+
 // 	#navigation
 // 		justify-content flex-start
-	
+
 // 	.extra-navigation
 // 		display block
 
@@ -96,7 +97,7 @@
 // 		vertical
 // 		height 100%
 // 		padding content-padding 0
-	
+
 // 	#container
 // 		horizontal
 

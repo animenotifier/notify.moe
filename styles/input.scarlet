@@ -22,6 +22,8 @@ input, select
 	padding 0.5rem 1rem
 
 input
+	height input-height
+
 	:active
 		transform translateY(3px)
 
@@ -56,3 +58,13 @@ textarea
 	line-height 1.5em
 	height 10rem
 	transition none
+
+.number-input-container
+	horizontal
+
+	button
+		justify-content center
+		margin-left 0.2rem
+		padding 0
+		width 2.7rem
+		height input-height
