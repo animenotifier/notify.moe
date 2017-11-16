@@ -7,5 +7,5 @@ import (
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	return ctx.HTML(components.Login())
+	return ctx.HTML(components.Login(""))
 }

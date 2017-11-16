@@ -6,7 +6,7 @@ component FrontPage
 
 		h2.mountable Your home for everything about anime.
 
-		Login
+		Login("")
 		Footer
 
 	video.bg-video(autoplay="autoplay", loop="loop")

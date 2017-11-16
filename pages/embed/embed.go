@@ -14,7 +14,7 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return utils.AllowEmbed(ctx, ctx.HTML(components.Login()))
+		return utils.AllowEmbed(ctx, ctx.HTML(components.Login("_blank")))
 	}
 
 	if !user.IsPro() && user.TimeSinceRegistered() > 14*24*time.Hour {
