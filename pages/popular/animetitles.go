@@ -2,7 +2,6 @@ package popular
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -25,7 +24,7 @@ func AnimeTitles(ctx *aero.Context) string {
 	}
 
 	for _, anime := range popularAnime {
-		popularAnimeTitles = append(popularAnimeTitles, strings.ToLower(anime.Title.Canonical))
+		popularAnimeTitles = append(popularAnimeTitles, anime.Title.Canonical)
 
 		if arn.ContainsUnicodeLetters(anime.Title.Japanese) {
 			popularAnimeTitles = append(popularAnimeTitles, anime.Title.Japanese)

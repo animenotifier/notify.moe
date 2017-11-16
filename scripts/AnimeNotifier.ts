@@ -164,7 +164,7 @@ export class AnimeNotifier {
 		}
 	}
 
-	onIdle() {
+	async onIdle() {
 		// Service worker
 		this.serviceWorkerManager = new ServiceWorkerManager(this, "/service-worker")
 		this.serviceWorkerManager.register()
@@ -178,6 +178,23 @@ export class AnimeNotifier {
 		if(navigator.onLine === false) {
 			this.statusMessage.showError("You are viewing an offline version of the site now.")
 		}
+
+		// Download popular anime titles for the search
+		// let response = await fetch("/api/popular/anime/titles/500")
+		// let titles = await response.json()
+		// let titleList = document.createElement("datalist")
+		// titleList.id = "popular-anime-titles-list"
+
+		// for(let title of titles) {
+		// 	let option = document.createElement("option")
+		// 	option.value = title
+		// 	titleList.appendChild(option)
+		// }
+
+		// document.body.appendChild(titleList)
+
+		// let search = this.app.find("search") as HTMLInputElement
+		// search.setAttribute("list", titleList.id)
 	}
 
 	dragAndDrop() {
