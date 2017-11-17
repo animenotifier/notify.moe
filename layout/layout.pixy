@@ -8,6 +8,7 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 
 			meta(name="viewport", content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 			meta(name="theme-color", content=app.Config.Manifest.ThemeColor)
+			meta(name="google-site-verification", content="1U-E2pDaYbFHyOSWl6AX3DvixQuDc4kfem9Kde_jZ8A")
 
 			if openGraph != nil
 				for _, name := range meta
