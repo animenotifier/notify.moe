@@ -120,6 +120,12 @@ component SettingsFormatting(user *arn.User)
 			h3.widget-title
 				Icon("font")
 				span Formatting
+
+			.widget-section
+				label(for="Theme")= "Theme:"
+				select.widget-ui-element.action(id="Theme", data-field="Theme", value=user.Settings().Theme, title="Language of anime titles", data-action="save", data-trigger="change")
+					option(value="light") Light
+					option(value="dark") Dark
 			
 			.widget-section
 				label(for="TitleLanguage")= "Title language:"

@@ -11,6 +11,7 @@ import { ServiceWorkerManager } from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate } from "./DateView"
 import { findAll, delay, canUseWebP, swapElements } from "./Utils"
 import * as actions from "./Actions"
+import { darkTheme } from "./Actions";
 
 export class AnimeNotifier {
 	app: Application
@@ -114,6 +115,11 @@ export class AnimeNotifier {
 		this.user = this.app.find("user")
 		this.app.content = this.app.find("content")
 		this.app.loading = this.app.find("loading")
+
+		// Theme
+		if(this.user.dataset.theme !== "light") {
+			darkTheme()
+		}
 
 		// Status message
 		this.statusMessage = new StatusMessage(

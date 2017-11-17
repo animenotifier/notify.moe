@@ -14,6 +14,7 @@ var items = []*arn.Item{
 Includes:
 
 * Chrome extension for quick list access
+* Dark theme for the site (persistent)
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
@@ -35,6 +36,7 @@ Includes:
 Includes:
 
 * Chrome extension for quick list access
+* Dark theme for the site (persistent)
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
@@ -56,6 +58,7 @@ Includes:
 Includes:
 
 * Chrome extension for quick list access
+* Dark theme for the site (persistent)
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
@@ -77,6 +80,7 @@ Includes:
 Includes:
 
 * Chrome extension for quick list access
+* Dark theme for the site (persistent)
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
