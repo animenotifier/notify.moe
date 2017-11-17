@@ -19,7 +19,7 @@ func Active(ctx *aero.Context) string {
 		followersB := users[j].FollowersCount()
 
 		if followersA == followersB {
-			return users[i].Nick > users[j].Nick
+			return users[i].Nick < users[j].Nick
 		}
 
 		return followersA > followersB
