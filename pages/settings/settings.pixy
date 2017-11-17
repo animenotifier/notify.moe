@@ -4,7 +4,6 @@ component SettingsTabs
 		Tab("Accounts", "cubes", "/settings/accounts")
 		Tab("Notifications", "bell", "/settings/notifications")
 		Tab("Apps", "puzzle-piece", "/settings/apps")
-		Tab("Avatar", "picture-o", "/settings/avatar")
 		Tab("Formatting", "font", "/settings/formatting")
 		Tab("PRO", "star", "/settings/pro")
 
@@ -22,6 +21,30 @@ component SettingsPersonal(user *arn.User)
 			InputText("Nick", user.Nick, "Username", "Your username on notify.moe")
 			InputText("Tagline", user.Tagline, "Tagline", "Text that appears below your username")
 			InputText("Website", user.Website, "Website", "Your homepage")
+
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("picture-o")
+				span Avatar
+
+			.widget-section
+				label(for="Avatar.Source") Source:
+				select.widget-ui-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
+					option(value="") Automatic
+					option(value="Gravatar") Gravatar
+					option(value="URL") Link
+					//- option(value="FileSystem") Upload
+
+			if user.Settings().Avatar.Source == "URL"
+				InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
+
+			if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
+				.profile-image-container.avatar-preview
+					img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar (" + user.Email + ")", title="Gravatar (" + user.Email + ")")
+			
+			if user.Settings().Avatar.Source == "URL" &&  user.Settings().Avatar.SourceURL != ""
+				.profile-image-container.avatar-preview
+					img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
 
 component SettingsNotifications(user *arn.User)
 	SettingsTabs
@@ -86,36 +109,6 @@ component SettingsApps(user *arn.User)
 				button.action(data-action="installApp", data-trigger="click")
 					Icon("desktop")
 					span Get the Desktop Web App
-
-component SettingsAvatar(user *arn.User)
-	SettingsTabs
-
-	h1.page-title Avatar settings
-
-	.settings
-		.widget.mountable(data-api="/api/settings/" + user.ID)
-			h3.widget-title
-				Icon("picture-o")
-				span Avatar
-
-			.widget-section
-				label(for="Avatar.Source") Source:
-				select.widget-ui-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
-					option(value="") Automatic
-					option(value="Gravatar") Gravatar
-					option(value="URL") Link
-					//- option(value="FileSystem") Upload
-
-			if user.Settings().Avatar.Source == "URL"
-				InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
-
-			if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
-				.profile-image-container.avatar-preview
-					img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar")
-			
-			if user.Settings().Avatar.Source == "URL" &&  user.Settings().Avatar.SourceURL != ""
-				.profile-image-container.avatar-preview
-					img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
 
 component SettingsFormatting(user *arn.User)
 	SettingsTabs

@@ -96,7 +96,6 @@ func Configure(app *aero.Application) {
 	l.Page("/settings/accounts", settings.Get(components.SettingsAccounts))
 	l.Page("/settings/notifications", settings.Get(components.SettingsNotifications))
 	l.Page("/settings/apps", settings.Get(components.SettingsApps))
-	l.Page("/settings/avatar", settings.Get(components.SettingsAvatar))
 	l.Page("/settings/formatting", settings.Get(components.SettingsFormatting))
 	l.Page("/settings/pro", settings.Get(components.SettingsPro))
 
