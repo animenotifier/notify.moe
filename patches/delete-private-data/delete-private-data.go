@@ -9,7 +9,11 @@ func main() {
 	color.Yellow("Deleting private user data")
 	defer arn.Node.Close()
 
-	arn.DB.Clear("EmailToUser")
+	emailToUser := arn.DB.Collection("EmailToUser")
+
+	testRecord, _ := emailToUser.Get("e.urbach@gmail.com")
+	emailToUser.Clear()
+	emailToUser.Set("e.urbach@gmail.com", testRecord)
 
 	// Iterate over the stream
 	count := 0
