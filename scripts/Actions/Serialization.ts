@@ -88,6 +88,20 @@ export function addNumber(arn: AnimeNotifier, element: HTMLElement) {
 	let input = arn.app.find(element.dataset.id) as HTMLInputElement
 	let add = parseInt(element.dataset.add)
 	let num = parseInt(input.value)
-	input.value = (num + add).toString()
+	let newValue = num + add
+	let min = parseInt(input.min)
+	let max = parseInt(input.max)
+
+	if(newValue > max) {
+		arn.statusMessage.showError("Maximum: " + max)
+		return
+	}
+
+	if(newValue < min) {
+		arn.statusMessage.showError("Minimum: " + min)
+		return
+	}
+
+	input.value = newValue.toString()
 	save(arn, input)
 }
