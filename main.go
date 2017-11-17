@@ -39,7 +39,6 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Middleware
 	app.Use(
-		middleware.Firewall(),
 		middleware.Log(),
 		middleware.Session(),
 		middleware.UserInfo(),
