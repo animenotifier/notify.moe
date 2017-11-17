@@ -42,6 +42,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/soundtrack"
 	"github.com/animenotifier/notify.moe/pages/soundtracks"
 	"github.com/animenotifier/notify.moe/pages/statistics"
+	"github.com/animenotifier/notify.moe/pages/terms"
 	"github.com/animenotifier/notify.moe/pages/threads"
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
@@ -177,6 +178,9 @@ func Configure(app *aero.Application) {
 	app.Get("/api/me", me.Get)
 	app.Get("/api/popular/anime/titles/:count", popular.AnimeTitles)
 	app.Get("/api/test/notification", notifications.Test)
+
+	// Legal stuff
+	l.Page("/terms", terms.Get)
 
 	// PayPal
 	l.Page("/paypal/success", paypal.Success)

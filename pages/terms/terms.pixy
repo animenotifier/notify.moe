@@ -1,0 +1,43 @@
+component TermsOfService
+	.terms
+		h1.mountable Terms of Service
+		p.terms-sub-title.mountable Last modified: November 17th, 2017
+
+		h2.mountable Welcome to Anime Notifier!
+		p.mountable Thank you for using our services.
+		p.mountable By using our services, you agree to the terms below. Please read them carefully.
+
+		h2.mountable Responsibilites
+		p.mountable You agree to the following:
+		ul.mountable
+			li You may only provide true and correct data about yourself.
+			li You may not, under no circumstances, impersonate someone else.
+			li You may not own more than one user account.
+			li You are 13 years of age or older.
+			li You will adhere to the rules mentioned in this document.
+
+		h2.mountable Misuse of the site
+		p.mountable Do not use the site in any other way than the provided interfaces. You may use our services only as permitted by law.
+
+		h3.mountable Web crawlers
+		p.mountable
+			span HTML scraping of content is not allowed as we have a public 
+			a.ajax(href="/api") API
+			span  covering nearly all the data on the site. Please use the 
+			a.ajax(href="/api") API
+			span  instead as this will ensure that only the minimum of required bandwidth will be used.
+
+		h2.mountable Links to Third-Party Websites
+		p.mountable Anime Notifier provides links to external websites for convenience reasons. By clicking on these links you are leaving our site. Thus we can not, under no circumstances, be held responsible for the content on external websites.
+
+		h2.mountable Copyright
+		p.mountable All submitted user content remains copyright to its original copyright holder. Images shown on the site are only for personal, non-commercial use.
+		
+		h3.mountable Copyright claims
+		p.mountable If you are a content creator and would like to report a copyright violation, please send your claim to copyright@notify.moe. We will try to get back to you as soon as possible.
+
+		h2.mountable Liability
+		p.mountable Under no circumstances can Anime Notifier be held liable for damage incurred via the use of our services.
+
+		h2.mountable Backups
+		p.mountable We are keeping your data safe using hourly backups. If you'd like to report a data loss and need to restore your data, please contact support@notify.moe.
