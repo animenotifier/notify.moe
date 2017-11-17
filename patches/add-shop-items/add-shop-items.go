@@ -18,7 +18,7 @@ Includes:
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your personal suggestions
+* High priority for your suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRaritySuperior,
@@ -40,7 +40,7 @@ Includes:
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your personal suggestions
+* High priority for your suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityRare,
@@ -62,7 +62,7 @@ Includes:
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your personal suggestions
+* High priority for your suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityUnique,
@@ -84,27 +84,27 @@ Includes:
 * Special highlight on the forums
 * Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your personal suggestions
+* High priority for your suggestions
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityLegendary,
 		Order:      4,
 		Consumable: true,
 	},
-	&arn.Item{
-		ID:    "anime-support-ticket",
-		Name:  "Anime Support Ticket",
-		Price: 100,
-		Description: `Support the makers of your favourite anime by using an anime support ticket.
-Anime Notifier uses 15% of the money to handle the transaction fees while the remaining 85% go directly
-to the studios involved in the creation of your favourite anime.
+	// 	&arn.Item{
+	// 		ID:    "anime-support-ticket",
+	// 		Name:  "Anime Support Ticket",
+	// 		Price: 100,
+	// 		Description: `Support the makers of your favourite anime by using an anime support ticket.
+	// Anime Notifier uses 15% of the money to handle the transaction fees while the remaining 85% go directly
+	// to the studios involved in the creation of your favourite anime.
 
-*This feature is work in progress.*`,
-		Icon:       "ticket",
-		Rarity:     arn.ItemRarityRare,
-		Order:      5,
-		Consumable: false,
-	},
+	// *This feature is work in progress.*`,
+	// 		Icon:       "ticket",
+	// 		Rarity:     arn.ItemRarityRare,
+	// 		Order:      5,
+	// 		Consumable: false,
+	// 	},
 }
 
 func main() {
