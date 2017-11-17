@@ -6,12 +6,12 @@ var routeTests = map[string][]string{
 		"/+Akyoto",
 	},
 
-	"/user/:nick/threads": []string{
-		"/+Akyoto/threads",
+	"/user/:nick/forum/threads": []string{
+		"/+Akyoto/forum/threads",
 	},
 
-	"/user/:nick/posts": []string{
-		"/+Akyoto/posts",
+	"/user/:nick/forum/posts": []string{
+		"/+Akyoto/forum/posts",
 	},
 
 	"/user/:nick/soundtracks": []string{
@@ -105,6 +105,10 @@ var routeTests = map[string][]string{
 
 	"/compare/animelist/:nick-1/:nick-2": []string{
 		"/compare/animelist/Akyoto/Scott",
+	},
+
+	"/explore/anime/:year/:status/:type": []string{
+		"/explore/anime/2011/finished/tv",
 	},
 
 	// API

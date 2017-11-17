@@ -115,8 +115,8 @@ func Configure(app *aero.Application) {
 	// User profiles
 	l.Page("/user", user.Get)
 	l.Page("/user/:nick", profile.Get)
-	l.Page("/user/:nick/threads", profile.GetThreadsByUser)
-	l.Page("/user/:nick/posts", profile.GetPostsByUser)
+	l.Page("/user/:nick/forum/threads", profile.GetThreadsByUser)
+	l.Page("/user/:nick/forum/posts", profile.GetPostsByUser)
 	l.Page("/user/:nick/soundtracks", profile.GetSoundTracksByUser)
 	l.Page("/user/:nick/stats", profile.GetStatsByUser)
 	l.Page("/user/:nick/followers", profile.GetFollowers)
