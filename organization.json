@@ -1,0 +1,26 @@
+{
+	"@context":"http://schema.org",
+	"@type":"Organization",
+	"name":"Anime Notifier",
+	"description":"Anime list, tracker, database and notifier for new anime episodes. Create your own anime list and keep track of your progress as you watch.",
+	"url":"https://notify.moe",
+	"email":"support@notify.moe",
+	"telephone":"",
+	"faxNumber":"",
+	"logo":"https://media.notify.moe/images/brand/512.png",
+	"sameAs":[
+		"https://www.facebook.com/animenotifier",
+		"https://twitter.com/animenotifier",
+		"https://plus.google.com/+AnimeReleaseNotifierOfficial"
+	],
+	"address":{
+		"@type":"PostalAddress",
+		"addressLocality":"",
+		"postalCode":"",
+		"streetAddress":""
+	},
+	"founder":{
+		"@type":"Person",
+		"name":"Eduard Urbach"
+	}
+}

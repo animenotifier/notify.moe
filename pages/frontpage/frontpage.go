@@ -8,7 +8,7 @@ import (
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	description := "Anime list and notifier for new anime episodes. Create your own anime list and keep track of your progress as you watch."
+	description := "Anime list, tracker, database and notifier for new anime episodes. Create your own anime list and keep track of your progress as you watch."
 
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{
