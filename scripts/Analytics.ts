@@ -14,6 +14,19 @@ export class Analytics {
 			system: {
 				cpuCount: navigator.hardwareConcurrency,
 				platform: navigator.platform
+			},
+			connection: {
+				downLink: 0,
+				roundTripTime: 0,
+				effectiveType: ""
+			}
+		}
+
+		if("connection" in navigator) {
+			analytics.connection = {
+				downLink: navigator["connection"].downlink,
+				roundTripTime: navigator["connection"].rtt,
+				effectiveType: navigator["connection"].effectiveType
 			}
 		}
 
