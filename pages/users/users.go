@@ -15,7 +15,14 @@ func Active(ctx *aero.Context) string {
 	})
 
 	sort.Slice(users, func(i, j int) bool {
-		return len(users[i].AnimeList().Watching().Items) > len(users[j].AnimeList().Watching().Items)
+		followersA := users[i].FollowersCount()
+		followersB := users[j].FollowersCount()
+
+		if followersA == followersB {
+			return users[i].Nick > users[j].Nick
+		}
+
+		return followersA > followersB
 	})
 
 	// arn.SortUsersLastSeen(users)
