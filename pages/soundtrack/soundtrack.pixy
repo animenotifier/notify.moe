@@ -11,8 +11,8 @@ component Track(track *arn.SoundTrack, user *arn.User)
 			each media in track.Media
 				.widget.mountable
 					h3.widget-title= media.Service
-					.sound-track-media
-						ExternalMedia(media)
+					.sound-track-media.video-container
+						iframe.lazy.video(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
 
 			.widget.mountable
 				h3.widget-title Anime
