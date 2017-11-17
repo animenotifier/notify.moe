@@ -3,7 +3,9 @@
 		"target": "es6",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"baseUrl": "."
+		"baseUrl": ".",
+		"strict": false,
+		"strictFunctionTypes": false
 	},
 	"compileOnSave": true,
 	"buildOnSave": false
