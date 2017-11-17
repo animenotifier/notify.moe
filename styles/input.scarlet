@@ -48,6 +48,10 @@ select
 	-webkit-appearance none
 	-moz-appearance none
 
+	option
+		color text-color
+		background bg-color
+
 label
 	width 100%
 	padding 0.5rem 0
