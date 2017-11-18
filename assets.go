@@ -84,6 +84,10 @@ func configureAssets(app *aero.Application) {
 		prefix := "https://" + app.Config.Domain
 
 		for user := range arn.StreamUsers() {
+			if !user.HasNick() {
+				continue
+			}
+
 			sitemap.Add(prefix + user.Link())
 		}
 
