@@ -19,13 +19,9 @@ func Tracks(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
-	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && len(track.Media) > 0 && arn.Contains(track.Tags, "anime:"+anime.ID)
 	})
-
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Error fetching soundtracks", err)
-	}
 
 	return ctx.HTML(components.AnimeTracks(anime, tracks))
 }

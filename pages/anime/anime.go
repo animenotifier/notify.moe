@@ -72,17 +72,13 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Soundtracks
-	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && len(track.Media) > 0 && arn.Contains(track.Tags, "anime:"+anime.ID)
 	})
 
 	sort.Slice(tracks, func(i, j int) bool {
 		return tracks[i].Title < tracks[j].Title
 	})
-
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Error fetching soundtracks", err)
-	}
 
 	// Open Graph
 	description := anime.Summary

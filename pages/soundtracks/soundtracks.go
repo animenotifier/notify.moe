@@ -16,13 +16,9 @@ const maxTracks = 12
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
-	tracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && len(track.Media) > 0
 	})
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error fetching soundtracks", err)
-	}
 
 	arn.SortSoundTracksLatestFirst(tracks)
 
@@ -42,13 +38,9 @@ func From(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Invalid start index", err)
 	}
 
-	allTracks, err := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+	allTracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && len(track.Media) > 0
 	})
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error fetching soundtracks", err)
-	}
 
 	if index < 0 || index >= len(allTracks) {
 		return ctx.Error(http.StatusBadRequest, "Invalid start index (maximum is "+strconv.Itoa(len(allTracks))+")", nil)

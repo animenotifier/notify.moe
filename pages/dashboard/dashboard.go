@@ -72,14 +72,9 @@ func Get(ctx *aero.Context) string {
 			upcomingEpisodes = upcomingEpisodes[:maxScheduleItems]
 		}
 	}, func() {
-		var err error
-		soundTracks, err = arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+		soundTracks = arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 			return !track.IsDraft && len(track.Media) > 0
 		})
-
-		if err != nil {
-			return
-		}
 
 		arn.SortSoundTracksLatestFirst(soundTracks)
 
