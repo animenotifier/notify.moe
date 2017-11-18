@@ -7,13 +7,14 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/utils/editform"
 )
 
-// Get company.
-func Get(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
+// Edit track.
+func Edit(ctx *aero.Context) string {
 	id := ctx.Get("id")
 	company, err := arn.GetCompany(id)
+	user := utils.GetUser(ctx)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Company not found", err)
@@ -28,5 +29,5 @@ func Get(ctx *aero.Context) string {
 		},
 	}
 
-	return ctx.HTML(components.CompanyPage(company, user))
+	return ctx.HTML(components.CompanyTabs(company, user) + editform.Render(company, "Edit company", user))
 }

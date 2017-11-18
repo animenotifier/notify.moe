@@ -1,2 +1,7 @@
 component CompanyPage(company *arn.Company, user *arn.User)
 	h1= company.Name.English
+
+component CompanyTabs(company *arn.Company, user *arn.User)
+	.tabs
+		Tab("Company", "building", company.Link())
+		Tab("Edit", "pencil", company.Link() + "/edit")
