@@ -1,0 +1,2 @@
+component CompanyPage(company *arn.Company)
+	h1= company.Name.English

@@ -14,9 +14,15 @@ func Active(ctx *aero.Context) string {
 		return user.IsActive() && user.HasAvatar()
 	})
 
+	followCount := map[*arn.User]int{}
+
+	for _, user := range users {
+		followCount[user] = user.FollowersCount()
+	}
+
 	sort.Slice(users, func(i, j int) bool {
-		followersA := users[i].FollowersCount()
-		followersB := users[j].FollowersCount()
+		followersA := followCount[users[i]]
+		followersB := followCount[users[j]]
 
 		if followersA == followersB {
 			return users[i].Nick < users[j].Nick

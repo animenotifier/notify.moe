@@ -13,6 +13,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/apiview"
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/charge"
+	"github.com/animenotifier/notify.moe/pages/company"
 	"github.com/animenotifier/notify.moe/pages/compare"
 	"github.com/animenotifier/notify.moe/pages/database"
 	"github.com/animenotifier/notify.moe/pages/editanime"
@@ -91,6 +92,9 @@ func Configure(app *aero.Application) {
 
 	// Characters
 	l.Page("/character/:id", character.Get)
+
+	// Companies
+	l.Page("/company/:id", company.Get)
 
 	// Settings
 	l.Page("/settings", settings.Get(components.SettingsPersonal))
