@@ -1,0 +1,17 @@
+component Companies(companies []*arn.Company, user *arn.User)
+	h1.page-title Companies
+
+	.music-buttons
+		if user != nil
+			if user.DraftIndex().CompanyID == ""
+				button.action(data-action="newObject", data-trigger="click", data-type="company")
+					Icon("plus")
+					span Add company
+			else
+				a.button.ajax(href="/company/" + user.DraftIndex().CompanyID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+	ul
+		each company in companies
+			li= company.Name.English

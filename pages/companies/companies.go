@@ -1,8 +1,6 @@
 package companies
 
 import (
-	"net/http"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -18,10 +16,6 @@ func Get(ctx *aero.Context) string {
 	companies := arn.FilterCompanies(func(company *arn.Company) bool {
 		return !company.IsDraft
 	})
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Error fetching companies", err)
-	}
 
 	if len(companies) > maxEntries {
 		companies = companies[:maxEntries]
