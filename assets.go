@@ -4,6 +4,8 @@ import (
 	"io/ioutil"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/sitemap"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components/js"
 )
 
@@ -50,6 +52,42 @@ func configureAssets(app *aero.Application) {
 	// Videos
 	app.Get("/videos/*file", func(ctx *aero.Context) string {
 		return ctx.File("videos" + ctx.Get("file"))
+	})
+
+	// Anime sitemap
+	app.Get("/sitemap/anime.txt", func(ctx *aero.Context) string {
+		sitemap := sitemap.New()
+		prefix := "https://" + app.Config.Domain
+
+		for anime := range arn.StreamAnime() {
+			sitemap.Add(prefix + anime.Link())
+		}
+
+		return ctx.Text(sitemap.Text())
+	})
+
+	// Character sitemap
+	app.Get("/sitemap/character.txt", func(ctx *aero.Context) string {
+		sitemap := sitemap.New()
+		prefix := "https://" + app.Config.Domain
+
+		for character := range arn.StreamCharacters() {
+			sitemap.Add(prefix + character.Link())
+		}
+
+		return ctx.Text(sitemap.Text())
+	})
+
+	// User sitemap
+	app.Get("/sitemap/user.txt", func(ctx *aero.Context) string {
+		sitemap := sitemap.New()
+		prefix := "https://" + app.Config.Domain
+
+		for user := range arn.StreamUsers() {
+			sitemap.Add(prefix + user.Link())
+		}
+
+		return ctx.Text(sitemap.Text())
 	})
 
 	// For benchmarks
