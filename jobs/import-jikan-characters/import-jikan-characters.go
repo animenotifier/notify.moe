@@ -1,91 +1,93 @@
 package main
 
-import (
-	"fmt"
-	"strings"
+func main() {}
 
-	"github.com/animenotifier/arn"
-	"github.com/animenotifier/jikan"
-	"github.com/fatih/color"
-)
+// import (
+// 	"fmt"
+// 	"strings"
 
-var jikanDB = arn.Node.Namespace("jikan")
+// 	"github.com/animenotifier/arn"
+// 	"github.com/animenotifier/jikan"
+// 	"github.com/fatih/color"
+// )
 
-func main() {
-	color.Yellow("Importing jikan characters...")
-	defer arn.Node.Close()
+// var jikanDB = arn.Node.Namespace("jikan")
 
-	for characterObj := range jikanDB.All("Character") {
-		jikanCharacter := characterObj.(*jikan.Character)
+// func main() {
+// 	color.Yellow("Importing jikan characters...")
+// 	defer arn.Node.Close()
 
-		if jikanCharacter.Name != "Slaine Troyard" {
-			continue
-		}
+// 	for characterObj := range jikanDB.All("Character") {
+// 		jikanCharacter := characterObj.(*jikan.Character)
 
-		character := &arn.Character{
-			ID:          arn.GenerateID("Character"),
-			Description: jikanCharacter.About,
-			Name: &arn.CharacterName{
-				Romaji:   jikanCharacter.Name,
-				Japanese: jikanCharacter.NameJapanese,
-			},
-			Image: jikanCharacter.Image,
-			// Mappings: []*arn.Mapping{
-			// 	&arn.Mapping{
-			// 		Service: "myanimelist/character",
-			// 		ServiceID: jikanCharacter.
-			// 	}
-			// },
-		}
+// 		if jikanCharacter.Name != "Slaine Troyard" {
+// 			continue
+// 		}
 
-		if strings.HasPrefix(character.Name.Japanese, "(") {
-			character.Name.Japanese = strings.TrimPrefix(character.Name.Japanese, "(")
-			character.Name.Japanese = strings.TrimSuffix(character.Name.Japanese, ")")
-		}
+// 		character := &arn.Character{
+// 			ID:          arn.GenerateID("Character"),
+// 			Description: jikanCharacter.About,
+// 			Name: &arn.CharacterName{
+// 				Romaji:   jikanCharacter.Name,
+// 				Japanese: jikanCharacter.NameJapanese,
+// 			},
+// 			Image: jikanCharacter.Image,
+// 			// Mappings: []*arn.Mapping{
+// 			// 	&arn.Mapping{
+// 			// 		Service: "myanimelist/character",
+// 			// 		ServiceID: jikanCharacter.
+// 			// 	}
+// 			// },
+// 		}
 
-		lines := strings.Split(character.Description, "\n")
-		finalLines := make([]string, 0, len(lines))
+// 		if strings.HasPrefix(character.Name.Japanese, "(") {
+// 			character.Name.Japanese = strings.TrimPrefix(character.Name.Japanese, "(")
+// 			character.Name.Japanese = strings.TrimSuffix(character.Name.Japanese, ")")
+// 		}
 
-		for _, line := range lines {
-			line = strings.TrimSpace(line)
-			originalLine := line
+// 		lines := strings.Split(character.Description, "\n")
+// 		finalLines := make([]string, 0, len(lines))
 
-			if strings.HasPrefix(line, "(") {
-				line = strings.TrimPrefix(line, "(")
-				line = strings.TrimSuffix(line, ")")
-			}
+// 		for _, line := range lines {
+// 			line = strings.TrimSpace(line)
+// 			originalLine := line
 
-			line = strings.TrimSpace(line)
+// 			if strings.HasPrefix(line, "(") {
+// 				line = strings.TrimPrefix(line, "(")
+// 				line = strings.TrimSuffix(line, ")")
+// 			}
 
-			colonPos := strings.Index(line, ":")
+// 			line = strings.TrimSpace(line)
 
-			if colonPos == -1 || colonPos < 2 || colonPos > 25 {
-				finalLines = append(finalLines, originalLine)
-				continue
-			}
+// 			colonPos := strings.Index(line, ":")
 
-			key := line[:colonPos]
-			value := line[colonPos+1:]
+// 			if colonPos == -1 || colonPos < 2 || colonPos > 25 {
+// 				finalLines = append(finalLines, originalLine)
+// 				continue
+// 			}
 
-			value = strings.TrimSpace(value)
+// 			key := line[:colonPos]
+// 			value := line[colonPos+1:]
 
-			if key == "source" {
-				key = "Source"
-			}
+// 			value = strings.TrimSpace(value)
 
-			character.Attributes = append(character.Attributes, &arn.CharacterAttribute{
-				Name:  key,
-				Value: value,
-			})
+// 			if key == "source" {
+// 				key = "Source"
+// 			}
 
-			fmt.Println(color.CyanString(key), color.YellowString(value))
-		}
+// 			character.Attributes = append(character.Attributes, &arn.CharacterAttribute{
+// 				Name:  key,
+// 				Value: value,
+// 			})
 
-		character.Description = strings.Join(finalLines, "\n")
-		character.Description = strings.TrimSpace(character.Description)
+// 			fmt.Println(color.CyanString(key), color.YellowString(value))
+// 		}
 
-		arn.PrettyPrint(character)
-	}
+// 		character.Description = strings.Join(finalLines, "\n")
+// 		character.Description = strings.TrimSpace(character.Description)
 
-	color.Green("Finished.")
-}
+// 		arn.PrettyPrint(character)
+// 	}
+
+// 	color.Green("Finished.")
+// }
