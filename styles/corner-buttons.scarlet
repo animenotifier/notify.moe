@@ -1,0 +1,9 @@
+.corner-buttons
+	display flex
+	justify-content center
+
+> 600px
+	.corner-buttons
+		position absolute
+		top content-padding
+		right content-padding

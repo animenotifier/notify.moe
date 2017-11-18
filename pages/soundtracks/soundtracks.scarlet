@@ -36,13 +36,3 @@
 .sound-track-anime-image
 	width 142px
 	height 200px
-
-.music-buttons
-	display flex
-	justify-content center
-
-> 600px
-	.music-buttons
-		position absolute
-		top content-padding
-		right content-padding

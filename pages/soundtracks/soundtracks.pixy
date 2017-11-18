@@ -1,7 +1,7 @@
 component SoundTracks(tracks []*arn.SoundTrack, tracksPerPage int, user *arn.User)
 	h1 Soundtracks
 
-	.music-buttons
+	.corner-buttons
 		if user != nil
 			if user.DraftIndex().SoundTrackID == ""
 				button.action(data-action="newObject", data-trigger="click", data-type="soundtrack")

@@ -1,7 +1,7 @@
 component Companies(companies []*arn.Company, user *arn.User)
 	h1.page-title Companies
 
-	.music-buttons
+	.corner-buttons
 		if user != nil
 			if user.DraftIndex().CompanyID == ""
 				button.action(data-action="newObject", data-trigger="click", data-type="company")
