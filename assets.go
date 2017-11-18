@@ -90,6 +90,42 @@ func configureAssets(app *aero.Application) {
 		return ctx.Text(sitemap.Text())
 	})
 
+	// SoundTrack sitemap
+	app.Get("/sitemap/soundtrack.txt", func(ctx *aero.Context) string {
+		sitemap := sitemap.New()
+		prefix := "https://" + app.Config.Domain
+
+		for soundTrack := range arn.StreamSoundTracks() {
+			sitemap.Add(prefix + soundTrack.Link())
+		}
+
+		return ctx.Text(sitemap.Text())
+	})
+
+	// Thread sitemap
+	app.Get("/sitemap/thread.txt", func(ctx *aero.Context) string {
+		sitemap := sitemap.New()
+		prefix := "https://" + app.Config.Domain
+
+		for thread := range arn.StreamThreads() {
+			sitemap.Add(prefix + thread.Link())
+		}
+
+		return ctx.Text(sitemap.Text())
+	})
+
+	// Post sitemap
+	app.Get("/sitemap/post.txt", func(ctx *aero.Context) string {
+		sitemap := sitemap.New()
+		prefix := "https://" + app.Config.Domain
+
+		for post := range arn.StreamPosts() {
+			sitemap.Add(prefix + post.Link())
+		}
+
+		return ctx.Text(sitemap.Text())
+	})
+
 	// For benchmarks
 	app.Get("/hello", func(ctx *aero.Context) string {
 		return ctx.Text("Hello World")
