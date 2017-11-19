@@ -57,7 +57,7 @@ export class AnimeNotifier {
 			this.visibilityObserver = new IntersectionObserver(
 				entries => {
 					for(let entry of entries) {
-						if(entry.intersectionRatio > 0) {
+						if(entry.isIntersecting) {
 							entry.target["became visible"]()
 							this.visibilityObserver.unobserve(entry.target)
 						}
