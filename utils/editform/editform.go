@@ -108,6 +108,17 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		b.WriteString(`<div class="buttons">`)
 		b.WriteString(`<button class="action" data-action="arrayAppend" data-trigger="click" data-field="` + field.Name + `">` + utils.Icon("plus") + `Add ` + field.Name + `</button>`)
 		b.WriteString(`</div>`)
+
+	case "arn.CompanyName":
+		b.WriteString(`<div class="widget-section">`)
+		b.WriteString(`<div class="widget-title">Name</div>`)
+
+		for i := 0; i < field.Type.NumField(); i++ {
+			subField := field.Type.Field(i)
+			RenderField(b, &fieldValue, subField, field.Name+".")
+		}
+
+		b.WriteString(`</div>`)
 	default:
 		panic("No edit form implementation for " + idPrefix + field.Name + " with type " + field.Type.String())
 	}
