@@ -2,6 +2,7 @@ package embed
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
@@ -16,7 +17,7 @@ func Get(ctx *aero.Context) string {
 		return utils.AllowEmbed(ctx, ctx.HTML(components.Login("_blank")))
 	}
 
-	if true {
+	if !user.IsPro() && user.TimeSinceRegistered() > 14*24*time.Hour {
 		return utils.AllowEmbed(ctx, ctx.HTML(components.EmbedProNotice(user)))
 	}
 
