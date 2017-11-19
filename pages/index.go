@@ -96,6 +96,7 @@ func Configure(app *aero.Application) {
 
 	// Companies
 	l.Page("/company/:id", company.Get)
+	l.Page("/company/:id/edit", company.Edit)
 	l.Page("/companies", companies.Get)
 
 	// Settings

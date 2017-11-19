@@ -1,5 +1,5 @@
 component Companies(companies []*arn.Company, user *arn.User)
-	h1.page-title Companies
+	h1 Companies
 
 	.corner-buttons
 		if user != nil

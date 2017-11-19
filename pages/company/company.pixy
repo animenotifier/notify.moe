@@ -1,5 +1,9 @@
 component CompanyPage(company *arn.Company, user *arn.User)
+	CompanyTabs(company, user)
+
 	h1= company.Name.English
+
+	.company-description!= markdown.Render(company.Description)
 
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs
