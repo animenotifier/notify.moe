@@ -26,7 +26,7 @@ func main() {
 		}
 
 		if _, err := os.Stat(base + ".jpeg"); err == nil {
-			anime.ImageExtension = ".jpeg"
+			anime.ImageExtension = ".jpg"
 			anime.Save()
 			continue
 		}

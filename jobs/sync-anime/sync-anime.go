@@ -52,16 +52,21 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	anime.Title.English = attr.Titles.En
 	anime.Title.Romaji = attr.Titles.EnJp
 	anime.Title.Synonyms = attr.AbbreviatedTitles
-	anime.ImageExtension = filepath.Ext(kitsu.FixImageURL(attr.PosterImage.Original))
 	anime.StartDate = attr.StartDate
 	anime.EndDate = attr.EndDate
 	anime.EpisodeCount = attr.EpisodeCount
 	anime.EpisodeLength = attr.EpisodeLength
 	anime.Status = attr.Status
+	anime.ImageExtension = filepath.Ext(kitsu.FixImageURL(attr.PosterImage.Original))
 
 	// Status "unreleased" means the same as "upcoming" so we should normalize it
 	if anime.Status == "unreleased" {
 		anime.Status = "upcoming"
+	}
+
+	// Normalize image extension to .jpg if .jpeg is used
+	if anime.ImageExtension == ".jpeg" {
+		anime.ImageExtension = ".jpg"
 	}
 
 	anime.Summary = arn.FixAnimeDescription(attr.Synopsis)
