@@ -1,13 +1,20 @@
-component CharacterDetails(character *arn.Character)
+component CharacterDetails(character *arn.Character, user *arn.User)
 	.character-page
-		.character-header
-			.character-image-container
-				img.character-image-fullsize(src=character.Image, alt=character.Name)
-			.character-description-container
-				h1.character-name= character.Name
-				.anime-alternative-title
-					Japanese("日本語の名前無し")
-				.character-description!= markdown.Render(character.Description)
+		.character-left-column
+			.character-header
+				.character-image-container
+					img.character-image-fullsize(src=character.Image, alt=character.Name)
+				.character-description-container
+					h1.character-name= character.Name
+					.anime-alternative-title
+						Japanese("日本語の名前無し")
+					.character-description!= markdown.Render(character.Description)
+			
+					h3 Anime
+					.character-anime
+						each anime in character.Anime()
+							a.character-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+								img.character-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
 
 		if len(character.Attributes) > 0
 			.character-sidebar

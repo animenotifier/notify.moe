@@ -19,8 +19,8 @@ component Track(track *arn.SoundTrack, user *arn.User)
 
 				.sound-track-anime-list
 					each anime in track.Anime()
-						a.sound-track-anime-list-item.ajax(href=anime.Link(), title=anime.Title.Canonical)
-							img.sound-track-anime-list-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.Canonical)
+						a.sound-track-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+							img.sound-track-anime-list-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
 
 			if len(track.Beatmaps()) > 0
 				.widget.mountable

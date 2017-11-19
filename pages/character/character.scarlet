@@ -1,6 +1,9 @@
 .character-page
 	vertical
 
+.character-left-column
+	vertical
+
 .character-header
 	vertical
 
@@ -30,6 +33,15 @@
 
 .character-attributes-value
 	text-align right
+
+.character-anime
+	horizontal-wrap
+
+.character-anime-item
+	anime-mini-item
+
+.character-anime-item-image
+	anime-mini-item-image
 
 > 1250px
 	.character-page
