@@ -14,4 +14,5 @@ component Companies(companies []*arn.Company, user *arn.User)
 
 	ul
 		each company in companies
-			li= company.Name.English
+			li
+				a.ajax(href=company.Link())= company.Name.English
