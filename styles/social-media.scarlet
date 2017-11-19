@@ -5,6 +5,7 @@
 	border-top 1px solid rgba(0, 0, 0, 0.1)
 
 .social-media-button
+	font-size 1.3rem
 	opacity 0.4
 	color text-color
 
