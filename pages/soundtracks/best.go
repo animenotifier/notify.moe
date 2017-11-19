@@ -10,17 +10,15 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxTracks = 12
-
-// Latest renders the soundtracks page.
-func Latest(ctx *aero.Context) string {
+// Best renders the soundtracks page.
+func Best(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && len(track.Media) > 0
 	})
 
-	arn.SortSoundTracksLatestFirst(tracks)
+	arn.SortSoundTracksPopularFirst(tracks)
 
 	if len(tracks) > maxTracks {
 		tracks = tracks[:maxTracks]
@@ -29,8 +27,8 @@ func Latest(ctx *aero.Context) string {
 	return ctx.HTML(components.SoundTracks(tracks, maxTracks, user))
 }
 
-// LatestFrom renders the soundtracks from the given index.
-func LatestFrom(ctx *aero.Context) string {
+// BestFrom renders the soundtracks from the given index.
+func BestFrom(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	index, err := ctx.GetInt("index")
 
@@ -46,7 +44,7 @@ func LatestFrom(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Invalid start index (maximum is "+strconv.Itoa(len(allTracks))+")", nil)
 	}
 
-	arn.SortSoundTracksLatestFirst(allTracks)
+	arn.SortSoundTracksPopularFirst(allTracks)
 
 	tracks := allTracks[index:]
 

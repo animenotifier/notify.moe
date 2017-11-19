@@ -108,8 +108,10 @@ func Configure(app *aero.Application) {
 	l.Page("/settings/pro", settings.Get(components.SettingsPro))
 
 	// Soundtracks
-	l.Page("/soundtracks", soundtracks.Get)
-	l.Page("/soundtracks/from/:index", soundtracks.From)
+	l.Page("/soundtracks", soundtracks.Latest)
+	l.Page("/soundtracks/from/:index", soundtracks.LatestFrom)
+	l.Page("/soundtracks/best", soundtracks.Best)
+	l.Page("/soundtracks/best/from/:index", soundtracks.BestFrom)
 	l.Page("/soundtrack/:id", soundtrack.Get)
 	l.Page("/soundtrack/:id/edit", soundtrack.Edit)
 

@@ -1,5 +1,7 @@
 component SoundTracks(tracks []*arn.SoundTrack, tracksPerPage int, user *arn.User)
-	h1 Soundtracks
+	h1.page-title Soundtracks
+
+	SoundTracksTabs
 
 	.corner-buttons
 		if user != nil
@@ -22,3 +24,8 @@ component SoundTracks(tracks []*arn.SoundTrack, tracksPerPage int, user *arn.Use
 component SoundTracksScrollable(tracks []*arn.SoundTrack, user *arn.User)
 	each track in tracks
 		SoundTrack(track)
+
+component SoundTracksTabs
+	.tabs
+		Tab("Latest", "music", "/soundtracks")
+		Tab("Best", "heart", "/soundtracks/best")
