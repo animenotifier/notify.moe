@@ -10,6 +10,12 @@
 		.anime-grid-title
 			opacity 1
 
+< 450px
+	.anime-grid-cell
+		width 71px
+		height 100px
+		margin 0.3rem
+
 .anime-grid-image
 	grid-image
 
