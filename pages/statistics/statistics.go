@@ -28,6 +28,9 @@ func getUserStats() []*arn.PieChart {
 	avatar := stats{}
 	ip := stats{}
 	pro := stats{}
+	connectionType := stats{}
+	roundTripTime := stats{}
+	downLink := stats{}
 
 	for info := range arn.StreamAnalytics() {
 		user, err := arn.GetUser(info.UserID)
@@ -41,6 +44,18 @@ func getUserStats() []*arn.PieChart {
 
 		size := arn.ToString(info.Screen.Width) + " x " + arn.ToString(info.Screen.Height)
 		screenSize[size]++
+
+		if info.Connection.EffectiveType != "" {
+			connectionType[info.Connection.EffectiveType]++
+		}
+
+		if info.Connection.DownLink != 0 {
+			downLink[fmt.Sprintf("%.0f Mb/s", info.Connection.DownLink)]++
+		}
+
+		if info.Connection.RoundTripTime != 0 {
+			roundTripTime[fmt.Sprintf("%.0f ms", info.Connection.RoundTripTime)]++
+		}
 	}
 
 	for user := range arn.StreamUsers() {
@@ -102,6 +117,9 @@ func getUserStats() []*arn.PieChart {
 		arn.NewPieChart("Notifications", notifications),
 		arn.NewPieChart("Gender", gender),
 		arn.NewPieChart("Pixel ratio", pixelRatio),
+		arn.NewPieChart("Connection", connectionType),
+		arn.NewPieChart("Ping", roundTripTime),
+		arn.NewPieChart("Download speed", downLink),
 		arn.NewPieChart("IP version", ip),
 		arn.NewPieChart("PRO accounts", pro),
 	}

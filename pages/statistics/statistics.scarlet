@@ -4,6 +4,7 @@
 	text-align center
 
 	.widget
+		flex-basis 300px
 		max-width 300px
 
 .pie-chart
