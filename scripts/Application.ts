@@ -13,7 +13,7 @@ export class Application {
 	loading: HTMLElement
 	currentPath: string
 	originalPath: string
-	lastRequest: XMLHttpRequest
+	lastRequest: XMLHttpRequest | null
 
 	constructor() {
 		this.currentPath = window.location.pathname
@@ -30,7 +30,7 @@ export class Application {
 		})
 	}
 
-	find(id: string): HTMLElement {
+	find(id: string): HTMLElement | null {
 		return document.getElementById(id)
 	}
 
@@ -76,10 +76,11 @@ export class Application {
 		this.currentPath = url
 
 		// Add to browser history
-		if(options.addToHistory)
-			history.pushState(url, null, url)
+		if(options.addToHistory) {
+			history.pushState(url, "", url)
+		}
 
-		let onTransitionEnd = e => {
+		let onTransitionEnd = (e: Event) => {
 			// Ignore transitions of child elements.
 			// We only care about the transition event on the content element.
 			if(e.target !== this.content) {
@@ -118,8 +119,9 @@ export class Application {
 	}
 
 	markActiveLinks(element?: HTMLElement) {
-		if(element === undefined)
+		if(!element) {
 			element = document.body
+		}
 
 		let links = element.getElementsByTagName("a")
 
@@ -135,8 +137,9 @@ export class Application {
 	}
 
 	ajaxify(element?: HTMLElement) {
-		if(!element)
+		if(!element) {
 			element = document.body
+		}
 
 		let links = element.querySelectorAll("." + this.ajaxClass)
 
@@ -155,10 +158,6 @@ export class Application {
 
 				e.preventDefault()
 
-				// if(this.dataset.bubble !== "true") {
-				// 	e.stopPropagation()
-				// }
-
 				if(!url || url === self.currentPath)
 					return
 
@@ -169,7 +168,7 @@ export class Application {
 	}
 
 	scrollToTop() {
-		let parent = this.content
+		let parent : HTMLElement | null = this.content
 
 		while(parent = parent.parentElement) {
 			parent.scrollTop = 0
