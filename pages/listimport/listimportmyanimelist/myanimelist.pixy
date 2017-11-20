@@ -1,5 +1,7 @@
 component ImportMyAnimeList(user *arn.User, matches []*arn.MyAnimeListMatch)
-	h1= "myanimelist.net Import (" + user.Accounts.MyAnimeList.Nick + ", " + toString(len(matches)) + " anime)"
+	h1= "Preview: myanimelist.net (" + user.Accounts.MyAnimeList.Nick + ", " + toString(len(matches)) + " anime)"
+
+	ImportButton("/import/myanimelist/animelist/finish")
 
 	table.import-list
 		thead
@@ -17,7 +19,4 @@ component ImportMyAnimeList(user *arn.User, matches []*arn.MyAnimeListMatch)
 						else
 							a(href=match.ARNAnime.Link(), target="_blank", rel="noopener")= match.ARNAnime.Title.Canonical
 	
-	.buttons
-		a.button.mountable(href="/import/myanimelist/animelist/finish")
-			Icon("refresh")
-			span Import
+	ImportButton("/import/myanimelist/animelist/finish")

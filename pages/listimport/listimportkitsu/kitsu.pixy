@@ -1,5 +1,7 @@
 component ImportKitsu(user *arn.User, matches []*arn.KitsuMatch)
-	h1= "kitsu.io Import (" + user.Accounts.Kitsu.Nick + ", " + toString(len(matches)) + " anime)"
+	h1= "Preview: kitsu.io (" + user.Accounts.Kitsu.Nick + ", " + toString(len(matches)) + " anime)"
+
+	ImportButton("/import/kitsu/animelist/finish")
 
 	table.import-list
 		thead
@@ -17,7 +19,4 @@ component ImportKitsu(user *arn.User, matches []*arn.KitsuMatch)
 						else
 							a(href=match.ARNAnime.Link(), target="_blank", rel="noopener")= match.ARNAnime.Title.Canonical
 	
-	.buttons
-		a.button.mountable(href="/import/kitsu/animelist/finish")
-			Icon("refresh")
-			span Import
+	ImportButton("/import/kitsu/animelist/finish")
