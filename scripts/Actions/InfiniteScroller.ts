@@ -12,18 +12,19 @@ export function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 	let target = arn.app.find("load-more-target")
 	let index = button.dataset.index
-	
+
 	fetch("/_" + arn.app.currentPath + "/from/" + index)
 	.then(response => {
 		let newIndex = response.headers.get("X-LoadMore-Index")
 
 		// End of data?
 		if(newIndex === "-1") {
+			button.disabled = true
 			button.classList.add("hidden")
 		} else {
 			button.dataset.index = newIndex
 		}
-		
+
 		return response
 	})
 	.then(response => response.text())
