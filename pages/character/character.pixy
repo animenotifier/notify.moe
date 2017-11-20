@@ -1,4 +1,4 @@
-component CharacterDetails(character *arn.Character, user *arn.User)
+component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, user *arn.User)
 	.character-page
 		.character-left-column
 			.character-header
@@ -12,7 +12,7 @@ component CharacterDetails(character *arn.Character, user *arn.User)
 			
 					h3 Anime
 					.character-anime
-						each anime in character.Anime()
+						each anime in characterAnime
 							a.character-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
 								img.character-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
 
