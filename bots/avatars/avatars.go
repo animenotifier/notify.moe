@@ -42,9 +42,12 @@ func main() {
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
-// onRequest handles requests and refreshes the requested avatar
+// onRequest handles requests and refreshes the requested avatar.
 func onRequest(w http.ResponseWriter, req *http.Request) {
+	// User ID is simply the path without the slash
 	userID := strings.TrimPrefix(req.URL.Path, "/")
+
+	// Get user from database
 	user, err := arn.GetUser(userID)
 
 	if err != nil {
