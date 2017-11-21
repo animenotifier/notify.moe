@@ -51,7 +51,7 @@ profile-boot-duration = 2s
 	.profile
 		horizontal
 		align-items flex-start
-	
+
 	.profile-field
 		text-align left
 
@@ -60,6 +60,7 @@ profile-boot-duration = 2s
 		margin-top 0
 		padding content-padding
 		padding-top 0
+		padding-bottom 0
 		padding-left calc(content-padding * 2)
 		max-width 900px
 
@@ -69,14 +70,14 @@ profile-boot-duration = 2s
 		right 0
 		padding content-padding
 		margin-top 0
-	
+
 	.profile-pro-status
 		position absolute
 		right 0
 		bottom 0
 		padding content-padding
 		margin-top 0
-	
+
 	// .profile-pro-status-text
 	// 	display none
 
@@ -98,7 +99,7 @@ profile-boot-duration = 2s
 	object-fit cover
 	// background-size cover
 	overflow hidden
-	
+
 	// default-transition
 	// animation cover-animation profile-boot-duration
 	// animation-fill-mode forwards
