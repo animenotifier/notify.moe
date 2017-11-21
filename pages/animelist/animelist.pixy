@@ -51,12 +51,15 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.ByUser(user)
 
 					td.anime-list-item-actions
-						if user != nil && item.Status == arn.AnimeListStatusWatching && item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
-							for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
-								a(href=link, title="Watch episode " + toString(item.Episodes + 1) + " on twist.moe", target="_blank", rel="noopener")
-									RawIcon("eye")
-								//- a(href=arn.Nyaa.GetLink(item.Anime()), title="Search on Nyaa", target="_blank", rel="noopener")
-								//- 	RawIcon("download")
+						if user != nil && item.Status == arn.AnimeListStatusWatching
+							if user.ID == "KpdWUlPzR"
+								a(href=arn.Nyaa.GetLink(item.Anime()), title="Search on Nyaa", target="_blank", rel="noopener")
+									RawIcon("download")
+							else
+								if item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
+									for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
+										a(href=link, title="Watch episode " + toString(item.Episodes + 1) + " on twist.moe", target="_blank", rel="noopener")
+											RawIcon("eye")
 
 					td.anime-list-item-airing-date
 						if (item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusPlanned) && item.Anime().UpcomingEpisode() != nil
