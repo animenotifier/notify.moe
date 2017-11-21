@@ -46,7 +46,7 @@ func Get(ctx *aero.Context) string {
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       character.Name,
-			"og:image":       character.Image,
+			"og:image":       "https:" + character.Image,
 			"og:url":         "https://" + ctx.App.Config.Domain + character.Link(),
 			"og:site_name":   "notify.moe",
 			"og:description": description,
