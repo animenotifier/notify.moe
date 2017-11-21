@@ -10,6 +10,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
+const maxDescriptionLength = 170
+
 // Get character.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
@@ -35,16 +37,26 @@ func Get(ctx *aero.Context) string {
 	})
 
 	// Set OpenGraph attributes
+	description := character.Description
+
+	if len(description) > maxDescriptionLength {
+		description = description[:maxDescriptionLength-3] + "..."
+	}
+
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       character.Name,
 			"og:image":       character.Image,
 			"og:url":         "https://" + ctx.App.Config.Domain + character.Link(),
 			"og:site_name":   "notify.moe",
-			"og:description": character.Description,
+			"og:description": description,
+
+			// The OpenGraph type "profile" is meant for real-life persons but I think it's okay in this context.
+			// An alternative would be to use "article" which is mostly used for blog posts and news.
+			"og:type": "profile",
 		},
 		Meta: map[string]string{
-			"description": character.Description,
+			"description": description,
 			"keywords":    character.Name + ",anime,character",
 		},
 	}
