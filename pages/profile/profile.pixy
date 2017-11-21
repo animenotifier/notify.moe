@@ -62,6 +62,11 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 					Icon("trophy")
 					a(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, target="_blank", rel="noopener")= toString(int(viewUser.Accounts.Osu.PP)) + " pp"
 
+			if viewUser.Accounts.Overwatch.BattleTag != "" && viewUser.Accounts.Overwatch.SkillRating >= 1000
+				p.profile-field.overwatch(title=arn.Capitalize(viewUser.Accounts.Overwatch.Tier) + " (Overwatch)")
+					Icon("overwatch")
+					span= toString(viewUser.Accounts.Overwatch.SkillRating) + " SR"
+
 			//- if viewUser.dataEditCount
 			//- 	p.profile-field.editor-contribution(title="Anime data modifications")
 			//- 		Icon("edit")
