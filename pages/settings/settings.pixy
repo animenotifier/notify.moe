@@ -179,6 +179,7 @@ component SettingsAccounts(user *arn.User)
 			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
 			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
 			InputText("Accounts.Osu.Nick", user.Accounts.Osu.Nick, "Osu", "Your username on osu.ppy.sh")
+			InputText("Accounts.Overwatch.BattleTag", user.Accounts.Overwatch.BattleTag, "Overwatch", "Your battletag on Overwatch")
 			//- InputText("Accounts.AnimePlanet.Nick", user.Accounts.AnimePlanet.Nick, "AnimePlanet", "Your username on anime-planet.com")
 
 		.widget.mountable
