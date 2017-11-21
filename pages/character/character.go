@@ -34,5 +34,20 @@ func Get(ctx *aero.Context) string {
 		return characterAnime[i].StartDate < characterAnime[j].StartDate
 	})
 
+	// Set OpenGraph attributes
+	ctx.Data = &arn.OpenGraph{
+		Tags: map[string]string{
+			"og:title":       character.Name,
+			"og:image":       character.Image,
+			"og:url":         "https://" + ctx.App.Config.Domain + character.Link(),
+			"og:site_name":   "notify.moe",
+			"og:description": character.Description,
+		},
+		Meta: map[string]string{
+			"description": character.Description,
+			"keywords":    character.Name + ",anime,character",
+		},
+	}
+
 	return ctx.HTML(components.CharacterDetails(character, characterAnime, user))
 }
