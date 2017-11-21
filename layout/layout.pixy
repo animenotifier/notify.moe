@@ -11,6 +11,8 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 			meta(name="google-site-verification", content="1U-E2pDaYbFHyOSWl6AX3DvixQuDc4kfem9Kde_jZ8A")
 
 			if openGraph != nil
+				meta(name="twitter:card", content="summary")
+				
 				for _, name := range meta
 					meta(name=name, content=openGraph.Meta[name])
 
