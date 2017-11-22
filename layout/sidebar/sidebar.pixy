@@ -15,12 +15,12 @@ component Sidebar(user *arn.User)
 
 		SidebarButton("Forum", "/forum", "comment")
 		SidebarButton("Explore", "/explore", "th")
+		SidebarButton("Calendar", "/calendar", "calendar")
 		SidebarButton("Soundtracks", "/soundtracks", "headphones")
 
 		if user != nil && user.Role == "admin"
 			SidebarButton("Companies", "/companies", "building")
 
-		SidebarButton("Calendar", "/calendar", "calendar")
 		SidebarButton("Users", "/users", "globe")
 
 		if user != nil
