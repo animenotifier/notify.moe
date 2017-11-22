@@ -5,6 +5,8 @@ component Calendar(days []*utils.CalendarDay, user *arn.User)
 		each day in days
 			.weekday
 				h3.weekday-name= day.Name
-				ol
+				.calendar-entries
 					each entry in day.Entries
-						li= entry.Anime.Title.ByUser(user) + " (Ep: " + strconv.Itoa(entry.Episode.Number) + ")"
+						.calendar-entry
+							.calendar-entry-title= entry.Anime.Title.ByUser(user)
+							.calendar-entry-episode= "Ep: " + strconv.Itoa(entry.Episode.Number)
