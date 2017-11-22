@@ -20,6 +20,7 @@ component Sidebar(user *arn.User)
 		if user != nil && user.Role == "admin"
 			SidebarButton("Companies", "/companies", "building")
 
+		SidebarButton("Calendar", "/calendar", "calendar")
 		SidebarButton("Users", "/users", "globe")
 
 		if user != nil
