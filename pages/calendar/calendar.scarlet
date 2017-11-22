@@ -26,6 +26,9 @@
 .calendar-entry-personal
 	border 2px solid main-color
 
+	:hover
+		border-color main-color
+
 .calendar-entry-info
 	horizontal
 
