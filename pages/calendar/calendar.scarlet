@@ -23,6 +23,9 @@
 	margin-bottom 0.5rem
 	overflow hidden
 
+.calendar-entry-personal
+	border 2px solid main-color
+
 .calendar-entry-info
 	horizontal
 

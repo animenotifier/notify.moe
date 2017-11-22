@@ -12,4 +12,5 @@ type CalendarDay struct {
 type CalendarEntry struct {
 	Anime   *arn.Anime
 	Episode *arn.AnimeEpisode
+	Class   string
 }

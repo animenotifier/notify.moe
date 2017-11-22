@@ -53,13 +53,27 @@ func Get(ctx *aero.Context) string {
 			airingDate, _ := time.Parse(time.RFC3339, episode.AiringDate.Start)
 			since := airingDate.Sub(now)
 
-			if since >= 0 && since < oneWeek {
-				dayIndex := int(since / (24 * time.Hour))
-				days[dayIndex].Entries = append(days[dayIndex].Entries, &utils.CalendarEntry{
-					Anime:   animeEpisodes.Anime(),
-					Episode: episode,
-				})
+			if since < 0 || since >= oneWeek {
+				continue
 			}
+
+			dayIndex := int(since / (24 * time.Hour))
+
+			entry := &utils.CalendarEntry{
+				Anime:   animeEpisodes.Anime(),
+				Episode: episode,
+				Class:   "calendar-entry mountable",
+			}
+
+			if user != nil {
+				animeListItem := user.AnimeList().Find(entry.Anime.ID)
+
+				if animeListItem != nil && (animeListItem.Status == arn.AnimeListStatusWatching || animeListItem.Status == arn.AnimeListStatusPlanned) {
+					entry.Class += " calendar-entry-personal"
+				}
+			}
+
+			days[dayIndex].Entries = append(days[dayIndex].Entries, entry)
 		}
 	}
 
