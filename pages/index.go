@@ -11,6 +11,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/apiview"
+	"github.com/animenotifier/notify.moe/pages/calendar"
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/charge"
 	"github.com/animenotifier/notify.moe/pages/companies"
@@ -93,6 +94,9 @@ func Configure(app *aero.Application) {
 
 	// Characters
 	l.Page("/character/:id", character.Get)
+
+	// Calendar
+	l.Page("/calendar", calendar.Get)
 
 	// Companies
 	l.Page("/company/:id", company.Get)
