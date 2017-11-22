@@ -50,9 +50,13 @@ func Get(ctx *aero.Context) string {
 				continue
 			}
 
+			// Since we validated the date earlier, we can ignore the error value.
 			airingDate, _ := time.Parse(time.RFC3339, episode.AiringDate.Start)
+
+			// Subtract from the starting date offset.
 			since := airingDate.Sub(now)
 
+			// Ignore entries in the past and more than 1 week away.
 			if since < 0 || since >= oneWeek {
 				continue
 			}
