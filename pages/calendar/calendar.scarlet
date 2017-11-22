@@ -12,21 +12,30 @@
 
 .weekday-name
 	text-align center
+	margin-bottom 1rem
 
 .calendar-entries
 	vertical
 
 .calendar-entry
 	ui-element
-	padding 0.75rem 1rem
+	padding 0.5rem 1rem
 	margin-bottom 0.5rem
 	overflow hidden
+
+.calendar-entry-info
+	horizontal
 
 .calendar-entry-title
 	clip-long-text
 
+.calendar-entry-time
+	opacity 0.85
+	font-size 0.9rem
+	flex 1
+
 .calendar-entry-episode
-	opacity 0.75
+	opacity 0.65
 	text-align right
 	font-size 0.9rem
 

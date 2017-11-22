@@ -8,5 +8,8 @@ component Calendar(days []*utils.CalendarDay, user *arn.User)
 				.calendar-entries
 					each entry in day.Entries
 						.calendar-entry
-							.calendar-entry-title= entry.Anime.Title.ByUser(user)
-							.calendar-entry-episode= "Ep: " + strconv.Itoa(entry.Episode.Number)
+							a.ajax(href=entry.Anime.Link())
+								.calendar-entry-title= entry.Anime.Title.ByUser(user)
+							.calendar-entry-info
+								.calendar-entry-time.utc-date-absolute(data-date=entry.Episode.AiringDate.Start)
+								.calendar-entry-episode= "Ep: " + strconv.Itoa(entry.Episode.Number)

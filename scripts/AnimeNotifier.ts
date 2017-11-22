@@ -8,7 +8,7 @@ import { Analytics } from "./Analytics"
 import { SideBar } from "./SideBar"
 import { InfiniteScroller } from "./InfiniteScroller"
 import { ServiceWorkerManager } from "./ServiceWorkerManager"
-import { displayAiringDate, displayDate } from "./DateView"
+import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, delay, canUseWebP, swapElements } from "./Utils"
 import * as actions from "./Actions"
 import { darkTheme } from "./Actions";
@@ -361,6 +361,10 @@ export class AnimeNotifier {
 
 		for(let element of findAll("utc-date")) {
 			displayDate(element, now)
+		}
+
+		for(let element of findAll("utc-date-absolute")) {
+			displayTime(element, now)
 		}
 	}
 

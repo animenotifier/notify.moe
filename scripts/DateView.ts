@@ -55,7 +55,7 @@ function getRemainingTime(remaining: number): string {
 	if(remainingAbs >= oneSecond) {
 		return plural(Math.round(remaining / oneSecond), " second")
 	}
-	
+
 	return "Just now"
 }
 
@@ -75,7 +75,7 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 	h = endDate.getHours()
 	m = endDate.getMinutes()
 	let endTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
-	
+
 	let airingVerb = "will be airing"
 
 	let remaining = startDate.getTime() - now.getTime()
@@ -106,7 +106,7 @@ export function displayDate(element: HTMLElement, now: Date) {
 	let h = startDate.getHours()
 	let m = startDate.getMinutes()
 	let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
-	
+
 	let remaining = startDate.getTime() - now.getTime()
 	let remainingString = getRemainingTime(remaining)
 
@@ -118,4 +118,19 @@ export function displayDate(element: HTMLElement, now: Date) {
 	element.innerText = remainingString
 
 	element.title = dayNames[startDate.getDay()] + " " + startTime
+}
+
+export function displayTime(element: HTMLElement, now: Date) {
+	if(element.dataset.date === "") {
+		element.innerText = ""
+		return
+	}
+
+	let startDate = new Date(element.dataset.date)
+
+	let h = startDate.getHours()
+	let m = startDate.getMinutes()
+	let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+
+	element.innerText = startTime
 }
