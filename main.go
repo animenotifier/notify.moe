@@ -58,6 +58,11 @@ func configure(app *aero.Application) *aero.Application {
 	// Close the database node on shutdown
 	app.OnShutdown(arn.Node.Close)
 
+	// Check that this is the server
+	if !arn.Node.IsServer() {
+		panic("Another program is currently running as the database server")
+	}
+
 	// Prefetch all collections
 	arn.DB.Prefetch()
 
