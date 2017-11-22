@@ -1,13 +1,13 @@
 component Calendar(days []*utils.CalendarDay, user *arn.User)
-	h1 Calendar
+	h1.mountable Calendar
 
 	.week
 		each day in days
 			.weekday
-				h3.weekday-name= day.Name
+				h3.weekday-name.mountable(data-mountable-type=day.Name)= day.Name
 				.calendar-entries
 					each entry in day.Entries
-						.calendar-entry
+						.calendar-entry.mountable(data-mountable-type=day.Name)
 							a.ajax(href=entry.Anime.Link())
 								.calendar-entry-title= entry.Anime.Title.ByUser(user)
 							.calendar-entry-info
