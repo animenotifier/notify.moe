@@ -43,6 +43,9 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 							Icon("pencil")
 
 				if post.Type() != "Thread"
+					if user.Role == "admin" || user.Role == "editor"
+						a.post-tool.post-delete.action(data-action="deletePost", data-trigger="click", data-id=post.ID(), title="Delete")
+							Icon("trash")
 					a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")
 						Icon("link")
 

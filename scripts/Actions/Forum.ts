@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import {AnimeNotifier} from "../AnimeNotifier"
 
 // Edit post
 export function editPost(arn: AnimeNotifier, element: HTMLElement) {
@@ -41,6 +41,20 @@ export function savePost(arn: AnimeNotifier, element: HTMLElement) {
 	arn.post(apiEndpoint, updates)
 	.then(() => arn.reloadContent())
 	.catch(err => arn.statusMessage.showError(err))
+}
+
+// Create thread
+export function deletePost(arn: AnimeNotifier, element: HTMLElement) {
+
+	if (!confirm(`Are you sure you want to delete this Post?`)) {
+		return
+	}
+
+	let endpoint = arn.findAPIEndpoint(element)
+
+	arn.post(endpoint + "/delete", "")
+		.then(() => arn.reloadContent())
+		.catch(err => arn.statusMessage.showError(err))
 }
 
 // Forum reply
