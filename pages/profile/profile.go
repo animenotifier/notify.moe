@@ -39,6 +39,9 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		animeList = viewUser.AnimeList()
 
 		// Sort by rating
+		animeList.Lock()
+		defer animeList.Unlock()
+
 		sort.Slice(animeList.Items, func(i, j int) bool {
 			return animeList.Items[i].Rating.Overall > animeList.Items[j].Rating.Overall
 		})

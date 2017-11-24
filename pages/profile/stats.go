@@ -33,6 +33,9 @@ func GetStatsByUser(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Anime list not found", err)
 	}
 
+	animeList.Lock()
+	defer animeList.Unlock()
+
 	for _, item := range animeList.Items {
 		currentWatch := item.Episodes * item.Anime().EpisodeLength
 		reWatch := item.RewatchCount * item.Anime().EpisodeCount * item.Anime().EpisodeLength

@@ -53,6 +53,7 @@ func Get(ctx *aero.Context) string {
 		}
 
 		animeList = animeList.Watching()
+		animeList.Lock()
 
 		for _, item := range animeList.Items {
 			futureEpisodes := item.Anime().UpcomingEpisodes()
@@ -63,6 +64,8 @@ func Get(ctx *aero.Context) string {
 
 			upcomingEpisodes = append(upcomingEpisodes, futureEpisodes...)
 		}
+
+		animeList.Unlock()
 
 		sort.Slice(upcomingEpisodes, func(i, j int) bool {
 			return upcomingEpisodes[i].Episode.AiringDate.Start < upcomingEpisodes[j].Episode.AiringDate.Start
