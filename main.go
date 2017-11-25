@@ -1,6 +1,8 @@
 package main
 
 import (
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
@@ -68,7 +70,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Do not use HTTP/2 push on service worker requests
 	app.AddPushCondition(func(ctx *aero.Context) bool {
-		return ctx.Request().Header().Get("X-Source") != "service-worker"
+		return !strings.Contains(ctx.Request().Header().Get("Referer"), "/service-worker")
 	})
 
 	// Specify test routes

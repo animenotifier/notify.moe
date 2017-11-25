@@ -211,14 +211,8 @@ class MyServiceWorker {
 	prefetchFullPage(url: string) {
 		let fullPage = new Request(url.replace("/_/", "/"))
 
-		// Disable HTTP/2 push responses
-		let headers = new Headers({
-			"X-Source": "service-worker"
-		})
-
 		let fullPageRefresh = fetch(fullPage, {
-			credentials: "same-origin",
-			headers
+			credentials: "same-origin"
 		}).then(response => {
 			// Save the new version of the resource in the cache
 			let cacheRefresh = caches.open(this.cache.version).then(cache => {
