@@ -60,6 +60,7 @@ nav-link-hover-slide-color = main-color
 // Forum
 post-like-color = green !important
 post-unlike-color = rgb(255, 32, 12) !important
+post-delete-color = post-unlike-color !important
 post-permalink-color = blue !important
 
 table-row-hover-background = hsla(0, 0%, 0%, 0.01)

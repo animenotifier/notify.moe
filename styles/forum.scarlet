@@ -13,7 +13,7 @@ post-content-padding-y = 0.75rem
 > 330px
 	.thread-link
 		horizontal
-	
+
 		.post-author
 			margin-bottom 0
 
@@ -37,11 +37,11 @@ post-content-padding-y = 0.75rem
 
 	h3
 		font-size 1.1rem
-	
+
 	:hover
 		.post-toolbar
 			opacity 1
-		
+
 		.post-date
 			opacity 0.25
 
@@ -106,6 +106,9 @@ post-content-padding-y = 0.75rem
 
 .post-unlike
 	color post-unlike-color
+
+.post-delete
+	color post-delete-color
 
 .post-save
 	//
@@ -246,7 +249,7 @@ post-content-padding-y = 0.75rem
 
 // .thread-title
 // 	width auto
-	
+
 // .posts
 // 	width 100%
 // 	max-width 830px
