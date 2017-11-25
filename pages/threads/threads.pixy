@@ -21,3 +21,8 @@ component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
 					button.action(data-action="forumReply", data-trigger="click")
 						Icon("mail-reply")
 						span Reply
+					if user.Role == "admin" || user.Role == "editor"
+						button.action(data-action="deleteObject", data-trigger="click", data-return-path="/forum", data-confirm-type="thread", data-api="/api/thread/" + thread.ID)
+							Icon("trash")
+							span Delete	
+						
