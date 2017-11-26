@@ -3,6 +3,9 @@
 .soundtrack-search
 	justify-content flex-start
 
+.character-search
+	horizontal-wrap
+
 .anime-search-result
 	width 55px !important
 	height 78px !important
