@@ -70,7 +70,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				Icon("user")
 				span Characters
 
-			.user-avatars.user-search
+			.character-search
 				if len(characters) == 0
 					p.no-search-results.mountable No characters found.
 				else
