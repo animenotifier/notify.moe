@@ -10,10 +10,10 @@ import (
 
 const maxUsers = 25
 const maxAnime = 25
-const maxPosts = 3
-const maxThreads = 3
+const maxPosts = 2
+const maxThreads = 2
 const maxTracks = 4
-const maxCharacters = 0
+const maxCharacters = 12
 
 // Get search page.
 func Get(ctx *aero.Context) string {
