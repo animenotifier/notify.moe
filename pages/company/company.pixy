@@ -9,6 +9,9 @@ component CompanyPage(company *arn.Company, user *arn.User)
 			each link in company.Links
 				li
 					a(href=link.URL, target="_blank", rel="noopener")= link.Title
+		
+		if company.Location.Latitude != 0 && company.Location.Longitude != 0
+			iframe.company-location.lazy(data-src="https://www.google.com/maps/embed/v1/place?q=" + toString(company.Location.Latitude) + "," + toString(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0")
 
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs
