@@ -60,10 +60,16 @@ func Render(obj interface{}, title string, user *arn.User) string {
 	return b.String()
 }
 
-// RenderObject ...
+// RenderObject renders the UI for the object into the bytes buffer and appends an ID prefix for all API requests.
+// The ID prefix should either be empty or end with a dot character.
 func RenderObject(b *bytes.Buffer, obj interface{}, idPrefix string) {
-	t := reflect.TypeOf(obj).Elem()
-	v := reflect.ValueOf(obj).Elem()
+	t := reflect.TypeOf(obj)
+	v := reflect.ValueOf(obj)
+
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+		v = v.Elem()
+	}
 
 	// Fields
 	for i := 0; i < t.NumField(); i++ {
@@ -79,9 +85,10 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 	}
 
 	fieldValue := reflect.Indirect(v.FieldByName(field.Name))
+	fieldType := field.Type.String()
 
-	switch field.Type.String() {
-	case "string":
+	// String
+	if fieldType == "string" {
 		if field.Tag.Get("datalist") != "" {
 			dataList := field.Tag.Get("datalist")
 			values := arn.DataLists[dataList]
@@ -91,16 +98,48 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		} else {
 			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 		}
-	case "[]string":
-		b.WriteString(components.InputTags(idPrefix+field.Name, fieldValue.Interface().([]string), field.Name, field.Tag.Get("tooltip")))
-	case "bool":
+
+		return
+	}
+
+	// Bool
+	if fieldType == "bool" {
 		if field.Name == "IsDraft" {
 			return
 		}
-	case "[]*arn.ExternalMedia", "[]*arn.Link":
+
+		// TODO: Render bool type
+		return
+	}
+
+	// Array of strings
+	if fieldType == "[]string" {
+		b.WriteString(components.InputTags(idPrefix+field.Name, fieldValue.Interface().([]string), field.Name, field.Tag.Get("tooltip")))
+		return
+	}
+
+	// Any kind of array
+	if strings.HasPrefix(fieldType, "[]") {
+		b.WriteString(`<div class="widget-section">`)
+		b.WriteString(`<h3 class="widget-title">`)
+		b.WriteString(field.Name)
+		b.WriteString(`</h3>`)
+
 		for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
 			b.WriteString(`<div class="widget-section">`)
-			b.WriteString(`<div class="widget-title">` + strconv.Itoa(sliceIndex+1) + ". " + field.Name + `</div>`)
+
+			b.WriteString(`<div class="widget-title">`)
+
+			// Title
+			b.WriteString(strconv.Itoa(sliceIndex+1) + ". " + field.Name)
+			b.WriteString(`<div class="spacer"></div>`)
+
+			// Remove button
+			b.WriteString(`<button class="action" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
+			b.WriteString(strconv.Itoa(sliceIndex))
+			b.WriteString(`">` + utils.RawIcon("trash") + `</button>`)
+
+			b.WriteString(`</div>`)
 
 			arrayObj := fieldValue.Index(sliceIndex).Interface()
 			arrayIDPrefix := fmt.Sprintf("%s[%d].", field.Name, sliceIndex)
@@ -109,14 +148,9 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			// Preview
 			// elementValue := fieldValue.Index(sliceIndex)
 			// RenderArrayElement(b, &elementValue)
-			if field.Type.String() == "[]*arn.ExternalMedia" {
+			if fieldType == "[]*arn.ExternalMedia" {
 				b.WriteString(components.ExternalMedia(fieldValue.Index(sliceIndex).Interface().(*arn.ExternalMedia)))
 			}
-
-			// Remove button
-			b.WriteString(`<div class="buttons"><button class="action" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
-			b.WriteString(strconv.Itoa(sliceIndex))
-			b.WriteString(`">` + utils.RawIcon("trash") + `</button></div>`)
 
 			b.WriteString(`</div>`)
 		}
@@ -125,17 +159,18 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		b.WriteString(`<button class="action" data-action="arrayAppend" data-trigger="click" data-field="` + field.Name + `">` + utils.Icon("plus") + `Add ` + field.Name + `</button>`)
 		b.WriteString(`</div>`)
 
-	case "arn.CompanyName":
-		b.WriteString(`<div class="widget-section">`)
-		b.WriteString(`<div class="widget-title">` + field.Name + `</div>`)
-
-		for i := 0; i < field.Type.NumField(); i++ {
-			subField := field.Type.Field(i)
-			RenderField(b, &fieldValue, subField, field.Name+".")
-		}
-
 		b.WriteString(`</div>`)
-	default:
-		panic("No edit form implementation for " + idPrefix + field.Name + " with type " + field.Type.String())
+		return
 	}
+
+	// Any custom field type will be recursively rendered via another RenderObject call
+	b.WriteString(`<div class="widget-section">`)
+	b.WriteString(`<h3 class="widget-title">` + field.Name + `</h3>`)
+
+	// Indent the fields
+	b.WriteString(`<div class="indent">`)
+	RenderObject(b, fieldValue.Interface(), field.Name+".")
+	b.WriteString(`</div>`)
+
+	b.WriteString(`</div>`)
 }
