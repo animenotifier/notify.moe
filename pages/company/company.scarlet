@@ -5,3 +5,12 @@
 .company-location
 	width 100%
 	height 300px
+
+.company-anime
+	horizontal-wrap
+
+.company-anime-item
+	anime-mini-item
+
+.company-anime-item-image
+	anime-mini-item-image

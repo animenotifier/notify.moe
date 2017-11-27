@@ -13,6 +13,11 @@ component CompanyPage(company *arn.Company, user *arn.User)
 		if company.Location.Latitude != 0 && company.Location.Longitude != 0
 			iframe.company-location.lazy(data-src="https://www.google.com/maps/embed/v1/place?q=" + toString(company.Location.Latitude) + "," + toString(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0")
 
+	.company-anime
+		each anime in company.Anime()
+			a.company-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+				img.company-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
+
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs
 		Tab("Company", "building", company.Link())

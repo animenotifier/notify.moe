@@ -9,7 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxEntries = 12
+const maxEntries = 24
 
 // Get renders the companies page.
 func Get(ctx *aero.Context) string {
