@@ -3,7 +3,12 @@ component CompanyPage(company *arn.Company, user *arn.User)
 
 	h1= company.Name.English
 
-	.company-description!= markdown.Render(company.Description)
+	.company-description
+		div!= markdown.Render(company.Description)
+		ul
+			each link in company.Links
+				li
+					a(href=link.URL, target="_blank", rel="noopener")= link.Title
 
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs

@@ -12,7 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Render ...
+// Render renders a generic editing UI for any kind of datatype that has an ID.
 func Render(obj interface{}, title string, user *arn.User) string {
 	t := reflect.TypeOf(obj).Elem()
 	v := reflect.ValueOf(obj).Elem()
@@ -25,12 +25,15 @@ func Render(obj interface{}, title string, user *arn.User) string {
 	b.WriteString(`<div class="widget-form">`)
 	b.WriteString(`<div class="widget" data-api="` + endpoint + `">`)
 
+	// Title
 	b.WriteString(`<h1>`)
 	b.WriteString(title)
 	b.WriteString(`</h1>`)
 
+	// Render the object with its fields
 	RenderObject(&b, obj, "")
 
+	// Additional buttons when logged in
 	if user != nil {
 		b.WriteString(`<div class="buttons">`)
 
@@ -94,7 +97,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		if field.Name == "IsDraft" {
 			return
 		}
-	case "[]*arn.ExternalMedia":
+	case "[]*arn.ExternalMedia", "[]*arn.Link":
 		for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
 			b.WriteString(`<div class="widget-section">`)
 			b.WriteString(`<div class="widget-title">` + strconv.Itoa(sliceIndex+1) + ". " + field.Name + `</div>`)
@@ -104,7 +107,11 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			RenderObject(b, arrayObj, arrayIDPrefix)
 
 			// Preview
-			b.WriteString(components.ExternalMedia(fieldValue.Index(sliceIndex).Interface().(*arn.ExternalMedia)))
+			// elementValue := fieldValue.Index(sliceIndex)
+			// RenderArrayElement(b, &elementValue)
+			if field.Type.String() == "[]*arn.ExternalMedia" {
+				b.WriteString(components.ExternalMedia(fieldValue.Index(sliceIndex).Interface().(*arn.ExternalMedia)))
+			}
 
 			// Remove button
 			b.WriteString(`<div class="buttons"><button class="action" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
@@ -120,7 +127,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 
 	case "arn.CompanyName":
 		b.WriteString(`<div class="widget-section">`)
-		b.WriteString(`<div class="widget-title">Name</div>`)
+		b.WriteString(`<div class="widget-title">` + field.Name + `</div>`)
 
 		for i := 0; i < field.Type.NumField(); i++ {
 			subField := field.Type.Field(i)
