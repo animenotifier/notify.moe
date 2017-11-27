@@ -5,9 +5,6 @@ component Charge(user *arn.User)
 
 	p.text-center.mountable You can add balance via PayPal. 1 Japanese Yen equals 1 Gem.
 
-	video.shop-video.mountable(autoplay="autoplay", loop="loop")
-		source(src="//media.notify.moe/videos/shop/shop.webm", type="video/webm")
-
 	.buttons
 		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=1000)
 			Icon("diamond")
