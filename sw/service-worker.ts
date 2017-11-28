@@ -38,11 +38,9 @@ class MyCache {
 
 class MyServiceWorker {
 	cache: MyCache
-	currentCSP: string
 
 	constructor() {
 		this.cache = new MyCache("v-5")
-		this.currentCSP = ""
 
 		self.addEventListener("install", (evt: InstallEvent) => evt.waitUntil(this.onInstall(evt)))
 		self.addEventListener("activate", (evt: any) => evt.waitUntil(this.onActivate(evt)))
@@ -184,19 +182,6 @@ class MyServiceWorker {
 
 			// Update ETag
 			ETAGS.set(url, eTag)
-
-			// Get CSP
-			let oldCSP = this.currentCSP
-			let csp = response.headers.get("Content-Security-Policy")
-
-			// If the CSP and therefore the sha-1 hash of the CSS changed, we need to do a reload.
-			if(csp != oldCSP) {
-				this.currentCSP = csp
-
-				if(oldCSP !== "") {
-					return this.forceClientReloadPage(url, evt.source)
-				}
-			}
 
 			// If the ETag changed, we need to do a reload.
 			if(eTag !== servedETag) {
