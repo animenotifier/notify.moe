@@ -1,15 +1,23 @@
 import { AnimeNotifier } from "../AnimeNotifier"
 
 // Add anime to collection
-export function addAnimeToCollection(arn: AnimeNotifier, button: HTMLElement) {
-	button.innerText = "Adding..."
-	
+export async function addAnimeToCollection(arn: AnimeNotifier, button: HTMLButtonElement) {
+	button.disabled = true
+
 	let {animeId} = button.dataset
 	let apiEndpoint = arn.findAPIEndpoint(button)
 
-	arn.post(apiEndpoint + "/add/" + animeId, "")
-	.then(() => arn.reloadContent())
-	.catch(err => arn.statusMessage.showError(err))
+	try {
+		await arn.post(apiEndpoint + "/add/" + animeId, "")
+		arn.reloadContent()
+
+		// Show status message
+		let response = await fetch("/api/anime/" + animeId)
+		let anime = await response.json()
+		arn.statusMessage.showInfo(`Added ${anime.title.canonical} to your collection.`)
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
 }
 
 // Remove anime from collection

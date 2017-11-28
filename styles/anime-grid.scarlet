@@ -7,7 +7,8 @@
 	shadow-up
 
 	:hover
-		.anime-grid-title
+		.anime-grid-title,
+		.anime-grid-add-button
 			opacity 1
 
 < 450px
@@ -35,3 +36,10 @@
 	text-shadow 0 0 3px black
 	font-size 80%
 	line-height 1.8em
+
+.anime-grid-add-button
+	opacity 0
+	position absolute
+	top 5px
+	right 5px
+	padding 0.25rem

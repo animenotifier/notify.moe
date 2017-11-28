@@ -10,13 +10,6 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 		.anime-image-container.mountable
 			img.anime-cover-image.lazy(data-src=anime.Image("large"), data-webp="true", alt=anime.Title.ByUser(user))
 
-			//- if anime.StartDate != ""
-			//- 	.anime-start-date
-			//- 		span(title="Start date: " + anime.StartDate)= anime.StartDate[:4]
-			//- 		if anime.EndDate != "" && anime.StartDate[:4] != anime.EndDate[:4]
-			//- 			span  -
-			//- 			span(title="End date: " + anime.EndDate)= anime.EndDate[:4]
-
 		.space
 
 		.anime-info
@@ -25,7 +18,6 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 			h2.anime-alternative-title.mountable
 				Japanese(anime.Title.Japanese)
 
-			//- h3.anime-section-name.anime-summary-header Summary
 			p.anime-summary.mountable= anime.Summary
 
 			AnimeActions(anime, user)
@@ -34,12 +26,6 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 	AnimeRelations(anime, user)
 	AnimeTracks(anime, tracks)
 	AnimeEpisodes(episodes)
-
-	//- //- h3.anime-section-name Reviews
-	//- //- p Coming soon.
-
-	//- .footer
-	//- 	span Powered by Kitsu.
 
 component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	AnimeTrailer(anime)
