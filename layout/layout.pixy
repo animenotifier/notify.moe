@@ -1,6 +1,8 @@
 component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, meta, tags []string, organization string, content string)
 	html(lang="en")
 		head
+			link(rel="stylesheet", href="/styles")
+
 			if openGraph != nil
 				title= openGraph.Tags["og:title"]
 			else

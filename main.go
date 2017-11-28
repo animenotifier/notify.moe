@@ -7,7 +7,6 @@ import (
 	"github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
-	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages"
 )
@@ -23,9 +22,6 @@ func configure(app *aero.Application) *aero.Application {
 	// Sessions
 	app.Sessions.Duration = 3600 * 24 * 30 * 6
 	app.Sessions.Store = nanostore.New(arn.DB.Collection("Session"))
-
-	// CSS
-	app.SetStyle(css.Bundle())
 
 	// Security
 	configureHTTPS(app)

@@ -30,7 +30,8 @@
 		"main": "main"
 	},
 	"push": [
-		"/scripts"
+		"/scripts",
+		"/styles"
 	],
 	"manifest": {
 		"short_name": "notify.moe",

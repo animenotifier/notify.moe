@@ -6,6 +6,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/aerogo/sitemap"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/components/js"
 )
 
@@ -18,6 +19,9 @@ func configureAssets(app *aero.Application) {
 	serviceWorkerBytes, err := ioutil.ReadFile("sw/service-worker.js")
 	serviceWorker := string(serviceWorkerBytes)
 
+	// CSS bundle
+	cssBundle := css.Bundle()
+
 	if err != nil {
 		panic("Couldn't load service worker")
 	}
@@ -26,8 +30,8 @@ func configureAssets(app *aero.Application) {
 		return ctx.JavaScript(scriptBundle)
 	})
 
-	app.Get("/scripts.js", func(ctx *aero.Context) string {
-		return ctx.JavaScript(scriptBundle)
+	app.Get("/styles", func(ctx *aero.Context) string {
+		return ctx.CSS(cssBundle)
 	})
 
 	app.Get("/service-worker", func(ctx *aero.Context) string {
