@@ -1,4 +1,4 @@
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, threads []*arn.Thread, posts []*arn.Post, tracks []*arn.SoundTrack, uri string)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, uri string)
 	ProfileHeader(viewUser, user, uri)
 
 	if len(animeList.Items) == 0

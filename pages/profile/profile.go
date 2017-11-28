@@ -1,10 +1,7 @@
 package profile
 
 import (
-	"sort"
-
 	"github.com/aerogo/aero"
-	"github.com/aerogo/flow"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
@@ -27,25 +24,9 @@ func Get(ctx *aero.Context) string {
 
 // Profile renders the user profile page of the given viewUser.
 func Profile(ctx *aero.Context, viewUser *arn.User) string {
-	var user *arn.User
-	var threads []*arn.Thread
-	var animeList *arn.AnimeList
-	var tracks []*arn.SoundTrack
-	var posts []*arn.Post
-
-	flow.Parallel(func() {
-		user = utils.GetUser(ctx)
-	}, func() {
-		animeList = viewUser.AnimeList()
-
-		// Sort by rating
-		animeList.Lock()
-		defer animeList.Unlock()
-
-		sort.Slice(animeList.Items, func(i, j int) bool {
-			return animeList.Items[i].Rating.Overall > animeList.Items[j].Rating.Overall
-		})
-	})
+	user := utils.GetUser(ctx)
+	animeList := viewUser.AnimeList()
+	animeList.SortByRating()
 
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
@@ -65,5 +46,5 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Profile(viewUser, user, animeList, threads, posts, tracks, ctx.URI()))
+	return ctx.HTML(components.Profile(viewUser, user, animeList, ctx.URI()))
 }
