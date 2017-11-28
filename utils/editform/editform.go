@@ -102,6 +102,12 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		return
 	}
 
+	// Int
+	if fieldType == "int" {
+		b.WriteString(components.InputNumber(idPrefix+field.Name, float64(fieldValue.Int()), field.Name, field.Tag.Get("tooltip"), "", "", "1"))
+		return
+	}
+
 	// Float
 	if fieldType == "float64" {
 		b.WriteString(components.InputNumber(idPrefix+field.Name, fieldValue.Float(), field.Name, field.Tag.Get("tooltip"), "", "", ""))
