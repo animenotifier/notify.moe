@@ -66,13 +66,14 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 							span.utc-airing-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
 
 					td.anime-list-item-episodes
-						.anime-list-item-episodes-watched
-							.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
-							if item.Status == arn.AnimeListStatusWatching
-								.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
+						if item.Status != arn.AnimeListStatusCompleted
+							.anime-list-item-episodes-watched
+								.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
+								if item.Status == arn.AnimeListStatusWatching
+									.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
 
-						.anime-list-item-episodes-separator /
-						.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
+							.anime-list-item-episodes-separator /
+							.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
 
 					td.anime-list-item-rating(title="Overall rating")
 						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= utils.FormatRating(item.Rating.Overall)
