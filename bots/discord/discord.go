@@ -102,7 +102,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(m.Content, "!s ") {
 		term := m.Content[len("!s "):]
-		users, animes, posts, threads, tracks := arn.Search(term, 3, 3, 3, 3, 3)
+		users, animes, posts, threads, tracks, characters := arn.Search(term, 3, 3, 3, 3, 3, 3)
 		message := ""
 
 		for _, user := range users {
@@ -123,6 +123,10 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		for _, track := range tracks {
 			message += "https://notify.moe" + track.Link() + "\n"
+		}
+
+		for _, character := range characters {
+			message += "https://notify.moe" + character.Link() + "\n"
 		}
 
 		if len(users) == 0 && len(animes) == 0 && len(posts) == 0 && len(threads) == 0 && len(tracks) == 0 {
