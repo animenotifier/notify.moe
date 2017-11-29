@@ -20,9 +20,10 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 
 			p.anime-summary.mountable= anime.Summary
 
-			.anime-summary-footer
-				AnimeGenres(anime)
-				AnimeActions(anime, user)
+			.anime-summary-footer-container
+				.anime-summary-footer
+					AnimeGenres(anime)
+					AnimeActions(anime, user)
 
 	AnimeCharacters(anime)
 	AnimeRelations(anime, user)
@@ -39,18 +40,18 @@ component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*
 
 component AnimeActions(anime *arn.Anime, user *arn.User)
 	if user != nil
-		.buttons.anime-actions.mountable
+		.buttons.anime-actions
 			if user.Role == "editor" || user.Role == "admin"
-				a.button.ajax(href=anime.Link() + "/edit")
+				a.button.mountable.ajax(href=anime.Link() + "/edit", data-mountable-type="footer")
 					Icon("pencil-square-o")
 					span Edit anime
 
 			if user.AnimeList().Contains(anime.ID)
-				a.button.ajax(href="/+" + user.Nick + "/animelist/anime/" + anime.ID)
+				a.button.mountable.ajax(href="/+" + user.Nick + "/animelist/anime/" + anime.ID, data-mountable-type="footer")
 					Icon("pencil")
 					span Edit in collection
 			else
-				button.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID)
+				button.mountable.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID, data-mountable-type="footer")
 					Icon("plus")
 					span Add to collection
 
@@ -133,7 +134,7 @@ component AnimeLinks(anime *arn.Anime)
 component AnimeGenres(anime *arn.Anime)
 	.anime-genres
 		each genre in anime.Genres
-			a.anime-genre.mountable.ajax(href="/genre/" + strings.ToLower(genre))
+			a.anime-genre.mountable.ajax(href="/genre/" + strings.ToLower(genre), data-mountable-type="footer")
 				span= genre
 
 component AnimeRelations(anime *arn.Anime, user *arn.User)
