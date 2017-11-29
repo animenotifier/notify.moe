@@ -1,4 +1,4 @@
-component Companies(companies []*arn.Company, user *arn.User)
+component Companies(groups [][]*arn.Company, user *arn.User)
 	h1 Companies
 
 	.corner-buttons
@@ -12,7 +12,12 @@ component Companies(companies []*arn.Company, user *arn.User)
 					Icon("pencil")
 					span Edit draft
 
-	ul
-		each company in companies
-			li
-				a.ajax(href=company.Link())= company.Name.English
+	.companies
+		each group in groups
+			.companies-group
+				h3= group[0].Name.English[:1]
+
+				ul
+					each company in group
+						li
+							a.ajax(href=company.Link())= company.Name.English
