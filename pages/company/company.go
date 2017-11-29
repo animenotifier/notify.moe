@@ -19,14 +19,19 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Company not found", err)
 	}
 
-	ctx.Data = &arn.OpenGraph{
+	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     company.Name.English,
 			"og:url":       "https://" + ctx.App.Config.Domain + company.Link(),
 			"og:site_name": "notify.moe",
-			"og:image":     company.Image,
+			"og:type":      "article",
 		},
 	}
 
+	if company.Image != "" {
+		openGraph.Tags["og:image"] = company.Image
+	}
+
+	ctx.Data = openGraph
 	return ctx.HTML(components.CompanyPage(company, user))
 }
