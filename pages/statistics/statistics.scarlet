@@ -13,5 +13,6 @@
 .slice
 	color black
 	default-transition
+
 	:hover
 		transform scale(1.05)

@@ -25,6 +25,6 @@ component StatisticsHeader
 component PieChart(slices []*arn.PieChartSlice)
 	svg.pie-chart(viewBox="-1.1 -1.1 2.2 2.2")
 		each slice in slices
-			g
+			g.slice
 				title= slice.Title
-				path.slice(d=utils.SVGSlicePath(slice.From, slice.To), fill=slice.Color)
+				path(d=utils.SVGSlicePath(slice.From, slice.To), fill=slice.Color)
