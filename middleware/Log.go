@@ -37,7 +37,13 @@ func Log() aero.Middleware {
 // Logs a single request
 func logRequest(ctx *aero.Context, responseTime time.Duration) {
 	responseTimeString := strconv.Itoa(int(responseTime.Nanoseconds()/1000000)) + " ms"
-	responseTimeString = strings.Repeat(" ", 8-len(responseTimeString)) + responseTimeString
+	repeatSpaceCount := 8 - len(responseTimeString)
+
+	if repeatSpaceCount < 0 {
+		repeatSpaceCount = 0
+	}
+
+	responseTimeString = strings.Repeat(" ", repeatSpaceCount) + responseTimeString
 
 	user := utils.GetUser(ctx)
 	ip := ctx.RealIP()
