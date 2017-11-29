@@ -40,7 +40,7 @@ func sync(anime *arn.Anime, malID string) {
 		return
 	}
 
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(time.Second)
 	jikanAnime, err := jikan.GetAnime(malID)
 
 	if err == nil {
