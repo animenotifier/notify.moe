@@ -23,9 +23,15 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 
 			link(rel="chrome-webstore-item", href="https://chrome.google.com/webstore/detail/hajchfikckiofgilinkpifobdbiajfch")
 			link(rel="manifest", href="/manifest.json")
-			link(rel="icon", type="image/png", href="//media.notify.moe/images/brand/64.png", sizes="64x64")
-			link(rel="icon", type="image/png", href="//media.notify.moe/images/brand/128.png", sizes="128x128")
-			link(rel="icon", type="image/png", href="//media.notify.moe/images/brand/512.png", sizes="512x512")
+
+			//- Icons
+			link(rel="icon", type="image/webp", sizes="64x64", href="//media.notify.moe/images/brand/64.webp")
+			link(rel="icon", type="image/webp", sizes="128x128", href="//media.notify.moe/images/brand/128.webp")
+			link(rel="icon", type="image/webp", sizes="512x512", href="//media.notify.moe/images/brand/512.webp")
+			link(rel="icon", type="image/png", sizes="64x64", href="//media.notify.moe/images/brand/64.png")
+			link(rel="icon", type="image/png", sizes="128x128", href="//media.notify.moe/images/brand/128.png")
+			link(rel="icon", type="image/png", sizes="512x512", href="//media.notify.moe/images/brand/512.png")
+			link(rel="apple-touch-icon", sizes="180x180", type="image/png", href="//media.notify.moe/images/brand/180.png")
 		body
 			#container(class=utils.GetContainerClass(ctx))
 				//- #header

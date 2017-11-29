@@ -70,6 +70,16 @@
 				"type": "image/webp"
 			},
 			{
+				"src": "images/brand/180.png",
+				"sizes": "180x180",
+				"type": "image/png"
+			},
+			{
+				"src": "images/brand/180.webp",
+				"sizes": "180x180",
+				"type": "image/webp"
+			},
+			{
 				"src": "images/brand/220.png",
 				"sizes": "220x220",
 				"type": "image/png"
