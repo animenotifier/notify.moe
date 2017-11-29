@@ -27,6 +27,18 @@ component CompanyPage(company *arn.Company, user *arn.User)
 						li
 							a(href=link.URL, target="_blank", rel="noopener")= link.Title
 			
+			//- if len(company.Name.Synonyms) > 0
+			//- 	h3 Synonyms
+			//- 	ul
+			//- 		each synonym in company.Name.Synonyms
+			//- 			li= synonym
+			
+			//- if len(company.Tags) > 0
+			//- 	h3 Tags
+			//- 	ul
+			//- 		each tag in company.Tags
+			//- 			li= tag
+			
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs
 		Tab("Company", "building", company.Link())
