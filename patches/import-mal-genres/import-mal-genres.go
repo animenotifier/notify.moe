@@ -21,6 +21,7 @@ func main() {
 			continue
 		}
 
+		fmt.Println(anime.Title.Canonical, malID)
 		sync(anime, malID)
 	}
 
@@ -37,4 +38,5 @@ func sync(anime *arn.Anime, malID string) {
 
 	malAnime := obj.(*mal.Anime)
 	anime.Genres = malAnime.Genres
+	anime.Save()
 }
