@@ -1,0 +1,25 @@
+.anime-genres
+	horizontal-wrap
+	justify-content center
+
+.anime-genre
+	default-transition
+	padding 0.25rem 0.75rem
+	font-size 85%
+	color text-color
+	background hsla(0, 0%, 100%, 0.1)
+	border-radius ui-element-border-radius
+	margin 0.35rem
+
+	&.mounted
+		opacity 0.8
+
+	:hover
+		color text-color
+		opacity 1.0
+		text-shadow none
+		background hsla(0, 0%, 100%, 0.2)
+
+> 800px
+	.anime-genres
+		justify-content flex-start

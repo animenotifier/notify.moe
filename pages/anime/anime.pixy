@@ -20,7 +20,9 @@ component AnimeMainColumn(anime *arn.Anime, tracks []*arn.SoundTrack, episodes [
 
 			p.anime-summary.mountable= anime.Summary
 
-			AnimeActions(anime, user)
+			.anime-summary-footer
+				AnimeGenres(anime)
+				AnimeActions(anime, user)
 
 	AnimeCharacters(anime)
 	AnimeRelations(anime, user)
@@ -127,6 +129,12 @@ component AnimeLinks(anime *arn.Anime)
 				a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
 					Icon("external-link")
 					span= mapping.Name()
+
+component AnimeGenres(anime *arn.Anime)
+	.anime-genres
+		each genre in anime.Genres
+			a.anime-genre.mountable.ajax(href="/genre/" + strings.ToLower(genre))
+				span= genre
 
 component AnimeRelations(anime *arn.Anime, user *arn.User)
 	if anime.Relations() != nil && len(anime.Relations().Items) > 0

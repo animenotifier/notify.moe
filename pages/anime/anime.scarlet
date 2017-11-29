@@ -38,15 +38,18 @@
 	.anime-alternative-title
 		text-align left
 
-	.anime-actions
-		flex 1
-		justify-content flex-end
-		align-items flex-end
+	.anime-summary-footer
+		display flex
+		justify-content space-between
+		align-items center
+		// flex 1
+		// justify-content flex-end
+		// align-items flex-end
 
 		button,
 		.button
-			margin-right 0
-			margin-bottom 0
+			margin 0
+			margin-left 0.5rem
 
 .anime-info-table
 	margin 0

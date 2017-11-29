@@ -87,7 +87,6 @@ content-padding-top = 1.6rem
 content-line-height = 1.7em
 hover-line-size = 3px
 typography-margin = 0.4rem
-// nav-height = 3.11rem
 
 // Timings
 fade-speed = 200ms
