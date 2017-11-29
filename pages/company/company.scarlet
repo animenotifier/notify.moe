@@ -4,16 +4,19 @@
 .company-header
 	vertical
 
+.company-sidebar
+	sidebar
+
 > 1250px
 	.company-page
 		horizontal
 
 	.company-sidebar
-		sidebar
+		sidebar-medium
 
 > 1400px
 	.company-sidebar
-		min-width 300px
+		sidebar-big
 
 .company-name,
 .company-description

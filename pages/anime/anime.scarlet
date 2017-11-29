@@ -6,22 +6,18 @@
 	flex 1
 
 .anime-side-column
-	vertical
-	margin-left 0
-	margin-top 1rem
+	sidebar
 
 > 1250px
 	.anime
 		horizontal
 
 	.anime-side-column
-		margin-left content-padding
-		margin-top 0
-		flex-basis 270px
+		sidebar-medium
 
 > 1400px
 	.anime-side-column
-		flex-basis 300px
+		sidebar-big
 
 .anime-header
 	vertical
