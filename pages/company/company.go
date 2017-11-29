@@ -21,15 +21,22 @@ func Get(ctx *aero.Context) string {
 
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":     company.Name.English,
-			"og:url":       "https://" + ctx.App.Config.Domain + company.Link(),
-			"og:site_name": "notify.moe",
-			"og:type":      "article",
+			"og:title":       company.Name.English,
+			"og:description": company.Description,
+			"og:url":         "https://" + ctx.App.Config.Domain + company.Link(),
+			"og:site_name":   "notify.moe",
+			"og:type":        "article",
 		},
 	}
 
 	if company.Image != "" {
 		openGraph.Tags["og:image"] = company.Image
+	}
+
+	if company.Description != "" {
+		openGraph.Tags["og:description"] = company.Description
+	} else {
+		openGraph.Tags["og:description"] = company.Name.English + " company information."
 	}
 
 	ctx.Data = openGraph
