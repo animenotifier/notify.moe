@@ -1,6 +1,23 @@
+.company-page
+	vertical
+
+.company-header
+	vertical
+
+> 1250px
+	.company-page
+		horizontal
+
+	.company-sidebar
+		sidebar
+
+> 1400px
+	.company-sidebar
+		min-width 300px
+
+.company-name,
 .company-description
-	max-width 700px
-	margin 0 auto
+	text-align left
 
 .company-location
 	width 100%

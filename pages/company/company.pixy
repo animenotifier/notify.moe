@@ -1,23 +1,32 @@
 component CompanyPage(company *arn.Company, user *arn.User)
 	CompanyTabs(company, user)
+	
+	.company-page
+		.company-header
+			h1.company-name= company.Name.English
 
-	h1= company.Name.English
+			.company-description
+				div!= markdown.Render(company.Description)
 
-	.company-description
-		div!= markdown.Render(company.Description)
-		ul
-			each link in company.Links
-				li
-					a(href=link.URL, target="_blank", rel="noopener")= link.Title
+			h3 Anime
+
+			.company-anime
+				each anime in company.Anime()
+					a.company-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+						img.company-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
 		
-		if company.Location.Latitude != 0 && company.Location.Longitude != 0
-			iframe.company-location.lazy(data-src="https://www.google.com/maps/embed/v1/place?q=" + toString(company.Location.Latitude) + "," + toString(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0")
+		.company-sidebar
+			if company.Location.Latitude != 0 && company.Location.Longitude != 0
+				h3 Location
+				iframe.company-location.lazy(data-src="https://www.google.com/maps/embed/v1/place?q=" + toString(company.Location.Latitude) + "," + toString(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0")
 
-	.company-anime
-		each anime in company.Anime()
-			a.company-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-				img.company-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
-
+			if len(company.Links) > 0
+				h3 Links
+				ul
+					each link in company.Links
+						li
+							a(href=link.URL, target="_blank", rel="noopener")= link.Title
+			
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs
 		Tab("Company", "building", company.Link())

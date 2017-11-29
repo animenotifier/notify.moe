@@ -60,9 +60,7 @@
 		margin-top typography-margin
 
 	.character-sidebar
-		margin-left content-padding
-		margin-top 0
-		min-width 270px
+		sidebar
 
 > 1400px
 	.character-sidebar
