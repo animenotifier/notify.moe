@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/animenotifier/arn"
-	"github.com/animenotifier/jikan"
+	"github.com/animenotifier/mal"
 	"github.com/fatih/color"
 )
 
-var jikanDB = arn.Node.Namespace("jikan")
+var malDB = arn.Node.Namespace("mal").RegisterTypes((*mal.Anime)(nil))
 var companies = map[string]*arn.Company{}
 var now = time.Now()
 
@@ -37,44 +36,30 @@ func main() {
 }
 
 func importCompanies(anime *arn.Anime, malID string) {
-	obj, err := jikanDB.Get("Anime", malID)
+	obj, err := malDB.Get("Anime", malID)
 
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	jikanAnime := obj.(*jikan.Anime)
+	malAnime := obj.(*mal.Anime)
 
-	for _, info := range jikanAnime.Studio {
-		importByName(anime, "studio", info)
+	for _, producer := range malAnime.Studios {
+		importByName(anime, "studio", producer)
 	}
 
-	for _, info := range jikanAnime.Producer {
-		importByName(anime, "producer", info)
+	for _, producer := range malAnime.Producers {
+		importByName(anime, "producer", producer)
 	}
 
-	for _, info := range jikanAnime.Licensor {
-		importByName(anime, "licensor", info)
+	for _, producer := range malAnime.Licensors {
+		importByName(anime, "licensor", producer)
 	}
 }
 
-func importByName(anime *arn.Anime, companyType string, info []string) {
-	studioMALID := info[0]
-	slashPos := strings.Index(studioMALID, "/")
-
-	if slashPos != -1 {
-		studioMALID = studioMALID[:slashPos]
-	}
-
-	studioName := info[1]
-	htmlPos := strings.Index(studioName, "<")
-
-	if htmlPos != -1 {
-		studioName = studioName[:htmlPos]
-	}
-
-	company, exists := companies[studioName]
+func importByName(anime *arn.Anime, companyType string, producer *mal.Producer) {
+	company, exists := companies[producer.Name]
 
 	if !exists {
 		now = now.Add(-time.Second)
@@ -82,14 +67,14 @@ func importByName(anime *arn.Anime, companyType string, info []string) {
 		company = &arn.Company{
 			ID: arn.GenerateID("Company"),
 			Name: arn.CompanyName{
-				English: studioName,
+				English: producer.Name,
 			},
 			Created:   now.UTC().Format(time.RFC3339),
 			CreatedBy: "",
 			Mappings: []*arn.Mapping{
 				&arn.Mapping{
 					Service:   "myanimelist/producer",
-					ServiceID: studioMALID,
+					ServiceID: producer.ID,
 					Created:   arn.DateTimeUTC(),
 					CreatedBy: "",
 				},
@@ -99,7 +84,7 @@ func importByName(anime *arn.Anime, companyType string, info []string) {
 			Likes: []string{},
 		}
 
-		companies[studioName] = company
+		companies[producer.Name] = company
 	}
 
 	switch companyType {
