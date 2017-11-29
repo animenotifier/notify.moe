@@ -17,6 +17,10 @@ func main() {
 	defer arn.Node.Close()
 	color.Yellow("Importing companies")
 
+	for company := range arn.StreamCompanies() {
+		companies[company.Name.English] = company
+	}
+
 	for anime := range arn.StreamAnime() {
 		malID := anime.GetMapping("myanimelist/anime")
 
