@@ -1,3 +1,3 @@
-component Genre(genre *arn.Genre, user *arn.User)
-	h2(title=toString(len(genre.AnimeList)) + " anime")= arn.Capitalize(genre.ID)
-	AnimeGrid(genre.AnimeList, user)
+component Genre(genre string, animes []*arn.Anime, user *arn.User)
+	h1(title=toString(len(animes)) + " anime")= strings.Title(genre)
+	AnimeGrid(animes, user)

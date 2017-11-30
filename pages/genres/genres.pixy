@@ -1,4 +1,4 @@
-component Genres(genres []*arn.Genre)
+component Genres(genres []string)
 	//- h1.page-title Genres
 
 	//- .genres

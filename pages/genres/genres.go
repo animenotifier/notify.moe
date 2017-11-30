@@ -1,8 +1,6 @@
 package genres
 
 import (
-	"fmt"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -10,22 +8,15 @@ import (
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	var genres []*arn.Genre
+	var genres []string
 
-	for _, genreName := range arn.Genres {
+	for _, genre := range arn.Genres {
 		// Skip this genre because it doesn't get processed in the background jobs
 		if genreName == "Hentai" {
 			continue
 		}
 
-		genre, err := arn.GetGenre(arn.GetGenreIDByName(genreName))
-
-		if err == nil {
-			genre.Name = genreName
-			genres = append(genres, genre)
-		} else {
-			fmt.Println(err)
-		}
+		genres = append(genres, genre)
 	}
 
 	return ctx.HTML(components.Genres(genres))

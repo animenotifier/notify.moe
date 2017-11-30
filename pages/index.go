@@ -23,6 +23,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
+	"github.com/animenotifier/notify.moe/pages/genre"
 	"github.com/animenotifier/notify.moe/pages/group"
 	"github.com/animenotifier/notify.moe/pages/groups"
 	"github.com/animenotifier/notify.moe/pages/home"
@@ -201,6 +202,6 @@ func Configure(app *aero.Application) {
 	app.Post("/api/paypal/payment/create", paypal.CreatePayment)
 
 	// Genres
-	// l.Ajax("/genres", genres.Get)
-	// l.Ajax("/genres/:name", genre.Get)
+	// l.Page("/genres", genres.Get)
+	l.Page("/genre/:name", genre.Get)
 }

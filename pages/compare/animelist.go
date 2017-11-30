@@ -66,7 +66,14 @@ func AnimeList(ctx *aero.Context) string {
 	}
 
 	sort.Slice(comparisons, func(i, j int) bool {
-		return comparisons[i].Anime.Popularity.Total() > comparisons[j].Anime.Popularity.Total()
+		aPopularity := comparisons[i].Anime.Popularity.Total()
+		bPopularity := comparisons[j].Anime.Popularity.Total()
+
+		if aPopularity == bPopularity {
+			return comparisons[i].Anime.Title.Canonical < comparisons[j].Anime.Title.Canonical
+		}
+
+		return aPopularity > bPopularity
 	})
 
 	return ctx.HTML(components.CompareAnimeList(a, b, countA, countB, comparisons, user))
