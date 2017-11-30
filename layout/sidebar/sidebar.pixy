@@ -16,10 +16,11 @@ component Sidebar(user *arn.User)
 		SidebarButton("Forum", "/forum", "comment")
 		SidebarButton("Explore", "/explore", "th")
 		SidebarButton("Calendar", "/calendar", "calendar")
+		SidebarButton("Genres", "/genres", "clone")
 		SidebarButton("Soundtracks", "/soundtracks", "headphones")
 
 		if user != nil && user.Role == "admin"
-			SidebarButton("Companies", "/companies", "building")
+			
 
 		SidebarButton("Users", "/users", "globe")
 
@@ -34,6 +35,7 @@ component Sidebar(user *arn.User)
 		//- SidebarButton("Games", "/games", "gamepad")
 		//- SidebarButton("Groups", "/groups", "users")
 		//- SidebarButton("Statistics", "/statistics", "pie-chart")
+		//- SidebarButton("Companies", "/companies", "building")
 
 		.spacer
 		
