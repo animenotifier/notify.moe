@@ -21,6 +21,13 @@ component UserLists(groups []*utils.UserList)
 				.mountable
 					Avatar(user)
 
+component StaffRecruitment
+	.footer.mountable
+		p
+			a(href="https://github.com/animenotifier/notify.moe/blob/go/INSTALLATION.md", target="_blank", rel="noopener") Interested in contributing code?
+			br
+			a(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener") Interested in editing data?
+
 component UsersTabs
 	.tabs
 		Tab("Active", "users", "/users")

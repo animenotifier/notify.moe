@@ -164,5 +164,5 @@ func Staff(ctx *aero.Context) string {
 		editors,
 	}
 
-	return ctx.HTML(components.UserLists(userLists))
+	return ctx.HTML(components.UserLists(userLists) + components.StaffRecruitment())
 }
