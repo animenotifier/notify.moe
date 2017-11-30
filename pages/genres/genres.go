@@ -11,8 +11,7 @@ func Get(ctx *aero.Context) string {
 	var genres []string
 
 	for _, genre := range arn.Genres {
-		// Skip this genre because it doesn't get processed in the background jobs
-		if genreName == "Hentai" {
+		if genre == "Hentai" {
 			continue
 		}
 
