@@ -6,7 +6,7 @@ sidebar-spacing-y = 0.7rem
 	left 0
 	top 0
 	z-index 10
-	width 60vw
+	width 70vw
 	height 100%
 	background sidebar-opaque-background
 	transform translateX(-100%)
@@ -14,7 +14,7 @@ sidebar-spacing-y = 0.7rem
 	overflow-y auto
 	opacity 0
 	pointer-events none
-	box-shadow 24px 0 24px rgba(0, 0, 0, 0.3)
+	box-shadow 24px 0 24px rgba(0, 0, 0, 0.2)
 	transition opacity transition-speed ease, transform transition-speed ease
 	will-change opacity, transition
 

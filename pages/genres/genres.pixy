@@ -7,6 +7,6 @@ component Genres(genres []string, genreToAnime map[string]*arn.Anime, user *arn.
 				.genre-text.front
 					.genre-icon
 						RawIcon(arn.GetGenreIcon(genre))
-					span= genre
+					span.genre-text-only= genre
 
 				img.genre-image.back(src=genreToAnime[genre].Image("medium"), alt=genreToAnime[genre].Title.ByUser(user), title=genre)

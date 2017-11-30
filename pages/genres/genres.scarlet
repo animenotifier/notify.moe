@@ -20,3 +20,15 @@
 
 .back
 	shadow-up
+
+< 450px
+	.genre
+		width 71px
+		height 100px
+		margin 0.3rem
+
+		.genre-icon
+			margin 0
+
+		.genre-text-only
+			display none
