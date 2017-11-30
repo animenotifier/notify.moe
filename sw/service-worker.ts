@@ -163,7 +163,18 @@ class MyServiceWorker {
 
 		// If the user requests a sub-page we should prefetch the full page, too.
 		if(url.includes("/_/") && !url.includes("/_/search/")) {
-			this.prefetchFullPage(url)
+			var prefetch = true
+
+			for(let pattern of EXCLUDECACHE.keys()) {
+				if(url.includes(pattern)) {
+					prefetch = false
+					break
+				}
+			}
+
+			if(prefetch) {
+				this.prefetchFullPage(url)
+			}
 		}
 
 		if(!refresh || !servedETag) {
