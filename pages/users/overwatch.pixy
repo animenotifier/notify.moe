@@ -1,0 +1,22 @@
+component OverwatchRankingList(users []*arn.User)
+	h1.page-title Overwatch ranking list
+
+	UsersTabs
+
+	table.osu-ranking-list
+		thead
+			tr.mountable
+				th #
+				th Player
+				th Name
+				th.osu-ranking-pp Skill Rating
+		tbody
+			for index, user := range users
+				tr.osu-ranking.mountable
+					td= toString(index + 1) + "."
+					td
+						Avatar(user)
+					td
+						a.ajax(href=user.Link())= user.Nick
+					td.osu-ranking-pp= strconv.Itoa(user.Accounts.Overwatch.SkillRating) + " SR"
+				

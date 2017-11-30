@@ -8,8 +8,23 @@ component Users(users []*arn.User)
 			.mountable
 				Avatar(user)
 
+component UserLists(groups []*utils.UserList)
+	h1.page-title Users
+
+	UsersTabs
+
+	each group in groups
+		h3.user-list-name.mountable= group.Name
+
+		.user-avatars
+			each user in group.Users
+				.mountable
+					Avatar(user)
+
 component UsersTabs
 	.tabs
 		Tab("Active", "users", "/users")
+		Tab("No Avatar", "users", "/users/noavatar")
 		Tab("Osu", "gamepad", "/users/osu")
+		Tab("Overwatch", "overwatch", "/users/overwatch")
 		Tab("Staff", "user-secret", "/users/staff")

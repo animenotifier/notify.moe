@@ -8,3 +8,6 @@
 
 .user
 	display flex
+
+.user-list-name
+	text-align center
