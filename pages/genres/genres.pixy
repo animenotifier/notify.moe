@@ -3,7 +3,7 @@ component Genres(genres []string, genreToAnime map[string]*arn.Anime, user *arn.
 
 	.genres
 		each genre in genres
-			a.genre.mountable.ajax(href="/genre/" + strings.ToLower(genre))
+			a.genre.genre-squared.mountable.ajax(href="/genre/" + strings.ToLower(genre))
 				.genre-text.front
 					.genre-icon
 						RawIcon(arn.GetGenreIcon(genre))

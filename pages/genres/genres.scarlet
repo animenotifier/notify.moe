@@ -5,6 +5,10 @@
 	grid-cell
 	flip-card
 
+.genre-squared
+	width 142px
+	height 142px
+
 .genre-text
 	grid-text
 
@@ -22,9 +26,9 @@
 	shadow-up
 
 < 450px
-	.genre
+	.genre-squared
 		width 71px
-		height 100px
+		height 71px
 		margin 0.3rem
 
 		.genre-icon
