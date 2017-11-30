@@ -7,6 +7,8 @@ link-hover-color = rgb(242, 60, 30)
 link-active-color = link-hover-color
 pro-color = hsla(0, 100%, 73%, 0.87)
 anime-alternative-title-color = hsla(0, 0%, 0%, 0.5)
+reverse-light-color = rgba(0, 0, 0, 0.05)
+reverse-light-hover-color = rgba(0, 0, 0, 0.1)
 
 theme-white = bg-color
 theme-black = text-color

@@ -7,7 +7,7 @@
 	padding 0.25rem 0.75rem
 	font-size 85%
 	color text-color
-	background hsla(0, 0%, 100%, 0.1)
+	background reverse-light-color
 	border-radius ui-element-border-radius
 	margin 0.35rem
 
@@ -18,7 +18,7 @@
 		color text-color
 		opacity 1.0
 		text-shadow none
-		background hsla(0, 0%, 100%, 0.2)
+		background reverse-light-hover-color
 
 > 800px
 	.anime-genres

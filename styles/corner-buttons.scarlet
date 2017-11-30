@@ -2,8 +2,13 @@
 	display flex
 	justify-content center
 
+.corner-buttons-hide-on-mobile
+	display none
+
 > 600px
-	.corner-buttons
+	.corner-buttons,
+	.corner-buttons-hide-on-mobile
+		display flex
 		position absolute
 		top content-padding
 		right content-padding

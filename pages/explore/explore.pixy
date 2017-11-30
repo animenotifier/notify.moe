@@ -1,12 +1,18 @@
 component ExploreAnime(animeList []*arn.Anime, year string, status string, typ string, user *arn.User)
 	ExploreFilters(year, status, typ)
 
+	.corner-buttons-hide-on-mobile
+		a.button.ajax(href="/genres")
+			Icon("clone")
+			span View genres
+
 	h1.page-title Explore
 
-	if len(animeList) == 0
-		p.no-data.mountable No anime found using the above filters.
-	else
-		AnimeGrid(animeList, user)
+	.explore-anime
+		if len(animeList) == 0
+			p.no-data.mountable No anime found using the above filters.
+		else
+			AnimeGrid(animeList, user)
 
 component ExploreFilters(year string, status string, typ string)
 	.explore-filters

@@ -1,10 +1,13 @@
 .explore-filters
 	horizontal
 	justify-content center
-	margin-bottom content-padding
+	margin-bottom calc(content-padding / 2)
 
 	select
 		margin 0.05rem
+
+.explore-anime
+	margin-top calc(content-padding / 2)
 
 #filter-year
 	max-width 80px

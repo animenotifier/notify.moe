@@ -11,6 +11,8 @@ let dark = {
 	"link-color": "hsl(var(--hue), var(--saturation), 66%)",
 	"link-hover-color": "hsl(var(--hue), var(--saturation), 76%)",
 	"link-hover-text-shadow": "0 0 8px hsla(var(--hue), var(--saturation), 66%, 0.5)",
+	"reverse-light-color": "rgba(255, 255, 255, 0.1)",
+	"reverse-light-hover-color": "rgba(255, 255, 255, 0.2)",
 	"ui-background": "hsl(0, 0%, 18%)",
 	"sidebar-background": "hsla(0, 0%, 0%, 0.2)",
 	"sidebar-opaque-background": "hsl(0, 0%, 18%)",
