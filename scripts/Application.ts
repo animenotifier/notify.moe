@@ -13,7 +13,6 @@ export class Application {
 	loading: HTMLElement
 	currentPath: string
 	originalPath: string
-	lastRequest: XMLHttpRequest | null
 
 	constructor() {
 		this.currentPath = window.location.pathname
@@ -35,28 +34,9 @@ export class Application {
 	}
 
 	get(url: string): Promise<string> {
-		if(this.lastRequest) {
-			this.lastRequest.abort()
-			this.lastRequest = null
-		}
-
-		return new Promise((resolve, reject) => {
-			let request = new XMLHttpRequest()
-
-			request.onerror = () => reject(new Error("You are either offline or the requested page doesn't exist."))
-			request.ontimeout = () => reject(new Error("The page took too much time to respond."))
-			request.onload = () => {
-				if(request.status < 200 || request.status >= 400)
-					reject(request.responseText)
-				else
-					resolve(request.responseText)
-			}
-
-			request.open("GET", url, true)
-			request.send()
-
-			this.lastRequest = request
-		})
+		return fetch(url, {
+			credentials: "same-origin"
+		}).then(response => response.text())
 	}
 
 	load(url: string, options?: LoadOptions) {
@@ -84,6 +64,11 @@ export class Application {
 			// Ignore transitions of child elements.
 			// We only care about the transition event on the content element.
 			if(e.target !== this.content) {
+				return
+			}
+
+			// Outdated response.
+			if(this.currentPath !== url) {
 				return
 			}
 

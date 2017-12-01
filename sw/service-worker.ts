@@ -13,9 +13,17 @@
 // If the style or script resources changed after being served, we need
 // to force a real page reload.
 
+// Promises
 const RELOADS = new Map<string, Promise<Response>>()
-const ETAGS = new Map<string, string>()
 const CACHEREFRESH = new Map<string, Promise<void>>()
+
+// E-Tags that we served for a given URL
+const ETAGS = new Map<string, string>()
+
+// When these patterns are matched for the request URL, we exclude them from being
+// served cache-first and instead serve them via a network request.
+// Note that the service worker URL is automatically excluded from fetch events
+// and therefore doesn't need to be added here.
 const EXCLUDECACHE = new Set<string>([
 	// API requests
 	"/api/",
@@ -98,6 +106,8 @@ class MyServiceWorker {
 	onRequest(evt: FetchEvent) {
 		let request = evt.request as Request
 
+		console.log("fetch", request.url)
+
 		// If it's not a GET request, fetch it normally
 		if(request.method !== "GET") {
 			return evt.respondWith(fetch(request))
@@ -130,6 +140,10 @@ class MyServiceWorker {
 
 			CACHEREFRESH.set(request.url, cacheRefresh)
 
+			if(request.url === "/styles") {
+				console.log("/styles fetched", response.headers.get("ETag"))
+			}
+
 			return response
 		})
 
@@ -142,6 +156,11 @@ class MyServiceWorker {
 		let onResponse = response => {
 			servedETag = response.headers.get("ETag")
 			ETAGS.set(request.url, servedETag)
+
+			if(request.url === "/styles") {
+				console.log("/styles served", servedETag)
+			}
+
 			return response
 		}
 
