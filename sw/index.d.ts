@@ -652,5 +652,11 @@ interface ServiceWorkerGlobalScope extends EventTarget {
     ): void;
 }
 
+interface NotificationOptions {
+	image?: string;
+	data?: string;
+	badge?: string;
+}
+
 // tslint:disable-next-line no-empty-interface
 interface Window extends ServiceWorkerGlobalScope {}
