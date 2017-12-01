@@ -292,7 +292,9 @@ class MyServiceWorker {
 				}
 			}
 
-			let user = await fetch("/api/me").then(response => response.json())
+			let user = await fetch("/api/me", {
+				credentials: "same-origin"
+			}).then(response => response.json())
 
 			return fetch("/api/pushsubscriptions/" + user.id + "/add", {
 				method: "POST",
