@@ -58,6 +58,140 @@ class MyCache {
 	}
 }
 
+class MyClient {
+	client: ServiceWorkerClient
+
+	constructor(client: ServiceWorkerClient) {
+		this.client = client
+	}
+
+	onMessage(message: any) {
+		switch(message.type) {
+			case "loaded":
+				this.onDOMContentLoaded(message.url)
+				break
+		}
+	}
+
+	postMessage(message: object) {
+		this.client.postMessage(JSON.stringify(message))
+	}
+
+	// onDOMContentLoaded is called when the client sent this service worker
+	// a message that the page has been loaded.
+	onDOMContentLoaded(url: string) {
+		let refresh = RELOADS.get(url)
+		let servedETag = ETAGS.get(url)
+
+		// If the user requests a sub-page we should prefetch the full page, too.
+		if(url.includes("/_/") && !url.includes("/_/search/")) {
+			var prefetch = true
+
+			for(let pattern of EXCLUDECACHE.keys()) {
+				if(url.includes(pattern)) {
+					prefetch = false
+					break
+				}
+			}
+
+			if(prefetch) {
+				this.prefetchFullPage(url)
+			}
+		}
+
+		if(!refresh || !servedETag) {
+			return Promise.resolve()
+		}
+
+		return refresh.then(async (response: Response) => {
+			// When the actual network request was used by the client, response.bodyUsed is set.
+			// In that case the client is already up to date and we don"t need to tell the client to do a refresh.
+			if(response.bodyUsed) {
+				return
+			}
+
+			// Get the ETag of the cached response we sent to the client earlier.
+			let eTag = response.headers.get("ETag")
+
+			// Update ETag
+			ETAGS.set(url, eTag)
+
+			// If the ETag changed, we need to do a reload.
+			if(eTag !== servedETag) {
+				return this.reloadContent(url)
+			}
+
+			// Do nothing
+			return Promise.resolve()
+		})
+	}
+
+	prefetchFullPage(url: string) {
+		let fullPage = new Request(url.replace("/_/", "/"))
+
+		let fullPageRefresh = fetch(fullPage, {
+			credentials: "same-origin"
+		}).then(response => {
+			// Save the new version of the resource in the cache
+			let cacheRefresh = caches.open(serviceWorker.cache.version).then(cache => {
+				return cache.put(fullPage, response)
+			})
+
+			CACHEREFRESH.set(fullPage.url, cacheRefresh)
+			return response
+		})
+
+		// Save in map
+		RELOADS.set(fullPage.url, fullPageRefresh)
+	}
+
+	async reloadContent(url: string) {
+		let cacheRefresh = CACHEREFRESH.get(url)
+
+		if(cacheRefresh) {
+			await cacheRefresh
+		}
+
+		return this.postMessage({
+			type: "new content",
+			url
+		})
+	}
+
+	async reloadPage(url: string) {
+		let networkFetch = RELOADS.get(url.replace("/_/", "/"))
+
+		if(networkFetch) {
+			await networkFetch
+		}
+
+		return this.postMessage({
+			type: "reload page",
+			url
+		})
+	}
+
+	reloadStyles() {
+		return this.postMessage({
+			type: "reload styles"
+		})
+	}
+
+	// Map of clients
+	static idToClient = new Map<string, MyClient>()
+
+	static async get(id: string): Promise<MyClient> {
+		let client = MyClient.idToClient.get(id)
+
+		if(!client) {
+			client = new MyClient(await self.clients.get(id))
+			MyClient.idToClient.set(id, client)
+		}
+
+		return client
+	}
+}
+
 class MyServiceWorker {
 	cache: MyCache
 
@@ -96,7 +230,7 @@ class MyServiceWorker {
 		})
 
 		// Immediate claim helps us gain control over a new client immediately
-		let immediateClaim = (self as any).clients.claim()
+		let immediateClaim = self.clients.claim()
 
 		return Promise.all([
 			deleteOldCache,
@@ -106,8 +240,6 @@ class MyServiceWorker {
 
 	onRequest(evt: FetchEvent) {
 		let request = evt.request as Request
-
-		console.log("fetch", request.url)
 
 		// If it's not a GET request, fetch it normally
 		if(request.method !== "GET") {
@@ -144,8 +276,19 @@ class MyServiceWorker {
 
 			CACHEREFRESH.set(request.url, cacheRefresh)
 
+			// Force reload page if styles changed
 			if(request.url.endsWith("/styles")) {
-				console.log("/styles fetched", response.headers.get("ETag"))
+				let servedETag = ETAGS.get(request.url)
+				let newETag = response.headers.get("ETag")
+				console.log("/styles fetched", servedETag, newETag)
+
+				if(servedETag && servedETag !== newETag) {
+					cacheRefresh.then(async () => {
+						console.log("tell client to reload style")
+						let client = await MyClient.get(evt.clientId)
+						client.reloadStyles()
+					})
+				}
 			}
 
 			return response
@@ -160,11 +303,6 @@ class MyServiceWorker {
 		let onResponse = response => {
 			servedETag = response.headers.get("ETag")
 			ETAGS.set(request.url, servedETag)
-
-			if(request.url.endsWith("/styles")) {
-				console.log("/styles served", servedETag)
-			}
-
 			return response
 		}
 
@@ -181,82 +319,12 @@ class MyServiceWorker {
 		return evt.respondWith(networkOrCache)
 	}
 
-	onMessage(evt: any) {
+	async onMessage(evt: ServiceWorkerMessageEvent) {
 		let message = JSON.parse(evt.data)
+		let clientId = (evt.source as any).id
+		let client = await MyClient.get(clientId)
 
-		switch(message.type) {
-			case "loaded":
-				this.onDOMContentLoaded(evt, message.url)
-				break
-		}
-	}
-
-	// onDOMContentLoaded is called when the client sent this service worker
-	// a message that the page has been loaded.
-	onDOMContentLoaded(evt: any, url: string) {
-		let refresh = RELOADS.get(url)
-		let servedETag = ETAGS.get(url)
-
-		// If the user requests a sub-page we should prefetch the full page, too.
-		if(url.includes("/_/") && !url.includes("/_/search/")) {
-			var prefetch = true
-
-			for(let pattern of EXCLUDECACHE.keys()) {
-				if(url.includes(pattern)) {
-					prefetch = false
-					break
-				}
-			}
-
-			if(prefetch) {
-				this.prefetchFullPage(url)
-			}
-		}
-
-		if(!refresh || !servedETag) {
-			return Promise.resolve()
-		}
-
-		return refresh.then((response: Response) => {
-			// When the actual network request was used by the client, response.bodyUsed is set.
-			// In that case the client is already up to date and we don"t need to tell the client to do a refresh.
-			if(response.bodyUsed) {
-				return
-			}
-
-			// Get the ETag of the cached response we sent to the client earlier.
-			let eTag = response.headers.get("ETag")
-
-			// Update ETag
-			ETAGS.set(url, eTag)
-
-			// If the ETag changed, we need to do a reload.
-			if(eTag !== servedETag) {
-				return this.forceClientReloadContent(url, evt.source)
-			}
-
-			// Do nothing
-			return Promise.resolve()
-		})
-	}
-
-	prefetchFullPage(url: string) {
-		let fullPage = new Request(url.replace("/_/", "/"))
-
-		let fullPageRefresh = fetch(fullPage, {
-			credentials: "same-origin"
-		}).then(response => {
-			// Save the new version of the resource in the cache
-			let cacheRefresh = caches.open(this.cache.version).then(cache => {
-				return cache.put(fullPage, response)
-			})
-
-			CACHEREFRESH.set(fullPage.url, cacheRefresh)
-			return response
-		})
-
-		// Save in map
-		RELOADS.set(fullPage.url, fullPageRefresh)
+		client.onMessage(message)
 	}
 
 	onPush(evt: PushEvent) {
@@ -312,51 +380,21 @@ class MyServiceWorker {
 		let notification = evt.notification
 		notification.close()
 
-		return (self as any).clients.matchAll().then(function(clientList) {
+		return self.clients.matchAll().then(function(clientList) {
 			// If we have a link, use that link to open a new window.
 			let url = notification.data
 
 			if(url) {
-				return (self as any).clients.openWindow(url)
+				return self.clients.openWindow(url)
 			}
 
 			// If there is at least one client, focus it.
 			if(clientList.length > 0) {
-				return clientList[0].focus()
+				return (clientList[0] as WindowClient).focus()
 			}
 
 			// Otherwise open a new window
-			return (self as any).clients.openWindow("https://notify.moe")
-		})
-	}
-
-	forceClientReloadContent(url: string, eventSource: any) {
-		let message = {
-			type: "new content",
-			url
-		}
-
-		this.postMessageAfterPromise(message, CACHEREFRESH.get(url), eventSource)
-	}
-
-	forceClientReloadPage(url: string, eventSource: any) {
-		let message = {
-			type: "reload page",
-			url
-		}
-
-		this.postMessageAfterPromise(message, RELOADS.get(url.replace("/_/", "/")), eventSource)
-	}
-
-	postMessageAfterPromise(message: any, promise: Promise<any>, eventSource: any) {
-		if(!promise) {
-			console.log("forcing reload, cache refresh null")
-			return eventSource.postMessage(JSON.stringify(message))
-		}
-
-		return promise.then(() => {
-			console.log("forcing reload after cache refresh")
-			eventSource.postMessage(JSON.stringify(message))
+			return self.clients.openWindow("https://notify.moe")
 		})
 	}
 

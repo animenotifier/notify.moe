@@ -85,12 +85,26 @@ export class ServiceWorkerManager {
 						this.arn.reloadPage()
 					})
 				}
-				
+
 				break
-			
+
 			case "reload page":
 				console.log("service worker instructed to reload page...disobeying in test mode")
 				// location.reload(true)
+				break
+
+			case "reload styles":
+				console.log("service worker instructed to reload styles")
+				const links = document.getElementsByTagName("link")
+
+				for(const x in links) {
+					const link = links[x]
+
+					if(link.getAttribute("rel") === "stylesheet") {
+						link.href = link.href
+					}
+				}
+
 				break
 		}
 	}
