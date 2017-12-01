@@ -1,5 +1,5 @@
 component ImportButton(url string)
 	.buttons.import-buttons
 		a.button.mountable(href=url)
-			Icon("refresh")
+			Icon("check")
 			span Import
