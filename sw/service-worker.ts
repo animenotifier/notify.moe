@@ -52,6 +52,7 @@ class MyCache {
 
 	store(request: RequestInfo, response: Response) {
 		return caches.open(this.version).then(cache => {
+			// This can fail if the disk space quota has been exceeded.
 			return cache.put(request, response)
 		})
 	}
@@ -136,11 +137,14 @@ class MyServiceWorker {
 			let clone = response.clone()
 
 			// Save the new version of the resource in the cache
-			let cacheRefresh = this.cache.store(request, clone)
+			let cacheRefresh = this.cache.store(request, clone).catch(err => {
+				console.error(err)
+				// TODO: Tell client that the quota is exceeded (disk full).
+			})
 
 			CACHEREFRESH.set(request.url, cacheRefresh)
 
-			if(request.url === "/styles") {
+			if(request.url.endsWith("/styles")) {
 				console.log("/styles fetched", response.headers.get("ETag"))
 			}
 
@@ -157,7 +161,7 @@ class MyServiceWorker {
 			servedETag = response.headers.get("ETag")
 			ETAGS.set(request.url, servedETag)
 
-			if(request.url === "/styles") {
+			if(request.url.endsWith("/styles")) {
 				console.log("/styles served", servedETag)
 			}
 
