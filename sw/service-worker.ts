@@ -1,5 +1,18 @@
 // pack:ignore
 
+// This is the service worker for notify.moe.
+// When installed, it will intercept all requests made by the browser
+// and return a cache-first response. By always returning cache first,
+// we avoid latency problems on high latency connections like mobile
+// networks. While the cache is being served, we start a real network
+// request to the server to see if the resource changed. We compare the
+// E-Tag of the cached and latest version of the resource. If the E-Tag
+// of the current document changed, we send a message to the client
+// that will cause the client to reload (diff) the page. It is not a real
+// page reload as we will only calculate a DOM diff on the contents.
+// If the style or script resources changed after being served, we need
+// to force a real page reload.
+
 const RELOADS = new Map<string, Promise<Response>>()
 const ETAGS = new Map<string, string>()
 const CACHEREFRESH = new Map<string, Promise<void>>()
