@@ -5,6 +5,7 @@
 	grid-cell
 	saturate-up
 	shadow-up
+	default-transition
 
 	:hover
 		.anime-grid-title,
@@ -16,6 +17,9 @@
 		width 71px
 		height 100px
 		margin 0.3rem
+
+.anime-grid-cell-hide
+	opacity 0.05
 
 .anime-grid-image
 	grid-image

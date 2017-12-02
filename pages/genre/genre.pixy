@@ -1,3 +1,8 @@
 component Genre(genre string, animes []*arn.Anime, user *arn.User)
 	h1(title=toString(len(animes)) + " anime")= strings.Title(genre)
+
+	.corner-buttons-hide-on-mobile
+		button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")
+			RawIcon("eye-slash")
+
 	AnimeGrid(animes, user)
