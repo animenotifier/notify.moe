@@ -39,9 +39,10 @@ let dark = {
 }
 
 // Toggle theme
-export function toggleTheme() {
+export function toggleTheme(arn: AnimeNotifier) {
 	if(currentTheme === "light") {
 		darkTheme()
+		arn.statusMessage.showInfo("Previewing Dark theme. If you would like to use it permanently, please buy a PRO account.", 4000)
 		return
 	}
 
