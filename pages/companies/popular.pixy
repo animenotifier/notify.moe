@@ -1,6 +1,8 @@
 component PopularCompanies(companies []*arn.Company, popularity map[string]int, user *arn.User)
 	CompaniesTabs(user)
 
+	h1.page-title Popular companies
+
 	.companies
 		ol
 			each company in companies

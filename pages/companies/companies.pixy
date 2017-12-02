@@ -1,6 +1,8 @@
 component Companies(groups [][]*arn.Company, user *arn.User)
 	CompaniesTabs(user)
 
+	h1.page-title All companies
+
 	.companies
 		each group in groups
 			.companies-group
