@@ -1,0 +1,9 @@
+component PopularCompanies(companies []*arn.Company, popularity map[string]int, user *arn.User)
+	CompaniesTabs(user)
+
+	.companies
+		ol
+			each company in companies
+				li.mountable
+					a.ajax(href=company.Link())= company.Name.English
+					span= " (" + strconv.Itoa(popularity[company.ID]) + ")"

@@ -10,8 +10,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get renders the companies page.
-func Get(ctx *aero.Context) string {
+// All renders the companies page.
+func All(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	companies := arn.FilterCompanies(func(company *arn.Company) bool {

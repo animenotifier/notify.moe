@@ -17,6 +17,10 @@ strong
 em
 	font-style italic
 
+ol
+	li
+		list-style-type decimal
+
 hr
 	border none
 	border-bottom 1px solid text-color

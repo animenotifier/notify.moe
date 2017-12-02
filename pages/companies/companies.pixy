@@ -1,6 +1,21 @@
 component Companies(groups [][]*arn.Company, user *arn.User)
-	h1 Companies
+	CompaniesTabs(user)
 
+	.companies
+		each group in groups
+			.companies-group
+				h3= group[0].Name.English[:1]
+
+				ul
+					each company in group
+						li.mountable
+							a.ajax(href=company.Link())= company.Name.English
+
+component CompaniesTabs(user *arn.User)
+	.tabs
+		Tab("All", "font", "/companies")
+		Tab("Popular", "globe", "/companies/popular")
+	
 	.corner-buttons
 		if user != nil
 			if user.DraftIndex().CompanyID == ""
@@ -11,13 +26,3 @@ component Companies(groups [][]*arn.Company, user *arn.User)
 				a.button.ajax(href="/company/" + user.DraftIndex().CompanyID + "/edit")
 					Icon("pencil")
 					span Edit draft
-
-	.companies
-		each group in groups
-			.companies-group
-				h3= group[0].Name.English[:1]
-
-				ul
-					each company in group
-						li
-							a.ajax(href=company.Link())= company.Name.English
