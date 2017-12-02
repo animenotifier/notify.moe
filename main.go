@@ -40,6 +40,7 @@ func configure(app *aero.Application) *aero.Application {
 		middleware.Log(),
 		middleware.Session(),
 		middleware.UserInfo(),
+		middleware.HTTPSRedirect(),
 	)
 
 	// API
