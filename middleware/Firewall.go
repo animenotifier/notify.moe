@@ -1,79 +1,70 @@
 package middleware
 
-import (
-	"strings"
-	"time"
+// const requestThreshold = 10
 
-	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
-	cache "github.com/patrickmn/go-cache"
-)
+// var ipToStats = cache.New(15*time.Minute, 15*time.Minute)
 
-const requestThreshold = 10
+// // IPStats captures the statistics for a single IP.
+// type IPStats struct {
+// 	Requests []string
+// }
 
-var ipToStats = cache.New(15*time.Minute, 15*time.Minute)
+// // Firewall middleware detects malicious requests.
+// func Firewall() aero.Middleware {
+// 	return func(ctx *aero.Context, next func()) {
+// 		var stats *IPStats
 
-// IPStats captures the statistics for a single IP.
-type IPStats struct {
-	Requests []string
-}
+// 		ip := ctx.RealIP()
 
-// Firewall middleware detects malicious requests.
-func Firewall() aero.Middleware {
-	return func(ctx *aero.Context, next func()) {
-		var stats *IPStats
+// 		// Allow localhost
+// 		if ip == "127.0.0.1" {
+// 			next()
+// 			return
+// 		}
 
-		ip := ctx.RealIP()
+// 		statsObj, found := ipToStats.Get(ip)
 
-		// Allow localhost
-		if ip == "127.0.0.1" {
-			next()
-			return
-		}
+// 		if found {
+// 			stats = statsObj.(*IPStats)
+// 		} else {
+// 			stats = &IPStats{
+// 				Requests: []string{},
+// 			}
 
-		statsObj, found := ipToStats.Get(ip)
+// 			ipToStats.Set(ip, stats, cache.DefaultExpiration)
+// 		}
 
-		if found {
-			stats = statsObj.(*IPStats)
-		} else {
-			stats = &IPStats{
-				Requests: []string{},
-			}
+// 		// Add requested URI to the list of requests
+// 		stats.Requests = append(stats.Requests, ctx.URI())
 
-			ipToStats.Set(ip, stats, cache.DefaultExpiration)
-		}
+// 		if len(stats.Requests) > requestThreshold {
+// 			stats.Requests = stats.Requests[len(stats.Requests)-requestThreshold:]
 
-		// Add requested URI to the list of requests
-		stats.Requests = append(stats.Requests, ctx.URI())
+// 			for _, uri := range stats.Requests {
+// 				// Allow request
+// 				if strings.Contains(uri, "/_/") || strings.Contains(uri, "/api/") || strings.Contains(uri, "/scripts") || strings.Contains(uri, "/service-worker") || strings.Contains(uri, "/images/") || strings.Contains(uri, "/favicon.ico") || strings.Contains(uri, "/extension/embed") {
+// 					next()
+// 					return
+// 				}
+// 			}
 
-		if len(stats.Requests) > requestThreshold {
-			stats.Requests = stats.Requests[len(stats.Requests)-requestThreshold:]
+// 			// Allow logged in users
+// 			if ctx.HasSession() {
+// 				user := utils.GetUser(ctx)
 
-			for _, uri := range stats.Requests {
-				// Allow request
-				if strings.Contains(uri, "/_/") || strings.Contains(uri, "/api/") || strings.Contains(uri, "/scripts") || strings.Contains(uri, "/service-worker") || strings.Contains(uri, "/images/") || strings.Contains(uri, "/favicon.ico") || strings.Contains(uri, "/extension/embed") {
-					next()
-					return
-				}
-			}
+// 				if user != nil {
+// 					// Allow request
+// 					next()
+// 					return
+// 				}
+// 			}
 
-			// Allow logged in users
-			if ctx.HasSession() {
-				user := utils.GetUser(ctx)
+// 			// Disallow request
+// 			request.Error("[guest]", ip, "BLOCKED BY FIREWALL", ctx.URI())
+// 			return
+// 		}
 
-				if user != nil {
-					// Allow request
-					next()
-					return
-				}
-			}
-
-			// Disallow request
-			request.Error("[guest]", ip, "BLOCKED BY FIREWALL", ctx.URI())
-			return
-		}
-
-		// Allow the request if the number of requests done by the IP is below the threshold
-		next()
-	}
-}
+// 		// Allow the request if the number of requests done by the IP is below the threshold
+// 		next()
+// 	}
+// }
