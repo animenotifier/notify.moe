@@ -23,6 +23,7 @@ func GetStatsByUser(ctx *aero.Context) string {
 	types := stats{}
 	years := stats{}
 	studios := stats{}
+	genres := stats{}
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "User not found", err)
@@ -51,6 +52,10 @@ func GetStatsByUser(ctx *aero.Context) string {
 			studios[studio.Name.English]++
 		}
 
+		for _, genre := range item.Anime().Genres {
+			genres[genre]++
+		}
+
 		if item.Anime().StartDate != "" {
 			year := item.Anime().StartDate[:4]
 
@@ -63,11 +68,12 @@ func GetStatsByUser(ctx *aero.Context) string {
 	}
 
 	userStats.PieCharts = []*arn.PieChart{
-		arn.NewPieChart("Ratings", ratings),
-		arn.NewPieChart("Status", status),
-		arn.NewPieChart("Types", types),
+		arn.NewPieChart("Genres", genres),
 		arn.NewPieChart("Studios", studios),
 		arn.NewPieChart("Years", years),
+		arn.NewPieChart("Ratings", ratings),
+		arn.NewPieChart("Types", types),
+		arn.NewPieChart("Status", status),
 	}
 
 	return ctx.HTML(components.ProfileStats(&userStats, viewUser, utils.GetUser(ctx), ctx.URI()))
