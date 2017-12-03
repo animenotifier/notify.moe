@@ -1,0 +1,13 @@
+.extension-navigation
+	display none
+
+> 780px
+	.extension-navigation
+		display block
+		position fixed
+		bottom 1rem
+		left 1rem
+
+> 790px
+	.extension-navigation
+		display none

@@ -1,0 +1,7 @@
+component BrowserExtension(watchingList *arn.AnimeList, viewUser *arn.User, user *arn.User)
+	AnimeList(watchingList, viewUser, user)
+
+component ExtensionNavigation
+	nav.extension-navigation
+		button.action(data-trigger="click", data-action="toggleSidebar")
+			RawIcon("bars")

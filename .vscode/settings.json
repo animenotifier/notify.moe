@@ -16,7 +16,8 @@
 	},
 	"search.exclude": {
 		"components/": true,
-		"**/*.svg": true
+		"**/*.svg": true,
+		"**/*.html": true
 	},
 	"[jade]": {
 		"files.trimTrailingWhitespace": false
