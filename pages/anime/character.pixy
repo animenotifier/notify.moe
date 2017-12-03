@@ -1,4 +1,7 @@
 component Character(character *arn.Character)
 	a.character.ajax(href="/character/" + character.ID)
 		img.character-image.lazy(data-src=character.Image, alt=character.Name, title=character.Name)
-		//- span.character-name= character.Name
+
+component CharacterSmall(character *arn.Character)
+	a.character.ajax(href="/character/" + character.ID)
+		img.character-image.character-image-small.lazy(data-src=character.Image, alt=character.Name, title=character.Name)

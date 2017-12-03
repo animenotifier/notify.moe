@@ -15,9 +15,11 @@
 		// 	opacity 1
 
 .character-image
-	border-radius 3px
+	border-radius 5%
 	box-shadow shadow-medium
 	object-fit cover
+	width 112px
+	height 112px
 
 // .character-name
 // 	font-size 0.75rem
@@ -25,7 +27,6 @@
 // 	opacity 0.5
 // 	transition opacity transition-speed ease
 
-.character-image
-	width 112px
-	height 112px
-	border-radius 10%
+.character-image-small
+	width 56px
+	height 56px

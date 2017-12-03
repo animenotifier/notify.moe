@@ -26,7 +26,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				else
 					each character in characters
 						.mountable(data-mountable-type="character")
-							Character(character)
+							CharacterSmall(character)
 
 		.widget
 			h3.widget-title
@@ -36,21 +36,22 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			if len(posts) == 0 && len(threads) == 0
 				p.no-search-results.mountable No posts found.
 			else
-				each thread in threads
-					.mountable(data-mountable-type="forum")
-						.forum-search-result
-							a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
-							if thread.Author().HasNick()
-								.forum-search-result-author= thread.Author().Nick
-						.forum-search-result-sample= thread.Text
+				.forum-search-results
+					each thread in threads
+						.forum-search-result.mountable(data-mountable-type="forum")
+							.forum-search-result-header
+								a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
+								if thread.Author().HasNick()
+									.forum-search-result-author= thread.Author().Nick
+							.forum-search-result-sample= thread.Text
 
-				each post in posts
-					.mountable(data-mountable-type="forum")
-						.forum-search-result
-							a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
-							if post.Author().HasNick()
-								.forum-search-result-author= post.Author().Nick
-						.forum-search-result-sample= post.Text
+					each post in posts
+						.forum-search-result.mountable(data-mountable-type="forum")
+							.forum-search-result-header
+								a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
+								if post.Author().HasNick()
+									.forum-search-result-author= post.Author().Nick
+							.forum-search-result-sample= post.Text
 
 		.widget
 			h3.widget-title

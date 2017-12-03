@@ -10,7 +10,18 @@
 	width 55px !important
 	height 78px !important
 
+.forum-search-results
+	horizontal-wrap
+	justify-content space-around
+
 .forum-search-result
+	vertical
+	flex 1
+	flex-basis 380px
+	padding 0.75rem
+	overflow hidden
+
+.forum-search-result-header
 	horizontal
 
 .forum-search-result-title
