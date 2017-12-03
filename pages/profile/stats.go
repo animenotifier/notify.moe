@@ -39,13 +39,18 @@ func GetStatsByUser(ctx *aero.Context) string {
 	defer animeList.Unlock()
 
 	for _, item := range animeList.Items {
+		status[item.Status]++
+
+		if item.Status == arn.AnimeListStatusPlanned {
+			continue
+		}
+
 		currentWatch := item.Episodes * item.Anime().EpisodeLength
 		reWatch := item.RewatchCount * item.Anime().EpisodeCount * item.Anime().EpisodeLength
 		duration := time.Duration(currentWatch + reWatch)
 		userStats.AnimeWatchingTime += duration * time.Minute
 
 		ratings[strconv.Itoa(int(item.Rating.Overall+0.5))]++
-		status[item.Status]++
 		types[item.Anime().Type]++
 
 		for _, studio := range item.Anime().Studios() {
