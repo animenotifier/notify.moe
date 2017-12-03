@@ -18,3 +18,12 @@ export function hideAddedAnime() {
 		}
 	}
 }
+
+// Hides anime that are not in your list.
+export function calendarShowAddedAnimeOnly() {
+	for(let anime of findAll("calendar-entry")) {
+		if(anime.dataset.added === "false") {
+			anime.classList.toggle("hidden")
+		}
+	}
+}

@@ -1,13 +1,17 @@
 component Calendar(days []*utils.CalendarDay, user *arn.User)
 	h1.mountable Calendar
 
+	.corner-buttons-hide-on-mobile
+		button.action(data-trigger="click", data-action="calendarShowAddedAnimeOnly", title="Show anime in my collection")
+			RawIcon("eye")
+
 	.week
 		each day in days
-			.weekday
+			div(class=day.Class)
 				h3.weekday-name.mountable(data-mountable-type=day.Name)= day.Name
 				.calendar-entries
 					each entry in day.Entries
-						div(data-mountable-type=day.Name, class=entry.Class)
+						.calendar-entry.mountable(data-mountable-type=day.Name, data-added=entry.Added)
 							a.ajax(href=entry.Anime.Link())
 								img.calendar-entry-image.lazy(data-src=entry.Anime.Image("large"), data-webp="true", alt=entry.Anime.Title.ByUser(user))
 							a.ajax(href=entry.Anime.Link())

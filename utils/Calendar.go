@@ -5,6 +5,7 @@ import "github.com/animenotifier/arn"
 // CalendarDay is a calendar day.
 type CalendarDay struct {
 	Name    string
+	Class   string
 	Entries []*CalendarEntry
 }
 
@@ -12,5 +13,5 @@ type CalendarDay struct {
 type CalendarEntry struct {
 	Anime   *arn.Anime
 	Episode *arn.AnimeEpisode
-	Class   string
+	Added   bool
 }

@@ -39,7 +39,12 @@ func Get(ctx *aero.Context) string {
 	for i := 0; i < 7; i++ {
 		days[i] = &utils.CalendarDay{
 			Name:    weekdayNames[(weekdayIndex+i)%7],
+			Class:   "weekday",
 			Entries: []*utils.CalendarEntry{},
+		}
+
+		if days[i].Name == "Saturday" || days[i].Name == "Sunday" {
+			days[i].Class += " weekend"
 		}
 	}
 
@@ -66,14 +71,14 @@ func Get(ctx *aero.Context) string {
 			entry := &utils.CalendarEntry{
 				Anime:   animeEpisodes.Anime(),
 				Episode: episode,
-				Class:   "calendar-entry mountable",
+				Added:   false,
 			}
 
 			if user != nil {
 				animeListItem := user.AnimeList().Find(entry.Anime.ID)
 
 				if animeListItem != nil && (animeListItem.Status == arn.AnimeListStatusWatching || animeListItem.Status == arn.AnimeListStatusPlanned) {
-					entry.Class += " calendar-entry-personal"
+					entry.Added = true
 				}
 			}
 
