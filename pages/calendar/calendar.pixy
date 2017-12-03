@@ -9,6 +9,8 @@ component Calendar(days []*utils.CalendarDay, user *arn.User)
 					each entry in day.Entries
 						div(data-mountable-type=day.Name, class=entry.Class)
 							a.ajax(href=entry.Anime.Link())
+								img.calendar-entry-image.lazy(data-src=entry.Anime.Image("large"), data-webp="true", alt=entry.Anime.Title.ByUser(user))
+							a.ajax(href=entry.Anime.Link())
 								.calendar-entry-title= entry.Anime.Title.ByUser(user)
 							.calendar-entry-info
 								.calendar-entry-time.utc-date-absolute(data-date=entry.Episode.AiringDate.Start)
