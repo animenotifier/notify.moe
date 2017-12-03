@@ -1,0 +1,17 @@
+component Quotes(quotes []*arn.Quote, user *arn.User)
+	h1.page-title Quotes
+
+	.corner-buttons
+		if user != nil
+			if user.DraftIndex().QuoteID == ""
+				button.action(data-action="newObject", data-trigger="click", data-type="quote")
+					Icon("plus")
+					span Add quote
+			else
+				a.button.ajax(href="/quote/" + user.DraftIndex().QuoteID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+	ul
+		each quote in quotes
+			li= quote.Description

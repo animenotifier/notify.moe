@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
+	QuoteTabs(quote, user)
+
+	.quote-page
+		.quote-header
+			h1.quote-name.mountable= quote.Description
+			h3.mountable Characters
+			.quote-character.mountable
+				Character(character)
+
+component QuoteTabs(quote *arn.Quote, user *arn.User)
+	.tabs
+		Tab("Quote", "building", quote.Link())
+		Tab("Edit", "pencil", quote.Link() + "/edit")

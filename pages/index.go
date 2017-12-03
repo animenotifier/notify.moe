@@ -43,6 +43,8 @@ import (
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/recommended"
+	"github.com/animenotifier/notify.moe/pages/quote"
+	"github.com/animenotifier/notify.moe/pages/quotes"
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/settings"
 	"github.com/animenotifier/notify.moe/pages/shop"
@@ -102,6 +104,10 @@ func Configure(app *aero.Application) {
 	// Characters
 	l.Page("/character/:id", character.Get)
 
+	// Quotes
+	l.Page("/quote/:id", quote.Get)
+	l.Page("/quote/:id/edit", quote.Edit)
+	l.Page("/quotes", quotes.Get)
 	// Calendar
 	l.Page("/calendar", calendar.Get)
 
