@@ -2,7 +2,20 @@
 
 // This is the service worker for notify.moe.
 // When installed, it will intercept all requests made by the browser
-// and return a cache-first response. By always returning cache first,
+// and return a cache-first response.
+
+//         request                 request
+// Browser -------> Service Worker ------> notify.moe Server
+//         <-------
+//         response (cache)
+//                                 <------
+//                                 response (network)
+//         <-------
+//         response
+//
+// -> Diff cache with network response.
+
+// By always returning cache first,
 // we avoid latency problems on high latency connections like mobile
 // networks. While the cache is being served, we start a real network
 // request to the server to see if the resource changed. We compare the
