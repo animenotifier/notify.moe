@@ -38,6 +38,9 @@ post-content-padding-y = 0.75rem
 	h3
 		font-size 1.1rem
 
+	img
+		max-width 100%
+
 	:hover
 		.post-toolbar
 			opacity 1
