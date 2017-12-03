@@ -20,6 +20,7 @@
 
 .anime-grid-cell-hide
 	opacity 0.05
+	pointer-events none
 
 .anime-grid-image
 	grid-image
