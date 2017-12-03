@@ -13,7 +13,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				else
 					each anime in animes
 						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
-							img.anime-cover-image.anime-search-result(src=anime.Image("small"), data-webp="true", alt=anime.Title.Canonical)
+							img.anime-cover-image.anime-search-result.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.Canonical)
 
 		.widget
 			h3.widget-title
