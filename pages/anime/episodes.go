@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -11,6 +12,7 @@ import (
 
 // Episodes ...
 func Episodes(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 
 	anime, err := arn.GetAnime(id)
@@ -19,5 +21,5 @@ func Episodes(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
-	return ctx.HTML(components.AnimeEpisodes(anime.Episodes().Items))
+	return ctx.HTML(components.AnimeEpisodes(anime.Episodes().Items, user))
 }
