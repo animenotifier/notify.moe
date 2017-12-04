@@ -31,7 +31,7 @@ component StaffRecruitment
 component UsersTabs
 	.tabs
 		Tab("Active", "users", "/users")
-		Tab("No Avatar", "users", "/users/noavatar")
+		//- Tab("No Avatar", "users", "/users/noavatar")
 		Tab("Osu", "gamepad", "/users/osu")
 		Tab("Overwatch", "overwatch", "/users/overwatch")
 		Tab("Staff", "user-secret", "/users/staff")
