@@ -136,9 +136,12 @@ class MyServiceWorker {
 		// Save the served E-Tag when onResponse is called
 		let servedETag = undefined
 
-		let onResponse = (response: Response) => {
-			servedETag = response.headers.get("ETag")
-			ETAGS.set(request.url, servedETag)
+		let onResponse = (response: Response | null) => {
+			if(response) {
+				servedETag = response.headers.get("ETag")
+				ETAGS.set(request.url, servedETag)
+			}
+
 			return response
 		}
 
@@ -276,14 +279,19 @@ class MyServiceWorker {
 	// Serve network first.
 	// Fall back to cache.
 	async networkFirst(request: Request, network: Promise<Response>, onResponse: (r: Response) => Response): Promise<Response> {
-		let response: Response
+		let response: Response | null
 
 		try {
 			response = await network
 			console.log("Network HIT:", request.url)
 		} catch(error) {
-			response = await this.fromCache(request)
 			console.log("Network MISS:", request.url, error)
+
+			try {
+				response = await this.fromCache(request)
+			} catch(error) {
+				console.error(error)
+			}
 		}
 
 		return onResponse(response)
@@ -292,14 +300,19 @@ class MyServiceWorker {
 	// Serve cache first.
 	// Fall back to network.
 	async cacheFirst(request: Request, network: Promise<Response>, onResponse: (r: Response) => Response): Promise<Response> {
-		let response: Response
+		let response: Response | null
 
 		try {
 			response = await this.fromCache(request)
 			console.log("Cache HIT:", request.url)
 		} catch(error) {
-			response = await network
 			console.log("Cache MISS:", request.url, error)
+
+			try {
+				response = await network
+			} catch(error) {
+				console.error(error)
+			}
 		}
 
 		return onResponse(response)
@@ -439,18 +452,18 @@ class MyClient {
 		})
 	}
 
-	async reloadPage(url: string) {
-		let networkFetch = serviceWorker.reloads.get(url.replace("/_/", "/"))
+	// async reloadPage(url: string) {
+	// 	let networkFetch = serviceWorker.reloads.get(url.replace("/_/", "/"))
 
-		if(networkFetch) {
-			await networkFetch
-		}
+	// 	if(networkFetch) {
+	// 		await networkFetch
+	// 	}
 
-		return this.postMessage({
-			type: "reload page",
-			url
-		})
-	}
+	// 	return this.postMessage({
+	// 		type: "reload page",
+	// 		url
+	// 	})
+	// }
 
 	reloadStyles() {
 		return this.postMessage({
