@@ -1,19 +1,40 @@
 .episodes
-	max-width 100%
+	vertical
+
+> 700px
+	.episodes
+		horizontal-wrap
 
 .episode
-	horizontal
+	ui-element
+	vertical
+	button-hover
+	flex 0
+	flex-basis 150px
+	margin 0.5rem
+	padding 0.5rem
+
+	// :hover
+	// 	background-color table-row-hover-background
 
 .episode-number
-	flex-basis 3.2rem
-	// text-align right
+	display flex
+	justify-content center
+	align-items center
+	font-size 2rem
+	line-height 1.7em
 
 .episode-title
-	flex 1
+	text-align center
+	font-size 0.7rem
+	opacity 0.8
+	clip-long-text
 
 .episode-airing-date-start
-	flex-basis 150px
-	text-align right
+	display flex
+	justify-content center
+	font-size 0.8rem
+	opacity 0.6
 
 < 800px
 	.episode-airing-date-start

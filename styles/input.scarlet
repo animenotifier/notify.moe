@@ -4,6 +4,16 @@ mixin input-focus
 		// TODO: Replace with alpha(main-color, 20%) function
 		box-shadow 0 0 6px rgba(248, 165, 130, 0.2) !important
 
+mixin button-hover
+	:hover,
+	&.active
+		cursor pointer
+		color button-hover-color
+		background button-hover-background
+
+	:active
+		transform translateY(3px)
+
 input, textarea, button, .button, select
 	ui-element
 	font-family inherit
@@ -34,14 +44,7 @@ button, .button
 	color link-color
 	align-items center
 
-	:hover,
-	&.active
-		cursor pointer
-		color button-hover-color
-		background button-hover-background
-
-	:active
-		transform translateY(3px)
+	button-hover
 
 select
 	appearance none
