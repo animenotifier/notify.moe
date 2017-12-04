@@ -4,17 +4,23 @@
 > 700px
 	.episodes
 		horizontal-wrap
-		justify-content space-around
+		justify-content flex-start
 
 .episode
 	vertical
 	flex 0
-	flex-basis 200px
+	flex-basis 190px
 	margin 0.5rem
 	padding 0.5rem
 	overflow hidden
+	border ui-border
 	border-radius ui-element-border-radius
 	color text-color
+	box-shadow shadow-light
+
+	[data-available="false"]
+		&.mounted
+			opacity 0.25 !important
 
 	:hover
 		color text-color

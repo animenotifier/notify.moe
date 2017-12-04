@@ -73,6 +73,9 @@
 	margin-bottom 0.5rem
 	min-width 200px
 
+	.video-container
+		box-shadow shadow-light
+
 > 500px
 	.anime-soundtracks
 		horizontal-wrap

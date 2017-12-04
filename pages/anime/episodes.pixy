@@ -4,7 +4,7 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, user *ar
 			h3.anime-section-name Episodes
 			.episodes
 				each episode in episodes
-					a.episode.ajax.mountable(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number), data-mountable-type="episode")
+					a.episode.ajax.mountable(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number), data-mountable-type="episode", data-available=episode.Available())
 						.episode-number
 							if episode.Number != -1
 								span= episode.Number

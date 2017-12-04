@@ -11,7 +11,7 @@ import (
 )
 
 const maxEpisodes = 26
-const maxEpisodesLongSeries = 10
+const maxEpisodesLongSeries = 12
 const maxDescriptionLength = 170
 
 // Get anime page.
@@ -25,15 +25,9 @@ func Get(ctx *aero.Context) string {
 	}
 
 	episodes := anime.Episodes().Items
-	// episodesReversed := false
 
 	if len(episodes) > maxEpisodes {
-		// episodesReversed = true
-		episodes = episodes[len(episodes)-maxEpisodesLongSeries:]
-
-		for i, j := 0, len(episodes)-1; i < j; i, j = i+1, j-1 {
-			episodes[i], episodes[j] = episodes[j], episodes[i]
-		}
+		episodes = anime.Episodes().LastReversed(maxEpisodesLongSeries)
 	}
 
 	// Friends watching
@@ -64,11 +58,7 @@ func Get(ctx *aero.Context) string {
 	relations := anime.Relations()
 
 	if relations != nil {
-		items := relations.Items
-
-		sort.Slice(items, func(i, j int) bool {
-			return items[i].Anime().StartDate < items[j].Anime().StartDate
-		})
+		relations.SortByStartDate()
 	}
 
 	// Soundtracks
