@@ -8,11 +8,10 @@
 	vertical
 
 .anime-list-item
+	table-row
 	horizontal
-
-	td
-		display flex
-		align-items center
+	align-items center
+	padding-right 1rem
 
 .anime-list-item-image-container
 	padding 0
@@ -26,6 +25,7 @@
 
 .anime-list-item-name
 	flex 1
+	margin 0.5rem 1rem
 	clip-long-text
 
 	a
@@ -38,7 +38,8 @@
 	justify-content flex-end
 	text-align right
 	white-space nowrap
-	width 130px
+	flex-basis 80px
+	flex-shrink 1
 
 	:hover
 		.plus-episode
@@ -46,7 +47,7 @@
 			pointer-events auto
 
 .anime-list-item-episodes-watched
-	flex 0.4
+	flex 0.45
 	horizontal
 	justify-content flex-end
 
@@ -58,18 +59,28 @@
 	margin-left 1px
 	transition opacity transition-speed ease
 
+.plus-episode-dummy
+	display inline-block
+	opacity 0
+
 .anime-list-item-episodes-separator
-	flex 0.2
+	flex 0.1
 	opacity 0.5
 
 .anime-list-item-episodes-max
-	flex 0.4
+	flex 0.3
 	opacity 0.5
 
 .anime-list-item-rating
+	horizontal
 	text-align right
 	justify-content flex-end
-	width 65px
+	flex-basis 65px
+	flex-shrink 1
+
+// .rating-label
+// 	opacity 0.5
+// 	margin-right 0.2rem
 
 .anime-list-item-actions
 	display none !important
@@ -81,7 +92,8 @@
 > 740px
 	.anime-list-item-actions
 		display flex !important
-		width 30px
+		flex-basis 30px
+		flex-shrink 1
 
 		:empty
 			display none !important
@@ -93,9 +105,13 @@
 	.anime-list-item-airing-date
 		display flex !important
 		text-align right
-		width 150px
+		flex-basis 150px
+		flex-shrink 1
 		opacity 0.8
 		justify-content flex-end
+
+	.anime-list-item-episodes
+		flex-basis 130px
 
 < 1100px
 	.anime-list-item-rating

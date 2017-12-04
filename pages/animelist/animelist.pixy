@@ -39,47 +39,54 @@ component AnimeLists(animeLists map[string]*arn.AnimeList, viewUser *arn.User, u
 				AnimeList(animeLists[arn.AnimeListStatusDropped], viewUser, user)
 
 component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User)
-	table.anime-list
-		tbody
-			each item in animeList.Items
-				tr.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/field/Items[AnimeID=\"" + item.AnimeID + "\"]")
-					td.anime-list-item-image-container
-						a.ajax(href=item.Anime().Link())
-							img.anime-list-item-image.lazy(data-src=item.Anime().Image("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
+	.anime-list
+		each item in animeList.Items
+			.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/field/Items[AnimeID=\"" + item.AnimeID + "\"]")
+				.anime-list-item-image-container
+					a.ajax(href=item.Anime().Link())
+						img.anime-list-item-image.lazy(data-src=item.Anime().Image("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
 
-					td.anime-list-item-name
-						a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.ByUser(user)
+				.anime-list-item-name
+					a.ajax(href=item.Link(animeList.User().Nick))= item.Anime().Title.ByUser(user)
 
-					td.anime-list-item-actions
-						if user != nil && item.Status == arn.AnimeListStatusWatching
-							//- if user.ID == "KpdWUlPzR"
-							//- 	a(href=arn.Nyaa.GetLink(item.Anime()), title="Search on Nyaa", target="_blank", rel="noopener")
-							//- 		RawIcon("download")
-							//- else
-							if item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
-								for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
-									a(href=link, title="Watch episode " + toString(item.Episodes + 1) + " on twist.moe", target="_blank", rel="noopener")
-										RawIcon("eye")
+				.anime-list-item-actions
+					if user != nil && item.Status == arn.AnimeListStatusWatching
+						//- if user.ID == "KpdWUlPzR"
+						//- 	a(href=arn.Nyaa.GetLink(item.Anime()), title="Search on Nyaa", target="_blank", rel="noopener")
+						//- 		RawIcon("download")
+						//- else
+						if item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
+							for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
+								a(href=link, title="Watch episode " + toString(item.Episodes + 1) + " on twist.moe", target="_blank", rel="noopener")
+									RawIcon("eye")
 
-					td.anime-list-item-airing-date
-						if (item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusPlanned) && item.Anime().UpcomingEpisode() != nil
-							span.utc-airing-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
+				.anime-list-item-airing-date
+					if (item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusPlanned) && item.Anime().UpcomingEpisode() != nil
+						span.utc-airing-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
 
-					td.anime-list-item-episodes
-						if item.Status != arn.AnimeListStatusCompleted
-							.anime-list-item-episodes-watched
-								.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
-								if item.Status == arn.AnimeListStatusWatching
-									.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
+				if item.Status != arn.AnimeListStatusCompleted
+					.anime-list-item-episodes
+						.anime-list-item-episodes-watched
+							.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
+							
+							if item.Status == arn.AnimeListStatusWatching
+								.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
+							else
+								.plus-episode-dummy +
 
-							.anime-list-item-episodes-separator /
-							.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
+						.anime-list-item-episodes-separator /
+						.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
 
-					td.anime-list-item-rating(title="Overall rating")
-						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= utils.FormatRating(item.Rating.Overall)
-					//- td.anime-list-item-rating(title="Story rating")
-					//- 	.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Story", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Story)
-					//- td.anime-list-item-rating(title="Visuals rating")
-					//- 	.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Visuals", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Visuals)
-					//- td.anime-list-item-rating(title="Soundtrack rating")
-					//- 	.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Soundtrack", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Soundtrack)
+				.anime-list-item-rating(title="Overall rating")
+					.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= utils.FormatRating(item.Rating.Overall)
+				
+				//- if item.Status == arn.AnimeListStatusCompleted
+				//- 	.anime-list-item-rating(title="Story rating")
+				//- 		span.rating-label S:
+				//- 		.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Story", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Story)
+				//- 	.anime-list-item-rating(title="Visuals rating")
+				//- 		span.rating-label V:
+				//- 		.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Visuals", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Visuals)
+				//- 	.anime-list-item-rating(title="Soundtrack rating")
+				//- 		span.rating-label M:
+				//- 		.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Soundtrack", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Soundtrack)

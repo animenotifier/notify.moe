@@ -1,17 +1,31 @@
-table
+mixin table-root
 	width 100%
 	max-width table-width-normal
 	margin 0 auto
 
-tr
+mixin table-row
 	border-bottom-width 1px
 	border-bottom-style solid
 	border-bottom-color rgba(0, 0, 0, 0.05)
+	background-color transparent
+
+	:hover
+		background-color table-row-hover-background
+
 	:last-child
 		border none
 
-td
+mixin table-cell
 	padding 0.5rem 1rem
+
+table
+	table-root
+
+tr
+	table-row
+
+td
+	table-cell
 
 th
 	font-size 1.2em
@@ -19,9 +33,7 @@ th
 	padding 0.5rem 1rem
 	font-weight bold
 
-tbody
+thead
 	tr
-		background-color transparent
-		
 		:hover
-			background-color table-row-hover-background
+			background-color transparent
