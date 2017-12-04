@@ -133,8 +133,16 @@ class MyServiceWorker {
 			return evt.respondWith(this.fromCache(request))
 		}
 
-		// Start fetching the request
-		let refresh = fetch(request).then(response => {
+		// Save the served E-Tag when onResponse is called
+		let servedETag = undefined
+
+		let onResponse = (response: Response) => {
+			servedETag = response.headers.get("ETag")
+			ETAGS.set(request.url, servedETag)
+			return response
+		}
+
+		let saveResponseInCache = response => {
 			let clone = response.clone()
 
 			// Save the new version of the resource in the cache
@@ -144,73 +152,36 @@ class MyServiceWorker {
 			})
 
 			CACHEREFRESH.set(request.url, cacheRefresh)
-
-			// // Force reload page if styles changed
-			// if(request.url.endsWith("/styles")) {
-			// 	let servedETag = ETAGS.get(request.url)
-			// 	let newETag = response.headers.get("ETag")
-			// 	console.log("/styles fetched", servedETag, newETag)
-
-			// 	if(servedETag && servedETag !== newETag) {
-			// 		cacheRefresh.then(async () => {
-			// 			console.log("tell client to reload style")
-			// 			let client = await MyClient.get(evt.clientId)
-			// 			client.reloadStyles()
-			// 		})
-			// 	}
-			// }
-
-			return response
-		}).catch(error => {
-			console.log("Fetch error:", error)
-			throw error
-		})
-
-		// Save in map
-		this.reloads.set(request.url, refresh)
-
-		// Forced reload
-		let servedETag = undefined
-
-		let onResponse = (response: Response) => {
-			servedETag = response.headers.get("ETag")
-			ETAGS.set(request.url, servedETag)
 			return response
 		}
 
+		// Start fetching the request
+		let network =
+			fetch(request)
+			.then(saveResponseInCache)
+			.catch(error => {
+				console.log("Fetch error:", error)
+				throw error
+			})
+
+		// Save in map
+		this.reloads.set(request.url, network)
+
 		if(request.headers.get("X-Reload") === "true") {
-			return evt.respondWith(refresh.then(onResponse))
+			return evt.respondWith(network)
 		}
 
 		// Scripts and styles are server pushed on the initial response
-		// so we can use a network-first response for those.
+		// so we can use a network-first response without an additional round-trip.
+		// This causes the browser to always load the most recent scripts and styles.
 		if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
-			// Serve network first.
-			// Fall back to cache.
-			let networkResponse = refresh.then(response => {
-				console.log("Network HIT:", request.url)
-				return response
-			}).catch(error => {
-				console.log("Network MISS:", request.url)
-				return this.fromCache(request).then(onResponse)
-			})
-
-			return evt.respondWith(networkResponse)
-		} else {
-			// Serve cache first.
-			// Fall back to network.
-			let cacheResponse = this.fromCache(request).then(response => {
-				console.log("Cache HIT:", request.url)
-				return onResponse(response)
-			}).catch(error => {
-				console.log("Cache MISS:", request.url)
-				return refresh
-			})
-
-			return evt.respondWith(cacheResponse)
+			return evt.respondWith(this.networkFirst(request, network, onResponse))
 		}
+
+		return evt.respondWith(this.cacheFirst(request, network, onResponse))
 	}
 
+	// onMessage is called when the service worker receives a message from a client (browser tab).
 	async onMessage(evt: ServiceWorkerMessageEvent) {
 		let message = JSON.parse(evt.data)
 		let clientId = (evt.source as any).id
@@ -219,6 +190,7 @@ class MyServiceWorker {
 		client.onMessage(message)
 	}
 
+	// onPush is called on push events and requires the payload to contain JSON information about the notification.
 	onPush(evt: PushEvent) {
 		var payload = evt.data ? evt.data.json() : {}
 
@@ -268,6 +240,7 @@ class MyServiceWorker {
 		})
 	}
 
+	// onNotificationClick is called when the user clicks on a notification.
 	onNotificationClick(evt: NotificationEvent) {
 		let notification = evt.notification
 		notification.close()
@@ -290,24 +263,52 @@ class MyServiceWorker {
 		})
 	}
 
+	// installCache is called when the service worker is installed for the first time.
 	installCache() {
-		// TODO: Implement a solution that caches resources with credentials: "same-origin"
-		return Promise.resolve()
-
-		// return caches.open(this.cache.version).then(cache => {
-		// 	return cache.addAll([
-		// 		"./",
-		// 		"./scripts",
-		// 		"https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw7z.ttf"
-		// 	])
-		// })
+		return caches.open(this.cache.version).then(cache => {
+			return cache.addAll([
+				"./scripts",
+				"./styles",
+			])
+		})
 	}
 
-	fromCache(request) {
+	// Serve network first.
+	// Fall back to cache.
+	async networkFirst(request: Request, network: Promise<Response>, onResponse: (r: Response) => Response): Promise<Response> {
+		let response: Response
+
+		try {
+			response = await network
+			console.log("Network HIT:", request.url)
+		} catch(error) {
+			response = await this.fromCache(request)
+			console.log("Network MISS:", request.url, error)
+		}
+
+		return onResponse(response)
+	}
+
+	// Serve cache first.
+	// Fall back to network.
+	async cacheFirst(request: Request, network: Promise<Response>, onResponse: (r: Response) => Response): Promise<Response> {
+		let response: Response
+
+		try {
+			response = await this.fromCache(request)
+			console.log("Cache HIT:", request.url)
+		} catch(error) {
+			response = await network
+			console.log("Cache MISS:", request.url, error)
+		}
+
+		return onResponse(response)
+	}
+
+	fromCache(request): Promise<Response> {
 		return caches.open(this.cache.version).then(cache => {
 			return cache.match(request).then(matching => {
 				if(matching) {
-					// console.log("Cache HIT:", request.url)
 					return Promise.resolve(matching)
 				}
 
@@ -316,7 +317,7 @@ class MyServiceWorker {
 		})
 	}
 
-	fromNetwork(request) {
+	fromNetwork(request): Promise<Response> {
 		return fetch(request)
 	}
 }
