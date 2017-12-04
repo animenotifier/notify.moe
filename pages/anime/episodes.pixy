@@ -1,23 +1,22 @@
-component AnimeEpisodes(episodes []*arn.AnimeEpisode, user *arn.User)
+component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, user *arn.User)
 	if len(episodes) > 0
 		.anime-section.mountable
 			h3.anime-section-name Episodes
 			.episodes
 				each episode in episodes
-					.episode.mountable(data-mountable-type="episode")
+					a.episode.ajax.mountable(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number), data-mountable-type="episode")
 						.episode-number
 							if episode.Number != -1
 								span= episode.Number
 						
-						.episode-title= episode.Title.Japanese
-							//- if episode.Title.Japanese != ""
-							//- 	Japanese(episode.Title.Japanese)
-							//- else
-							//- 	span -
+						.episode-title
+							if episode.Title.Japanese != ""
+								span= episode.Title.Japanese
+							else
+								span -
 						
 						if validator.IsValidDate(episode.AiringDate.Start)
 							.episode-airing-date-start.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
-			
 			
 			//- table.episodes
 			//- 	tbody

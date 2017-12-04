@@ -21,6 +21,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
+	"github.com/animenotifier/notify.moe/pages/episode"
 	"github.com/animenotifier/notify.moe/pages/explore"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/genre"
@@ -95,6 +96,7 @@ func Configure(app *aero.Application) {
 	l.Page("/anime/:id/characters", anime.Characters)
 	l.Page("/anime/:id/tracks", anime.Tracks)
 	l.Page("/anime/:id/edit", editanime.Get)
+	l.Page("/anime/:id/episode/:episode-number", episode.Get)
 
 	// Characters
 	l.Page("/character/:id", character.Get)

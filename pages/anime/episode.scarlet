@@ -4,18 +4,21 @@
 > 700px
 	.episodes
 		horizontal-wrap
+		justify-content space-around
 
 .episode
-	ui-element
 	vertical
-	button-hover
 	flex 0
-	flex-basis 150px
+	flex-basis 200px
 	margin 0.5rem
 	padding 0.5rem
+	overflow hidden
+	border-radius ui-element-border-radius
+	color text-color
 
-	// :hover
-	// 	background-color table-row-hover-background
+	:hover
+		color text-color
+		background-color reverse-light-hover-color
 
 .episode-number
 	display flex
@@ -33,12 +36,8 @@
 .episode-airing-date-start
 	display flex
 	justify-content center
-	font-size 0.8rem
+	font-size 0.7rem
 	opacity 0.6
-
-< 800px
-	.episode-airing-date-start
-		display none
 
 < 320px
 	.episode-actions

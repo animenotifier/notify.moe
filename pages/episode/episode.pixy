@@ -1,0 +1,9 @@
+component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User)
+	h1= episode.Title.Japanese
+	p
+		a.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+			img(src=anime.Image("medium"), alt=anime.Title.ByUser(user))
+		
+		if validator.IsValidDate(episode.AiringDate.Start)
+			.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
+	
