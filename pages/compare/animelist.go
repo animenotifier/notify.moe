@@ -33,7 +33,10 @@ func AnimeList(ctx *aero.Context) string {
 	countA := 0
 	countB := 0
 
-	for _, item := range a.AnimeList().Items {
+	animeListA := a.AnimeList()
+	animeListB := b.AnimeList()
+
+	for _, item := range animeListA.Items {
 		if item.Status == arn.AnimeListStatusPlanned {
 			continue
 		}
@@ -43,11 +46,11 @@ func AnimeList(ctx *aero.Context) string {
 		comparisons = append(comparisons, &utils.Comparison{
 			Anime: item.Anime(),
 			ItemA: item,
-			ItemB: b.AnimeList().Find(item.AnimeID),
+			ItemB: animeListB.Find(item.AnimeID),
 		})
 	}
 
-	for _, item := range b.AnimeList().Items {
+	for _, item := range animeListB.Items {
 		if item.Status == arn.AnimeListStatusPlanned {
 			continue
 		}
@@ -60,7 +63,7 @@ func AnimeList(ctx *aero.Context) string {
 
 		comparisons = append(comparisons, &utils.Comparison{
 			Anime: item.Anime(),
-			ItemA: a.AnimeList().Find(item.AnimeID),
+			ItemA: animeListA.Find(item.AnimeID),
 			ItemB: item,
 		})
 	}
