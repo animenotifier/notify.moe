@@ -113,8 +113,6 @@ class MyServiceWorker {
 			return evt.respondWith(this.fromNetwork(request))
 		}
 
-		console.log("Fetch:", request.url)
-
 		// Clear cache on authentication and fetch it normally
 		if(request.url.includes("/auth/") || request.url.includes("/logout")) {
 			return evt.respondWith(caches.delete(this.cache.version).then(() => fetch(request)))

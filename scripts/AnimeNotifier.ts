@@ -52,6 +52,7 @@ export class AnimeNotifier {
 		// Never remove src property on diffs
 		Diff.persistentAttributes.add("src")
 
+		// Is intersection observer supported?
 		if("IntersectionObserver" in window) {
 			// Enable lazy load
 			this.visibilityObserver = new IntersectionObserver(
@@ -449,6 +450,11 @@ export class AnimeNotifier {
 				}
 
 				element.removeEventListener(oldAction.trigger, oldAction.handler)
+			}
+
+			// This prevents default actions on links
+			if(actionTrigger === "click" && element.tagName === "A") {
+				element.onclick = null
 			}
 
 			if(!(actionName in actions)) {

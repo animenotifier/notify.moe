@@ -154,21 +154,21 @@ export class Application {
 
 		for(let i = 0; i < links.length; i++) {
 			let link = links[i] as HTMLElement
-
-			// link.classList.remove(this.ajaxClass)
-
 			let self = this
+
 			link.onclick = function(e) {
 				// Middle mouse button should have standard behaviour
-				if(e.which === 2)
+				if(e.which === 2) {
 					return
+				}
 
 				let url = this.getAttribute("href")
 
 				e.preventDefault()
 
-				if(!url || url === self.currentPath)
+				if(!url || url === self.currentPath) {
 					return
+				}
 
 				// Load requested page
 				self.load(url)
