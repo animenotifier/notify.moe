@@ -27,7 +27,6 @@
 // to force a real page reload.
 
 // Promises
-const RELOADS = new Map<string, Promise<Response>>()
 const CACHEREFRESH = new Map<string, Promise<void>>()
 
 // E-Tags that we served for a given URL
@@ -56,13 +55,14 @@ const EXCLUDECACHE = new Set<string>([
 	// Authorization paths /auth/ and /logout are not listed here because they are handled in a special way.
 ])
 
-
 // MyServiceWorker is the process that controls all the tabs in a browser.
 class MyServiceWorker {
 	cache: MyCache
+	reloads: Map<string, Promise<Response>>
 
 	constructor() {
 		this.cache = new MyCache("v-5")
+		this.reloads = new Map<string, Promise<Response>>()
 
 		self.addEventListener("install", (evt: InstallEvent) => evt.waitUntil(this.onInstall(evt)))
 		self.addEventListener("activate", (evt: any) => evt.waitUntil(this.onActivate(evt)))
@@ -110,8 +110,10 @@ class MyServiceWorker {
 
 		// If it's not a GET request, fetch it normally
 		if(request.method !== "GET") {
-			return evt.respondWith(fetch(request))
+			return evt.respondWith(this.fromNetwork(request))
 		}
+
+		console.log("Fetch:", request.url)
 
 		// Clear cache on authentication and fetch it normally
 		if(request.url.includes("/auth/") || request.url.includes("/logout")) {
@@ -121,7 +123,7 @@ class MyServiceWorker {
 		// Exclude certain URLs from being cached
 		for(let pattern of EXCLUDECACHE.keys()) {
 			if(request.url.includes(pattern)) {
-				return evt.respondWith(fetch(request))
+				return evt.respondWith(this.fromNetwork(request))
 			}
 		}
 
@@ -143,31 +145,34 @@ class MyServiceWorker {
 
 			CACHEREFRESH.set(request.url, cacheRefresh)
 
-			// Force reload page if styles changed
-			if(request.url.endsWith("/styles")) {
-				let servedETag = ETAGS.get(request.url)
-				let newETag = response.headers.get("ETag")
-				console.log("/styles fetched", servedETag, newETag)
+			// // Force reload page if styles changed
+			// if(request.url.endsWith("/styles")) {
+			// 	let servedETag = ETAGS.get(request.url)
+			// 	let newETag = response.headers.get("ETag")
+			// 	console.log("/styles fetched", servedETag, newETag)
 
-				if(servedETag && servedETag !== newETag) {
-					cacheRefresh.then(async () => {
-						console.log("tell client to reload style")
-						let client = await MyClient.get(evt.clientId)
-						client.reloadStyles()
-					})
-				}
-			}
+			// 	if(servedETag && servedETag !== newETag) {
+			// 		cacheRefresh.then(async () => {
+			// 			console.log("tell client to reload style")
+			// 			let client = await MyClient.get(evt.clientId)
+			// 			client.reloadStyles()
+			// 		})
+			// 	}
+			// }
 
 			return response
+		}).catch(error => {
+			console.log("Fetch error:", error)
+			throw error
 		})
 
 		// Save in map
-		RELOADS.set(request.url, refresh)
+		this.reloads.set(request.url, refresh)
 
 		// Forced reload
 		let servedETag = undefined
 
-		let onResponse = response => {
+		let onResponse = (response: Response) => {
 			servedETag = response.headers.get("ETag")
 			ETAGS.set(request.url, servedETag)
 			return response
@@ -177,13 +182,33 @@ class MyServiceWorker {
 			return evt.respondWith(refresh.then(onResponse))
 		}
 
-		// Try to serve cache first and fall back to network response
-		let networkOrCache = this.fromCache(request).then(onResponse).catch(error => {
-			// console.log("Cache MISS:", request.url)
-			return refresh
-		})
+		// Scripts and styles are server pushed on the initial response
+		// so we can use a network-first response for those.
+		if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
+			// Serve network first.
+			// Fall back to cache.
+			let networkResponse = refresh.then(response => {
+				console.log("Network HIT:", request.url)
+				return response
+			}).catch(error => {
+				console.log("Network MISS:", request.url)
+				return this.fromCache(request).then(onResponse)
+			})
 
-		return evt.respondWith(networkOrCache)
+			return evt.respondWith(networkResponse)
+		} else {
+			// Serve cache first.
+			// Fall back to network.
+			let cacheResponse = this.fromCache(request).then(response => {
+				console.log("Cache HIT:", request.url)
+				return onResponse(response)
+			}).catch(error => {
+				console.log("Cache MISS:", request.url)
+				return refresh
+			})
+
+			return evt.respondWith(cacheResponse)
+		}
 	}
 
 	async onMessage(evt: ServiceWorkerMessageEvent) {
@@ -290,6 +315,10 @@ class MyServiceWorker {
 			})
 		})
 	}
+
+	fromNetwork(request) {
+		return fetch(request)
+	}
 }
 
 // MyCache is the cache used by the service worker.
@@ -331,7 +360,7 @@ class MyClient {
 	// onDOMContentLoaded is called when the client sent this service worker
 	// a message that the page has been loaded.
 	onDOMContentLoaded(url: string) {
-		let refresh = RELOADS.get(url)
+		let refresh = serviceWorker.reloads.get(url)
 		let servedETag = ETAGS.get(url)
 
 		// If the user requests a sub-page we should prefetch the full page, too.
@@ -393,7 +422,7 @@ class MyClient {
 		})
 
 		// Save in map
-		RELOADS.set(fullPage.url, fullPageRefresh)
+		serviceWorker.reloads.set(fullPage.url, fullPageRefresh)
 	}
 
 	async reloadContent(url: string) {
@@ -410,7 +439,7 @@ class MyClient {
 	}
 
 	async reloadPage(url: string) {
-		let networkFetch = RELOADS.get(url.replace("/_/", "/"))
+		let networkFetch = serviceWorker.reloads.get(url.replace("/_/", "/"))
 
 		if(networkFetch) {
 			await networkFetch
