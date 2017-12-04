@@ -1,0 +1,36 @@
+.quote-page
+	vertical
+
+.quote-header
+	vertical
+
+.quote-sidebar
+	sidebar
+
+> 1250px
+	.quote-page
+		horizontal
+
+	.quote-sidebar
+		sidebar-medium
+
+> 1400px
+	.quote-sidebar
+		sidebar-big
+
+.quote-name,
+.quote-description
+	text-align left
+
+.quote-location
+	width 100%
+	height 300px
+
+.quote-character
+	horizontal-wrap
+
+.quote-character-item
+	anime-mini-item
+
+.quote-character-item-image
+	anime-mini-item-image

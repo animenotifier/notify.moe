@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
 	QuoteTabs(quote, user)
 
