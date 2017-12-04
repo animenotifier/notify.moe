@@ -11,7 +11,7 @@
 //                                 <------
 //                                 response (network)
 //         <-------
-//         response
+//         response (network)
 //
 // -> Diff cache with network response.
 
@@ -104,6 +104,7 @@ class MyServiceWorker {
 		])
 	}
 
+	// onRequest intercepts all browser requests
 	onRequest(evt: FetchEvent) {
 		let request = evt.request as Request
 
