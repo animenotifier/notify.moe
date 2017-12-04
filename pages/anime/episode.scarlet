@@ -8,23 +8,23 @@
 
 .episode
 	vertical
+	ui-element
+	button-hover
 	flex 0
 	flex-basis 190px
 	margin 0.5rem
 	padding 0.5rem
 	overflow hidden
-	border ui-border
-	border-radius ui-element-border-radius
 	color text-color
 	box-shadow shadow-light
 
 	[data-available="false"]
+		:hover
+			color text-color
+			background ui-background
+
 		&.mounted
 			opacity 0.25 !important
-
-	:hover
-		color text-color
-		background-color reverse-light-hover-color
 
 .episode-number
 	display flex
