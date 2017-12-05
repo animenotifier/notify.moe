@@ -3,22 +3,22 @@ component OsuRankingList(users []*arn.User)
 
 	UsersTabs
 
-	table.osu-ranking-list
+	table.ranking-list
 		thead
 			tr.mountable
 				th #
 				th Player
 				th Name
-				th.osu-ranking-pp Performance
-				th.osu-ranking-accuracy Accuracy
+				th.ranking-pp Performance
+				th.ranking-accuracy Accuracy
 		tbody
 			for index, user := range users
-				tr.osu-ranking.mountable
+				tr.ranking.mountable
 					td= toString(index + 1) + "."
 					td
 						Avatar(user)
 					td
 						a.ajax(href=user.Link())= user.Nick
-					td.osu-ranking-pp= toString(int(user.Accounts.Osu.PP + 0.5)) + " pp"
-					td.osu-ranking-accuracy= fmt.Sprintf("%.1f", user.Accounts.Osu.Accuracy) + "%"
+					td.ranking-score= toString(int(user.Accounts.Osu.PP + 0.5)) + " pp"
+					td.ranking-accuracy= fmt.Sprintf("%.1f", user.Accounts.Osu.Accuracy) + "%"
 				

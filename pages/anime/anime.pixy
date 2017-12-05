@@ -238,4 +238,4 @@ component AnimeInformation(anime *arn.Anime)
 	//- 					a.ajax(href=company.Link())= company.Name.English
 
 component FriendEntry(friend *arn.User, listItems map[*arn.User]*arn.AnimeListItem)
-	CustomAvatar(friend, listItems[friend].Link(friend.Nick), friend.Nick + " => " + listItems[friend].Status + " | " + toString(listItems[friend].Episodes) + " eps | " + fmt.Sprintf("%.1f", listItems[friend].Rating.Overall) + " rating")
+	CustomAvatar(friend, friend.Link(), friend.Nick + " => " + listItems[friend].Status + " | " + toString(listItems[friend].Episodes) + " eps | " + fmt.Sprintf("%.1f", listItems[friend].Rating.Overall) + " rating")

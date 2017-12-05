@@ -1,12 +1,16 @@
-.osu-ranking-list
+.ranking-list
 	max-width 400px
 
-.osu-ranking
+	.user-image
+		width calc(avatar-size / 2)
+		height calc(avatar-size / 2)
+
+.ranking
 	width 100%
 
 	td
 		vertical-align middle
 
-.osu-ranking-pp,
-.osu-ranking-accuracy
+.ranking-score,
+.ranking-accuracy
 	text-align right

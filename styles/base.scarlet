@@ -7,9 +7,9 @@ html
 	html
 		font-size 90%
 
-> 1400px
-	html
-		font-size 100%
+// > 1400px
+// 	html
+// 		font-size 100%
 
 body
 	tab-size 4
