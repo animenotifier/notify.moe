@@ -8,6 +8,7 @@ component OverwatchRankingList(users []*arn.User)
 			tr.mountable
 				th #
 				th Player
+				th.ranking-tier Tier
 				th.ranking-score Skill Rating
 		tbody
 			for index, user := range users
@@ -16,5 +17,6 @@ component OverwatchRankingList(users []*arn.User)
 					td.ranking-user
 						Avatar(user)
 						a.ajax(href=user.Link())= user.Nick
+					td.ranking-tier= strings.Title(user.Accounts.Overwatch.Tier)
 					td.ranking-score= strconv.Itoa(user.Accounts.Overwatch.SkillRating) + " SR"
 				
