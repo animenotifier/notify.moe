@@ -1,0 +1,21 @@
+.ranking-list
+	max-width 400px
+
+.ranking
+	width 100%
+
+	td
+		vertical-align middle
+
+.ranking-user
+	horizontal
+	align-items center
+
+	.user-image
+		width calc(avatar-size / 2)
+		height calc(avatar-size / 2)
+		margin-right 1rem
+
+.ranking-score,
+.ranking-accuracy
+	text-align right

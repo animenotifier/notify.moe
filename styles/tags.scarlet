@@ -1,7 +1,7 @@
 mixin tag-dimensions
 	padding 0.4rem 0.8rem
 	margin 0.4rem
-	height 40px
+	height 38px
 
 .tags
 	horizontal-wrap
