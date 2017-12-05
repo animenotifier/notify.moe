@@ -8,7 +8,7 @@ component OsuRankingList(users []*arn.User)
 			tr.mountable
 				th #
 				th Player
-				th.ranking-pp Performance
+				th.ranking-score Performance
 				th.ranking-accuracy Accuracy
 		tbody
 			for index, user := range users

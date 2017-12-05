@@ -8,7 +8,7 @@ component OverwatchRankingList(users []*arn.User)
 			tr.mountable
 				th #
 				th Player
-				th.ranking-pp Skill Rating
+				th.ranking-score Skill Rating
 		tbody
 			for index, user := range users
 				tr.ranking.mountable
