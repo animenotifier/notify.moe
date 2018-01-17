@@ -28,5 +28,9 @@ func Edit(ctx *aero.Context) string {
 		},
 	}
 
+	if quote.Character() != nil {
+		ctx.Data.(*arn.OpenGraph).Tags["og:image"] = quote.Character().Image
+	}
+
 	return ctx.HTML(components.QuoteTabs(quote, user) + editform.Render(quote, "Edit quote", user))
 }

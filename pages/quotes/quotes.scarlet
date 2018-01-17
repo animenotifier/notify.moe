@@ -1,0 +1,87 @@
+.quotes
+	horizontal-wrap
+	justify-content space-around
+
+.quote
+	vertical
+	flex 1
+	flex-basis 500px
+	padding 1rem
+
+.quote-content
+	vertical
+	border-radius 3px
+	border-left 5px solid quote-side-border-color
+	overflow hidden
+	box-shadow shadow-light
+	align-items stretch
+	align-content stretch
+
+.quote-character
+	horizontal
+	align-self flex-end
+	align-items baseline
+	justify-content space-around
+	padding 0 1em 1em 0
+
+	span
+		opacity 0.65
+
+	a
+		display inline
+		margin-left 0.5em
+
+
+.quote-footer
+	text-align center
+	margin-bottom 1rem
+	margin-top 0.4rem
+	font-size 0.9em
+
+	span
+		opacity 0.65
+
+.quotation
+	height 100%
+	display flex
+	flex-grow 1
+	align-items stretch
+	align-content stretch
+
+blockquote
+	flex-grow 1
+	padding 1em
+
+	p
+		line-height 2em
+
+		q
+			quotes "\201C""\201D"
+
+			:before
+				color quote-color
+				content open-quote
+				font-size 4em
+				line-height 0.1em
+				margin-right 0.25em
+				vertical-align -0.4em
+
+			:after
+				color quote-color
+				content close-quote
+				font-size 4em
+				line-height 0.1em
+				margin-left  0.25em
+				vertical-align -0.4em
+
+
+.character
+	display none !important
+
+> 800px
+	.character
+		margin 0.5em 0 0 0.5em !important
+		display block !important
+
+	.quote-character a
+		display none

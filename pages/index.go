@@ -107,7 +107,10 @@ func Configure(app *aero.Application) {
 	// Quotes
 	l.Page("/quote/:id", quote.Get)
 	l.Page("/quote/:id/edit", quote.Edit)
-	l.Page("/quotes", quotes.Get)
+	l.Page("/quotes", quotes.Latest)
+	l.Page("/quotes/from/:index", quotes.LatestFrom)
+	l.Page("/quotes/best", quotes.Best)
+	l.Page("/quotes/best/from/:index", quotes.BestFrom)
 
 	// Calendar
 	l.Page("/calendar", calendar.Get)

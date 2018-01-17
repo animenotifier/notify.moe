@@ -1,34 +1,34 @@
 package quotes
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
-	"net/http"
-	"strconv"
 )
 
-const maxQuotes = 12
-
-// Latest renders the quotes page.
-func Latest(ctx *aero.Context) string {
+// Best renders the quotes page ordered by the most favorites first.
+func Best(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	quotes := arn.FilterQuotes(func(track *arn.Quote) bool {
 		return !track.IsDraft && len(track.Description) > 0
 	})
 
-	arn.SortQuotesLatestFirst(quotes)
+	arn.SortQuotesPopularFirst(quotes)
 
 	if len(quotes) > maxQuotes {
 		quotes = quotes[:maxQuotes]
 	}
+
 	return ctx.HTML(components.Quotes(quotes, maxQuotes, user))
 }
 
-// LatestFrom renders the quotes from the given index.
-func LatestFrom(ctx *aero.Context) string {
+// BestFrom renders the quotes from the given index.
+func BestFrom(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	index, err := ctx.GetInt("index")
 
@@ -44,7 +44,7 @@ func LatestFrom(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Invalid start index (maximum is "+strconv.Itoa(len(allQuotes))+")", nil)
 	}
 
-	arn.SortQuotesLatestFirst(allQuotes)
+	arn.SortQuotesPopularFirst(allQuotes)
 
 	quotes := allQuotes[index:]
 

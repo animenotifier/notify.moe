@@ -19,7 +19,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Quote not found", err)
 	}
 
-	character, err := arn.GetCharacter(quote.Character)
+	character, err := arn.GetCharacter(quote.CharacterId)
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Quote not found", err)
 	}

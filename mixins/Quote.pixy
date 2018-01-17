@@ -1,0 +1,23 @@
+component Quote(quote *arn.Quote)
+	.quote.mountable(id=quote.ID)
+		QuoteContent(quote)
+		QuoteFooter(quote)
+
+component QuoteContent(quote *arn.Quote)
+	.quote-content
+		a.quotation.ajax(href="/quote/" + quote.ID)
+			blockquote
+				p
+					q= quote.Description
+		if quote.Character() != nil
+			footer.quote-character
+				span= "by"
+				a.ajax(href="/character/" + quote.Character().ID)= quote.Character().Name
+				CharacterSmall(quote.Character())
+
+component QuoteFooter(quote *arn.Quote)
+	.quote-footer
+		span  posted 
+		span.utc-date(data-date=quote.Created)
+		span  by 
+		a.ajax(href=quote.Creator().Link())= quote.Creator().Nick + " "

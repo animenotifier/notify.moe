@@ -1,5 +1,7 @@
-component Quotes(quotes []*arn.Quote, user *arn.User)
+component Quotes(quotes []*arn.Quote, quotesPerPage int, user *arn.User)
 	h1.page-title Quotes
+
+	QuotesTabs
 
 	.corner-buttons
 		if user != nil
@@ -12,6 +14,18 @@ component Quotes(quotes []*arn.Quote, user *arn.User)
 					Icon("pencil")
 					span Edit draft
 
-	ul
-		each quote in quotes
-			li= quote.Description
+	#load-more-target.quotes
+		QuotesScrollable(quotes, user)
+
+	if len(quotes) == quotesPerPage
+		.buttons
+			LoadMore(quotesPerPage)
+
+component QuotesScrollable(quotes []*arn.Quote, user *arn.User)
+	each quote in quotes
+		Quote(quote)
+
+component QuotesTabs
+	.tabs
+		Tab("Latest", "quote-left", "/quotes")
+		Tab("Best", "heart", "/quotes/best")
