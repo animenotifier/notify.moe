@@ -87,6 +87,30 @@ var routeTests = map[string][]string{
 		"/search/Dragon Ball",
 	},
 
+	"/quote/:id": []string{
+		"/quote/-8I3JKykR",
+	},
+
+	"/quote/:id/edit": []string{
+		"/quote/-8I3JKykR/edit",
+	},
+
+	"/quotes": []string{
+		"/quotes",
+	},
+
+	"/quotes/best": []string{
+		"/quotes/best",
+	},
+
+	"/quotes/from/:index": []string{
+		"/quotes/from/2",
+	},
+
+	"/quotes/best/from/:index": []string{
+		"/quotes/best/from/2",
+	},
+
 	"/soundtrack/:id": []string{
 		"/soundtrack/h0ac8sKkg",
 	},
@@ -95,8 +119,20 @@ var routeTests = map[string][]string{
 		"/soundtrack/h0ac8sKkg/edit",
 	},
 
+	"/soundtracks": []string{
+		"/soundtracks",
+	},
+
+	"/soundtracks/best": []string{
+		"/soundtracks/best",
+	},
+
 	"/soundtracks/from/:index": []string{
 		"/soundtracks/from/12",
+	},
+
+	"/soundtracks/best/from/:index": []string{
+		"/soundtracks/best/from/12",
 	},
 
 	"/character/:id": []string{

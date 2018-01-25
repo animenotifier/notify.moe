@@ -41,6 +41,16 @@
 .character-anime-item-image
 	anime-mini-item-image
 
+.character-quotes
+	horizontal-wrap
+	justify-content space-around
+
+	.quote
+		flex-basis 400px !important
+
+		footer
+			display none !important
+
 > 1250px
 	.character-page
 		horizontal

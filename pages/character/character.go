@@ -36,6 +36,13 @@ func Get(ctx *aero.Context) string {
 		return characterAnime[i].StartDate < characterAnime[j].StartDate
 	})
 
+	// Quotes
+	quotes := arn.FilterQuotes(func(quote *arn.Quote) bool {
+		return !quote.IsDraft && len(quote.Description) > 0 && quote.CharacterId == character.ID
+	})
+
+	arn.SortQuotesPopularFirst(quotes)
+
 	// Set OpenGraph attributes
 	description := character.Description
 
@@ -61,5 +68,5 @@ func Get(ctx *aero.Context) string {
 		},
 	}
 
-	return ctx.HTML(components.CharacterDetails(character, characterAnime, user))
+	return ctx.HTML(components.CharacterDetails(character, characterAnime, quotes, user))
 }
