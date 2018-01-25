@@ -1,36 +1,50 @@
-.quote-page
+quote-full-page
 	vertical
 
-.quote-header
+.quote-main-column
 	vertical
+	flex 1
 
-.quote-sidebar
+.quote-side-column
 	sidebar
 
 > 1250px
-	.quote-page
+	.quote-full-page
 		horizontal
 
-	.quote-sidebar
+	.quote-side-column
 		sidebar-medium
 
 > 1400px
-	.quote-sidebar
+	.quote-side-column
 		sidebar-big
 
-.quote-name,
-.quote-description
-	text-align left
+.quote-media
+	iframe
+		width 100%
 
-.quote-location
-	width 100%
-	height 300px
+.quote-info-table
+	margin 0
+// width 100%
+// max-width 600px
 
-.quote-character
+.quote-info-value
+	text-align right
+
+.quote-section
+	margin-top 1rem
+
+	:first-child
+		margin-top 0 !important
+
+.quote-section-name
+	font-weight bold
+
+.quote-anime-list
 	horizontal-wrap
 
-.quote-character-item
+.quote-anime-list-item
 	anime-mini-item
 
-.quote-character-item-image
+.quote-anime-list-item-image
 	anime-mini-item-image

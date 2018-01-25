@@ -1,14 +1,59 @@
 component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
 	QuoteTabs(quote, user)
 
-	.quote-page
-		.quote-header
-			h1.quote-name.mountable= quote.Description
-			h3.mountable Characters
-			.quote-character.mountable
-				Character(character)
+	.quote-full-page
+
+		.quote-main-column
+			QuoteMainColumn(quote, user)
+		.quote-side-column
+			QuoteSideColumn(quote, user)
+
+component QuoteMainColumn(quote *arn.Quote, user *arn.User)
+	.widget-form
+		QuoteContent(quote)
+
+	.footer.mountable
+		if quote.EditedBy != ""
+			span Edited 
+			span.utc-date(data-date=quote.Edited)
+			span  by 
+			a.ajax(href=quote.EditedByUser().Link())= quote.EditedByUser().Nick
+		else
+			span Posted 
+			span.utc-date(data-date=quote.Created)
+			span  by 
+			a.ajax(href=quote.Creator().Link())= quote.Creator().Nick
+			span .
+
+component QuoteSideColumn(quote *arn.Quote, user *arn.User)
+	QuoteInformation(quote, user)
+
+component QuoteInformation(quote *arn.Quote, user *arn.User)
+	section.quote-section.mountable
+		h3.quote-section-name Information
+		table.quote-info-table
+			if quote.Anime() != nil
+				tr.mountable(data-mountable-type="info")
+					td.quote-info-key Anime:
+					td.quote-info-value
+						QuoteAnime(quote.Anime(), user)
+
+			if quote.Episode != 0
+				tr.mountable(data-mountable-type="info")
+					td.quote-info-key Episode:
+					td.quote-info-value= quote.Episode
+
+			if quote.Time != 0
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Time:
+					td.anime-info-value= strconv.Itoa(quote.Time) + " min"
 
 component QuoteTabs(quote *arn.Quote, user *arn.User)
 	.tabs
+		TabLikeQuote(strconv.Itoa(len(quote.Likes)), "heart", quote, user)
 		Tab("Quote", "building", quote.Link())
 		Tab("Edit", "pencil", quote.Link() + "/edit")
+
+component QuoteAnime(anime *arn.Anime, user *arn.User)
+	a.quote-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+		img.quote-anime-list-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
