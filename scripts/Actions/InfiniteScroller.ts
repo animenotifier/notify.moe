@@ -3,7 +3,7 @@ import { AnimeNotifier } from "../AnimeNotifier"
 // Load more
 export function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 	// Prevent firing this event multiple times
-	if(arn.isLoading || button.disabled) {
+	if(arn.isLoading || button.disabled || button.classList.contains("hidden")) {
 		return
 	}
 
