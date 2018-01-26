@@ -51,7 +51,7 @@ component QuoteInformation(quote *arn.Quote, user *arn.User)
 component QuoteTabs(quote *arn.Quote, user *arn.User)
 	.tabs
 		TabLikeQuote(strconv.Itoa(len(quote.Likes)), "heart", quote, user)
-		Tab("Quote", "building", quote.Link())
+		Tab("Quote", "quote-left", quote.Link())
 		Tab("Edit", "pencil", quote.Link() + "/edit")
 
 component QuoteAnime(anime *arn.Anime, user *arn.User)
