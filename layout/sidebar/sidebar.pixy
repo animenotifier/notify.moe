@@ -17,6 +17,7 @@ component Sidebar(user *arn.User)
 		SidebarButton("Explore", "/explore", "th")
 		SidebarButton("Calendar", "/calendar", "calendar")
 		SidebarButton("Soundtracks", "/soundtracks", "headphones")
+		SidebarButton("Quotes", "/quotes", "quote-left")
 		SidebarButton("Users", "/users", "globe")
 
 		if user != nil
