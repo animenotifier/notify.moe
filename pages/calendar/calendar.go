@@ -50,6 +50,10 @@ func Get(ctx *aero.Context) string {
 
 	// Add anime episodes to the days
 	for animeEpisodes := range arn.StreamAnimeEpisodes() {
+		if animeEpisodes.Anime().Status == "finished" {
+			continue
+		}
+
 		for _, episode := range animeEpisodes.Items {
 			if !validator.IsValidDate(episode.AiringDate.Start) {
 				continue
