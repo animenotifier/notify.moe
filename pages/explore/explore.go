@@ -5,11 +5,13 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"time"
+	"strconv"
 )
 
 // Get ...
 func Get(ctx *aero.Context) string {
-	year := "2017"
+	year := strconv.Itoa(time.Now().Year())
 	status := "current"
 	typ := "tv"
 	results := filterAnime(year, status, typ)
