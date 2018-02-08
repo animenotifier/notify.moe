@@ -6,4 +6,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 		
 		if validator.IsValidDate(episode.AiringDate.Start)
 			.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
-	
+	ul
+		for _, link := range episode.Links
+			a(href=link, title="Watch episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
+				RawIcon("eye")
