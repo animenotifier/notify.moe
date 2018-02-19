@@ -9,6 +9,8 @@ BUILDPATCHES=@./patches/build.sh
 BUILDBOTS=@./bots/build.sh
 TSCMD=@tsc
 IPTABLES=@sudo iptables
+
+# Determine the name of the platform
 OSNAME=
 
 ifeq ($(OS),Windows_NT)
@@ -23,6 +25,7 @@ else
 	endif
 endif
 
+# Build targets
 server:
 	$(GOBUILD)
 jobs:
@@ -50,7 +53,6 @@ endif
 	go install github.com/aerogo/run
 versions:
 	@go version
-	@asd --version
 assets:
 	$(TSCMD)
 	@pack
