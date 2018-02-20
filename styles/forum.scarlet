@@ -17,6 +17,10 @@ post-content-padding-y = 0.75rem
 		.post-author
 			margin-bottom 0
 
+		.user-image
+			width 42px
+			height 42px
+
 .post-content
 	ui-element
 	flex-grow 1
