@@ -61,7 +61,7 @@ class MyServiceWorker {
 	reloads: Map<string, Promise<Response>>
 
 	constructor() {
-		this.cache = new MyCache("v-5")
+		this.cache = new MyCache("v-6")
 		this.reloads = new Map<string, Promise<Response>>()
 
 		self.addEventListener("install", (evt: InstallEvent) => evt.waitUntil(this.onInstall(evt)))
@@ -106,80 +106,82 @@ class MyServiceWorker {
 
 	// onRequest intercepts all browser requests
 	onRequest(evt: FetchEvent) {
-		let request = evt.request as Request
+		return evt.respondWith(this.fromNetwork(evt.request))
 
-		// If it's not a GET request, fetch it normally
-		if(request.method !== "GET") {
-			return evt.respondWith(this.fromNetwork(request))
-		}
+		// let request = evt.request as Request
 
-		// Clear cache on authentication and fetch it normally
-		if(request.url.includes("/auth/") || request.url.includes("/logout")) {
-			return evt.respondWith(caches.delete(this.cache.version).then(() => fetch(request)))
-		}
+		// // If it's not a GET request, fetch it normally
+		// if(request.method !== "GET") {
+		// 	return evt.respondWith(this.fromNetwork(request))
+		// }
 
-		// Exclude certain URLs from being cached
-		for(let pattern of EXCLUDECACHE.keys()) {
-			if(request.url.includes(pattern)) {
-				return evt.respondWith(this.fromNetwork(request))
-			}
-		}
+		// // Clear cache on authentication and fetch it normally
+		// if(request.url.includes("/auth/") || request.url.includes("/logout")) {
+		// 	return evt.respondWith(caches.delete(this.cache.version).then(() => fetch(request)))
+		// }
 
-		// If the request included the header "X-CacheOnly", return a cache-only response.
-		// This is used in reloads to avoid generating a 2nd request after a cache refresh.
-		if(request.headers.get("X-CacheOnly") === "true") {
-			return evt.respondWith(this.fromCache(request))
-		}
+		// // Exclude certain URLs from being cached
+		// for(let pattern of EXCLUDECACHE.keys()) {
+		// 	if(request.url.includes(pattern)) {
+		// 		return evt.respondWith(this.fromNetwork(request))
+		// 	}
+		// }
 
-		// Save the served E-Tag when onResponse is called
-		let servedETag = undefined
+		// // If the request included the header "X-CacheOnly", return a cache-only response.
+		// // This is used in reloads to avoid generating a 2nd request after a cache refresh.
+		// if(request.headers.get("X-CacheOnly") === "true") {
+		// 	return evt.respondWith(this.fromCache(request))
+		// }
 
-		let onResponse = (response: Response | null) => {
-			if(response) {
-				servedETag = response.headers.get("ETag")
-				ETAGS.set(request.url, servedETag)
-			}
+		// // Save the served E-Tag when onResponse is called
+		// let servedETag = undefined
 
-			return response
-		}
+		// let onResponse = (response: Response | null) => {
+		// 	if(response) {
+		// 		servedETag = response.headers.get("ETag")
+		// 		ETAGS.set(request.url, servedETag)
+		// 	}
 
-		let saveResponseInCache = response => {
-			let clone = response.clone()
+		// 	return response
+		// }
 
-			// Save the new version of the resource in the cache
-			let cacheRefresh = this.cache.store(request, clone).catch(err => {
-				console.error(err)
-				// TODO: Tell client that the quota is exceeded (disk full).
-			})
+		// let saveResponseInCache = response => {
+		// 	let clone = response.clone()
 
-			CACHEREFRESH.set(request.url, cacheRefresh)
-			return response
-		}
+		// 	// Save the new version of the resource in the cache
+		// 	let cacheRefresh = this.cache.store(request, clone).catch(err => {
+		// 		console.error(err)
+		// 		// TODO: Tell client that the quota is exceeded (disk full).
+		// 	})
 
-		// Start fetching the request
-		let network =
-			fetch(request)
-			.then(saveResponseInCache)
-			.catch(error => {
-				console.log("Fetch error:", error)
-				throw error
-			})
+		// 	CACHEREFRESH.set(request.url, cacheRefresh)
+		// 	return response
+		// }
 
-		// Save in map
-		this.reloads.set(request.url, network)
+		// // Start fetching the request
+		// let network =
+		// 	fetch(request)
+		// 	.then(saveResponseInCache)
+		// 	.catch(error => {
+		// 		console.log("Fetch error:", error)
+		// 		throw error
+		// 	})
 
-		if(request.headers.get("X-Reload") === "true") {
-			return evt.respondWith(network)
-		}
+		// // Save in map
+		// this.reloads.set(request.url, network)
 
-		// Scripts and styles are server pushed on the initial response
-		// so we can use a network-first response without an additional round-trip.
-		// This causes the browser to always load the most recent scripts and styles.
-		if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
-			return evt.respondWith(this.networkFirst(request, network, onResponse))
-		}
+		// if(request.headers.get("X-Reload") === "true") {
+		// 	return evt.respondWith(network)
+		// }
 
-		return evt.respondWith(this.cacheFirst(request, network, onResponse))
+		// // Scripts and styles are server pushed on the initial response
+		// // so we can use a network-first response without an additional round-trip.
+		// // This causes the browser to always load the most recent scripts and styles.
+		// if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
+		// 	return evt.respondWith(this.networkFirst(request, network, onResponse))
+		// }
+
+		// return evt.respondWith(this.cacheFirst(request, network, onResponse))
 	}
 
 	// onMessage is called when the service worker receives a message from a client (browser tab).
