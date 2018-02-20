@@ -374,50 +374,50 @@ class MyClient {
 	// onDOMContentLoaded is called when the client sent this service worker
 	// a message that the page has been loaded.
 	onDOMContentLoaded(url: string) {
-		let refresh = serviceWorker.reloads.get(url)
-		let servedETag = ETAGS.get(url)
+		// let refresh = serviceWorker.reloads.get(url)
+		// let servedETag = ETAGS.get(url)
 
-		// If the user requests a sub-page we should prefetch the full page, too.
-		if(url.includes("/_/") && !url.includes("/_/search/")) {
-			var prefetch = true
+		// // If the user requests a sub-page we should prefetch the full page, too.
+		// if(url.includes("/_/") && !url.includes("/_/search/")) {
+		// 	var prefetch = true
 
-			for(let pattern of EXCLUDECACHE.keys()) {
-				if(url.includes(pattern)) {
-					prefetch = false
-					break
-				}
-			}
+		// 	for(let pattern of EXCLUDECACHE.keys()) {
+		// 		if(url.includes(pattern)) {
+		// 			prefetch = false
+		// 			break
+		// 		}
+		// 	}
 
-			if(prefetch) {
-				this.prefetchFullPage(url)
-			}
-		}
+		// 	if(prefetch) {
+		// 		this.prefetchFullPage(url)
+		// 	}
+		// }
 
-		if(!refresh || !servedETag) {
-			return Promise.resolve()
-		}
+		// if(!refresh || !servedETag) {
+		// 	return Promise.resolve()
+		// }
 
-		return refresh.then(async (response: Response) => {
-			// When the actual network request was used by the client, response.bodyUsed is set.
-			// In that case the client is already up to date and we don"t need to tell the client to do a refresh.
-			if(response.bodyUsed) {
-				return
-			}
+		// return refresh.then(async (response: Response) => {
+		// 	// When the actual network request was used by the client, response.bodyUsed is set.
+		// 	// In that case the client is already up to date and we don"t need to tell the client to do a refresh.
+		// 	if(response.bodyUsed) {
+		// 		return
+		// 	}
 
-			// Get the ETag of the cached response we sent to the client earlier.
-			let eTag = response.headers.get("ETag")
+		// 	// Get the ETag of the cached response we sent to the client earlier.
+		// 	let eTag = response.headers.get("ETag")
 
-			// Update ETag
-			ETAGS.set(url, eTag)
+		// 	// Update ETag
+		// 	ETAGS.set(url, eTag)
 
-			// If the ETag changed, we need to do a reload.
-			if(eTag !== servedETag) {
-				return this.reloadContent(url)
-			}
+		// 	// If the ETag changed, we need to do a reload.
+		// 	if(eTag !== servedETag) {
+		// 		return this.reloadContent(url)
+		// 	}
 
-			// Do nothing
-			return Promise.resolve()
-		})
+		// 	// Do nothing
+		// 	return Promise.resolve()
+		// })
 	}
 
 	prefetchFullPage(url: string) {
