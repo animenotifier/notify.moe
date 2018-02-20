@@ -45,16 +45,19 @@ func configureAssets(app *aero.Application) {
 
 	// Favicon
 	app.Get("/favicon.ico", func(ctx *aero.Context) string {
+		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
 		return ctx.File("images/brand/64.png")
 	})
 
 	// Images
 	app.Get("/images/*file", func(ctx *aero.Context) string {
+		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
 		return ctx.File("images" + ctx.Get("file"))
 	})
 
 	// Videos
 	app.Get("/videos/*file", func(ctx *aero.Context) string {
+		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
 		return ctx.File("videos" + ctx.Get("file"))
 	})
 
