@@ -27,7 +27,6 @@ var jobs = map[string]time.Duration{
 	"avatars":          1 * time.Hour,
 	"test":             1 * time.Hour,
 	"twist":            2 * time.Hour,
-	"search-index":     2 * time.Hour,
 	"refresh-episodes": 10 * time.Hour,
 	"refresh-osu":      12 * time.Hour,
 	"sync-anime":       12 * time.Hour,
