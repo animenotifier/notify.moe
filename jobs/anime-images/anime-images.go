@@ -25,11 +25,13 @@ var ticker = time.NewTicker(50 * time.Millisecond)
 // Shell parameters
 var from int
 var to int
+var useCache bool
 
 // Shell flags
 func init() {
 	flag.IntVar(&from, "from", 0, "From index")
 	flag.IntVar(&to, "to", 0, "To index")
+	flag.BoolVar(&useCache, "cache", false, "Use cache")
 	flag.Parse()
 }
 
@@ -83,8 +85,12 @@ func work(anime *arn.Anime) error {
 
 	kitsuOriginal := fmt.Sprintf("https://media.kitsu.io/anime/poster_images/%s/original", anime.ID)
 
-	system := ipo.System{
-		Inputs: []ipo.Input{
+	// Define the input sources
+	sources := []ipo.Input{}
+
+	// If we use the file system cache, start by searching those files
+	if useCache {
+		sources = append(sources,
 			&inputs.FileSystemImage{
 				URL: path.Join(originals, anime.ID+".png"),
 			},
@@ -97,19 +103,28 @@ func work(anime *arn.Anime) error {
 			&inputs.FileSystemImage{
 				URL: path.Join(originals, anime.ID+".gif"),
 			},
-			&inputs.NetworkImage{
-				URL: kitsuOriginal + anime.ImageExtension,
-			},
-			&inputs.NetworkImage{
-				URL: kitsuOriginal + ".png",
-			},
-			&inputs.NetworkImage{
-				URL: kitsuOriginal + ".jpg",
-			},
-			&inputs.NetworkImage{
-				URL: kitsuOriginal + ".jpeg",
-			},
+		)
+	}
+
+	// Afterwards, use the network sources
+	sources = append(sources,
+		&inputs.NetworkImage{
+			URL: kitsuOriginal + anime.ImageExtension,
 		},
+		&inputs.NetworkImage{
+			URL: kitsuOriginal + ".png",
+		},
+		&inputs.NetworkImage{
+			URL: kitsuOriginal + ".jpg",
+		},
+		&inputs.NetworkImage{
+			URL: kitsuOriginal + ".jpeg",
+		},
+	)
+
+	// Define the system
+	system := ipo.System{
+		Inputs: sources,
 		Outputs: []ipo.Output{
 			// Original
 			&outputs.ImageFile{
