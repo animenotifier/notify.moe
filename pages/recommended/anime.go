@@ -1,6 +1,7 @@
 package recommended
 
 import (
+	"fmt"
 	"net/http"
 	"sort"
 
@@ -9,7 +10,10 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-const maxRecommendations = 20
+const (
+	maxRecommendations = 20
+	worstGenreCount    = 5
+)
 
 // Anime shows a list of recommended anime.
 func Anime(ctx *aero.Context) string {
@@ -23,15 +27,16 @@ func Anime(ctx *aero.Context) string {
 	animeList := user.AnimeList()
 	genreItems := animeList.Genres()
 	genreAffinity := map[string]float64{}
+	worstGenres := []string{}
 
 	for genre, animeListItems := range genreItems {
 		affinity := 0.0
 
 		for _, item := range animeListItems {
-			if item.Status == arn.AnimeListStatusDropped {
-				affinity -= 5.0
-				continue
-			}
+			// if item.Status == arn.AnimeListStatusDropped {
+			// 	affinity -= 5.0
+			// 	continue
+			// }
 
 			if item.Rating.Overall != 0 {
 				affinity += item.Rating.Overall
@@ -41,7 +46,18 @@ func Anime(ctx *aero.Context) string {
 		}
 
 		genreAffinity[genre] = affinity
+		worstGenres = append(worstGenres, genre)
 	}
+
+	sort.Slice(worstGenres, func(i, j int) bool {
+		return genreAffinity[worstGenres[i]] < genreAffinity[worstGenres[j]]
+	})
+
+	if len(worstGenres) > worstGenreCount {
+		worstGenres = worstGenres[:worstGenreCount]
+	}
+
+	fmt.Println(worstGenres)
 
 	// Get all anime
 	recommendations := arn.AllAnime()
@@ -51,6 +67,11 @@ func Anime(ctx *aero.Context) string {
 
 	// Calculate affinity for each anime
 	for _, anime := range recommendations {
+		// Skip anime that are upcoming
+		if anime.Status == "upcoming" {
+			continue
+		}
+
 		// Skip anime from my list (except planned anime)
 		existing := animeList.Find(anime.ID)
 
@@ -58,26 +79,41 @@ func Anime(ctx *aero.Context) string {
 			continue
 		}
 
-		affinity[anime.ID] = float64(anime.Popularity.Total())
+		// Skip anime that don't have one of the top genres for that user
+		worstGenreFound := false
 
-		// animeGenresAffinity := 0.0
+		for _, genre := range anime.Genres {
+			if arn.Contains(worstGenres, genre) {
+				worstGenreFound = true
+				break
+			}
+		}
 
-		// if len(anime.Genres) > 0 {
-		// 	for _, genre := range anime.Genres {
-		// 		if genreAffinity[genre] > animeGenresAffinity {
-		// 			animeGenresAffinity = genreAffinity[genre]
-		// 		}
-		// 	}
+		if worstGenreFound {
+			continue
+		}
 
-		// 	animeGenresAffinity = animeGenresAffinity / float64(len(anime.Genres))
-		// }
+		animeAffinity := 0.0
 
-		// affinity[anime.ID] = animeGenresAffinity
+		// Planned anime go higher
+		if existing != nil && existing.Status == arn.AnimeListStatusPlanned {
+			animeAffinity += 75.0
+		}
+
+		animeAffinity += float64(anime.Popularity.Total())
+		affinity[anime.ID] = animeAffinity
 	}
 
 	// Sort
 	sort.Slice(recommendations, func(i, j int) bool {
-		return affinity[recommendations[i].ID] > affinity[recommendations[j].ID]
+		affinityA := affinity[recommendations[i].ID]
+		affinityB := affinity[recommendations[j].ID]
+
+		if affinityA == affinityB {
+			return recommendations[i].Title.Canonical < recommendations[j].Title.Canonical
+		}
+
+		return affinityA > affinityB
 	})
 
 	// Take the top 10
