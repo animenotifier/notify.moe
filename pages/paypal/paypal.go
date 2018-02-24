@@ -9,21 +9,22 @@ import (
 	"github.com/logpacker/PayPal-Go-SDK"
 )
 
-// CreatePayment ...
+// CreatePayment creates the PayPal payment, typically via a JSON API route.
 func CreatePayment(ctx *aero.Context) string {
+	// Make sure the user is logged in
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
+	// Verify amount
 	amount, err := ctx.Request().Body().String()
 
 	if err != nil {
 		return ctx.Error(http.StatusBadRequest, "Could not read amount", err)
 	}
 
-	// Verify amount
 	switch amount {
 	case "1000", "2000", "3000", "6000", "12000":
 		// OK
@@ -44,34 +45,6 @@ func CreatePayment(ctx *aero.Context) string {
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Could not get PayPal access token", err)
 	}
-
-	// webprofile := paypalsdk.WebProfile{
-	// 	Name: "Anime Notifier",
-	// 	Presentation: paypalsdk.Presentation{
-	// 		BrandName:  "Anime Notifier",
-	// 		LogoImage:  "https://notify.moe/brand/220",
-	// 		LocaleCode: "US",
-	// 	},
-
-	// 	InputFields: paypalsdk.InputFields{
-	// 		AllowNote:       true,
-	// 		NoShipping:      paypalsdk.NoShippingDisplay,
-	// 		AddressOverride: paypalsdk.AddrOverrideFromCall,
-	// 	},
-
-	// 	FlowConfig: paypalsdk.FlowConfig{
-	// 		LandingPageType: paypalsdk.LandingPageTypeBilling,
-	// 	},
-	// }
-
-	// result, err := c.CreateWebProfile(webprofile)
-	// c.SetWebProfile(*result)
-
-	// if err != nil {
-	// 	return ctx.Error(http.StatusInternalServerError, "Could not create PayPal web profile", err)
-	// }
-
-	// total := amount[:len(amount)-2] + "." + amount[len(amount)-2:]
 
 	// Create payment
 	p := paypalsdk.Payment{

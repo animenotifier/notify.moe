@@ -13,7 +13,8 @@ import (
 
 const adminID = "4J6qpK1ve"
 
-// Success ...
+// Success is called once the payment has been confirmed by the user on the PayPal website.
+// However, the actual payment still needs to be executed and can fail.
 func Success(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 

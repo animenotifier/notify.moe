@@ -11,5 +11,5 @@ func Cancel(ctx *aero.Context) string {
 	token := ctx.Query("token")
 	fmt.Println("cancel", token)
 
-	return ctx.HTML("cancel")
+	return ctx.HTML("Payment has been canceled.")
 }
