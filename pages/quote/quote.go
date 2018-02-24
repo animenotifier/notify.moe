@@ -9,7 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get company.
+// Get quote.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
@@ -19,7 +19,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Quote not found", err)
 	}
 
-	character, err := arn.GetCharacter(quote.CharacterId)
+	character, err := arn.GetCharacter(quote.CharacterID)
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Quote not found", err)
 	}

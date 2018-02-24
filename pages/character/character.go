@@ -38,7 +38,7 @@ func Get(ctx *aero.Context) string {
 
 	// Quotes
 	quotes := arn.FilterQuotes(func(quote *arn.Quote) bool {
-		return !quote.IsDraft && len(quote.Description) > 0 && quote.CharacterId == character.ID
+		return !quote.IsDraft && len(quote.Description) > 0 && quote.CharacterID == character.ID
 	})
 
 	arn.SortQuotesPopularFirst(quotes)

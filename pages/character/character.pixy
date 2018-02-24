@@ -19,7 +19,8 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 						h3 Quotes
 						.character-quotes
 							each quote in quotes
-								Quote(quote)
+								.character-quote
+									Quote(quote)
 
 		if len(character.Attributes) > 0
 			.character-sidebar

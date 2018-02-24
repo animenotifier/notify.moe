@@ -45,11 +45,11 @@
 	horizontal-wrap
 	justify-content space-around
 
-	.quote
-		flex-basis 400px !important
+.character-quote
+	flex-basis 400px
 
-		footer
-			display none !important
+	footer
+		display none
 
 > 1250px
 	.character-page

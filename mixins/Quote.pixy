@@ -5,14 +5,14 @@ component Quote(quote *arn.Quote)
 
 component QuoteContent(quote *arn.Quote)
 	.quote-content
-		a.quotation.ajax(href="/quote/" + quote.ID)
+		a.quotation.ajax(href=quote.Link())
 			blockquote
 				p
 					q= quote.Description
 		if quote.Character() != nil
 			footer.quote-character
 				span= "by"
-				a.ajax(href="/character/" + quote.Character().ID)= quote.Character().Name
+				a.ajax(href=quote.Character().Link())= quote.Character().Name
 				CharacterSmall(quote.Character())
 
 component QuoteFooter(quote *arn.Quote)

@@ -1,8 +1,6 @@
 component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
 	QuoteTabs(quote, user)
-
 	.quote-full-page
-
 		.quote-main-column
 			QuoteMainColumn(quote, user)
 		.quote-side-column
@@ -38,10 +36,10 @@ component QuoteInformation(quote *arn.Quote, user *arn.User)
 					td.quote-info-value
 						QuoteAnime(quote.Anime(), user)
 
-			if quote.Episode != 0
+			if quote.EpisodeNumber != 0
 				tr.mountable(data-mountable-type="info")
 					td.quote-info-key Episode:
-					td.quote-info-value= quote.Episode
+					td.quote-info-value= quote.EpisodeNumber
 
 			if quote.Time != 0
 				tr.mountable(data-mountable-type="info")

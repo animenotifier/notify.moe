@@ -10,7 +10,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils/editform"
 )
 
-// Edit track.
+// Edit quote.
 func Edit(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
