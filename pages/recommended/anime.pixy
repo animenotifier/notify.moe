@@ -1,0 +1,7 @@
+component RecommendedAnime(animes []*arn.Anime, user *arn.User)
+	h1= "Recommended anime for " + user.Nick
+	
+	AnimeGrid(animes, user)
+	//- ul
+	//- 	each anime in animes
+	//- 		li= anime.Title.Canonical

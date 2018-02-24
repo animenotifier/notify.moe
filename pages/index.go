@@ -42,6 +42,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/popular"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
+	"github.com/animenotifier/notify.moe/pages/recommended"
 	"github.com/animenotifier/notify.moe/pages/search"
 	"github.com/animenotifier/notify.moe/pages/settings"
 	"github.com/animenotifier/notify.moe/pages/shop"
@@ -147,6 +148,7 @@ func Configure(app *aero.Application) {
 	l.Page("/user/:nick/animelist/hold", animelist.FilterByStatus(arn.AnimeListStatusHold))
 	l.Page("/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
 	l.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
+	l.Page("/user/:nick/recommended/anime", recommended.Anime)
 
 	// Anime list
 	l.Page("/animelist/watching", home.FilterByStatus(arn.AnimeListStatusWatching))
