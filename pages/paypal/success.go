@@ -35,7 +35,14 @@ func Success(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Could not initiate PayPal client", err)
 	}
 
-	c.SetAccessToken(token)
+	// Get access token
+	_, err = c.GetAccessToken()
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Could not get PayPal access token", err)
+	}
+
+	// Execute payment
 	execute, err := c.ExecuteApprovedPayment(paymentID, payerID)
 
 	if err != nil {
