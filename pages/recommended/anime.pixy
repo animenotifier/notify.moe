@@ -1,7 +1,4 @@
-component RecommendedAnime(animes []*arn.Anime, user *arn.User)
-	h1= "Recommended anime for " + user.Nick
+component RecommendedAnime(animes []*arn.Anime, worstGenres []string, viewUser *arn.User, user *arn.User)
+	h1(title="This is a machine-generated list of anime recommendations.")= "Recommended anime for " + viewUser.Nick
 	
 	AnimeGrid(animes, user)
-	//- ul
-	//- 	each anime in animes
-	//- 		li= anime.Title.Canonical

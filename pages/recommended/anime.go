@@ -1,13 +1,13 @@
 package recommended
 
 import (
-	"fmt"
 	"net/http"
 	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 const (
@@ -17,14 +17,15 @@ const (
 
 // Anime shows a list of recommended anime.
 func Anime(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
 	nick := ctx.Get("nick")
-	user, err := arn.GetUserByNick(nick)
+	viewUser, err := arn.GetUserByNick(nick)
 
 	if err != nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", err)
 	}
 
-	animeList := user.AnimeList()
+	animeList := viewUser.AnimeList()
 	genreItems := animeList.Genres()
 	genreAffinity := map[string]float64{}
 	worstGenres := []string{}
@@ -56,8 +57,6 @@ func Anime(ctx *aero.Context) string {
 	if len(worstGenres) > worstGenreCount {
 		worstGenres = worstGenres[:worstGenreCount]
 	}
-
-	fmt.Println(worstGenres)
 
 	// Get all anime
 	recommendations := arn.AllAnime()
@@ -121,5 +120,5 @@ func Anime(ctx *aero.Context) string {
 		recommendations = recommendations[:maxRecommendations]
 	}
 
-	return ctx.HTML(components.RecommendedAnime(recommendations, user))
+	return ctx.HTML(components.RecommendedAnime(recommendations, worstGenres, viewUser, user))
 }

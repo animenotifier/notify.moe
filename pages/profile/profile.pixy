@@ -10,9 +10,13 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.ByUser(user) + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
 						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
 
-	if user != nil && (user.Role == "admin" || user.Role == "editor")
-		.footer
-			.buttons
+	.footer
+		.buttons
+			a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/recommended/anime")
+				Icon("tv")
+				span View recommendations
+				
+			if user != nil && (user.Role == "admin" || user.Role == "editor")
 				a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
 					Icon("search-plus")
 					span JSON
