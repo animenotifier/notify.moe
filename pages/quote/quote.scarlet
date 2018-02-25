@@ -19,10 +19,6 @@
 	.quote-side-column
 		sidebar-big
 
-.quote-media
-	iframe
-		width 100%
-
 .quote-info-table
 	margin 0
 
@@ -37,12 +33,3 @@
 
 .quote-section-name
 	font-weight bold
-
-.quote-anime-list
-	horizontal-wrap
-
-.quote-anime-list-item
-	anime-mini-item
-
-.quote-anime-list-item-image
-	anime-mini-item-image

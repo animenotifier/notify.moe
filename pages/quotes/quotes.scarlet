@@ -17,9 +17,10 @@
 .quote-character
 	horizontal
 	align-self flex-end
-	align-items baseline
-	justify-content space-around
 	margin 0 1em 1em 0
+
+	.character
+		margin 0
 
 .quote-footer
 	text-align center
@@ -29,11 +30,6 @@
 
 	span
 		opacity 0.65
-
-.quotation
-	height 100%
-	display flex
-	flex-grow 1
 
 blockquote
 	flex-grow 1
@@ -60,7 +56,3 @@ blockquote
 			line-height 0.1em
 			margin-left  0.25em
 			vertical-align -0.4em
-
-.character
-	margin 0.5em 0 0 0.5em !important
-	display block !important
