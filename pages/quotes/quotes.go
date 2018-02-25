@@ -17,12 +17,12 @@ func Latest(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	quotes := arn.FilterQuotes(func(track *arn.Quote) bool {
-		return !track.IsDraft && len(track.Description) > 0
+		return !track.IsDraft && len(track.Text.English) > 0
 	})
 
 	arn.SortQuotesLatestFirst(quotes)
 
-	// Reduce the number of displayed quotes
+	// Limit the number of displayed quotes
 	loadMoreIndex := 0
 
 	if len(quotes) > maxQuotes {
@@ -43,7 +43,7 @@ func LatestFrom(ctx *aero.Context) string {
 	}
 
 	allQuotes := arn.FilterQuotes(func(track *arn.Quote) bool {
-		return !track.IsDraft && len(track.Description) > 0
+		return !track.IsDraft && len(track.Text.English) > 0
 	})
 
 	if index < 0 || index >= len(allQuotes) {

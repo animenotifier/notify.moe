@@ -22,7 +22,7 @@ func Get(ctx *aero.Context) string {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       "Quote",
-			"og:description": quote.Description,
+			"og:description": quote.Text.English,
 			"og:url":         "https://" + ctx.App.Config.Domain + quote.Link(),
 			"og:site_name":   "notify.moe",
 			"og:type":        "article",

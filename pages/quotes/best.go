@@ -15,16 +15,20 @@ func Best(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	quotes := arn.FilterQuotes(func(track *arn.Quote) bool {
-		return !track.IsDraft && len(track.Description) > 0
+		return !track.IsDraft && len(track.Text.English) > 0
 	})
 
 	arn.SortQuotesPopularFirst(quotes)
 
+	// Limit the number of displayed quotes
+	loadMoreIndex := 0
+
 	if len(quotes) > maxQuotes {
 		quotes = quotes[:maxQuotes]
+		loadMoreIndex = maxQuotes
 	}
 
-	return ctx.HTML(components.Quotes(quotes, maxQuotes, user))
+	return ctx.HTML(components.Quotes(quotes, loadMoreIndex, user))
 }
 
 // BestFrom renders the quotes from the given index.
@@ -37,7 +41,7 @@ func BestFrom(ctx *aero.Context) string {
 	}
 
 	allQuotes := arn.FilterQuotes(func(track *arn.Quote) bool {
-		return !track.IsDraft && len(track.Description) > 0
+		return !track.IsDraft && len(track.Text.English) > 0
 	})
 
 	if index < 0 || index >= len(allQuotes) {

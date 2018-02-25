@@ -7,8 +7,7 @@ component QuoteContent(quote *arn.Quote)
 	.quote-content
 		a.quotation.ajax(href=quote.Link())
 			blockquote
-				p
-					q= quote.Description
+				p= quote.Text.English
 		
 		if quote.CharacterID != "" && quote.Character() != nil
 			footer.quote-character

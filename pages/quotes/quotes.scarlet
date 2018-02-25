@@ -41,8 +41,6 @@ blockquote
 
 	p
 		line-height 2em
-
-	q
 		quotes "\201C""\201D"
 		color text-color
 		text-shadow none

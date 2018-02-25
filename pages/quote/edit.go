@@ -22,7 +22,7 @@ func Edit(ctx *aero.Context) string {
 
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":     quote.Description,
+			"og:title":     quote.Text.English,
 			"og:url":       "https://" + ctx.App.Config.Domain + quote.Link(),
 			"og:site_name": "notify.moe",
 		},
