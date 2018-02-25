@@ -43,7 +43,7 @@ component QuoteInformation(quote *arn.Quote, user *arn.User)
 					td.quote-info-key Episode:
 					td.quote-info-value= quote.EpisodeNumber
 
-			if quote.Time != 0
+			if quote.Time != -1
 				tr.mountable(data-mountable-type="info")
 					td.anime-info-key Time:
 					td.anime-info-value= strconv.Itoa(quote.Time) + " min"
