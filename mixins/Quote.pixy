@@ -9,7 +9,8 @@ component QuoteContent(quote *arn.Quote)
 			blockquote
 				p
 					q= quote.Description
-		if quote.Character() != nil
+		
+		if quote.CharacterID != "" && quote.Character() != nil
 			footer.quote-character
 				span= "by"
 				a.ajax(href=quote.Character().Link())= quote.Character().Name

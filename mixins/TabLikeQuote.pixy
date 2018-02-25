@@ -1,5 +1,3 @@
-// This should be made abstract for every Likeable so we avoid repeating ourselves but I'm unsure on
-// how to do it
 component TabLikeQuote(label string, icon string, quote *arn.Quote, user *arn.User)
 	if user == nil
 		.tab.action(aria-label=label, title="Login to like this quote")

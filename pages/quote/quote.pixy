@@ -1,5 +1,6 @@
 component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
 	QuoteTabs(quote, user)
+
 	.quote-full-page
 		.quote-main-column
 			QuoteMainColumn(quote, user)
@@ -7,7 +8,7 @@ component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
 			QuoteSideColumn(quote, user)
 
 component QuoteMainColumn(quote *arn.Quote, user *arn.User)
-	.widget-form
+	.widget-form.mountable
 		QuoteContent(quote)
 
 	.footer.mountable
@@ -29,8 +30,9 @@ component QuoteSideColumn(quote *arn.Quote, user *arn.User)
 component QuoteInformation(quote *arn.Quote, user *arn.User)
 	section.quote-section.mountable
 		h3.quote-section-name Information
+		
 		table.quote-info-table
-			if quote.Anime() != nil
+			if quote.AnimeID != "" && quote.Anime() != nil
 				tr.mountable(data-mountable-type="info")
 					td.quote-info-key Anime:
 					td.quote-info-value

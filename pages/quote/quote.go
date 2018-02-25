@@ -19,19 +19,20 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Quote not found", err)
 	}
 
-	character, err := arn.GetCharacter(quote.CharacterID)
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Quote not found", err)
-	}
-
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":       quote.Description,
+			"og:title":       "Quote",
 			"og:description": quote.Description,
 			"og:url":         "https://" + ctx.App.Config.Domain + quote.Link(),
 			"og:site_name":   "notify.moe",
 			"og:type":        "article",
 		},
+	}
+
+	character, _ := arn.GetCharacter(quote.CharacterID)
+
+	if character != nil {
+		openGraph.Tags["og:title"] = character.Name + "'s quote"
 	}
 
 	ctx.Data = openGraph
