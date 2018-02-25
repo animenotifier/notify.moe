@@ -12,8 +12,6 @@ component QuoteContent(quote *arn.Quote)
 		
 		if quote.CharacterID != "" && quote.Character() != nil
 			footer.quote-character
-				span= "by"
-				a.ajax(href=quote.Character().Link())= quote.Character().Name
 				CharacterSmall(quote.Character())
 
 component QuoteFooter(quote *arn.Quote)

@@ -10,8 +10,8 @@
 
 .quote-content
 	vertical
-	border-radius 3px
-	border-left 5px solid quote-side-border-color
+	ui-element
+	border-left 5px solid quote-side-border-color !important
 	overflow hidden
 	box-shadow shadow-light
 	align-items stretch
@@ -55,33 +55,28 @@ blockquote
 	p
 		line-height 2em
 
-		q
-			quotes "\201C""\201D"
+	q
+		quotes "\201C""\201D"
+		color text-color
+		text-shadow none
 
-			:before
-				color quote-color
-				content open-quote
-				font-size 4em
-				line-height 0.1em
-				margin-right 0.25em
-				vertical-align -0.4em
+		:before
+			color quote-color
+			content open-quote
+			font-size 4em
+			line-height 0.1em
+			margin-right 0.25em
+			vertical-align -0.4em
 
-			:after
-				color quote-color
-				content close-quote
-				font-size 4em
-				line-height 0.1em
-				margin-left  0.25em
-				vertical-align -0.4em
+		:after
+			color quote-color
+			content close-quote
+			font-size 4em
+			line-height 0.1em
+			margin-left  0.25em
+			vertical-align -0.4em
 
 
 .character
-	display none !important
-
-> 800px
-	.character
-		margin 0.5em 0 0 0.5em !important
-		display block !important
-
-	.quote-character a
-		display none
+	margin 0.5em 0 0 0.5em !important
+	display block !important
