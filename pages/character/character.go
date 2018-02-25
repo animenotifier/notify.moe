@@ -37,10 +37,7 @@ func Get(ctx *aero.Context) string {
 	})
 
 	// Quotes
-	quotes := arn.FilterQuotes(func(quote *arn.Quote) bool {
-		return !quote.IsDraft && len(quote.Description) > 0 && quote.CharacterID == character.ID
-	})
-
+	quotes := character.Quotes()
 	arn.SortQuotesPopularFirst(quotes)
 
 	// Set OpenGraph attributes
