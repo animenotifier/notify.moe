@@ -1,0 +1,16 @@
+// This should be made abstract for every Likeable so we avoid repeating ourselves but I'm unsure on
+// how to do it
+component TabLikeQuote(label string, icon string, quote *arn.Quote, user *arn.User)
+	if user == nil
+		.tab.action(aria-label=label, title="Login to like this quote")
+			Icon(icon)
+			span.tab-text= label
+	else
+		if quote.LikedBy(user.ID)
+			.tab.action(data-api="/api" + quote.Link(), data-action="unlike", data-trigger="click", aria-label=label, title="Click to unlike this quote")
+				Icon(icon)
+				span.tab-text= label
+		else
+			.tab.action(data-api="/api" + quote.Link(), data-action="like", data-trigger="click", aria-label=label, title="Click to like this quote")
+				Icon(icon + "-o")
+				span.tab-text= label

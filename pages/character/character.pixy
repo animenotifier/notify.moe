@@ -1,4 +1,4 @@
-component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, user *arn.User)
+component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, user *arn.User)
 	.character-page
 		.character-left-column
 			.character-header
@@ -15,6 +15,12 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 						each anime in characterAnime
 							a.character-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
 								img.character-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
+					if len(quotes) >0
+						h3 Quotes
+						.character-quotes
+							each quote in quotes
+								.character-quote
+									Quote(quote)
 
 		if len(character.Attributes) > 0
 			.character-sidebar

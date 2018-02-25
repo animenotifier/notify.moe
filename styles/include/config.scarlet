@@ -59,6 +59,10 @@ nav-link-hover-slide-color = main-color
 // nav-link-color = rgb(160, 160, 160)
 // nav-link-hover-color = rgb(80, 80, 80)
 
+// Quote
+quote-color = hsl(0, 0%, 45%)
+quote-side-border-color = quote-color
+
 // Forum
 post-like-color = green !important
 post-unlike-color = rgb(255, 32, 12) !important

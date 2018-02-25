@@ -35,3 +35,6 @@
 // post-like-color = link-color
 // post-unlike-color = link-color
 // post-permalink-color = link-color
+
+// // Quote
+// quote-color = text-color
