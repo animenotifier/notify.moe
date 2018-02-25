@@ -42,13 +42,11 @@
 	anime-mini-item-image
 
 .character-quotes
-	horizontal-wrap
-	justify-content space-around
+	vertical
 
 .character-quote
-	flex-basis 400px
-
-	footer
+	footer,
+	.quote-footer
 		display none
 
 > 1250px

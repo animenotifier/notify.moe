@@ -1,15 +1,16 @@
 package quotes
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
-	"net/http"
-	"strconv"
 )
 
-const maxQuotes = 12
+const maxQuotes = 6
 
 // Latest renders the quotes page.
 func Latest(ctx *aero.Context) string {
@@ -21,10 +22,15 @@ func Latest(ctx *aero.Context) string {
 
 	arn.SortQuotesLatestFirst(quotes)
 
+	// Reduce the number of displayed quotes
+	loadMoreIndex := 0
+
 	if len(quotes) > maxQuotes {
 		quotes = quotes[:maxQuotes]
+		loadMoreIndex = maxQuotes
 	}
-	return ctx.HTML(components.Quotes(quotes, maxQuotes, user))
+
+	return ctx.HTML(components.Quotes(quotes, loadMoreIndex, user))
 }
 
 // LatestFrom renders the quotes from the given index.

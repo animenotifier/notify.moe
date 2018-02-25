@@ -1,5 +1,5 @@
 component Quote(quote *arn.Quote)
-	.quote.mountable(id=quote.ID)
+	.quote.mountable
 		QuoteContent(quote)
 		QuoteFooter(quote)
 
@@ -19,4 +19,4 @@ component QuoteFooter(quote *arn.Quote)
 		span  posted 
 		span.utc-date(data-date=quote.Created)
 		span  by 
-		a.ajax(href=quote.Creator().Link())= quote.Creator().Nick + " "
+		a.ajax(href=quote.Creator().Link())= quote.Creator().Nick
