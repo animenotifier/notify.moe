@@ -22,11 +22,15 @@ func Latest(ctx *aero.Context) string {
 
 	arn.SortSoundTracksLatestFirst(tracks)
 
+	// Limit the number of displayed tracks
+	loadMoreIndex := 0
+
 	if len(tracks) > maxTracks {
 		tracks = tracks[:maxTracks]
+		loadMoreIndex = maxTracks
 	}
 
-	return ctx.HTML(components.SoundTracks(tracks, maxTracks, user))
+	return ctx.HTML(components.SoundTracks(tracks, loadMoreIndex, user))
 }
 
 // LatestFrom renders the soundtracks from the given index.

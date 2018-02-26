@@ -1,4 +1,4 @@
-component SoundTracks(tracks []*arn.SoundTrack, tracksPerPage int, user *arn.User)
+component SoundTracks(tracks []*arn.SoundTrack, loadMoreIndex int, user *arn.User)
 	h1.page-title Soundtracks
 
 	SoundTracksTabs
@@ -17,9 +17,9 @@ component SoundTracks(tracks []*arn.SoundTrack, tracksPerPage int, user *arn.Use
 	#load-more-target.sound-tracks
 		SoundTracksScrollable(tracks, user)
 	
-	if len(tracks) == tracksPerPage
+	if loadMoreIndex != 0
 		.buttons
-			LoadMore(tracksPerPage)
+			LoadMore(loadMoreIndex)
 
 component SoundTracksScrollable(tracks []*arn.SoundTrack, user *arn.User)
 	each track in tracks

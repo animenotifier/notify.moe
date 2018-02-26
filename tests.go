@@ -88,19 +88,11 @@ var routeTests = map[string][]string{
 	},
 
 	"/quote/:id": []string{
-		"/quote/-8I3JKykR",
+		"/quote/gUZugd6zR",
 	},
 
 	"/quote/:id/edit": []string{
-		"/quote/-8I3JKykR/edit",
-	},
-
-	"/quotes": []string{
-		"/quotes",
-	},
-
-	"/quotes/best": []string{
-		"/quotes/best",
+		"/quote/gUZugd6zR/edit",
 	},
 
 	"/quotes/from/:index": []string{
