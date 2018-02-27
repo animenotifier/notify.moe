@@ -1,0 +1,16 @@
+component Notifications(notifications []*arn.Notification, user *arn.User)
+	h1 Notifications
+
+	.notifications
+		each notification in notifications
+			Notification(notification)
+
+component Notification(notification *arn.Notification)
+	.notification
+		.notification-icon
+			img.lazy(data-src=notification.Icon, alt=notification.Title)
+		
+		.notification-info
+			h3= notification.Title
+			p= notification.Message
+			.notification-date.utc-date(data-date=notification.Created)

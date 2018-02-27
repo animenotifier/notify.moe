@@ -1,0 +1,22 @@
+.notifications
+	vertical
+
+.notification
+	horizontal
+	ui-element
+	padding 1rem
+	margin-bottom 0.5rem
+
+.notification-icon
+	margin-right 1rem
+
+	img
+		width 64px
+		height 64px
+
+.notification-info
+	vertical
+
+.notification-date
+	opacity 0.5
+	font-size 0.9em
