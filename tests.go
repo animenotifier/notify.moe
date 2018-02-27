@@ -54,6 +54,10 @@ var routeTests = map[string][]string{
 		"/+Akyoto/animelist/dropped",
 	},
 
+	"/user/:nick/recommended/anime": []string{
+		"/+Akyoto/recommended/anime",
+	},
+
 	// Pages
 	"/anime/:id": []string{
 		"/anime/1",
@@ -263,6 +267,7 @@ var routeTests = map[string][]string{
 	"/import/myanimelist/animelist/finish":           nil,
 	"/import/kitsu/animelist":                        nil,
 	"/import/kitsu/animelist/finish":                 nil,
+	"/notifications":                                 nil,
 	"/api/test/notification":                         nil,
 	"/api/paypal/payment/create":                     nil,
 	"/api/userfollows/:id/get/:item":                 nil,
