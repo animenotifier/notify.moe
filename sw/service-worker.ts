@@ -200,9 +200,8 @@ class MyServiceWorker {
 		return self.registration.showNotification(payload.title, {
 			body: payload.message,
 			icon: payload.icon,
-			image: payload.image,
 			data: payload.link,
-			badge: "https://notify.moe/brand/64.png"
+			badge: "https://media.notify.moe/images/brand/64.png"
 		})
 	}
 

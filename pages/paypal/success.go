@@ -85,7 +85,7 @@ func Success(ctx *aero.Context) string {
 	// Notify admin
 	go func() {
 		admin, _ := arn.GetUser(adminID)
-		admin.SendNotification(&arn.Notification{
+		admin.SendNotification(&arn.PushNotification{
 			Title:   user.Nick + " bought " + strconv.Itoa(payment.Gems()) + " gems",
 			Message: user.Nick + " paid " + payment.Amount + " " + payment.Currency + " making his new balance " + strconv.Itoa(user.Balance),
 			Icon:    user.LargeAvatar(),

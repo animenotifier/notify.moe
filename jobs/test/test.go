@@ -55,7 +55,7 @@ func testPackage(pkg string) {
 
 		// Send notification to the admin
 		admin, _ := arn.GetUser("4J6qpK1ve")
-		admin.SendNotification(&arn.Notification{
+		admin.SendNotification(&arn.PushNotification{
 			Title:   pkg,
 			Message: "Test failed",
 			Link:    "https://" + pkg,
