@@ -67,6 +67,9 @@ sidebar-spacing-y = 0.7rem
 		margin-right 0.75rem
 
 .badge
+	horizontal
+	justify-content center
+	align-items center
 	position absolute
 	top 50%
 	background reverse-light-color
@@ -74,6 +77,8 @@ sidebar-spacing-y = 0.7rem
 	transform translateY(-50%)
 	padding 0.5rem
 	color text-color
+	width 30px
+	height 30px
 
 	:hover
 		color text-color
@@ -88,4 +93,7 @@ sidebar-spacing-y = 0.7rem
 .right-badge
 	right 12%
 
-
+.badge-important
+	background badge-important-bg-color
+	color badge-important-text-color
+	font-weight bold

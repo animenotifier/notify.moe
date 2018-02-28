@@ -4,6 +4,7 @@ import { MutationQueue } from "./MutationQueue"
 import { StatusMessage } from "./StatusMessage"
 import { PushManager } from "./PushManager"
 import { TouchController } from "./TouchController"
+import { NotificationManager } from "./NotificationManager"
 import { Analytics } from "./Analytics"
 import { SideBar } from "./SideBar"
 import { InfiniteScroller } from "./InfiniteScroller"
@@ -24,6 +25,7 @@ export class AnimeNotifier {
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
 	serviceWorkerManager: ServiceWorkerManager
+	notificationManager: NotificationManager
 	touchController: TouchController
 	sideBar: SideBar
 	infiniteScroller: InfiniteScroller
@@ -131,6 +133,9 @@ export class AnimeNotifier {
 		// Push manager
 		this.pushManager = new PushManager()
 
+		// Notification manager
+		this.notificationManager = new NotificationManager()
+
 		// Analytics
 		this.analytics = new Analytics()
 
@@ -184,6 +189,11 @@ export class AnimeNotifier {
 		// Offline message
 		if(navigator.onLine === false) {
 			this.statusMessage.showError("You are viewing an offline version of the site now.")
+		}
+
+		// Notification manager
+		if(this.user) {
+			this.notificationManager.update()
 		}
 
 		// Download popular anime titles for the search

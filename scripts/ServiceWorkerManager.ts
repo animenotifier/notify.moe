@@ -51,7 +51,7 @@ export class ServiceWorkerManager {
 				message.url = window.location.href
 			}
 
-			console.log("checking for updates:", message.url)
+			// console.log("checking for updates:", message.url)
 
 			this.postMessage(message)
 		}

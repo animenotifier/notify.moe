@@ -50,6 +50,10 @@ post-highlight-color = rgba(248, 165, 130, 0.7)
 // Avatar
 avatar-size = 50px
 
+// Badge
+badge-important-bg-color = rgb(215, 38, 15)
+badge-important-text-color = white
+
 // Quote
 quote-color = hsl(0, 0%, 45%)
 quote-side-border-color = quote-color

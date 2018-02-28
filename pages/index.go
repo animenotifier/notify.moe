@@ -213,6 +213,7 @@ func Configure(app *aero.Application) {
 	app.Get("/api/me", me.Get)
 	app.Get("/api/popular/anime/titles/:count", popular.AnimeTitles)
 	app.Get("/api/test/notification", notifications.Test)
+	app.Get("/api/count/notifications/unseen", notifications.CountUnseen)
 
 	// Legal stuff
 	l.Page("/terms", terms.Get)

@@ -11,8 +11,10 @@ component Sidebar(user *arn.User)
 				a.badge.left-badge.ajax(href="/settings")
 					RawIcon("cog")
 				
-				a.badge.right-badge.ajax(href="/notifications")
+				a#notification-icon.badge.right-badge.ajax(href="/notifications")
 					RawIcon("bell")
+				
+				a#notification-count.badge.right-badge.ajax.badge-important.hidden(href="/notifications") 0
 
 		//- Sidebar buttons
 		if user != nil

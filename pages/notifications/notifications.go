@@ -3,6 +3,7 @@ package notifications
 import (
 	"net/http"
 	"sort"
+	"strconv"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -26,6 +27,26 @@ func All(ctx *aero.Context) string {
 	})
 
 	return ctx.HTML(components.Notifications(notifications, user))
+}
+
+// CountUnseen sends the number of unseen notifications.
+func CountUnseen(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
+
+	if user == nil {
+		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+	}
+
+	notifications := user.Notifications().Notifications()
+	unseen := 0
+
+	for _, notification := range notifications {
+		if notification.Seen == "" {
+			unseen++
+		}
+	}
+
+	return ctx.Text(strconv.Itoa(unseen))
 }
 
 // Test sends a test notification to the logged in user.
