@@ -52,6 +52,7 @@ avatar-size = 50px
 
 // Badge
 badge-important-bg-color = rgb(215, 38, 15)
+badge-important-hover-bg-color = rgb(242, 60, 30)
 badge-important-text-color = white
 
 // Quote

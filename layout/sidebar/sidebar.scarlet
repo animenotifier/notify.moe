@@ -97,3 +97,8 @@ sidebar-spacing-y = 0.7rem
 	background badge-important-bg-color
 	color badge-important-text-color
 	font-weight bold
+
+	:hover
+		background badge-important-hover-bg-color
+		color badge-important-text-color
+		text-shadow none

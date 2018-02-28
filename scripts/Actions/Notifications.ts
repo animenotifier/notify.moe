@@ -13,8 +13,11 @@ export async function disableNotifications(arn: AnimeNotifier, button: HTMLEleme
 }
 
 // Test notification
-export function testNotification(arn: AnimeNotifier) {
-	fetch("/api/test/notification", {
+export async function testNotification(arn: AnimeNotifier) {
+	await fetch("/api/test/notification", {
 		credentials: "same-origin"
 	})
+
+	// Update notification counter
+	arn.notificationManager.update()
 }

@@ -1,5 +1,11 @@
+.notifications-container
+	horizontal
+	justify-content center
+
 .notifications
 	vertical
+	width 100%
+	max-width 800px
 
 .notification
 	horizontal
@@ -17,6 +23,14 @@
 
 .notification-info
 	vertical
+	flex 1
+
+.notification-footer
+	horizontal
+
+.notification-text
+	flex 1
+	margin 0
 
 .notification-date
 	opacity 0.5

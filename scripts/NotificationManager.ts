@@ -8,13 +8,10 @@ export class NotificationManager {
 
 		let body = await response.text()
 		this.unseen = parseInt(body)
-		this.unseen = 2
 		this.render()
 	}
 
 	render() {
-		console.log("notification count", this.unseen)
-
 		let notificationIcon = document.getElementById("notification-icon")
 		let notificationCount = document.getElementById("notification-count")
 
