@@ -60,6 +60,7 @@ func testPackage(pkg string) {
 			Message: "Test failed",
 			Link:    "https://" + pkg,
 			Icon:    "https://notify.moe/images/brand/220.png",
+			Type:    arn.NotificationTypePackageTest,
 		})
 		return
 	}

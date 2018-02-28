@@ -90,6 +90,7 @@ func Success(ctx *aero.Context) string {
 			Message: user.Nick + " paid " + payment.Amount + " " + payment.Currency + " making his new balance " + strconv.Itoa(user.Balance),
 			Icon:    user.LargeAvatar(),
 			Link:    "https://" + ctx.App.Config.Domain + "/api/paypalpayment/" + payment.ID,
+			Type:    arn.NotificationTypePurchase,
 		})
 	}()
 

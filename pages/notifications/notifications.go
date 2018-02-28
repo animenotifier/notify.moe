@@ -40,6 +40,7 @@ func Test(ctx *aero.Context) string {
 		Title:   "Anime Notifier",
 		Message: "Yay, it works!",
 		Icon:    "https://" + ctx.App.Config.Domain + "/images/brand/220.png",
+		Type:    arn.NotificationTypeTest,
 	})
 
 	return "ok"
