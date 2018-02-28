@@ -9,7 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxNotifications = 50
+const maxNotifications = 30
 
 // All shows all notifications sent so far.
 func All(ctx *aero.Context) string {
