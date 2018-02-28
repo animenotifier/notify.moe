@@ -1,0 +1,9 @@
+#search
+	background transparent
+	border none !important
+	box-shadow none !important
+	font-size 1em
+	padding 0
+	width 0
+	height auto
+	flex-grow 1

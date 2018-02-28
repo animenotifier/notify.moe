@@ -75,6 +75,10 @@ sidebar-spacing-y = 0.7rem
 	padding 0.5rem
 	color text-color
 
+	:hover
+		color text-color
+		background reverse-light-hover-color
+
 	:active
 		transform translateY(-50%) translateY(3px)
 

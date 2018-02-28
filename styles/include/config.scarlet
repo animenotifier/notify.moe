@@ -50,15 +50,6 @@ post-highlight-color = rgba(248, 165, 130, 0.7)
 // Avatar
 avatar-size = 50px
 
-// Navigation
-nav-color = text-color
-nav-link-color = rgba(255, 255, 255, 0.5)
-nav-link-hover-color = white
-nav-link-hover-slide-color = main-color
-// nav-color = rgb(245, 245, 245)
-// nav-link-color = rgb(160, 160, 160)
-// nav-link-hover-color = rgb(80, 80, 80)
-
 // Quote
 quote-color = hsl(0, 0%, 45%)
 quote-side-border-color = quote-color
@@ -76,7 +67,7 @@ anime-list-item-name-color = link-color
 table-width-normal = 900px
 
 // Loading animation
-loading-anim-color = nav-link-hover-slide-color
+loading-anim-color = main-color
 
 // Shadow
 shadow-light = 4px 4px 8px rgba(0, 0, 0, 0.05)
@@ -91,7 +82,6 @@ outline-shadow-heavy = 0 0 6px rgba(0, 0, 0, 0.6)
 content-padding = 1.6rem
 content-padding-top = 1.6rem
 content-line-height = 1.7em
-hover-line-size = 3px
 typography-margin = 0.4rem
 
 // Timings

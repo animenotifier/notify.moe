@@ -4,24 +4,14 @@ remove-margin = 1.1rem
 	// Put navigation to the bottom of the screen
 	flex-direction column-reverse !important
 
-	// .extension-navigation
-	// 	display inline-block
-
 	.anime-list
-		// max-width 500px
 		margin-left calc(remove-margin * -1)
 		margin-top calc(remove-margin * -1)
 		width calc(100% + remove-margin * 2)
 
-		// td
-		// 	padding 0.4rem 0.8rem
-	
 	.anime-list-owner
 		display none
 
 	.anime-list-item-image,
 	.anime-list-item-image-container
 		width 27px
-	
-	#navigation
-		font-size 0.9rem
