@@ -21,6 +21,7 @@ sidebar-spacing-y = 0.7rem
 
 	.user-image-container
 		horizontal
+		position relative
 		justify-content center
 		margin 0.8rem 0
 		flex-shrink 0
@@ -64,3 +65,23 @@ sidebar-spacing-y = 0.7rem
 	.icon
 		font-size 1rem
 		margin-right 0.75rem
+
+.badge
+	position absolute
+	top 50%
+	background reverse-light-color
+	border-radius 50%
+	transform translateY(-50%)
+	padding 0.5rem
+	color text-color
+
+	:active
+		transform translateY(-50%) translateY(3px)
+
+.left-badge
+	left 12%
+
+.right-badge
+	right 12%
+
+

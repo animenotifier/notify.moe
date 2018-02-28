@@ -6,6 +6,13 @@ component Sidebar(user *arn.User)
 				Avatar(user)
 			else
 				img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
+			
+			if user != nil
+				a.badge.left-badge.ajax(href="/settings")
+					RawIcon("cog")
+				
+				a.badge.right-badge.ajax(href="/notifications")
+					RawIcon("bell")
 
 		//- Sidebar buttons
 		if user != nil
@@ -22,7 +29,7 @@ component Sidebar(user *arn.User)
 
 		if user != nil
 			SidebarButton("Shop", "/shop", "shopping-cart")
-			SidebarButton("Settings", "/settings", "cog")
+			//- SidebarButton("Settings", "/settings", "cog")
 
 		//- Disabled:
 		//- SidebarButton("Dash", "/dashboard", "tachometer")
