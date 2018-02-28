@@ -8,6 +8,11 @@ export class NotificationManager {
 
 		let body = await response.text()
 		this.unseen = parseInt(body)
+
+		if(this.unseen > 99) {
+			this.unseen = 99
+		}
+
 		this.render()
 	}
 

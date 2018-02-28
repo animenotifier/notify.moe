@@ -21,3 +21,16 @@ export async function testNotification(arn: AnimeNotifier) {
 	// Update notification counter
 	arn.notificationManager.update()
 }
+
+// Mark notifications as seen
+export async function markNotificationsAsSeen(arn: AnimeNotifier) {
+	await fetch("/api/mark/notifications/seen", {
+		credentials: "same-origin"
+	})
+
+	// Update notification counter
+	arn.notificationManager.update()
+
+	// Update notifications
+	arn.reloadContent()
+}

@@ -3,13 +3,13 @@ package notifications
 import (
 	"net/http"
 	"sort"
-	"strconv"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
+
+const maxNotifications = 50
 
 // All shows all notifications sent so far.
 func All(ctx *aero.Context) string {
@@ -26,43 +26,10 @@ func All(ctx *aero.Context) string {
 		return notifications[i].Created > notifications[j].Created
 	})
 
+	// Limit results
+	if len(notifications) > maxNotifications {
+		notifications = notifications[:maxNotifications]
+	}
+
 	return ctx.HTML(components.Notifications(notifications, user))
-}
-
-// CountUnseen sends the number of unseen notifications.
-func CountUnseen(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
-
-	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
-	}
-
-	notifications := user.Notifications().Notifications()
-	unseen := 0
-
-	for _, notification := range notifications {
-		if notification.Seen == "" {
-			unseen++
-		}
-	}
-
-	return ctx.Text(strconv.Itoa(unseen))
-}
-
-// Test sends a test notification to the logged in user.
-func Test(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
-
-	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
-	}
-
-	user.SendNotification(&arn.PushNotification{
-		Title:   "Anime Notifier",
-		Message: "Yay, it works!",
-		Icon:    "https://" + ctx.App.Config.Domain + "/images/brand/220.png",
-		Type:    arn.NotificationTypeTest,
-	})
-
-	return "ok"
 }

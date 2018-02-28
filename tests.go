@@ -274,6 +274,8 @@ var routeTests = map[string][]string{
 	"/api/userfollows/:id/get/:item/:property":       nil,
 	"/api/pushsubscriptions/:id/get/:item":           nil,
 	"/api/pushsubscriptions/:id/get/:item/:property": nil,
+	"/api/count/notifications/unseen":                nil,
+	"/api/mark/notifications/seen":                   nil,
 	"/paypal/success":                                nil,
 	"/paypal/cancel":                                 nil,
 	"/anime/:id/edit":                                nil,

@@ -12,6 +12,11 @@
 	ui-element
 	padding 1rem
 	margin-bottom 0.5rem
+	position relative
+	opacity 0.25
+
+.notification[data-seen=""]
+	opacity 1.0
 
 .notification-icon
 	margin-right 1rem
@@ -24,6 +29,8 @@
 .notification-info
 	vertical
 	flex 1
+	color text-color
+	text-shadow none
 
 .notification-footer
 	horizontal
@@ -31,7 +38,14 @@
 .notification-text
 	flex 1
 	margin 0
+	opacity 0.9
 
 .notification-date
 	opacity 0.5
 	font-size 0.9em
+	align-self flex-end
+
+.notification-seen
+	position absolute
+	top 1rem
+	right 1rem

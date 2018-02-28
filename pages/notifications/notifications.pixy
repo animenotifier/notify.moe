@@ -12,7 +12,7 @@ component Notifications(notifications []*arn.Notification, user *arn.User)
 				Notification(notification)
 
 component Notification(notification *arn.Notification)
-	.notification
+	a.notification(href=notification.Link, target="_blank", data-seen=notification.Seen)
 		.notification-icon
 			img.lazy(data-src=notification.Icon, alt=notification.Title)
 		
@@ -21,3 +21,7 @@ component Notification(notification *arn.Notification)
 			.notification-footer
 				p.notification-text= notification.Message
 				.notification-date.utc-date(data-date=notification.Created)
+		
+		if notification.Seen != ""
+			.notification-seen
+				RawIcon("check")
