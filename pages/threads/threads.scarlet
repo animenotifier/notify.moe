@@ -13,19 +13,19 @@
 
 	.post-author
 		margin-bottom 0.25rem
-	
+
 	[data-highlight="true"]
 		.post-content
 			border 2px solid post-highlight-color
-	
-	[data-pro="true"]
-		.post-content
-			border 2px solid pro-color
+
+	// [data-pro="true"]
+	// 	.post-content
+	// 		border 2px solid pro-color
 
 > 600px
 	.post
 		horizontal
 		margin-bottom 0.75rem
-	
+
 		.post-author
 			margin-bottom 0
