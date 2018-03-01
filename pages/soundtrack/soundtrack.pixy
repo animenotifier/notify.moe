@@ -50,6 +50,6 @@ component Track(track *arn.SoundTrack, user *arn.User)
 
 component SoundTrackTabs(track *arn.SoundTrack, user *arn.User)
 	.tabs
-		TabLikeTrack(strconv.Itoa(len(track.Likes)), "heart", track, user)
+		TabLike(strconv.Itoa(len(track.Likes)), "heart", "track", track, user)
 		Tab("Soundtrack", "music", track.Link())
 		Tab("Edit", "pencil", track.Link() + "/edit")
