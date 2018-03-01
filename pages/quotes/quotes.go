@@ -10,7 +10,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxQuotes = 6
+const maxQuotes = 9
 
 // Latest renders the quotes page.
 func Latest(ctx *aero.Context) string {
