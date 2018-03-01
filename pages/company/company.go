@@ -9,6 +9,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
+const maxDescriptionLength = 170
+
 // Get company.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
@@ -19,13 +21,18 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Company not found", err)
 	}
 
+	description := company.Description
+
+	if len(description) > maxDescriptionLength {
+		description = description[:maxDescriptionLength-3] + "..."
+	}
+
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":       company.Name.English,
-			"og:description": company.Description,
-			"og:url":         "https://" + ctx.App.Config.Domain + company.Link(),
-			"og:site_name":   "notify.moe",
-			"og:type":        "article",
+			"og:title":     company.Name.English,
+			"og:url":       "https://" + ctx.App.Config.Domain + company.Link(),
+			"og:site_name": "notify.moe",
+			"og:type":      "article",
 		},
 	}
 
@@ -33,8 +40,8 @@ func Get(ctx *aero.Context) string {
 		openGraph.Tags["og:image"] = company.Image
 	}
 
-	if company.Description != "" {
-		openGraph.Tags["og:description"] = company.Description
+	if description != "" {
+		openGraph.Tags["og:description"] = description
 	} else {
 		openGraph.Tags["og:description"] = company.Name.English + " company information."
 	}
