@@ -1,4 +1,4 @@
-component CompanyPage(company *arn.Company, user *arn.User)
+component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensedAnime []*arn.Anime, user *arn.User)
 	CompanyTabs(company, user)
 	
 	.company-page
@@ -8,12 +8,9 @@ component CompanyPage(company *arn.Company, user *arn.User)
 			.company-description.mountable
 				div!= markdown.Render(company.Description)
 
-			h3.mountable Anime
-			
-			.company-anime.mountable
-				each anime in company.Anime()
-					a.company-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-						img.company-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
+			CompanyAnime("Animated:", studioAnime, user)
+			CompanyAnime("Produced:", producedAnime, user)
+			CompanyAnime("Licensed:", licensedAnime, user)
 		
 		.company-sidebar
 			if company.Location.Latitude != 0 && company.Location.Longitude != 0
@@ -38,7 +35,16 @@ component CompanyPage(company *arn.Company, user *arn.User)
 			//- 	ul
 			//- 		each tag in company.Tags
 			//- 			li= tag
-			
+
+component CompanyAnime(label string, animes []*arn.Anime, user *arn.User)
+	if len(animes) > 0
+		h3.mountable= label
+		
+		.company-anime.mountable
+			each anime in animes
+				a.company-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+					img.company-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
+
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs
 		Tab("Company", "building", company.Link())

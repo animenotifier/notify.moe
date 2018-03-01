@@ -40,5 +40,8 @@ func Get(ctx *aero.Context) string {
 	}
 
 	ctx.Data = openGraph
-	return ctx.HTML(components.CompanyPage(company, user))
+
+	studioAnime, producedAnime, licensedAnime := company.Anime()
+
+	return ctx.HTML(components.CompanyPage(company, studioAnime, producedAnime, licensedAnime, user))
 }
