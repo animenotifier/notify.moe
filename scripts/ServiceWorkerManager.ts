@@ -73,6 +73,10 @@ export class ServiceWorkerManager {
 		let message = JSON.parse(evt.data)
 
 		switch(message.type) {
+			case "new notification":
+				this.arn.notificationManager.update()
+				break
+
 			case "new content":
 				if(message.url.includes("/_/")) {
 					// Content reload

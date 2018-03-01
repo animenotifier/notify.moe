@@ -197,6 +197,16 @@ class MyServiceWorker {
 	onPush(evt: PushEvent) {
 		var payload = evt.data ? evt.data.json() : {}
 
+		// Notify all clients about the new notification so they can update their notification counter
+		self.clients.matchAll().then(function(clientList) {
+			for(let client of clientList) {
+				client.postMessage(JSON.stringify({
+					type: "new notification"
+				}))
+			}
+		})
+
+		// Display the notification
 		return self.registration.showNotification(payload.title, {
 			body: payload.message,
 			icon: payload.icon,
