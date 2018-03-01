@@ -3,14 +3,14 @@ component Companies(groups [][]*arn.Company, user *arn.User)
 
 	h1.page-title All companies
 
-	.companies
+	.company-groups
 		each group in groups
-			.companies-group
-				h3= group[0].Name.English[:1]
+			.company-group.mountable
+				h3= strings.ToUpper(group[0].Name.English[:1])
 
 				ul
 					each company in group
-						li.mountable
+						li
 							a.ajax(href=company.Link())= company.Name.English
 
 component CompaniesTabs(user *arn.User)
@@ -19,7 +19,7 @@ component CompaniesTabs(user *arn.User)
 		Tab("Popular", "globe", "/companies/popular")
 	
 	.corner-buttons
-		if user != nil
+		if user != nil && (user.Role == "editor" || user.Role == "admin")
 			if user.DraftIndex().CompanyID == ""
 				button.action(data-action="newObject", data-trigger="click", data-type="company")
 					Icon("plus")

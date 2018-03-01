@@ -3,6 +3,7 @@ package companies
 import (
 	"sort"
 	"strings"
+	"unicode"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -29,6 +30,10 @@ func All(ctx *aero.Context) string {
 
 	for _, company := range companies {
 		firstLetter := strings.ToLower(company.Name.English[:1])
+
+		if !unicode.IsLetter([]rune(firstLetter)[0]) {
+			continue
+		}
 
 		if firstLetter != previousFirstLetter {
 			groups = append(groups, []*arn.Company{})
