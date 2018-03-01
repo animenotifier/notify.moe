@@ -144,7 +144,8 @@ func Configure(app *aero.Application) {
 	l.Page("/group/:id/forum", group.Forum)
 
 	// Notifications
-	l.Page("/notifications", notifications.All)
+	l.Page("/notifications", notifications.ByUser)
+	l.Page("/notifications/all", notifications.All)
 
 	// User profiles
 	l.Page("/user", user.Get)
@@ -162,7 +163,7 @@ func Configure(app *aero.Application) {
 	l.Page("/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
 	l.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
 	l.Page("/user/:nick/recommended/anime", recommended.Anime)
-	l.Page("/user/:nick/notifications", notifications.All)
+	l.Page("/user/:nick/notifications", notifications.ByUser)
 
 	// Anime list
 	l.Page("/animelist/watching", home.FilterByStatus(arn.AnimeListStatusWatching))

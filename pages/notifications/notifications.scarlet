@@ -15,6 +15,11 @@
 	position relative
 	opacity 0.25
 
+.notification-user
+	text-align right
+	margin-bottom 0.5rem
+	font-size 0.9rem
+
 .notification[data-seen=""]
 	opacity 1.0
 

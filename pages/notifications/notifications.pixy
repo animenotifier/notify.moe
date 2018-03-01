@@ -12,6 +12,17 @@ component Notifications(notifications []*arn.Notification, viewUser *arn.User, u
 			each notification in notifications
 				Notification(notification)
 
+component AllNotifications(notifications []*arn.Notification)
+	h1 All notifications
+
+	.notifications-container
+		.notifications
+			each notification in notifications
+				Notification(notification)
+
+				.notification-user
+					a.ajax(href=notification.User().Link())= notification.User().Nick
+
 component Notification(notification *arn.Notification)
 	a.notification(href=notification.Link, target="_blank", data-seen=notification.Seen)
 		.notification-icon
@@ -19,6 +30,7 @@ component Notification(notification *arn.Notification)
 		
 		.notification-info
 			h3.notification-title= notification.Title
+
 			.notification-footer
 				p.notification-text= notification.Message
 				.notification-date.utc-date(data-date=notification.Created)
