@@ -122,6 +122,11 @@ component AnimeLinks(anime *arn.Anime)
 	section.anime-section.mountable
 		h3.anime-section-name Links
 		.light-button-group
+			each link in anime.Links
+				a.light-button(href=link.URL, target="_blank", rel="noopener")
+					Icon("external-link")
+					span= link.Title
+			
 			a.light-button(href="https://kitsu.io/anime/" + anime.ID, target="_blank", rel="noopener")
 				Icon("external-link")
 				span Kitsu
