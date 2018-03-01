@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"sort"
 
+	"github.com/animenotifier/arn"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
@@ -19,7 +21,16 @@ func All(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
 	}
 
-	notifications := user.Notifications().Notifications()
+	var viewUser *arn.User
+	nick := ctx.Get("nick")
+
+	if nick != "" {
+		viewUser, _ = arn.GetUserByNick(nick)
+	} else {
+		viewUser = user
+	}
+
+	notifications := viewUser.Notifications().Notifications()
 
 	// Sort by date
 	sort.Slice(notifications, func(i, j int) bool {
@@ -31,5 +42,5 @@ func All(ctx *aero.Context) string {
 		notifications = notifications[:maxNotifications]
 	}
 
-	return ctx.HTML(components.Notifications(notifications, user))
+	return ctx.HTML(components.Notifications(notifications, viewUser, user))
 }

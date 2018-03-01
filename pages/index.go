@@ -162,6 +162,7 @@ func Configure(app *aero.Application) {
 	l.Page("/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
 	l.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
 	l.Page("/user/:nick/recommended/anime", recommended.Anime)
+	l.Page("/user/:nick/notifications", notifications.All)
 
 	// Anime list
 	l.Page("/animelist/watching", home.FilterByStatus(arn.AnimeListStatusWatching))

@@ -1,10 +1,11 @@
-component Notifications(notifications []*arn.Notification, user *arn.User)
+component Notifications(notifications []*arn.Notification, viewUser *arn.User, user *arn.User)
 	h1 Notifications
 
 	.corner-buttons
-		button.action(data-action="markNotificationsAsSeen", data-trigger="click")
-			Icon("check")
-			span Mark all as seen
+		if user.ID == viewUser.ID
+			button.action(data-action="markNotificationsAsSeen", data-trigger="click")
+				Icon("check")
+				span Mark all as seen
 
 	.notifications-container
 		.notifications

@@ -268,6 +268,7 @@ var routeTests = map[string][]string{
 	"/import/kitsu/animelist":                        nil,
 	"/import/kitsu/animelist/finish":                 nil,
 	"/notifications":                                 nil,
+	"/user/:nick/notifications":                      nil,
 	"/api/test/notification":                         nil,
 	"/api/paypal/payment/create":                     nil,
 	"/api/userfollows/:id/get/:item":                 nil,
