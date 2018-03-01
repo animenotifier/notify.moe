@@ -70,6 +70,13 @@ func Get(ctx *aero.Context) string {
 		return tracks[i].Title < tracks[j].Title
 	})
 
+	// Anime list item
+	var animeListItem *arn.AnimeListItem
+
+	if user != nil {
+		animeListItem = user.AnimeList().Find(anime.ID)
+	}
+
 	// Open Graph
 	description := anime.Summary
 
@@ -100,5 +107,5 @@ func Get(ctx *aero.Context) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Anime(anime, tracks, episodes, friends, friendsAnimeListItems, user))
+	return ctx.HTML(components.Anime(anime, animeListItem, tracks, episodes, friends, friendsAnimeListItems, user))
 }
