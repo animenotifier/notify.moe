@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"image"
-	"io"
 	"net/http"
 
 	"github.com/aerogo/aero"
@@ -25,19 +24,14 @@ func Avatar(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Reading request body failed", err)
 	}
 
-	format, err := guessImageFormat(bytes.NewReader(data))
+	// Decode
+	img, format, err := image.Decode(bytes.NewReader(data))
 
 	if err != nil {
-		return ctx.Error(http.StatusBadRequest, "Could not determine image file type", err)
+		return ctx.Error(http.StatusBadRequest, "Invalid image format", err)
 	}
 
-	fmt.Println("Avatar received!", len(data), format, user.Nick)
+	fmt.Println("Avatar received!", len(data), format, img.Bounds().Dx(), img.Bounds().Dy(), user.Nick)
 	// ioutil.WriteFile("avatar")
 	return "ok"
-}
-
-// Guess image format from gif/jpeg/png/webp
-func guessImageFormat(r io.Reader) (format string, err error) {
-	_, format, err = image.DecodeConfig(r)
-	return format, err
 }
