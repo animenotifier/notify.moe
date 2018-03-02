@@ -30,6 +30,13 @@ component InputSelection(id string, value string, label string, placeholder stri
 			each option in options
 				option(value=option.Value)= option.Label
 
+component InputImage(id string, label string, src string)
+	.widget-section
+		label(for=id)= label + ":"
+		button.action(data-action="selectFile", data-trigger="click", data-preview-image-id=id + "-preview")
+			Icon("upload")
+			span Select file
+
 component InputTags(id string, value []string, label string, tooltip string)
 	.widget-section
 		label(for=id)= label + ":"

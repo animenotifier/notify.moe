@@ -23,6 +23,9 @@ func configure(app *aero.Application) *aero.Application {
 	app.Sessions.Duration = 3600 * 24 * 30 * 6
 	app.Sessions.Store = nanostore.New(arn.DB.Collection("Session"))
 
+	// Content security policy
+	app.ContentSecurityPolicy.Set("img-src", "https: data:")
+
 	// Security
 	configureHTTPS(app)
 
