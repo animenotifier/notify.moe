@@ -7,19 +7,18 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 	input.setAttribute("type", "file")
 
 	input.onchange = () => {
-		previewImage(input, preview)
-		uploadImage(input, preview)
+		let file = input.files[0]
+
+		previewImage(file, preview)
+		uploadImage(file)
 	}
 
 	input.click()
 }
 
 // Preview image
-function previewImage(input: HTMLInputElement, preview: HTMLImageElement) {
-	let file = input.files[0]
+function previewImage(file: File, preview: HTMLImageElement) {
 	let reader = new FileReader()
-
-	console.log(file.name, file.size, file.type)
 
 	reader.onloadend = () => {
 		preview.classList.remove("hidden")
@@ -29,11 +28,26 @@ function previewImage(input: HTMLInputElement, preview: HTMLImageElement) {
 	if(file) {
 		reader.readAsDataURL(file)
 	} else {
-		preview.src = ""
+		preview.classList.add("hidden")
 	}
 }
 
 // Upload image
-function uploadImage(input: HTMLInputElement, preview: HTMLImageElement) {
+function uploadImage(file: File) {
+	let reader = new FileReader()
 
+	reader.onloadend = async () => {
+		await fetch("/api/upload/avatar", {
+			method: "POST",
+			credentials: "include",
+			headers: {
+				"Content-Type": "application/octet-stream"
+			},
+			body: reader.result
+		})
+
+		console.log("Avatar upload finished!")
+	}
+
+	reader.readAsBinaryString(file)
 }

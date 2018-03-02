@@ -53,6 +53,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/statistics"
 	"github.com/animenotifier/notify.moe/pages/terms"
 	"github.com/animenotifier/notify.moe/pages/threads"
+	"github.com/animenotifier/notify.moe/pages/upload"
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
 )
@@ -184,6 +185,9 @@ func Configure(app *aero.Application) {
 	l.Page("/charge", charge.Get)
 	l.Page("/shop/history", shop.PurchaseHistory)
 	app.Post("/api/shop/buy/:item/:quantity", shop.BuyItem)
+
+	// Upload
+	app.Post("/api/upload/avatar", upload.Avatar)
 
 	// Admin
 	l.Page("/admin", admin.Get)
