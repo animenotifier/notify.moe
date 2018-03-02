@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	notification := &arn.Notification{
+	notification := &arn.PushNotification{
 		Title:   "Boku dake ga Inai Machi",
 		Message: "Episode 16 has been released!",
-		Image:   "https://media.notify.moe/images/anime/large/11110.webp",
+		Icon:    "https://media.notify.moe/images/anime/large/11110.webp",
 		Link:    "https://notify.moe/anime/11110",
 	}
 
