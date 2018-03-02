@@ -10,7 +10,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 		let file = input.files[0]
 
 		previewImage(file, preview)
-		uploadImage(file)
+		uploadFile(file, "/api/upload/avatar")
 	}
 
 	input.click()
@@ -32,12 +32,12 @@ function previewImage(file: File, preview: HTMLImageElement) {
 	}
 }
 
-// Upload image
-function uploadImage(file: File) {
+// Upload file
+function uploadFile(file: File, endpoint: string) {
 	let reader = new FileReader()
 
 	reader.onloadend = async () => {
-		await fetch("/api/upload/avatar", {
+		await fetch(endpoint, {
 			method: "POST",
 			credentials: "include",
 			headers: {
