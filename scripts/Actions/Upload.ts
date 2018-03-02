@@ -45,9 +45,7 @@ function uploadImage(file: File) {
 			},
 			body: reader.result
 		})
-
-		console.log("Avatar upload finished!")
 	}
 
-	reader.readAsBinaryString(file)
+	reader.readAsArrayBuffer(file)
 }
