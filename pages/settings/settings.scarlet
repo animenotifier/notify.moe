@@ -15,3 +15,8 @@
 
 .avatar-preview
 	margin 0 auto
+
+.settings-info-text
+	text-align center
+	font-size 0.9rem
+	opacity 0.5

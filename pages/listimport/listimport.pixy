@@ -1,6 +1,6 @@
 component ImportLists(user *arn.User)
 	if user.Accounts.AniList.Nick == "" && user.Accounts.Kitsu.Nick == "" && user.Accounts.MyAnimeList.Nick == ""
-		p Import your list once you enter your username!
+		p.settings-info-text Import your list once you enter your username!
 
 	if user.Accounts.AniList.Nick != ""
 		label AniList:

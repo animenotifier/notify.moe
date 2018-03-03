@@ -56,9 +56,9 @@ component SettingsPersonal(user *arn.User)
 
 			.profile-image-container.avatar-preview
 				if user.HasAvatar()
-					img#avatar-input-preview.profile-image.mountable(src=user.LargeAvatar(), alt="Profile image")
+					img#avatar-input-preview.profile-image.mountable(src=user.LargeAvatar(), alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
 				else
-					img#avatar-input-preview.profile-image.hidden(src=user.LargeAvatar(), alt="Profile image")
+					img#avatar-input-preview.profile-image.hidden(src=user.LargeAvatar(), alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
 
 					#avatar-input-preview-svg
 						SVGProfileImage(user)
