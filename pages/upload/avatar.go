@@ -1,9 +1,6 @@
 package upload
 
 import (
-	"bytes"
-	"fmt"
-	"image"
 	"net/http"
 
 	"github.com/aerogo/aero"
@@ -18,20 +15,22 @@ func Avatar(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
+	// Retrieve file from post body
 	data, err := ctx.Request().Body().Bytes()
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Reading request body failed", err)
 	}
 
-	// Decode
-	img, format, err := image.Decode(bytes.NewReader(data))
+	// Set avatar file
+	err = user.SetAvatarBytes(data)
 
 	if err != nil {
-		return ctx.Error(http.StatusBadRequest, "Invalid image format", err)
+		return ctx.Error(http.StatusInternalServerError, "Invalid image format", err)
 	}
 
-	fmt.Println("Avatar received!", len(data), format, img.Bounds().Dx(), img.Bounds().Dy(), user.Nick)
-	// ioutil.WriteFile("avatar")
+	// Save avatar information
+	user.Save()
+
 	return "ok"
 }

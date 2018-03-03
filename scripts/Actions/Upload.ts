@@ -10,7 +10,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 		let file = input.files[0]
 
 		previewImage(file, preview)
-		uploadFile(file, "/api/upload/avatar")
+		uploadFile(file, "/api/upload/avatar", arn)
 	}
 
 	input.click()
@@ -33,11 +33,13 @@ function previewImage(file: File, preview: HTMLImageElement) {
 }
 
 // Upload file
-function uploadFile(file: File, endpoint: string) {
+function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
 	let reader = new FileReader()
 
 	reader.onloadend = async () => {
-		await fetch(endpoint, {
+		arn.statusMessage.showInfo("Uploading avatar...")
+
+		let response = await fetch(endpoint, {
 			method: "POST",
 			credentials: "include",
 			headers: {
@@ -45,6 +47,12 @@ function uploadFile(file: File, endpoint: string) {
 			},
 			body: reader.result
 		})
+
+		if(response.ok) {
+			arn.statusMessage.showInfo("Successfully uploaded your new avatar.")
+		} else {
+			arn.statusMessage.showError("Failed uploading your new avatar.")
+		}
 	}
 
 	reader.readAsArrayBuffer(file)

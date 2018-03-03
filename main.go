@@ -3,10 +3,6 @@ package main
 import (
 	"strings"
 
-	_ "image/gif"
-	_ "image/jpeg"
-	_ "image/png"
-
 	"github.com/aerogo/aero"
 	"github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
