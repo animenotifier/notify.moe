@@ -43,7 +43,7 @@ component AnimeList(animeList *arn.AnimeList, viewUser *arn.User, user *arn.User
 		each item in animeList.Items
 			.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + animeList.UserID + "/field/Items[AnimeID=\"" + item.AnimeID + "\"]")
 				.anime-list-item-image-container
-					a.ajax(href=item.Anime().Link())
+					a.anime-list-item-image-link.ajax(href=item.Anime().Link())
 						img.anime-list-item-image.lazy(data-src=item.Anime().Image("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
 
 				.anime-list-item-name
