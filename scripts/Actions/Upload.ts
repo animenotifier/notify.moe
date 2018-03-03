@@ -1,4 +1,5 @@
 import { AnimeNotifier } from "../AnimeNotifier"
+import { StatusMessage } from "../StatusMessage"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
@@ -10,6 +11,11 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 		let file = input.files[0]
 
 		if(!file) {
+			return
+		}
+
+		if(!file.type.startsWith("image/")) {
+			arn.statusMessage.showError(file.name + " is not an image file!")
 			return
 		}
 
@@ -43,7 +49,7 @@ function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
 	let reader = new FileReader()
 
 	reader.onloadend = async () => {
-		arn.statusMessage.showInfo("Uploading avatar...")
+		arn.statusMessage.showInfo("Uploading avatar...", 60000)
 
 		let response = await fetch(endpoint, {
 			method: "POST",
