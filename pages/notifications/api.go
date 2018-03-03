@@ -17,14 +17,7 @@ func CountUnseen(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
 	}
 
-	notifications := user.Notifications().Notifications()
-	unseen := 0
-
-	for _, notification := range notifications {
-		if notification.Seen == "" {
-			unseen++
-		}
-	}
+	unseen := user.Notifications().CountUnseen()
 
 	return ctx.Text(strconv.Itoa(unseen))
 }
