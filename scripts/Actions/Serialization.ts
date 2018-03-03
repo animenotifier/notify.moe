@@ -37,7 +37,11 @@ export function save(arn: AnimeNotifier, input: HTMLElement) {
 			(input as HTMLInputElement).disabled = false
 		}
 
-		return arn.reloadContent()
+		if(apiEndpoint.startsWith("/api/user/") && input.dataset.field === "Nick") {
+			return arn.reloadPage()
+		} else {
+			return arn.reloadContent()
+		}
 	})
 }
 
