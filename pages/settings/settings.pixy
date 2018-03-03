@@ -54,7 +54,7 @@ component SettingsPersonal(user *arn.User)
 				InputImage("avatar-input", "File", user.LargeAvatar())
 
 				.profile-image-container.avatar-preview
-					img.profile-image.hidden(id="avatar-input-preview", src="", alt="Image preview")
+					img.profile-image.mountable(id="avatar-input-preview", src=user.LargeAvatar(), alt="Image preview")
 
 component SettingsNotifications(user *arn.User)
 	SettingsTabs
