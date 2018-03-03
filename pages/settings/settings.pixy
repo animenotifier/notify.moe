@@ -51,10 +51,16 @@ component SettingsPersonal(user *arn.User)
 			
 			//- File upload
 			if user.Settings().Avatar.Source == "FileSystem"
-				InputImage("avatar-input", "File", user.LargeAvatar())
+				InputImage("avatar-input", "File")
 
 				.profile-image-container.avatar-preview
-					img.profile-image.mountable(id="avatar-input-preview", src=user.LargeAvatar(), alt="Image preview")
+					if user.HasAvatar()
+						img#avatar-input-preview.profile-image.mountable(src=user.LargeAvatar(), alt="Profile image")
+					else
+						img#avatar-input-preview.profile-image.hidden(src=user.LargeAvatar(), alt="Profile image")
+
+						#avatar-input-preview-svg
+							SVGProfileImage(user)
 
 component SettingsNotifications(user *arn.User)
 	SettingsTabs

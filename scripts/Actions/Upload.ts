@@ -21,14 +21,18 @@ function previewImage(file: File, preview: HTMLImageElement) {
 	let reader = new FileReader()
 
 	reader.onloadend = () => {
+		let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
+
+		if(svgPreview) {
+			svgPreview.classList.add("hidden")
+		}
+
 		preview.classList.remove("hidden")
 		preview.src = reader.result
 	}
 
 	if(file) {
 		reader.readAsDataURL(file)
-	} else {
-		preview.classList.add("hidden")
 	}
 }
 
@@ -49,10 +53,7 @@ function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
 		})
 
 		let newURL = await response.text()
-		let sidebar = document.getElementById("sidebar")
-		let userImage = sidebar.getElementsByClassName("user-image")[0] as HTMLImageElement
-		userImage.dataset.src = newURL
-		userImage["became visible"]()
+		updateSideBarAvatar(newURL)
 
 		if(response.ok) {
 			arn.statusMessage.showInfo("Successfully uploaded your new avatar.")
@@ -62,4 +63,18 @@ function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
 	}
 
 	reader.readAsArrayBuffer(file)
+}
+
+// Update sidebar avatar
+function updateSideBarAvatar(url: string) {
+	let sidebar = document.getElementById("sidebar")
+	let userImage = sidebar.getElementsByClassName("user-image")[0] as HTMLImageElement
+	let lazyLoad = userImage["became visible"]
+
+	if(lazyLoad) {
+		userImage.dataset.src = url
+		lazyLoad()
+	} else {
+		location.reload()
+	}
 }
