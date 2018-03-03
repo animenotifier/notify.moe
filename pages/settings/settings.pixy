@@ -27,40 +27,41 @@ component SettingsPersonal(user *arn.User)
 				Icon("picture-o")
 				span Avatar
 
-			.widget-section
-				label(for="Avatar.Source") Source:
-				select.widget-ui-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
-					option(value="") Automatic
-					option(value="Gravatar") Gravatar
-					option(value="URL") Link
-					option(value="FileSystem") Upload
+			//- .widget-section
+			//- 	label(for="Avatar.Source") Source:
+			//- 	select.widget-ui-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
+			//- 		option(value="") Automatic
+			//- 		option(value="Gravatar") Gravatar
+			//- 		option(value="URL") Link
+			//- 		option(value="FileSystem") Upload
 
-			//- URL input
-			if user.Settings().Avatar.Source == "URL"
-				InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
+			//- //- URL input
+			//- if user.Settings().Avatar.Source == "URL"
+			//- 	InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
 
-			//- Gravatar preview image
-			if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
-				.profile-image-container.avatar-preview
-					img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar (" + user.Email + ")", title="Gravatar (" + user.Email + ")")
+			//- //- Gravatar preview image
+			//- if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
+			//- 	.profile-image-container.avatar-preview
+			//- 		img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar (" + user.Email + ")", title="Gravatar (" + user.Email + ")")
 			
-			//- URL preview image
-			if user.Settings().Avatar.Source == "URL" && user.Settings().Avatar.SourceURL != ""
-				.profile-image-container.avatar-preview
-					img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
+			//- //- URL preview image
+			//- if user.Settings().Avatar.Source == "URL" && user.Settings().Avatar.SourceURL != ""
+			//- 	.profile-image-container.avatar-preview
+			//- 		img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
 			
-			//- File upload
-			if user.Settings().Avatar.Source == "FileSystem"
-				InputImage("avatar-input", "File")
+			//- //- File upload
+			//- if user.Settings().Avatar.Source == "FileSystem"
+			
+			InputImage("avatar-input", "File")
 
-				.profile-image-container.avatar-preview
-					if user.HasAvatar()
-						img#avatar-input-preview.profile-image.mountable(src=user.LargeAvatar(), alt="Profile image")
-					else
-						img#avatar-input-preview.profile-image.hidden(src=user.LargeAvatar(), alt="Profile image")
+			.profile-image-container.avatar-preview
+				if user.HasAvatar()
+					img#avatar-input-preview.profile-image.mountable(src=user.LargeAvatar(), alt="Profile image")
+				else
+					img#avatar-input-preview.profile-image.hidden(src=user.LargeAvatar(), alt="Profile image")
 
-						#avatar-input-preview-svg
-							SVGProfileImage(user)
+					#avatar-input-preview-svg
+						SVGProfileImage(user)
 
 component SettingsNotifications(user *arn.User)
 	SettingsTabs

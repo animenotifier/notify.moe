@@ -9,6 +9,10 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 	input.onchange = () => {
 		let file = input.files[0]
 
+		if(!file) {
+			return
+		}
+
 		previewImage(file, preview)
 		uploadFile(file, "/api/upload/avatar", arn)
 	}
@@ -31,9 +35,7 @@ function previewImage(file: File, preview: HTMLImageElement) {
 		preview.src = reader.result
 	}
 
-	if(file) {
-		reader.readAsDataURL(file)
-	}
+	reader.readAsDataURL(file)
 }
 
 // Upload file
