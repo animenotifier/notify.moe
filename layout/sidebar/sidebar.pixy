@@ -8,13 +8,13 @@ component Sidebar(user *arn.User)
 				img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
 			
 			if user != nil
-				a.badge.left-badge.ajax(href="/settings")
+				a.badge.left-badge.ajax(href="/settings", title="Settings")
 					RawIcon("cog")
 				
-				a#notification-icon.badge.right-badge.ajax(href="/notifications")
+				a#notification-icon.badge.right-badge.ajax(href="/notifications", title="Notifications")
 					RawIcon("bell")
 				
-				a#notification-count.badge.right-badge.ajax.badge-important.hidden(href="/notifications") 0
+				a#notification-count.badge.right-badge.ajax.badge-important.hidden(href="/notifications", title="Notifications") 0
 
 		//- Sidebar buttons
 		if user != nil
