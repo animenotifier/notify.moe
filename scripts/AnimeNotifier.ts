@@ -510,15 +510,21 @@ export class AnimeNotifier {
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
 			let dataSrc = element.dataset.src
-			let dot = dataSrc.lastIndexOf(".")
-			let base = dataSrc.substring(0, dot)
+			let dotPos = dataSrc.lastIndexOf(".")
+			let base = dataSrc.substring(0, dotPos)
 			let extension = ""
 
 			// Replace URL with WebP if supported
 			if(this.webpEnabled && element.dataset.webp) {
-				extension = ".webp"
+				let queryPos = dataSrc.lastIndexOf("?")
+
+				if(queryPos !== -1) {
+					extension = ".webp" + dataSrc.substring(queryPos)
+				} else {
+					extension = ".webp"
+				}
 			} else {
-				extension = dataSrc.substring(dot)
+				extension = dataSrc.substring(dotPos)
 			}
 
 			// Anime images on Retina displays

@@ -48,6 +48,12 @@ function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
 			body: reader.result
 		})
 
+		let newURL = await response.text()
+		let sidebar = document.getElementById("sidebar")
+		let userImage = sidebar.getElementsByClassName("user-image")[0] as HTMLImageElement
+		userImage.dataset.src = newURL
+		userImage["became visible"]()
+
 		if(response.ok) {
 			arn.statusMessage.showInfo("Successfully uploaded your new avatar.")
 		} else {

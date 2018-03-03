@@ -32,5 +32,5 @@ func Avatar(ctx *aero.Context) string {
 	// Save avatar information
 	user.Save()
 
-	return "ok"
+	return user.SmallAvatar()
 }
