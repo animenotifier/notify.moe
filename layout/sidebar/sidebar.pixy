@@ -32,7 +32,9 @@ component Sidebar(user *arn.User)
 
 		if user != nil
 			SidebarButton("Shop", "/shop", "shopping-cart")
-			//- SidebarButton("Settings", "/settings", "cog")
+		
+		if arn.IsDevelopment()
+			SidebarButton("Groups", "/groups", "users")
 
 		//- Disabled:
 		//- SidebarButton("Dash", "/dashboard", "tachometer")
