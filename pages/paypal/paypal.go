@@ -26,7 +26,7 @@ func CreatePayment(ctx *aero.Context) string {
 	}
 
 	switch amount {
-	case "1000", "2000", "3000", "6000", "12000":
+	case "1000", "2000", "3000", "6000", "12000", "25000", "50000", "75000":
 		// OK
 	default:
 		return ctx.Error(http.StatusBadRequest, "Incorrect amount", nil)
