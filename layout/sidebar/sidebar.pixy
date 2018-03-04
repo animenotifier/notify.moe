@@ -31,7 +31,7 @@ component Sidebar(user *arn.User)
 		SidebarButton("Users", "/users", "globe")
 
 		if user != nil
-			SidebarButton("Shop", "/shop", "shopping-cart")
+			SidebarButton("Support", "/support", "heart")
 		
 		if arn.IsDevelopment()
 			SidebarButton("Groups", "/groups", "users")

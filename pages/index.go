@@ -51,6 +51,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/soundtrack"
 	"github.com/animenotifier/notify.moe/pages/soundtracks"
 	"github.com/animenotifier/notify.moe/pages/statistics"
+	"github.com/animenotifier/notify.moe/pages/support"
 	"github.com/animenotifier/notify.moe/pages/terms"
 	"github.com/animenotifier/notify.moe/pages/threads"
 	"github.com/animenotifier/notify.moe/pages/upload"
@@ -180,6 +181,7 @@ func Configure(app *aero.Application) {
 	l.Page("/search/*term", search.Get)
 
 	// Shop
+	l.Page("/support", support.Get)
 	l.Page("/shop", shop.Get)
 	l.Page("/inventory", inventory.Get)
 	l.Page("/charge", charge.Get)

@@ -1,0 +1,32 @@
+component Support(user *arn.User)
+	ShopTabs(user)
+
+	h1.mountable Want to support us?
+
+	.feature-cards
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("user")
+			
+			p.feature-card-text Anime Notifier is developed and maintained mostly by just one person in Japan.
+
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("comments")
+			
+			.feature-card-text
+				p The developer is always listening to user feedback. Your voice will definitely be heard!
+
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("thumbs-up")
+			
+			.feature-card-text
+				p We aim for the highest quality standards, which is why the site will always be ad-free.
+		
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("star")
+			
+			.feature-card-text
+				p You'll receive PRO account status allowing you to unlock extra features!
