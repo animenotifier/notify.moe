@@ -13,12 +13,10 @@ var items = []*arn.Item{
 
 Includes:
 
-* Browser extension for quick list access
 * Dark theme for the site and extension
 * Special highlight on the forums
-* Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your suggestions
+* Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRaritySuperior,
@@ -35,12 +33,10 @@ Includes:
 
 Includes:
 
-* Browser extension for quick list access
 * Dark theme for the site and extension
 * Special highlight on the forums
-* Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your suggestions
+* Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityRare,
@@ -57,12 +53,10 @@ Includes:
 
 Includes:
 
-* Browser extension for quick list access
 * Dark theme for the site and extension
 * Special highlight on the forums
-* Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your suggestions
+* Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityUnique,
@@ -79,12 +73,10 @@ Includes:
 
 Includes:
 
-* Browser extension for quick list access
 * Dark theme for the site and extension
 * Special highlight on the forums
-* Access to the VIP channel on Discord
 * PRO star on your profile
-* High priority for your suggestions
+* Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ItemRarityLegendary,

@@ -72,7 +72,8 @@ anime-list-item-name-color = link-color
 table-width-normal = 900px
 
 // Feature cards
-feature-card-color = crimson
+feature-card-color = hsl(348, 83%, 47%)
+feature-card-alternative-color = hsl(203, 83%, 47%)
 feature-card-icon-color = white
 
 // Loading animation

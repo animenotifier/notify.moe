@@ -1,22 +1,23 @@
 .feature-cards
-	horizontal
+	horizontal-wrap
 	justify-content space-around
 	max-width 1200px
-	margin 0 auto
-	margin-top content-padding
+	margin content-padding auto
 
 .feature-card
 	vertical
-	flex-basis 250px
+	flex-basis 240px
 	border-radius 5px
 	overflow hidden
 	background ui-background
 	box-shadow shadow-light
 	border 1px solid ui-border-color
+	margin calc(content-padding / 2)
 	default-transition
 
 	:hover
 		box-shadow shadow-medium
+		text-shadow none
 
 .feature-card-icon,
 .feature-card-text
@@ -33,4 +34,15 @@
 	color feature-card-icon-color
 
 .feature-card-text
-	//
+	color text-color
+
+.feature-cards-alternative-color
+	.feature-card-icon
+		background feature-card-alternative-color
+
+.support-button-container
+	margin-top content-padding
+
+.support-button
+	font-size 2rem
+	padding 1rem 2rem
