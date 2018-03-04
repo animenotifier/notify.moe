@@ -12,7 +12,7 @@ import (
 // Active ...
 func Active(ctx *aero.Context) string {
 	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.IsActive() && user.HasAvatar()
+		return user.HasAvatar() && user.HasNick() && user.IsActive()
 	})
 
 	followCount := map[*arn.User]int{}
@@ -80,7 +80,7 @@ func ActiveNoAvatar(ctx *aero.Context) string {
 // Osu ...
 func Osu(ctx *aero.Context) string {
 	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.IsActive() && user.HasAvatar() && user.Accounts.Osu.PP > 0
+		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.Osu.PP > 0
 	})
 
 	// Sort by pp
@@ -98,7 +98,7 @@ func Osu(ctx *aero.Context) string {
 // Overwatch ...
 func Overwatch(ctx *aero.Context) string {
 	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.IsActive() && user.HasAvatar() && user.Accounts.Overwatch.SkillRating > 0
+		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.Overwatch.SkillRating > 0
 	})
 
 	// Sort by Skill Ratings
@@ -116,7 +116,7 @@ func Overwatch(ctx *aero.Context) string {
 // Staff ...
 func Staff(ctx *aero.Context) string {
 	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.IsActive() && user.HasAvatar() && user.Role != ""
+		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Role != ""
 	})
 
 	// Make order deterministic
