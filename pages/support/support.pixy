@@ -1,7 +1,7 @@
 component Support(user *arn.User)
 	ShopTabs(user)
 
-	h1.mountable Want to support us?
+	h1.mountable Why support us?
 
 	.feature-cards
 		.feature-card.mountable
@@ -23,6 +23,35 @@ component Support(user *arn.User)
 			
 			.feature-card-text
 				p We aim for the highest quality standards, which is why the site will always be ad-free.
+		
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("server")
+			
+			.feature-card-text
+				p High-quality servers cost a lot of money on a monthly basis and need to be maintained.
+		
+		//- 
+
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("github")
+			
+			p.feature-card-text The project is truly 100% Open Source with proper governance and organization on GitHub.
+
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("code")
+			
+			.feature-card-text
+				p All the data on the site is accessible via a public API which developers can utilize.
+		
+		.feature-card.mountable
+			.feature-card-icon
+				RawIcon("users")
+			
+			.feature-card-text
+				p With more supporters, we can start hiring new personnel to build more features!
 		
 		.feature-card.mountable
 			.feature-card-icon
@@ -58,8 +87,14 @@ component Support(user *arn.User)
 			
 			p.feature-card-text Confirm the PRO status by visiting your profile.
 	
+	h1.mountable Let's get down to business!
+
 	.buttons.support-button-container
 		a.button.support-button.mountable.ajax(href="/charge")
 			Icon("heart")
 			span Support us!
+	
+	.footer.support-footer
+		p Thank you to everyone supporting the site. It means a lot me.
+		p --Akyoto
 	

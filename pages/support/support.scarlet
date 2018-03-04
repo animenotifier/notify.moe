@@ -1,6 +1,6 @@
 .feature-cards
 	horizontal-wrap
-	justify-content space-around
+	justify-content center
 	max-width 1200px
 	margin content-padding auto
 
@@ -12,7 +12,7 @@
 	background ui-background
 	box-shadow shadow-light
 	border 1px solid ui-border-color
-	margin calc(content-padding / 2)
+	margin 1.2rem
 	default-transition
 
 	:hover
@@ -41,8 +41,11 @@
 		background feature-card-alternative-color
 
 .support-button-container
-	margin-top content-padding
+	margin content-padding 0
 
 .support-button
 	font-size 2rem
 	padding 1rem 2rem
+
+.support-footer
+	margin-bottom content-padding
