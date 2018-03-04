@@ -13,7 +13,7 @@
 	padding 1rem
 	margin-bottom 0.5rem
 	position relative
-	opacity 0.25
+	opacity 0.35
 
 .notification-user
 	text-align right
