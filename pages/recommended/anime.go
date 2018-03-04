@@ -66,8 +66,8 @@ func Anime(ctx *aero.Context) string {
 
 	// Calculate affinity for each anime
 	for _, anime := range recommendations {
-		// Skip anime that are upcoming
-		if anime.Status == "upcoming" {
+		// Skip anime that are upcoming or tba
+		if anime.Status == "upcoming" || anime.Status == "tba" {
 			continue
 		}
 
