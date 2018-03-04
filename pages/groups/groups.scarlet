@@ -16,8 +16,9 @@ group-padding-x = 0.75rem
 	color text-color
 
 	:hover
-		color white
-		background-color rgb(60, 60, 60)
+		color theme-white
+		background-color theme-black
+		text-shadow none
 
 .group-image
 	width 70px
