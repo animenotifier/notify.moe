@@ -1,0 +1,13 @@
+.episode-view-number
+	text-align center
+	margin 0
+
+.episode-view-airing-date
+	text-align center
+	opacity 0.5
+	font-size 0.9rem
+
+.episode-view-image-container
+	horizontal
+	justify-content center
+	margin-bottom content-padding

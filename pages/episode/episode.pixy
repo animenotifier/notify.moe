@@ -1,14 +1,26 @@
 component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User)
-	h1= episode.Title.Japanese
-	p
+	h1= anime.Title.ByUser(user)
+
+	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
+
+	if validator.IsValidDate(episode.AiringDate.Start)
+		p.episode-view-airing-date
+			span.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
+
+	.episode-view-image-container
 		a.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-			img(src=anime.Image("medium"), alt=anime.Title.ByUser(user))
-		
-		if validator.IsValidDate(episode.AiringDate.Start)
-			.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
+			img.anime-cover-image(src=anime.Image("large"), alt=anime.Title.ByUser(user))
 	
 	if user != nil
-		ul
-			for _, link := range episode.Links
-				a(href=link, title="Watch episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
-					RawIcon("eye")
+		.buttons
+			for serviceName, link := range episode.Links
+				a.button(href=link, title="Watch episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
+					Icon("eye")
+					span= serviceName
+			
+			a.button(href=arn.Nyaa.GetLink(anime, fmt.Sprintf("%02d", episode.Number)), title="Download episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
+				Icon("download")
+				span nyaa.si
+		
+		.footer
+			p Make sure to support the anime you're watching by buying officially released Blu-rays and merchandise. Thank you.
