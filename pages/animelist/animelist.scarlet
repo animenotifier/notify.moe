@@ -29,6 +29,7 @@
 .anime-list-item-name
 	flex 1
 	margin 0.5rem 1rem
+	padding 0
 	clip-long-text
 
 	a
