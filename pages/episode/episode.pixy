@@ -1,15 +1,19 @@
 component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User)
 	h1= anime.Title.ByUser(user)
 
+	.episode-view-image-container
+		a.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+			img.anime-cover-image(src=anime.Image("large"), alt=anime.Title.ByUser(user))
+
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
+
+	if episode.Title.Japanese != ""
+		.episode-view-title
+			Japanese(episode.Title.Japanese)
 
 	if validator.IsValidDate(episode.AiringDate.Start)
 		p.episode-view-airing-date
 			span.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
-
-	.episode-view-image-container
-		a.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-			img.anime-cover-image(src=anime.Image("large"), alt=anime.Title.ByUser(user))
 	
 	if user != nil
 		.buttons
@@ -23,4 +27,5 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 				span nyaa.si
 		
 		.footer
-			p Make sure to support the anime you're watching by buying officially released Blu-rays and merchandise. Thank you.
+			p Make sure to support the anime you're watching by buying officially released Blu-rays and merchandise.
+			p Anime Notifier provides links to external websites for convenience reasons. By clicking on these links you are leaving our site. Thus we can not, under no circumstances, be held responsible for the content on external websites.
