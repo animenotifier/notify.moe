@@ -7,13 +7,13 @@ component CustomAvatar(user *arn.User, link string, title string)
 
 component AvatarNoLink(user *arn.User)
 	if user.HasAvatar()
-		img.user-image.lazy(data-src=user.SmallAvatar(), data-webp="true", alt=user.Nick)
+		img.user-image.lazy(data-src=user.AvatarLink("small"), data-webp="true", alt=user.Nick)
 	else
 		SVGAvatar(user)
 
 component ProfileImage(user *arn.User)
 	if user.HasAvatar()
-		img.profile-image.lazy(data-src=user.LargeAvatar(), data-webp="true", alt="Profile image")
+		img.profile-image.lazy(data-src=user.AvatarLink("large"), data-webp="true", alt="Profile image")
 	else
 		SVGProfileImage(user)
 

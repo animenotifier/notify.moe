@@ -31,7 +31,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":         viewUser.Nick,
-			"og:image":         viewUser.LargeAvatar(),
+			"og:image":         viewUser.AvatarLink("large"),
 			"og:url":           "https://" + ctx.App.Config.Domain + viewUser.Link(),
 			"og:site_name":     "notify.moe",
 			"og:description":   viewUser.Tagline,

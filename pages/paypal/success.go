@@ -88,7 +88,7 @@ func Success(ctx *aero.Context) string {
 		admin.SendNotification(&arn.PushNotification{
 			Title:   user.Nick + " bought " + strconv.Itoa(payment.Gems()) + " gems",
 			Message: user.Nick + " paid " + payment.Amount + " " + payment.Currency + " making his new balance " + strconv.Itoa(user.Balance),
-			Icon:    user.LargeAvatar(),
+			Icon:    user.AvatarLink("large"),
 			Link:    "https://" + ctx.App.Config.Domain + "/api/paypalpayment/" + payment.ID,
 			Type:    arn.NotificationTypePurchase,
 		})
