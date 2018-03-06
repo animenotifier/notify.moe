@@ -21,7 +21,9 @@ component SettingsPersonal(user *arn.User)
 			InputText("Nick", user.Nick, "Username", "Your username on notify.moe")
 			InputText("Tagline", user.Tagline, "Tagline", "Text that appears below your username")
 			InputText("Website", user.Website, "Website", "Your homepage")
-			InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us about yourself (Markdown is allowed)")
+
+			if arn.IsDevelopment()
+				InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us about yourself (Markdown is allowed)")
 			
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
