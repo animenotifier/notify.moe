@@ -3,7 +3,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 
 	.episode-view-image-container
 		a.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-			img.anime-cover-image(src=anime.Image("large"), alt=anime.Title.ByUser(user))
+			img.anime-cover-image.lazy(data-src=anime.Image("large"), data-webp="true", alt=anime.Title.ByUser(user))
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 
@@ -22,9 +22,9 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 					Icon("eye")
 					span= serviceName
 			
-			a.button(href=arn.Nyaa.GetLink(anime, fmt.Sprintf("%02d", episode.Number)), title="Download episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
-				Icon("download")
-				span nyaa.si
+			//- a.button(href=arn.Nyaa.GetLink(anime, fmt.Sprintf("%02d", episode.Number)), title="Download episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
+			//- 	Icon("download")
+			//- 	span nyaa.si
 		
 		.footer
 			p Make sure to support the anime you're watching by buying officially released Blu-rays and merchandise.
