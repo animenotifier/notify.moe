@@ -665,7 +665,7 @@ export class AnimeNotifier {
 		this.loading(true)
 
 		// Delay by transition-speed
-		return delay(200).then(() => request)
+		return delay(150).then(() => request)
 		.then(html => Diff.innerHTML(this.app.content, html))
 		.then(() => this.app.emit("DOMContentLoaded"))
 		.then(() => this.loading(false))

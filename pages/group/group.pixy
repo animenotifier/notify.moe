@@ -1,5 +1,5 @@
-component Group(group *arn.Group)
-	GroupTabs(group)
+component Group(group *arn.Group, user *arn.User)
+	GroupTabs(group, user)
 	
 	if group.Name != ""
 		h1.mountable= group.Name
@@ -31,8 +31,10 @@ component Group(group *arn.Group)
 				each post in group.Posts()
 					p!= post.HTML()
 
-component GroupTabs(group *arn.Group)
+component GroupTabs(group *arn.Group, user *arn.User)
 	.tabs
 		Tab("Group", "users", group.Link())
-		Tab("Forum", "comment", group.Link() + "/forum")
-		Tab("Edit", "pencil", group.Link() + "/edit")
+		//- Tab("Forum", "comment", group.Link() + "/forum")
+
+		if user != nil && group.FindMember(user.ID) != nil && group.FindMember(user.ID).Role == "founder"
+			Tab("Edit", "pencil", group.Link() + "/edit")

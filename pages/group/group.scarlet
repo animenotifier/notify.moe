@@ -1,6 +1,8 @@
 .group-view
 	horizontal-wrap
 	width 100%
+	max-width 1200px
+	margin 0 auto
 
 < 1100px
 	.group-view

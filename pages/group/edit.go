@@ -28,5 +28,5 @@ func Edit(ctx *aero.Context) string {
 		},
 	}
 
-	return ctx.HTML(components.GroupTabs(group) + editform.Render(group, "Edit group", user))
+	return ctx.HTML(components.GroupTabs(group, user) + editform.Render(group, "Edit group", user))
 }

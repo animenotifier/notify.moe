@@ -6,10 +6,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get ...
 func Get(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
 
@@ -25,5 +27,5 @@ func Get(ctx *aero.Context) string {
 		},
 	}
 
-	return ctx.HTML(components.Group(group))
+	return ctx.HTML(components.Group(group, user))
 }

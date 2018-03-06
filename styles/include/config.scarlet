@@ -95,6 +95,6 @@ content-line-height = 1.7em
 typography-margin = 0.4rem
 
 // Timings
-fade-speed = 200ms
+fade-speed = 150ms
 transition-speed = 150ms
-mountable-transition-speed = 200ms
+mountable-transition-speed = 150ms
