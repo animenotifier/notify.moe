@@ -805,7 +805,7 @@ export class AnimeNotifier {
 			return
 		}
 
-		// F = Search
+		// "F" = Search
 		if(e.keyCode == 70 && !e.ctrlKey) {
 			let search = this.app.find("search") as HTMLInputElement
 
@@ -817,7 +817,16 @@ export class AnimeNotifier {
 			return
 		}
 
-		// Ctrl + , = Settings
+		// "S" = Toggle sidebar
+		if(e.keyCode == 83 && !e.ctrlKey) {
+			this.sideBar.toggle()
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
+		// "Ctrl" + "," = Settings
 		if(e.ctrlKey && e.keyCode == 188) {
 			this.app.load("/settings")
 

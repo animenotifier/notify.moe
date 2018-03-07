@@ -26,4 +26,14 @@ export class SideBar {
 	hide() {
 		this.element.classList.remove("sidebar-visible")
 	}
+
+	toggle() {
+		let visible = this.element.style.display !== "none"
+
+		if(visible) {
+			this.element.style.display = "none"
+		} else {
+			this.element.style.display = "flex"
+		}
+	}
 }
