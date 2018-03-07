@@ -3,6 +3,11 @@ import { StatusMessage } from "../StatusMessage"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
+	if(arn.user.dataset.pro !== "true") {
+		alert("Please buy a PRO account to use this feature.")
+		return
+	}
+
 	let preview = document.getElementById(button.dataset.previewImageId) as HTMLImageElement
 	let endpoint = button.dataset.endpoint
 

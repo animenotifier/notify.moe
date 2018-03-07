@@ -120,7 +120,7 @@ export class AnimeNotifier {
 		this.app.loading = this.app.find("loading")
 
 		// Theme
-		if(this.user && this.user.dataset.theme !== "light") {
+		if(this.user && this.user.dataset.pro === "true" && this.user.dataset.theme !== "light") {
 			darkTheme()
 		}
 
