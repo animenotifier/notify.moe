@@ -1,25 +1,4 @@
-component AniListMissingMapping(missing []*arn.Anime)
-	h1.page-title Anime without Anilist links
-
+component AniListMissingMapping(missing []*arn.Anime, generateSearchLink func(*arn.Anime) string)
 	EditorTabs
-
-	table
-		thead
-			tr
-				th(title="Popularity") Pop.
-				th Title
-				th Type
-				th Year
-				th Tools
-		tbody
-			each anime in missing
-				tr.mountable
-					td= anime.Popularity.Total()
-					td
-						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
-					td= anime.Type
-					td
-						if len(anime.StartDate) >= 4
-							span= anime.StartDate[:4]
-					td
-						a(href="https://anilist.co/search?type=anime&q=" + anime.Title.Canonical, target="_blank", rel="noopener") Search
+	h1.mountable Anime without Anilist links
+	AnimeEditorList(missing, generateSearchLink)

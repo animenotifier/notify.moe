@@ -1,0 +1,21 @@
+component AnimeEditorList(animes []*arn.Anime, generateSearchLink func(*arn.Anime) string)
+	table
+		thead
+			tr.mountable
+				th(title="Popularity") Pop.
+				th Title
+				th Type
+				th Year
+				th Tools
+		tbody
+			each anime in animes
+				tr.mountable
+					td= anime.Popularity.Total()
+					td
+						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
+					td= anime.Type
+					td
+						if len(anime.StartDate) >= 4
+							span= anime.StartDate[:4]
+					td
+						a(href=generateSearchLink(anime), target="_blank", rel="noopener") Search

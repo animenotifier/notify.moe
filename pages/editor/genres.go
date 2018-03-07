@@ -8,12 +8,12 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 )
 
-const maxShoboiEntries = 70
+const maxGenreEntries = 70
 
-// Shoboi ...
-func Shoboi(ctx *aero.Context) string {
+// Genres ...
+func Genres(ctx *aero.Context) string {
 	missing := arn.FilterAnime(func(anime *arn.Anime) bool {
-		return anime.GetMapping("shoboi/anime") == ""
+		return len(anime.Genres) == 0
 	})
 
 	sort.Slice(missing, func(i, j int) bool {
@@ -30,11 +30,11 @@ func Shoboi(ctx *aero.Context) string {
 		return aPop > bPop
 	})
 
-	if len(missing) > maxShoboiEntries {
-		missing = missing[:maxShoboiEntries]
+	if len(missing) > maxGenreEntries {
+		missing = missing[:maxGenreEntries]
 	}
 
-	return ctx.HTML(components.ShoboiMissingMapping(missing, func(anime *arn.Anime) string {
-		return "http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese
+	return ctx.HTML(components.AnimeWithoutGenres(missing, func(anime *arn.Anime) string {
+		return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
 	}))
 }

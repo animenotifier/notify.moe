@@ -1,0 +1,4 @@
+component AnimeWithoutGenres(missing []*arn.Anime, generateSearchLink func(*arn.Anime) string)
+	EditorTabs
+	h1.mountable Anime without genres
+	AnimeEditorList(missing, generateSearchLink)

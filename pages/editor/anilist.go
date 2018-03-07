@@ -34,5 +34,7 @@ func AniList(ctx *aero.Context) string {
 		missing = missing[:maxAniListEntries]
 	}
 
-	return ctx.HTML(components.AniListMissingMapping(missing))
+	return ctx.HTML(components.AniListMissingMapping(missing, func(anime *arn.Anime) string {
+		return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
+	}))
 }

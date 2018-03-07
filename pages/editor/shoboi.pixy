@@ -1,25 +1,4 @@
-component ShoboiMissingMapping(missing []*arn.Anime)
-	h1.page-title Anime without Shoboi links
-
+component ShoboiMissingMapping(missing []*arn.Anime, generateSearchLink func(*arn.Anime) string)
 	EditorTabs
-
-	table
-		thead
-			tr
-				th(title="Popularity") Pop.
-				th Title
-				th Type
-				th Year
-				th Tools
-		tbody
-			each anime in missing
-				tr.mountable
-					td= anime.Popularity.Total()
-					td
-						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
-					td= anime.Type
-					td
-						if len(anime.StartDate) >= 4
-							span= anime.StartDate[:4]
-					td
-						a(href="http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese, target="_blank", rel="noopener") Search
+	h1.mountable Anime without Shoboi links
+	AnimeEditorList(missing, generateSearchLink)

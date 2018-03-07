@@ -8,10 +8,10 @@ component Editor
 component EditorTabs
 	.tabs
 		Tab("Editor", "pencil", "/editor")
-		Tab("Search", "search", "/database")
 		Tab("Shoboi", "list", "/editor/shoboi")
 		Tab("AniList", "list", "/editor/anilist")
 		Tab("Genres", "list", "/editor/genres")
+		Tab("Search", "search", "/database")
 
 		//- a.tab.ajax(href="/admin", aria-label="Admin")
 		//- 	Icon("wrench")
