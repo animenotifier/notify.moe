@@ -35,6 +35,6 @@ func Genres(ctx *aero.Context) string {
 	}
 
 	return ctx.HTML(components.AnimeWithoutGenres(missing, func(anime *arn.Anime) string {
-		return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
+		return ""
 	}))
 }
