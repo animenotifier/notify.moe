@@ -28,4 +28,4 @@ component AnimeEditorList(animes []*arn.Anime, pageURI string, generateSearchLin
 					
 					if generateSearchLink != nil
 						td
-							a(href=generateSearchLink(anime), target="_blank", rel="noopener") Search
+							a(href=generateSearchLink(anime), target="_blank", rel="noopener") 🔍
