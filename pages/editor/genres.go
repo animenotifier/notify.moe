@@ -30,9 +30,16 @@ func Genres(ctx *aero.Context) string {
 		return aPop > bPop
 	})
 
-	if len(missing) > maxGenreEntries {
+	count := len(missing)
+
+	if count > maxGenreEntries {
 		missing = missing[:maxGenreEntries]
 	}
 
-	return ctx.HTML(components.AnimeWithoutGenres(missing, nil))
+	return ctx.HTML(components.AnimeEditorListFull(
+		"Anime without genres",
+		missing,
+		count,
+		nil,
+	))
 }

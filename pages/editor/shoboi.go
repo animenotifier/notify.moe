@@ -30,11 +30,18 @@ func Shoboi(ctx *aero.Context) string {
 		return aPop > bPop
 	})
 
-	if len(missing) > maxShoboiEntries {
+	count := len(missing)
+
+	if count > maxShoboiEntries {
 		missing = missing[:maxShoboiEntries]
 	}
 
-	return ctx.HTML(components.ShoboiMissingMapping(missing, func(anime *arn.Anime) string {
-		return "http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese
-	}))
+	return ctx.HTML(components.AnimeEditorListFull(
+		"Anime without Shoboi links",
+		missing,
+		count,
+		func(anime *arn.Anime) string {
+			return "http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese
+		},
+	))
 }

@@ -1,3 +1,9 @@
+component AnimeEditorListFull(title string, missing []*arn.Anime, count int, generateSearchLink func(*arn.Anime) string)
+	EditorTabs
+	h1.editor-list-title.mountable= title
+	.footer.editor-list-entry-count.mountable= strconv.Itoa(count) + " anime"
+	AnimeEditorList(missing, generateSearchLink)
+
 component AnimeEditorList(animes []*arn.Anime, generateSearchLink func(*arn.Anime) string)
 	table
 		thead

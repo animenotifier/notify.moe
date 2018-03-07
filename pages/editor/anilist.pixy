@@ -1,4 +1,0 @@
-component AniListMissingMapping(missing []*arn.Anime, generateSearchLink func(*arn.Anime) string)
-	EditorTabs
-	h1.mountable Anime without Anilist links
-	AnimeEditorList(missing, generateSearchLink)

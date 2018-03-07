@@ -30,11 +30,18 @@ func AniList(ctx *aero.Context) string {
 		return aPop > bPop
 	})
 
-	if len(missing) > maxAniListEntries {
+	count := len(missing)
+
+	if count > maxAniListEntries {
 		missing = missing[:maxAniListEntries]
 	}
 
-	return ctx.HTML(components.AniListMissingMapping(missing, func(anime *arn.Anime) string {
-		return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
-	}))
+	return ctx.HTML(components.AnimeEditorListFull(
+		"Anime without Anilist links",
+		missing,
+		count,
+		func(anime *arn.Anime) string {
+			return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
+		},
+	))
 }
