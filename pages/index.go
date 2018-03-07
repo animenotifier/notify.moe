@@ -190,6 +190,7 @@ func Configure(app *aero.Application) {
 
 	// Upload
 	app.Post("/api/upload/avatar", upload.Avatar)
+	app.Post("/api/upload/cover", upload.Cover)
 
 	// Admin
 	l.Page("/admin", admin.Get)

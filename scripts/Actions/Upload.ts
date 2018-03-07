@@ -3,8 +3,11 @@ import { StatusMessage } from "../StatusMessage"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let input = document.createElement("input")
 	let preview = document.getElementById(button.dataset.previewImageId) as HTMLImageElement
+	let endpoint = button.dataset.endpoint
+
+	// Click on virtual file input element
+	let input = document.createElement("input")
 	input.setAttribute("type", "file")
 
 	input.onchange = () => {
@@ -19,22 +22,24 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 			return
 		}
 
-		previewImage(file, preview)
-		uploadFile(file, "/api/upload/avatar", arn)
+		previewImage(file, endpoint, preview)
+		uploadFile(file, endpoint, arn)
 	}
 
 	input.click()
 }
 
 // Preview image
-function previewImage(file: File, preview: HTMLImageElement) {
+function previewImage(file: File, endpoint: string, preview: HTMLImageElement) {
 	let reader = new FileReader()
 
 	reader.onloadend = () => {
-		let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
+		if(endpoint === "/api/upload/avatar") {
+			let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
 
-		if(svgPreview) {
-			svgPreview.classList.add("hidden")
+			if(svgPreview) {
+				svgPreview.classList.add("hidden")
+			}
 		}
 
 		preview.classList.remove("hidden")
@@ -49,7 +54,7 @@ function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
 	let reader = new FileReader()
 
 	reader.onloadend = async () => {
-		arn.statusMessage.showInfo("Uploading avatar...", 60000)
+		arn.statusMessage.showInfo("Uploading image...", 60000)
 
 		let response = await fetch(endpoint, {
 			method: "POST",
@@ -60,13 +65,15 @@ function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
 			body: reader.result
 		})
 
-		let newURL = await response.text()
-		updateSideBarAvatar(newURL)
+		if(endpoint === "/api/upload/avatar") {
+			let newURL = await response.text()
+			updateSideBarAvatar(newURL)
+		}
 
 		if(response.ok) {
-			arn.statusMessage.showInfo("Successfully uploaded your new avatar.")
+			arn.statusMessage.showInfo("Successfully uploaded your new image.")
 		} else {
-			arn.statusMessage.showError("Failed uploading your new avatar.")
+			arn.statusMessage.showError("Failed uploading your new image.")
 		}
 	}
 

@@ -39,7 +39,7 @@ component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 
 component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 	.profile
-		img.profile-cover.lazy(data-src=viewUser.CoverImageURL(), data-webp="true", alt="Cover image")
+		img.profile-cover.lazy(data-src=viewUser.CoverLink("large"), data-webp="true", alt="Cover image")
 
 		.profile-image-container.mountable.never-unmount
 			ProfileImage(viewUser)

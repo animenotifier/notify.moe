@@ -27,7 +27,7 @@ component SettingsPersonal(user *arn.User)
 			
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
-				Icon("picture-o")
+				Icon("camera")
 				span Avatar
 
 			//- .widget-section
@@ -55,16 +55,26 @@ component SettingsPersonal(user *arn.User)
 			//- //- File upload
 			//- if user.Settings().Avatar.Source == "FileSystem"
 			
-			InputImage("avatar-input", "File")
+			InputImage("avatar-input", "File", "/api/upload/avatar")
 
 			.profile-image-container.avatar-preview
 				if user.HasAvatar()
-					img#avatar-input-preview.profile-image.mountable(src=user.AvatarLink("large"), alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
+					img#avatar-input-preview.profile-image.lazy(data-src=user.AvatarLink("large"), data-webp="true", alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
 				else
 					img#avatar-input-preview.profile-image.hidden(src=user.AvatarLink("large"), alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
 
 					#avatar-input-preview-svg
 						SVGProfileImage(user)
+		
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("picture-o")
+				span Cover
+			
+			InputImage("cover-input", "File", "/api/upload/cover")
+
+			.cover-preview
+				img#cover-input-preview.profile-cover.lazy(data-src=user.CoverLink("small"), data-webp="true", alt="Cover image")
 
 component SettingsNotifications(user *arn.User)
 	SettingsTabs
@@ -237,13 +247,13 @@ component SettingsAccounts(user *arn.User)
 			
 			ImportLists(user)
 
-		.widget.mountable
-			h3.widget-title
-				Icon("upload")
-				span Export
+		//- .widget.mountable
+		//- 	h3.widget-title
+		//- 		Icon("upload")
+		//- 		span Export
 			
-			.widget-section
-				label JSON:
-				a.button(href="/api/animelist/" + user.ID)
-					Icon("upload")
-					span Export anime list as JSON
+		//- 	.widget-section
+		//- 		label JSON:
+		//- 		a.button(href="/api/animelist/" + user.ID)
+		//- 			Icon("upload")
+		//- 			span Export anime list as JSON

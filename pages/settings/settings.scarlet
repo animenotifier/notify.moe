@@ -16,6 +16,16 @@
 .avatar-preview
 	margin 0 auto
 
+.cover-preview
+	width 100%
+	height 0
+	padding-top 25%
+	position relative
+	margin 0 auto
+
+#cover-input-preview
+	border-radius 3px
+
 .settings-info-text
 	text-align center
 	font-size 0.9rem

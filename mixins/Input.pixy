@@ -30,10 +30,10 @@ component InputSelection(id string, value string, label string, placeholder stri
 			each option in options
 				option(value=option.Value)= option.Label
 
-component InputImage(id string, label string)
+component InputImage(id string, label string, endpoint string)
 	.widget-section
 		label(for=id)= label + ":"
-		button.action(data-action="selectFile", data-trigger="click", data-preview-image-id=id + "-preview")
+		button.action(data-action="selectFile", data-trigger="click", data-preview-image-id=id + "-preview", data-endpoint=endpoint)
 			Icon("upload")
 			span Select file
 

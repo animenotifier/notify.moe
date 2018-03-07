@@ -7,8 +7,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Avatar handles the avatar upload.
-func Avatar(ctx *aero.Context) string {
+// Cover handles the cover image upload.
+func Cover(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
@@ -22,15 +22,15 @@ func Avatar(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Reading request body failed", err)
 	}
 
-	// Set avatar file
-	err = user.SetAvatarBytes(data)
+	// Set cover image file
+	err = user.SetCoverBytes(data)
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Invalid image format", err)
 	}
 
-	// Save avatar information
+	// Save cover image information
 	user.Save()
 
-	return user.AvatarLink("small")
+	return "ok"
 }
