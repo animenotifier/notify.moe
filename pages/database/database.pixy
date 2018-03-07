@@ -18,6 +18,7 @@ component Database
 					option(value="SoundTrack") SoundTrack
 					option(value="Thread") Thread
 					option(value="User") User
+					option(value="Quote") Quote
 			
 			.widget-section.mountable
 				label(for="field") where

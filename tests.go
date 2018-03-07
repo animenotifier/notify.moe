@@ -208,6 +208,10 @@ var routeTests = map[string][]string{
 		"/api/animeepisodes/323",
 	},
 
+	"/anime/:id/episode/:episode-number": []string{
+		"/anime/12230/episode/5",
+	},
+
 	"/api/character/:id": []string{
 		"/api/character/6556",
 	},
