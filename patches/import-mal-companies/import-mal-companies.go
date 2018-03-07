@@ -85,7 +85,9 @@ func importByName(anime *arn.Anime, companyType string, producer *mal.Producer) 
 			},
 			Links: []*arn.Link{},
 			Tags:  []string{},
-			Likes: []string{},
+			LikeableImplementation: arn.LikeableImplementation{
+				Likes: []string{},
+			},
 		}
 
 		companies[producer.Name] = company
