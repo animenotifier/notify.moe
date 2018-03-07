@@ -25,6 +25,7 @@
 
 #cover-input-preview
 	border-radius 3px
+	filter none
 
 .settings-info-text
 	text-align center
