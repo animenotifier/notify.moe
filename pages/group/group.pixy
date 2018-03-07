@@ -25,11 +25,16 @@ component Group(group *arn.Group, user *arn.User)
 						Avatar(member.User())
 		
 		.group-feed.mountable
-			if len(group.Posts()) == 0
-				p.text-center.mountable No posts in this group yet.
-			else
-				each post in group.Posts()
-					p!= post.HTML()
+			if user != nil
+				NewPostArea(user, "Content")
+			
+				.buttons
+					button.action(data-action="newGroupPost", data-trigger="click")
+						Icon("check")
+						span Publish
+
+			each post in group.Posts()
+				p!= post.HTML()
 
 component GroupTabs(group *arn.Group, user *arn.User)
 	.tabs

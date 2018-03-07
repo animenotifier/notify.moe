@@ -1,19 +1,20 @@
 .group-view
 	horizontal-wrap
 	width 100%
-	max-width 1200px
+	max-width 900px
 	margin 0 auto
+	border 1px solid red
 
 < 1100px
 	.group-view
 		vertical
 
 .group-feed
-	flex 0.75
+	flex 1
 	padding 1rem
 
 .group-sidebar
-	flex 0.25
+	flex-basis 300px
 
 .group-sidebar-section
 	ui-element

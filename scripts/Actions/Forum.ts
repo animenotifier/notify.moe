@@ -73,6 +73,11 @@ export function forumReply(arn: AnimeNotifier) {
 	.catch(err => arn.statusMessage.showError(err))
 }
 
+// Group post
+export function newGroupPost(arn: AnimeNotifier) {
+	// TODO: ...
+}
+
 // Create thread
 export function createThread(arn: AnimeNotifier) {
 	let title = arn.app.find("title") as HTMLInputElement

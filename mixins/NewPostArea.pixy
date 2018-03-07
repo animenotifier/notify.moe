@@ -1,0 +1,6 @@
+component NewPostArea(user *arn.User, placeholder string)
+	.post.mountable
+		.post-author
+			Avatar(user)
+		
+		textarea#new-reply.post-content(placeholder=placeholder + "...", aria-label=placeholder)
