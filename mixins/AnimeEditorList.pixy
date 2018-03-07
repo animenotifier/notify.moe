@@ -6,7 +6,9 @@ component AnimeEditorList(animes []*arn.Anime, generateSearchLink func(*arn.Anim
 				th Title
 				th Type
 				th Year
-				th Tools
+
+				if generateSearchLink != nil
+					th Tools
 		tbody
 			each anime in animes
 				tr.mountable
@@ -17,5 +19,7 @@ component AnimeEditorList(animes []*arn.Anime, generateSearchLink func(*arn.Anim
 					td
 						if len(anime.StartDate) >= 4
 							span= anime.StartDate[:4]
-					td
-						a(href=generateSearchLink(anime), target="_blank", rel="noopener") Search
+					
+					if generateSearchLink != nil
+						td
+							a(href=generateSearchLink(anime), target="_blank", rel="noopener") Search

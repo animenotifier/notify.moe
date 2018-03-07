@@ -34,7 +34,5 @@ func Genres(ctx *aero.Context) string {
 		missing = missing[:maxGenreEntries]
 	}
 
-	return ctx.HTML(components.AnimeWithoutGenres(missing, func(anime *arn.Anime) string {
-		return ""
-	}))
+	return ctx.HTML(components.AnimeWithoutGenres(missing, nil))
 }
