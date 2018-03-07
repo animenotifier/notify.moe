@@ -200,8 +200,14 @@ func Configure(app *aero.Application) {
 	// Editor
 	l.Page("/editor", editor.Get)
 	l.Page("/editor/anilist", editor.AniList)
+	l.Page("/editor/anilist/:year", editor.AniList)
+	l.Page("/editor/anilist/:year/:type", editor.AniList)
 	l.Page("/editor/shoboi", editor.Shoboi)
+	l.Page("/editor/shoboi/:year", editor.Shoboi)
+	l.Page("/editor/shoboi/:year/:type", editor.Shoboi)
 	l.Page("/editor/genres", editor.Genres)
+	l.Page("/editor/genres/:year", editor.Genres)
+	l.Page("/editor/genres/:year/:type", editor.Genres)
 
 	// Mixed
 	l.Page("/database", database.Get)

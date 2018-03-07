@@ -12,7 +12,18 @@ const maxShoboiEntries = 70
 
 // Shoboi ...
 func Shoboi(ctx *aero.Context) string {
+	year, _ := ctx.GetInt("year")
+	animeType := ctx.Get("type")
+
 	missing := arn.FilterAnime(func(anime *arn.Anime) bool {
+		if year != 0 && year != anime.StartDateTime().Year() {
+			return false
+		}
+
+		if animeType != "" && anime.Type != animeType {
+			return false
+		}
+
 		return anime.GetMapping("shoboi/anime") == ""
 	})
 
@@ -40,6 +51,7 @@ func Shoboi(ctx *aero.Context) string {
 		"Anime without Shoboi links",
 		missing,
 		count,
+		"/editor/shoboi",
 		func(anime *arn.Anime) string {
 			return "http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese
 		},

@@ -12,7 +12,18 @@ const maxGenreEntries = 70
 
 // Genres ...
 func Genres(ctx *aero.Context) string {
+	year, _ := ctx.GetInt("year")
+	animeType := ctx.Get("type")
+
 	missing := arn.FilterAnime(func(anime *arn.Anime) bool {
+		if year != 0 && year != anime.StartDateTime().Year() {
+			return false
+		}
+
+		if animeType != "" && anime.Type != animeType {
+			return false
+		}
+
 		return len(anime.Genres) == 0
 	})
 
@@ -40,6 +51,7 @@ func Genres(ctx *aero.Context) string {
 		"Anime without genres",
 		missing,
 		count,
+		"/editor/genres",
 		nil,
 	))
 }

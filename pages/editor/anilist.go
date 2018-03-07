@@ -12,7 +12,18 @@ const maxAniListEntries = 70
 
 // AniList ...
 func AniList(ctx *aero.Context) string {
+	year, _ := ctx.GetInt("year")
+	animeType := ctx.Get("type")
+
 	missing := arn.FilterAnime(func(anime *arn.Anime) bool {
+		if year != 0 && year != anime.StartDateTime().Year() {
+			return false
+		}
+
+		if animeType != "" && anime.Type != animeType {
+			return false
+		}
+
 		return anime.GetMapping("anilist/anime") == ""
 	})
 
@@ -40,6 +51,7 @@ func AniList(ctx *aero.Context) string {
 		"Anime without Anilist links",
 		missing,
 		count,
+		"/editor/anilist",
 		func(anime *arn.Anime) string {
 			return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
 		},
