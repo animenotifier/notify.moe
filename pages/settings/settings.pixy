@@ -76,8 +76,9 @@ component SettingsPersonal(user *arn.User)
 			.cover-preview(title="Recommended: 1920 x 450 | PNG or JPG")
 				img#cover-input-preview.profile-cover.lazy(data-src=user.CoverLink("small"), data-webp="true", alt="Cover image")
 			
-			.footer
-				p PRO account required.
+			if !user.IsPro()
+				.footer
+					p PRO account required.
 
 component SettingsNotifications(user *arn.User)
 	SettingsTabs

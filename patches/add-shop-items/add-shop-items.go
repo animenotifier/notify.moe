@@ -13,9 +13,10 @@ var items = []*arn.Item{
 
 Includes:
 
-* Dark theme for the site and extension
-* Special highlight on the forums
+* Dark theme for the website and extension
+* Upload your own cover image
 * PRO star on your profile
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
@@ -33,9 +34,10 @@ Includes:
 
 Includes:
 
-* Dark theme for the site and extension
-* Special highlight on the forums
+* Dark theme for the website and extension
+* Upload your own cover image
 * PRO star on your profile
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
@@ -53,9 +55,10 @@ Includes:
 
 Includes:
 
-* Dark theme for the site and extension
-* Special highlight on the forums
+* Dark theme for the website and extension
+* Upload your own cover image
 * PRO star on your profile
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
@@ -73,9 +76,10 @@ Includes:
 
 Includes:
 
-* Dark theme for the site and extension
-* Special highlight on the forums
+* Dark theme for the website and extension
+* Upload your own cover image
 * PRO star on your profile
+* Special highlight on the forums
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",

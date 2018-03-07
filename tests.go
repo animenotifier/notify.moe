@@ -241,10 +241,6 @@ var routeTests = map[string][]string{
 		"/images/login/google",
 	},
 
-	"/images/cover/:file": []string{
-		"/images/cover/default",
-	},
-
 	"/images/elements/:file": []string{
 		"/images/elements/no-avatar.svg",
 	},
