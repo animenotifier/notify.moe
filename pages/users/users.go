@@ -56,8 +56,8 @@ func ActiveNoAvatar(ctx *aero.Context) string {
 			return false
 		}
 
-		followersA := followCount[users[i]]
-		followersB := followCount[users[j]]
+		followersA := followCount[users[i].ID]
+		followersB := followCount[users[j].ID]
 
 		if followersA == followersB {
 			return users[i].Nick < users[j].Nick
