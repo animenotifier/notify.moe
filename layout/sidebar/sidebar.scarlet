@@ -75,7 +75,6 @@ sidebar-spacing-y = 0.7rem
 	background reverse-light-color
 	border-radius 50%
 	transform translateY(-50%)
-	font-size 0.96rem
 	padding 0.5rem
 	color text-color
 	width 30px
