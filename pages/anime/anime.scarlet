@@ -1,5 +1,7 @@
 .anime
 	vertical
+	max-width 1700px
+	margin 0 auto
 
 .anime-main-column
 	vertical
