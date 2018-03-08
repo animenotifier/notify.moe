@@ -13,8 +13,9 @@ import (
 
 const (
 	// The maximum age of files we accept until we force a refresh.
-	maxAge    = 30 * 24 * time.Hour
-	userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.166 Safari/537.36"
+	maxAge               = 30 * 24 * time.Hour
+	delayBetweenRequests = 1000 * time.Millisecond
+	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.166 Safari/537.36"
 )
 
 func main() {
@@ -41,7 +42,7 @@ func main() {
 			"User-Agent":      userAgent,
 			"Accept-Encoding": "gzip",
 		},
-		1500*time.Millisecond,
+		delayBetweenRequests,
 		len(animes),
 	)
 
