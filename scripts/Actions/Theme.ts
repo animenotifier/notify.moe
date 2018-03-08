@@ -37,7 +37,9 @@ let dark = {
 	"post-unlike-color": "var(--link-color)",
 	"post-permalink-color": "var(--link-color)",
 
-	"quote-color" : "var(--text-color)"
+	"quote-color": "var(--text-color)",
+
+	"calendar-hover-color": "var(--reverse-light-color)"
 }
 
 // Toggle theme

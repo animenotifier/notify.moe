@@ -22,28 +22,45 @@
 	vertical
 
 .calendar-entry
-	ui-element
-	padding 0.5rem 1rem
-	margin-bottom 0.5rem
+	horizontal
+	default-transition
+	border-radius ui-element-border-radius
+	padding 0.5rem 0.6rem
+	margin-bottom 0.4rem
 	overflow hidden
 
+	:hover
+		background calendar-hover-color
+		box-shadow outline-shadow-light
+
 .calendar-entry-image
-	width 100%
-	height 4rem
-	object-fit cover
+	anime-list-item-image
 
 .calendar-entry[data-added="true"]
-	border 2px solid main-color
+	background calendar-entry-seen-background
+	box-shadow outline-shadow-light
+	border ui-border
 
 	:hover
-		border-color main-color
+		background calendar-entry-seen-hover-background
 
 .calendar-entry-info
-	horizontal
+	vertical
+	overflow hidden
+	margin-left 0.8rem
+	flex 1
 
 .calendar-entry-title
 	clip-long-text
-	margin-top 0.4rem
+	flex 0.5
+	line-height 1.2em
+
+.calendar-entry-time-and-episode
+	horizontal
+	flex 0.5
+	color text-color
+	line-height 1.6em
+	text-shadow none
 
 .calendar-entry-time
 	opacity 0.85

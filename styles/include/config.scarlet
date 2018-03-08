@@ -9,6 +9,7 @@ pro-color = hsla(0, 100%, 73%, 0.87)
 anime-alternative-title-color = hsla(0, 0%, 0%, 0.5)
 reverse-light-color = rgba(0, 0, 0, 0.05)
 reverse-light-hover-color = rgba(0, 0, 0, 0.1)
+reverse-light-lite-color = rgba(0, 0, 0, 0.02)
 
 theme-white = bg-color
 theme-black = text-color
@@ -67,6 +68,11 @@ post-permalink-color = blue !important
 
 table-row-hover-background = hsla(0, 0%, 0%, 0.01)
 anime-list-item-name-color = link-color
+
+// Calendar
+calendar-hover-color = rgba(255, 255, 255, 0.4)
+calendar-entry-seen-background = ui-background
+calendar-entry-seen-hover-background = ui-background
 
 // Tables
 table-width-normal = 900px

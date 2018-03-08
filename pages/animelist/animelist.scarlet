@@ -21,10 +21,7 @@
 	display flex
 
 .anime-list-item-image
-	width 39px
-	height 39px
-	border-radius 2px
-	object-fit cover
+	anime-list-item-image
 
 .anime-list-item-name
 	flex 1

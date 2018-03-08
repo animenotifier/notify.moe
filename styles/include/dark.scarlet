@@ -38,3 +38,6 @@
 
 // // Quote
 // quote-color = text-color
+
+// Calendar
+// calendar-hover-color = reverse-light-color
