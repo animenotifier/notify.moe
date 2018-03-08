@@ -54,7 +54,7 @@ func main() {
 	for _, anime := range animes {
 		malID := anime.GetMapping("myanimelist/anime")
 		url := "https://myanimelist.net/anime/" + malID
-		filePath := fmt.Sprintf("mal/anime-%s.html", malID)
+		filePath := fmt.Sprintf("files/anime-%s.html", malID)
 		fileInfo, err := os.Stat(filePath)
 
 		if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {
