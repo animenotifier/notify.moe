@@ -15,11 +15,7 @@ func Active(ctx *aero.Context) string {
 		return user.HasAvatar() && user.HasNick() && user.IsActive()
 	})
 
-	followCount := map[*arn.User]int{}
-
-	for _, user := range users {
-		followCount[user] = user.FollowersCount()
-	}
+	followCount := arn.UserFollowerCountMap()
 
 	sort.Slice(users, func(i, j int) bool {
 		if users[i].HasAvatar() != users[j].HasAvatar() {
@@ -30,8 +26,8 @@ func Active(ctx *aero.Context) string {
 			return false
 		}
 
-		followersA := followCount[users[i]]
-		followersB := followCount[users[j]]
+		followersA := followCount[users[i].ID]
+		followersB := followCount[users[j].ID]
 
 		if followersA == followersB {
 			return users[i].Nick < users[j].Nick
@@ -49,11 +45,7 @@ func ActiveNoAvatar(ctx *aero.Context) string {
 		return user.IsActive() && !user.HasAvatar()
 	})
 
-	followCount := map[*arn.User]int{}
-
-	for _, user := range users {
-		followCount[user] = user.FollowersCount()
-	}
+	followCount := arn.UserFollowerCountMap()
 
 	sort.Slice(users, func(i, j int) bool {
 		if users[i].HasAvatar() != users[j].HasAvatar() {
