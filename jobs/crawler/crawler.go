@@ -38,7 +38,8 @@ func main() {
 	// Create crawler
 	malCrawler := crawler.New(
 		map[string]string{
-			"User-Agent": userAgent,
+			"User-Agent":      userAgent,
+			"Accept-Encoding": "gzip",
 		},
 		1500*time.Millisecond,
 		len(animes),
