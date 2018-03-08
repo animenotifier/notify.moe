@@ -1,11 +1,11 @@
 html
 	height 100%
 	font-family "Ubuntu", "Trebuchet MS", sans-serif
-	font-size 100%
+	font-size 95%
 
-> 900px
-	html
-		font-size 90%
+// > 900px
+// 	html
+// 		font-size 90%
 
 // > 1400px
 // 	html

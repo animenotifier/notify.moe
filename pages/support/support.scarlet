@@ -9,13 +9,13 @@
 .feature-card,
 .payment-card
 	vertical
-	flex-basis 240px
+	flex-basis 250px
 	border-radius 5px
 	overflow hidden
 	background ui-background
 	box-shadow shadow-light
 	border 1px solid ui-border-color
-	margin 1.2rem
+	margin 0.8rem
 	default-transition
 
 	:hover
