@@ -7,7 +7,6 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 				th.text-center Icon
 				th User
 				th Object
-				th Type
 				th Key
 				th Old
 				th New
@@ -23,22 +22,27 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 							else if entry.Action == "delete"
 								.edit-log-delete
 									RawIcon("minus")
-							else if entry.OldValue == "" && entry.NewValue != ""
-								.edit-log-add
-									RawIcon("plus-circle")
-							else if entry.OldValue != "" && entry.NewValue == ""
-								.edit-log-remove
-									RawIcon("minus-circle")
-							else
+							else if entry.Action == "edit"
 								.edit-log-change
 									RawIcon("pencil")
+								
+								if entry.OldValue == "" && entry.NewValue != ""
+									.edit-log-sub-icon.edit-log-add
+										RawIcon("plus-circle")
+								else if entry.OldValue != "" && entry.NewValue == ""
+									.edit-log-sub-icon.edit-log-remove
+										RawIcon("minus-circle")
+
 					td
 						.edit-log-user
 							Avatar(entry.User())
 					td.edit-log-object
 						a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
-					td.edit-log-type= entry.ObjectType
-					td.edit-log-key= entry.Key
+					td.edit-log-key
+						span= entry.ObjectType
+
+						if entry.Key != ""
+							span= "." + entry.Key
 					td= entry.OldValue
 					td= entry.NewValue
 					td.edit-log-date.utc-date(data-date=entry.Created)

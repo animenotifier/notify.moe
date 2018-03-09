@@ -20,6 +20,9 @@
 	justify-content center
 	align-items center
 
+.edit-log-sub-icon
+	//
+
 .edit-log-create
 	color green
 
@@ -33,7 +36,7 @@
 	color red
 
 .edit-log-change
-	color main-color
+	color hsl(214, 100%, 62%)
 
 .edit-log-date
 	opacity 0.5
