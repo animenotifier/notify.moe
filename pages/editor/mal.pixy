@@ -11,8 +11,13 @@ component CompareMAL(comparisons []*utils.MALComparison, user *arn.User)
 					
 					.data-comparison-title
 						a(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.Canonical
+
 						.spacer
-						a(href=comparison.MALAnime.URL, target="_blank")
+
+						a.data-comparison-tool(href=comparison.Anime.Link() + "/edit", target="_blank")
+							RawIcon("pencil")
+						
+						a.data-comparison-tool(href=comparison.MALAnime.URL, target="_blank")
 							RawIcon("external-link")
 
 				.data-comparison-differences

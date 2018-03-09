@@ -25,6 +25,10 @@
 	flex 1
 	align-items center
 
+.data-comparison-tool
+	display flex
+	padding 0.5rem
+
 .data-comparison-differences
 	vertical
 	margin-top 0.5rem
