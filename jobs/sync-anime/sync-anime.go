@@ -30,8 +30,13 @@ func main() {
 	}
 }
 
-func sync(data *kitsu.Anime) *arn.Anime {
+func sync(data *kitsu.Anime) {
 	anime, err := arn.GetAnime(data.ID)
+
+	// This stops overwriting existing data
+	if err == nil || anime != nil {
+		return
+	}
 
 	if err != nil {
 		if strings.Contains(err.Error(), "not found") {
@@ -150,6 +155,4 @@ func sync(data *kitsu.Anime) *arn.Anime {
 
 	// Log
 	fmt.Println(color.GreenString("✔"), anime.ID, anime.Title.Canonical)
-
-	return anime
 }
