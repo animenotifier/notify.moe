@@ -53,6 +53,6 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 
 						if entry.Key != ""
 							span= "." + entry.Key
-					td= entry.OldValue
-					td= entry.NewValue
+					td.edit-log-value(title=entry.OldValue)= entry.OldValue
+					td.edit-log-value(title=entry.NewValue)= entry.NewValue
 					td.edit-log-date.utc-date(data-date=entry.Created)

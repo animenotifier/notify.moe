@@ -15,6 +15,10 @@
 		height calc(avatar-size / 2)
 		margin-right 0.5rem
 
+.edit-log-value
+	max-width 150px
+	clip-long-text
+
 .edit-log-icon
 	display flex
 	justify-content center
