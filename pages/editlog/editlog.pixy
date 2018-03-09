@@ -22,16 +22,23 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 							else if entry.Action == "delete"
 								.edit-log-delete
 									RawIcon("minus")
-							else if entry.Action == "edit"
+							else if entry.Action == "edit" || entry.Action == "arrayAppend" || entry.Action == "arrayRemove"
 								.edit-log-change
 									RawIcon("pencil")
 								
-								if entry.OldValue == "" && entry.NewValue != ""
+								if entry.Action == "arrayAppend"
 									.edit-log-sub-icon.edit-log-add
-										RawIcon("plus-circle")
-								else if entry.OldValue != "" && entry.NewValue == ""
+										RawIcon("plus-square")
+								else if entry.Action == "arrayRemove"
 									.edit-log-sub-icon.edit-log-remove
-										RawIcon("minus-circle")
+										RawIcon("minus-square")
+								else
+									if entry.OldValue == "" && entry.NewValue != ""
+										.edit-log-sub-icon.edit-log-add
+											RawIcon("plus-circle")
+									else if entry.OldValue != "" && entry.NewValue == ""
+										.edit-log-sub-icon.edit-log-remove
+											RawIcon("minus-circle")
 
 					td
 						.edit-log-user
