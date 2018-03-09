@@ -55,7 +55,7 @@ func readFile(name string) error {
 		return errors.New("Empty ID")
 	}
 
-	fmt.Println(anime.ID, anime.Title)
+	// fmt.Println(anime.ID, anime.Title)
 	arn.MAL.Set("Anime", anime.ID, anime)
 	return nil
 }

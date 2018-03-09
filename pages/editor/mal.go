@@ -12,7 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxCompareMALEntries = 10
+const maxCompareMALEntries = 15
 
 // CompareMAL ...
 func CompareMAL(ctx *aero.Context) string {
@@ -81,6 +81,71 @@ func CompareMAL(ctx *aero.Context) string {
 				differences = append(differences, &animediff.JapaneseTitle{
 					TitleA:      anime.Title.Japanese,
 					TitleB:      malAnime.JapaneseTitle,
+					NumericHash: hash,
+				})
+			}
+		}
+
+		// Romaji title
+		if anime.Title.Romaji != malAnime.Title {
+			hash := utils.HashString(malAnime.Title)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "RomajiTitle", hash) {
+				differences = append(differences, &animediff.RomajiTitle{
+					TitleA:      anime.Title.Romaji,
+					TitleB:      malAnime.Title,
+					NumericHash: hash,
+				})
+			}
+		}
+
+		// Airing start date
+		if anime.StartDate != malAnime.StartDate {
+			hash := utils.HashString(malAnime.StartDate)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "StartDate", hash) {
+				differences = append(differences, &animediff.StartDate{
+					DateA:       anime.StartDate,
+					DateB:       malAnime.StartDate,
+					NumericHash: hash,
+				})
+			}
+		}
+
+		// Airing end date
+		if anime.EndDate != malAnime.EndDate && malAnime.EndDate != "" {
+			hash := utils.HashString(malAnime.EndDate)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "EndDate", hash) {
+				differences = append(differences, &animediff.EndDate{
+					DateA:       anime.EndDate,
+					DateB:       malAnime.EndDate,
+					NumericHash: hash,
+				})
+			}
+		}
+
+		// Status
+		if anime.Status != malAnime.Status {
+			hash := utils.HashString(malAnime.Status)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Status", hash) {
+				differences = append(differences, &animediff.Status{
+					StatusA:     anime.Status,
+					StatusB:     malAnime.Status,
+					NumericHash: hash,
+				})
+			}
+		}
+
+		// EpisodeCount
+		if anime.EpisodeCount != malAnime.EpisodeCount {
+			hash := uint64(malAnime.EpisodeCount)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "EpisodeCount", hash) {
+				differences = append(differences, &animediff.EpisodeCount{
+					EpisodesA:   anime.EpisodeCount,
+					EpisodesB:   malAnime.EpisodeCount,
 					NumericHash: hash,
 				})
 			}
