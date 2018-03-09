@@ -12,7 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxCompareMALEntries = 10
+const maxCompareMALEntries = 20
 
 // CompareMAL ...
 func CompareMAL(ctx *aero.Context) string {
@@ -60,7 +60,7 @@ func CompareMAL(ctx *aero.Context) string {
 		malAnime := obj.(*mal.Anime)
 		var differences []animediff.Difference
 
-		// Compare canonical titles
+		// Canonical title
 		if anime.Title.Canonical != malAnime.Title {
 			differences = append(differences, &animediff.CanonicalTitle{
 				TitleA: anime.Title.Canonical,
@@ -68,10 +68,19 @@ func CompareMAL(ctx *aero.Context) string {
 			})
 		}
 
+		// Japanese title
 		if anime.Title.Japanese != malAnime.JapaneseTitle {
 			differences = append(differences, &animediff.JapaneseTitle{
 				TitleA: anime.Title.Japanese,
 				TitleB: malAnime.JapaneseTitle,
+			})
+		}
+
+		// Synopsis
+		if len(anime.Summary) < len(malAnime.Synopsis) {
+			differences = append(differences, &animediff.ShorterSynopsis{
+				SynopsisA: anime.Summary,
+				SynopsisB: malAnime.Synopsis,
 			})
 		}
 
