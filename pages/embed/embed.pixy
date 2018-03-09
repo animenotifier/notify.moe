@@ -1,7 +1,13 @@
 component BrowserExtension(watchingList *arn.AnimeList, viewUser *arn.User, user *arn.User)
 	AnimeList(watchingList, viewUser, user)
 
-component ExtensionNavigation
+component ExtensionNavigation(user *arn.User)
 	nav.extension-navigation
 		button.action(data-trigger="click", data-action="toggleSidebar")
 			RawIcon("bars")
+		
+		if user != nil
+			.spacer
+
+			a.button(href="/support", target="_blank")
+				RawIcon("heart")

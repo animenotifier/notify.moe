@@ -3,10 +3,12 @@
 
 > 780px
 	.extension-navigation
-		display block
+		horizontal
 		position fixed
-		bottom 1rem
-		left 1rem
+		bottom 0
+		left 0
+		padding 1rem
+		width 100%
 
 > 790px
 	.extension-navigation
