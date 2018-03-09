@@ -1,7 +1,12 @@
 component Editor(url string, user *arn.User)
 	EditorTabs(url)
-	h1.page-title Editor Panel
-	p.text-center.mountable= "Welcome to the Editor Panel, " + user.Nick + "!"
+	h1.mountable= "Welcome to the Editor Panel, " + user.Nick + "!"
+
+	.feature-cards
+		.feature-card.mountable
+			.feature-card-icon.editor-score 0
+			
+			p.feature-card-text Your contribution score (wip).
 
 component EditorTabs(url string)
 	.tabs

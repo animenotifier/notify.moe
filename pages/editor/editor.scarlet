@@ -3,3 +3,6 @@
 
 .editor-list-entry-count
 	margin-top 0
+
+.editor-score
+	line-height 1em
