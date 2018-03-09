@@ -100,8 +100,13 @@ func Configure(app *aero.Application) {
 	l.Page("/anime/:id/episodes", anime.Episodes)
 	l.Page("/anime/:id/characters", anime.Characters)
 	l.Page("/anime/:id/tracks", anime.Tracks)
-	l.Page("/anime/:id/edit", editanime.Get)
 	l.Page("/anime/:id/episode/:episode-number", episode.Get)
+
+	// Edit anime
+	l.Page("/anime/:id/edit", editanime.Main)
+	l.Page("/anime/:id/edit/characters", editanime.Characters)
+	l.Page("/anime/:id/edit/relations", editanime.Relations)
+	// l.Page("/anime/:id/edit/episodes", editanime.Episodes)
 
 	// Characters
 	l.Page("/character/:id", character.Get)
