@@ -1,0 +1,23 @@
+component EditLog(entries []*arn.EditLogEntry, user *arn.User)
+	h1 Editor log
+
+	table
+		thead
+			tr.mountable
+				th ID
+				th User
+				th Object
+				th Old
+				th New
+				th Date
+		tbody
+			each entry in entries
+				tr.mountable
+					td= entry.ID
+					td
+						a(href=entry.User().Link(), target="_blank", rel="noopener")= entry.User().Nick
+					td
+						a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= entry.ObjectType + " " + entry.ObjectID
+					td= entry.OldValue
+					td= entry.NewValue
+					td.utc-date(data-date=entry.Created)

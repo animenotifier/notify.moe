@@ -35,6 +35,7 @@ component Sidebar(user *arn.User)
 		
 		if arn.IsDevelopment()
 			SidebarButton("Groups", "/groups", "users")
+			SidebarButton("Log", "/log", "list")
 
 		//- Disabled:
 		//- SidebarButton("Dash", "/dashboard", "tachometer")

@@ -19,6 +19,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/compare"
 	"github.com/animenotifier/notify.moe/pages/database"
 	"github.com/animenotifier/notify.moe/pages/editanime"
+	"github.com/animenotifier/notify.moe/pages/editlog"
 	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/episode"
@@ -214,6 +215,9 @@ func Configure(app *aero.Application) {
 	l.Page("/editor/anime/missing/genres/:year", editor.Genres)
 	l.Page("/editor/anime/missing/genres/:year/:type", editor.Genres)
 	l.Page("/editor/anime/maldiff", editor.CompareMAL)
+
+	// Log
+	l.Page("/log", editlog.Get)
 
 	// Mixed
 	l.Page("/database", database.Get)
