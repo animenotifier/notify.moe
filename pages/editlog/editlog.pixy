@@ -37,7 +37,10 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 						.edit-log-user
 							Avatar(entry.User())
 					td.edit-log-object
-						a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
+						if strings.HasPrefix(arn.GetObjectTitle(entry.ObjectType, entry.ObjectID), "<not found:")
+							span= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
+						else
+							a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
 					td.edit-log-key
 						span= entry.ObjectType
 
