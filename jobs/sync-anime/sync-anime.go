@@ -30,12 +30,12 @@ func main() {
 	}
 }
 
-func sync(data *kitsu.Anime) {
+func sync(data *kitsu.Anime) *arn.Anime {
 	anime, err := arn.GetAnime(data.ID)
 
 	// This stops overwriting existing data
-	if err == nil || anime != nil {
-		return
+	if anime != nil {
+		return anime
 	}
 
 	if err != nil {
@@ -153,6 +153,20 @@ func sync(data *kitsu.Anime) {
 		arn.DB.Set("AnimeEpisodes", anime.ID, episodes)
 	}
 
+	// Relations
+	relations, _ := arn.GetAnimeRelations(anime.ID)
+
+	if relations == nil {
+		relations := &arn.AnimeRelations{
+			AnimeID: anime.ID,
+			Items:   []*arn.AnimeRelation{},
+		}
+
+		arn.DB.Set("AnimeRelations", anime.ID, relations)
+	}
+
 	// Log
 	fmt.Println(color.GreenString("✔"), anime.ID, anime.Title.Canonical)
+
+	return anime
 }

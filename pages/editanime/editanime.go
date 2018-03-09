@@ -75,3 +75,27 @@ func Relations(ctx *aero.Context) string {
 
 	return ctx.HTML(components.EditAnimeTabs(anime) + editform.Render(animeRelations, "Edit anime relations", user))
 }
+
+// Episodes anime episodes edit page.
+func Episodes(ctx *aero.Context) string {
+	id := ctx.Get("id")
+	user := utils.GetUser(ctx)
+
+	if user == nil || (user.Role != "editor" && user.Role != "admin") {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit", nil)
+	}
+
+	anime, err := arn.GetAnime(id)
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "Anime not found", err)
+	}
+
+	animeEpisodes, err := arn.GetAnimeEpisodes(id)
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "Anime episodes not found", err)
+	}
+
+	return ctx.HTML(components.EditAnimeTabs(anime) + editform.Render(animeEpisodes, "Edit anime episodes", user))
+}

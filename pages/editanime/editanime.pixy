@@ -4,7 +4,7 @@ component EditAnimeTabs(anime *arn.Anime)
 			Icon("tv")
 			span Anime
 		
-		Tab("Edit anime", "pencil", anime.Link() + "/edit")
-		Tab("Edit characters", "pencil", anime.Link() + "/edit/characters")
-		Tab("Edit relations", "pencil", anime.Link() + "/edit/relations")
-		//- Tab("Edit episodes", "pencil", anime.Link() + "/edit/episodes")
+		Tab("Edit", "pencil", anime.Link() + "/edit")
+		Tab("Characters", "pencil", anime.Link() + "/edit/characters")
+		Tab("Relations", "pencil", anime.Link() + "/edit/relations")
+		Tab("Episodes", "pencil", anime.Link() + "/edit/episodes")
