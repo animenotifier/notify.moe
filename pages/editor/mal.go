@@ -62,26 +62,38 @@ func CompareMAL(ctx *aero.Context) string {
 
 		// Canonical title
 		if anime.Title.Canonical != malAnime.Title {
-			differences = append(differences, &animediff.CanonicalTitle{
-				TitleA: anime.Title.Canonical,
-				TitleB: malAnime.Title,
-			})
+			hash := utils.HashString(malAnime.Title)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "CanonicalTitle", hash) {
+				differences = append(differences, &animediff.CanonicalTitle{
+					TitleA: anime.Title.Canonical,
+					TitleB: malAnime.Title,
+				})
+			}
 		}
 
 		// Japanese title
 		if anime.Title.Japanese != malAnime.JapaneseTitle {
-			differences = append(differences, &animediff.JapaneseTitle{
-				TitleA: anime.Title.Japanese,
-				TitleB: malAnime.JapaneseTitle,
-			})
+			hash := utils.HashString(malAnime.JapaneseTitle)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "JapaneseTitle", hash) {
+				differences = append(differences, &animediff.JapaneseTitle{
+					TitleA: anime.Title.Japanese,
+					TitleB: malAnime.JapaneseTitle,
+				})
+			}
 		}
 
 		// Synopsis
 		if len(anime.Summary) < len(malAnime.Synopsis) {
-			differences = append(differences, &animediff.ShorterSynopsis{
-				SynopsisA: anime.Summary,
-				SynopsisB: malAnime.Synopsis,
-			})
+			hash := utils.HashString(malAnime.Synopsis)
+
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Synopsis", hash) {
+				differences = append(differences, &animediff.Synopsis{
+					SynopsisA: anime.Summary,
+					SynopsisB: malAnime.Synopsis,
+				})
+			}
 		}
 
 		// Compare genres
@@ -89,10 +101,12 @@ func CompareMAL(ctx *aero.Context) string {
 		hashB := utils.HashStringsNoOrder(malAnime.Genres)
 
 		if hashA != hashB {
-			differences = append(differences, &animediff.Genres{
-				GenresA: anime.Genres,
-				GenresB: malAnime.Genres,
-			})
+			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Genres", hashB) {
+				differences = append(differences, &animediff.Genres{
+					GenresA: anime.Genres,
+					GenresB: malAnime.Genres,
+				})
+			}
 		}
 
 		// Add if there were any differences

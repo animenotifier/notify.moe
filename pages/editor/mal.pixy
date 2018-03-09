@@ -23,7 +23,7 @@ component CompareMAL(comparisons []*utils.MALComparison, url string, user *arn.U
 				.data-comparison-differences
 					each difference in comparison.Differences
 						.data-comparison-difference
-							.data-comparison-difference-title= difference.String()
+							.data-comparison-difference-title= difference.Explanation()
 
 							.data-comparison-difference-details
 								.data-comparison-difference-detail= difference.DetailsA()

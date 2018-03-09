@@ -6,8 +6,13 @@ type JapaneseTitle struct {
 	TitleB string
 }
 
-// String returns the description.
-func (diff *JapaneseTitle) String() string {
+// Type returns the diff type.
+func (diff *JapaneseTitle) Type() string {
+	return "JapaneseTitle"
+}
+
+// Explanation returns the description.
+func (diff *JapaneseTitle) Explanation() string {
 	return "Japanese titles are different"
 }
 

@@ -6,8 +6,13 @@ type CanonicalTitle struct {
 	TitleB string
 }
 
-// String returns the description.
-func (diff *CanonicalTitle) String() string {
+// Type returns the diff type.
+func (diff *CanonicalTitle) Type() string {
+	return "CanonicalTitle"
+}
+
+// Explanation returns the description.
+func (diff *CanonicalTitle) Explanation() string {
 	return "Canonical titles are different"
 }
 

@@ -8,8 +8,13 @@ type Genres struct {
 	GenresB []string
 }
 
-// String returns the description.
-func (diff *Genres) String() string {
+// Type returns the diff type.
+func (diff *Genres) Type() string {
+	return "Genres"
+}
+
+// Explanation returns the description.
+func (diff *Genres) Explanation() string {
 	return "Genres are different"
 }
 
