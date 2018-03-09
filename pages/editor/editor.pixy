@@ -1,17 +1,21 @@
-component Editor
-	EditorTabs
+component Editor(url string, user *arn.User)
+	EditorTabs(url)
 	h1.page-title Editor Panel
-	p.text-center.mountable Welcome to the Editor Panel!
+	p.text-center.mountable= "Welcome to the Editor Panel, " + user.Nick + "!"
 
-component EditorTabs
+component EditorTabs(url string)
 	.tabs
 		Tab("Editor", "pencil", "/editor")
-		Tab("Shoboi", "list", "/editor/shoboi")
-		Tab("AniList", "list", "/editor/anilist")
-		Tab("Genres", "list", "/editor/genres")
-		Tab("MAL", "list", "/editor/mal")
+		Tab("MAL", "exchange", "/editor/anime/maldiff")
+		Tab("Missing", "list", "/editor/anime/missing/shoboi")
 		Tab("Search", "search", "/database")
 
-		//- a.tab.ajax(href="/admin", aria-label="Admin")
-		//- 	Icon("wrench")
-		//- 	span.tab-text Admin
+	if strings.Contains(url, "/editor/anime/missing/")
+		.tabs
+			Tab("Shoboi", "list", "/editor/anime/missing/shoboi")
+			Tab("AniList", "list", "/editor/anime/missing/anilist")
+			Tab("Genres", "list", "/editor/anime/missing/genres")
+
+			//- a.tab.ajax(href="/admin", aria-label="Admin")
+			//- 	Icon("wrench")
+			//- 	span.tab-text Admin

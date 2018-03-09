@@ -1,5 +1,5 @@
-component Database
-	EditorTabs
+component Database(url string)
+	EditorTabs(url)
 
 	.widget-form
 		.widget

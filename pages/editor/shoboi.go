@@ -51,7 +51,7 @@ func Shoboi(ctx *aero.Context) string {
 		"Anime without Shoboi links",
 		missing,
 		count,
-		"/editor/shoboi",
+		"/editor/anime/missing/shoboi",
 		func(anime *arn.Anime) string {
 			return "http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese
 		},

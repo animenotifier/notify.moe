@@ -199,16 +199,16 @@ func Configure(app *aero.Application) {
 
 	// Editor
 	l.Page("/editor", editor.Get)
-	l.Page("/editor/anilist", editor.AniList)
-	l.Page("/editor/anilist/:year", editor.AniList)
-	l.Page("/editor/anilist/:year/:type", editor.AniList)
-	l.Page("/editor/shoboi", editor.Shoboi)
-	l.Page("/editor/shoboi/:year", editor.Shoboi)
-	l.Page("/editor/shoboi/:year/:type", editor.Shoboi)
-	l.Page("/editor/genres", editor.Genres)
-	l.Page("/editor/genres/:year", editor.Genres)
-	l.Page("/editor/genres/:year/:type", editor.Genres)
-	l.Page("/editor/mal", editor.CompareMAL)
+	l.Page("/editor/anime/missing/anilist", editor.AniList)
+	l.Page("/editor/anime/missing/anilist/:year", editor.AniList)
+	l.Page("/editor/anime/missing/anilist/:year/:type", editor.AniList)
+	l.Page("/editor/anime/missing/shoboi", editor.Shoboi)
+	l.Page("/editor/anime/missing/shoboi/:year", editor.Shoboi)
+	l.Page("/editor/anime/missing/shoboi/:year/:type", editor.Shoboi)
+	l.Page("/editor/anime/missing/genres", editor.Genres)
+	l.Page("/editor/anime/missing/genres/:year", editor.Genres)
+	l.Page("/editor/anime/missing/genres/:year/:type", editor.Genres)
+	l.Page("/editor/anime/maldiff", editor.CompareMAL)
 
 	// Mixed
 	l.Page("/database", database.Get)

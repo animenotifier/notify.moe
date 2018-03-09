@@ -109,5 +109,5 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 	}
 
-	return ctx.HTML(components.CompareMAL(comparisons, user))
+	return ctx.HTML(components.CompareMAL(comparisons, ctx.URI(), user))
 }

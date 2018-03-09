@@ -1,5 +1,5 @@
 component AnimeEditorListFull(title string, missing []*arn.Anime, count int, pageURI string, generateSearchLink func(*arn.Anime) string)
-	EditorTabs
+	EditorTabs(pageURI)
 	h1.editor-list-title.mountable= title
 	.footer.editor-list-entry-count.mountable= strconv.Itoa(count) + " anime"
 	AnimeEditorList(missing, pageURI, generateSearchLink)

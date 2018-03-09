@@ -14,5 +14,5 @@ func Get(ctx *aero.Context) string {
 		return ctx.Redirect("/")
 	}
 
-	return ctx.HTML(components.Editor())
+	return ctx.HTML(components.Editor(ctx.URI(), user))
 }

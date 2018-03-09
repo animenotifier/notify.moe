@@ -1,5 +1,5 @@
-component CompareMAL(comparisons []*utils.MALComparison, user *arn.User)
-	EditorTabs
+component CompareMAL(comparisons []*utils.MALComparison, url string, user *arn.User)
+	EditorTabs(url)
 	h1.mountable MAL comparison
 
 	.data-comparisons

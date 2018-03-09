@@ -7,5 +7,5 @@ import (
 
 // Get the dashboard.
 func Get(ctx *aero.Context) string {
-	return ctx.HTML(components.Database())
+	return ctx.HTML(components.Database(ctx.URI()))
 }
