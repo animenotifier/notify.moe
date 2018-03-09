@@ -8,17 +8,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/animenotifier/mal"
-
-	"github.com/aerogo/nano"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal/parser"
 )
 
-var node = nano.New(5000)
-var db = node.Namespace("mal").RegisterTypes((*mal.Anime)(nil))
-
 func main() {
-	defer node.Close()
+	defer arn.Node.Close()
 
 	// readFile("../mal-crawler/files/anime-31240.html")
 
@@ -61,7 +56,7 @@ func readFile(name string) error {
 	}
 
 	fmt.Println(anime.ID, anime.Title)
-	db.Set("Anime", anime.ID, anime)
+	arn.MAL.Set("Anime", anime.ID, anime)
 	return nil
 }
 
