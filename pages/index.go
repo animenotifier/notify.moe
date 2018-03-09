@@ -208,6 +208,7 @@ func Configure(app *aero.Application) {
 	l.Page("/editor/genres", editor.Genres)
 	l.Page("/editor/genres/:year", editor.Genres)
 	l.Page("/editor/genres/:year/:type", editor.Genres)
+	l.Page("/editor/mal", editor.CompareMAL)
 
 	// Mixed
 	l.Page("/database", database.Get)

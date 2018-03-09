@@ -1,8 +1,6 @@
 component Editor
-	h1.page-title Editor Panel
-
 	EditorTabs
-	
+	h1.page-title Editor Panel
 	p.text-center.mountable Welcome to the Editor Panel!
 
 component EditorTabs
@@ -11,6 +9,7 @@ component EditorTabs
 		Tab("Shoboi", "list", "/editor/shoboi")
 		Tab("AniList", "list", "/editor/anilist")
 		Tab("Genres", "list", "/editor/genres")
+		Tab("MAL", "list", "/editor/mal")
 		Tab("Search", "search", "/database")
 
 		//- a.tab.ajax(href="/admin", aria-label="Admin")

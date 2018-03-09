@@ -1,0 +1,21 @@
+.mal-comparisons
+	vertical
+	width 100%
+	max-width 1100px
+	margin 0 auto
+
+.mal-comparison
+	vertical
+	ui-element
+	padding 0.5rem 1rem
+	margin 0.5rem
+
+.comparison-difference
+	vertical
+	font-weight bold
+
+.comparison-difference-details
+	horizontal
+
+.comparison-difference-detail
+	flex 1
