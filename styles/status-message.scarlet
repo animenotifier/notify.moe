@@ -8,6 +8,9 @@
 	pointer-events none
 	z-index 1000
 
+	&.fade-out
+		z-index 1
+
 #status-message-text
 	flex 1
 	text-align center

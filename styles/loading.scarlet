@@ -5,6 +5,7 @@ loading-anim-size = 24px
 	position fixed
 	bottom 1.15rem
 	right 1.15rem
+	z-index 1
 	pointer-events none
 
 .sk-cube-grid
