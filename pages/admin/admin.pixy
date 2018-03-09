@@ -3,8 +3,9 @@ component AdminTabs
 		Tab("Server", "server", "/admin")
 		Tab("WebDev", "html5", "/admin/webdev")
 		Tab("Purchases", "shopping-cart", "/admin/purchases")
-
-		a.tab.ajax(href="/editor", aria-label="Editor")
+	
+	.corner-buttons
+		a.button.ajax(href="/editor", aria-label="Editor")
 			Icon("pencil")
 			span.tab-text Editor
 

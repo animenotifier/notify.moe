@@ -19,8 +19,6 @@ const (
 )
 
 func main() {
-	defer arn.Node.Close()
-
 	// Filter anime with MAL ID
 	animes := []*arn.Anime{}
 
@@ -35,6 +33,9 @@ func main() {
 	}
 
 	color.Yellow("Found %d anime", len(animes))
+
+	// We don't need the database anymore
+	arn.Node.Close()
 
 	// Create crawler
 	malCrawler := crawler.New(
