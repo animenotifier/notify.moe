@@ -3,7 +3,8 @@ package editor
 import (
 	"sort"
 
-	"github.com/OneOfOne/xxhash"
+	"github.com/animenotifier/notify.moe/utils/animediff"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
@@ -57,37 +58,29 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 
 		malAnime := obj.(*mal.Anime)
-		var differences []utils.AnimeDiff
+		var differences []animediff.Difference
 
-		// Compare titles
+		// Compare canonical titles
 		if anime.Title.Canonical != malAnime.Title {
-			differences = append(differences, &utils.AnimeTitleDiff{
+			differences = append(differences, &animediff.CanonicalTitle{
 				TitleA: anime.Title.Canonical,
 				TitleB: malAnime.Title,
 			})
 		}
 
+		if anime.Title.Japanese != malAnime.JapaneseTitle {
+			differences = append(differences, &animediff.JapaneseTitle{
+				TitleA: anime.Title.Japanese,
+				TitleB: malAnime.JapaneseTitle,
+			})
+		}
+
 		// Compare genres
-		sumA := uint64(0)
+		hashA := utils.HashStringsNoOrder(anime.Genres)
+		hashB := utils.HashStringsNoOrder(malAnime.Genres)
 
-		for _, genre := range anime.Genres {
-			h := xxhash.NewS64(0)
-			h.Write([]byte(genre))
-			numHash := h.Sum64()
-			sumA += numHash
-		}
-
-		sumB := uint64(0)
-
-		for _, genre := range malAnime.Genres {
-			h := xxhash.NewS64(0)
-			h.Write([]byte(genre))
-			numHash := h.Sum64()
-			sumB += numHash
-		}
-
-		if sumA != sumB {
-			differences = append(differences, &utils.AnimeGenresDiff{
+		if hashA != hashB {
+			differences = append(differences, &animediff.Genres{
 				GenresA: anime.Genres,
 				GenresB: malAnime.Genres,
 			})
