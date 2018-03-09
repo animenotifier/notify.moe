@@ -1,6 +1,6 @@
 component CompareMAL(comparisons []*utils.MALComparison, user *arn.User)
 	EditorTabs
-	h1.mountable MAL Comparison
+	h1.mountable MAL comparison
 
 	.data-comparisons
 		each comparison in comparisons
@@ -9,9 +9,11 @@ component CompareMAL(comparisons []*utils.MALComparison, user *arn.User)
 					.data-comparison-image-container
 						img.data-comparison-image.lazy(data-src=comparison.Anime.Image("small"), data-webp="true", alt=comparison.Anime.Title.ByUser(user))
 					
-					.data-comparison-titles
-						a.data-comparison-title(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.Canonical
-						a.data-comparison-title(href=comparison.MALAnime.URL, target="_blank")= comparison.MALAnime.Title
+					.data-comparison-title
+						a(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.Canonical
+						.spacer
+						a(href=comparison.MALAnime.URL, target="_blank")
+							RawIcon("external-link")
 
 				.data-comparison-differences
 					each difference in comparison.Differences

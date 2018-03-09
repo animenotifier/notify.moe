@@ -8,6 +8,7 @@
 	vertical
 	padding 0.5rem 0.75rem
 	margin 0.5rem
+	border-left 3px solid ui-border-color
 
 .data-comparison-header
 	horizontal
@@ -18,20 +19,21 @@
 .data-comparison-image
 	anime-list-item-image
 
-.data-comparison-titles
-	vertical
-
 .data-comparison-title
-	line-height 1.5em
+	horizontal
+	font-size 1.2rem
+	flex 1
+	align-items center
 
 .data-comparison-differences
 	vertical
+	margin-top 0.5rem
 
 .data-comparison-difference
 	vertical
 	ui-element
 	padding 0.5rem 0.75rem
-	margin 0.5rem 0
+	margin-bottom 0.5rem
 
 .data-comparison-difference-title
 	font-weight bold

@@ -59,6 +59,15 @@ func CompareMAL(ctx *aero.Context) string {
 		malAnime := obj.(*mal.Anime)
 		var differences []utils.AnimeDiff
 
+		// Compare titles
+		if anime.Title.Canonical != malAnime.Title {
+			differences = append(differences, &utils.AnimeTitleDiff{
+				TitleA: anime.Title.Canonical,
+				TitleB: malAnime.Title,
+			})
+		}
+
+		// Compare genres
 		sumA := uint64(0)
 
 		for _, genre := range anime.Genres {
@@ -84,6 +93,7 @@ func CompareMAL(ctx *aero.Context) string {
 			})
 		}
 
+		// Add if there were any differences
 		if len(differences) > 0 {
 			comparisons = append(comparisons, &utils.MALComparison{
 				Anime:       anime,
