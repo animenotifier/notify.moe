@@ -20,6 +20,9 @@
 	justify-content center
 	align-items center
 
+.edit-log-create
+	color green
+
 .edit-log-add
 	color green
 

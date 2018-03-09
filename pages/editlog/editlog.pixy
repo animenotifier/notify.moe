@@ -7,6 +7,7 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 				th.text-center Icon
 				th User
 				th Object
+				th Type
 				th Key
 				th Old
 				th New
@@ -15,10 +16,13 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 			each entry in entries
 				tr.mountable
 					td
-						.edit-log-icon
-							if entry.OldValue == "" && entry.NewValue != ""
-								.edit-log-add
+						.edit-log-icon(title=entry.Action)
+							if entry.Action == "create"
+								.edit-log-create
 									RawIcon("plus")
+							else if entry.OldValue == "" && entry.NewValue != ""
+								.edit-log-add
+									RawIcon("plus-circle")
 							else if entry.OldValue != "" && entry.NewValue == ""
 								.edit-log-remove
 									RawIcon("minus")
@@ -30,6 +34,7 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 							Avatar(entry.User())
 					td.edit-log-object
 						a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
+					td.edit-log-type= entry.ObjectType
 					td.edit-log-key= entry.Key
 					td= entry.OldValue
 					td= entry.NewValue
