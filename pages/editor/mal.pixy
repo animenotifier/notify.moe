@@ -2,16 +2,22 @@ component CompareMAL(comparisons []*utils.MALComparison, user *arn.User)
 	EditorTabs
 	h1.mountable MAL Comparison
 
-	.mal-comparisons
+	.data-comparisons
 		each comparison in comparisons
-			.mal-comparison.mountable
-				a(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.ByUser(user)
-				a(href=comparison.MALAnime.URL, target="_blank")= comparison.MALAnime.Title
+			.data-comparison.mountable
+				.data-comparison-header
+					.data-comparison-image-container
+						img.data-comparison-image.lazy(data-src=comparison.Anime.Image("small"), data-webp="true", alt=comparison.Anime.Title.ByUser(user))
+					
+					.data-comparison-titles
+						a.data-comparison-title(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.Canonical
+						a.data-comparison-title(href=comparison.MALAnime.URL, target="_blank")= comparison.MALAnime.Title
 
-				each difference in comparison.Differences
-					.comparison-difference
-						div= difference.String()
+				.data-comparison-differences
+					each difference in comparison.Differences
+						.data-comparison-difference
+							.data-comparison-difference-title= difference.String()
 
-					.comparison-difference-details
-						.comparison-difference-detail= difference.DetailsA()
-						.comparison-difference-detail= difference.DetailsB()
+							.data-comparison-difference-details
+								.data-comparison-difference-detail= difference.DetailsA()
+								.data-comparison-difference-detail= difference.DetailsB()

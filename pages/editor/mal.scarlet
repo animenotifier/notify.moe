@@ -1,21 +1,43 @@
-.mal-comparisons
+.data-comparisons
 	vertical
 	width 100%
-	max-width 1100px
+	max-width 1200px
 	margin 0 auto
 
-.mal-comparison
+.data-comparison
 	vertical
-	ui-element
-	padding 0.5rem 1rem
+	padding 0.5rem 0.75rem
 	margin 0.5rem
 
-.comparison-difference
-	vertical
-	font-weight bold
-
-.comparison-difference-details
+.data-comparison-header
 	horizontal
 
-.comparison-difference-detail
+.data-comparison-image-container
+	margin-right 0.75rem
+
+.data-comparison-image
+	anime-list-item-image
+
+.data-comparison-titles
+	vertical
+
+.data-comparison-title
+	line-height 1.5em
+
+.data-comparison-differences
+	vertical
+
+.data-comparison-difference
+	vertical
+	ui-element
+	padding 0.5rem 0.75rem
+	margin 0.5rem 0
+
+.data-comparison-difference-title
+	font-weight bold
+
+.data-comparison-difference-details
+	horizontal
+
+.data-comparison-difference-detail
 	flex 1
