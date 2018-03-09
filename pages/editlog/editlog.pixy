@@ -1,23 +1,36 @@
 component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 	h1 Editor log
 
-	table
+	table.edit-log
 		thead
 			tr.mountable
-				th ID
+				th.text-center Icon
 				th User
 				th Object
+				th Key
 				th Old
 				th New
 				th Date
 		tbody
 			each entry in entries
 				tr.mountable
-					td= entry.ID
 					td
-						a(href=entry.User().Link(), target="_blank", rel="noopener")= entry.User().Nick
+						.edit-log-icon
+							if entry.OldValue == "" && entry.NewValue != ""
+								.edit-log-add
+									RawIcon("plus")
+							else if entry.OldValue != "" && entry.NewValue == ""
+								.edit-log-remove
+									RawIcon("minus")
+							else
+								.edit-log-change
+									RawIcon("pencil")
 					td
-						a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= entry.ObjectType + " " + entry.ObjectID
+						.edit-log-user
+							Avatar(entry.User())
+					td.edit-log-object
+						a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
+					td.edit-log-key= entry.Key
 					td= entry.OldValue
 					td= entry.NewValue
-					td.utc-date(data-date=entry.Created)
+					td.edit-log-date.utc-date(data-date=entry.Created)

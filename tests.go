@@ -297,6 +297,7 @@ var routeTests = map[string][]string{
 	"/shop/history":                                  nil,
 	"/support":                                       nil,
 	"/charge":                                        nil,
+	"/log":                                           nil,
 	"/inventory":                                     nil,
 	"/extension/embed":                               nil,
 }

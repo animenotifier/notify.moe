@@ -1,0 +1,33 @@
+.edit-log
+	max-width 1500px
+
+	td
+		padding 0.25rem 0.5rem
+
+.edit-log-object,
+.edit-log-key,
+.edit-log-date
+	white-space nowrap
+
+.edit-log-user
+	.user-image
+		width calc(avatar-size / 2)
+		height calc(avatar-size / 2)
+		margin-right 0.5rem
+
+.edit-log-icon
+	display flex
+	justify-content center
+	align-items center
+
+.edit-log-add
+	color green
+
+.edit-log-remove
+	color red
+
+.edit-log-change
+	color main-color
+
+.edit-log-date
+	opacity 0.5
