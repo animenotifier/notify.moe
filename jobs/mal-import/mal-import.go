@@ -61,7 +61,7 @@ func readFile(name string) error {
 	}
 
 	fmt.Println(anime.ID, anime.Title)
-	// db.Set("Anime", anime.ID, anime)
+	db.Set("Anime", anime.ID, anime)
 	return nil
 }
 
