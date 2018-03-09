@@ -35,6 +35,14 @@ component Sidebar(user *arn.User)
 		
 		if arn.IsDevelopment()
 			SidebarButton("Groups", "/groups", "users")
+		
+		if user != nil && (user.Role == "editor" || user.Role == "admin")
+			if user.Role == "admin"
+				SidebarButton("Admin", "/admin", "wrench")
+
+			if (user.Role == "editor" || user.Role == "admin")
+				SidebarButton("Editor", "/editor", "pencil")
+			
 			SidebarButton("Log", "/log", "list")
 
 		//- Disabled:
@@ -53,13 +61,6 @@ component Sidebar(user *arn.User)
 			.sidebar-button
 				Icon("search")
 				FuzzySearch
-
-		if user != nil
-			if user.Role == "admin"
-				SidebarButton("Admin", "/admin", "wrench")
-
-			if user.Role == "editor"
-				SidebarButton("Editor", "/editor", "pencil")
 
 		a.sidebar-link.action(href="#", data-action="toggleTheme", data-trigger="click")
 			.sidebar-button
