@@ -515,7 +515,7 @@ export class AnimeNotifier {
 			let extension = ""
 
 			// Replace URL with WebP if supported
-			if(this.webpEnabled && element.dataset.webp) {
+			if(this.webpEnabled && element.dataset.webp === "true") {
 				let queryPos = dataSrc.lastIndexOf("?")
 
 				if(queryPos !== -1) {

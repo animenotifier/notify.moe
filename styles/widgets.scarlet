@@ -30,6 +30,18 @@
 	vertical
 	width 100%
 
+.widget-section-with-preview
+	horizontal
+
+.widget-section-preview
+	display flex
+	justify-content center
+	align-items center
+	margin-left 1rem
+
+	img
+		anime-mini-item-image
+
 .widget-title
 	horizontal
 	align-items center

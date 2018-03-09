@@ -16,7 +16,7 @@ import (
 func Render(obj interface{}, title string, user *arn.User) string {
 	t := reflect.TypeOf(obj).Elem()
 	v := reflect.ValueOf(obj).Elem()
-	id := reflect.Indirect(v.FieldByName("ID"))
+	id := findMainID(t, v)
 	lowerCaseTypeName := strings.ToLower(t.Name())
 	endpoint := `/api/` + lowerCaseTypeName + `/` + id.String()
 
@@ -89,6 +89,26 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 
 	// String
 	if fieldType == "string" {
+		idType := field.Tag.Get("idType")
+
+		// Try to infer the ID type by the field name
+		if idType == "" {
+			switch field.Name {
+			case "AnimeID":
+				idType = "Anime"
+
+			case "CharacterID":
+				idType = "Character"
+			}
+		}
+
+		showPreview := idType != "" && fieldValue.String() != ""
+
+		if showPreview {
+			b.WriteString("<div class='widget-section-with-preview'>")
+		}
+
+		// Input field
 		if field.Tag.Get("datalist") != "" {
 			dataList := field.Tag.Get("datalist")
 			values := arn.DataLists[dataList]
@@ -97,6 +117,40 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 		} else {
 			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
+		}
+
+		if showPreview {
+			b.WriteString("<div class='widget-section-preview'>")
+		}
+
+		// Preview
+		switch idType {
+		case "Anime":
+			animeID := fieldValue.String()
+			anime, err := arn.GetAnime(animeID)
+
+			if err == nil {
+				b.WriteString(components.EditFormImagePreview(anime.Link(), anime.Image("small"), true))
+			}
+
+		case "Character":
+			characterID := fieldValue.String()
+			character, err := arn.GetCharacter(characterID)
+
+			if err == nil {
+				b.WriteString(components.EditFormImagePreview(character.Link(), character.Image, false))
+			}
+
+		case "":
+			break
+
+		default:
+			fmt.Println("Error: Unknown idType tag: " + idType)
+		}
+
+		// Close preview tags
+		if showPreview {
+			b.WriteString("</div></div>")
 		}
 
 		return
@@ -185,4 +239,23 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 	b.WriteString(`</div>`)
 
 	b.WriteString(`</div>`)
+}
+
+// findMainID finds the main ID of the object.
+func findMainID(t reflect.Type, v reflect.Value) reflect.Value {
+	idField := v.FieldByName("ID")
+
+	if idField.IsValid() {
+		return reflect.Indirect(idField)
+	}
+
+	for i := 0; i < t.NumField(); i++ {
+		field := t.Field(i)
+
+		if field.Tag.Get("mainID") == "true" {
+			return reflect.Indirect(v.Field(i))
+		}
+	}
+
+	panic("Type " + t.Name() + " doesn't have a main ID!")
 }
