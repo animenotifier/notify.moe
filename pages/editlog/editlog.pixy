@@ -20,12 +20,15 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 							if entry.Action == "create"
 								.edit-log-create
 									RawIcon("plus")
+							else if entry.Action == "delete"
+								.edit-log-delete
+									RawIcon("minus")
 							else if entry.OldValue == "" && entry.NewValue != ""
 								.edit-log-add
 									RawIcon("plus-circle")
 							else if entry.OldValue != "" && entry.NewValue == ""
 								.edit-log-remove
-									RawIcon("minus")
+									RawIcon("minus-circle")
 							else
 								.edit-log-change
 									RawIcon("pencil")

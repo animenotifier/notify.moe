@@ -29,6 +29,9 @@
 .edit-log-remove
 	color red
 
+.edit-log-delete
+	color red
+
 .edit-log-change
 	color main-color
 
