@@ -72,7 +72,7 @@ func refresh(anime *arn.Anime) {
 		faint := color.New(color.Faint).SprintFunc()
 		episodes := anime.Episodes()
 
-		fmt.Println(faint(episodes))
+		fmt.Println(faint(episodes.ListString()))
 		fmt.Printf("+%d episodes | +%d available (%d total)\n", len(episodes.Items)-episodeCount, episodes.AvailableCount()-availableEpisodeCount, len(episodes.Items))
 		println()
 	}
