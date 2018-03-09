@@ -36,6 +36,7 @@
 .data-comparison-difference
 	vertical
 	ui-element
+	position relative
 	padding 0.5rem 0.75rem
 	margin-bottom 0.5rem
 
@@ -48,3 +49,14 @@
 .data-comparison-difference-detail
 	flex 1
 	padding 0.5rem 0.75rem
+
+.data-comparison-difference-ignore
+	position absolute
+	top 0.5rem
+	right 0.5rem
+	width 30px
+	height 30px
+	padding 0
+	display flex
+	justify-content center
+	align-items center

@@ -4,8 +4,9 @@ import "strings"
 
 // Genres describes differing genres.
 type Genres struct {
-	GenresA []string
-	GenresB []string
+	GenresA     []string
+	GenresB     []string
+	NumericHash uint64
 }
 
 // Type returns the diff type.
@@ -26,4 +27,9 @@ func (diff *Genres) DetailsA() string {
 // DetailsB shows the details for the second anime.
 func (diff *Genres) DetailsB() string {
 	return strings.Join(diff.GenresB, ", ")
+}
+
+// Hash returns the hash for the suggested value (from anime B).
+func (diff *Genres) Hash() uint64 {
+	return diff.NumericHash
 }

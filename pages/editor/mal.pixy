@@ -23,8 +23,12 @@ component CompareMAL(comparisons []*utils.MALComparison, url string, user *arn.U
 				.data-comparison-differences
 					each difference in comparison.Differences
 						.data-comparison-difference
-							.data-comparison-difference-title= difference.Explanation()
+							.data-comparison-difference-title
+								span= difference.Explanation()
 
 							.data-comparison-difference-details
 								.data-comparison-difference-detail= difference.DetailsA()
 								.data-comparison-difference-detail= difference.DetailsB()
+							
+							button.data-comparison-difference-ignore.action(data-action="newAnimeDiffIgnore", data-trigger="click", data-id=arn.CreateDifferenceID(comparison.Anime.ID, "mal", comparison.MALAnime.ID, difference.Type()), data-hash=difference.Hash())
+								RawIcon("trash")

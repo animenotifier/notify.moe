@@ -12,7 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxCompareMALEntries = 20
+const maxCompareMALEntries = 10
 
 // CompareMAL ...
 func CompareMAL(ctx *aero.Context) string {
@@ -66,8 +66,9 @@ func CompareMAL(ctx *aero.Context) string {
 
 			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "CanonicalTitle", hash) {
 				differences = append(differences, &animediff.CanonicalTitle{
-					TitleA: anime.Title.Canonical,
-					TitleB: malAnime.Title,
+					TitleA:      anime.Title.Canonical,
+					TitleB:      malAnime.Title,
+					NumericHash: hash,
 				})
 			}
 		}
@@ -78,8 +79,9 @@ func CompareMAL(ctx *aero.Context) string {
 
 			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "JapaneseTitle", hash) {
 				differences = append(differences, &animediff.JapaneseTitle{
-					TitleA: anime.Title.Japanese,
-					TitleB: malAnime.JapaneseTitle,
+					TitleA:      anime.Title.Japanese,
+					TitleB:      malAnime.JapaneseTitle,
+					NumericHash: hash,
 				})
 			}
 		}
@@ -90,8 +92,9 @@ func CompareMAL(ctx *aero.Context) string {
 
 			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Synopsis", hash) {
 				differences = append(differences, &animediff.Synopsis{
-					SynopsisA: anime.Summary,
-					SynopsisB: malAnime.Synopsis,
+					SynopsisA:   anime.Summary,
+					SynopsisB:   malAnime.Synopsis,
+					NumericHash: hash,
 				})
 			}
 		}
@@ -103,8 +106,9 @@ func CompareMAL(ctx *aero.Context) string {
 		if hashA != hashB {
 			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Genres", hashB) {
 				differences = append(differences, &animediff.Genres{
-					GenresA: anime.Genres,
-					GenresB: malAnime.Genres,
+					GenresA:     anime.Genres,
+					GenresB:     malAnime.Genres,
+					NumericHash: hashB,
 				})
 			}
 		}

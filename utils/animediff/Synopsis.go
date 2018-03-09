@@ -2,8 +2,9 @@ package animediff
 
 // Synopsis describes differing synopsis.
 type Synopsis struct {
-	SynopsisA string
-	SynopsisB string
+	SynopsisA   string
+	SynopsisB   string
+	NumericHash uint64
 }
 
 // Type returns the diff type.
@@ -24,4 +25,9 @@ func (diff *Synopsis) DetailsA() string {
 // DetailsB shows the details for the second anime.
 func (diff *Synopsis) DetailsB() string {
 	return diff.SynopsisB
+}
+
+// Hash returns the hash for the suggested value (from anime B).
+func (diff *Synopsis) Hash() uint64 {
+	return diff.NumericHash
 }

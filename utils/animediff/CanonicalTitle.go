@@ -2,8 +2,9 @@ package animediff
 
 // CanonicalTitle describes differing titles.
 type CanonicalTitle struct {
-	TitleA string
-	TitleB string
+	TitleA      string
+	TitleB      string
+	NumericHash uint64
 }
 
 // Type returns the diff type.
@@ -24,4 +25,9 @@ func (diff *CanonicalTitle) DetailsA() string {
 // DetailsB shows the details for the second anime.
 func (diff *CanonicalTitle) DetailsB() string {
 	return diff.TitleB
+}
+
+// Hash returns the hash for the suggested value (from anime B).
+func (diff *CanonicalTitle) Hash() uint64 {
+	return diff.NumericHash
 }

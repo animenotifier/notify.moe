@@ -2,8 +2,9 @@ package animediff
 
 // JapaneseTitle describes differing Japanese titles.
 type JapaneseTitle struct {
-	TitleA string
-	TitleB string
+	TitleA      string
+	TitleB      string
+	NumericHash uint64
 }
 
 // Type returns the diff type.
@@ -24,4 +25,9 @@ func (diff *JapaneseTitle) DetailsA() string {
 // DetailsB shows the details for the second anime.
 func (diff *JapaneseTitle) DetailsB() string {
 	return diff.TitleB
+}
+
+// Hash returns the hash for the suggested value (from anime B).
+func (diff *JapaneseTitle) Hash() uint64 {
+	return diff.NumericHash
 }

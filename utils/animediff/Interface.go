@@ -6,4 +6,5 @@ type Difference interface {
 	Explanation() string
 	DetailsA() string
 	DetailsB() string
+	Hash() uint64
 }
