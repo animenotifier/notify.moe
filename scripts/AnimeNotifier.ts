@@ -143,7 +143,7 @@ export class AnimeNotifier {
 		this.sideBar = new SideBar(this.app.find("sidebar"))
 
 		// Infinite scrolling
-		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 100)
+		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 150)
 
 		// Loading
 		this.loading(false)

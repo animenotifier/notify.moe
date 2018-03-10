@@ -3,6 +3,8 @@
 
 .weekday
 	width 100%
+	max-width 500px
+	margin 0 auto
 	text-align left
 	border-bottom 1px solid ui-border-color
 	padding 0.5rem
@@ -72,7 +74,7 @@
 	text-align right
 	font-size 0.9rem
 
-> 800px
+> 1350px
 	.week
 		horizontal
 
