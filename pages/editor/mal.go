@@ -158,7 +158,7 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 
 		// Synopsis
-		if len(anime.Summary) < len(malAnime.Synopsis) {
+		if len(anime.Summary) < 300 && len(anime.Summary)+50 < len(malAnime.Synopsis) {
 			hash := utils.HashString(malAnime.Synopsis)
 
 			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Synopsis", hash) {
