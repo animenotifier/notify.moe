@@ -215,6 +215,11 @@ component AnimeInformation(anime *arn.Anime)
 					tr.mountable(data-mountable-type="info")
 						td.anime-info-key End date:
 						td.anime-info-value= anime.EndDate
+			
+			if anime.Source != "" && arn.AnimeSourceHumanReadable[anime.Source] != ""
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Source:
+					td.anime-info-value= arn.AnimeSourceHumanReadable[anime.Source]
 
 			if anime.FirstChannel != ""
 				tr.mountable(data-mountable-type="info")
