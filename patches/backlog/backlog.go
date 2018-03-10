@@ -1,33 +1,27 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/animenotifier/arn"
-)
-
 func main() {
-	defer arn.Node.Close()
+	// defer arn.Node.Close()
 
-	for track := range arn.StreamSoundTracks() {
-		if track.Created > "2018-03-09" {
-			continue
-		}
+	// for track := range arn.StreamSoundTracks() {
+	// 	if track.Created > "2018-03-09" {
+	// 		continue
+	// 	}
 
-		fmt.Println(track.Created, track.Title)
-		logEntry := arn.NewEditLogEntry(track.CreatedBy, "create", "SoundTrack", track.ID, "", "", "")
-		logEntry.Created = track.Created
-		logEntry.Save()
-	}
+	// 	fmt.Println(track.Created, track.Title)
+	// 	logEntry := arn.NewEditLogEntry(track.CreatedBy, "create", "SoundTrack", track.ID, "", "", "")
+	// 	logEntry.Created = track.Created
+	// 	logEntry.Save()
+	// }
 
-	for quote := range arn.StreamQuotes() {
-		if quote.Created > "2018-03-09" {
-			continue
-		}
+	// for quote := range arn.StreamQuotes() {
+	// 	if quote.Created > "2018-03-09" {
+	// 		continue
+	// 	}
 
-		fmt.Println(quote.Created, quote.Text.English)
-		logEntry := arn.NewEditLogEntry(quote.CreatedBy, "create", "Quote", quote.ID, "", "", "")
-		logEntry.Created = quote.Created
-		logEntry.Save()
-	}
+	// 	fmt.Println(quote.Created, quote.Text.English)
+	// 	logEntry := arn.NewEditLogEntry(quote.CreatedBy, "create", "Quote", quote.ID, "", "", "")
+	// 	logEntry.Created = quote.Created
+	// 	logEntry.Save()
+	// }
 }
