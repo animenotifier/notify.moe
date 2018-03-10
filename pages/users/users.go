@@ -73,6 +73,10 @@ func Editors(ctx *aero.Context) string {
 		score[entry.UserID] = current + entryScore
 	}
 
+	for ignore := range arn.StreamIgnoreAnimeDifferences() {
+		score[ignore.CreatedBy] += arn.IgnoreAnimeDifferenceEditorScore
+	}
+
 	sort.Slice(users, func(i, j int) bool {
 		scoreA := score[users[i].ID]
 		scoreB := score[users[j].ID]
