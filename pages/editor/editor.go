@@ -15,11 +15,15 @@ func Get(ctx *aero.Context) string {
 		return ctx.Redirect("/")
 	}
 
+	ignoreDifferences := arn.FilterIgnoreAnimeDifferences(func(entry *arn.IgnoreAnimeDifference) bool {
+		return entry.CreatedBy == user.ID
+	})
+
 	logEntries := arn.FilterEditLogEntries(func(entry *arn.EditLogEntry) bool {
 		return entry.UserID == user.ID
 	})
 
-	score := 0
+	score := len(ignoreDifferences)
 
 	for _, entry := range logEntries {
 		switch entry.Action {
@@ -28,6 +32,10 @@ func Get(ctx *aero.Context) string {
 
 		case "edit":
 			score += 2
+
+			if entry.ObjectType == "Anime" && (entry.Key == "Summary" || entry.Key == "Synopsis") {
+				score += 2
+			}
 
 		case "delete", "arrayRemove":
 			score++

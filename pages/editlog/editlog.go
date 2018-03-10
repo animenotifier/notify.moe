@@ -12,7 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxEntries = 40
+const maxEntries = 120
 
 // Get edit log.
 func Get(ctx *aero.Context) string {
