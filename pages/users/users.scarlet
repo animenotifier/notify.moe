@@ -6,6 +6,24 @@
 	.user-image
 		margin 0.4rem
 
+.pro-avatars
+	horizontal-wrap
+	justify-content center
+
+	.profile-image-container
+		width 140px
+		height 140px
+		max-width 140px
+		max-height 140px
+		margin 0.4rem
+		position relative
+		border ui-border
+		box-shadow shadow-light
+
+		:hover
+			.anime-grid-title
+				opacity 1
+
 .user
 	display flex
 

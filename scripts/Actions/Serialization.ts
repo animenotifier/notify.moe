@@ -10,6 +10,9 @@ export function save(arn: AnimeNotifier, input: HTMLElement) {
 		return
 	}
 
+	// Trim value
+	value = value.trim()
+
 	if((input as HTMLInputElement).type === "number" || input.dataset.type === "number") {
 		if(input.getAttribute("step") === "1" || input.dataset.step === "1") {
 			obj[input.dataset.field] = parseInt(value)

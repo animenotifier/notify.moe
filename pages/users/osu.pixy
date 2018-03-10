@@ -1,7 +1,6 @@
-component OsuRankingList(users []*arn.User)
+component OsuRankingList(users []*arn.User, url string)
 	h1.page-title osu! ranking list
-
-	UsersTabs
+	UsersTabs(url)
 
 	table.ranking-list
 		thead

@@ -1,17 +1,29 @@
-component Users(users []*arn.User)
+component Users(users []*arn.User, url string)
 	h1.page-title Users
-
-	UsersTabs
+	UsersTabs(url)
 
 	.user-avatars
 		each user in users
 			.mountable
 				Avatar(user)
 
-component UserLists(groups []*utils.UserList)
-	h1.page-title Users
+component ProUsers(users []*arn.User, url string)
+	h1.page-title Supporters
+	UsersTabs(url)
 
-	UsersTabs
+	.pro-avatars
+		each user in users
+			a.profile-image-container.mountable.ajax(href=user.Link())
+				ProfileImage(user)
+				.anime-grid-title
+					.anime-grid-title-text= user.Nick
+	
+	.footer.mountable
+		p We are thankful to everyone supporting the site!
+
+component UserLists(groups []*utils.UserList, url string)
+	h1.page-title Users
+	UsersTabs(url)
 
 	each group in groups
 		h3.user-list-name.mountable= group.Name
@@ -28,10 +40,15 @@ component StaffRecruitment
 			br
 			a(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener") Interested in editing data?
 
-component UsersTabs
+component UsersTabs(url string)
 	.tabs
 		Tab("Active", "users", "/users")
-		//- Tab("No Avatar", "users", "/users/noavatar")
-		Tab("Osu", "gamepad", "/users/osu")
-		Tab("Overwatch", "overwatch", "/users/overwatch")
+		Tab("Games", "gamepad", "/users/games/osu")
+		Tab("Editors", "pencil", "/users/editors")
+		Tab("Supporters", "heart", "/users/pro")
 		Tab("Staff", "user-secret", "/users/staff")
+	
+	if strings.Contains(url, "/users/games")
+		.tabs
+			Tab("Osu", "gamepad", "/users/games/osu")
+			Tab("Overwatch", "overwatch", "/users/games/overwatch")

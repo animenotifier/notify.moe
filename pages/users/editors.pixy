@@ -1,0 +1,21 @@
+component EditorRankingList(users []*arn.User, url string)
+	h1.page-title Editor ranking list
+	UsersTabs(url)
+
+	table.ranking-list
+		thead
+			tr.mountable
+				th #
+				th User
+				th.ranking-score Score
+		tbody
+			for index, user := range users
+				tr.ranking.mountable
+					td= toString(index + 1) + "."
+					td.ranking-user
+						Avatar(user)
+						a.ajax(href=user.Link())= user.Nick
+					td.ranking-score= user.EditorScore()
+	
+	.footer.mountable
+		p Score is generated from new data submissions and data fixes.

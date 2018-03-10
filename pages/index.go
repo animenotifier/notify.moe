@@ -88,9 +88,11 @@ func Configure(app *aero.Application) {
 	// User lists
 	l.Page("/users", users.Active)
 	l.Page("/users/noavatar", users.ActiveNoAvatar)
-	l.Page("/users/osu", users.Osu)
-	l.Page("/users/overwatch", users.Overwatch)
+	l.Page("/users/games/osu", users.Osu)
+	l.Page("/users/games/overwatch", users.Overwatch)
 	l.Page("/users/staff", users.Staff)
+	l.Page("/users/pro", users.Pro)
+	l.Page("/users/editors", users.Editors)
 
 	// Statistics
 	l.Page("/statistics", statistics.Get)

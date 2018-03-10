@@ -1,7 +1,6 @@
-component OverwatchRankingList(users []*arn.User)
+component OverwatchRankingList(users []*arn.User, url string)
 	h1.page-title Overwatch ranking list
-
-	UsersTabs
+	UsersTabs(url)
 
 	table.ranking-list
 		thead

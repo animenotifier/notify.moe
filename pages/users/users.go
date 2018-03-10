@@ -36,7 +36,55 @@ func Active(ctx *aero.Context) string {
 		return followersA > followersB
 	})
 
-	return ctx.HTML(components.Users(users))
+	return ctx.HTML(components.Users(users, ctx.URI()))
+}
+
+// Pro ...
+func Pro(ctx *aero.Context) string {
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.IsPro()
+	})
+
+	sort.Slice(users, func(i, j int) bool {
+		return users[i].Registered > users[j].Registered
+	})
+
+	return ctx.HTML(components.ProUsers(users, ctx.URI()))
+}
+
+// Editors ...
+func Editors(ctx *aero.Context) string {
+	score := map[string]int{}
+	users := []*arn.User{}
+
+	for entry := range arn.StreamEditLogEntries() {
+		entryScore := entry.EditorScore()
+
+		if entryScore == 0 {
+			continue
+		}
+
+		current, exists := score[entry.UserID]
+
+		if !exists {
+			users = append(users, entry.User())
+		}
+
+		score[entry.UserID] = current + entryScore
+	}
+
+	sort.Slice(users, func(i, j int) bool {
+		scoreA := score[users[i].ID]
+		scoreB := score[users[j].ID]
+
+		if scoreA == scoreB {
+			return users[i].Registered > users[j].Registered
+		}
+
+		return scoreA > scoreB
+	})
+
+	return ctx.HTML(components.EditorRankingList(users, ctx.URI()))
 }
 
 // ActiveNoAvatar ...
@@ -66,7 +114,7 @@ func ActiveNoAvatar(ctx *aero.Context) string {
 		return followersA > followersB
 	})
 
-	return ctx.HTML(components.Users(users))
+	return ctx.HTML(components.Users(users, ctx.URI()))
 }
 
 // Osu ...
@@ -84,7 +132,7 @@ func Osu(ctx *aero.Context) string {
 		users = users[:50]
 	}
 
-	return ctx.HTML(components.OsuRankingList(users))
+	return ctx.HTML(components.OsuRankingList(users, ctx.URI()))
 }
 
 // Overwatch ...
@@ -102,7 +150,7 @@ func Overwatch(ctx *aero.Context) string {
 		users = users[:50]
 	}
 
-	return ctx.HTML(components.OverwatchRankingList(users))
+	return ctx.HTML(components.OverwatchRankingList(users, ctx.URI()))
 }
 
 // Staff ...
@@ -156,5 +204,5 @@ func Staff(ctx *aero.Context) string {
 		editors,
 	}
 
-	return ctx.HTML(components.UserLists(userLists) + components.StaffRecruitment())
+	return ctx.HTML(components.UserLists(userLists, ctx.URI()) + components.StaffRecruitment())
 }
