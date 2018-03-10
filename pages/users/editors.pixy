@@ -1,4 +1,4 @@
-component EditorRankingList(users []*arn.User, url string)
+component EditorRankingList(users []*arn.User, idToScore map[string]int, url string)
 	h1.page-title Editor ranking list
 	UsersTabs(url)
 
@@ -15,7 +15,7 @@ component EditorRankingList(users []*arn.User, url string)
 					td.ranking-user
 						Avatar(user)
 						a.ajax(href=user.Link())= user.Nick
-					td.ranking-score= user.EditorScore()
+					td.ranking-score= idToScore[user.ID]
 	
 	.footer.mountable
 		p Score is generated from new data submissions and data fixes.

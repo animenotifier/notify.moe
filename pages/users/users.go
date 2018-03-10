@@ -84,7 +84,7 @@ func Editors(ctx *aero.Context) string {
 		return scoreA > scoreB
 	})
 
-	return ctx.HTML(components.EditorRankingList(users, ctx.URI()))
+	return ctx.HTML(components.EditorRankingList(users, score, ctx.URI()))
 }
 
 // ActiveNoAvatar ...
