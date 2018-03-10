@@ -11,11 +11,9 @@
 	justify-content center
 
 	.profile-image-container
-		width 140px
+		flex-basis 170px
 		height 140px
-		max-width 140px
-		max-height 140px
-		margin 0.4rem
+		margin calc(content-padding / 2)
 		position relative
 		border ui-border
 		box-shadow shadow-light
