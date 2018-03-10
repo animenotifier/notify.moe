@@ -1,6 +1,7 @@
-component CompareMAL(comparisons []*utils.MALComparison, url string, user *arn.User)
+component CompareMAL(comparisons []*utils.MALComparison, year string, status string, typ string, url string, user *arn.User)
 	EditorTabs(url)
 	h1.mountable MAL comparison
+	ExploreFilters(year, status, typ, "malDiffFilterAnime")
 
 	.data-comparisons
 		each comparison in comparisons

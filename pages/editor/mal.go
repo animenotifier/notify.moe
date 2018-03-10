@@ -2,6 +2,7 @@ package editor
 
 import (
 	"sort"
+	"strconv"
 
 	"github.com/animenotifier/notify.moe/utils/animediff"
 
@@ -18,9 +19,14 @@ const maxCompareMALEntries = 15
 func CompareMAL(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	year, _ := ctx.GetInt("year")
+	status := ctx.Get("status")
 	animeType := ctx.Get("type")
 
 	animes := arn.FilterAnime(func(anime *arn.Anime) bool {
+		if status != "" && anime.Status != status {
+			return false
+		}
+
 		if year != 0 && year != anime.StartDateTime().Year() {
 			return false
 		}
@@ -100,7 +106,7 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 
 		// Airing start date
-		if anime.StartDate != malAnime.StartDate {
+		if anime.StartDate != malAnime.StartDate && malAnime.StartDate != "" {
 			hash := utils.HashString(malAnime.StartDate)
 
 			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "StartDate", hash) {
@@ -192,5 +198,5 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 	}
 
-	return ctx.HTML(components.CompareMAL(comparisons, ctx.URI(), user))
+	return ctx.HTML(components.CompareMAL(comparisons, strconv.Itoa(year), status, animeType, ctx.URI(), user))
 }
