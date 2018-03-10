@@ -1,8 +1,12 @@
 .company-page
 	vertical
+	width 100%
+	max-width 1700px
+	margin 0 auto
 
 .company-header
 	vertical
+	flex 1
 
 .company-sidebar
 	sidebar
