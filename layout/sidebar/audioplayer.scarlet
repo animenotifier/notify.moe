@@ -152,5 +152,5 @@ mixin volume-slider-hover-thumb
 		::-webkit-slider-thumb
 			volume-slider-hover-thumb
 
-		::-moz-range-thumb
-			volume-slider-hover-thumb
+#audio-player-volume:hover ::-moz-range-thumb
+	volume-slider-thumb
