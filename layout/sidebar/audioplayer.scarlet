@@ -8,6 +8,7 @@
 #audio-player-track-title
 	color text-color
 	font-size 0.7rem
+	line-height 1.7em
 	opacity 0.8
 	text-align center
 	padding 0.8rem
