@@ -19,6 +19,7 @@
 	justify-content center
 	align-items center
 	font-size 1.5rem
+	color text-color
 	background rgba(0, 0, 0, 0.03)
 	border none
 	border-radius 50%

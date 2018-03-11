@@ -14,7 +14,7 @@ component Track(track *arn.SoundTrack, user *arn.User)
 					.sound-track-media.video-container
 						iframe.lazy.video(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
 					
-					if user != nil && media.Service == "Youtube" && (user.Role == "admin" || user.Role == "editor") && track.File != ""
+					if user != nil && media.Service == "Youtube" && track.File != ""
 						.buttons
 							button.action(data-action="playAudio", data-trigger="click", data-src="/audio/" + track.File)
 								Icon("play")

@@ -23,6 +23,9 @@ export function playAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 			audioNode.buffer = buffer
 			audioNode.connect(audioContext.destination)
 			audioNode.start(0)
+			audioNode.onended = () => {
+				document.getElementById("audio-player").classList.add("fade-out")
+			}
 		}, console.error)
 	}
 	request.send()
