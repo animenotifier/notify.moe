@@ -3,7 +3,7 @@ import { AnimeNotifier } from "../AnimeNotifier"
 var audioContext: AudioContext
 var audioNode: AudioBufferSourceNode
 var gainNode: GainNode
-var volume = 1.0
+var volume = 0.5
 var playId = 0
 var audioPlayer = document.getElementById("audio-player")
 var audioPlayerPlay = document.getElementById("audio-player-play")

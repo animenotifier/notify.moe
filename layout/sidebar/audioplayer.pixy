@@ -7,4 +7,4 @@ component AudioPlayer
 			button#audio-player-pause.fade-out.action(data-action="pauseAudio", data-trigger="click")
 				RawIcon("pause")
 		
-		input#audio-player-volume.action(data-action="setVolume", data-trigger="input", type="range", min="0", max="100", value="100")
+		input#audio-player-volume.action(data-action="setVolume", data-trigger="input", type="range", min="0", max="100", value="50")

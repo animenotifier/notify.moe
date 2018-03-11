@@ -5,6 +5,7 @@
 	justify-content center
 	align-items center
 	margin 0.8rem 0
+	min-height 90px
 
 .audio-player-play-pause-container
 	position relative
