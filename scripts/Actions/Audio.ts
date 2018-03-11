@@ -24,7 +24,7 @@ export function playAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 	// Request
 	let request = new XMLHttpRequest()
-	request.open("GET", button.dataset.src, true)
+	request.open("GET", button.dataset.audioSrc, true)
 	request.responseType = "arraybuffer"
 
 	request.onload = () => {

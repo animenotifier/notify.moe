@@ -12,7 +12,10 @@ component SoundTrackContent(track *arn.SoundTrack, media *arn.ExternalMedia)
 			a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
 				img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image("medium"), data-webp="true", alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 
-		ExternalMedia(media)
+		if track.File != "" && media.Service == "Youtube"
+			img.soundtrack-image.action.lazy(data-action="playAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-src="https://img.youtube.com/vi/" + media.ServiceID + "/maxresdefault.jpg", alt=track.Title)
+		else
+			ExternalMedia(media)
 
 component SoundTrackFooter(track *arn.SoundTrack)
 	.sound-track-footer
