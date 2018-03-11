@@ -90,7 +90,7 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 				let anime = await animeResponse.json()
 				animeLink.title = anime.title.canonical
 				animeLink.href = "/anime/" + anime.id
-				animeImage.dataset.src = "//media.notify.moe/images/anime/small/" + anime.id + anime.imageExtension
+				animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + anime.imageExtension
 				animeImage.classList.remove("hidden")
 				animeImage["became visible"]()
 			}
