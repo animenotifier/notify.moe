@@ -118,6 +118,11 @@ mixin volume-slider-thumb
 	box-shadow shadow-medium
 	default-transition
 
+mixin volume-slider-hover-thumb
+	background link-hover-color
+	opacity 1
+	transform scale(1)
+
 #audio-player-volume
 	appearance none
 	-webkit-appearance none
@@ -145,6 +150,7 @@ mixin volume-slider-thumb
 		background rgba(0, 0, 0, 0.06)
 
 		::-webkit-slider-thumb
-			background link-hover-color
-			opacity 1
-			transform scale(1)
+			volume-slider-hover-thumb
+
+		::-moz-range-thumb
+			volume-slider-hover-thumb
