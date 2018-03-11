@@ -13,6 +13,12 @@ component Track(track *arn.SoundTrack, user *arn.User)
 					h3.widget-title= media.Service
 					.sound-track-media.video-container
 						iframe.lazy.video(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
+					
+					if user != nil && media.Service == "Youtube" && (user.Role == "admin" || user.Role == "editor") && track.File != ""
+						.buttons
+							button.action(data-action="playAudio", data-trigger="click", data-src="/audio/" + track.File)
+								Icon("play")
+								span Play in background
 
 			.widget.mountable
 				h3.widget-title Anime

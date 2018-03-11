@@ -1,3 +1,4 @@
+export * from "./Actions/Audio"
 export * from "./Actions/AnimeList"
 export * from "./Actions/Diff"
 export * from "./Actions/Editor"
