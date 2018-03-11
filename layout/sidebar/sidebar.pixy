@@ -51,6 +51,15 @@ component Sidebar(user *arn.User)
 		//- SidebarButton("Genres", "/genres", "clone")
 
 		.spacer
+
+		
+		#audio-player.fade-out
+			.audio-player-play-pause-container
+				button#audio-player-play.action(data-action="resumeAudio", data-trigger="click")
+					RawIcon("play")
+				
+				button#audio-player-pause.fade-out.action(data-action="pauseAudio", data-trigger="click")
+					RawIcon("pause")
 		
 		.sidebar-link(aria-label="Search")
 			.sidebar-button

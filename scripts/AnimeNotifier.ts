@@ -32,7 +32,6 @@ export class AnimeNotifier {
 	mainPageLoaded: boolean
 	isLoading: boolean
 	lastReloadContentPath: string
-	audio: HTMLAudioElement
 
 	elementFound: MutationQueue
 	elementNotFound: MutationQueue

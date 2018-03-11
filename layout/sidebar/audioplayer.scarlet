@@ -1,0 +1,36 @@
+#audio-player
+	horizontal
+	default-transition
+	justify-content center
+	align-items center
+	margin 0.8rem 0
+
+.audio-player-play-pause-container
+	position relative
+	width 48px
+	height 48px
+
+#audio-player-play,
+#audio-player-pause
+	position absolute
+	left 0
+	top 0
+	display flex
+	justify-content center
+	align-items center
+	font-size 1.5rem
+	background rgba(0, 0, 0, 0.03)
+	border none
+	border-radius 50%
+	width 100%
+	height 100%
+
+	:hover
+		color button-hover-color
+		background button-hover-background
+
+	&.fade-out
+		pointer-events none
+
+	.icon-play
+		transform translateX(3px)
