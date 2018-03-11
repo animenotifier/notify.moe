@@ -14,7 +14,7 @@ component SoundTracks(tracks []*arn.SoundTrack, loadMoreIndex int, user *arn.Use
 					Icon("pencil")
 					span Edit draft
 
-	#load-more-target.sound-tracks
+	#load-more-target.soundtracks
 		SoundTracksScrollable(tracks, user)
 	
 	if loadMoreIndex != 0

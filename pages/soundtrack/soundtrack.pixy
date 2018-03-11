@@ -1,17 +1,17 @@
 component Track(track *arn.SoundTrack, user *arn.User)
 	SoundTrackTabs(track, user)
 
-	.sound-track-full-page
+	.soundtrack-full-page
 		if track.Title == ""
 			h1.mountable untitled
 		else
 			h1.mountable= track.Title
 
-		.widget-form.sound-track-media-list
+		.widget-form.soundtrack-media-list
 			each media in track.Media
 				.widget.mountable
 					h3.widget-title= media.Service
-					.sound-track-media.video-container
+					.soundtrack-media.video-container
 						iframe.lazy.video(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
 					
 					if user != nil && media.Service == "Youtube" && track.File != ""
@@ -23,10 +23,10 @@ component Track(track *arn.SoundTrack, user *arn.User)
 			.widget.mountable
 				h3.widget-title Anime
 
-				.sound-track-anime-list
+				.soundtrack-anime-list
 					each anime in track.Anime()
-						a.sound-track-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-							img.sound-track-anime-list-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
+						a.soundtrack-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+							img.soundtrack-anime-list-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
 
 			if len(track.Beatmaps()) > 0
 				.widget.mountable

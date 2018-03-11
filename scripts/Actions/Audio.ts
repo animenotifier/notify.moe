@@ -8,23 +8,22 @@ var audioPlayerPlay = document.getElementById("audio-player-play")
 var audioPlayerPause = document.getElementById("audio-player-pause")
 
 // Play audio file
-export function playAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
+export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 	if(!audioContext) {
 		audioContext = new AudioContext()
 	}
 
 	playID++
 
-	// Stop existing audioNode
-	if(audioNode) {
-		audioNode.stop()
-		audioNode.disconnect()
-		audioNode = null
-	}
+	// Stop current track
+	stopAudio(arn)
+
+	arn.currentSoundTrackId = element.dataset.soundtrackId
+	element.classList.add("playing")
 
 	// Request
 	let request = new XMLHttpRequest()
-	request.open("GET", button.dataset.audioSrc, true)
+	request.open("GET", element.dataset.audioSrc, true)
 	request.responseType = "arraybuffer"
 
 	request.onload = () => {
@@ -38,8 +37,7 @@ export function playAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 			audioNode.onended = (event: MediaStreamErrorEvent) => {
 				if(currentPlayCount === playID) {
-					audioPlayer.classList.add("fade-out")
-					audioNode.disconnect()
+					stopAudio(arn)
 				}
 			}
 		}, console.error)
@@ -51,6 +49,38 @@ export function playAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 	audioPlayer.classList.remove("fade-out")
 	audioPlayerPlay.classList.add("fade-out")
 	audioPlayerPause.classList.remove("fade-out")
+}
+
+// Stop audio
+export function stopAudio(arn: AnimeNotifier) {
+	if(!audioNode) {
+		return
+	}
+
+	audioNode.stop()
+	audioNode.disconnect()
+	audioNode = null
+
+	arn.currentSoundTrackId = undefined
+
+	// Remove CSS class "playing"
+	let playingElements = document.getElementsByClassName("playing")
+
+	for(let playing of playingElements) {
+		playing.classList.remove("playing")
+	}
+
+	// Fade out sidebar player
+	audioPlayer.classList.add("fade-out")
+}
+
+// Toggle audio
+export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
+	if(!arn.currentSoundTrackId) {
+		playAudio(arn, element)
+	} else {
+		stopAudio(arn)
+	}
 }
 
 // Pause audio

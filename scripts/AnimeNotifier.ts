@@ -32,6 +32,7 @@ export class AnimeNotifier {
 	mainPageLoaded: boolean
 	isLoading: boolean
 	lastReloadContentPath: string
+	currentSoundTrackId: string
 
 	elementFound: MutationQueue
 	elementNotFound: MutationQueue
@@ -158,6 +159,7 @@ export class AnimeNotifier {
 			Promise.resolve().then(() => this.lazyLoad()),
 			Promise.resolve().then(() => this.displayLocalDates()),
 			Promise.resolve().then(() => this.setSelectBoxValue()),
+			Promise.resolve().then(() => this.markPlayingSoundTrack()),
 			Promise.resolve().then(() => this.assignActions()),
 			Promise.resolve().then(() => this.updatePushUI()),
 			Promise.resolve().then(() => this.dragAndDrop()),
@@ -354,6 +356,14 @@ export class AnimeNotifier {
 			}
 
 			window.requestAnimationFrame(callback)
+		}
+	}
+
+	markPlayingSoundTrack() {
+		for(let element of findAll("soundtrack-play-area")) {
+			if(element.dataset.soundtrackId === this.currentSoundTrackId) {
+				element.classList.add("playing")
+			}
 		}
 	}
 

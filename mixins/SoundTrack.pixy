@@ -2,23 +2,33 @@ component SoundTrack(track *arn.SoundTrack)
 	SoundTrackMedia(track, track.Media[0])
 
 component SoundTrackMedia(track *arn.SoundTrack, media *arn.ExternalMedia)
-	.sound-track.mountable(id=track.ID)
+	.soundtrack.mountable(id=track.ID)
 		SoundTrackContent(track, media)
 		SoundTrackFooter(track)
 
 component SoundTrackContent(track *arn.SoundTrack, media *arn.ExternalMedia)
-	.sound-track-content
+	.soundtrack-content
 		if track.MainAnime() != nil
-			a.sound-track-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
-				img.sound-track-anime-image.lazy(data-src=track.MainAnime().Image("medium"), data-webp="true", alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
+			a.soundtrack-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
+				img.soundtrack-anime-image.lazy(data-src=track.MainAnime().Image("medium"), data-webp="true", alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 
 		if track.File != "" && media.Service == "Youtube"
-			img.soundtrack-image.action.lazy(data-action="playAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-src="https://img.youtube.com/vi/" + media.ServiceID + "/maxresdefault.jpg", alt=track.Title)
+			.soundtrack-media
+				.soundtrack-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-soundtrack-id=track.ID)
+					img.soundtrack-image.lazy(data-src="https://img.youtube.com/vi/" + media.ServiceID + "/maxresdefault.jpg", alt=track.Title)
+					button.soundtrack-play-button
+						RawIcon("play")
+					
+					.soundtrack-visualizer
+						.visualizer-box.visualizer-box-1
+						.visualizer-box.visualizer-box-2
+						.visualizer-box.visualizer-box-3
+
 		else
 			ExternalMedia(media)
 
 component SoundTrackFooter(track *arn.SoundTrack)
-	.sound-track-footer
+	.soundtrack-footer
 		if track.Title == ""
 			a.ajax(href=track.Link() + "/edit") untitled
 		else

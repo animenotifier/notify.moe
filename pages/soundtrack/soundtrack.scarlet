@@ -1,15 +1,18 @@
-.sound-track-media-list
+.soundtrack-media-list
 	vertical
 
-.sound-track-media
+.soundtrack-media
+	width 100%
+	position relative
+
 	iframe
 		width 100%
 
-.sound-track-anime-list
+.soundtrack-anime-list
 	horizontal-wrap
 
-.sound-track-anime-list-item
+.soundtrack-anime-list-item
 	anime-mini-item
 
-.sound-track-anime-list-item-image
+.soundtrack-anime-list-item-image
 	anime-mini-item-image

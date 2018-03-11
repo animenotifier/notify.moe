@@ -6,7 +6,7 @@ component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, user *arn.User
 	if len(tracks) == 0
 		p.no-data.mountable= viewUser.Nick + " hasn't added any tracks yet."
 	else
-		.sound-tracks
+		.soundtracks
 			each track in tracks
 				SoundTrack(track)
 	
