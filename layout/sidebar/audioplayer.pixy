@@ -1,5 +1,6 @@
 component AudioPlayer
 	#audio-player
+		a#audio-player-track-title.ajax(href="")
 		#audio-player-controls
 			button#audio-player-prev.audio-player-side-button.action(data-action="playPreviousTrack", data-trigger="click")
 				RawIcon("step-backward")

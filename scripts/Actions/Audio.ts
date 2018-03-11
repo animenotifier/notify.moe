@@ -8,6 +8,7 @@ var playId = 0
 var audioPlayer = document.getElementById("audio-player")
 var audioPlayerPlay = document.getElementById("audio-player-play")
 var audioPlayerPause = document.getElementById("audio-player-pause")
+var trackLink = document.getElementById("audio-player-track-title") as HTMLLinkElement
 
 // Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
@@ -44,7 +45,7 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 			return
 		}
 
-		audioContext.decodeAudioData(request.response, buffer => {
+		audioContext.decodeAudioData(request.response, async buffer => {
 			if(currentPlayId !== playId) {
 				return
 			}
@@ -63,6 +64,12 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 				playNextTrack(arn)
 				// stopAudio(arn)
 			}
+
+			// Set track title
+			let trackInfoResponse = await fetch("/api/soundtrack/" + trackId)
+			let track = await trackInfoResponse.json()
+			trackLink.href = "/soundtrack/" + track.id
+			trackLink.innerText = track.title
 		}, console.error)
 	}
 
@@ -91,6 +98,10 @@ export function stopAudio(arn: AnimeNotifier) {
 
 	// Fade out sidebar player
 	audioPlayer.classList.add("fade-out")
+
+	// Remove title
+	trackLink.href = ""
+	trackLink.innerText = ""
 
 	if(gainNode) {
 		gainNode.disconnect()
