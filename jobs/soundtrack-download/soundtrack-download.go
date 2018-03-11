@@ -15,6 +15,10 @@ func main() {
 	defer arn.Node.Close()
 
 	for track := range arn.StreamSoundTracks() {
+		if track.IsDraft {
+			continue
+		}
+
 		fmt.Println(track.Title)
 
 		err := track.Download()
