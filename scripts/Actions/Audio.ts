@@ -76,10 +76,12 @@ export function stopAudio(arn: AnimeNotifier) {
 
 // Toggle audio
 export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
-	if(!arn.currentSoundTrackId) {
-		playAudio(arn, element)
-	} else {
+	// If we're clicking on the same track again, stop playing.
+	// Otherwise, start the track we clicked on.
+	if(arn.currentSoundTrackId && element.dataset.soundtrackId === arn.currentSoundTrackId) {
 		stopAudio(arn)
+	} else {
+		playAudio(arn, element)
 	}
 }
 

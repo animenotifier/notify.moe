@@ -23,7 +23,6 @@ component SoundTrackContent(track *arn.SoundTrack, media *arn.ExternalMedia)
 						.visualizer-box.visualizer-box-1
 						.visualizer-box.visualizer-box-2
 						.visualizer-box.visualizer-box-3
-
 		else
 			ExternalMedia(media)
 
