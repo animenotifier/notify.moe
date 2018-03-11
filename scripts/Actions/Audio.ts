@@ -4,11 +4,15 @@ var audioContext: AudioContext
 var audioNode: AudioBufferSourceNode
 var gainNode: GainNode
 var volume = 0.5
+var volumeTimeConstant = 0.01
+var volumeSmoothingDelay = 0.05
 var playId = 0
 var audioPlayer = document.getElementById("audio-player")
 var audioPlayerPlay = document.getElementById("audio-player-play")
 var audioPlayerPause = document.getElementById("audio-player-pause")
 var trackLink = document.getElementById("audio-player-track-title") as HTMLLinkElement
+var animeLink = document.getElementById("audio-player-anime-link") as HTMLLinkElement
+var animeImage = document.getElementById("audio-player-anime-image") as HTMLImageElement
 
 // Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
@@ -20,7 +24,7 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 	if(!audioContext) {
 		audioContext = new AudioContext()
 		gainNode = audioContext.createGain()
-		gainNode.gain.value = volume
+		gainNode.gain.setTargetAtTime(volume, audioContext.currentTime + volumeSmoothingDelay, volumeTimeConstant)
 	}
 
 	playId++
@@ -70,6 +74,26 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 			let track = await trackInfoResponse.json()
 			trackLink.href = "/soundtrack/" + track.id
 			trackLink.innerText = track.title
+
+			let animeId = ""
+
+			for(let tag of (track.tags as string[])) {
+				if(tag.startsWith("anime:")) {
+					animeId = tag.split(":")[1]
+					break
+				}
+			}
+
+			// Set anime info
+			if(animeId !== "") {
+				let animeResponse = await fetch("/api/anime/" + animeId)
+				let anime = await animeResponse.json()
+				animeLink.title = anime.title.canonical
+				animeLink.href = "/anime/" + anime.id
+				animeImage.dataset.src = "//media.notify.moe/images/anime/small/" + anime.id + anime.imageExtension
+				animeImage.classList.remove("hidden")
+				animeImage["became visible"]()
+			}
 		}, console.error)
 	}
 
@@ -102,6 +126,10 @@ export function stopAudio(arn: AnimeNotifier) {
 	// Remove title
 	trackLink.href = ""
 	trackLink.innerText = ""
+
+	// Hide anime info
+	animeLink.href = ""
+	animeImage.classList.add("hidden")
 
 	if(gainNode) {
 		gainNode.disconnect()
@@ -147,7 +175,7 @@ export function setVolume(arn: AnimeNotifier, element: HTMLInputElement) {
 	volume = parseFloat(element.value) / 100.0
 
 	if(gainNode) {
-		gainNode.gain.value = volume
+		gainNode.gain.setTargetAtTime(volume, audioContext.currentTime + volumeSmoothingDelay, volumeTimeConstant)
 	}
 }
 
