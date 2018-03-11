@@ -15,7 +15,7 @@ func main() {
 	defer arn.Node.Close()
 
 	for track := range arn.StreamSoundTracks() {
-		fmt.Println(track.ID, track.Title)
+		fmt.Println(track.Title)
 
 		err := track.Download()
 
@@ -23,8 +23,6 @@ func main() {
 			color.Red(err.Error())
 			continue
 		}
-
-		fmt.Println(track.File)
 
 		// Save the file information
 		track.Save()

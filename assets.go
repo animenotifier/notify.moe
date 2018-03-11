@@ -61,6 +61,12 @@ func configureAssets(app *aero.Application) {
 		return ctx.File("videos" + ctx.Get("file"))
 	})
 
+	// Audio
+	app.Get("/audio/*file", func(ctx *aero.Context) string {
+		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
+		return ctx.File("audio" + ctx.Get("file"))
+	})
+
 	// Anime sitemap
 	app.Get("/sitemap/anime.txt", func(ctx *aero.Context) string {
 		sitemap := sitemap.New()
