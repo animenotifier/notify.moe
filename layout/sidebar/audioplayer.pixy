@@ -1,6 +1,6 @@
 component AudioPlayer
 	#audio-player
-		#audio-player-anime-info
+		#audio-player-anime-info.hidden
 			a#audio-player-anime-link.ajax(href="", title="")
 				img#audio-player-anime-image.lazy.hidden(data-src="", data-webp="true", alt="Anime cover")
 		

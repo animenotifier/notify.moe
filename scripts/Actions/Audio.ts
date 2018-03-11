@@ -11,6 +11,7 @@ var audioPlayer = document.getElementById("audio-player")
 var audioPlayerPlay = document.getElementById("audio-player-play")
 var audioPlayerPause = document.getElementById("audio-player-pause")
 var trackLink = document.getElementById("audio-player-track-title") as HTMLLinkElement
+var animeInfo = document.getElementById("audio-player-anime-info") as HTMLElement
 var animeLink = document.getElementById("audio-player-anime-link") as HTMLLinkElement
 var animeImage = document.getElementById("audio-player-anime-image") as HTMLImageElement
 
@@ -86,6 +87,7 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 
 			// Set anime info
 			if(animeId !== "") {
+				animeInfo.classList.remove("hidden")
 				let animeResponse = await fetch("/api/anime/" + animeId)
 				let anime = await animeResponse.json()
 				animeLink.title = anime.title.canonical
@@ -129,6 +131,7 @@ export function stopAudio(arn: AnimeNotifier) {
 
 	// Hide anime info
 	animeLink.href = ""
+	animeInfo.classList.add("hidden")
 	animeImage.classList.add("hidden")
 
 	if(gainNode) {
