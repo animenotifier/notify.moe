@@ -2,7 +2,7 @@ import { AnimeNotifier } from "../AnimeNotifier"
 
 var audioContext: AudioContext
 var audioNode: AudioBufferSourceNode
-var playID = 0
+var playId = 0
 var audioPlayer = document.getElementById("audio-player")
 var audioPlayerPlay = document.getElementById("audio-player-play")
 var audioPlayerPause = document.getElementById("audio-player-pause")
@@ -13,7 +13,8 @@ export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 		audioContext = new AudioContext()
 	}
 
-	playID++
+	playId++
+	let currentPlayId = playId
 
 	// Stop current track
 	stopAudio(arn)
@@ -27,18 +28,26 @@ export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 	request.responseType = "arraybuffer"
 
 	request.onload = () => {
+		if(currentPlayId !== playId) {
+			return
+		}
+
 		audioContext.decodeAudioData(request.response, buffer => {
+			if(currentPlayId !== playId) {
+				return
+			}
+
 			audioNode = audioContext.createBufferSource()
 			audioNode.buffer = buffer
 			audioNode.connect(audioContext.destination)
 			audioNode.start(0)
 
-			let currentPlayCount = playID
-
 			audioNode.onended = (event: MediaStreamErrorEvent) => {
-				if(currentPlayCount === playID) {
-					stopAudio(arn)
+				if(currentPlayId !== playId) {
+					return
 				}
+
+				stopAudio(arn)
 			}
 		}, console.error)
 	}
@@ -53,14 +62,6 @@ export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 
 // Stop audio
 export function stopAudio(arn: AnimeNotifier) {
-	if(!audioNode) {
-		return
-	}
-
-	audioNode.stop()
-	audioNode.disconnect()
-	audioNode = null
-
 	arn.currentSoundTrackId = undefined
 
 	// Remove CSS class "playing"
@@ -72,6 +73,14 @@ export function stopAudio(arn: AnimeNotifier) {
 
 	// Fade out sidebar player
 	audioPlayer.classList.add("fade-out")
+
+	if(!audioNode) {
+		return
+	}
+
+	audioNode.stop()
+	audioNode.disconnect()
+	audioNode = null
 }
 
 // Toggle audio
@@ -83,6 +92,11 @@ export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
 	} else {
 		playAudio(arn, element)
 	}
+}
+
+// Set volume
+export function setVolume(arn: AnimeNotifier, element: HTMLElement) {
+
 }
 
 // Pause audio
