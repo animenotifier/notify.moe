@@ -1,30 +1,30 @@
 component SoundTrack(track *arn.SoundTrack)
-	SoundTrackMedia(track, track.Media[0])
-
-component SoundTrackMedia(track *arn.SoundTrack, media *arn.ExternalMedia)
 	.soundtrack.mountable(id=track.ID)
-		SoundTrackContent(track, media)
+		SoundTrackContent(track)
 		SoundTrackFooter(track)
 
-component SoundTrackContent(track *arn.SoundTrack, media *arn.ExternalMedia)
+component SoundTrackContent(track *arn.SoundTrack)
 	.soundtrack-content
 		if track.MainAnime() != nil
 			a.soundtrack-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
 				img.soundtrack-anime-image.lazy(data-src=track.MainAnime().Image("medium"), data-webp="true", alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 
-		if track.File != "" && media.Service == "Youtube"
-			.soundtrack-media
-				.soundtrack-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-soundtrack-id=track.ID)
-					img.soundtrack-image.lazy(data-src="https://img.youtube.com/vi/" + media.ServiceID + "/maxresdefault.jpg", alt=track.Title)
-					button.soundtrack-play-button
-						RawIcon("play")
-					
-					.soundtrack-visualizer
-						.visualizer-box.visualizer-box-1
-						.visualizer-box.visualizer-box-2
-						.visualizer-box.visualizer-box-3
-		else
-			ExternalMedia(media)
+		SoundTrackMedia(track)
+
+component SoundTrackMedia(track *arn.SoundTrack)
+	if track.File != ""
+		.soundtrack-media
+			.soundtrack-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-soundtrack-id=track.ID)
+				img.soundtrack-image.lazy(data-src="https://img.youtube.com/vi/" + track.MediaByService("Youtube")[0].ServiceID + "/maxresdefault.jpg", alt=track.Title)
+				button.soundtrack-play-button
+					RawIcon("play")
+				
+				.soundtrack-visualizer
+					.visualizer-box.visualizer-box-1
+					.visualizer-box.visualizer-box-2
+					.visualizer-box.visualizer-box-3
+	else
+		ExternalMedia(track.Media[0])
 
 component SoundTrackFooter(track *arn.SoundTrack)
 	.soundtrack-footer

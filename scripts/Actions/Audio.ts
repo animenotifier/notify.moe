@@ -9,8 +9,13 @@ var audioPlayer = document.getElementById("audio-player")
 var audioPlayerPlay = document.getElementById("audio-player-play")
 var audioPlayerPause = document.getElementById("audio-player-pause")
 
-// Play audio file
+// Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
+	playAudioFile(arn, element.dataset.soundtrackId, element.dataset.audioSrc)
+}
+
+// Play audio file
+function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 	if(!audioContext) {
 		audioContext = new AudioContext()
 		gainNode = audioContext.createGain()
@@ -23,12 +28,12 @@ export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 	// Stop current track
 	stopAudio(arn)
 
-	arn.currentSoundTrackId = element.dataset.soundtrackId
-	element.classList.add("playing")
+	arn.currentSoundTrackId = trackId
+	arn.markPlayingSoundTrack()
 
 	// Request
 	let request = new XMLHttpRequest()
-	request.open("GET", element.dataset.audioSrc, true)
+	request.open("GET", trackUrl, true)
 	request.responseType = "arraybuffer"
 
 	request.onload = () => {
@@ -52,7 +57,8 @@ export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 					return
 				}
 
-				stopAudio(arn)
+				playNextTrack(arn)
+				// stopAudio(arn)
 			}
 		}, console.error)
 	}
@@ -101,6 +107,17 @@ export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
 	}
 }
 
+// Play next track
+export async function playNextTrack(arn: AnimeNotifier) {
+	// Get random track
+	let response = await fetch("/api/next/soundtrack")
+	let track = await response.json()
+
+	playAudioFile(arn, track.id, "https://notify.moe/audio/" + track.file)
+
+	return track
+}
+
 // Set volume
 export function setVolume(arn: AnimeNotifier, element: HTMLInputElement) {
 	volume = parseFloat(element.value) / 100.0
@@ -123,8 +140,10 @@ export function pauseAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 }
 
 // Resume audio
-export function resumeAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
+export async function resumeAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 	if(!audioNode) {
+		let track = await playNextTrack(arn)
+		arn.statusMessage.showInfo("Now playing: " + track.title)
 		return
 	}
 

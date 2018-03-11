@@ -246,6 +246,8 @@ func Configure(app *aero.Application) {
 	app.Get("/api/test/notification", notifications.Test)
 	app.Get("/api/count/notifications/unseen", notifications.CountUnseen)
 	app.Get("/api/mark/notifications/seen", notifications.MarkNotificationsAsSeen)
+	app.Get("/api/random/soundtrack", soundtrack.Random)
+	app.Get("/api/next/soundtrack", soundtrack.Next)
 
 	// Legal stuff
 	l.Page("/terms", terms.Get)

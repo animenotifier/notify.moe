@@ -1,5 +1,5 @@
 component AudioPlayer
-	#audio-player.fade-out
+	#audio-player
 		.audio-player-play-pause-container
 			button#audio-player-play.action(data-action="resumeAudio", data-trigger="click")
 				RawIcon("play")
