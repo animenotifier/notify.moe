@@ -52,14 +52,7 @@ component Sidebar(user *arn.User)
 
 		.spacer
 
-		
-		#audio-player.fade-out
-			.audio-player-play-pause-container
-				button#audio-player-play.action(data-action="resumeAudio", data-trigger="click")
-					RawIcon("play")
-				
-				button#audio-player-pause.fade-out.action(data-action="pauseAudio", data-trigger="click")
-					RawIcon("pause")
+		AudioPlayer
 		
 		.sidebar-link(aria-label="Search")
 			.sidebar-button

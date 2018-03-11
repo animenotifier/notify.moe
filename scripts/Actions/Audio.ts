@@ -2,6 +2,8 @@ import { AnimeNotifier } from "../AnimeNotifier"
 
 var audioContext: AudioContext
 var audioNode: AudioBufferSourceNode
+var gainNode: GainNode
+var volume = 1.0
 var playId = 0
 var audioPlayer = document.getElementById("audio-player")
 var audioPlayerPlay = document.getElementById("audio-player-play")
@@ -11,6 +13,8 @@ var audioPlayerPause = document.getElementById("audio-player-pause")
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 	if(!audioContext) {
 		audioContext = new AudioContext()
+		gainNode = audioContext.createGain()
+		gainNode.gain.value = volume
 	}
 
 	playId++
@@ -39,7 +43,8 @@ export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 
 			audioNode = audioContext.createBufferSource()
 			audioNode.buffer = buffer
-			audioNode.connect(audioContext.destination)
+			audioNode.connect(gainNode)
+			gainNode.connect(audioContext.destination)
 			audioNode.start(0)
 
 			audioNode.onended = (event: MediaStreamErrorEvent) => {
@@ -74,13 +79,15 @@ export function stopAudio(arn: AnimeNotifier) {
 	// Fade out sidebar player
 	audioPlayer.classList.add("fade-out")
 
-	if(!audioNode) {
-		return
+	if(gainNode) {
+		gainNode.disconnect()
 	}
 
-	audioNode.stop()
-	audioNode.disconnect()
-	audioNode = null
+	if(audioNode) {
+		audioNode.stop()
+		audioNode.disconnect()
+		audioNode = null
+	}
 }
 
 // Toggle audio
@@ -95,8 +102,12 @@ export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
 }
 
 // Set volume
-export function setVolume(arn: AnimeNotifier, element: HTMLElement) {
+export function setVolume(arn: AnimeNotifier, element: HTMLInputElement) {
+	volume = parseFloat(element.value) / 100.0
 
+	if(gainNode) {
+		gainNode.gain.value = volume
+	}
 }
 
 // Pause audio

@@ -16,7 +16,7 @@ component Track(track *arn.SoundTrack, user *arn.User)
 					
 					if user != nil && media.Service == "Youtube" && track.File != ""
 						.buttons
-							button.action(data-action="playAudio", data-trigger="click", data-audio-src="/audio/" + track.File)
+							button.action(data-action="playAudio", data-trigger="click", data-audio-src="/audio/" + track.File, data-soundtrack-id=track.ID)
 								Icon("play")
 								span Play in background
 
