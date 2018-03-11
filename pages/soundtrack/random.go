@@ -9,7 +9,10 @@ import (
 
 // Random returns a random soundtrack.
 func Random(ctx *aero.Context) string {
-	tracks := arn.AllSoundTracks()
+	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+		return !track.IsDraft
+	})
+
 	index := rand.Intn(len(tracks))
 	track := tracks[index]
 
@@ -19,7 +22,7 @@ func Random(ctx *aero.Context) string {
 // Next returns the next soundtrack for the audio player.
 func Next(ctx *aero.Context) string {
 	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return track.File != ""
+		return !track.IsDraft && track.File != ""
 	})
 
 	index := rand.Intn(len(tracks))
