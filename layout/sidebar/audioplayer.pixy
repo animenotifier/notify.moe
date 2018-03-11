@@ -1,7 +1,7 @@
 component AudioPlayer
 	#audio-player
 		#audio-player-controls
-			button#audio-player-prev.audio-player-side-button
+			button#audio-player-prev.audio-player-side-button.action(data-action="playPreviousTrack", data-trigger="click")
 				RawIcon("step-backward")
 
 			.audio-player-play-pause-container
@@ -11,7 +11,7 @@ component AudioPlayer
 				button#audio-player-pause.fade-out.action(data-action="pauseAudio", data-trigger="click")
 					RawIcon("pause")
 
-			button#audio-player-next.audio-player-side-button
+			button#audio-player-next.audio-player-side-button.action(data-action="playNextTrack", data-trigger="click")
 				RawIcon("step-forward")
 		
 		input#audio-player-volume.action(data-action="setVolume", data-trigger="input", type="range", min="0", max="100", value="50")

@@ -30,6 +30,7 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 
 	arn.currentSoundTrackId = trackId
 	arn.markPlayingSoundTrack()
+	arn.loading(true)
 
 	// Request
 	let request = new XMLHttpRequest()
@@ -37,6 +38,8 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 	request.responseType = "arraybuffer"
 
 	request.onload = () => {
+		arn.loading(false)
+
 		if(currentPlayId !== playId) {
 			return
 		}
@@ -61,6 +64,10 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 				// stopAudio(arn)
 			}
 		}, console.error)
+	}
+
+	request.onerror = () => {
+		arn.loading(false)
 	}
 
 	request.send()
@@ -107,6 +114,11 @@ export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
 	}
 }
 
+// Play previous track
+export async function playPreviousTrack(arn: AnimeNotifier) {
+	alert("Previous track is currently work in progress! Check back later :)")
+}
+
 // Play next track
 export async function playNextTrack(arn: AnimeNotifier) {
 	// Get random track
@@ -114,6 +126,7 @@ export async function playNextTrack(arn: AnimeNotifier) {
 	let track = await response.json()
 
 	playAudioFile(arn, track.id, "https://notify.moe/audio/" + track.file)
+	arn.statusMessage.showInfo("Now playing: " + track.title)
 
 	return track
 }
@@ -140,10 +153,9 @@ export function pauseAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 }
 
 // Resume audio
-export async function resumeAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
+export function resumeAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 	if(!audioNode) {
-		let track = await playNextTrack(arn)
-		arn.statusMessage.showInfo("Now playing: " + track.title)
+		playNextTrack(arn)
 		return
 	}
 
