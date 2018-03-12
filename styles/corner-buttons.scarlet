@@ -1,18 +1,31 @@
 .corner-buttons
 	display flex
 	justify-content center
+	margin-bottom content-padding
+
+	position absolute
+	top content-padding
+	right content-padding
 
 .corner-buttons-hide-on-mobile
-	display none
+	display flex
+	position absolute
+	top content-padding
+	right content-padding
 
+.corner-buttons,
+.corner-buttons-hide-on-mobile
 	button,
 	.button
-		margin 0 0.25rem
+		margin-left 0.5rem
 
-> 600px
-	.corner-buttons,
+< 600px
 	.corner-buttons-hide-on-mobile
-		display flex
-		position absolute
-		top content-padding
-		right content-padding
+		display none
+
+	.corner-buttons
+		.icon
+			margin-right 0
+
+		span
+			display none

@@ -6,12 +6,14 @@
 		horizontal-wrap
 		justify-content flex-start
 
+	.episode
+		flex-basis 190px
+
 .episode
 	vertical
 	ui-element
 	button-hover
 	flex 0
-	flex-basis 190px
 	margin 0.5rem
 	padding 0.5rem
 	overflow hidden

@@ -1,7 +1,7 @@
 component Calendar(days []*utils.CalendarDay, user *arn.User)
 	h1.mountable Calendar
 
-	.corner-buttons-hide-on-mobile
+	.corner-buttons
 		button.action(data-trigger="click", data-action="calendarShowAddedAnimeOnly", title="Show anime in my collection")
 			RawIcon("eye")
 
