@@ -123,7 +123,7 @@ export function stopAudio(arn: AnimeNotifier) {
 	}
 
 	// Fade out sidebar player
-	audioPlayer.classList.add("fade-out")
+	// audioPlayer.classList.add("fade-out")
 
 	// Remove title
 	trackLink.href = ""

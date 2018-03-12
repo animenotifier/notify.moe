@@ -59,8 +59,6 @@
 
 .anime-info-table
 	margin 0
-	// width 100%
-	// max-width 600px
 
 .anime-info-value
 	text-align right
@@ -69,15 +67,18 @@
 	vertical
 	margin-top 1rem
 
-.anime-soundtrack
-	vertical
-	// flex-basis 100%
-	flex-grow 1
-	margin-bottom 0.5rem
-	min-width 200px
+	.soundtrack
+		flex-basis auto
+		// 	vertical
+		// 	flex-grow 1
+		// 	margin-bottom 0.5rem
+		// 	min-width 200px
 
-	.video-container
-		box-shadow shadow-light
+	.soundtrack-anime-image
+		display none
+
+// 	.video-container
+// 		box-shadow shadow-light
 
 > 500px
 	.anime-soundtracks
@@ -85,16 +86,17 @@
 		justify-content flex-start
 		margin-top 0
 
-	.anime-soundtrack
-		max-width 200px
-		margin calc(content-padding / 2)
+		.soundtrack
+			max-width 200px
 
-// .anime-soundtracks
-// 	horizontal-wrap
+		.soundtrack-content
+			min-height 112px
+			height 112px
 
-// .anime-soundtrack
-// 	flex-basis 400px
-// 	padding-bottom video-padding
+		.soundtrack-play-button
+			width 48px
+			height 48px
+			font-size 1rem
 
 .anime-section
 	margin-top 1rem

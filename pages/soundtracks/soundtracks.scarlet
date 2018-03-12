@@ -13,6 +13,7 @@
 	border-radius 3px
 	overflow hidden
 	box-shadow shadow-light
+	min-height 200px
 
 	iframe
 		width 100%
