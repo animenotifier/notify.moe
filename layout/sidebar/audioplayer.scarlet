@@ -18,9 +18,25 @@
 	height 142px
 	overflow-y hidden
 	border-radius 3px
-	opacity 0.75
+	opacity 1
+	animation scale-down 1s ease 5s forwards
 
 	:hover
+		animation scale-up 1s ease forwards
+		opacity 0.75
+		width 121px
+		height 121px
+
+animation scale-down
+	100%
+		width 121px
+		height 121px
+		opacity 0.75
+
+animation scale-up
+	100%
+		width 142px
+		height 142px
 		opacity 1
 
 #audio-player-anime-image
