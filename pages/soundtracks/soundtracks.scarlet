@@ -133,3 +133,4 @@ animation change-color
 .soundtrack-anime-image
 	width 142px
 	height 200px
+	object-fit cover
