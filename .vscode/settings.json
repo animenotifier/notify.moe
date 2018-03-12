@@ -17,7 +17,11 @@
 	"search.exclude": {
 		"components/": true,
 		"**/*.svg": true,
-		"**/*.html": true
+		"**/*.html": true,
+		"**/*.opus": true,
+		"**/*.ogg": true,
+		"**/*.m4a": true,
+		"**/*.webm": true,
 	},
 	"[jade]": {
 		"files.trimTrailingWhitespace": false
