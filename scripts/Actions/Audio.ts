@@ -14,6 +14,7 @@ var trackLink = document.getElementById("audio-player-track-title") as HTMLLinkE
 var animeInfo = document.getElementById("audio-player-anime-info") as HTMLElement
 var animeLink = document.getElementById("audio-player-anime-link") as HTMLLinkElement
 var animeImage = document.getElementById("audio-player-anime-image") as HTMLImageElement
+var lastRequest: XMLHttpRequest
 
 // Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
@@ -31,6 +32,11 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 	playId++
 	let currentPlayId = playId
 
+	if(lastRequest) {
+		lastRequest.abort()
+		lastRequest = null
+	}
+
 	// Stop current track
 	stopAudio(arn)
 
@@ -38,22 +44,32 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 	arn.markPlayingSoundTrack()
 	arn.loading(true)
 
+	// Mark as loading
+	audioPlayer.classList.add("loading-network")
+	audioPlayer.classList.remove("decoding-audio")
+	audioPlayer.classList.remove("decoded")
+
 	// Request
 	let request = new XMLHttpRequest()
 	request.open("GET", trackUrl, true)
 	request.responseType = "arraybuffer"
 
 	request.onload = () => {
-		arn.loading(false)
-
 		if(currentPlayId !== playId) {
 			return
 		}
+
+		// Mark as loading finished, now decoding starts
+		audioPlayer.classList.add("decoding-audio")
+		arn.loading(false)
 
 		audioContext.decodeAudioData(request.response, async buffer => {
 			if(currentPlayId !== playId) {
 				return
 			}
+
+			// Mark as ready
+			audioPlayer.classList.add("decoded")
 
 			audioNode = audioContext.createBufferSource()
 			audioNode.buffer = buffer
@@ -69,33 +85,6 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 				playNextTrack(arn)
 				// stopAudio(arn)
 			}
-
-			// Set track title
-			let trackInfoResponse = await fetch("/api/soundtrack/" + trackId)
-			let track = await trackInfoResponse.json()
-			trackLink.href = "/soundtrack/" + track.id
-			trackLink.innerText = track.title
-
-			let animeId = ""
-
-			for(let tag of (track.tags as string[])) {
-				if(tag.startsWith("anime:")) {
-					animeId = tag.split(":")[1]
-					break
-				}
-			}
-
-			// Set anime info
-			if(animeId !== "") {
-				animeInfo.classList.remove("hidden")
-				let animeResponse = await fetch("/api/anime/" + animeId)
-				let anime = await animeResponse.json()
-				animeLink.title = anime.title.canonical
-				animeLink.href = "/anime/" + anime.id
-				animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + anime.imageExtension
-				animeImage.classList.remove("hidden")
-				animeImage["became visible"]()
-			}
 		}, console.error)
 	}
 
@@ -103,12 +92,46 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 		arn.loading(false)
 	}
 
+	lastRequest = request
 	request.send()
+
+	// Update track info
+	updateTrackInfo(trackId)
 
 	// Show audio player
 	audioPlayer.classList.remove("fade-out")
 	audioPlayerPlay.classList.add("fade-out")
 	audioPlayerPause.classList.remove("fade-out")
+}
+
+// Update track info
+async function updateTrackInfo(trackId: string) {
+	// Set track title
+	let trackInfoResponse = await fetch("/api/soundtrack/" + trackId)
+	let track = await trackInfoResponse.json()
+	trackLink.href = "/soundtrack/" + track.id
+	trackLink.innerText = track.title
+
+	let animeId = ""
+
+	for(let tag of (track.tags as string[])) {
+		if(tag.startsWith("anime:")) {
+			animeId = tag.split(":")[1]
+			break
+		}
+	}
+
+	// Set anime info
+	if(animeId !== "") {
+		animeInfo.classList.remove("hidden")
+		let animeResponse = await fetch("/api/anime/" + animeId)
+		let anime = await animeResponse.json()
+		animeLink.title = anime.title.canonical
+		animeLink.href = "/anime/" + anime.id
+		animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + anime.imageExtension
+		animeImage.classList.remove("hidden")
+		animeImage["became visible"]()
+	}
 }
 
 // Stop audio
@@ -133,6 +156,10 @@ export function stopAudio(arn: AnimeNotifier) {
 	animeLink.href = ""
 	animeInfo.classList.add("hidden")
 	animeImage.classList.add("hidden")
+
+	// Show play button
+	audioPlayerPlay.classList.remove("fade-out")
+	audioPlayerPause.classList.add("fade-out")
 
 	if(gainNode) {
 		gainNode.disconnect()
@@ -168,7 +195,7 @@ export async function playNextTrack(arn: AnimeNotifier) {
 	let track = await response.json()
 
 	playAudioFile(arn, track.id, "https://notify.moe/audio/" + track.file)
-	arn.statusMessage.showInfo("Now playing: " + track.title)
+	// arn.statusMessage.showInfo("Now playing: " + track.title)
 
 	return track
 }

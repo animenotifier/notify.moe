@@ -19,9 +19,10 @@
 	overflow-y hidden
 	border-radius 3px
 	opacity 0.75
+	transform opacity transition-speed ease
 
 	:hover
-		opacity 1
+		opacity 1 !important
 
 #audio-player-anime-image
 	width 100%
