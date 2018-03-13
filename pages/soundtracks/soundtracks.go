@@ -30,7 +30,7 @@ func Latest(ctx *aero.Context) string {
 		loadMoreIndex = maxTracks
 	}
 
-	return ctx.HTML(components.SoundTracks(tracks, loadMoreIndex, user))
+	return ctx.HTML(components.SoundTracks(tracks, loadMoreIndex, "", user))
 }
 
 // LatestFrom renders the soundtracks from the given index.

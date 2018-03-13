@@ -41,5 +41,5 @@ func Get(ctx *aero.Context) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Track(track, user))
+	return ctx.HTML(components.SoundTrackPage(track, user))
 }

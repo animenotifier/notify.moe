@@ -1,4 +1,4 @@
-component Track(track *arn.SoundTrack, user *arn.User)
+component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 	SoundTrackTabs(track, user)
 
 	.soundtrack-full-page
@@ -35,11 +35,14 @@ component Track(track *arn.SoundTrack, user *arn.User)
 						for index, beatmap := range track.Beatmaps()
 							li
 								a.beatmap(href="https://osu.ppy.sh/s/" + beatmap, target="_blank")= "Beatmap #" + strconv.Itoa(index + 1)
+			
 			.widget.mountable
 				h3.widget-title Tags
+
 				.tags
 					each tag in track.Tags
-						.tag= tag
+						a.tag.ajax(href="/soundtracks/tag/" + tag)= tag
+
 		.footer.mountable
 			if track.EditedBy != ""
 				span Edited 

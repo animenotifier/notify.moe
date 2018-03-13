@@ -10,12 +10,13 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Best renders the soundtracks page.
-func Best(ctx *aero.Context) string {
+// FilterByTag renders the soundtracks with the given tag.
+func FilterByTag(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
+	tag := ctx.Get("tag")
 
 	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft && len(track.Media) > 0
+		return !track.IsDraft && len(track.Media) > 0 && track.HasTag(tag)
 	})
 
 	arn.SortSoundTracksPopularFirst(tracks)
@@ -28,12 +29,13 @@ func Best(ctx *aero.Context) string {
 		loadMoreIndex = maxTracks
 	}
 
-	return ctx.HTML(components.SoundTracks(tracks, loadMoreIndex, "", user))
+	return ctx.HTML(components.SoundTracks(tracks, loadMoreIndex, tag, user))
 }
 
-// BestFrom renders the soundtracks from the given index.
-func BestFrom(ctx *aero.Context) string {
+// FilterByTagFrom renders the soundtracks from the given index.
+func FilterByTagFrom(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
+	tag := ctx.Get("tag")
 	index, err := ctx.GetInt("index")
 
 	if err != nil {
@@ -41,7 +43,7 @@ func BestFrom(ctx *aero.Context) string {
 	}
 
 	allTracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft && len(track.Media) > 0
+		return !track.IsDraft && len(track.Media) > 0 && track.HasTag(tag)
 	})
 
 	if index < 0 || index >= len(allTracks) {

@@ -3,22 +3,7 @@
 	justify-content center
 
 .anime-genre
-	default-transition
-	padding 0.25rem 0.75rem
-	font-size 85%
-	color text-color
-	background reverse-light-color
-	border-radius ui-element-border-radius
-	margin 0.35rem
-
-	&.mounted
-		opacity 0.8
-
-	:hover
-		color text-color
-		opacity 1.0
-		text-shadow none
-		background reverse-light-hover-color
+	genre-tag
 
 > 800px
 	.anime-genres
