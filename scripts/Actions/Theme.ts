@@ -45,16 +45,16 @@ let dark = {
 // Toggle theme
 export function toggleTheme(arn: AnimeNotifier) {
 	if(currentTheme === "light") {
-		darkTheme()
+		darkTheme(arn)
 		arn.statusMessage.showInfo("Previewing Dark theme. If you would like to use it permanently, please buy a PRO account.", 4000)
 		return
 	}
 
-	lightTheme()
+	lightTheme(arn)
 }
 
 // Light theme
-export function lightTheme() {
+export function lightTheme(arn: AnimeNotifier) {
 	let root = document.documentElement
 
 	for(let property in light) {
@@ -69,8 +69,12 @@ export function lightTheme() {
 }
 
 // Dark theme
-export function darkTheme() {
+export function darkTheme(arn: AnimeNotifier) {
 	let root = document.documentElement
+
+	if(arn.user.dataset.pro !== "true") {
+		alert("You need a PRO account!")
+	}
 
 	for(let property in dark) {
 		if(!dark.hasOwnProperty(property)) {

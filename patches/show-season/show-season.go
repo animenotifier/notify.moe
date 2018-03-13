@@ -11,7 +11,7 @@ func main() {
 	list := []*arn.Anime{}
 
 	for anime := range arn.StreamAnime() {
-		if anime.NSFW == 1 || anime.Status != "current" || anime.Type != "tv" || anime.StartDate == "" || anime.StartDate < "2017-12" || anime.StartDate > "2018-02-01" {
+		if anime.Status != "current" || anime.Type != "tv" || anime.StartDate == "" || anime.StartDate < "2017-12" || anime.StartDate > "2018-02-01" {
 			continue
 		}
 

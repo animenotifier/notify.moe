@@ -122,7 +122,7 @@ export class AnimeNotifier {
 
 		// Theme
 		if(this.user && this.user.dataset.pro === "true" && this.user.dataset.theme !== "light") {
-			darkTheme()
+			darkTheme(this)
 		}
 
 		// Status message

@@ -107,13 +107,6 @@ func sync(data *kitsu.Anime) *arn.Anime {
 		}
 	}
 
-	// NSFW
-	if attr.Nsfw {
-		anime.NSFW = 1
-	} else {
-		anime.NSFW = 0
-	}
-
 	// Rating
 	if anime.Rating == nil {
 		anime.Rating = &arn.AnimeRating{}
