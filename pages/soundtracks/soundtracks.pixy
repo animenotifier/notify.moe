@@ -26,9 +26,15 @@ component SoundTracksScrollable(tracks []*arn.SoundTrack, user *arn.User)
 		SoundTrack(track)
 
 component SoundTracksTabs(tag string)
-	.tabs
-		Tab("Latest", "music", "/soundtracks")
-		Tab("Best", "heart", "/soundtracks/best")
+	.tab-groups
+		.tabs
+			Tab("Latest", "music", "/soundtracks")
+			Tab("Best", "heart", "/soundtracks/best")
+		
+		.tabs
+			Tab("opening", "tag", "/soundtracks/tag/opening")
+			Tab("ending", "tag", "/soundtracks/tag/ending")
 
-		if tag != ""
-			Tab(tag, "tag", "/soundtracks/tag/" + tag)
+		if tag != "" && tag != "opening" && tag != "ending"
+			.tabs
+				Tab(tag, "tag", "/soundtracks/tag/" + tag)

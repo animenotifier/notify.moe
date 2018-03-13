@@ -29,29 +29,20 @@
 		border-top-right-radius ui-element-border-radius
 		border-bottom-right-radius ui-element-border-radius
 
-	// color text-color !important
-	// :hover
-	// 	color white !important
-	// &.active
-	// 	color white !important
-	// 	background-color link-hover-color
-
 < 920px
 	.tab
 		.icon
 			margin-right 0
-	
+
 	.tab-text
 		display none
 
 .tabs
 	horizontal
 	justify-content center
-	// margin-left calc(content-padding * -1)
-	// margin-top calc(content-padding * -1)
-	// margin-right calc(content-padding * -2)
-	margin-bottom content-padding
-	// background-color rgba(0, 0, 0, 0.02)
-	// justify-content flex-start !important
-	// margin-bottom 1rem
-	// margin-top -0.6rem
+	margin content-padding calc(content-padding / 4)
+	margin-top 0
+
+.tab-groups
+	horizontal
+	justify-content center
