@@ -3,7 +3,7 @@ component PopularCompanies(companies []*arn.Company, nextIndex int, user *arn.Us
 
 	h1.page-title Popular companies
 
-	ol#load-more-target.companies
+	ol#load-more-target.popular-companies
 		PopularCompaniesScrollable(companies, user)
 
 	if nextIndex != -1
@@ -12,6 +12,11 @@ component PopularCompanies(companies []*arn.Company, nextIndex int, user *arn.Us
 
 component PopularCompaniesScrollable(companies []*arn.Company, user *arn.User)
 	each company in companies
-		li.company.mountable
-			a.ajax(href=company.Link())= company.Name.English
+		li.popular-company.mountable
+			a.popular-company-name.ajax(href=company.Link())
+				.popular-company-icon
+					Icon("building")
+				
+				span= company.Name.English
+			
 			//- span= " (" + strconv.Itoa(popularity[company.ID]) + ")"

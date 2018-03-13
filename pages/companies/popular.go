@@ -8,7 +8,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
-const maxPopularCompanies = 50
+const maxPopularCompanies = 60
 
 // Popular renders the best companies.
 func Popular(ctx *aero.Context) string {

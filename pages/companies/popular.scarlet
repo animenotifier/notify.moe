@@ -1,0 +1,31 @@
+.popular-companies
+	horizontal-wrap
+	justify-content space-evenly
+
+.popular-company
+	display flex
+	width 100%
+	max-width 500px
+	margin 0
+	margin-bottom calc(content-padding / 4)
+	padding 0.5rem 0.75rem
+	ui-element
+
+.popular-company-icon
+	//
+
+.popular-company-name
+	horizontal
+	align-items center
+	clip-long-text
+
+.popular-company-anime-preview
+	flex 1
+
+> 900px
+	.popular-company
+		height 50px
+		padding 0.75rem 1rem
+
+	.popular-company-name
+		font-size 1.3rem
