@@ -1,4 +1,4 @@
-component Quotes(quotes []*arn.Quote, loadMoreIndex int, user *arn.User)
+component Quotes(quotes []*arn.Quote, nextIndex int, user *arn.User)
 	h1.page-title Quotes
 
 	QuotesTabs
@@ -17,9 +17,9 @@ component Quotes(quotes []*arn.Quote, loadMoreIndex int, user *arn.User)
 	#load-more-target.quotes
 		QuotesScrollable(quotes, user)
 
-	if loadMoreIndex != -1
+	if nextIndex != -1
 		.buttons
-			LoadMore(loadMoreIndex)
+			LoadMore(nextIndex)
 
 component QuotesScrollable(quotes []*arn.Quote, user *arn.User)
 	each quote in quotes

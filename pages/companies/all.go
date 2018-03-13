@@ -11,7 +11,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// All renders the companies page.
+// All renders an index of all companies.
 func All(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
@@ -44,5 +44,5 @@ func All(ctx *aero.Context) string {
 		groups[currentGroupIndex] = append(groups[currentGroupIndex], company)
 	}
 
-	return ctx.HTML(components.Companies(groups, user))
+	return ctx.HTML(components.CompaniesIndex(groups, user))
 }

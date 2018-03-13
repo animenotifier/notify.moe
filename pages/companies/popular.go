@@ -1,57 +1,41 @@
 package companies
 
 import (
-	"sort"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
-const maxPopularCompanies = 100
+const maxPopularCompanies = 50
 
-// Popular renders the companies sorted by popularity.
+// Popular renders the best companies.
 func Popular(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
-	companies := []*arn.Company{}
+	index, _ := ctx.GetInt("index")
 
-	// ID to popularity
-	popularity := map[string]int{}
+	// Fetch all eligible companies
+	allCompanies := fetchAll()
 
-	for anime := range arn.StreamAnime() {
-		for _, studio := range anime.Studios() {
-			popularity[studio.ID] += anime.Popularity.Watching + anime.Popularity.Completed
-		}
-	}
+	// Sort the companies by popularity
+	arn.SortCompaniesPopularFirst(allCompanies)
 
-	for companyID := range popularity {
-		company, err := arn.GetCompany(companyID)
-
-		if err != nil {
-			continue
-		}
-
-		companies = append(companies, company)
-	}
-
-	sort.Slice(companies, func(i, j int) bool {
-		a := companies[i]
-		b := companies[j]
-
-		aPopularity := popularity[a.ID]
-		bPopularity := popularity[b.ID]
-
-		if aPopularity == bPopularity {
-			return a.Name.English < b.Name.English
-		}
-
-		return aPopularity > bPopularity
-	})
+	// Slice the part that we need
+	companies := allCompanies[index:]
 
 	if len(companies) > maxPopularCompanies {
 		companies = companies[:maxPopularCompanies]
 	}
 
-	return ctx.HTML(components.PopularCompanies(companies, popularity, user))
+	// Next index
+	nextIndex := infinitescroll.NextIndex(ctx, len(allCompanies), maxPopularCompanies, index)
+
+	// In case we're scrolling, send companies only (without the page frame)
+	if index > 0 {
+		return ctx.HTML(components.PopularCompaniesScrollable(companies, user))
+	}
+
+	// Otherwise, send the full page
+	return ctx.HTML(components.PopularCompanies(companies, nextIndex, user))
 }

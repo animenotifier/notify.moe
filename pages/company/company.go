@@ -11,7 +11,7 @@ import (
 
 const maxDescriptionLength = 170
 
-// Get company.
+// Get renders a company page.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")

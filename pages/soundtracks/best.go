@@ -16,7 +16,7 @@ func Best(ctx *aero.Context) string {
 	// Fetch all eligible tracks
 	allTracks := fetchAll()
 
-	// Sort the tracks by date
+	// Sort the tracks by number of likes
 	arn.SortSoundTracksPopularFirst(allTracks)
 
 	// Slice the part that we need

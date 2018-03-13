@@ -1,11 +1,17 @@
-component PopularCompanies(companies []*arn.Company, popularity map[string]int, user *arn.User)
+component PopularCompanies(companies []*arn.Company, nextIndex int, user *arn.User)
 	CompaniesTabs(user)
 
 	h1.page-title Popular companies
 
-	.companies
-		ol
-			each company in companies
-				li.mountable
-					a.ajax(href=company.Link())= company.Name.English
-					span= " (" + strconv.Itoa(popularity[company.ID]) + ")"
+	ol#load-more-target.companies
+		PopularCompaniesScrollable(companies, user)
+
+	if nextIndex != -1
+		.buttons
+			LoadMore(nextIndex)
+
+component PopularCompaniesScrollable(companies []*arn.Company, user *arn.User)
+	each company in companies
+		li.company.mountable
+			a.ajax(href=company.Link())= company.Name.English
+			//- span= " (" + strconv.Itoa(popularity[company.ID]) + ")"

@@ -1,0 +1,5 @@
+.company-index-groups
+	horizontal-wrap
+
+.company-index-group
+	padding 1rem

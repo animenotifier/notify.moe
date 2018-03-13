@@ -1,11 +1,11 @@
-component Companies(groups [][]*arn.Company, user *arn.User)
+component CompaniesIndex(groups [][]*arn.Company, user *arn.User)
 	CompaniesTabs(user)
 
 	h1.page-title All companies
 
-	.company-groups
+	.company-index-groups
 		each group in groups
-			.company-group.mountable
+			.company-index-group.mountable
 				h3= strings.ToUpper(group[0].Name.English[:1])
 
 				ul
@@ -15,8 +15,8 @@ component Companies(groups [][]*arn.Company, user *arn.User)
 
 component CompaniesTabs(user *arn.User)
 	.tabs
-		Tab("All", "font", "/companies")
-		Tab("Popular", "globe", "/companies/popular")
+		Tab("Popular", "globe", "/companies")
+		Tab("All", "font", "/companies/all")
 	
 	.corner-buttons
 		if user != nil && (user.Role == "editor" || user.Role == "admin")

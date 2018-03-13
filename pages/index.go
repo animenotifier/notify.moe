@@ -131,8 +131,9 @@ func Configure(app *aero.Application) {
 	l.Page("/company/:id", company.Get)
 	l.Page("/company/:id/edit", company.Edit)
 	l.Page("/company/:id/history", company.History)
-	l.Page("/companies", companies.All)
-	l.Page("/companies/popular", companies.Popular)
+	l.Page("/companies", companies.Popular)
+	l.Page("/companies/from/:index", companies.Popular)
+	l.Page("/companies/all", companies.All)
 
 	// Settings
 	l.Page("/settings", settings.Get(components.SettingsPersonal))

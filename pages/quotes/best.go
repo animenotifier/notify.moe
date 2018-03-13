@@ -16,7 +16,7 @@ func Best(ctx *aero.Context) string {
 	// Fetch all eligible quotes
 	allQuotes := fetchAll()
 
-	// Sort the quotes by date
+	// Sort the quotes by number of likes
 	arn.SortQuotesPopularFirst(allQuotes)
 
 	// Slice the part that we need
