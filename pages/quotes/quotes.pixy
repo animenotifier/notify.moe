@@ -17,7 +17,7 @@ component Quotes(quotes []*arn.Quote, loadMoreIndex int, user *arn.User)
 	#load-more-target.quotes
 		QuotesScrollable(quotes, user)
 
-	if loadMoreIndex != 0
+	if loadMoreIndex != -1
 		.buttons
 			LoadMore(loadMoreIndex)
 

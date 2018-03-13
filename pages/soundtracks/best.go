@@ -1,70 +1,39 @@
 package soundtracks
 
 import (
-	"net/http"
-	"strconv"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
-// Best renders the soundtracks page.
+// Best renders the best soundtracks.
 func Best(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
+	index, _ := ctx.GetInt("index")
 
-	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft && len(track.Media) > 0
-	})
+	// Fetch all eligible tracks
+	allTracks := fetchAll()
 
-	arn.SortSoundTracksPopularFirst(tracks)
-
-	// Limit the number of displayed tracks
-	loadMoreIndex := 0
-
-	if len(tracks) > maxTracks {
-		tracks = tracks[:maxTracks]
-		loadMoreIndex = maxTracks
-	}
-
-	return ctx.HTML(components.SoundTracks(tracks, loadMoreIndex, "", user))
-}
-
-// BestFrom renders the soundtracks from the given index.
-func BestFrom(ctx *aero.Context) string {
-	user := utils.GetUser(ctx)
-	index, err := ctx.GetInt("index")
-
-	if err != nil {
-		return ctx.Error(http.StatusBadRequest, "Invalid start index", err)
-	}
-
-	allTracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft && len(track.Media) > 0
-	})
-
-	if index < 0 || index >= len(allTracks) {
-		return ctx.Error(http.StatusBadRequest, "Invalid start index (maximum is "+strconv.Itoa(len(allTracks))+")", nil)
-	}
-
+	// Sort the tracks by date
 	arn.SortSoundTracksPopularFirst(allTracks)
 
+	// Slice the part that we need
 	tracks := allTracks[index:]
 
 	if len(tracks) > maxTracks {
 		tracks = tracks[:maxTracks]
 	}
 
-	nextIndex := index + maxTracks
+	// Next index
+	nextIndex := infinitescroll.NextIndex(ctx, len(allTracks), maxTracks, index)
 
-	if nextIndex >= len(allTracks) {
-		// End of data - no more scrolling
-		ctx.Response().Header().Set("X-LoadMore-Index", "-1")
-	} else {
-		// Send the index for the next request
-		ctx.Response().Header().Set("X-LoadMore-Index", strconv.Itoa(nextIndex))
+	// In case we're scrolling, send soundtracks only (without the page frame)
+	if index > 0 {
+		return ctx.HTML(components.SoundTracksScrollable(tracks, user))
 	}
 
-	return ctx.HTML(components.SoundTracksScrollable(tracks, user))
+	// Otherwise, send the full page
+	return ctx.HTML(components.SoundTracks(tracks, nextIndex, "", user))
 }

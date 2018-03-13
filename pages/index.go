@@ -120,9 +120,9 @@ func Configure(app *aero.Application) {
 	l.Page("/quote/:id/edit", quote.Edit)
 	l.Page("/quote/:id/history", quote.History)
 	l.Page("/quotes", quotes.Latest)
-	l.Page("/quotes/from/:index", quotes.LatestFrom)
+	l.Page("/quotes/from/:index", quotes.Latest)
 	l.Page("/quotes/best", quotes.Best)
-	l.Page("/quotes/best/from/:index", quotes.BestFrom)
+	l.Page("/quotes/best/from/:index", quotes.Best)
 
 	// Calendar
 	l.Page("/calendar", calendar.Get)
@@ -144,9 +144,9 @@ func Configure(app *aero.Application) {
 
 	// Soundtracks
 	l.Page("/soundtracks", soundtracks.Latest)
-	l.Page("/soundtracks/from/:index", soundtracks.LatestFrom)
+	l.Page("/soundtracks/from/:index", soundtracks.Latest)
 	l.Page("/soundtracks/best", soundtracks.Best)
-	l.Page("/soundtracks/best/from/:index", soundtracks.BestFrom)
+	l.Page("/soundtracks/best/from/:index", soundtracks.Best)
 	l.Page("/soundtracks/tag/:tag", soundtracks.FilterByTag)
 	l.Page("/soundtracks/tag/:tag/from/:index", soundtracks.FilterByTagFrom)
 	l.Page("/soundtrack/:id", soundtrack.Get)
