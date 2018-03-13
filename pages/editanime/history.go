@@ -20,7 +20,7 @@ func History(ctx *aero.Context) string {
 	}
 
 	entries := arn.FilterEditLogEntries(func(entry *arn.EditLogEntry) bool {
-		return entry.ObjectType == "Anime" && entry.ObjectID == id
+		return entry.ObjectID == id && (entry.ObjectType == "Anime" || entry.ObjectType == "AnimeCharacters" || entry.ObjectType == "AnimeRelations" || entry.ObjectType == "AnimeEpisodes")
 	})
 
 	arn.SortEditLogEntriesLatestFirst(entries)
