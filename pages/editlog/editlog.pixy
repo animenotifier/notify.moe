@@ -1,6 +1,8 @@
-component EditLog(entries []*arn.EditLogEntry, user *arn.User)
-	h1 Editor log
+component EditLogPage(entries []*arn.EditLogEntry, user *arn.User)
+	h1.mountable Editor log
+	EditLog(entries, user)
 
+component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 	table.edit-log
 		thead
 			tr.mountable

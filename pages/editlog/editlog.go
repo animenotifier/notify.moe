@@ -2,7 +2,6 @@ package editlog
 
 import (
 	"net/http"
-	"sort"
 
 	"github.com/animenotifier/arn"
 
@@ -25,13 +24,12 @@ func Get(ctx *aero.Context) string {
 	entries := arn.AllEditLogEntries()
 
 	// Sort by creation date
-	sort.Slice(entries, func(i, j int) bool {
-		return entries[i].Created > entries[j].Created
-	})
+	arn.SortEditLogEntriesLatestFirst(entries)
 
+	// Limit results
 	if len(entries) > maxEntries {
 		entries = entries[:maxEntries]
 	}
 
-	return ctx.HTML(components.EditLog(entries, user))
+	return ctx.HTML(components.EditLogPage(entries, user))
 }

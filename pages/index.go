@@ -110,6 +110,7 @@ func Configure(app *aero.Application) {
 	l.Page("/anime/:id/edit/characters", editanime.Characters)
 	l.Page("/anime/:id/edit/relations", editanime.Relations)
 	l.Page("/anime/:id/edit/episodes", editanime.Episodes)
+	l.Page("/anime/:id/edit/history", editanime.History)
 
 	// Characters
 	l.Page("/character/:id", character.Get)
@@ -117,6 +118,7 @@ func Configure(app *aero.Application) {
 	// Quotes
 	l.Page("/quote/:id", quote.Get)
 	l.Page("/quote/:id/edit", quote.Edit)
+	l.Page("/quote/:id/history", quote.History)
 	l.Page("/quotes", quotes.Latest)
 	l.Page("/quotes/from/:index", quotes.LatestFrom)
 	l.Page("/quotes/best", quotes.Best)
@@ -128,6 +130,7 @@ func Configure(app *aero.Application) {
 	// Companies
 	l.Page("/company/:id", company.Get)
 	l.Page("/company/:id/edit", company.Edit)
+	l.Page("/company/:id/history", company.History)
 	l.Page("/companies", companies.All)
 	l.Page("/companies/popular", companies.Popular)
 
@@ -148,6 +151,7 @@ func Configure(app *aero.Application) {
 	l.Page("/soundtracks/tag/:tag/from/:index", soundtracks.FilterByTagFrom)
 	l.Page("/soundtrack/:id", soundtrack.Get)
 	l.Page("/soundtrack/:id/edit", soundtrack.Edit)
+	l.Page("/soundtrack/:id/history", soundtrack.History)
 
 	// Groups
 	l.Page("/groups", groups.Get)

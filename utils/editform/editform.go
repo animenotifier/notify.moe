@@ -26,7 +26,7 @@ func Render(obj interface{}, title string, user *arn.User) string {
 	b.WriteString(`<div class="widget" data-api="` + endpoint + `">`)
 
 	// Title
-	b.WriteString(`<h1>`)
+	b.WriteString(`<h1 class="mountable">`)
 	b.WriteString(title)
 	b.WriteString(`</h1>`)
 
@@ -83,6 +83,9 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 	if field.Anonymous || field.Tag.Get("editable") != "true" {
 		return
 	}
+
+	b.WriteString("<div class='mountable'>")
+	defer b.WriteString("</div>")
 
 	fieldValue := reflect.Indirect(v.FieldByName(field.Name))
 	fieldType := field.Type.String()
