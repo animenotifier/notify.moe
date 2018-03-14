@@ -22,12 +22,16 @@ export async function addAnimeToCollection(arn: AnimeNotifier, button: HTMLButto
 
 // Remove anime from collection
 export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElement) {
+	if(!confirm("Are you sure you want to remove it from your collection?")) {
+		return
+	}
+
 	button.innerText = "Removing..."
 
 	let {animeId, nick} = button.dataset
 	let apiEndpoint = arn.findAPIEndpoint(button)
 
 	arn.post(apiEndpoint + "/remove/" + animeId, "")
-	.then(() => arn.app.load("/animelist/" + (arn.app.find("Status") as HTMLSelectElement).value))
+	.then(() => arn.app.load(`/+${nick}/animelist/` + (arn.app.find("Status") as HTMLSelectElement).value))
 	.catch(err => arn.statusMessage.showError(err))
 }

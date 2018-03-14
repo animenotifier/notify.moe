@@ -27,7 +27,7 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			InputTextArea("Notes", item.Notes, "Notes", "Your notes")
 
 			.buttons.mountable
-				a.ajax.button(href="/animelist/" + item.Status)
+				a.ajax.button(href="/+" + viewUser.Nick + "/animelist/" + item.Status)
 					Icon("list")
 					span View collection
 				a.ajax.button(href=anime.Link())
