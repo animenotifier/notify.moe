@@ -1,3 +1,8 @@
+.anime-list-user-avatar
+	position absolute
+	top calc(content-padding / 2)
+	left calc(content-padding / 2)
+
 .anime-list-container
 	width 100%
 	max-width 800px
@@ -107,6 +112,9 @@
 	display none !important
 
 > 700px
+	.anime-list-title
+		display block
+
 	.anime-list-item-airing-date
 		display flex !important
 		text-align right

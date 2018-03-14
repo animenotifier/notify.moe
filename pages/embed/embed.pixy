@@ -6,7 +6,7 @@ component ExtensionNavigation(user *arn.User)
 		button.action(data-trigger="click", data-action="toggleSidebar")
 			RawIcon("bars")
 		
-		if user != nil
+		if user != nil && !user.IsPro()
 			.spacer
 
 			a.button(href="/support", target="_blank")

@@ -24,14 +24,15 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 component ProfileTabs(viewUser *arn.User, uri string)
 	.tabs
 		Tab("Anime", "th", "/+" + viewUser.Nick)
-		Tab("Collection", "list", "/+" + viewUser.Nick + "/animelist/watching")
+		//- Tab("Collection", "list", "/+" + viewUser.Nick + "/animelist/watching")
 		Tab("Forum", "comment", "/+" + viewUser.Nick + "/forum/threads")
 		Tab("Tracks", "music", "/+" + viewUser.Nick + "/soundtracks/liked")
 		Tab("Stats", "area-chart", "/+" + viewUser.Nick + "/stats")
 		Tab("Followers", "users", "/+" + viewUser.Nick + "/followers")
 
-	if strings.Contains(uri, "/animelist")
-		StatusTabs("/+" + viewUser.Nick + "/animelist")
+	//- if strings.Contains(uri, "/animelist")
+	//- 	StatusTabs("/+" + viewUser.Nick + "/animelist")
+	
 	if strings.Contains(uri, "/soundtracks")
 		.tabs
 			Tab("Liked", "heart", "/+" + viewUser.Nick + "/soundtracks/liked")
@@ -109,7 +110,13 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 						button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
 							Icon("user-times")
 							span Unfollow
-
+				
+				if user.ID != viewUser.ID
 					a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
 						Icon("exchange")
 						span Compare
+				
+				a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/animelist/watching")
+					Icon("list")
+					span Anime list
+				

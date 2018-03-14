@@ -1,3 +1,0 @@
-component Home(animeListItems []*arn.AnimeListItem, nextIndex int, viewUser *arn.User, user *arn.User, status string)
-	StatusTabs("/animelist")
-	AnimeListFilteredByStatus(animeListItems, nextIndex, viewUser, user, status)

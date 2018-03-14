@@ -18,7 +18,7 @@ component Sidebar(user *arn.User)
 
 		//- Sidebar buttons
 		if user != nil
-			SidebarButton("Home", "/animelist/watching", "home")
+			SidebarButton("Home", "/+" + user.Nick + "/animelist/watching", "home")
 		else
 			SidebarButton("Home", "/", "home")
 

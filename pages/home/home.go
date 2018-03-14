@@ -14,6 +14,5 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
-	return ctx.Redirect("/animelist/watching")
-	//return AnimeList(ctx, user, arn.AnimeListStatusWatching)
+	return ctx.Redirect("/+" + user.Nick + "/animelist/watching")
 }
