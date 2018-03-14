@@ -36,7 +36,7 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 					.anime-list-item-episodes-watched
 						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
 						
-						if item.Status == arn.AnimeListStatusWatching
+						if item.Status == arn.AnimeListStatusWatching && user != nil && user.ID == viewUser.ID
 							.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
 						else
 							.plus-episode-dummy +

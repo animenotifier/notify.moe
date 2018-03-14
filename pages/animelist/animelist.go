@@ -2,6 +2,7 @@ package animelist
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -46,13 +47,13 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
 	}
 
-	animeList = animeList.FilterStatus(status)
+	statusList := animeList.FilterStatus(status)
 
 	// Sort the items
-	animeList.Sort()
+	statusList.Sort()
 
 	// These are all animer list items for the given status
-	allItems := animeList.Items
+	allItems := statusList.Items
 
 	// Slice the part that we need
 	items := allItems[index:]
@@ -69,11 +70,30 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 	// Next index
 	nextIndex := infinitescroll.NextIndex(ctx, len(allItems), maxLength, index)
 
+	// OpenGraph data
+	ctx.Data = &arn.OpenGraph{
+		Tags: map[string]string{
+			"og:title":       viewUser.Nick + "'s anime list",
+			"og:image":       "https:" + viewUser.AvatarLink("large"),
+			"og:url":         "https://" + ctx.App.Config.Domain + viewUser.Link(),
+			"og:site_name":   "notify.moe",
+			"og:description": strconv.Itoa(len(animeList.Items)) + " anime",
+
+			// The OpenGraph type "profile" is meant for real-life persons but I think it's okay in this context.
+			// An alternative would be to use "article" which is mostly used for blog posts and news.
+			"og:type": "profile",
+		},
+		Meta: map[string]string{
+			"description": viewUser.Nick + "'s anime list",
+			"keywords":    "anime list",
+		},
+	}
+
 	// In case we're scrolling, send items only (without the page frame)
 	if index > 0 {
 		return ctx.HTML(components.AnimeListScrollable(items, viewUser, user))
 	}
 
 	// Otherwise, send the full page
-	return ctx.HTML(components.HomeAnimeList(items, nextIndex, viewUser, user, status))
+	return ctx.HTML(components.AnimeListPage(items, nextIndex, viewUser, user, status))
 }
