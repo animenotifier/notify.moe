@@ -1,12 +1,13 @@
 package explore
 
 import (
+	"strconv"
+	"time"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
-	"time"
-	"strconv"
 )
 
 // Get ...
@@ -55,6 +56,6 @@ func filterAnime(year, status, typ string) []*arn.Anime {
 		results = append(results, anime)
 	}
 
-	arn.SortAnimeByQuality(results, status)
+	arn.SortAnimeByQualityDetailed(results, status)
 	return results
 }

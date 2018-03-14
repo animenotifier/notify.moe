@@ -22,7 +22,7 @@ func Get(ctx *aero.Context) string {
 	}
 
 	allAnime := arn.AllAnime()
-	arn.SortAnimeByQuality(allAnime, "")
+	arn.SortAnimeByQuality(allAnime)
 
 	added := 0
 

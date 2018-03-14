@@ -48,7 +48,7 @@ func main() {
 	)
 
 	// Sort so that we download the most important ones first
-	arn.SortAnimeByQuality(animes, "")
+	arn.SortAnimeByQuality(animes)
 
 	// Queue up URLs
 	count := 0

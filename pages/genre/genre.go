@@ -23,7 +23,7 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
-	arn.SortAnimeByQuality(animes, "")
+	arn.SortAnimeByQuality(animes)
 
 	if len(animes) > animePerPage {
 		animes = animes[:animePerPage]
