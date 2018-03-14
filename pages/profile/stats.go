@@ -3,6 +3,7 @@ package profile
 import (
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/aerogo/aero"
@@ -24,6 +25,7 @@ func GetStatsByUser(ctx *aero.Context) string {
 	years := stats{}
 	studios := stats{}
 	genres := stats{}
+	trackTags := stats{}
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "User not found", err)
@@ -72,6 +74,20 @@ func GetStatsByUser(ctx *aero.Context) string {
 		}
 	}
 
+	for track := range arn.StreamSoundTracks() {
+		if !track.LikedBy(viewUser.ID) {
+			continue
+		}
+
+		for _, tag := range track.Tags {
+			if strings.Contains(tag, ":") {
+				continue
+			}
+
+			trackTags[tag]++
+		}
+	}
+
 	userStats.PieCharts = []*arn.PieChart{
 		arn.NewPieChart("Genres", genres),
 		arn.NewPieChart("Studios", studios),
@@ -79,6 +95,7 @@ func GetStatsByUser(ctx *aero.Context) string {
 		arn.NewPieChart("Ratings", ratings),
 		arn.NewPieChart("Types", types),
 		arn.NewPieChart("Status", status),
+		arn.NewPieChart("Soundtracks", trackTags),
 	}
 
 	return ctx.HTML(components.ProfileStats(&userStats, viewUser, utils.GetUser(ctx), ctx.URI()))
