@@ -18,8 +18,16 @@ var routeTests = map[string][]string{
 		"/+Akyoto/soundtracks/added",
 	},
 
+	"/user/:nick/soundtracks/added/from/:index": []string{
+		"/+Akyoto/soundtracks/added/from/3",
+	},
+
 	"/user/:nick/soundtracks/liked": []string{
 		"/+Akyoto/soundtracks/liked",
+	},
+
+	"/user/:nick/soundtracks/liked/from/:index": []string{
+		"/+Akyoto/soundtracks/liked/from/3",
 	},
 
 	"/user/:nick/followers": []string{
