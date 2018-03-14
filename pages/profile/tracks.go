@@ -23,7 +23,7 @@ func GetSoundTracksByUser(ctx *aero.Context) string {
 	index, _ := ctx.GetInt("index")
 
 	// Fetch all eligible tracks
-	allTracks := fetchAllByUser(viewUser.ID)
+	allTracks := fetchAllTracksByUser(viewUser.ID)
 
 	// Sort the tracks by publication date
 	arn.SortSoundTracksLatestFirst(allTracks)
@@ -61,7 +61,7 @@ func GetSoundTracksLikedByUser(ctx *aero.Context) string {
 	index, _ := ctx.GetInt("index")
 
 	// Fetch all eligible tracks
-	allTracks := fetchAllLikedByUser(viewUser.ID)
+	allTracks := fetchAllTracksLikedByUser(viewUser.ID)
 
 	// Sort the tracks by publication date
 	arn.SortSoundTracksLatestFirst(allTracks)
@@ -83,4 +83,18 @@ func GetSoundTracksLikedByUser(ctx *aero.Context) string {
 
 	// Otherwise, send the full page
 	return ctx.HTML(components.TrackList(tracks, viewUser, nextIndex, user, ctx.URI()))
+}
+
+// fetchAllTracksByUser returns all soundtracks that the user with userID published
+func fetchAllTracksByUser(userID string) []*arn.SoundTrack {
+	return arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+		return !track.IsDraft && len(track.Media) > 0 && track.CreatedBy == userID
+	})
+}
+
+// fetchAllTracksLikedByUser returns all soundtracks that the user with userID liked
+func fetchAllTracksLikedByUser(userID string) []*arn.SoundTrack {
+	return arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
+		return !track.IsDraft && len(track.Media) > 0 && track.LikedBy(userID)
+	})
 }
