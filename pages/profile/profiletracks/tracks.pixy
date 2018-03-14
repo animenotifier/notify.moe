@@ -1,4 +1,4 @@
-component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, nextIndex int, user *arn.User, uri string)
+component ProfileSoundTracks(tracks []*arn.SoundTrack, viewUser *arn.User, nextIndex int, user *arn.User, uri string)
 	ProfileHeader(viewUser, user, uri)
 
 	if strings.Contains(uri, "/added")

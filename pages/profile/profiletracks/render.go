@@ -53,5 +53,5 @@ func render(ctx *aero.Context, fetch func(userID string) []*arn.SoundTrack) stri
 	}
 
 	// Otherwise, send the full page
-	return ctx.HTML(components.TrackList(tracks, viewUser, nextIndex, user, ctx.URI()))
+	return ctx.HTML(components.ProfileSoundTracks(tracks, viewUser, nextIndex, user, ctx.URI()))
 }
