@@ -1,45 +1,36 @@
 package animelist
 
-import (
-	"net/http"
+// // ProfileFilterByStatus returns a handler for the given anime list item status.
+// func ProfileFilterByStatus(status string) aero.Handle {
+// 	return func(ctx *aero.Context) string {
+// 		user := utils.GetUser(ctx)
+// 		list, response := statusList(ctx, status)
 
-	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
-	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
-)
+// 		if response != "" {
+// 			return response
+// 		}
 
-// ProfileFilterByStatus returns a handler for the given anime list item status.
-func ProfileFilterByStatus(status string) aero.Handle {
-	return func(ctx *aero.Context) string {
-		user := utils.GetUser(ctx)
-		list, response := statusList(ctx, status)
+// 		return ctx.HTML(components.ProfileAnimeListItems(list.Items, list.User(), user, status, ctx.URI()))
+// 	}
+// }
 
-		if response != "" {
-			return response
-		}
+// // statusList handles the request for an anime list with a given status.
+// func statusList(ctx *aero.Context, status string) (*arn.AnimeList, string) {
+// 	nick := ctx.Get("nick")
+// 	viewUser, err := arn.GetUserByNick(nick)
 
-		return ctx.HTML(components.ProfileAnimeListItems(list.Items, list.User(), user, status, ctx.URI()))
-	}
-}
+// 	if err != nil {
+// 		return nil, ctx.Error(http.StatusNotFound, "User not found", err)
+// 	}
 
-// statusList handles the request for an anime list with a given status.
-func statusList(ctx *aero.Context, status string) (*arn.AnimeList, string) {
-	nick := ctx.Get("nick")
-	viewUser, err := arn.GetUserByNick(nick)
+// 	animeList := viewUser.AnimeList()
 
-	if err != nil {
-		return nil, ctx.Error(http.StatusNotFound, "User not found", err)
-	}
+// 	if animeList == nil {
+// 		return nil, ctx.Error(http.StatusNotFound, "Anime list not found", nil)
+// 	}
 
-	animeList := viewUser.AnimeList()
+// 	watchingList := animeList.FilterStatus(status)
+// 	watchingList.Sort()
 
-	if animeList == nil {
-		return nil, ctx.Error(http.StatusNotFound, "Anime list not found", nil)
-	}
-
-	watchingList := animeList.FilterStatus(status)
-	watchingList.Sort()
-
-	return watchingList, ""
-}
+// 	return watchingList, ""
+// }
