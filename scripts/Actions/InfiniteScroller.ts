@@ -13,7 +13,9 @@ export function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 	let target = arn.app.find("load-more-target")
 	let index = button.dataset.index
 
-	fetch("/_" + arn.app.currentPath + "/from/" + index)
+	fetch("/_" + arn.app.currentPath + "/from/" + index, {
+		credentials: "same-origin"
+	})
 	.then(response => {
 		let newIndex = response.headers.get("X-LoadMore-Index")
 
