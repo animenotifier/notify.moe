@@ -1,3 +1,5 @@
+const timeCapacity = 6.5
+
 export class MutationQueue {
 	elements: Array<HTMLElement>
 	mutation: (elem: HTMLElement) => void
@@ -16,7 +18,16 @@ export class MutationQueue {
 	}
 
 	mutateAll() {
+		let start = performance.now()
+
 		for(let i = 0; i < this.elements.length; i++) {
+			if(performance.now() - start > timeCapacity) {
+				let end = performance.now()
+				this.elements = this.elements.slice(i)
+				window.requestAnimationFrame(() => this.mutateAll())
+				return
+			}
+
 			this.mutation(this.elements[i])
 		}
 
@@ -31,7 +42,6 @@ export class MutationQueue {
 export class CustomMutationQueue {
 	mutations: Array<() => void>
 	onClearCallBack: () => void
-	timeCapacity = 6.5
 
 	constructor() {
 		this.mutations = []
@@ -49,9 +59,8 @@ export class CustomMutationQueue {
 		let start = performance.now()
 
 		for(let i = 0; i < this.mutations.length; i++) {
-			if(performance.now() - start > this.timeCapacity) {
+			if(performance.now() - start > timeCapacity) {
 				let end = performance.now()
-				// console.log(i, "mutations in", performance.now() - start, "ms")
 				this.mutations = this.mutations.slice(i)
 				window.requestAnimationFrame(() => this.mutateAll())
 				return
