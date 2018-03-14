@@ -1,5 +1,5 @@
 component BrowserExtension(watchingList *arn.AnimeList, viewUser *arn.User, user *arn.User)
-	AnimeList(watchingList, viewUser, user)
+	AnimeList(watchingList.Items, -1, viewUser, user)
 
 component ExtensionNavigation(user *arn.User)
 	nav.extension-navigation

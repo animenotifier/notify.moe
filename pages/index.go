@@ -189,6 +189,12 @@ func Configure(app *aero.Application) {
 	l.Page("/animelist/hold", home.FilterByStatus(arn.AnimeListStatusHold))
 	l.Page("/animelist/dropped", home.FilterByStatus(arn.AnimeListStatusDropped))
 
+	l.Page("/animelist/watching/from/:index", home.FilterByStatus(arn.AnimeListStatusWatching))
+	l.Page("/animelist/completed/from/:index", home.FilterByStatus(arn.AnimeListStatusCompleted))
+	l.Page("/animelist/planned/from/:index", home.FilterByStatus(arn.AnimeListStatusPlanned))
+	l.Page("/animelist/hold/from/:index", home.FilterByStatus(arn.AnimeListStatusHold))
+	l.Page("/animelist/dropped/from/:index", home.FilterByStatus(arn.AnimeListStatusDropped))
+
 	// Compare
 	l.Page("/compare/animelist/:nick-1/:nick-2", compare.AnimeList)
 
