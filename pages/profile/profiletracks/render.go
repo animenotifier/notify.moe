@@ -12,7 +12,7 @@ import (
 
 const (
 	tracksFirstLoad = 12
-	tracksPerScroll = 6
+	tracksPerScroll = 9
 )
 
 // render renders the soundtracks on user profiles.

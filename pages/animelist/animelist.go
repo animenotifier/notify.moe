@@ -14,7 +14,7 @@ import (
 
 const (
 	animeFirstLoad = 50
-	animePerScroll = 15
+	animePerScroll = 30
 )
 
 // FilterByStatus returns a handler for the given anime list item status.
