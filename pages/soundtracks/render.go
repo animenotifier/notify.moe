@@ -10,7 +10,7 @@ import (
 
 const (
 	tracksFirstLoad = 12
-	tracksPerScroll = 3
+	tracksPerScroll = 6
 )
 
 // render renders the soundracks page with the given tracks.
