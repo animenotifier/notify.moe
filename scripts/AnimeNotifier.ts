@@ -609,6 +609,14 @@ export class AnimeNotifier {
 
 		for(let i = 0; i < collection.length; i++) {
 			let element = collection.item(i) as HTMLElement
+
+			// Skip already mounted elements.
+			// This helps a lot when dealing with infinite scrolling
+			// where the first elements are already mounted.
+			if(element.classList.contains("mounted")) {
+				continue
+			}
+
 			let type = element.dataset.mountableType || "general"
 
 			if(mountableTypes.has(type)) {

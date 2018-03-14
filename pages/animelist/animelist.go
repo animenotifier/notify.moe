@@ -11,7 +11,10 @@ import (
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
-const maxAnimeListItems = 50
+const (
+	animeFirstLoad = 50
+	animePerScroll = 5
+)
 
 // FilterByStatus returns a handler for the given anime list item status.
 func FilterByStatus(status string) aero.Handle {
@@ -53,13 +56,18 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 
 	// Slice the part that we need
 	items := allItems[index:]
+	maxLength := animeFirstLoad
 
-	if len(items) > maxAnimeListItems {
-		items = items[:maxAnimeListItems]
+	if index > 0 {
+		maxLength = animePerScroll
+	}
+
+	if len(items) > maxLength {
+		items = items[:maxLength]
 	}
 
 	// Next index
-	nextIndex := infinitescroll.NextIndex(ctx, len(allItems), maxAnimeListItems, index)
+	nextIndex := infinitescroll.NextIndex(ctx, len(allItems), maxLength, index)
 
 	// In case we're scrolling, send items only (without the page frame)
 	if index > 0 {
