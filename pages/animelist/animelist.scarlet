@@ -5,13 +5,17 @@
 	margin-bottom 1rem
 
 .anime-list
-	vertical
+	display grid
+	grid-template-rows 40px
+	grid-template-columns 100%
 
 .anime-list-item
 	table-row
 	horizontal
 	align-items center
 	padding-right 1rem
+	width 100%
+	height 40px
 
 .anime-list-item-image-container
 	padding 0
@@ -117,6 +121,3 @@
 < 1100px
 	.anime-list-item-rating
 		display none !important
-
-.fill-screen
-	min-height calc(100vh - content-padding * 2 - 1rem - 43px - 23px)
