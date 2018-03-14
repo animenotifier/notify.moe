@@ -11,11 +11,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 						img.profile-watching-list-item-image.lazy(data-src=item.Anime().Image("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
 
 	.footer
-		.buttons
-			a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/recommended/anime")
-				Icon("tv")
-				span View recommendations
-				
+		.buttons	
 			if user != nil && (user.Role == "admin" || user.Role == "editor")
 				a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
 					Icon("search-plus")
@@ -111,12 +107,16 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 							Icon("user-times")
 							span Unfollow
 				
+				a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/animelist/watching")
+					Icon("list")
+					span Anime list
+
 				if user.ID != viewUser.ID
 					a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
 						Icon("exchange")
 						span Compare
 				
-				a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/animelist/watching")
-					Icon("list")
-					span Anime list
+				a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/recommended/anime")
+					Icon("archive")
+					span Recomms
 				
