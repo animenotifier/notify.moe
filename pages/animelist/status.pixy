@@ -1,3 +1,0 @@
-component ProfileAnimeListItems(animeListItems []*arn.AnimeListItem, viewUser *arn.User, user *arn.User, status string, uri string)
-	ProfileHeader(viewUser, user, uri)
-	AnimeListItems(animeListItems, -1, viewUser, user)

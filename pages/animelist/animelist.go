@@ -22,12 +22,12 @@ func FilterByStatus(status string) aero.Handle {
 			return frontpage.Get(ctx)
 		}
 
-		return HomeAnimeList(ctx, user, status)
+		return AnimeList(ctx, user, status)
 	}
 }
 
-// HomeAnimeList renders the anime list items.
-func HomeAnimeList(ctx *aero.Context, user *arn.User, status string) string {
+// AnimeList renders the anime list items.
+func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 	nick := ctx.Get("nick")
 	index, _ := ctx.GetInt("index")
 	viewUser, err := arn.GetUserByNick(nick)
