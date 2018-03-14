@@ -7,7 +7,11 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 	let status = arn.app.find("filter-status") as HTMLSelectElement
 	let type = arn.app.find("filter-type") as HTMLSelectElement
 
-	arn.app.load(`/explore/anime/${year.value}/${status.value}/${type.value}`)
+	for(let cell of findAll("anime-grid-cell")) {
+		cell.style.opacity = "0.1"
+	}
+
+	arn.diff(`/explore/anime/${year.value}/${status.value}/${type.value}`)
 }
 
 // Hides anime that are already in your list.

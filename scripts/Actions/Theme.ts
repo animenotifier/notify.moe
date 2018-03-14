@@ -72,9 +72,9 @@ export function lightTheme(arn: AnimeNotifier) {
 export function darkTheme(arn: AnimeNotifier) {
 	let root = document.documentElement
 
-	if(arn.user.dataset.pro !== "true") {
-		alert("You need a PRO account!")
-	}
+	// if(arn.user.dataset.pro !== "true") {
+	// 	alert("You need a PRO account!")
+	// }
 
 	for(let property in dark) {
 		if(!dark.hasOwnProperty(property)) {
