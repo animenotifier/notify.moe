@@ -8,6 +8,11 @@ import (
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
+const (
+	tracksFirstLoad = 12
+	tracksPerScroll = 3
+)
+
 // render renders the soundracks page with the given tracks.
 func render(ctx *aero.Context, allTracks []*arn.SoundTrack) string {
 	user := utils.GetUser(ctx)

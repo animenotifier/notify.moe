@@ -5,11 +5,6 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-const (
-	tracksFirstLoad = 12
-	tracksPerScroll = 3
-)
-
 // Latest renders the latest soundtracks.
 func Latest(ctx *aero.Context) string {
 	// Fetch all eligible tracks
