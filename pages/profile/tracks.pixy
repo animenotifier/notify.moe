@@ -1,12 +1,18 @@
-component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, user *arn.User, uri string)
+component TrackList(tracks []*arn.SoundTrack, viewUser *arn.User, nextIndex int, user *arn.User, uri string)
 	ProfileHeader(viewUser, user, uri)
 
-	h1.page-title= "Tracks added by " + viewUser.Nick
-	
+	if strings.Contains(uri, "/added")
+		h1.page-title= "Tracks added by " + viewUser.Nick
+	else
+		h1.page-title= "Tracks liked by " + viewUser.Nick
+
 	if len(tracks) == 0
 		p.no-data.mountable= viewUser.Nick + " hasn't added any tracks yet."
 	else
-		.soundtracks
-			each track in tracks
-				SoundTrack(track)
+		#load-more-target.soundtracks
+			SoundTracksScrollable(tracks, user)
+
+		if nextIndex != -1
+			.buttons
+				LoadMore(nextIndex)
 	
