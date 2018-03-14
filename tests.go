@@ -14,8 +14,12 @@ var routeTests = map[string][]string{
 		"/+Akyoto/forum/posts",
 	},
 
-	"/user/:nick/soundtracks": []string{
-		"/+Akyoto/soundtracks",
+	"/user/:nick/soundtracks/added": []string{
+		"/+Akyoto/soundtracks/added",
+	},
+
+	"/user/:nick/soundtracks/liked": []string{
+		"/+Akyoto/soundtracks/liked",
 	},
 
 	"/user/:nick/followers": []string{
