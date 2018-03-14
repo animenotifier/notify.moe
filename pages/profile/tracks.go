@@ -7,6 +7,7 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
 // GetSoundTracksByUser shows all soundtracks of a particular user.
@@ -19,17 +20,35 @@ func GetSoundTracksByUser(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "User not found", err)
 	}
 
-	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft && len(track.Media) > 0 && track.CreatedBy == viewUser.ID
-	})
+	index, _ := ctx.GetInt("index")
 
-	arn.SortSoundTracksLatestFirst(tracks)
+	// Fetch all eligible tracks
+	allTracks := fetchAllByUser(viewUser.ID)
 
-	return ctx.HTML(components.TrackList(tracks, viewUser, user, ctx.URI()))
+	// Sort the tracks by number of likes
+	arn.SortSoundTracksLatestFirst(allTracks)
+
+	// Slice the part that we need
+	tracks := allTracks[index:]
+
+	if len(tracks) > maxTracks {
+		tracks = tracks[:maxTracks]
+	}
+
+	// Next index
+	nextIndex := infinitescroll.NextIndex(ctx, len(allTracks), maxTracks, index)
+
+	// In case we're scrolling, send soundtracks only (without the page frame)
+	if index > 0 {
+		return ctx.HTML(components.SoundTracksScrollable(tracks, user))
+	}
+
+	// Otherwise, send the full page
+	return ctx.HTML(components.TrackList(tracks,viewUser, nextIndex, user, ctx.URI()))
 
 }
 
-// GetSoundTracksByUser shows all soundtracks of a particular user.
+// GetSoundTracksLikedByUser shows all soundtracks of a particular user.
 func GetSoundTracksLikedByUser(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
 	user := utils.GetUser(ctx)
@@ -39,12 +58,29 @@ func GetSoundTracksLikedByUser(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "User not found", err)
 	}
 
-	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
-		return !track.IsDraft && len(track.Media) > 0 && track.LikedBy(viewUser.ID)
-	})
+	index, _ := ctx.GetInt("index")
 
-	arn.SortSoundTracksLatestFirst(tracks)
+	// Fetch all eligible tracks
+	allTracks := fetchAllLikedByUser(viewUser.ID)
 
-	return ctx.HTML(components.TrackList(tracks, viewUser, user, ctx.URI()))
+	// Sort the tracks by number of likes
+	arn.SortSoundTracksLatestFirst(allTracks)
 
+	// Slice the part that we need
+	tracks := allTracks[index:]
+
+	if len(tracks) > maxTracks {
+		tracks = tracks[:maxTracks]
+	}
+
+	// Next index
+	nextIndex := infinitescroll.NextIndex(ctx, len(allTracks), maxTracks, index)
+
+	// In case we're scrolling, send soundtracks only (without the page frame)
+	if index > 0 {
+		return ctx.HTML(components.SoundTracksScrollable(tracks, user))
+	}
+
+	// Otherwise, send the full page
+	return ctx.HTML(components.TrackList(tracks,viewUser, nextIndex, user, ctx.URI()))
 }
