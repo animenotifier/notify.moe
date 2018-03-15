@@ -7,7 +7,7 @@ func main() {
 
 	for user := range arn.StreamUsers() {
 		settings := user.Settings()
-		settings.NotificationEmail = user.Email
+		settings.Notification.Email = user.Email
 		settings.Save()
 	}
 }
