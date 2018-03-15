@@ -6,7 +6,7 @@ component EditLog(entries []*arn.EditLogEntry, user *arn.User)
 	table.edit-log
 		thead
 			tr.mountable
-				th.text-center Icon
+				th.text-center Action
 				th User
 				th Object
 				th Key
