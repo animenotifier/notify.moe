@@ -3,6 +3,19 @@ component InputText(id string, value string, label string, placeholder string)
 		label(for=id)= label + ":"
 		input.widget-ui-element.action(id=id, data-field=id, type="text", value=value, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
 
+component InputBool(id string, value bool, label string, title string)
+	.widget-section
+		label(for=id)= label + ":"
+		if value
+			button.action(id=id, data-action="disable", data-trigger="click", data-field=id, title=title)
+				Icon("toggle-on")
+				span ON
+		else
+			button.action(id=id, data-action="enable", data-trigger="click", data-field=id, title=title)
+				Icon("toggle-off")
+				span OFF
+		//- input.widget-ui-element.action(id=id, data-field=id, type="checkbox", value=value, checked=value, data-action="save", data-trigger="change")
+
 component InputTextArea(id string, value string, label string, placeholder string)
 	.widget-section
 		label(for=id)= label + ":"

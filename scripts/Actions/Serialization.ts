@@ -48,6 +48,52 @@ export function save(arn: AnimeNotifier, input: HTMLElement) {
 	})
 }
 
+// Enable (bool field)
+export async function enable(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let obj = {}
+	let apiEndpoint = arn.findAPIEndpoint(button)
+
+	obj[button.dataset.field] = true
+	button.disabled = true
+
+	try {
+		// Update boolean value
+		await arn.post(apiEndpoint, obj)
+
+		// Reload content
+		arn.reloadContent()
+
+		arn.statusMessage.showInfo("Enabled: " + button.title)
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	} finally {
+		button.disabled = false
+	}
+}
+
+// Disable (bool field)
+export async function disable(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let obj = {}
+	let apiEndpoint = arn.findAPIEndpoint(button)
+
+	obj[button.dataset.field] = false
+	button.disabled = true
+
+	try {
+		// Update boolean value
+		await arn.post(apiEndpoint, obj)
+
+		// Reload content
+		arn.reloadContent()
+
+		arn.statusMessage.showInfo("Disabled: " + button.title)
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	} finally {
+		button.disabled = false
+	}
+}
+
 // Append new element to array
 export function arrayAppend(arn: AnimeNotifier, element: HTMLElement) {
 	let field = element.dataset.field

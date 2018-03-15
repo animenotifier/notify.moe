@@ -312,8 +312,8 @@ export class AnimeNotifier {
 		let testButton = this.app.find("test-notification") as HTMLButtonElement
 
 		if(!this.pushManager.pushSupported) {
-			enableButton.style.display = "none"
-			disableButton.style.display = "none"
+			enableButton.classList.add("hidden")
+			disableButton.classList.add("hidden")
 			testButton.innerHTML = "Your browser doesn't support push notifications!"
 			return
 		}
@@ -321,11 +321,11 @@ export class AnimeNotifier {
 		let subscription = await this.pushManager.subscription()
 
 		if(subscription) {
-			enableButton.style.display = "none"
-			disableButton.style.display = "flex"
+			enableButton.classList.add("hidden")
+			disableButton.classList.remove("hidden")
 		} else {
-			enableButton.style.display = "flex"
-			disableButton.style.display = "none"
+			enableButton.classList.remove("hidden")
+			disableButton.classList.add("hidden")
 		}
 	}
 

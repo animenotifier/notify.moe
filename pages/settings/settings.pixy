@@ -89,25 +89,47 @@ component SettingsNotifications(user *arn.User)
 		.widget.mountable
 			h3.widget-title
 				Icon("bell")
-				span Notifications
+				span Push notifications
 			
 			#enable-notifications.widget-section
 				label Enable:
 				button.action(data-action="enableNotifications", data-trigger="click")
 					Icon("toggle-off")
-					span Enable notifications
+					span Enable push notifications
 
-			#disable-notifications.widget-section
+			#disable-notifications.widget-section.hidden
 				label Disable:
 				button.action(data-action="disableNotifications", data-trigger="click")
 					Icon("toggle-on")
-					span Disable notifications
+					span Disable push notifications
 
 			#test-notification.widget-section
 				label Test:
 				button.action(data-action="testNotification", data-trigger="click")
 					Icon("paper-plane")
 					span Send test notification
+			
+			.footer
+				p(title="This setting is not account bound, instead it is bound to your browser.") You can customize this setting on every device you own.
+		
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("filter")
+				span General
+			
+			InputBool("Notification.AnimeEpisodeReleases", user.Settings().Notification.AnimeEpisodeReleases, "New episodes", "Notifications about new episodes")
+			InputBool("Notification.AnimeFinished", user.Settings().Notification.AnimeFinished, "Finished anime series", "Notifications about finished anime series")
+			InputBool("Notification.NewFollowers", user.Settings().Notification.NewFollowers, "New followers", "Notifications about new followers")
+		
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("heart")
+				span Likes
+			
+			InputBool("Notification.ForumLikes", user.Settings().Notification.ForumLikes, "Forum post likes", "Notifications about forum post likes")
+			InputBool("Notification.SoundTrackLikes", user.Settings().Notification.SoundTrackLikes, "Soundtrack likes", "Notifications about soundtrack likes")
+			//- InputBool("Notification.GroupPostLikes", user.Settings().Notification.GroupPostLikes, "Group post likes", "Notifications about group post likes")
+			InputBool("Notification.QuoteLikes", user.Settings().Notification.QuoteLikes, "Quote likes", "Notifications about quote likes")
 
 component SettingsApps(user *arn.User)
 	SettingsTabs
