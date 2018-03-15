@@ -48,5 +48,6 @@ component CompanyAnime(label string, animes []*arn.Anime, user *arn.User)
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs
 		Tab("Company", "building", company.Link())
-		Tab("Edit", "pencil", company.Link() + "/edit")
+		if user != nil
+			Tab("Edit", "pencil", company.Link() + "/edit")
 		Tab("History", "history", company.Link() + "/history")
