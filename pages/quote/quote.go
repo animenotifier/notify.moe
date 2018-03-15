@@ -33,6 +33,7 @@ func Get(ctx *aero.Context) string {
 
 	if character != nil {
 		openGraph.Tags["og:title"] = character.Name + "'s quote"
+		openGraph.Tags["og:image"] = "https:" + character.Image
 	}
 
 	ctx.Data = openGraph
