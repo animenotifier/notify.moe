@@ -50,8 +50,8 @@ func Finish(ctx *aero.Context) string {
 
 		rating := match.KitsuItem.Attributes.RatingTwenty
 
-		if rating < 2 {
-			rating = 2
+		if rating < 0 {
+			rating = 0
 		}
 
 		if rating > 20 {
@@ -59,7 +59,7 @@ func Finish(ctx *aero.Context) string {
 		}
 
 		// Convert rating
-		convertedRating := (float64(rating-2) / 18.0) * 10.0
+		convertedRating := (float64(rating) / 20.0) * 10.0
 
 		item := &arn.AnimeListItem{
 			AnimeID:  match.ARNAnime.ID,
@@ -79,7 +79,7 @@ func Finish(ctx *aero.Context) string {
 
 	animeList.Save()
 
-	return ctx.Redirect("/+" + user.Nick + "/animelist")
+	return ctx.Redirect("/+" + user.Nick + "/animelist/watching")
 }
 
 // getMatches finds and returns all matches for the logged in user.
