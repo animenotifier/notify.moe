@@ -17,6 +17,7 @@ const (
 func render(ctx *aero.Context, allTracks []*arn.SoundTrack) string {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
+	tag := ctx.Get("tag")
 
 	// Slice the part that we need
 	tracks := allTracks[index:]
@@ -39,5 +40,5 @@ func render(ctx *aero.Context, allTracks []*arn.SoundTrack) string {
 	}
 
 	// Otherwise, send the full page
-	return ctx.HTML(components.SoundTracks(tracks, nextIndex, "", user))
+	return ctx.HTML(components.SoundTracks(tracks, nextIndex, tag, user))
 }
