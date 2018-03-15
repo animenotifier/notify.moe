@@ -55,6 +55,11 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 		return
 	}
 
+	if msg.Content == "!source" {
+		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+"B-baaaaaaaka! Y..you...you want to...TOUCH MY CODE?!\n\nhttps://github.com/animenotifier/notify.moe/tree/go/bots/discord")
+		return
+	}
+
 	if strings.HasPrefix(msg.Content, "!s ") {
 		term := msg.Content[len("!s "):]
 		users, animes, posts, threads, tracks, characters := arn.Search(term, 3, 3, 3, 3, 3, 3)
