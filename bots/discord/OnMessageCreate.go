@@ -56,7 +56,7 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 
 	if msg.Content == "!source" {
-		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+"B-baaaaaaaka! Y..you...you want to...TOUCH MY CODE?!\n\nhttps://github.com/animenotifier/notify.moe/tree/go/bots/discord")
+		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+" B-baaaaaaaka! Y..you...you want to...TOUCH MY CODE?!\n\nhttps://github.com/animenotifier/notify.moe/tree/go/bots/discord")
 		return
 	}
 
