@@ -671,11 +671,12 @@ export class AnimeNotifier {
 		}
 
 		let path = "/_" + url
+		let request = this.app.get(path)
 
-		let request = fetch(path, {
-			credentials: "same-origin"
-		})
-		.then(response => response.text())
+		// let request = fetch(path, {
+		// 	credentials: "same-origin"
+		// })
+		// .then(response => response.text())
 
 		history.pushState(url, null, url)
 		this.app.currentPath = url

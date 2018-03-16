@@ -7,76 +7,90 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				Icon("tv")
 				span Anime
 
-			.profile-watching-list.anime-search
-				if len(animes) == 0
-					p.no-search-results.mountable No anime found.
-				else
-					each anime in animes
-						a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
-							img.anime-cover-image.anime-search-result.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.Canonical)
+			AnimeSearchResults(animes)
 
 		.widget
 			h3.widget-title
 				Icon("user")
 				span Characters
 
-			.character-search
-				if len(characters) == 0
-					p.no-search-results.mountable No characters found.
-				else
-					each character in characters
-						.mountable(data-mountable-type="character")
-							CharacterSmall(character)
+			CharacterSearchResults(characters)
 
 		.widget
 			h3.widget-title
 				Icon("comment")
 				span Forum
 
-			if len(posts) == 0 && len(threads) == 0
-				p.no-search-results.mountable No posts found.
-			else
-				.forum-search-results
-					each thread in threads
-						.forum-search-result.mountable(data-mountable-type="forum")
-							.forum-search-result-header
-								a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
-								if thread.Author().HasNick()
-									.forum-search-result-author= thread.Author().Nick
-							.forum-search-result-sample= thread.Text
-
-					each post in posts
-						.forum-search-result.mountable(data-mountable-type="forum")
-							.forum-search-result-header
-								a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
-								if post.Author().HasNick()
-									.forum-search-result-author= post.Author().Nick
-							.forum-search-result-sample= post.Text
+			ForumSearchResults(posts, threads)
 
 		.widget
 			h3.widget-title
 				Icon("music")
 				span Soundtracks
 
-			if len(tracks) == 0
-				p.no-search-results.mountable No soundtracks found.
-			else
-				ul.soundtrack-search
-					each track in tracks
-						li.mountable(data-mountable-type="track")
-							a.ajax(href=track.Link())= track.Title
+			SoundTrackSearchResults(tracks)
 
 		.widget
 			h3.widget-title
 				Icon("user")
 				span Users
 
-			.user-avatars.user-search
-				if len(users) == 0
-					p.no-search-results.mountable No users found.
-				else
-					each user in users
-						.mountable(data-mountable-type="user")
-							Avatar(user)
-						//- a.ajax(href=user.Link())= user.Nick
+			UserSearchResults(users)
+
+component AnimeSearchResults(animes []*arn.Anime)
+	if len(animes) == 0
+		p.no-search-results.mountable No anime found.
+	else
+		.profile-watching-list.anime-search
+			each anime in animes
+				a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
+					img.anime-cover-image.anime-search-result.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.Canonical)
+
+component CharacterSearchResults(characters []*arn.Character)
+	if len(characters) == 0
+		p.no-search-results.mountable No characters found.
+	else
+		.character-search
+			each character in characters
+				.mountable(data-mountable-type="character")
+					CharacterSmall(character)
+
+component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread)
+	if len(posts) == 0 && len(threads) == 0
+		p.no-search-results.mountable No posts found.
+	else
+		.forum-search-results
+			each thread in threads
+				.forum-search-result.mountable(data-mountable-type="forum")
+					.forum-search-result-header
+						a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
+						if thread.Author().HasNick()
+							.forum-search-result-author= thread.Author().Nick
+					.forum-search-result-sample= thread.Text
+
+			each post in posts
+				.forum-search-result.mountable(data-mountable-type="forum")
+					.forum-search-result-header
+						a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
+						if post.Author().HasNick()
+							.forum-search-result-author= post.Author().Nick
+					.forum-search-result-sample= post.Text
+
+component SoundTrackSearchResults(tracks []*arn.SoundTrack)
+	if len(tracks) == 0
+		p.no-search-results.mountable No soundtracks found.
+	else
+		ul.soundtrack-search
+			each track in tracks
+				li.mountable(data-mountable-type="track")
+					a.ajax(href=track.Link())= track.Title
+
+component UserSearchResults(users []*arn.User)
+	if len(users) == 0
+		p.no-search-results.mountable No users found.
+	else
+		.user-avatars.user-search
+			each user in users
+				.mountable(data-mountable-type="user")
+					Avatar(user)
 				
