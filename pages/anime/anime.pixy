@@ -7,7 +7,7 @@ component Anime(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.Sou
 
 component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, episodes []*arn.AnimeEpisode, user *arn.User)
 	.anime-header(data-id=anime.ID)
-		.anime-image-container.mountable
+		a.anime-image-container.mountable(href=anime.Image("original"), target="_blank")
 			img.anime-cover-image.lazy(data-src=anime.Image("large"), data-webp="true", alt=anime.Title.ByUser(user))
 
 		.space
