@@ -12,7 +12,8 @@ import { ServiceWorkerManager } from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, delay, canUseWebP, swapElements } from "./Utils"
 import * as actions from "./Actions"
-import { darkTheme } from "./Actions";
+import { darkTheme, addSpeed, playPreviousTrack } from "./Actions";
+import { playPauseAudio, playNextTrack } from "./Actions/Audio"
 
 export class AnimeNotifier {
 	app: Application
@@ -838,6 +839,51 @@ export class AnimeNotifier {
 		// "S" = Toggle sidebar
 		if(e.keyCode == 83 && !e.ctrlKey) {
 			this.sideBar.toggle()
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
+		// "+" = Audio speed up
+		if(e.keyCode == 107 && !e.ctrlKey) {
+			addSpeed(this, 0.05)
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
+		// "-" = Audio speed down
+		if(e.keyCode == 109 && !e.ctrlKey) {
+			addSpeed(this, -0.05)
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
+		// "J" = Previous track
+		if(e.keyCode == 74 && !e.ctrlKey) {
+			playPreviousTrack(this)
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
+		// "K" = Play/pause
+		if(e.keyCode == 75 && !e.ctrlKey) {
+			playPauseAudio(this)
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
+		// "L" = Next track
+		if(e.keyCode == 76 && !e.ctrlKey) {
+			playNextTrack(this)
 
 			e.preventDefault()
 			e.stopPropagation()

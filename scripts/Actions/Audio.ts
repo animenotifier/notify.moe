@@ -6,10 +6,11 @@ var gainNode: GainNode
 var volume = 0.5
 var volumeTimeConstant = 0.01
 var volumeSmoothingDelay = 0.05
+var targetSpeed = 1.0
 var playId = 0
 var audioPlayer = document.getElementById("audio-player")
-var audioPlayerPlay = document.getElementById("audio-player-play")
-var audioPlayerPause = document.getElementById("audio-player-pause")
+var audioPlayerPlay = document.getElementById("audio-player-play") as HTMLButtonElement
+var audioPlayerPause = document.getElementById("audio-player-pause") as HTMLButtonElement
 var trackLink = document.getElementById("audio-player-track-title") as HTMLLinkElement
 var animeInfo = document.getElementById("audio-player-anime-info") as HTMLElement
 var animeLink = document.getElementById("audio-player-anime-link") as HTMLLinkElement
@@ -75,6 +76,7 @@ function playAudioFile(arn: AnimeNotifier, trackId: string, trackUrl: string) {
 			audioNode.buffer = buffer
 			audioNode.connect(gainNode)
 			gainNode.connect(audioContext.destination)
+			audioNode.playbackRate.setValueAtTime(targetSpeed, 0)
 			audioNode.start(0)
 
 			audioNode.onended = (event: MediaStreamErrorEvent) => {
@@ -183,6 +185,20 @@ export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
 	}
 }
 
+// Play or pause audio
+export function playPauseAudio(arn: AnimeNotifier) {
+	if(!audioNode) {
+		playNextTrack(arn)
+		return
+	}
+
+	if(audioNode.playbackRate.value === 0) {
+		resumeAudio(arn, audioPlayerPlay)
+	} else {
+		pauseAudio(arn, audioPlayerPlay)
+	}
+}
+
 // Play previous track
 export async function playPreviousTrack(arn: AnimeNotifier) {
 	alert("Previous track is currently work in progress! Check back later :)")
@@ -228,8 +244,26 @@ export function resumeAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
 		return
 	}
 
-	audioNode.playbackRate.setValueAtTime(1.0, 0)
+	audioNode.playbackRate.setValueAtTime(targetSpeed, 0)
 
 	audioPlayerPlay.classList.add("fade-out")
 	audioPlayerPause.classList.remove("fade-out")
+}
+
+// Add speed
+export function addSpeed(arn: AnimeNotifier, speed: number) {
+	if(!audioNode || audioNode.playbackRate.value === 0) {
+		return
+	}
+
+	targetSpeed += speed
+
+	if(targetSpeed < 0.5) {
+		targetSpeed = 0.5
+	} else if(targetSpeed > 2) {
+		targetSpeed = 2
+	}
+
+	audioNode.playbackRate.setValueAtTime(targetSpeed, 0)
+	arn.statusMessage.showInfo("Playback speed: " + Math.round(targetSpeed * 100) + "%")
 }
