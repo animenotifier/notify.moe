@@ -1,8 +1,6 @@
 package support
 
 import (
-	"net/http"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
@@ -11,10 +9,11 @@ import (
 // Get support page.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
+	profileLink := "/"
 
-	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+	if user != nil {
+		profileLink = "/+" + user.Nick
 	}
 
-	return ctx.HTML(components.Support(user))
+	return ctx.HTML(components.Support(profileLink, user))
 }

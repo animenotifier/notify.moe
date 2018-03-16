@@ -10,10 +10,12 @@ component Shop(user *arn.User, items []*arn.Item)
 component ShopTabs(user *arn.User)
 	.tabs
 		Tab("Support", "heart", "/support")
-		Tab("Shop", "shopping-cart", "/shop")
-		Tab("Inventory", "briefcase", "/inventory")
-		Tab("History", "history", "/shop/history")
-		Tab(strconv.Itoa(user.Balance), "diamond", "/charge")
+
+		if user != nil
+			Tab("Shop", "shopping-cart", "/shop")
+			Tab("Inventory", "briefcase", "/inventory")
+			Tab("History", "history", "/shop/history")
+			Tab(strconv.Itoa(user.Balance), "diamond", "/charge")
 
 component ShopItem(item *arn.Item)
 	.shop-item.mountable(data-item-id=item.ID)

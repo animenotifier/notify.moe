@@ -1,4 +1,4 @@
-component Support(user *arn.User)
+component Support(profileLink string, user *arn.User)
 	ShopTabs(user)
 
 	h1.mountable Why support us?
@@ -79,7 +79,7 @@ component Support(user *arn.User)
 			
 			p.feature-card-text Lastly, activate the freshly bought item in your inventory.
 
-		a.feature-card.mountable.ajax(href="/+" + user.Nick)
+		a.feature-card.mountable.ajax(href=profileLink)
 			.feature-card-icon
 				RawIcon("user-circle")
 			
