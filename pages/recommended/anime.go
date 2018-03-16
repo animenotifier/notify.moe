@@ -100,6 +100,7 @@ func Anime(ctx *aero.Context) string {
 		}
 
 		animeAffinity += float64(anime.Popularity.Total())
+		animeAffinity += anime.Rating.Overall * 80
 		affinity[anime.ID] = animeAffinity
 	}
 
