@@ -10,14 +10,18 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal/parser"
+	"github.com/fatih/color"
 )
 
 func main() {
+	color.Yellow("Importing MAL anime")
+
 	defer arn.Node.Close()
+	defer color.Green("Finished.")
 
-	// readFile("../mal-crawler/files/anime-31240.html")
+	// readFile("../mal-download/files/anime-31240.html")
 
-	filepath.Walk("../mal-crawler/files", func(name string, info os.FileInfo, err error) error {
+	filepath.Walk("../mal-download/files", func(name string, info os.FileInfo, err error) error {
 		if err != nil {
 			fmt.Println(err)
 			return err

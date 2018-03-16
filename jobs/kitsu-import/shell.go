@@ -33,7 +33,7 @@ func InvokeShellArgs() bool {
 			panic(errors.New("Anime ID is not the same"))
 		}
 
-		anime := sync(kitsuAnime)
+		anime := importKitsuAnime(kitsuAnime)
 
 		if verbose {
 			color.Cyan("Kitsu:")

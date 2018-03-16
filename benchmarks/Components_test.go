@@ -35,7 +35,7 @@ func BenchmarkRenderAnimeList(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			components.AnimeList(animeList, user, user)
+			components.AnimeList(animeList.Items, -1, user, user)
 		}
 	})
 }

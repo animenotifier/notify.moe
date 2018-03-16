@@ -2,16 +2,17 @@ package main
 
 import (
 	"fmt"
-	"path/filepath"
+	"net/http"
 	"strings"
 
+	"github.com/aerogo/http/client"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/kitsu"
 	"github.com/fatih/color"
 )
 
 func main() {
-	color.Yellow("Syncing Anime")
+	color.Yellow("Importing Kitsu anime")
 
 	defer arn.Node.Close()
 	defer color.Green("Finished.")
@@ -26,17 +27,17 @@ func main() {
 
 	// Iterate over the stream
 	for anime := range allAnime {
-		sync(anime)
+		importKitsuAnime(anime)
 	}
 }
 
-func sync(data *kitsu.Anime) *arn.Anime {
+func importKitsuAnime(data *kitsu.Anime) *arn.Anime {
 	anime, err := arn.GetAnime(data.ID)
 
 	// This stops overwriting existing data
-	if anime != nil {
-		return anime
-	}
+	// if anime != nil {
+	// 	return anime
+	// }
 
 	if err != nil {
 		if strings.Contains(err.Error(), "not found") {
@@ -62,7 +63,6 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	anime.EpisodeCount = attr.EpisodeCount
 	anime.EpisodeLength = attr.EpisodeLength
 	anime.Status = attr.Status
-	anime.Image.Extension = filepath.Ext(kitsu.FixImageURL(attr.PosterImage.Original))
 
 	// Status "unreleased" means the same as "upcoming" so we should normalize it
 	if anime.Status == "unreleased" {
@@ -95,16 +95,28 @@ func sync(data *kitsu.Anime) *arn.Anime {
 	for _, mapping := range data.Mappings {
 		switch mapping.Attributes.ExternalSite {
 		case "myanimelist/anime":
-			anime.AddMapping("myanimelist/anime", mapping.Attributes.ExternalID, "")
+			anime.SetMapping("myanimelist/anime", mapping.Attributes.ExternalID, "")
 		case "anidb":
-			anime.AddMapping("anidb/anime", mapping.Attributes.ExternalID, "")
+			anime.SetMapping("anidb/anime", mapping.Attributes.ExternalID, "")
 		case "thetvdb", "thetvdb/series":
-			anime.AddMapping("thetvdb/anime", mapping.Attributes.ExternalID, "")
+			fmt.Println(mapping.Attributes.ExternalSite, mapping.Attributes.ExternalID)
+			anime.SetMapping("thetvdb/anime", mapping.Attributes.ExternalID, "")
 		case "thetvdb/season":
 			// Ignore
 		default:
 			color.Yellow("Unknown mapping: %s %s", mapping.Attributes.ExternalSite, mapping.Attributes.ExternalID)
 		}
+	}
+
+	return anime
+
+	// Download image
+	response, err := client.Get(attr.PosterImage.Original).End()
+
+	if err == nil && response.StatusCode() == http.StatusOK {
+		anime.SetImageBytes(response.Bytes())
+	} else {
+		color.Red("No image for [%s] %s (%d)", anime.ID, anime, response.StatusCode())
 	}
 
 	// Rating
