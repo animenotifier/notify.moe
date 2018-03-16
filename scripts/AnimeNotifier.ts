@@ -824,8 +824,22 @@ export class AnimeNotifier {
 			return
 		}
 
+		// "Ctrl" + "," = Settings
+		if(e.ctrlKey && e.keyCode == 188) {
+			this.app.load("/settings")
+
+			e.preventDefault()
+			e.stopPropagation()
+			return
+		}
+
+		// The following keycodes should not be activated while Ctrl is held down
+		if(e.ctrlKey) {
+			return
+		}
+
 		// "F" = Search
-		if(e.keyCode == 70 && !e.ctrlKey) {
+		if(e.keyCode == 70) {
 			let search = this.app.find("search") as HTMLInputElement
 
 			search.focus()
@@ -837,7 +851,7 @@ export class AnimeNotifier {
 		}
 
 		// "S" = Toggle sidebar
-		if(e.keyCode == 83 && !e.ctrlKey) {
+		if(e.keyCode == 83) {
 			this.sideBar.toggle()
 
 			e.preventDefault()
@@ -846,7 +860,7 @@ export class AnimeNotifier {
 		}
 
 		// "+" = Audio speed up
-		if(e.keyCode == 107 && !e.ctrlKey) {
+		if(e.keyCode == 107 || e.keyCode == 187) {
 			addSpeed(this, 0.05)
 
 			e.preventDefault()
@@ -855,7 +869,7 @@ export class AnimeNotifier {
 		}
 
 		// "-" = Audio speed down
-		if(e.keyCode == 109 && !e.ctrlKey) {
+		if(e.keyCode == 109 || e.keyCode == 189) {
 			addSpeed(this, -0.05)
 
 			e.preventDefault()
@@ -864,7 +878,7 @@ export class AnimeNotifier {
 		}
 
 		// "J" = Previous track
-		if(e.keyCode == 74 && !e.ctrlKey) {
+		if(e.keyCode == 74) {
 			playPreviousTrack(this)
 
 			e.preventDefault()
@@ -873,7 +887,7 @@ export class AnimeNotifier {
 		}
 
 		// "K" = Play/pause
-		if(e.keyCode == 75 && !e.ctrlKey) {
+		if(e.keyCode == 75) {
 			playPauseAudio(this)
 
 			e.preventDefault()
@@ -882,17 +896,8 @@ export class AnimeNotifier {
 		}
 
 		// "L" = Next track
-		if(e.keyCode == 76 && !e.ctrlKey) {
+		if(e.keyCode == 76) {
 			playNextTrack(this)
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
-		}
-
-		// "Ctrl" + "," = Settings
-		if(e.ctrlKey && e.keyCode == 188) {
-			this.app.load("/settings")
 
 			e.preventDefault()
 			e.stopPropagation()
