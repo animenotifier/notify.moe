@@ -8,7 +8,7 @@ component CompareMAL(comparisons []*utils.MALComparison, year string, status str
 			.data-comparison.mountable
 				.data-comparison-header
 					a.data-comparison-image-container(href=comparison.Anime.Link(), target="_blank")
-						img.data-comparison-image.lazy(data-src=comparison.Anime.Image("small"), data-webp="true", alt=comparison.Anime.Title.ByUser(user))
+						img.data-comparison-image.lazy(data-src=comparison.Anime.ImageLink("small"), data-webp="true", alt=comparison.Anime.Title.ByUser(user))
 					
 					.data-comparison-title
 						a(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.Canonical

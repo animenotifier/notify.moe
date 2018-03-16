@@ -5,7 +5,8 @@ component EditAnimeTabs(anime *arn.Anime)
 			span Anime
 		
 		Tab("Edit", "pencil", anime.Link() + "/edit")
-		Tab("Characters", "pencil", anime.Link() + "/edit/characters")
-		Tab("Relations", "pencil", anime.Link() + "/edit/relations")
-		Tab("Episodes", "pencil", anime.Link() + "/edit/episodes")
+		Tab("Images", "image", anime.Link() + "/edit/images")
+		Tab("Characters", "users", anime.Link() + "/edit/characters")
+		Tab("Relations", "sync-alt", anime.Link() + "/edit/relations")
+		Tab("Episodes", "list-ol", anime.Link() + "/edit/episodes")
 		Tab("History", "history", anime.Link() + "/edit/history")

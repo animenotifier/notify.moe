@@ -108,6 +108,7 @@ func Configure(app *aero.Application) {
 
 	// Edit anime
 	l.Page("/anime/:id/edit", editanime.Main)
+	l.Page("/anime/:id/edit/images", editanime.Images)
 	l.Page("/anime/:id/edit/characters", editanime.Characters)
 	l.Page("/anime/:id/edit/relations", editanime.Relations)
 	l.Page("/anime/:id/edit/episodes", editanime.Episodes)
@@ -216,6 +217,7 @@ func Configure(app *aero.Application) {
 	// Upload
 	app.Post("/api/upload/avatar", upload.Avatar)
 	app.Post("/api/upload/cover", upload.Cover)
+	app.Post("/api/upload/anime/:id/image", upload.AnimeImage)
 
 	// Admin
 	l.Page("/admin", admin.Get)

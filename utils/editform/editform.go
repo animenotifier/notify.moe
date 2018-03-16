@@ -133,7 +133,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			anime, err := arn.GetAnime(animeID)
 
 			if err == nil {
-				b.WriteString(components.EditFormImagePreview(anime.Link(), anime.Image("small"), true))
+				b.WriteString(components.EditFormImagePreview(anime.Link(), anime.ImageLink("small"), true))
 			}
 
 		case "Character":

@@ -14,7 +14,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					.character-anime
 						each anime in characterAnime
 							a.character-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-								img.character-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
+								img.character-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", alt=anime.Title.ByUser(user))
 					
 					if len(quotes) >0
 						h3 Quotes

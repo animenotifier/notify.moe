@@ -28,6 +28,24 @@ func Main(ctx *aero.Context) string {
 	return ctx.HTML(components.EditAnimeTabs(anime) + editform.Render(anime, "Edit anime", user))
 }
 
+// Images anime images edit page.
+func Images(ctx *aero.Context) string {
+	id := ctx.Get("id")
+	user := utils.GetUser(ctx)
+
+	if user == nil || (user.Role != "editor" && user.Role != "admin") {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this anime", nil)
+	}
+
+	anime, err := arn.GetAnime(id)
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "Anime not found", err)
+	}
+
+	return ctx.HTML(components.EditAnimeImages(anime))
+}
+
 // Characters anime characters edit page.
 func Characters(ctx *aero.Context) string {
 	id := ctx.Get("id")

@@ -3,7 +3,7 @@ import { StatusMessage } from "../StatusMessage"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
-	if(arn.user.dataset.pro !== "true") {
+	if(button.dataset.endpoint === "/api/upload/cover" && arn.user.dataset.pro !== "true") {
 		alert("Please buy a PRO account to use this feature.")
 		return
 	}

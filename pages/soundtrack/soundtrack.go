@@ -29,7 +29,7 @@ func Get(ctx *aero.Context) string {
 	}
 
 	if track.MainAnime() != nil {
-		openGraph.Tags["og:image"] = track.MainAnime().Image("large")
+		openGraph.Tags["og:image"] = track.MainAnime().ImageLink("large")
 	}
 
 	// Set video so that it can be played

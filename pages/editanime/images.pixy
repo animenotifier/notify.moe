@@ -1,0 +1,15 @@
+component EditAnimeImages(anime *arn.Anime)
+	EditAnimeTabs(anime)
+
+	.widget-form
+		h1.mountable Edit anime images
+
+		.widget.mountable(data-api="/api/anime/" + anime.ID)
+			h3.widget-title
+				Icon("picture-o")
+				span Image
+			
+			InputImage("anime-image-input", "File", "/api/upload/anime/" + anime.ID + "/image")
+
+			.anime-image-container
+				img#anime-image-input-preview.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", alt="Anime image")

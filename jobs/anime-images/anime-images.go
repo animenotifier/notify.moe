@@ -109,7 +109,7 @@ func work(anime *arn.Anime) error {
 	// Afterwards, use the network sources
 	sources = append(sources,
 		&inputs.NetworkImage{
-			URL: kitsuOriginal + anime.ImageExtension,
+			URL: kitsuOriginal + anime.Image.Extension,
 		},
 		&inputs.NetworkImage{
 			URL: kitsuOriginal + ".png",

@@ -3,7 +3,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 
 	.episode-view-image-container
 		a.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-			img.anime-cover-image.lazy(data-src=anime.Image("large"), data-webp="true", alt=anime.Title.ByUser(user))
+			img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", alt=anime.Title.ByUser(user))
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 

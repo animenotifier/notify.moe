@@ -43,7 +43,7 @@ component CompanyAnime(label string, animes []*arn.Anime, user *arn.User)
 		.company-anime.mountable
 			each anime in animes
 				a.company-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-					img.company-anime-item-image.lazy(data-src=anime.Image("small"), data-webp="true", alt=anime.Title.ByUser(user))
+					img.company-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", alt=anime.Title.ByUser(user))
 
 component CompanyTabs(company *arn.Company, user *arn.User)
 	.tabs

@@ -31,7 +31,7 @@ func Edit(ctx *aero.Context) string {
 	}
 
 	if track.MainAnime() != nil {
-		ctx.Data.(*arn.OpenGraph).Tags["og:image"] = track.MainAnime().Image("large")
+		ctx.Data.(*arn.OpenGraph).Tags["og:image"] = track.MainAnime().ImageLink("large")
 	}
 
 	return ctx.HTML(components.SoundTrackTabs(track, user) + editform.Render(track, "Edit soundtrack", user))
