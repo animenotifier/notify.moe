@@ -28,7 +28,11 @@ export class MutationQueue {
 				return
 			}
 
-			this.mutation(this.elements[i])
+			try {
+				this.mutation(this.elements[i])
+			} catch(err) {
+				console.error(err)
+			}
 		}
 
 		this.clear()
@@ -66,7 +70,11 @@ export class CustomMutationQueue {
 				return
 			}
 
-			this.mutations[i]()
+			try {
+				this.mutations[i]()
+			} catch(err) {
+				console.error(err)
+			}
 		}
 
 		this.clear()

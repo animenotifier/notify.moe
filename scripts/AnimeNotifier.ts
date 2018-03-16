@@ -32,6 +32,7 @@ export class AnimeNotifier {
 	infiniteScroller: InfiniteScroller
 	mainPageLoaded: boolean
 	isLoading: boolean
+	diffCompletedForCurrentPath: boolean
 	lastReloadContentPath: string
 	currentSoundTrackId: string
 
@@ -665,31 +666,48 @@ export class AnimeNotifier {
 		}
 	}
 
-	diff(url: string) {
+	async diff(url: string) {
 		if(url === this.app.currentPath) {
-			return Promise.reject(null)
+			return null
 		}
 
 		let path = "/_" + url
-		let request = this.app.get(path)
 
-		// let request = fetch(path, {
-		// 	credentials: "same-origin"
-		// })
-		// .then(response => response.text())
+		try {
+			// Start the request
+			let request = fetch(path, {
+				credentials: "same-origin"
+			})
+			.then(response => response.text())
 
-		history.pushState(url, null, url)
-		this.app.currentPath = url
-		this.app.markActiveLinks()
-		this.unmountMountables()
-		this.loading(true)
+			history.pushState(url, null, url)
+			this.app.currentPath = url
+			this.diffCompletedForCurrentPath = false
+			this.app.markActiveLinks()
+			this.unmountMountables()
+			this.loading(true)
 
-		// Delay by transition-speed
-		return delay(150).then(() => request)
-		.then(html => Diff.innerHTML(this.app.content, html))
-		.then(() => this.app.emit("DOMContentLoaded"))
-		.then(() => this.loading(false))
-		.catch(console.error)
+			// Delay by transition-speed
+			await delay(150)
+
+			let html = await request
+
+			// If the response for the correct path has not arrived yet, show this response
+			if(!this.diffCompletedForCurrentPath) {
+				// If this response was the most recently requested one, mark the requests as completed
+				if(this.app.currentPath === url) {
+					this.diffCompletedForCurrentPath = true
+				}
+
+				// Update contents
+				await Diff.innerHTML(this.app.content, html)
+				this.app.emit("DOMContentLoaded")
+			}
+		} catch(err) {
+			console.error(err)
+		} finally {
+			this.loading(false)
+		}
 	}
 
 	post(url: string, body: any) {
