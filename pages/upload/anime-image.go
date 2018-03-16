@@ -41,5 +41,9 @@ func AnimeImage(ctx *aero.Context) string {
 	// Save image information
 	anime.Save()
 
+	// Write log entry
+	logEntry := arn.NewEditLogEntry(user.ID, "edit", "Anime", anime.ID, "Image", "", "")
+	logEntry.Save()
+
 	return "ok"
 }
