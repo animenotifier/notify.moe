@@ -95,28 +95,28 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 					Icon("star")
 					span.profile-pro-status-text PRO
 
-		if user != nil
-			.profile-actions
-				if user.ID != viewUser.ID
-					if !user.Follows().Contains(viewUser.ID)
-						button.profile-action.action(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add/" + viewUser.ID)
-							Icon("user-plus")
-							span Follow
-					else
-						button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
-							Icon("user-times")
-							span Unfollow
-				
-				a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/animelist/watching")
-					Icon("list")
-					span Anime list
+		
+		.profile-actions
+			if user != nil && user.ID != viewUser.ID
+				if !user.Follows().Contains(viewUser.ID)
+					button.profile-action.action(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add/" + viewUser.ID)
+						Icon("user-plus")
+						span Follow
+				else
+					button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
+						Icon("user-times")
+						span Unfollow
+			
+			a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/animelist/watching")
+				Icon("list")
+				span Anime list
 
-				if user.ID != viewUser.ID
-					a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
-						Icon("exchange")
-						span Compare
-				
-				a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/recommended/anime")
-					Icon("archive")
-					span Recomms
+			if user != nil && user.ID != viewUser.ID
+				a.button.profile-action.ajax(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
+					Icon("exchange")
+					span Compare
+			
+			a.button.profile-action.ajax(href="/+" + viewUser.Nick + "/recommended/anime")
+				Icon("archive")
+				span Recomms
 				
