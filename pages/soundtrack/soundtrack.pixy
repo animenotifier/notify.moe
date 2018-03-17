@@ -28,6 +28,14 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 						a.soundtrack-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
 							img.soundtrack-anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", alt=anime.Title.ByUser(user))
 
+			if len(track.Links) > 0
+				.widget.mountable
+					h3.widget-title Links
+					ul.soundtrack-links
+						for _, link := range track.Links
+							li
+								a.soundtrack-link(href=link.URL, target="_blank")= link.Title
+
 			//- TODO: This is quite ineffective, performance-wise
 			if len(track.OsuBeatmaps()) > 0 || len(track.EtternaBeatmaps()) > 0
 				.widget.mountable
