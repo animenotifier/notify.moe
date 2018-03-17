@@ -1,0 +1,28 @@
+component NewKitsuAnime(animes []*kitsu.Anime, url string, user *arn.User)
+	EditorTabs(url)
+	h1.mountable New anime on Kitsu
+	
+	if len(animes) == 0
+		p.text-center.mountable No new anime found.
+	else
+		table
+			thead
+				tr.mountable
+					th ID
+					th Image
+					th Title
+					th Type
+					th Year
+			tbody
+				each anime in animes
+					tr.mountable
+						td= anime.ID
+						td
+							a(href="https://kitsu.io/anime/" + anime.ID, target="_blank")
+								img.profile-watching-list-item-image(src=anime.Attributes.PosterImage.Tiny, alt=anime.Attributes.CanonicalTitle)
+						td
+							a(href="https://kitsu.io/anime/" + anime.ID, target="_blank")= anime.Attributes.CanonicalTitle
+						td= anime.Attributes.ShowType
+						td
+							if len(anime.Attributes.StartDate) >= 4
+								span= anime.Attributes.StartDate[:4]

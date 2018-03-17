@@ -239,6 +239,7 @@ func Configure(app *aero.Application) {
 	l.Page("/editor/anime/maldiff/:year", editor.CompareMAL)
 	l.Page("/editor/anime/maldiff/:year/:status", editor.CompareMAL)
 	l.Page("/editor/anime/maldiff/:year/:status/:type", editor.CompareMAL)
+	l.Page("/editor/anime/kitsu/new", editor.NewKitsuAnime)
 
 	// Log
 	l.Page("/log", editlog.Get)

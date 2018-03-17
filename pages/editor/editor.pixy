@@ -12,6 +12,7 @@ component EditorTabs(url string)
 	.tabs
 		Tab("Editor", "pencil", "/editor")
 		Tab("MAL", "exchange", "/editor/anime/maldiff")
+		Tab("Kitsu", "exchange", "/editor/anime/kitsu/new")
 		Tab("Missing", "list", "/editor/anime/missing/shoboi")
 		Tab("Search", "search", "/database")
 
