@@ -76,24 +76,28 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 			return
 		}
 
+		const fetchOptions: RequestInit = {
+			credentials: "same-origin"
+		}
+
 		// Start searching
-		fetch("/_/anime-search/" + term)
+		fetch("/_/anime-search/" + term, fetchOptions)
 		.then(showResponseInElement(arn, url, "anime", animeSearchResults))
 		.catch(console.error)
 
-		fetch("/_/character-search/" + term)
+		fetch("/_/character-search/" + term, fetchOptions)
 		.then(showResponseInElement(arn, url, "character", characterSearchResults))
 		.catch(console.error)
 
-		fetch("/_/forum-search/" + term)
+		fetch("/_/forum-search/" + term, fetchOptions)
 		.then(showResponseInElement(arn, url, "forum", forumSearchResults))
 		.catch(console.error)
 
-		fetch("/_/soundtrack-search/" + term)
+		fetch("/_/soundtrack-search/" + term, fetchOptions)
 		.then(showResponseInElement(arn, url, "soundtrack", soundtrackSearchResults))
 		.catch(console.error)
 
-		fetch("/_/user-search/" + term)
+		fetch("/_/user-search/" + term, fetchOptions)
 		.then(showResponseInElement(arn, url, "user", userSearchResults))
 		.catch(console.error)
 	} catch(err) {
