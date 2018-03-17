@@ -29,7 +29,7 @@ func main() {
 }
 
 func sync(anime *kitsu.Anime) {
-	fmt.Println(anime.ID, anime.Attributes.Titles.En)
+	fmt.Println(anime.ID, anime.Attributes.CanonicalTitle)
 	arn.Kitsu.Set("Anime", anime.ID, anime)
 }
 
