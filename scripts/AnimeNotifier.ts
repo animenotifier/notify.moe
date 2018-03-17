@@ -710,6 +710,10 @@ export class AnimeNotifier {
 		}
 	}
 
+	innerHTML(element: HTMLElement, html: string) {
+		return Diff.innerHTML(element, html)
+	}
+
 	post(url: string, body: any) {
 		if(this.isLoading) {
 			return Promise.resolve(null)

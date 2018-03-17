@@ -205,6 +205,12 @@ func Configure(app *aero.Application) {
 
 	// Search
 	l.Page("/search/*term", search.Get)
+	l.Page("/empty-search", search.GetEmptySearch)
+	l.Page("/anime-search/*term", search.Anime)
+	l.Page("/character-search/*term", search.Characters)
+	l.Page("/forum-search/*term", search.Forum)
+	l.Page("/soundtrack-search/*term", search.SoundTracks)
+	l.Page("/user-search/*term", search.Users)
 
 	// Shop
 	l.Page("/support", support.Get)
