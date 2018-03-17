@@ -37,6 +37,9 @@
 	margin-bottom 1rem
 	opacity 0.8
 
+.soundtrack-search-anime
+	opacity 0.35
+
 .no-search-results
 	text-align left
 	padding-bottom typography-margin

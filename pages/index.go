@@ -211,6 +211,7 @@ func Configure(app *aero.Application) {
 	l.Page("/forum-search/*term", search.Forum)
 	l.Page("/soundtrack-search/*term", search.SoundTracks)
 	l.Page("/user-search/*term", search.Users)
+	l.Page("/company-search/*term", search.Companies)
 
 	// Shop
 	l.Page("/support", support.Get)

@@ -2,8 +2,9 @@ component ExploreAnime(animeList []*arn.Anime, year string, status string, typ s
 	ExploreFilters(year, status, typ, "filterAnime")
 
 	.corner-buttons-hide-on-mobile
-		button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")
-			RawIcon("eye-slash")
+		if user != nil
+			button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")
+				RawIcon("eye-slash")
 		
 		a.button.ajax(href="/genres", title="View genres")
 			RawIcon("clone")

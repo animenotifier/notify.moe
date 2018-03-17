@@ -8,7 +8,8 @@ var correctResponseRendered = {
 	"character": false,
 	"forum": false,
 	"soundtrack": false,
-	"user": false
+	"user": false,
+	"company": false
 }
 
 // Containers for all the search results
@@ -17,6 +18,7 @@ var characterSearchResults: HTMLElement
 var forumSearchResults: HTMLElement
 var soundtrackSearchResults: HTMLElement
 var userSearchResults: HTMLElement
+var companySearchResults: HTMLElement
 
 // Search
 export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: KeyboardEvent) {
@@ -68,6 +70,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 			forumSearchResults = document.getElementById("forum-search-results")
 			soundtrackSearchResults = document.getElementById("soundtrack-search-results")
 			userSearchResults = document.getElementById("user-search-results")
+			companySearchResults = document.getElementById("company-search-results")
 		}
 
 		if(!term || term.length < 1) {
@@ -99,6 +102,10 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 
 		fetch("/_/user-search/" + term, fetchOptions)
 		.then(showResponseInElement(arn, url, "user", userSearchResults))
+		.catch(console.error)
+
+		fetch("/_/company-search/" + term, fetchOptions)
+		.then(showResponseInElement(arn, url, "company", companySearchResults))
 		.catch(console.error)
 	} catch(err) {
 		console.error(err)

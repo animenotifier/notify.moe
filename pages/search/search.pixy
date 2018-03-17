@@ -1,4 +1,4 @@
-component SearchResults(term string, users []*arn.User, animes []*arn.Anime, posts []*arn.Post, threads []*arn.Thread, tracks []*arn.SoundTrack, characters []*arn.Character)
+component SearchResults(term string, users []*arn.User, animes []*arn.Anime, posts []*arn.Post, threads []*arn.Thread, tracks []*arn.SoundTrack, characters []*arn.Character, companies []*arn.Company, quotes []*arn.Quote)
 	h1.page-title= "Search: " + term
 
 	.search
@@ -33,6 +33,22 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 
 			#soundtrack-search-results
 				SoundTrackSearchResults(tracks)
+		
+		//- .widget
+		//- 	h3.widget-title
+		//- 		Icon("quote-left")
+		//- 		span Quotes
+
+		//- 	#quote-search-results
+		//- 		QuoteSearchResults(quotes)
+
+		.widget
+			h3.widget-title
+				Icon("building")
+				span Companies
+
+			#company-search-results
+				CompanySearchResults(companies)
 
 		.widget
 			h3.widget-title
@@ -89,6 +105,25 @@ component SoundTrackSearchResults(tracks []*arn.SoundTrack)
 			each track in tracks
 				li.mountable(data-mountable-type="track")
 					a.ajax(href=track.Link())= track.Title
+					span.soundtrack-search-anime= " - " + track.MainAnime().Title.Canonical
+
+component CompanySearchResults(companies []*arn.Company)
+	if len(companies) == 0
+		p.no-search-results.mountable No companies found.
+	else
+		ul.company-search
+			each company in companies
+				li.mountable(data-mountable-type="company")
+					a.ajax(href=company.Link())= company.Name.English
+
+component QuoteSearchResults(quotes []*arn.Quote)
+	if len(quotes) == 0
+		p.no-search-results.mountable No quotes found.
+	else
+		ul.quote-search
+			each quote in quotes
+				li.mountable(data-mountable-type="quote")
+					a.ajax(href=quote.Link())= quote.Text.English
 
 component UserSearchResults(users []*arn.User)
 	if len(users) == 0
