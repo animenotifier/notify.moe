@@ -3,6 +3,7 @@ import { AnimeNotifier } from "../AnimeNotifier"
 // Search page reference
 var emptySearchHTML = ""
 var searchPage: HTMLElement
+var searchPageTitle: HTMLElement
 var correctResponseRendered = {
 	"anime": false,
 	"character": false,
@@ -50,7 +51,8 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 
 	// Set browser URL
 	let url = "/search/" + term
-	history.pushState(url, null, url)
+	document.title = "Search: " + term
+	history.pushState(url, document.title, url)
 	arn.app.currentPath = url
 
 	// Unmount mountables to improve visual responsiveness on key press
@@ -83,7 +85,10 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 			soundtrackSearchResults = document.getElementById("soundtrack-search-results")
 			userSearchResults = document.getElementById("user-search-results")
 			companySearchResults = document.getElementById("company-search-results")
+			searchPageTitle = document.getElementsByTagName("h1")[0]
 		}
+
+		searchPageTitle.innerText = document.title
 
 		if(!term || term.length < 1) {
 			await arn.innerHTML(searchPage, emptySearchHTML)
