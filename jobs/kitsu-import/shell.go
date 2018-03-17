@@ -6,7 +6,6 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/kitsu"
-	"github.com/fatih/color"
 )
 
 // Shell parameters
@@ -33,14 +32,10 @@ func InvokeShellArgs() bool {
 			panic(errors.New("Anime ID is not the same"))
 		}
 
-		anime := importKitsuAnime(kitsuAnime)
+		sync(kitsuAnime)
 
 		if verbose {
-			color.Cyan("Kitsu:")
 			arn.PrettyPrint(kitsuAnime)
-
-			color.Cyan("ARN:")
-			arn.PrettyPrint(anime)
 		}
 
 		return true
