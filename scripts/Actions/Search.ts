@@ -12,6 +12,9 @@ var correctResponseRendered = {
 	"company": false
 }
 
+// Save old term to compare
+var oldTerm = ""
+
 // Containers for all the search results
 var animeSearchResults: HTMLElement
 var characterSearchResults: HTMLElement
@@ -26,7 +29,16 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 		return
 	}
 
+	// Check if the search term really changed
 	let term = search.value.trim()
+
+	if(term === oldTerm) {
+		return
+	}
+
+	oldTerm = term
+
+	// Determine if we're already seeing the search page
 	let searchPageActivated = (searchPage === arn.app.content.children[0])
 
 	// Reset
