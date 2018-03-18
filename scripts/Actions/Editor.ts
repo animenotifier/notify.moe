@@ -30,12 +30,15 @@ export function malDiffFilterAnime(arn: AnimeNotifier, input: HTMLInputElement) 
 
 // Import Kitsu anime
 export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let response = await fetch(`/api/import/kitsu/anime/${button.dataset.id}`, {
+	let newTab = window.open()
+	let animeId = button.dataset.id
+	let response = await fetch(`/api/import/kitsu/anime/${animeId}`, {
 		method: "POST",
 		credentials: "same-origin"
 	})
 
 	if(response.ok) {
+		newTab.location.href = `/anime/${animeId}`
 		arn.reloadContent()
 	} else {
 		arn.statusMessage.showError(await response.text())
