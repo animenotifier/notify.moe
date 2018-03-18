@@ -1,5 +1,3 @@
-profile-boot-duration = 2s
-
 .profile
 	vertical
 	align-items center
@@ -78,9 +76,7 @@ profile-boot-duration = 2s
 		padding content-padding
 		margin-top 0
 
-	// .profile-pro-status-text
-	// 	display none
-
+// const profile-boot-duration = 2s
 // animation appear
 // 	0%
 // 		transform rotateX(90deg)

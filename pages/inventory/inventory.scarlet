@@ -1,4 +1,4 @@
-inventory-slot-size = 64px
+const inventory-slot-size = 64px
 
 .inventory
 	display grid
@@ -24,7 +24,7 @@ inventory-slot-size = 64px
 
 			.item-icon
 				animation hover-item 1s infinite ease-in-out
-	
+
 	.icon
 		margin 0
 		pointer-events none

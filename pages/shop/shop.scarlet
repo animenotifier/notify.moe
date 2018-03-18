@@ -1,5 +1,5 @@
-item-color-pro-account = hsl(0, 100%, 71%)
-item-color-anime-support-ticket = hsl(217, 64%, 50%)
+const item-color-pro-account = hsl(0, 100%, 71%)
+const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 
 .shop-items
 	horizontal-wrap

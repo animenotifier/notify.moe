@@ -1,4 +1,4 @@
-frontpage-bg-color = rgb(32, 32, 32)
+const frontpage-bg-color = rgb(32, 32, 32)
 
 .frontpage-background
 	position absolute
@@ -16,7 +16,7 @@ frontpage-bg-color = rgb(32, 32, 32)
 	top 50%
 	left 50%
 	transform translateX(-50%) translateY(-50%)
-	
+
 	a, h1, h2
 		color white !important
 		text-shadow 0px 0px 4px rgb(0, 0, 0, 0.75)
@@ -35,7 +35,7 @@ frontpage-bg-color = rgb(32, 32, 32)
 		margin-bottom 1em
 		line-height 1.2em
 		text-align center
-	
+
 	.footer
 		text-align center
 		margin-top content-padding

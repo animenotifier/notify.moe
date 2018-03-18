@@ -1,4 +1,4 @@
-remove-margin = 1.1rem
+const remove-margin = 1.1rem
 
 .embedded
 	// Put navigation to the bottom of the screen

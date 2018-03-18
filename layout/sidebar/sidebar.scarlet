@@ -1,4 +1,4 @@
-sidebar-spacing-y = 0.7rem
+const sidebar-spacing-y = 0.7rem
 
 #sidebar
 	vertical

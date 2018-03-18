@@ -1,4 +1,4 @@
-video-padding = 56.25%
+const video-padding = 56.25%
 
 .video-container
 	position relative

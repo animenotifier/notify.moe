@@ -1,5 +1,5 @@
-loading-anim-duration = 0.8s
-loading-anim-size = 24px
+const loading-anim-duration = 0.8s
+const loading-anim-size = 24px
 
 #loading
 	position fixed
