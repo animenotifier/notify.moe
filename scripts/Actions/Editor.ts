@@ -27,3 +27,17 @@ export function malDiffFilterAnime(arn: AnimeNotifier, input: HTMLInputElement) 
 
 	arn.app.load(`/editor/anime/maldiff/${year.value}/${status.value}/${type.value}`)
 }
+
+// Import Kitsu anime
+export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let response = await fetch(`/api/import/kitsu/anime/${button.dataset.id}`, {
+		method: "POST",
+		credentials: "same-origin"
+	})
+
+	if(response.ok) {
+		arn.reloadContent()
+	} else {
+		arn.statusMessage.showError(await response.text())
+	}
+}

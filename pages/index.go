@@ -8,6 +8,7 @@ import (
 	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/pages/admin"
 	"github.com/animenotifier/notify.moe/pages/anime"
+	"github.com/animenotifier/notify.moe/pages/animeimport"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/apiview"
@@ -220,6 +221,9 @@ func Configure(app *aero.Application) {
 	l.Page("/charge", charge.Get)
 	l.Page("/shop/history", shop.PurchaseHistory)
 	app.Post("/api/shop/buy/:item/:quantity", shop.BuyItem)
+
+	// Import anime
+	app.Post("/api/import/kitsu/anime/:id", animeimport.Kitsu)
 
 	// Upload
 	app.Post("/api/upload/avatar", upload.Avatar)

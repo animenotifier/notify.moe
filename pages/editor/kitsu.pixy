@@ -13,6 +13,7 @@ component NewKitsuAnime(animes []*kitsu.Anime, url string, user *arn.User)
 					th Title
 					th Type
 					th Year
+					th Actions
 			tbody
 				each anime in animes
 					tr.mountable
@@ -26,3 +27,7 @@ component NewKitsuAnime(animes []*kitsu.Anime, url string, user *arn.User)
 						td
 							if len(anime.Attributes.StartDate) >= 4
 								span= anime.Attributes.StartDate[:4]
+						td
+							button.action(data-action="importKitsuAnime", data-trigger="click", data-id=anime.ID)
+								Icon("download")
+								span Import
