@@ -22,7 +22,7 @@ In the past it was, but not anymore. We're growing bigger by establishing a data
 
 ## What does the current feature set look like?
 
-* [Chrome extension](https://chrome.google.com/webstore/detail/anime-notifier/hajchfikckiofgilinkpifobdbiajfch) for quick watching list access and episode updates
+* [Chrome](https://chrome.google.com/webstore/detail/anime-notifier/hajchfikckiofgilinkpifobdbiajfch) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/) extension for quick watching list access and episode updates
 * [Unrivaled](https://www.webpagetest.org/results/video/18/03/18/6071a7292ed1dd4602d30d13b31e1a89ec430b1d/video.mp4) page loading times
 * High quality, multi-DPI images loading super-fast
 * Smooth page transitions optimized for 144+ Hz monitors
