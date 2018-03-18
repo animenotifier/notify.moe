@@ -23,22 +23,26 @@ In the past it was, but not anymore. We're growing bigger by establishing a data
 ## What does the current feature set look like?
 
 * [Chrome extension](https://chrome.google.com/webstore/detail/anime-notifier/hajchfikckiofgilinkpifobdbiajfch) for quick watching list access and episode updates
-* Edit episode progress and rating by clicking on the number
+* [Unrivaled](https://www.webpagetest.org/results/video/18/03/18/6071a7292ed1dd4602d30d13b31e1a89ec430b1d/video.mp4) page loading times
+* High quality, multi-DPI images loading super-fast
+* Smooth page transitions optimized for 144+ Hz monitors
+* Looks good on 1080p, 720p and on mobile devices
 * Airing dates
-* Offline browsing
 * Push notifications
+* Light & Dark theme
+* Offline browsing
+* Anime radio
+* Search
+* User profiles
+* Forums
 * Soundtracks
-* Anime & user search
-* Anime rating system
+* Quotes
+* Companies
+* Detailed anime rating system
 * [twist.moe](https://twist.moe) integration
 * [anilist.co](https://anilist.co/), [myanimelist.net](https://myanimelist.net/) and [kitsu.io](https://kitsu.io/) import
 * [osu](https://osu.ppy.sh/) ranking view
 * [Gravatar](https://gravatar.com) support
-* High quality images that are small in file size (WebP)
-* User profiles
-* Dashboard
-* Forums
-* Responsive layout (looks good on 1080p and on mobile devices)
 
 ## Can I follow the project on social media?
 
@@ -47,6 +51,10 @@ In the past it was, but not anymore. We're growing bigger by establishing a data
 * [Google+](https://plus.google.com/+AnimeReleaseNotifierOfficial)
 * [GitHub](https://github.com/animenotifier/notify.moe)
 * [Discord](https://discord.gg/0kimAmMCeXGXuzNF)
+
+## Where can I read the Terms of Service?
+
+You automatically agree to the [Terms of Service](https://notify.moe/terms) by visiting and using this site.
 
 ## How do I enable notifications?
 
@@ -85,6 +93,10 @@ You can rate each entry in your anime list in 4 different categories:
 * Soundtrack (music rating)
 
 Each rating is a number on a scale of 0 to 10. A rating of 0 counts as "not rated" and will be ignored in average rating calculations for that anime. Thus the lowest possible rating you can assign to an anime is 0.1. The highest possible rating is 10. The average is close to the number 5.
+
+## How do I add a soundtrack?
+
+Go to [soundtracks](https://notify.moe/soundtracks) and press the "Add soundtrack" button. Then add a title, media and tags for the track. For media you need to select a service (e.g. Youtube) and enter the ID of the video (usually at the end of the link). You can link it with an anime by adding an "anime:ID" tag where you replace ID with the anime ID. Once you're happy with the result, press "Publish".
 
 ## What does the Chrome extension offer me?
 
@@ -167,10 +179,14 @@ Go to your [settings](https://notify.moe/settings), it should show you the remai
 ## Are there any hotkeys?
 
 * Press "F" to search the site for anime or other content
+* Press "S" to hide or show the sidebar
+* Press "K" to start/pause anime radio
+* Press "J" or "L" for previous and next track respectively
+* Press "+" or "-" to change audio playback speed
 
 ## Is this website well-optimized?
 
-Take a look at the comparison of [notify.moe, kitsu.io, anilist.co and myanimelist.net](https://www.webpagetest.org/video/compare.php?tests=171111_CA_e6d20ca33741ffb9e7e61456b588111d,171111_NW_15a380b66a64fe57bad2f656bcec3bf9,171111_SD_2bced86a01dc94a9608385beeb823230,171111_EC_381395feb27de2e8047cd821b8add5bf) loading speeds.
+Take a look at the comparison of [notify.moe, kitsu.io, anilist.co and myanimelist.net](https://www.webpagetest.org/results/video/18/03/18/6071a7292ed1dd4602d30d13b31e1a89ec430b1d/video.mp4) loading speeds.
 
 ![Anime Notifier - Lighthouse](https://pbs.twimg.com/media/DEplUsNXgAEF-UT.jpg:large)
 
