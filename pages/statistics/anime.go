@@ -19,56 +19,10 @@ func getAnimeStats() []*arn.PieChart {
 	anidb := stats{}
 	status := stats{}
 	types := stats{}
-	shoboiEdits := stats{}
-	anilistEdits := stats{}
-	malEdits := stats{}
-	anidbEdits := stats{}
 	rating := stats{}
 	twist := stats{}
 
 	for anime := range arn.StreamAnime() {
-		for _, external := range anime.Mappings {
-			if external.Service == "shoboi/anime" {
-				if external.CreatedBy == "" {
-					shoboiEdits["(auto-generated)"]++
-				} else {
-					user, err := arn.GetUser(external.CreatedBy)
-					arn.PanicOnError(err)
-					shoboiEdits[user.Nick]++
-				}
-			}
-
-			if external.Service == "anilist/anime" {
-				if external.CreatedBy == "" {
-					anilistEdits["(auto-generated)"]++
-				} else {
-					user, err := arn.GetUser(external.CreatedBy)
-					arn.PanicOnError(err)
-					anilistEdits[user.Nick]++
-				}
-			}
-
-			if external.Service == "myanimelist/anime" {
-				if external.CreatedBy == "" {
-					malEdits["(auto-generated)"]++
-				} else {
-					user, err := arn.GetUser(external.CreatedBy)
-					arn.PanicOnError(err)
-					malEdits[user.Nick]++
-				}
-			}
-
-			if external.Service == "anidb/anime" {
-				if external.CreatedBy == "" {
-					anidbEdits["(auto-generated)"]++
-				} else {
-					user, err := arn.GetUser(external.CreatedBy)
-					arn.PanicOnError(err)
-					anidbEdits[user.Nick]++
-				}
-			}
-		}
-
 		if anime.GetMapping("shoboi/anime") != "" {
 			shoboi["Connected with Shoboi"]++
 		} else {
@@ -122,9 +76,5 @@ func getAnimeStats() []*arn.PieChart {
 		arn.NewPieChart("AniDB", anidb),
 		arn.NewPieChart("Shoboi", shoboi),
 		arn.NewPieChart("AnimeTwist", twist),
-		// arn.NewPieChart("MyAnimeList Editors", malEdits),
-		arn.NewPieChart("AniList Editors", anilistEdits),
-		// arn.NewPieChart("AniDB Editors", anidbEdits),
-		arn.NewPieChart("Shoboi Editors", shoboiEdits),
 	}
 }
