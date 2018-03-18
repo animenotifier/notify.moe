@@ -1,0 +1,31 @@
+package main
+
+import (
+	"fmt"
+
+	"github.com/animenotifier/arn"
+	"github.com/animenotifier/kitsu"
+	"github.com/fatih/color"
+)
+
+func main() {
+	color.Yellow("Importing Kitsu mappings")
+
+	defer arn.Node.Close()
+	defer color.Green("Finished.")
+
+	// Iterate over all mappings
+	for mapping := range kitsu.StreamMappings() {
+		sync(mapping)
+	}
+}
+
+func sync(mapping *kitsu.Mapping) {
+	// Skip mappings for anything that's not anime
+	if mapping.Relationships.Item.Data.Type != "anime" {
+		return
+	}
+
+	fmt.Printf("[MappingID: %s] [AnimeID: %s] %s %s\n", mapping.ID, mapping.Relationships.Item.Data.ID, color.YellowString(mapping.Attributes.ExternalSite), mapping.Attributes.ExternalID)
+	arn.Kitsu.Set("Mapping", mapping.ID, mapping)
+}
