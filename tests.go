@@ -30,6 +30,22 @@ var routeTests = map[string][]string{
 		"/+Akyoto/soundtracks/liked/from/3",
 	},
 
+	"/user/:nick/quotes/added": []string{
+		"/+Scott/quotes/added",
+	},
+
+	"/user/:nick/quotes/added/from/:index": []string{
+		"/+Scott/quotes/added/from/3",
+	},
+
+	"/user/:nick/quotes/liked": []string{
+		"/+Scott/quotes/liked",
+	},
+
+	"/user/:nick/quotes/liked/from/:index": []string{
+		"/+Scott/quotes/liked/from/3",
+	},
+
 	"/user/:nick/followers": []string{
 		"/+Akyoto/followers",
 	},

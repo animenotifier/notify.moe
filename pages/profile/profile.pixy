@@ -23,6 +23,7 @@ component ProfileTabs(viewUser *arn.User, uri string)
 		//- Tab("Collection", "list", "/+" + viewUser.Nick + "/animelist/watching")
 		Tab("Forum", "comment", "/+" + viewUser.Nick + "/forum/threads")
 		Tab("Tracks", "music", "/+" + viewUser.Nick + "/soundtracks/liked")
+		Tab("Quotes", "quote-left", "/+" + viewUser.Nick + "/quotes/liked")
 		Tab("Stats", "area-chart", "/+" + viewUser.Nick + "/stats")
 		Tab("Followers", "users", "/+" + viewUser.Nick + "/followers")
 
@@ -33,6 +34,11 @@ component ProfileTabs(viewUser *arn.User, uri string)
 		.tabs
 			Tab("Liked", "heart", "/+" + viewUser.Nick + "/soundtracks/liked")
 			Tab("Added", "music", "/+" + viewUser.Nick + "/soundtracks/added")
+
+	if strings.Contains(uri, "/quotes")
+		.tabs
+			Tab("Liked", "heart", "/+" + viewUser.Nick + "/quotes/liked")
+			Tab("Added", "music", "/+" + viewUser.Nick + "/quotes/added")
 
 component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	ProfileHead(viewUser, user, uri)
