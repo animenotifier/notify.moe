@@ -1,0 +1,21 @@
+component ProfileQuotes(quotes []*arn.Quote, viewUser *arn.User, nextIndex int, user *arn.User, uri string)
+	ProfileHeader(viewUser, user, uri)
+
+	if strings.Contains(uri, "/added")
+		h1.page-title= "Quotes added by " + viewUser.Nick
+	else
+		h1.page-title= "Quotes liked by " + viewUser.Nick
+
+	if len(quotes) == 0
+		if strings.Contains(uri, "/added")
+			p.no-data.mountable= viewUser.Nick + " hasn't added any quotes yet."
+		else
+			p.no-data.mountable= viewUser.Nick + " hasn't liked any quotes yet."
+	else
+		#load-more-target.quotes
+			QuotesScrollable(quotes, user)
+
+		if nextIndex != -1
+			.buttons
+				LoadMore(nextIndex)
+	
