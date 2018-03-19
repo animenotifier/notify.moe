@@ -2,6 +2,7 @@ package editor
 
 import (
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -14,5 +15,25 @@ func Get(ctx *aero.Context) string {
 		return ctx.Redirect("/")
 	}
 
-	return ctx.HTML(components.Editor(ctx.URI(), user.EditorScore(), user))
+	ignoreDifferences := arn.FilterIgnoreAnimeDifferences(func(entry *arn.IgnoreAnimeDifference) bool {
+		return entry.CreatedBy == user.ID
+	})
+
+	score := len(ignoreDifferences) * arn.IgnoreAnimeDifferenceEditorScore
+	scoreTypes := map[string]int{}
+
+	logEntries := arn.FilterEditLogEntries(func(entry *arn.EditLogEntry) bool {
+		return entry.UserID == user.ID
+	})
+
+	for _, entry := range logEntries {
+		entryScore := entry.EditorScore()
+		score += entryScore
+
+		if entry.ObjectType != "" {
+			scoreTypes[entry.ObjectType]++
+		}
+	}
+
+	return ctx.HTML(components.Editor(ctx.URI(), score, scoreTypes, user))
 }

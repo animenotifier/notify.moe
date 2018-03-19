@@ -1,12 +1,17 @@
-component Editor(url string, score int, user *arn.User)
+component Editor(url string, score int, scoreTypes map[string]int, user *arn.User)
 	EditorTabs(url)
 	h1.mountable= "Welcome to the Editor Panel, " + user.Nick + "!"
 
 	.feature-cards
 		.feature-card.mountable
 			.feature-card-icon.editor-score= score
-			
 			p.feature-card-text Your contribution score.
+	
+	.feature-cards.feature-cards-alternative-color
+		for objectType, score := range scoreTypes
+			.feature-card.mountable
+				.feature-card-icon.editor-score= score
+				p.feature-card-text= objectType
 
 component EditorTabs(url string)
 	.tabs
