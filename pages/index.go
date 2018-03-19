@@ -22,6 +22,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editlog"
 	"github.com/animenotifier/notify.moe/pages/editor"
+	"github.com/animenotifier/notify.moe/pages/editor/filtercompanies"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/episode"
 	"github.com/animenotifier/notify.moe/pages/explore"
@@ -242,6 +243,8 @@ func Configure(app *aero.Application) {
 
 	// Editor
 	l.Page("/editor", editor.Get)
+
+	// Editor - Anime
 	l.Page("/editor/anime/missing/anilist", editor.AniList)
 	l.Page("/editor/anime/missing/anilist/:year", editor.AniList)
 	l.Page("/editor/anime/missing/anilist/:year/:type", editor.AniList)
@@ -256,6 +259,9 @@ func Configure(app *aero.Application) {
 	l.Page("/editor/anime/maldiff/:year/:status", editor.CompareMAL)
 	l.Page("/editor/anime/maldiff/:year/:status/:type", editor.CompareMAL)
 	l.Page("/editor/anime/kitsu/new", editor.NewKitsuAnime)
+
+	// Editor - Companies
+	l.Page("/editor/companies/missing/description", filtercompanies.NoDescription)
 
 	// Log
 	l.Page("/log", editlog.Get)
