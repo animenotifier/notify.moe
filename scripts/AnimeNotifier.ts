@@ -200,6 +200,9 @@ export class AnimeNotifier {
 			this.notificationManager.update()
 		}
 
+		// Bind unload event
+		window.addEventListener("beforeunload", this.onBeforeUnload.bind(this))
+
 		// Download popular anime titles for the search
 		// let response = await fetch("/api/popular/anime/titles/500")
 		// let titles = await response.json()
@@ -216,6 +219,20 @@ export class AnimeNotifier {
 
 		// let search = this.app.find("search") as HTMLInputElement
 		// search.setAttribute("list", titleList.id)
+	}
+
+	async onBeforeUnload(e: BeforeUnloadEvent) {
+		let message = undefined
+
+		// Prevent closing tab on new thread page
+		if(this.app.currentPath === "/new/thread" && document.activeElement.tagName === "TEXTAREA" && (document.activeElement as HTMLTextAreaElement).value.length > 20) {
+			message = "You have unsaved changes on the current page. Are you sure you want to leave?"
+		}
+
+		if(message) {
+			e.returnValue = message
+			return message
+		}
 	}
 
 	dragAndDrop() {
