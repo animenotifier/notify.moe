@@ -115,21 +115,21 @@ component SettingsNotifications(user *arn.User)
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
 				Icon("filter")
-				span General
+				span Filter
 			
 			InputBool("Notification.AnimeEpisodeReleases", user.Settings().Notification.AnimeEpisodeReleases, "New episodes", "Notifications about new episodes")
 			InputBool("Notification.AnimeFinished", user.Settings().Notification.AnimeFinished, "Finished anime series", "Notifications about finished anime series")
-			InputBool("Notification.NewFollowers", user.Settings().Notification.NewFollowers, "New followers", "Notifications about new followers")
+			//- InputBool("Notification.NewFollowers", user.Settings().Notification.NewFollowers, "New followers", "Notifications about new followers")
 		
-		.widget.mountable(data-api="/api/settings/" + user.ID)
-			h3.widget-title
-				Icon("heart")
-				span Likes
+		//- .widget.mountable(data-api="/api/settings/" + user.ID)
+		//- 	h3.widget-title
+		//- 		Icon("heart")
+		//- 		span Likes
 			
-			InputBool("Notification.ForumLikes", user.Settings().Notification.ForumLikes, "Forum post likes", "Notifications about forum post likes")
-			InputBool("Notification.SoundTrackLikes", user.Settings().Notification.SoundTrackLikes, "Soundtrack likes", "Notifications about soundtrack likes")
-			//- InputBool("Notification.GroupPostLikes", user.Settings().Notification.GroupPostLikes, "Group post likes", "Notifications about group post likes")
-			InputBool("Notification.QuoteLikes", user.Settings().Notification.QuoteLikes, "Quote likes", "Notifications about quote likes")
+		//- 	InputBool("Notification.ForumLikes", user.Settings().Notification.ForumLikes, "Forum post likes", "Notifications about forum post likes")
+		//- 	InputBool("Notification.SoundTrackLikes", user.Settings().Notification.SoundTrackLikes, "Soundtrack likes", "Notifications about soundtrack likes")
+		//- 	//- InputBool("Notification.GroupPostLikes", user.Settings().Notification.GroupPostLikes, "Group post likes", "Notifications about group post likes")
+		//- 	InputBool("Notification.QuoteLikes", user.Settings().Notification.QuoteLikes, "Quote likes", "Notifications about quote likes")
 
 component SettingsApps(user *arn.User)
 	SettingsTabs

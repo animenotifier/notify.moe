@@ -7,7 +7,13 @@ func main() {
 
 	for user := range arn.StreamUsers() {
 		settings := user.Settings()
-		settings.Notification = arn.DefaultNotificationSettings()
+		defaultSettings := arn.DefaultNotificationSettings()
+
+		settings.Notification.QuoteLikes = defaultSettings.QuoteLikes
+		settings.Notification.SoundTrackLikes = defaultSettings.SoundTrackLikes
+		settings.Notification.GroupPostLikes = defaultSettings.GroupPostLikes
+		settings.Notification.ForumLikes = defaultSettings.ForumLikes
+		settings.Notification.NewFollowers = defaultSettings.NewFollowers
 		settings.Save()
 	}
 }
