@@ -119,8 +119,8 @@
 	margin-top 0.5rem
 
 .anime-cover-image
-	width 250px
-	height auto
+	width anime-image-large-width
+	height anime-image-large-height
 	border-radius 3px
 
 	default-transition

@@ -95,10 +95,14 @@ outline-shadow-medium = 0 0 6px rgba(0, 0, 0, 0.13)
 outline-shadow-heavy = 0 0 6px rgba(0, 0, 0, 0.6)
 
 // Distances
-content-padding = 1.6rem
-content-padding-top = 1.6rem
-content-line-height = 1.7em
-typography-margin = 0.4rem
+const content-padding = 1.6rem
+const content-padding-top = 1.6rem
+const content-line-height = 1.7em
+const typography-margin = 0.4rem
+
+// Sizes
+const anime-image-large-width = 250px
+const anime-image-large-height = auto
 
 // Timings
 fade-speed = 150ms
