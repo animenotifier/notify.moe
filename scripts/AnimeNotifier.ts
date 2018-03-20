@@ -36,23 +36,17 @@ export class AnimeNotifier {
 	lastReloadContentPath: string
 	currentSoundTrackId: string
 
-	elementFound: MutationQueue
-	elementFoundRemove: MutationQueue
-	elementNotFound: MutationQueue
-	elementColorPreview: MutationQueue
-	unmount: MutationQueue
-
 	constructor(app: Application) {
 		this.app = app
 		this.user = null
 		this.title = "Anime Notifier"
 		this.isLoading = true
 
-		this.elementFound = new MutationQueue(elem => elem.classList.add("element-found"))
-		this.elementFoundRemove = new MutationQueue(elem => elem.classList.remove("element-found"))
-		this.elementNotFound = new MutationQueue(elem => elem.classList.add("element-not-found"))
-		this.elementColorPreview = new MutationQueue(elem => elem.classList.add("element-color-preview"))
-		this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
+		// this.elementFound = new MutationQueue(elem => elem.classList.add("element-found"))
+		// this.elementFoundRemove = new MutationQueue(elem => elem.classList.remove("element-found"))
+		// this.elementNotFound = new MutationQueue(elem => elem.classList.add("element-not-found"))
+		// this.elementColorPreview = new MutationQueue(elem => elem.classList.add("element-color-preview"))
+		// this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
 
 		// These classes will never be removed on DOM diffs
 		Diff.persistentClasses.add("mounted")
@@ -576,10 +570,10 @@ export class AnimeNotifier {
 				if(element.dataset.color) {
 					element.src = this.emptyPixel()
 					element.style.backgroundColor = element.dataset.color
-					this.elementColorPreview.queue(element)
+					Diff.mutations.queue(() => element.classList.add("element-color-preview"))
 				}
 
-				this.elementFoundRemove.queue(element)
+				Diff.mutations.queue(() => element.classList.remove("element-found"))
 				element.src = finalSrc
 			}
 
@@ -589,7 +583,7 @@ export class AnimeNotifier {
 						return
 					}
 
-					this.elementFound.queue(element)
+					Diff.mutations.queue(() => element.classList.add("element-found"))
 				}
 
 				element.onerror = () => {
@@ -597,10 +591,10 @@ export class AnimeNotifier {
 						return
 					}
 
-					this.elementNotFound.queue(element)
+					Diff.mutations.queue(() => element.classList.add("element-not-found"))
 				}
 			} else {
-				this.elementFound.queue(element)
+				Diff.mutations.queue(() => element.classList.add("element-found"))
 			}
 		}
 
@@ -615,7 +609,7 @@ export class AnimeNotifier {
 				element.src = element.dataset.src
 			}
 
-			this.elementFound.queue(element)
+			Diff.mutations.queue(() => element.classList.add("element-found"))
 		}
 
 		this.visibilityObserver.observe(element)
@@ -631,7 +625,7 @@ export class AnimeNotifier {
 				continue
 			}
 
-			this.unmount.queue(element)
+			Diff.mutations.queue(() => element.classList.remove("mounted"))
 		}
 	}
 
