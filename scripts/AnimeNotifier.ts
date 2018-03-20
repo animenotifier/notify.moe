@@ -576,7 +576,7 @@ export class AnimeNotifier {
 
 			let finalSrc = base + extension
 
-			if(element.src !== finalSrc && element.src !== "https:" + finalSrc) {
+			if(element.src !== finalSrc && element.src !== "https:" + finalSrc && element.src !== "https://notify.moe" + finalSrc) {
 				element.classList.remove("element-found")
 				element.src = finalSrc
 			}
