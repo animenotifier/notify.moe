@@ -198,12 +198,8 @@ class MyServiceWorker {
 		var payload = evt.data ? evt.data.json() : {}
 
 		// Notify all clients about the new notification so they can update their notification counter
-		self.clients.matchAll().then(function(clientList) {
-			for(let client of clientList) {
-				client.postMessage(JSON.stringify({
-					type: "new notification"
-				}))
-			}
+		this.broadcast({
+			type: "new notification"
 		})
 
 		// Display the notification
@@ -272,6 +268,17 @@ class MyServiceWorker {
 
 			// Otherwise open a new window
 			return self.clients.openWindow("https://notify.moe")
+		})
+	}
+
+	// Broadcast sends a message to all clients (open tabs etc.)
+	broadcast(msg: object) {
+		const msgText = JSON.stringify(msg)
+
+		self.clients.matchAll().then(function(clientList) {
+			for(let client of clientList) {
+				client.postMessage(msgText)
+			}
 		})
 	}
 
@@ -373,6 +380,12 @@ class MyClient {
 			case "loaded":
 				this.onDOMContentLoaded(message.url)
 				break
+
+			case "broadcast":
+				message.type = message.realType
+				delete message.realType
+				serviceWorker.broadcast(message)
+				break
 		}
 	}
 
@@ -429,37 +442,37 @@ class MyClient {
 		// })
 	}
 
-	prefetchFullPage(url: string) {
-		let fullPage = new Request(url.replace("/_/", "/"))
+	// prefetchFullPage(url: string) {
+	// 	let fullPage = new Request(url.replace("/_/", "/"))
 
-		let fullPageRefresh = fetch(fullPage, {
-			credentials: "same-origin"
-		}).then(response => {
-			// Save the new version of the resource in the cache
-			let cacheRefresh = caches.open(serviceWorker.cache.version).then(cache => {
-				return cache.put(fullPage, response)
-			})
+	// 	let fullPageRefresh = fetch(fullPage, {
+	// 		credentials: "same-origin"
+	// 	}).then(response => {
+	// 		// Save the new version of the resource in the cache
+	// 		let cacheRefresh = caches.open(serviceWorker.cache.version).then(cache => {
+	// 			return cache.put(fullPage, response)
+	// 		})
 
-			CACHEREFRESH.set(fullPage.url, cacheRefresh)
-			return response
-		})
+	// 		CACHEREFRESH.set(fullPage.url, cacheRefresh)
+	// 		return response
+	// 	})
 
-		// Save in map
-		serviceWorker.reloads.set(fullPage.url, fullPageRefresh)
-	}
+	// 	// Save in map
+	// 	serviceWorker.reloads.set(fullPage.url, fullPageRefresh)
+	// }
 
-	async reloadContent(url: string) {
-		let cacheRefresh = CACHEREFRESH.get(url)
+	// async reloadContent(url: string) {
+	// 	let cacheRefresh = CACHEREFRESH.get(url)
 
-		if(cacheRefresh) {
-			await cacheRefresh
-		}
+	// 	if(cacheRefresh) {
+	// 		await cacheRefresh
+	// 	}
 
-		return this.postMessage({
-			type: "new content",
-			url
-		})
-	}
+	// 	return this.postMessage({
+	// 		type: "new content",
+	// 		url
+	// 	})
+	// }
 
 	// async reloadPage(url: string) {
 	// 	let networkFetch = serviceWorker.reloads.get(url.replace("/_/", "/"))
@@ -474,11 +487,11 @@ class MyClient {
 	// 	})
 	// }
 
-	reloadStyles() {
-		return this.postMessage({
-			type: "reload styles"
-		})
-	}
+	// reloadStyles() {
+	// 	return this.postMessage({
+	// 		type: "reload styles"
+	// 	})
+	// }
 
 	// Map of clients
 	static idToClient = new Map<string, MyClient>()

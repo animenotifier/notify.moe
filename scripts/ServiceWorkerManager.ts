@@ -11,11 +11,9 @@ export class ServiceWorkerManager {
 
 	register() {
 		if(!("serviceWorker" in navigator)) {
-			console.log("service worker not supported, skipping registration")
+			console.warn("service worker not supported, skipping registration")
 			return
 		}
-
-		console.log("register service worker")
 
 		navigator.serviceWorker.register(this.uri).then(registration => {
 			// registration.update()
@@ -74,6 +72,7 @@ export class ServiceWorkerManager {
 
 		switch(message.type) {
 			case "new notification":
+			case "notifications marked as seen":
 				this.arn.notificationManager.update()
 				break
 
