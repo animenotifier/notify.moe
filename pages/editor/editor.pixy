@@ -22,7 +22,7 @@ component EditorTabs(url string)
 		Tab("Companies", "building", "/editor/companies/missing/description")
 		Tab("Search", "search", "/database")
 
-	if strings.Contains(url, "/editor/anime/")
+	if strings.Contains(url, "/editor/anime/missing/") || strings.Contains(url, "/editor/anime/lowresimage") || strings.Contains(url, "/editor/anime/ultralowresimage")
 		.tabs
 			Tab("Shoboi", "list", "/editor/anime/missing/shoboi")
 			Tab("AniList", "list", "/editor/anime/missing/anilist")
