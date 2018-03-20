@@ -47,6 +47,10 @@ func LowResolutionAnimeImages(ctx *aero.Context) string {
 		}
 	}
 
+	// Sort
+	arn.SortAnimeByQuality(lowResAnime)
+
+	// Limit
 	count := len(lowResAnime)
 
 	if count > maxImageEntries {
