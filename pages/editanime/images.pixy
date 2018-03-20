@@ -12,4 +12,4 @@ component EditAnimeImages(anime *arn.Anime)
 			InputImage("anime-image-input", "File", "/api/upload/anime/" + anime.ID + "/image")
 
 			.anime-image-container
-				img#anime-image-input-preview.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", alt="Anime image")
+				img#anime-image-input-preview.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt="Anime image")

@@ -38,6 +38,7 @@ export class AnimeNotifier {
 
 	elementFound: MutationQueue
 	elementNotFound: MutationQueue
+	elementColorPreview: MutationQueue
 	unmount: MutationQueue
 
 	constructor(app: Application) {
@@ -48,6 +49,7 @@ export class AnimeNotifier {
 
 		this.elementFound = new MutationQueue(elem => elem.classList.add("element-found"))
 		this.elementNotFound = new MutationQueue(elem => elem.classList.add("element-not-found"))
+		this.elementColorPreview = new MutationQueue(elem => elem.classList.add("element-color-preview"))
 		this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
 
 		// These classes will never be removed on DOM diffs
@@ -538,7 +540,7 @@ export class AnimeNotifier {
 	lazyLoadImage(element: HTMLImageElement) {
 		if(element.dataset.color) {
 			element.style.backgroundColor = element.dataset.color
-			this.elementFound.queue(element)
+			this.elementColorPreview.queue(element)
 		}
 
 		// Once the image becomes visible, load it

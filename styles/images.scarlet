@@ -2,10 +2,18 @@
 	visibility hidden
 	opacity 0
 
+.element-color-preview
+	visibility visible
+	animation color-preview 1000ms forwards
+
+animation color-preview
+	100%
+		opacity 1
+
 .element-found
 	visibility visible
-	opacity 1 !important
+	opacity 1
 
 .element-not-found
 	visibility hidden
-	opacity 0 !important
+	opacity 0

@@ -12,7 +12,7 @@ component Calendar(days []*utils.CalendarDay, user *arn.User)
 				.calendar-entries
 					each entry in day.Entries
 						a.calendar-entry.mountable.ajax(href=entry.Anime.Link(), data-mountable-type=day.Name, data-added=entry.Added)
-							img.calendar-entry-image.lazy(data-src=entry.Anime.ImageLink("small"), data-webp="true", alt=entry.Anime.Title.ByUser(user))
+							img.calendar-entry-image.lazy(data-src=entry.Anime.ImageLink("small"), data-webp="true", data-color=entry.Anime.AverageColor(), alt=entry.Anime.Title.ByUser(user))
 							.calendar-entry-info
 								.calendar-entry-title= entry.Anime.Title.ByUser(user)
 								.calendar-entry-time-and-episode

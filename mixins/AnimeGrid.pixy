@@ -3,7 +3,7 @@ component AnimeGrid(animeList []*arn.Anime, user *arn.User)
 		each anime in animeList
 			.anime-grid-cell(data-added=(user != nil && user.AnimeList().Contains(anime.ID)))
 				a.ajax(href="/anime/" + toString(anime.ID))
-					img.anime-grid-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.Image.AverageColor, alt=anime.Title.Romaji)
+					img.anime-grid-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Romaji)
 					.anime-grid-title
 						.anime-grid-title-text= anime.Title.ByUser(user)
 				

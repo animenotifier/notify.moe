@@ -11,7 +11,7 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 		.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + viewUser.ID + "/field/Items[AnimeID=\"" + item.AnimeID + "\"]")
 			.anime-list-item-image-container
 				a.anime-list-item-image-link.ajax(href=item.Anime().Link())
-					img.anime-list-item-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
+					img.anime-list-item-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp="true", data-color=item.Anime().AverageColor(), alt=item.Anime().Title.ByUser(user))
 
 			.anime-list-item-name
 				a.ajax(href=item.Link(viewUser.Nick))= item.Anime().Title.ByUser(user)

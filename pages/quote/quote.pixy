@@ -58,4 +58,4 @@ component QuoteTabs(quote *arn.Quote, user *arn.User)
 
 component QuoteAnime(anime *arn.Anime, user *arn.User)
 	a.quote-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
-		img.quote-anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", alt=anime.Title.ByUser(user))
+		img.quote-anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
