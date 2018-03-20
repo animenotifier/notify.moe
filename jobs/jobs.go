@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/aerogo/log"
+	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
 
@@ -23,14 +24,13 @@ var colorPool = []*color.Color{
 }
 
 var jobs = map[string]time.Duration{
-	"anime-ratings":    10 * time.Minute,
-	"avatars":          1 * time.Hour,
-	"test":             1 * time.Hour,
-	"twist":            2 * time.Hour,
-	"refresh-episodes": 10 * time.Hour,
-	"refresh-osu":      12 * time.Hour,
-	"sync-anime":       12 * time.Hour,
-	"sync-shoboi":      24 * time.Hour,
+	"anime-ratings": 10 * time.Minute,
+	// "test":             1 * time.Hour,
+	"twist": 4 * time.Hour,
+	// "refresh-episodes": 10 * time.Hour,
+	// "refresh-osu":      12 * time.Hour,
+	// "sync-anime":       12 * time.Hour,
+	// "sync-shoboi":      24 * time.Hour,
 }
 
 func main() {
@@ -42,18 +42,9 @@ func main() {
 }
 
 func startJobs() {
-	// Get the directory the executable is in
-	exe, err := os.Executable()
-
-	if err != nil {
-		panic(err)
-	}
-
-	root := path.Dir(exe)
-
 	// Log paths
-	logsPath := path.Join(root, "../", "logs")
-	jobLogsPath := path.Join(root, "../", "logs", "jobs")
+	logsPath := path.Join(arn.Root, "logs")
+	jobLogsPath := path.Join(arn.Root, "logs", "jobs")
 	os.Mkdir(jobLogsPath, 0777)
 
 	// Scheduler log
@@ -69,7 +60,7 @@ func startJobs() {
 	for job, interval := range jobs {
 		jobName := job
 		jobInterval := interval
-		executable := path.Join(root, jobName, jobName)
+		executable := path.Join(arn.Root, "jobs", jobName, jobName)
 		jobColor := colorPool[colorIndex].SprintFunc()
 
 		jobLog := log.New()
@@ -80,8 +71,6 @@ func startJobs() {
 		go func() {
 			ticker := time.NewTicker(jobInterval)
 			defer ticker.Stop()
-
-			var err error
 
 			for {
 				// Wait for the given interval first
@@ -94,7 +83,7 @@ func startJobs() {
 				cmd.Stdout = jobLog
 				cmd.Stderr = jobLog
 
-				err = cmd.Start()
+				err := cmd.Start()
 
 				if err != nil {
 					schedulerLog.Error("Error starting job", jobColor(jobName), err)
