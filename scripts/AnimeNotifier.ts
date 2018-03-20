@@ -536,6 +536,11 @@ export class AnimeNotifier {
 	}
 
 	lazyLoadImage(element: HTMLImageElement) {
+		if(element.dataset.color) {
+			element.style.backgroundColor = element.dataset.color
+			this.elementFound.queue(element)
+		}
+
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
 			let dataSrc = element.dataset.src
