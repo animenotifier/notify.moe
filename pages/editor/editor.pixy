@@ -27,6 +27,7 @@ component EditorTabs(url string)
 			Tab("Shoboi", "list", "/editor/anime/missing/shoboi")
 			Tab("AniList", "list", "/editor/anime/missing/anilist")
 			Tab("Genres", "list", "/editor/anime/missing/genres")
+			Tab("Hi-Res Image", "list", "/editor/anime/missing/hiresimage")
 
 			//- a.tab.ajax(href="/admin", aria-label="Admin")
 			//- 	Icon("wrench")

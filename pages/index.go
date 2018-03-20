@@ -254,10 +254,15 @@ func Configure(app *aero.Application) {
 	l.Page("/editor/anime/missing/genres", editor.Genres)
 	l.Page("/editor/anime/missing/genres/:year", editor.Genres)
 	l.Page("/editor/anime/missing/genres/:year/:type", editor.Genres)
+	l.Page("/editor/anime/missing/hiresimage", editor.LowResolutionAnimeImages)
+
+	// Editor - MALdiff
 	l.Page("/editor/anime/maldiff", editor.CompareMAL)
 	l.Page("/editor/anime/maldiff/:year", editor.CompareMAL)
 	l.Page("/editor/anime/maldiff/:year/:status", editor.CompareMAL)
 	l.Page("/editor/anime/maldiff/:year/:status/:type", editor.CompareMAL)
+
+	// Editor - Kitsu
 	l.Page("/editor/anime/kitsu/new", editor.NewKitsuAnime)
 
 	// Editor - Companies
