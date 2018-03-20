@@ -37,6 +37,7 @@ export class AnimeNotifier {
 	currentSoundTrackId: string
 
 	elementFound: MutationQueue
+	elementFoundRemove: MutationQueue
 	elementNotFound: MutationQueue
 	elementColorPreview: MutationQueue
 	unmount: MutationQueue
@@ -48,6 +49,7 @@ export class AnimeNotifier {
 		this.isLoading = true
 
 		this.elementFound = new MutationQueue(elem => elem.classList.add("element-found"))
+		this.elementFoundRemove = new MutationQueue(elem => elem.classList.remove("element-found"))
 		this.elementNotFound = new MutationQueue(elem => elem.classList.add("element-not-found"))
 		this.elementColorPreview = new MutationQueue(elem => elem.classList.add("element-color-preview"))
 		this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
@@ -544,13 +546,6 @@ export class AnimeNotifier {
 	lazyLoadImage(element: HTMLImageElement) {
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
-			// Show average color
-			if(element.dataset.color) {
-				element.src = this.emptyPixel()
-				element.style.backgroundColor = element.dataset.color
-				this.elementColorPreview.queue(element)
-			}
-
 			let dataSrc = element.dataset.src
 			let dotPos = dataSrc.lastIndexOf(".")
 			let base = dataSrc.substring(0, dotPos)
@@ -577,7 +572,14 @@ export class AnimeNotifier {
 			let finalSrc = base + extension
 
 			if(element.src !== finalSrc && element.src !== "https:" + finalSrc && element.src !== "https://notify.moe" + finalSrc) {
-				element.classList.remove("element-found")
+				// Show average color
+				if(element.dataset.color) {
+					element.src = this.emptyPixel()
+					element.style.backgroundColor = element.dataset.color
+					this.elementColorPreview.queue(element)
+				}
+
+				this.elementFoundRemove.queue(element)
 				element.src = finalSrc
 			}
 
