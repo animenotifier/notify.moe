@@ -76,9 +76,16 @@ func update(anime *arn.Anime, filePath string) {
 	data, err := ioutil.ReadFile(filePath)
 
 	if err != nil {
+		color.Red(err.Error())
 		return
 	}
 
-	anime.SetImageBytes(data)
+	err = anime.SetImageBytes(data)
+
+	if err != nil {
+		color.Red(err.Error())
+		return
+	}
+
 	anime.Save()
 }
