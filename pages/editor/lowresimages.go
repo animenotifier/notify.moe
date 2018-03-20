@@ -48,11 +48,13 @@ func filterAnimeImages(ctx *aero.Context, title string, minExpectedWidth int, mi
 		title,
 		lowResAnime,
 		count,
-		"/editor/anime/missing/hiresimage",
-		func(anime *arn.Anime) string {
-			return "https://www.google.com/search?q=" + anime.Title.Canonical + "&tbm=isch"
-		},
+		ctx.URI(),
+		googleImageSearch,
 	))
+}
+
+func googleImageSearch(anime *arn.Anime) string {
+	return "https://www.google.com/search?q=" + anime.Title.Canonical + "&tbm=isch&tbs=imgo:1,isz:lt,islt:qsvga"
 }
 
 // // LowResolutionAnimeImages ...

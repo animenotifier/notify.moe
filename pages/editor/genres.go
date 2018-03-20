@@ -51,7 +51,7 @@ func Genres(ctx *aero.Context) string {
 		"Anime without genres",
 		missing,
 		count,
-		"/editor/anime/missing/genres",
+		ctx.URI(),
 		nil,
 	))
 }

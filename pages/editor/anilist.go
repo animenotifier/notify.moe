@@ -51,7 +51,7 @@ func AniList(ctx *aero.Context) string {
 		"Anime without Anilist links",
 		missing,
 		count,
-		"/editor/anime/missing/anilist",
+		ctx.URI(),
 		func(anime *arn.Anime) string {
 			return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
 		},
