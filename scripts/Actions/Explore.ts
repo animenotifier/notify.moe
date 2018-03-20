@@ -9,8 +9,9 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 
 	for(let element of findAll("anime-grid-image")) {
 		let img = element as HTMLImageElement
-		img.src = ""
+		img.src = arn.emptyPixel()
 		img.classList.remove("element-found")
+		img.classList.remove("element-color-preview")
 	}
 
 	arn.diff(`/explore/anime/${year.value}/${status.value}/${type.value}`)

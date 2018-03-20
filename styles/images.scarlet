@@ -1,21 +1,23 @@
+mixin image-appear
+	animation color-preview 400ms forwards
+
 .lazy
 	visibility hidden
 	opacity 0
 
-	// Hide the alt text that is shown while the image is loading
-	text-indent -500px
-
 .element-color-preview
 	visibility visible
-	animation color-preview 1000ms forwards
+	image-appear
 
 animation color-preview
+	0%
+		opacity 0
 	100%
 		opacity 1
 
 .element-found
 	visibility visible
-	opacity 1
+	image-appear
 
 .element-not-found
 	visibility hidden

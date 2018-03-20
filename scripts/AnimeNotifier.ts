@@ -537,14 +537,20 @@ export class AnimeNotifier {
 		}
 	}
 
-	lazyLoadImage(element: HTMLImageElement) {
-		if(element.dataset.color) {
-			element.style.backgroundColor = element.dataset.color
-			this.elementColorPreview.queue(element)
-		}
+	emptyPixel() {
+		return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+	}
 
+	lazyLoadImage(element: HTMLImageElement) {
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
+			// Show average color
+			if(element.dataset.color) {
+				element.src = this.emptyPixel()
+				element.style.backgroundColor = element.dataset.color
+				this.elementColorPreview.queue(element)
+			}
+
 			let dataSrc = element.dataset.src
 			let dotPos = dataSrc.lastIndexOf(".")
 			let base = dataSrc.substring(0, dotPos)
@@ -568,10 +574,19 @@ export class AnimeNotifier {
 				base += "@2"
 			}
 
-			element.src = base + extension
+			let finalSrc = base + extension
+
+			if(element.src !== finalSrc && element.src !== "https:" + finalSrc) {
+				element.classList.remove("element-found")
+				element.src = finalSrc
+			}
 
 			if(element.naturalWidth === 0) {
 				element.onload = () => {
+					if(element.src.startsWith("data:")) {
+						return
+					}
+
 					this.elementFound.queue(element)
 				}
 
