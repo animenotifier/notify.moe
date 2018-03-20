@@ -1,19 +1,19 @@
 import { AnimeNotifier } from "../AnimeNotifier"
 
 // like
-export function like(arn: AnimeNotifier, element: HTMLElement) {
-	let apiEndpoint = arn.findAPIEndpoint(element)
+export async function like(arn: AnimeNotifier, element: HTMLElement) {
+	arn.statusMessage.showInfo("Liked!")
 
-	arn.post(apiEndpoint + "/like", null)
-	.then(() => arn.reloadContent())
-	.catch(err => arn.statusMessage.showError(err))
+	let apiEndpoint = arn.findAPIEndpoint(element)
+	await arn.post(apiEndpoint + "/like", null).catch(err => arn.statusMessage.showError(err))
+	arn.reloadContent()
 }
 
 // unlike
-export function unlike(arn: AnimeNotifier, element: HTMLElement) {
-	let apiEndpoint = arn.findAPIEndpoint(element)
+export async function unlike(arn: AnimeNotifier, element: HTMLElement) {
+	arn.statusMessage.showInfo("Disliked!")
 
-	arn.post(apiEndpoint + "/unlike", null)
-	.then(() => arn.reloadContent())
-	.catch(err => arn.statusMessage.showError(err))
+	let apiEndpoint = arn.findAPIEndpoint(element)
+	await arn.post(apiEndpoint + "/unlike", null).catch(err => arn.statusMessage.showError(err))
+	arn.reloadContent()
 }
