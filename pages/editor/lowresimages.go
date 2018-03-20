@@ -54,7 +54,7 @@ func filterAnimeImages(ctx *aero.Context, title string, minExpectedWidth int, mi
 }
 
 func googleImageSearch(anime *arn.Anime) string {
-	return "https://www.google.com/search?q=" + anime.Title.Canonical + "&tbm=isch&tbs=imgo:1,isz:lt,islt:qsvga"
+	return "https://www.google.com/search?q=" + anime.Title.Canonical + " anime cover" + "&tbm=isch&tbs=imgo:1,isz:lt,islt:qsvga"
 }
 
 // // LowResolutionAnimeImages ...
