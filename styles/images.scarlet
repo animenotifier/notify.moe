@@ -2,6 +2,9 @@
 	visibility hidden
 	opacity 0
 
+	// Hide the alt text that is shown while the image is loading
+	text-indent -500px
+
 .element-color-preview
 	visibility visible
 	animation color-preview 1000ms forwards
