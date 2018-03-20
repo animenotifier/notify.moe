@@ -30,15 +30,15 @@ export async function markNotificationsAsSeen(arn: AnimeNotifier) {
 	})
 
 	// Update notification counter
-	if(!("serviceWorker" in navigator)) {
-		// If there is no service worker, update the counter on this tab
-		arn.notificationManager.update()
-	} else {
+	if("serviceWorker" in navigator) {
 		// If we have service worker support, broadcast the "notifications marked as seen" message to all open tabs
 		arn.serviceWorkerManager.postMessage({
 			type: "broadcast",
 			realType: "notifications marked as seen"
 		})
+	} else {
+		// If there is no service worker, update the counter on this tab
+		arn.notificationManager.update()
 	}
 
 	// Update notifications
