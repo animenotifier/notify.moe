@@ -10,6 +10,15 @@ const maxImageEntries = 70
 
 // LowResolutionAnimeImages filters anime with low resolution images.
 func LowResolutionAnimeImages(ctx *aero.Context) string {
+	return filterAnimeImages(ctx, "Anime with low resolution images", arn.AnimeImageLargeWidth, arn.AnimeImageLargeHeight)
+}
+
+// UltraLowResolutionAnimeImages filters anime with ultra low resolution images.
+func UltraLowResolutionAnimeImages(ctx *aero.Context) string {
+	return filterAnimeImages(ctx, "Anime with ultra low resolution images", arn.AnimeImageLargeWidth/2, arn.AnimeImageLargeHeight/2)
+}
+
+func filterAnimeImages(ctx *aero.Context, title string, minExpectedWidth int, minExpectedHeight int) string {
 	year, _ := ctx.GetInt("year")
 	animeType := ctx.Get("type")
 
@@ -22,7 +31,7 @@ func LowResolutionAnimeImages(ctx *aero.Context) string {
 			return false
 		}
 
-		return anime.Image.Width < arn.AnimeImageLargeWidth || anime.Image.Height < arn.AnimeImageLargeHeight
+		return anime.Image.Width < minExpectedWidth || anime.Image.Height < minExpectedHeight
 	})
 
 	// Sort
@@ -36,7 +45,7 @@ func LowResolutionAnimeImages(ctx *aero.Context) string {
 	}
 
 	return ctx.HTML(components.AnimeEditorListFull(
-		"Anime with low resolution images",
+		title,
 		lowResAnime,
 		count,
 		"/editor/anime/missing/hiresimage",
