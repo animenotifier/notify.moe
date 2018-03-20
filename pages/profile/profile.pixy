@@ -8,7 +8,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 			each item in animeList.Items
 				if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
 					a.profile-watching-list-item.ajax(href=item.Anime().Link(), title=item.Anime().Title.ByUser(user) + " (" + toString(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-						img.profile-watching-list-item-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp="true", alt=item.Anime().Title.ByUser(user))
+						img.profile-watching-list-item-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp="true", data-color=item.Anime().Image.AverageColor, alt=item.Anime().Title.ByUser(user))
 
 	.footer
 		.buttons	

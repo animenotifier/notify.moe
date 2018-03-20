@@ -73,34 +73,6 @@ func update(anime *arn.Anime, filePath string) {
 		return
 	}
 
-	width := img.Bounds().Dx()
-	height := img.Bounds().Dy()
-
-	totalR := uint64(0)
-	totalG := uint64(0)
-	totalB := uint64(0)
-
-	for x := 0; x < width; x++ {
-		for y := 0; y < height; y++ {
-			r, g, b, _ := img.At(x, y).RGBA()
-			totalR += uint64(r)
-			totalG += uint64(g)
-			totalB += uint64(b)
-		}
-	}
-
-	pixels := uint64(width * height)
-
-	const max = float64(65535)
-	averageR := float64(totalR/pixels) / max
-	averageG := float64(totalG/pixels) / max
-	averageB := float64(totalB/pixels) / max
-
-	h, s, l := arn.RGBToHSL(averageR, averageG, averageB)
-
-	anime.Image.AverageColor.Hue = h
-	anime.Image.AverageColor.Saturation = s
-	anime.Image.AverageColor.Lightness = l
-
+	anime.Image.AverageColor = arn.GetAverageColor(img)
 	anime.Save()
 }

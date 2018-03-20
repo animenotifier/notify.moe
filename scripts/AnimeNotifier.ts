@@ -574,6 +574,10 @@ export class AnimeNotifier {
 				}
 
 				element.onerror = () => {
+					if(element.classList.contains("element-found")) {
+						return
+					}
+
 					this.elementNotFound.queue(element)
 				}
 			} else {
