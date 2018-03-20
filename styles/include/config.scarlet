@@ -102,7 +102,7 @@ const typography-margin = 0.4rem
 
 // Sizes
 const anime-image-large-width = 250px
-const anime-image-large-height = auto
+const anime-image-large-height = 350px
 
 // Timings
 fade-speed = 150ms
