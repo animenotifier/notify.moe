@@ -53,9 +53,7 @@ mixin clip-long-text
 mixin anime-mini-item
 	margin 0.25rem
 
-mixin anime-mini-item-image
-	width 55px !important
-	height 78px !important
+mixin anime-generic-item-image
 	object-fit cover
 	border-radius 2px
 	filter none
@@ -63,6 +61,11 @@ mixin anime-mini-item-image
 
 	:hover
 		filter saturate(1.3)
+
+mixin anime-mini-item-image
+	width 55px !important
+	height 78px !important
+	anime-generic-item-image
 
 mixin anime-list-item-image
 	width 39px
