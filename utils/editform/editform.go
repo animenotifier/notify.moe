@@ -37,6 +37,7 @@ func Render(obj interface{}, title string, user *arn.User) string {
 	if user != nil {
 		b.WriteString(`<div class="buttons">`)
 
+		// Publish button
 		_, ok := t.FieldByName("IsDraft")
 
 		if ok {
@@ -47,8 +48,18 @@ func Render(obj interface{}, title string, user *arn.User) string {
 			}
 		}
 
+		// Delete button
 		if user.Role == "editor" || user.Role == "admin" {
-			b.WriteString(`<button class="mountable action" data-action="deleteObject" data-trigger="click" data-return-path="/` + lowerCaseTypeName + "s" + `" data-confirm-type="` + lowerCaseTypeName + `">` + utils.Icon("trash") + `Delete</button>`)
+			returnPath := ""
+
+			switch lowerCaseTypeName {
+			case "company":
+				returnPath = "/companies"
+			default:
+				returnPath = "/" + lowerCaseTypeName + "s"
+			}
+
+			b.WriteString(`<button class="mountable action" data-action="deleteObject" data-trigger="click" data-return-path="` + returnPath + `" data-confirm-type="` + lowerCaseTypeName + `">` + utils.Icon("trash") + `Delete</button>`)
 		}
 
 		b.WriteString(`</div>`)
