@@ -1,12 +1,15 @@
-component AnimeGrid(animeList []*arn.Anime, user *arn.User)
-	.anime-grid
-		each anime in animeList
-			.anime-grid-cell(data-added=(user != nil && user.AnimeList().Contains(anime.ID)))
-				a.ajax(href="/anime/" + toString(anime.ID))
-					img.anime-grid-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Romaji)
-					.anime-grid-title
-						.anime-grid-title-text= anime.Title.ByUser(user)
-				
-				if user != nil && !user.AnimeList().Contains(anime.ID)
-					button.anime-grid-add-button.action(data-action="addAnimeToCollection", data-trigger="click", data-api="/api/animelist/" + user.ID, data-anime-id=anime.ID)
-						RawIcon("plus")
+component AnimeGrid(animes []*arn.Anime, user *arn.User)
+	#load-more-target.anime-grid
+		AnimeGridScrollable(animes, user)
+
+component AnimeGridScrollable(animes []*arn.Anime, user *arn.User)
+	each anime in animes
+		.anime-grid-cell(data-added=(user != nil && user.AnimeList().Contains(anime.ID)))
+			a.ajax(href="/anime/" + toString(anime.ID))
+				img.anime-grid-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Romaji)
+				.anime-grid-title
+					.anime-grid-title-text= anime.Title.ByUser(user)
+			
+			if user != nil && !user.AnimeList().Contains(anime.ID)
+				button.anime-grid-add-button.action(data-action="addAnimeToCollection", data-trigger="click", data-api="/api/animelist/" + user.ID, data-anime-id=anime.ID)
+					RawIcon("plus")

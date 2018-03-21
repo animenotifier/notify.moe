@@ -1,4 +1,4 @@
-component ExploreColor(animes []*arn.Anime, color string, user *arn.User)
+component ExploreColor(animes []*arn.Anime, nextIndex int, totalCount int, color string, user *arn.User)
 	h1.page-title Explore anime by color
 
 	for saturation := 0.75; saturation >= 0.25; saturation -= 0.25
@@ -7,12 +7,16 @@ component ExploreColor(animes []*arn.Anime, color string, user *arn.User)
 				a.tab.color-stripe.action(href=fmt.Sprintf("/explore/color/hsl:%.3f,%.2f,0.5/anime", hue, saturation), data-action="diff", data-trigger="click", data-color=fmt.Sprintf("hsl(%.0f, %.0f%%, 50%%)", hue * 360, saturation * 100))
 
 	.explore-anime
-		if len(animes) == 0
+		if totalCount == 0
 			if color == "any"
 				p.no-data.mountable Please choose a color.
 			else
 				p.no-data.mountable No anime found for the given color.
 		else
-			p.text-center.mountable= strconv.Itoa(len(animes)) + " anime."
+			p.text-center.mountable= strconv.Itoa(totalCount) + " anime."
 
 			AnimeGrid(animes, user)
+	
+	if nextIndex != -1
+		.buttons
+			LoadMore(nextIndex)

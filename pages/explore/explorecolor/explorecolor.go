@@ -9,17 +9,45 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/utils/infinitescroll"
+)
+
+const (
+	animeFirstLoad = 50
+	animePerScroll = 20
 )
 
 // AnimeByAverageColor returns all anime with an image in the given color.
 func AnimeByAverageColor(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	color := ctx.Get("color")
-	animes := filterAnimeByColor(color)
+	index, _ := ctx.GetInt("index")
 
-	arn.SortAnimeByQuality(animes)
+	allAnimes := filterAnimeByColor(color)
+	arn.SortAnimeByQuality(allAnimes)
 
-	return ctx.HTML(components.ExploreColor(animes, color, user))
+	// Slice the part that we need
+	animes := allAnimes[index:]
+	maxLength := animeFirstLoad
+
+	if index > 0 {
+		maxLength = animePerScroll
+	}
+
+	if len(animes) > maxLength {
+		animes = animes[:maxLength]
+	}
+
+	// Next index
+	nextIndex := infinitescroll.NextIndex(ctx, len(allAnimes), maxLength, index)
+
+	// In case we're scrolling, send animes only (without the page frame)
+	if index > 0 {
+		return ctx.HTML(components.AnimeGridScrollable(animes, user))
+	}
+
+	// Otherwise, send the full page
+	return ctx.HTML(components.ExploreColor(animes, nextIndex, len(allAnimes), color, user))
 }
 
 func filterAnimeByColor(colorText string) []*arn.Anime {

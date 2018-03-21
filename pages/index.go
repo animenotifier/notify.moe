@@ -77,6 +77,7 @@ func Configure(app *aero.Application) {
 	l.Page("/explore", explore.Get)
 	l.Page("/explore/anime/:year/:status/:type", explore.Filter)
 	l.Page("/explore/color/:color/anime", explorecolor.AnimeByAverageColor)
+	l.Page("/explore/color/:color/anime/from/:index", explorecolor.AnimeByAverageColor)
 	l.Page("/login", login.Get)
 	l.Page("/api", apiview.Get)
 	// l.Ajax("/dashboard", dashboard.Get)
