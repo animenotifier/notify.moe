@@ -29,6 +29,12 @@
 	transform translateY(0%)
 	animation bounce-up-down 45s linear infinite
 
+	// The element-found class doesn't set opacity,
+	// because we're overwriting the animation.
+	// That's why we have to manually add it here.
+	&.element-found
+		opacity 1
+
 animation bounce-up-down
 	50%
 		transform translateY(-30%)
