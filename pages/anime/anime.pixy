@@ -148,12 +148,13 @@ component AnimeRelations(anime *arn.Anime, user *arn.User)
 			h3.anime-section-name Relations
 			.anime-relations
 				each relation in anime.Relations().Items
-					a.anime-relation.mountable.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user), data-mountable-type="relation")
-						img.anime-relation-image.lazy(data-src=relation.Anime().ImageLink("small"), data-webp="true", data-color=relation.Anime().AverageColor(), alt=relation.Anime().Title.ByUser(user))
-						.anime-relation-type= relation.HumanReadableType()
-						.anime-relation-year
-							if relation.Anime().StartDate != ""
-								span= relation.Anime().StartDate[:4]
+					if relation.Anime() != nil
+						a.anime-relation.mountable.ajax(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user), data-mountable-type="relation")
+							img.anime-relation-image.lazy(data-src=relation.Anime().ImageLink("small"), data-webp="true", data-color=relation.Anime().AverageColor(), alt=relation.Anime().Title.ByUser(user))
+							.anime-relation-type= relation.HumanReadableType()
+							.anime-relation-year
+								if relation.Anime().StartDate != ""
+									span= relation.Anime().StartDate[:4]
 
 component AnimeTrailer(anime *arn.Anime)
 	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].ServiceID != ""
