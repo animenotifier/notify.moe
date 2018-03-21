@@ -14,7 +14,7 @@ import (
 
 const (
 	animeFirstLoad = 50
-	animePerScroll = 20
+	animePerScroll = 30
 )
 
 // AnimeByAverageColor returns all anime with an image in the given color.
