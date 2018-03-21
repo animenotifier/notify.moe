@@ -54,10 +54,6 @@ var routeTests = map[string][]string{
 		"/+Akyoto/stats",
 	},
 
-	"/user/:nick/animelist": []string{
-		"/+Akyoto/animelist",
-	},
-
 	"/user/:nick/animelist/anime/:id": []string{
 		"/+Akyoto/animelist/anime/7929",
 	},
