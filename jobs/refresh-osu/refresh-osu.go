@@ -7,26 +7,34 @@ import (
 	"github.com/fatih/color"
 )
 
+var ticker = time.NewTicker(500 * time.Millisecond)
+
 func main() {
 	color.Yellow("Refreshing osu information")
+
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
-	ticker := time.NewTicker(500 * time.Millisecond)
-
 	for user := range arn.StreamUsers() {
-		// Get osu info
-		if user.RefreshOsuInfo() == nil {
-			arn.PrettyPrint(user.Accounts.Osu)
-
-			// Fetch user again to prevent writing old data
-			updatedUser, _ := arn.GetUser(user.ID)
-			updatedUser.Accounts.Osu = user.Accounts.Osu
-			updatedUser.Save()
+		if user.Accounts.Osu.Nick == "" {
+			continue
 		}
+
+		// Fetch new info
+		err := user.RefreshOsuInfo()
+
+		if err != nil {
+			color.Red(err.Error())
+			continue
+		}
+
+		// Log it
+		arn.PrettyPrint(user.Accounts.Osu)
+
+		// Save in database
+		user.Save()
 
 		// Wait for rate limiter
 		<-ticker.C
 	}
-
-	color.Green("Finished.")
 }

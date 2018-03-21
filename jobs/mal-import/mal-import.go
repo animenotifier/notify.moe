@@ -16,8 +16,8 @@ import (
 func main() {
 	color.Yellow("Importing MAL anime")
 
-	defer arn.Node.Close()
 	defer color.Green("Finished.")
+	defer arn.Node.Close()
 
 	// readFile("../mal-download/files/anime-31240.html")
 

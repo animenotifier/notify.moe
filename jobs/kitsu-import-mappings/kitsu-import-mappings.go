@@ -11,8 +11,8 @@ import (
 func main() {
 	color.Yellow("Importing Kitsu mappings")
 
-	defer arn.Node.Close()
 	defer color.Green("Finished.")
+	defer arn.Node.Close()
 
 	// Iterate over all mappings
 	for mapping := range kitsu.StreamMappings() {

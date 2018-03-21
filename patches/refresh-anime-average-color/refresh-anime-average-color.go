@@ -16,8 +16,8 @@ import (
 func main() {
 	color.Yellow("Updating anime image average colors")
 
-	defer arn.Node.Close()
 	defer color.Green("Finished.")
+	defer arn.Node.Close()
 
 	// Parse flags
 	var animeID string

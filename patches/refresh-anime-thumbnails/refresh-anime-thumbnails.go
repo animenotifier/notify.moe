@@ -14,8 +14,8 @@ import (
 func main() {
 	color.Yellow("Updating anime thumbnails")
 
-	defer arn.Node.Close()
 	defer color.Green("Finished.")
+	defer arn.Node.Close()
 
 	// Parse flags
 	var animeID string

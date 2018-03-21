@@ -116,5 +116,5 @@ func search(anime *arn.Anime, title string) {
 	}
 
 	// This will start a goroutine that saves the anime
-	anime.SetMapping("shoboi/anime", shoboi.TID, "")
+	anime.SetMapping("shoboi/anime", shoboi.TID)
 }

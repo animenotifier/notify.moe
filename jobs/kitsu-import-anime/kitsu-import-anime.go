@@ -11,8 +11,8 @@ import (
 func main() {
 	color.Yellow("Importing Kitsu anime")
 
-	defer arn.Node.Close()
 	defer color.Green("Finished.")
+	defer arn.Node.Close()
 
 	// In case we refresh only one anime
 	if InvokeShellArgs() {
