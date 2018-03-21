@@ -26,6 +26,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/episode"
 	"github.com/animenotifier/notify.moe/pages/explore"
+	"github.com/animenotifier/notify.moe/pages/explore/explorecolor"
 	"github.com/animenotifier/notify.moe/pages/forum"
 	"github.com/animenotifier/notify.moe/pages/genre"
 	"github.com/animenotifier/notify.moe/pages/genres"
@@ -75,6 +76,7 @@ func Configure(app *aero.Application) {
 	l.Page("/", home.Get)
 	l.Page("/explore", explore.Get)
 	l.Page("/explore/anime/:year/:status/:type", explore.Filter)
+	l.Page("/explore/color/:color/anime", explorecolor.AnimeByAverageColor)
 	l.Page("/login", login.Get)
 	l.Page("/api", apiview.Get)
 	// l.Ajax("/dashboard", dashboard.Get)

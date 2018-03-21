@@ -1,0 +1,13 @@
+.color-stripes
+	horizontal
+	justify-content center
+	margin-bottom 0
+
+.color-stripe
+	width 2%
+	height 2rem
+	padding 0
+	border 1px solid transparent
+
+	&.active
+		border 1px solid theme-black

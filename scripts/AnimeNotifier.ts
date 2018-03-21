@@ -163,6 +163,7 @@ export class AnimeNotifier {
 			Promise.resolve().then(() => this.assignActions()),
 			Promise.resolve().then(() => this.updatePushUI()),
 			Promise.resolve().then(() => this.dragAndDrop()),
+			Promise.resolve().then(() => this.colorStripes()),
 			Promise.resolve().then(() => this.countUp())
 		])
 
@@ -343,6 +344,18 @@ export class AnimeNotifier {
 		} else {
 			enableButton.classList.remove("hidden")
 			disableButton.classList.add("hidden")
+		}
+	}
+
+	colorStripes() {
+		if(!this.app.currentPath.includes("/explore/color/")) {
+			return
+		}
+
+		for(let element of findAll("color-stripe")) {
+			Diff.mutations.queue(() => {
+				element.style.backgroundColor = element.dataset.color
+			})
 		}
 	}
 
