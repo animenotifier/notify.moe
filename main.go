@@ -60,7 +60,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.OnShutdown(arn.Node.Close)
 
 	// Check that this is the server
-	if !arn.Node.IsServer() {
+	if !arn.Node.IsServer() && !arn.IsTest() {
 		panic("Another program is currently running as the database server")
 	}
 

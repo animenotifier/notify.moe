@@ -79,8 +79,6 @@ func importByName(anime *arn.Anime, companyType string, producer *mal.Producer) 
 				&arn.Mapping{
 					Service:   "myanimelist/producer",
 					ServiceID: producer.ID,
-					Created:   arn.DateTimeUTC(),
-					CreatedBy: "",
 				},
 			},
 			Links: []*arn.Link{},

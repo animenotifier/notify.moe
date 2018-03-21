@@ -9,17 +9,22 @@ import (
 	"github.com/aerogo/aero"
 )
 
-func TestRoutes(t *testing.T) {
+// TestRouteStatusCodes tests the status code of every route registered in routeTests.
+func TestRouteStatusCodes(t *testing.T) {
 	app := configure(aero.New())
 
+	// Iterate through every route
 	for _, examples := range routeTests {
+		// Iterate through every example specified for that route
 		for _, example := range examples {
+			// Create a new HTTP request
 			request, err := http.NewRequest("GET", example, nil)
 
 			if err != nil {
 				t.Fatal(err)
 			}
 
+			// Record the response without actually starting the server
 			responseRecorder := httptest.NewRecorder()
 			app.Handler().ServeHTTP(responseRecorder, request)
 

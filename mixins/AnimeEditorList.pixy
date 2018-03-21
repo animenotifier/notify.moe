@@ -9,6 +9,7 @@ component AnimeEditorList(animes []*arn.Anime, pageURI string, generateSearchLin
 		thead
 			tr.mountable
 				th(title="Popularity") Pop.
+				th Image
 				th Title
 				th Type
 				th Year
@@ -19,6 +20,8 @@ component AnimeEditorList(animes []*arn.Anime, pageURI string, generateSearchLin
 			each anime in animes
 				tr.mountable
 					td= anime.Popularity.Total()
+					td
+						img.anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Canonical)
 					td
 						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
 					td= anime.Type
