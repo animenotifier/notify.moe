@@ -67,8 +67,9 @@ mixin anime-mini-item-image
 	height anime-image-small-height !important
 	anime-generic-item-image
 
-	// Make it easier for the browser to layout by specifying max-width as well
+	// Make it easier for the browser to layout by specifying max size as well
 	max-width anime-image-small-width
+	max-height anime-image-small-height
 
 mixin anime-list-item-image
 	width anime-image-tiny-width
@@ -76,8 +77,9 @@ mixin anime-list-item-image
 	border-radius 2px
 	object-fit cover
 
-	// Make it easier for the browser to layout by specifying max-width as well
+	// Make it easier for the browser to layout by specifying max size as well
 	max-width anime-image-tiny-width
+	max-height anime-image-tiny-height
 
 mixin sidebar
 	vertical

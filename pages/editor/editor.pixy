@@ -18,16 +18,16 @@ component EditorTabs(url string)
 		Tab("Editor", "pencil", "/editor")
 		Tab("MAL", "exchange", "/editor/maldiff/anime")
 		Tab("Kitsu", "exchange", "/editor/kitsu/new/anime")
-		Tab("Anime", "tv", "/editor/anime/synopsis")
+		Tab("Anime", "tv", "/editor/anime/mapping/mal")
 		Tab("Companies", "building", "/editor/companies/description")
 		Tab("Search", "search", "/database")
 
 	if strings.Contains(url, "/editor/anime/")
 		.tabs
+			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal")
 			Tab("Synopsis", "align-left", "/editor/anime/synopsis")
 			Tab("Genres", "clone", "/editor/anime/genres")
 			Tab("Start date", "calendar", "/editor/anime/startdate")
-			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal")
 			Tab("Images", "image", "/editor/anime/image/lowres")
 	
 	if strings.Contains(url, "/editor/anime/mapping/")
