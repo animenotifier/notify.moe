@@ -5,15 +5,13 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-const maxGenreEntries = 70
-
-// Genres ...
-func Genres(ctx *aero.Context) string {
+// Synopsis ...
+func Synopsis(ctx *aero.Context) string {
 	return editorList(
 		ctx,
-		"Anime without genres",
+		"Anime without a long synopsis",
 		func(anime *arn.Anime) bool {
-			return len(anime.Genres) == 0
+			return len(anime.Summary) < 170
 		},
 		nil,
 	)

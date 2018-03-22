@@ -16,19 +16,30 @@ component Editor(url string, score int, scoreTypes map[string]int, user *arn.Use
 component EditorTabs(url string)
 	.tabs
 		Tab("Editor", "pencil", "/editor")
-		Tab("MAL", "exchange", "/editor/anime/maldiff")
-		Tab("Kitsu", "exchange", "/editor/anime/kitsu/new")
-		Tab("Anime", "tv", "/editor/anime/missing/shoboi")
-		Tab("Companies", "building", "/editor/companies/missing/description")
+		Tab("MAL", "exchange", "/editor/maldiff/anime")
+		Tab("Kitsu", "exchange", "/editor/kitsu/new/anime")
+		Tab("Anime", "tv", "/editor/anime/synopsis")
+		Tab("Companies", "building", "/editor/companies/description")
 		Tab("Search", "search", "/database")
 
-	if strings.Contains(url, "/editor/anime/missing/") || strings.Contains(url, "/editor/anime/lowresimage") || strings.Contains(url, "/editor/anime/ultralowresimage")
+	if strings.Contains(url, "/editor/anime/")
 		.tabs
-			Tab("Shoboi", "list", "/editor/anime/missing/shoboi")
-			Tab("AniList", "list", "/editor/anime/missing/anilist")
-			Tab("Genres", "list", "/editor/anime/missing/genres")
-			Tab("Low-Res", "image", "/editor/anime/lowresimage")
-			Tab("Ultra Low-Res", "image", "/editor/anime/ultralowresimage")
+			Tab("Synopsis", "align-left", "/editor/anime/synopsis")
+			Tab("Genres", "clone", "/editor/anime/genres")
+			Tab("Start date", "calendar", "/editor/anime/startdate")
+			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal")
+			Tab("Images", "image", "/editor/anime/image/lowres")
+	
+	if strings.Contains(url, "/editor/anime/mapping/")
+		.tabs
+			Tab("MAL", "arrows-h", "/editor/anime/mapping/mal")
+			Tab("Shoboi", "arrows-h", "/editor/anime/mapping/shoboi")
+			Tab("AniList", "arrows-h", "/editor/anime/mapping/anilist")
+
+	if strings.Contains(url, "/editor/anime/image/")
+		.tabs
+			Tab("Low-Res", "image", "/editor/anime/image/lowres")
+			Tab("Ultra Low-Res", "image", "/editor/anime/image/ultralowres")
 
 			//- a.tab.ajax(href="/admin", aria-label="Admin")
 			//- 	Icon("wrench")

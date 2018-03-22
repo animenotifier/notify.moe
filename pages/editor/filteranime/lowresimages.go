@@ -3,7 +3,6 @@ package filteranime
 import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
-	"github.com/animenotifier/notify.moe/components"
 )
 
 const maxImageEntries = 70
@@ -19,38 +18,14 @@ func UltraLowResolutionAnimeImages(ctx *aero.Context) string {
 }
 
 func filterAnimeImages(ctx *aero.Context, title string, minExpectedWidth int, minExpectedHeight int) string {
-	year, _ := ctx.GetInt("year")
-	animeType := ctx.Get("type")
-
-	lowResAnime := arn.FilterAnime(func(anime *arn.Anime) bool {
-		if year != 0 && year != anime.StartDateTime().Year() {
-			return false
-		}
-
-		if animeType != "" && anime.Type != animeType {
-			return false
-		}
-
-		return anime.Image.Width < minExpectedWidth || anime.Image.Height < minExpectedHeight
-	})
-
-	// Sort
-	arn.SortAnimeByQuality(lowResAnime)
-
-	// Limit
-	count := len(lowResAnime)
-
-	if count > maxImageEntries {
-		lowResAnime = lowResAnime[:maxImageEntries]
-	}
-
-	return ctx.HTML(components.AnimeEditorListFull(
+	return editorList(
+		ctx,
 		title,
-		lowResAnime,
-		count,
-		ctx.URI(),
+		func(anime *arn.Anime) bool {
+			return anime.Image.Width < minExpectedWidth || anime.Image.Height < minExpectedHeight
+		},
 		googleImageSearch,
-	))
+	)
 }
 
 func googleImageSearch(anime *arn.Anime) string {

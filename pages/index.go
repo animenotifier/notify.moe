@@ -249,33 +249,32 @@ func Configure(app *aero.Application) {
 	l.Page("/editor", editor.Get)
 
 	// Editor - Anime
-	l.Page("/editor/anime/missing/anilist", filteranime.AniList)
-	l.Page("/editor/anime/missing/anilist/:year", filteranime.AniList)
-	l.Page("/editor/anime/missing/anilist/:year/:type", filteranime.AniList)
-	l.Page("/editor/anime/missing/shoboi", filteranime.Shoboi)
-	l.Page("/editor/anime/missing/shoboi/:year", filteranime.Shoboi)
-	l.Page("/editor/anime/missing/shoboi/:year/:type", filteranime.Shoboi)
-	l.Page("/editor/anime/missing/genres", filteranime.Genres)
-	l.Page("/editor/anime/missing/genres/:year", filteranime.Genres)
-	l.Page("/editor/anime/missing/genres/:year/:type", filteranime.Genres)
-	l.Page("/editor/anime/lowresimage", filteranime.LowResolutionAnimeImages)
-	l.Page("/editor/anime/lowresimage/:year", filteranime.LowResolutionAnimeImages)
-	l.Page("/editor/anime/lowresimage/:year/:type", filteranime.LowResolutionAnimeImages)
-	l.Page("/editor/anime/ultralowresimage", filteranime.UltraLowResolutionAnimeImages)
-	l.Page("/editor/anime/ultralowresimage/:year", filteranime.UltraLowResolutionAnimeImages)
-	l.Page("/editor/anime/ultralowresimage/:year/:type", filteranime.UltraLowResolutionAnimeImages)
+	editorList := func(route string, handler func(ctx *aero.Context) string) {
+		l.Page(route, handler)
+		l.Page(route+"/:year", handler)
+		l.Page(route+"/:year/:type", handler)
+	}
+
+	editorList("/editor/anime/synopsis", filteranime.Synopsis)
+	editorList("/editor/anime/genres", filteranime.Genres)
+	editorList("/editor/anime/startdate", filteranime.StartDate)
+	editorList("/editor/anime/mapping/shoboi", filteranime.Shoboi)
+	editorList("/editor/anime/mapping/anilist", filteranime.AniList)
+	editorList("/editor/anime/mapping/mal", filteranime.MAL)
+	editorList("/editor/anime/image/lowres", filteranime.LowResolutionAnimeImages)
+	editorList("/editor/anime/image/ultralowres", filteranime.UltraLowResolutionAnimeImages)
 
 	// Editor - MALdiff
-	l.Page("/editor/anime/maldiff", editor.CompareMAL)
-	l.Page("/editor/anime/maldiff/:year", editor.CompareMAL)
-	l.Page("/editor/anime/maldiff/:year/:status", editor.CompareMAL)
-	l.Page("/editor/anime/maldiff/:year/:status/:type", editor.CompareMAL)
+	l.Page("/editor/maldiff/anime", editor.CompareMAL)
+	l.Page("/editor/maldiff/anime/:year", editor.CompareMAL)
+	l.Page("/editor/maldiff/anime/:year/:status", editor.CompareMAL)
+	l.Page("/editor/maldiff/anime/:year/:status/:type", editor.CompareMAL)
 
 	// Editor - Kitsu
-	l.Page("/editor/anime/kitsu/new", editor.NewKitsuAnime)
+	l.Page("/editor/kitsu/new/anime", editor.NewKitsuAnime)
 
 	// Editor - Companies
-	l.Page("/editor/companies/missing/description", filtercompanies.NoDescription)
+	l.Page("/editor/companies/description", filtercompanies.NoDescription)
 
 	// Log
 	l.Page("/log", editlog.Get)
