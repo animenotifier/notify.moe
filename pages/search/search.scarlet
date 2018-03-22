@@ -7,8 +7,8 @@
 	horizontal-wrap
 
 .anime-search-result
-	width 55px !important
-	height 78px !important
+	width anime-image-small-width !important
+	height anime-image-small-height !important
 
 .forum-search-results
 	horizontal-wrap

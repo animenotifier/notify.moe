@@ -1,8 +1,6 @@
-package editor
+package filteranime
 
 import (
-	"sort"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -27,19 +25,7 @@ func Shoboi(ctx *aero.Context) string {
 		return anime.GetMapping("shoboi/anime") == ""
 	})
 
-	sort.Slice(missing, func(i, j int) bool {
-		a := missing[i]
-		b := missing[j]
-
-		aPop := a.Popularity.Total()
-		bPop := b.Popularity.Total()
-
-		if aPop == bPop {
-			return a.Title.Canonical < b.Title.Canonical
-		}
-
-		return aPop > bPop
-	})
+	arn.SortAnimeByQuality(missing)
 
 	count := len(missing)
 
@@ -48,7 +34,7 @@ func Shoboi(ctx *aero.Context) string {
 	}
 
 	return ctx.HTML(components.AnimeEditorListFull(
-		"Anime without Shoboi links",
+		"Anime without Shoboi mappings",
 		missing,
 		count,
 		ctx.URI(),

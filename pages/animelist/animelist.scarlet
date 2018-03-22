@@ -24,7 +24,7 @@
 
 .anime-list-item-image-container
 	padding 0
-	width 39px
+	width anime-image-tiny-width
 
 .anime-list-item-image-link
 	display flex

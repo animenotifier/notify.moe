@@ -6,8 +6,8 @@
 	flip-card
 
 .genre-squared
-	width 142px
-	height 142px
+	width anime-image-medium-width
+	height anime-image-medium-width
 
 .genre-text
 	grid-text

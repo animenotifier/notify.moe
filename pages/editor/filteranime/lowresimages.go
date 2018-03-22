@@ -1,4 +1,4 @@
-package editor
+package filteranime
 
 import (
 	"github.com/aerogo/aero"

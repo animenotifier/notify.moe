@@ -22,6 +22,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editlog"
 	"github.com/animenotifier/notify.moe/pages/editor"
+	"github.com/animenotifier/notify.moe/pages/editor/filteranime"
 	"github.com/animenotifier/notify.moe/pages/editor/filtercompanies"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/episode"
@@ -248,21 +249,21 @@ func Configure(app *aero.Application) {
 	l.Page("/editor", editor.Get)
 
 	// Editor - Anime
-	l.Page("/editor/anime/missing/anilist", editor.AniList)
-	l.Page("/editor/anime/missing/anilist/:year", editor.AniList)
-	l.Page("/editor/anime/missing/anilist/:year/:type", editor.AniList)
-	l.Page("/editor/anime/missing/shoboi", editor.Shoboi)
-	l.Page("/editor/anime/missing/shoboi/:year", editor.Shoboi)
-	l.Page("/editor/anime/missing/shoboi/:year/:type", editor.Shoboi)
-	l.Page("/editor/anime/missing/genres", editor.Genres)
-	l.Page("/editor/anime/missing/genres/:year", editor.Genres)
-	l.Page("/editor/anime/missing/genres/:year/:type", editor.Genres)
-	l.Page("/editor/anime/lowresimage", editor.LowResolutionAnimeImages)
-	l.Page("/editor/anime/lowresimage/:year", editor.LowResolutionAnimeImages)
-	l.Page("/editor/anime/lowresimage/:year/:type", editor.LowResolutionAnimeImages)
-	l.Page("/editor/anime/ultralowresimage", editor.UltraLowResolutionAnimeImages)
-	l.Page("/editor/anime/ultralowresimage/:year", editor.UltraLowResolutionAnimeImages)
-	l.Page("/editor/anime/ultralowresimage/:year/:type", editor.UltraLowResolutionAnimeImages)
+	l.Page("/editor/anime/missing/anilist", filteranime.AniList)
+	l.Page("/editor/anime/missing/anilist/:year", filteranime.AniList)
+	l.Page("/editor/anime/missing/anilist/:year/:type", filteranime.AniList)
+	l.Page("/editor/anime/missing/shoboi", filteranime.Shoboi)
+	l.Page("/editor/anime/missing/shoboi/:year", filteranime.Shoboi)
+	l.Page("/editor/anime/missing/shoboi/:year/:type", filteranime.Shoboi)
+	l.Page("/editor/anime/missing/genres", filteranime.Genres)
+	l.Page("/editor/anime/missing/genres/:year", filteranime.Genres)
+	l.Page("/editor/anime/missing/genres/:year/:type", filteranime.Genres)
+	l.Page("/editor/anime/lowresimage", filteranime.LowResolutionAnimeImages)
+	l.Page("/editor/anime/lowresimage/:year", filteranime.LowResolutionAnimeImages)
+	l.Page("/editor/anime/lowresimage/:year/:type", filteranime.LowResolutionAnimeImages)
+	l.Page("/editor/anime/ultralowresimage", filteranime.UltraLowResolutionAnimeImages)
+	l.Page("/editor/anime/ultralowresimage/:year", filteranime.UltraLowResolutionAnimeImages)
+	l.Page("/editor/anime/ultralowresimage/:year/:type", filteranime.UltraLowResolutionAnimeImages)
 
 	// Editor - MALdiff
 	l.Page("/editor/anime/maldiff", editor.CompareMAL)

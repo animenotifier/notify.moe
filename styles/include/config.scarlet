@@ -101,6 +101,15 @@ const content-line-height = 1.7em
 const typography-margin = 0.4rem
 
 // Sizes
+const anime-image-tiny-width = 39px
+const anime-image-tiny-height = 39px
+
+const anime-image-small-width = 55px
+const anime-image-small-height = 78px
+
+const anime-image-medium-width = 142px
+const anime-image-medium-height = 200px
+
 const anime-image-large-width = 250px
 const anime-image-large-height = 350px
 

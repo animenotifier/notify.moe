@@ -14,8 +14,8 @@
 	margin-top 0.8rem
 
 #audio-player-anime-link
-	width 142px
-	height 142px
+	width anime-image-medium-width
+	height anime-image-medium-width
 	overflow-y hidden
 	border-radius 3px
 	opacity 0.75

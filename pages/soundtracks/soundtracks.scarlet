@@ -131,6 +131,6 @@ animation change-color
 		display block
 
 .soundtrack-anime-image
-	width 142px
-	height 200px
+	width anime-image-medium-width
+	height anime-image-medium-height
 	object-fit cover

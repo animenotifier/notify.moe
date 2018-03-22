@@ -1,5 +1,9 @@
-.editor-list-title
+.editor-list-page-title
 	margin-bottom 0
+
+.editor-list
+	img
+		margin-right 1rem
 
 .editor-list-entry-count
 	margin-top 0

@@ -1,9 +1,9 @@
 component CompaniesEditorList(companies []*arn.Company, count int, url string)
 	EditorTabs(url)
-	h1.editor-list-title.mountable Companies without a description
+	h1.editor-list-page-title.mountable Companies without a description
 	.footer.editor-list-entry-count.mountable= strconv.Itoa(count) + " companies"
 
-	table
+	table.editor-list
 		thead
 			tr.mountable
 				th Name

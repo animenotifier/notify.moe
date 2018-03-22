@@ -1,15 +1,14 @@
 component AnimeEditorListFull(title string, missing []*arn.Anime, count int, pageURI string, generateSearchLink func(*arn.Anime) string)
 	EditorTabs(pageURI)
-	h1.editor-list-title.mountable= title
+	h1.editor-list-page-title.mountable= title
 	.footer.editor-list-entry-count.mountable= strconv.Itoa(count) + " anime"
 	AnimeEditorList(missing, pageURI, generateSearchLink)
 
 component AnimeEditorList(animes []*arn.Anime, pageURI string, generateSearchLink func(*arn.Anime) string)
-	table
+	table.editor-list
 		thead
 			tr.mountable
-				th(title="Popularity") Pop.
-				th Image
+				th Score
 				th Title
 				th Type
 				th Year
@@ -19,15 +18,15 @@ component AnimeEditorList(animes []*arn.Anime, pageURI string, generateSearchLin
 		tbody
 			each anime in animes
 				tr.mountable
-					td= anime.Popularity.Total()
+					td= anime.ScoreHumanReadable()
 					td
-						img.anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Canonical)
-					td
-						a(href=anime.Link(), target="_blank", rel="noopener")= anime.Title.Canonical
+						a(href=anime.Link(), target="_blank", rel="noopener")
+							img.anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Canonical)
+							span= anime.Title.Canonical
 					td= anime.Type
 					td
 						if len(anime.StartDate) >= 4
-							a.ajax(href=pageURI + "/" + anime.StartDate[:4])= anime.StartDate[:4]
+							a.ajax(href=strings.TrimPrefix(pageURI, "/_") + "/" + anime.StartDate[:4])= anime.StartDate[:4]
 					
 					if generateSearchLink != nil
 						td

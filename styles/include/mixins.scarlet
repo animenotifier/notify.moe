@@ -63,15 +63,21 @@ mixin anime-generic-item-image
 		filter saturate(1.3)
 
 mixin anime-mini-item-image
-	width 55px !important
-	height 78px !important
+	width anime-image-small-width !important
+	height anime-image-small-height !important
 	anime-generic-item-image
 
+	// Make it easier for the browser to layout by specifying max-width as well
+	max-width anime-image-small-width
+
 mixin anime-list-item-image
-	width 39px
-	height 39px
+	width anime-image-tiny-width
+	height anime-image-tiny-height
 	border-radius 2px
 	object-fit cover
+
+	// Make it easier for the browser to layout by specifying max-width as well
+	max-width anime-image-tiny-width
 
 mixin sidebar
 	vertical

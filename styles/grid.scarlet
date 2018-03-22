@@ -5,8 +5,9 @@ mixin grid
 mixin grid-cell
 	position relative
 
-	width 142px
-	height 200px
+	width anime-image-medium-width
+	height anime-image-medium-height
+	max-width anime-image-medium-width
 	// min-width 90px
 	// min-height 127px
 	border-radius 3px
