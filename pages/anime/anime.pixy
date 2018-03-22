@@ -67,25 +67,25 @@ component AnimeRatings(anime *arn.Anime, user *arn.User)
 					else
 						span Overall:
 				td.anime-info-value
-					Rating(anime.Rating.Overall, user)
+					Rating(anime.Rating.Overall, anime.Rating.Count.Overall, user)
 
-			if anime.Rating.Story > 0
+			if anime.Rating.Count.Story > 0
 				tr.mountable(data-mountable-type="info")
 					td.anime-info-key Story:
 					td.anime-info-value
-						Rating(anime.Rating.Story, user)
+						Rating(anime.Rating.Story, anime.Rating.Count.Story, user)
 
-			if anime.Rating.Visuals > 0
+			if anime.Rating.Count.Visuals > 0
 				tr.mountable(data-mountable-type="info")
 					td.anime-info-key Visuals:
 					td.anime-info-value
-						Rating(anime.Rating.Visuals, user)
+						Rating(anime.Rating.Visuals, anime.Rating.Count.Visuals, user)
 
-			if anime.Rating.Soundtrack > 0
+			if anime.Rating.Count.Soundtrack > 0
 				tr.mountable(data-mountable-type="info")
 					td.anime-info-key Soundtrack:
 					td.anime-info-value
-						Rating(anime.Rating.Soundtrack, user)
+						Rating(anime.Rating.Soundtrack, anime.Rating.Count.Soundtrack, user)
 
 component AnimePopularity(anime *arn.Anime)
 	if anime.Popularity.Total() > 0

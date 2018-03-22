@@ -48,6 +48,30 @@ func main() {
 			}
 		}
 
+		// Save number of people who rated on this
+		finalRating[animeID].Count.Overall = len(overall)
+		finalRating[animeID].Count.Story = len(story)
+		finalRating[animeID].Count.Visuals = len(visuals)
+		finalRating[animeID].Count.Soundtrack = len(soundtrack)
+
+		// Dampen the rating if number of users is too low
+		if len(overall) < arn.RatingCountThreshold {
+			overall = append(overall, arn.AverageRating)
+		}
+
+		if len(story) < arn.RatingCountThreshold {
+			story = append(story, arn.AverageRating)
+		}
+
+		if len(visuals) < arn.RatingCountThreshold {
+			visuals = append(visuals, arn.AverageRating)
+		}
+
+		if len(soundtrack) < arn.RatingCountThreshold {
+			soundtrack = append(soundtrack, arn.AverageRating)
+		}
+
+		// Average rating
 		finalRating[animeID].Overall = average(overall)
 		finalRating[animeID].Story = average(story)
 		finalRating[animeID].Visuals = average(visuals)
@@ -75,7 +99,7 @@ func main() {
 
 func average(floatSlice []float64) float64 {
 	if len(floatSlice) == 0 {
-		return arn.DefaultAverageRating
+		return 0
 	}
 
 	var sum float64
