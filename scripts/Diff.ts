@@ -1,4 +1,4 @@
-import { MutationQueue, CustomMutationQueue } from "./MutationQueue"
+import { MutationQueue } from "./MutationQueue"
 
 export class Diff {
 	static persistentClasses = new Set<string>()
@@ -7,7 +7,7 @@ export class Diff {
 	// Reuse container for diffs to avoid memory allocation
 	static container: HTMLElement
 	static rootContainer: HTMLElement
-	static mutations: CustomMutationQueue = new CustomMutationQueue()
+	static mutations: MutationQueue = new MutationQueue()
 
 	// innerHTML will diff the element with the given HTML string and apply DOM mutations.
 	static innerHTML(aRoot: HTMLElement, html: string): Promise<void> {

@@ -1,6 +1,5 @@
 import { Application } from "./Application"
 import { Diff } from "./Diff"
-import { MutationQueue } from "./MutationQueue"
 import { StatusMessage } from "./StatusMessage"
 import { PushManager } from "./PushManager"
 import { TouchController } from "./TouchController"
@@ -41,12 +40,6 @@ export class AnimeNotifier {
 		this.user = null
 		this.title = "Anime Notifier"
 		this.isLoading = true
-
-		// this.elementFound = new MutationQueue(elem => elem.classList.add("element-found"))
-		// this.elementFoundRemove = new MutationQueue(elem => elem.classList.remove("element-found"))
-		// this.elementNotFound = new MutationQueue(elem => elem.classList.add("element-not-found"))
-		// this.elementColorPreview = new MutationQueue(elem => elem.classList.add("element-color-preview"))
-		// this.unmount = new MutationQueue(elem => elem.classList.remove("mounted"))
 
 		// These classes will never be removed on DOM diffs
 		Diff.persistentClasses.add("mounted")
