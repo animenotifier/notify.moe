@@ -13,7 +13,7 @@ import (
 
 const (
 	// The maximum age of files we accept until we force a refresh.
-	maxAge               = 30 * 24 * time.Hour
+	maxAge               = 7 * 24 * time.Hour
 	delayBetweenRequests = 1000 * time.Millisecond
 	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.166 Safari/537.36"
 )
