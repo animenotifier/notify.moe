@@ -12,7 +12,7 @@ import { ServiceWorkerManager } from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, delay, canUseWebP, swapElements } from "./Utils"
 import * as actions from "./Actions"
-import { darkTheme, addSpeed, playPreviousTrack } from "./Actions";
+import { darkTheme, addSpeed, playPreviousTrack, search } from "./Actions";
 import { playPauseAudio, playNextTrack } from "./Actions/Audio"
 
 export class AnimeNotifier {
@@ -880,6 +880,13 @@ export class AnimeNotifier {
 		// Ignore hotkeys on input elements
 		switch(activeElement.tagName) {
 			case "INPUT":
+				//
+				if(activeElement.id === "search" && e.keyCode === 13) {
+					search(this, activeElement as HTMLInputElement, e)
+				}
+
+				return
+
 			case "TEXTAREA":
 				return
 		}
@@ -887,7 +894,7 @@ export class AnimeNotifier {
 		// Ignore hotkeys on contentEditable elements
 		if(activeElement.getAttribute("contenteditable") === "true") {
 			// Disallow Enter key in contenteditables and make it blur the element instead
-			if(e.keyCode == 13) {
+			if(e.keyCode === 13) {
 				if("blur" in activeElement) {
 					activeElement["blur"]()
 				}
@@ -900,7 +907,7 @@ export class AnimeNotifier {
 		}
 
 		// "Ctrl" + "," = Settings
-		if(e.ctrlKey && e.keyCode == 188) {
+		if(e.ctrlKey && e.keyCode === 188) {
 			this.app.load("/settings")
 
 			e.preventDefault()
@@ -914,7 +921,7 @@ export class AnimeNotifier {
 		}
 
 		// "F" = Search
-		if(e.keyCode == 70) {
+		if(e.keyCode === 70) {
 			let search = this.app.find("search") as HTMLInputElement
 
 			search.focus()
@@ -926,7 +933,7 @@ export class AnimeNotifier {
 		}
 
 		// "S" = Toggle sidebar
-		if(e.keyCode == 83) {
+		if(e.keyCode === 83) {
 			this.sideBar.toggle()
 
 			e.preventDefault()
@@ -935,7 +942,7 @@ export class AnimeNotifier {
 		}
 
 		// "+" = Audio speed up
-		if(e.keyCode == 107 || e.keyCode == 187) {
+		if(e.keyCode === 107 || e.keyCode === 187) {
 			addSpeed(this, 0.05)
 
 			e.preventDefault()
@@ -944,7 +951,7 @@ export class AnimeNotifier {
 		}
 
 		// "-" = Audio speed down
-		if(e.keyCode == 109 || e.keyCode == 189) {
+		if(e.keyCode === 109 || e.keyCode === 189) {
 			addSpeed(this, -0.05)
 
 			e.preventDefault()
@@ -953,7 +960,7 @@ export class AnimeNotifier {
 		}
 
 		// "J" = Previous track
-		if(e.keyCode == 74) {
+		if(e.keyCode === 74) {
 			playPreviousTrack(this)
 
 			e.preventDefault()
@@ -962,7 +969,7 @@ export class AnimeNotifier {
 		}
 
 		// "K" = Play/pause
-		if(e.keyCode == 75) {
+		if(e.keyCode === 75) {
 			playPauseAudio(this)
 
 			e.preventDefault()
@@ -971,7 +978,7 @@ export class AnimeNotifier {
 		}
 
 		// "L" = Next track
-		if(e.keyCode == 76) {
+		if(e.keyCode === 76) {
 			playNextTrack(this)
 
 			e.preventDefault()

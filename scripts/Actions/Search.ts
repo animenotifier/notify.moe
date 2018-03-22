@@ -30,17 +30,17 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 		return
 	}
 
+	// Determine if we're already seeing the search page
+	let searchPageActivated = (searchPage === arn.app.content.children[0])
+
 	// Check if the search term really changed
 	let term = search.value.trim()
 
-	if(term === oldTerm) {
+	if(term === oldTerm && searchPageActivated) {
 		return
 	}
 
 	oldTerm = term
-
-	// Determine if we're already seeing the search page
-	let searchPageActivated = (searchPage === arn.app.content.children[0])
 
 	// Reset
 	correctResponseRendered.anime = false
