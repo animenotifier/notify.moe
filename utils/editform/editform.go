@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/aerogo/api"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
@@ -49,7 +50,9 @@ func Render(obj interface{}, title string, user *arn.User) string {
 		}
 
 		// Delete button
-		if user.Role == "editor" || user.Role == "admin" {
+		_, isDeletable := obj.(api.Deletable)
+
+		if isDeletable && (user.Role == "editor" || user.Role == "admin") {
 			returnPath := ""
 
 			switch lowerCaseTypeName {
