@@ -18,7 +18,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/companies"
 	"github.com/animenotifier/notify.moe/pages/company"
 	"github.com/animenotifier/notify.moe/pages/compare"
-	"github.com/animenotifier/notify.moe/pages/database"
 	"github.com/animenotifier/notify.moe/pages/editanime"
 	"github.com/animenotifier/notify.moe/pages/editlog"
 	"github.com/animenotifier/notify.moe/pages/editor"
@@ -248,27 +247,50 @@ func Configure(app *aero.Application) {
 	// Editor
 	l.Page("/editor", editor.Get)
 
-	// Editor - Anime
-	editorList := func(route string, handler func(ctx *aero.Context) string) {
-		l.Page(route, handler)
-		l.Page(route+"/:year", handler)
-		l.Page(route+"/:year/:type", handler)
+	// Editor links can be filtered by year, status and type
+	editorFilterable := func(route string, handler func(ctx *aero.Context) string) {
+		// l.Page(route, func(ctx *aero.Context) string {
+		// 	user := utils.GetUser(ctx)
+
+		// 	if user == nil {
+		// 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		// 	}
+
+		// 	settings := user.Settings().Editor
+
+		// 	year := settings.Filter.Year
+		// 	status := settings.Filter.Status
+		// 	typ := settings.Filter.Type
+
+		// 	if year == "" {
+		// 		year = "any"
+		// 	}
+
+		// 	if status == "" {
+		// 		status = "any"
+		// 	}
+
+		// 	if typ == "" {
+		// 		typ = "any"
+		// 	}
+
+		// 	return ctx.Redirect(fmt.Sprintf("%s/%s/%s/%s", ctx.URI(), year, status, typ))
+		// })
+		l.Page(route+"/:year/:status/:type", handler)
 	}
 
-	editorList("/editor/anime/synopsis", filteranime.Synopsis)
-	editorList("/editor/anime/genres", filteranime.Genres)
-	editorList("/editor/anime/startdate", filteranime.StartDate)
-	editorList("/editor/anime/mapping/shoboi", filteranime.Shoboi)
-	editorList("/editor/anime/mapping/anilist", filteranime.AniList)
-	editorList("/editor/anime/mapping/mal", filteranime.MAL)
-	editorList("/editor/anime/image/lowres", filteranime.LowResolutionAnimeImages)
-	editorList("/editor/anime/image/ultralowres", filteranime.UltraLowResolutionAnimeImages)
+	// Editor - Anime
+	editorFilterable("/editor/anime/synopsis", filteranime.Synopsis)
+	editorFilterable("/editor/anime/genres", filteranime.Genres)
+	editorFilterable("/editor/anime/startdate", filteranime.StartDate)
+	editorFilterable("/editor/anime/mapping/shoboi", filteranime.Shoboi)
+	editorFilterable("/editor/anime/mapping/anilist", filteranime.AniList)
+	editorFilterable("/editor/anime/mapping/mal", filteranime.MAL)
+	editorFilterable("/editor/anime/image/lowres", filteranime.LowResolutionAnimeImages)
+	editorFilterable("/editor/anime/image/ultralowres", filteranime.UltraLowResolutionAnimeImages)
 
 	// Editor - MALdiff
-	l.Page("/editor/maldiff/anime", editor.CompareMAL)
-	l.Page("/editor/maldiff/anime/:year", editor.CompareMAL)
-	l.Page("/editor/maldiff/anime/:year/:status", editor.CompareMAL)
-	l.Page("/editor/maldiff/anime/:year/:status/:type", editor.CompareMAL)
+	editorFilterable("/editor/mal/diff/anime", editor.CompareMAL)
 
 	// Editor - Kitsu
 	l.Page("/editor/kitsu/new/anime", editor.NewKitsuAnime)
@@ -280,8 +302,8 @@ func Configure(app *aero.Application) {
 	l.Page("/log", editlog.Get)
 
 	// Mixed
-	l.Page("/database", database.Get)
-	app.Get("/api/select/:data-type/where/:field/is/:field-value", database.Select)
+	// l.Page("/database", database.Get)
+	// app.Get("/api/select/:data-type/where/:field/is/:field-value", database.Select)
 
 	// Import
 	l.Page("/import", listimport.Get)

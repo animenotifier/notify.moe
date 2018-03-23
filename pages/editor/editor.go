@@ -1,6 +1,8 @@
 package editor
 
 import (
+	"strconv"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -35,5 +37,11 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
-	return ctx.HTML(components.Editor(ctx.URI(), score, scoreTypes, user))
+	scoreTitle := ""
+
+	for objectType, score := range scoreTypes {
+		scoreTitle += objectType + ": " + strconv.Itoa(score) + "\n"
+	}
+
+	return ctx.HTML(components.Editor(ctx.URI(), score, scoreTitle, scoreTypes, user))
 }

@@ -1,46 +1,53 @@
-component Editor(url string, score int, scoreTypes map[string]int, user *arn.User)
-	EditorTabs(url)
+component Editor(url string, score int, scoreTitle string, scoreTypes map[string]int, user *arn.User)
+	EditorTabs(url, user)
 	h1.mountable= "Welcome to the Editor Panel, " + user.Nick + "!"
 
 	.feature-cards
-		.feature-card.mountable
+		.feature-card.mountable(title=scoreTitle)
 			.feature-card-icon.editor-score= score
 			p.feature-card-text Your contribution score.
 	
-	.feature-cards.feature-cards-alternative-color
-		for objectType, score := range scoreTypes
-			.feature-card.mountable
-				.feature-card-icon.editor-score= score
-				p.feature-card-text= objectType
+	//- .footer
+	//- 	for objectType, score := range scoreTypes
+	//- 		.mountable
+	//- 			span= objectType + ": "
+	//- 			span= score
+	
+	//- .feature-cards.feature-cards-alternative-color
+	//- 	for objectType, score := range scoreTypes
+	//- 		.feature-card.mountable
+	//- 			.feature-card-icon.editor-score= score
+	//- 			p.feature-card-text= objectType
 
-component EditorTabs(url string)
+component EditorTabs(url string, user *arn.User)
 	.tabs
 		Tab("Editor", "pencil", "/editor")
-		Tab("MAL", "exchange", "/editor/maldiff/anime")
-		Tab("Kitsu", "exchange", "/editor/kitsu/new/anime")
-		Tab("Anime", "tv", "/editor/anime/mapping/mal")
+		Tab("MAL", "exchange", "/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix())
+		Tab("Anime", "tv", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
 		Tab("Companies", "building", "/editor/companies/description")
-		Tab("Search", "search", "/database")
-
+		Tab("Kitsu", "download", "/editor/kitsu/new/anime")
+	
 	if strings.Contains(url, "/editor/anime/")
 		.tabs
-			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal")
-			Tab("Synopsis", "align-left", "/editor/anime/synopsis")
-			Tab("Genres", "clone", "/editor/anime/genres")
-			Tab("Start date", "calendar", "/editor/anime/startdate")
-			Tab("Images", "image", "/editor/anime/image/lowres")
+			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
+			Tab("Synopsis", "align-left", "/editor/anime/synopsis" + user.Settings().Editor.Filter.Suffix())
+			Tab("Genres", "clone", "/editor/anime/genres" + user.Settings().Editor.Filter.Suffix())
+			Tab("Start date", "calendar", "/editor/anime/startdate" + user.Settings().Editor.Filter.Suffix())
+			Tab("Images", "image", "/editor/anime/image/lowres" + user.Settings().Editor.Filter.Suffix())
 	
 	if strings.Contains(url, "/editor/anime/mapping/")
 		.tabs
-			Tab("MAL", "arrows-h", "/editor/anime/mapping/mal")
-			Tab("Shoboi", "arrows-h", "/editor/anime/mapping/shoboi")
-			Tab("AniList", "arrows-h", "/editor/anime/mapping/anilist")
+			Tab("MAL", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
+			Tab("Shoboi", "arrows-h", "/editor/anime/mapping/shoboi" + user.Settings().Editor.Filter.Suffix())
+			Tab("AniList", "arrows-h", "/editor/anime/mapping/anilist" + user.Settings().Editor.Filter.Suffix())
 
 	if strings.Contains(url, "/editor/anime/image/")
 		.tabs
-			Tab("Low-Res", "image", "/editor/anime/image/lowres")
-			Tab("Ultra Low-Res", "image", "/editor/anime/image/ultralowres")
-
-			//- a.tab.ajax(href="/admin", aria-label="Admin")
-			//- 	Icon("wrench")
-			//- 	span.tab-text Admin
+			Tab("Low-Res", "image", "/editor/anime/image/lowres" + user.Settings().Editor.Filter.Suffix())
+			Tab("Ultra Low-Res", "image", "/editor/anime/image/ultralowres" + user.Settings().Editor.Filter.Suffix())
+	
+	if strings.Contains(url, "/editor/anime/") || strings.Contains(url, "/editor/mal/diff/anime")
+		.corner-buttons.fixed
+			#filter-root(data-url=url)
+			ExploreFilters(user.Settings().Editor.Filter.Year, user.Settings().Editor.Filter.Status, user.Settings().Editor.Filter.Type, true)
+	

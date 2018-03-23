@@ -1,5 +1,5 @@
 component NewKitsuAnime(animes []*kitsu.Anime, url string, user *arn.User)
-	EditorTabs(url)
+	EditorTabs(url, user)
 	h1.mountable New anime on Kitsu
 	
 	if len(animes) == 0

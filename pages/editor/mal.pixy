@@ -1,35 +1,37 @@
 component CompareMAL(comparisons []*utils.MALComparison, year string, status string, typ string, url string, user *arn.User)
-	EditorTabs(url)
+	EditorTabs(url, user)
 	h1.mountable MAL comparison
-	ExploreFilters(year, status, typ, "malDiffFilterAnime")
 
 	.data-comparisons
-		each comparison in comparisons
-			.data-comparison.mountable
-				.data-comparison-header
-					a.data-comparison-image-container(href=comparison.Anime.Link(), target="_blank")
-						img.data-comparison-image.lazy(data-src=comparison.Anime.ImageLink("small"), data-webp="true", data-color=comparison.Anime.AverageColor(), alt=comparison.Anime.Title.ByUser(user))
-					
-					.data-comparison-title
-						a(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.Canonical
-
-						.spacer
-
-						a.data-comparison-tool(href=comparison.Anime.Link() + "/edit", target="_blank")
-							RawIcon("pencil")
+		if len(comparisons) == 0
+			p.no-data.mountable No differences found.
+		else
+			each comparison in comparisons
+				.data-comparison.mountable
+					.data-comparison-header
+						a.data-comparison-image-container(href=comparison.Anime.Link(), target="_blank")
+							img.data-comparison-image.lazy(data-src=comparison.Anime.ImageLink("small"), data-webp="true", data-color=comparison.Anime.AverageColor(), alt=comparison.Anime.Title.ByUser(user))
 						
-						a.data-comparison-tool(href=comparison.MALAnime.URL, target="_blank")
-							RawIcon("external-link")
+						.data-comparison-title
+							a(href=comparison.Anime.Link(), target="_blank")= comparison.Anime.Title.Canonical
 
-				.data-comparison-differences
-					each difference in comparison.Differences
-						.data-comparison-difference
-							.data-comparison-difference-title
-								span= difference.Explanation()
+							.spacer
 
-							.data-comparison-difference-details
-								.data-comparison-difference-detail= difference.DetailsA()
-								.data-comparison-difference-detail= difference.DetailsB()
+							a.data-comparison-tool(href=comparison.Anime.Link() + "/edit", target="_blank")
+								RawIcon("pencil")
 							
-							button.data-comparison-difference-ignore.action(data-action="newAnimeDiffIgnore", data-trigger="click", data-id=arn.CreateDifferenceID(comparison.Anime.ID, "mal", comparison.MALAnime.ID, difference.Type()), data-hash=difference.Hash())
-								RawIcon("trash")
+							a.data-comparison-tool(href=comparison.MALAnime.URL, target="_blank")
+								RawIcon("external-link")
+
+					.data-comparison-differences
+						each difference in comparison.Differences
+							.data-comparison-difference
+								.data-comparison-difference-title
+									span= difference.Explanation()
+
+								.data-comparison-difference-details
+									.data-comparison-difference-detail= difference.DetailsA()
+									.data-comparison-difference-detail= difference.DetailsB()
+								
+								button.data-comparison-difference-ignore.action(data-action="newAnimeDiffIgnore", data-trigger="click", data-id=arn.CreateDifferenceID(comparison.Anime.ID, "mal", comparison.MALAnime.ID, difference.Type()), data-hash=difference.Hash())
+									RawIcon("trash")

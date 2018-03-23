@@ -19,6 +19,9 @@
 	.button
 		margin-left 0.5rem
 
+.fixed
+	position fixed
+
 < 600px
 	.corner-buttons-hide-on-mobile
 		display none

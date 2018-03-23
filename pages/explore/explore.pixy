@@ -1,5 +1,6 @@
 component ExploreAnime(animeList []*arn.Anime, year string, status string, typ string, user *arn.User)
-	ExploreFilters(year, status, typ, "filterAnime")
+	#filter-root(data-url="/explore/anime")
+	ExploreFilters(year, status, typ, false)
 
 	.corner-buttons-hide-on-mobile
 		if user != nil
@@ -20,18 +21,27 @@ component ExploreAnime(animeList []*arn.Anime, year string, status string, typ s
 		else
 			AnimeGrid(animeList, user)
 
-component ExploreFilters(year string, status string, typ string, action string)
+component ExploreFilters(year string, status string, typ string, allowAny bool)
 	.explore-filters
-		select#filter-year.action(value=year, data-action=action, data-trigger="change")
+		select#filter-year.action(value=year, data-action="filterAnime", data-trigger="change")
+			if allowAny
+				option(value="")
+
 			for year := time.Now().Year()+1; year >= 1951; year--
 				option(value=year)= year
 
-		select#filter-status.action(value=status, data-action=action, data-trigger="change")
+		select#filter-status.action(value=status, data-action="filterAnime", data-trigger="change")
+			if allowAny
+				option(value="")
+			
 			option(value="current") Current
 			option(value="upcoming") Upcoming
 			option(value="finished") Finished
 
-		select#filter-type.action(value=typ, data-action=action, data-trigger="change")
+		select#filter-type.action(value=typ, data-action="filterAnime", data-trigger="change")
+			if allowAny
+				option(value="")
+			
 			option(value="tv") TV
 			option(value="movie") Movie
 			option(value="ova") OVA

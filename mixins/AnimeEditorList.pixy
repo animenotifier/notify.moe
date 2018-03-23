@@ -1,5 +1,5 @@
-component AnimeEditorListFull(title string, missing []*arn.Anime, count int, pageURI string, generateSearchLink func(*arn.Anime) string)
-	EditorTabs(pageURI)
+component AnimeEditorListFull(title string, missing []*arn.Anime, count int, pageURI string, generateSearchLink func(*arn.Anime) string, user *arn.User)
+	EditorTabs(pageURI, user)
 	h1.editor-list-page-title.mountable= title
 	.footer.editor-list-entry-count.mountable= strconv.Itoa(count) + " anime"
 	AnimeEditorList(missing, pageURI, generateSearchLink)
@@ -26,7 +26,7 @@ component AnimeEditorList(animes []*arn.Anime, pageURI string, generateSearchLin
 					td= anime.Type
 					td
 						if len(anime.StartDate) >= 4
-							a.ajax(href=strings.TrimPrefix(pageURI, "/_") + "/" + anime.StartDate[:4])= anime.StartDate[:4]
+							span= anime.StartDate[:4]
 					
 					if generateSearchLink != nil
 						td
