@@ -21,7 +21,7 @@ component PopularCompaniesScrollable(companies []*arn.Company, companyToAnime ma
 			
 			.popular-company-footer
 				.company-anime
-					each anime in utils.MaxAnime(companyToAnime[company.ID], 13)
+					each anime in utils.MaxAnime(companyToAnime[company.ID], 12)
 						CompanyAnime(anime, user)
 			
 			//- span= " (" + strconv.Itoa(popularity[company.ID]) + ")"

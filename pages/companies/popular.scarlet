@@ -7,7 +7,7 @@ const popular-company-height = 250px
 .popular-company
 	vertical
 	width 100%
-	max-width 800px
+	max-width 777px
 	margin 0
 	margin-bottom calc(content-padding / 2)
 	padding 0.5rem 0.75rem
@@ -24,12 +24,6 @@ const popular-company-height = 250px
 	.company-anime
 		flex-flow row
 		overflow hidden
-
-	.company-anime-item
-		opacity 0.75
-
-		:hover
-			opacity 1
 
 .popular-company-description
 	clip-long-text
