@@ -1,4 +1,4 @@
-const popular-company-height = 250px
+const popular-company-height = 246px
 
 .popular-companies
 	horizontal-wrap
@@ -26,6 +26,10 @@ const popular-company-height = 250px
 
 .popular-company-description
 	clip-long-text
+	margin-top 0.4rem
+
+	p
+		display inline
 
 .popular-company-icon
 	//

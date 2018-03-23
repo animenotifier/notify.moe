@@ -17,7 +17,7 @@ component PopularCompaniesScrollable(companies []*arn.Company, companyToAnime ma
 				Icon("building")
 				span.popular-company-name= company.Name.English
 			
-			p.popular-company-body.popular-company-description(href=company.Link())= company.Description
+			.popular-company-body.popular-company-description!= markdown.Render(company.Description)
 			
 			.popular-company-footer
 				.company-anime
