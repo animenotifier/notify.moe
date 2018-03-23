@@ -112,16 +112,9 @@ func findAllMatches(library chan *kitsu.LibraryEntry) []*arn.KitsuMatch {
 			continue
 		}
 
-		var anime *arn.Anime
-		connection, err := arn.GetKitsuToAnime(item.Anime.ID)
-
-		if err == nil {
-			anime, _ = arn.GetAnime(connection.AnimeID)
-		}
-
 		matches = append(matches, &arn.KitsuMatch{
 			KitsuItem: item,
-			ARNAnime:  anime,
+			ARNAnime:  arn.FindKitsuAnime(item.Anime.ID),
 		})
 	}
 

@@ -7,9 +7,11 @@ import (
 )
 
 func main() {
+	color.Yellow("Iterating through AniList anime to generate new mappings")
 	defer arn.Node.Close()
 
-	arn.PanicOnError(anilist.Authorize())
+	err := anilist.Authorize()
+	arn.PanicOnError(err)
 	color.Green(anilist.AccessToken)
 
 	allAnime := arn.AllAnime()

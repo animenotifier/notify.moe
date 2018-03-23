@@ -99,19 +99,13 @@ func getMatches(ctx *aero.Context) ([]*arn.MyAnimeListMatch, string) {
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.
 func findAllMatches(animeList *mal.AnimeList) []*arn.MyAnimeListMatch {
+	allAnime := arn.AllAnime()
 	matches := []*arn.MyAnimeListMatch{}
 
 	for _, item := range animeList.Items {
-		var anime *arn.Anime
-		connection, err := arn.GetMyAnimeListToAnime(item.AnimeID)
-
-		if err == nil {
-			anime, _ = arn.GetAnime(connection.AnimeID)
-		}
-
 		matches = append(matches, &arn.MyAnimeListMatch{
 			MyAnimeListItem: item,
-			ARNAnime:        anime,
+			ARNAnime:        arn.FindMyAnimeListAnime(item.AnimeID, allAnime),
 		})
 	}
 
