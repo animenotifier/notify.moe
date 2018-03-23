@@ -11,8 +11,7 @@ import (
 )
 
 const (
-	maxRecommendations = 20
-	worstGenreCount    = 5
+	maxRecommendations = 10
 )
 
 // Anime shows a list of recommended anime.
@@ -26,49 +25,26 @@ func Anime(ctx *aero.Context) string {
 	}
 
 	animeList := viewUser.AnimeList()
-	genreItems := animeList.Genres()
-	genreAffinity := map[string]float64{}
-	worstGenres := []string{}
-
-	for genre, animeListItems := range genreItems {
-		affinity := 0.0
-
-		for _, item := range animeListItems {
-			// if item.Status == arn.AnimeListStatusDropped {
-			// 	affinity -= 5.0
-			// 	continue
-			// }
-
-			if item.Rating.Overall != 0 {
-				affinity += item.Rating.Overall
-			} else {
-				affinity += 5.0
-			}
-		}
-
-		genreAffinity[genre] = affinity
-		worstGenres = append(worstGenres, genre)
-	}
-
-	sort.Slice(worstGenres, func(i, j int) bool {
-		return genreAffinity[worstGenres[i]] < genreAffinity[worstGenres[j]]
-	})
-
-	if len(worstGenres) > worstGenreCount {
-		worstGenres = worstGenres[:worstGenreCount]
-	}
 
 	// Get all anime
-	recommendations := arn.AllAnime()
+	var tv []*arn.Anime
+	var movies []*arn.Anime
+	allAnime := arn.AllAnime()
 
 	// Affinity maps an anime ID to a number that indicates how likely a user is going to enjoy that anime.
 	affinity := map[string]float64{}
 
 	// Calculate affinity for each anime
-	for _, anime := range recommendations {
+	for _, anime := range allAnime {
 		// Skip anime that are upcoming or tba
 		if anime.Status == "upcoming" || anime.Status == "tba" {
 			continue
+		}
+
+		if anime.Type == "tv" {
+			tv = append(tv, anime)
+		} else if anime.Type == "movie" {
+			movies = append(movies, anime)
 		}
 
 		// Skip anime from my list (except planned anime)
@@ -78,48 +54,47 @@ func Anime(ctx *aero.Context) string {
 			continue
 		}
 
-		// Skip anime that don't have one of the top genres for that user
-		worstGenreFound := false
-
-		for _, genre := range anime.Genres {
-			if arn.Contains(worstGenres, genre) {
-				worstGenreFound = true
-				break
-			}
-		}
-
-		if worstGenreFound {
-			continue
-		}
-
-		animeAffinity := 0.0
+		animeAffinity := anime.Score()
 
 		// Planned anime go higher
 		if existing != nil && existing.Status == arn.AnimeListStatusPlanned {
-			animeAffinity += 75.0
+			animeAffinity += 15.0
 		}
 
-		animeAffinity += float64(anime.Popularity.Total())
-		animeAffinity += anime.Rating.Overall * 80
 		affinity[anime.ID] = animeAffinity
 	}
 
 	// Sort
-	sort.Slice(recommendations, func(i, j int) bool {
-		affinityA := affinity[recommendations[i].ID]
-		affinityB := affinity[recommendations[j].ID]
+	sort.Slice(tv, func(i, j int) bool {
+		affinityA := affinity[tv[i].ID]
+		affinityB := affinity[tv[j].ID]
 
 		if affinityA == affinityB {
-			return recommendations[i].Title.Canonical < recommendations[j].Title.Canonical
+			return tv[i].Title.Canonical < tv[j].Title.Canonical
+		}
+
+		return affinityA > affinityB
+	})
+
+	sort.Slice(movies, func(i, j int) bool {
+		affinityA := affinity[movies[i].ID]
+		affinityB := affinity[movies[j].ID]
+
+		if affinityA == affinityB {
+			return movies[i].Title.Canonical < movies[j].Title.Canonical
 		}
 
 		return affinityA > affinityB
 	})
 
 	// Take the top 10
-	if len(recommendations) > maxRecommendations {
-		recommendations = recommendations[:maxRecommendations]
+	if len(tv) > maxRecommendations {
+		tv = tv[:maxRecommendations]
 	}
 
-	return ctx.HTML(components.RecommendedAnime(recommendations, worstGenres, viewUser, user))
+	if len(movies) > maxRecommendations {
+		movies = movies[:maxRecommendations]
+	}
+
+	return ctx.HTML(components.RecommendedAnime(tv, movies, viewUser, user))
 }

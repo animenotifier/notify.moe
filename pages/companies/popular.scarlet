@@ -12,6 +12,7 @@ const popular-company-height = 246px
 	padding 0.5rem 0.75rem
 	overflow hidden
 	ui-element
+	box-shadow shadow-light
 
 .popular-company-header
 	margin-bottom 0.5rem

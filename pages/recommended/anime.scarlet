@@ -1,0 +1,5 @@
+.recommendations-category
+	text-align left
+	font-size 1.8rem
+	border-bottom ui-border
+	padding-bottom 1rem
