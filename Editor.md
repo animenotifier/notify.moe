@@ -1,18 +1,18 @@
 # Table of contents 
 
-[Anime page](https://github.com/bleack114/notify.moe/blob/go/Editor.md#plot-twist---anime-edit-page)
+[Anime page](#plot-twist---anime-edit-page)
 
-[Editor menu](https://github.com/bleack114/notify.moe/blob/go/Editor.md#editor-menu-1)
+[Editor menu](#editor-menu-1)
 
-* [MAL](https://github.com/bleack114/notify.moe/blob/go/Editor.md#mal)
+* [MAL](#mal)
 
-* [Kitsu](https://github.com/bleack114/notify.moe/blob/go/Editor.md#kitsu)
+* [Kitsu](#kitsu)
 
-* [Anime](https://github.com/bleack114/notify.moe/blob/go/Editor.md#anime)
+* [Anime](#anime)
 
-* [Companies](https://github.com/bleack114/notify.moe/blob/go/Editor.md#companies)
+* [Companies](#companies)
 
-[Company page](https://github.com/bleack114/notify.moe/blob/go/Editor.md#company-page-edit)
+[Company page](#company-page-edit)
 
 # Living in the database, database
 
