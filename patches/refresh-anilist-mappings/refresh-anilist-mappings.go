@@ -23,7 +23,7 @@ func main() {
 		anime := arn.FindAniListAnime(aniListAnime, allAnime)
 
 		if anime != nil {
-			color.Green("%s %s", anime.ID, aniListAnime.TitleRomaji)
+			color.Green("%s %s", anime.ID, anime)
 			count++
 		} else {
 			color.Red("Not found")
