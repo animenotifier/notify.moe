@@ -10,10 +10,10 @@
 	margin-top calc(content-padding / 2)
 
 #filter-year
-	max-width 80px
+	width 80px
 
 #filter-status
-	max-width 120px
+	width 120px
 
 #filter-type
-	max-width 80px
+	width 80px
