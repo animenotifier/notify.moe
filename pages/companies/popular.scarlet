@@ -7,7 +7,6 @@ const popular-company-height = 250px
 .popular-company
 	vertical
 	width 100%
-	max-width 777px
 	margin 0
 	margin-bottom calc(content-padding / 2)
 	padding 0.5rem 0.75rem
@@ -37,7 +36,7 @@ const popular-company-height = 250px
 .popular-company-anime-preview
 	flex 1
 
-> 900px
+> 800px
 	.popular-company
 		height popular-company-height
 		max-height popular-company-height
@@ -49,3 +48,11 @@ const popular-company-height = 250px
 
 	.popular-company-description
 		white-space normal
+
+> 1350px
+	.popular-company
+		max-width calc(50% - content-padding * 2)
+
+> 1880px
+	.popular-company
+		max-width 777px
