@@ -84,7 +84,7 @@ component SidebarButton(name string, target string, icon string)
 			span.sidebar-text= name
 
 component SidebarButtonNoAJAX(name string, target string, icon string)
-	a.sidebar-link(href=target, aria-label=name, data-bubble="true")
+	a.sidebar-link(href=target, aria-label=name, data-bubble="true", data-ajax="false")
 		.sidebar-button
 			Icon(icon)
 			span.sidebar-text= name

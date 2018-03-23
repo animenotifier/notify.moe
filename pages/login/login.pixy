@@ -1,9 +1,9 @@
 component Login(target string)
 	.login-buttons.mountable
-		a.login-button.login-button-google(href="/auth/google", target=target)
+		a.login-button.login-button-google(href="/auth/google", target=target, data-ajax="false")
 			Icon("google")
 			span Sign in via Google
 
-		a.login-button.login-button-facebook(href="/auth/facebook", target=target)
+		a.login-button.login-button-facebook(href="/auth/facebook", target=target, data-ajax="false")
 			Icon("facebook")
 			span Sign in via Facebook

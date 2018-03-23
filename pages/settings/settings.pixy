@@ -246,7 +246,7 @@ component SettingsAccounts(user *arn.User)
 			.widget-section.social-account
 				label(for="google") Google:
 				
-				a#google.button.social-account-button(href="/auth/google")
+				a#google.button.social-account-button(href="/auth/google", data-ajax="false")
 					if user.Accounts.Google.ID != ""
 						Icon("check")
 						span Connected
@@ -257,7 +257,7 @@ component SettingsAccounts(user *arn.User)
 			.widget-section.social-account
 				label(for="facebook") Facebook:
 
-				a#facebook.button.social-account-button(href="/auth/facebook")
+				a#facebook.button.social-account-button(href="/auth/facebook", data-ajax="false")
 					if user.Accounts.Facebook.ID != ""
 						Icon("check")
 						span Connected

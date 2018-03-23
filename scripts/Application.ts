@@ -6,7 +6,6 @@ class LoadOptions {
 }
 
 export class Application {
-	ajaxClass: string
 	fadeOutClass: string
 	activeLinkClass: string
 	content: HTMLElement
@@ -18,7 +17,6 @@ export class Application {
 	constructor() {
 		this.currentPath = window.location.pathname
 		this.originalPath = window.location.pathname
-		this.ajaxClass = "ajax"
 		this.activeLinkClass = "active"
 		this.fadeOutClass = "fade-out"
 	}
@@ -150,10 +148,25 @@ export class Application {
 			element = document.body
 		}
 
-		let links = element.querySelectorAll("." + this.ajaxClass)
+		let links = element.getElementsByTagName("a")
 
 		for(let i = 0; i < links.length; i++) {
-			let link = links[i] as HTMLElement
+			let link = links[i] as HTMLAnchorElement
+
+			// Don't ajaxify links to a different host
+			if(link.hostname !== window.location.hostname) {
+				if(!link.target) {
+					link.target = "_blank"
+				}
+
+				continue
+			}
+
+			// Don't ajaxify links with a target or links that disable ajax specifically
+			if(link.target.length > 0 || link.dataset.ajax === "false") {
+				continue
+			}
+
 			let self = this
 
 			link.onclick = function(e) {
@@ -179,9 +192,11 @@ export class Application {
 	scrollToTop() {
 		let parent : HTMLElement | null = this.content
 
-		while(parent = parent.parentElement) {
-			parent.scrollTop = 0
-		}
+		Diff.mutations.queue(() => {
+			while(parent = parent.parentElement) {
+				parent.scrollTop = 0
+			}
+		})
 	}
 
 	emit(eventName: string) {
