@@ -1,18 +1,18 @@
 # Table of contents 
 
-[Anime page](https://github.com/bleack114/notify.moe/blob/aero/Editor.md#plot-twist---anime-edit-page)
+[Anime page](https://github.com/bleack114/notify.moe/blob/go/Editor.md#plot-twist---anime-edit-page)
 
-[Editor menu](https://github.com/bleack114/notify.moe/blob/aero/Editor.md#editor-menu-1)
+[Editor menu](https://github.com/bleack114/notify.moe/blob/go/Editor.md#editor-menu-1)
 
-* [MAL](https://github.com/bleack114/notify.moe/blob/aero/Editor.md#mal)
+* [MAL](https://github.com/bleack114/notify.moe/blob/go/Editor.md#mal)
 
-* [Kitsu](https://github.com/bleack114/notify.moe/blob/aero/Editor.md#kitsu)
+* [Kitsu](https://github.com/bleack114/notify.moe/blob/go/Editor.md#kitsu)
 
-* [Anime](https://github.com/bleack114/notify.moe/blob/aero/Editor.md#anime)
+* [Anime](https://github.com/bleack114/notify.moe/blob/go/Editor.md#anime)
 
-* [Companies](https://github.com/bleack114/notify.moe/blob/aero/Editor.md#companies)
+* [Companies](https://github.com/bleack114/notify.moe/blob/go/Editor.md#companies)
 
-[Company page](https://github.com/bleack114/notify.moe/blob/aero/Editor.md#company-page-edit)
+[Company page](https://github.com/bleack114/notify.moe/blob/go/Editor.md#company-page-edit)
 
 # Living in the database, database
 
