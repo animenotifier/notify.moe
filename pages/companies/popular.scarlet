@@ -15,14 +15,12 @@ const popular-company-height = 250px
 	ui-element
 
 .popular-company-header
-	flex 0.2
+	margin-bottom 0.5rem
 
 .popular-company-body
-	flex 0.6
+	flex 1.0
 
 .popular-company-footer
-	flex 0.2
-
 	.company-anime
 		flex-flow row
 		overflow hidden
