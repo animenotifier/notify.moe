@@ -249,33 +249,6 @@ func Configure(app *aero.Application) {
 
 	// Editor links can be filtered by year, status and type
 	editorFilterable := func(route string, handler func(ctx *aero.Context) string) {
-		// l.Page(route, func(ctx *aero.Context) string {
-		// 	user := utils.GetUser(ctx)
-
-		// 	if user == nil {
-		// 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
-		// 	}
-
-		// 	settings := user.Settings().Editor
-
-		// 	year := settings.Filter.Year
-		// 	status := settings.Filter.Status
-		// 	typ := settings.Filter.Type
-
-		// 	if year == "" {
-		// 		year = "any"
-		// 	}
-
-		// 	if status == "" {
-		// 		status = "any"
-		// 	}
-
-		// 	if typ == "" {
-		// 		typ = "any"
-		// 	}
-
-		// 	return ctx.Redirect(fmt.Sprintf("%s/%s/%s/%s", ctx.URI(), year, status, typ))
-		// })
 		l.Page(route+"/:year/:status/:type", handler)
 	}
 
@@ -286,6 +259,7 @@ func Configure(app *aero.Application) {
 	editorFilterable("/editor/anime/mapping/shoboi", filteranime.Shoboi)
 	editorFilterable("/editor/anime/mapping/anilist", filteranime.AniList)
 	editorFilterable("/editor/anime/mapping/mal", filteranime.MAL)
+	editorFilterable("/editor/anime/mapping/duplicate", filteranime.DuplicateMappings)
 	editorFilterable("/editor/anime/image/lowres", filteranime.LowResolutionAnimeImages)
 	editorFilterable("/editor/anime/image/ultralowres", filteranime.UltraLowResolutionAnimeImages)
 
