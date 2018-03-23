@@ -43,7 +43,7 @@ func main() {
 
 // work refreshes the average color of the given anime.
 func work(anime *arn.Anime) {
-	base := path.Join(arn.Root, "/images/anime/small/", anime.ID)
+	base := path.Join(arn.Root, "/images/anime/medium/", anime.ID)
 
 	if _, err := os.Stat(base + ".jpg"); err != nil {
 		color.Red(err.Error())
