@@ -5,7 +5,7 @@ component Quote(quote *arn.Quote)
 
 component QuoteContent(quote *arn.Quote)
 	.quote-content
-		a.quotation.ajax(href=quote.Link())
+		a.quotation(href=quote.Link())
 			blockquote!= markdown.Render(quote.Text.English)
 		
 		if quote.CharacterID != "" && quote.Character() != nil
@@ -17,4 +17,4 @@ component QuoteFooter(quote *arn.Quote)
 		span  posted 
 		span.utc-date(data-date=quote.Created)
 		span  by 
-		a.ajax(href=quote.Creator().Link())= quote.Creator().Nick
+		a(href=quote.Creator().Link())= quote.Creator().Nick

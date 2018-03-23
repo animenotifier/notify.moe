@@ -7,10 +7,10 @@ component ExploreAnime(animeList []*arn.Anime, year string, status string, typ s
 			button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")
 				RawIcon("eye-slash")
 		
-		a.button.ajax(href="/explore/color/any/anime", title="View colors")
+		a.button(href="/explore/color/any/anime", title="View colors")
 			RawIcon("paint-brush")
 		
-		a.button.ajax(href="/genres", title="View genres")
+		a.button(href="/genres", title="View genres")
 			RawIcon("clone")
 
 	h1.page-title Explore

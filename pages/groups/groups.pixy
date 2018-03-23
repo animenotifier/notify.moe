@@ -11,13 +11,13 @@ component Groups(groups []*arn.Group, groupsPerPage int, user *arn.User)
 					Icon("plus")
 					span New group
 			else
-				a.button.ajax(href="/group/" + user.DraftIndex().GroupID + "/edit")
+				a.button(href="/group/" + user.DraftIndex().GroupID + "/edit")
 					Icon("pencil")
 					span Edit draft
 
 	#load-more-target.groups
 		each group in groups
-			a.group.mountable.ajax(href=group.Link())
+			a.group.mountable(href=group.Link())
 				img.group-image.lazy(data-src=group.ImageURL(), alt=group.Name)
 				
 				.group-info

@@ -1,10 +1,10 @@
 component AudioPlayer
 	#audio-player
 		#audio-player-anime-info.hidden
-			a#audio-player-anime-link.ajax(href="", title="")
+			a#audio-player-anime-link(href="", title="")
 				img#audio-player-anime-image.lazy.hidden(data-src="", data-webp="true", alt="Anime cover")
 		
-		a#audio-player-track-title.ajax(href="")
+		a#audio-player-track-title(href="")
 
 		#audio-player-controls
 			button#audio-player-prev.audio-player-side-button.action(data-action="playPreviousTrack", data-trigger="click")

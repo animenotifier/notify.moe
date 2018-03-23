@@ -1,6 +1,6 @@
 component EditAnimeTabs(anime *arn.Anime)
 	.tabs
-		a.tab.ajax(href=anime.Link())
+		a.tab(href=anime.Link())
 			Icon("tv")
 			span Anime
 		

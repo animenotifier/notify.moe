@@ -21,7 +21,7 @@ component AllNotifications(notifications []*arn.Notification)
 				Notification(notification)
 
 				.notification-user
-					a.ajax(href=notification.User().Link())= notification.User().Nick
+					a(href=notification.User().Link())= notification.User().Nick
 
 component Notification(notification *arn.Notification)
 	a.notification(href=notification.Link, target="_blank", data-seen=notification.Seen)

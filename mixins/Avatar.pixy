@@ -2,7 +2,7 @@ component Avatar(user *arn.User)
 	CustomAvatar(user, user.Link(), user.Nick)
 
 component CustomAvatar(user *arn.User, link string, title string)
-	a.user.ajax(href=link, title=title)
+	a.user(href=link, title=title)
 		AvatarNoLink(user)
 
 component AvatarNoLink(user *arn.User)

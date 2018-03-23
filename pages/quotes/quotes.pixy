@@ -10,7 +10,7 @@ component Quotes(quotes []*arn.Quote, nextIndex int, user *arn.User)
 					Icon("plus")
 					span Add quote
 			else
-				a.button.ajax(href="/quote/" + user.DraftIndex().QuoteID + "/edit")
+				a.button(href="/quote/" + user.DraftIndex().QuoteID + "/edit")
 					Icon("pencil")
 					span Edit draft
 

@@ -61,25 +61,25 @@ component Support(profileLink string, user *arn.User)
 	h1.mountable How does it work?
 
 	.feature-cards.feature-cards-alternative-color
-		a.feature-card.mountable.ajax(href="/charge")
+		a.feature-card.mountable(href="/charge")
 			.feature-card-icon
 				RawIcon("diamond")
 			
 			p.feature-card-text First, you need to charge up the balance on your account.
 
-		a.feature-card.mountable.ajax(href="/shop")
+		a.feature-card.mountable(href="/shop")
 			.feature-card-icon
 				RawIcon("shopping-cart")
 			
 			p.feature-card-text Afterwards, go to the shop and buy the item you like.
 
-		a.feature-card.mountable.ajax(href="/inventory")
+		a.feature-card.mountable(href="/inventory")
 			.feature-card-icon
 				RawIcon("briefcase")
 			
 			p.feature-card-text Lastly, activate the freshly bought item in your inventory.
 
-		a.feature-card.mountable.ajax(href=profileLink)
+		a.feature-card.mountable(href=profileLink)
 			.feature-card-icon
 				RawIcon("user-circle")
 			
@@ -88,7 +88,7 @@ component Support(profileLink string, user *arn.User)
 	h1.mountable Let's get down to business!
 
 	.buttons.support-button-container
-		a.button.support-button.mountable.ajax(href="/charge")
+		a.button.support-button.mountable(href="/charge")
 			Icon("heart")
 			span Support us!
 	

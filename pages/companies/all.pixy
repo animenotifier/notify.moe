@@ -11,7 +11,7 @@ component CompaniesIndex(groups [][]*arn.Company, user *arn.User)
 				ul
 					each company in group
 						li
-							a.ajax(href=company.Link())= company.Name.English
+							a(href=company.Link())= company.Name.English
 
 component CompaniesTabs(user *arn.User)
 	.tabs
@@ -25,6 +25,6 @@ component CompaniesTabs(user *arn.User)
 					Icon("plus")
 					span Add company
 			else
-				a.button.ajax(href="/company/" + user.DraftIndex().CompanyID + "/edit")
+				a.button(href="/company/" + user.DraftIndex().CompanyID + "/edit")
 					Icon("pencil")
 					span Edit draft

@@ -6,7 +6,7 @@ component SoundTrack(track *arn.SoundTrack)
 component SoundTrackContent(track *arn.SoundTrack)
 	.soundtrack-content
 		if track.MainAnime() != nil
-			a.soundtrack-anime-link.ajax(href="/anime/" + track.MainAnime().ID)
+			a.soundtrack-anime-link(href="/anime/" + track.MainAnime().ID)
 				img.soundtrack-anime-image.lazy(data-src=track.MainAnime().ImageLink("medium"), data-webp="true", data-color=track.MainAnime().AverageColor(), alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
 
 		SoundTrackMedia(track)
@@ -29,13 +29,13 @@ component SoundTrackMedia(track *arn.SoundTrack)
 component SoundTrackFooter(track *arn.SoundTrack)
 	.soundtrack-footer
 		if track.Title == ""
-			a.ajax(href=track.Link() + "/edit") untitled
+			a(href=track.Link() + "/edit") untitled
 		else
-			a.ajax(href=track.Link())= track.Title
+			a(href=track.Link())= track.Title
 		span  posted 
 		span.utc-date(data-date=track.Created)
 		span  by 
-		a.ajax(href=track.Creator().Link())= track.Creator().Nick + " "
+		a(href=track.Creator().Link())= track.Creator().Nick + " "
 
 component ExternalMedia(media *arn.ExternalMedia)
 	iframe.lazy(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")

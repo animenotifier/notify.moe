@@ -22,9 +22,9 @@ component TermsOfService
 		h3.mountable Web crawlers
 		p.mountable
 			span HTML scraping of content is not allowed as we have a public 
-			a.ajax(href="/api") API
+			a(href="/api") API
 			span  covering nearly all the data on the site. Please use the 
-			a.ajax(href="/api") API
+			a(href="/api") API
 			span  instead as this will ensure that only the minimum of required bandwidth will be used.
 
 		h2.mountable Links to Third-Party Websites

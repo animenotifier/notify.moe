@@ -13,7 +13,7 @@ component PopularCompanies(companies []*arn.Company, companyToAnime map[string][
 component PopularCompaniesScrollable(companies []*arn.Company, companyToAnime map[string][]*arn.Anime, user *arn.User)
 	each company in companies
 		li.popular-company.mountable
-			a.popular-company-header.ajax(href=company.Link())
+			a.popular-company-header(href=company.Link())
 				Icon("building")
 				span.popular-company-name= company.Name.English
 			

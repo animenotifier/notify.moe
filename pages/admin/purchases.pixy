@@ -16,5 +16,5 @@ component GlobalPurchaseHistory(purchases []*arn.Purchase)
 			each purchase in purchases
 				tr.shop-history-item.mountable(data-item-id=purchase.ItemID)
 					td
-						a.ajax(href=purchase.User().Link())= purchase.User().Nick
+						a(href=purchase.User().Link())= purchase.User().Nick
 					PurchaseInfo(purchase)

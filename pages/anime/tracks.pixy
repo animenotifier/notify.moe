@@ -14,4 +14,4 @@ component AnimeTracks(anime *arn.Anime, tracks []*arn.SoundTrack)
 			//- 		.anime-soundtrack.mountable(data-mountable-type="track")
 			//- 			.video-container
 			//- 				iframe.video.lazy(data-src=track.Media[0].EmbedLink(), allowfullscreen="allowfullscreen")
-			//- 			a.soundtrack-footer.ajax(href=track.Link())= track.Title
+			//- 			a.soundtrack-footer(href=track.Link())= track.Title

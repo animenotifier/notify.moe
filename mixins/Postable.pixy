@@ -47,7 +47,7 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 						a.post-tool.post-delete.action(data-action="deletePost", data-trigger="click", data-id=post.ID(), title="Delete")
 							Icon("trash")
 					
-					a.post-tool.post-permalink.ajax(href=post.Link(), title="Permalink")
+					a.post-tool.post-permalink(href=post.Link(), title="Permalink")
 						Icon("link")
 
 				//- if type === "Messages" && user && (user.ID === post.authorId || user.ID === post.recipientId)

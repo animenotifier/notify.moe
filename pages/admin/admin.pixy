@@ -5,7 +5,7 @@ component AdminTabs
 		Tab("Purchases", "shopping-cart", "/admin/purchases")
 	
 	.corner-buttons
-		a.button.ajax(href="/editor", aria-label="Editor")
+		a.button(href="/editor", aria-label="Editor")
 			Icon("pencil")
 			span.tab-text Editor
 

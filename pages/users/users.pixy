@@ -13,7 +13,7 @@ component ProUsers(users []*arn.User, url string)
 
 	.pro-avatars
 		each user in users
-			a.profile-image-container.mountable.ajax(href=user.Link())
+			a.profile-image-container.mountable(href=user.Link())
 				ProfileImage(user)
 				.anime-grid-title
 					.anime-grid-title-text= user.Nick

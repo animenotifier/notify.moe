@@ -46,7 +46,7 @@ component CompanyAnimes(label string, animes []*arn.Anime, user *arn.User)
 				CompanyAnime(anime, user)
 
 component CompanyAnime(anime *arn.Anime, user *arn.User)
-	a.company-anime-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+	a.company-anime-item(href=anime.Link(), title=anime.Title.ByUser(user))
 		img.company-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 component CompanyTabs(company *arn.Company, user *arn.User)

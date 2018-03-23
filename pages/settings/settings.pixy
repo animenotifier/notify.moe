@@ -210,13 +210,13 @@ component SettingsPro(user *arn.User)
 						span Your PRO account expires in 
 						span.utc-date(data-date=user.ProExpires)
 						span .
-					a.button.ajax(href="/shop")
+					a.button(href="/shop")
 						Icon("star")
 						span Extend PRO account duration
 			else
 				.widget-section
 					label Would you like to support the site development?
-					a.button.ajax(href="/support")
+					a.button(href="/support")
 						Icon("star")
 						span Go PRO
 

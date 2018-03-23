@@ -9,7 +9,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 				if i < len(schedule)
 					.widget-ui-element
 						.widget-ui-element-text
-							a.schedule-item-link.ajax(href=schedule[i].Anime.Link())
+							a.schedule-item-link(href=schedule[i].Anime.Link())
 								Icon("calendar-o")
 								.schedule-item-title= schedule[i].Anime.Title.ByUser(user)
 							.spacer
@@ -24,7 +24,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 			h3.widget-title Forums
 
 			each post in posts
-				a.widget-ui-element.ajax(href=post.Thread().Link())
+				a.widget-ui-element(href=post.Thread().Link())
 					.widget-ui-element-text
 						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
 						span= post.Thread().Title
@@ -43,7 +43,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 
 			for i := 0; i <= 4; i++
 				if i < len(soundTracks)
-					a.widget-ui-element.ajax(href=soundTracks[i].Link())
+					a.widget-ui-element(href=soundTracks[i].Link())
 						.widget-ui-element-text
 							Icon("music")
 							if soundTracks[i].Title == ""
@@ -88,7 +88,7 @@ component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, sound
 
 			for i := 0; i <= 4; i++
 				if i < len(following)
-					a.widget-ui-element.ajax(href="/+" + following[i].Nick)
+					a.widget-ui-element(href="/+" + following[i].Nick)
 						.widget-ui-element-text
 							Icon("address-card")
 							span= following[i].Nick

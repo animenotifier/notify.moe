@@ -19,11 +19,11 @@ component CompareAnimeList(a *arn.User, b *arn.User, countA int, countB int, com
 			each comparison in comparisons
 				tr.anime-list-item.mountable
 					td.anime-list-item-image-container
-						a.ajax(href=comparison.Anime.Link())
+						a(href=comparison.Anime.Link())
 							img.anime-list-item-image.lazy(data-src=comparison.Anime.ImageLink("small"), data-webp="true", data-color=comparison.Anime.AverageColor(), alt=comparison.Anime.Title.ByUser(user))
 
 					td.anime-list-item-name
-						a.ajax(href=comparison.Anime.Link())= comparison.Anime.Title.ByUser(user)
+						a(href=comparison.Anime.Link())= comparison.Anime.Title.ByUser(user)
 
 					td.comparison
 						if comparison.ItemA != nil

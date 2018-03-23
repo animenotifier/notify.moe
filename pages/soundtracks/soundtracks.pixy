@@ -10,7 +10,7 @@ component SoundTracks(tracks []*arn.SoundTrack, nextIndex int, tag string, user 
 					Icon("plus")
 					span Add soundtrack
 			else
-				a.button.ajax(href="/soundtrack/" + user.DraftIndex().SoundTrackID + "/edit")
+				a.button(href="/soundtrack/" + user.DraftIndex().SoundTrackID + "/edit")
 					Icon("pencil")
 					span Edit draft
 

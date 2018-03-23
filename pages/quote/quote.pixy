@@ -16,12 +16,12 @@ component QuoteMainColumn(quote *arn.Quote, user *arn.User)
 			span Edited 
 			span.utc-date(data-date=quote.Edited)
 			span  by 
-			a.ajax(href=quote.EditedByUser().Link())= quote.EditedByUser().Nick
+			a(href=quote.EditedByUser().Link())= quote.EditedByUser().Nick
 		else
 			span Posted 
 			span.utc-date(data-date=quote.Created)
 			span  by 
-			a.ajax(href=quote.Creator().Link())= quote.Creator().Nick
+			a(href=quote.Creator().Link())= quote.Creator().Nick
 			span .
 
 component QuoteSideColumn(quote *arn.Quote, user *arn.User)
@@ -57,5 +57,5 @@ component QuoteTabs(quote *arn.Quote, user *arn.User)
 		Tab("History", "history", quote.Link() + "/history")
 
 component QuoteAnime(anime *arn.Anime, user *arn.User)
-	a.quote-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+	a.quote-anime-list-item(href=anime.Link(), title=anime.Title.ByUser(user))
 		img.quote-anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))

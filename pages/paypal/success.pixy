@@ -11,6 +11,6 @@ component PayPalSuccess(payment *arn.PayPalPayment)
 		img.new-payment-thank-you-image(src="/images/elements/thank-you.jpg", alt="Thank you!")
 	
 	.buttons
-		a.button.ajax(href="/shop")
+		a.button(href="/shop")
 			Icon("shopping-cart")
 			span Return to the shop

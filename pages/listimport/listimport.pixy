@@ -6,20 +6,20 @@ component ImportLists(user *arn.User)
 		label AniList:
 
 		.widget-section
-			a.button.mountable.ajax(href="/import/anilist/animelist")
+			a.button.mountable(href="/import/anilist/animelist")
 				Icon("download")
 				span Import AniList
 
 	if user.Accounts.Kitsu.Nick != ""
 		label Kitsu:
 		.widget-section
-			a.button.mountable.ajax(href="/import/kitsu/animelist")
+			a.button.mountable(href="/import/kitsu/animelist")
 				Icon("download")
 				span Import Kitsu
 	
 	if user.Accounts.MyAnimeList.Nick != ""
 		label MyAnimeList:
 		.widget-section
-			a.button.mountable.ajax(href="/import/myanimelist/animelist")
+			a.button.mountable(href="/import/myanimelist/animelist")
 				Icon("download")
 				span Import MyAnimeList

@@ -6,7 +6,7 @@ component ThreadLink(thread *arn.Thread)
 			.thread-content
 				if thread.Sticky != 0
 					Icon("thumb-tack")
-				a.thread-link-title.ajax(href="/thread/" + thread.ID)= thread.Title
+				a.thread-link-title(href="/thread/" + thread.ID)= thread.Title
 				.spacer
 				.thread-reply-count= len(thread.Posts)
 				.thread-icons

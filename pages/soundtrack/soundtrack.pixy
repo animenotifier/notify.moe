@@ -25,7 +25,7 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 
 				.soundtrack-anime-list
 					each anime in track.Anime()
-						a.soundtrack-anime-list-item.ajax(href=anime.Link(), title=anime.Title.ByUser(user))
+						a.soundtrack-anime-list-item(href=anime.Link(), title=anime.Title.ByUser(user))
 							img.soundtrack-anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 			if len(track.Links) > 0
@@ -54,7 +54,7 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 
 				.tags
 					each tag in track.Tags
-						a.tag.ajax(href="/soundtracks/tag/" + tag)= tag
+						a.tag(href="/soundtracks/tag/" + tag)= tag
 
 		.footer.mountable
 			if track.EditedBy != ""

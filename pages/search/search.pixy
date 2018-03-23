@@ -64,7 +64,7 @@ component AnimeSearchResults(animes []*arn.Anime)
 	else
 		.profile-watching-list.anime-search
 			each anime in animes
-				a.profile-watching-list-item.mountable.ajax(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
+				a.profile-watching-list-item.mountable(href=anime.Link(), title=anime.Title.Canonical, data-mountable-type="anime")
 					img.anime-cover-image.anime-search-result.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Canonical)
 
 component CharacterSearchResults(characters []*arn.Character)
@@ -84,7 +84,7 @@ component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread)
 			each thread in threads
 				.forum-search-result.mountable(data-mountable-type="forum")
 					.forum-search-result-header
-						a.forum-search-result-title.ajax(href=thread.Link())= thread.Title
+						a.forum-search-result-title(href=thread.Link())= thread.Title
 						if thread.Author().HasNick()
 							.forum-search-result-author= thread.Author().Nick
 					.forum-search-result-sample= thread.Text
@@ -92,7 +92,7 @@ component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread)
 			each post in posts
 				.forum-search-result.mountable(data-mountable-type="forum")
 					.forum-search-result-header
-						a.forum-search-result-title.ajax(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
+						a.forum-search-result-title(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
 						if post.Author().HasNick()
 							.forum-search-result-author= post.Author().Nick
 					.forum-search-result-sample= post.Text
@@ -104,7 +104,7 @@ component SoundTrackSearchResults(tracks []*arn.SoundTrack)
 		ul.soundtrack-search
 			each track in tracks
 				li.mountable(data-mountable-type="track")
-					a.ajax(href=track.Link())= track.Title
+					a(href=track.Link())= track.Title
 					span.soundtrack-search-anime= " - " + track.MainAnime().Title.Canonical
 
 component CompanySearchResults(companies []*arn.Company)
@@ -114,7 +114,7 @@ component CompanySearchResults(companies []*arn.Company)
 		ul.company-search
 			each company in companies
 				li.mountable(data-mountable-type="company")
-					a.ajax(href=company.Link())= company.Name.English
+					a(href=company.Link())= company.Name.English
 
 component QuoteSearchResults(quotes []*arn.Quote)
 	if len(quotes) == 0
@@ -123,7 +123,7 @@ component QuoteSearchResults(quotes []*arn.Quote)
 		ul.quote-search
 			each quote in quotes
 				li.mountable(data-mountable-type="quote")
-					a.ajax(href=quote.Link())= quote.Text.English
+					a(href=quote.Link())= quote.Text.English
 
 component UserSearchResults(users []*arn.User)
 	if len(users) == 0

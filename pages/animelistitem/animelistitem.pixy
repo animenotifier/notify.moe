@@ -27,10 +27,10 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			InputTextArea("Notes", item.Notes, "Notes", "Your notes")
 
 			.buttons.mountable
-				a.ajax.button(href="/+" + viewUser.Nick + "/animelist/" + item.Status)
+				a.button(href="/+" + viewUser.Nick + "/animelist/" + item.Status)
 					Icon("list")
 					span View collection
-				a.ajax.button(href=anime.Link())
+				a.button(href=anime.Link())
 					Icon("search-plus")
 					span View anime
 				button.action(data-action="removeAnimeFromCollection", data-trigger="click", data-api="/api/animelist/" + viewUser.ID, data-anime-id=anime.ID, data-nick=viewUser.Nick)

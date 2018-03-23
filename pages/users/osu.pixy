@@ -15,7 +15,7 @@ component OsuRankingList(users []*arn.User, url string)
 					td= toString(index + 1) + "."
 					td.ranking-user
 						Avatar(user)
-						a.ajax(href=user.Link())= user.Nick
+						a(href=user.Link())= user.Nick
 					td.ranking-score= toString(int(user.Accounts.Osu.PP + 0.5)) + " pp"
 					td.ranking-accuracy= fmt.Sprintf("%.1f", user.Accounts.Osu.Accuracy) + "%"
 				
