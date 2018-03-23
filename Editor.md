@@ -31,7 +31,7 @@ Ok, on to the actual guide. You've probably noticed by now that you have 2 new m
 
 # Plot twist - Anime edit page
 
-Before the fun stuff you must first learn the basics. When you go to a media page you'll see 2 buttons. The button we care about here is `Edit anime`.
+Before the fun stuff you must first learn the basics. **Edits are saved by pressing Tab, Enter or just by clicking outside of the field**. Anyway, when you go to a media page you'll see 2 buttons. The button we care about here is `Edit anime`.
 
 ![image](https://user-images.githubusercontent.com/7947042/37798119-708e45b6-2e24-11e8-9020-8b3d9ffaeeba.png)
 
@@ -146,17 +146,17 @@ Not sure, haven't had a chance to try it because someone was trigger happy @_@
 
 Here you're presented with a new menu
 
-![image](https://vgy.me/0ffmwo.png)
+![image](https://vgy.me/D4Byi6.png)
 
 Basically this displays entries that don't have mappings to MAL/Shoboi/Anilist. MAL and Anilist are there for obvious reasons and Shoboi is where we get our episode data for notifications so it's important that every show from the current and upcoming season to have a Shoboi ID. I'll explain how to do that in a later part.
+
+Duplicate displays entries that share the same ID. 
 
 1. Synopsis - Anime entries that don't have a synopsis that's longer than x characters.
 
 2. Genres - Anime entries that don't have any genres. At all.
 
-
 3. Start date - idk, guess? 
-
 
 4. Images - Ok, so here's the deal. A lot of anime have horribly low resolution posters. We're talking about 200x350 here. It's really bad looking and we're working on fixing that.
 
