@@ -2,7 +2,7 @@
 
 [Anime page](#plot-twist---anime-edit-page)
 
-[Editor menu](#editor-menu-1)
+[Editor menu](#editor-menu)
 
 * [MAL](#mal)
 
