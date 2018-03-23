@@ -1,3 +1,5 @@
+const popular-company-height = 250px
+
 .popular-companies
 	horizontal-wrap
 	justify-content space-evenly
@@ -7,7 +9,7 @@
 	width 100%
 	max-width 800px
 	margin 0
-	margin-bottom calc(content-padding / 4)
+	margin-bottom calc(content-padding / 2)
 	padding 0.5rem 0.75rem
 	overflow hidden
 	ui-element
@@ -20,6 +22,16 @@
 
 .popular-company-footer
 	flex 0.2
+
+	.company-anime
+		flex-flow row
+		overflow hidden
+
+	.company-anime-item
+		opacity 0.75
+
+		:hover
+			opacity 1
 
 .popular-company-description
 	clip-long-text
@@ -35,8 +47,8 @@
 
 > 900px
 	.popular-company
-		height 200px
-		max-height 200px
+		height popular-company-height
+		max-height popular-company-height
 		padding 0.75rem 1rem
 		margin calc(content-padding / 2)
 

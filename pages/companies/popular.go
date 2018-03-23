@@ -8,7 +8,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
-const maxPopularCompanies = 60
+const maxPopularCompanies = 25
 
 // Popular renders the best companies.
 func Popular(ctx *aero.Context) string {
@@ -31,11 +31,14 @@ func Popular(ctx *aero.Context) string {
 	// Next index
 	nextIndex := infinitescroll.NextIndex(ctx, len(allCompanies), maxPopularCompanies, index)
 
+	// Get company to anime map
+	companyToAnime := arn.GetCompanyToAnimeMap()
+
 	// In case we're scrolling, send companies only (without the page frame)
 	if index > 0 {
-		return ctx.HTML(components.PopularCompaniesScrollable(companies, user))
+		return ctx.HTML(components.PopularCompaniesScrollable(companies, companyToAnime, user))
 	}
 
 	// Otherwise, send the full page
-	return ctx.HTML(components.PopularCompanies(companies, nextIndex, user))
+	return ctx.HTML(components.PopularCompanies(companies, companyToAnime, nextIndex, user))
 }
