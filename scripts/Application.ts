@@ -162,8 +162,9 @@ export class Application {
 				continue
 			}
 
-			// Don't ajaxify links with a target or links that disable ajax specifically
-			if(link.target.length > 0 || link.dataset.ajax === "false") {
+			// Don't ajaxify invalid links, links with a target or links that disable ajax specifically
+			console.log(link.hash)
+			if(link.href === "" || link.href.includes("#") || link.target.length > 0 || link.dataset.ajax === "false") {
 				continue
 			}
 
