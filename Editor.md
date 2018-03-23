@@ -31,7 +31,7 @@ Ok, on to the actual guide. You've probably noticed by now that you have 2 new m
 
 # Plot twist - Anime edit page
 
-Before the fun stuff you must first learn the basics. When you go to a media page you'll see 2 buttons. The button we care about here is `Edit anime`.
+Before the fun stuff you must first learn the basics. **Edits are saved by pressing Tab, Enter or just by clicking outside of the field** When you go to a media page you'll see 2 buttons. The button we care about here is `Edit anime`.
 
 ![image](https://user-images.githubusercontent.com/7947042/37798119-708e45b6-2e24-11e8-9020-8b3d9ffaeeba.png)
 
