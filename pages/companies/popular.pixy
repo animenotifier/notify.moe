@@ -13,10 +13,13 @@ component PopularCompanies(companies []*arn.Company, nextIndex int, user *arn.Us
 component PopularCompaniesScrollable(companies []*arn.Company, user *arn.User)
 	each company in companies
 		li.popular-company.mountable
-			a.popular-company-name.ajax(href=company.Link())
-				.popular-company-icon
-					Icon("building")
-				
-				span= company.Name.English
+			a.popular-company-header.ajax(href=company.Link())
+				Icon("building")
+				span.popular-company-name= company.Name.English
+			
+			p.popular-company-body.popular-company-description= company.Description
+			
+			.popular-company-footer
+				p Test.
 			
 			//- span= " (" + strconv.Itoa(popularity[company.ID]) + ")"

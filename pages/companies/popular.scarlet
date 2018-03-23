@@ -3,20 +3,31 @@
 	justify-content space-evenly
 
 .popular-company
-	display flex
+	vertical
 	width 100%
-	max-width 500px
+	max-width 800px
 	margin 0
 	margin-bottom calc(content-padding / 4)
 	padding 0.5rem 0.75rem
+	overflow hidden
 	ui-element
+
+.popular-company-header
+	flex 0.2
+
+.popular-company-body
+	flex 0.6
+
+.popular-company-footer
+	flex 0.2
+
+.popular-company-description
+	clip-long-text
 
 .popular-company-icon
 	//
 
 .popular-company-name
-	horizontal
-	align-items center
 	clip-long-text
 
 .popular-company-anime-preview
@@ -24,8 +35,13 @@
 
 > 900px
 	.popular-company
-		height 50px
+		height 200px
+		max-height 200px
 		padding 0.75rem 1rem
+		margin calc(content-padding / 2)
 
-	.popular-company-name
-		font-size 1.3rem
+	.popular-company-header
+		font-size 1.2rem
+
+	.popular-company-description
+		white-space normal
