@@ -1,8 +1,9 @@
 import { AnimeNotifier } from "../AnimeNotifier"
 
 let currentTheme = "light"
-let light = {}
-let dark = {
+
+const light = {}
+const dark = {
 	"hue": "45",
 	"saturation": "100%",
 
