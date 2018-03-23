@@ -11,16 +11,16 @@ func DuplicateMappings(ctx *aero.Context) string {
 		ctx,
 		"Anime with duplicate mappings",
 		func(anime *arn.Anime) bool {
-			all := map[string]bool{}
+			existing := map[string]bool{}
 
 			for _, mapping := range anime.Mappings {
-				_, exists := all[mapping.Service]
+				_, exists := existing[mapping.Service]
 
 				if exists {
 					return true
 				}
 
-				all[mapping.Service] = true
+				existing[mapping.Service] = true
 			}
 
 			return false
