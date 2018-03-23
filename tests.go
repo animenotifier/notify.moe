@@ -62,20 +62,40 @@ var routeTests = map[string][]string{
 		"/+Akyoto/animelist/watching",
 	},
 
+	"/user/:nick/animelist/watching/from/:index": []string{
+		"/+Akyoto/animelist/watching/from/3",
+	},
+
 	"/user/:nick/animelist/completed": []string{
 		"/+Akyoto/animelist/completed",
+	},
+
+	"/user/:nick/animelist/completed/from/:index": []string{
+		"/+Akyoto/animelist/completed/from/3",
 	},
 
 	"/user/:nick/animelist/planned": []string{
 		"/+Akyoto/animelist/planned",
 	},
 
+	"/user/:nick/animelist/planned/from/:index": []string{
+		"/+Akyoto/animelist/planned/from/3",
+	},
+
 	"/user/:nick/animelist/hold": []string{
 		"/+Akyoto/animelist/hold",
 	},
 
+	"/user/:nick/animelist/hold/from/:index": []string{
+		"/+Akyoto/animelist/hold/from/3",
+	},
+
 	"/user/:nick/animelist/dropped": []string{
 		"/+Akyoto/animelist/dropped",
+	},
+
+	"/user/:nick/animelist/dropped/from/:index": []string{
+		"/+Akyoto/animelist/dropped/from/3",
 	},
 
 	"/user/:nick/recommended/anime": []string{
@@ -139,20 +159,32 @@ var routeTests = map[string][]string{
 		"/soundtrack/h0ac8sKkg/edit",
 	},
 
-	"/soundtracks": []string{
-		"/soundtracks",
+	"/soundtrack/:id/history": []string{
+		"/soundtrack/h0ac8sKkg/history",
 	},
 
-	"/soundtracks/best": []string{
-		"/soundtracks/best",
+	"/soundtracks": []string{
+		"/soundtracks",
 	},
 
 	"/soundtracks/from/:index": []string{
 		"/soundtracks/from/12",
 	},
 
+	"/soundtracks/best": []string{
+		"/soundtracks/best",
+	},
+
 	"/soundtracks/best/from/:index": []string{
 		"/soundtracks/best/from/12",
+	},
+
+	"/soundtracks/tag/:tag": []string{
+		"/soundtracks/tag/moe",
+	},
+
+	"/soundtracks/tag/:tag/from/:index": []string{
+		"/soundtracks/tag/moe/from/3",
 	},
 
 	"/character/:id": []string{
