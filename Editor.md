@@ -223,7 +223,7 @@ What you see after you click on that? I got no clue what that page is about and 
 
 ![image](https://vgy.me/7PMgFe.png)
 
-But remember! In ordder of appearance
+But remember! In order of appearance:
 
 ![image](https://vgy.me/a9IcMo.png)
 
