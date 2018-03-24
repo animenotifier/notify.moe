@@ -262,7 +262,6 @@ component SettingsAccounts(user *arn.User)
 						Icon("check")
 						span Connected
 					else
-						
 						Icon("circle-o")
 						span Not connected
 
@@ -273,13 +272,14 @@ component SettingsAccounts(user *arn.User)
 			
 			ImportLists(user)
 
-		//- .widget.mountable
-		//- 	h3.widget-title
-		//- 		Icon("upload")
-		//- 		span Export
-			
-		//- 	.widget-section
-		//- 		label JSON:
-		//- 		a.button(href="/api/animelist/" + user.ID)
-		//- 			Icon("upload")
-		//- 			span Export anime list as JSON
+		if len(user.AnimeList().Items) > 0
+			.widget.mountable
+				h3.widget-title
+					Icon("upload")
+					span Export
+				
+				.widget-section
+					label JSON:
+					a.button(href="/api/animelist/" + user.ID, target="_blank")
+						Icon("upload")
+						span Export anime list as JSON
