@@ -414,8 +414,6 @@ export class AnimeNotifier {
 	}
 
 	reloadContent(cached?: boolean) {
-		// console.log("reload content", "/_" + this.app.currentPath)
-
 		let headers = new Headers()
 
 		if(!cached) {
@@ -482,6 +480,7 @@ export class AnimeNotifier {
 			let actionTrigger = element.dataset.trigger
 			let actionName = element.dataset.action
 
+			// Filter out invalid definitions
 			if(!actionTrigger || !actionName) {
 				continue
 			}
@@ -501,11 +500,13 @@ export class AnimeNotifier {
 				element.onclick = null
 			}
 
+			// Warn us about undefined actions
 			if(!(actionName in actions)) {
 				this.statusMessage.showError(`Action '${actionName}' has not been defined`)
 				continue
 			}
 
+			// Register the actual action handler
 			let actionHandler = e => {
 				actions[actionName](this, element, e)
 

@@ -218,7 +218,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			b.WriteString(`<div class="spacer"></div>`)
 
 			// Remove button
-			b.WriteString(`<button class="action" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
+			b.WriteString(`<button class="action" title="Delete this ` + field.Name + `" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
 			b.WriteString(strconv.Itoa(sliceIndex))
 			b.WriteString(`">` + utils.RawIcon("trash") + `</button>`)
 

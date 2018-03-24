@@ -31,13 +31,14 @@ mixin genre-tag
 	color text-color
 
 .tag-edit
-	border-right none
 	border-top-right-radius 0
 	border-bottom-right-radius 0
+	width auto
 
 .tag-remove
 	tag-dimensions
 	margin-left 0
+	border-left none
 	border-top-left-radius 0
 	border-bottom-left-radius 0
 
