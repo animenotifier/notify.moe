@@ -117,6 +117,7 @@ mixin volume-slider-thumb
 	width 18px
 	height 18px
 	transform scale(0.5)
+	border none
 	border-radius 50%
 	background text-color
 	cursor pointer
@@ -137,6 +138,7 @@ mixin volume-slider-hover-thumb
 	background rgba(0, 0, 0, 0.03)
 	outline none !important
 	border none !important
+	box-shadow none !important
 	border-radius 0
 	padding 0
 	margin 0
@@ -157,6 +159,3 @@ mixin volume-slider-hover-thumb
 
 		::-webkit-slider-thumb
 			volume-slider-hover-thumb
-
-#audio-player-volume:hover ::-moz-range-thumb
-	volume-slider-thumb
