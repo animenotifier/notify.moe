@@ -4,6 +4,7 @@ import { StatusMessage } from "./StatusMessage"
 import { PushManager } from "./PushManager"
 import { TouchController } from "./TouchController"
 import { NotificationManager } from "./NotificationManager"
+import { AudioPlayer } from "./AudioPlayer"
 import { Analytics } from "./Analytics"
 import { SideBar } from "./SideBar"
 import { InfiniteScroller } from "./InfiniteScroller"
@@ -11,8 +12,6 @@ import { ServiceWorkerManager } from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, delay, canUseWebP, swapElements } from "./Utils"
 import * as actions from "./Actions"
-import { darkTheme, addSpeed, playPreviousTrack, search } from "./Actions";
-import { playPauseAudio, playNextTrack } from "./Actions/Audio"
 
 export class AnimeNotifier {
 	app: Application
@@ -27,6 +26,7 @@ export class AnimeNotifier {
 	serviceWorkerManager: ServiceWorkerManager
 	notificationManager: NotificationManager
 	touchController: TouchController
+	audioPlayer: AudioPlayer
 	sideBar: SideBar
 	infiniteScroller: InfiniteScroller
 	mainPageLoaded: boolean
@@ -116,7 +116,7 @@ export class AnimeNotifier {
 
 		// Theme
 		if(this.user && this.user.dataset.pro === "true" && this.user.dataset.theme !== "light") {
-			darkTheme(this)
+			actions.darkTheme(this)
 		}
 
 		// Status message
@@ -130,6 +130,9 @@ export class AnimeNotifier {
 
 		// Notification manager
 		this.notificationManager = new NotificationManager()
+
+		// Audio player
+		this.audioPlayer = new AudioPlayer(this)
 
 		// Analytics
 		this.analytics = new Analytics()
@@ -877,7 +880,7 @@ export class AnimeNotifier {
 			case "INPUT":
 				//
 				if(activeElement.id === "search" && e.keyCode === 13) {
-					search(this, activeElement as HTMLInputElement, e)
+					actions.search(this, activeElement as HTMLInputElement, e)
 				}
 
 				return
@@ -938,7 +941,7 @@ export class AnimeNotifier {
 
 		// "+" = Audio speed up
 		if(e.keyCode === 107 || e.keyCode === 187) {
-			addSpeed(this, 0.05)
+			this.audioPlayer.addSpeed(0.05)
 
 			e.preventDefault()
 			e.stopPropagation()
@@ -947,7 +950,7 @@ export class AnimeNotifier {
 
 		// "-" = Audio speed down
 		if(e.keyCode === 109 || e.keyCode === 189) {
-			addSpeed(this, -0.05)
+			this.audioPlayer.addSpeed(-0.05)
 
 			e.preventDefault()
 			e.stopPropagation()
@@ -956,7 +959,7 @@ export class AnimeNotifier {
 
 		// "J" = Previous track
 		if(e.keyCode === 74) {
-			playPreviousTrack(this)
+			this.audioPlayer.previous()
 
 			e.preventDefault()
 			e.stopPropagation()
@@ -965,7 +968,7 @@ export class AnimeNotifier {
 
 		// "K" = Play/pause
 		if(e.keyCode === 75) {
-			playPauseAudio(this)
+			this.audioPlayer.playPause()
 
 			e.preventDefault()
 			e.stopPropagation()
@@ -974,7 +977,7 @@ export class AnimeNotifier {
 
 		// "L" = Next track
 		if(e.keyCode === 76) {
-			playNextTrack(this)
+			this.audioPlayer.next()
 
 			e.preventDefault()
 			e.stopPropagation()
