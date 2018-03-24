@@ -191,8 +191,8 @@ export class AudioPlayer {
 	}
 
 	// Previous track
-	async previous() {
-		alert("Previous track is currently work in progress! Check back later :)")
+	previous() {
+		this.arn.statusMessage.showInfo("Previous track feature is currently work in progress! Check back later :)")
 	}
 
 	// Next track
