@@ -44,24 +44,3 @@ func ByUser(ctx *aero.Context) string {
 
 	return ctx.HTML(components.Notifications(notifications, viewUser, user))
 }
-
-// All shows all notifications.
-func All(ctx *aero.Context) string {
-	notifications, err := arn.AllNotifications()
-
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Could not retrieve notification list", err)
-	}
-
-	// Sort by date
-	sort.Slice(notifications, func(i, j int) bool {
-		return notifications[i].Created > notifications[j].Created
-	})
-
-	// Limit results
-	if len(notifications) > maxNotifications {
-		notifications = notifications[:maxNotifications]
-	}
-
-	return ctx.HTML(components.AllNotifications(notifications))
-}
