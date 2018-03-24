@@ -123,11 +123,12 @@ export class AudioPlayer {
 
 	// Pause
 	pause() {
-		if(!this.audioNode) {
+		if(!this.audioNode || !this.audioContext || this.audioContext.state === "suspended") {
 			return
 		}
 
 		this.audioNode.playbackRate.setValueAtTime(0.0, 0)
+		this.audioContext.suspend()
 
 		this.audioPlayerPlay.classList.remove("fade-out")
 		this.audioPlayerPause.classList.add("fade-out")
@@ -140,7 +141,12 @@ export class AudioPlayer {
 			return
 		}
 
+		if(!this.audioContext || this.audioContext.state === "running") {
+			return
+		}
+
 		this.audioNode.playbackRate.setValueAtTime(this.targetSpeed, 0)
+		this.audioContext.resume()
 
 		this.audioPlayerPlay.classList.add("fade-out")
 		this.audioPlayerPause.classList.remove("fade-out")
