@@ -3,7 +3,7 @@
 
 .weekday
 	width 100%
-	max-width 500px
+	max-width 750px
 	margin 0 auto
 	text-align left
 	border-bottom 1px solid ui-border-color
@@ -80,6 +80,7 @@
 
 	.weekday
 		width 14.2857%
+		max-width 500px
 		border-bottom none
 		border-right 1px solid ui-border-color
 
