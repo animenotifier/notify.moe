@@ -44,6 +44,7 @@ export class AnimeNotifier {
 		// These classes will never be removed on DOM diffs
 		Diff.persistentClasses.add("mounted")
 		Diff.persistentClasses.add("element-found")
+		Diff.persistentClasses.add("active")
 
 		// Never remove src property on diffs
 		Diff.persistentAttributes.add("src")

@@ -23,8 +23,10 @@ export class Application {
 
 	init() {
 		document.addEventListener("DOMContentLoaded", () => {
-			this.ajaxify()
-			this.markActiveLinks()
+			let links = document.getElementsByTagName("a")
+
+			this.markActiveLinks(links)
+			this.ajaxify(links)
 		})
 	}
 
@@ -82,6 +84,9 @@ export class Application {
 			history.pushState(url, "", url)
 		}
 
+		// Mark active links
+		this.markActiveLinks()
+
 		let onTransitionEnd = (e: Event) => {
 			// Ignore transitions of child elements.
 			// We only care about the transition event on the content element.
@@ -116,7 +121,6 @@ export class Application {
 
 		this.content.classList.add(this.fadeOutClass)
 		this.loading.classList.remove(this.fadeOutClass)
-		this.markActiveLinks()
 
 		return request
 	}
@@ -125,30 +129,28 @@ export class Application {
 		this.content.innerHTML = html
 	}
 
-	markActiveLinks(element?: HTMLElement) {
-		if(!element) {
-			element = document.body
+	markActiveLinks(links?: NodeListOf<HTMLAnchorElement>) {
+		if(!links) {
+			links = document.getElementsByTagName("a")
 		}
-
-		let links = element.getElementsByTagName("a")
 
 		for(let i = 0; i < links.length; i++) {
 			let link = links[i]
-			let href = link.getAttribute("href")
 
-			if(href === this.currentPath)
-				link.classList.add(this.activeLinkClass)
-			else
-				link.classList.remove(this.activeLinkClass)
+			Diff.mutations.queue(() => {
+				if(link.getAttribute("href") === this.currentPath) {
+					link.classList.add(this.activeLinkClass)
+				} else {
+					link.classList.remove(this.activeLinkClass)
+				}
+			})
 		}
 	}
 
-	ajaxify(element?: HTMLElement) {
-		if(!element) {
-			element = document.body
+	ajaxify(links?: NodeListOf<HTMLAnchorElement>) {
+		if(!links) {
+			links = document.getElementsByTagName("a")
 		}
-
-		let links = element.getElementsByTagName("a")
 
 		for(let i = 0; i < links.length; i++) {
 			let link = links[i] as HTMLAnchorElement
