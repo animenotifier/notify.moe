@@ -23,6 +23,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/editor/filteranime"
 	"github.com/animenotifier/notify.moe/pages/editor/filtercompanies"
+	"github.com/animenotifier/notify.moe/pages/editor/filtersoundtracks"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/episode"
 	"github.com/animenotifier/notify.moe/pages/explore"
@@ -271,6 +272,9 @@ func Configure(app *aero.Application) {
 
 	// Editor - Companies
 	l.Page("/editor/companies/description", filtercompanies.NoDescription)
+
+	// Editor - Soundtracks
+	l.Page("/editor/soundtracks/links", filtersoundtracks.NoLinks)
 
 	// Log
 	l.Page("/log", editlog.Get)

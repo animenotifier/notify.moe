@@ -24,6 +24,7 @@ component EditorTabs(url string, user *arn.User)
 		Tab("Editor", "pencil", "/editor")
 		Tab("MAL", "exchange", "/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix())
 		Tab("Anime", "tv", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
+		Tab("Tracks", "music", "/editor/soundtracks/links")
 		Tab("Companies", "building", "/editor/companies/description")
 		Tab("Kitsu", "download", "/editor/kitsu/new/anime")
 	

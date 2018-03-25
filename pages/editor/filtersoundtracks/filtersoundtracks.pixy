@@ -1,0 +1,20 @@
+component SoundTracksEditorList(tracks []*arn.SoundTrack, count int, url string, user *arn.User)
+	EditorTabs(url, user)
+	h1.editor-list-page-title.mountable Soundtracks without links
+	.footer.editor-list-entry-count.mountable= strconv.Itoa(count) + " soundtracks"
+
+	table.editor-list
+		thead
+			tr.mountable
+				th Likes
+				th Title
+		tbody
+			each track in tracks
+				tr.mountable
+					td= len(track.Likes)
+					td
+						a(href=track.Link(), target="_blank", rel="noopener")= track.Title
+					td
+						each media in track.Media
+							if media.Service == "Youtube"
+								a(href="https://song.link/https://youtu.be/" + media.ServiceID, target="_blank", rel="noopener") 🔍
