@@ -6,11 +6,13 @@
 
 * [MAL](#mal)
 
-* [Kitsu](#kitsu)
+* [Tracks](#tracks)
 
 * [Anime](#anime)
 
 * [Companies](#companies)
+
+* [Kitsu](#kitsu)
 
 [Company page](#company-page-edit)
 
@@ -115,13 +117,13 @@ Same logic, Just take the ID from the URL and you're done.
 
 Ok, this is where we get down to business. When you open that menu you'll be greeted with this page. I call it the e-peen page and I love it. Who doesn't like growing their e-peen ;)
 
-![image](https://user-images.githubusercontent.com/7947042/37795266-af4f9f1e-2e1c-11e8-92ca-f6d97b606bf1.png)
+![image](https://vgy.me/9SvuFH.png)
 
-Naturally, it won't say Bleack, but instead it'll be your name. Anyway, everything on the page doesn't really need explaining. The score in red is your score and it's calculated based on the number of edits you've made, which are displayed underneath it.
+Naturally, it won't say Bleack, but instead it'll be your name. Anyway, everything on the page doesn't really need explaining. The score in red is your score and it's calculated based on the number of edits you've made, which are displayed on hover.
 
 The interesting part is this 
 
-![image](https://user-images.githubusercontent.com/7947042/37795420-17aee4de-2e1d-11e8-9b46-502764a5cb81.png)
+![image](https://vgy.me/FrlZhL.png)
 
 But first I need to mention this. It works just like the explore page so don't overthink it.
 
@@ -137,6 +139,19 @@ This is where we compare our data with MAL's. As you can see, you can filter out
 ![image](https://user-images.githubusercontent.com/7947042/37797051-76254a9a-2e21-11e8-8989-4d3a732bf889.png)
 
 This is what you'll see when there's a difference. What you do with the information displayed is left up to your judgement and the information you can get on other sites, such as: MAL, Anilist, Anidb, ANN and Shoboi. The icons are fairly standard. The edit icon opens the entry in a new tab in editing mode, the icon next to it opens the MAL page for it and the trash icon will result in ignoring the difference displayed until there's new data. Also, it has a confirmation dialogue so don't worry about misscliks. 
+
+## Tracks
+
+![image](https://vgy.me/pAe1hc.png)
+
+Tracks that have no iTunes or Amazon links. 
+
+## Companies 
+
+Just companies that have no description. 
+
+![image](https://vgy.me/SJn5xb.png)
+
 
 ## Kitsu
 
@@ -165,12 +180,6 @@ Duplicate displays entries that share the same ID.
 ![image](https://user-images.githubusercontent.com/7947042/37801243-850c154a-2e2e-11e8-9bbf-b8c7e1fb40a6.png)
 
 You have 2 submenus there. Low-Res are images the size of which I just mentioned. Ultra Low-Res....let's just say it's not pretty 
-
-## Companies 
-
-Just companies that have no description. 
-
-![image](https://vgy.me/SJn5xb.png)
 
 
 # Company page edit
