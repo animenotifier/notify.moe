@@ -64,6 +64,11 @@ export class Application {
 	}
 
 	load(url: string, options?: LoadOptions) {
+		// Remove protocol and hostname if it was specified
+		if(url.startsWith(location.origin)) {
+			url = url.substr(location.origin.length)
+		}
+
 		// Start sending a network request
 		let request = this.get("/_" + url).catch(error => error)
 
