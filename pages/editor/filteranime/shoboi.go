@@ -5,8 +5,6 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-const maxShoboiEntries = 70
-
 // Shoboi ...
 func Shoboi(ctx *aero.Context) string {
 	return editorList(

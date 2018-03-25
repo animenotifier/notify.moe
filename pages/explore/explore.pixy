@@ -21,25 +21,28 @@ component ExploreAnime(animeList []*arn.Anime, year string, status string, typ s
 		else
 			AnimeGrid(animeList, user)
 
-component ExploreFilters(year string, status string, typ string, allowAny bool)
+component ExploreFilters(year string, status string, typ string, advancedFilters bool)
 	.explore-filters
 		select#filter-year.action(value=year, data-action="filterAnime", data-trigger="change")
-			if allowAny
+			if advancedFilters
 				option(value="")
 
 			for year := time.Now().Year()+1; year >= 1951; year--
 				option(value=year)= year
 
 		select#filter-status.action(value=status, data-action="filterAnime", data-trigger="change")
-			if allowAny
+			if advancedFilters
 				option(value="")
 			
 			option(value="current") Current
 			option(value="upcoming") Upcoming
 			option(value="finished") Finished
 
+			if advancedFilters
+				option(value="tba") TBA
+
 		select#filter-type.action(value=typ, data-action="filterAnime", data-trigger="change")
-			if allowAny
+			if advancedFilters
 				option(value="")
 			
 			option(value="tv") TV
@@ -47,3 +50,6 @@ component ExploreFilters(year string, status string, typ string, allowAny bool)
 			option(value="ova") OVA
 			option(value="ona") ONA
 			option(value="special") Special
+
+			if advancedFilters
+				option(value="music") Music

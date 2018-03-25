@@ -5,8 +5,6 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-const maxGenreEntries = 70
-
 // Genres ...
 func Genres(ctx *aero.Context) string {
 	return editorList(

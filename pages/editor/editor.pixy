@@ -33,8 +33,9 @@ component EditorTabs(url string, user *arn.User)
 			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
 			Tab("Synopsis", "align-left", "/editor/anime/synopsis" + user.Settings().Editor.Filter.Suffix())
 			Tab("Genres", "clone", "/editor/anime/genres" + user.Settings().Editor.Filter.Suffix())
-			Tab("Start date", "calendar", "/editor/anime/startdate" + user.Settings().Editor.Filter.Suffix())
 			Tab("Images", "image", "/editor/anime/image/lowres" + user.Settings().Editor.Filter.Suffix())
+			Tab("Start date", "calendar", "/editor/anime/startdate" + user.Settings().Editor.Filter.Suffix())
+			Tab("TBA", "question-circle", "/editor/anime/tba" + user.Settings().Editor.Filter.Suffix())
 	
 	if strings.Contains(url, "/editor/anime/mapping/")
 		.tabs

@@ -257,6 +257,7 @@ func Configure(app *aero.Application) {
 	editorFilterable("/editor/anime/synopsis", filteranime.Synopsis)
 	editorFilterable("/editor/anime/genres", filteranime.Genres)
 	editorFilterable("/editor/anime/startdate", filteranime.StartDate)
+	editorFilterable("/editor/anime/tba", filteranime.TBA)
 	editorFilterable("/editor/anime/mapping/shoboi", filteranime.Shoboi)
 	editorFilterable("/editor/anime/mapping/anilist", filteranime.AniList)
 	editorFilterable("/editor/anime/mapping/mal", filteranime.MAL)

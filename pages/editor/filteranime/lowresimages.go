@@ -5,8 +5,6 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-const maxImageEntries = 70
-
 // LowResolutionAnimeImages filters anime with low resolution images.
 func LowResolutionAnimeImages(ctx *aero.Context) string {
 	return filterAnimeImages(ctx, "Anime with low resolution images", arn.AnimeImageLargeWidth, arn.AnimeImageLargeHeight)
