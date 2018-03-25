@@ -19,12 +19,9 @@ func UserInfo() aero.Middleware {
 		next()
 
 		// Ignore non-HTML requests
-		if aero.IsMediaType(ctx.Response().Header().Get("Content-Type")) {
-			return
-		}
+		contentType := ctx.Response().Header().Get("Content-Type")
 
-		// Ignore API requests
-		if strings.HasPrefix(ctx.URI(), "/api/") {
+		if !strings.HasPrefix(contentType, "text/html") {
 			return
 		}
 
