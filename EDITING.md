@@ -140,7 +140,9 @@ This is what you'll see when there's a difference. What you do with the informat
 
 ## Kitsu
 
-Not sure, haven't had a chance to try it because someone was trigger happy @_@
+![image](https://vgy.me/9JksvW.png)
+
+Now anime on Kitsu - press import to import.
 
 ## Anime
 
