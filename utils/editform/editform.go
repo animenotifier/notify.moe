@@ -56,6 +56,8 @@ func Render(obj interface{}, title string, user *arn.User) string {
 			returnPath := ""
 
 			switch lowerCaseTypeName {
+			case "anime":
+				returnPath = "/explore"
 			case "company":
 				returnPath = "/companies"
 			default:
