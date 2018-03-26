@@ -18,7 +18,14 @@ export function deleteObject(arn: AnimeNotifier, button: HTMLButtonElement) {
 	if(!confirm(`Are you sure you want to delete this ${confirmType}?`)) {
 		return
 	}
-	
+
+	// Double confirmation on anime
+	if(confirmType === "anime") {
+		if(!confirm(`Just making sure because this is not reversible. Are you absolutely sure you want to delete this ${confirmType}?`)) {
+			return
+		}
+	}
+
 	let endpoint = arn.findAPIEndpoint(button)
 
 	arn.post(endpoint + "/delete", "")
