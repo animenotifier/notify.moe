@@ -1,4 +1,4 @@
-component ExploreAnime(animeList []*arn.Anime, year string, status string, typ string, user *arn.User)
+component ExploreAnime(animes []*arn.Anime, year string, status string, typ string, user *arn.User)
 	#filter-root(data-url="/explore/anime")
 	ExploreFilters(year, status, typ, false)
 
@@ -6,6 +6,10 @@ component ExploreAnime(animeList []*arn.Anime, year string, status string, typ s
 		if user != nil
 			button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")
 				RawIcon("eye-slash")
+		
+		if user != nil
+			a.button(href="/explore/sequels", title="View sequels of my completed anime")
+				RawIcon("forward")
 		
 		a.button(href="/explore/color/any/anime", title="View colors")
 			RawIcon("paint-brush")
@@ -16,10 +20,10 @@ component ExploreAnime(animeList []*arn.Anime, year string, status string, typ s
 	h1.page-title Explore
 
 	.explore-anime
-		if len(animeList) == 0
+		if len(animes) == 0
 			p.no-data.mountable No anime found using the above filters.
 		else
-			AnimeGrid(animeList, user)
+			AnimeGrid(animes, user)
 
 component ExploreFilters(year string, status string, typ string, advancedFilters bool)
 	.explore-filters

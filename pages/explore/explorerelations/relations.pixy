@@ -1,0 +1,8 @@
+component ExploreAnimeSequels(entries []*utils.AnimeWithRelatedAnime, user *arn.User)
+	h1 Sequels of my completed anime
+
+	.explore-anime
+		if len(entries) == 0
+			p.no-data.mountable No sequels found for the anime you completed.
+		else
+			AnimeGridWithRelation(entries, user)
