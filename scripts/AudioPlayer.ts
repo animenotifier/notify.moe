@@ -1,4 +1,5 @@
 import { AnimeNotifier } from "./AnimeNotifier"
+import { Anime } from "./Types/Anime"
 
 export class AudioPlayer {
 	arn: AnimeNotifier
@@ -269,10 +270,10 @@ export class AudioPlayer {
 		if(animeId !== "") {
 			this.animeInfo.classList.remove("hidden")
 			let animeResponse = await fetch("/api/anime/" + animeId)
-			let anime = await animeResponse.json()
+			let anime = await animeResponse.json() as Anime
 			this.animeLink.title = anime.title.canonical
 			this.animeLink.href = "/anime/" + anime.id
-			this.animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + ".jpg"
+			this.animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + ".jpg?" + anime.image.lastModified.toString()
 			this.animeImage.classList.remove("hidden")
 			this.animeImage["became visible"]()
 		}
