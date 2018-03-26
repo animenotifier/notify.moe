@@ -16,6 +16,12 @@ component Sidebar(user *arn.User)
 				
 				a#notification-count.badge.right-badge.badge-important.hidden(href="/notifications", title="Notifications") 0
 
+		//- Search
+		.sidebar-link(aria-label="Search")
+			.sidebar-button
+				Icon("search")
+				FuzzySearch
+
 		//- Sidebar buttons
 		if user != nil
 			SidebarButton("Home", "/+" + user.Nick + "/animelist/watching", "home")
@@ -49,11 +55,6 @@ component Sidebar(user *arn.User)
 		.spacer
 
 		AudioPlayer
-		
-		.sidebar-link(aria-label="Search")
-			.sidebar-button
-				Icon("search")
-				FuzzySearch
 		
 		if user != nil && (user.Role == "editor" || user.Role == "admin")
 			SidebarButton("Log", "/log", "list")
