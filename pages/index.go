@@ -254,16 +254,25 @@ func Configure(app *aero.Application) {
 	}
 
 	// Editor - Anime
-	editorFilterable("/editor/anime/synopsis", filteranime.Synopsis)
-	editorFilterable("/editor/anime/genres", filteranime.Genres)
-	editorFilterable("/editor/anime/startdate", filteranime.StartDate)
-	editorFilterable("/editor/anime/tba", filteranime.TBA)
 	editorFilterable("/editor/anime/mapping/shoboi", filteranime.Shoboi)
 	editorFilterable("/editor/anime/mapping/anilist", filteranime.AniList)
 	editorFilterable("/editor/anime/mapping/mal", filteranime.MAL)
 	editorFilterable("/editor/anime/mapping/duplicate", filteranime.DuplicateMappings)
+
 	editorFilterable("/editor/anime/image/lowres", filteranime.LowResolutionAnimeImages)
 	editorFilterable("/editor/anime/image/ultralowres", filteranime.UltraLowResolutionAnimeImages)
+
+	editorFilterable("/editor/anime/companies/studios", filteranime.Studios)
+	editorFilterable("/editor/anime/companies/producers", filteranime.Producers)
+	editorFilterable("/editor/anime/companies/licensors", filteranime.Licensors)
+
+	editorFilterable("/editor/anime/details/synopsis", filteranime.Synopsis)
+	editorFilterable("/editor/anime/details/genres", filteranime.Genres)
+	editorFilterable("/editor/anime/details/startdate", filteranime.StartDate)
+	editorFilterable("/editor/anime/details/episodelength", filteranime.EpisodeLength)
+	editorFilterable("/editor/anime/details/source", filteranime.Source)
+
+	editorFilterable("/editor/anime/tba", filteranime.TBA)
 
 	// Editor - MALdiff
 	editorFilterable("/editor/mal/diff/anime", editor.CompareMAL)

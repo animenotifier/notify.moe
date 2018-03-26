@@ -31,12 +31,25 @@ component EditorTabs(url string, user *arn.User)
 	if strings.Contains(url, "/editor/anime/")
 		.tabs
 			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
-			Tab("Synopsis", "align-left", "/editor/anime/synopsis" + user.Settings().Editor.Filter.Suffix())
-			Tab("Genres", "clone", "/editor/anime/genres" + user.Settings().Editor.Filter.Suffix())
 			Tab("Images", "image", "/editor/anime/image/lowres" + user.Settings().Editor.Filter.Suffix())
-			Tab("Start date", "calendar", "/editor/anime/startdate" + user.Settings().Editor.Filter.Suffix())
+			Tab("Companies", "building", "/editor/anime/companies/studios" + user.Settings().Editor.Filter.Suffix())
+			Tab("Details", "search-plus", "/editor/anime/details/genres" + user.Settings().Editor.Filter.Suffix())
 			Tab("TBA", "question-circle", "/editor/anime/tba" + user.Settings().Editor.Filter.Suffix())
 	
+	if strings.Contains(url, "/editor/anime/details")
+		.tabs
+			Tab("Genres", "clone", "/editor/anime/details/genres" + user.Settings().Editor.Filter.Suffix())
+			Tab("Synopsis", "align-left", "/editor/anime/details/synopsis" + user.Settings().Editor.Filter.Suffix())
+			Tab("Start date", "calendar", "/editor/anime/details/startdate" + user.Settings().Editor.Filter.Suffix())
+			Tab("Ep. Length", "clock-o", "/editor/anime/details/episodelength" + user.Settings().Editor.Filter.Suffix())
+			Tab("Source", "book", "/editor/anime/details/source" + user.Settings().Editor.Filter.Suffix())
+	
+	if strings.Contains(url, "/editor/anime/companies")
+		.tabs
+			Tab("Studios", "building", "/editor/anime/companies/studios" + user.Settings().Editor.Filter.Suffix())
+			Tab("Producers", "building", "/editor/anime/companies/producers" + user.Settings().Editor.Filter.Suffix())
+			Tab("Licensors", "building", "/editor/anime/companies/licensors" + user.Settings().Editor.Filter.Suffix())
+
 	if strings.Contains(url, "/editor/anime/mapping/")
 		.tabs
 			Tab("MAL", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
