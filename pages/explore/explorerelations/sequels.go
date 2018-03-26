@@ -23,7 +23,10 @@ func Sequels(ctx *aero.Context) string {
 	sequels := []*utils.AnimeWithRelatedAnime{}
 
 	for anime := range arn.StreamAnime() {
-		if animeList.Contains(anime.ID) {
+		item := animeList.Find(anime.ID)
+
+		// Ignore if user added the anime and it's not "Planned" status
+		if item != nil && item.Status != arn.AnimeListStatusPlanned {
 			continue
 		}
 
