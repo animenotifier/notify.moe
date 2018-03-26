@@ -7,3 +7,6 @@
 	width 0
 	height auto
 	flex-grow 1
+
+	:focus
+		color link-color
