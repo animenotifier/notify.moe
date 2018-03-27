@@ -32,8 +32,8 @@ func Get(ctx *aero.Context) string {
 	character, _ := arn.GetCharacter(quote.CharacterID)
 
 	if character != nil {
-		openGraph.Tags["og:title"] = character.Name + "'s quote"
-		openGraph.Tags["og:image"] = "https:" + character.Image
+		openGraph.Tags["og:title"] = character.Name.Canonical + "'s quote"
+		openGraph.Tags["og:image"] = "https:" + character.ImageLink("large")
 	}
 
 	ctx.Data = openGraph

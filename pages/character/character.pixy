@@ -3,11 +3,16 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 		.character-left-column
 			.character-header
 				.character-image-container
-					img.character-image-fullsize(src=character.Image, alt=character.Name)
+					img.character-image-fullsize(src=character.ImageLink("large"), alt=character.Name.Canonical)
 				.character-description-container
-					h1.character-name= character.Name
+					h1.character-name= character.Name.Canonical
+
 					.anime-alternative-title
-						Japanese("日本語の名前無し")
+						if character.Name.Japanese != ""
+							Japanese(character.Name.Japanese)
+						else
+							Japanese("日本語の名前無し")
+					
 					.character-description!= markdown.Render(character.Description)
 			
 					h3 Anime

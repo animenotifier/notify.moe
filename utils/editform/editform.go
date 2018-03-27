@@ -157,7 +157,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			character, err := arn.GetCharacter(characterID)
 
 			if err == nil {
-				b.WriteString(components.EditFormImagePreview(character.Link(), character.Image, false))
+				b.WriteString(components.EditFormImagePreview(character.Link(), character.ImageLink("small"), false))
 			}
 
 		case "":

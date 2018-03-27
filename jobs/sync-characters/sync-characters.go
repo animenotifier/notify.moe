@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"path"
+	"strconv"
 	"strings"
 
 	"github.com/animenotifier/arn"
@@ -17,11 +19,28 @@ func main() {
 
 	for kitsuCharacter := range kitsuCharacters {
 		character := &arn.Character{
-			ID:          kitsuCharacter.ID,
-			Name:        kitsuCharacter.Attributes.Name,
-			Image:       kitsu.FixImageURL(kitsuCharacter.Attributes.Image.Original),
+			ID: kitsuCharacter.ID,
+			Name: arn.CharacterName{
+				Canonical: kitsuCharacter.Attributes.Name,
+			},
+			Image: arn.CharacterImage{
+				Extension: path.Ext(kitsu.FixImageURL(kitsuCharacter.Attributes.Image.Original)),
+			},
 			Description: kitsuCharacter.Attributes.Description,
 			Attributes:  []*arn.CharacterAttribute{},
+			Mappings: []*arn.Mapping{
+				&arn.Mapping{
+					Service:   "kitsu/character",
+					ServiceID: kitsuCharacter.ID,
+				},
+			},
+		}
+
+		if kitsuCharacter.Attributes.MalID != 0 {
+			character.Mappings = append(character.Mappings, &arn.Mapping{
+				Service:   "myanimelist/character",
+				ServiceID: strconv.Itoa(kitsuCharacter.Attributes.MalID),
+			})
 		}
 
 		// We use markdown, so replace <br/> with two line breaks.
