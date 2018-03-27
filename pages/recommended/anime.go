@@ -58,7 +58,23 @@ func Anime(ctx *aero.Context) string {
 
 		// Planned anime go higher
 		if existing != nil && existing.Status == arn.AnimeListStatusPlanned {
-			animeAffinity += 15.0
+			animeAffinity += 10.0
+		}
+
+		// Anime whose high-ranked prequel you did not see are lower ranked
+		prequels := anime.Prequels()
+
+		for _, prequel := range prequels {
+			item := animeList.Find(prequel.ID)
+
+			// Filter out unimportant prequels
+			if prequel.Score() < anime.Score()/2 {
+				continue
+			}
+
+			if item == nil || item.Status != arn.AnimeListStatusCompleted {
+				animeAffinity -= 20.0
+			}
 		}
 
 		affinity[anime.ID] = animeAffinity
