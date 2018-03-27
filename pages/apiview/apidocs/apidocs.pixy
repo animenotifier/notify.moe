@@ -1,21 +1,32 @@
-component APIDocs(t reflect.Type, fields []*utils.APIField)
-	h1= "API: " + t.Name()
+component APIDocs(t reflect.Type, examples []string, fields []*utils.APIField)
+	.api-docs-page
+		h1= "API: " + t.Name()
 
-	table
-		thead
-			tr
-				th Field name
-				th JavaScript notation
-				th Type
-		tbody
-			each field in fields
+		h2 Examples
+
+		if len(examples) == 0
+			p.no-data No examples have been added to this type yet.
+		else
+			.buttons
+				each example in examples
+					a.button(href="https://notify.moe" + example, target="_blank")
+						Icon("external-link")
+						span= example
+
+		h2 Fields
+
+		table
+			thead
 				tr
-					td= field.Name
-					td= field.JSON
-					td= field.Type
-						
+					th Field
+					th Type
+			tbody
+				each field in fields
+					tr.api-field
+						td.api-field-json(title=field.Name + " (Go)")= field.JSON
+						td.api-field-type= field.Type
 
-	.corner-buttons
-		a.button(href="/api")
-			Icon("code")
-			span Overview
+		.corner-buttons
+			a.button(href="/api")
+				Icon("code")
+				span Overview

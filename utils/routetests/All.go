@@ -1,4 +1,4 @@
-package main
+package routetests
 
 var routeTests = map[string][]string{
 	// User
@@ -363,4 +363,9 @@ var routeTests = map[string][]string{
 	"/log":                                           nil,
 	"/inventory":                                     nil,
 	"/extension/embed":                               nil,
+}
+
+// All returns which specific routes to test for a given generic route.
+func All() map[string][]string {
+	return routeTests
 }

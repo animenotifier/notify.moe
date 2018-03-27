@@ -9,6 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages"
+	"github.com/animenotifier/notify.moe/utils/routetests"
 )
 
 var app = aero.New()
@@ -73,7 +74,7 @@ func configure(app *aero.Application) *aero.Application {
 	})
 
 	// Specify test routes
-	for route, examples := range routeTests {
+	for route, examples := range routetests.All() {
 		app.Test(route, examples)
 	}
 

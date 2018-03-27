@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/utils/routetests"
 )
 
 // TestRouteStatusCodes tests the status code of every route registered in routeTests.
@@ -14,7 +15,7 @@ func TestRouteStatusCodes(t *testing.T) {
 	app := configure(aero.New())
 
 	// Iterate through every route
-	for _, examples := range routeTests {
+	for _, examples := range routetests.All() {
 		// Iterate through every example specified for that route
 		for _, example := range examples {
 			// Create a new HTTP request

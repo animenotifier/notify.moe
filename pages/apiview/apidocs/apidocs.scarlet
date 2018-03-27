@@ -1,0 +1,19 @@
+.api-docs-page
+	h1,
+	h2
+		text-align left
+
+	table
+		margin 0
+
+	.buttons
+		justify-content flex-start
+
+.api-field
+	//
+
+.api-field-json
+	//
+
+.api-field-type
+	opacity 0.5
