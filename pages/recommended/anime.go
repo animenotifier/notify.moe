@@ -1,7 +1,6 @@
 package recommended
 
 import (
-	"fmt"
 	"math"
 	"net/http"
 	"sort"
@@ -62,8 +61,6 @@ func Anime(ctx *aero.Context) string {
 	if len(bestGenres) > bestGenreCount {
 		bestGenres = bestGenres[:bestGenreCount]
 	}
-
-	fmt.Println(bestGenres)
 
 	// Get all anime
 	var tv []*arn.Anime
