@@ -116,7 +116,7 @@
 	flex 1
 	max-width 280px
 	max-height 280px
-	border-radius 3px
+	border-radius ui-element-border-radius
 	overflow hidden
 
 #nick

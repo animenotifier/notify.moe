@@ -1,7 +1,7 @@
 .user-avatars
 	horizontal-wrap
 	justify-content center
-	border-radius 3px
+	border-radius ui-element-border-radius
 
 	.user-image
 		margin 0.4rem

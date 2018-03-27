@@ -121,7 +121,7 @@
 .anime-cover-image
 	width anime-image-large-width
 	height anime-image-large-height
-	border-radius 3px
+	border-radius ui-element-border-radius
 
 	default-transition
 	object-fit cover
@@ -214,7 +214,7 @@
 .relation-image
 	width 100px
 	height 141px
-	border-radius 3px
+	border-radius ui-element-border-radius
 	object-fit cover
 	default-transition
 	shadow-up

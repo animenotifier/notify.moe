@@ -10,7 +10,7 @@
 
 .soundtrack-content
 	horizontal
-	border-radius 3px
+	border-radius ui-element-border-radius
 	overflow hidden
 	box-shadow shadow-light
 	min-height 200px

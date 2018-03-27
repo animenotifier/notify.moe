@@ -6,7 +6,7 @@
 	horizontal
 	display inline-block
 	padding 0.5rem 1rem
-	border-radius 3px
+	border-radius ui-element-border-radius
 	font-size 0.9rem
 
 	:hover

@@ -24,7 +24,7 @@
 	margin 0 auto
 
 #cover-input-preview
-	border-radius 3px
+	border-radius ui-element-border-radius
 	filter none
 
 .settings-info-text

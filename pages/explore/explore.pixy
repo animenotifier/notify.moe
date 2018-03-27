@@ -7,15 +7,18 @@ component ExploreAnime(animes []*arn.Anime, year string, status string, typ stri
 			button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")
 				RawIcon("eye-slash")
 		
+		a.button(href="/halloffame", title="Hall of Fame")
+			RawIcon("trophy")
+		
+		a.button(href="/genres", title="View genres")
+			RawIcon("clone")
+		
 		if user != nil
 			a.button(href="/explore/sequels", title="View sequels of my completed anime")
 				RawIcon("forward")
 		
 		a.button(href="/explore/color/any/anime", title="View colors")
 			RawIcon("paint-brush")
-		
-		a.button(href="/genres", title="View genres")
-			RawIcon("clone")
 
 	h1.page-title Explore
 

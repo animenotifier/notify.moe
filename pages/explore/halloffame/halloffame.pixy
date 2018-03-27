@@ -1,0 +1,13 @@
+component HallOfFame(entries []*utils.HallOfFameEntry, user *arn.User)
+	h1.hall-of-fame-page-title Hall of Fame
+	.footer Best TV series for each year.
+
+	.hall-of-fame
+		each entry in entries
+			.hall-of-fame-entry
+				.hall-of-fame-anime
+					AnimeImageLink(entry.Anime, "large", user)
+				a.hall-of-fame-footer(href="/explore/anime/" + strconv.Itoa(entry.Year) + "/finished/tv", title="Best TV series " + strconv.Itoa(entry.Year))
+					.hall-of-fame-trophy
+						Icon("trophy")
+					.hall-of-fame-year= entry.Year

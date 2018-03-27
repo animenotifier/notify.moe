@@ -9,12 +9,14 @@ component AnimeGridWithRelation(entries []*utils.AnimeWithRelatedAnime, user *ar
 component AnimeGridScrollable(animes []*arn.Anime, user *arn.User)
 	each anime in animes
 		.anime-grid-cell(data-added=(user != nil && user.AnimeList().Contains(anime.ID)))
-			a(href="/anime/" + anime.ID)
-				img.anime-grid-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Romaji)
-				.anime-grid-title
-					.anime-grid-title-text= anime.Title.ByUser(user)
-			
+			AnimeImageLink(anime, "medium", user)
 			AnimeGridButton(anime, user)
+
+component AnimeImageLink(anime *arn.Anime, size string, user *arn.User)
+	a(href="/anime/" + anime.ID)
+		img.anime-grid-image.lazy(data-src=anime.ImageLink(size), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Romaji)
+		.anime-grid-title
+			.anime-grid-title-text= anime.Title.ByUser(user)
 
 component AnimeGridWithRelationScrollable(entries []*utils.AnimeWithRelatedAnime, user *arn.User)
 	each entry in entries

@@ -11,7 +11,7 @@ mixin grid-cell
 	max-height anime-image-medium-height
 	// min-width 90px
 	// min-height 127px
-	border-radius 3px
+	border-radius ui-element-border-radius
 
 	// background-size cover
 	// background-position 50% 50%
@@ -30,7 +30,7 @@ mixin grid-text
 mixin grid-image
 	width 100%
 	height 100%
-	border-radius 3px
+	border-radius ui-element-border-radius
 	object-fit cover
 	default-transition
 

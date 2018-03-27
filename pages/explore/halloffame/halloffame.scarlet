@@ -1,0 +1,52 @@
+.hall-of-fame
+	horizontal-wrap
+	justify-content center
+	margin-top calc(content-padding * 2)
+
+.hall-of-fame-page-title
+	margin-bottom 0
+
+.hall-of-fame-entry
+	vertical
+	padding content-padding
+	margin-bottom content-padding
+
+.hall-of-fame-footer
+	horizontal
+	justify-content center
+	align-items center
+	font-weight bold
+	letter-spacing 1px
+	padding 1rem
+	border-bottom ui-border
+	border-bottom-left-radius 50%
+	border-bottom-right-radius 50%
+
+	:hover
+		background reverse-light-color
+
+.hall-of-fame-trophy
+	font-size 2.5rem
+
+.hall-of-fame-year
+	font-size 1.5rem
+	color text-color
+	opacity 0.85
+	text-shadow none
+
+.hall-of-fame-anime
+	saturate-up
+	shadow-up
+	default-transition
+	position relative
+	width anime-image-large-width
+	height anime-image-large-height
+	border-radius ui-element-border-radius
+
+	.anime-grid-title
+		font-size 1.2rem
+		padding 1rem 0.75rem
+
+	:hover
+		.anime-grid-title
+			opacity 1

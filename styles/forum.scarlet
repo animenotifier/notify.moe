@@ -225,7 +225,7 @@ post-content-padding-y = 0.75rem
 // 	flex-grow 1
 // 	padding 0.4rem 1rem
 // 	margin-left 0.3rem
-// 	border-radius 3px
+// 	border-radius ui-element-border-radius
 // 	position relative
 
 // 	:hover
