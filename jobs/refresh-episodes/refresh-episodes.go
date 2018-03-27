@@ -38,12 +38,15 @@ func main() {
 
 	switch queue {
 	case "high":
+		color.Cyan("High priority queue (%d):", len(highPriority))
 		refreshQueue(highPriority)
 
 	case "medium":
+		color.Cyan("Medium priority queue (%d):", len(mediumPriority))
 		refreshQueue(mediumPriority)
 
 	case "low":
+		color.Cyan("Low priority queue (%d):", len(lowPriority))
 		refreshQueue(lowPriority)
 
 	default:
