@@ -36,14 +36,26 @@ func main() {
 		}
 	}
 
-	color.Cyan("High priority queue (%d):", len(highPriority))
-	refreshQueue(highPriority)
+	switch queue {
+	case "high":
+		refreshQueue(highPriority)
 
-	color.Cyan("Medium priority queue (%d):", len(mediumPriority))
-	refreshQueue(mediumPriority)
+	case "medium":
+		refreshQueue(mediumPriority)
 
-	color.Cyan("Low priority queue (%d):", len(lowPriority))
-	refreshQueue(lowPriority)
+	case "low":
+		refreshQueue(lowPriority)
+
+	default:
+		color.Cyan("High priority queue (%d):", len(highPriority))
+		refreshQueue(highPriority)
+
+		color.Cyan("Medium priority queue (%d):", len(mediumPriority))
+		refreshQueue(mediumPriority)
+
+		color.Cyan("Low priority queue (%d):", len(lowPriority))
+		refreshQueue(lowPriority)
+	}
 
 	color.Green("Finished.")
 }

@@ -8,10 +8,12 @@ import (
 
 // Shell parameters
 var animeID string
+var queue string
 
 // Shell flags
 func init() {
 	flag.StringVar(&animeID, "id", "", "ID of the anime you want to refresh")
+	flag.StringVar(&queue, "queue", "", "Queue type you want to refresh (high, medium, low)")
 	flag.Parse()
 }
 
