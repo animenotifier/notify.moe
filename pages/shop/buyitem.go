@@ -32,7 +32,7 @@ func BuyItem(ctx *aero.Context) string {
 		return ctx.Error(http.StatusBadRequest, "Invalid item quantity", err)
 	}
 
-	item, err := arn.GetItem(itemID)
+	item, err := arn.GetShopItem(itemID)
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching item data", err)

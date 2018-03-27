@@ -104,19 +104,19 @@ var routeTests = map[string][]string{
 
 	// Pages
 	"/anime/:id": []string{
-		"/anime/1",
+		"/anime/323",
 	},
 
 	"/anime/:id/characters": []string{
-		"/anime/1/characters",
+		"/anime/323/characters",
 	},
 
 	"/anime/:id/episodes": []string{
-		"/anime/1/episodes",
+		"/anime/323/episodes",
 	},
 
 	"/anime/:id/tracks": []string{
-		"/anime/1/tracks",
+		"/anime/323/tracks",
 	},
 
 	"/thread/:id": []string{
@@ -201,7 +201,7 @@ var routeTests = map[string][]string{
 
 	// API
 	"/api/anime/:id": []string{
-		"/api/anime/1",
+		"/api/anime/323",
 	},
 
 	"/api/thread/:id": []string{
@@ -252,12 +252,12 @@ var routeTests = map[string][]string{
 		"/api/userfollows/4J6qpK1ve",
 	},
 
-	"/api/anilisttoanime/:id": []string{
-		"/api/anilisttoanime/527",
-	},
-
 	"/api/animecharacters/:id": []string{
 		"/api/animecharacters/323",
+	},
+
+	"/api/animerelations/:id": []string{
+		"/api/animerelations/323",
 	},
 
 	"/api/animeepisodes/:id": []string{
@@ -272,12 +272,36 @@ var routeTests = map[string][]string{
 		"/api/character/6556",
 	},
 
-	"/api/pushsubscriptions/:id": []string{
-		"/api/pushsubscriptions/4J6qpK1ve",
+	"/api/company/:id": []string{
+		"/api/company/xCAUr7UkRaz",
 	},
 
-	"/api/myanimelisttoanime/:id": []string{
-		"/api/myanimelisttoanime/527",
+	"/api/draftindex/:id": []string{
+		"/api/draftindex/4J6qpK1ve",
+	},
+
+	"/api/inventory/:id": []string{
+		"/api/inventory/4J6qpK1ve",
+	},
+
+	"/api/shopitem/:id": []string{
+		"/api/shopitem/pro-account-3",
+	},
+
+	"/api/notification/:id": []string{
+		"/api/notification/u2WHJpkigm",
+	},
+
+	"/api/quote/:id": []string{
+		"/api/quote/GXp675zmR",
+	},
+
+	"/api/usernotifications/:id": []string{
+		"/api/usernotifications/4J6qpK1ve",
+	},
+
+	"/api/pushsubscriptions/:id": []string{
+		"/api/pushsubscriptions/4J6qpK1ve",
 	},
 
 	// Images

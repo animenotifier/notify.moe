@@ -2,8 +2,8 @@ package main
 
 import "github.com/animenotifier/arn"
 
-var items = []*arn.Item{
-	&arn.Item{
+var items = []*arn.ShopItem{
+	&arn.ShopItem{
 		ID:    "pro-account-3",
 		Name:  "PRO Account (1 season)",
 		Price: 900,
@@ -20,11 +20,11 @@ Includes:
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
-		Rarity:     arn.ItemRaritySuperior,
+		Rarity:     arn.ShopItemRaritySuperior,
 		Order:      1,
 		Consumable: true,
 	},
-	&arn.Item{
+	&arn.ShopItem{
 		ID:    "pro-account-6",
 		Name:  "PRO Account (2 seasons)",
 		Price: 1600,
@@ -41,11 +41,11 @@ Includes:
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
-		Rarity:     arn.ItemRarityRare,
+		Rarity:     arn.ShopItemRarityRare,
 		Order:      2,
 		Consumable: true,
 	},
-	&arn.Item{
+	&arn.ShopItem{
 		ID:    "pro-account-12",
 		Name:  "PRO Account (4 seasons)",
 		Price: 3000,
@@ -62,11 +62,11 @@ Includes:
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
-		Rarity:     arn.ItemRarityUnique,
+		Rarity:     arn.ShopItemRarityUnique,
 		Order:      3,
 		Consumable: true,
 	},
-	&arn.Item{
+	&arn.ShopItem{
 		ID:    "pro-account-24",
 		Name:  "PRO Account (8 seasons)",
 		Price: 5900,
@@ -83,7 +83,7 @@ Includes:
 * Access to the VIP channel on Discord
 * Early access to new features`,
 		Icon:       "star",
-		Rarity:     arn.ItemRarityLegendary,
+		Rarity:     arn.ShopItemRarityLegendary,
 		Order:      4,
 		Consumable: true,
 	},

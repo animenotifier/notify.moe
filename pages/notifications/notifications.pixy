@@ -24,7 +24,7 @@ component AllNotifications(notifications []*arn.Notification)
 					a(href=notification.User().Link())= notification.User().Nick
 
 component Notification(notification *arn.Notification)
-	a.notification(href=notification.Link, target="_blank", data-seen=notification.Seen)
+	a.notification(href=notification.Link, target="_blank", data-seen=notification.Seen, data-id=notification.ID)
 		.notification-icon
 			img.lazy(data-src=notification.Icon, alt=notification.Title)
 		

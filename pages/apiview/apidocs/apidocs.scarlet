@@ -1,6 +1,7 @@
 .api-docs-page
 	h1,
-	h2
+	h2,
+	p
 		text-align left
 
 	table

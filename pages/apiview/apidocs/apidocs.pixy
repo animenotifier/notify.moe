@@ -1,17 +1,17 @@
 component APIDocs(t reflect.Type, examples []string, fields []*utils.APIField)
 	.api-docs-page
-		h1= "API: " + t.Name()
+		h1= t.Name()
 
 		h2 Examples
 
 		if len(examples) == 0
-			p.no-data No examples have been added to this type yet.
+			p.no-data No examples available yet.
 		else
 			.buttons
 				each example in examples
-					a.button(href="https://notify.moe" + example, target="_blank")
+					a.button(href=example, target="_blank")
 						Icon("external-link")
-						span= example
+						span= strings.TrimPrefix(example, "/api")
 
 		h2 Fields
 

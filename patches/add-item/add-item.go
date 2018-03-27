@@ -29,7 +29,7 @@ func main() {
 	user, err := arn.GetUserByNick(nick)
 	arn.PanicOnError(err)
 
-	item, err := arn.GetItem(itemID)
+	item, err := arn.GetShopItem(itemID)
 	arn.PanicOnError(err)
 
 	if item == nil {

@@ -19,7 +19,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
 	}
 
-	items, err := arn.AllItems()
+	items, err := arn.AllShopItems()
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Error fetching shop item data", err)
