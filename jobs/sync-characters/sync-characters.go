@@ -21,7 +21,10 @@ func main() {
 		character := &arn.Character{
 			ID: kitsuCharacter.ID,
 			Name: arn.CharacterName{
-				Canonical: kitsuCharacter.Attributes.Name,
+				Canonical: kitsuCharacter.Attributes.CanonicalName,
+				English:   kitsuCharacter.Attributes.Names.En,
+				Japanese:  kitsuCharacter.Attributes.Names.JaJp,
+				Synonyms:  kitsuCharacter.Attributes.OtherNames,
 			},
 			Image: arn.CharacterImage{
 				Extension: path.Ext(kitsu.FixImageURL(kitsuCharacter.Attributes.Image.Original)),
@@ -95,6 +98,10 @@ func main() {
 		character.Description = strings.Trim(character.Description, "\n\n")
 		character.Save()
 
+		// Save Kitsu character in Kitsu DB
+		arn.Kitsu.Set("Character", kitsuCharacter.ID, kitsuCharacter)
+
+		// Log
 		fmt.Printf("%s %s %s\n", color.GreenString("✔"), character.ID, character.Name)
 	}
 
