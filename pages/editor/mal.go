@@ -162,7 +162,7 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 
 		// EpisodeCount
-		if anime.EpisodeCount != malAnime.EpisodeCount {
+		if malAnime.EpisodeCount != 0 && anime.EpisodeCount != malAnime.EpisodeCount {
 			hash := uint64(malAnime.EpisodeCount)
 
 			if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "EpisodeCount", hash) {
