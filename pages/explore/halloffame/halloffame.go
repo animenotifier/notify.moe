@@ -10,6 +10,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
+const minYear = 1963
+
 // Get ...
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
@@ -21,7 +23,9 @@ func Get(ctx *aero.Context) string {
 			return false
 		}
 
-		if anime.StartDateTime().Year() > maxYear {
+		year := anime.StartDateTime().Year()
+
+		if year > maxYear || year < minYear {
 			return false
 		}
 
