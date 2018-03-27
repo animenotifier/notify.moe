@@ -5,7 +5,7 @@ import (
 	"github.com/fatih/color"
 )
 
-var ratings = map[string][]*arn.AnimeRating{}
+var ratings = map[string][]arn.AnimeListItemRating{}
 var finalRating = map[string]*arn.AnimeRating{}
 var popularity = map[string]*arn.AnimePopularity{}
 
@@ -120,7 +120,7 @@ func extractRatings(animeList *arn.AnimeList) {
 		_, found := ratings[item.AnimeID]
 
 		if !found {
-			ratings[item.AnimeID] = []*arn.AnimeRating{}
+			ratings[item.AnimeID] = []arn.AnimeListItemRating{}
 			finalRating[item.AnimeID] = &arn.AnimeRating{}
 		}
 
