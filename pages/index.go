@@ -1,6 +1,8 @@
 package pages
 
 import (
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/aerogo/layout"
 	"github.com/animenotifier/arn"
@@ -12,6 +14,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/apiview"
+	"github.com/animenotifier/notify.moe/pages/apiview/apidocs"
 	"github.com/animenotifier/notify.moe/pages/calendar"
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/charge"
@@ -85,6 +88,11 @@ func Configure(app *aero.Application) {
 	l.Page("/halloffame", halloffame.Get)
 	l.Page("/login", login.Get)
 	l.Page("/api", apiview.Get)
+
+	for name := range arn.DB.Types() {
+		l.Page("/api/"+strings.ToLower(name), apidocs.ByType(name))
+	}
+
 	// l.Ajax("/dashboard", dashboard.Get)
 	// l.Ajax("/best/anime", best.Get)
 	// l.Ajax("/artworks", artworks.Get)

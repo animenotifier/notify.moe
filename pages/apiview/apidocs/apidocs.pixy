@@ -1,0 +1,21 @@
+component APIDocs(t reflect.Type, fields []*utils.APIField)
+	h1= "API: " + t.Name()
+
+	table
+		thead
+			tr
+				th Field name
+				th JavaScript notation
+				th Type
+		tbody
+			each field in fields
+				tr
+					td= field.Name
+					td= field.JSON
+					td= field.Type
+						
+
+	.corner-buttons
+		a.button(href="/api")
+			Icon("code")
+			span Overview
