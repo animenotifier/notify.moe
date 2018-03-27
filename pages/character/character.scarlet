@@ -3,6 +3,7 @@
 
 .character-left-column
 	vertical
+	flex 1
 
 .character-header
 	vertical
