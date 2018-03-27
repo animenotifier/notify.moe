@@ -62,7 +62,7 @@ func Finish(ctx *aero.Context) string {
 			Status:   arn.MyAnimeListStatusToARNStatus(match.MyAnimeListItem.MyStatus),
 			Episodes: episodesWatched,
 			Notes:    "",
-			Rating: &arn.AnimeRating{
+			Rating: arn.AnimeListItemRating{
 				Overall: rating,
 			},
 			RewatchCount: rewatchCount,

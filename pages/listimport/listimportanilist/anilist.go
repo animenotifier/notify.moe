@@ -53,7 +53,7 @@ func Finish(ctx *aero.Context) string {
 			Status:   arn.AniListAnimeListStatus(match.AniListItem),
 			Episodes: match.AniListItem.EpisodesWatched,
 			Notes:    match.AniListItem.Notes,
-			Rating: &arn.AnimeRating{
+			Rating: arn.AnimeListItemRating{
 				Overall: float64(match.AniListItem.ScoreRaw) / 10.0,
 			},
 			RewatchCount: match.AniListItem.Rewatched,

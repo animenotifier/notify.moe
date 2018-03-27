@@ -66,7 +66,7 @@ func Finish(ctx *aero.Context) string {
 			Status:   arn.KitsuStatusToARNStatus(match.KitsuItem.Attributes.Status),
 			Episodes: match.KitsuItem.Attributes.Progress,
 			Notes:    match.KitsuItem.Attributes.Notes,
-			Rating: &arn.AnimeRating{
+			Rating: arn.AnimeListItemRating{
 				Overall: convertedRating,
 			},
 			RewatchCount: match.KitsuItem.Attributes.ReconsumeCount,
