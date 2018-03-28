@@ -87,7 +87,7 @@ Includes:
 		Order:      4,
 		Consumable: true,
 	},
-	// 	&arn.Item{
+	// 	&arn.ShopItem{
 	// 		ID:    "anime-support-ticket",
 	// 		Name:  "Anime Support Ticket",
 	// 		Price: 100,
@@ -97,7 +97,7 @@ Includes:
 
 	// *This feature is work in progress.*`,
 	// 		Icon:       "ticket",
-	// 		Rarity:     arn.ItemRarityRare,
+	// 		Rarity:     arn.ShopItemRarityRare,
 	// 		Order:      5,
 	// 		Consumable: false,
 	// 	},

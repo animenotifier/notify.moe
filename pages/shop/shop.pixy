@@ -1,4 +1,4 @@
-component Shop(user *arn.User, items []*arn.Item)
+component Shop(user *arn.User, items []*arn.ShopItem)
 	ShopTabs(user)
 
 	h1.page-title Shop
@@ -17,7 +17,7 @@ component ShopTabs(user *arn.User)
 			Tab("History", "history", "/shop/history")
 			Tab(strconv.Itoa(user.Balance), "diamond", "/charge")
 
-component ShopItem(item *arn.Item)
+component ShopItem(item *arn.ShopItem)
 	.shop-item.mountable(data-item-id=item.ID)
 		h3.shop-item-name
 			.item-icon
