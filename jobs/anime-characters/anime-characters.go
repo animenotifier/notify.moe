@@ -10,6 +10,8 @@ import (
 
 func main() {
 	color.Yellow("Refreshing anime characters...")
+
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
 	rateLimiter := time.NewTicker(500 * time.Millisecond)
@@ -26,6 +28,4 @@ func main() {
 
 		fmt.Printf("%s %s (%d characters)\n", anime.ID, anime.Title.Canonical, len(chars.Items))
 	}
-
-	color.Green("Finished.")
 }

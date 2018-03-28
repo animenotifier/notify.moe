@@ -37,6 +37,8 @@ func init() {
 
 func main() {
 	color.Yellow("Downloading anime images")
+
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
 	if from < 0 {
@@ -52,8 +54,6 @@ func main() {
 		fmt.Printf("%d / %d\n", index+1, len(allAnime))
 		work(anime)
 	}
-
-	color.Green("Finished downloading anime images.")
 
 	// Give file buffers some time, just to be safe
 	time.Sleep(time.Second)

@@ -13,6 +13,7 @@ import (
 var rateLimiter = time.NewTicker(500 * time.Millisecond)
 
 func main() {
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
 	// Replace this with ID list from twist.moe later

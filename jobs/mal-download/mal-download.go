@@ -72,6 +72,12 @@ func main() {
 		count++
 	}
 
+	// Log number of links
 	color.Yellow("Queued up %d links", count)
+
+	// Wait for completion
 	malCrawler.Wait()
+
+	// Finished
+	color.Green("Finished.")
 }

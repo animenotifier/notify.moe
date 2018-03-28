@@ -22,6 +22,8 @@ var packages = []string{
 }
 
 func main() {
+	defer color.Green("Finished.")
+
 	wg := sync.WaitGroup{}
 
 	for _, pkg := range packages {

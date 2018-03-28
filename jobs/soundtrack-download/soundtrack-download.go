@@ -12,6 +12,8 @@ const delayBetweenRequests = 1000
 
 func main() {
 	color.Yellow("Downloading soundtracks")
+
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
 	for track := range arn.StreamSoundTracks() {
@@ -34,6 +36,4 @@ func main() {
 		// Delay a little
 		time.Sleep(delayBetweenRequests)
 	}
-
-	color.Green("Finished.")
 }

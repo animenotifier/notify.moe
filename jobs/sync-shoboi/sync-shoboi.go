@@ -10,6 +10,8 @@ import (
 
 func main() {
 	color.Yellow("Syncing Shoboi Anime")
+
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
 	// Priority queues
@@ -43,8 +45,6 @@ func main() {
 
 	// This is a lazy hack: Wait 5 minutes for goroutines to finish their remaining work.
 	time.Sleep(5 * time.Minute)
-
-	color.Green("Finished.")
 }
 
 func refreshQueue(queue []*arn.Anime) {

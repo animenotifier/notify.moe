@@ -12,6 +12,8 @@ import (
 
 func main() {
 	color.Yellow("Syncing media relations with Kitsu DB")
+
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
 	kitsuMediaRelations := kitsu.StreamMediaRelations()
@@ -70,6 +72,4 @@ func main() {
 	for _, animeRelations := range relations {
 		animeRelations.Save()
 	}
-
-	color.Green("Finished.")
 }

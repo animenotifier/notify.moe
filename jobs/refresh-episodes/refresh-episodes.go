@@ -10,6 +10,8 @@ import (
 
 func main() {
 	color.Yellow("Refreshing episode information for each anime.")
+
+	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
 	if InvokeShellArgs() {
@@ -59,8 +61,6 @@ func main() {
 		color.Cyan("Low priority queue (%d):", len(lowPriority))
 		refreshQueue(lowPriority)
 	}
-
-	color.Green("Finished.")
 }
 
 func refreshQueue(queue []*arn.Anime) {
