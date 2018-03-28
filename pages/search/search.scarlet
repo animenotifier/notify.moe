@@ -1,7 +1,7 @@
 .anime-search,
 .user-search,
 .soundtrack-search
-	justify-content flex-start
+	justify-content flex-start !important
 
 .character-search
 	horizontal-wrap
