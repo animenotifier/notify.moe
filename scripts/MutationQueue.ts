@@ -1,5 +1,13 @@
+// Computation time allowed per frame, in milliseconds.
+// On a 100 Hz monitor this would ideally be 10 ms.
+// On a 200 Hz monitor it should be 5 ms.
+// However, the renderer also needs a bit of time,
+// so setting the value a little lower guarantees smooth transitions.
 const timeCapacity = 6.5
 
+// MutationQueue queues up DOM mutations to batch execute them before a frame is rendered.
+// It checks the time used to process these mutations and if the time is over the
+// defined time capacity, it will pause and continue the mutations in the next frame.
 export class MutationQueue {
 	mutations: Array<() => void>
 	onClearCallBack: () => void
