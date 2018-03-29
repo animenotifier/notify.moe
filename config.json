@@ -35,7 +35,7 @@
 		"/styles"
 	],
 	"manifest": {
-		"short_name": "Anime List",
+		"short_name": "Anime",
 		"gcm_sender_id": "941298467524",
 		"theme_color": "#f0c7bb",
 		"background_color": "#f6f6f6",
