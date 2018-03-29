@@ -52,7 +52,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 	// Set browser URL
 	let url = "/search/" + term
 	document.title = "Search: " + term
-	history.pushState(url, document.title, url)
+	history.replaceState(url, document.title, url)
 	arn.app.currentPath = url
 
 	// Unmount mountables to improve visual responsiveness on key press
