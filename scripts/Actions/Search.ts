@@ -67,14 +67,6 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 	// Unmount mountables to improve visual responsiveness on key press
 	arn.unmountMountables()
 
-	// Delay
-	await delay(searchDelay)
-
-	if(term !== search.value.trim()) {
-		arn.mountMountables()
-		return
-	}
-
 	// Show loading spinner
 	arn.loading(true)
 
@@ -97,6 +89,14 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 			history.pushState(url, document.title, url)
 		} else {
 			history.replaceState(url, document.title, url)
+		}
+
+		// Delay
+		await delay(searchDelay)
+
+		if(term !== search.value.trim()) {
+			arn.mountMountables()
+			return
 		}
 
 		if(!animeSearchResults) {

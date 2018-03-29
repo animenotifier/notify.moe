@@ -81,16 +81,6 @@
 				"type": "image/webp"
 			},
 			{
-				"src": "images/brand/220.png",
-				"sizes": "220x220",
-				"type": "image/png"
-			},
-			{
-				"src": "images/brand/220.webp",
-				"sizes": "220x220",
-				"type": "image/webp"
-			},
-			{
 				"src": "images/brand/512.png",
 				"sizes": "512x512",
 				"type": "image/png"
