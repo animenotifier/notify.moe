@@ -207,9 +207,6 @@ export class Application {
 	}
 
 	emit(eventName: string) {
-		document.dispatchEvent(new Event(eventName, {
-			"bubbles": true,
-			"cancelable": true
-		}))
+		document.dispatchEvent(new Event(eventName))
 	}
 }

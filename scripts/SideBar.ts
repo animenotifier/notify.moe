@@ -1,4 +1,5 @@
 import { TouchController } from "./TouchController"
+import { Diff } from "./Diff"
 
 export class SideBar {
 	element: HTMLElement
@@ -20,11 +21,11 @@ export class SideBar {
 	}
 
 	show() {
-		this.element.classList.add("sidebar-visible")
+		Diff.mutations.queue(() => this.element.classList.add("sidebar-visible"))
 	}
 
 	hide() {
-		this.element.classList.remove("sidebar-visible")
+		Diff.mutations.queue(() => this.element.classList.remove("sidebar-visible"))
 	}
 
 	toggle() {
