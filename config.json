@@ -1,5 +1,5 @@
 {
-	"domain": "Anime List",
+	"domain": "notify.moe",
 	"title": "Anime Notifier",
 	"fonts": [
 		"Ubuntu"
@@ -35,7 +35,7 @@
 		"/styles"
 	],
 	"manifest": {
-		"short_name": "notify.moe",
+		"short_name": "Anime List",
 		"gcm_sender_id": "941298467524",
 		"theme_color": "#f0c7bb",
 		"background_color": "#f6f6f6",
