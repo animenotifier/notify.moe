@@ -152,8 +152,6 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 
 function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string, element: HTMLElement) {
 	return async (response: Response) => {
-		console.log(response.status, response.headers.get("ETag"))
-
 		let html = await response.text()
 
 		if(arn.app.currentPath !== url) {
