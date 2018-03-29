@@ -89,19 +89,19 @@ component SettingsNotifications(user *arn.User)
 		.widget.mountable
 			h3.widget-title
 				Icon("bell")
-				span Push notifications
+				span Instant notifications
 			
 			#enable-notifications.widget-section
-				label Enable:
+				label Instant notifications:
 				button.action(data-action="enableNotifications", data-trigger="click")
 					Icon("toggle-off")
-					span Enable push notifications
+					span OFF
 
 			#disable-notifications.widget-section.hidden
-				label Disable:
+				label Instant notifications:
 				button.action(data-action="disableNotifications", data-trigger="click")
 					Icon("toggle-on")
-					span Disable push notifications
+					span ON
 
 			#test-notification.widget-section
 				label Test:

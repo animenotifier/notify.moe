@@ -1,7 +1,8 @@
 import { AnimeNotifier } from "../AnimeNotifier"
+import { Diff } from "../Diff"
 
 // Load more
-export function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
+export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 	// Prevent firing this event multiple times
 	if(arn.isLoading || button.disabled || button.classList.contains("hidden")) {
 		return
@@ -13,10 +14,15 @@ export function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 	let target = arn.app.find("load-more-target")
 	let index = button.dataset.index
 
-	fetch("/_" + arn.app.currentPath + "/from/" + index, {
-		credentials: "same-origin"
-	})
-	.then(response => {
+	try {
+		let response = await fetch("/_" + arn.app.currentPath + "/from/" + index, {
+			credentials: "same-origin"
+		})
+
+		if(!response.ok) {
+			throw response.statusText
+		}
+
 		let newIndex = response.headers.get("X-LoadMore-Index")
 
 		// End of data?
@@ -27,26 +33,24 @@ export function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 			button.dataset.index = newIndex
 		}
 
-		return response
-	})
-	.then(response => response.text())
-	.then(body => {
+		let body = await response.text()
+
 		let tmp = document.createElement(target.tagName)
 		tmp.innerHTML = body
 
 		let children = [...tmp.childNodes]
 
-		window.requestAnimationFrame(() => {
+		Diff.mutations.queue(() => {
 			for(let child of children) {
 				target.appendChild(child)
 			}
 
 			arn.app.emit("DOMContentLoaded")
 		})
-	})
-	.catch(err => arn.statusMessage.showError(err))
-	.then(() => {
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	} finally {
 		arn.loading(false)
 		button.disabled = false
-	})
+	}
 }
