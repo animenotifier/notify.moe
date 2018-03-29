@@ -24,6 +24,11 @@ var soundtrackSearchResults: HTMLElement
 var userSearchResults: HTMLElement
 var companySearchResults: HTMLElement
 
+// Fetch options
+const fetchOptions: RequestInit = {
+	credentials: "same-origin"
+}
+
 // Search
 export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: KeyboardEvent) {
 	if(e.ctrlKey || e.altKey) {
@@ -48,11 +53,11 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 	correctResponseRendered.forum = false
 	correctResponseRendered.soundtrack = false
 	correctResponseRendered.user = false
+	correctResponseRendered.company = false
 
 	// Set browser URL
 	let url = "/search/" + term
 	document.title = "Search: " + term
-	history.replaceState(url, document.title, url)
 	arn.app.currentPath = url
 
 	// Unmount mountables to improve visual responsiveness on key press
@@ -76,6 +81,10 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 
 			arn.app.content.innerHTML = ""
 			arn.app.content.appendChild(searchPage)
+
+			history.pushState(url, document.title, url)
+		} else {
+			history.replaceState(url, document.title, url)
 		}
 
 		if(!animeSearchResults) {
@@ -94,10 +103,6 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 			await arn.innerHTML(searchPage, emptySearchHTML)
 			arn.app.emit("DOMContentLoaded")
 			return
-		}
-
-		const fetchOptions: RequestInit = {
-			credentials: "same-origin"
 		}
 
 		// Start searching
