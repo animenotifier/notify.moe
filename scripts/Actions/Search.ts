@@ -1,4 +1,5 @@
 import { AnimeNotifier } from "../AnimeNotifier"
+import { delay } from "../Utils"
 
 // Search page reference
 var emptySearchHTML = ""
@@ -23,6 +24,9 @@ var forumSearchResults: HTMLElement
 var soundtrackSearchResults: HTMLElement
 var userSearchResults: HTMLElement
 var companySearchResults: HTMLElement
+
+// Delay before a request is sent
+const searchDelay = 150
 
 // Fetch options
 const fetchOptions: RequestInit = {
@@ -62,6 +66,14 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 
 	// Unmount mountables to improve visual responsiveness on key press
 	arn.unmountMountables()
+
+	// Delay
+	await delay(searchDelay)
+
+	if(term !== search.value.trim()) {
+		arn.mountMountables()
+		return
+	}
 
 	// Show loading spinner
 	arn.loading(true)
@@ -110,25 +122,27 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 		.then(showResponseInElement(arn, url, "anime", animeSearchResults))
 		.catch(console.error)
 
-		fetch("/_/character-search/" + term, fetchOptions)
-		.then(showResponseInElement(arn, url, "character", characterSearchResults))
-		.catch(console.error)
+		arn.requestIdleCallback(() => {
+			fetch("/_/character-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "character", characterSearchResults))
+			.catch(console.error)
 
-		fetch("/_/forum-search/" + term, fetchOptions)
-		.then(showResponseInElement(arn, url, "forum", forumSearchResults))
-		.catch(console.error)
+			fetch("/_/forum-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "forum", forumSearchResults))
+			.catch(console.error)
 
-		fetch("/_/soundtrack-search/" + term, fetchOptions)
-		.then(showResponseInElement(arn, url, "soundtrack", soundtrackSearchResults))
-		.catch(console.error)
+			fetch("/_/soundtrack-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "soundtrack", soundtrackSearchResults))
+			.catch(console.error)
 
-		fetch("/_/user-search/" + term, fetchOptions)
-		.then(showResponseInElement(arn, url, "user", userSearchResults))
-		.catch(console.error)
+			fetch("/_/user-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "user", userSearchResults))
+			.catch(console.error)
 
-		fetch("/_/company-search/" + term, fetchOptions)
-		.then(showResponseInElement(arn, url, "company", companySearchResults))
-		.catch(console.error)
+			fetch("/_/company-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "company", companySearchResults))
+			.catch(console.error)
+		})
 	} catch(err) {
 		console.error(err)
 	} finally {
@@ -137,7 +151,9 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 }
 
 function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string, element: HTMLElement) {
-	return async response => {
+	return async (response: Response) => {
+		console.log(response.status, response.headers.get("ETag"))
+
 		let html = await response.text()
 
 		if(arn.app.currentPath !== url) {
