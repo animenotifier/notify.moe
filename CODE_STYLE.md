@@ -4,6 +4,7 @@ This document is only meant to teach you the code style used in this project and
 
 * [Tabs vs Spaces](#tabs-vs-spaces)
 * [Empty line between blocks and statements](#empty-line-between-blocks-and-statements)
+* [Empty line between commented blocks](#empty-line-between-commented-blocks)
 * [Variable names](#variable-names)
 * [Types at the top](#types-at-the-top)
 * [Private fields at the end of a struct](#private-fields-at-the-end-of-a-struct)
