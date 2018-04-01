@@ -66,6 +66,40 @@ func() {
 }
 ```
 
+## Empty line between commented blocks
+
+A commented block is a sequence of lines preceded by a descriptive comment. Commented blocks should be treated as normal blocks and therefore require newlines separating them from other blocks.
+
+Bad:
+
+```go
+func(a int, b int) int {
+	// Add one to a and b
+	a++
+	b++
+	// Calculate c as the sum of a and b
+	c = a + b
+	// Return c squared
+	return c * c
+}
+```
+
+Good:
+
+```go
+func(a int, b int) int {
+	// Add one to a and b
+	a++
+	b++
+
+	// Calculate c as the sum of a and b
+	c = a + b
+
+	// Return c squared
+	return c * c
+}
+```
+
 ## Variable names
 
 Variables are written in `camelCase` and should clearly state what they contain, preferably with no abbreviations. Common short names like `id` and `url` are allowed.
