@@ -522,8 +522,12 @@ export default class AnimeNotifier {
 		}
 	}
 
-	lazyLoad() {
-		for(let element of findAll("lazy")) {
+	lazyLoad(elements?: IterableIterator<Element>) {
+		if(!elements) {
+			elements = findAll("lazy")
+		}
+
+		for(let element of elements) {
 			switch(element.tagName) {
 				case "IMG":
 					this.lazyLoadImage(element as HTMLImageElement)
@@ -618,8 +622,12 @@ export default class AnimeNotifier {
 		this.visibilityObserver.observe(element)
 	}
 
-	mountMountables() {
-		this.modifyDelayed("mountable", element => element.classList.add("mounted"))
+	mountMountables(elements?: IterableIterator<HTMLElement>) {
+		if(!elements) {
+			elements = findAll("mountable")
+		}
+
+		this.modifyDelayed(elements, element => element.classList.add("mounted"))
 	}
 
 	unmountMountables() {
@@ -632,7 +640,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	modifyDelayed(className: string, func: (element: HTMLElement) => void) {
+	modifyDelayed(elements: IterableIterator<HTMLElement>, func: (element: HTMLElement) => void) {
 		const maxDelay = 1000
 		const delay = 18
 
@@ -643,17 +651,7 @@ export default class AnimeNotifier {
 		let mountableTypes = new Map<string, number>()
 		let mountableTypeMutations = new Map<string, Array<any>>()
 
-		let collection = document.getElementsByClassName(className)
-
-		if(collection.length === 0) {
-			return
-		}
-
-		// let delay = Math.min(maxDelay / collection.length, 20)
-
-		for(let i = 0; i < collection.length; i++) {
-			let element = collection.item(i) as HTMLElement
-
+		for(let element of elements) {
 			// Skip already mounted elements.
 			// This helps a lot when dealing with infinite scrolling
 			// where the first elements are already mounted.

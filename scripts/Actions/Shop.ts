@@ -18,7 +18,6 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 			throw "Error creating PayPal payment"
 		}
 
-		console.log(payment)
 		let link = payment.links.find(link => link.rel === "approval_url")
 
 		if(!link) {

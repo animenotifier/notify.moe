@@ -1,5 +1,5 @@
 import AnimeNotifier from "../AnimeNotifier"
-import { delay, requestIdleCallback } from "../Utils"
+import { delay, requestIdleCallback, findAllInside } from "../Utils"
 
 // Search page reference
 var emptySearchHTML = ""
@@ -26,7 +26,7 @@ var userSearchResults: HTMLElement
 var companySearchResults: HTMLElement
 
 // Delay before a request is sent
-const searchDelay = 150
+const searchDelay = 140
 
 // Fetch options
 const fetchOptions: RequestInit = {
@@ -89,10 +89,10 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 			history.pushState(url, document.title, url)
 		} else {
 			history.replaceState(url, document.title, url)
-		}
 
-		// Delay
-		await delay(searchDelay)
+			// Delay
+			await delay(searchDelay)
+		}
 
 		if(term !== search.value.trim()) {
 			arn.mountMountables()
@@ -165,7 +165,10 @@ function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string
 
 		await arn.innerHTML(element, html)
 
-		// Emit content loaded event
-		arn.app.emit("DOMContentLoaded")
+		// Do the same as for the content loaded event,
+		// except here we are limiting it to the element.
+		arn.app.ajaxify(element.getElementsByTagName("a"))
+		arn.lazyLoad(findAllInside("lazy", element))
+		arn.mountMountables(findAllInside("mountable", element))
 	}
 }

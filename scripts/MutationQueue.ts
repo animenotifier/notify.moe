@@ -10,10 +10,11 @@ const timeCapacity = 6.5
 // defined time capacity, it will pause and continue the mutations in the next frame.
 export class MutationQueue {
 	mutations: Array<() => void>
-	onClearCallBack: () => void
+	onClearCallBacks: Array<() => void>
 
 	constructor() {
 		this.mutations = []
+		this.onClearCallBacks = []
 	}
 
 	queue(mutation: () => void) {
@@ -48,13 +49,16 @@ export class MutationQueue {
 	clear() {
 		this.mutations.length = 0
 
-		if(this.onClearCallBack) {
-			this.onClearCallBack()
-			this.onClearCallBack = null
+		if(this.onClearCallBacks.length > 0) {
+			for(let callback of this.onClearCallBacks) {
+				callback()
+			}
+
+			this.onClearCallBacks.length = 0
 		}
 	}
 
 	wait(callBack: () => void) {
-		this.onClearCallBack = callBack
+		this.onClearCallBacks.push(callBack)
 	}
 }

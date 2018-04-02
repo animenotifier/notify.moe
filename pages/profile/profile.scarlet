@@ -1,3 +1,5 @@
+const profile-image-size = 280px
+
 .profile
 	vertical
 	align-items center
@@ -114,8 +116,10 @@
 
 .profile-image-container
 	flex 1
-	max-width 280px
-	max-height 280px
+	width profile-image-size
+	height profile-image-size
+	max-width profile-image-size
+	max-height profile-image-size
 	border-radius ui-element-border-radius
 	overflow hidden
 
