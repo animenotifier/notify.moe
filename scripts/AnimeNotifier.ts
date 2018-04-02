@@ -102,9 +102,9 @@ export default class AnimeNotifier {
 		this.webpEnabled = canUseWebP()
 
 		// Initiate the elements we need
-		this.user = this.app.find("user")
-		this.app.content = this.app.find("content")
-		this.app.loading = this.app.find("loading")
+		this.user = document.getElementById("user")
+		this.app.content = document.getElementById("content")
+		this.app.loading = document.getElementById("loading")
 
 		// Theme
 		if(this.user && this.user.dataset.pro === "true" && this.user.dataset.theme !== "light") {
@@ -113,8 +113,8 @@ export default class AnimeNotifier {
 
 		// Status message
 		this.statusMessage = new StatusMessage(
-			this.app.find("status-message"),
-			this.app.find("status-message-text")
+			document.getElementById("status-message"),
+			document.getElementById("status-message-text")
 		)
 
 		// Push manager
@@ -130,7 +130,7 @@ export default class AnimeNotifier {
 		this.analytics = new Analytics()
 
 		// Sidebar control
-		this.sideBar = new SideBar(this.app.find("sidebar"))
+		this.sideBar = new SideBar(document.getElementById("sidebar"))
 
 		// Infinite scrolling
 		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 150)
@@ -205,7 +205,7 @@ export default class AnimeNotifier {
 
 		// document.body.appendChild(titleList)
 
-		// let search = this.app.find("search") as HTMLInputElement
+		// let search = document.getElementById("search") as HTMLInputElement
 		// search.setAttribute("list", titleList.id)
 	}
 
@@ -314,9 +314,9 @@ export default class AnimeNotifier {
 			return
 		}
 
-		let enableButton = this.app.find("enable-notifications") as HTMLButtonElement
-		let disableButton = this.app.find("disable-notifications") as HTMLButtonElement
-		let testButton = this.app.find("test-notification") as HTMLButtonElement
+		let enableButton = document.getElementById("enable-notifications") as HTMLButtonElement
+		let disableButton = document.getElementById("disable-notifications") as HTMLButtonElement
+		let testButton = document.getElementById("test-notification") as HTMLButtonElement
 
 		if(!this.pushManager.pushSupported) {
 			enableButton.classList.add("hidden")
@@ -912,7 +912,7 @@ export default class AnimeNotifier {
 
 		// "F" = Search
 		if(e.keyCode === 70) {
-			let search = this.app.find("search") as HTMLInputElement
+			let search = document.getElementById("search") as HTMLInputElement
 
 			search.focus()
 			search.select()

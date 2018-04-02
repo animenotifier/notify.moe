@@ -3,11 +3,11 @@ import { findAll } from "scripts/Utils";
 
 // Filter anime on explore page
 export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
-	let root = arn.app.find("filter-root")
+	let root = document.getElementById("filter-root")
 
-	let elementYear = arn.app.find("filter-year") as HTMLSelectElement
-	let elementStatus = arn.app.find("filter-status") as HTMLSelectElement
-	let elementType = arn.app.find("filter-type") as HTMLSelectElement
+	let elementYear = document.getElementById("filter-year") as HTMLSelectElement
+	let elementStatus = document.getElementById("filter-status") as HTMLSelectElement
+	let elementType = document.getElementById("filter-type") as HTMLSelectElement
 
 	for(let element of findAll("anime-grid-image")) {
 		let img = element as HTMLImageElement

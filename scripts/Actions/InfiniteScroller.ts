@@ -11,7 +11,7 @@ export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 	arn.loading(true)
 	button.disabled = true
 
-	let target = arn.app.find("load-more-target")
+	let target = document.getElementById("load-more-target")
 	let index = button.dataset.index
 
 	try {

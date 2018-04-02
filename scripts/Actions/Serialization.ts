@@ -138,7 +138,7 @@ export function addNumber(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let input = arn.app.find(element.dataset.id) as HTMLInputElement
+	let input = document.getElementById(element.dataset.id) as HTMLInputElement
 	let add = parseInt(element.dataset.add)
 	let num = parseInt(input.value)
 	let newValue = num + add

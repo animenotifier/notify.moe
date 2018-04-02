@@ -4,11 +4,11 @@ import AnimeNotifier from "../AnimeNotifier"
 export function editPost(arn: AnimeNotifier, element: HTMLElement) {
 	let postId = element.dataset.id
 
-	let render = arn.app.find("render-" + postId)
-	let toolbar = arn.app.find("toolbar-" + postId)
-	let title = arn.app.find("title-" + postId)
-	let source = arn.app.find("source-" + postId)
-	let edit = arn.app.find("edit-toolbar-" + postId)
+	let render = document.getElementById("render-" + postId)
+	let toolbar = document.getElementById("toolbar-" + postId)
+	let title = document.getElementById("title-" + postId)
+	let source = document.getElementById("source-" + postId)
+	let edit = document.getElementById("edit-toolbar-" + postId)
 
 	render.classList.toggle("hidden")
 	toolbar.classList.toggle("hidden")
@@ -23,8 +23,8 @@ export function editPost(arn: AnimeNotifier, element: HTMLElement) {
 // Save post
 export function savePost(arn: AnimeNotifier, element: HTMLElement) {
 	let postId = element.dataset.id
-	let source = arn.app.find("source-" + postId) as HTMLTextAreaElement
-	let title = arn.app.find("title-" + postId) as HTMLInputElement
+	let source = document.getElementById("source-" + postId) as HTMLTextAreaElement
+	let title = document.getElementById("title-" + postId) as HTMLInputElement
 	let text = source.value
 
 	let updates: any = {
@@ -58,8 +58,8 @@ export function deletePost(arn: AnimeNotifier, element: HTMLElement) {
 
 // Forum reply
 export function forumReply(arn: AnimeNotifier) {
-	let textarea = arn.app.find("new-reply") as HTMLTextAreaElement
-	let thread = arn.app.find("thread")
+	let textarea = document.getElementById("new-reply") as HTMLTextAreaElement
+	let thread = document.getElementById("thread")
 
 	let post = {
 		text: textarea.value,
@@ -80,9 +80,9 @@ export function newGroupPost(arn: AnimeNotifier) {
 
 // Create thread
 export function createThread(arn: AnimeNotifier) {
-	let title = arn.app.find("title") as HTMLInputElement
-	let text = arn.app.find("text") as HTMLTextAreaElement
-	let category = arn.app.find("tag") as HTMLInputElement
+	let title = document.getElementById("title") as HTMLInputElement
+	let text = document.getElementById("text") as HTMLTextAreaElement
+	let category = document.getElementById("tag") as HTMLInputElement
 
 	let thread = {
 		title: title.value,

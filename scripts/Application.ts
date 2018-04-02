@@ -30,10 +30,6 @@ export default class Application {
 		})
 	}
 
-	find(id: string): HTMLElement | null {
-		return document.getElementById(id)
-	}
-
 	get(url: string): Promise<string> {
 		// return fetch(url, {
 		// 	credentials: "same-origin"
