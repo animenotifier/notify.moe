@@ -14,6 +14,7 @@ export default class Application {
 	currentPath: string
 	originalPath: string
 	lastRequest: XMLHttpRequest | null
+	contentInvisible: boolean
 	onError: (err: Error) => void
 
 	constructor() {
@@ -104,40 +105,73 @@ export default class Application {
 		// Mark active links
 		this.markActiveLinks()
 
-		let onTransitionEnd = (e: Event) => {
-			// Ignore transitions of child elements.
-			// We only care about the transition event on the content element.
-			if(e.target !== this.content) {
-				return
-			}
+		let consume = async () => {
+			let html = await request
 
-			// Outdated response.
 			if(this.currentPath !== url) {
 				return
 			}
 
-			// Remove listener after we finally got the correct event.
-			this.content.removeEventListener("transitionend", onTransitionEnd)
+			// Set content
+			this.setContent(html)
+			this.scrollToTop()
 
-			// Wait for the network request to end.
-			request.then(html => {
-				// Set content
-				this.setContent(html)
-				this.scrollToTop()
+			// Fade in listener
+			let onFadedIn: EventListener = (e: Event) => {
+				// Ignore transitions of child elements.
+				// We only care about the transition event on the content element.
+				if(e.target !== this.content) {
+					return
+				}
 
-				// Fade animations
-				this.content.classList.remove(this.fadeOutClass)
-				this.loading.classList.add(this.fadeOutClass)
+				// Reset the transition ended flag
+				this.contentInvisible = false
 
-				// Send DOMContentLoaded Event
-				this.emit("DOMContentLoaded")
-			})
+				// Remove listener after we finally got the correct event.
+				this.content.removeEventListener("transitionend", onFadedIn)
+			}
+
+			this.content.addEventListener("transitionend", onFadedIn)
+
+			// Fade animations
+			this.content.classList.remove(this.fadeOutClass)
+			this.loading.classList.add(this.fadeOutClass)
+
+			// Send DOMContentLoaded Event
+			this.emit("DOMContentLoaded")
 		}
 
-		this.content.addEventListener("transitionend", onTransitionEnd)
+		if(this.contentInvisible) {
+			consume()
+		} else {
+			// Fade out listener
+			let onFadedOut: EventListener = (e: Event) => {
+				// Ignore transitions of child elements.
+				// We only care about the transition event on the content element.
+				if(e.target !== this.content) {
+					return
+				}
 
-		this.content.classList.add(this.fadeOutClass)
-		this.loading.classList.remove(this.fadeOutClass)
+				this.contentInvisible = true
+
+				// Remove listener after we finally got the correct event.
+				this.content.removeEventListener("transitionend", onFadedOut)
+
+				// Outdated response.
+				if(this.currentPath !== url) {
+					return
+				}
+
+				// Wait for the network request to end.
+				consume()
+			}
+
+			this.content.addEventListener("transitionend", onFadedOut)
+
+			// Add fade out class
+			this.content.classList.add(this.fadeOutClass)
+			this.loading.classList.remove(this.fadeOutClass)
+		}
 
 		return request
 	}
