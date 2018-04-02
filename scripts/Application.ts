@@ -173,8 +173,8 @@ export default class Application {
 			let self = this
 
 			link.onclick = function(e) {
-				// Middle mouse button should have standard behaviour
-				if(e.which === 2) {
+				// Middle mouse button and Ctrl clicks should have standard behaviour
+				if(e.which === 2 || e.ctrlKey) {
 					return
 				}
 
