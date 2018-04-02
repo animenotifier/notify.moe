@@ -117,6 +117,10 @@ export default class AnimeNotifier {
 			document.getElementById("status-message-text")
 		)
 
+		this.app.onError = (error: Error) => {
+			this.statusMessage.showError(error, 3000)
+		}
+
 		// Push manager
 		this.pushManager = new PushManager()
 

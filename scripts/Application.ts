@@ -1,4 +1,5 @@
 import Diff from "./Diff"
+import { delay } from "./Utils"
 
 class LoadOptions {
 	addToHistory?: boolean
@@ -13,12 +14,14 @@ export default class Application {
 	currentPath: string
 	originalPath: string
 	lastRequest: XMLHttpRequest | null
+	onError: (err: Error) => void
 
 	constructor() {
 		this.currentPath = window.location.pathname
 		this.originalPath = window.location.pathname
 		this.activeLinkClass = "active"
 		this.fadeOutClass = "fade-out"
+		this.onError = console.error
 	}
 
 	init() {
@@ -66,7 +69,20 @@ export default class Application {
 		}
 
 		// Start sending a network request
-		let request = this.get("/_" + url).catch(error => error)
+		let request: Promise<string>
+
+		let retry = () => {
+			return this.get("/_" + url).catch(async error => {
+				// Display connection error
+				this.onError(error)
+
+				// Retry after 3 seconds
+				await delay(3000)
+				return retry()
+			})
+		}
+
+		request = retry()
 
 		// Parse options
 		if(!options) {

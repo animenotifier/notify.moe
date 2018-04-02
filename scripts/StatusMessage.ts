@@ -31,9 +31,9 @@ export default class StatusMessage {
 		this.container.classList.remove("error-message")
 	}
 
-	showError(message: string, duration?: number) {
+	showError(message: string | Error, duration?: number) {
 		this.clearStyle()
-		this.show(message, duration || 4000)
+		this.show(message.toString(), duration || 4000)
 		this.container.classList.add("error-message")
 	}
 
