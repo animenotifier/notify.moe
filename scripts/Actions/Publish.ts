@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Publish
 export function publish(arn: AnimeNotifier, button: HTMLButtonElement) {

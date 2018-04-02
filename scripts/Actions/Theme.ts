@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 let currentTheme = "light"
 

@@ -1,6 +1,6 @@
 import { MutationQueue } from "./MutationQueue"
 
-export class Diff {
+export default class Diff {
 	static persistentClasses = new Set<string>()
 	static persistentAttributes = new Set<string>()
 

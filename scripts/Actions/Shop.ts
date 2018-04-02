@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Charge up
 export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
@@ -55,7 +55,7 @@ export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
 		if(body !== "ok") {
 			throw body
 		}
-		
+
 		return arn.reloadContent()
 	})
 	.then(() => arn.statusMessage.showInfo(`You bought ${itemName} for ${price} gems. Check out your inventory to confirm the purchase.`, 4000))

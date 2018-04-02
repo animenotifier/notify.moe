@@ -1,7 +1,7 @@
-import { TouchController } from "./TouchController"
-import { Diff } from "./Diff"
+import TouchController from "./TouchController"
+import Diff from "./Diff"
 
-export class SideBar {
+export default class SideBar {
 	element: HTMLElement
 	touchController: TouchController
 

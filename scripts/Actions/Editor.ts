@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // newAnimeDiffIgnore
 export function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement) {

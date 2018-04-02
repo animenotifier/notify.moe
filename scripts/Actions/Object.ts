@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // New
 export function newObject(arn: AnimeNotifier, button: HTMLButtonElement) {

@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // like
 export async function like(arn: AnimeNotifier, element: HTMLElement) {

@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {

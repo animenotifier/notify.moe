@@ -1,19 +1,19 @@
-import { Application } from "./Application"
-import { Diff } from "./Diff"
-import { StatusMessage } from "./StatusMessage"
-import { PushManager } from "./PushManager"
-import { TouchController } from "./TouchController"
-import { NotificationManager } from "./NotificationManager"
-import { AudioPlayer } from "./AudioPlayer"
-import { Analytics } from "./Analytics"
-import { SideBar } from "./SideBar"
-import { InfiniteScroller } from "./InfiniteScroller"
-import { ServiceWorkerManager } from "./ServiceWorkerManager"
+import Application from "./Application"
+import Diff from "./Diff"
+import StatusMessage from "./StatusMessage"
+import PushManager from "./PushManager"
+import TouchController from "./TouchController"
+import NotificationManager from "./NotificationManager"
+import AudioPlayer from "./AudioPlayer"
+import Analytics from "./Analytics"
+import SideBar from "./SideBar"
+import InfiniteScroller from "./InfiniteScroller"
+import ServiceWorkerManager from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
-import { findAll, delay, canUseWebP, swapElements } from "./Utils"
+import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
 import * as actions from "./Actions"
 
-export class AnimeNotifier {
+export default class AnimeNotifier {
 	app: Application
 	analytics: Analytics
 	user: HTMLElement
@@ -86,15 +86,7 @@ export class AnimeNotifier {
 		window.addEventListener("popstate", this.onPopState.bind(this))
 
 		// Idle
-		this.requestIdleCallback(this.onIdle.bind(this))
-	}
-
-	requestIdleCallback(func: Function) {
-		if("requestIdleCallback" in window) {
-			window["requestIdleCallback"](func)
-		} else {
-			func()
-		}
+		requestIdleCallback(this.onIdle.bind(this))
 	}
 
 	onReadyStateChange() {

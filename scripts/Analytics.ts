@@ -1,4 +1,4 @@
-export class Analytics {
+export default class Analytics {
 	push() {
 		let analytics = {
 			general: {

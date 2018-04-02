@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Add anime to collection
 export async function addAnimeToCollection(arn: AnimeNotifier, button: HTMLButtonElement) {

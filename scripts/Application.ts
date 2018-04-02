@@ -1,11 +1,11 @@
-import { Diff } from "./Diff"
+import Diff from "./Diff"
 
 class LoadOptions {
 	addToHistory?: boolean
 	forceReload?: boolean
 }
 
-export class Application {
+export default class Application {
 	fadeOutClass: string
 	activeLinkClass: string
 	content: HTMLElement

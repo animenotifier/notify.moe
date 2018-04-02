@@ -1,5 +1,5 @@
-import { AnimeNotifier } from "../AnimeNotifier"
-import { delay } from "../Utils"
+import AnimeNotifier from "../AnimeNotifier"
+import { delay, requestIdleCallback } from "../Utils"
 
 // Search page reference
 var emptySearchHTML = ""
@@ -122,7 +122,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: Ke
 		.then(showResponseInElement(arn, url, "anime", animeSearchResults))
 		.catch(console.error)
 
-		arn.requestIdleCallback(() => {
+		requestIdleCallback(() => {
 			fetch("/_/character-search/" + term, fetchOptions)
 			.then(showResponseInElement(arn, url, "character", characterSearchResults))
 			.catch(console.error)

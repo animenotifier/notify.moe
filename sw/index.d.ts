@@ -654,7 +654,7 @@ interface ServiceWorkerGlobalScope extends EventTarget {
 
 interface NotificationOptions {
 	image?: string;
-	data?: string;
+	data?: any;
 	badge?: string;
 }
 

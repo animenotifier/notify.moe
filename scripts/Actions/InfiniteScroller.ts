@@ -1,5 +1,5 @@
-import { AnimeNotifier } from "../AnimeNotifier"
-import { Diff } from "../Diff"
+import AnimeNotifier from "../AnimeNotifier"
+import Diff from "../Diff"
 
 // Load more
 export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {

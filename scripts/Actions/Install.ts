@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Chrome extension installation
 export function installExtension(arn: AnimeNotifier, button: HTMLElement) {

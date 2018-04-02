@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Save new data from an input field
 export function save(arn: AnimeNotifier, input: HTMLElement) {

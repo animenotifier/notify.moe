@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 import { findAll } from "scripts/Utils";
 
 // Filter anime on explore page

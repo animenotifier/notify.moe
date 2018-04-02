@@ -1,4 +1,4 @@
-export class InfiniteScroller {
+export default class InfiniteScroller {
 	container: HTMLElement
 	threshold: number
 

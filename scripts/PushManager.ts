@@ -1,6 +1,6 @@
-export class PushManager {
+export default class PushManager {
 	pushSupported: boolean
-	
+
 	constructor() {
 		this.pushSupported = ("serviceWorker" in navigator) && ("PushManager" in window)
 	}
@@ -52,7 +52,7 @@ export class PushManager {
 			console.error("Subscription does not exist")
 			return
 		}
-		
+
 		await subscription.unsubscribe()
 
 		this.unsubscribeOnServer(subscription, userId)

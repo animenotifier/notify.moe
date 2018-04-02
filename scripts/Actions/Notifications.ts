@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Enable notifications
 export async function enableNotifications(arn: AnimeNotifier, button: HTMLElement) {

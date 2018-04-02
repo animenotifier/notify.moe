@@ -1,5 +1,5 @@
-import { AnimeNotifier } from "../AnimeNotifier"
-import { StatusMessage } from "../StatusMessage"
+import AnimeNotifier from "../AnimeNotifier"
+import StatusMessage from "../StatusMessage"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {

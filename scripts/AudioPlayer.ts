@@ -1,7 +1,7 @@
-import { AnimeNotifier } from "./AnimeNotifier"
+import AnimeNotifier from "./AnimeNotifier"
 import { Anime } from "./Types/Anime"
 
-export class AudioPlayer {
+export default class AudioPlayer {
 	arn: AnimeNotifier
 
 	// Web audio

@@ -1,6 +1,6 @@
-import { Diff } from "./Diff"
+import Diff from "./Diff"
 
-export class NotificationManager {
+export default class NotificationManager {
 	unseen: number
 	icon: HTMLElement
 	counter: HTMLElement

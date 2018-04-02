@@ -1,5 +1,5 @@
-import { Application } from "./Application"
-import { AnimeNotifier } from "./AnimeNotifier"
+import Application from "./Application"
+import AnimeNotifier from "./AnimeNotifier"
 
 let app = new Application()
 let arn = new AnimeNotifier(app)

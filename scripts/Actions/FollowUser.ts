@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Follow user
 export function followUser(arn: AnimeNotifier, elem: HTMLElement) {

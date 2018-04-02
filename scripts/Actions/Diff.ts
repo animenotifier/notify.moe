@@ -1,4 +1,5 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
+import { requestIdleCallback } from "../Utils"
 
 // Load
 export function load(arn: AnimeNotifier, element: HTMLElement) {
@@ -13,7 +14,7 @@ export function diff(arn: AnimeNotifier, element: HTMLElement) {
 	arn.diff(url)
 	.then(() => {
 		// Avoid instant layout thrashing
-		arn.requestIdleCallback(() => arn.scrollTo(element))
+		requestIdleCallback(() => arn.scrollTo(element))
 	})
 	.catch(console.error)
 }

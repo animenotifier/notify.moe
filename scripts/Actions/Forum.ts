@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Edit post
 export function editPost(arn: AnimeNotifier, element: HTMLElement) {

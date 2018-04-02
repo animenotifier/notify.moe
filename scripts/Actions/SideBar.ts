@@ -1,4 +1,4 @@
-import { AnimeNotifier } from "../AnimeNotifier"
+import AnimeNotifier from "../AnimeNotifier"
 
 // Toggle sidebar
 export function toggleSidebar(arn: AnimeNotifier) {

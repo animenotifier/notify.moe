@@ -1,6 +1,6 @@
-import { AnimeNotifier } from "./AnimeNotifier"
+import AnimeNotifier from "./AnimeNotifier"
 
-export class ServiceWorkerManager {
+export default class ServiceWorkerManager {
 	arn: AnimeNotifier
 	uri: string
 

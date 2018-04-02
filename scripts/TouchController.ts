@@ -1,4 +1,4 @@
-export class TouchController {
+export default class TouchController {
 	x: number
 	y: number
 
@@ -46,7 +46,7 @@ export class TouchController {
 				this.downSwipe()
 			}
 		}
-		
+
 		this.x = undefined
 		this.y = undefined
 	}
