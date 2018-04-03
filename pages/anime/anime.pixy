@@ -36,7 +36,7 @@ component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*
 	AnimeRatings(anime, user)
 	AnimePopularity(anime)
 	AnimeFriends(friends, listItems)
-	AnimeLinks(anime)
+	AnimeLinks(anime, user)
 
 component AnimeActions(anime *arn.Anime, listItem *arn.AnimeListItem, user *arn.User)
 	if user != nil
@@ -118,7 +118,7 @@ component AnimePopularity(anime *arn.Anime)
 						td.anime-info-key Dropped:
 						td.anime-info-value= anime.Popularity.Dropped
 
-component AnimeLinks(anime *arn.Anime)
+component AnimeLinks(anime *arn.Anime, user *arn.User)
 	section.anime-section.mountable
 		h3.anime-section-name Links
 		.light-button-group
@@ -135,6 +135,10 @@ component AnimeLinks(anime *arn.Anime)
 				a.light-button(href=mapping.Link(), target="_blank", rel="noopener")
 					Icon("external-link")
 					span= mapping.Name()
+			
+			a.light-button(href="https://www.google.com/search?btnI=745&q=" + anime.Title.ByUser(user) + "+TV+series+site%3Aen.wikipedia.org", target="_blank", rel="noopener")
+				Icon("wikipedia-w")
+				span Wikipedia
 
 component AnimeGenres(anime *arn.Anime)
 	.anime-genres
