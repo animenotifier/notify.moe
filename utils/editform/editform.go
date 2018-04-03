@@ -96,14 +96,21 @@ func RenderObject(b *bytes.Buffer, obj interface{}, idPrefix string) {
 
 // RenderField ...
 func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, idPrefix string) {
-	if field.Anonymous || field.Tag.Get("editable") != "true" {
+	fieldValue := reflect.Indirect(v.FieldByName(field.Name))
+
+	// Embedded fields
+	if field.Anonymous {
+		RenderObject(b, fieldValue.Interface(), idPrefix)
+		return
+	}
+
+	if field.Tag.Get("editable") != "true" {
 		return
 	}
 
 	b.WriteString("<div class='mountable'>")
 	defer b.WriteString("</div>")
 
-	fieldValue := reflect.Indirect(v.FieldByName(field.Name))
 	fieldType := field.Type.String()
 
 	// String
