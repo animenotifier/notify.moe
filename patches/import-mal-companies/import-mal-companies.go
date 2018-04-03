@@ -18,7 +18,13 @@ func main() {
 	color.Yellow("Importing companies")
 
 	for company := range arn.StreamCompanies() {
-		companies[company.Name.English] = company
+		malID := company.GetMapping("myanimelist/producer")
+
+		if malID == "" {
+			continue
+		}
+
+		companies[malID] = company
 	}
 
 	for anime := range arn.StreamAnime() {
@@ -31,11 +37,6 @@ func main() {
 		importCompanies(anime, malID)
 	}
 
-	for name, company := range companies {
-		fmt.Println(name)
-		company.Save()
-	}
-
 	color.Green("Finished importing %d companies", len(companies))
 }
 
@@ -43,7 +44,7 @@ func importCompanies(anime *arn.Anime, malID string) {
 	obj, err := malDB.Get("Anime", malID)
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("%s: %s (invalid MAL ID)\n", color.YellowString(anime.ID), color.RedString(malID))
 		return
 	}
 
@@ -63,41 +64,34 @@ func importCompanies(anime *arn.Anime, malID string) {
 }
 
 func importByName(anime *arn.Anime, companyType string, producer *mal.Producer) {
-	company, exists := companies[producer.Name]
+	company, exists := companies[producer.ID]
 
+	// If we encounter a company that has not been added yet, save the new company
 	if !exists {
+		fmt.Println("Adding new company:", producer.Name)
+
+		// Subtract one second every time we create a new company
+		// so that they don't all end up with the same creation date.
 		now = now.Add(-time.Second)
 
-		company = &arn.Company{
-			ID: arn.GenerateID("Company"),
-			Name: arn.CompanyName{
-				English: producer.Name,
-			},
-			Created:   now.UTC().Format(time.RFC3339),
-			CreatedBy: "",
-			Mappings: []*arn.Mapping{
-				&arn.Mapping{
-					Service:   "myanimelist/producer",
-					ServiceID: producer.ID,
-				},
-			},
-			Links: []*arn.Link{},
-			Tags:  []string{},
-			LikeableImplementation: arn.LikeableImplementation{
-				Likes: []string{},
-			},
-		}
+		// Create new company
+		company = arn.NewCompany()
+		company.Name.English = producer.Name
+		company.Created = now.UTC().Format(time.RFC3339)
+		company.SetMapping("myanimelist/producer", producer.ID)
+		company.Save()
 
-		companies[producer.Name] = company
+		// Add company to the global ID map
+		companies[producer.ID] = company
 	}
 
 	switch companyType {
 	case "studio":
-		anime.StudioIDs = append(anime.StudioIDs, company.ID)
+		anime.AddStudio(company.ID)
 	case "producer":
-		anime.ProducerIDs = append(anime.ProducerIDs, company.ID)
+		anime.AddProducer(company.ID)
 	case "licensor":
-		anime.LicensorIDs = append(anime.LicensorIDs, company.ID)
+		anime.AddLicensor(company.ID)
 	}
 
 	anime.Save()
