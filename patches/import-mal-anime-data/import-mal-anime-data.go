@@ -12,7 +12,7 @@ var malDB = arn.Node.Namespace("mal").RegisterTypes((*mal.Anime)(nil))
 
 func main() {
 	defer arn.Node.Close()
-	color.Yellow("Importing genres")
+	color.Yellow("Importing MAL data")
 
 	for anime := range arn.StreamAnime() {
 		malID := anime.GetMapping("myanimelist/anime")
@@ -25,7 +25,7 @@ func main() {
 		sync(anime, malID)
 	}
 
-	color.Green("Finished importing genres")
+	color.Green("Finished importing MAL data")
 }
 
 func sync(anime *arn.Anime, malID string) {
