@@ -354,6 +354,7 @@ var routeTests = map[string][]string{
 	"/animelist/dropped":                             nil,
 	"/notifications":                                 nil,
 	"/user/:nick/notifications":                      nil,
+	"/user/:nick/edit":                               nil,
 	"/api/test/notification":                         nil,
 	"/api/paypal/payment/create":                     nil,
 	"/api/userfollows/:id/get/:item":                 nil,

@@ -203,6 +203,7 @@ func Configure(app *aero.Application) {
 	l.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
 	l.Page("/user/:nick/recommended/anime", recommended.Anime)
 	l.Page("/user/:nick/notifications", notifications.ByUser)
+	l.Page("/user/:nick/edit", user.Edit)
 
 	// Anime list
 	l.Page("/user/:nick/animelist/watching", animelist.FilterByStatus(arn.AnimeListStatusWatching))
