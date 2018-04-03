@@ -78,5 +78,5 @@ func sync(anime *arn.Anime, malID string) {
 		anime.Title.English = malAnime.EnglishTitle
 	}
 
-	// anime.Save()
+	anime.Save()
 }
