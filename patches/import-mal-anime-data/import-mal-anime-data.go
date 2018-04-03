@@ -37,6 +37,38 @@ func sync(anime *arn.Anime, malID string) {
 	}
 
 	malAnime := obj.(*mal.Anime)
-	anime.Genres = malAnime.Genres
+
+	if len(anime.Genres) == 0 {
+		anime.Genres = malAnime.Genres
+	}
+
+	if anime.EpisodeCount == 0 {
+		anime.EpisodeCount = malAnime.EpisodeCount
+	}
+
+	if anime.EpisodeLength == 0 {
+		anime.EpisodeLength = malAnime.EpisodeLength
+	}
+
+	if anime.StartDate == "" {
+		anime.StartDate = malAnime.StartDate
+	}
+
+	if anime.EndDate == "" {
+		anime.EndDate = malAnime.EndDate
+	}
+
+	if anime.Source == "" {
+		anime.Source = malAnime.Source
+	}
+
+	if anime.Title.Japanese == "" {
+		anime.Title.Japanese = malAnime.JapaneseTitle
+	}
+
+	if anime.Title.English == "" {
+		anime.Title.English = malAnime.EnglishTitle
+	}
+
 	anime.Save()
 }
