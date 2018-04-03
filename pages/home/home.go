@@ -1,6 +1,8 @@
 package home
 
 import (
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/frontpage"
 	"github.com/animenotifier/notify.moe/utils"
@@ -14,5 +16,12 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
-	return ctx.Redirect("/+" + user.Nick + "/animelist/watching")
+	// Redirect
+	prefix := "/"
+
+	if strings.HasPrefix(ctx.URI(), "/_") {
+		prefix = "/_/"
+	}
+
+	return ctx.Redirect(prefix + "+" + user.Nick + "/animelist/watching")
 }

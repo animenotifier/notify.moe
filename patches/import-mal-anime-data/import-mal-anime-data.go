@@ -21,7 +21,7 @@ func main() {
 			continue
 		}
 
-		fmt.Println(anime.Title.Canonical, malID)
+		fmt.Printf("%s %s\n", color.CyanString(anime.Title.Canonical), malID)
 		sync(anime, malID)
 	}
 
@@ -38,37 +38,45 @@ func sync(anime *arn.Anime, malID string) {
 
 	malAnime := obj.(*mal.Anime)
 
-	if len(anime.Genres) == 0 {
+	if len(anime.Genres) == 0 && len(malAnime.Genres) > 0 {
+		fmt.Println("Genres:", malAnime.Genres)
 		anime.Genres = malAnime.Genres
 	}
 
-	if anime.EpisodeCount == 0 {
+	if anime.EpisodeCount == 0 && malAnime.EpisodeCount != 0 {
+		fmt.Println("EpisodeCount:", malAnime.EpisodeCount)
 		anime.EpisodeCount = malAnime.EpisodeCount
 	}
 
-	if anime.EpisodeLength == 0 {
+	if anime.EpisodeLength == 0 && malAnime.EpisodeLength != 0 {
+		fmt.Println("EpisodeLength:", malAnime.EpisodeLength)
 		anime.EpisodeLength = malAnime.EpisodeLength
 	}
 
-	if anime.StartDate == "" {
+	if anime.StartDate == "" && malAnime.StartDate != "" {
+		fmt.Println("StartDate:", malAnime.StartDate)
 		anime.StartDate = malAnime.StartDate
 	}
 
-	if anime.EndDate == "" {
+	if anime.EndDate == "" && malAnime.EndDate != "" {
+		fmt.Println("EndDate:", malAnime.EndDate)
 		anime.EndDate = malAnime.EndDate
 	}
 
-	if anime.Source == "" {
+	if anime.Source == "" && malAnime.Source != "" {
+		fmt.Println("Source:", malAnime.Source)
 		anime.Source = malAnime.Source
 	}
 
-	if anime.Title.Japanese == "" {
+	if anime.Title.Japanese == "" && malAnime.JapaneseTitle != "" {
+		fmt.Println("JapaneseTitle:", malAnime.JapaneseTitle)
 		anime.Title.Japanese = malAnime.JapaneseTitle
 	}
 
-	if anime.Title.English == "" {
+	if anime.Title.English == "" && malAnime.EnglishTitle != "" {
+		fmt.Println("EnglishTitle:", malAnime.EnglishTitle)
 		anime.Title.English = malAnime.EnglishTitle
 	}
 
-	anime.Save()
+	// anime.Save()
 }
