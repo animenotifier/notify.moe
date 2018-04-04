@@ -112,7 +112,7 @@ func getMatches(ctx *aero.Context) ([]*arn.KitsuMatch, string) {
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.
 func findAllMatches(library chan *kitsu.LibraryEntry) []*arn.KitsuMatch {
-	allAnime := arn.AllAnime()
+	finder := arn.NewKitsuFinder()
 	matches := []*arn.KitsuMatch{}
 
 	for item := range library {
@@ -123,7 +123,7 @@ func findAllMatches(library chan *kitsu.LibraryEntry) []*arn.KitsuMatch {
 
 		matches = append(matches, &arn.KitsuMatch{
 			KitsuItem: item,
-			ARNAnime:  arn.FindKitsuAnime(item.Anime.ID, allAnime),
+			ARNAnime:  finder.GetAnime(item.Anime.ID),
 		})
 	}
 

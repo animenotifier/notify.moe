@@ -16,7 +16,7 @@ func main() {
 	added := 0
 	conflicted := 0
 
-	allAnime := arn.AllAnime()
+	finder := arn.NewKitsuFinder()
 
 	for mapping := range arn.StreamKitsuMappings() {
 		if mapping.Relationships.Item.Data.Type != "anime" {
@@ -33,7 +33,7 @@ func main() {
 			externalID = externalID[len("anime/"):]
 		}
 
-		anime := arn.FindKitsuAnime(mapping.Relationships.Item.Data.ID, allAnime)
+		anime := finder.GetAnime(mapping.Relationships.Item.Data.ID)
 
 		if anime == nil {
 			continue
