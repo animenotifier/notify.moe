@@ -55,7 +55,7 @@ var routeTests = map[string][]string{
 	},
 
 	"/user/:nick/animelist/anime/:id": []string{
-		"/+Akyoto/animelist/anime/7929",
+		"/+Akyoto/animelist/anime/74y2cFiiR",
 	},
 
 	"/user/:nick/animelist/watching": []string{
@@ -104,19 +104,19 @@ var routeTests = map[string][]string{
 
 	// Pages
 	"/anime/:id": []string{
-		"/anime/323",
+		"/anime/74y2cFiiR",
 	},
 
 	"/anime/:id/characters": []string{
-		"/anime/323/characters",
+		"/anime/74y2cFiiR/characters",
 	},
 
 	"/anime/:id/episodes": []string{
-		"/anime/323/episodes",
+		"/anime/74y2cFiiR/episodes",
 	},
 
 	"/anime/:id/tracks": []string{
-		"/anime/323/tracks",
+		"/anime/74y2cFiiR/tracks",
 	},
 
 	"/thread/:id": []string{
@@ -201,7 +201,7 @@ var routeTests = map[string][]string{
 
 	// API
 	"/api/anime/:id": []string{
-		"/api/anime/323",
+		"/api/anime/74y2cFiiR",
 	},
 
 	"/api/thread/:id": []string{
@@ -253,19 +253,19 @@ var routeTests = map[string][]string{
 	},
 
 	"/api/animecharacters/:id": []string{
-		"/api/animecharacters/323",
+		"/api/animecharacters/74y2cFiiR",
 	},
 
 	"/api/animerelations/:id": []string{
-		"/api/animerelations/323",
+		"/api/animerelations/74y2cFiiR",
 	},
 
 	"/api/animeepisodes/:id": []string{
-		"/api/animeepisodes/323",
+		"/api/animeepisodes/74y2cFiiR",
 	},
 
 	"/anime/:id/episode/:episode-number": []string{
-		"/anime/12230/episode/5",
+		"/anime/74y2cFiiR/episode/5",
 	},
 
 	"/api/character/:id": []string{
