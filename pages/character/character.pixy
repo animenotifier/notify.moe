@@ -2,36 +2,40 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 	.character-page
 		.character-left-column
 			.character-header
-				.character-image-container
+				.character-image-container.mountable
 					img.character-image-fullsize(src=character.ImageLink("large"), alt=character.Name.Canonical)
+				
 				.character-description-container
-					h1.character-name= character.Name.Canonical
+					h1.character-name.mountable= character.Name.Canonical
 
-					.anime-alternative-title
+					.anime-alternative-title.mountable
 						if character.Name.Japanese != ""
 							Japanese(character.Name.Japanese)
 						else
 							Japanese("日本語の名前無し")
 					
-					.character-description!= markdown.Render(character.Description)
+					.character-description.mountable!= markdown.Render(character.Description)
 			
-					h3 Anime
-					.character-anime
+					h3.mountable Anime
+
+					.character-anime.mountable
 						each anime in characterAnime
-							a.character-anime-item(href=anime.Link(), title=anime.Title.ByUser(user))
+							a.character-anime-item.mountable(href=anime.Link(), title=anime.Title.ByUser(user), data-mountable-type="anime")
 								img.character-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 					
 					if len(quotes) >0
-						h3 Quotes
-						.character-quotes
+						h3.mountable Quotes
+
+						.character-quotes.mountable
 							each quote in quotes
 								.character-quote
 									Quote(quote)
 
-		if len(character.Attributes) > 0
-			.character-sidebar
-				h3 Information
-				table.character-attributes
+		.character-sidebar
+			if len(character.Attributes) > 0
+				h3.mountable Information
+
+				table.character-attributes.mountable
 					each attribute in character.Attributes
 						tr.mountable(data-mountable-type="info")
 							td.character-attributes-name= attribute.Name + ":"
@@ -40,4 +44,12 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 								td.character-attributes-value!= markdown.Render(attribute.Value)
 							else
 								td.character-attributes-value= attribute.Value
+			
+			if character.GetMapping("myanimelist/character") != ""
+				h3.mountable Links
+
+				.light-button-group.mountable
+					a.light-button(href="https://myanimelist.net/character/" + character.GetMapping("myanimelist/character"), target="_blank", rel="noopener")
+						Icon("external-link")
+						span MAL
 

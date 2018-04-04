@@ -121,6 +121,7 @@ component AnimePopularity(anime *arn.Anime)
 component AnimeLinks(anime *arn.Anime, user *arn.User)
 	section.anime-section.mountable
 		h3.anime-section-name Links
+		
 		.light-button-group
 			each link in anime.Links
 				a.light-button(href=link.URL, target="_blank", rel="noopener")
