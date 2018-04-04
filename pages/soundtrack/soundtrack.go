@@ -2,6 +2,7 @@ package soundtrack
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -19,12 +20,23 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
+	descriptionTags := []string{}
+
+	for _, tag := range track.Tags {
+		if strings.HasPrefix(tag, "anime:") {
+			continue
+		}
+
+		descriptionTags = append(descriptionTags, tag)
+	}
+
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":     track.Title,
-			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
-			"og:site_name": "notify.moe",
-			"og:type":      "music.song",
+			"og:title":       track.Title,
+			"og:description": track.MainAnime().Title.Canonical + " (" + strings.Join(descriptionTags, ", ") + ")",
+			"og:url":         "https://" + ctx.App.Config.Domain + track.Link(),
+			"og:site_name":   "notify.moe",
+			"og:type":        "music.song",
 		},
 	}
 
