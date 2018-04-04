@@ -16,7 +16,7 @@ func main() {
 	added := 0
 	conflicted := 0
 
-	finder := arn.NewKitsuFinder()
+	finder := arn.NewAnimeFinder("kitsu/anime")
 
 	for mapping := range arn.StreamKitsuMappings() {
 		if mapping.Relationships.Item.Data.Type != "anime" {

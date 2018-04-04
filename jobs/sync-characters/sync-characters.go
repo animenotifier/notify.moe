@@ -33,10 +33,12 @@ func main() {
 			},
 			Description: kitsuCharacter.Attributes.Description,
 			Attributes:  []*arn.CharacterAttribute{},
-			Mappings: []*arn.Mapping{
-				&arn.Mapping{
-					Service:   "kitsu/character",
-					ServiceID: kitsuCharacter.ID,
+			HasMappings: arn.HasMappings{
+				Mappings: []*arn.Mapping{
+					&arn.Mapping{
+						Service:   "kitsu/character",
+						ServiceID: kitsuCharacter.ID,
+					},
 				},
 			},
 		}

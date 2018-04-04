@@ -13,7 +13,7 @@ func main() {
 	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
-	finder := arn.NewKitsuFinder()
+	finder := arn.NewAnimeFinder("kitsu/anime")
 
 	for mapping := range arn.StreamKitsuMappings() {
 		if mapping.Relationships.Item.Data.Type != "anime" {

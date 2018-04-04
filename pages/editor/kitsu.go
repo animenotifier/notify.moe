@@ -13,7 +13,7 @@ import (
 // NewKitsuAnime ...
 func NewKitsuAnime(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
-	finder := arn.NewKitsuFinder()
+	finder := arn.NewAnimeFinder("kitsu/anime")
 
 	animes := arn.FilterKitsuAnime(func(anime *kitsu.Anime) bool {
 		return finder.GetAnime(anime.ID) == nil
