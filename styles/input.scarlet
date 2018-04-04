@@ -43,6 +43,7 @@ button, .button
 	padding 0.5rem 1rem
 	color link-color
 	align-items center
+	pointer-events all
 
 	button-hover
 

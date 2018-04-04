@@ -10,6 +10,7 @@
 		padding 1.2rem
 		width 100%
 		z-index 2
+		pointer-events none
 
 > 790px
 	.extension-navigation
