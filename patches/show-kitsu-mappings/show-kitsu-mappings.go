@@ -12,7 +12,7 @@ func main() {
 
 	for mapping := range arn.StreamKitsuMappings() {
 		fmt.Printf(
-			"Anime %s: %s mapped to %s\n",
+			"Kitsu Anime %s: %s mapped to %s\n",
 			mapping.Relationships.Item.Data.ID,
 			color.YellowString(mapping.Attributes.ExternalSite),
 			color.GreenString(mapping.Attributes.ExternalID),

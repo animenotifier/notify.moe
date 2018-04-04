@@ -13,10 +13,10 @@ import (
 // NewKitsuAnime ...
 func NewKitsuAnime(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
+	allAnime := arn.AllAnime()
 
 	animes := arn.FilterKitsuAnime(func(anime *kitsu.Anime) bool {
-		_, err := arn.GetAnime(anime.ID)
-		return err != nil
+		return arn.FindKitsuAnime(anime.ID, allAnime) != nil
 	})
 
 	sort.Slice(animes, func(i, j int) bool {

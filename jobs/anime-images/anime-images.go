@@ -83,7 +83,7 @@ func work(anime *arn.Anime) error {
 	qualityBonusMedium := 10
 	qualityBonusSmall := 10
 
-	kitsuOriginal := fmt.Sprintf("https://media.kitsu.io/anime/poster_images/%s/original", anime.ID)
+	kitsuOriginal := fmt.Sprintf("https://media.kitsu.io/anime/poster_images/%s/original", anime.GetMapping("kitsu/anime"))
 
 	// Define the input sources
 	sources := []ipo.Input{}

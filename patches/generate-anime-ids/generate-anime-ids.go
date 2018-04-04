@@ -16,7 +16,9 @@ func main() {
 	defer color.Green("Finished")
 	defer arn.Node.Close()
 
-	allAnime := arn.AllAnime()
+	allAnime := arn.FilterAnime(func(anime *arn.Anime) bool {
+		return len(anime.ID) < len("hw5heOmiR")
+	})
 
 	sort.Slice(allAnime, func(i, j int) bool {
 		aID, _ := strconv.Atoi(allAnime[i].ID)
