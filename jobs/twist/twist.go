@@ -21,16 +21,19 @@ func main() {
 	arn.PanicOnError(err)
 	idList := arn.IDList(twistAnime.KitsuIDs())
 
+	// Kitsu finder
+	finder := arn.NewAnimeFinder("kitsu/anime")
+
 	// Save index in cache
 	arn.DB.Set("IDList", "animetwist index", &idList)
 
 	color.Yellow("Refreshing twist.moe links for %d anime", len(idList))
 
-	for count, animeID := range idList {
-		anime, animeErr := arn.GetAnime(animeID)
+	for count, kitsuID := range idList {
+		anime := finder.GetAnime(kitsuID)
 
-		if animeErr != nil {
-			color.Red("Error fetching anime from the database with ID %s: %v", animeID, animeErr)
+		if anime == nil {
+			color.Red("Error fetching anime from the database with Kitsu ID %s", kitsuID)
 			continue
 		}
 
@@ -46,7 +49,7 @@ func main() {
 		anime.RefreshEpisodes()
 
 		// Ok
-		color.Green("Found %d episodes for anime %s", len(anime.Episodes().Items), animeID)
+		color.Green("Found %d episodes for anime %s (Kitsu: %s)", len(anime.Episodes().Items), anime.ID, kitsuID)
 
 		// Wait for rate limiter
 		<-rateLimiter.C
