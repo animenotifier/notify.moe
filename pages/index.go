@@ -125,6 +125,11 @@ func Configure(app *aero.Application) {
 	l.Page("/anime/:id/tracks", anime.Tracks)
 	l.Page("/anime/:id/episode/:episode-number", episode.Get)
 
+	// Anime redirects
+	l.Page("/kitsu/anime/:id", anime.RedirectByMapping("kitsu/anime"))
+	l.Page("/mal/anime/:id", anime.RedirectByMapping("myanimelist/anime"))
+	l.Page("/anilist/anime/:id", anime.RedirectByMapping("anilist/anime"))
+
 	// Edit anime
 	l.Page("/anime/:id/edit", editanime.Main)
 	l.Page("/anime/:id/edit/images", editanime.Images)

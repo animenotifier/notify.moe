@@ -29,7 +29,7 @@ export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonEle
 	})
 
 	if(response.ok) {
-		newTab.location.href = `/anime/${animeId}`
+		newTab.location.href = `/kitsu/anime/${animeId}`
 		arn.reloadContent()
 	} else {
 		arn.statusMessage.showError(await response.text())

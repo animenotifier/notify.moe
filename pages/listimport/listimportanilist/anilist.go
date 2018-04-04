@@ -2,7 +2,6 @@ package listimportanilist
 
 import (
 	"net/http"
-	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/anilist"
@@ -67,14 +66,7 @@ func Finish(ctx *aero.Context) string {
 
 	animeList.Save()
 
-	// Redirect
-	prefix := "/"
-
-	if strings.HasPrefix(ctx.URI(), "/_") {
-		prefix = "/_/"
-	}
-
-	return ctx.Redirect(prefix + "+" + user.Nick + "/animelist/watching")
+	return utils.SmartRedirect(ctx, "/+"+user.Nick+"/animelist/watching")
 }
 
 // getMatches finds and returns all matches for the logged in user.
