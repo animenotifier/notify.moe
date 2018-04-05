@@ -3,11 +3,12 @@ package main
 import "github.com/animenotifier/arn"
 
 var items = []*arn.ShopItem{
+	// 1 month
 	&arn.ShopItem{
-		ID:    "pro-account-3",
-		Name:  "PRO Account (1 season)",
+		ID:    "pro-account-1",
+		Name:  "PRO Account (1 month)",
 		Price: 900,
-		Description: `PRO status for 1 anime season (3 months).
+		Description: `PRO status for 1 month.
 
 1 month equals 300 gems.
 
@@ -24,9 +25,34 @@ Includes:
 		Order:      1,
 		Consumable: true,
 	},
+
+	// 3 months
+	&arn.ShopItem{
+		ID:    "pro-account-3",
+		Name:  "PRO Account (3 months)",
+		Price: 900,
+		Description: `PRO status for 1 anime season (3 months).
+
+1 month equals 300 gems.
+
+Includes:
+
+* Dark theme for the website and extension
+* Upload your own cover image
+* PRO star on your profile
+* Special highlight on the forums
+* Access to the VIP channel on Discord
+* Early access to new features`,
+		Icon:       "star",
+		Rarity:     arn.ShopItemRaritySuperior,
+		Order:      2,
+		Consumable: true,
+	},
+
+	// 6 months
 	&arn.ShopItem{
 		ID:    "pro-account-6",
-		Name:  "PRO Account (2 seasons)",
+		Name:  "PRO Account (6 months)",
 		Price: 1600,
 		Description: `PRO status for 2 anime seasons (6 months).
 
@@ -42,12 +68,12 @@ Includes:
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ShopItemRarityRare,
-		Order:      2,
+		Order:      3,
 		Consumable: true,
 	},
 	&arn.ShopItem{
 		ID:    "pro-account-12",
-		Name:  "PRO Account (4 seasons)",
+		Name:  "PRO Account (12 months)",
 		Price: 3000,
 		Description: `PRO status for 4 anime seasons (12 months).
 
@@ -63,12 +89,12 @@ Includes:
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ShopItemRarityUnique,
-		Order:      3,
+		Order:      4,
 		Consumable: true,
 	},
 	&arn.ShopItem{
 		ID:    "pro-account-24",
-		Name:  "PRO Account (8 seasons)",
+		Name:  "PRO Account (24 months)",
 		Price: 5900,
 		Description: `PRO status for 8 anime seasons (24 months).
 
@@ -84,7 +110,7 @@ Includes:
 * Early access to new features`,
 		Icon:       "star",
 		Rarity:     arn.ShopItemRarityLegendary,
-		Order:      4,
+		Order:      5,
 		Consumable: true,
 	},
 	// 	&arn.ShopItem{
