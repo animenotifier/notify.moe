@@ -12,7 +12,7 @@ component ImportAnilist(user *arn.User, matches []*arn.AniListMatch)
 			each match in matches
 				tr
 					td
-						a(href=match.AniListItem.Anime.Link(), target="_blank", rel="noopener")= match.AniListItem.Anime.TitleRomaji
+						a(href=match.AniListItem.Anime.Link(), target="_blank", rel="noopener")= match.AniListItem.Anime.Title.Romaji
 					td
 						if match.ARNAnime == nil
 							span.import-error Not found on notify.moe

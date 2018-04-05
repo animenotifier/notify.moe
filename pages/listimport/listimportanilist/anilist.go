@@ -2,6 +2,7 @@ package listimportanilist
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/anilist"
@@ -51,12 +52,13 @@ func Finish(ctx *aero.Context) string {
 		item := &arn.AnimeListItem{
 			AnimeID:  match.ARNAnime.ID,
 			Status:   arn.AniListAnimeListStatus(match.AniListItem),
-			Episodes: match.AniListItem.EpisodesWatched,
+			Episodes: match.AniListItem.Progress,
 			Notes:    match.AniListItem.Notes,
 			Rating: arn.AnimeListItemRating{
 				Overall: float64(match.AniListItem.ScoreRaw) / 10.0,
 			},
-			RewatchCount: match.AniListItem.Rewatched,
+			RewatchCount: match.AniListItem.Repeat,
+			Private:      match.AniListItem.Private,
 			Created:      arn.DateTimeUTC(),
 			Edited:       arn.DateTimeUTC(),
 		}
@@ -77,53 +79,44 @@ func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
 		return nil, ctx.Error(http.StatusBadRequest, "Not logged in", nil)
 	}
 
-	authErr := anilist.Authorize()
+	// Get user
+	anilistUser, err := anilist.GetUser(user.Accounts.AniList.Nick)
 
-	if authErr != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Couldn't authorize the Anime Notifier app on AniList", authErr)
+	if err != nil {
+		return nil, ctx.Error(http.StatusBadRequest, "User doesn't exist on AniList", err)
 	}
 
-	allAnime := arn.AllAnime()
-	anilistAnimeList, err := anilist.GetAnimeList(user.Accounts.AniList.Nick)
+	// Get anime list
+	anilistAnimeList, err := anilist.GetAnimeList(anilistUser.ID)
 
 	if err != nil {
 		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
 	}
 
-	matches := findAllMatches(allAnime, anilistAnimeList)
+	// Find matches
+	matches := findAllMatches(anilistAnimeList)
 
 	return matches, ""
 }
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.
-func findAllMatches(allAnime []*arn.Anime, animeList *anilist.AnimeList) []*arn.AniListMatch {
+func findAllMatches(animeList *anilist.AnimeList) []*arn.AniListMatch {
+	finder := arn.NewAniListAnimeFinder()
 	matches := []*arn.AniListMatch{}
 
-	matches = importList(matches, allAnime, animeList.Lists.Watching)
-	matches = importList(matches, allAnime, animeList.Lists.Completed)
-	matches = importList(matches, allAnime, animeList.Lists.PlanToWatch)
-	matches = importList(matches, allAnime, animeList.Lists.OnHold)
-	matches = importList(matches, allAnime, animeList.Lists.Dropped)
-
-	custom, ok := animeList.CustomLists.(map[string][]*anilist.AnimeListItem)
-
-	if !ok {
-		return matches
-	}
-
-	for _, list := range custom {
-		matches = importList(matches, allAnime, list)
+	for _, list := range animeList.Lists {
+		matches = importList(matches, finder, list.Entries)
 	}
 
 	return matches
 }
 
 // importList imports a single list inside an anilist anime list collection.
-func importList(matches []*arn.AniListMatch, allAnime []*arn.Anime, animeListItems []*anilist.AnimeListItem) []*arn.AniListMatch {
+func importList(matches []*arn.AniListMatch, finder *arn.AniListAnimeFinder, animeListItems []*anilist.AnimeListItem) []*arn.AniListMatch {
 	for _, item := range animeListItems {
 		matches = append(matches, &arn.AniListMatch{
 			AniListItem: item,
-			ARNAnime:    arn.FindAniListAnime(item.Anime, allAnime),
+			ARNAnime:    finder.GetAnime(strconv.Itoa(item.Anime.ID), strconv.Itoa(item.Anime.MALID)),
 		})
 	}
 

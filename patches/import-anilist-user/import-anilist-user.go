@@ -16,9 +16,6 @@ func init() {
 }
 
 func main() {
-	arn.PanicOnError(anilist.Authorize())
-	println(anilist.AccessToken)
-
 	user, _ := arn.GetUserByNick(userName)
 	animeList, err := anilist.GetAnimeList(user.Accounts.AniList.Nick)
 	arn.PanicOnError(err)
