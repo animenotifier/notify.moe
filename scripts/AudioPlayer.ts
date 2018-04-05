@@ -113,6 +113,11 @@ export default class AudioPlayer {
 		this.lastRequest = request
 		request.send()
 
+		// Resume audio context if it was paused before
+		if(this.audioContext.state === "suspended") {
+			this.audioContext.resume()
+		}
+
 		// Update track info
 		this.updateTrackInfo(trackId)
 
