@@ -1,6 +1,8 @@
 package filteranime
 
 import (
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 )
@@ -13,6 +15,14 @@ func Trailers(ctx *aero.Context) string {
 		func(anime *arn.Anime) bool {
 			return len(anime.Trailers) == 0
 		},
-		nil,
+		func(anime *arn.Anime) string {
+			title := anime.Title.Canonical
+
+			if anime.Title.Japanese != "" {
+				title = anime.Title.Japanese
+			}
+
+			return "https://www.youtube.com/results?search_query=" + strings.Replace(title+" PV", " ", "+", -1)
+		},
 	)
 }
