@@ -14,6 +14,10 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 
 			if openGraph != nil
 				meta(name="twitter:card", content="summary")
+
+				//- Color of the embed sidebar in Discord..
+				//- This is equal to link-color in the styles.
+				meta(name="theme-color", content="#d7260f")
 				
 				for _, name := range meta
 					meta(name=name, content=openGraph.Meta[name])
