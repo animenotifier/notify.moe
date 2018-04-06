@@ -199,6 +199,19 @@ var routeTests = map[string][]string{
 		"/explore/anime/2011/finished/tv",
 	},
 
+	// Redirects
+	"/mal/anime/:id": []string{
+		"/mal/anime/33352",
+	},
+
+	"/kitsu/anime/:id": []string{
+		"/kitsu/anime/12230",
+	},
+
+	"/anilist/anime/:id": []string{
+		"/anilist/anime/21827",
+	},
+
 	// API
 	"/api/anime/:id": []string{
 		"/api/anime/74y2cFiiR",
