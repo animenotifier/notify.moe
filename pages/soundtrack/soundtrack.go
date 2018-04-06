@@ -35,13 +35,18 @@ func Get(ctx *aero.Context) string {
 			"og:title":       track.Title,
 			"og:description": track.MainAnime().Title.Canonical + " (" + strings.Join(descriptionTags, ", ") + ")",
 			"og:url":         "https://" + ctx.App.Config.Domain + track.Link(),
-			"og:site_name":   "notify.moe",
+			"og:site_name":   ctx.App.Config.Domain,
 			"og:type":        "music.song",
 		},
 	}
 
 	if track.MainAnime() != nil {
 		openGraph.Tags["og:image"] = track.MainAnime().ImageLink("large")
+	}
+
+	if track.File != "" {
+		openGraph.Tags["og:audio"] = "https://" + ctx.App.Config.Domain + "/audio/" + track.File
+		openGraph.Tags["og:audio:type"] = "audio/vnd.facebook.bridge"
 	}
 
 	// Set video so that it can be played
