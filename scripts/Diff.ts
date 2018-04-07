@@ -3,22 +3,15 @@ import { MutationQueue } from "./MutationQueue"
 export default class Diff {
 	static persistentClasses = new Set<string>()
 	static persistentAttributes = new Set<string>()
-
-	// Reuse container for diffs to avoid memory allocation
-	static container: HTMLElement
-	static rootContainer: HTMLElement
 	static mutations: MutationQueue = new MutationQueue()
 
 	// innerHTML will diff the element with the given HTML string and apply DOM mutations.
 	static innerHTML(aRoot: HTMLElement, html: string): Promise<void> {
-		if(!Diff.container) {
-			Diff.container = document.createElement("main")
-		}
-
-		Diff.container.innerHTML = html
+		let container = document.createElement("main")
+		container.innerHTML = html
 
 		return new Promise((resolve, reject) => {
-			Diff.childNodes(aRoot, Diff.container)
+			Diff.childNodes(aRoot, container)
 			this.mutations.wait(resolve)
 		})
 	}
@@ -26,13 +19,10 @@ export default class Diff {
 	// root will diff the document root element with the given HTML string and apply DOM mutations.
 	static root(aRoot: HTMLElement, html: string) {
 		return new Promise((resolve, reject) => {
-			if(!Diff.rootContainer) {
-				Diff.rootContainer = document.createElement("html")
-			}
+			let rootContainer = document.createElement("html")
+			rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
 
-			Diff.rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
-
-			Diff.childNodes(aRoot.getElementsByTagName("body")[0], Diff.rootContainer.getElementsByTagName("body")[0])
+			Diff.childNodes(aRoot.getElementsByTagName("body")[0], rootContainer.getElementsByTagName("body")[0])
 			this.mutations.wait(resolve)
 		})
 	}
