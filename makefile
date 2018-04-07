@@ -9,6 +9,9 @@ BUILDPATCHES=@./patches/build.sh
 BUILDBOTS=@./bots/build.sh
 TSCMD=@tsc
 IPTABLES=@sudo iptables
+PACK:=$(shell command -v pack 2> /dev/null)
+RUN:=$(shell command -v run 2> /dev/null)
+GOIMPORTS:=$(shell command -v goimports 2> /dev/null)
 
 # Determine the name of the platform
 OSNAME=
@@ -42,20 +45,36 @@ test:
 	$(GOTEST) github.com/animenotifier/notify.moe -v -cover
 bench:
 	$(GOTEST) -bench .
+pack:
+	go get -u github.com/aerogo/pack
+	go install github.com/aerogo/pack
+run:
+	go get -u github.com/aerogo/run
+	go install github.com/aerogo/run
+goimports:
+	go get -u golang.org/x/tools/cmd/goimports
+	go install golang.org/x/tools/cmd/goimports
 tools:
 ifeq ($(OSNAME),OSX)
 	brew install coreutils
 endif
-	go get -u golang.org/x/tools/cmd/goimports
-	go get -u github.com/aerogo/pack
-	go get -u github.com/aerogo/run
-	go install github.com/aerogo/pack
-	go install github.com/aerogo/run
+ifndef GOIMPORTS
+	@make goimports
+endif
+ifndef PACK
+	@make pack
+endif
+ifndef RUN
+	@make run
+endif
 versions:
 	@go version
+	$(TSCMD) --version
 assets:
 	$(TSCMD)
 	@pack
+deps:
+	@go get -v ./...
 depslist:
 	$(GOCMD) list -f {{.Deps}} | sed -e 's/\[//g' -e 's/\]//g' | tr " " "\n"
 clean:
@@ -75,6 +94,6 @@ endif
 ifeq ($(OSNAME),OSX)
 	@/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors
 endif
-all: assets server bots jobs patches
+all: tools assets server bots jobs patches
 
-.PHONY: bots jobs patches ports
+.PHONY: tools assets server bots jobs patches ports clean versions

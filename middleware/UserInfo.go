@@ -68,6 +68,15 @@ func updateUserInfo(ctx *aero.Context, user *arn.User) {
 // Updates the location of the user.
 func updateUserLocation(user *arn.User, newIP string) {
 	user.IP = newIP
+
+	if arn.APIKeys.IPInfoDB.ID == "" {
+		if arn.IsProduction() {
+			color.Red("IPInfoDB key not defined")
+		}
+
+		return
+	}
+
 	locationAPI := "https://api.ipinfodb.com/v3/ip-city/?key=" + arn.APIKeys.IPInfoDB.ID + "&ip=" + user.IP + "&format=json"
 	response, err := client.Get(locationAPI).End()
 

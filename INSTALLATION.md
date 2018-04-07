@@ -13,12 +13,11 @@
 
 ## Download the repository
 
-* `go get github.com/animenotifier/notify.moe`
+* `go get github.com/animenotifier/notify.moe/...`
 
 ## Build all
 
 * `cd $GOPATH/src/github.com/animenotifier/notify.moe`
-* `make tools` to install [pack](https://github.com/aerogo/pack) & [run](https://github.com/aerogo/run)
 * `make all`
 
 ## Browser
