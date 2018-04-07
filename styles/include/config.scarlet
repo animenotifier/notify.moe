@@ -78,8 +78,11 @@ calendar-entry-seen-hover-background = ui-background
 table-width-normal = 900px
 
 // Feature cards
-feature-card-color = hsl(348, 83%, 47%)
-feature-card-alternative-color = hsl(203, 83%, 47%)
+const feature-card-saturation = 83%
+const feature-card-lightness = 47%
+
+feature-card-color = hsl(348, feature-card-saturation, feature-card-lightness)
+feature-card-alternative-color = hsl(203, feature-card-saturation, feature-card-lightness)
 feature-card-icon-color = white
 
 // Loading animation

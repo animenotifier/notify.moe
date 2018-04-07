@@ -291,7 +291,7 @@ func Configure(app *aero.Application) {
 	editorFilterable("/editor/anime/details/episodelength", filteranime.EpisodeLength)
 	editorFilterable("/editor/anime/details/source", filteranime.Source)
 
-	editorFilterable("/editor/anime/tba", filteranime.TBA)
+	editorFilterable("/editor/anime/all", filteranime.All)
 
 	// Editor - MALdiff
 	editorFilterable("/editor/mal/diff/anime", editor.CompareMAL)

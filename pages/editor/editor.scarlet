@@ -1,5 +1,6 @@
 .editor-list-page-title
 	margin-bottom 0
+	margin-top 1rem
 
 .editor-list
 	img
@@ -7,6 +8,13 @@
 
 .editor-list-entry-count
 	margin-top 0
+	margin-bottom content-padding
 
 .editor-score
-	line-height 1em
+	feature-card-footer
+
+.feature-card-color-soundtrack
+	background hsl(200, feature-card-saturation, feature-card-lightness) !important
+
+.feature-card-color-company
+	background hsl(150, feature-card-saturation, feature-card-lightness) !important

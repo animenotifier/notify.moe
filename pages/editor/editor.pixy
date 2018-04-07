@@ -1,56 +1,54 @@
 component Editor(url string, score int, scoreTitle string, scoreTypes map[string]int, user *arn.User)
-	EditorTabs(url, user)
-	h1.mountable= "Welcome to the Editor Panel, " + user.Nick + "!"
-
-	.feature-cards
-		.feature-card.mountable(title=scoreTitle)
-			.feature-card-icon.editor-score= score
-			p.feature-card-text Your contribution score.
+	h1.mountable What would you like to edit?
 	
 	.feature-cards
-		a.feature-card.mountable(href="/editor/anime")
-			.feature-card-icon
+		a.feature-card.mountable(href="/editor/anime/all" + user.Settings().Editor.Filter.Suffix())
+			.feature-card-icon.feature-card-color-anime
 				RawIcon("tv")
-			p.feature-card-text Anime
+			.feature-card-text
+				p Anime
+				p.editor-score= arn.Plural(scoreTypes["Anime"], "contribution")
 
-		a.feature-card.mountable(href="/editor/tracks")
-			.feature-card-icon
+		a.feature-card.mountable(href="/editor/soundtracks/links")
+			.feature-card-icon.feature-card-color-soundtrack
 				RawIcon("music")
-			p.feature-card-text SoundTracks
+			.feature-card-text
+				p SoundTracks
+				p.editor-score= arn.Plural(scoreTypes["SoundTrack"], "contribution")
 		
-		a.feature-card.mountable(href="/editor/companies")
-			.feature-card-icon
+		a.feature-card.mountable(href="/editor/companies/description")
+			.feature-card-icon.feature-card-color-company
 				RawIcon("building-o")
-			p.feature-card-text Companies
+			.feature-card-text
+				p Companies
+				p.editor-score= arn.Plural(scoreTypes["Company"], "contribution")
 	
-	//- .footer
-	//- 	for objectType, score := range scoreTypes
-	//- 		.mountable
-	//- 			span= objectType + ": "
-	//- 			span= score
-	
-	//- .feature-cards.feature-cards-alternative-color
-	//- 	for objectType, score := range scoreTypes
-	//- 		.feature-card.mountable
-	//- 			.feature-card-icon.editor-score= score
-	//- 			p.feature-card-text= objectType
+	.footer.mountable
+		a.footer-element(href="/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix()) MALdiff
+		a.footer-element(href="/editor/kitsu/new/anime") Kitsu
+			
 
 component EditorTabs(url string, user *arn.User)
-	.tabs
-		Tab("Editor", "pencil", "/editor")
-		Tab("MAL", "exchange", "/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix())
-		Tab("Anime", "tv", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
-		Tab("Tracks", "music", "/editor/soundtracks/links")
-		Tab("Companies", "building", "/editor/companies/description")
-		Tab("Kitsu", "download", "/editor/kitsu/new/anime")
+	//- .tabs
+	//- 	Tab("Editor", "pencil", "/editor")
+	//- 	Tab("MAL", "exchange", "/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix())
+	//- 	Tab("Anime", "tv", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
+	//- 	Tab("Tracks", "music", "/editor/soundtracks/links")
+	//- 	Tab("Companies", "building", "/editor/companies/description")
+	//- 	Tab("Kitsu", "download", "/editor/kitsu/new/anime")
+
+	.corner-buttons-left
+		a.button(href="/editor")
+			Icon("arrow-left")
+			span Overview
 	
 	if strings.Contains(url, "/editor/anime/")
 		.tabs
+			Tab("All", "list", "/editor/anime/all" + user.Settings().Editor.Filter.Suffix())
 			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
 			Tab("Images", "image", "/editor/anime/image/lowres" + user.Settings().Editor.Filter.Suffix())
 			Tab("Companies", "building", "/editor/anime/companies/studios" + user.Settings().Editor.Filter.Suffix())
 			Tab("Details", "search-plus", "/editor/anime/details/genres" + user.Settings().Editor.Filter.Suffix())
-			Tab("TBA", "question-circle", "/editor/anime/tba" + user.Settings().Editor.Filter.Suffix())
 	
 	if strings.Contains(url, "/editor/anime/details")
 		.tabs

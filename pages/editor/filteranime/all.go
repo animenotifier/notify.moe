@@ -5,13 +5,13 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-// TBA ...
-func TBA(ctx *aero.Context) string {
+// All ...
+func All(ctx *aero.Context) string {
 	return editorList(
 		ctx,
-		"Anime to be announced",
+		"All anime",
 		func(anime *arn.Anime) bool {
-			return anime.Status == "tba"
+			return true
 		},
 		func(anime *arn.Anime) string {
 			return "https://www.google.com/search?q=" + anime.Title.Canonical

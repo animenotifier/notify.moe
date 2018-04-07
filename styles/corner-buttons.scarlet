@@ -1,11 +1,18 @@
-.corner-buttons
+mixin corner-buttons
 	display flex
 	justify-content center
 	margin-bottom content-padding
-
+	z-index 1
 	position absolute
 	top content-padding
+
+.corner-buttons
+	corner-buttons
 	right content-padding
+
+.corner-buttons-left
+	corner-buttons
+	left content-padding
 
 .corner-buttons-hide-on-mobile
 	display flex
