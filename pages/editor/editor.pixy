@@ -12,6 +12,16 @@ component Editor(url string, score int, scoreTitle string, scoreTypes map[string
 			.feature-card-icon
 				RawIcon("tv")
 			p.feature-card-text Anime
+
+		a.feature-card.mountable(href="/editor/tracks")
+			.feature-card-icon
+				RawIcon("music")
+			p.feature-card-text SoundTracks
+		
+		a.feature-card.mountable(href="/editor/companies")
+			.feature-card-icon
+				RawIcon("building-o")
+			p.feature-card-text Companies
 	
 	//- .footer
 	//- 	for objectType, score := range scoreTypes

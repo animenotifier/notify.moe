@@ -1,0 +1,13 @@
+mixin sidebar
+	vertical
+	margin-left 0
+	margin-top 1rem
+	flex-shrink 0
+
+mixin sidebar-medium
+	margin-left content-padding
+	margin-top 0
+	flex-basis 270px
+
+mixin sidebar-big
+	flex-basis 300px

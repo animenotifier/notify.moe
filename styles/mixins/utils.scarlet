@@ -1,0 +1,13 @@
+mixin default-transition
+	transition all transition-speed ease
+
+mixin noise-light
+	background-image url("//media.notify.moe/images/elements/noise-light.png")
+
+mixin noise-strong
+	background-image url("//media.notify.moe/images/elements/noise-strong.png")
+
+mixin clip-long-text
+	overflow hidden
+	white-space nowrap
+	text-overflow ellipsis

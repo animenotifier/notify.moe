@@ -1,0 +1,39 @@
+mixin bg-dark-up
+	background-color transparent
+	:hover
+		background-color rgba(0, 0, 0, 0.015)
+
+mixin bg-light-up
+	background-color transparent
+	:hover
+		background-color rgba(255, 255, 255, 0.015)
+
+mixin light-up
+	filter brightness(0.4) saturate(1)
+	:hover
+		filter brightness(1) saturate(1.3)
+
+mixin saturate-up
+	filter saturate(1)
+	:hover
+		filter saturate(1.3)
+
+mixin saturate-up
+	filter saturate(1)
+	:hover
+		filter saturate(1.3)
+
+mixin scale-up
+	transform scale(1)
+	:hover
+		transform scale(1.056338)
+
+mixin shadow-up
+	box-shadow shadow-light
+	:hover
+		box-shadow shadow-medium
+
+mixin outline-shadow-up
+	box-shadow outline-shadow-light
+	:hover
+		box-shadow outline-shadow-medium

@@ -1,0 +1,4 @@
+mixin feature-card-footer
+	font-size 0.9rem
+	opacity 0.5
+	margin-top 0

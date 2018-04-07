@@ -1,0 +1,23 @@
+mixin horizontal
+	display flex
+	flex-direction row
+
+mixin horizontal-wrap
+	display flex
+	flex-flow row wrap
+
+mixin horizontal-wrap-center
+	horizontal-wrap
+	justify-content center
+
+mixin vertical
+	display flex
+	flex-direction column
+
+mixin vertical-wrap
+	display flex
+	flex-flow column wrap
+
+mixin vertical-wrap-center
+	horizontal-wrap
+	align-items center

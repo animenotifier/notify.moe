@@ -53,9 +53,7 @@
 	font-weight bold
 
 .payment-amount-converted
-	font-size 0.9rem
-	opacity 0.5
-	margin-top 0
+	feature-card-footer
 
 .feature-cards-alternative-color
 	.feature-card-icon,
