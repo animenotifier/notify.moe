@@ -21,7 +21,6 @@ func main() {
 			continue
 		}
 
-		fmt.Printf("%s %s\n", color.CyanString(anime.Title.Canonical), malID)
 		sync(anime, malID)
 	}
 
@@ -37,6 +36,9 @@ func sync(anime *arn.Anime, malID string) {
 	}
 
 	malAnime := obj.(*mal.Anime)
+
+	// Log title
+	fmt.Printf("%s %s\n", color.CyanString(anime.Title.Canonical), malID)
 
 	if len(anime.Genres) == 0 && len(malAnime.Genres) > 0 {
 		fmt.Println("Genres:", malAnime.Genres)
