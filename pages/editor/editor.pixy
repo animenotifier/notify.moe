@@ -7,6 +7,12 @@ component Editor(url string, score int, scoreTitle string, scoreTypes map[string
 			.feature-card-icon.editor-score= score
 			p.feature-card-text Your contribution score.
 	
+	.feature-cards
+		a.feature-card.mountable(href="/editor/anime")
+			.feature-card-icon
+				RawIcon("tv")
+			p.feature-card-text Anime
+	
 	//- .footer
 	//- 	for objectType, score := range scoreTypes
 	//- 		.mountable

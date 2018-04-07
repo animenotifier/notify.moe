@@ -74,11 +74,22 @@ export default class Application {
 
 		let retry = () => {
 			return this.get("/_" + url).catch(async error => {
+				// Are we still on that page?
+				if(this.currentPath !== url) {
+					return
+				}
+
 				// Display connection error
 				this.onError(error)
 
 				// Retry after 3 seconds
 				await delay(3000)
+
+				// Are we still on that page?
+				if(this.currentPath !== url) {
+					return
+				}
+
 				return retry()
 			})
 		}
