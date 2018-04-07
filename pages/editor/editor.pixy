@@ -26,7 +26,6 @@ component Editor(url string, score int, scoreTitle string, scoreTypes map[string
 	.footer.mountable
 		a.footer-element(href="/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix()) MALdiff
 		a.footer-element(href="/editor/kitsu/new/anime") Kitsu
-			
 
 component EditorTabs(url string, user *arn.User)
 	//- .tabs
