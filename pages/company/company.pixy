@@ -32,7 +32,7 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 					each closeCompany in closeCompanies
 						li.mountable(data-mountable-type="close-company")
 							a(href=closeCompany.Link())= closeCompany.Name.English
-							span= fmt.Sprintf(" (%.0f m)", distances[closeCompany.ID] * 1000)
+							span.company-distance= fmt.Sprintf(" - %.0f m", distances[closeCompany.ID] * 1000)
 			
 			//- if len(company.Name.Synonyms) > 0
 			//- 	h3 Synonyms

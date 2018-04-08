@@ -11,6 +11,9 @@
 .company-sidebar
 	sidebar
 
+.company-distance
+	opacity 0.75
+
 > 1250px
 	.company-page
 		horizontal
