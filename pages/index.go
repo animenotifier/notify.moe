@@ -93,11 +93,6 @@ func Configure(app *aero.Application) {
 		l.Page("/api/"+strings.ToLower(name), apidocs.ByType(name))
 	}
 
-	// l.Ajax("/dashboard", dashboard.Get)
-	// l.Ajax("/best/anime", best.Get)
-	// l.Ajax("/artworks", artworks.Get)
-	// l.Ajax("/amvs", amvs.Get)
-
 	// Forum
 	l.Page("/forum", forum.Get)
 	l.Page("/forum/:tag", forum.Get)

@@ -1,101 +1,101 @@
 component Dashboard(schedule []*arn.UpcomingEpisode, posts []arn.Postable, soundTracks []*arn.SoundTrack, following []*arn.User, user *arn.User)
-	h1.page-title Dashboard
+	//- h1.page-title Dashboard
 
-	.dashboard
-		.widget.mountable
-			h3.widget-title Schedule
+	//- .dashboard
+	//- 	.widget.mountable
+	//- 		h3.widget-title Schedule
 
-			for i := 0; i <= 4; i++
-				if i < len(schedule)
-					.widget-ui-element
-						.widget-ui-element-text
-							a.schedule-item-link(href=schedule[i].Anime.Link())
-								Icon("calendar-o")
-								.schedule-item-title= schedule[i].Anime.Title.ByUser(user)
-							.spacer
-							.schedule-item-date.utc-airing-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
-				else
-					.widget-ui-element
-						.widget-ui-element-text
-							Icon("calendar-o")
-							span ...
+	//- 		for i := 0; i <= 4; i++
+	//- 			if i < len(schedule)
+	//- 				.widget-ui-element
+	//- 					.widget-ui-element-text
+	//- 						a.schedule-item-link(href=schedule[i].Anime.Link())
+	//- 							Icon("calendar-o")
+	//- 							.schedule-item-title= schedule[i].Anime.Title.ByUser(user)
+	//- 						.spacer
+	//- 						.schedule-item-date.utc-airing-date(data-start-date=schedule[i].Episode.AiringDate.Start, data-end-date=schedule[i].Episode.AiringDate.End, data-episode-number=schedule[i].Episode.Number)
+	//- 			else
+	//- 				.widget-ui-element
+	//- 					.widget-ui-element-text
+	//- 						Icon("calendar-o")
+	//- 						span ...
 
-		.widget.mountable
-			h3.widget-title Forums
+	//- 	.widget.mountable
+	//- 		h3.widget-title Forums
 
-			each post in posts
-				a.widget-ui-element(href=post.Thread().Link())
-					.widget-ui-element-text
-						Icon(arn.GetForumIcon(post.Thread().Tags[0]))
-						span= post.Thread().Title
+	//- 		each post in posts
+	//- 			a.widget-ui-element(href=post.Thread().Link())
+	//- 				.widget-ui-element-text
+	//- 					Icon(arn.GetForumIcon(post.Thread().Tags[0]))
+	//- 					span= post.Thread().Title
 		
-		.widget.mountable
-			h3.widget-title Artworks
+	//- 	.widget.mountable
+	//- 		h3.widget-title Artworks
 
-			for i := 1; i <= 5; i++
-				.widget-ui-element
-					.widget-ui-element-text
-						Icon("paint-brush")
-						span ...
+	//- 		for i := 1; i <= 5; i++
+	//- 			.widget-ui-element
+	//- 				.widget-ui-element-text
+	//- 					Icon("paint-brush")
+	//- 					span ...
 
-		.widget.mountable
-			h3.widget-title Soundtracks
+	//- 	.widget.mountable
+	//- 		h3.widget-title Soundtracks
 
-			for i := 0; i <= 4; i++
-				if i < len(soundTracks)
-					a.widget-ui-element(href=soundTracks[i].Link())
-						.widget-ui-element-text
-							Icon("music")
-							if soundTracks[i].Title == ""
-								span untitled
-							else
-								span= soundTracks[i].Title
-				else
-					.widget-ui-element
-						.widget-ui-element-text
-							Icon("music")
-							span ...
+	//- 		for i := 0; i <= 4; i++
+	//- 			if i < len(soundTracks)
+	//- 				a.widget-ui-element(href=soundTracks[i].Link())
+	//- 					.widget-ui-element-text
+	//- 						Icon("music")
+	//- 						if soundTracks[i].Title == ""
+	//- 							span untitled
+	//- 						else
+	//- 							span= soundTracks[i].Title
+	//- 			else
+	//- 				.widget-ui-element
+	//- 					.widget-ui-element-text
+	//- 						Icon("music")
+	//- 						span ...
 		
-		.widget.mountable
-			h3.widget-title AMVs
+	//- 	.widget.mountable
+	//- 		h3.widget-title AMVs
 
-			for i := 1; i <= 5; i++
-				.widget-ui-element
-					.widget-ui-element-text
-						Icon("video-camera")
-						span ...
+	//- 		for i := 1; i <= 5; i++
+	//- 			.widget-ui-element
+	//- 				.widget-ui-element-text
+	//- 					Icon("video-camera")
+	//- 					span ...
 		
-		.widget.mountable
-			h3.widget-title Reviews
+	//- 	.widget.mountable
+	//- 		h3.widget-title Reviews
 
-			for i := 1; i <= 5; i++
-				.widget-ui-element
-					.widget-ui-element-text
-						Icon("book")
-						span ...
+	//- 		for i := 1; i <= 5; i++
+	//- 			.widget-ui-element
+	//- 				.widget-ui-element-text
+	//- 					Icon("book")
+	//- 					span ...
 
-		.widget.mountable
-			h3.widget-title Groups
+	//- 	.widget.mountable
+	//- 		h3.widget-title Groups
 
-			for i := 1; i <= 5; i++
-				.widget-ui-element
-					.widget-ui-element-text
-						Icon("group")
-						span ...
+	//- 		for i := 1; i <= 5; i++
+	//- 			.widget-ui-element
+	//- 				.widget-ui-element-text
+	//- 					Icon("group")
+	//- 					span ...
 		
-		.widget.mountable
-			h3.widget-title Contacts
+	//- 	.widget.mountable
+	//- 		h3.widget-title Contacts
 
-			for i := 0; i <= 4; i++
-				if i < len(following)
-					a.widget-ui-element(href="/+" + following[i].Nick)
-						.widget-ui-element-text
-							Icon("address-card")
-							span= following[i].Nick
-				else
-					.widget-ui-element
-						.widget-ui-element-text
-							Icon("address-card")
-							span ...
+	//- 		for i := 0; i <= 4; i++
+	//- 			if i < len(following)
+	//- 				a.widget-ui-element(href="/+" + following[i].Nick)
+	//- 					.widget-ui-element-text
+	//- 						Icon("address-card")
+	//- 						span= following[i].Nick
+	//- 			else
+	//- 				.widget-ui-element
+	//- 					.widget-ui-element-text
+	//- 						Icon("address-card")
+	//- 						span ...
 
-	Footer
+	//- Footer

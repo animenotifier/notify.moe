@@ -67,7 +67,7 @@ func Get(ctx *aero.Context) string {
 	})
 
 	sort.Slice(tracks, func(i, j int) bool {
-		return tracks[i].Title < tracks[j].Title
+		return tracks[i].Title.ByUser(user) < tracks[j].Title.ByUser(user)
 	})
 
 	// Anime list item
