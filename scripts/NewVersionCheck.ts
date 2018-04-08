@@ -1,4 +1,4 @@
-import { delay } from "./Utils"
+import { delay, requestIdleCallback } from "./Utils"
 import StatusMessage from "./StatusMessage"
 
 let etags = new Map<string, string>()
@@ -52,6 +52,8 @@ async function checkNewVersion(url: string, statusMessage: StatusMessage) {
 	}
 }
 
-export async function checkNewVersionDelayed(url: string, statusMessage: StatusMessage) {
-	delay(newVersionCheckDelay).then(() => checkNewVersion(url, statusMessage))
+export function checkNewVersionDelayed(url: string, statusMessage: StatusMessage) {
+	return delay(newVersionCheckDelay).then(() => {
+		requestIdleCallback(() => checkNewVersion(url, statusMessage))
+	})
 }
