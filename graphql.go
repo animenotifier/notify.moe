@@ -60,6 +60,7 @@ func init() {
 	}
 
 	app.Post("/graphql", func(ctx *aero.Context) string {
+		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
 		body, err := ctx.Request().Body().JSONObject()
 
 		if err != nil {
