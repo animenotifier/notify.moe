@@ -1,4 +1,4 @@
-component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensedAnime []*arn.Anime, user *arn.User)
+component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensedAnime []*arn.Anime, closeCompanies []*arn.Company, distances map[string]float64, user *arn.User)
 	CompanyTabs(company, user)
 	
 	.company-page
@@ -19,10 +19,20 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 
 			if len(company.Links) > 0
 				h3.mountable Links
+
 				ul.mountable
 					each link in company.Links
-						li
+						li.mountable(data-mountable-type="company-link")
 							a(href=link.URL, target="_blank", rel="noopener")= link.Title
+			
+			if len(closeCompanies) > 0
+				h3.mountable Within 1 km radius
+
+				ul.mountable
+					each closeCompany in closeCompanies
+						li.mountable(data-mountable-type="close-company")
+							a(href=closeCompany.Link())= closeCompany.Name.English
+							span= fmt.Sprintf(" (%.0f m)", distances[closeCompany.ID] * 1000)
 			
 			//- if len(company.Name.Synonyms) > 0
 			//- 	h3 Synonyms

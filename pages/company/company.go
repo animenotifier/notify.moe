@@ -2,6 +2,7 @@ package company
 
 import (
 	"net/http"
+	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -50,5 +51,30 @@ func Get(ctx *aero.Context) string {
 
 	studioAnime, producedAnime, licensedAnime := company.Anime()
 
-	return ctx.HTML(components.CompanyPage(company, studioAnime, producedAnime, licensedAnime, user))
+	// Find close companies
+	var closeCompanies []*arn.Company
+	distances := map[string]float64{}
+
+	if company.Location.IsValid() {
+		closeCompanies = arn.FilterCompanies(func(closeCompany *arn.Company) bool {
+			if closeCompany.ID == company.ID {
+				return false
+			}
+
+			if !closeCompany.Location.IsValid() {
+				return false
+			}
+
+			distance := company.Location.Distance(closeCompany.Location)
+			distances[closeCompany.ID] = distance
+
+			return distance <= 1.0
+		})
+
+		sort.Slice(closeCompanies, func(i, j int) bool {
+			return distances[closeCompanies[i].ID] < distances[closeCompanies[j].ID]
+		})
+	}
+
+	return ctx.HTML(components.CompanyPage(company, studioAnime, producedAnime, licensedAnime, closeCompanies, distances, user))
 }
