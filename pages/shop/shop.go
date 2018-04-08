@@ -29,5 +29,12 @@ func Get(ctx *aero.Context) string {
 		return items[i].Order < items[j].Order
 	})
 
-	return ctx.HTML(components.Shop(user, items))
+	// Calculate popularity of items
+	itemPopularity := map[string]int{}
+
+	for purchase := range arn.StreamPurchases() {
+		itemPopularity[purchase.ItemID]++
+	}
+
+	return ctx.HTML(components.Shop(items, itemPopularity, user))
 }

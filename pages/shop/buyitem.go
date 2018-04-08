@@ -42,7 +42,7 @@ func BuyItem(ctx *aero.Context) string {
 	totalPrice := int(item.Price) * quantity
 
 	if user.Balance < totalPrice {
-		return ctx.Error(http.StatusBadRequest, "Not enough gems", nil)
+		return ctx.Error(http.StatusBadRequest, "Not enough gems. You need to charge up your balance before you can buy this item.", nil)
 	}
 
 	user.Balance -= totalPrice

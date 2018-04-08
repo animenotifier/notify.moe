@@ -2,24 +2,35 @@ const item-color-pro-account = hsl(0, 100%, 71%)
 const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 
 .shop-items
-	horizontal-wrap
-	justify-content space-around
+	vertical
+	width 100%
+	max-width 600px
+	margin 0 auto
 
 .shop-item
-	ui-element
-	flex 1
-	flex-basis 380px
-	margin calc(content-padding / 2)
-	padding 0.5rem content-padding
+	horizontal
+	align-items center
+	padding 0.5rem 0
+	border-bottom ui-border
+
+	:last-child
+		border-bottom none
+
+.shop-item-info-column
+	flex 0.7
+	vertical
 
 .shop-item-name
-	font-size 1.6rem
-	text-align center
-	padding 0.75rem 0
-	// border-bottom 1px solid rgba(0, 0, 0, 0.1)
+	font-size 1.4rem
+	text-align left
+	margin 0
+	clip-long-text
 
-.item-icon
-	display inline-block
+.shop-item-popularity
+	opacity 0.5
+
+.shop-item-icon
+	//
 
 // Colors
 .shop-item, .inventory-slot, .shop-history-item
@@ -28,12 +39,12 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	[data-item-id="pro-account-6"],
 	[data-item-id="pro-account-12"],
 	[data-item-id="pro-account-24"]
-		.item-icon
+		.shop-item-icon
 			color item-color-pro-account
 
-	[data-item-id="anime-support-ticket"]
-		.item-icon
-			color item-color-anime-support-ticket
+	// [data-item-id="anime-support-ticket"]
+	// 	.shop-item-icon
+	// 		color item-color-anime-support-ticket
 
 .shop-item-price
 	// ...
@@ -48,9 +59,13 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	float right
 
 .shop-buttons
-	margin-top 1rem
+	flex 0.3
+	white-space nowrap
 
 .shop-button-buy
+	width 100%
+	justify-content center
+
 	.icon-diamond
 		margin-left 0.3rem
 		margin-right 0

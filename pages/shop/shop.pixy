@@ -1,11 +1,11 @@
-component Shop(user *arn.User, items []*arn.ShopItem)
+component Shop(items []*arn.ShopItem, itemPopularity map[string]int, user *arn.User)
 	ShopTabs(user)
 
 	h1.page-title Shop
 
 	.shop-items
 		each item in items
-			ShopItem(item)
+			ShopItem(item, itemPopularity[item.ID])
 
 component ShopTabs(user *arn.User)
 	.tabs
@@ -17,14 +17,18 @@ component ShopTabs(user *arn.User)
 			Tab("History", "history", "/shop/history")
 			Tab(strconv.Itoa(user.Balance), "diamond", "/charge")
 
-component ShopItem(item *arn.ShopItem)
+component ShopItem(item *arn.ShopItem, popularity int)
 	.shop-item.mountable(data-item-id=item.ID)
-		h3.shop-item-name
-			.item-icon
-				Icon(item.Icon)
-			span= item.Name
+		//- .shop-item-icon
+		//- 	Icon(item.Icon)
+		
+		.shop-item-info-column
+			h3.shop-item-name= item.Name
+			.shop-item-popularity= arn.Plural(popularity, "user") + " bought this"
+
 			//- span.shop-item-duration= " " + duration
-		.shop-item-description!= markdown.Render(item.Description)
+		//- .shop-item-description!= markdown.Render(item.Description)
+
 		.buttons.shop-buttons
 			button.shop-button-buy.action(data-item-id=item.ID, data-item-name=item.Name, data-price=item.Price, data-trigger="click", data-action="buyItem")
 				span.shop-item-price= "Buy for " + toString(item.Price)

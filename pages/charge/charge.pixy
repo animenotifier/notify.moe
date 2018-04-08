@@ -5,69 +5,25 @@ component Charge(user *arn.User)
 
 	p.text-center.mountable You can add balance via PayPal. 1 Japanese Yen equals 1 Gem.
 
-	.payment-cards.feature-cards-alternative-color
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=1000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 1,000 ¥
-				p.payment-amount-converted ≈ 9.46 $
+	.buttons
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=1000)
+			Icon("diamond")
+			span 1000
 
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=2000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 2,000 ¥
-				p.payment-amount-converted ≈ 18.92 $
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=2000)
+			Icon("diamond")
+			span 2000
 
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=3000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 3,000 ¥
-				p.payment-amount-converted ≈ 28.38 $
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=3000)
+			Icon("diamond")
+			span 3000
+		
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=6000)
+			Icon("diamond")
+			span 6000
 
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=6000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 6,000 ¥
-				p.payment-amount-converted ≈ 56.76 $
-
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=12000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 12,000 ¥
-				p.payment-amount-converted ≈ 113.52 $
-
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=25000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 25,000 ¥
-				p.payment-amount-converted ≈ 236.50 $
-
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=50000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 50,000 ¥
-				p.payment-amount-converted ≈ 473.00 $
-
-		.payment-card.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=75000)
-			.payment-card-icon
-				RawIcon("diamond")
-			
-			.payment-card-text
-				p.payment-amount 75,000 ¥
-				p.payment-amount-converted ≈ 709.50 $
+		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=12000)
+			Icon("diamond")
+			span 12000
 
 	.footer.mountable Different currencies will automatically be converted.

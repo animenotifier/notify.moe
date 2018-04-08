@@ -22,7 +22,7 @@ const inventory-slot-size = 64px
 		:hover
 			cursor pointer
 
-			.item-icon
+			.shop-item-icon
 				animation hover-item 1s infinite ease-in-out
 
 	.icon
@@ -30,19 +30,19 @@ const inventory-slot-size = 64px
 		pointer-events none
 
 	// [data-item-id="pro-account-3"]
-	// 	.item-icon
+	// 	.shop-item-icon
 	// 		opacity 0.7
 
 	// [data-item-id="pro-account-6"]
-	// 	.item-icon
+	// 	.shop-item-icon
 	// 		opacity 0.8
 
 	// [data-item-id="pro-account-12"]
-	// 	.item-icon
+	// 	.shop-item-icon
 	// 		opacity 0.9
 
 	// [data-item-id="pro-account-24"]
-	// 	.item-icon
+	// 	.shop-item-icon
 	// 		opacity 1.0
 
 animation hover-item

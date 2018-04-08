@@ -20,22 +20,14 @@ mixin feature-card
 		box-shadow shadow-medium
 		text-shadow none
 
-.feature-cards,
-.payment-cards
+.feature-cards
 	feature-cards
 
-.feature-card,
-.payment-card
+.feature-card
 	feature-card
 
-.payment-card
-	:hover
-		cursor pointer
-
 .feature-card-icon,
-.feature-card-text,
-.payment-card-icon,
-.payment-card-text
+.feature-card-text
 	horizontal
 	justify-content center
 	align-items center
@@ -43,23 +35,14 @@ mixin feature-card
 	padding 1rem
 	margin 0
 
-.feature-card-icon,
-.payment-card-icon
+.feature-card-icon
 	font-size 3rem
 	background feature-card-color
 	color feature-card-icon-color
 
-.feature-card-text,
-.payment-card-text
+.feature-card-text
 	vertical
 	color text-color
-
-.payment-amount
-	font-size 1.2rem
-	font-weight bold
-
-.payment-amount-converted
-	feature-card-footer
 
 .feature-cards-alternative-color
 	.feature-card-icon,

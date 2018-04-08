@@ -6,7 +6,7 @@ var items = []*arn.ShopItem{
 	// 1 month
 	&arn.ShopItem{
 		ID:    "pro-account-1",
-		Name:  "PRO Account (1 month)",
+		Name:  "PRO Account - 1 month",
 		Price: 300,
 		Description: `PRO status for 1 month.
 
@@ -29,7 +29,7 @@ Includes:
 	// 3 months
 	&arn.ShopItem{
 		ID:    "pro-account-3",
-		Name:  "PRO Account (3 months)",
+		Name:  "PRO Account - 3 months",
 		Price: 900,
 		Description: `PRO status for 1 anime season (3 months).
 
@@ -52,7 +52,7 @@ Includes:
 	// 6 months
 	&arn.ShopItem{
 		ID:    "pro-account-6",
-		Name:  "PRO Account (6 months)",
+		Name:  "PRO Account - 6 months",
 		Price: 1600,
 		Description: `PRO status for 2 anime seasons (6 months).
 
@@ -73,7 +73,7 @@ Includes:
 	},
 	&arn.ShopItem{
 		ID:    "pro-account-12",
-		Name:  "PRO Account (12 months)",
+		Name:  "PRO Account - 1 year",
 		Price: 3000,
 		Description: `PRO status for 4 anime seasons (12 months).
 
@@ -94,7 +94,7 @@ Includes:
 	},
 	&arn.ShopItem{
 		ID:    "pro-account-24",
-		Name:  "PRO Account (24 months)",
+		Name:  "PRO Account - 2 years",
 		Price: 5900,
 		Description: `PRO status for 8 anime seasons (24 months).
 

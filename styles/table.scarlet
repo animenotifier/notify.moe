@@ -7,10 +7,10 @@ mixin table-row
 	border-bottom-width 1px
 	border-bottom-style solid
 	border-bottom-color rgba(0, 0, 0, 0.05)
-	background-color transparent
+	background transparent
 
 	:hover
-		background-color table-row-hover-background
+		background table-row-hover-background
 
 	:last-child
 		border none

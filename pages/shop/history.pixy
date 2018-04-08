@@ -20,7 +20,7 @@ component PurchaseHistory(purchases []*arn.Purchase, user *arn.User)
 						PurchaseInfo(purchase)
 
 component PurchaseInfo(purchase *arn.Purchase)
-	td.item-icon
+	td.shop-item-icon
 		Icon(purchase.Item().Icon)
 	td= purchase.Item().Name
 	td.history-quantity= purchase.Quantity
