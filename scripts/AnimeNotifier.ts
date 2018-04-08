@@ -34,6 +34,7 @@ export default class AnimeNotifier {
 	diffCompletedForCurrentPath: boolean
 	lastReloadContentPath: string
 	currentSoundTrackId: string
+	etags: Map<string, string>
 
 	constructor(app: Application) {
 		this.app = app
@@ -195,7 +196,27 @@ export default class AnimeNotifier {
 		// Bind unload event
 		window.addEventListener("beforeunload", this.onBeforeUnload.bind(this))
 
-		// Download popular anime titles for the search
+		// Check etags of scripts and styles
+		this.etags = new Map<string, string>()
+
+		delay(2000).then(async () => {
+			let response = await fetch("/scripts")
+			let newETag = response.headers.get("ETag")
+			let oldETag = this.etags.get("/scripts")
+
+			this.etags.set("/scripts", newETag)
+			console.log("etags", this.etags)
+
+			if(!oldETag || !newETag) {
+				return
+			}
+
+			if(oldETag !== newETag) {
+				this.statusMessage.showInfo("A new version of the website is available. Please refresh the page.", -1)
+			}
+		})
+
+		// // Download popular anime titles for the search
 		// let response = await fetch("/api/popular/anime/titles/500")
 		// let titles = await response.json()
 		// let titleList = document.createElement("datalist")

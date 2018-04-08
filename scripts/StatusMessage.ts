@@ -17,6 +17,11 @@ export default class StatusMessage {
 		this.container.classList.remove("fade-out")
 		this.container.dataset.messageId = messageId
 
+		// Negative duration means we're displaying it forever until the user manually closes it
+		if(duration === -1) {
+			return
+		}
+
 		delay(duration || 4000).then(() => {
 			if(this.container.dataset.messageId !== messageId) {
 				return

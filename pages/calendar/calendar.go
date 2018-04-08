@@ -6,7 +6,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
-	"github.com/animenotifier/arn/validator"
+	"github.com/animenotifier/arn/validate"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -55,7 +55,7 @@ func Get(ctx *aero.Context) string {
 		}
 
 		for _, episode := range animeEpisodes.Items {
-			if !validator.IsValidDate(episode.AiringDate.Start) {
+			if !validate.Date(episode.AiringDate.Start) {
 				continue
 			}
 

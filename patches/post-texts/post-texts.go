@@ -13,7 +13,7 @@ func main() {
 	for post := range arn.StreamPosts() {
 		// Fix text
 		color.Yellow(post.Text)
-		post.Text = autocorrect.FixPostText(post.Text)
+		post.Text = autocorrect.PostText(post.Text)
 		color.Green(post.Text)
 
 		// Tags
