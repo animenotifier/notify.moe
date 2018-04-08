@@ -7,7 +7,7 @@ var items = []*arn.ShopItem{
 	&arn.ShopItem{
 		ID:    "pro-account-1",
 		Name:  "PRO Account (1 month)",
-		Price: 900,
+		Price: 300,
 		Description: `PRO status for 1 month.
 
 1 month equals 300 gems.

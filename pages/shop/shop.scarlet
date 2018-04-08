@@ -23,18 +23,10 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 
 // Colors
 .shop-item, .inventory-slot, .shop-history-item
-	[data-item-id="pro-account-3"]
-		.item-icon
-			color item-color-pro-account
-
-	[data-item-id="pro-account-6"]
-		.item-icon
-			color item-color-pro-account
-
-	[data-item-id="pro-account-12"]
-		.item-icon
-			color item-color-pro-account
-
+	[data-item-id="pro-account-1"],
+	[data-item-id="pro-account-3"],
+	[data-item-id="pro-account-6"],
+	[data-item-id="pro-account-12"],
 	[data-item-id="pro-account-24"]
 		.item-icon
 			color item-color-pro-account
