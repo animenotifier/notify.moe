@@ -14,7 +14,7 @@ export async function checkNewVersion(url: string, statusMessage: StatusMessage)
 		let response = await fetch(url)
 
 		if(!response.ok) {
-			console.warn("Error fetch", url)
+			console.warn("Error fetching", url)
 			return
 		}
 
