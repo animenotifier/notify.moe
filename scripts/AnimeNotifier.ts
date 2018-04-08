@@ -11,6 +11,7 @@ import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
+import { checkNewVersion } from "./NewVersionCheck"
 import * as actions from "./Actions"
 
 export default class AnimeNotifier {
@@ -34,7 +35,6 @@ export default class AnimeNotifier {
 	diffCompletedForCurrentPath: boolean
 	lastReloadContentPath: string
 	currentSoundTrackId: string
-	etags: Map<string, string>
 
 	constructor(app: Application) {
 		this.app = app
@@ -196,25 +196,9 @@ export default class AnimeNotifier {
 		// Bind unload event
 		window.addEventListener("beforeunload", this.onBeforeUnload.bind(this))
 
-		// Check etags of scripts and styles
-		this.etags = new Map<string, string>()
-
-		delay(2000).then(async () => {
-			let response = await fetch("/scripts")
-			let newETag = response.headers.get("ETag")
-			let oldETag = this.etags.get("/scripts")
-
-			this.etags.set("/scripts", newETag)
-			console.log("etags", this.etags)
-
-			if(!oldETag || !newETag) {
-				return
-			}
-
-			if(oldETag !== newETag) {
-				this.statusMessage.showInfo("A new version of the website is available. Please refresh the page.", -1)
-			}
-		})
+		// Periodically check etags of scripts and styles to let the user know about page updates
+		checkNewVersion("/scripts", this.statusMessage)
+		checkNewVersion("/styles", this.statusMessage)
 
 		// // Download popular anime titles for the search
 		// let response = await fetch("/api/popular/anime/titles/500")
