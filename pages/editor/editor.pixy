@@ -28,14 +28,6 @@ component Editor(url string, score int, scoreTitle string, scoreTypes map[string
 		a.footer-element(href="/editor/kitsu/new/anime") Kitsu
 
 component EditorTabs(url string, user *arn.User)
-	//- .tabs
-	//- 	Tab("Editor", "pencil", "/editor")
-	//- 	Tab("MAL", "exchange", "/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix())
-	//- 	Tab("Anime", "tv", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
-	//- 	Tab("Tracks", "music", "/editor/soundtracks/links")
-	//- 	Tab("Companies", "building", "/editor/companies/description")
-	//- 	Tab("Kitsu", "download", "/editor/kitsu/new/anime")
-
 	.corner-buttons-left
 		a.button(href="/editor")
 			Icon("arrow-left")
@@ -47,7 +39,13 @@ component EditorTabs(url string, user *arn.User)
 			Tab("Mappings", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
 			Tab("Images", "image", "/editor/anime/image/lowres" + user.Settings().Editor.Filter.Suffix())
 			Tab("Companies", "building", "/editor/anime/companies/studios" + user.Settings().Editor.Filter.Suffix())
+			Tab("Connections", "exchange", "/editor/anime/connections/relations" + user.Settings().Editor.Filter.Suffix())
 			Tab("Details", "search-plus", "/editor/anime/details/genres" + user.Settings().Editor.Filter.Suffix())
+	
+	if strings.Contains(url, "/editor/anime/connections")
+		.tabs
+			Tab("Relations", "exchange", "/editor/anime/connections/relations" + user.Settings().Editor.Filter.Suffix())
+			Tab("Characters", "users", "/editor/anime/connections/characters" + user.Settings().Editor.Filter.Suffix())
 	
 	if strings.Contains(url, "/editor/anime/details")
 		.tabs
