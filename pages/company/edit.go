@@ -25,7 +25,7 @@ func Edit(ctx *aero.Context) string {
 			"og:title":     company.Name.English,
 			"og:url":       "https://" + ctx.App.Config.Domain + company.Link(),
 			"og:site_name": "notify.moe",
-			"og:image":     company.Image,
+			// "og:image":     company.Image,
 		},
 	}
 

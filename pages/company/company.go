@@ -37,9 +37,9 @@ func Get(ctx *aero.Context) string {
 		},
 	}
 
-	if company.Image != "" {
-		openGraph.Tags["og:image"] = company.Image
-	}
+	// if company.Image != "" {
+	// 	openGraph.Tags["og:image"] = company.Image
+	// }
 
 	if description != "" {
 		openGraph.Tags["og:description"] = description
