@@ -32,16 +32,16 @@ func Get(ctx *aero.Context) string {
 
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":       track.Title.ByUser(user),
-			"og:description": track.MainAnime().Title.Canonical + " (" + strings.Join(descriptionTags, ", ") + ")",
-			"og:url":         "https://" + ctx.App.Config.Domain + track.Link(),
-			"og:site_name":   ctx.App.Config.Domain,
-			"og:type":        "music.song",
+			"og:title":     track.Title.ByUser(user),
+			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
+			"og:site_name": ctx.App.Config.Domain,
+			"og:type":      "music.song",
 		},
 	}
 
 	if track.MainAnime() != nil {
 		openGraph.Tags["og:image"] = track.MainAnime().ImageLink("large")
+		openGraph.Tags["og:description"] = track.MainAnime().Title.Canonical + " (" + strings.Join(descriptionTags, ", ") + ")"
 	}
 
 	if track.File != "" {
