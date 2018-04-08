@@ -11,7 +11,7 @@ import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
-import { checkNewVersion } from "./NewVersionCheck"
+import { checkNewVersionDelayed } from "./NewVersionCheck"
 import * as actions from "./Actions"
 
 export default class AnimeNotifier {
@@ -197,8 +197,8 @@ export default class AnimeNotifier {
 		window.addEventListener("beforeunload", this.onBeforeUnload.bind(this))
 
 		// Periodically check etags of scripts and styles to let the user know about page updates
-		checkNewVersion("/scripts", this.statusMessage)
-		checkNewVersion("/styles", this.statusMessage)
+		checkNewVersionDelayed("/scripts", this.statusMessage)
+		checkNewVersionDelayed("/styles", this.statusMessage)
 
 		// // Download popular anime titles for the search
 		// let response = await fetch("/api/popular/anime/titles/500")
