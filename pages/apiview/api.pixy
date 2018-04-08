@@ -1,7 +1,17 @@
 component API(types []string)
 	.api-docs-page
 		h1 API
+
+		h2 Endpoints
+		ul
+			li
+				strong REST: 
+				span https://notify.moe/api
+			li
+				strong GraphQL: 
+				span https://notify.moe/graphql
 		
+		h2 Types
 		table
 			//- thead
 			//- 	tr

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"reflect"
@@ -24,7 +23,6 @@ func init() {
 		// Bind name for the closure
 		typeName := name
 
-		fmt.Println(typeName)
 		rootQueryFields[typeName] = &graphql.Field{
 			Args: graphql.FieldConfigArgument{
 				"id": &graphql.ArgumentConfig{
