@@ -61,7 +61,7 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 				span Edited 
 				span.utc-date(data-date=track.Edited)
 				span  by 
-				span= track.EditedByUser().Nick
+				span= track.Editor().Nick
 			else
 				span Posted 
 				span.utc-date(data-date=track.Created)

@@ -16,7 +16,7 @@ component QuoteMainColumn(quote *arn.Quote, user *arn.User)
 			span Edited 
 			span.utc-date(data-date=quote.Edited)
 			span  by 
-			a(href=quote.EditedByUser().Link())= quote.EditedByUser().Nick
+			a(href=quote.Editor().Link())= quote.Editor().Nick
 		else
 			span Posted 
 			span.utc-date(data-date=quote.Created)

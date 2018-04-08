@@ -85,16 +85,16 @@ component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread)
 				.forum-search-result.mountable(data-mountable-type="forum")
 					.forum-search-result-header
 						a.forum-search-result-title(href=thread.Link())= thread.Title
-						if thread.Author().HasNick()
-							.forum-search-result-author= thread.Author().Nick
+						if thread.Creator().HasNick()
+							.forum-search-result-author= thread.Creator().Nick
 					.forum-search-result-sample= thread.Text
 
 			each post in posts
 				.forum-search-result.mountable(data-mountable-type="forum")
 					.forum-search-result-header
 						a.forum-search-result-title(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
-						if post.Author().HasNick()
-							.forum-search-result-author= post.Author().Nick
+						if post.Creator().HasNick()
+							.forum-search-result-author= post.Creator().Nick
 					.forum-search-result-sample= post.Text
 
 component SoundTrackSearchResults(tracks []*arn.SoundTrack)

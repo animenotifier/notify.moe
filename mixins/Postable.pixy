@@ -1,7 +1,7 @@
 component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
-	.post.mountable(id=strings.ToLower(post.Type()) + "-" + toString(post.ID()), data-highlight=post.Author().ID == highlightAuthorID, data-pro=post.Author().IsPro(), data-api="/api/" + strings.ToLower(post.Type()) + "/" + post.ID())
+	.post.mountable(id=strings.ToLower(post.Type()) + "-" + toString(post.ID()), data-highlight=post.Creator().ID == highlightAuthorID, data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.Type()) + "/" + post.ID())
 		.post-author
-			Avatar(post.Author())
+			Avatar(post.Creator())
 
 			//- if post.recipient && post.recipient.ID !== post.author.ID
 			//- 	a.user.post-recipient(href="/+" + post.recipient.nick, title=post.recipient.nick)
@@ -9,7 +9,7 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 		.post-content
 			div(id="render-" + post.ID())!= post.HTML()
 
-			if user != nil && user.ID == post.Author().ID
+			if user != nil && user.ID == post.Creator().ID
 				.post-edit-interface
 					if post.Type() == "Thread"
 						input.post-title-input.hidden(id="title-" + post.ID(), value=post.Title(), type="text", placeholder="Thread title")
@@ -30,7 +30,7 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 				.post-likes(id="likes-" + post.ID(), title="Likes")= len(post.Likes())
 
 				if user != nil
-					if user.ID != post.Author().ID
+					if user.ID != post.Creator().ID
 						if post.LikedBy(user.ID)
 							a.post-tool.post-unlike.action(id="unlike-" + post.ID(), title="Unlike", data-action="unlike", data-trigger="click")
 								Icon("thumbs-down")
@@ -38,7 +38,7 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 							a.post-tool.post-like.action(id="like-" + post.ID(), title="Like", data-action="like", data-trigger="click")
 								Icon("thumbs-up")
 
-					if user.ID == post.Author().ID
+					if user.ID == post.Creator().ID
 						a.post-tool.post-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID(), title="Edit")
 							Icon("pencil")
 

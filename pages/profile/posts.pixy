@@ -8,7 +8,7 @@ component LatestPosts(postables []arn.Postable, viewUser *arn.User, user *arn.Us
 	ProfileForumTabs(viewUser)
 	
 	if len(postables) > 0
-		h1.page-title= len(postables), " latest posts by ", postables[0].Author().Nick
+		h1.page-title= len(postables), " latest posts by ", postables[0].Creator().Nick
 		PostableList(postables, user)
 	else
 		p.no-data.mountable= viewUser.Nick + " hasn't written any posts yet."

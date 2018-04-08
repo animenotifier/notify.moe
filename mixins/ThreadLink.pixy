@@ -1,7 +1,7 @@
 component ThreadLink(thread *arn.Thread)
 	.thread-link.mountable(data-sticky=thread.Sticky)
 		.post-author.thread-author
-			Avatar(thread.Author())
+			Avatar(thread.Creator())
 		.thread-content-container
 			.thread-content
 				if thread.Sticky != 0
