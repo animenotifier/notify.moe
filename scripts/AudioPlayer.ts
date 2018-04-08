@@ -260,7 +260,7 @@ export default class AudioPlayer {
 		let trackInfoResponse = await fetch("/api/soundtrack/" + trackId)
 		let track = await trackInfoResponse.json()
 		this.trackLink.href = "/soundtrack/" + track.id
-		this.trackLink.innerText = track.title
+		this.trackLink.innerText = track.title.canonical || track.title.native
 
 		let animeId = ""
 

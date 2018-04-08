@@ -28,10 +28,10 @@ component SoundTrackMedia(track *arn.SoundTrack)
 
 component SoundTrackFooter(track *arn.SoundTrack)
 	.soundtrack-footer
-		if track.Title == ""
+		if track.NewTitle.ByUser(nil) == ""
 			a(href=track.Link() + "/edit") untitled
 		else
-			a(href=track.Link())= track.Title
+			a(href=track.Link())= track.NewTitle.ByUser(nil)
 		span  posted 
 		span.utc-date(data-date=track.Created)
 		span  by 

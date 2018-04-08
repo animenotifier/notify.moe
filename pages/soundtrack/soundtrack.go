@@ -32,7 +32,7 @@ func Get(ctx *aero.Context) string {
 
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":       track.Title,
+			"og:title":       track.NewTitle.ByUser(user),
 			"og:description": track.MainAnime().Title.Canonical + " (" + strings.Join(descriptionTags, ", ") + ")",
 			"og:url":         "https://" + ctx.App.Config.Domain + track.Link(),
 			"og:site_name":   ctx.App.Config.Domain,

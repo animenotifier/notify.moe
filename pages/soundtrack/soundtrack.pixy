@@ -2,10 +2,10 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 	SoundTrackTabs(track, user)
 
 	.soundtrack-full-page
-		if track.Title == ""
+		if track.NewTitle.ByUser(user) == ""
 			h1.mountable untitled
 		else
-			h1.mountable= track.Title
+			h1.mountable= track.NewTitle.ByUser(user)
 
 		.widget-form.soundtrack-media-list
 			each media in track.Media

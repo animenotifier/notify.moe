@@ -23,7 +23,7 @@ func Edit(ctx *aero.Context) string {
 
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{
-			"og:title":     track.Title,
+			"og:title":     track.NewTitle.ByUser(user),
 			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
 			"og:site_name": "notify.moe",
 			"og:type":      "music.song",
