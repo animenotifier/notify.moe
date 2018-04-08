@@ -15,7 +15,7 @@ component SoundTrackMedia(track *arn.SoundTrack)
 	if track.File != ""
 		.soundtrack-media
 			.soundtrack-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-soundtrack-id=track.ID)
-				img.soundtrack-image.lazy(data-src="https://img.youtube.com/vi/" + track.MediaByService("Youtube")[0].ServiceID + "/0.jpg", alt=track.NewTitle)
+				img.soundtrack-image.lazy(data-src="https://img.youtube.com/vi/" + track.MediaByService("Youtube")[0].ServiceID + "/0.jpg", alt=track.Title)
 				button.soundtrack-play-button
 					RawIcon("play")
 				
@@ -28,10 +28,10 @@ component SoundTrackMedia(track *arn.SoundTrack)
 
 component SoundTrackFooter(track *arn.SoundTrack)
 	.soundtrack-footer
-		if track.NewTitle.ByUser(nil) == ""
+		if track.Title.ByUser(nil) == ""
 			a(href=track.Link() + "/edit") untitled
 		else
-			a(href=track.Link())= track.NewTitle.ByUser(nil)
+			a(href=track.Link())= track.Title.ByUser(nil)
 		span  posted 
 		span.utc-date(data-date=track.Created)
 		span  by 

@@ -5,9 +5,9 @@ func main() {
 
 	// for track := range arn.StreamSoundTracks() {
 	// 	if arn.ContainsUnicodeLetters(track.Title) {
-	// 		track.NewTitle.Native = track.Title
+	// 		track.Title.Native = track.Title
 	// 	} else {
-	// 		track.NewTitle.Canonical = track.Title
+	// 		track.Title.Canonical = track.Title
 	// 	}
 
 	// 	track.Save()

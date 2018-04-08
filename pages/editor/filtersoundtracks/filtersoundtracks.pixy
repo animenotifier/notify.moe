@@ -13,7 +13,7 @@ component SoundTracksEditorList(tracks []*arn.SoundTrack, count int, url string,
 				tr.mountable
 					td= len(track.Likes)
 					td
-						a(href=track.Link(), target="_blank", rel="noopener")= track.NewTitle.ByUser(user)
+						a(href=track.Link(), target="_blank", rel="noopener")= track.Title.ByUser(user)
 					td
 						each media in track.Media
 							if media.Service == "Youtube"

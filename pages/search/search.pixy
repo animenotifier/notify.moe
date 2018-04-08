@@ -104,7 +104,7 @@ component SoundTrackSearchResults(tracks []*arn.SoundTrack)
 		ul.soundtrack-search
 			each track in tracks
 				li.mountable(data-mountable-type="track")
-					a(href=track.Link())= track.NewTitle.ByUser(nil)
+					a(href=track.Link())= track.Title.ByUser(nil)
 					span.soundtrack-search-anime= " - " + track.MainAnime().Title.Canonical
 
 component CompanySearchResults(companies []*arn.Company)
