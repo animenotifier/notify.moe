@@ -191,6 +191,9 @@ export default class AnimeNotifier {
 		// Notification manager
 		if(this.user) {
 			this.notificationManager.update()
+
+			// Periodically check notifications
+			setInterval(() => this.notificationManager.update(), 150000)
 		}
 
 		// Bind unload event
