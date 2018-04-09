@@ -305,6 +305,9 @@ func Configure(app *aero.Application) {
 
 	// Log
 	l.Page("/log", editlog.Get)
+	l.Page("/log/from/:index", editlog.Get)
+	l.Page("/user/:nick/log", editlog.Get)
+	l.Page("/user/:nick/log/from/:index", editlog.Get)
 
 	// Mixed
 	// l.Page("/database", database.Get)

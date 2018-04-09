@@ -125,4 +125,9 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 			a.button.profile-action(href="/+" + viewUser.Nick + "/recommended/anime")
 				Icon("archive")
 				span Recomms
+
+			if user != nil && (user.Role == "editor" || user.Role == "admin")
+				a.button.profile-action(href="/+" + viewUser.Nick + "/log")
+					Icon("edit")
+					span Log
 				
