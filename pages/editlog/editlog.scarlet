@@ -1,8 +1,18 @@
 .edit-log
-	max-width 1500px
+	display grid
+	grid-template-columns 100%
 
-	td
-		padding 0.25rem 0.5rem
+.edit-log-entry
+	table-row
+	horizontal
+
+.edit-log-header
+	horizontal
+	font-weight bold
+
+.edit-log-entry,
+.edit-log-header
+	padding 0.25rem 0
 
 .edit-log-object,
 .edit-log-key,
@@ -10,23 +20,32 @@
 	white-space nowrap
 
 .edit-log-user
+	horizontal
+	align-items center
+	flex-basis calc(avatar-size / 1.5 + 1rem)
+
 	.user-image
-		width calc(avatar-size / 2)
-		height calc(avatar-size / 2)
+		width calc(avatar-size / 1.5)
+		height calc(avatar-size / 1.5)
 		margin-right 0.5rem
 
-.edit-log-object
-	max-width 150px
-	clip-long-text
+.edit-log-user-link
+	horizontal
+	align-items center
 
+.edit-log-object,
+.edit-log-key,
 .edit-log-value
-	max-width 150px
+	display flex
+	align-items center
+	flex 1 1 150px
 	clip-long-text
 
 .edit-log-icon
 	display flex
 	justify-content center
 	align-items center
+	flex-basis 80px
 
 .edit-log-sub-icon
 	//
@@ -47,4 +66,21 @@
 	color hsl(214, 100%, 62%)
 
 .edit-log-date
+	display flex
+	align-items center
 	opacity 0.5
+	flex-basis 120px
+
+.edit-log-empty
+	opacity 0.25
+	pointer-events none
+
+< 800px
+	.edit-log-header
+		display none
+
+	.edit-log-date
+		display none
+
+	.edit-log-user
+		flex 0 0 calc(avatar-size / 2)

@@ -11,61 +11,74 @@ component EditLogPage(entries []*arn.EditLogEntry, nextIndex int, viewUser *arn.
 			LoadMore(nextIndex)
 
 component EditLog(entries []*arn.EditLogEntry, user *arn.User)
-	table.edit-log
-		thead
-			tr.mountable
-				th.text-center Action
-				th User
-				th Object
-				th Key
-				th Old
-				th New
-				th Date
-		tbody#load-more-target
-			EditLogScrollable(entries, user)
+	#load-more-target.edit-log
+		.edit-log-header.mountable
+			.edit-log-icon Action
+			.edit-log-user User
+			.edit-log-object Object
+			.edit-log-key Key
+			.edit-log-value Old
+			.edit-log-value New
+			.edit-log-date Date
+		
+		EditLogScrollable(entries, user)
 
 component EditLogScrollable(entries []*arn.EditLogEntry, user *arn.User)
 	each entry in entries
-		tr.mountable
-			td
-				.edit-log-icon(title=entry.Action)
-					if entry.Action == "create"
-						.edit-log-create
-							RawIcon("plus")
-					else if entry.Action == "delete"
-						.edit-log-delete
-							RawIcon("minus")
-					else if entry.Action == "edit" || entry.Action == "arrayAppend" || entry.Action == "arrayRemove"
-						.edit-log-change
-							RawIcon("pencil")
-						
-						if entry.Action == "arrayAppend"
+		.edit-log-entry.mountable
+			.edit-log-icon(title=entry.Action)
+				if entry.Action == "create"
+					.edit-log-create
+						RawIcon("plus")
+				else if entry.Action == "delete"
+					.edit-log-delete
+						RawIcon("minus")
+				else if entry.Action == "edit" || entry.Action == "arrayAppend" || entry.Action == "arrayRemove"
+					.edit-log-change
+						RawIcon("pencil")
+					
+					if entry.Action == "arrayAppend"
+						.edit-log-sub-icon.edit-log-add
+							RawIcon("plus-square")
+					else if entry.Action == "arrayRemove"
+						.edit-log-sub-icon.edit-log-remove
+							RawIcon("minus-square")
+					else
+						if entry.OldValue == "" && entry.NewValue != ""
 							.edit-log-sub-icon.edit-log-add
-								RawIcon("plus-square")
-						else if entry.Action == "arrayRemove"
+								RawIcon("plus-circle")
+						else if entry.OldValue != "" && entry.NewValue == ""
 							.edit-log-sub-icon.edit-log-remove
-								RawIcon("minus-square")
-						else
-							if entry.OldValue == "" && entry.NewValue != ""
-								.edit-log-sub-icon.edit-log-add
-									RawIcon("plus-circle")
-							else if entry.OldValue != "" && entry.NewValue == ""
-								.edit-log-sub-icon.edit-log-remove
-									RawIcon("minus-circle")
+								RawIcon("minus-circle")
 
-			td
-				.edit-log-user
-					Avatar(entry.User())
-			td.edit-log-object
-				if strings.HasPrefix(arn.GetObjectTitle(entry.ObjectType, entry.ObjectID), "<not found:")
+			.edit-log-user
+				a.edit-log-user-link(href=entry.User().Link(), title=entry.User().Nick)
+					AvatarNoLink(entry.User())
+			
+			.edit-log-object
+				if arn.GetObjectTitle(entry.ObjectType, entry.ObjectID) == ""
+					.edit-log-empty empty
+				else if strings.HasPrefix(arn.GetObjectTitle(entry.ObjectType, entry.ObjectID), "<not found:")
 					span= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
 				else
-					a(href="/" + strings.ToLower(entry.ObjectType) + "/" + entry.ObjectID, target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
-			td.edit-log-key
+					a(href=arn.GetObjectLink(entry.ObjectType, entry.ObjectID), target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
+			
+			.edit-log-key
 				span= entry.ObjectType
 
 				if entry.Key != ""
 					span= "." + entry.Key
-			td.edit-log-value(title=entry.OldValue)= entry.OldValue
-			td.edit-log-value(title=entry.NewValue)= entry.NewValue
-			td.edit-log-date.utc-date(data-date=entry.Created)
+			
+			.edit-log-value(title=entry.OldValue)
+				if entry.OldValue == ""
+					.edit-log-empty empty
+				else
+					span= entry.OldValue
+			
+			.edit-log-value(title=entry.NewValue)
+				if entry.NewValue == ""
+					.edit-log-empty empty
+				else
+					span= entry.NewValue
+
+			.edit-log-date.utc-date(data-date=entry.Created)

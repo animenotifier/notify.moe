@@ -1,0 +1,19 @@
+component AnimeRelations(anime *arn.Anime, user *arn.User, standAlonePage bool)
+	if standAlonePage
+		h1.mountable
+			a(href=anime.Link())= anime.Title.ByUser(user)
+	
+	if anime.Relations() != nil && len(anime.Relations().Items) > 0
+		section.anime-section.mountable
+			h3.anime-section-name
+				a(href=anime.Relations().Link()) Relations
+
+			.anime-relations
+				each relation in anime.Relations().Items
+					if relation.Anime() != nil
+						a.anime-relation.mountable(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user), data-mountable-type="relation")
+							img.anime-relation-image.lazy(data-src=relation.Anime().ImageLink("small"), data-webp="true", data-color=relation.Anime().AverageColor(), alt=relation.Anime().Title.ByUser(user))
+							.anime-relation-type= relation.HumanReadableType()
+							.anime-relation-year
+								if relation.Anime().StartDate != ""
+									span= relation.Anime().StartDate[:4]

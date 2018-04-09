@@ -25,10 +25,10 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 					AnimeGenres(anime)
 					AnimeActions(anime, listItem, user)
 
-	AnimeCharacters(anime)
-	AnimeRelations(anime, user)
-	AnimeTracks(anime, tracks)
-	AnimeEpisodes(anime, episodes, user)
+	AnimeCharacters(anime, user, false)
+	AnimeRelations(anime, user, false)
+	AnimeTracks(anime, tracks, user, false)
+	AnimeEpisodes(anime, episodes, user, false)
 
 component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	AnimeTrailer(anime)
@@ -142,20 +142,6 @@ component AnimeGenres(anime *arn.Anime)
 		each genre in anime.Genres
 			a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="footer")
 				span= genre
-
-component AnimeRelations(anime *arn.Anime, user *arn.User)
-	if anime.Relations() != nil && len(anime.Relations().Items) > 0
-		section.anime-section.mountable
-			h3.anime-section-name Relations
-			.anime-relations
-				each relation in anime.Relations().Items
-					if relation.Anime() != nil
-						a.anime-relation.mountable(href=relation.Anime().Link(), title=relation.Anime().Title.ByUser(user), data-mountable-type="relation")
-							img.anime-relation-image.lazy(data-src=relation.Anime().ImageLink("small"), data-webp="true", data-color=relation.Anime().AverageColor(), alt=relation.Anime().Title.ByUser(user))
-							.anime-relation-type= relation.HumanReadableType()
-							.anime-relation-year
-								if relation.Anime().StartDate != ""
-									span= relation.Anime().StartDate[:4]
 
 component AnimeTrailer(anime *arn.Anime)
 	if len(anime.Trailers) > 0 && anime.Trailers[0].Service == "Youtube" && anime.Trailers[0].ServiceID != ""

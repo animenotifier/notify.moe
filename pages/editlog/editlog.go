@@ -14,7 +14,7 @@ import (
 
 const (
 	entriesFirstLoad = 120
-	entriesPerScroll = 30
+	entriesPerScroll = 40
 )
 
 // Get edit log.

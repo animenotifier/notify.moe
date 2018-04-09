@@ -1,7 +1,12 @@
-component AnimeTracks(anime *arn.Anime, tracks []*arn.SoundTrack)
+component AnimeTracks(anime *arn.Anime, tracks []*arn.SoundTrack, user *arn.User, standAlonePage bool)
+	if standAlonePage
+		h1.mountable
+			a(href=anime.Link())= anime.Title.ByUser(user)
+	
 	if len(tracks) > 0
 		.anime-section.mountable
-			h3.anime-section-name Tracks
+			h3.anime-section-name
+				a(href="/anime/" + anime.ID + "/tracks") Tracks
 
 			.soundtracks.anime-soundtracks
 				each track in tracks

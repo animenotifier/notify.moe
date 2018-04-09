@@ -1,11 +1,15 @@
-component AnimeCharacters(anime *arn.Anime)
-	//- AnimeTabs(anime)
+component AnimeCharacters(anime *arn.Anime, user *arn.User, standAlonePage bool)
+	if standAlonePage
+		h1.mountable
+			a(href=anime.Link())= anime.Title.ByUser(user)
 
 	if anime.Characters() != nil && len(anime.Characters().Items) > 0
-		.anime-section
-			h3.anime-section-name Characters
+		.anime-section.mountable
+			h3.anime-section-name
+				a(href=anime.Characters().Link()) Characters
+			
 			.characters
 				each character in anime.Characters().Items
-					if character.Role == "main" && character.Character() != nil
+					if (character.Role == "main" || standAlonePage) && character.Character() != nil
 						.mountable(data-mountable-type="character")
 							Character(character.Character())

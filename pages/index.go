@@ -118,6 +118,7 @@ func Configure(app *aero.Application) {
 	l.Page("/anime/:id/episodes", anime.Episodes)
 	l.Page("/anime/:id/characters", anime.Characters)
 	l.Page("/anime/:id/tracks", anime.Tracks)
+	l.Page("/anime/:id/relations", anime.Relations)
 	l.Page("/anime/:id/episode/:episode-number", episode.Get)
 
 	// Anime redirects
