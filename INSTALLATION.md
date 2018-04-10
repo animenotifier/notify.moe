@@ -9,7 +9,15 @@
 * Install [Ubuntu](https://www.ubuntu.com/) or [MacOS](https://en.wikipedia.org/wiki/MacOS)
 * Install [Go](https://golang.org/dl/) (1.9 or higher)
 * Install [TypeScript](https://www.typescriptlang.org/) (2.6 or higher)
-* Optional: [Git LFS](https://git-lfs.github.com/) if you want the video files
+* Install [Git LFS](https://git-lfs.github.com/)
+
+## Check
+
+```bash
+go version
+tsc --version
+git lfs version
+```
 
 ## Download the repository
 
