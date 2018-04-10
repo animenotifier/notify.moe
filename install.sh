@@ -31,7 +31,9 @@ else
 fi
 
 echo "Looks like the prerequisites were installed correctly!"
-echo "---"
+
+# Use sudo hero to request permissions for later
+sudo echo "---"
 
 # Clone and build main repository
 go get -v github.com/animenotifier/notify.moe/...
