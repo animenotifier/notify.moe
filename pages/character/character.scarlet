@@ -45,8 +45,7 @@
 .character-quotes
 	vertical
 
-.character-quote,
-.character-main-quote
+.character-quote
 	footer,
 	.quote-footer
 		display none
