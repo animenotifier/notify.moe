@@ -14,7 +14,7 @@ You can take a look at this Youtube video if you're interested in contributing:
 
 ## Links
 
+- [About](ABOUT.md)
 - [Issues](https://github.com/animenotifier/notify.moe/projects/10)
 - [Code Style](CODE_STYLE.md)
-- [Contributing](CONTRIBUTING.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
