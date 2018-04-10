@@ -26,7 +26,7 @@
 
 #audio-player-anime-image
 	width 100%
-	transform translateY(0%)
+	transform translateY(0)
 	will-change transform
 	animation bounce-up-down 45s linear infinite
 
@@ -38,7 +38,7 @@
 
 animation bounce-up-down
 	50%
-		transform translateY(-30%)
+		transform translateY(-30%) rotate(0.002deg)
 
 #audio-player-track-title
 	width 100%
