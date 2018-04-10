@@ -36,7 +36,7 @@ component UserLists(groups []*utils.UserList, url string)
 component StaffRecruitment
 	.footer.mountable
 		p
-			a(href="https://github.com/animenotifier/notify.moe/blob/go/INSTALLATION.md", target="_blank", rel="noopener") Interested in contributing code?
+			a(href="https://github.com/animenotifier/notify.moe#installation", target="_blank", rel="noopener") Interested in contributing code?
 			br
 			a(href="https://discord.gg/0kimAmMCeXGXuzNF", target="_blank", rel="noopener") Interested in editing data?
 

@@ -4,4 +4,4 @@ Please get in contact with the team on the [Anime Notifier Discord](https://disc
 We're willing to help with installations and how to get started with contributions.
 There are no stupid questions so feel free to ask anything if you encounter any troubles.
 
-If you'd like to install this project locally, take a look at the [Installation](INSTALLATION.md) guide.
+If you'd like to install this project locally, take a look at the [Installation](README.md#installation) guide.
