@@ -237,10 +237,6 @@ var routeTests = map[string][]string{
 		"/api/user/4J6qpK1ve",
 	},
 
-	"/api/emailtouser/:id": []string{
-		"/api/emailtouser/e.urbach@gmail.com",
-	},
-
 	"/api/googletouser/:id": []string{
 		"/api/googletouser/106530160120373282283",
 	},
@@ -370,6 +366,7 @@ var routeTests = map[string][]string{
 	"/user/:nick/edit":                               nil,
 	"/api/test/notification":                         nil,
 	"/api/paypal/payment/create":                     nil,
+	"/api/emailtouser/:id":                           nil,
 	"/api/userfollows/:id/get/:item":                 nil,
 	"/api/userfollows/:id/get/:item/:property":       nil,
 	"/api/pushsubscriptions/:id/get/:item":           nil,
