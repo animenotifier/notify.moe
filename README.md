@@ -19,9 +19,13 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 
 * Start the web server in notify.moe directory using: `run`
 * In your browser, import the file `security/default/rootCA.pem` as a trusted Root authority
-* Open `https://beta.notify.moe`
+* Open `https://beta.notify.moe` which resolves to localhost
+
+![Anime Notifier Beta](https://puu.sh/A08nW/3a0b7c4490.png)
 
 ## Youtube guide
+
+You can take a look at this Youtube video if you're interested in contributing:
 
 [![notify.moe Source Code Guide](https://i1.ytimg.com/vi/c6e-F51e_8w/maxresdefault.jpg)](https://www.youtube.com/watch?v=c6e-F51e_8w&amp=&t=3m42s)
 
