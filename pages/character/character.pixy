@@ -1,4 +1,4 @@
-component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, user *arn.User)
+component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, mainQuote *arn.Quote, user *arn.User)
 	.character-page
 		.character-left-column
 			.character-header
@@ -13,7 +13,9 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							Japanese(character.Name.Japanese)
 						else
 							Japanese("日本語の名前無し")
-					
+					if mainQuote != nil	
+						.character-quote
+							Quote(mainQuote)
 					.character-description.mountable!= markdown.Render(character.Description)
 			
 					h3.mountable Anime
