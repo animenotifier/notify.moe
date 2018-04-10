@@ -37,6 +37,7 @@ a
 
 img
 	backface-visibility hidden
+	color transparent
 
 .hidden
 	display none !important
