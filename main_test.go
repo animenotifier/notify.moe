@@ -28,8 +28,12 @@ func TestRouteStatusCodes(t *testing.T) {
 			// Record the response without actually starting the server
 			responseRecorder := httptest.NewRecorder()
 			app.Handler().ServeHTTP(responseRecorder, request)
+			status := responseRecorder.Code
 
-			if status := responseRecorder.Code; status != http.StatusOK {
+			switch status {
+			case 200, 302:
+				// 200 and 302 are allowed
+			default:
 				panic(fmt.Errorf("%s | Wrong status code | %v instead of %v", example, status, http.StatusOK))
 			}
 		}

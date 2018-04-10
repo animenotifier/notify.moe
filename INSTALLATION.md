@@ -11,7 +11,7 @@
 * Install [TypeScript](https://www.typescriptlang.org/) (2.6 or higher)
 * Install [Git LFS](https://git-lfs.github.com/)
 
-## Check
+## Confirm that prerequisites are installed
 
 ```bash
 go version
@@ -19,29 +19,13 @@ tsc --version
 git lfs version
 ```
 
-## Download the repository
+## Start the installation
 
-* `go get github.com/animenotifier/notify.moe/...`
+```bash
+curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh | sudo bash
+```
 
-## Build all
-
-* `cd $GOPATH/src/github.com/animenotifier/notify.moe`
-* `make all`
-
-## Browser
-
-* `make ports` to set up local port forwarding *(80 to 4000, 443 to 4001)*
-* `make browser` to start Google Chrome
-
-## Database
-
-* `git clone https://github.com/animenotifier/database ~/.aero/db/arn`
-
-## Hosts
-
-* Add `127.0.0.1 beta.notify.moe` to `/etc/hosts`
-
-## Run
+## Run the server
 
 * Start the web server in notify.moe directory: `run`
 * Open `https://beta.notify.moe` which should now resolve to localhost
