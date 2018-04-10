@@ -11,10 +11,11 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 				.character-image-container.mountable
 					img.character-image-fullsize(src=character.ImageLink("large"), alt=character.Name.Canonical)
 
-					.buttons
-						a.button(href=character.Link() + "/edit")
-							Icon("pencil")
-							span Edit character
+					if user != nil && (user.Role == "editor" || user.Role == "admin")
+						.buttons
+							a.button(href=character.Link() + "/edit")
+								Icon("pencil")
+								span Edit character
 				
 				.character-description-container
 					h1.character-name.mountable= character.Name.Canonical
