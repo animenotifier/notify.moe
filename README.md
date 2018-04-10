@@ -12,7 +12,7 @@
 ### Start the installation
 
 ```bash
-curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh | sudo bash
+curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh | bash
 ```
 
 ### Run the server
