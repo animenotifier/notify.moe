@@ -27,6 +27,7 @@
 #audio-player-anime-image
 	width 100%
 	transform translateY(0%)
+	will-change transform
 	animation bounce-up-down 45s linear infinite
 
 	// The element-found class doesn't set opacity,
