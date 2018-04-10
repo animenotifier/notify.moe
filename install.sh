@@ -32,7 +32,7 @@ fi
 
 echo "Looks like the prerequisites were installed correctly!"
 
-# Use sudo hero to request permissions for later
+# Use sudo here to request permissions for later
 sudo echo "---"
 
 # Clone and build main repository
