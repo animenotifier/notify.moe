@@ -27,6 +27,7 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 
 ## Links
 
+- [About](ABOUT.md)
 - [Issues](https://github.com/animenotifier/notify.moe/projects/10)
 - [Code Style](CODE_STYLE.md)
 - [Contributing](CONTRIBUTING.md)
