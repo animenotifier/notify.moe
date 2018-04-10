@@ -46,7 +46,16 @@ git clone https://github.com/animenotifier/database ~/.aero/db/arn
 make ports
 
 # Add "127.0.0.1 beta.notify.moe" to /etc/hosts
-sudo -- sh -c -e "echo '127.0.0.1 beta.notify.moe' >> /etc/hosts"
+if grep -Fxq "127.0.0.1 beta.notify.moe" /etc/hosts; then
+	echo "beta.notify.moe already resolves to localhost"
+else
+	sudo -- sh -c -e "echo '127.0.0.1 beta.notify.moe' >> /etc/hosts"
+	echo "beta.notify.moe now resolves to localhost"
+fi
 
 # Test
 make test
+
+# Finished
+echo "Finished installation."
+echo "You can now execute the 'run' command and open https://beta.notify.moe in your browser."
