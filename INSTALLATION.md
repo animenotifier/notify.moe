@@ -7,17 +7,9 @@
 ## Prerequisites
 
 * Install [Ubuntu](https://www.ubuntu.com/) or [MacOS](https://en.wikipedia.org/wiki/MacOS)
-* Install [Go](https://golang.org/dl/) (1.9 or higher)
-* Install [TypeScript](https://www.typescriptlang.org/) (2.6 or higher)
+* Install [Go](https://golang.org/dl/)
+* Install [TypeScript](https://www.typescriptlang.org/)
 * Install [Git LFS](https://git-lfs.github.com/)
-
-## Confirm that prerequisites are installed
-
-```bash
-go version
-tsc --version
-git lfs version
-```
 
 ## Start the installation
 
@@ -27,5 +19,6 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 
 ## Run the server
 
-* Start the web server in notify.moe directory: `run`
-* Open `https://beta.notify.moe` which should now resolve to localhost
+* Start the web server in notify.moe directory using: `run`
+* In your browser, import the file `security/default/rootCA.pem` as a trusted Root authority
+* Open `https://beta.notify.moe`
