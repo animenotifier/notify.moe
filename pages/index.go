@@ -136,6 +136,8 @@ func Configure(app *aero.Application) {
 
 	// Characters
 	l.Page("/character/:id", character.Get)
+	l.Page("/character/:id/edit", character.Edit)
+	l.Page("/character/:id/history", character.History)
 
 	// Quotes
 	l.Page("/quote/:id", quote.Get)

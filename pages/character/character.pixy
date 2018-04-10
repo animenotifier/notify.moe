@@ -1,9 +1,20 @@
+component CharacterTabs(character *arn.Character, user *arn.User)
+	.tabs
+		Tab("Character", "user", character.Link())
+		Tab("Edit", "pencil", character.Link() + "/edit")
+		Tab("History", "history", character.Link() + "/history")
+
 component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, mainQuote *arn.Quote, user *arn.User)
 	.character-page
 		.character-left-column
 			.character-header
 				.character-image-container.mountable
 					img.character-image-fullsize(src=character.ImageLink("large"), alt=character.Name.Canonical)
+
+					.buttons
+						a.button(href=character.Link() + "/edit")
+							Icon("pencil")
+							span Edit character
 				
 				.character-description-container
 					h1.character-name.mountable= character.Name.Canonical
@@ -11,8 +22,6 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					.anime-alternative-title.mountable
 						if character.Name.Japanese != ""
 							Japanese(character.Name.Japanese)
-						else
-							Japanese("日本語の名前無し")
 					
 					if mainQuote != nil
 						.character-quote
