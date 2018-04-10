@@ -200,7 +200,6 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			return
 		}
 
-		// TODO: Render bool type
 		b.WriteString(components.InputBool(idPrefix+field.Name, fieldValue.Bool(), field.Name, field.Tag.Get("tooltip")))
 		return
 	}

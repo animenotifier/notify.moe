@@ -37,14 +37,9 @@ func Get(ctx *aero.Context) string {
 	})
 
 	// Quotes
-	var mainQuote *arn.Quote
+	mainQuote := character.MainQuote()
 	quotes := character.Quotes()
-	for i, quote := range quotes {
-		if quote.IsMainQuote {
-			mainQuote = quote
-			quotes = append(quotes[:i], quotes[i+1:]...)
-		}
-	}
+
 	arn.SortQuotesPopularFirst(quotes)
 
 	// Set OpenGraph attributes
