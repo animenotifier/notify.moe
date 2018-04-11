@@ -5,6 +5,10 @@ import (
 	"sort"
 	"time"
 
+	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
+
 	"github.com/aerogo/http/client"
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
