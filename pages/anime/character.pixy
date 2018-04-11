@@ -1,11 +1,11 @@
 component Character(character *arn.Character)
 	a.character(href="/character/" + character.ID)
-		img.character-image.lazy(data-src=character.ImageLink("medium"), alt=character.Name.Canonical, title=character.Name.Canonical)
+		img.character-image.lazy(data-src=character.ImageLink("medium"), alt=character.Name.Canonical)
 		.anime-grid-title
 			.anime-grid-title-text= character.Name.Canonical
 
 component CharacterSmall(character *arn.Character)
 	a.character(href="/character/" + character.ID)
-		img.character-image.character-image-small.lazy(data-src=character.ImageLink("small"), alt=character.Name.Canonical, title=character.Name.Canonical)
+		img.character-image.character-image-small.lazy(data-src=character.ImageLink("small"), alt=character.Name.Canonical)
 		.anime-grid-title
 			.anime-grid-title-text= character.Name.Canonical
