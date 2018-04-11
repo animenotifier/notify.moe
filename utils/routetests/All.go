@@ -188,7 +188,15 @@ var routeTests = map[string][]string{
 	},
 
 	"/character/:id": []string{
-		"/character/6556",
+		"/character/dfrNQrmmg-",
+	},
+
+	"/kitsu/character/:id": []string{
+		"/kitsu/character/6556",
+	},
+
+	"/mal/character/:id": []string{
+		"/mal/character/498",
 	},
 
 	"/compare/animelist/:nick-1/:nick-2": []string{
