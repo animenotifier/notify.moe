@@ -286,7 +286,7 @@ var routeTests = map[string][]string{
 	},
 
 	"/api/character/:id": []string{
-		"/api/character/6556",
+		"/api/character/dfrNQrmmg-",
 	},
 
 	"/api/company/:id": []string{
@@ -372,6 +372,8 @@ var routeTests = map[string][]string{
 	"/notifications":                                 nil,
 	"/user/:nick/notifications":                      nil,
 	"/user/:nick/edit":                               nil,
+	"/user/:nick/log":                                nil,
+	"/user/:nick/log/from/:index":                    nil,
 	"/api/test/notification":                         nil,
 	"/api/paypal/payment/create":                     nil,
 	"/api/emailtouser/:id":                           nil,
