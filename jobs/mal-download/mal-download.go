@@ -15,7 +15,7 @@ const (
 	// The maximum age of files we accept until we force a refresh.
 	maxAge               = 7 * 24 * time.Hour
 	delayBetweenRequests = 1100 * time.Millisecond
-	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.166 Safari/537.36"
+	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
 )
 
 func main() {
@@ -36,6 +36,9 @@ func main() {
 
 	// We don't need the database anymore
 	arn.Node.Close()
+
+	// Create files directory if it's missing
+	os.Mkdir("files", 0777)
 
 	// Create crawler
 	malCrawler := crawler.New(
