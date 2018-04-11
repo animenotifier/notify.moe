@@ -42,7 +42,7 @@ cd $GOPATH/src/github.com/animenotifier/notify.moe
 make all
 
 # Database
-git clone https://github.com/animenotifier/database ~/.aero/db/arn
+git clone --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn
 
 # Configure
 make ports
