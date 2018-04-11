@@ -15,8 +15,8 @@ component ProUsers(users []*arn.User, url string)
 		each user in users
 			a.profile-image-container.mountable(href=user.Link())
 				ProfileImage(user)
-				.anime-grid-title
-					.anime-grid-title-text= user.Nick
+				.image-title
+					.image-title-text= user.Nick
 	
 	.footer.mountable
 		p We are thankful to everyone supporting the site!

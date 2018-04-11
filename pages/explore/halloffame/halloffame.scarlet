@@ -43,10 +43,10 @@
 	height anime-image-large-height
 	border-radius ui-element-border-radius
 
-	.anime-grid-title
+	.image-title
 		font-size 1.2rem
 		padding 1rem 0.75rem
 
 	:hover
-		.anime-grid-title
+		.image-title
 			opacity 1

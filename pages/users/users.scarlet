@@ -19,7 +19,7 @@
 		box-shadow shadow-light
 
 		:hover
-			.anime-grid-title
+			.image-title
 				opacity 1
 
 .user

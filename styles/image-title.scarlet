@@ -1,0 +1,19 @@
+.image-title
+	opacity 0
+	position absolute
+	bottom 0
+	left 0
+	width 100%
+	padding 0.7rem 0.5rem
+	background linear-gradient(to top, hsla(0, 0%, 0%, 0.8), hsla(0, 0%, 0%, 0))
+	border-bottom-left-radius ui-element-border-radius
+	border-bottom-right-radius ui-element-border-radius
+	pointer-events none
+	default-transition
+
+.image-title-text
+	text-align center
+	color white
+	text-shadow 0 0 3px black
+	font-size 80%
+	line-height 1.8em

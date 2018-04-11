@@ -9,7 +9,7 @@
 	transform scale(1)
 
 	:hover
-		.anime-grid-title
+		.image-title
 			opacity 1
 
 .character-image
