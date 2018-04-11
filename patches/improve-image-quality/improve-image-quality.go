@@ -78,10 +78,7 @@ func (area *Area) AverageColor() color.Color {
 }
 
 const (
-	tolerance           = uint32(3000)
-	hueTolerance        = 0.1
-	lightnessTolerance  = 0.1
-	saturationTolerance = 0.1
+	tolerance = uint32(3000)
 )
 
 func diffAbs(a uint32, b uint32) uint32 {
@@ -97,7 +94,8 @@ func ImproveQuality(img image.Image) *image.NRGBA {
 	width := img.Bounds().Dx()
 	height := img.Bounds().Dy()
 	clone := image.NewNRGBA(image.Rect(0, 0, width, height))
-	hueAreas := []Area{}
+	areas := []Area{}
+	areaIndexMap := make([]int, width*height)
 
 	for x := 0; x < width; x++ {
 		for y := 0; y < height; y++ {
@@ -106,8 +104,8 @@ func ImproveQuality(img image.Image) *image.NRGBA {
 			areaIndex := -1
 
 			// Find similar area
-			for i := 0; i < len(hueAreas); i++ {
-				area := hueAreas[i]
+			for i := 0; i < len(areas); i++ {
+				area := areas[i]
 				avgR, avgG, avgB, _ := area.AverageColor().RGBA()
 
 				// Is the color similar?
@@ -119,18 +117,108 @@ func ImproveQuality(img image.Image) *image.NRGBA {
 
 			// Insert new area
 			if areaIndex == -1 {
-				areaIndex = len(hueAreas)
-				hueAreas = append(hueAreas, Area{})
+				areaIndex = len(areas)
+				areas = append(areas, Area{})
 			}
 
-			hueAreas[areaIndex].Add(x, y, r, g, b, a)
+			areaIndexMap[y*width+x] = areaIndex
+			areas[areaIndex].Add(x, y, r, g, b, a)
 		}
 	}
 
-	fmt.Println(len(hueAreas), "areas")
+	fmt.Println(len(areas), "areas")
+
+	// Reduce noise
+	noiseCount := 0
+
+	for r := 0; r < 30; r++ {
+		for areaIndex, area := range areas {
+			removals := []int{}
+
+			for i := 0; i < len(area.Pixels); i++ {
+				// If pixel is surrounded by 4 different areas, remove it
+				pixel := area.Pixels[i]
+				x := pixel.X
+				y := pixel.Y
+				left := areaIndex
+				right := areaIndex
+				top := areaIndex
+				bottom := areaIndex
+
+				if x > 0 {
+					left = areaIndexMap[y*width+(x-1)]
+				}
+
+				if x < width-1 {
+					right = areaIndexMap[y*width+(x+1)]
+				}
+
+				if y > 0 {
+					top = areaIndexMap[(y-1)*width+x]
+				}
+
+				if y < height-1 {
+					bottom = areaIndexMap[(y+1)*width+x]
+				}
+
+				differentNeighbors := 0
+
+				if left != areaIndex {
+					differentNeighbors++
+				}
+
+				if right != areaIndex {
+					differentNeighbors++
+				}
+
+				if top != areaIndex {
+					differentNeighbors++
+				}
+
+				if bottom != areaIndex {
+					differentNeighbors++
+				}
+
+				// Determine surrounding area
+				areaIndexScore := map[int]int{}
+				areaIndexScore[left]++
+				areaIndexScore[right]++
+				areaIndexScore[top]++
+				areaIndexScore[bottom]++
+
+				newAreaIndex := -1
+				bestScore := 0
+
+				for checkIndex, score := range areaIndexScore {
+					if score > bestScore {
+						bestScore = score
+						newAreaIndex = checkIndex
+					}
+				}
+
+				if differentNeighbors == 4 && bestScore >= 3 {
+					noiseCount++
+					removals = append(removals, i)
+
+					// Add to surrounding area
+					r, g, b, a := img.At(x, y).RGBA()
+					areas[newAreaIndex].Add(x, y, r, g, b, a)
+				}
+			}
+
+			offset := 0
+
+			for _, removal := range removals {
+				area.Pixels = append(area.Pixels[:removal-offset], area.Pixels[removal-offset+1:]...)
+				offset++
+			}
+		}
+	}
+
+	fmt.Println(noiseCount, "noise pixels")
 
 	// Build image from areas
-	for _, area := range hueAreas {
+	for _, area := range areas {
 		avgColor := area.AverageColor()
 
 		for _, pixel := range area.Pixels {
