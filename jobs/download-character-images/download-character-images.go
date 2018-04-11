@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"sort"
 	"time"
 
@@ -49,6 +50,11 @@ func download(characterID string) {
 
 	if err != nil {
 		color.Red(err.Error())
+		return
+	}
+
+	if response.StatusCode() != http.StatusOK {
+		color.Red("Status: %d", response.StatusCode())
 		return
 	}
 
