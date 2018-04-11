@@ -9,13 +9,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 		.character-left-column
 			.character-header
 				.character-image-container.mountable
-					img.character-image-fullsize(src=character.ImageLink("large"), alt=character.Name.Canonical)
-
-					if user != nil && (user.Role == "editor" || user.Role == "admin")
-						.buttons
-							a.button(href=character.Link() + "/edit")
-								Icon("pencil")
-								span Edit character
+					img.character-image-large.lazy(data-src=character.ImageLink("large"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.Canonical)
 				
 				.character-description-container
 					h1.character-name.mountable= character.Name.Canonical
@@ -29,6 +23,15 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							Quote(mainQuote)
 					
 					.character-description.mountable!= markdown.Render(character.Description)
+
+					if user != nil && (user.Role == "editor" || user.Role == "admin")
+						.anime-summary-footer-container
+							.anime-summary-footer
+								.spacer
+								.buttons.anime-buttons
+									a.button.mountable(href=character.Link() + "/edit")
+										Icon("pencil")
+										span Edit character
 			
 					h3.mountable Anime
 

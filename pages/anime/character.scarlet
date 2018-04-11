@@ -9,10 +9,8 @@
 	transform scale(1)
 
 	:hover
-		transform scale(1.05)
-
-		// .character-name
-		// 	opacity 1
+		.anime-grid-title
+			opacity 1
 
 .character-image
 	border-radius 5%

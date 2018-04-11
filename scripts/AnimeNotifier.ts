@@ -557,6 +557,8 @@ export default class AnimeNotifier {
 	}
 
 	lazyLoadImage(element: HTMLImageElement) {
+		let pixelRatio = window.devicePixelRatio
+
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
 			let dataSrc = element.dataset.src
@@ -577,9 +579,11 @@ export default class AnimeNotifier {
 				extension = dataSrc.substring(dotPos)
 			}
 
-			// Anime images on Retina displays
-			if(base.includes("/anime/") && window.devicePixelRatio > 1) {
-				base += "@2"
+			// Anime and character images on Retina displays
+			if(pixelRatio > 1) {
+				if(base.includes("/anime/") || (base.includes("/characters/") && !base.includes("/large/"))) {
+					base += "@2"
+				}
 			}
 
 			let finalSrc = base + extension
