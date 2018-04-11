@@ -18,13 +18,12 @@ func main() {
 		panic(err)
 	}
 
-	img, format, err := image.Decode(bytes.NewReader(data))
+	img, _, err := image.Decode(bytes.NewReader(data))
 
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(img.Bounds().Dx(), img.Bounds().Dy(), format)
 	improved := ImproveQuality(img)
 	f, err := os.Create("output.png")
 
@@ -46,7 +45,6 @@ type Pixel struct {
 
 // Area ...
 type Area struct {
-	color.Color
 	Pixels []Pixel
 	totalR uint64
 	totalG uint64
@@ -69,6 +67,10 @@ func (area *Area) Add(x, y int, r, g, b, a uint32) {
 
 // AverageColor ...
 func (area *Area) AverageColor() color.Color {
+	if len(area.Pixels) == 0 {
+		return color.Transparent
+	}
+
 	return color.RGBA64{
 		R: uint16(area.totalR / uint64(len(area.Pixels))),
 		G: uint16(area.totalG / uint64(len(area.Pixels))),
@@ -78,7 +80,7 @@ func (area *Area) AverageColor() color.Color {
 }
 
 const (
-	tolerance = uint32(3000)
+	tolerance = uint32(10000)
 )
 
 func diffAbs(a uint32, b uint32) uint32 {
@@ -94,7 +96,7 @@ func ImproveQuality(img image.Image) *image.NRGBA {
 	width := img.Bounds().Dx()
 	height := img.Bounds().Dy()
 	clone := image.NewNRGBA(image.Rect(0, 0, width, height))
-	areas := []Area{}
+	areas := []*Area{}
 	areaIndexMap := make([]int, width*height)
 
 	for x := 0; x < width; x++ {
@@ -118,7 +120,7 @@ func ImproveQuality(img image.Image) *image.NRGBA {
 			// Insert new area
 			if areaIndex == -1 {
 				areaIndex = len(areas)
-				areas = append(areas, Area{})
+				areas = append(areas, &Area{})
 			}
 
 			areaIndexMap[y*width+x] = areaIndex
@@ -128,94 +130,146 @@ func ImproveQuality(img image.Image) *image.NRGBA {
 
 	fmt.Println(len(areas), "areas")
 
+	pixelCount := 0
+
+	for _, area := range areas {
+		pixelCount += len(area.Pixels)
+	}
+
+	// fmt.Println(pixelCount, "pixels", width*height)
+
 	// Reduce noise
 	noiseCount := 0
 
-	for r := 0; r < 30; r++ {
-		for areaIndex, area := range areas {
-			removals := []int{}
+	for areaIndex, area := range areas {
+		removals := []int{}
+		areaSurroundedBy := map[int]int{}
 
-			for i := 0; i < len(area.Pixels); i++ {
-				// If pixel is surrounded by 4 different areas, remove it
-				pixel := area.Pixels[i]
-				x := pixel.X
-				y := pixel.Y
-				left := areaIndex
-				right := areaIndex
-				top := areaIndex
-				bottom := areaIndex
+		for i := 0; i < len(area.Pixels); i++ {
+			// If pixel is surrounded by 4 different areas, remove it
+			pixel := area.Pixels[i]
+			x := pixel.X
+			y := pixel.Y
+			left := areaIndex
+			right := areaIndex
+			top := areaIndex
+			bottom := areaIndex
 
-				if x > 0 {
-					left = areaIndexMap[y*width+(x-1)]
-				}
+			if x > 0 {
+				left = areaIndexMap[y*width+(x-1)]
+			}
 
-				if x < width-1 {
-					right = areaIndexMap[y*width+(x+1)]
-				}
+			if x < width-1 {
+				right = areaIndexMap[y*width+(x+1)]
+			}
 
-				if y > 0 {
-					top = areaIndexMap[(y-1)*width+x]
-				}
+			if y > 0 {
+				top = areaIndexMap[(y-1)*width+x]
+			}
 
-				if y < height-1 {
-					bottom = areaIndexMap[(y+1)*width+x]
-				}
+			if y < height-1 {
+				bottom = areaIndexMap[(y+1)*width+x]
+			}
 
-				differentNeighbors := 0
+			differentNeighbors := 0
 
-				if left != areaIndex {
-					differentNeighbors++
-				}
+			if left != areaIndex {
+				differentNeighbors++
+			}
 
-				if right != areaIndex {
-					differentNeighbors++
-				}
+			if right != areaIndex {
+				differentNeighbors++
+			}
 
-				if top != areaIndex {
-					differentNeighbors++
-				}
+			if top != areaIndex {
+				differentNeighbors++
+			}
 
-				if bottom != areaIndex {
-					differentNeighbors++
-				}
+			if bottom != areaIndex {
+				differentNeighbors++
+			}
 
-				// Determine surrounding area
-				areaIndexScore := map[int]int{}
-				areaIndexScore[left]++
-				areaIndexScore[right]++
-				areaIndexScore[top]++
-				areaIndexScore[bottom]++
+			// Determine surrounding area
+			areaIndexScore := map[int]int{}
 
-				newAreaIndex := -1
-				bestScore := 0
+			areaIndexScore[left]++
+			areaIndexScore[right]++
+			areaIndexScore[top]++
+			areaIndexScore[bottom]++
 
-				for checkIndex, score := range areaIndexScore {
-					if score > bestScore {
-						bestScore = score
-						newAreaIndex = checkIndex
-					}
-				}
+			areaSurroundedBy[left]++
+			areaSurroundedBy[right]++
+			areaSurroundedBy[top]++
+			areaSurroundedBy[bottom]++
 
-				if differentNeighbors == 4 && bestScore >= 3 {
-					noiseCount++
-					removals = append(removals, i)
+			newAreaIndex := -1
+			bestScore := 0
 
-					// Add to surrounding area
-					r, g, b, a := img.At(x, y).RGBA()
-					areas[newAreaIndex].Add(x, y, r, g, b, a)
+			for checkIndex, score := range areaIndexScore {
+				if score > bestScore {
+					bestScore = score
+					newAreaIndex = checkIndex
 				}
 			}
 
-			offset := 0
+			if differentNeighbors >= 3 && bestScore >= 3 {
+				noiseCount++
+				removals = append(removals, i)
 
-			for _, removal := range removals {
-				area.Pixels = append(area.Pixels[:removal-offset], area.Pixels[removal-offset+1:]...)
-				offset++
+				// Add to surrounding area
+				r, g, b, a := img.At(x, y).RGBA()
+				areas[newAreaIndex].Add(x, y, r, g, b, a)
 			}
+		}
+
+		// Remove noise pixels
+		// offset := 0
+
+		// for _, removal := range removals {
+		// 	index := removal - offset
+		// 	area.Pixels = append(area.Pixels[:index], area.Pixels[index+1:]...)
+		// 	// area.Pixels = area.Pixels[:index+copy(area.Pixels[index:], area.Pixels[index+1:])]
+		// 	offset++
+		// }
+
+		// Determine surrounding area
+		surroundingAreaIndex := -1
+		bestScore := 0
+
+		for checkIndex, score := range areaSurroundedBy {
+			if score > bestScore {
+				bestScore = score
+				surroundingAreaIndex = checkIndex
+			}
+		}
+
+		if areaIndex != surroundingAreaIndex {
+			// fmt.Println(areaIndex, "surrounded by", surroundingAreaIndex, "|", len(area.Pixels), len(areas[surroundingAreaIndex].Pixels))
+
+			// // Add pixels to surrounding area
+			// for _, pixel := range area.Pixels {
+			// 	r, g, b, a := img.At(pixel.X, pixel.Y).RGBA()
+			// 	areas[surroundingAreaIndex].Add(pixel.X, pixel.Y, r, g, b, a)
+			// }
+
+			// // Remove this area
+			// area.Pixels = nil
+			// area.totalR = 0
+			// area.totalG = 0
+			// area.totalB = 0
+			// area.totalA = 0
 		}
 	}
 
 	fmt.Println(noiseCount, "noise pixels")
+
+	pixelCount = 0
+
+	for _, area := range areas {
+		pixelCount += len(area.Pixels)
+	}
+
+	fmt.Println(pixelCount, "pixels", width*height)
 
 	// Build image from areas
 	for _, area := range areas {
