@@ -136,6 +136,10 @@ component AnimeLinks(anime *arn.Anime, user *arn.User)
 			a.light-button(href="https://www.google.com/search?btnI=745&q=" + anime.Title.ByUser(user) + "+TV+series+site%3Aen.wikipedia.org", target="_blank", rel="noopener")
 				Icon("wikipedia-w")
 				span Wikipedia
+			
+			a.light-button(href="/api/anime/" + anime.ID, target="_blank", rel="noopener")
+				Icon("code")
+				span API
 
 component AnimeGenres(anime *arn.Anime)
 	.anime-genres
