@@ -87,11 +87,7 @@ func readFile(name string) error {
 		}
 	}
 
-	for _, character := range anime.Characters {
-		fmt.Println(character)
-	}
-
-	// fmt.Println(anime.ID, anime.Title)
+	fmt.Println(anime.ID, anime.Title)
 	arn.MAL.Set("Anime", anime.ID, anime)
 	return nil
 }
