@@ -13,12 +13,24 @@ import (
 
 const (
 	// The maximum age of files we accept until we force a refresh.
-	maxAge               = 7 * 24 * time.Hour
+	maxAge               = 24 * time.Hour
 	delayBetweenRequests = 1100 * time.Millisecond
 	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
 )
 
+var headers = map[string]string{
+	"User-Agent":      userAgent,
+	"Accept-Encoding": "gzip",
+}
+
 func main() {
+	defer color.Green("Finished.")
+
+	// Called with arguments?
+	if InvokeShellArgs() {
+		return
+	}
+
 	// Filter anime with MAL ID
 	animes := []*arn.Anime{}
 
@@ -42,10 +54,7 @@ func main() {
 
 	// Create crawler
 	malCrawler := crawler.New(
-		map[string]string{
-			"User-Agent":      userAgent,
-			"Accept-Encoding": "gzip",
-		},
+		headers,
 		delayBetweenRequests,
 		len(animes),
 	)
@@ -57,21 +66,7 @@ func main() {
 	count := 0
 
 	for _, anime := range animes {
-		malID := anime.GetMapping("myanimelist/anime")
-		url := "https://myanimelist.net/anime/" + malID
-		filePath := fmt.Sprintf("files/anime-%s.html", malID)
-		fileInfo, err := os.Stat(filePath)
-
-		if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {
-			// fmt.Println(color.YellowString(url), "skip")
-			continue
-		}
-
-		malCrawler.Queue(&crawler.Task{
-			URL:         url,
-			Destination: filePath,
-		})
-
+		queue(anime, malCrawler)
 		count++
 	}
 
@@ -80,7 +75,21 @@ func main() {
 
 	// Wait for completion
 	malCrawler.Wait()
+}
 
-	// Finished
-	color.Green("Finished.")
+func queue(anime *arn.Anime, malCrawler *crawler.Crawler) {
+	malID := anime.GetMapping("myanimelist/anime")
+	url := "https://myanimelist.net/anime/" + malID
+	filePath := fmt.Sprintf("files/anime-%s.html", malID)
+	fileInfo, err := os.Stat(filePath)
+
+	if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {
+		// fmt.Println(color.YellowString(url), "skip")
+		return
+	}
+
+	malCrawler.Queue(&crawler.Task{
+		URL:         url,
+		Destination: filePath,
+	})
 }
