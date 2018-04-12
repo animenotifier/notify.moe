@@ -40,7 +40,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							a.character-anime-item.mountable(href=anime.Link(), title=anime.Title.ByUser(user), data-mountable-type="anime")
 								img.character-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 					
-					if len(quotes) >0
+					if len(quotes) > 0 && (len(quotes) > 1 || mainQuote != quotes[0])
 						h3.mountable Quotes
 
 						.character-quotes.mountable
