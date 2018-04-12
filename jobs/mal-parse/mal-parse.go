@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	color.Yellow("Importing MAL anime")
+	color.Yellow("Parsing MAL files")
 
 	defer color.Green("Finished.")
 	defer arn.Node.Close()
