@@ -19,6 +19,11 @@ func main() {
 	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
+	// Invoke via parameters
+	if InvokeShellArgs() {
+		return
+	}
+
 	// Sync the most important ones first
 	allAnime := arn.AllAnime()
 	arn.SortAnimeByQuality(allAnime)

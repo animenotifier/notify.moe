@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -21,9 +22,12 @@ func main() {
 	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
-	// readFile("../mal-download/files/anime-31240.html")
+	// Invoke via parameters
+	if InvokeShellArgs() {
+		return
+	}
 
-	filepath.Walk("../mal-download/files", func(name string, info os.FileInfo, err error) error {
+	filepath.Walk(path.Join(arn.Root, "jobs/mal-download/files"), func(name string, info os.FileInfo, err error) error {
 		if err != nil {
 			fmt.Println(err)
 			return err
