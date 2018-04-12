@@ -1,4 +1,4 @@
-component API(types []string)
+component API(types []*autodocs.Type)
 	.api-docs-page
 		h1 API
 
@@ -12,13 +12,10 @@ component API(types []string)
 				span https://notify.moe/graphql
 		
 		h2 Types
-		table
-			//- thead
-			//- 	tr
-			//- 		th Table
+		table.api-types
 			tbody
-				each typeName in types
+				each typ in types
 					tr
-						td= typeName
 						td
-							a(href="/api/" + strings.ToLower(typeName) + "/")= "/api/" + strings.ToLower(typeName) + "/"
+							a(href=typ.Endpoint())= typ.Name
+						td= typ.Comment
