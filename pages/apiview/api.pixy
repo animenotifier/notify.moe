@@ -1,21 +1,24 @@
 component API(types []*autodocs.Type)
 	.api-docs-page
-		h1 API
+		h1.mountable API
 
-		h2 Endpoints
+		h2.mountable Endpoints
 		ul
-			li
+			li.mountable
 				strong REST: 
 				span https://notify.moe/api
-			li
+			li.mountable
 				strong GraphQL: 
 				span https://notify.moe/graphql
 		
-		h2 Types
+		h2.mountable Types
 		table.api-types
 			tbody
 				each typ in types
-					tr
+					tr.mountable
 						td
 							a(href=typ.Endpoint())= typ.Name
 						td= typ.Comment
+						td
+							a(href=typ.GitHubLink())
+								RawIcon("github")

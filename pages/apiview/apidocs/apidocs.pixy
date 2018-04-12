@@ -1,28 +1,28 @@
 component APIDocs(t reflect.Type, examples []string, fields []*utils.APIField)
 	.api-docs-page
-		h1= t.Name()
+		h1.mountable= t.Name()
 
-		h2 Examples
+		h2.mountable Examples
 
 		if len(examples) == 0
-			p.no-data No examples available yet.
+			p.no-data.mountable No examples available yet.
 		else
-			.buttons
+			.buttons.mountable
 				each example in examples
 					a.button(href=example, target="_blank")
 						Icon("external-link")
 						span= strings.TrimPrefix(example, "/api")
 
-		h2 Fields
+		h2.mountable Fields
 
 		table
 			thead
-				tr
+				tr.mountable
 					th Field
 					th Type
 			tbody
 				each field in fields
-					tr.api-field
+					tr.api-field.mountable
 						td.api-field-json(title=field.Name + " (Go)")= field.JSON
 						td.api-field-type= field.Type
 
