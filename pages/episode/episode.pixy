@@ -11,7 +11,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 		.episode-view-title
 			Japanese(episode.Title.Japanese)
 
-	if validate.Date(episode.AiringDate.Start)
+	if validate.DateTime(episode.AiringDate.Start)
 		p.episode-view-airing-date
 			span.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 	
