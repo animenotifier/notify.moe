@@ -1,7 +1,7 @@
 import AnimeNotifier from "../AnimeNotifier"
 
 let currentTheme = "light"
-let intervalID: number = 0
+let timeoutID: number = 0
 
 const light = {}
 const dark = {
@@ -47,7 +47,7 @@ const dark = {
 // Toggle theme
 export function toggleTheme(arn: AnimeNotifier) {
 	// Clear preview interval
-	clearInterval(intervalID)
+	clearTimeout(timeoutID)
 
 	if(currentTheme === "light") {
 		darkTheme(arn)
@@ -80,7 +80,7 @@ export function darkTheme(arn: AnimeNotifier) {
 		arn.statusMessage.showInfo("Previewing Dark theme for 30 seconds. If you would like to use it permanently, please support us.", 5000)
 
 		// After 30 seconds, switch back to default theme if the user doesn't own a PRO account
-		intervalID = setInterval(() => {
+		timeoutID = setTimeout(() => {
 			if(currentTheme === "dark") {
 				toggleTheme(arn)
 				arn.statusMessage.showInfo("Dark theme preview time has ended. If you would like to use it permanently, please support us.", 5000)
