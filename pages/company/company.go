@@ -10,8 +10,6 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxDescriptionLength = 170
-
 // Get renders a company page.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
@@ -22,11 +20,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Company not found", err)
 	}
 
-	description := company.Description
-
-	if len(description) > maxDescriptionLength {
-		description = description[:maxDescriptionLength-3] + "..."
-	}
+	description := utils.CutLongDescription(company.Description)
 
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{

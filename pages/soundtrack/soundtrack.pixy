@@ -47,8 +47,8 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 						
 						for index, beatmap := range track.EtternaBeatmaps()
 							li
-								a.beatmap(href="https://etternaonline.com/song/view/" + beatmap, target="_blank")= "Etterna Beatmap #" + strconv.Itoa(index + 1)
-			
+								a.beatmap(href="https://etternaonline.com/song/view/" + beatmap, target="_blank")= "Etterna Beatmap #" + strconv.Itoa(index + 1)	
+
 			.widget.mountable
 				h3.widget-title Tags
 
@@ -74,6 +74,11 @@ component SoundTrackTabs(track *arn.SoundTrack, user *arn.User)
 	.tabs
 		TabLike(strconv.Itoa(len(track.Likes)), "heart", "track", track, user)
 		Tab("Soundtrack", "music", track.Link())
+
+		if track.HasLyrics()
+			Tab("Lyrics", "font", track.Link() + "/lyrics")
+
 		if user != nil
 			Tab("Edit", "pencil", track.Link() + "/edit")
+		
 		Tab("History", "history", track.Link() + "/history")

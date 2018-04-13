@@ -175,6 +175,7 @@ func Configure(app *aero.Application) {
 	l.Page("/soundtracks/tag/:tag", soundtracks.FilterByTag)
 	l.Page("/soundtracks/tag/:tag/from/:index", soundtracks.FilterByTag)
 	l.Page("/soundtrack/:id", soundtrack.Get)
+	l.Page("/soundtrack/:id/lyrics", soundtrack.Lyrics)
 	l.Page("/soundtrack/:id/edit", soundtrack.Edit)
 	l.Page("/soundtrack/:id/history", soundtrack.History)
 

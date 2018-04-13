@@ -1,0 +1,28 @@
+component SoundTrackLyricsPage(track *arn.SoundTrack, user *arn.User)
+	SoundTrackTabs(track, user)
+
+	.soundtrack-full-page
+		if track.Title.ByUser(user) == ""
+			h1.mountable untitled
+		else
+			h1.mountable= track.Title.ByUser(user)
+	
+	.widget-form
+		if !track.HasLyrics()
+			p.no-data.mountable No lyrics available for this track.
+		else
+			if track.Lyrics.Romaji != ""
+				.widget
+					h3.widget-title.mountable Romaji
+					RenderLyrics(track.Lyrics.Romaji)
+			
+			if track.Lyrics.Native != ""
+				.widget
+					h3.widget-title.mountable Native
+					RenderLyrics(track.Lyrics.Native)
+
+component RenderLyrics(text string)
+	each paragraph in strings.Split(text, "\n\n")
+		p.lyrics-paragraph.mountable
+			each line in strings.Split(paragraph, "\n")
+				span.lyrics-line= line

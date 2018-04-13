@@ -20,6 +20,20 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
+	ctx.Data = getOpenGraph(ctx, track)
+	return ctx.HTML(components.SoundTrackPage(track, user))
+}
+
+func getOpenGraph(ctx *aero.Context, track *arn.SoundTrack) *arn.OpenGraph {
+	openGraph := &arn.OpenGraph{
+		Tags: map[string]string{
+			"og:title":     track.Title.ByUser(nil),
+			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
+			"og:site_name": ctx.App.Config.Domain,
+			"og:type":      "music.song",
+		},
+	}
+
 	descriptionTags := []string{}
 
 	for _, tag := range track.Tags {
@@ -28,15 +42,6 @@ func Get(ctx *aero.Context) string {
 		}
 
 		descriptionTags = append(descriptionTags, tag)
-	}
-
-	openGraph := &arn.OpenGraph{
-		Tags: map[string]string{
-			"og:title":     track.Title.ByUser(user),
-			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
-			"og:site_name": ctx.App.Config.Domain,
-			"og:type":      "music.song",
-		},
 	}
 
 	if track.MainAnime() != nil {
@@ -56,7 +61,5 @@ func Get(ctx *aero.Context) string {
 		openGraph.Tags["og:video"] = "https://www.youtube.com/v/" + youtube[0].ServiceID
 	}
 
-	ctx.Data = openGraph
-
-	return ctx.HTML(components.SoundTrackPage(track, user))
+	return openGraph
 }
