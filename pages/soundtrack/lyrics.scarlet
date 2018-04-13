@@ -1,2 +1,16 @@
+.soundtrack-lyrics
+	horizontal-wrap
+	justify-content center
+
+.lyrics-column
+	flex 1
+	max-width 500px
+	padding calc(content-padding / 2)
+
+.lyrics-paragraph
+	margin 1rem 0
+
 .lyrics-line
-	display block
+	border-radius ui-element-border-radius
+	padding 0 0.25rem
+	height 1.9rem

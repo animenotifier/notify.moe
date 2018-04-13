@@ -39,6 +39,9 @@ img
 	backface-visibility hidden
 	color transparent
 
+rt
+	user-select none
+
 .hidden
 	display none !important
 
