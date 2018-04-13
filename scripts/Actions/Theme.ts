@@ -1,6 +1,7 @@
 import AnimeNotifier from "../AnimeNotifier"
 
 let currentTheme = "light"
+let intervalID: number = 0
 
 const light = {}
 const dark = {
@@ -45,9 +46,11 @@ const dark = {
 
 // Toggle theme
 export function toggleTheme(arn: AnimeNotifier) {
+	// Clear preview interval
+	clearInterval(intervalID)
+
 	if(currentTheme === "light") {
 		darkTheme(arn)
-		arn.statusMessage.showInfo("Previewing Dark theme. If you would like to use it permanently, please buy a PRO account.", 4000)
 		return
 	}
 
@@ -73,9 +76,17 @@ export function lightTheme(arn: AnimeNotifier) {
 export function darkTheme(arn: AnimeNotifier) {
 	let root = document.documentElement
 
-	// if(arn.user.dataset.pro !== "true") {
-	// 	alert("You need a PRO account!")
-	// }
+	if(arn.user.dataset.pro !== "true") {
+		arn.statusMessage.showInfo("Previewing Dark theme for 30 seconds. If you would like to use it permanently, please support us.", 5000)
+
+		// After 30 seconds, switch back to default theme if the user doesn't own a PRO account
+		intervalID = setInterval(() => {
+			if(currentTheme === "dark") {
+				toggleTheme(arn)
+				arn.statusMessage.showInfo("Dark theme preview time has ended. If you would like to use it permanently, please support us.", 5000)
+			}
+		}, 30000)
+	}
 
 	for(let property in dark) {
 		if(!dark.hasOwnProperty(property)) {
