@@ -1,7 +1,7 @@
 import AnimeNotifier from "../AnimeNotifier"
 
 // Save new data from an input field
-export function save(arn: AnimeNotifier, input: HTMLElement) {
+export async function save(arn: AnimeNotifier, input: HTMLElement) {
 	let obj = {}
 	let isContentEditable = input.isContentEditable
 	let value = isContentEditable ? input.innerText : (input as HTMLInputElement).value
@@ -31,21 +31,28 @@ export function save(arn: AnimeNotifier, input: HTMLElement) {
 
 	let apiEndpoint = arn.findAPIEndpoint(input)
 
-	arn.post(apiEndpoint, obj)
-	.catch(err => arn.statusMessage.showError(err))
-	.then(() => {
+	try {
+		await arn.post(apiEndpoint, obj)
+
+		if(apiEndpoint.startsWith("/api/user/") && input.dataset.field === "Nick") {
+			// Update nickname based links on the page
+			return arn.reloadPage()
+		} else if(apiEndpoint.startsWith("/api/settings/") && input.dataset.field === "Theme") {
+			// Reload for the theme to take effect
+			location.reload()
+		} else {
+			return arn.reloadContent()
+		}
+	} catch(err) {
+		arn.reloadContent()
+		arn.statusMessage.showError(err)
+	} finally {
 		if(isContentEditable) {
 			input.contentEditable = "true"
 		} else {
 			(input as HTMLInputElement).disabled = false
 		}
-
-		if(apiEndpoint.startsWith("/api/user/") && input.dataset.field === "Nick") {
-			return arn.reloadPage()
-		} else {
-			return arn.reloadContent()
-		}
-	})
+	}
 }
 
 // Enable (bool field)

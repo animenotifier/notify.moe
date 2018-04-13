@@ -1,7 +1,10 @@
 component Charge(user *arn.User)
 	ShopTabs(user)
 
-	h1.mountable Charge up
+	h1.page-title Charge up
+
+	p
+		img.paypal-logo.mountable(src="/images/elements/paypal.svg", alt="Payment method: PayPal")
 
 	p.text-center.mountable You can add balance via PayPal. 1 Japanese Yen equals 1 Gem.
 

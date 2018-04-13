@@ -215,7 +215,7 @@ component SettingsPro(user *arn.User)
 						span Extend PRO account duration
 			else
 				.widget-section
-					label Would you like to support the site development?
+					label Would you like to make this website more awesome?
 					a.button(href="/support")
 						Icon("star")
 						span Go PRO
