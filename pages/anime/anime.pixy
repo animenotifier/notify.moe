@@ -191,37 +191,37 @@ component AnimeInformation(anime *arn.Anime)
 			tr.mountable(data-mountable-type="info")
 				td.anime-info-key Status:
 				td.anime-info-value= anime.StatusHumanReadable()
-			
-			if anime.Season() != ""
-				tr.mountable(data-mountable-type="info")
-					td.anime-info-key Season:
-					td.anime-info-value= arn.Capitalize(anime.Season()) + " " + anime.StartDate[:4]
 
-			if anime.StartDate == anime.EndDate && anime.StartDate != "" && anime.EndDate != ""
+			if anime.StartDate == anime.EndDate && validate.Date(anime.StartDate) && validate.Date(anime.EndDate)
 				if anime.StartDate != ""
 					tr.mountable(data-mountable-type="info")
 						td.anime-info-key Airing date:
 						td.anime-info-value= anime.StartDateTime().Format("Jan _2, 2006")
 			else
-				if anime.StartDate != ""
+				if validate.Date(anime.StartDate)
 					tr.mountable(data-mountable-type="info")
 						td.anime-info-key Start:
 						td.anime-info-value= anime.StartDateTime().Format("Jan _2, 2006")
 
-				if anime.EndDate != ""
+				if validate.Date(anime.EndDate)
 					tr.mountable(data-mountable-type="info")
 						td.anime-info-key End:
 						td.anime-info-value= anime.EndDateTime().Format("Jan _2, 2006")
+			
+			if anime.Season() != ""
+				tr.mountable(data-mountable-type="info")
+					td.anime-info-key Season:
+					td.anime-info-value= arn.Capitalize(anime.Season()) + " " + anime.StartDate[:4]
 			
 			if anime.Source != "" && arn.AnimeSourceHumanReadable[anime.Source] != ""
 				tr.mountable(data-mountable-type="info")
 					td.anime-info-key Source:
 					td.anime-info-value= arn.AnimeSourceHumanReadable[anime.Source]
 
-			if anime.FirstChannel != ""
-				tr.mountable(data-mountable-type="info")
-					td.anime-info-key Channel:
-					td.anime-info-value= anime.FirstChannel
+			//- if anime.FirstChannel != ""
+			//- 	tr.mountable(data-mountable-type="info")
+			//- 		td.anime-info-key Channel:
+			//- 		td.anime-info-value= anime.FirstChannel
 
 			each company in anime.Studios()
 				tr.mountable(data-mountable-type="info")
