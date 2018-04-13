@@ -79,3 +79,10 @@ component EditorTabs(url string, user *arn.User)
 			#filter-root(data-url=url)
 			ExploreFilters(user.Settings().Editor.Filter.Year, user.Settings().Editor.Filter.Status, user.Settings().Editor.Filter.Type, true)
 	
+	if strings.Contains(url, "/editor/soundtracks/")
+		.tabs
+			Tab("Links", "external-link", "/editor/soundtracks/links")
+			Tab("Lyrics", "font", "/editor/soundtracks/lyrics")
+			Tab("Tags", "tag", "/editor/soundtracks/tags")
+			Tab("File", "volume-off", "/editor/soundtracks/file")
+	

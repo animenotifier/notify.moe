@@ -305,7 +305,10 @@ func Configure(app *aero.Application) {
 	l.Page("/editor/companies/description", filtercompanies.NoDescription)
 
 	// Editor - Soundtracks
-	l.Page("/editor/soundtracks/links", filtersoundtracks.NoLinks)
+	l.Page("/editor/soundtracks/links", filtersoundtracks.Links)
+	l.Page("/editor/soundtracks/lyrics", filtersoundtracks.Lyrics)
+	l.Page("/editor/soundtracks/tags", filtersoundtracks.Tags)
+	l.Page("/editor/soundtracks/file", filtersoundtracks.File)
 
 	// Log
 	l.Page("/log", editlog.Get)
