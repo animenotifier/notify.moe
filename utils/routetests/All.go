@@ -203,8 +203,8 @@ var routeTests = map[string][]string{
 		"/compare/animelist/Akyoto/Scott",
 	},
 
-	"/explore/anime/:year/:status/:type": []string{
-		"/explore/anime/2011/finished/tv",
+	"/explore/anime/:year/:season/:status/:type": []string{
+		"/explore/anime/2011/any/finished/tv",
 	},
 
 	// Redirects
@@ -374,6 +374,10 @@ var routeTests = map[string][]string{
 	"/user/:nick/edit":                               nil,
 	"/user/:nick/log":                                nil,
 	"/user/:nick/log/from/:index":                    nil,
+	"/editor/soundtracks/file":                       nil,
+	"/editor/soundtracks/links":                      nil,
+	"/editor/soundtracks/lyrics":                     nil,
+	"/editor/soundtracks/tags":                       nil,
 	"/api/test/notification":                         nil,
 	"/api/paypal/payment/create":                     nil,
 	"/api/emailtouser/:id":                           nil,
