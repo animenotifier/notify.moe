@@ -16,6 +16,9 @@
 .filter-select
 	margin 0.05rem
 
+	[value=""]
+		opacity 0.25
+
 .filter-label
 	opacity 0.5
 	font-size 0.7rem
