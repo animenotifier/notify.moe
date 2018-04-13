@@ -33,12 +33,12 @@ component ProfileTabs(viewUser *arn.User, uri string)
 	if strings.Contains(uri, "/soundtracks")
 		.tabs
 			Tab("Liked", "heart", "/+" + viewUser.Nick + "/soundtracks/liked")
-			Tab("Added", "music", "/+" + viewUser.Nick + "/soundtracks/added")
+			Tab("Added", "plus", "/+" + viewUser.Nick + "/soundtracks/added")
 
 	if strings.Contains(uri, "/quotes")
 		.tabs
 			Tab("Liked", "heart", "/+" + viewUser.Nick + "/quotes/liked")
-			Tab("Added", "music", "/+" + viewUser.Nick + "/quotes/added")
+			Tab("Added", "plus", "/+" + viewUser.Nick + "/quotes/added")
 
 component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	ProfileHead(viewUser, user, uri)
