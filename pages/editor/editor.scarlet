@@ -6,6 +6,9 @@
 	img
 		margin-right 1rem
 
+.editor-filters
+	//
+
 .editor-list-entry-count
 	margin-top 0
 	margin-bottom content-padding
@@ -18,3 +21,10 @@
 
 .feature-card-color-company
 	background hsl(150, feature-card-saturation, feature-card-lightness) !important
+
+> 1550px
+	.editor-filters
+		position fixed
+		right content-padding
+		top content-padding
+		z-index 1

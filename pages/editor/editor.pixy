@@ -30,8 +30,7 @@ component Editor(url string, score int, scoreTitle string, scoreTypes map[string
 component EditorTabs(url string, user *arn.User)
 	.corner-buttons-left
 		a.button(href="/editor")
-			Icon("arrow-left")
-			span Overview
+			RawIcon("arrow-left")
 	
 	if strings.Contains(url, "/editor/anime/")
 		.tabs
@@ -74,15 +73,15 @@ component EditorTabs(url string, user *arn.User)
 			Tab("Low-Res", "image", "/editor/anime/image/lowres" + user.Settings().Editor.Filter.Suffix())
 			Tab("Ultra Low-Res", "image", "/editor/anime/image/ultralowres" + user.Settings().Editor.Filter.Suffix())
 	
-	if strings.Contains(url, "/editor/anime/") || strings.Contains(url, "/editor/mal/diff/anime")
-		.corner-buttons.fixed
-			#filter-root(data-url=url)
-			ExploreFilters(user.Settings().Editor.Filter.Year, user.Settings().Editor.Filter.Status, user.Settings().Editor.Filter.Type, true)
-	
 	if strings.Contains(url, "/editor/soundtracks/")
 		.tabs
 			Tab("Links", "external-link", "/editor/soundtracks/links")
 			Tab("Lyrics", "font", "/editor/soundtracks/lyrics")
 			Tab("Tags", "tag", "/editor/soundtracks/tags")
 			Tab("File", "volume-off", "/editor/soundtracks/file")
+	
+	if strings.Contains(url, "/editor/anime/") || strings.Contains(url, "/editor/mal/diff/anime")
+		.editor-filters
+			#filter-root(data-url=url)
+			ExploreFilters(user.Settings().Editor.Filter.Year, user.Settings().Editor.Filter.Status, user.Settings().Editor.Filter.Type, true)
 	
