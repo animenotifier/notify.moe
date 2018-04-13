@@ -19,10 +19,15 @@ func CompareMAL(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	year := ctx.Get("year")
 	status := ctx.Get("status")
+	season := ctx.Get("season")
 	typ := ctx.Get("type")
 
 	if year == "any" {
 		year = ""
+	}
+
+	if season == "any" {
+		season = ""
 	}
 
 	if status == "any" {
@@ -35,6 +40,7 @@ func CompareMAL(ctx *aero.Context) string {
 
 	settings := user.Settings()
 	settings.Editor.Filter.Year = year
+	settings.Editor.Filter.Season = season
 	settings.Editor.Filter.Status = status
 	settings.Editor.Filter.Type = typ
 	settings.Save()
@@ -45,6 +51,10 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 
 		if status != "" && anime.Status != status {
+			return false
+		}
+
+		if season != "" && anime.Season() != season {
 			return false
 		}
 

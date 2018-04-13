@@ -25,7 +25,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.Anime) bool, s
 	// Determine URL
 	url := strings.TrimPrefix(ctx.URI(), "/_")
 	urlParts := strings.Split(url, "/")
-	urlParts = urlParts[:len(urlParts)-3]
+	urlParts = urlParts[:len(urlParts)-4]
 	url = strings.Join(urlParts, "/")
 
 	return ctx.HTML(components.AnimeEditorListFull(
@@ -43,6 +43,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.Anime) bool, s
 func filterAnime(ctx *aero.Context, user *arn.User, filter func(*arn.Anime) bool) ([]*arn.Anime, int) {
 	year := ctx.Get("year")
 	status := ctx.Get("status")
+	season := ctx.Get("season")
 	typ := ctx.Get("type")
 
 	if year == "any" {
@@ -53,12 +54,17 @@ func filterAnime(ctx *aero.Context, user *arn.User, filter func(*arn.Anime) bool
 		status = ""
 	}
 
+	if season == "any" {
+		season = ""
+	}
+
 	if typ == "any" {
 		typ = ""
 	}
 
 	settings := user.Settings()
 	settings.Editor.Filter.Year = year
+	settings.Editor.Filter.Season = season
 	settings.Editor.Filter.Status = status
 	settings.Editor.Filter.Type = typ
 	settings.Save()
@@ -66,6 +72,10 @@ func filterAnime(ctx *aero.Context, user *arn.User, filter func(*arn.Anime) bool
 	// Filter
 	animes := arn.FilterAnime(func(anime *arn.Anime) bool {
 		if year != "" && (len(anime.StartDate) < 4 || anime.StartDate[:4] != year) {
+			return false
+		}
+
+		if season != "" && anime.Season() != season {
 			return false
 		}
 

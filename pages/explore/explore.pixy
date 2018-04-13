@@ -1,6 +1,6 @@
-component ExploreAnime(animes []*arn.Anime, year string, status string, typ string, user *arn.User)
+component ExploreAnime(animes []*arn.Anime, year string, season string, status string, typ string, user *arn.User)
 	#filter-root(data-url="/explore/anime")
-	ExploreFilters(year, status, typ, false)
+	ExploreFilters(year, season, status, typ, false)
 
 	.corner-buttons-hide-on-mobile
 		if user != nil
@@ -28,35 +28,50 @@ component ExploreAnime(animes []*arn.Anime, year string, status string, typ stri
 		else
 			AnimeGrid(animes, user)
 
-component ExploreFilters(year string, status string, typ string, advancedFilters bool)
+component ExploreFilters(year string, season string, status string, typ string, advancedFilters bool)
 	.explore-filters
-		select#filter-year.action(value=year, data-action="filterAnime", data-trigger="change")
-			if advancedFilters
-				option(value="")
+		.filter-select-container
+			select#filter-year.filter-select.action(value=year, data-action="filterAnime", data-trigger="change")
+				if advancedFilters
+					option.option-any(value="") Any
 
-			for year := time.Now().Year()+1; year >= 1951; year--
-				option(value=year)= year
+				for year := time.Now().Year()+1; year >= 1951; year--
+					option(value=year)= year
+				
+			.filter-label Year
 
-		select#filter-status.action(value=status, data-action="filterAnime", data-trigger="change")
-			if advancedFilters
-				option(value="")
+		.filter-select-container
+			select#filter-season.filter-select.action(value=season, data-action="filterAnime", data-trigger="change")
+				option.option-any(value="") Any
+				option(value="winter") Winter
+				option(value="spring") Spring
+				option(value="summer") Summer
+				option(value="autumn") Autumn
 			
-			option(value="current") Current
-			option(value="upcoming") Upcoming
-			option(value="finished") Finished
+			.filter-label Season
 
-			if advancedFilters
-				option(value="tba") TBA
+		.filter-select-container
+			select#filter-status.filter-select.action(value=status, data-action="filterAnime", data-trigger="change")
+				option.option-any(value="") Any
+				option(value="current") Current
+				option(value="upcoming") Upcoming
+				option(value="finished") Finished
 
-		select#filter-type.action(value=typ, data-action="filterAnime", data-trigger="change")
-			if advancedFilters
-				option(value="")
-			
-			option(value="tv") TV
-			option(value="movie") Movie
-			option(value="ova") OVA
-			option(value="ona") ONA
-			option(value="special") Special
+				if advancedFilters
+					option(value="tba") TBA
+				
+			.filter-label Status
 
-			if advancedFilters
-				option(value="music") Music
+		.filter-select-container
+			select#filter-type.filter-select.action(value=typ, data-action="filterAnime", data-trigger="change")
+				option.option-any(value="") Any
+				option(value="tv") TV
+				option(value="movie") Movie
+				option(value="ova") OVA
+				option(value="ona") ONA
+				option(value="special") Special
+
+				if advancedFilters
+					option(value="music") Music
+
+			.filter-label Type

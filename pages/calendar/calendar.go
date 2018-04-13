@@ -55,7 +55,7 @@ func Get(ctx *aero.Context) string {
 		}
 
 		for _, episode := range animeEpisodes.Items {
-			if !validate.Date(episode.AiringDate.Start) {
+			if !validate.DateTime(episode.AiringDate.Start) {
 				continue
 			}
 

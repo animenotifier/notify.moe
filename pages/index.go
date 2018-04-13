@@ -80,8 +80,8 @@ func Configure(app *aero.Application) {
 
 	// Main menu
 	l.Page("/", home.Get)
-	l.Page("/explore", explore.Get)
-	l.Page("/explore/anime/:year/:status/:type", explore.Filter)
+	l.Page("/explore", explore.Filter)
+	l.Page("/explore/anime/:year/:season/:status/:type", explore.Filter)
 	l.Page("/explore/color/:color/anime", explorecolor.AnimeByAverageColor)
 	l.Page("/explore/color/:color/anime/from/:index", explorecolor.AnimeByAverageColor)
 	l.Page("/explore/sequels", explorerelations.Sequels)
@@ -267,7 +267,7 @@ func Configure(app *aero.Application) {
 
 	// Editor links can be filtered by year, status and type
 	editorFilterable := func(route string, handler func(ctx *aero.Context) string) {
-		l.Page(route+"/:year/:status/:type", handler)
+		l.Page(route+"/:year/:season/:status/:type", handler)
 	}
 
 	// Editor - Anime

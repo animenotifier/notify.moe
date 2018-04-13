@@ -10,46 +10,75 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get ...
-func Get(ctx *aero.Context) string {
-	year := strconv.Itoa(time.Now().Year())
-	status := "current"
-	typ := "tv"
-	results := filterAnime(year, status, typ)
-	user := utils.GetUser(ctx)
-
-	return ctx.HTML(components.ExploreAnime(results, year, status, typ, user))
-}
-
 // Filter ...
 func Filter(ctx *aero.Context) string {
 	year := ctx.Get("year")
+	season := ctx.Get("season")
 	status := ctx.Get("status")
 	typ := ctx.Get("type")
 	user := utils.GetUser(ctx)
+	now := time.Now()
 
-	results := filterAnime(year, status, typ)
+	if year == "" {
+		year = strconv.Itoa(now.Year())
+	}
 
-	return ctx.HTML(components.ExploreAnime(results, year, status, typ, user))
+	if season == "" {
+		season = arn.DateToSeason(now)
+	}
+
+	if status == "" {
+		status = "current"
+	}
+
+	if typ == "" {
+		typ = "tv"
+	}
+
+	results := filterAnime(year, season, status, typ)
+
+	if year == "any" {
+		year = ""
+	}
+
+	if season == "any" {
+		season = ""
+	}
+
+	if status == "any" {
+		status = ""
+	}
+
+	if typ == "any" {
+		typ = ""
+	}
+
+	return ctx.HTML(components.ExploreAnime(results, year, season, status, typ, user))
 }
 
-func filterAnime(year, status, typ string) []*arn.Anime {
+func filterAnime(year, season, status, typ string) []*arn.Anime {
 	var results []*arn.Anime
 
 	for anime := range arn.StreamAnime() {
-		if len(anime.StartDate) < 4 {
+		if year != "any" {
+			if len(anime.StartDate) < 4 {
+				continue
+			}
+
+			if anime.StartDate[:4] != year {
+				continue
+			}
+		}
+
+		if status != "any" && anime.Status != status {
 			continue
 		}
 
-		if anime.StartDate[:4] != year {
+		if season != "any" && anime.Season() != season {
 			continue
 		}
 
-		if anime.Status != status {
-			continue
-		}
-
-		if anime.Type != typ {
+		if (typ != "any" || anime.Type == "music" || anime.Type == "tba") && anime.Type != typ {
 			continue
 		}
 
