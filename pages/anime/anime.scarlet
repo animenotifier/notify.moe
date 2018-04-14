@@ -69,16 +69,9 @@
 
 	.soundtrack
 		flex-basis auto
-		// 	vertical
-		// 	flex-grow 1
-		// 	margin-bottom 0.5rem
-		// 	min-width 200px
 
 	.soundtrack-anime-image
 		display none
-
-// 	.video-container
-// 		box-shadow shadow-light
 
 > 500px
 	.anime-soundtracks
@@ -158,9 +151,6 @@
 .anime-widget
 	margin-top 0.6rem
 	margin-bottom 0.4rem
-
-.amv
-	//
 
 < 800px
 	.anime-rating-categories

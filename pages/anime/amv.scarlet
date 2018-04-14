@@ -1,0 +1,17 @@
+.amvs
+	vertical
+	margin-top 1rem
+
+.amv
+	width 100%
+	margin calc(content-padding / 2)
+	box-shadow shadow-medium
+
+> 500px
+	.amvs
+		horizontal-wrap
+		justify-content flex-start
+		margin-top 0
+
+	.amv
+		max-width 380px
