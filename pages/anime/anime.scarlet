@@ -159,6 +159,9 @@
 	margin-top 0.6rem
 	margin-bottom 0.4rem
 
+.amv
+	//
+
 < 800px
 	.anime-rating-categories
 		vertical
