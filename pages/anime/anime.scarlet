@@ -155,37 +155,8 @@
 	horizontal
 	justify-content center
 
-	// Action button margin
-	// margin calc(content-padding - 0.5rem) -0.5rem
-
-	// Setting z-index requires setting a background as well
-	// z-index 10
-
-// > 1450px
-// 	.anime-actions
-// 		position fixed
-// 		bottom 0
-// 		right content-padding
-
-// .anime-rating-categories
-// 	horizontal
-// 	width 100%
-
-// .anime-rating-category
-// 	ui-element
-// 	flex 1
-// 	text-align center
-// 	margin 0.5rem
-
-// .anime-rating-category-name
-// 	font-size 1.3rem
-// 	margin-top 0.5rem
-
-// .anime-rating
-// 	margin 0.5rem
-// 	letter-spacing 3px
-// 	font-size 1.3rem
-// 	color link-color
+.amv-video
+	width 100%
 
 .anime-widget
 	margin-top 0.6rem
