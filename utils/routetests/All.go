@@ -322,23 +322,7 @@ var routeTests = map[string][]string{
 	},
 
 	// Images
-	"/images/avatars/large/:file": []string{
-		"/images/avatars/large/4J6qpK1ve.webp",
-	},
-
-	"/images/avatars/small/:file": []string{
-		"/images/avatars/small/4J6qpK1ve.webp",
-	},
-
-	"/images/brand/:file": []string{
-		"/images/brand/64.webp",
-	},
-
-	"/images/login/:file": []string{
-		"/images/login/google",
-	},
-
-	"/images/elements/:file": []string{
+	"/images/*file": []string{
 		"/images/elements/no-avatar.svg",
 	},
 
