@@ -9,6 +9,8 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/pages/admin"
+	"github.com/animenotifier/notify.moe/pages/amv"
+	"github.com/animenotifier/notify.moe/pages/amvs"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/animeimport"
 	"github.com/animenotifier/notify.moe/pages/animelist"
@@ -138,6 +140,11 @@ func Configure(app *aero.Application) {
 	l.Page("/character/:id", character.Get)
 	l.Page("/character/:id/edit", character.Edit)
 	l.Page("/character/:id/history", character.History)
+
+	// AMVs
+	l.Page("/amvs", amvs.Latest)
+	l.Page("/amvs/best", amvs.Best)
+	l.Page("/amv/:id", amv.Get)
 
 	// Quotes
 	l.Page("/quote/:id", quote.Get)

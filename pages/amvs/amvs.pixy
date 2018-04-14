@@ -1,0 +1,32 @@
+component AMVs(amvs []*arn.AMV, nextIndex int, tag string, user *arn.User)
+	h1.page-title AMVs
+
+	AMVsTabs(tag)
+
+	.corner-buttons
+		if user != nil
+			if user.DraftIndex().AMVID == ""
+				button.action(data-action="newObject", data-trigger="click", data-type="amv")
+					Icon("plus")
+					span Add AMV
+			else
+				a.button(href="/amv/" + user.DraftIndex().AMVID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+	#load-more-target.amvs
+		AMVsScrollable(amvs, user)
+	
+	if nextIndex != -1
+		.buttons
+			LoadMore(nextIndex)
+
+component AMVsScrollable(amvs []*arn.AMV, user *arn.User)
+	each amv in amvs
+		AMV(amv, user)
+
+component AMVsTabs(tag string)
+	.tab-groups
+		.tabs
+			Tab("Latest", "video-camera", "/amvs")
+			Tab("Best", "heart", "/amvs/best")
