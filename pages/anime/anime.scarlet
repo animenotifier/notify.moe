@@ -155,9 +155,6 @@
 	horizontal
 	justify-content center
 
-.amv-video
-	width 100%
-
 .anime-widget
 	margin-top 0.6rem
 	margin-bottom 0.4rem
