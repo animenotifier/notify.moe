@@ -34,13 +34,13 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 			h3.mountable AMVs
 			.video-container.amv.mountable
 				video.video(controls="controls", controlsList="nodownload")
-					source(src="/videos/unchained.mp4", type="video/mp4")
+					source(src="/videos/unchained.webm", type="video/webm")
 		
 		if anime.ID == "7VjCpFiiR"
 			h3.mountable AMVs
 			.video-container.amv.mountable
 				video.video(controls="controls", controlsList="nodownload")
-					source(src="/videos/sunlight.mp4", type="video/mp4")
+					source(src="/videos/sunlight.webm", type="video/webm")
 
 	AnimeEpisodes(anime, episodes, user, false)
 
