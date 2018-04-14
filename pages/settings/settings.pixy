@@ -55,7 +55,7 @@ component SettingsPersonal(user *arn.User)
 			//- //- File upload
 			//- if user.Settings().Avatar.Source == "FileSystem"
 			
-			InputImage("avatar-input", "File", "/api/upload/avatar")
+			InputFileUpload("avatar-input", "File", "image", "/api/upload/avatar")
 
 			.profile-image-container.avatar-preview
 				if user.HasAvatar()
@@ -71,7 +71,7 @@ component SettingsPersonal(user *arn.User)
 				Icon("picture-o")
 				span Cover
 			
-			InputImage("cover-input", "File", "/api/upload/cover")
+			InputFileUpload("cover-input", "File", "image", "/api/upload/cover")
 
 			.cover-preview(title="Recommended: 1920 x 450 | PNG or JPG")
 				img#cover-input-preview.profile-cover.lazy(data-src=user.CoverLink("small"), data-webp="true", alt="Cover image")

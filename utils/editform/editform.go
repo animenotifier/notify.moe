@@ -120,7 +120,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		// Try to infer the ID type by the field name
 		if idType == "" {
 			switch field.Name {
-			case "AnimeID", "MainAnimeID":
+			case "AnimeID":
 				idType = "Anime"
 
 			case "CharacterID":
@@ -141,6 +141,8 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 			b.WriteString(components.InputSelection(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), values))
 		} else if field.Tag.Get("type") == "textarea" {
 			b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
+		} else if field.Tag.Get("type") == "upload" {
+			b.WriteString(components.InputFileUpload(idPrefix+field.Name, field.Name, field.Tag.Get("filetype"), field.Tag.Get("endpoint")))
 		} else {
 			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 		}

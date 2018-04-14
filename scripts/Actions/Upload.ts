@@ -8,7 +8,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 		return
 	}
 
-	let preview = document.getElementById(button.dataset.previewImageId) as HTMLImageElement
+	let fileType = button.dataset.type
 	let endpoint = button.dataset.endpoint
 
 	// Click on virtual file input element
@@ -22,16 +22,62 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 			return
 		}
 
-		if(!file.type.startsWith("image/")) {
+		// Check mime type for images
+		if(fileType === "image" && !file.type.startsWith("image/")) {
 			arn.statusMessage.showError(file.name + " is not an image file!")
 			return
 		}
 
-		previewImage(file, endpoint, preview)
-		uploadFile(file, endpoint, arn)
+		// Check mime type for videos
+		if(fileType === "video" && !file.type.startsWith("video/webm")) {
+			arn.statusMessage.showError(file.name + " is not a WebM video file!")
+			return
+		}
+
+		// Preview image
+		if(fileType === "image") {
+			let preview = document.getElementById(button.id + "-preview") as HTMLImageElement
+
+			if(preview) {
+				previewImage(file, endpoint, preview)
+			}
+		}
+
+		uploadFile(file, fileType, endpoint, arn)
 	}
 
 	input.click()
+}
+
+// Upload file
+function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNotifier) {
+	let reader = new FileReader()
+
+	reader.onloadend = async () => {
+		arn.statusMessage.showInfo(`Uploading ${fileType}...`, 60000)
+
+		let response = await fetch(endpoint, {
+			method: "POST",
+			credentials: "include",
+			headers: {
+				"Content-Type": "application/octet-stream"
+			},
+			body: reader.result
+		})
+
+		if(endpoint === "/api/upload/avatar") {
+			let newURL = await response.text()
+			updateSideBarAvatar(newURL)
+		}
+
+		if(response.ok) {
+			arn.statusMessage.showInfo(`Successfully uploaded your new ${fileType}.`)
+		} else {
+			arn.statusMessage.showError(`Failed uploading your new ${fileType}.`)
+		}
+	}
+
+	reader.readAsArrayBuffer(file)
 }
 
 // Preview image
@@ -52,37 +98,6 @@ function previewImage(file: File, endpoint: string, preview: HTMLImageElement) {
 	}
 
 	reader.readAsDataURL(file)
-}
-
-// Upload file
-function uploadFile(file: File, endpoint: string, arn: AnimeNotifier) {
-	let reader = new FileReader()
-
-	reader.onloadend = async () => {
-		arn.statusMessage.showInfo("Uploading image...", 60000)
-
-		let response = await fetch(endpoint, {
-			method: "POST",
-			credentials: "include",
-			headers: {
-				"Content-Type": "application/octet-stream"
-			},
-			body: reader.result
-		})
-
-		if(endpoint === "/api/upload/avatar") {
-			let newURL = await response.text()
-			updateSideBarAvatar(newURL)
-		}
-
-		if(response.ok) {
-			arn.statusMessage.showInfo("Successfully uploaded your new image.")
-		} else {
-			arn.statusMessage.showError("Failed uploading your new image.")
-		}
-	}
-
-	reader.readAsArrayBuffer(file)
 }
 
 // Update sidebar avatar

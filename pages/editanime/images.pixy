@@ -9,7 +9,7 @@ component EditAnimeImages(anime *arn.Anime)
 				Icon("picture-o")
 				span Image
 			
-			InputImage("anime-image-input", "File", "/api/upload/anime/" + anime.ID + "/image")
+			InputFileUpload("anime-image-input", "File", "image", "/api/upload/anime/" + anime.ID + "/image")
 
 			.anime-image-container
 				img#anime-image-input-preview.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt="Anime image")
