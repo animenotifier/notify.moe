@@ -29,21 +29,25 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 	AnimeRelations(anime, user, false)
 	AnimeTracks(anime, tracks, user, false)
 
-	if user != nil && (user.Role == "editor" || user.Role == "admin")
-		if anime.ID == "LbbCcKiig"
-			section.anime-section.mountable
-				h3.anime-section-name AMVs
+	if anime.ID == "LbbCcKiig"
+		section.anime-section.mountable
+			h3.anime-section-name AMVs
 
-				.amvs
-					.amv.mountable
-						.video-container
-							video.video
-								source(src="/videos/unchained.webm", type="video/webm")
-		
-					.amv.mountable
-						.video-container
-							video.video
-								source(src="/videos/sunlight.webm", type="video/webm")
+			.amvs
+				.amv.mountable
+					.video-container
+						video.video(controls="controls", controlsList="nodownload")
+							source(src="/videos/unchained.webm", type="video/webm")
+	
+	if anime.ID == "7VjCpFiiR"
+		section.anime-section.mountable
+			h3.anime-section-name AMVs
+
+			.amvs
+				.amv.mountable
+					.video-container
+						video.video(controls="controls", controlsList="nodownload")
+							source(src="/videos/sunlight.webm", type="video/webm")
 
 	AnimeEpisodes(anime, episodes, user, false)
 
