@@ -1,0 +1,7 @@
+component AMV(amv *arn.AMV, user *arn.User)
+	p= amv.Title.ByUser(user)
+	
+	.amv.mountable
+		.video-container
+			video.video(controls="controls", controlsList="nodownload")
+				source(src="", type="video/webm")

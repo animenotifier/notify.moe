@@ -120,7 +120,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		// Try to infer the ID type by the field name
 		if idType == "" {
 			switch field.Name {
-			case "AnimeID":
+			case "AnimeID", "MainAnimeID":
 				idType = "Anime"
 
 			case "CharacterID":
