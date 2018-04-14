@@ -32,7 +32,7 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 	if anime.ID == "LbbCcKiig" && user != nil && (user.Role == "editor" || user.Role == "admin")
 		h3.mountable AMVs
 		video.mountable(controls="controls", controlsList="nodownload")
-			source(src="https://notify.moe/videos/unchained.mkv", type="video/mp4")
+			source(src="/videos/unchained.mkv")
 
 	AnimeEpisodes(anime, episodes, user, false)
 

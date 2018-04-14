@@ -121,6 +121,8 @@
 .anime-cover-image
 	width anime-image-large-width
 	height anime-image-large-height
+	min-width anime-image-large-width
+	min-height anime-image-large-height
 	border-radius ui-element-border-radius
 
 	default-transition
