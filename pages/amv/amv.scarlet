@@ -1,0 +1,39 @@
+.amvs
+	vertical
+	margin-top 1rem
+
+.amv
+	width 100%
+	margin calc(content-padding / 2)
+
+	.video-container
+		box-shadow shadow-medium
+
+.amv-footer
+	media-footer
+
+.amv-page
+	vertical
+	align-items center
+
+.amv-main-anime
+	margin-bottom 1rem
+
+.amv-extra-anime
+	horizontal-wrap
+
+	a
+		display block
+		margin 0.4rem
+
+	img
+		border-radius ui-element-border-radius
+
+> 500px
+	.amvs
+		horizontal-wrap
+		justify-content flex-start
+		margin-top 0
+
+	.amv
+		max-width 380px

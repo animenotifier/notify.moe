@@ -1,7 +1,18 @@
 component AMV(amv *arn.AMV, user *arn.User)
-	p= amv.Title.ByUser(user)
-	
 	.amv.mountable
 		.video-container
 			video.video(controls="controls", controlsList="nodownload")
-				source(src="", type="video/webm")
+				source(src="/videos/amvs/" + amv.File, type="video/webm")
+		
+		AMVFooter(amv, user)
+
+component AMVFooter(amv *arn.AMV, user *arn.User)
+	.amv-footer
+		if amv.Title.ByUser(user) == ""
+			a(href=amv.Link() + "/edit") untitled
+		else
+			a(href=amv.Link())= amv.Title.ByUser(user)
+		span  posted 
+		span.utc-date(data-date=amv.Created)
+		span  by 
+		a(href=amv.Creator().Link())= amv.Creator().Nick + " "

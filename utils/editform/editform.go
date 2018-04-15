@@ -142,7 +142,11 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 		} else if field.Tag.Get("type") == "textarea" {
 			b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 		} else if field.Tag.Get("type") == "upload" {
-			b.WriteString(components.InputFileUpload(idPrefix+field.Name, field.Name, field.Tag.Get("filetype"), field.Tag.Get("endpoint")))
+			endpoint := field.Tag.Get("endpoint")
+			id := v.FieldByName("ID").String()
+			endpoint = strings.Replace(endpoint, ":id", id, 1)
+
+			b.WriteString(components.InputFileUpload(idPrefix+field.Name, field.Name, field.Tag.Get("filetype"), endpoint))
 		} else {
 			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 		}

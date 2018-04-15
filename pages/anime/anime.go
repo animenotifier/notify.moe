@@ -67,7 +67,24 @@ func Get(ctx *aero.Context) string {
 	})
 
 	sort.Slice(tracks, func(i, j int) bool {
-		return tracks[i].Title.ByUser(user) < tracks[j].Title.ByUser(user)
+		if len(tracks[i].Likes) == len(tracks[j].Likes) {
+			return tracks[i].Title.ByUser(user) < tracks[j].Title.ByUser(user)
+		}
+
+		return len(tracks[i].Likes) > len(tracks[j].Likes)
+	})
+
+	// AMVs
+	amvs := arn.FilterAMVs(func(track *arn.AMV) bool {
+		return !track.IsDraft && track.MainAnimeID == anime.ID
+	})
+
+	sort.Slice(amvs, func(i, j int) bool {
+		if len(amvs[i].Likes) == len(amvs[j].Likes) {
+			return amvs[i].Title.ByUser(user) < amvs[j].Title.ByUser(user)
+		}
+
+		return len(amvs[i].Likes) > len(amvs[j].Likes)
 	})
 
 	// Anime list item
@@ -107,5 +124,5 @@ func Get(ctx *aero.Context) string {
 
 	ctx.Data = openGraph
 
-	return ctx.HTML(components.Anime(anime, animeListItem, tracks, episodes, friends, friendsAnimeListItems, user))
+	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, episodes, friends, friendsAnimeListItems, user))
 }

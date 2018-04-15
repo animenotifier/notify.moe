@@ -1,11 +1,11 @@
-component Anime(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, episodes []*arn.AnimeEpisode, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+component Anime(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, episodes []*arn.AnimeEpisode, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	.anime
 		.anime-main-column
-			AnimeMainColumn(anime, listItem, tracks, episodes, user)
+			AnimeMainColumn(anime, listItem, tracks, amvs, episodes, user)
 		.anime-side-column
 			AnimeSideColumn(anime, friends, listItems, user)
 
-component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, episodes []*arn.AnimeEpisode, user *arn.User)
+component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, episodes []*arn.AnimeEpisode, user *arn.User)
 	.anime-header(data-id=anime.ID)
 		a.anime-image-container.mountable(href=anime.ImageLink("original"), target="_blank")
 			img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
@@ -28,28 +28,17 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 	AnimeCharacters(anime, user, false)
 	AnimeRelations(anime, user, false)
 	AnimeTracks(anime, tracks, user, false)
-
-	if anime.ID == "LbbCcKiig"
-		section.anime-section.mountable
-			h3.anime-section-name AMVs
-
-			.amvs
-				.amv.mountable
-					.video-container
-						video.video(controls="controls", controlsList="nodownload")
-							source(src="/videos/unchained.webm", type="video/webm")
-	
-	if anime.ID == "7VjCpFiiR"
-		section.anime-section.mountable
-			h3.anime-section-name AMVs
-
-			.amvs
-				.amv.mountable
-					.video-container
-						video.video(controls="controls", controlsList="nodownload")
-							source(src="/videos/sunlight.webm", type="video/webm")
-
+	AnimeAMVs(anime, amvs, user)
 	AnimeEpisodes(anime, episodes, user, false)
+
+component AnimeAMVs(anime *arn.Anime, amvs []*arn.AMV, user *arn.User)
+	if len(amvs) > 0
+		section.anime-section.mountable
+			h3.anime-section-name AMVs
+
+			.amvs
+				each amv in amvs
+					AMV(amv, user)
 
 component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	AnimeTrailer(anime)

@@ -1,10 +1,30 @@
 component AMVPage(amv *arn.AMV, user *arn.User)
 	AMVTabs(amv, user)
 	
-	if amv.Title.String() == ""
-		h1 untitled
-	else
-		h1= amv.Title.ByUser(user)
+	.amv-page
+		if amv.Title.String() == ""
+			h1.mountable untitled
+		else
+			h1.mountable= amv.Title.ByUser(user)
+		
+		if amv.File != ""
+			AMV(amv, user)
+		
+		if amv.MainAnimeID != "" || len(amv.ExtraAnimeIDs) > 0
+			h3.mountable Anime
+
+			if amv.MainAnimeID != ""
+				.amv-main-anime.mountable
+					AnimeGrid([]*arn.Anime{amv.MainAnime()}, user)
+			
+			if len(amv.ExtraAnimeIDs) > 0
+				.amv-extra-anime.mountable
+					AnimeGridSmall(amv.ExtraAnime(), user)
+
+component AnimeGridSmall(animes []*arn.Anime, user *arn.User)
+	each anime in animes
+		a.mountable(href=anime.Link(), title=anime.Title.ByUser(user))
+			img.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 component AMVTabs(amv *arn.AMV, user *arn.User)
 	.tabs

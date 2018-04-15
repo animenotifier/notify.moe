@@ -265,6 +265,7 @@ func Configure(app *aero.Application) {
 	app.Post("/api/upload/avatar", upload.Avatar)
 	app.Post("/api/upload/cover", upload.Cover)
 	app.Post("/api/upload/anime/:id/image", upload.AnimeImage)
+	app.Post("/api/upload/amv/:id/file", upload.AMVFile)
 
 	// Admin
 	l.Page("/admin", admin.Get)
