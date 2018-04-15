@@ -1,11 +1,11 @@
-component Anime(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, episodes []*arn.AnimeEpisode, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+component Anime(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, amvAppearances []*arn.AMV, episodes []*arn.AnimeEpisode, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	.anime
 		.anime-main-column
-			AnimeMainColumn(anime, listItem, tracks, amvs, episodes, user)
+			AnimeMainColumn(anime, listItem, tracks, amvs, amvAppearances, episodes, user)
 		.anime-side-column
 			AnimeSideColumn(anime, friends, listItems, user)
 
-component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, episodes []*arn.AnimeEpisode, user *arn.User)
+component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, amvAppearances []*arn.AMV, episodes []*arn.AnimeEpisode, user *arn.User)
 	.anime-header(data-id=anime.ID)
 		a.anime-image-container.mountable(href=anime.ImageLink("original"), target="_blank")
 			img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
@@ -28,16 +28,24 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 	AnimeCharacters(anime, user, false)
 	AnimeRelations(anime, user, false)
 	AnimeTracks(anime, tracks, user, false)
-	AnimeAMVs(anime, amvs, user)
+	AnimeAMVs(anime, amvs, amvAppearances, user)
 	AnimeEpisodes(anime, episodes, user, false)
 
-component AnimeAMVs(anime *arn.Anime, amvs []*arn.AMV, user *arn.User)
+component AnimeAMVs(anime *arn.Anime, amvs []*arn.AMV, amvAppearances []*arn.AMV, user *arn.User)
 	if len(amvs) > 0
 		section.anime-section.mountable
 			h3.anime-section-name AMVs
 
 			.amvs
 				each amv in amvs
+					AMV(amv, user)
+	
+	if len(amvAppearances) > 0
+		section.anime-section.mountable
+			h3.anime-section-name Appears in AMVs
+
+			.amvs
+				each amv in amvAppearances
 					AMV(amv, user)
 
 component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
