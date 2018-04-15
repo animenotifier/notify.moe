@@ -647,6 +647,9 @@ export default class AnimeNotifier {
 		video["became visible"] = () => {
 			video.pause()
 
+			// Prevent context menu
+			video.addEventListener("contextmenu", e => e.preventDefault())
+
 			for(let child of video.children) {
 				let div = child as HTMLDivElement
 				let source = document.createElement("source")
