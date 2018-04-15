@@ -20,6 +20,7 @@
 
 .amv-extra-anime
 	horizontal-wrap
+	justify-content center
 
 	a
 		display block
