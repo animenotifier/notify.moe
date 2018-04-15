@@ -20,6 +20,14 @@ component AMVPage(amv *arn.AMV, user *arn.User)
 			if len(amv.ExtraAnimeIDs) > 0
 				.amv-extra-anime.mountable
 					AnimeGridSmall(amv.ExtraAnime(), user)
+		
+		if len(amv.Links) > 0
+			//- h3.mountable Links
+
+			ul.amv-links
+				each link in amv.Links
+					li.amv-link.mountable
+						a(href=link.URL)= link.Title
 
 component AnimeGridSmall(animes []*arn.Anime, user *arn.User)
 	each anime in animes

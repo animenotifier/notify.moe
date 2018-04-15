@@ -14,7 +14,7 @@ component AMVs(amvs []*arn.AMV, nextIndex int, tag string, user *arn.User)
 					Icon("pencil")
 					span Edit draft
 
-	#load-more-target.amvs
+	#load-more-target.amvs.amvs-page
 		AMVsScrollable(amvs, user)
 	
 	if nextIndex != -1

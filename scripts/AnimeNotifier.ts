@@ -545,6 +545,10 @@ export default class AnimeNotifier {
 					this.lazyLoadImage(element as HTMLImageElement)
 					break
 
+				case "VIDEO":
+					this.lazyLoadVideo(element as HTMLVideoElement)
+					break
+
 				case "IFRAME":
 					this.lazyLoadIFrame(element as HTMLIFrameElement)
 					break
@@ -636,6 +640,29 @@ export default class AnimeNotifier {
 		}
 
 		this.visibilityObserver.observe(element)
+	}
+
+	lazyLoadVideo(video: HTMLVideoElement) {
+		// Once the video becomes visible, load it
+		video["became visible"] = () => {
+			video.pause()
+
+			for(let child of video.children) {
+				let div = child as HTMLDivElement
+				let source = document.createElement("source")
+				source.src = div.dataset.src
+				source.type = div.dataset.type
+
+				Diff.mutations.queue(() => video.replaceChild(source, div))
+			}
+
+			Diff.mutations.queue(() => {
+				video.load()
+				video.classList.add("element-found")
+			})
+		}
+
+		this.visibilityObserver.observe(video)
 	}
 
 	mountMountables(elements?: IterableIterator<HTMLElement>) {

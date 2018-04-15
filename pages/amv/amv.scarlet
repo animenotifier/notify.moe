@@ -4,7 +4,6 @@
 
 .amv
 	width 100%
-	margin calc(content-padding / 2)
 
 	.video-container
 		box-shadow shadow-medium
@@ -29,6 +28,14 @@
 	img
 		border-radius ui-element-border-radius
 
+.amv-links
+	margin-top 1rem
+
+.amv-link
+	list-style none
+	margin-left 0
+	text-align center
+
 > 500px
 	.amvs
 		horizontal-wrap
@@ -37,3 +44,4 @@
 
 	.amv
 		max-width 380px
+		margin calc(content-padding / 2)
