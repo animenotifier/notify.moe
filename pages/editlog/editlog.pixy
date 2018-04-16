@@ -59,26 +59,26 @@ component EditLogScrollable(entries []*arn.EditLogEntry, user *arn.User)
 				if arn.GetObjectTitle(entry.ObjectType, entry.ObjectID) == ""
 					.edit-log-empty empty
 				else if strings.HasPrefix(arn.GetObjectTitle(entry.ObjectType, entry.ObjectID), "<not found:")
-					span= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
+					span.clip-long-text= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
 				else
-					a(href=arn.GetObjectLink(entry.ObjectType, entry.ObjectID), target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
+					a.clip-long-text(href=arn.GetObjectLink(entry.ObjectType, entry.ObjectID), target="_blank")= arn.GetObjectTitle(entry.ObjectType, entry.ObjectID)
 			
 			.edit-log-key
 				span= entry.ObjectType
 
 				if entry.Key != ""
-					span= "." + entry.Key
+					span.clip-long-text= "." + entry.Key
 			
 			.edit-log-value(title=entry.OldValue)
 				if entry.OldValue == ""
 					.edit-log-empty empty
 				else
-					span= entry.OldValue
+					span.clip-long-text= entry.OldValue
 			
 			.edit-log-value(title=entry.NewValue)
 				if entry.NewValue == ""
 					.edit-log-empty empty
 				else
-					span= entry.NewValue
+					span.clip-long-text= entry.NewValue
 
 			.edit-log-date.utc-date(data-date=entry.Created)
