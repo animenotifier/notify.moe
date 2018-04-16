@@ -1,0 +1,11 @@
+component UserRegistrations(years []int, yearInfo map[int]utils.YearRegistrations)
+	AdminTabs
+	h1.page-title User registrations
+
+	for _, year := range years
+		h3.mountable= year
+		h4.mountable= strconv.Itoa(yearInfo[year].Total) + " registrations"
+		for month := 1; month <= 12; month++
+			p.mountable
+				strong= time.Month(month).String() + ": "
+				span= strconv.Itoa(yearInfo[year].Months[month])
