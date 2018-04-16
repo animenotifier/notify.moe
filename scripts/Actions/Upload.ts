@@ -55,8 +55,20 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 	let reader = new FileReader()
 
 	reader.onloadend = async () => {
-		let megaBytes = reader.result.byteLength / 1024 / 1024
-		arn.statusMessage.showInfo(`Uploading ${fileType}...${megaBytes.toFixed(1)} MB`, -1)
+		let fileSize = reader.result.byteLength
+		let unit = "bytes"
+
+		if(fileSize >= 1024) {
+			fileSize /= 1024
+			unit = "KB"
+
+			if(fileSize >= 1024) {
+				fileSize /= 1024
+				unit = "MB"
+			}
+		}
+
+		arn.statusMessage.showInfo(`Uploading ${fileType}...${fileSize.toFixed(1)} ${unit}`, -1)
 
 		try {
 			let responseText = await fetchWithProgress(endpoint, {
