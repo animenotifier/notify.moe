@@ -143,7 +143,9 @@ func Configure(app *aero.Application) {
 
 	// AMVs
 	l.Page("/amvs", amvs.Latest)
+	l.Page("/amvs/from/:index", amvs.Latest)
 	l.Page("/amvs/best", amvs.Best)
+	l.Page("/amvs/best/from/:index", amvs.Best)
 	l.Page("/amv/:id", amv.Get)
 	l.Page("/amv/:id/edit", amv.Edit)
 	l.Page("/amv/:id/history", amv.History)
