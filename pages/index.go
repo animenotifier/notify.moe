@@ -60,6 +60,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/quotes"
 	"github.com/animenotifier/notify.moe/pages/recommended"
 	"github.com/animenotifier/notify.moe/pages/search"
+	"github.com/animenotifier/notify.moe/pages/search/multisearch"
 	"github.com/animenotifier/notify.moe/pages/settings"
 	"github.com/animenotifier/notify.moe/pages/shop"
 	"github.com/animenotifier/notify.moe/pages/soundtrack"
@@ -252,7 +253,9 @@ func Configure(app *aero.Application) {
 	l.Page("/soundtrack-search/*term", search.SoundTracks)
 	l.Page("/user-search/*term", search.Users)
 	l.Page("/company-search/*term", search.Companies)
+	l.Page("/multisearch/anime", multisearch.Anime)
 
+	// Shop
 	// Shop
 	l.Page("/support", support.Get)
 	l.Page("/shop", shop.Get)

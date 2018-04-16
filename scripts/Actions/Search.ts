@@ -165,10 +165,14 @@ function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string
 
 		await arn.innerHTML(element, html)
 
-		// Do the same as for the content loaded event,
-		// except here we are limiting it to the element.
-		arn.app.ajaxify(element.getElementsByTagName("a"))
-		arn.lazyLoad(findAllInside("lazy", element))
-		arn.mountMountables(findAllInside("mountable", element))
+		showSearchResults(arn, element)
 	}
+}
+
+export function showSearchResults(arn: AnimeNotifier, element: HTMLElement) {
+	// Do the same as for the content loaded event,
+	// except here we are limiting it to the element.
+	arn.app.ajaxify(element.getElementsByTagName("a"))
+	arn.lazyLoad(findAllInside("lazy", element))
+	arn.mountMountables(findAllInside("mountable", element))
 }

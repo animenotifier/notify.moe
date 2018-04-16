@@ -1,0 +1,3 @@
+component MultiSearch
+	textarea.action(data-action="multiSearchAnime", data-trigger="change", placeholder="Paste multiple anime titles here, one per line")
+	#multi-search-anime

@@ -1,4 +1,6 @@
 import AnimeNotifier from "../AnimeNotifier"
+import { findAllInside } from "../Utils";
+import { showSearchResults } from "./Search"
 
 // newAnimeDiffIgnore
 export function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement) {
@@ -34,4 +36,23 @@ export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonEle
 	} else {
 		arn.statusMessage.showError(await response.text())
 	}
+}
+
+// Multi-search anime
+export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAreaElement) {
+	let results = document.getElementById("multi-search-anime") as HTMLDivElement
+	let animeTitles = textarea.value.split("\n")
+	let animeIDs = new Array<string>(animeTitles.length)
+
+	results.innerHTML = ""
+
+	for(let i = 0; i < animeTitles.length; i++) {
+		console.log(animeTitles[i])
+		let response = await fetch("/_/anime-search/" + animeTitles[i])
+		let html = await response.text()
+		results.innerHTML += "<h3>" + animeTitles[i] + "</h3>" + html
+	}
+
+	results.classList.remove("hidden")
+	showSearchResults(arn, results)
 }
