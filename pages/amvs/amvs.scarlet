@@ -1,2 +1,2 @@
 .amvs-page
-	justify-content center !important
+	justify-content space-evenly !important
