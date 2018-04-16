@@ -18,18 +18,20 @@ func getOpenGraph(ctx *aero.Context, amv *arn.AMV) *arn.OpenGraph {
 		Meta: map[string]string{},
 	}
 
-	if amv.MainAnime() != nil {
-		openGraph.Tags["og:image"] = amv.MainAnime().ImageLink("large")
-		openGraph.Tags["og:description"] = amv.MainAnime().Title.Canonical + " (" + strings.Join(amv.Tags, ", ") + ")"
-	} else {
-		openGraph.Tags["og:description"] = strings.Join(amv.Tags, ", ")
-	}
+	// if amv.MainAnime() != nil {
+	// 	openGraph.Tags["og:image"] = amv.MainAnime().ImageLink("large")
+	// 	openGraph.Tags["og:description"] = amv.MainAnime().Title.Canonical + " (" + strings.Join(amv.Tags, ", ") + ")"
+	// } else {
+	// 	openGraph.Tags["og:description"] = strings.Join(amv.Tags, ", ")
+	// }
+
+	openGraph.Tags["og:description"] = strings.Join(amv.Tags, ", ")
 
 	if amv.File != "" {
 		openGraph.Tags["og:video"] = "https://" + ctx.App.Config.Domain + "/videos/amvs/" + amv.File
 		openGraph.Tags["og:video:type"] = "video/webm"
-		openGraph.Tags["og:video:width"] = "640"
-		openGraph.Tags["og:video:height"] = "360"
+		openGraph.Tags["og:video:width"] = "320"
+		openGraph.Tags["og:video:height"] = "180"
 
 		openGraph.Meta["twitter:player"] = openGraph.Tags["og:video"]
 		openGraph.Meta["twitter:player:width"] = openGraph.Tags["og:video:width"]
