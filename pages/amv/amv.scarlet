@@ -1,3 +1,5 @@
+const amv-large-width = 854px
+
 .amvs
 	vertical
 	margin-top 1rem
@@ -14,6 +16,7 @@
 .amv-page
 	vertical
 	align-items flex-start
+	max-width amv-large-width !important
 
 	.widget
 		justify-content flex-start
@@ -60,4 +63,4 @@
 
 	.amv-page
 		.amv
-			max-width 854px
+			max-width amv-large-width
