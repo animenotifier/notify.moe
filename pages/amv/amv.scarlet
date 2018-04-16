@@ -13,14 +13,23 @@
 
 .amv-page
 	vertical
-	align-items center
+	align-items flex-start
+
+	.widget
+		justify-content flex-start
+		width 100%
+
+.amv-page-title
+	width 100%
+	text-align center
 
 .amv-main-anime
+	display flex
 	margin-bottom 1rem
 
 .amv-extra-anime
 	horizontal-wrap
-	justify-content center
+	justify-content left
 
 	a
 		display block
@@ -30,12 +39,10 @@
 		border-radius ui-element-border-radius
 
 .amv-links
-	margin-top 1rem
+	//
 
 .amv-link
-	list-style none
-	margin-left 0
-	text-align center
+	//
 
 > 500px
 	.amvs
@@ -44,5 +51,13 @@
 		margin-top 0
 
 	.amv
-		max-width 380px
+		max-width 200px
 		margin calc(content-padding / 2)
+
+	.amvs
+		.amv
+			max-width 520px
+
+	.amv-page
+		.amv
+			max-width 854px

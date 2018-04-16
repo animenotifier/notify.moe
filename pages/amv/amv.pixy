@@ -1,33 +1,44 @@
 component AMVPage(amv *arn.AMV, user *arn.User)
 	AMVTabs(amv, user)
 	
-	.amv-page
+	.widget-form.amv-page
 		if amv.Title.String() == ""
-			h1.mountable untitled
+			h1.amv-page-title.mountable untitled
 		else
-			h1.mountable= amv.Title.ByUser(user)
+			h1.amv-page-title.mountable= amv.Title.ByUser(user)
 		
 		if amv.File != ""
 			AMV(amv, user)
 		
 		if amv.MainAnimeID != "" || len(amv.ExtraAnimeIDs) > 0
-			h3.mountable Anime
+			.widget
+				h3.widget-title.mountable Anime
 
-			if amv.MainAnimeID != ""
-				.amv-main-anime.mountable
-					AnimeGrid([]*arn.Anime{amv.MainAnime()}, user)
-			
-			if len(amv.ExtraAnimeIDs) > 0
-				.amv-extra-anime.mountable
-					AnimeGridSmall(amv.ExtraAnime(), user)
+				if amv.MainAnimeID != ""
+					.amv-main-anime.mountable
+						AnimeGrid([]*arn.Anime{amv.MainAnime()}, user)
+				
+				if len(amv.ExtraAnimeIDs) > 0
+					.amv-extra-anime.mountable
+						AnimeGridSmall(amv.ExtraAnime(), user)
 		
 		if len(amv.Links) > 0
-			//- h3.mountable Links
+			.widget
+				h3.widget-title.mountable Links
 
-			ul.amv-links
-				each link in amv.Links
-					li.amv-link.mountable
-						a(href=link.URL)= link.Title
+				.light-button-group.amv-links
+					each link in amv.Links
+						a.light-button.amv-link.mountable(href=link.URL)
+							Icon("external-link")
+							span= link.Title
+		
+		if len(amv.Tags) > 0
+			.widget
+				h3.widget-title.mountable Tags
+
+				.tags.mountable
+					each tag in amv.Tags
+						.tag.mountable= tag
 
 component AnimeGridSmall(animes []*arn.Anime, user *arn.User)
 	each anime in animes
