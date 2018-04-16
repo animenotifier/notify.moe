@@ -68,7 +68,7 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 			}
 		}
 
-		arn.statusMessage.showInfo(`Uploading ${fileType}...${fileSize.toFixed(1)} ${unit}`, -1)
+		arn.statusMessage.showInfo(`Uploading ${fileType}...${fileSize.toFixed(0)} ${unit}`, -1)
 
 		try {
 			let responseText = await fetchWithProgress(endpoint, {
