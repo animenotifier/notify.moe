@@ -19,5 +19,6 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "AMV not found", err)
 	}
 
+	ctx.Data = getOpenGraph(ctx, amv)
 	return ctx.HTML(components.AMVPage(amv, user))
 }
