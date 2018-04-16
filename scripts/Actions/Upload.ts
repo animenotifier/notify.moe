@@ -1,5 +1,6 @@
 import AnimeNotifier from "../AnimeNotifier"
 import StatusMessage from "../StatusMessage"
+import { fetchWithProgress } from "../Utils/fetchWithProgress"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
@@ -54,29 +55,39 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 	let reader = new FileReader()
 
 	reader.onloadend = async () => {
-		arn.statusMessage.showInfo(`Uploading ${fileType}...`, 60000)
+		let megaBytes = reader.result.byteLength / 1024 / 1024
+		arn.statusMessage.showInfo(`Uploading ${fileType}...${megaBytes.toFixed(1)} MB`, -1)
 
-		let response = await fetch(endpoint, {
-			method: "POST",
-			credentials: "include",
-			headers: {
-				"Content-Type": "application/octet-stream"
-			},
-			body: reader.result
-		})
+		try {
+			let responseText = await fetchWithProgress(endpoint, {
+				method: "POST",
+				credentials: "include",
+				headers: {
+					"Content-Type": "application/octet-stream"
+				},
+				body: reader.result
+			}, e => {
+				if(!e.lengthComputable) {
+					return
+				}
 
-		if(endpoint === "/api/upload/avatar") {
-			let newURL = await response.text()
-			updateSideBarAvatar(newURL)
-		}
+				let progress = e.loaded / e.total * 100
+				arn.statusMessage.showInfo(`Uploading ${fileType}...${progress.toFixed(1)}%`, -1)
+			})
 
-		if(response.ok) {
 			arn.statusMessage.showInfo(`Successfully uploaded your new ${fileType}.`)
-		} else {
+
+			if(endpoint === "/api/upload/avatar") {
+				// We received the new avatar URL
+				updateSideBarAvatar(responseText)
+			}
+		} catch(err) {
 			arn.statusMessage.showError(`Failed uploading your new ${fileType}.`)
+			console.error(err)
 		}
 	}
 
+	arn.statusMessage.showInfo(`Reading ${fileType} from disk...`, -1)
 	reader.readAsArrayBuffer(file)
 }
 
