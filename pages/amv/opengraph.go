@@ -30,12 +30,8 @@ func getOpenGraph(ctx *aero.Context, amv *arn.AMV) *arn.OpenGraph {
 	if amv.File != "" {
 		openGraph.Tags["og:video"] = "https://" + ctx.App.Config.Domain + "/videos/amvs/" + amv.File
 		openGraph.Tags["og:video:type"] = "video/webm"
-		openGraph.Tags["og:video:width"] = "320"
-		openGraph.Tags["og:video:height"] = "180"
 
 		openGraph.Meta["twitter:player"] = openGraph.Tags["og:video"]
-		openGraph.Meta["twitter:player:width"] = openGraph.Tags["og:video:width"]
-		openGraph.Meta["twitter:player:height"] = openGraph.Tags["og:video:height"]
 		openGraph.Meta["twitter:player:stream"] = openGraph.Tags["og:video"]
 		openGraph.Meta["twitter:player:stream:content_type"] = openGraph.Tags["og:video:type"]
 	}
