@@ -650,19 +650,23 @@ export default class AnimeNotifier {
 			// Prevent context menu
 			video.addEventListener("contextmenu", e => e.preventDefault())
 
-			for(let child of video.children) {
-				let div = child as HTMLDivElement
-				let source = document.createElement("source")
-				source.src = div.dataset.src
-				source.type = div.dataset.type
+			let modified = false
 
-				Diff.mutations.queue(() => video.replaceChild(source, div))
+			for(let child of video.children) {
+				let element = child as HTMLSourceElement
+
+				if(element.src !== element.dataset.src) {
+					element.src = element.dataset.src
+					modified = true
+				}
 			}
 
-			Diff.mutations.queue(() => {
-				video.load()
-				video.classList.add("element-found")
-			})
+			if(modified) {
+				Diff.mutations.queue(() => {
+					video.load()
+					video.classList.add("element-found")
+				})
+			}
 		}
 
 		this.visibilityObserver.observe(video)

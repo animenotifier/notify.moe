@@ -2,7 +2,7 @@ component AMV(amv *arn.AMV, user *arn.User)
 	.amv.mountable
 		.video-container
 			video.video.lazy(controls="controls", controlsList="nodownload")
-				div(data-src="/videos/amvs/" + amv.File, data-type="video/webm")
+				source(data-src="https://notify.moe/videos/amvs/" + amv.File, data-type="video/webm")
 		
 		AMVFooter(amv, user)
 
