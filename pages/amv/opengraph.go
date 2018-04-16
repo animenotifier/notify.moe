@@ -15,7 +15,7 @@ func getOpenGraph(ctx *aero.Context, amv *arn.AMV) *arn.OpenGraph {
 			"og:site_name": ctx.App.Config.Domain,
 			"og:type":      "video.other",
 		},
-		// Meta: map[string]string{},
+		Meta: map[string]string{},
 	}
 
 	openGraph.Tags["og:description"] = strings.Join(amv.Tags, ", ")
@@ -26,11 +26,11 @@ func getOpenGraph(ctx *aero.Context, amv *arn.AMV) *arn.OpenGraph {
 		openGraph.Tags["og:video:width"] = "640"
 		openGraph.Tags["og:video:height"] = "360"
 
-		// openGraph.Meta["twitter:player"] = openGraph.Tags["og:video"]
-		// openGraph.Meta["twitter:player:width"] = openGraph.Tags["og:video:width"]
-		// openGraph.Meta["twitter:player:height"] = openGraph.Tags["og:video:height"]
-		// openGraph.Meta["twitter:player:stream"] = openGraph.Tags["og:video"]
-		// openGraph.Meta["twitter:player:stream:content_type"] = openGraph.Tags["og:video:type"]
+		openGraph.Meta["twitter:player"] = openGraph.Tags["og:video"]
+		openGraph.Meta["twitter:player:width"] = openGraph.Tags["og:video:width"]
+		openGraph.Meta["twitter:player:height"] = openGraph.Tags["og:video:height"]
+		openGraph.Meta["twitter:player:stream"] = openGraph.Tags["og:video"]
+		openGraph.Meta["twitter:player:stream:content_type"] = openGraph.Tags["og:video:type"]
 	}
 
 	return openGraph
