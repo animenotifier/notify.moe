@@ -1,0 +1,8 @@
+component UserMap(url string)
+	UsersTabs(url)
+	h1 Map
+
+	.buttons
+		button.action(data-action="showUserMap", data-trigger="click") Show
+	
+	#user-map

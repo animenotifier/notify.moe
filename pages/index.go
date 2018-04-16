@@ -104,6 +104,7 @@ func Configure(app *aero.Application) {
 
 	// User lists
 	l.Page("/users", users.Active)
+	l.Page("/users/map", users.Map)
 	l.Page("/users/noavatar", users.ActiveNoAvatar)
 	l.Page("/users/games/osu", users.Osu)
 	l.Page("/users/games/overwatch", users.Overwatch)

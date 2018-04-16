@@ -47,6 +47,7 @@ component UsersTabs(url string)
 		Tab("Editors", "pencil", "/users/editors")
 		Tab("Supporters", "heart", "/users/pro")
 		Tab("Staff", "user-secret", "/users/staff")
+		//- Tab("Map", "map", "/users/map")
 	
 	if strings.Contains(url, "/users/games")
 		.tabs
