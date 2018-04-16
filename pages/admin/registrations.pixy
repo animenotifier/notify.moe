@@ -1,6 +1,6 @@
-component UserRegistrations(years []int, yearInfo map[int]utils.YearRegistrations)
+component UserRegistrations(total int, years []int, yearInfo map[int]utils.YearRegistrations)
 	AdminTabs
-	h1.page-title User registrations
+	h1.mountable= fmt.Sprintf("User registrations (%d)", total)
 
 	for _, year := range years
 		h3.mountable= year

@@ -23,6 +23,7 @@ func UserRegistrations(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
 	}
 
+	total := 0
 	yearInfo := map[int]utils.YearRegistrations{}
 	years := []int{}
 
@@ -44,6 +45,8 @@ func UserRegistrations(ctx *aero.Context) string {
 
 		yearRegistrations.Months[int(registered.Month())]++
 		yearInfo[year] = yearRegistrations
+
+		total++
 	}
 
 	for year := range yearInfo {
@@ -52,5 +55,5 @@ func UserRegistrations(ctx *aero.Context) string {
 
 	sort.Ints(years)
 
-	return ctx.HTML(components.UserRegistrations(years, yearInfo))
+	return ctx.HTML(components.UserRegistrations(total, years, yearInfo))
 }
