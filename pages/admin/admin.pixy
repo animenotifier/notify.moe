@@ -2,6 +2,7 @@ component AdminTabs
 	.tabs
 		Tab("Server", "server", "/admin")
 		Tab("WebDev", "html5", "/admin/webdev")
+		Tab("Client errors", "exclamation", "/admin/errors/client")
 		Tab("Registrations", "user-plus", "/admin/registrations")
 		Tab("Purchases", "shopping-cart", "/admin/purchases")
 	

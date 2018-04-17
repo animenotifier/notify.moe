@@ -1,0 +1,19 @@
+component ClientErrors(reports []*arn.ClientErrorReport)
+	AdminTabs
+	h1.mountable Client-side errors
+
+	table
+		tbody
+			each report in reports
+				tr.mountable
+					td
+						a(href="/api/clienterrorreport/" + report.ID, target="_blank")= report.Message
+					td
+						each line in strings.Split(report.Stack, "\n")
+							p= line
+					td.utc-date(data-date=report.Created)
+					td.edit-log-user
+						if report.CreatedBy != ""
+							Avatar(report.Creator())
+						else
+							span anonymous

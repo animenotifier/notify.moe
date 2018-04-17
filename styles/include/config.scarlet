@@ -75,7 +75,7 @@ calendar-entry-seen-background = ui-background
 calendar-entry-seen-hover-background = ui-background
 
 // Tables
-table-width-normal = 900px
+table-width-normal = 1100px
 
 // Feature cards
 const feature-card-saturation = 83%

@@ -278,6 +278,7 @@ func Configure(app *aero.Application) {
 	l.Page("/admin", admin.Get)
 	l.Page("/admin/webdev", admin.WebDev)
 	l.Page("/admin/registrations", admin.UserRegistrations)
+	l.Page("/admin/errors/client", admin.ClientErrors)
 	l.Page("/admin/purchases", admin.PurchaseHistory)
 
 	// Editor
