@@ -1,6 +1,6 @@
 import AnimeNotifier from "../AnimeNotifier"
 import StatusMessage from "../StatusMessage"
-import { fetchWithProgress } from "../Utils/fetchWithProgress"
+import { bytesHumanReadable, fetchWithProgress } from "../Utils"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
@@ -56,19 +56,13 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 
 	reader.onloadend = async () => {
 		let fileSize = reader.result.byteLength
-		let unit = "bytes"
 
-		if(fileSize >= 1024) {
-			fileSize /= 1024
-			unit = "KB"
-
-			if(fileSize >= 1024) {
-				fileSize /= 1024
-				unit = "MB"
-			}
+		if(fileSize === 0) {
+			arn.statusMessage.showError("File is empty")
+			return
 		}
 
-		arn.statusMessage.showInfo(`Uploading ${fileType}...${fileSize.toFixed(0)} ${unit}`, -1)
+		arn.statusMessage.showInfo(`Preparing to upload ${fileType} (${bytesHumanReadable(fileSize)})`, -1)
 
 		try {
 			let responseText = await fetchWithProgress(endpoint, {
@@ -79,11 +73,7 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 				},
 				body: reader.result
 			}, e => {
-				if(!e.lengthComputable) {
-					return
-				}
-
-				let progress = e.loaded / e.total * 100
+				let progress = e.loaded / (e.lengthComputable ? e.total : fileSize) * 100
 				arn.statusMessage.showInfo(`Uploading ${fileType}...${progress.toFixed(1)}%`, -1)
 			})
 
