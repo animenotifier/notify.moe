@@ -319,12 +319,10 @@ class MyServiceWorker {
 	async installCache() {
 		let urls = [
 			"/",
-			"/_/",
 			"/scripts",
 			"/styles",
 			"/manifest.json",
 			"https://media.notify.moe/images/elements/noise-strong.png",
-			"https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw72.woff2"
 		]
 
 		let promises = []
