@@ -9,7 +9,7 @@ export function fetchWithProgress(url, options: RequestInit, onProgress: ((this:
 			xhr.upload.addEventListener("progress", onProgress)
 		}
 
-		xhr.open(options.method || "GET", url)
+		xhr.open(options.method || "GET", url, true)
 
 		for(let k in options.headers || {}) {
 			xhr.setRequestHeader(k, options.headers[k])
