@@ -377,6 +377,7 @@ var routeTests = map[string][]string{
 	"/anime/:id/edit":                                nil,
 	"/new/thread":                                    nil,
 	"/admin/purchases":                               nil,
+	"/admin/registrations":                           nil,
 	"/explore/sequels":                               nil,
 	"/editor/anilist":                                nil,
 	"/editor/shoboi":                                 nil,

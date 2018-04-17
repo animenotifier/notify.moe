@@ -36,22 +36,22 @@ export default class ServiceWorkerManager {
 				return
 			}
 
-			let message = {
-				type: "loaded",
-				url: ""
-			}
+			let url = ""
 
 			// If mainPageLoaded is set, it means every single request is now an AJAX request for the /_/ prefixed page
 			if(this.arn.mainPageLoaded) {
-				message.url = window.location.origin + "/_" + window.location.pathname
+				url = window.location.origin + "/_" + window.location.pathname
 			} else {
 				this.arn.mainPageLoaded = true
-				message.url = window.location.href
+				url = window.location.href
 			}
 
 			// console.log("checking for updates:", message.url)
 
-			this.postMessage(message)
+			this.postMessage({
+				type: "loaded",
+				url: ""
+			})
 		}
 
 		// For future loaded events

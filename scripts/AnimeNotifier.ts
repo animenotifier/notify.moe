@@ -186,7 +186,7 @@ export default class AnimeNotifier {
 
 		// Offline message
 		if(navigator.onLine === false) {
-			this.statusMessage.showError("You are viewing an offline version of the site now.")
+			this.statusMessage.showInfo("You are viewing an offline version of the site now.")
 		}
 
 		// Notification manager
@@ -424,14 +424,13 @@ export default class AnimeNotifier {
 	reloadContent(cached?: boolean) {
 		let headers = new Headers()
 
-		if(!cached) {
-			headers.append("X-Reload", "true")
+		if(cached) {
+			headers.set("X-Force-Cache", "true")
 		} else {
-			headers.append("X-CacheOnly", "true")
+			headers.set("X-No-Cache", "true")
 		}
 
-		let path = this.app.currentPath
-		this.lastReloadContentPath = path
+		let path = this.lastReloadContentPath = this.app.currentPath
 
 		return fetch("/_" + path, {
 			credentials: "same-origin",

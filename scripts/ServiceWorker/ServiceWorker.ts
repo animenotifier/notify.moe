@@ -27,42 +27,46 @@
 // to force a real page reload.
 
 // Promises
-const CACHEREFRESH = new Map<string, Promise<void>>()
+// const CACHEREFRESH = new Map<string, Promise<void>>()
 
 // E-Tags that we served for a given URL
-const ETAGS = new Map<string, string>()
-
-// When these patterns are matched for the request URL, we exclude them from being
-// served cache-first and instead serve them via a network request.
-// Note that the service worker URL is automatically excluded from fetch events
-// and therefore doesn't need to be added here.
-const EXCLUDECACHE = new Set<string>([
-	// API requests
-	"/api/",
-
-	// PayPal stuff
-	"/paypal/",
-
-	// List imports
-	"/import/",
-
-	// Infinite scrolling
-	"/from/",
-
-	// Chrome extension
-	"chrome-extension",
-
-	// Authorization paths /auth/ and /logout are not listed here because they are handled in a special way.
-])
+// const ETAGS = new Map<string, string>()
 
 // MyServiceWorker is the process that controls all the tabs in a browser.
 class MyServiceWorker {
 	cache: MyCache
 	reloads: Map<string, Promise<Response>>
+	excludeCache: Set<string>
 
 	constructor() {
 		this.cache = new MyCache("v-6")
 		this.reloads = new Map<string, Promise<Response>>()
+
+		// When these patterns are matched for the request URL, we exclude them from being
+		// served cache-first and instead serve them via a network request.
+		// Note that the service worker URL is automatically excluded from fetch events
+		// and therefore doesn't need to be added here.
+		this.excludeCache = new Set<string>([
+			// API requests
+			"/api/",
+
+			// PayPal stuff
+			"/paypal/",
+
+			// List imports
+			"/import/",
+
+			// Infinite scrolling
+			"/from/",
+
+			// Chrome extension
+			"chrome-extension",
+
+			// WebM files
+			".webm"
+
+			// Authorization paths /auth/ and /logout are not listed here because they are handled in a special way.
+		])
 
 		self.addEventListener("install", (evt: InstallEvent) => evt.waitUntil(this.onInstall(evt)))
 		self.addEventListener("activate", (evt: any) => evt.waitUntil(this.onActivate(evt)))
@@ -73,12 +77,11 @@ class MyServiceWorker {
 		self.addEventListener("notificationclick", (evt: NotificationEvent) => evt.waitUntil(this.onNotificationClick(evt)))
 	}
 
-	onInstall(evt: InstallEvent) {
+	async onInstall(evt: InstallEvent) {
 		console.log("service worker install")
 
-		return self.skipWaiting().then(() => {
-			return this.installCache()
-		})
+		await self.skipWaiting()
+		await this.installCache()
 	}
 
 	onActivate(evt: any) {
@@ -104,97 +107,111 @@ class MyServiceWorker {
 		])
 	}
 
-	// onRequest intercepts all browser requests
-	onRequest(evt: FetchEvent) {
-		// Allow XHR upload requests via POST,
+	// onRequest intercepts all browser requests.
+	// Simply returning, without calling evt.respondWith(),
+	// will let the browser deal with the request normally.
+	async onRequest(evt: FetchEvent) {
+		let request = evt.request as Request
+
+		// If it's not a GET request, fetch it normally.
+		// Let the browser handle XHR upload requests via POST,
 		// so that we can receive upload progress events.
-		if(evt.request.method === "POST") {
+		if(request.method !== "GET") {
 			return
 		}
 
 		// DevTools opening will trigger these "only-if-cached" requests.
 		// https://bugs.chromium.org/p/chromium/issues/detail?id=823392
-		if((evt.request.cache as string) === "only-if-cached" && evt.request.mode !== "same-origin") {
+		if((request.cache as string) === "only-if-cached" && request.mode !== "same-origin") {
 			return
 		}
 
-		// Fetch via network
-		return evt.respondWith(fetch(evt.request))
+		// Exclude certain URLs from being cached.
+		for(let pattern of this.excludeCache.keys()) {
+			if(request.url.includes(pattern)) {
+				return
+			}
+		}
 
-		// let request = evt.request as Request
+		// If the request has cache set to "force-cache", return a cache-only response.
+		// This is used in reloads to avoid generating a 2nd request after a cache refresh.
+		if(request.headers.get("X-Force-Cache") === "true") {
+			return evt.respondWith(this.cache.serve(request))
+		}
 
-		// // If it's not a GET request, fetch it normally
-		// if(request.method !== "GET") {
-		// 	return evt.respondWith(this.fromNetwork(request))
-		// }
+		// --------------------------------------------------------------------------------
+		// Cross-origin requests.
+		// --------------------------------------------------------------------------------
 
-		// // Clear cache on authentication and fetch it normally
-		// if(request.url.includes("/auth/") || request.url.includes("/logout")) {
-		// 	return evt.respondWith(caches.delete(this.cache.version).then(() => fetch(request)))
-		// }
+		// These hosts don't support CORS. Always load via network.
+		if(request.url.startsWith("https://img.youtube.com/")) {
+			return
+		}
 
-		// // Exclude certain URLs from being cached
-		// for(let pattern of EXCLUDECACHE.keys()) {
-		// 	if(request.url.includes(pattern)) {
-		// 		return evt.respondWith(this.fromNetwork(request))
-		// 	}
-		// }
+		// Use CORS for cross-origin requests.
+		if(!request.url.startsWith("https://notify.moe/") && !request.url.startsWith("https://beta.notify.moe/")) {
+			request = new Request(request.url, {
+				credentials: "omit",
+				mode: "cors"
+			})
+		} else {
+			// let relativePath = trimPrefix(request.url, "https://notify.moe")
+			// relativePath = trimPrefix(relativePath, "https://beta.notify.moe")
+			// console.log(relativePath)
+		}
 
-		// // If the request included the header "X-CacheOnly", return a cache-only response.
-		// // This is used in reloads to avoid generating a 2nd request after a cache refresh.
-		// if(request.headers.get("X-CacheOnly") === "true") {
-		// 	return evt.respondWith(this.fromCache(request))
-		// }
+		// --------------------------------------------------------------------------------
+		// Network refresh.
+		// --------------------------------------------------------------------------------
 
-		// // Save the served E-Tag when onResponse is called
-		// let servedETag = undefined
+		// Save response in cache.
+		let saveResponseInCache = response => {
+			// Save response in cache.
+			let clone = response.clone()
+			this.cache.store(request, clone)
 
-		// let onResponse = (response: Response | null) => {
-		// 	if(response) {
-		// 		servedETag = response.headers.get("ETag")
-		// 		ETAGS.set(request.url, servedETag)
-		// 	}
+			return response
+		}
 
-		// 	return response
-		// }
+		let onResponse = (response: Response | null) => {
+			return response
+		}
 
-		// let saveResponseInCache = response => {
-		// 	let clone = response.clone()
+		// Refresh resource via a network request.
+		let refresh = fetch(request).then(saveResponseInCache)
 
-		// 	// Save the new version of the resource in the cache
-		// 	let cacheRefresh = this.cache.store(request, clone).catch(err => {
-		// 		console.error(err)
-		// 		// TODO: Tell client that the quota is exceeded (disk full).
-		// 	})
+		// --------------------------------------------------------------------------------
+		// Final response.
+		// --------------------------------------------------------------------------------
 
-		// 	CACHEREFRESH.set(request.url, cacheRefresh)
-		// 	return response
-		// }
+		// Clear cache on authentication and fetch it normally.
+		if(request.url.includes("/auth/") || request.url.includes("/logout")) {
+			return evt.respondWith(this.cache.clear().then(() => refresh))
+		}
 
-		// // Start fetching the request
-		// let network =
-		// 	fetch(request)
-		// 	.then(saveResponseInCache)
-		// 	.catch(error => {
-		// 		console.log("Fetch error:", error)
-		// 		throw error
-		// 	})
+		// If the request has cache set to "no-cache",
+		// return the network-only response even if it fails.
+		if(request.headers.get("X-No-Cache") === "true") {
+			return evt.respondWith(refresh)
+		}
 
-		// // Save in map
-		// this.reloads.set(request.url, network)
+		// Styles and scripts will be served via network first and fallback to cache.
+		if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
+			evt.respondWith(this.networkFirst(request, refresh, onResponse))
+			return refresh
+		}
 
-		// if(request.headers.get("X-Reload") === "true") {
-		// 	return evt.respondWith(network)
-		// }
+		// --------------------------------------------------------------------------------
+		// Default behavior for most requests.
+		// --------------------------------------------------------------------------------
 
-		// // Scripts and styles are server pushed on the initial response
-		// // so we can use a network-first response without an additional round-trip.
-		// // This causes the browser to always load the most recent scripts and styles.
-		// if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
-		// 	return evt.respondWith(this.networkFirst(request, network, onResponse))
-		// }
+		// // Respond via cache first.
+		// evt.respondWith(this.cacheFirst(request, refresh, onResponse))
+		// return refresh
 
-		// return evt.respondWith(this.cacheFirst(request, network, onResponse))
+		// Serve via network first and fallback to cache.
+		evt.respondWith(this.networkFirst(request, refresh, onResponse))
+		return refresh
 	}
 
 	// onMessage is called when the service worker receives a message from a client (browser tab).
@@ -249,9 +266,8 @@ class MyServiceWorker {
 				}
 			}
 
-			let user = await fetch("/api/me", {
-				credentials: "same-origin"
-			}).then(response => response.json())
+			let response = await fetch("/api/me", {credentials: "same-origin"})
+			let user = await response.json()
 
 			return fetch("/api/pushsubscriptions/" + user.id + "/add", {
 				method: "POST",
@@ -296,13 +312,30 @@ class MyServiceWorker {
 	}
 
 	// installCache is called when the service worker is installed for the first time.
-	installCache() {
-		return caches.open(this.cache.version).then(cache => {
-			return cache.addAll([
-				"./scripts",
-				"./styles",
-			])
-		})
+	async installCache() {
+		let urls = [
+			"/",
+			"/_/",
+			"/scripts",
+			"/styles",
+			"/manifest.json",
+			"https://media.notify.moe/images/elements/noise-strong.png",
+			"https://fonts.gstatic.com/s/ubuntu/v11/4iCs6KVjbNBYlgoKfw72.woff2"
+		]
+
+		let promises = []
+
+		for(let url of urls) {
+			let request = new Request(url, {
+				credentials: "same-origin",
+				mode: "cors"
+			})
+
+			let promise = fetch(request).then(response => this.cache.store(request, response))
+			promises.push(promise)
+		}
+
+		return Promise.all(promises)
 	}
 
 	// Serve network first.
@@ -312,14 +345,14 @@ class MyServiceWorker {
 
 		try {
 			response = await network
-			console.log("Network HIT:", request.url)
+			// console.log("Network HIT:", request.url)
 		} catch(error) {
-			console.log("Network MISS:", request.url, error)
+			// console.log("Network MISS:", request.url, error)
 
 			try {
-				response = await this.fromCache(request)
+				response = await this.cache.serve(request)
 			} catch(error) {
-				console.error(error)
+				return Promise.reject(error)
 			}
 		}
 
@@ -332,52 +365,74 @@ class MyServiceWorker {
 		let response: Response | null
 
 		try {
-			response = await this.fromCache(request)
-			console.log("Cache HIT:", request.url)
+			response = await this.cache.serve(request)
+			// console.log("Cache HIT:", request.url)
 		} catch(error) {
-			console.log("Cache MISS:", request.url, error)
+			// console.log("Cache MISS:", request.url, error)
 
 			try {
 				response = await network
 			} catch(error) {
-				console.error(error)
+				return Promise.reject(error)
 			}
 		}
 
 		return onResponse(response)
-	}
-
-	fromCache(request): Promise<Response> {
-		return caches.open(this.cache.version).then(cache => {
-			return cache.match(request).then(matching => {
-				if(matching) {
-					return Promise.resolve(matching)
-				}
-
-				return Promise.reject("no-match")
-			})
-		})
 	}
 }
 
 // MyCache is the cache used by the service worker.
 class MyCache {
 	version: string
+	cache: Cache
 
 	constructor(version: string) {
 		this.version = version
+		caches.open(this.version).then(newCache => this.cache = newCache)
 	}
 
-	store(request: RequestInfo, response: Response) {
-		return caches.open(this.version).then(cache => {
+	clear() {
+		return caches.delete(this.version)
+	}
+
+	async store(request: RequestInfo, response: Response) {
+		try {
 			// This can fail if the disk space quota has been exceeded.
-			return cache.put(request, response)
-		})
+			await this.cache.put(request, response)
+		} catch(err) {
+			console.log("Disk quota exceeded, can't store in cache:", request, response)
+		}
+	}
+
+	async serve(request: RequestInfo): Promise<Response> {
+		let matching = await this.cache.match(request)
+
+		if(matching) {
+			return matching
+		}
+
+		return Promise.reject("no-match")
 	}
 }
 
 // MyClient represents a single tab in the browser.
 class MyClient {
+	// MyClient.idToClient is a Map of clients
+	static idToClient = new Map<string, MyClient>()
+
+	// MyClient.get retrieves a client by ID
+	static async get(id: string): Promise<MyClient> {
+		let client = MyClient.idToClient.get(id)
+
+		if(!client) {
+			client = new MyClient(await self.clients.get(id))
+			MyClient.idToClient.set(id, client)
+		}
+
+		return client
+	}
+
+	// The actual client
 	client: ServiceWorkerClient
 
 	constructor(client: ServiceWorkerClient) {
@@ -398,6 +453,7 @@ class MyClient {
 		}
 	}
 
+	// postMessage sends a message to the client.
 	postMessage(message: object) {
 		this.client.postMessage(JSON.stringify(message))
 	}
@@ -405,116 +461,18 @@ class MyClient {
 	// onDOMContentLoaded is called when the client sent this service worker
 	// a message that the page has been loaded.
 	onDOMContentLoaded(url: string) {
-		// let refresh = serviceWorker.reloads.get(url)
-		// let servedETag = ETAGS.get(url)
-
-		// // If the user requests a sub-page we should prefetch the full page, too.
-		// if(url.includes("/_/") && !url.includes("/_/search/")) {
-		// 	var prefetch = true
-
-		// 	for(let pattern of EXCLUDECACHE.keys()) {
-		// 		if(url.includes(pattern)) {
-		// 			prefetch = false
-		// 			break
-		// 		}
-		// 	}
-
-		// 	if(prefetch) {
-		// 		this.prefetchFullPage(url)
-		// 	}
-		// }
-
-		// if(!refresh || !servedETag) {
-		// 	return Promise.resolve()
-		// }
-
-		// return refresh.then(async (response: Response) => {
-		// 	// When the actual network request was used by the client, response.bodyUsed is set.
-		// 	// In that case the client is already up to date and we don"t need to tell the client to do a refresh.
-		// 	if(response.bodyUsed) {
-		// 		return
-		// 	}
-
-		// 	// Get the ETag of the cached response we sent to the client earlier.
-		// 	let eTag = response.headers.get("ETag")
-
-		// 	// Update ETag
-		// 	ETAGS.set(url, eTag)
-
-		// 	// If the ETag changed, we need to do a reload.
-		// 	if(eTag !== servedETag) {
-		// 		return this.reloadContent(url)
-		// 	}
-
-		// 	// Do nothing
-		// 	return Promise.resolve()
-		// })
-	}
-
-	// prefetchFullPage(url: string) {
-	// 	let fullPage = new Request(url.replace("/_/", "/"))
-
-	// 	let fullPageRefresh = fetch(fullPage, {
-	// 		credentials: "same-origin"
-	// 	}).then(response => {
-	// 		// Save the new version of the resource in the cache
-	// 		let cacheRefresh = caches.open(serviceWorker.cache.version).then(cache => {
-	// 			return cache.put(fullPage, response)
-	// 		})
-
-	// 		CACHEREFRESH.set(fullPage.url, cacheRefresh)
-	// 		return response
-	// 	})
-
-	// 	// Save in map
-	// 	serviceWorker.reloads.set(fullPage.url, fullPageRefresh)
-	// }
-
-	// async reloadContent(url: string) {
-	// 	let cacheRefresh = CACHEREFRESH.get(url)
-
-	// 	if(cacheRefresh) {
-	// 		await cacheRefresh
-	// 	}
-
-	// 	return this.postMessage({
-	// 		type: "new content",
-	// 		url
-	// 	})
-	// }
-
-	// async reloadPage(url: string) {
-	// 	let networkFetch = serviceWorker.reloads.get(url.replace("/_/", "/"))
-
-	// 	if(networkFetch) {
-	// 		await networkFetch
-	// 	}
-
-	// 	return this.postMessage({
-	// 		type: "reload page",
-	// 		url
-	// 	})
-	// }
-
-	// reloadStyles() {
-	// 	return this.postMessage({
-	// 		type: "reload styles"
-	// 	})
-	// }
-
-	// Map of clients
-	static idToClient = new Map<string, MyClient>()
-
-	static async get(id: string): Promise<MyClient> {
-		let client = MyClient.idToClient.get(id)
-
-		if(!client) {
-			client = new MyClient(await self.clients.get(id))
-			MyClient.idToClient.set(id, client)
-		}
-
-		return client
+		// ...
 	}
 }
 
+// trimPrefix removes the prefix from the text.
+function trimPrefix(text, prefix) {
+	if(text.startsWith(prefix)) {
+		return text.slice(prefix.length)
+	}
+
+	return text
+}
+
+// Initialize the service worker
 const serviceWorker = new MyServiceWorker()
