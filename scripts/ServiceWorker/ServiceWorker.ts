@@ -123,101 +123,103 @@ class MyServiceWorker {
 			return
 		}
 
-		// Exclude certain URLs from being cached.
-		for(let pattern of this.excludeCache.keys()) {
-			if(request.url.includes(pattern)) {
-				return
-			}
-		}
+		return fetch(request)
 
-		// If the request has cache set to "force-cache", return a cache-only response.
-		// This is used in reloads to avoid generating a 2nd request after a cache refresh.
-		if(request.headers.get("X-Force-Cache") === "true") {
-			return evt.respondWith(this.cache.serve(request))
-		}
+		// // Exclude certain URLs from being cached.
+		// for(let pattern of this.excludeCache.keys()) {
+		// 	if(request.url.includes(pattern)) {
+		// 		return
+		// 	}
+		// }
 
-		// --------------------------------------------------------------------------------
-		// Cross-origin requests.
-		// --------------------------------------------------------------------------------
+		// // If the request has cache set to "force-cache", return a cache-only response.
+		// // This is used in reloads to avoid generating a 2nd request after a cache refresh.
+		// if(request.headers.get("X-Force-Cache") === "true") {
+		// 	return evt.respondWith(this.cache.serve(request))
+		// }
 
-		// These hosts don't support CORS. Always load via network.
-		if(request.url.startsWith("https://img.youtube.com/")) {
-			return
-		}
+		// // --------------------------------------------------------------------------------
+		// // Cross-origin requests.
+		// // --------------------------------------------------------------------------------
 
-		// Use CORS for cross-origin requests.
-		if(!request.url.startsWith("https://notify.moe/") && !request.url.startsWith("https://beta.notify.moe/")) {
-			request = new Request(request.url, {
-				credentials: "omit",
-				mode: "cors"
-			})
-		} else {
-			// let relativePath = trimPrefix(request.url, "https://notify.moe")
-			// relativePath = trimPrefix(relativePath, "https://beta.notify.moe")
-			// console.log(relativePath)
-		}
+		// // These hosts don't support CORS. Always load via network.
+		// if(request.url.startsWith("https://img.youtube.com/")) {
+		// 	return
+		// }
 
-		// --------------------------------------------------------------------------------
-		// Network refresh.
-		// --------------------------------------------------------------------------------
+		// // Use CORS for cross-origin requests.
+		// if(!request.url.startsWith("https://notify.moe/") && !request.url.startsWith("https://beta.notify.moe/")) {
+		// 	request = new Request(request.url, {
+		// 		credentials: "omit",
+		// 		mode: "cors"
+		// 	})
+		// } else {
+		// 	// let relativePath = trimPrefix(request.url, "https://notify.moe")
+		// 	// relativePath = trimPrefix(relativePath, "https://beta.notify.moe")
+		// 	// console.log(relativePath)
+		// }
 
-		// Save response in cache.
-		let saveResponseInCache = (response: Response) => {
-			let contentType = response.headers.get("Content-Type")
+		// // --------------------------------------------------------------------------------
+		// // Network refresh.
+		// // --------------------------------------------------------------------------------
 
-			// Don't cache anything other than text, styles, scripts, fonts and images.
-			if(!contentType.includes("text/") && !contentType.includes("application/javascript") && !contentType.includes("image/") && !contentType.includes("font/")) {
-				return response
-			}
+		// // Save response in cache.
+		// let saveResponseInCache = (response: Response) => {
+		// 	let contentType = response.headers.get("Content-Type")
 
-			// Save response in cache.
-			if(response.ok) {
-				let clone = response.clone()
-				this.cache.store(request, clone)
-			}
+		// 	// Don't cache anything other than text, styles, scripts, fonts and images.
+		// 	if(!contentType.includes("text/") && !contentType.includes("application/javascript") && !contentType.includes("image/") && !contentType.includes("font/")) {
+		// 		return response
+		// 	}
 
-			return response
-		}
+		// 	// Save response in cache.
+		// 	if(response.ok) {
+		// 		let clone = response.clone()
+		// 		this.cache.store(request, clone)
+		// 	}
 
-		let onResponse = (response: Response | null) => {
-			return response
-		}
+		// 	return response
+		// }
 
-		// Refresh resource via a network request.
-		let refresh = fetch(request).then(saveResponseInCache)
+		// let onResponse = (response: Response | null) => {
+		// 	return response
+		// }
 
-		// --------------------------------------------------------------------------------
-		// Final response.
-		// --------------------------------------------------------------------------------
+		// // Refresh resource via a network request.
+		// let refresh = fetch(request).then(saveResponseInCache)
 
-		// Clear cache on authentication and fetch it normally.
-		if(request.url.includes("/auth/") || request.url.includes("/logout")) {
-			return evt.respondWith(this.cache.clear().then(() => refresh))
-		}
+		// // --------------------------------------------------------------------------------
+		// // Final response.
+		// // --------------------------------------------------------------------------------
 
-		// If the request has cache set to "no-cache",
-		// return the network-only response even if it fails.
-		if(request.headers.get("X-No-Cache") === "true") {
-			return evt.respondWith(refresh)
-		}
+		// // Clear cache on authentication and fetch it normally.
+		// if(request.url.includes("/auth/") || request.url.includes("/logout")) {
+		// 	return evt.respondWith(this.cache.clear().then(() => refresh))
+		// }
 
-		// Styles and scripts will be served via network first and fallback to cache.
-		if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
-			evt.respondWith(this.networkFirst(request, refresh, onResponse))
-			return refresh
-		}
+		// // If the request has cache set to "no-cache",
+		// // return the network-only response even if it fails.
+		// if(request.headers.get("X-No-Cache") === "true") {
+		// 	return evt.respondWith(refresh)
+		// }
 
-		// --------------------------------------------------------------------------------
-		// Default behavior for most requests.
-		// --------------------------------------------------------------------------------
+		// // Styles and scripts will be served via network first and fallback to cache.
+		// if(request.url.endsWith("/styles") || request.url.endsWith("/scripts")) {
+		// 	evt.respondWith(this.networkFirst(request, refresh, onResponse))
+		// 	return refresh
+		// }
 
-		// // Respond via cache first.
-		// evt.respondWith(this.cacheFirst(request, refresh, onResponse))
+		// // --------------------------------------------------------------------------------
+		// // Default behavior for most requests.
+		// // --------------------------------------------------------------------------------
+
+		// // // Respond via cache first.
+		// // evt.respondWith(this.cacheFirst(request, refresh, onResponse))
+		// // return refresh
+
+		// // Serve via network first and fallback to cache.
+		// evt.respondWith(this.networkFirst(request, refresh, onResponse))
 		// return refresh
-
-		// Serve via network first and fallback to cache.
-		evt.respondWith(this.networkFirst(request, refresh, onResponse))
-		return refresh
 	}
 
 	// onMessage is called when the service worker receives a message from a client (browser tab).
