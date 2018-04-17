@@ -10,8 +10,12 @@ export function fetchWithProgress(url, options: RequestInit, onProgress: ((this:
 		xhr.onload = e => resolve(xhr.responseText)
 		xhr.onerror = reject
 
-		if(xhr.upload && onProgress) {
-			xhr.upload.onprogress = onProgress
+		if(onProgress) {
+			xhr.addEventListener("progress", onProgress)
+
+			if(xhr.upload) {
+				xhr.upload.onprogress = onProgress
+			}
 		}
 
 		xhr.send(options.body)
