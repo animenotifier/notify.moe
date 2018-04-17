@@ -9,7 +9,7 @@ import (
 	"github.com/fatih/color"
 )
 
-const malImageLargeWidth = 285
+const imageWidthThreshold = 225
 
 var (
 	malDB           = arn.Node.Namespace("mal").RegisterTypes((*mal.Anime)(nil))
@@ -95,7 +95,7 @@ func sync(anime *arn.Anime, malID string) {
 		anime.Title.English = malAnime.EnglishTitle
 	}
 
-	if (!anime.HasImage() || anime.Image.Width < malImageLargeWidth) && malAnime.Image != "" {
+	if (!anime.HasImage() || anime.Image.Width <= imageWidthThreshold) && malAnime.Image != "" {
 		fmt.Println("Downloading image:", malAnime.Image)
 		response, err := client.Get(malAnime.Image).End()
 
