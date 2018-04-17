@@ -85,6 +85,7 @@ export default class AnimeNotifier {
 		document.addEventListener("DOMContentLoaded", this.onContentLoaded.bind(this))
 		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
 		window.addEventListener("popstate", this.onPopState.bind(this))
+		window.addEventListener("error", this.onError.bind(this))
 
 		// Idle
 		requestIdleCallback(this.onIdle.bind(this))
@@ -1023,5 +1024,20 @@ export default class AnimeNotifier {
 			e.stopPropagation()
 			return
 		}
+	}
+
+	// This is called every time an uncaught JavaScript error is thrown
+	onError(evt: ErrorEvent) {
+		let report = {
+			message: evt.message,
+			stack: evt.error.stack,
+			fileName: evt.filename,
+			lineNumber: evt.lineno,
+			columnNumber: evt.colno,
+		}
+
+		this.post("/api/new/clienterrorreport", report)
+		.then(() => console.log("Successfully reported the error to the website staff."))
+		.catch(() => console.warn("Failed reporting the error to the website staff."))
 	}
 }
