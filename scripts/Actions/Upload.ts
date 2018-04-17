@@ -1,6 +1,6 @@
 import AnimeNotifier from "../AnimeNotifier"
 import StatusMessage from "../StatusMessage"
-import { bytesHumanReadable, fetchWithProgress } from "../Utils"
+import { bytesHumanReadable, uploadWithProgress } from "../Utils"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
@@ -65,7 +65,7 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 		arn.statusMessage.showInfo(`Preparing to upload ${fileType} (${bytesHumanReadable(fileSize)})`, -1)
 
 		try {
-			let responseText = await fetchWithProgress(endpoint, {
+			let responseText = await uploadWithProgress(endpoint, {
 				method: "POST",
 				credentials: "include",
 				headers: {
