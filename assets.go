@@ -16,7 +16,7 @@ func configureAssets(app *aero.Application) {
 	scriptBundle := js.Bundle()
 
 	// Service worker
-	serviceWorkerBytes, err := ioutil.ReadFile("sw/service-worker.js")
+	serviceWorkerBytes, err := ioutil.ReadFile("scripts/ServiceWorker/ServiceWorker.js")
 	serviceWorker := string(serviceWorkerBytes)
 
 	// CSS bundle

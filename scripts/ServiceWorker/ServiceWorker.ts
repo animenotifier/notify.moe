@@ -112,6 +112,12 @@ class MyServiceWorker {
 			return
 		}
 
+		// DevTools opening will trigger these "only-if-cached" requests.
+		// https://bugs.chromium.org/p/chromium/issues/detail?id=823392
+		if((evt.request.cache as string) === "only-if-cached" && evt.request.mode !== "same-origin") {
+			return
+		}
+
 		// Fetch via network
 		return evt.respondWith(fetch(evt.request))
 
