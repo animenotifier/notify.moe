@@ -229,7 +229,8 @@ component AnimeInformation(anime *arn.Anime)
 			if anime.Season() != ""
 				tr.mountable(data-mountable-type="info")
 					td.anime-info-key Season:
-					td.anime-info-value= arn.Capitalize(anime.Season()) + " " + anime.StartDate[:4]
+					td.anime-info-value
+						a(href="/explore/anime/" + anime.StartDate[:4] + "/" + strings.ToLower(anime.Season()) + "/any/" + anime.Type)= arn.Capitalize(anime.Season()) + " " + anime.StartDate[:4]
 			
 			if anime.Source != "" && arn.AnimeSourceHumanReadable[anime.Source] != ""
 				tr.mountable(data-mountable-type="info")
