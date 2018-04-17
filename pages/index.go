@@ -266,6 +266,7 @@ func Configure(app *aero.Application) {
 
 	// Import anime
 	app.Post("/api/import/kitsu/anime/:id", animeimport.Kitsu)
+	app.Post("/api/delete/kitsu/anime/:id", animeimport.DeleteKitsu)
 
 	// Upload
 	app.Post("/api/upload/avatar", upload.Avatar)

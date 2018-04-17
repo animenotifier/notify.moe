@@ -23,6 +23,10 @@ export function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement
 
 // Import Kitsu anime
 export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonElement) {
+	if(!confirm("Are you sure you want to import this anime?")) {
+		return
+	}
+
 	let newTab = window.open()
 	let animeId = button.dataset.id
 	let response = await fetch(`/api/import/kitsu/anime/${animeId}`, {
@@ -36,6 +40,17 @@ export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonEle
 	} else {
 		arn.statusMessage.showError(await response.text())
 	}
+}
+
+// Delete Kitsu anime
+export async function deleteKitsuAnime(arn: AnimeNotifier, button: HTMLButtonElement) {
+	if(!confirm("Are you sure you want to delete this anime?")) {
+		return
+	}
+
+	let animeId = button.dataset.id
+	await arn.post(`/api/delete/kitsu/anime/${animeId}`)
+	arn.reloadContent()
 }
 
 // Multi-search anime

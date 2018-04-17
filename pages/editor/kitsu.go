@@ -14,9 +14,14 @@ import (
 func NewKitsuAnime(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	finder := arn.NewAnimeFinder("kitsu/anime")
+	deletedIDs, err := arn.GetIDList("deleted kitsu anime")
+
+	if err != nil {
+		deletedIDs = arn.IDList{}
+	}
 
 	animes := arn.FilterKitsuAnime(func(anime *kitsu.Anime) bool {
-		return finder.GetAnime(anime.ID) == nil
+		return finder.GetAnime(anime.ID) == nil && !arn.Contains(deletedIDs, anime.ID)
 	})
 
 	sort.Slice(animes, func(i, j int) bool {

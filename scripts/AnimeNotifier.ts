@@ -804,12 +804,12 @@ export default class AnimeNotifier {
 		return Diff.innerHTML(element, html)
 	}
 
-	post(url: string, body: any) {
+	post(url: string, body?: any) {
 		if(this.isLoading) {
 			return Promise.resolve(null)
 		}
 
-		if(typeof body !== "string") {
+		if(body !== undefined && typeof body !== "string") {
 			body = JSON.stringify(body)
 		}
 
