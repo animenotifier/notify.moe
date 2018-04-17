@@ -388,11 +388,9 @@ class MyServiceWorker {
 // MyCache is the cache used by the service worker.
 class MyCache {
 	version: string
-	cache: Cache
 
 	constructor(version: string) {
 		this.version = version
-		caches.open(this.version).then(newCache => this.cache = newCache)
 	}
 
 	clear() {
@@ -402,14 +400,16 @@ class MyCache {
 	async store(request: RequestInfo, response: Response) {
 		try {
 			// This can fail if the disk space quota has been exceeded.
-			await this.cache.put(request, response)
+			let cache = await caches.open(this.version)
+			await cache.put(request, response)
 		} catch(err) {
-			console.log("Disk quota exceeded, can't store in cache:", request, response)
+			console.log("Disk quota exceeded, can't store in cache:", request, response, err)
 		}
 	}
 
 	async serve(request: RequestInfo): Promise<Response> {
-		let matching = await this.cache.match(request)
+		let cache = await caches.open(this.version)
+		let matching = await cache.match(request)
 
 		if(matching) {
 			return matching
