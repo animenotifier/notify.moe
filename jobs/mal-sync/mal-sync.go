@@ -3,10 +3,13 @@ package main
 import (
 	"fmt"
 
+	"github.com/aerogo/http/client"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
 	"github.com/fatih/color"
 )
+
+const malImageLargeWidth = 285
 
 var (
 	malDB           = arn.Node.Namespace("mal").RegisterTypes((*mal.Anime)(nil))
@@ -90,6 +93,17 @@ func sync(anime *arn.Anime, malID string) {
 	if anime.Title.English == "" && malAnime.EnglishTitle != "" {
 		fmt.Println("EnglishTitle:", malAnime.EnglishTitle)
 		anime.Title.English = malAnime.EnglishTitle
+	}
+
+	if (!anime.HasImage() || anime.Image.Width < malImageLargeWidth) && malAnime.Image != "" {
+		fmt.Println("Downloading image:", malAnime.Image)
+		response, err := client.Get(malAnime.Image).End()
+
+		if err == nil && response.StatusCode() == 200 {
+			anime.SetImageBytes(response.Bytes())
+		} else {
+			color.Red("Error downloading image")
+		}
 	}
 
 	// Check for existence of characters
