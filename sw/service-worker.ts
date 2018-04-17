@@ -106,7 +106,14 @@ class MyServiceWorker {
 
 	// onRequest intercepts all browser requests
 	onRequest(evt: FetchEvent) {
-		return evt.respondWith(this.fromNetwork(evt.request))
+		// Allow XHR upload requests via POST,
+		// so that we can receive upload progress events.
+		if(evt.request.method === "POST") {
+			return
+		}
+
+		// Fetch via network
+		return evt.respondWith(fetch(evt.request))
 
 		// let request = evt.request as Request
 
@@ -344,10 +351,6 @@ class MyServiceWorker {
 				return Promise.reject("no-match")
 			})
 		})
-	}
-
-	fromNetwork(request): Promise<Response> {
-		return fetch(request)
 	}
 }
 
