@@ -62,12 +62,6 @@ class MyServiceWorker {
 			// Chrome extension
 			"chrome-extension",
 
-			// Media files
-			".webm",
-			".opus",
-			".ogg",
-			".m4a",
-
 			// Authorization paths /auth/ and /logout are not listed here because they are handled in a special way.
 		])
 
@@ -168,7 +162,14 @@ class MyServiceWorker {
 		// --------------------------------------------------------------------------------
 
 		// Save response in cache.
-		let saveResponseInCache = response => {
+		let saveResponseInCache = (response: Response) => {
+			let contentType = response.headers.get("Content-Type")
+
+			// Don't cache anything other than text and images.
+			if(!contentType.includes("text/") && !contentType.includes("application/javascript") && !contentType.includes("image/")) {
+				return response
+			}
+
 			// Save response in cache.
 			let clone = response.clone()
 			this.cache.store(request, clone)
