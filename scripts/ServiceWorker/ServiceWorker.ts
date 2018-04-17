@@ -165,14 +165,16 @@ class MyServiceWorker {
 		let saveResponseInCache = (response: Response) => {
 			let contentType = response.headers.get("Content-Type")
 
-			// Don't cache anything other than text and images.
-			if(!contentType.includes("text/") && !contentType.includes("application/javascript") && !contentType.includes("image/")) {
+			// Don't cache anything other than text, styles, scripts, fonts and images.
+			if(!contentType.includes("text/") && !contentType.includes("application/javascript") && !contentType.includes("image/") && !contentType.includes("font/")) {
 				return response
 			}
 
 			// Save response in cache.
-			let clone = response.clone()
-			this.cache.store(request, clone)
+			if(response.ok) {
+				let clone = response.clone()
+				this.cache.store(request, clone)
+			}
 
 			return response
 		}
