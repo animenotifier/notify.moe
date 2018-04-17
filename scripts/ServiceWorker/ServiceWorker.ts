@@ -62,8 +62,11 @@ class MyServiceWorker {
 			// Chrome extension
 			"chrome-extension",
 
-			// WebM files
-			".webm"
+			// Media files
+			".webm",
+			".opus",
+			".ogg",
+			".m4a",
 
 			// Authorization paths /auth/ and /logout are not listed here because they are handled in a special way.
 		])
