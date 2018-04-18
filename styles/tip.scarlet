@@ -1,0 +1,46 @@
+.tip
+	position relative
+
+	:before
+		content attr(aria-label)
+		position absolute
+		top 0
+		left 50%
+		z-index 100000
+		pointer-events none
+		opacity 0
+		transform translateX(-50%) translateY(-80%)
+		color text-color
+		text-shadow none
+		padding 0.2rem 0.7rem
+		background ui-background
+		border 1px solid ui-border-color
+		border-radius ui-element-border-radius
+		box-shadow shadow-light
+		white-space nowrap
+		default-transition
+
+	:after
+		content ""
+		position absolute
+		top 0
+		left 50%
+		z-index 100001
+		pointer-events none
+		opacity 0
+		width 0
+		height 0
+		border-style solid
+		border-width 8px 8px 0 8px
+		border-color ui-background transparent transparent transparent
+		transform translateX(-50%) translateY(-80%)
+		default-transition
+
+	:hover
+		:before
+			opacity 1
+			transform translateX(-50%) translateY(calc(-100% - 10px))
+
+		:after
+			opacity 1
+			transform translateX(-50%) translateY(calc(-100% - 4px))

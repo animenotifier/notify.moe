@@ -76,7 +76,7 @@ export function lightTheme(arn: AnimeNotifier) {
 export function darkTheme(arn: AnimeNotifier) {
 	let root = document.documentElement
 
-	if(arn.user.dataset.pro !== "true") {
+	if(!arn.user || arn.user.dataset.pro !== "true") {
 		arn.statusMessage.showInfo("Previewing Dark theme for 30 seconds. If you would like to use it permanently, please support us.", 5000)
 
 		// After 30 seconds, switch back to default theme if the user doesn't own a PRO account

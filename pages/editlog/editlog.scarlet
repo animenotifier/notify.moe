@@ -27,7 +27,6 @@
 	.user-image
 		width calc(avatar-size / 1.5)
 		height calc(avatar-size / 1.5)
-		margin-right 0.5rem
 
 .edit-log-user-link
 	horizontal

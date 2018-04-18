@@ -52,7 +52,7 @@ component EditLogScrollable(entries []*arn.EditLogEntry, user *arn.User)
 								RawIcon("minus-circle")
 
 			.edit-log-user
-				a.edit-log-user-link(href=entry.User().Link(), title=entry.User().Nick)
+				a.edit-log-user-link.tip(href=entry.User().Link(), aria-label=entry.User().Nick)
 					AvatarNoLink(entry.User())
 			
 			.edit-log-object
