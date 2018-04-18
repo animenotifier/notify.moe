@@ -8,7 +8,7 @@ const dark = {
 	"hue": "45",
 	"saturation": "100%",
 
-	"text-color": "hsl(0, 0%, 90%)",
+	"text-color-l": "90%",
 	"bg-color": "hsl(0, 0%, 18%)",
 	"link-color": "hsl(var(--hue), var(--saturation), 66%)",
 	"link-hover-color": "hsl(var(--hue), var(--saturation), 76%)",

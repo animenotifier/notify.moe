@@ -120,7 +120,7 @@
 		text-align right
 		flex-basis 150px
 		flex-shrink 1
-		opacity 0.8
+		color hsla(text-color-h, text-color-s, text-color-l, 0.8)
 		justify-content flex-end
 
 	.anime-list-item-episodes

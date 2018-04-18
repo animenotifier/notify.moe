@@ -92,8 +92,14 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 		airingVerb = "aired"
 	}
 
-	element.setAttribute("aria-label", "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + dayNames[startDate.getDay()] + " from " + startTime + " - " + endTime)
-	element.classList.add("tip")
+	let tooltip = "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + dayNames[startDate.getDay()] + " from " + startTime + " - " + endTime
+
+	if(element.classList.contains("no-tip")) {
+		element.title = tooltip
+	} else {
+		element.setAttribute("aria-label", tooltip)
+		element.classList.add("tip")
+	}
 }
 
 export function displayDate(element: HTMLElement, now: Date) {

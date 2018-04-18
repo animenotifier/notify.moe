@@ -1,5 +1,8 @@
 // Colors
-text-color = rgb(60, 60, 60)
+text-color-h = 0
+text-color-s = 0%
+text-color-l = 23.5%
+text-color = hsl(text-color-h, text-color-s, text-color-l)
 bg-color = rgb(246, 246, 246)
 main-color = rgb(248, 165, 130)
 link-color = rgb(215, 38, 15)

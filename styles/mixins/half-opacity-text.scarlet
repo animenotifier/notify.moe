@@ -1,0 +1,2 @@
+mixin half-opacity-text
+	color hsla(text-color-h, text-color-s, text-color-l, 0.5)

@@ -8,8 +8,8 @@
 
 .episode-view-airing-date
 	text-align center
-	opacity 0.5
 	font-size 0.9rem
+	half-opacity-text
 
 .episode-view-image-container
 	horizontal

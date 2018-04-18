@@ -56,9 +56,9 @@ component CompareAnimeList(a *arn.User, b *arn.User, countA int, countB int, com
 									if comparison.ItemA.Rating.Overall == comparison.ItemB.Rating.Overall
 										span.comparison-rating-equal= utils.FormatRating(comparison.ItemB.Rating.Overall)
 									else if comparison.ItemB.Rating.Overall > comparison.ItemA.Rating.Overall
-										span.comparison-rating-higher(title=utils.FormatRating(comparison.ItemB.Rating.Overall))= "+" + utils.FormatRating(comparison.ItemB.Rating.Overall - comparison.ItemA.Rating.Overall)
+										span.comparison-rating-higher.tip(aria-label=utils.FormatRating(comparison.ItemB.Rating.Overall))= "+" + utils.FormatRating(comparison.ItemB.Rating.Overall - comparison.ItemA.Rating.Overall)
 									else
-										span.comparison-rating-lower(title=utils.FormatRating(comparison.ItemB.Rating.Overall))= "-" + utils.FormatRating(comparison.ItemA.Rating.Overall - comparison.ItemB.Rating.Overall)
+										span.comparison-rating-lower.tip(aria-label=utils.FormatRating(comparison.ItemB.Rating.Overall))= "-" + utils.FormatRating(comparison.ItemA.Rating.Overall - comparison.ItemB.Rating.Overall)
 								else
 									span= utils.FormatRating(comparison.ItemB.Rating.Overall)
 							else
