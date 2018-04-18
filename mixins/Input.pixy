@@ -31,9 +31,9 @@ component InputNumberWithButtons(id string, value float64, label string, placeho
 		label(for=id)= label + ":"
 		.number-input-container
 			input.widget-ui-element.action(id=id, data-field=id, type="number", value=value, min=min, max=max, step=step, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
-			button.action(data-action="addNumber", data-trigger="click", data-id=id, data-add="1")
+			button.action.tip(data-action="addNumber", data-trigger="click", data-id=id, data-add="1", aria-label="Increase by 1")
 				RawIcon("plus")
-			button.action(data-action="addNumber", data-trigger="click", data-id=id, data-add="-1")
+			button.action.tip(data-action="addNumber", data-trigger="click", data-id=id, data-add="-1", aria-label="Decrease by 1")
 				RawIcon("minus")
 
 component InputSelection(id string, value string, label string, placeholder string, options []*arn.Option)

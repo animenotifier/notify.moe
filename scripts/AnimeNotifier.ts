@@ -158,8 +158,8 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.assignActions()),
 			Promise.resolve().then(() => this.updatePushUI()),
 			Promise.resolve().then(() => this.dragAndDrop()),
-			Promise.resolve().then(() => this.assignTooltipOffsets()),
 			Promise.resolve().then(() => this.colorStripes()),
+			Promise.resolve().then(() => this.assignTooltipOffsets()),
 			Promise.resolve().then(() => this.countUp())
 		])
 
@@ -237,10 +237,14 @@ export default class AnimeNotifier {
 		}
 	}
 
-	assignTooltipOffsets() {
+	assignTooltipOffsets(elements?: IterableIterator<HTMLElement>) {
+		if(!elements) {
+			elements = findAll("tip")
+		}
+
 		let contentRect = this.app.content.getBoundingClientRect()
 
-		for(let element of findAll("tip")) {
+		for(let element of elements) {
 			Diff.mutations.queue(() => {
 				let rect = element.getBoundingClientRect()
 				let tipStyle = window.getComputedStyle(element, ":before")
@@ -262,7 +266,7 @@ export default class AnimeNotifier {
 					let tipChild = document.createElement("div")
 					tipChild.classList.add("tip-offset-child")
 					tipChild.setAttribute("aria-label", element.getAttribute("aria-label"))
-					tipChild.style.left = leftOffset + "px"
+					tipChild.style.left = Math.round(leftOffset) + "px"
 					tipChild.style.width = rect.width + "px"
 					tipChild.style.height = rect.height + "px"
 					element.appendChild(tipChild)

@@ -175,4 +175,5 @@ export function showSearchResults(arn: AnimeNotifier, element: HTMLElement) {
 	arn.app.ajaxify(element.getElementsByTagName("a"))
 	arn.lazyLoad(findAllInside("lazy", element))
 	arn.mountMountables(findAllInside("mountable", element))
+	arn.assignTooltipOffsets(findAllInside("tip", element))
 }
