@@ -3,7 +3,7 @@ component Sidebar(user *arn.User)
 		//- User avatar
 		.user-image-container
 			if user != nil
-				Avatar(user)
+				AvatarNoTip(user)
 			else
 				img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
 			

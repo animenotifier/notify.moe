@@ -11,6 +11,10 @@ component AvatarNoLink(user *arn.User)
 	else
 		SVGAvatar(user)
 
+component AvatarNoTip(user *arn.User)
+	a.user(href=user.Link(), title=user.Nick)
+		AvatarNoLink(user)
+
 component ProfileImage(user *arn.User)
 	if user.HasAvatar()
 		img.profile-image.lazy(data-src=user.AvatarLink("large"), data-webp="true", alt="Profile image")
