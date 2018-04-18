@@ -12,7 +12,8 @@
 
 	.profile-image-container
 		flex-basis 170px
-		height 140px
+		flex-grow 0
+		height 230px
 		margin calc(content-padding / 2)
 		position relative
 		border ui-border

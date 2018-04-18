@@ -42,7 +42,7 @@ component AMVPage(amv *arn.AMV, user *arn.User)
 
 component AnimeGridSmall(animes []*arn.Anime, user *arn.User)
 	each anime in animes
-		a.mountable(href=anime.Link(), title=anime.Title.ByUser(user))
+		a.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user))
 			img.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 component AMVTabs(amv *arn.AMV, user *arn.User)
