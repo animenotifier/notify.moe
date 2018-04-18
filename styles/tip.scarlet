@@ -1,3 +1,5 @@
+const tip-opacity = 0.94
+
 .tip
 	position relative
 
@@ -38,9 +40,9 @@
 
 	:hover
 		:before
-			opacity 1
+			opacity tip-opacity
 			transform translateX(-50%) translateY(calc(-100% - 10px))
 
 		:after
-			opacity 1
+			opacity tip-opacity
 			transform translateX(-50%) translateY(calc(-100% - 4px))

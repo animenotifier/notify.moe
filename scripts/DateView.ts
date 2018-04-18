@@ -92,7 +92,8 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 		airingVerb = "aired"
 	}
 
-	element.title = "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + dayNames[startDate.getDay()] + " from " + startTime + " - " + endTime
+	element.setAttribute("aria-label", "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + dayNames[startDate.getDay()] + " from " + startTime + " - " + endTime)
+	element.classList.add("tip")
 }
 
 export function displayDate(element: HTMLElement, now: Date) {

@@ -21,10 +21,8 @@
 
 .widget
 	vertical
-	// flex-basis 100%
 	flex 1
 	margin calc(content-padding / 2)
-	overflow hidden
 
 .widget-section
 	vertical

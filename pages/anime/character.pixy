@@ -5,7 +5,5 @@ component Character(character *arn.Character)
 			.image-title-text= character.Name.Canonical
 
 component CharacterSmall(character *arn.Character)
-	a.character(href="/character/" + character.ID)
+	a.character.tip(href="/character/" + character.ID, aria-label=character.Name.Canonical)
 		img.character-image.character-image-small.lazy(data-src=character.ImageLink("small"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.Canonical)
-		.image-title
-			.image-title-text= character.Name.Canonical

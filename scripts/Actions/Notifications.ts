@@ -18,6 +18,8 @@ export async function disableNotifications(arn: AnimeNotifier, button: HTMLEleme
 
 // Test notification
 export async function testNotification(arn: AnimeNotifier) {
+	arn.statusMessage.showInfo("Sending test notification...this might take a few seconds...")
+
 	await fetch("/api/test/notification", {
 		credentials: "same-origin"
 	})
