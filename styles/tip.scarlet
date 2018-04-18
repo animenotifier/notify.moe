@@ -2,44 +2,56 @@ const tip-opacity = 0.94
 const tip-transform-hidden = rotate(0.02deg) translateX(-50%) translateY(-80%)
 const tip-transform-visible = rotate(0.02deg) translateX(-50%) translateY(-100%)
 
+mixin tip-before
+	content attr(aria-label)
+	position absolute
+	top -10px
+	left 50%
+	z-index 100000
+	pointer-events none
+	opacity 0
+	transform tip-transform-hidden
+	font-size 0.92rem
+	color text-color
+	text-shadow none
+	padding 0.2rem 0.7rem
+	background ui-background
+	border 1px solid ui-border-color
+	border-radius ui-element-border-radius
+	box-shadow shadow-light
+	white-space nowrap
+	default-transition
+
+mixin tip-after
+	content ""
+	position absolute
+	top -4px
+	left 50%
+	z-index 100001
+	pointer-events none
+	opacity 0
+	width 0
+	height 0
+	border-style solid
+	border-width 8px 8px 0 8px
+	border-color ui-background transparent transparent transparent
+	transform tip-transform-hidden
+	default-transition
+
+.tip-offset-child
+	position absolute !important
+	left 0
+	top 0
+	pointer-events none
+
 .tip
 	position relative
 
 	:before
-		content attr(aria-label)
-		position absolute
-		top -10px
-		left 50%
-		z-index 100000
-		pointer-events none
-		opacity 0
-		transform tip-transform-hidden
-		font-size 0.92rem
-		color text-color
-		text-shadow none
-		padding 0.2rem 0.7rem
-		background ui-background
-		border 1px solid ui-border-color
-		border-radius ui-element-border-radius
-		box-shadow shadow-light
-		white-space nowrap
-		default-transition
+		tip-before
 
 	:after
-		content ""
-		position absolute
-		top -4px
-		left 50%
-		z-index 100001
-		pointer-events none
-		opacity 0
-		width 0
-		height 0
-		border-style solid
-		border-width 8px 8px 0 8px
-		border-color ui-background transparent transparent transparent
-		transform tip-transform-hidden
-		default-transition
+		tip-after
 
 	:hover
 		:before
@@ -49,3 +61,23 @@ const tip-transform-visible = rotate(0.02deg) translateX(-50%) translateY(-100%)
 		:after
 			opacity tip-opacity
 			transform tip-transform-visible
+
+.tip-offset-root
+	position relative
+
+	:after
+		tip-after
+
+	.tip-offset-child
+		:before
+			tip-before
+
+	:hover
+		:after
+			opacity tip-opacity
+			transform tip-transform-visible
+
+		.tip-offset-child
+			:before
+				opacity tip-opacity
+				transform tip-transform-visible

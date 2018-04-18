@@ -1,5 +1,6 @@
 mixin anime-mini-item
 	margin 0.25rem
+	flex-basis anime-image-small-width
 
 mixin anime-generic-item-image
 	object-fit cover

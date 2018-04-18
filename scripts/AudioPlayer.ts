@@ -41,6 +41,11 @@ export default class AudioPlayer {
 
 	// Play audio file
 	play(trackId: string, trackUrl: string) {
+		if(typeof AudioContext === "undefined") {
+			alert("Your browser doesn't support web audio!")
+			return
+		}
+
 		if(!this.audioContext) {
 			this.audioContext = new AudioContext()
 			this.gainNode = this.audioContext.createGain()
