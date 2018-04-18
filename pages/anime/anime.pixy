@@ -78,32 +78,33 @@ component AnimeRatings(anime *arn.Anime, user *arn.User)
 		h3.anime-section-name Ratings
 
 		table.anime-info-table
-			tr.mountable(data-mountable-type="info")
-				td.anime-info-key
-					if anime.Status == "upcoming"
-						span Hype:
-					else
-						span Overall:
-				td.anime-info-value
-					Rating(anime.Rating.Overall, anime.Rating.Count.Overall, user)
-
-			if anime.Rating.Count.Story > 0
+			tbody
 				tr.mountable(data-mountable-type="info")
-					td.anime-info-key Story:
+					td.anime-info-key
+						if anime.Status == "upcoming"
+							span Hype:
+						else
+							span Overall:
 					td.anime-info-value
-						Rating(anime.Rating.Story, anime.Rating.Count.Story, user)
+						Rating(anime.Rating.Overall, anime.Rating.Count.Overall, user)
 
-			if anime.Rating.Count.Visuals > 0
-				tr.mountable(data-mountable-type="info")
-					td.anime-info-key Visuals:
-					td.anime-info-value
-						Rating(anime.Rating.Visuals, anime.Rating.Count.Visuals, user)
+				if anime.Rating.Count.Story > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Story:
+						td.anime-info-value
+							Rating(anime.Rating.Story, anime.Rating.Count.Story, user)
 
-			if anime.Rating.Count.Soundtrack > 0
-				tr.mountable(data-mountable-type="info")
-					td.anime-info-key Soundtrack:
-					td.anime-info-value
-						Rating(anime.Rating.Soundtrack, anime.Rating.Count.Soundtrack, user)
+				if anime.Rating.Count.Visuals > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Visuals:
+						td.anime-info-value
+							Rating(anime.Rating.Visuals, anime.Rating.Count.Visuals, user)
+
+				if anime.Rating.Count.Soundtrack > 0
+					tr.mountable(data-mountable-type="info")
+						td.anime-info-key Soundtrack:
+						td.anime-info-value
+							Rating(anime.Rating.Soundtrack, anime.Rating.Count.Soundtrack, user)
 
 component AnimePopularity(anime *arn.Anime)
 	if anime.Popularity.Total() > 0

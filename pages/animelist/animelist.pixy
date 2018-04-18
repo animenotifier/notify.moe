@@ -3,7 +3,7 @@ component AnimeListPage(animeListItems []*arn.AnimeListItem, nextIndex int, view
 
 	if user.ID != viewUser.ID
 		.anime-list-user-avatar
-			Avatar(viewUser)
+			AvatarNoTip(viewUser)
 	
 	StatusTabs("/+" + viewUser.Nick + "/animelist")
 	AnimeListItems(animeListItems, nextIndex, viewUser, user)

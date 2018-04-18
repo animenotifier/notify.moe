@@ -23,7 +23,7 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 							Icon("close")
 							span Cancel
 			
-			.post-date.utc-date(data-date=post.Created())
+			.post-date.utc-date.no-tip(data-date=post.Created())
 
 			.post-toolbar(id="toolbar-" + post.ID())
 				.spacer

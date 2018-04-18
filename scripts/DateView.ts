@@ -123,8 +123,14 @@ export function displayDate(element: HTMLElement, now: Date) {
 	}
 
 	element.innerText = remainingString
+	let tooltip = dayNames[startDate.getDay()] + " " + startTime
 
-	element.title = dayNames[startDate.getDay()] + " " + startTime
+	if(element.classList.contains("no-tip")) {
+		element.title = tooltip
+	} else {
+		element.setAttribute("aria-label", tooltip)
+		element.classList.add("tip")
+	}
 }
 
 export function displayTime(element: HTMLElement, now: Date) {

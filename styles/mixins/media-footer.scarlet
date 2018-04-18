@@ -5,4 +5,4 @@ mixin media-footer
 	font-size 0.9em
 
 	span
-		opacity 0.65
+		color hsla(text-color-h, text-color-s, text-color-l, 0.65)

@@ -58,7 +58,14 @@
 			margin 0.25rem
 
 .anime-info-table
+	vertical
 	margin 0
+
+	tr
+		horizontal
+
+.anime-info-key
+	flex 1
 
 .anime-info-value
 	text-align right
@@ -152,9 +159,8 @@
 	margin-top 0.6rem
 	margin-bottom 0.4rem
 
-< 800px
-	.anime-rating-categories
-		vertical
+.anime-rating
+	// ...
 
 .anime-friends
 	.user-avatars

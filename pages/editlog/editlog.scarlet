@@ -70,8 +70,8 @@
 .edit-log-date
 	display flex
 	align-items center
-	opacity 0.5
 	flex-basis 120px
+	half-opacity-text
 
 .edit-log-empty
 	opacity 0.25
