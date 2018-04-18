@@ -85,8 +85,9 @@
 	horizontal
 	text-align right
 	justify-content flex-end
-	flex-basis 65px
+	flex-basis 20px
 	flex-shrink 1
+	margin-left 45px
 
 // .rating-label
 // 	opacity 0.5

@@ -44,7 +44,7 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 					.anime-list-item-episodes-separator /
 					.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
 
-			.anime-list-item-rating(title="Overall rating")
+			.anime-list-item-rating.tip(aria-label="O: " + utils.FormatRating(item.Rating.Overall) + " | S: " + utils.FormatRating(item.Rating.Story) + " | V: " + utils.FormatRating(item.Rating.Visuals) + " | M: " + utils.FormatRating(item.Rating.Soundtrack))
 				.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= utils.FormatRating(item.Rating.Overall)
 			
 			//- if item.Status == arn.AnimeListStatusCompleted
