@@ -14,6 +14,7 @@ const tip-transform-visible = rotate(0.02deg) translateX(-50%) translateY(-100%)
 		pointer-events none
 		opacity 0
 		transform tip-transform-hidden
+		font-size 0.92rem
 		color text-color
 		text-shadow none
 		padding 0.2rem 0.7rem

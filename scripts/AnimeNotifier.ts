@@ -256,7 +256,7 @@ export default class AnimeNotifier {
 					return
 				}
 
-				let itemName = element.title
+				let itemName = element.getAttribute("aria-label")
 
 				if(element.dataset.consumable !== "true") {
 					return this.statusMessage.showError(itemName + " is not a consumable item.")

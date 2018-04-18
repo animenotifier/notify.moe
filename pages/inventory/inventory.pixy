@@ -8,7 +8,7 @@ component Inventory(inventory *arn.Inventory, viewUser *arn.User, user *arn.User
 			if slot.ItemID == ""
 				.inventory-slot.mountable(draggable="false", data-index=index)
 			else
-				.inventory-slot.mountable(title=slot.Item().Name, draggable="true", data-index=index, data-item-id=slot.ItemID, data-consumable=slot.Item().Consumable)
+				.inventory-slot.tip.mountable(aria-label=slot.Item().Name, draggable="true", data-index=index, data-item-id=slot.ItemID, data-consumable=slot.Item().Consumable)
 					.shop-item-icon
 						Icon(slot.Item().Icon)
 					if slot.Quantity > 1
