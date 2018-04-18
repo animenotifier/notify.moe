@@ -9,23 +9,23 @@ component Charge(user *arn.User)
 	p.text-center.mountable You can add balance via PayPal. 1 Japanese Yen equals 1 Gem.
 
 	.buttons
-		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=1000)
+		button.action.tip.mountable(data-trigger="click", data-action="chargeUp", data-amount=1000, aria-label=utils.YenToUserCurrency(1000, user))
 			Icon("diamond")
 			span 1000
 
-		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=2000)
+		button.action.tip.mountable(data-trigger="click", data-action="chargeUp", data-amount=2000, aria-label=utils.YenToUserCurrency(2000, user))
 			Icon("diamond")
 			span 2000
 
-		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=3000)
+		button.action.tip.mountable(data-trigger="click", data-action="chargeUp", data-amount=3000, aria-label=utils.YenToUserCurrency(3000, user))
 			Icon("diamond")
 			span 3000
 		
-		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=6000)
+		button.action.tip.mountable(data-trigger="click", data-action="chargeUp", data-amount=6000, aria-label=utils.YenToUserCurrency(6000, user))
 			Icon("diamond")
 			span 6000
 
-		button.action.mountable(data-trigger="click", data-action="chargeUp", data-amount=12000)
+		button.action.tip.mountable(data-trigger="click", data-action="chargeUp", data-amount=12000, aria-label=utils.YenToUserCurrency(12000, user))
 			Icon("diamond")
 			span 12000
 
