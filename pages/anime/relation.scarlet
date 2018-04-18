@@ -5,6 +5,9 @@
 	anime-mini-item
 	vertical
 
+	:hover
+		text-shadow none
+
 .anime-relation-image
 	anime-mini-item-image
 
