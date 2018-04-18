@@ -6,8 +6,8 @@ component SoundTrack(track *arn.SoundTrack)
 component SoundTrackContent(track *arn.SoundTrack)
 	.soundtrack-content
 		if track.MainAnime() != nil
-			a.soundtrack-anime-link(href="/anime/" + track.MainAnime().ID)
-				img.soundtrack-anime-image.lazy(data-src=track.MainAnime().ImageLink("medium"), data-webp="true", data-color=track.MainAnime().AverageColor(), alt=track.MainAnime().Title.Canonical, title=track.MainAnime().Title.Canonical)
+			a.soundtrack-anime-link.tip(href="/anime/" + track.MainAnime().ID, aria-label=track.MainAnime().Title.ByUser(nil))
+				img.soundtrack-anime-image.lazy(data-src=track.MainAnime().ImageLink("medium"), data-webp="true", data-color=track.MainAnime().AverageColor(), alt=track.MainAnime().Title.Canonical)
 
 		SoundTrackMedia(track)
 

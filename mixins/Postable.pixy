@@ -27,27 +27,27 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 
 			.post-toolbar(id="toolbar-" + post.ID())
 				.spacer
-				.post-likes(id="likes-" + post.ID(), title="Likes")= len(post.Likes())
+				.post-likes.tip(id="likes-" + post.ID(), aria-label=arn.Plural(len(post.Likes()), "like"))= "+" + strconv.Itoa(len(post.Likes()))
 
 				if user != nil
 					if user.ID != post.Creator().ID
 						if post.LikedBy(user.ID)
-							a.post-tool.post-unlike.action(id="unlike-" + post.ID(), title="Unlike", data-action="unlike", data-trigger="click")
+							a.post-tool.post-unlike.tip.action(id="unlike-" + post.ID(), aria-label="Unlike", data-action="unlike", data-trigger="click")
 								Icon("thumbs-down")
 						else
-							a.post-tool.post-like.action(id="like-" + post.ID(), title="Like", data-action="like", data-trigger="click")
+							a.post-tool.post-like.tip.action(id="like-" + post.ID(), aria-label="Like", data-action="like", data-trigger="click")
 								Icon("thumbs-up")
 
 					if user.ID == post.Creator().ID
-						a.post-tool.post-edit.action(data-action="editPost", data-trigger="click", data-id=post.ID(), title="Edit")
+						a.post-tool.post-edit.tip.action(data-action="editPost", data-trigger="click", data-id=post.ID(), aria-label="Edit")
 							Icon("pencil")
 
 				if post.Type() != "Thread"
 					if user != nil && (user.Role == "admin" || user.Role == "editor")
-						a.post-tool.post-delete.action(data-action="deletePost", data-trigger="click", data-id=post.ID(), title="Delete")
+						a.post-tool.post-delete.tip.action(data-action="deletePost", data-trigger="click", data-id=post.ID(), aria-label="Delete")
 							Icon("trash")
 					
-					a.post-tool.post-permalink(href=post.Link(), title="Permalink")
+					a.post-tool.post-permalink.tip(href=post.Link(), aria-label="Link")
 						Icon("link")
 
 				//- if type === "Messages" && user && (user.ID === post.authorId || user.ID === post.recipientId)

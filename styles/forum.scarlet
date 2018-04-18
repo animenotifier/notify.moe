@@ -100,10 +100,8 @@ post-content-padding-y = 0.75rem
 		opacity 1
 
 .post-likes
-	opacity 0.4
+	color hsla(text-color-h, text-color-s, text-color-l, 0.4)
 	margin-right 0.4em
-	&:before
-		content "+"
 
 .post-permalink
 	color post-permalink-color
