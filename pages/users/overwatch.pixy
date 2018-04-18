@@ -15,7 +15,7 @@ component OverwatchRankingList(users []*arn.User, url string)
 					td= toString(index + 1) + "."
 					td.ranking-user
 						Avatar(user)
-						a(href=user.Link())= user.Nick
+						a.ranking-user-nick(href=user.Link())= user.Nick
 					td.ranking-tier= strings.Title(user.Accounts.Overwatch.Tier)
 					td.ranking-score= strconv.Itoa(user.Accounts.Overwatch.SkillRating) + " SR"
 				

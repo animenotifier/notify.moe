@@ -14,7 +14,9 @@
 	.user-image
 		width calc(avatar-size / 2)
 		height calc(avatar-size / 2)
-		margin-right 1rem
+
+.ranking-user-nick
+	margin-left 0.8rem
 
 .ranking-score,
 .ranking-accuracy
