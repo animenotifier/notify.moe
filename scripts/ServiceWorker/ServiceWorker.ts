@@ -123,7 +123,7 @@ class MyServiceWorker {
 			return
 		}
 
-		return fetch(request)
+		return evt.respondWith(fetch(request))
 
 		// // Exclude certain URLs from being cached.
 		// for(let pattern of this.excludeCache.keys()) {
