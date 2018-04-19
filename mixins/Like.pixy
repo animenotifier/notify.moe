@@ -1,0 +1,29 @@
+component LikeButton(label string, icon string, typeName string, likeable arn.Likeable, user *arn.User)
+	if user == nil
+		button.tip.action(aria-label="Login to like this " + typeName)
+			Icon(icon)
+			span= label
+	else
+		if likeable.LikedBy(user.ID)
+			button.tip.action(data-api="/api" + likeable.Link(), data-action="unlike", data-trigger="click", aria-label="Click to unlike this " + typeName)
+				Icon(icon)
+				span= label
+		else
+			button.tip.action(data-api="/api" + likeable.Link(), data-action="like", data-trigger="click", aria-label="Click to like this " + typeName)
+				Icon(icon + "-o")
+				span= label
+
+component LikeTab(label string, icon string, typeName string, likeable arn.Likeable, user *arn.User)
+	if user == nil
+		.tab.action(aria-label=label, title="Login to like this " + typeName)
+			Icon(icon)
+			span.tab-text= label
+	else
+		if likeable.LikedBy(user.ID)
+			.tab.action(data-api="/api" + likeable.Link(), data-action="unlike", data-trigger="click", aria-label=label, title="Click to unlike this " + typeName)
+				Icon(icon)
+				span.tab-text= label
+		else
+			.tab.action(data-api="/api" + likeable.Link(), data-action="like", data-trigger="click", aria-label=label, title="Click to like this " + typeName)
+				Icon(icon + "-o")
+				span.tab-text= label

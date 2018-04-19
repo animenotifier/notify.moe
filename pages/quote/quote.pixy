@@ -50,7 +50,7 @@ component QuoteInformation(quote *arn.Quote, user *arn.User)
 
 component QuoteTabs(quote *arn.Quote, user *arn.User)
 	.tabs
-		TabLike(strconv.Itoa(len(quote.Likes)), "heart", "quote", quote, user)
+		LikeTab(strconv.Itoa(len(quote.Likes)), "heart", "quote", quote, user)
 		Tab("Quote", "quote-left", quote.Link())
 		if user != nil
 			Tab("Edit", "pencil", quote.Link() + "/edit")

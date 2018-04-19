@@ -72,7 +72,7 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 
 component SoundTrackTabs(track *arn.SoundTrack, user *arn.User)
 	.tabs
-		TabLike(strconv.Itoa(len(track.Likes)), "heart", "track", track, user)
+		LikeTab(strconv.Itoa(len(track.Likes)), "heart", "track", track, user)
 		Tab("Soundtrack", "music", track.Link())
 
 		if track.HasLyrics()

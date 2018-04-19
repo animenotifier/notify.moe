@@ -54,6 +54,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/popular"
 	"github.com/animenotifier/notify.moe/pages/posts"
 	"github.com/animenotifier/notify.moe/pages/profile"
+	"github.com/animenotifier/notify.moe/pages/profile/profilecharacters"
 	"github.com/animenotifier/notify.moe/pages/profile/profilequotes"
 	"github.com/animenotifier/notify.moe/pages/profile/profiletracks"
 	"github.com/animenotifier/notify.moe/pages/quote"
@@ -205,6 +206,7 @@ func Configure(app *aero.Application) {
 	// User profiles
 	l.Page("/user", user.Get)
 	l.Page("/user/:nick", profile.Get)
+	l.Page("/user/:nick/characters/liked", profilecharacters.Liked)
 	l.Page("/user/:nick/forum/threads", profile.GetThreadsByUser)
 	l.Page("/user/:nick/forum/posts", profile.GetPostsByUser)
 	l.Page("/user/:nick/soundtracks/added", profiletracks.Added)

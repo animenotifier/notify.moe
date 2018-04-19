@@ -11,7 +11,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 						img.profile-watching-list-item-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp="true", data-color=item.Anime().AverageColor(), alt=item.Anime().Title.ByUser(user))
 
 	.footer
-		.buttons	
+		.buttons
 			if user != nil && (user.Role == "admin" || user.Role == "editor")
 				a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
 					Icon("search-plus")
@@ -20,15 +20,12 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 component ProfileTabs(viewUser *arn.User, uri string)
 	.tabs
 		Tab("Anime", "th", "/+" + viewUser.Nick)
-		//- Tab("Collection", "list", "/+" + viewUser.Nick + "/animelist/watching")
+		Tab("Characters", "child", "/+" + viewUser.Nick + "/characters/liked")
 		Tab("Forum", "comment", "/+" + viewUser.Nick + "/forum/threads")
 		Tab("Tracks", "music", "/+" + viewUser.Nick + "/soundtracks/liked")
 		Tab("Quotes", "quote-left", "/+" + viewUser.Nick + "/quotes/liked")
 		Tab("Stats", "area-chart", "/+" + viewUser.Nick + "/stats")
 		Tab("Followers", "users", "/+" + viewUser.Nick + "/followers")
-
-	//- if strings.Contains(uri, "/animelist")
-	//- 	StatusTabs("/+" + viewUser.Nick + "/animelist")
 	
 	if strings.Contains(uri, "/soundtracks")
 		.tabs

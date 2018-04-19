@@ -47,7 +47,7 @@ component AnimeGridSmall(animes []*arn.Anime, user *arn.User)
 
 component AMVTabs(amv *arn.AMV, user *arn.User)
 	.tabs
-		TabLike(strconv.Itoa(len(amv.Likes)), "heart", "amv", amv, user)
+		LikeTab(strconv.Itoa(len(amv.Likes)), "heart", "amv", amv, user)
 		Tab("AMV", "video-camera", amv.Link())
 
 		if user != nil

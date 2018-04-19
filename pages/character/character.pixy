@@ -10,6 +10,9 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 			.character-header
 				.character-image-container.mountable
 					img.character-image-large.lazy(data-src=character.ImageLink("large"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.Canonical)
+					
+					.buttons
+						LikeButton(strconv.Itoa(len(character.Likes)), "heart", "character", character, user)
 				
 				.character-description-container
 					h1.character-name.mountable= character.Name.Canonical
