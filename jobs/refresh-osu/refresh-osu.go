@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/arn/stringutils"
 	"github.com/fatih/color"
 )
 
@@ -29,7 +30,7 @@ func main() {
 		}
 
 		// Log it
-		arn.PrettyPrint(user.Accounts.Osu)
+		stringutils.PrettyPrint(user.Accounts.Osu)
 
 		// Save in database
 		user.Save()

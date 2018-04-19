@@ -3,8 +3,7 @@ package main
 import (
 	"strings"
 
-	"github.com/animenotifier/arn"
-
+	"github.com/animenotifier/arn/search"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -58,7 +57,7 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(msg.Content, "!a ") {
 		term := msg.Content[len("!a "):]
-		animes := arn.SearchAnime(term, 3)
+		animes := search.Anime(term, 3)
 		message := ""
 
 		for _, anime := range animes {

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"flag"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/arn/stringutils"
 	"github.com/animenotifier/kitsu"
 )
 
@@ -35,7 +35,7 @@ func InvokeShellArgs() bool {
 		sync(kitsuAnime)
 
 		if verbose {
-			arn.PrettyPrint(kitsuAnime)
+			stringutils.PrettyPrint(kitsuAnime)
 		}
 
 		return true

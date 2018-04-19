@@ -7,6 +7,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/arn/stringutils"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -60,7 +61,7 @@ func Success(ctx *aero.Context) string {
 		return ctx.Error(http.StatusInternalServerError, "Could not retrieve payment information", err)
 	}
 
-	arn.PrettyPrint(sdkPayment)
+	stringutils.PrettyPrint(sdkPayment)
 
 	transaction := sdkPayment.Transactions[0]
 
