@@ -2,10 +2,10 @@ const amv-large-width = 854px
 
 .amvs
 	vertical
-	margin-top 1rem
 
 .amv
 	width 100%
+	margin calc(content-padding / 2) 0
 
 	.video-container
 		box-shadow shadow-medium

@@ -1,3 +1,5 @@
+const quote-margin = 1rem
+
 .quotes
 	horizontal-wrap
 	justify-content space-around
@@ -6,13 +8,20 @@
 	vertical
 	flex 1
 	flex-basis 500px
-	padding 1rem
+	margin quote-margin 0
+
+> 500px
+	.quote
+		margin quote-margin
 
 .quote-content
 	vertical
 	ui-element
 	border-left 5px solid quote-side-border-color !important
 	box-shadow shadow-light
+
+.quote-line
+	// ...
 
 .quote-character
 	horizontal

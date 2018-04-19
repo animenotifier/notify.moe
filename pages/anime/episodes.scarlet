@@ -1,21 +1,16 @@
+const episode-margin = 0.5rem
+
 .episodes
-	vertical
-
-> 700px
-	.episodes
-		horizontal-wrap
-		justify-content flex-start
-
-	.episode
-		flex-basis 190px
+	horizontal-wrap
+	justify-content space-evenly
 
 .episode
 	vertical
 	ui-element
 	button-hover
-	flex 0
-	margin 0.5rem
+	margin episode-margin
 	padding 0.5rem
+	flex-basis calc(50% - episode-margin * 2)
 	overflow hidden
 	color text-color
 	box-shadow shadow-light
@@ -27,6 +22,13 @@
 
 		&.mounted
 			opacity 0.25 !important
+
+> 700px
+	.episodes
+		justify-content flex-start
+
+	.episode
+		flex-basis 190px
 
 .episode-number
 	display flex

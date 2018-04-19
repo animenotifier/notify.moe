@@ -1,10 +1,17 @@
 component AMV(amv *arn.AMV, user *arn.User)
 	.amv.mountable
-		.video-container
-			video.video.lazy(controls="controls", controlsList="nodownload")
-				source(data-src="https://notify.moe/videos/amvs/" + amv.File, data-type="video/webm")
-		
+		AMVVideo(amv)
 		AMVFooter(amv, user)
+
+component AMVMini(amv *arn.AMV, user *arn.User)
+	.amv.mountable
+		AMVVideo(amv)
+		AMVMiniFooter(amv, user)
+
+component AMVVideo(amv *arn.AMV)
+	.video-container
+		video.video.lazy(controls="controls", controlsList="nodownload")
+			source(data-src="https://notify.moe/videos/amvs/" + amv.File, data-type="video/webm")
 
 component AMVFooter(amv *arn.AMV, user *arn.User)
 	.amv-footer
@@ -13,6 +20,13 @@ component AMVFooter(amv *arn.AMV, user *arn.User)
 		else
 			a(href=amv.Link())= amv.Title.ByUser(user)
 		span  posted 
-		span.utc-date(data-date=amv.Created)
+		span.utc-date.no-tip(data-date=amv.Created)
 		span  by 
 		a(href=amv.Creator().Link())= amv.Creator().Nick + " "
+
+component AMVMiniFooter(amv *arn.AMV, user *arn.User)
+	.amv-footer
+		if amv.Title.ByUser(user) == ""
+			a(href=amv.Link() + "/edit") untitled
+		else
+			a(href=amv.Link())= amv.Title.ByUser(user)

@@ -1,4 +1,4 @@
-const tip-opacity = 0.94
+const tip-opacity = 0.97
 const tip-transform-hidden = rotate(0.02deg) translateX(-50%) translateY(-80%)
 const tip-transform-visible = rotate(0.02deg) translateX(-50%) translateY(-100%)
 

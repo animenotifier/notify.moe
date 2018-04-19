@@ -3,6 +3,11 @@ component SoundTrack(track *arn.SoundTrack)
 		SoundTrackContent(track)
 		SoundTrackFooter(track)
 
+component SoundTrackMini(track *arn.SoundTrack)
+	.soundtrack.mountable(id=track.ID)
+		SoundTrackContent(track)
+		SoundTrackMiniFooter(track)
+
 component SoundTrackContent(track *arn.SoundTrack)
 	.soundtrack-content
 		if track.MainAnime() != nil
@@ -36,6 +41,13 @@ component SoundTrackFooter(track *arn.SoundTrack)
 		span.utc-date.no-tip(data-date=track.Created)
 		span  by 
 		a(href=track.Creator().Link())= track.Creator().Nick + " "
+
+component SoundTrackMiniFooter(track *arn.SoundTrack)
+	.soundtrack-footer
+		if track.Title.ByUser(nil) == ""
+			a(href=track.Link() + "/edit") untitled
+		else
+			a(href=track.Link())= track.Title.ByUser(nil)
 
 component ExternalMedia(media *arn.ExternalMedia)
 	iframe.lazy(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")

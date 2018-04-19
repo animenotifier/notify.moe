@@ -23,7 +23,7 @@ component Quotes(quotes []*arn.Quote, nextIndex int, user *arn.User)
 
 component QuotesScrollable(quotes []*arn.Quote, user *arn.User)
 	each quote in quotes
-		Quote(quote)
+		QuotePreview(quote)
 
 component QuotesTabs
 	.tabs

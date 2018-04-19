@@ -7,17 +7,17 @@ component AudioPlayer
 		a#audio-player-track-title(href="")
 
 		#audio-player-controls
-			button#audio-player-prev.audio-player-side-button.action(data-action="playPreviousTrack", data-trigger="click")
+			button#audio-player-prev.audio-player-side-button.action(data-action="playPreviousTrack", data-trigger="click", aria-label="Previous track")
 				RawIcon("step-backward")
 
 			.audio-player-play-pause-container
-				button#audio-player-play.action(data-action="resumeAudio", data-trigger="click")
+				button#audio-player-play.action(data-action="resumeAudio", data-trigger="click", aria-label="Play")
 					RawIcon("play")
 				
-				button#audio-player-pause.fade-out.action(data-action="pauseAudio", data-trigger="click")
+				button#audio-player-pause.fade-out.action(data-action="pauseAudio", data-trigger="click", aria-label="Pause")
 					RawIcon("pause")
 
-			button#audio-player-next.audio-player-side-button.action(data-action="playNextTrack", data-trigger="click")
+			button#audio-player-next.audio-player-side-button.action(data-action="playNextTrack", data-trigger="click", aria-label="Next track")
 				RawIcon("step-forward")
 		
 		input#audio-player-volume.action(data-action="setVolume", data-trigger="input", type="range", min="0", max="100", value="50")

@@ -1,0 +1,16 @@
+component AnimeAMVs(anime *arn.Anime, amvs []*arn.AMV, amvAppearances []*arn.AMV, user *arn.User)
+	if len(amvs) > 0
+		section.anime-section.mountable
+			h3.anime-section-name AMVs
+
+			.anime-amvs
+				each amv in amvs
+					AMVMini(amv, user)
+	
+	if len(amvAppearances) > 0
+		section.anime-section.mountable
+			h3.anime-section-name Appears in AMVs
+
+			.anime-amvs
+				each amv in amvAppearances
+					AMVMini(amv, user)

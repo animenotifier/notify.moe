@@ -31,23 +31,6 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 	AnimeAMVs(anime, amvs, amvAppearances, user)
 	AnimeEpisodes(anime, episodes, user, false)
 
-component AnimeAMVs(anime *arn.Anime, amvs []*arn.AMV, amvAppearances []*arn.AMV, user *arn.User)
-	if len(amvs) > 0
-		section.anime-section.mountable
-			h3.anime-section-name AMVs
-
-			.amvs
-				each amv in amvs
-					AMV(amv, user)
-	
-	if len(amvAppearances) > 0
-		section.anime-section.mountable
-			h3.anime-section-name Appears in AMVs
-
-			.amvs
-				each amv in amvAppearances
-					AMV(amv, user)
-
 component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	AnimeTrailer(anime)
 	AnimeInformation(anime)

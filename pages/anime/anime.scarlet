@@ -72,10 +72,10 @@
 
 .anime-soundtracks
 	vertical
-	margin-top 1rem
 
-	.soundtrack
-		flex-basis auto
+	.soundtrack-content
+		border-bottom-left-radius ui-element-border-radius !important
+		border-top-left-radius ui-element-border-radius !important
 
 	.soundtrack-anime-image
 		display none
@@ -84,10 +84,10 @@
 	.anime-soundtracks
 		horizontal-wrap
 		justify-content flex-start
-		margin-top 0
 
 		.soundtrack
 			max-width 200px
+			padding 0.5rem
 
 		.soundtrack-content
 			min-height 112px

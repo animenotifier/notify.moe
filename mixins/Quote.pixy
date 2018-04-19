@@ -3,14 +3,38 @@ component Quote(quote *arn.Quote)
 		QuoteContent(quote)
 		QuoteFooter(quote)
 
+component QuotePreview(quote *arn.Quote)
+	.quote.mountable
+		QuoteContentPreview(quote)
+		QuoteFooter(quote)
+
 component QuoteContent(quote *arn.Quote)
 	.quote-content
 		a.quotation(href=quote.Link())
-			blockquote!= markdown.Render(quote.Text.English)
+			QuoteText(quote)
 		
-		if quote.CharacterID != "" && quote.Character() != nil
-			footer.quote-character
-				CharacterSmall(quote.Character())
+		QuoteCharacter(quote)
+
+component QuoteContentPreview(quote *arn.Quote)
+	.quote-content
+		a.quotation(href=quote.Link())
+			QuoteTextPreview(quote)
+		
+		QuoteCharacter(quote)
+
+component QuoteText(quote *arn.Quote)
+	blockquote!= utils.RenderQuoteText(quote.Text.English)
+
+component QuoteCharacter(quote *arn.Quote)
+	if quote.CharacterID != "" && quote.Character() != nil
+		footer.quote-character
+			CharacterSmall(quote.Character())
+
+component QuoteTextPreview(quote *arn.Quote)
+	if len(quote.Text.English) > 170
+		blockquote!= utils.RenderQuoteText(quote.Text.English[:167] + "...")
+	else
+		blockquote!= utils.RenderQuoteText(quote.Text.English)
 
 component QuoteFooter(quote *arn.Quote)
 	.quote-footer

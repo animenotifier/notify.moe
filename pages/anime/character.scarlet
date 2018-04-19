@@ -19,12 +19,6 @@
 	width 112px
 	height 112px
 
-// .character-name
-// 	font-size 0.75rem
-// 	color text-color
-// 	opacity 0.5
-// 	transition opacity transition-speed ease
-
 .character-image-small
 	width 56px
 	height 56px
