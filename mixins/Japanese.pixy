@@ -1,5 +1,5 @@
 component Japanese(text string)
-	if arn.ContainsUnicodeLetters(text)
+	if stringutils.ContainsUnicodeLetters(text)
 		for _, token := range arn.JapaneseTokenizer.Tokenize(text)
 			if token.Furigana
 				a.japanese(href="http://jisho.org/search/" + token.Original, target="_blank", rel="noopener")

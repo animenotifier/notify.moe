@@ -7,21 +7,21 @@ component Editor(url string, score int, scoreTitle string, scoreTypes map[string
 				RawIcon("tv")
 			.feature-card-text
 				p Anime
-				p.editor-score= arn.Plural(scoreTypes["Anime"], "contribution")
+				p.editor-score= stringutils.Plural(scoreTypes["Anime"], "contribution")
 
 		a.feature-card.mountable(href="/editor/soundtracks/links")
 			.feature-card-icon.feature-card-color-soundtrack
 				RawIcon("music")
 			.feature-card-text
 				p SoundTracks
-				p.editor-score= arn.Plural(scoreTypes["SoundTrack"], "contribution")
+				p.editor-score= stringutils.Plural(scoreTypes["SoundTrack"], "contribution")
 		
 		a.feature-card.mountable(href="/editor/companies/description")
 			.feature-card-icon.feature-card-color-company
 				RawIcon("building-o")
 			.feature-card-text
 				p Companies
-				p.editor-score= arn.Plural(scoreTypes["Company"], "contribution")
+				p.editor-score= stringutils.Plural(scoreTypes["Company"], "contribution")
 	
 	.footer.mountable
 		a.footer-element(href="/editor/mal/diff/anime" + user.Settings().Editor.Filter.Suffix()) MALdiff

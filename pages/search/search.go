@@ -7,6 +7,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/arn/search"
 	"github.com/animenotifier/notify.moe/components"
 )
 
@@ -25,7 +26,7 @@ func Get(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 
-	users, animes, posts, threads, tracks, characters, companies := arn.Search(
+	users, animes, posts, threads, tracks, characters, companies := search.All(
 		term,
 		maxUsers,
 		maxAnime,
@@ -49,7 +50,7 @@ func Anime(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 
-	animes := arn.SearchAnime(term, maxAnime)
+	animes := search.Anime(term, maxAnime)
 	return ctx.HTML(components.AnimeSearchResults(animes))
 }
 
@@ -58,7 +59,7 @@ func Characters(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 
-	characters := arn.SearchCharacters(term, maxCharacters)
+	characters := search.Characters(term, maxCharacters)
 	return ctx.HTML(components.CharacterSearchResults(characters))
 }
 
@@ -71,9 +72,9 @@ func Forum(ctx *aero.Context) string {
 	var threads []*arn.Thread
 
 	flow.Parallel(func() {
-		posts = arn.SearchPosts(term, maxPosts)
+		posts = search.Posts(term, maxPosts)
 	}, func() {
-		threads = arn.SearchThreads(term, maxThreads)
+		threads = search.Threads(term, maxThreads)
 	})
 
 	return ctx.HTML(components.ForumSearchResults(posts, threads))
@@ -84,7 +85,7 @@ func SoundTracks(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 
-	tracks := arn.SearchSoundTracks(term, maxSoundTracks)
+	tracks := search.SoundTracks(term, maxSoundTracks)
 	return ctx.HTML(components.SoundTrackSearchResults(tracks))
 }
 
@@ -93,7 +94,7 @@ func Users(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 
-	users := arn.SearchUsers(term, maxUsers)
+	users := search.Users(term, maxUsers)
 	return ctx.HTML(components.UserSearchResults(users))
 }
 
@@ -102,6 +103,6 @@ func Companies(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 
-	companies := arn.SearchCompanies(term, maxCompanies)
+	companies := search.Companies(term, maxCompanies)
 	return ctx.HTML(components.CompanySearchResults(companies))
 }

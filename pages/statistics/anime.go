@@ -1,6 +1,8 @@
 package statistics
 
 import (
+	"fmt"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -47,7 +49,7 @@ func getAnimeStats() []*arn.PieChart {
 			anidb["Not connected with AniDB"]++
 		}
 
-		rating[arn.ToString(int(anime.Rating.Overall+0.5))]++
+		rating[fmt.Sprint(int(anime.Rating.Overall+0.5))]++
 
 		found := false
 		for _, episode := range anime.Episodes().Items {

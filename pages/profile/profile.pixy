@@ -71,7 +71,7 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 					a(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, target="_blank", rel="noopener")= toString(int(viewUser.Accounts.Osu.PP)) + " pp"
 
 			if viewUser.Accounts.Overwatch.BattleTag != "" && viewUser.Accounts.Overwatch.SkillRating >= 1000
-				p.profile-field.overwatch(title=arn.Capitalize(viewUser.Accounts.Overwatch.Tier) + " (Overwatch)")
+				p.profile-field.overwatch(title=stringutils.Capitalize(viewUser.Accounts.Overwatch.Tier) + " (Overwatch)")
 					Icon("overwatch")
 					a(href="https://playoverwatch.com/en-us/career/pc/" + strings.Replace(viewUser.Accounts.Overwatch.BattleTag, "#", "-", 1), target="_blank", rel="noopener")= toString(viewUser.Accounts.Overwatch.SkillRating) + " SR"
 
@@ -90,7 +90,7 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 			if viewUser.Role != ""
 				p.profile-field.role
 					Icon("rocket")
-					span= arn.Capitalize(viewUser.Role)
+					span= stringutils.Capitalize(viewUser.Role)
 
 		if viewUser.IsPro()
 			p.profile-field.profile-pro-status

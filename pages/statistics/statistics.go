@@ -42,7 +42,7 @@ func getUserStats() []*arn.PieChart {
 
 		pixelRatio[fmt.Sprintf("%.0f", info.Screen.PixelRatio)]++
 
-		size := arn.ToString(info.Screen.Width) + " x " + arn.ToString(info.Screen.Height)
+		size := fmt.Sprint(info.Screen.Width) + " x " + fmt.Sprint(info.Screen.Height)
 		screenSize[size]++
 
 		if info.Connection.EffectiveType != "" {

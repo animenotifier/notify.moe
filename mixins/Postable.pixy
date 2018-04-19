@@ -27,7 +27,7 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 
 			.post-toolbar(id="toolbar-" + post.ID())
 				.spacer
-				.post-likes.tip(id="likes-" + post.ID(), aria-label=arn.Plural(len(post.Likes()), "like"))= "+" + strconv.Itoa(len(post.Likes()))
+				.post-likes.tip(id="likes-" + post.ID(), aria-label=stringutils.Plural(len(post.Likes()), "like"))= "+" + strconv.Itoa(len(post.Likes()))
 
 				if user != nil
 					if user.ID != post.Creator().ID

@@ -24,7 +24,7 @@ component ShopItem(item *arn.ShopItem, popularity int)
 		
 		.shop-item-info-column
 			h3.shop-item-name= item.Name
-			.shop-item-popularity= arn.Plural(popularity, "user") + " bought this"
+			.shop-item-popularity= stringutils.Plural(popularity, "user") + " bought this"
 
 			//- span.shop-item-duration= " " + duration
 		//- .shop-item-description!= markdown.Render(item.Description)

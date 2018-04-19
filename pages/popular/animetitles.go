@@ -5,6 +5,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/arn/stringutils"
 )
 
 // AnimeTitles returns a list of the 500 most popular anime titles.
@@ -26,7 +27,7 @@ func AnimeTitles(ctx *aero.Context) string {
 	for _, anime := range popularAnime {
 		popularAnimeTitles = append(popularAnimeTitles, anime.Title.Canonical)
 
-		if arn.ContainsUnicodeLetters(anime.Title.Japanese) {
+		if stringutils.ContainsUnicodeLetters(anime.Title.Japanese) {
 			popularAnimeTitles = append(popularAnimeTitles, anime.Title.Japanese)
 		}
 	}
