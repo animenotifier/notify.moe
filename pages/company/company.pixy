@@ -16,14 +16,6 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 			if company.Location.Latitude != 0 && company.Location.Longitude != 0
 				h3.mountable Location
 				iframe.company-location.mountable(src="https://www.google.com/maps/embed/v1/place?q=" + toString(company.Location.Latitude) + "," + toString(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0")
-
-			if len(company.Links) > 0
-				h3.mountable Links
-
-				ul.mountable
-					each link in company.Links
-						li.mountable(data-mountable-type="company-link")
-							a(href=link.URL, target="_blank", rel="noopener")= link.Title
 			
 			if len(closeCompanies) > 0
 				h3.mountable Within 1 km radius
@@ -33,6 +25,21 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 						li.mountable(data-mountable-type="close-company")
 							a(href=closeCompany.Link())= closeCompany.Name.English
 							span.company-distance= fmt.Sprintf(" - %.0f m", distances[closeCompany.ID] * 1000)
+			
+			h3.mountable Links
+			
+			.light-button-group.mountable
+				each link in company.Links
+					a.light-button.mountable(href=link.URL, target="_blank", data-mountable-type="company-link")
+						if strings.ToLower(link.Title) == "wikipedia"
+							Icon("wikipedia-w")
+						else
+							Icon("external-link")
+						span= link.Title
+				
+				a.light-button.mountable(href="/api" + company.Link(), target="_blank", data-mountable-type="company-link")
+					Icon("code")
+					span API
 			
 			//- if len(company.Name.Synonyms) > 0
 			//- 	h3 Synonyms
