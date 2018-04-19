@@ -245,33 +245,42 @@ export default class AnimeNotifier {
 		let contentRect = this.app.content.getBoundingClientRect()
 
 		for(let element of elements) {
-			Diff.mutations.queue(() => {
-				let rect = element.getBoundingClientRect()
-				let tipStyle = window.getComputedStyle(element, ":before")
-				let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
-				let tipStartX = rect.left + rect.width / 2 - tipWidth / 2 - contentRect.left
-				let tipEndX = tipStartX + tipWidth
-				let leftOffset = 0
-
-				if(tipStartX < 0) {
-					leftOffset = -tipStartX + 5
-				} else if(tipEndX > contentRect.width) {
-					leftOffset = -(tipEndX - contentRect.width + 5)
+			element.onmouseenter = () => {
+				if(element.dataset.offsetAssigned) {
+					element.onmouseenter = null
+					return
 				}
 
-				if(leftOffset !== 0) {
-					element.classList.remove("tip")
-					element.classList.add("tip-offset-root")
+				Diff.mutations.queue(() => {
+					let rect = element.getBoundingClientRect()
+					let tipStyle = window.getComputedStyle(element, ":before")
+					let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
+					let tipStartX = rect.left + rect.width / 2 - tipWidth / 2 - contentRect.left
+					let tipEndX = tipStartX + tipWidth
+					let leftOffset = 0
 
-					let tipChild = document.createElement("div")
-					tipChild.classList.add("tip-offset-child")
-					tipChild.setAttribute("aria-label", element.getAttribute("aria-label"))
-					tipChild.style.left = Math.round(leftOffset) + "px"
-					tipChild.style.width = rect.width + "px"
-					tipChild.style.height = rect.height + "px"
-					element.appendChild(tipChild)
-				}
-			})
+					if(tipStartX < 0) {
+						leftOffset = -tipStartX + 5
+					} else if(tipEndX > contentRect.width) {
+						leftOffset = -(tipEndX - contentRect.width + 5)
+					}
+
+					if(leftOffset !== 0) {
+						element.classList.remove("tip")
+						element.classList.add("tip-offset-root")
+
+						let tipChild = document.createElement("div")
+						tipChild.classList.add("tip-offset-child")
+						tipChild.setAttribute("aria-label", element.getAttribute("aria-label"))
+						tipChild.style.left = Math.round(leftOffset) + "px"
+						tipChild.style.width = rect.width + "px"
+						tipChild.style.height = rect.height + "px"
+						element.appendChild(tipChild)
+					}
+
+					element.dataset.offsetAssigned = "true"
+				})
+			}
 		}
 	}
 
