@@ -16,9 +16,9 @@ const soundtrack-margin = 1rem
 
 .soundtrack-content
 	horizontal
-	border-radius ui-element-border-radius
 	box-shadow shadow-light
 	min-height 200px
+	border-radius ui-element-border-radius
 	overflow hidden
 
 	iframe

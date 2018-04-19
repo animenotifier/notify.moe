@@ -73,6 +73,9 @@
 .anime-soundtracks
 	vertical
 
+	.soundtrack
+		margin 1rem 0
+
 	.soundtrack-content
 		border-bottom-left-radius ui-element-border-radius !important
 		border-top-left-radius ui-element-border-radius !important
@@ -87,7 +90,7 @@
 
 		.soundtrack
 			max-width 200px
-			padding 0.5rem
+			margin calc(content-padding / 2)
 
 		.soundtrack-content
 			min-height 112px
