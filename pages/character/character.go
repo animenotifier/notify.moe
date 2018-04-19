@@ -68,16 +68,19 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Friends
-	friendIDs := utils.Intersection(character.Likes, user.Follows().Items)
-	friendObjects := arn.DB.GetMany("User", friendIDs)
-	friends := []*arn.User{}
+	var friends []*arn.User
 
-	for _, obj := range friendObjects {
-		if obj == nil {
-			continue
+	if user != nil {
+		friendIDs := utils.Intersection(character.Likes, user.Follows().Items)
+		friendObjects := arn.DB.GetMany("User", friendIDs)
+
+		for _, obj := range friendObjects {
+			if obj == nil {
+				continue
+			}
+
+			friends = append(friends, obj.(*arn.User))
 		}
-
-		friends = append(friends, obj.(*arn.User))
 	}
 
 	return ctx.HTML(components.CharacterDetails(character, characterAnime, quotes, friends, mainQuote, user))
