@@ -32,7 +32,7 @@ ui-disabled-color = rgb(224, 224, 224)
 const ui-element-border-radius = 3px
 
 // Input
-input-height = 2.4rem
+input-height = 2.5rem
 input-focus-border-color = rgb(248, 165, 130)
 
 // Button

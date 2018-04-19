@@ -7,7 +7,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/pages/frontpage"
 	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
@@ -21,11 +20,6 @@ const (
 func FilterByStatus(status string) aero.Handle {
 	return func(ctx *aero.Context) string {
 		user := utils.GetUser(ctx)
-
-		if user == nil {
-			return frontpage.Get(ctx)
-		}
-
 		return AnimeList(ctx, user, status)
 	}
 }
@@ -48,6 +42,11 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 	}
 
 	statusList := animeList.FilterStatus(status)
+
+	// Filter private items
+	if user == nil || user.ID != viewUser.ID {
+		statusList = statusList.WithoutPrivateItems()
+	}
 
 	// Sort the items
 	statusList.Sort()

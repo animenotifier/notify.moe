@@ -1,7 +1,7 @@
 component AnimeListPage(animeListItems []*arn.AnimeListItem, nextIndex int, viewUser *arn.User, user *arn.User, status string)
 	h1.page-title= viewUser.Nick + "'s anime list"
 
-	if user.ID != viewUser.ID
+	if user == nil || user.ID != viewUser.ID
 		.anime-list-user-avatar
 			AvatarNoTip(viewUser)
 	

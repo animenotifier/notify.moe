@@ -39,11 +39,11 @@ input
 
 button, .button
 	horizontal
-	line-height 1.5em
 	padding 0.5rem 1rem
 	color link-color
 	align-items center
 	pointer-events all
+	height input-height
 
 	button-hover
 

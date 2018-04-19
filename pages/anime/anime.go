@@ -43,7 +43,7 @@ func Get(ctx *aero.Context) string {
 			friendAnimeList := friends[j].AnimeList()
 			friendAnimeListItem := friendAnimeList.Find(anime.ID)
 
-			if friendAnimeListItem == nil {
+			if friendAnimeListItem == nil || friendAnimeListItem.Private {
 				friends = friends[:j+copy(friends[j:], friends[j+1:])]
 				deleted++
 			} else {

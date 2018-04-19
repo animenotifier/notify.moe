@@ -25,6 +25,11 @@ func Get(ctx *aero.Context) string {
 func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	user := utils.GetUser(ctx)
 	animeList := viewUser.AnimeList()
+
+	if user == nil || user.ID != viewUser.ID {
+		animeList = animeList.WithoutPrivateItems()
+	}
+
 	animeList.SortByRating()
 
 	openGraph := &arn.OpenGraph{
