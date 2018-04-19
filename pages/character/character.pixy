@@ -73,4 +73,8 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					a.light-button(href="https://myanimelist.net/character/" + character.GetMapping("myanimelist/character"), target="_blank", rel="noopener")
 						Icon("external-link")
 						span MAL
+					
+					a.light-button(href="/api" + character.Link(), target="_blank")
+						Icon("code")
+						span API
 
