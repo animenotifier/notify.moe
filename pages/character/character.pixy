@@ -13,6 +13,10 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					
 					.buttons
 						LikeButton(strconv.Itoa(len(character.Likes)), "heart", "character", character, user)
+
+						if user != nil && (user.Role == "editor" || user.Role == "admin")
+							a.button.mountable(href=character.Link() + "/edit")
+								RawIcon("pencil")
 				
 				.character-description-container
 					h1.character-name.mountable= character.Name.Canonical
@@ -26,15 +30,6 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							Quote(mainQuote)
 					
 					.character-description.mountable!= markdown.Render(character.Description)
-
-					if user != nil && (user.Role == "editor" || user.Role == "admin")
-						.anime-summary-footer-container
-							.anime-summary-footer
-								.spacer
-								.buttons.anime-buttons
-									a.button.mountable(href=character.Link() + "/edit")
-										Icon("pencil")
-										span Edit character
 			
 					h3.mountable Anime
 
