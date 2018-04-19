@@ -36,13 +36,14 @@
 			width anime-image-medium-width
 			height anime-image-medium-height
 
-		.raw-icon
-			font-size 2.5rem
-			position absolute
-			left 0
-			top calc(anime-image-medium-height / 2)
-			transform translateY(-50%) translateX(-50%)
-			opacity 0.85
+		// .raw-icon
+		// 	font-size 2.5rem
+		// 	position absolute
+		// 	left 0
+		// 	top calc(anime-image-medium-height / 2)
+		// 	transform translateY(-50%) translateX(-50%)
+		// 	opacity 0.85
+		// 	color rgb(215, 38, 15)
 
 .anime-list-item-rating-edit
 	horizontal

@@ -1,7 +1,7 @@
 component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.Anime, user *arn.User)
 	.anime-list-item-view.mountable(data-api="/api/animelist/" + viewUser.ID + "/field/Items[AnimeID=\"" + anime.ID + "\"]")
 		h1.anime-list-item-title.mountable= anime.Title.ByUser(user)
-		
+
 		.anime-list-item-progress-edit
 			.anime-list-item-episodes-edit
 				InputNumberWithButtons("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
@@ -42,5 +42,5 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 	
 	a.anime-list-item-cover.mountable(href=anime.Link(), title="View anime")
 		img.anime-cover-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
-		RawIcon("arrow-left")
+		//- RawIcon("arrow-left")
 	
