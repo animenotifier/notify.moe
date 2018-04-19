@@ -56,6 +56,10 @@
 	.quote-footer
 		display none
 
+.character-friends
+	.user-avatars
+		justify-content flex-start
+
 > 1250px
 	.character-page
 		horizontal

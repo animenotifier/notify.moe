@@ -6,6 +6,10 @@ var routeTests = map[string][]string{
 		"/+Akyoto",
 	},
 
+	"/user/:nick/characters/liked": []string{
+		"/+Akyoto/characters/liked",
+	},
+
 	"/user/:nick/forum/threads": []string{
 		"/+Akyoto/forum/threads",
 	},

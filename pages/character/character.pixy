@@ -4,7 +4,7 @@ component CharacterTabs(character *arn.Character, user *arn.User)
 		Tab("Edit", "pencil", character.Link() + "/edit")
 		Tab("History", "history", character.Link() + "/history")
 
-component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, mainQuote *arn.Quote, user *arn.User)
+component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, friends []*arn.User, mainQuote *arn.Quote, user *arn.User)
 	.character-page
 		.character-left-column
 			.character-header
@@ -66,6 +66,19 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							else
 								td.character-attributes-value= attribute.Value
 			
+			if len(friends) > 0
+				.character-friends
+					h3.mountable Friends
+
+					.user-avatars.mountable
+						each friend in friends
+							.mountable(data-mountable-type="friend")
+								if friend.IsActive()
+									Avatar(friend)
+								else
+									.inactive-user
+										Avatar(friend)
+
 			if character.GetMapping("myanimelist/character") != ""
 				h3.mountable Links
 
@@ -77,4 +90,3 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					a.light-button(href="/api" + character.Link(), target="_blank")
 						Icon("code")
 						span API
-

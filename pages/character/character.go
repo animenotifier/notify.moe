@@ -67,5 +67,18 @@ func Get(ctx *aero.Context) string {
 		},
 	}
 
-	return ctx.HTML(components.CharacterDetails(character, characterAnime, quotes, mainQuote, user))
+	// Friends
+	friendIDs := utils.Intersection(character.Likes, user.Follows().Items)
+	friendObjects := arn.DB.GetMany("User", friendIDs)
+	friends := []*arn.User{}
+
+	for _, obj := range friendObjects {
+		if obj == nil {
+			continue
+		}
+
+		friends = append(friends, obj.(*arn.User))
+	}
+
+	return ctx.HTML(components.CharacterDetails(character, characterAnime, quotes, friends, mainQuote, user))
 }
