@@ -3,10 +3,10 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 		h1.anime-list-item-title.mountable= anime.Title.ByUser(user)
 
 		.anime-list-item-progress-edit
-			.anime-list-item-episodes-edit
+			.anime-list-item-episodes-edit.mountable
 				InputNumberWithButtons("Episodes", float64(item.Episodes), "Episodes", "Number of episodes you watched", "0", arn.EpisodeCountMax(anime.EpisodeCount), "1")
 			
-			.widget-section.anime-list-item-status-edit
+			.widget-section.anime-list-item-status-edit.mountable
 				label(for="Status") Status:
 				select.widget-ui-element.action(id="Status", data-field="Status", value=item.Status, data-action="save", data-trigger="change")
 					option(value=arn.AnimeListStatusWatching) Watching
@@ -15,32 +15,33 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 					option(value=arn.AnimeListStatusHold) On hold
 					option(value=arn.AnimeListStatusDropped) Dropped
 
-		.anime-list-item-rating-edit(data-status=item.Status)
+		.anime-list-item-rating-edit.mountable(data-status=item.Status)
 			InputNumber("Rating.Overall", item.Rating.Overall, arn.OverallRatingName(item.Episodes), "Overall rating on a scale of 0 to 10", "0", "10", "0.1")
 			InputNumber("Rating.Story", item.Rating.Story, "Story", "Story rating on a scale of 0 to 10", "0", "10", "0.1")
 			InputNumber("Rating.Visuals", item.Rating.Visuals, "Visuals", "Visuals rating on a scale of 0 to 10", "0", "10", "0.1")
 			InputNumber("Rating.Soundtrack", item.Rating.Soundtrack, "Soundtrack", "Soundtrack rating on a scale of 0 to 10", "0", "10", "0.1")
 		
-		.anime-list-item-others
+		.anime-list-item-others.mountable
 			InputNumber("RewatchCount", float64(item.RewatchCount), "Rewatched", "How often you rewatched this anime", "0", "100", "1")
 			InputBool("Private", item.Private, "Private", "Hidden entry")
 		
-		InputTextArea("Notes", item.Notes, "Notes", "Your notes")
+		.mountable
+			InputTextArea("Notes", item.Notes, "Notes", "Your notes")
 
 	.buttons.mountable
-		a.button(href="/+" + viewUser.Nick + "/animelist/" + item.Status)
+		a.button.mountable(href="/+" + viewUser.Nick + "/animelist/" + item.Status)
 			Icon("list")
 			span View collection
 		
-		a.button(href=anime.Link())
+		a.button.mountable(href=anime.Link())
 			Icon("search-plus")
 			span View anime
 		
-		button.action(data-action="removeAnimeFromCollection", data-trigger="click", data-api="/api/animelist/" + viewUser.ID, data-anime-id=anime.ID, data-nick=viewUser.Nick)
+		button.action.mountable(data-action="removeAnimeFromCollection", data-trigger="click", data-api="/api/animelist/" + viewUser.ID, data-anime-id=anime.ID, data-nick=viewUser.Nick)
 			Icon("trash")
 			span Remove from collection
 	
-	a.anime-list-item-cover.mountable(href=anime.Link(), title="View anime")
-		img.anime-cover-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
-		//- RawIcon("arrow-left")
+	//- a.anime-list-item-cover.mountable(href=anime.Link(), title="View anime")
+	//- 	img.anime-cover-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
+	//- 	//- RawIcon("arrow-left")
 	

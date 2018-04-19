@@ -22,28 +22,34 @@
 	grid-template-columns repeat(auto-fill, calc(50% - content-padding / 2))
 	grid-gap content-padding
 
-.anime-list-item-cover
-	display none
+// .anime-list-item-cover
+// 	display none
 
-> 1200px
-	.anime-list-item-cover
-		display block
-		position absolute
-		left content-padding
-		top content-padding
+// > 1200px
+// 	.anime-list-item-cover
+// 		display block
+// 		position absolute
+// 		left content-padding
+// 		top content-padding
 
-		img
-			width anime-image-medium-width
-			height anime-image-medium-height
+// 		&.mounted
+// 			opacity 0 !important
 
-		// .raw-icon
-		// 	font-size 2.5rem
-		// 	position absolute
-		// 	left 0
-		// 	top calc(anime-image-medium-height / 2)
-		// 	transform translateY(-50%) translateX(-50%)
-		// 	opacity 0.85
-		// 	color rgb(215, 38, 15)
+// 			:hover
+// 				opacity 1 !important
+
+// 		img
+// 			width anime-image-medium-width
+// 			height anime-image-medium-height
+
+// 		// .raw-icon
+// 		// 	font-size 2.5rem
+// 		// 	position absolute
+// 		// 	left 0
+// 		// 	top calc(anime-image-medium-height / 2)
+// 		// 	transform translateY(-50%) translateX(-50%)
+// 		// 	opacity 0.85
+// 		// 	color rgb(215, 38, 15)
 
 .anime-list-item-rating-edit
 	horizontal
