@@ -59,6 +59,11 @@ export class MutationQueue {
 	}
 
 	wait(callBack: () => void) {
+		if(this.mutations.length === 0) {
+			callBack()
+			return
+		}
+
 		this.onClearCallBacks.push(callBack)
 	}
 }

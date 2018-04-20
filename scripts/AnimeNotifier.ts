@@ -238,55 +238,60 @@ export default class AnimeNotifier {
 	}
 
 	assignTooltipOffsets(elements?: IterableIterator<HTMLElement>) {
-		const distanceToBorder = 5
-		let contentRect: ClientRect
+		requestIdleCallback(() => {
+			const distanceToBorder = 5
+			let contentRect: ClientRect
 
-		if(!elements) {
-			elements = findAll("tip")
-		}
-
-		for(let element of elements) {
-			element.onmouseenter = () => {
-				if(element.dataset.offsetAssigned) {
-					element.onmouseenter = null
-					return
-				}
-
-				Diff.mutations.queue(() => {
-					if(!contentRect) {
-						contentRect = this.app.content.getBoundingClientRect()
-					}
-
-					let rect = element.getBoundingClientRect()
-					let tipStyle = window.getComputedStyle(element, ":before")
-					let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
-					let tipStartX = rect.left + rect.width / 2 - tipWidth / 2 - contentRect.left
-					let tipEndX = tipStartX + tipWidth
-					let leftOffset = 0
-
-					if(tipStartX < distanceToBorder) {
-						leftOffset = -tipStartX + distanceToBorder
-					} else if(tipEndX > contentRect.width - distanceToBorder) {
-						leftOffset = -(tipEndX - contentRect.width + distanceToBorder)
-					}
-
-					if(leftOffset !== 0) {
-						element.classList.remove("tip")
-						element.classList.add("tip-offset-root")
-
-						let tipChild = document.createElement("div")
-						tipChild.classList.add("tip-offset-child")
-						tipChild.setAttribute("aria-label", element.getAttribute("aria-label"))
-						tipChild.style.left = Math.round(leftOffset) + "px"
-						tipChild.style.width = rect.width + "px"
-						tipChild.style.height = rect.height + "px"
-						element.appendChild(tipChild)
-					}
-
-					element.dataset.offsetAssigned = "true"
-				})
+			if(!elements) {
+				elements = findAll("tip")
 			}
-		}
+
+			// Assign mouse enter event handler
+			for(let element of elements) {
+				Diff.mutations.queue(() => {
+					element.classList.add("tip-active")
+				})
+
+				element.onmouseenter = () => {
+					// if(element.dataset.offsetAssigned) {
+					// 	element.onmouseenter = null
+					// 	return
+					// }
+
+					Diff.mutations.queue(() => {
+						if(!contentRect) {
+							contentRect = this.app.content.getBoundingClientRect()
+						}
+
+						let rect = element.getBoundingClientRect()
+						let tipStyle = window.getComputedStyle(element, ":before")
+						let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
+						let tipStartX = rect.left + rect.width / 2 - tipWidth / 2 - contentRect.left
+						let tipEndX = tipStartX + tipWidth
+						let leftOffset = 0
+
+						if(tipStartX < distanceToBorder) {
+							leftOffset = -tipStartX + distanceToBorder
+						} else if(tipEndX > contentRect.width - distanceToBorder) {
+							leftOffset = -(tipEndX - contentRect.width + distanceToBorder)
+						}
+
+						if(leftOffset !== 0) {
+							element.classList.remove("tip-active")
+							element.classList.add("tip-offset-root")
+
+							let tipChild = document.createElement("div")
+							tipChild.classList.add("tip-offset-child")
+							tipChild.setAttribute("aria-label", element.getAttribute("aria-label"))
+							tipChild.style.left = Math.round(leftOffset) + "px"
+							tipChild.style.width = rect.width + "px"
+							tipChild.style.height = rect.height + "px"
+							element.appendChild(tipChild)
+						}
+					})
+				}
+			}
+		})
 	}
 
 	dragAndDrop() {

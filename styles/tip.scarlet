@@ -45,6 +45,9 @@ mixin tip-after
 	pointer-events none
 
 .tip
+	//
+
+.tip-active
 	position relative
 
 	:before
