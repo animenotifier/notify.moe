@@ -14,6 +14,6 @@
 .image-title-text
 	text-align center
 	color white
-	text-shadow 0 0 3px black
+	text-shadow 0 0 3px black !important
 	font-size 80%
 	line-height 1.8em

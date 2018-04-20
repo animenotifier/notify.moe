@@ -9,14 +9,14 @@ mixin grid-cell
 	height anime-image-medium-height
 	max-width anime-image-medium-width
 	max-height anime-image-medium-height
-	// min-width 90px
-	// min-height 127px
 	border-radius ui-element-border-radius
-
-	// background-size cover
-	// background-position 50% 50%
-
 	margin 0.5rem
+
+	// If text-shadow is enabled, the whole container will repaint.
+	// We need to disable text-shadow to reduce re-painting.
+	a
+		:hover
+			text-shadow none
 
 mixin grid-text
 	vertical

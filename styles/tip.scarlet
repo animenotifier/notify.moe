@@ -10,6 +10,7 @@ mixin tip-before
 	z-index 100000
 	pointer-events none
 	opacity 0
+	will-change opacity
 	transform tip-transform-hidden
 	font-size 0.92rem
 	color text-color
@@ -30,6 +31,7 @@ mixin tip-after
 	z-index 100001
 	pointer-events none
 	opacity 0
+	will-change opacity
 	width 0
 	height 0
 	border-style solid

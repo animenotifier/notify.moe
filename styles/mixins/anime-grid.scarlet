@@ -2,19 +2,23 @@ mixin anime-mini-item
 	margin 0.25rem
 	flex-basis anime-image-small-width
 
+	:hover
+		text-shadow none
+
 mixin anime-generic-item-image
 	object-fit cover
 	border-radius 2px
 	filter none
+	will-change filter
 	transition filter transition-speed ease, opacity transition-speed ease
 
 	:hover
 		filter saturate(1.3)
 
 mixin anime-mini-item-image
+	anime-generic-item-image
 	width anime-image-small-width !important
 	height anime-image-small-height !important
-	anime-generic-item-image
 
 	// Make it easier for the browser to layout by specifying max size as well
 	max-width anime-image-small-width
