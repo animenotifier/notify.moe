@@ -5,7 +5,8 @@ component Sidebar(user *arn.User)
 			if user != nil
 				AvatarNoTip(user)
 			else
-				img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
+				a(href="/")
+					img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
 			
 			if user != nil
 				a.badge.left-badge(href="/settings", title="Settings")
