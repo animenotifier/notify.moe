@@ -21,7 +21,7 @@ component Sidebar(user *arn.User)
 			.sidebar-button
 				Icon("search")
 				FuzzySearch
-				.speech-input.action(data-action="searchBySpeech", data-trigger="click", title="Voice input")
+				.speech-input.action(data-action="searchBySpeech", data-trigger="click", title="Speech input")
 					RawIcon("microphone")
 
 		//- Sidebar buttons
