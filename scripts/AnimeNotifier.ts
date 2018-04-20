@@ -976,7 +976,7 @@ export default class AnimeNotifier {
 		// Ignore hotkeys on input elements
 		switch(activeElement.tagName) {
 			case "INPUT":
-				//
+				// If the active element is the search and we press Enter, re-activate search.
 				if(activeElement.id === "search" && e.keyCode === 13) {
 					actions.search(this, activeElement as HTMLInputElement, e)
 				}
@@ -987,6 +987,12 @@ export default class AnimeNotifier {
 				return
 		}
 
+		// When called, this will prevent the default action for that key.
+		let preventDefault = () => {
+			e.preventDefault()
+			e.stopPropagation()
+		}
+
 		// Ignore hotkeys on contentEditable elements
 		if(activeElement.getAttribute("contenteditable") === "true") {
 			// Disallow Enter key in contenteditables and make it blur the element instead
@@ -995,8 +1001,7 @@ export default class AnimeNotifier {
 					activeElement["blur"]()
 				}
 
-				e.preventDefault()
-				e.stopPropagation()
+				return preventDefault()
 			}
 
 			return
@@ -1005,14 +1010,11 @@ export default class AnimeNotifier {
 		// "Ctrl" + "," = Settings
 		if(e.ctrlKey && e.keyCode === 188) {
 			this.app.load("/settings")
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
+			return preventDefault()
 		}
 
-		// The following keycodes should not be activated while Ctrl is held down
-		if(e.ctrlKey) {
+		// The following keycodes should not be activated while Ctrl or Alt is held down
+		if(e.ctrlKey || e.altKey) {
 			return
 		}
 
@@ -1022,64 +1024,58 @@ export default class AnimeNotifier {
 
 			search.focus()
 			search.select()
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
+			return preventDefault()
 		}
 
 		// "S" = Toggle sidebar
 		if(e.keyCode === 83) {
 			this.sideBar.toggle()
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
+			return preventDefault()
 		}
 
 		// "+" = Audio speed up
 		if(e.keyCode === 107 || e.keyCode === 187) {
 			this.audioPlayer.addSpeed(0.05)
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
+			return preventDefault()
 		}
 
 		// "-" = Audio speed down
 		if(e.keyCode === 109 || e.keyCode === 189) {
 			this.audioPlayer.addSpeed(-0.05)
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
+			return preventDefault()
 		}
 
 		// "J" = Previous track
 		if(e.keyCode === 74) {
 			this.audioPlayer.previous()
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
+			return preventDefault()
 		}
 
 		// "K" = Play/pause
 		if(e.keyCode === 75) {
 			this.audioPlayer.playPause()
-
-			e.preventDefault()
-			e.stopPropagation()
-			return
+			return preventDefault()
 		}
 
 		// "L" = Next track
 		if(e.keyCode === 76) {
 			this.audioPlayer.next()
+			return preventDefault()
+		}
 
-			e.preventDefault()
-			e.stopPropagation()
-			return
+		// Number keys activate sidebar menus
+		for(let i = 48; i <= 57; i++) {
+			if(e.keyCode === i) {
+				let index = i === 48 ? 9 : i - 49
+				let links = [...findAll("sidebar-link")]
+
+				if(index < links.length) {
+					let element = links[index] as HTMLElement
+
+					element.click()
+					return preventDefault()
+				}
+			}
 		}
 	}
 

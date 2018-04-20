@@ -17,7 +17,7 @@ component Sidebar(user *arn.User)
 				a#notification-count.badge.right-badge.badge-important.hidden(href="/notifications", title="Notifications") 0
 
 		//- Search
-		.sidebar-link(aria-label="Search")
+		div(aria-label="Search")
 			.sidebar-button
 				Icon("search")
 				FuzzySearch
