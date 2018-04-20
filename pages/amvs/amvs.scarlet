@@ -1,2 +1,7 @@
 .amvs-page
 	justify-content space-evenly !important
+
+> 500px
+	.amvs-page
+		.amv
+			margin-bottom media-bottom-margin

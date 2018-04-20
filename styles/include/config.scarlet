@@ -105,6 +105,7 @@ const content-padding = 1.6rem
 const content-padding-top = 1.6rem
 const content-line-height = 1.7em
 const typography-margin = 0.4rem
+const media-bottom-margin = 2rem
 
 // Sizes
 const anime-image-tiny-width = 39px

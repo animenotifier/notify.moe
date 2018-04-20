@@ -1,2 +1,8 @@
 .anime-amvs
 	horizontal-wrap
+
+> 500px
+	.anime-amvs
+		.amv
+			max-width 200px
+			margin calc(content-padding / 2)

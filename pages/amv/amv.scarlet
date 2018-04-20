@@ -40,6 +40,8 @@ const amv-large-width = 854px
 
 	img
 		border-radius ui-element-border-radius
+		width anime-image-small-width
+		height anime-image-small-height
 
 .amv-links
 	//
@@ -52,10 +54,6 @@ const amv-large-width = 854px
 		horizontal-wrap
 		justify-content flex-start
 		margin-top 0
-
-	.amv
-		max-width 200px
-		margin calc(content-padding / 2)
 
 	.amvs
 		.amv

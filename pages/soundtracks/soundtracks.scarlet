@@ -13,6 +13,7 @@ const soundtrack-margin = 1rem
 > 500px
 	.soundtrack
 		margin soundtrack-margin
+		margin-bottom media-bottom-margin
 
 .soundtrack-content
 	horizontal

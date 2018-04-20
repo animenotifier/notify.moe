@@ -70,37 +70,6 @@
 .anime-info-value
 	text-align right
 
-.anime-soundtracks
-	vertical
-
-	.soundtrack
-		margin 1rem 0
-
-	.soundtrack-content
-		border-bottom-left-radius ui-element-border-radius !important
-		border-top-left-radius ui-element-border-radius !important
-
-	.soundtrack-anime-image
-		display none
-
-> 500px
-	.anime-soundtracks
-		horizontal-wrap
-		justify-content flex-start
-
-		.soundtrack
-			max-width 200px
-			margin calc(content-padding / 2)
-
-		.soundtrack-content
-			min-height 112px
-			height 112px
-
-		.soundtrack-play-button
-			width 48px
-			height 48px
-			font-size 1rem
-
 .anime-section
 	margin-top 1rem
 
