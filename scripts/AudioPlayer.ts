@@ -229,7 +229,7 @@ export default class AudioPlayer {
 
 	// Add speed
 	addSpeed(speed: number) {
-		if(!this.audioNode || this.audioNode.playbackRate.value === 0) {
+		if(!this.audioNode || this.audioContext.state === "suspended") {
 			return
 		}
 
@@ -252,7 +252,7 @@ export default class AudioPlayer {
 			return
 		}
 
-		if(this.audioNode.playbackRate.value === 0) {
+		if(this.audioContext.state === "suspended") {
 			this.resume()
 		} else {
 			this.pause()
