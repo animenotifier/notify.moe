@@ -34,8 +34,8 @@ const fetchOptions: RequestInit = {
 }
 
 // Search
-export async function search(arn: AnimeNotifier, search: HTMLInputElement, e: KeyboardEvent) {
-	if(e.ctrlKey || e.altKey) {
+export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?: KeyboardEvent) {
+	if(evt && (evt.ctrlKey || evt.altKey)) {
 		return
 	}
 
@@ -176,4 +176,50 @@ export function showSearchResults(arn: AnimeNotifier, element: HTMLElement) {
 	arn.lazyLoad(findAllInside("lazy", element))
 	arn.mountMountables(findAllInside("mountable", element))
 	arn.assignTooltipOffsets(findAllInside("tip", element))
+}
+
+export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
+	let searchInput = document.getElementById("search") as HTMLInputElement
+	let oldPlaceholder = searchInput.placeholder
+	let SpeechRecognition: SpeechRecognitionStatic = (window["SpeechRecognition"] || window["webkitSpeechRecognition"])
+	let recognition = new SpeechRecognition()
+	recognition.continuous = false
+	recognition.interimResults = false
+	recognition.lang = "en-US"
+
+	recognition.onresult = evt => {
+		if(evt.results.length > 0) {
+			let result = evt.results.item(0).item(0)
+			let term = result.transcript
+
+			if(term !== "") {
+				searchInput.value = term
+				arn.sideBar.hide()
+				search(arn, searchInput)
+			}
+		}
+
+		recognition.stop()
+	}
+
+	recognition.onerror = e => {
+		recognition.stop()
+	}
+
+	recognition.onend = e => {
+		searchInput.placeholder = oldPlaceholder
+		element.classList.remove("speech-listening")
+	}
+
+	// Focus search field
+	searchInput.placeholder = "Listening..."
+	searchInput.value = ""
+	searchInput.focus()
+	searchInput.select()
+
+	// Highlight microphone icon
+	element.classList.add("speech-listening")
+
+	// Start voice recognition
+	recognition.start()
 }
