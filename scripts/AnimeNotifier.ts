@@ -238,6 +238,8 @@ export default class AnimeNotifier {
 	}
 
 	assignTooltipOffsets(elements?: IterableIterator<HTMLElement>) {
+		const distanceToBorder = 5
+
 		if(!elements) {
 			elements = findAll("tip")
 		}
@@ -259,10 +261,10 @@ export default class AnimeNotifier {
 					let tipEndX = tipStartX + tipWidth
 					let leftOffset = 0
 
-					if(tipStartX < 0) {
-						leftOffset = -tipStartX + 5
-					} else if(tipEndX > contentRect.width) {
-						leftOffset = -(tipEndX - contentRect.width + 5)
+					if(tipStartX < distanceToBorder) {
+						leftOffset = -tipStartX + distanceToBorder
+					} else if(tipEndX > contentRect.width - distanceToBorder) {
+						leftOffset = -(tipEndX - contentRect.width + distanceToBorder)
 					}
 
 					if(leftOffset !== 0) {
