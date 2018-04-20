@@ -12,3 +12,21 @@
 	:focus
 		color link-color
 		opacity 1.0
+
+// Microphone icon
+.speech-input
+	display none
+	opacity 0
+	default-transition
+
+	:hover
+		cursor pointer
+		opacity 1
+
+.speech-input-available
+	display block
+	opacity 0.25
+
+.speech-listening
+	color link-hover-color
+	opacity 1

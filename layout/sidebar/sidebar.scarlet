@@ -102,21 +102,3 @@ const sidebar-spacing-y = 0.7rem
 		background badge-important-hover-bg-color
 		color badge-important-text-color
 		text-shadow none
-
-// Microphone icon
-.speech-input
-	display none
-	opacity 0
-	default-transition
-
-	:hover
-		cursor pointer
-		opacity 1
-
-.speech-input-available
-	display block
-	opacity 0.5
-
-.speech-listening
-	color link-hover-color
-	opacity 1
