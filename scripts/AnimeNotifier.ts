@@ -205,6 +205,11 @@ export default class AnimeNotifier {
 		checkNewVersionDelayed("/scripts", this.statusMessage)
 		checkNewVersionDelayed("/styles", this.statusMessage)
 
+		// Show microphone icon if speech input is available
+		if(window["SpeechRecognition"] || window["webkitSpeechRecognition"]) {
+			document.getElementsByClassName("speech-input")[0].classList.add("speech-input-available")
+		}
+
 		// // Download popular anime titles for the search
 		// let response = await fetch("/api/popular/anime/titles/500")
 		// let titles = await response.json()

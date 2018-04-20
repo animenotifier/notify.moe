@@ -105,12 +105,17 @@ const sidebar-spacing-y = 0.7rem
 
 // Microphone icon
 .speech-input
-	opacity 0.5
+	display none
+	opacity 0
 	default-transition
 
 	:hover
 		cursor pointer
 		opacity 1
+
+.speech-input-available
+	display block
+	opacity 0.5
 
 .speech-listening
 	color link-hover-color
