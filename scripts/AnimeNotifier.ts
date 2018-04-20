@@ -239,12 +239,11 @@ export default class AnimeNotifier {
 
 	assignTooltipOffsets(elements?: IterableIterator<HTMLElement>) {
 		const distanceToBorder = 5
+		let contentRect: ClientRect
 
 		if(!elements) {
 			elements = findAll("tip")
 		}
-
-		let contentRect = this.app.content.getBoundingClientRect()
 
 		for(let element of elements) {
 			element.onmouseenter = () => {
@@ -254,6 +253,10 @@ export default class AnimeNotifier {
 				}
 
 				Diff.mutations.queue(() => {
+					if(!contentRect) {
+						contentRect = this.app.content.getBoundingClientRect()
+					}
+
 					let rect = element.getBoundingClientRect()
 					let tipStyle = window.getComputedStyle(element, ":before")
 					let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
