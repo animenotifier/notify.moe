@@ -33,6 +33,9 @@ const fetchOptions: RequestInit = {
 	credentials: "same-origin"
 }
 
+// Speech recognition
+let recognition: SpeechRecognition
+
 // Search
 export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?: KeyboardEvent) {
 	if(evt && (evt.ctrlKey || evt.altKey)) {
@@ -179,11 +182,16 @@ export function showSearchResults(arn: AnimeNotifier, element: HTMLElement) {
 }
 
 export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
+	if(recognition) {
+		recognition.stop()
+		return
+	}
+
 	let searchInput = document.getElementById("search") as HTMLInputElement
 	let oldPlaceholder = searchInput.placeholder
 
 	let SpeechRecognition: SpeechRecognitionStatic = window["SpeechRecognition"] || window["webkitSpeechRecognition"]
-	let recognition = new SpeechRecognition()
+	recognition = new SpeechRecognition()
 	recognition.continuous = false
 	recognition.interimResults = false
 	recognition.lang = "en-US"
@@ -210,6 +218,7 @@ export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
 	recognition.onend = e => {
 		searchInput.placeholder = oldPlaceholder
 		element.classList.remove("speech-listening")
+		recognition = null
 	}
 
 	// Focus search field
