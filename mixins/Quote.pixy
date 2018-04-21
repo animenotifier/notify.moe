@@ -39,6 +39,6 @@ component QuoteTextPreview(quote *arn.Quote)
 component QuoteFooter(quote *arn.Quote)
 	.quote-footer
 		span  posted 
-		span.utc-date(data-date=quote.Created)
+		span.utc-date.no-tip(data-date=quote.Created)
 		span  by 
 		a(href=quote.Creator().Link())= quote.Creator().Nick
