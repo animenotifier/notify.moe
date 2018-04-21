@@ -22,6 +22,17 @@ component AMVPage(amv *arn.AMV, user *arn.User)
 					.amv-extra-anime.mountable
 						AnimeGridSmall(amv.ExtraAnime(), user)
 		
+		if len(amv.VideoEditorIDs) > 0
+			.widget
+				if len(amv.VideoEditorIDs) == 1
+					h3.widget-title.mountable Editor
+				else
+					h3.widget-title.mountable Editors
+
+				.user-avatars.amv-editors
+					each editor in amv.VideoEditors()
+						Avatar(editor)
+		
 		if len(amv.Links) > 0
 			.widget
 				h3.widget-title.mountable Links

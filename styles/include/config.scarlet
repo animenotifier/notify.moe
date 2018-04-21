@@ -88,6 +88,9 @@ feature-card-color = hsl(348, feature-card-saturation, feature-card-lightness)
 feature-card-alternative-color = hsl(203, feature-card-saturation, feature-card-lightness)
 feature-card-icon-color = white
 
+// Tooltips
+tip-bg-color = white
+
 // Loading animation
 loading-anim-color = main-color
 

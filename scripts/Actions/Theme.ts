@@ -34,6 +34,7 @@ const dark = {
 	"loading-anim-color": "var(--link-color)",
 	"anime-alternative-title-color": "hsla(0, 0%, 100%, 0.5)",
 	"anime-list-item-name-color": "var(--text-color)",
+	"tip-bg-color": "hsl(0, 0%, 10%)",
 
 	"post-like-color": "var(--link-color)",
 	"post-unlike-color": "var(--link-color)",

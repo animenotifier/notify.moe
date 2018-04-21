@@ -15,7 +15,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 						LikeButton(strconv.Itoa(len(character.Likes)), "heart", "character", character, user)
 
 						if user != nil && (user.Role == "editor" || user.Role == "admin")
-							a.button.mountable(href=character.Link() + "/edit")
+							a.button.tip.mountable(href=character.Link() + "/edit", aria-label="Edit character")
 								RawIcon("pencil")
 				
 				.character-description-container

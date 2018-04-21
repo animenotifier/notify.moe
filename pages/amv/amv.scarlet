@@ -43,6 +43,9 @@ const amv-large-width = 854px
 		width anime-image-small-width
 		height anime-image-small-height
 
+.amv-editors
+	justify-content flex-start !important
+
 .amv-links
 	//
 

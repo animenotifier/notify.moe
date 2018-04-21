@@ -15,7 +15,7 @@ mixin tip-before
 	color text-color
 	text-shadow none
 	padding 0.2rem 0.7rem
-	background ui-background
+	background tip-bg-color
 	border 1px solid ui-border-color
 	border-radius ui-element-border-radius
 	box-shadow shadow-light
@@ -34,7 +34,7 @@ mixin tip-after
 	height 0
 	border-style solid
 	border-width 8px 8px 0 8px
-	border-color ui-background transparent transparent transparent
+	border-color tip-bg-color transparent transparent transparent
 	transform tip-transform-hidden
 	default-transition
 
