@@ -62,9 +62,8 @@ func process(character *arn.Character) {
 		return
 	}
 
-	char, _ := arn.GetCharacter("EI3HwrmiRm")
-	char.SetImageBytes(buffer.Bytes())
-	char.Save()
+	character.SetImageBytes(buffer.Bytes())
+	character.Save()
 }
 
 func diffAbs(a uint32, b uint32) uint32 {
