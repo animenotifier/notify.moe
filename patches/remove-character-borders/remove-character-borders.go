@@ -30,6 +30,9 @@ func main() {
 		fmt.Printf("[%d / %d] %s\n", index+1, len(characters), character)
 		process(character)
 	}
+
+	// char, _ := arn.GetCharacter("EI3HwrmiRm")
+	// process(char)
 }
 
 func process(character *arn.Character) {
@@ -51,8 +54,7 @@ func process(character *arn.Character) {
 
 	newImg := removeBorders(img)
 
-	fmt.Println(img.Bounds().Dx(), img.Bounds().Dy(), format)
-	fmt.Println(newImg.Bounds().Dx(), newImg.Bounds().Dy())
+	fmt.Println(img.Bounds().Dx(), "->", newImg.Bounds().Dx(), "width", format)
 
 	buffer := bytes.NewBuffer(nil)
 	err = png.Encode(buffer, newImg)
@@ -82,7 +84,7 @@ func removeBorders(img image.Image) image.Image {
 
 	borderLength := 0
 
-	for ; borderLength < maxBorderLength; borderLength++ {
+	for ; borderLength <= maxBorderLength; borderLength++ {
 		edgeColors := []icolor.Color{}
 
 		// Top edge
@@ -126,7 +128,7 @@ func removeBorders(img image.Image) image.Image {
 		averageG := uint32(totalG / uint64(len(edgeColors)))
 		averageB := uint32(totalB / uint64(len(edgeColors)))
 
-		const tolerance = 11000
+		const tolerance = 12000
 
 		// Check if the colors are close to the average color
 		notSimilarCount := 0
