@@ -31,7 +31,8 @@ component AMVPage(amv *arn.AMV, user *arn.User)
 
 				.user-avatars.amv-editors
 					each editor in amv.VideoEditors()
-						Avatar(editor)
+						.mountable
+							Avatar(editor)
 		
 		if len(amv.Links) > 0
 			.widget
