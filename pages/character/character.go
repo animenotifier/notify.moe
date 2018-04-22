@@ -8,9 +8,13 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"github.com/fatih/color"
 )
 
-const maxDescriptionLength = 170
+const (
+	maxDescriptionLength  = 170
+	maxRelevantCharacters = 12
+)
 
 // Get character.
 func Get(ctx *aero.Context) string {
@@ -22,6 +26,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Character not found", err)
 	}
 
+	// Anime
 	characterAnime := character.Anime()
 
 	sort.Slice(characterAnime, func(i, j int) bool {
@@ -35,6 +40,51 @@ func Get(ctx *aero.Context) string {
 
 		return characterAnime[i].StartDate < characterAnime[j].StartDate
 	})
+
+	// Characters from the same anime
+	characterAppearances := map[string]int{}
+
+	for _, anime := range characterAnime {
+		for _, animeCharacter := range anime.Characters().Items {
+			if animeCharacter.CharacterID == character.ID {
+				continue
+			}
+
+			characterAppearances[animeCharacter.CharacterID]++
+		}
+	}
+
+	relevantCharacters := []*arn.Character{}
+
+	for characterID := range characterAppearances {
+		relevantCharacter, err := arn.GetCharacter(characterID)
+
+		if !relevantCharacter.HasImage() {
+			continue
+		}
+
+		if err != nil {
+			color.Red(err.Error())
+			continue
+		}
+
+		relevantCharacters = append(relevantCharacters, relevantCharacter)
+	}
+
+	sort.Slice(relevantCharacters, func(i, j int) bool {
+		aRelevance := characterAppearances[relevantCharacters[i].ID]
+		bRelevance := characterAppearances[relevantCharacters[j].ID]
+
+		if aRelevance == bRelevance {
+			return relevantCharacters[i].Name.Canonical < relevantCharacters[j].Name.Canonical
+		}
+
+		return aRelevance > bRelevance
+	})
+
+	if len(relevantCharacters) > maxRelevantCharacters {
+		relevantCharacters = relevantCharacters[:maxRelevantCharacters]
+	}
 
 	// Quotes
 	mainQuote := character.MainQuote()
@@ -83,5 +133,5 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
-	return ctx.HTML(components.CharacterDetails(character, characterAnime, quotes, friends, mainQuote, user))
+	return ctx.HTML(components.CharacterDetails(character, characterAnime, quotes, friends, relevantCharacters, mainQuote, user))
 }

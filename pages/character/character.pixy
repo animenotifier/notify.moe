@@ -5,7 +5,7 @@ component CharacterTabs(character *arn.Character, user *arn.User)
 		Tab("Images", "image", character.Link() + "/edit/images")
 		Tab("History", "history", character.Link() + "/history")
 
-component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, friends []*arn.User, mainQuote *arn.Quote, user *arn.User)
+component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, friends []*arn.User, relevantCharacters []*arn.Character, mainQuote *arn.Quote, user *arn.User)
 	.character-page
 		.character-left-column
 			.character-header
@@ -61,6 +61,14 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 								td.character-attributes-value!= markdown.Render(attribute.Value)
 							else
 								td.character-attributes-value= attribute.Value
+			
+			if len(relevantCharacters) > 0
+				h3.mountable Relevant
+
+				.relevant-characters.mountable
+					each relevantCharacter in relevantCharacters
+						.mountable(data-mountable-type="relevant-character")
+							CharacterSmall(relevantCharacter, user)
 			
 			if len(friends) > 0
 				.character-friends

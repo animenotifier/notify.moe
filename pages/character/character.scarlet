@@ -61,6 +61,9 @@
 	.user-avatars
 		justify-content flex-start
 
+.relevant-characters
+	horizontal-wrap
+
 > 1250px
 	.character-page
 		horizontal
