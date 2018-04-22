@@ -760,7 +760,7 @@ export default class AnimeNotifier {
 	}
 
 	modifyDelayed(elements: IterableIterator<HTMLElement>, func: (element: HTMLElement) => void) {
-		const maxDelay = 1000
+		const maxDelay = 2500
 		const delay = 18
 
 		let time = 0

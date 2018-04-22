@@ -23,7 +23,8 @@ component Characters(characters []*arn.Character, nextIndex int, tag string, use
 
 component CharactersScrollable(characters []*arn.Character, user *arn.User)
 	each character in characters
-		Character(character, user)
+		.mountable
+			Character(character, user)
 
 component CharactersTabs(tag string)
 	.tab-groups
