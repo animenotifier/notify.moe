@@ -19,6 +19,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/apiview/apidocs"
 	"github.com/animenotifier/notify.moe/pages/calendar"
 	"github.com/animenotifier/notify.moe/pages/character"
+	"github.com/animenotifier/notify.moe/pages/characters"
 	"github.com/animenotifier/notify.moe/pages/charge"
 	"github.com/animenotifier/notify.moe/pages/companies"
 	"github.com/animenotifier/notify.moe/pages/company"
@@ -140,6 +141,12 @@ func Configure(app *aero.Application) {
 	l.Page("/anime/:id/edit/history", editanime.History)
 
 	// Characters
+	l.Page("/characters", characters.Latest)
+	l.Page("/characters/from/:index", characters.Latest)
+	l.Page("/characters/best", characters.Best)
+	l.Page("/characters/best/from/:index", characters.Best)
+
+	// Character
 	l.Page("/character/:id", character.Get)
 	l.Page("/character/:id/edit", character.Edit)
 	l.Page("/character/:id/edit/images", character.EditImages)
@@ -150,6 +157,8 @@ func Configure(app *aero.Application) {
 	l.Page("/amvs/from/:index", amvs.Latest)
 	l.Page("/amvs/best", amvs.Best)
 	l.Page("/amvs/best/from/:index", amvs.Best)
+
+	// AMV
 	l.Page("/amv/:id", amv.Get)
 	l.Page("/amv/:id/edit", amv.Edit)
 	l.Page("/amv/:id/history", amv.History)

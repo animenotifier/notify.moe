@@ -14,19 +14,19 @@ component Characters(characters []*arn.Character, nextIndex int, tag string, use
 					Icon("pencil")
 					span Edit draft
 
-	//- #load-more-target.characters.characters-page
-	//- 	CharactersScrollable(characters, user)
+	#load-more-target.characters.characters-page
+		CharactersScrollable(characters, user)
 	
-	//- if nextIndex != -1
-	//- 	.buttons
-	//- 		LoadMore(nextIndex)
+	if nextIndex != -1
+		.buttons
+			LoadMore(nextIndex)
 
 component CharactersScrollable(characters []*arn.Character, user *arn.User)
 	each character in characters
 		Character(character, user)
 
 component CharactersTabs(tag string)
-	//- .tab-groups
-	//- 	.tabs
-	//- 		Tab("Latest", "video-camera", "/characters")
-	//- 		Tab("Best", "heart", "/characters/best")
+	.tab-groups
+		.tabs
+			Tab("Latest", "child", "/characters")
+			Tab("Best", "heart", "/characters/best")

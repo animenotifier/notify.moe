@@ -205,5 +205,9 @@ func importCharacter(malCharacter *mal.Character) *arn.Character {
 
 	// Save character in DB
 	character.Save()
+
+	// Add to character finder so we don't create duplicates of this character
+	characterFinder.Add(character)
+
 	return character
 }

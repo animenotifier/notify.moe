@@ -1,0 +1,40 @@
+package main
+
+import (
+	"strconv"
+	"time"
+
+	"github.com/animenotifier/arn"
+	"github.com/fatih/color"
+)
+
+func main() {
+	color.Yellow("Adding creation dates")
+
+	defer color.Green("Finished")
+	defer arn.Node.Close()
+
+	baseTime := time.Now().Add(-2 * 30 * 24 * time.Hour)
+	irregular := time.Duration(0)
+
+	for character := range arn.StreamCharacters() {
+		malID := character.GetMapping("myanimelist/character")
+
+		if malID != "" {
+			malIDNumber, err := strconv.Atoi(malID)
+
+			if err != nil {
+				panic(err)
+			}
+
+			character.Created = baseTime.Add(time.Duration(malIDNumber) * time.Minute).Format(time.RFC3339)
+		} else {
+			irregular++
+			character.Created = baseTime.Add(-irregular * time.Minute).Format(time.RFC3339)
+		}
+
+		character.Save()
+	}
+
+	time.Sleep(1 * time.Second)
+}
