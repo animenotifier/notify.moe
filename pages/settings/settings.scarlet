@@ -25,7 +25,7 @@
 
 .cover-input-preview
 	border-radius ui-element-border-radius
-	filter none
+	filter none !important
 
 .settings-info-text
 	text-align center
