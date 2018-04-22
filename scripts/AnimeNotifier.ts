@@ -258,17 +258,20 @@ export default class AnimeNotifier {
 				})
 
 				element.onmouseenter = () => {
-					// if(element.dataset.offsetAssigned) {
-					// 	element.onmouseenter = null
-					// 	return
-					// }
-
 					Diff.mutations.queue(() => {
 						if(!contentRect) {
 							contentRect = this.app.content.getBoundingClientRect()
 						}
 
+						// Dynamic label assignment to prevent label texts overflowing
+						// and taking horizontal space at page load.
+						element.dataset.label = element.getAttribute("aria-label")
+
+						// This is the most expensive call in this whole function,
+						// it consumes about 2-4 ms every time you call it.
 						let rect = element.getBoundingClientRect()
+
+						// Calculate offsets
 						let tipStyle = window.getComputedStyle(element, ":before")
 						let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
 						let tipStartX = rect.left + rect.width / 2 - tipWidth / 2 - contentRect.left
@@ -287,12 +290,15 @@ export default class AnimeNotifier {
 
 							let tipChild = document.createElement("div")
 							tipChild.classList.add("tip-offset-child")
-							tipChild.setAttribute("aria-label", element.getAttribute("aria-label"))
+							tipChild.setAttribute("data-label", element.getAttribute("data-label"))
 							tipChild.style.left = Math.round(leftOffset) + "px"
 							tipChild.style.width = rect.width + "px"
 							tipChild.style.height = rect.height + "px"
 							element.appendChild(tipChild)
 						}
+
+						// Unassign event listener
+						element.onmouseenter = null
 					})
 				}
 			}

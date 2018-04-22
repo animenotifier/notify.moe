@@ -3,7 +3,7 @@ const tip-transform-hidden = translateX(-50%) translateY(-80%)
 const tip-transform-visible = translateX(-50%) translateY(-100%)
 
 mixin tip-before
-	content attr(aria-label)
+	content attr(data-label)
 	position absolute
 	top -10px
 	left 50%
