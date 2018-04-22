@@ -28,7 +28,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					
 					if mainQuote != nil
 						.character-quote
-							Quote(mainQuote)
+							Quote(mainQuote, user)
 					
 					.character-description.mountable!= markdown.Render(character.Description)
 			
@@ -46,7 +46,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							each quote in quotes
 								if mainQuote == nil || quote.ID != mainQuote.ID
 									.character-quote
-										Quote(quote)
+										Quote(quote, user)
 
 		.character-sidebar
 			if len(character.Attributes) > 0

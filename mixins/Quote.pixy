@@ -1,34 +1,34 @@
-component Quote(quote *arn.Quote)
+component Quote(quote *arn.Quote, user *arn.User)
 	.quote.mountable
-		QuoteContent(quote)
+		QuoteContent(quote, user)
 		QuoteFooter(quote)
 
-component QuotePreview(quote *arn.Quote)
+component QuotePreview(quote *arn.Quote, user *arn.User)
 	.quote.mountable
-		QuoteContentPreview(quote)
+		QuoteContentPreview(quote, user)
 		QuoteFooter(quote)
 
-component QuoteContent(quote *arn.Quote)
+component QuoteContent(quote *arn.Quote, user *arn.User)
 	.quote-content
 		a.quotation(href=quote.Link())
 			QuoteText(quote)
 		
-		QuoteCharacter(quote)
+		QuoteCharacter(quote, user)
 
-component QuoteContentPreview(quote *arn.Quote)
+component QuoteContentPreview(quote *arn.Quote, user *arn.User)
 	.quote-content
 		a.quotation(href=quote.Link())
 			QuoteTextPreview(quote)
 		
-		QuoteCharacter(quote)
+		QuoteCharacter(quote, user)
 
 component QuoteText(quote *arn.Quote)
 	blockquote!= utils.RenderQuoteText(quote.Text.English)
 
-component QuoteCharacter(quote *arn.Quote)
+component QuoteCharacter(quote *arn.Quote, user *arn.User)
 	if quote.CharacterID != "" && quote.Character() != nil
 		footer.quote-character
-			CharacterSmall(quote.Character())
+			CharacterSmall(quote.Character(), user)
 
 component QuoteTextPreview(quote *arn.Quote)
 	if len(quote.Text.English) > 170

@@ -1,0 +1,32 @@
+component Characters(characters []*arn.Character, nextIndex int, tag string, user *arn.User)
+	h1.page-title Characters
+
+	CharactersTabs(tag)
+
+	.corner-buttons
+		if user != nil
+			if user.DraftIndex().CharacterID == ""
+				button.action(data-action="newObject", data-trigger="click", data-type="character")
+					Icon("plus")
+					span Add Character
+			else
+				a.button(href="/character/" + user.DraftIndex().CharacterID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+	//- #load-more-target.characters.characters-page
+	//- 	CharactersScrollable(characters, user)
+	
+	//- if nextIndex != -1
+	//- 	.buttons
+	//- 		LoadMore(nextIndex)
+
+component CharactersScrollable(characters []*arn.Character, user *arn.User)
+	each character in characters
+		Character(character, user)
+
+component CharactersTabs(tag string)
+	//- .tab-groups
+	//- 	.tabs
+	//- 		Tab("Latest", "video-camera", "/characters")
+	//- 		Tab("Best", "heart", "/characters/best")

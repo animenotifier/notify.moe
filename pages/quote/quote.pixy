@@ -9,7 +9,7 @@ component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
 
 component QuoteMainColumn(quote *arn.Quote, user *arn.User)
 	.widget-form.mountable
-		QuoteContent(quote)
+		QuoteContent(quote, user)
 
 	.footer.mountable
 		if quote.EditedBy != ""

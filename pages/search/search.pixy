@@ -1,4 +1,4 @@
-component SearchResults(term string, users []*arn.User, animes []*arn.Anime, posts []*arn.Post, threads []*arn.Thread, tracks []*arn.SoundTrack, characters []*arn.Character, companies []*arn.Company, quotes []*arn.Quote)
+component SearchResults(term string, users []*arn.User, animes []*arn.Anime, posts []*arn.Post, threads []*arn.Thread, tracks []*arn.SoundTrack, characters []*arn.Character, companies []*arn.Company, quotes []*arn.Quote, user *arn.User)
 	h1.page-title= "Search: " + term
 
 	.search
@@ -16,7 +16,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				span Characters
 
 			#character-search-results
-				CharacterSearchResults(characters)
+				CharacterSearchResults(characters, user)
 
 		.widget
 			h3.widget-title
@@ -67,14 +67,14 @@ component AnimeSearchResults(animes []*arn.Anime)
 				a.profile-watching-list-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.Canonical, data-mountable-type="anime")
 					img.anime-cover-image.anime-search-result.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Canonical)
 
-component CharacterSearchResults(characters []*arn.Character)
+component CharacterSearchResults(characters []*arn.Character, user *arn.User)
 	if len(characters) == 0
 		p.no-search-results.mountable No characters found.
 	else
 		.character-search
 			each character in characters
 				.mountable(data-mountable-type="character")
-					CharacterSmall(character)
+					CharacterSmall(character, user)
 
 component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread)
 	if len(posts) == 0 && len(threads) == 0

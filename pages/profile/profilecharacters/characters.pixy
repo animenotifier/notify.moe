@@ -7,5 +7,5 @@ component ProfileCharacters(characters []*arn.Character, viewUser *arn.User, use
 		.characters.profile-characters
 			each character in characters
 				.mountable
-					Character(character)
+					Character(character, user)
 			

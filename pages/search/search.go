@@ -3,6 +3,8 @@ package search
 import (
 	"strings"
 
+	"github.com/animenotifier/notify.moe/utils"
+
 	"github.com/aerogo/flow"
 
 	"github.com/aerogo/aero"
@@ -25,6 +27,7 @@ const (
 func Get(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
+	user := utils.GetUser(ctx)
 
 	users, animes, posts, threads, tracks, characters, companies := search.All(
 		term,
@@ -37,12 +40,12 @@ func Get(ctx *aero.Context) string {
 		maxCompanies,
 	)
 
-	return ctx.HTML(components.SearchResults(term, users, animes, posts, threads, tracks, characters, companies, nil))
+	return ctx.HTML(components.SearchResults(term, users, animes, posts, threads, tracks, characters, companies, nil, user))
 }
 
 // GetEmptySearch renders the search page with no contents.
 func GetEmptySearch(ctx *aero.Context) string {
-	return ctx.HTML(components.SearchResults("", nil, nil, nil, nil, nil, nil, nil, nil))
+	return ctx.HTML(components.SearchResults("", nil, nil, nil, nil, nil, nil, nil, nil, utils.GetUser(ctx)))
 }
 
 // Anime search.
@@ -58,9 +61,10 @@ func Anime(ctx *aero.Context) string {
 func Characters(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
+	user := utils.GetUser(ctx)
 
 	characters := search.Characters(term, maxCharacters)
-	return ctx.HTML(components.CharacterSearchResults(characters))
+	return ctx.HTML(components.CharacterSearchResults(characters, user))
 }
 
 // Forum search.

@@ -12,4 +12,4 @@ component AnimeCharacters(anime *arn.Anime, user *arn.User, standAlonePage bool)
 				each character in anime.Characters().Items
 					if (character.Role == "main" || standAlonePage) && character.Character() != nil
 						.mountable(data-mountable-type="character")
-							Character(character.Character())
+							Character(character.Character(), user)
