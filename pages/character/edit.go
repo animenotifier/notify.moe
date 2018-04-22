@@ -22,3 +22,16 @@ func Edit(ctx *aero.Context) string {
 
 	return ctx.HTML(components.CharacterTabs(character, user) + editform.Render(character, "Edit character", user))
 }
+
+// EditImages renders the form to edit the character images.
+func EditImages(ctx *aero.Context) string {
+	id := ctx.Get("id")
+	character, err := arn.GetCharacter(id)
+	user := utils.GetUser(ctx)
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "Character not found", err)
+	}
+
+	return ctx.HTML(components.EditCharacterImages(character, user))
+}

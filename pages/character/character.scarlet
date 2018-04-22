@@ -21,6 +21,7 @@
 .character-image-large
 	width 219px
 	height 344px
+	object-fit cover
 	border-radius ui-element-border-radius
 	box-shadow shadow-light
 

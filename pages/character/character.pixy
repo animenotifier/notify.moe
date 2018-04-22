@@ -2,6 +2,7 @@ component CharacterTabs(character *arn.Character, user *arn.User)
 	.tabs
 		Tab("Character", "user", character.Link())
 		Tab("Edit", "pencil", character.Link() + "/edit")
+		Tab("Images", "image", character.Link() + "/edit/images")
 		Tab("History", "history", character.Link() + "/history")
 
 component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime, quotes []*arn.Quote, friends []*arn.User, mainQuote *arn.Quote, user *arn.User)

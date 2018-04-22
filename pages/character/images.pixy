@@ -1,0 +1,21 @@
+component EditCharacterImages(character *arn.Character, user *arn.User)
+	CharacterTabs(character, user)
+
+	.widget-form
+		h1.mountable Edit character images
+
+		.widget.mountable(data-api="/api/character/" + character.ID)
+			h3.widget-title
+				Icon("picture-o")
+				span Image
+			
+			InputFileUpload("character-image-input", "File", "image", "/api/upload/character/" + character.ID + "/image")
+
+			.character-image-container.mountable
+				img.character-image-input-preview.character-image-large.lazy(data-src=character.ImageLink("large"), data-webp="true", data-color=character.AverageColor(), alt="Character image")
+			
+			.character-image-container.mountable
+				img.character-image-input-preview.character-image-medium.lazy(data-src=character.ImageLink("medium"), data-webp="true", data-color=character.AverageColor(), alt="Character image")
+			
+			.character-image-container.mountable
+				img.character-image-input-preview.character-image-small.lazy(data-src=character.ImageLink("small"), data-webp="true", data-color=character.AverageColor(), alt="Character image")

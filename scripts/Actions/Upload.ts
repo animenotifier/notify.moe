@@ -37,10 +37,10 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 		// Preview image
 		if(fileType === "image") {
-			let preview = document.getElementById(button.id + "-preview") as HTMLImageElement
+			let previews = document.getElementsByClassName(button.id + "-preview")
 
-			if(preview) {
-				previewImage(file, endpoint, preview)
+			for(let preview of previews) {
+				previewImage(file, endpoint, previews)
 			}
 		}
 
@@ -94,7 +94,7 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 }
 
 // Preview image
-function previewImage(file: File, endpoint: string, preview: HTMLImageElement) {
+function previewImage(file: File, endpoint: string, previews: HTMLCollectionOf<Element>) {
 	let reader = new FileReader()
 
 	reader.onloadend = () => {
@@ -106,8 +106,11 @@ function previewImage(file: File, endpoint: string, preview: HTMLImageElement) {
 			}
 		}
 
-		preview.classList.remove("hidden")
-		preview.src = reader.result
+		for(let preview of previews) {
+			let img = preview as HTMLImageElement
+			img.classList.remove("hidden")
+			img.src = reader.result
+		}
 	}
 
 	reader.readAsDataURL(file)

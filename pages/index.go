@@ -142,6 +142,7 @@ func Configure(app *aero.Application) {
 	// Characters
 	l.Page("/character/:id", character.Get)
 	l.Page("/character/:id/edit", character.Edit)
+	l.Page("/character/:id/edit/images", character.EditImages)
 	l.Page("/character/:id/history", character.History)
 
 	// AMVs
@@ -274,6 +275,7 @@ func Configure(app *aero.Application) {
 	app.Post("/api/upload/avatar", upload.Avatar)
 	app.Post("/api/upload/cover", upload.Cover)
 	app.Post("/api/upload/anime/:id/image", upload.AnimeImage)
+	app.Post("/api/upload/character/:id/image", upload.CharacterImage)
 	app.Post("/api/upload/amv/:id/file", upload.AMVFile)
 
 	// Admin

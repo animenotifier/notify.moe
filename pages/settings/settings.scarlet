@@ -23,7 +23,7 @@
 	position relative
 	margin 0 auto
 
-#cover-input-preview
+.cover-input-preview
 	border-radius ui-element-border-radius
 	filter none
 

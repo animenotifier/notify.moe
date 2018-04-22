@@ -12,13 +12,16 @@
 		.image-title
 			opacity 1
 
-.character-image
+.character-image-medium
+	width 112px
+	height 112px
 	border-radius 5%
 	box-shadow shadow-medium
 	object-fit cover
-	width 112px
-	height 112px
 
 .character-image-small
 	width 56px
 	height 56px
+	border-radius ui-element-border-radius
+	box-shadow shadow-light
+	object-fit cover
