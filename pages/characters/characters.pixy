@@ -14,7 +14,7 @@ component Characters(characters []*arn.Character, nextIndex int, tag string, use
 					Icon("pencil")
 					span Edit draft
 
-	#load-more-target.characters.characters-page
+	#load-more-target.characters-page
 		CharactersScrollable(characters, user)
 	
 	if nextIndex != -1

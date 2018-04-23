@@ -37,8 +37,6 @@ component Sidebar(user *arn.User)
 		SidebarButton("AMVs", "/amvs", "video-camera")
 		SidebarButton("Soundtracks", "/soundtracks", "headphones")
 		SidebarButton("Quotes", "/quotes", "quote-left")
-		if user != nil && (user.Role == "editor" || user.Role == "admin")
-			SidebarButton("Characters", "/characters", "child")
 		SidebarButton("Companies", "/companies", "building")
 		SidebarButton("Users", "/users", "globe")
 
@@ -57,6 +55,7 @@ component Sidebar(user *arn.User)
 		//- SidebarButton("Statistics", "/statistics", "pie-chart")
 		//- SidebarButton("Companies", "/companies", "building")
 		//- SidebarButton("Genres", "/genres", "clone")
+		//- SidebarButton("Characters", "/characters", "child")
 
 		.spacer
 

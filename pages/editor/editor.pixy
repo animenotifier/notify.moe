@@ -8,6 +8,13 @@ component Editor(url string, score int, scoreTitle string, scoreTypes map[string
 			.feature-card-text
 				p Anime
 				p.editor-score= stringutils.Plural(scoreTypes["Anime"], "contribution")
+		
+		a.feature-card.mountable(href="/characters")
+			.feature-card-icon.feature-card-color-character
+				RawIcon("child")
+			.feature-card-text
+				p Characters
+				p.editor-score= stringutils.Plural(scoreTypes["Character"], "contribution")
 
 		a.feature-card.mountable(href="/editor/soundtracks/links")
 			.feature-card-icon.feature-card-color-soundtrack

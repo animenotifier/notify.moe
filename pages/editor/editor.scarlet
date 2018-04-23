@@ -22,6 +22,9 @@
 .feature-card-color-company
 	background hsl(150, feature-card-saturation, feature-card-lightness) !important
 
+.feature-card-color-character
+	background hsl(273, feature-card-saturation, feature-card-lightness) !important
+
 > 1550px
 	.editor-filters
 		position fixed
