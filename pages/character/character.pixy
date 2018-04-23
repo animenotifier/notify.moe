@@ -20,11 +20,16 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 								RawIcon("pencil")
 				
 				.character-description-container
-					h1.character-name.mountable= character.Name.Canonical
+					if character.Name.Canonical == ""
+						h1.character-name.mountable untitled
+					else
+						h1.character-name.mountable= character.Name.Canonical
 
 					.anime-alternative-title.mountable
 						if character.Name.Japanese != ""
 							Japanese(character.Name.Japanese)
+						else
+							Japanese("日本語の名前無し")
 					
 					if mainQuote != nil
 						.character-quote
