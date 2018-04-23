@@ -1,9 +1,9 @@
 component Character(character *arn.Character, user *arn.User)
 	a.character(href="/character/" + character.ID)
-		img.character-image-medium.lazy(data-src=character.ImageLink("medium"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.Canonical)
+		img.character-image-medium.lazy(data-src=character.ImageLink("medium"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.ByUser(user))
 		.image-title
-			.image-title-text= character.Name.Canonical
+			.image-title-text= character.Name.ByUser(user)
 
 component CharacterSmall(character *arn.Character, user *arn.User)
-	a.character.tip(href="/character/" + character.ID, aria-label=character.Name.Canonical)
-		img.character-image-small.lazy(data-src=character.ImageLink("small"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.Canonical)
+	a.character.tip(href="/character/" + character.ID, aria-label=character.Name.ByUser(user))
+		img.character-image-small.lazy(data-src=character.ImageLink("small"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.ByUser(user))

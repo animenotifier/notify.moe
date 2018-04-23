@@ -52,9 +52,10 @@ func GetEmptySearch(ctx *aero.Context) string {
 func Anime(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
+	user := utils.GetUser(ctx)
 
 	animes := search.Anime(term, maxAnime)
-	return ctx.HTML(components.AnimeSearchResults(animes))
+	return ctx.HTML(components.AnimeSearchResults(animes, user))
 }
 
 // Characters search.

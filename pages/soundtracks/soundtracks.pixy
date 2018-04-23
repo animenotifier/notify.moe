@@ -23,7 +23,7 @@ component SoundTracks(tracks []*arn.SoundTrack, nextIndex int, tag string, user 
 
 component SoundTracksScrollable(tracks []*arn.SoundTrack, user *arn.User)
 	each track in tracks
-		SoundTrack(track)
+		SoundTrack(track, user)
 
 component SoundTracksTabs(tag string)
 	.tab-groups

@@ -8,7 +8,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				span Anime
 
 			#anime-search-results
-				AnimeSearchResults(animes)
+				AnimeSearchResults(animes, user)
 
 		.widget
 			h3.widget-title
@@ -58,14 +58,14 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			#user-search-results
 				UserSearchResults(users)
 
-component AnimeSearchResults(animes []*arn.Anime)
+component AnimeSearchResults(animes []*arn.Anime, user *arn.User)
 	if len(animes) == 0
 		p.no-search-results.mountable No anime found.
 	else
 		.profile-watching-list.anime-search
 			each anime in animes
-				a.profile-watching-list-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.Canonical, data-mountable-type="anime")
-					img.anime-cover-image.anime-search-result.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.Canonical)
+				a.profile-watching-list-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user), data-mountable-type="anime")
+					img.anime-cover-image.anime-search-result.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 component CharacterSearchResults(characters []*arn.Character, user *arn.User)
 	if len(characters) == 0

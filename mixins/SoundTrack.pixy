@@ -1,17 +1,17 @@
-component SoundTrack(track *arn.SoundTrack)
+component SoundTrack(track *arn.SoundTrack, user *arn.User)
 	.soundtrack.mountable(id=track.ID)
-		SoundTrackContent(track)
-		SoundTrackFooter(track)
+		SoundTrackContent(track, user)
+		SoundTrackFooter(track, user)
 
-component SoundTrackMini(track *arn.SoundTrack)
+component SoundTrackMini(track *arn.SoundTrack, user *arn.User)
 	.soundtrack.mountable(id=track.ID)
-		SoundTrackContent(track)
-		SoundTrackMiniFooter(track)
+		SoundTrackContent(track, user)
+		SoundTrackMiniFooter(track, user)
 
-component SoundTrackContent(track *arn.SoundTrack)
+component SoundTrackContent(track *arn.SoundTrack, user *arn.User)
 	.soundtrack-content
 		if track.MainAnime() != nil
-			a.soundtrack-anime-link(href="/anime/" + track.MainAnime().ID, title=track.MainAnime().Title.ByUser(nil))
+			a.soundtrack-anime-link(href="/anime/" + track.MainAnime().ID, title=track.MainAnime().Title.ByUser(user))
 				img.soundtrack-anime-image.lazy(data-src=track.MainAnime().ImageLink("medium"), data-webp="true", data-color=track.MainAnime().AverageColor(), alt=track.MainAnime().Title.Canonical)
 
 		SoundTrackMedia(track)
@@ -31,23 +31,23 @@ component SoundTrackMedia(track *arn.SoundTrack)
 	else
 		ExternalMedia(track.Media[0])
 
-component SoundTrackFooter(track *arn.SoundTrack)
+component SoundTrackFooter(track *arn.SoundTrack, user *arn.User)
 	.soundtrack-footer
-		if track.Title.ByUser(nil) == ""
+		if track.Title.ByUser(user) == ""
 			a(href=track.Link() + "/edit") untitled
 		else
-			a(href=track.Link())= track.Title.ByUser(nil)
+			a(href=track.Link())= track.Title.ByUser(user)
 		span  posted 
 		span.utc-date.no-tip(data-date=track.Created)
 		span  by 
 		a(href=track.Creator().Link())= track.Creator().Nick + " "
 
-component SoundTrackMiniFooter(track *arn.SoundTrack)
+component SoundTrackMiniFooter(track *arn.SoundTrack, user *arn.User)
 	.soundtrack-footer
-		if track.Title.ByUser(nil) == ""
+		if track.Title.ByUser(user) == ""
 			a(href=track.Link() + "/edit") untitled
 		else
-			a(href=track.Link())= track.Title.ByUser(nil)
+			a(href=track.Link())= track.Title.ByUser(user)
 
 component ExternalMedia(media *arn.ExternalMedia)
 	iframe.lazy(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
