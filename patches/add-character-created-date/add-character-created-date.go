@@ -14,7 +14,7 @@ func main() {
 	defer color.Green("Finished")
 	defer arn.Node.Close()
 
-	baseTime := time.Now().Add(-2 * 30 * 24 * time.Hour)
+	baseTime := time.Now().Add(-6 * 30 * 24 * time.Hour)
 	irregular := time.Duration(0)
 
 	for character := range arn.StreamCharacters() {
