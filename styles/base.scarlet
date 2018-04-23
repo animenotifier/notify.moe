@@ -38,6 +38,7 @@ a
 img
 	backface-visibility hidden
 	color transparent
+	text-shadow none
 
 rt
 	user-select none

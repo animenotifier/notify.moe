@@ -90,6 +90,10 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					a.light-button(href="https://myanimelist.net/character/" + character.GetMapping("myanimelist/character"), target="_blank", rel="noopener")
 						Icon("external-link")
 						span MAL
+				else if user != nil && (user.Role == "editor" || user.Role == "admin")
+					a.light-button(href="https://myanimelist.net/character.php?q=" + character.Name.Canonical, target="_blank", rel="noopener")
+						Icon("exclamation-triangle")
+						span Error: No MAL ID
 				
 				a.light-button(href="/api" + character.Link(), target="_blank")
 					Icon("code")
