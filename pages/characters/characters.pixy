@@ -8,7 +8,7 @@ component Characters(characters []*arn.Character, nextIndex int, tag string, use
 			if user.DraftIndex().CharacterID == ""
 				button.action(data-action="newObject", data-trigger="click", data-type="character")
 					Icon("plus")
-					span Add Character
+					span Add character
 			else
 				a.button(href="/character/" + user.DraftIndex().CharacterID + "/edit")
 					Icon("pencil")
