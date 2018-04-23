@@ -68,7 +68,7 @@ component Sidebar(user *arn.User)
 		//- if user != nil && user.Role == "admin"
 		//- 	SidebarButton("Admin", "/admin", "wrench")
 
-		a.sidebar-link.action(href="#", data-action="toggleTheme", data-trigger="click")
+		a.sidebar-link.action(href="#", data-action="nextTheme", data-trigger="click")
 			.sidebar-button
 				Icon("paint-brush")
 				span.sidebar-text Theme

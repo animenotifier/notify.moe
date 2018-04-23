@@ -3,10 +3,21 @@ text-color-h = 0
 text-color-s = 0%
 text-color-l = 23.5%
 text-color = hsl(text-color-h, text-color-s, text-color-l)
-bg-color = rgb(246, 246, 246)
-main-color = rgb(248, 165, 130)
-link-color = rgb(215, 38, 15)
-link-hover-color = rgb(242, 60, 30)
+
+bg-color-h = 0
+bg-color-s = 0%
+bg-color-l = 96%
+bg-color = hsl(bg-color-h, bg-color-s, bg-color-l)
+
+link-color-h = 7
+link-color-s = 87%
+link-color-l = 45%
+link-color = hsl(link-color-h, link-color-s, link-color-l)
+
+link-hover-color-l = 53%
+link-hover-color = hsl(link-color-h, link-color-s, link-hover-color-l)
+// link-hover-color = hsl(8, 89%, 53%)
+
 link-active-color = link-hover-color
 pro-color = hsla(0, 100%, 73%, 0.87)
 anime-alternative-title-color = hsla(0, 0%, 0%, 0.5)
@@ -24,7 +35,10 @@ ui-border-color = rgba(0, 0, 0, 0.1)
 ui-border = 1px solid ui-border-color
 ui-hover-border-color = rgba(0, 0, 0, 0.15)
 ui-hover-border = 1px solid ui-hover-border-color
-ui-background = rgb(254, 254, 254)
+
+ui-background-l = 99.5%
+ui-background = hsl(bg-color-h, bg-color-s, ui-background-l)
+
 // ui-hover-background = rgb(254, 254, 254)
 // ui-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.037) 100%)
 // ui-hover-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.027) 100%)
@@ -36,8 +50,11 @@ input-height = 2.5rem
 input-focus-border-color = rgb(248, 165, 130)
 
 // Button
+button-color = link-color
 button-hover-color = white
 button-hover-background = link-hover-color
+
+// Tab
 tab-background = rgba(0, 0, 0, 0.02)
 tab-hover-background = bg-color
 tab-active-color = white
@@ -92,7 +109,7 @@ feature-card-icon-color = white
 tip-bg-color = white
 
 // Loading animation
-loading-anim-color = main-color
+loading-anim-color = hsl(18, 89%, 74%)
 
 // Shadow
 shadow-light = 4px 4px 8px rgba(0, 0, 0, 0.05)

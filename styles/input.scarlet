@@ -40,7 +40,7 @@ input
 button, .button
 	horizontal
 	padding 0.5rem 1rem
-	color link-color
+	color button-color
 	align-items center
 	pointer-events all
 	height input-height

@@ -110,7 +110,7 @@ export default class AnimeNotifier {
 
 		// Theme
 		if(this.user && this.user.dataset.pro === "true" && this.user.dataset.theme !== "light") {
-			actions.darkTheme(this)
+			actions.applyTheme(this.user.dataset.theme)
 		}
 
 		// Status message
