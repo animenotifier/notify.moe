@@ -109,6 +109,7 @@ function previewImage(file: File, endpoint: string, previews: HTMLCollectionOf<E
 		for(let preview of previews) {
 			let img = preview as HTMLImageElement
 			img.classList.remove("hidden")
+			img.classList.remove("element-not-found")
 			img.src = reader.result
 		}
 	}
