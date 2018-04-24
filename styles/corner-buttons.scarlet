@@ -20,6 +20,30 @@ mixin corner-buttons
 	top content-padding
 	right content-padding
 
+	.button
+		position absolute
+		opacity 0
+		will-change opacity
+
+		:first-child
+			opacity 1
+
+	:hover
+		.button
+			opacity 1
+
+			:nth-child(2)
+				transform translateX(-100%)
+
+			:nth-child(3)
+				transform translateX(-200%)
+
+			:nth-child(4)
+				transform translateX(-300%)
+
+			:nth-child(5)
+				transform translateX(-400%)
+
 .corner-buttons,
 .corner-buttons-hide-on-mobile
 	button,
