@@ -27,11 +27,14 @@ hr
 	opacity 0.1
 	margin-bottom content-padding
 
-p > img
-	max-width 100%
-	border-radius ui-element-border-radius
-	display inherit
-	margin 0 auto
+p
+	word-wrap break-word
+
+	> img
+		max-width 100%
+		border-radius ui-element-border-radius
+		display inherit
+		margin 0 auto
 
 .furigana
 	opacity 0.25
