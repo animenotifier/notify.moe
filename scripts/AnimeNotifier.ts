@@ -83,9 +83,13 @@ export default class AnimeNotifier {
 		// Event listeners
 		document.addEventListener("readystatechange", this.onReadyStateChange.bind(this))
 		document.addEventListener("DOMContentLoaded", this.onContentLoaded.bind(this))
-		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
-		window.addEventListener("popstate", this.onPopState.bind(this))
-		window.addEventListener("error", this.onError.bind(this))
+
+		// If we finished loading the DOM (either "interactive" or "complete" state),
+		// immediately trigger the event listener functions.
+		if(document.readyState !== "loading") {
+			this.app.emit("DOMContentLoaded")
+			this.run()
+		}
 
 		// Idle
 		requestIdleCallback(this.onIdle.bind(this))
@@ -176,6 +180,11 @@ export default class AnimeNotifier {
 	}
 
 	async onIdle() {
+		// Register event listeners
+		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
+		window.addEventListener("popstate", this.onPopState.bind(this))
+		window.addEventListener("error", this.onError.bind(this))
+
 		// Service worker
 		this.serviceWorkerManager = new ServiceWorkerManager(this, "/service-worker")
 		this.serviceWorkerManager.register()

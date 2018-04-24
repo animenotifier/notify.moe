@@ -26,12 +26,14 @@ export default class Application {
 	}
 
 	init() {
-		document.addEventListener("DOMContentLoaded", () => {
-			let links = document.getElementsByTagName("a")
+		document.addEventListener("DOMContentLoaded", this.onContentLoaded.bind(this))
+	}
 
-			this.markActiveLinks(links)
-			this.ajaxify(links)
-		})
+	onContentLoaded() {
+		let links = document.getElementsByTagName("a")
+
+		this.markActiveLinks(links)
+		this.ajaxify(links)
 	}
 
 	get(url: string): Promise<string> {
