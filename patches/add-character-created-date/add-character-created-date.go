@@ -18,6 +18,11 @@ func main() {
 	irregular := time.Duration(0)
 
 	for character := range arn.StreamCharacters() {
+		// Skip manually created characters
+		if character.CreatedBy != "" {
+			continue
+		}
+
 		malID := character.GetMapping("myanimelist/character")
 
 		if malID != "" {
