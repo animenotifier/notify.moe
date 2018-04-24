@@ -36,6 +36,11 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 						else
 							Icon("external-link")
 						span= link.Title
+
+				if company.Email != ""
+					a.light-button.mountable(href="mailto:" + company.Email, data-mountable-type="company-link")
+						Icon("envelope")
+						span Email
 				
 				a.light-button.mountable(href="/api" + company.Link(), target="_blank", data-mountable-type="company-link")
 					Icon("code")
