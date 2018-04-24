@@ -51,7 +51,6 @@
 .character-quotes
 	justify-content flex-start
 
-.character-quotes
 	footer,
 	.quote-footer
 		display none

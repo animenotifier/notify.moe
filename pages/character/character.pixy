@@ -32,7 +32,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							Japanese("日本語の名前無し")
 					
 					if mainQuote != nil
-						.character-quote
+						.character-quotes
 							Quote(mainQuote, user)
 					
 					.character-description.mountable!= markdown.Render(character.Description)
