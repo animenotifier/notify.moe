@@ -80,7 +80,7 @@ func main() {
 func queue(anime *arn.Anime, malCrawler *crawler.Crawler) {
 	malID := anime.GetMapping("myanimelist/anime")
 	url := "https://myanimelist.net/anime/" + malID
-	filePath := fmt.Sprintf("files/anime-%s.html", malID)
+	filePath := fmt.Sprintf("anime/anime-%s.html", malID)
 	fileInfo, err := os.Stat(filePath)
 
 	if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {

@@ -27,7 +27,7 @@ func main() {
 		return
 	}
 
-	filepath.Walk(path.Join(arn.Root, "jobs/mal-download/files"), func(name string, info os.FileInfo, err error) error {
+	filepath.Walk(path.Join(arn.Root, "jobs/mal-download/anime"), func(name string, info os.FileInfo, err error) error {
 		if err != nil {
 			fmt.Println(err)
 			return err
