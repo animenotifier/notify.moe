@@ -16,7 +16,6 @@
 	vertical
 	justify-content flex-start
 	align-items center
-	margin-bottom 1rem
 
 .character-image-large
 	width 219px
@@ -50,9 +49,9 @@
 	anime-mini-item-image
 
 .character-quotes
-	vertical
+	justify-content flex-start
 
-.character-quote
+.character-quotes
 	footer,
 	.quote-footer
 		display none
@@ -64,12 +63,19 @@
 .relevant-characters
 	horizontal-wrap
 
+.character-section
+	margin-top 1rem
+
+.character-section-name
+	font-weight bold
+
 > 1250px
 	.character-page
 		horizontal
 
 	.character-header
 		horizontal
+		page-header
 
 	.character-name
 		text-align left

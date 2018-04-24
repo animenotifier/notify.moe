@@ -37,21 +37,24 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					
 					.character-description.mountable!= markdown.Render(character.Description)
 			
-					h3.mountable Anime
+			.character-main-column
+				if len(characterAnime) > 0
+					.character-section
+						h3.character-section-name.mountable Anime
 
-					.character-anime.mountable
-						each anime in characterAnime
-							a.character-anime-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user), data-mountable-type="anime")
-								img.character-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
-					
-					if len(quotes) > 0 && (len(quotes) > 1 || mainQuote != quotes[0])
-						h3.mountable Quotes
+						.character-anime.mountable
+							each anime in characterAnime
+								a.character-anime-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user), data-mountable-type="anime")
+									img.character-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
-						.character-quotes.mountable
+				if len(quotes) > 0 && (len(quotes) > 1 || mainQuote != quotes[0])
+					.character-section
+						h3.character-section-name.mountable Quotes
+
+						.quotes.character-quotes.mountable
 							each quote in quotes
 								if mainQuote == nil || quote.ID != mainQuote.ID
-									.character-quote
-										Quote(quote, user)
+									Quote(quote, user)
 
 		.character-sidebar
 			if len(character.Attributes) > 0

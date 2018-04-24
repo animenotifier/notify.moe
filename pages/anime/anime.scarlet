@@ -32,8 +32,7 @@
 > 800px
 	.anime-header
 		horizontal
-		padding-bottom content-padding
-		border-bottom 1px solid rgba(0, 0, 0, 0.05)
+		page-header
 
 	.anime-title
 		text-align left
