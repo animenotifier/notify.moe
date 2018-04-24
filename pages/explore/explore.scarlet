@@ -12,12 +12,14 @@
 .filter-select-container
 	vertical
 	justify-content center
+	margin 1px
 
 .filter-select
-	margin 0.05rem
-
 	[value=""]
 		opacity 0.25
+
+		:focus
+			border-color ui-border-color !important
 
 .filter-label
 	opacity 0.5
@@ -25,13 +27,4 @@
 	text-align center
 
 #filter-year
-	width 80px
-
-#filter-season
-	width 90px
-
-#filter-status
-	width 110px
-
-#filter-type
-	width 80px
+	width 75px
