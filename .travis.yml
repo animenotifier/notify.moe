@@ -10,9 +10,9 @@ go:
   - 1.10.x
   - master
 
-# Skip the install step. Don't `go get` dependencies. Only build with the
-# code in vendor/
-install: true
+# Setting this to true would skip the `go get` dependencies step.
+# Useful if you want to build using repository-provided vendor/ only.
+install: false
 
 matrix:
   # It's ok if our code fails on unstable development versions of Go.
