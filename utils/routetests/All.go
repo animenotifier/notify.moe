@@ -123,6 +123,10 @@ var routeTests = map[string][]string{
 		"/anime/74y2cFiiR/tracks",
 	},
 
+	"/anime/:id/relations": []string{
+		"/anime/74y2cFiiR/relations",
+	},
+
 	"/thread/:id": []string{
 		"/thread/HJgS7c2K",
 	},
@@ -147,6 +151,10 @@ var routeTests = map[string][]string{
 		"/quote/gUZugd6zR/edit",
 	},
 
+	"/quote/:id/history": []string{
+		"/quote/gUZugd6zR/history",
+	},
+
 	"/quotes/from/:index": []string{
 		"/quotes/from/2",
 	},
@@ -157,6 +165,10 @@ var routeTests = map[string][]string{
 
 	"/soundtrack/:id": []string{
 		"/soundtrack/h0ac8sKkg",
+	},
+
+	"/soundtrack/:id/lyrics": []string{
+		"/soundtrack/vS64GbpzR/lyrics",
 	},
 
 	"/soundtrack/:id/edit": []string{
@@ -209,6 +221,28 @@ var routeTests = map[string][]string{
 
 	"/explore/anime/:year/:season/:status/:type": []string{
 		"/explore/anime/2011/any/finished/tv",
+	},
+
+	// AMV
+	"/amv/:id": []string{
+		"/amv/07scvSWmg",
+	},
+
+	"/amv/:id/edit": []string{
+		"/amv/07scvSWmg/edit",
+	},
+
+	"/amv/:id/history": []string{
+		"/amv/07scvSWmg/history",
+	},
+
+	// AMVs
+	"/amvs/from/:index": []string{
+		"/amvs/from/3",
+	},
+
+	"/amvs/best/from/:index": []string{
+		"/amvs/best/from/3",
 	},
 
 	// Redirects
@@ -287,6 +321,10 @@ var routeTests = map[string][]string{
 
 	"/anime/:id/episode/:episode-number": []string{
 		"/anime/74y2cFiiR/episode/5",
+	},
+
+	"/api/amv/:id": []string{
+		"/api/amv/07scvSWmg",
 	},
 
 	"/api/character/:id": []string{
@@ -380,6 +418,11 @@ var routeTests = map[string][]string{
 	"/paypal/success":                                nil,
 	"/paypal/cancel":                                 nil,
 	"/anime/:id/edit":                                nil,
+	"/anime/:id/edit/images":                         nil,
+	"/anime/:id/edit/characters":                     nil,
+	"/anime/:id/edit/relations":                      nil,
+	"/anime/:id/edit/episodes":                       nil,
+	"/anime/:id/edit/history":                        nil,
 	"/new/thread":                                    nil,
 	"/admin/purchases":                               nil,
 	"/admin/registrations":                           nil,

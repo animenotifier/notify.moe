@@ -3,7 +3,7 @@ package animeroutes
 import (
 	"github.com/aerogo/layout"
 	"github.com/animenotifier/notify.moe/pages/anime"
-	"github.com/animenotifier/notify.moe/pages/editanime"
+	"github.com/animenotifier/notify.moe/pages/anime/editanime"
 	"github.com/animenotifier/notify.moe/pages/episode"
 	"github.com/animenotifier/notify.moe/pages/genre"
 	"github.com/animenotifier/notify.moe/pages/genres"
