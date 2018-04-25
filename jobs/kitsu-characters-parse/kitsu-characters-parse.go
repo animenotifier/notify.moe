@@ -101,7 +101,7 @@ func main() {
 		}
 
 		character.Description = strings.Join(finalLines, "\n\n")
-		character.Description = strings.Trim(character.Description, "\n\n")
+		character.Description = strings.Trim(character.Description, "\n")
 		character.Save()
 
 		// Save Kitsu character in Kitsu DB

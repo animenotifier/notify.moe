@@ -19,11 +19,7 @@ func Active(ctx *aero.Context) string {
 
 	sort.Slice(users, func(i, j int) bool {
 		if users[i].HasAvatar() != users[j].HasAvatar() {
-			if users[i].HasAvatar() {
-				return true
-			}
-
-			return false
+			return users[i].HasAvatar()
 		}
 
 		followersA := followCount[users[i].ID]
@@ -101,11 +97,7 @@ func ActiveNoAvatar(ctx *aero.Context) string {
 
 	sort.Slice(users, func(i, j int) bool {
 		if users[i].HasAvatar() != users[j].HasAvatar() {
-			if users[i].HasAvatar() {
-				return true
-			}
-
-			return false
+			return users[i].HasAvatar()
 		}
 
 		followersA := followCount[users[i].ID]

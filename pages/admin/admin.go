@@ -45,17 +45,3 @@ func Get(ctx *aero.Context) string {
 
 	return ctx.HTML(components.Admin(user, platform, family, platformVersion, kernelVersion))
 }
-
-func average(floatSlice []float64) float64 {
-	if len(floatSlice) == 0 {
-		return 0
-	}
-
-	var sum float64
-
-	for _, value := range floatSlice {
-		sum += value
-	}
-
-	return sum / float64(len(floatSlice))
-}

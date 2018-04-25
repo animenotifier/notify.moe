@@ -35,8 +35,6 @@ func main() {
 	png.Encode(f, improved)
 }
 
-const max = float64(65535)
-
 // Pixel ...
 type Pixel struct {
 	X int
@@ -228,42 +226,42 @@ func ImproveQuality(img image.Image) *image.NRGBA {
 			offset++
 		}
 
-		// Determine surrounding area
-		surroundingAreaIndex := -1
-		bestScore := 0
+		// // Determine surrounding area
+		// surroundingAreaIndex := -1
+		// bestScore := 0
 
-		for checkIndex, score := range areaSurroundedBy {
-			if score > bestScore && checkIndex != areaIndex {
-				bestScore = score
-				surroundingAreaIndex = checkIndex
-			}
-		}
+		// for checkIndex, score := range areaSurroundedBy {
+		// 	if score > bestScore && checkIndex != areaIndex {
+		// 		bestScore = score
+		// 		surroundingAreaIndex = checkIndex
+		// 	}
+		// }
 
-		surroundingArea := areas[surroundingAreaIndex]
+		// surroundingArea := areas[surroundingAreaIndex]
 
-		if areaIndex != surroundingAreaIndex && len(surroundingArea.Pixels) > len(area.Pixels)*2 {
-			// const surroundTolerance = 5000
+		// if areaIndex != surroundingAreaIndex && len(surroundingArea.Pixels) > len(area.Pixels)*2 {
+		// 	// const surroundTolerance = 5000
 
-			// r1, g1, b1, a1 := area.AverageColor().RGBA()
-			// r2, g2, b2, a2 := surroundingArea.AverageColor().RGBA()
+		// 	// r1, g1, b1, a1 := area.AverageColor().RGBA()
+		// 	// r2, g2, b2, a2 := surroundingArea.AverageColor().RGBA()
 
-			// if diffAbs(r1, r2) < surroundTolerance && diffAbs(g1, g2) < surroundTolerance && diffAbs(b1, b2) < surroundTolerance && diffAbs(a1, a2) < surroundTolerance {
-			// 	// fmt.Println(areaIndex, "surrounded by", surroundingAreaIndex, "|", len(area.Pixels), len(surroundingArea.Pixels))
+		// 	// if diffAbs(r1, r2) < surroundTolerance && diffAbs(g1, g2) < surroundTolerance && diffAbs(b1, b2) < surroundTolerance && diffAbs(a1, a2) < surroundTolerance {
+		// 	// 	// fmt.Println(areaIndex, "surrounded by", surroundingAreaIndex, "|", len(area.Pixels), len(surroundingArea.Pixels))
 
-			// 	// Add pixels to surrounding area
-			// 	for _, pixel := range area.Pixels {
-			// 		r, g, b, a := img.At(pixel.X, pixel.Y).RGBA()
-			// 		surroundingArea.Add(pixel.X, pixel.Y, r, g, b, a)
-			// 	}
+		// 	// 	// Add pixels to surrounding area
+		// 	// 	for _, pixel := range area.Pixels {
+		// 	// 		r, g, b, a := img.At(pixel.X, pixel.Y).RGBA()
+		// 	// 		surroundingArea.Add(pixel.X, pixel.Y, r, g, b, a)
+		// 	// 	}
 
-			// 	// Remove this area
-			// 	area.Pixels = nil
-			// 	area.totalR = 0
-			// 	area.totalG = 0
-			// 	area.totalB = 0
-			// 	area.totalA = 0
-			// }
-		}
+		// 	// 	// Remove this area
+		// 	// 	area.Pixels = nil
+		// 	// 	area.totalR = 0
+		// 	// 	area.totalG = 0
+		// 	// 	area.totalB = 0
+		// 	// 	area.totalA = 0
+		// 	// }
+		// }
 	}
 
 	fmt.Println(noiseCount, "noise pixels")

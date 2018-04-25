@@ -28,10 +28,7 @@ func main() {
 		}
 
 		externalID := mapping.Attributes.ExternalID
-
-		if strings.HasPrefix(externalID, "anime/") {
-			externalID = externalID[len("anime/"):]
-		}
+		externalID = strings.TrimPrefix(externalID, "anime/")
 
 		anime := finder.GetAnime(mapping.Relationships.Item.Data.ID)
 

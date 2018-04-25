@@ -5,8 +5,6 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-const maxEntries = 70
-
 // Links shows soundtracks without links.
 func Links(ctx *aero.Context) string {
 	return editorList(

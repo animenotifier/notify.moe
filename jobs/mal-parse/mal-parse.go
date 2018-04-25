@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -47,13 +46,13 @@ func main() {
 
 func readFile(name string) error {
 	file, err := os.Open(name)
-	defer file.Close()
 
 	if err != nil {
 		fmt.Println(err)
 		return err
 	}
 
+	defer file.Close()
 	anime, characters, err := malparser.ParseAnime(file)
 
 	if err != nil {
@@ -94,10 +93,4 @@ func readFile(name string) error {
 	fmt.Println(anime.ID, anime.Title)
 	arn.MAL.Set("Anime", anime.ID, anime)
 	return nil
-}
-
-// prettyPrint prints the object as indented JSON data on the console.
-func prettyPrint(obj interface{}) {
-	pretty, _ := json.MarshalIndent(obj, "", "\t")
-	fmt.Println(string(pretty))
 }

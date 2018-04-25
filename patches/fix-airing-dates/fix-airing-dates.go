@@ -39,7 +39,7 @@ func main() {
 			modified = true
 		}
 
-		if modified == true {
+		if modified {
 			anime.Episodes().Save()
 		}
 	}

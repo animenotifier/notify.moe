@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"io/ioutil"
@@ -63,14 +64,14 @@ func InstallGoogleAuth(app *aero.Application) {
 		}
 
 		// Handle the exchange code to initiate a transport
-		token, err := config.Exchange(oauth2.NoContext, ctx.Query("code"))
+		token, err := config.Exchange(context.Background(), ctx.Query("code"))
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Could not obtain OAuth token", err)
 		}
 
 		// Construct the OAuth client
-		client := config.Client(oauth2.NoContext, token)
+		client := config.Client(context.Background(), token)
 
 		// Fetch user data from Google
 		resp, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")

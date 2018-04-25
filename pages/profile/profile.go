@@ -7,8 +7,6 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxPosts = 5
-
 // Get user profile page.
 func Get(ctx *aero.Context) string {
 	nick := ctx.Get("nick")

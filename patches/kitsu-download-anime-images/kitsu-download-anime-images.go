@@ -22,7 +22,6 @@ var ticker = time.NewTicker(50 * time.Millisecond)
 // Shell parameters
 var from int
 var to int
-var useCache bool
 
 // Shell flags
 func init() {
