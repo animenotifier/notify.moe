@@ -21,7 +21,9 @@ func main() {
 
 	for kitsuCharacter := range kitsuCharacters {
 		character := &arn.Character{
-			ID: kitsuCharacter.ID,
+			HasID: arn.HasID{
+				ID: kitsuCharacter.ID,
+			},
 			Name: arn.CharacterName{
 				Canonical: kitsuCharacter.Attributes.CanonicalName,
 				English:   kitsuCharacter.Attributes.Names.En,
