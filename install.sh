@@ -36,8 +36,7 @@ echo "Looks like the prerequisites were installed correctly!"
 sudo echo "---"
 
 # Clone and build main repository
-go get -v github.com/animenotifier/notify.moe/...
-go get -v github.com/stretchr/testify/assert
+go get -t -v github.com/animenotifier/notify.moe/...
 cd $GOPATH/src/github.com/animenotifier/notify.moe
 make all
 
