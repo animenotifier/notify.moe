@@ -53,7 +53,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/paypal"
 	"github.com/animenotifier/notify.moe/pages/popular"
-	"github.com/animenotifier/notify.moe/pages/posts"
+	"github.com/animenotifier/notify.moe/pages/post"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/profile/profilecharacters"
 	"github.com/animenotifier/notify.moe/pages/profile/profilequotes"
@@ -102,7 +102,7 @@ func Configure(app *aero.Application) {
 	l.Page("/forum", forum.Get)
 	l.Page("/forum/:tag", forum.Get)
 	l.Page("/thread/:id", thread.Get)
-	l.Page("/post/:id", posts.Get)
+	l.Page("/post/:id", post.Get)
 	l.Page("/new/thread", newthread.Get)
 
 	// User lists

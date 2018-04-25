@@ -1,5 +1,0 @@
-component Post(post *arn.Post, user *arn.User)
-	Postable(post.ToPostable(), user, "")
-
-	.side-note
-		a(href=post.Thread().Link())= post.Thread().Title
