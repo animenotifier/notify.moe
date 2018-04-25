@@ -13,6 +13,10 @@ func MissingLyrics(ctx *aero.Context) string {
 		ctx,
 		"Soundtracks without lyrics",
 		func(track *arn.SoundTrack) bool {
+			if !track.HasTag("vocal") {
+				return false
+			}
+
 			return !track.HasLyrics()
 		},
 		func(track *arn.SoundTrack) string {
@@ -27,6 +31,10 @@ func UnalignedLyrics(ctx *aero.Context) string {
 		ctx,
 		"Soundtracks with unaligned lyrics",
 		func(track *arn.SoundTrack) bool {
+			if !track.HasTag("vocal") {
+				return false
+			}
+
 			return track.Lyrics.Native != "" && track.Lyrics.Romaji != "" && strings.Count(track.Lyrics.Native, "\n") != strings.Count(track.Lyrics.Romaji, "\n")
 		},
 		nil,
