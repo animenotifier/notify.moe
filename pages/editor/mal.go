@@ -79,6 +79,13 @@ func CompareMAL(ctx *aero.Context) string {
 		return aPop > bPop
 	})
 
+	comparisons := compare(animes)
+
+	return ctx.HTML(components.CompareMAL(comparisons, year, status, typ, "/editor/mal/diff/anime", user))
+}
+
+// compare builds the comparisons to MAL anime entries.
+func compare(animes []*arn.Anime) []*utils.MALComparison {
 	comparisons := []*utils.MALComparison{}
 	malAnimeCollection := arn.MAL.Collection("Anime")
 
@@ -225,5 +232,5 @@ func CompareMAL(ctx *aero.Context) string {
 		}
 	}
 
-	return ctx.HTML(components.CompareMAL(comparisons, year, status, typ, "/editor/mal/diff/anime", user))
+	return comparisons
 }
