@@ -1,12 +1,14 @@
 package filtersoundtracks
 
 import (
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 )
 
-// Lyrics shows soundtracks without lyrics.
-func Lyrics(ctx *aero.Context) string {
+// MissingLyrics shows soundtracks without lyrics.
+func MissingLyrics(ctx *aero.Context) string {
 	return editorList(
 		ctx,
 		"Soundtracks without lyrics",
@@ -16,5 +18,17 @@ func Lyrics(ctx *aero.Context) string {
 		func(track *arn.SoundTrack) string {
 			return "https://www.google.com/search?q=" + track.Title.String() + " lyrics site:animelyrics.com"
 		},
+	)
+}
+
+// UnalignedLyrics shows soundtracks with unaligned lyrics.
+func UnalignedLyrics(ctx *aero.Context) string {
+	return editorList(
+		ctx,
+		"Soundtracks with unaligned lyrics",
+		func(track *arn.SoundTrack) bool {
+			return track.Lyrics.Native != "" && track.Lyrics.Romaji != "" && strings.Count(track.Lyrics.Native, "\n") != strings.Count(track.Lyrics.Romaji, "\n")
+		},
+		nil,
 	)
 }

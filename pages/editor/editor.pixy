@@ -86,9 +86,14 @@ component EditorTabs(url string, user *arn.User)
 	if strings.Contains(url, "/editor/soundtracks/")
 		.tabs
 			Tab("Links", "external-link", "/editor/soundtracks/links")
-			Tab("Lyrics", "font", "/editor/soundtracks/lyrics")
+			Tab("Lyrics", "font", "/editor/soundtracks/lyrics/missing")
 			Tab("Tags", "tag", "/editor/soundtracks/tags")
 			Tab("File", "volume-off", "/editor/soundtracks/file")
+	
+	if strings.Contains(url, "/editor/soundtracks/lyrics/")
+		.tabs
+			Tab("Missing", "times", "/editor/soundtracks/lyrics/missing")
+			Tab("Unaligned", "align-left", "/editor/soundtracks/lyrics/unaligned")
 	
 	if strings.Contains(url, "/editor/anime/") || strings.Contains(url, "/editor/mal/diff/anime")
 		.editor-filters

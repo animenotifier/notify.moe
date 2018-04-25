@@ -338,7 +338,8 @@ func Configure(app *aero.Application) {
 
 	// Editor - Soundtracks
 	l.Page("/editor/soundtracks/links", filtersoundtracks.Links)
-	l.Page("/editor/soundtracks/lyrics", filtersoundtracks.Lyrics)
+	l.Page("/editor/soundtracks/lyrics/missing", filtersoundtracks.MissingLyrics)
+	l.Page("/editor/soundtracks/lyrics/unaligned", filtersoundtracks.UnalignedLyrics)
 	l.Page("/editor/soundtracks/tags", filtersoundtracks.Tags)
 	l.Page("/editor/soundtracks/file", filtersoundtracks.File)
 
