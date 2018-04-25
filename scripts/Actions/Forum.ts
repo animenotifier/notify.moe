@@ -51,7 +51,7 @@ export function deletePost(arn: AnimeNotifier, element: HTMLElement) {
 
 	let endpoint = arn.findAPIEndpoint(element)
 
-	arn.post(endpoint + "/delete", "")
+	arn.post(endpoint + "/delete")
 	.then(() => arn.reloadContent())
 	.catch(err => arn.statusMessage.showError(err))
 }
@@ -92,5 +92,30 @@ export function createThread(arn: AnimeNotifier) {
 
 	arn.post("/api/new/thread", thread)
 	.then(() => arn.app.load("/forum/" + thread.tags[0]))
+	.catch(err => arn.statusMessage.showError(err))
+}
+
+// Lock thread
+export function lockThread(arn: AnimeNotifier, element: HTMLButtonElement) {
+	setThreadLock(arn, element, true)
+}
+
+// Unlock thread
+export function unlockThread(arn: AnimeNotifier, element: HTMLButtonElement) {
+	setThreadLock(arn, element, false)
+}
+
+// Set thread locked state
+function setThreadLock(arn: AnimeNotifier, element: HTMLButtonElement, state: boolean) {
+	let verb = state ? "lock" : "unlock"
+
+	if(!confirm(`Are you sure you want to ${verb} this Thread?`)) {
+		return
+	}
+
+	let endpoint = arn.findAPIEndpoint(element)
+
+	arn.post(`${endpoint}/${verb}`)
+	.then(() => arn.reloadContent())
 	.catch(err => arn.statusMessage.showError(err))
 }

@@ -122,7 +122,7 @@ export function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
 	let index = element.dataset.index
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
-	arn.post(apiEndpoint + "/field/" + field + "/remove/" + index, "")
+	arn.post(apiEndpoint + "/field/" + field + "/remove/" + index)
 	.then(() => arn.reloadContent())
 	.catch(err => arn.statusMessage.showError(err))
 }

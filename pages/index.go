@@ -70,7 +70,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/statistics"
 	"github.com/animenotifier/notify.moe/pages/support"
 	"github.com/animenotifier/notify.moe/pages/terms"
-	"github.com/animenotifier/notify.moe/pages/threads"
+	"github.com/animenotifier/notify.moe/pages/thread"
 	"github.com/animenotifier/notify.moe/pages/upload"
 	"github.com/animenotifier/notify.moe/pages/user"
 	"github.com/animenotifier/notify.moe/pages/users"
@@ -101,7 +101,7 @@ func Configure(app *aero.Application) {
 	// Forum
 	l.Page("/forum", forum.Get)
 	l.Page("/forum/:tag", forum.Get)
-	l.Page("/thread/:id", threads.Get)
+	l.Page("/thread/:id", thread.Get)
 	l.Page("/post/:id", posts.Get)
 	l.Page("/new/thread", newthread.Get)
 

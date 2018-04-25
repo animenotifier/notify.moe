@@ -1,0 +1,37 @@
+component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
+	h1.thread-title= thread.Title
+
+	#thread.thread(data-id=thread.ID)
+		.posts
+			Postable(thread.ToPostable(), user, thread.Creator().ID)
+
+			each post in posts
+				Postable(post.ToPostable(), user, thread.Creator().ID)
+			
+			//- Reply
+			if user != nil
+				if thread.Locked
+					footer.footer.mountable
+						p.text-center This topic is locked.
+				else
+					NewPostArea(user, "Reply")
+			
+				.buttons
+					if !thread.Locked
+						button.mountable.action(data-action="forumReply", data-trigger="click")
+							Icon("mail-reply")
+							span Reply
+					
+					if user.Role == "admin" || user.Role == "editor"
+						if thread.Locked
+							button.mountable.action(data-action="unlockThread", data-trigger="click", data-api="/api/thread/" + thread.ID)
+								Icon("unlock")
+								span Unlock
+						else
+							button.mountable.action(data-action="lockThread", data-trigger="click", data-api="/api/thread/" + thread.ID)
+								Icon("lock")
+								span Lock
+						
+						button.mountable.action(data-action="deleteObject", data-trigger="click", data-return-path="/forum", data-confirm-type="thread", data-api="/api/thread/" + thread.ID)
+							Icon("trash")
+							span Delete	

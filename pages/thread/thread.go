@@ -1,4 +1,4 @@
-package threads
+package thread
 
 import (
 	"net/http"

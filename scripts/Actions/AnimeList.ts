@@ -8,7 +8,7 @@ export async function addAnimeToCollection(arn: AnimeNotifier, button: HTMLButto
 	let apiEndpoint = arn.findAPIEndpoint(button)
 
 	try {
-		await arn.post(apiEndpoint + "/add/" + animeId, "")
+		await arn.post(apiEndpoint + "/add/" + animeId)
 		arn.reloadContent()
 
 		// Show status message
@@ -31,7 +31,7 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 	let {animeId, nick} = button.dataset
 	let apiEndpoint = arn.findAPIEndpoint(button)
 
-	arn.post(apiEndpoint + "/remove/" + animeId, "")
+	arn.post(apiEndpoint + "/remove/" + animeId)
 	.then(() => arn.app.load(`/+${nick}/animelist/` + (document.getElementById("Status") as HTMLSelectElement).value))
 	.catch(err => arn.statusMessage.showError(err))
 }

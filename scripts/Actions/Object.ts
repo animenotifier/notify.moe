@@ -4,7 +4,7 @@ import AnimeNotifier from "../AnimeNotifier"
 export function newObject(arn: AnimeNotifier, button: HTMLButtonElement) {
 	let dataType = button.dataset.type
 
-	arn.post(`/api/new/${dataType}`, "")
+	arn.post(`/api/new/${dataType}`)
 	.then(response => response.json())
 	.then(obj => arn.app.load(`/${dataType}/${obj.id}/edit`))
 	.catch(err => arn.statusMessage.showError(err))
@@ -28,7 +28,7 @@ export function deleteObject(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 	let endpoint = arn.findAPIEndpoint(button)
 
-	arn.post(endpoint + "/delete", "")
+	arn.post(endpoint + "/delete")
 	.then(() => arn.app.load(returnPath))
 	.catch(err => arn.statusMessage.showError(err))
 }
