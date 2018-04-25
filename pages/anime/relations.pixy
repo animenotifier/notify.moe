@@ -15,5 +15,5 @@ component AnimeRelations(anime *arn.Anime, user *arn.User, standAlonePage bool)
 							img.anime-relation-image.lazy(data-src=relation.Anime().ImageLink("small"), data-webp="true", data-color=relation.Anime().AverageColor(), alt=relation.Anime().Title.ByUser(user))
 							.anime-relation-type= relation.HumanReadableType()
 							.anime-relation-year
-								if relation.Anime().StartDate != ""
+								if len(relation.Anime().StartDate) >= 4
 									span= relation.Anime().StartDate[:4]
