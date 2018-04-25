@@ -1,15 +1,15 @@
-.theme-wheel
-	position fixed
-	right content-padding
-	bottom content-padding
-	width 200px
-	height 200px
-	border 1px solid red
-	background rgba(255, 255, 255, 0.1)
-	border-radius 50%
+// .theme-wheel
+// 	position fixed
+// 	right content-padding
+// 	bottom content-padding
+// 	width 200px
+// 	height 200px
+// 	border 1px solid red
+// 	background rgba(255, 255, 255, 0.1)
+// 	border-radius 50%
 
-	&.fade-out
-		pointer-events none
+// 	&.fade-out
+// 		pointer-events none
 
-.theme-wheel-theme
-	//
+// .theme-wheel-theme
+// 	//
