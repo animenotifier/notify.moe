@@ -12,7 +12,7 @@ component OverwatchRankingList(users []*arn.User, url string)
 		tbody
 			for index, user := range users
 				tr.ranking.mountable
-					td= toString(index + 1) + "."
+					td= fmt.Sprint(index + 1) + "."
 					td.ranking-user
 						Avatar(user)
 						a.ranking-user-nick(href=user.Link())= user.Nick

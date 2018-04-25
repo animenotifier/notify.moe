@@ -39,7 +39,7 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, user *ar
 			//- 				if user != nil && user.Location.CountryName != "Japan"
 			//- 					td.episode-actions
 			//- 						for name, link := range episode.Links
-			//- 							a(href=link, target="_blank", rel="noopener", title="Watch episode " + toString(episode.Number) + " on " + name)
+			//- 							a(href=link, target="_blank", rel="noopener", title="Watch episode " + fmt.Sprint(episode.Number) + " on " + name)
 			//- 								RawIcon("eye")
 			//- 						//- a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
 			//- 						//- 	RawIcon("google")

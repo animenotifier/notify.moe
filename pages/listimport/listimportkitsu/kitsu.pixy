@@ -1,5 +1,5 @@
 component ImportKitsu(user *arn.User, matches []*arn.KitsuMatch)
-	h1= "Preview: kitsu.io (" + user.Accounts.Kitsu.Nick + ", " + toString(len(matches)) + " anime)"
+	h1= "Preview: kitsu.io (" + user.Accounts.Kitsu.Nick + ", " + fmt.Sprint(len(matches)) + " anime)"
 
 	ImportButton("/import/kitsu/animelist/finish")
 

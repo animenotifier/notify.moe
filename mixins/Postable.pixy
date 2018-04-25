@@ -1,5 +1,5 @@
 component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
-	.post.mountable(id=strings.ToLower(post.Type()) + "-" + toString(post.ID()), data-highlight=post.Creator().ID == highlightAuthorID, data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.Type()) + "/" + post.ID())
+	.post.mountable(id=strings.ToLower(post.Type()) + "-" + fmt.Sprint(post.ID()), data-highlight=post.Creator().ID == highlightAuthorID, data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.Type()) + "/" + post.ID())
 		.post-author
 			Avatar(post.Creator())
 

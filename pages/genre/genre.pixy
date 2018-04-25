@@ -1,5 +1,5 @@
 component Genre(genre string, animes []*arn.Anime, user *arn.User)
-	h1(title=toString(len(animes)) + " anime")= strings.Title(genre)
+	h1(title=fmt.Sprint(len(animes)) + " anime")= strings.Title(genre)
 
 	.corner-buttons-hide-on-mobile
 		if user != nil

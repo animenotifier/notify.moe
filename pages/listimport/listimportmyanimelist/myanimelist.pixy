@@ -1,5 +1,5 @@
 component ImportMyAnimeList(user *arn.User, matches []*arn.MyAnimeListMatch)
-	h1= "Preview: myanimelist.net (" + user.Accounts.MyAnimeList.Nick + ", " + toString(len(matches)) + " anime)"
+	h1= "Preview: myanimelist.net (" + user.Accounts.MyAnimeList.Nick + ", " + fmt.Sprint(len(matches)) + " anime)"
 
 	ImportButton("/import/myanimelist/animelist/finish")
 
