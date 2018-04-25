@@ -87,6 +87,15 @@ func TestQuotePages(t *testing.T) {
 	}
 }
 
+func TestUserPages(t *testing.T) {
+	t.Parallel()
+	app := configure(aero.New())
+
+	for user := range arn.StreamUsers() {
+		testRoute(t, app, user.Link())
+	}
+}
+
 func testRoute(t *testing.T, app *aero.Application, route string) {
 	// Create a new HTTP request
 	request, err := http.NewRequest("GET", route, nil)
