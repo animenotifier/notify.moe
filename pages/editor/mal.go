@@ -14,6 +14,9 @@ import (
 
 const maxCompareMALEntries = 15
 
+// diffFunction is the signature of a diff function.
+type diffFunction func(*arn.Anime, *mal.Anime) []animediff.Difference
+
 // CompareMAL ...
 func CompareMAL(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
@@ -121,122 +124,19 @@ func compare(animes []*arn.Anime) []*utils.MALComparison {
 func diff(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
 	var differences []animediff.Difference
 
-	// Canonical title
-	if anime.Title.Canonical != malAnime.Title {
-		hash := utils.HashString(malAnime.Title)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "CanonicalTitle", hash) {
-			differences = append(differences, &animediff.CanonicalTitle{
-				TitleA:      anime.Title.Canonical,
-				TitleB:      malAnime.Title,
-				NumericHash: hash,
-			})
-		}
+	// We'll use the following diffs
+	diffFunctions := []diffFunction{
+		diffTitles,
+		diffDates,
+		diffEpisodes,
+		diffStatus,
+		diffSynopsis,
+		diffGenres,
 	}
 
-	// Japanese title
-	if anime.Title.Japanese != malAnime.JapaneseTitle {
-		hash := utils.HashString(malAnime.JapaneseTitle)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "JapaneseTitle", hash) {
-			differences = append(differences, &animediff.JapaneseTitle{
-				TitleA:      anime.Title.Japanese,
-				TitleB:      malAnime.JapaneseTitle,
-				NumericHash: hash,
-			})
-		}
-	}
-
-	// Romaji title
-	if anime.Title.Romaji != malAnime.Title {
-		hash := utils.HashString(malAnime.Title)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "RomajiTitle", hash) {
-			differences = append(differences, &animediff.RomajiTitle{
-				TitleA:      anime.Title.Romaji,
-				TitleB:      malAnime.Title,
-				NumericHash: hash,
-			})
-		}
-	}
-
-	// Airing start date
-	if anime.StartDate != malAnime.StartDate && malAnime.StartDate != "" {
-		hash := utils.HashString(malAnime.StartDate)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "StartDate", hash) {
-			differences = append(differences, &animediff.StartDate{
-				DateA:       anime.StartDate,
-				DateB:       malAnime.StartDate,
-				NumericHash: hash,
-			})
-		}
-	}
-
-	// Airing end date
-	if anime.EndDate != malAnime.EndDate && malAnime.EndDate != "" {
-		hash := utils.HashString(malAnime.EndDate)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "EndDate", hash) {
-			differences = append(differences, &animediff.EndDate{
-				DateA:       anime.EndDate,
-				DateB:       malAnime.EndDate,
-				NumericHash: hash,
-			})
-		}
-	}
-
-	// Status
-	if anime.Status != malAnime.Status {
-		hash := utils.HashString(malAnime.Status)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Status", hash) {
-			differences = append(differences, &animediff.Status{
-				StatusA:     anime.Status,
-				StatusB:     malAnime.Status,
-				NumericHash: hash,
-			})
-		}
-	}
-
-	// EpisodeCount
-	if malAnime.EpisodeCount != 0 && anime.EpisodeCount != malAnime.EpisodeCount {
-		hash := uint64(malAnime.EpisodeCount)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "EpisodeCount", hash) {
-			differences = append(differences, &animediff.EpisodeCount{
-				EpisodesA:   anime.EpisodeCount,
-				EpisodesB:   malAnime.EpisodeCount,
-				NumericHash: hash,
-			})
-		}
-	}
-
-	// Synopsis
-	if len(anime.Summary) < 300 && len(anime.Summary)+50 < len(malAnime.Synopsis) {
-		hash := utils.HashString(malAnime.Synopsis)
-
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Synopsis", hash) {
-			differences = append(differences, &animediff.Synopsis{
-				SynopsisA:   anime.Summary,
-				SynopsisB:   malAnime.Synopsis,
-				NumericHash: hash,
-			})
-		}
-	}
-
-	// Compare genres
-	hashA := utils.HashStringsNoOrder(anime.Genres)
-	hashB := utils.HashStringsNoOrder(malAnime.Genres)
-
-	if hashA != hashB {
-		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Genres", hashB) {
-			differences = append(differences, &animediff.Genres{
-				GenresA:     anime.Genres,
-				GenresB:     malAnime.Genres,
-				NumericHash: hashB,
-			})
-		}
+	for _, diffFunction := range diffFunctions {
+		diffs := diffFunction(anime, malAnime)
+		differences = append(differences, diffs...)
 	}
 
 	return differences
