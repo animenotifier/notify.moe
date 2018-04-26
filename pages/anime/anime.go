@@ -138,4 +138,6 @@ func getOpenGraph(ctx *aero.Context, anime *arn.Anime) *arn.OpenGraph {
 	case "movie":
 		openGraph.Tags["og:type"] = "video.movie"
 	}
+
+	return openGraph
 }
