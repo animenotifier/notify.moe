@@ -1,7 +1,6 @@
 package recommended
 
 import (
-	"math"
 	"net/http"
 	"sort"
 
@@ -31,36 +30,7 @@ func Anime(ctx *aero.Context) string {
 	completed := animeList.FilterStatus(arn.AnimeListStatusCompleted)
 
 	// Genre affinity
-	genreItems := animeList.Genres()
-	genreAffinity := map[string]float64{}
-	bestGenres := []string{}
-
-	for genre, animeListItems := range genreItems {
-		affinity := 0.0
-
-		for _, item := range animeListItems {
-			if item.Status != arn.AnimeListStatusCompleted {
-				continue
-			}
-
-			if item.Rating.Overall != 0 {
-				affinity += item.Rating.Overall
-			} else {
-				affinity += 5.0
-			}
-		}
-
-		genreAffinity[genre] = affinity
-		bestGenres = append(bestGenres, genre)
-	}
-
-	sort.Slice(bestGenres, func(i, j int) bool {
-		return genreAffinity[bestGenres[i]] > genreAffinity[bestGenres[j]]
-	})
-
-	if len(bestGenres) > bestGenreCount {
-		bestGenres = bestGenres[:bestGenreCount]
-	}
+	bestGenres := getBestGenres(animeList)
 
 	// Get all anime
 	var tv []*arn.Anime
@@ -81,6 +51,8 @@ func Anime(ctx *aero.Context) string {
 			tv = append(tv, anime)
 		} else if anime.Type == "movie" {
 			movies = append(movies, anime)
+		} else {
+			continue
 		}
 
 		// Skip anime from my list (except planned anime)
@@ -90,44 +62,7 @@ func Anime(ctx *aero.Context) string {
 			continue
 		}
 
-		animeAffinity := anime.Score()
-
-		// Planned anime go higher
-		if existing != nil && existing.Status == arn.AnimeListStatusPlanned {
-			animeAffinity += 10.0
-		}
-
-		// Anime whose high-ranked prequel you did not see are lower ranked
-		prequels := anime.Prequels()
-
-		for _, prequel := range prequels {
-			item := completed.Find(prequel.ID)
-
-			// Filter out unimportant prequels
-			if prequel.Score() < anime.Score()/2 {
-				continue
-			}
-
-			if item == nil {
-				animeAffinity -= 20.0
-			}
-		}
-
-		// Give favorite genre bonus if we have enough completed anime
-		if len(completed.Items) >= genreBonusCompletedAnimeThreshold {
-			bestGenreCount := 0
-
-			for _, genre := range anime.Genres {
-				if arn.Contains(bestGenres, genre) {
-					bestGenreCount++
-				}
-			}
-
-			// Use square root to dampen the bonus of additional best genres
-			animeAffinity += math.Sqrt(float64(bestGenreCount)) * 7.0
-		}
-
-		affinity[anime.ID] = animeAffinity
+		affinity[anime.ID] = getAnimeAffinity(anime, existing, completed, bestGenres)
 	}
 
 	// Sort
