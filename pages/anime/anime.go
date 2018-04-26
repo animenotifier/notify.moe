@@ -106,6 +106,12 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Open Graph
+	ctx.Data = getOpenGraph(ctx, anime)
+
+	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, user))
+}
+
+func getOpenGraph(ctx *aero.Context, anime *arn.Anime) *arn.OpenGraph {
 	description := anime.Summary
 
 	if len(description) > maxDescriptionLength {
@@ -132,8 +138,4 @@ func Get(ctx *aero.Context) string {
 	case "movie":
 		openGraph.Tags["og:type"] = "video.movie"
 	}
-
-	ctx.Data = openGraph
-
-	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, user))
 }
