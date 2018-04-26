@@ -55,36 +55,27 @@ func sync(anime *arn.Anime, malID string) {
 	// Log title
 	fmt.Printf("%s %s\n", color.CyanString(anime.Title.Canonical), malID)
 
-	if len(anime.Genres) == 0 && len(malAnime.Genres) > 0 {
-		fmt.Println("Genres:", malAnime.Genres)
-		anime.Genres = malAnime.Genres
-	}
+	// Titles
+	syncTitles(anime, malAnime)
 
-	if anime.EpisodeCount == 0 && malAnime.EpisodeCount != 0 {
-		fmt.Println("EpisodeCount:", malAnime.EpisodeCount)
-		anime.EpisodeCount = malAnime.EpisodeCount
-	}
+	// Dates
+	syncDates(anime, malAnime)
 
-	if anime.EpisodeLength == 0 && malAnime.EpisodeLength != 0 {
-		fmt.Println("EpisodeLength:", malAnime.EpisodeLength)
-		anime.EpisodeLength = malAnime.EpisodeLength
-	}
+	// Episodes
+	syncEpisodes(anime, malAnime)
 
-	if anime.StartDate == "" && malAnime.StartDate != "" {
-		fmt.Println("StartDate:", malAnime.StartDate)
-		anime.StartDate = malAnime.StartDate
-	}
+	// Others
+	syncOthers(anime, malAnime)
 
-	if anime.EndDate == "" && malAnime.EndDate != "" {
-		fmt.Println("EndDate:", malAnime.EndDate)
-		anime.EndDate = malAnime.EndDate
-	}
+	// Characters
+	syncCharacters(anime, malAnime)
 
-	if anime.Source == "" && malAnime.Source != "" {
-		fmt.Println("Source:", malAnime.Source)
-		anime.Source = malAnime.Source
-	}
+	// Save in database
+	anime.Save()
+}
 
+// Sync titles
+func syncTitles(anime *arn.Anime, malAnime *mal.Anime) {
 	if anime.Title.Japanese == "" && malAnime.JapaneseTitle != "" {
 		fmt.Println("JapaneseTitle:", malAnime.JapaneseTitle)
 		anime.Title.Japanese = malAnime.JapaneseTitle
@@ -94,25 +85,64 @@ func sync(anime *arn.Anime, malID string) {
 		fmt.Println("EnglishTitle:", malAnime.EnglishTitle)
 		anime.Title.English = malAnime.EnglishTitle
 	}
-
-	if (!anime.HasImage() || anime.Image.Width <= imageWidthThreshold) && malAnime.Image != "" {
-		fmt.Println("Downloading image:", malAnime.Image)
-		response, err := client.Get(malAnime.Image).End()
-
-		if err == nil && response.StatusCode() == 200 {
-			anime.SetImageBytes(response.Bytes())
-		} else {
-			color.Red("Error downloading image")
-		}
-	}
-
-	// Characters
-	syncCharacters(anime, malAnime)
-
-	// Save in database
-	anime.Save()
 }
 
+// Sync dates
+func syncDates(anime *arn.Anime, malAnime *mal.Anime) {
+	if anime.StartDate == "" && malAnime.StartDate != "" {
+		fmt.Println("StartDate:", malAnime.StartDate)
+		anime.StartDate = malAnime.StartDate
+	}
+
+	if anime.EndDate == "" && malAnime.EndDate != "" {
+		fmt.Println("EndDate:", malAnime.EndDate)
+		anime.EndDate = malAnime.EndDate
+	}
+}
+
+// Sync episodes
+func syncEpisodes(anime *arn.Anime, malAnime *mal.Anime) {
+	if anime.EpisodeCount == 0 && malAnime.EpisodeCount != 0 {
+		fmt.Println("EpisodeCount:", malAnime.EpisodeCount)
+		anime.EpisodeCount = malAnime.EpisodeCount
+	}
+
+	if anime.EpisodeLength == 0 && malAnime.EpisodeLength != 0 {
+		fmt.Println("EpisodeLength:", malAnime.EpisodeLength)
+		anime.EpisodeLength = malAnime.EpisodeLength
+	}
+}
+
+// Sync others
+func syncOthers(anime *arn.Anime, malAnime *mal.Anime) {
+	if len(anime.Genres) == 0 && len(malAnime.Genres) > 0 {
+		fmt.Println("Genres:", malAnime.Genres)
+		anime.Genres = malAnime.Genres
+	}
+
+	if anime.Source == "" && malAnime.Source != "" {
+		fmt.Println("Source:", malAnime.Source)
+		anime.Source = malAnime.Source
+	}
+}
+
+// Sync image
+func syncImage(anime *arn.Anime, malAnime *mal.Anime) {
+	if (anime.HasImage() && anime.Image.Width > imageWidthThreshold) || malAnime.Image == "" {
+		return
+	}
+
+	fmt.Println("Downloading image:", malAnime.Image)
+	response, err := client.Get(malAnime.Image).End()
+
+	if err == nil && response.StatusCode() == 200 {
+		anime.SetImageBytes(response.Bytes())
+	} else {
+		color.Red("Error downloading image")
+	}
+}
+
+// Sync characters
 func syncCharacters(anime *arn.Anime, malAnime *mal.Anime) {
 	// Check for existence of characters
 	animeCharacters := anime.Characters()
