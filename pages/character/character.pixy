@@ -55,54 +55,57 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							each quote in quotes
 								if mainQuote == nil || quote.ID != mainQuote.ID
 									Quote(quote, user)
+		
+		CharacterSidebar(character, friends, relevantCharacters, user)
 
-		.character-sidebar
-			if len(character.Attributes) > 0
-				h3.mountable Information
+component CharacterSidebar(character *arn.Character, friends []*arn.User, relevantCharacters []*arn.Character, user *arn.User)
+	.character-sidebar
+		if len(character.Attributes) > 0
+			h3.mountable Information
 
-				table.character-attributes.mountable
-					each attribute in character.Attributes
-						tr.mountable(data-mountable-type="info")
-							td.character-attributes-name= attribute.Name + ":"
+			table.character-attributes.mountable
+				each attribute in character.Attributes
+					tr.mountable(data-mountable-type="info")
+						td.character-attributes-name= attribute.Name + ":"
 
-							if strings.Contains(attribute.Value, "<")
-								td.character-attributes-value!= markdown.Render(attribute.Value)
+						if strings.Contains(attribute.Value, "<")
+							td.character-attributes-value!= markdown.Render(attribute.Value)
+						else
+							td.character-attributes-value= attribute.Value
+		
+		if len(relevantCharacters) > 0
+			h3.mountable Relevant
+
+			.relevant-characters.mountable
+				each relevantCharacter in relevantCharacters
+					.mountable(data-mountable-type="relevant-character")
+						CharacterSmall(relevantCharacter, user)
+		
+		if len(friends) > 0
+			.character-friends
+				h3.mountable Friends
+
+				.user-avatars.mountable
+					each friend in friends
+						.mountable(data-mountable-type="friend")
+							if friend.IsActive()
+								Avatar(friend)
 							else
-								td.character-attributes-value= attribute.Value
-			
-			if len(relevantCharacters) > 0
-				h3.mountable Relevant
-
-				.relevant-characters.mountable
-					each relevantCharacter in relevantCharacters
-						.mountable(data-mountable-type="relevant-character")
-							CharacterSmall(relevantCharacter, user)
-			
-			if len(friends) > 0
-				.character-friends
-					h3.mountable Friends
-
-					.user-avatars.mountable
-						each friend in friends
-							.mountable(data-mountable-type="friend")
-								if friend.IsActive()
+								.inactive-user
 									Avatar(friend)
-								else
-									.inactive-user
-										Avatar(friend)
 
-			h3.mountable Links
+		h3.mountable Links
 
-			.light-button-group.mountable
-				if character.GetMapping("myanimelist/character") != ""
-					a.light-button(href="https://myanimelist.net/character/" + character.GetMapping("myanimelist/character"), target="_blank", rel="noopener")
-						Icon("external-link")
-						span MAL
-				else if user != nil && (user.Role == "editor" || user.Role == "admin")
-					a.light-button(href="https://myanimelist.net/character.php?q=" + character.Name.Canonical, target="_blank", rel="noopener")
-						Icon("exclamation-triangle")
-						span Error: No MAL ID
-				
-				a.light-button(href="/api" + character.Link(), target="_blank")
-					Icon("code")
-					span API
+		.light-button-group.mountable
+			if character.GetMapping("myanimelist/character") != ""
+				a.light-button(href="https://myanimelist.net/character/" + character.GetMapping("myanimelist/character"), target="_blank", rel="noopener")
+					Icon("external-link")
+					span MAL
+			else if user != nil && (user.Role == "editor" || user.Role == "admin")
+				a.light-button(href="https://myanimelist.net/character.php?q=" + character.Name.Canonical, target="_blank", rel="noopener")
+					Icon("exclamation-triangle")
+					span Error: No MAL ID
+			
+			a.light-button(href="/api" + character.Link(), target="_blank")
+				Icon("code")
+				span API
