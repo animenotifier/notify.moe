@@ -74,8 +74,8 @@ assets:
 	$(TSCMD)
 	@pack
 deps:
-	@go get -t -v ./...
-	@exit 0
+	# Ignore errors using the "-" because components directory can not be fetched.
+	@-go get -t -v ./...
 depslist:
 	$(GOCMD) list -f {{.Deps}} | sed -e 's/\[//g' -e 's/\]//g' | tr " " "\n"
 clean:
