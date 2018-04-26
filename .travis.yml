@@ -41,8 +41,8 @@ before_script:
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
 script:
-  - go get -t ./...                          # Get dependencies. Allow this to fail because components cannot be found.
-  - make all
+  - make deps                                # Get dependencies. Allow this to fail because components cannot be found.
+  - make all                                 # Build
 # - test -z $(gofmt -s -l $GO_FILES)         # Fail if a .go file hasn't been formatted with gofmt
 # - go test -v .                             # Run all the tests
 # - go test -v -race ./...                   # Run all the tests with the race detector enabled

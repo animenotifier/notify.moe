@@ -74,7 +74,8 @@ assets:
 	$(TSCMD)
 	@pack
 deps:
-	@go get -v ./...
+	@go get -t -v ./...
+	@exit 0
 depslist:
 	$(GOCMD) list -f {{.Deps}} | sed -e 's/\[//g' -e 's/\]//g' | tr " " "\n"
 clean:
