@@ -115,76 +115,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 
 	// String
 	if fieldType == "string" {
-		idType := field.Tag.Get("idType")
-
-		// Try to infer the ID type by the field name
-		if idType == "" {
-			switch field.Name {
-			case "AnimeID":
-				idType = "Anime"
-
-			case "CharacterID":
-				idType = "Character"
-			}
-		}
-
-		showPreview := idType != "" && fieldValue.String() != ""
-
-		if showPreview {
-			b.WriteString("<div class='widget-section-with-preview'>")
-		}
-
-		// Input field
-		if field.Tag.Get("datalist") != "" {
-			dataList := field.Tag.Get("datalist")
-			values := arn.DataLists[dataList]
-			b.WriteString(components.InputSelection(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), values))
-		} else if field.Tag.Get("type") == "textarea" {
-			b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
-		} else if field.Tag.Get("type") == "upload" {
-			endpoint := field.Tag.Get("endpoint")
-			id := v.FieldByName("ID").String()
-			endpoint = strings.Replace(endpoint, ":id", id, 1)
-
-			b.WriteString(components.InputFileUpload(idPrefix+field.Name, field.Name, field.Tag.Get("filetype"), endpoint))
-		} else {
-			b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
-		}
-
-		if showPreview {
-			b.WriteString("<div class='widget-section-preview'>")
-		}
-
-		// Preview
-		switch idType {
-		case "Anime":
-			animeID := fieldValue.String()
-			anime, err := arn.GetAnime(animeID)
-
-			if err == nil {
-				b.WriteString(components.EditFormImagePreview(anime.Link(), anime.ImageLink("small"), true))
-			}
-
-		case "Character":
-			characterID := fieldValue.String()
-			character, err := arn.GetCharacter(characterID)
-
-			if err == nil {
-				b.WriteString(components.EditFormImagePreview(character.Link(), character.ImageLink("medium"), false))
-			}
-
-		case "":
-			break
-
-		default:
-			fmt.Println("Error: Unknown idType tag: " + idType)
-		}
-
-		// Close preview tags
-		if showPreview {
-			b.WriteString("</div></div>")
-		}
-
+		renderStringField(b, v, field, idPrefix, fieldValue)
 		return
 	}
 
@@ -218,46 +149,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 
 	// Any kind of array
 	if strings.HasPrefix(fieldType, "[]") {
-		b.WriteString(`<div class="widget-section">`)
-		b.WriteString(`<h3 class="widget-title">`)
-		b.WriteString(field.Name)
-		b.WriteString(`</h3>`)
-
-		for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
-			b.WriteString(`<div class="widget-section">`)
-
-			b.WriteString(`<div class="widget-title">`)
-
-			// Title
-			b.WriteString(strconv.Itoa(sliceIndex+1) + ". " + field.Name)
-			b.WriteString(`<div class="spacer"></div>`)
-
-			// Remove button
-			b.WriteString(`<button class="action" title="Delete this ` + field.Name + `" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
-			b.WriteString(strconv.Itoa(sliceIndex))
-			b.WriteString(`">` + utils.RawIcon("trash") + `</button>`)
-
-			b.WriteString(`</div>`)
-
-			arrayObj := fieldValue.Index(sliceIndex).Interface()
-			arrayIDPrefix := fmt.Sprintf("%s[%d].", field.Name, sliceIndex)
-			RenderObject(b, arrayObj, arrayIDPrefix)
-
-			// Preview
-			// elementValue := fieldValue.Index(sliceIndex)
-			// RenderArrayElement(b, &elementValue)
-			if fieldType == "[]*arn.ExternalMedia" {
-				b.WriteString(components.ExternalMedia(fieldValue.Index(sliceIndex).Interface().(*arn.ExternalMedia)))
-			}
-
-			b.WriteString(`</div>`)
-		}
-
-		b.WriteString(`<div class="buttons">`)
-		b.WriteString(`<button class="action" data-action="arrayAppend" data-trigger="click" data-field="` + field.Name + `">` + utils.Icon("plus") + `Add ` + field.Name + `</button>`)
-		b.WriteString(`</div>`)
-
-		b.WriteString(`</div>`)
+		renderSliceField(b, v, field, idPrefix, fieldType, fieldValue)
 		return
 	}
 
@@ -268,6 +160,123 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 	// Indent the fields
 	b.WriteString(`<div class="indent">`)
 	RenderObject(b, fieldValue.Interface(), field.Name+".")
+	b.WriteString(`</div>`)
+
+	b.WriteString(`</div>`)
+}
+
+// String field
+func renderStringField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, idPrefix string, fieldValue reflect.Value) {
+	idType := field.Tag.Get("idType")
+
+	// Try to infer the ID type by the field name
+	if idType == "" {
+		switch field.Name {
+		case "AnimeID":
+			idType = "Anime"
+
+		case "CharacterID":
+			idType = "Character"
+		}
+	}
+
+	showPreview := idType != "" && fieldValue.String() != ""
+
+	if showPreview {
+		b.WriteString("<div class='widget-section-with-preview'>")
+	}
+
+	// Input field
+	if field.Tag.Get("datalist") != "" {
+		dataList := field.Tag.Get("datalist")
+		values := arn.DataLists[dataList]
+		b.WriteString(components.InputSelection(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), values))
+	} else if field.Tag.Get("type") == "textarea" {
+		b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
+	} else if field.Tag.Get("type") == "upload" {
+		endpoint := field.Tag.Get("endpoint")
+		id := v.FieldByName("ID").String()
+		endpoint = strings.Replace(endpoint, ":id", id, 1)
+
+		b.WriteString(components.InputFileUpload(idPrefix+field.Name, field.Name, field.Tag.Get("filetype"), endpoint))
+	} else {
+		b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
+	}
+
+	if showPreview {
+		b.WriteString("<div class='widget-section-preview'>")
+	}
+
+	// Preview
+	switch idType {
+	case "Anime":
+		animeID := fieldValue.String()
+		anime, err := arn.GetAnime(animeID)
+
+		if err == nil {
+			b.WriteString(components.EditFormImagePreview(anime.Link(), anime.ImageLink("small"), true))
+		}
+
+	case "Character":
+		characterID := fieldValue.String()
+		character, err := arn.GetCharacter(characterID)
+
+		if err == nil {
+			b.WriteString(components.EditFormImagePreview(character.Link(), character.ImageLink("medium"), false))
+		}
+
+	case "":
+		break
+
+	default:
+		fmt.Println("Error: Unknown idType tag: " + idType)
+	}
+
+	// Close preview tags
+	if showPreview {
+		b.WriteString("</div></div>")
+	}
+}
+
+// Slice field
+func renderSliceField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, idPrefix string, fieldType string, fieldValue reflect.Value) {
+	b.WriteString(`<div class="widget-section">`)
+	b.WriteString(`<h3 class="widget-title">`)
+	b.WriteString(field.Name)
+	b.WriteString(`</h3>`)
+
+	for sliceIndex := 0; sliceIndex < fieldValue.Len(); sliceIndex++ {
+		b.WriteString(`<div class="widget-section">`)
+
+		b.WriteString(`<div class="widget-title">`)
+
+		// Title
+		b.WriteString(strconv.Itoa(sliceIndex+1) + ". " + field.Name)
+		b.WriteString(`<div class="spacer"></div>`)
+
+		// Remove button
+		b.WriteString(`<button class="action" title="Delete this ` + field.Name + `" data-action="arrayRemove" data-trigger="click" data-field="` + field.Name + `" data-index="`)
+		b.WriteString(strconv.Itoa(sliceIndex))
+		b.WriteString(`">` + utils.RawIcon("trash") + `</button>`)
+
+		b.WriteString(`</div>`)
+
+		arrayObj := fieldValue.Index(sliceIndex).Interface()
+		arrayIDPrefix := fmt.Sprintf("%s[%d].", field.Name, sliceIndex)
+		RenderObject(b, arrayObj, arrayIDPrefix)
+
+		// Preview
+		// elementValue := fieldValue.Index(sliceIndex)
+		// RenderArrayElement(b, &elementValue)
+		if fieldType == "[]*arn.ExternalMedia" {
+			b.WriteString(components.ExternalMedia(fieldValue.Index(sliceIndex).Interface().(*arn.ExternalMedia)))
+		}
+
+		b.WriteString(`</div>`)
+	}
+
+	b.WriteString(`<div class="buttons">`)
+	b.WriteString(`<button class="action" data-action="arrayAppend" data-trigger="click" data-field="` + field.Name + `">` + utils.Icon("plus") + `Add ` + field.Name + `</button>`)
 	b.WriteString(`</div>`)
 
 	b.WriteString(`</div>`)
