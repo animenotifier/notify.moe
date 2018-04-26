@@ -106,6 +106,14 @@ func sync(anime *arn.Anime, malID string) {
 		}
 	}
 
+	// Characters
+	syncCharacters(anime, malAnime)
+
+	// Save in database
+	anime.Save()
+}
+
+func syncCharacters(anime *arn.Anime, malAnime *mal.Anime) {
 	// Check for existence of characters
 	animeCharacters := anime.Characters()
 	modifiedCharacters := false
@@ -182,8 +190,6 @@ func sync(anime *arn.Anime, malID string) {
 	if modifiedCharacters {
 		animeCharacters.Save()
 	}
-
-	anime.Save()
 }
 
 func importCharacter(malCharacter *mal.Character) *arn.Character {
