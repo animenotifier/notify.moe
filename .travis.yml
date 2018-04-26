@@ -16,10 +16,13 @@ install: true
 matrix:
   allow_failures:
     - go: master                # It's ok if our code fails on unstable development versions of Go.
-    - script: go get -t ./...   # It's ok if the dependency download fails due to missing components directory.
   # Don't wait for tip tests to finish. Mark the test run green if the
   # tests pass on the stable versions of Go.
   fast_finish: true
+
+jobs:
+  allow_failures:
+    - script: go get -t ./...   # It's ok if the dependency download fails due to missing components directory.
 
 # Don't email me the results of the test runs.
 notifications:
