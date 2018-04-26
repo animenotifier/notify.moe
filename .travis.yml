@@ -20,10 +20,6 @@ matrix:
   # tests pass on the stable versions of Go.
   fast_finish: true
 
-jobs:
-  allow_failures:
-    - script: go get -t ./...   # It's ok if the dependency download fails due to missing components directory.
-
 # Don't email me the results of the test runs.
 notifications:
   email: false
