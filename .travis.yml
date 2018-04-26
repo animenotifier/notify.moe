@@ -1,4 +1,6 @@
-language: go
+language:
+  - go
+  - node_js
 
 # Only the last two Go releases are supported by the Go team with security
 # updates. Any versions older than that should be considered deprecated.
@@ -10,14 +12,16 @@ go:
   - 1.10.x
   - master
 
-# Setting this to true would skip the `go get` dependencies step.
-# Useful if you want to build using repository-provided vendor/ only.
-install: false
+node_js:
+  - "10"
+
+# Setting this to true will skip the `go get` dependencies step.
+install: true
 
 matrix:
-  # It's ok if our code fails on unstable development versions of Go.
   allow_failures:
-    - go: master
+    - go: master                # It's ok if our code fails on unstable development versions of Go.
+    - script: go get -t ./...   # It's ok if the dependency download fails due to missing components directory.
   # Don't wait for tip tests to finish. Mark the test run green if the
   # tests pass on the stable versions of Go.
   fast_finish: true
@@ -34,13 +38,14 @@ before_script:
   - go get github.com/golang/lint/golint                        # Linter
   - go get honnef.co/go/tools/cmd/megacheck                     # Badass static analyzer/linter
   - go get github.com/fzipp/gocyclo
+  - npm install -g typescript
 
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
 script:
   - go get -t ./...                          # Get dependencies. Allow this to fail because components cannot be found.
   - make all
-  - test -z $(gofmt -s -l $GO_FILES)         # Fail if a .go file hasn't been formatted with gofmt
+# - test -z $(gofmt -s -l $GO_FILES)         # Fail if a .go file hasn't been formatted with gofmt
 # - go test -v .                             # Run all the tests
 # - go test -v -race ./...                   # Run all the tests with the race detector enabled
   - go vet ./...                             # go vet is the official Go static analyzer
