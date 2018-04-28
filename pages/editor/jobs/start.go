@@ -2,6 +2,7 @@ package jobs
 
 import (
 	"net/http"
+	"sync"
 
 	"github.com/animenotifier/arn"
 
@@ -9,8 +10,14 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
+// Only allow one job to be started at a time
+var jobStartMutex sync.Mutex
+
 // Start will start the specified background job.
 func Start(ctx *aero.Context) string {
+	jobStartMutex.Lock()
+	defer jobStartMutex.Unlock()
+
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
