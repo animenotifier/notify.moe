@@ -1,0 +1,5 @@
+.background-job
+	[data-running="true"]
+		&.mounted
+			opacity 0.5 !important
+			pointer-events none

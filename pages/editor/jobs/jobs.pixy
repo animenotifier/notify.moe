@@ -1,9 +1,18 @@
-component EditorJobs(running bool, url string, user *arn.User)
+component EditorJobs(jobs []*utils.JobInfo, jobLogs []string, url string, user *arn.User)
 	EditorTabs(url, user)
 
-	h1.editor-list-page-title.mountable Background jobs
+	h1.mountable Background jobs
 
 	.buttons
-		button.mountable.action(data-action="startJob", data-trigger="click", data-job="twist", disabled=running)
-			Icon("rocket")
-			span twist
+		each job in jobs
+			button.background-job.mountable.action(data-action="startJob", data-trigger="click", data-job=job.Name, data-running=job.IsRunning())
+				if job.IsRunning()
+					Icon("hourglass-start")
+				else
+					Icon("rocket")
+				
+				span= job.Name
+	
+	footer.footer
+		for i := 0; i < len(jobLogs); i++
+			p.mountable= jobLogs[len(jobLogs) - 1 - i]

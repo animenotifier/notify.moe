@@ -1,17 +1,39 @@
 package jobs
 
 import (
+	"sort"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-var running = map[string]bool{}
-var lastRun = map[string]string{}
+var jobInfo = map[string]*utils.JobInfo{
+	"anime-ratings": &utils.JobInfo{
+		Name: "anime-ratings",
+	},
+	"twist": &utils.JobInfo{
+		Name: "twist",
+	},
+	"refresh-osu": &utils.JobInfo{
+		Name: "refresh-osu",
+	},
+}
+
+var jobLogs = []string{}
 
 // Overview shows all background jobs.
 func Overview(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
+	jobs := []*utils.JobInfo{}
 
-	return ctx.HTML(components.EditorJobs(running, lastRun, ctx.URI(), user))
+	for _, job := range jobInfo {
+		jobs = append(jobs, job)
+	}
+
+	sort.Slice(jobs, func(i, j int) bool {
+		return jobs[i].Name < jobs[j].Name
+	})
+
+	return ctx.HTML(components.EditorJobs(jobs, jobLogs, ctx.URI(), user))
 }

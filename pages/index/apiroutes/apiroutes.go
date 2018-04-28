@@ -10,6 +10,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/animeimport"
 	"github.com/animenotifier/notify.moe/pages/apiview"
 	"github.com/animenotifier/notify.moe/pages/apiview/apidocs"
+	"github.com/animenotifier/notify.moe/pages/editor/jobs"
 	"github.com/animenotifier/notify.moe/pages/me"
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/popular"
@@ -45,4 +46,7 @@ func Register(l *layout.Layout, app *aero.Application) {
 	// Import anime
 	app.Post("/api/import/kitsu/anime/:id", animeimport.Kitsu)
 	app.Post("/api/delete/kitsu/anime/:id", animeimport.DeleteKitsu)
+
+	// Jobs
+	app.Post("/api/job/:job/start", jobs.Start)
 }

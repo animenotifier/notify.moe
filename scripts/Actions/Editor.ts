@@ -75,6 +75,11 @@ export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAre
 
 // Start background job
 export async function startJob(arn: AnimeNotifier, button: HTMLButtonElement) {
+	if(button.dataset.running === "true") {
+		alert("Job is currently running!")
+		return
+	}
+
 	let jobName = button.dataset.job
 
 	if(!confirm(`Are you sure you want to start the "${jobName}" job?`)) {
