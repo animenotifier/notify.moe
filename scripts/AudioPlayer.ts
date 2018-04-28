@@ -86,6 +86,11 @@ export default class AudioPlayer {
 			this.audioPlayer.classList.add("decoding-audio")
 			this.arn.loading(false)
 
+			// Connect gain node to audio context when the response arrives.
+			// Connecting it instantly on audio context creation would fail
+			// without any error and also wouldn't work on audio source changes.
+			this.gainNode.connect(this.audioContext.destination)
+
 			this.audioContext.decodeAudioData(request.response, async buffer => {
 				if(currentPlayId !== this.playId) {
 					return
@@ -97,7 +102,6 @@ export default class AudioPlayer {
 				this.audioNode = this.audioContext.createBufferSource()
 				this.audioNode.buffer = buffer
 				this.audioNode.connect(this.gainNode)
-				this.gainNode.connect(this.audioContext.destination)
 				this.audioNode.playbackRate.setValueAtTime(this.targetSpeed, 0)
 				this.audioNode.start(0)
 
