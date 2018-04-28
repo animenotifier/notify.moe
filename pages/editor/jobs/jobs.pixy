@@ -1,0 +1,9 @@
+component EditorJobs(running bool, url string, user *arn.User)
+	EditorTabs(url, user)
+
+	h1.editor-list-page-title.mountable Background jobs
+
+	.buttons
+		button.mountable.action(data-action="startJob", data-trigger="click", data-job="twist", disabled=running)
+			Icon("rocket")
+			span twist

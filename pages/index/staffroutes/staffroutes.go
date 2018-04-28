@@ -9,6 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editor/filteranime"
 	"github.com/animenotifier/notify.moe/pages/editor/filtercompanies"
 	"github.com/animenotifier/notify.moe/pages/editor/filtersoundtracks"
+	"github.com/animenotifier/notify.moe/pages/editor/jobs"
 )
 
 // Register registers the page routes.
@@ -61,6 +62,9 @@ func Register(l *layout.Layout) {
 	l.Page("/editor/soundtracks/lyrics/unaligned", filtersoundtracks.UnalignedLyrics)
 	l.Page("/editor/soundtracks/tags", filtersoundtracks.Tags)
 	l.Page("/editor/soundtracks/file", filtersoundtracks.File)
+
+	// Editor - Jobs
+	l.Page("/editor/jobs", jobs.Overview)
 
 	// Log
 	l.Page("/log", editlog.Get)

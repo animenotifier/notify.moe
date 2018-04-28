@@ -71,3 +71,16 @@ export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAre
 	results.classList.remove("hidden")
 	showSearchResults(arn, results)
 }
+
+
+// Start background job
+export async function startJob(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let jobName = button.dataset.job
+
+	if(!confirm(`Are you sure you want to start the "${jobName}" job?`)) {
+		return
+	}
+
+	await arn.post(`/api/job/${jobName}/start`)
+	arn.reloadContent()
+}
