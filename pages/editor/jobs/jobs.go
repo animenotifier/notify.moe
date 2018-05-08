@@ -12,6 +12,9 @@ var jobInfo = map[string]*utils.JobInfo{
 	"anime-ratings": &utils.JobInfo{
 		Name: "anime-ratings",
 	},
+	"kitsu-import-anime": &utils.JobInfo{
+		Name: "kitsu-import-anime",
+	},
 	"twist": &utils.JobInfo{
 		Name: "twist",
 	},
