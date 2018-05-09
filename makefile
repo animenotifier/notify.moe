@@ -9,6 +9,7 @@ BUILDPATCHES=@./patches/build.sh
 BUILDBOTS=@./bots/build.sh
 TSCMD=@tsc
 IPTABLES=@sudo iptables
+IP6TABLES=@sudo ip6tables
 PACK:=$(shell command -v pack 2> /dev/null)
 RUN:=$(shell command -v run 2> /dev/null)
 GOIMPORTS:=$(shell command -v goimports 2> /dev/null)
@@ -84,6 +85,8 @@ ports:
 ifeq ($(OSNAME),LINUX)
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 4000
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 4001
+	$(IP6TABLES) -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 4000
+	$(IP6TABLES) -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 4001
 endif
 ifeq ($(OSNAME),OSX)
 	@echo "rdr pass inet proto tcp from any to any port 443 -> 127.0.0.1 port 4001" | sudo pfctl -ef -

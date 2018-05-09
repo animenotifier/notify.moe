@@ -22,6 +22,10 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 * In your browser, import the file `security/default/rootCA.pem` as a trusted Root authority
 * Open `https://beta.notify.moe`
 
+## OS restarts
+
+* If you restart your operating system, run `make ports` to update your port bindings
+
 [godoc-image]: https://godoc.org/github.com/animenotifier/notify.moe?status.svg
 [godoc-url]: https://godoc.org/github.com/animenotifier/notify.moe
 [travis-image]: https://travis-ci.org/animenotifier/notify.moe.svg?branch=go
