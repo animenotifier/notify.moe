@@ -17,7 +17,7 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 				a(href=item.Link(viewUser.Nick))= item.Anime().Title.ByUser(user)
 
 			.anime-list-item-actions
-				if user != nil && item.Status == arn.AnimeListStatusWatching
+				if user != nil && item.Status == arn.AnimeListStatusWatching && user.Location.CountryName != "Japan"
 					//- if user.ID == "KpdWUlPzR"
 					//- 	a(href=arn.Nyaa.GetLink(item.Anime()), title="Search on Nyaa", target="_blank", rel="noopener")
 					//- 		RawIcon("download")
