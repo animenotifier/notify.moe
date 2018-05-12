@@ -15,7 +15,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 		p.episode-view-airing-date
 			span.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 	
-	if user != nil
+	if user != nil && user.Location.CountryName != "Japan"
 		.buttons
 			for serviceName, link := range episode.Links
 				a.button(href=link, title="Watch episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
