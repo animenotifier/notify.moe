@@ -58,7 +58,7 @@ func configure(app *aero.Application) *aero.Application {
 	auth.Install(app)
 
 	// Close the database node on shutdown
-	app.OnShutdown(arn.Node.Close)
+	app.OnEnd(arn.Node.Close)
 
 	// Check that this is the server
 	if !arn.Node.IsServer() && !arn.IsTest() {
