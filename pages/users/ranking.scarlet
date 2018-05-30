@@ -1,5 +1,5 @@
 .ranking-list
-	max-width 400px
+	width auto
 
 .ranking
 	width 100%
