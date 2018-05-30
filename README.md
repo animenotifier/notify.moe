@@ -1,6 +1,7 @@
 # Installation
 
 [![Godoc reference][godoc-image]][godoc-url]
+[![Go report card][goreportcard-image]][goreportcard-url]
 [![Build status][travis-image]][travis-url]
 
 ## Prerequisites
@@ -28,5 +29,7 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 
 [godoc-image]: https://godoc.org/github.com/animenotifier/notify.moe?status.svg
 [godoc-url]: https://godoc.org/github.com/animenotifier/notify.moe
+[goreportcard-image]: https://goreportcard.com/badge/github.com/animenotifier/notify.moe
+[goreportcard-url]: https://goreportcard.com/report/github.com/animenotifier/notify.moe
 [travis-image]: https://travis-ci.org/animenotifier/notify.moe.svg?branch=go
 [travis-url]: https://travis-ci.org/animenotifier/notify.moe
