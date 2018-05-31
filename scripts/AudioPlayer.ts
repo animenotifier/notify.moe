@@ -91,10 +91,16 @@ export default class AudioPlayer {
 			// without any error and also wouldn't work on audio source changes.
 			this.gainNode.connect(this.audioContext.destination)
 
+			// Show status message
+			this.arn.statusMessage.showInfo("Decoding audio...", -1)
+
 			this.audioContext.decodeAudioData(request.response, async buffer => {
 				if(currentPlayId !== this.playId) {
 					return
 				}
+
+				// Close status message
+				this.arn.statusMessage.showInfo(`Playing "${this.trackLink.textContent}"`)
 
 				// Mark as ready
 				this.audioPlayer.classList.add("decoded")
@@ -115,9 +121,21 @@ export default class AudioPlayer {
 			}, console.error)
 		}
 
+		request.onprogress = e => {
+			if(!e.lengthComputable) {
+				return
+			}
+
+			let progress = e.loaded / e.total * 100
+			this.arn.statusMessage.showInfo(`Loading audio...${progress.toFixed(1)}%`, -1)
+		}
+
 		request.onerror = () => {
 			this.arn.loading(false)
 		}
+
+		// Show status message
+		this.arn.statusMessage.showInfo("Loading audio...", -1)
 
 		this.lastRequest = request
 		request.send()
