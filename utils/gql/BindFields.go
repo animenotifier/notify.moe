@@ -127,7 +127,7 @@ func getGraphList(tipe reflect.Type) *graphql.List {
 		}
 	}
 
-	// finaly bind object
+	// finally bind object
 	t := reflect.New(tipe.Elem())
 	name := strings.Replace(fmt.Sprint(tipe.Elem()), ".", "_", -1)
 	obj := graphql.NewObject(graphql.ObjectConfig{
