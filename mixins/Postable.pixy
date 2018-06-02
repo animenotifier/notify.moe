@@ -37,6 +37,10 @@ component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
 						else
 							a.post-tool.post-like.tip.action(id="like-" + post.ID(), aria-label="Like", data-action="like", data-trigger="click")
 								Icon("thumbs-up")
+					
+					if user.Role == "admin"
+						a.post-tool.post-edit.tip(href=post.Link() + "/edit", aria-label="Edit")
+							Icon("edit")
 
 					if user.ID == post.Creator().ID
 						a.post-tool.post-edit.tip.action(data-action="editPost", data-trigger="click", data-id=post.ID(), aria-label="Edit")

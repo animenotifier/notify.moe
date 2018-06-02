@@ -1,0 +1,7 @@
+component EditPostTabs(post *arn.Post)
+	.tabs
+		a.tab(href=post.Link())
+			Icon("comment")
+			span Post
+		
+		Tab("Edit", "pencil", post.Link() + "/edit")

@@ -1,0 +1,7 @@
+component EditThreadTabs(thread *arn.Thread)
+	.tabs
+		a.tab(href=thread.Link())
+			Icon("comments")
+			span Thread
+		
+		Tab("Edit", "pencil", thread.Link() + "/edit")

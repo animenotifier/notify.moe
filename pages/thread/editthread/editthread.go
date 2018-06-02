@@ -1,0 +1,29 @@
+package editthread
+
+import (
+	"net/http"
+
+	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/utils/editform"
+)
+
+// Get thread edit page.
+func Get(ctx *aero.Context) string {
+	id := ctx.Get("id")
+	user := utils.GetUser(ctx)
+
+	if user == nil || (user.Role != "editor" && user.Role != "admin") {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this thread", nil)
+	}
+
+	thread, err := arn.GetThread(id)
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "Thread not found", err)
+	}
+
+	return ctx.HTML(components.EditThreadTabs(thread) + editform.Render(thread, "Edit thread", user))
+}
