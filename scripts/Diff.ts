@@ -8,7 +8,7 @@ import MutationQueue from "./MutationQueue"
 //
 // Whatever contents will be in the body, they will be re-used and morphed
 // into the new DOM defined by a simple HTML string. This is useful for
-// Single Page Applications that use server rendered pages. The server
+// Single Page Applications that use server rendered content. The server
 // responds with the pre-rendered HTML and we can simply morph our current
 // contents into the next page.
 export default class Diff {
