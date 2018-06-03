@@ -14,7 +14,7 @@ component AMVPage(amv *arn.AMV, user *arn.User)
 			.widget
 				h3.widget-title.mountable Anime
 
-				if amv.MainAnimeID != ""
+				if amv.MainAnimeID != "" && amv.MainAnime() != nil
 					.amv-main-anime.mountable
 						AnimeGrid([]*arn.Anime{amv.MainAnime()}, user)
 				
