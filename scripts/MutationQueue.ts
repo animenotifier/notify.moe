@@ -30,7 +30,6 @@ export default class MutationQueue {
 
 		for(let i = 0; i < this.mutations.length; i++) {
 			if(performance.now() - start > timeCapacity) {
-				let end = performance.now()
 				this.mutations = this.mutations.slice(i)
 				window.requestAnimationFrame(() => this.mutateAll())
 				return
