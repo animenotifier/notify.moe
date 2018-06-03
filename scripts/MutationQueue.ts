@@ -8,7 +8,7 @@ const timeCapacity = 6.5
 // MutationQueue queues up DOM mutations to batch execute them before a frame is rendered.
 // It checks the time used to process these mutations and if the time is over the
 // defined time capacity, it will pause and continue the mutations in the next frame.
-export class MutationQueue {
+export default class MutationQueue {
 	mutations: Array<() => void>
 	onClearCallBacks: Array<() => void>
 

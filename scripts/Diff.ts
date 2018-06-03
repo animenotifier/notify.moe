@@ -1,4 +1,4 @@
-import { MutationQueue } from "./MutationQueue"
+import MutationQueue from "./MutationQueue"
 
 export default class Diff {
 	static persistentClasses = new Set<string>()
