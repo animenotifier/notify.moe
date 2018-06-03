@@ -1,5 +1,16 @@
 import MutationQueue from "./MutationQueue"
 
+// Diff provides diffing utilities to morph existing DOM elements
+// into the target HTML string.
+//
+// Example:
+// Diff.innerHTML(body, "<div>This is my new content</div>")
+//
+// Whatever contents will be in the body, they will be re-used and morphed
+// into the new DOM defined by a simple HTML string. This is useful for
+// Single Page Applications that use server rendered pages. The server
+// responds with the pre-rendered HTML and we can simply morph our current
+// contents into the next page.
 export default class Diff {
 	static persistentClasses = new Set<string>()
 	static persistentAttributes = new Set<string>()
