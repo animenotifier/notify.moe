@@ -41,8 +41,7 @@ func InstallFacebookAuth(app *aero.Application) {
 	app.Get("/auth/facebook", func(ctx *aero.Context) string {
 		state := ctx.Session().ID()
 		url := config.AuthCodeURL(state)
-		ctx.Redirect(url)
-		return ""
+		return ctx.Redirect(url)
 	})
 
 	// Auth Callback
