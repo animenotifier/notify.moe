@@ -17,7 +17,7 @@ component SoundTrackContent(track *arn.SoundTrack, user *arn.User)
 		SoundTrackMedia(track)
 
 component SoundTrackMedia(track *arn.SoundTrack)
-	if track.File != ""
+	if track.File != "" && track.HasMediaByService("Youtube")
 		.soundtrack-media
 			.soundtrack-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-soundtrack-id=track.ID)
 				img.soundtrack-image.lazy(data-src="https://img.youtube.com/vi/" + track.MediaByService("Youtube")[0].ServiceID + "/0.jpg", alt=track.Title)
@@ -28,7 +28,7 @@ component SoundTrackMedia(track *arn.SoundTrack)
 					.visualizer-box.visualizer-box-1
 					.visualizer-box.visualizer-box-2
 					.visualizer-box.visualizer-box-3
-	else
+	else if len(track.Media) > 0
 		ExternalMedia(track.Media[0])
 
 component SoundTrackFooter(track *arn.SoundTrack, user *arn.User)
