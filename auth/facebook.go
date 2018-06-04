@@ -26,6 +26,10 @@ type FacebookUser struct {
 
 // InstallFacebookAuth enables Facebook login for the app.
 func InstallFacebookAuth(app *aero.Application) {
+	// OAuth2 configuration defines the API keys,
+	// scopes of required data and the redirect URL
+	// that Facebook should send the user to after
+	// a successful login on their pages.
 	config := &oauth2.Config{
 		ClientID:     arn.APIKeys.Facebook.ID,
 		ClientSecret: arn.APIKeys.Facebook.Secret,
@@ -37,14 +41,20 @@ func InstallFacebookAuth(app *aero.Application) {
 		Endpoint: facebook.Endpoint,
 	}
 
-	// Auth
+	// When a user visits /auth/facebook, we ask OAuth2 config for a URL
+	// to redirect the user to. Once the user has logged in on that page,
+	// he'll be redirected back to our servers to the callback page.
 	app.Get("/auth/facebook", func(ctx *aero.Context) string {
 		state := ctx.Session().ID()
 		url := config.AuthCodeURL(state)
 		return ctx.Redirect(url)
 	})
 
-	// Auth Callback
+	// This is the redirect URL that we specified in the OAuth2 config.
+	// The user has successfully completed the login on Facebook servers.
+	// Now we have to check for fraud requests and request user information.
+	// If both Facebook ID and email can't be found in our DB, register a new user.
+	// Otherwise, log in the user with the given Facebook ID or email.
 	app.Get("/auth/facebook/callback", func(ctx *aero.Context) string {
 		if !ctx.HasSession() {
 			return ctx.Error(http.StatusUnauthorized, "Facebook login failed", errors.New("Session does not exist"))
