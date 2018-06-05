@@ -43,7 +43,7 @@
 	"manifest": {
 		"short_name": "Anime",
 		"gcm_sender_id": "941298467524",
-		"theme_color": "#a7ff47",
+		"theme_color": "#ef371f",
 		"background_color": "#f6f6f6",
 		"icons": [
 			{
