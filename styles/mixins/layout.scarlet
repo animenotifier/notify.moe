@@ -19,5 +19,5 @@ mixin vertical-wrap
 	flex-flow column wrap
 
 mixin vertical-wrap-center
-	horizontal-wrap
+	vertical-wrap
 	align-items center
