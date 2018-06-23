@@ -2,6 +2,6 @@
 
 The changes in this folder are ignored by git.
 
-## API keys
+## Default certificates and API keys
 
-The default API keys included do not represent the actual API keys used on the live server. The ones provided in the repository are merely used for testing.
+The default certificates and API keys included do not represent the actual ones used on the live server. The ones provided in the repository are merely used for local testing.

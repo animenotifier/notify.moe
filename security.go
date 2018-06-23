@@ -14,7 +14,7 @@ func configureHTTPS(app *aero.Application) {
 	fullKeyPath := path.Join(arn.Root, "security", "privkey.pem")
 
 	if _, err := os.Stat(fullCertPath); os.IsNotExist(err) {
-		defaultCertPath := path.Join(arn.Root, "security", "default", "fullchain.pem")
+		defaultCertPath := path.Join(arn.Root, "security", "default", "server.crt")
 		err := os.Link(defaultCertPath, fullCertPath)
 
 		if err != nil {
@@ -26,7 +26,7 @@ func configureHTTPS(app *aero.Application) {
 	}
 
 	if _, err := os.Stat(fullKeyPath); os.IsNotExist(err) {
-		defaultKeyPath := path.Join(arn.Root, "security", "default", "privkey.pem")
+		defaultKeyPath := path.Join(arn.Root, "security", "default", "server.key")
 		err := os.Link(defaultKeyPath, fullKeyPath)
 
 		if err != nil {
