@@ -2,8 +2,6 @@
 	"editor.detectIndentation": false,
 	"editor.insertSpaces": false,
 	"files.trimTrailingWhitespace": true,
-	"tsimporter.emitSemicolon": false,
-	"tsimporter.doubleQuotes": true,
 	"files.exclude": {
 		"**/*.js": {
 			"when": "$(basename).ts"

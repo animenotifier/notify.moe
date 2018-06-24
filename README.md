@@ -20,7 +20,7 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 ## Run the server
 
 * Start the web server in notify.moe directory using: `run`
-* In your browser, import the file `security/default/rootCA.pem` as a trusted Root authority
+* In your browser, import the file `security/default/root.crt` as a trusted Root authority
 * Open `https://beta.notify.moe`
 
 ## OS restarts
