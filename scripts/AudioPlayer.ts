@@ -65,7 +65,7 @@ export default class AudioPlayer {
 
 		// Check if we have PRO status after 5 plays
 		if(this.playId >= 6 && this.arn.user.dataset.pro !== "true") {
-			this.arn.statusMessage.showInfo("Please buy a PRO account to get unlimited access the Anime Radio.", -1)
+			this.arn.statusMessage.showInfo("Please buy a PRO account to get unlimited access to the Anime Radio.", -1)
 			return
 		}
 
