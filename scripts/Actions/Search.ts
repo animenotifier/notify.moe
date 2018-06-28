@@ -112,7 +112,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 			searchPageTitle = document.getElementsByTagName("h1")[0]
 		}
 
-		searchPageTitle.innerText = document.title
+		searchPageTitle.textContent = document.title
 
 		if(!term || term.length < 1) {
 			await arn.innerHTML(searchPage, emptySearchHTML)

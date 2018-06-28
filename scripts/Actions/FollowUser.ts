@@ -4,7 +4,7 @@ import AnimeNotifier from "../AnimeNotifier"
 export function followUser(arn: AnimeNotifier, elem: HTMLElement) {
 	return arn.post(elem.dataset.api)
 	.then(() => arn.reloadContent())
-	.then(() => arn.statusMessage.showInfo("You are now following " + document.getElementById("nick").innerText + "."))
+	.then(() => arn.statusMessage.showInfo("You are now following " + document.getElementById("nick").textContent + "."))
 	.catch(err => arn.statusMessage.showError(err))
 }
 
@@ -12,6 +12,6 @@ export function followUser(arn: AnimeNotifier, elem: HTMLElement) {
 export function unfollowUser(arn: AnimeNotifier, elem: HTMLElement) {
 	return arn.post(elem.dataset.api)
 	.then(() => arn.reloadContent())
-	.then(() => arn.statusMessage.showInfo("You stopped following " + document.getElementById("nick").innerText + "."))
+	.then(() => arn.statusMessage.showInfo("You stopped following " + document.getElementById("nick").textContent + "."))
 	.catch(err => arn.statusMessage.showError(err))
 }

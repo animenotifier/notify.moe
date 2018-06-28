@@ -12,7 +12,7 @@ export default class StatusMessage {
 	show(message: string, duration: number) {
 		let messageId = String(Date.now())
 
-		this.text.innerText = message
+		this.text.textContent = message
 
 		this.container.classList.remove("fade-out")
 		this.container.dataset.messageId = messageId

@@ -61,7 +61,7 @@ function getRemainingTime(remaining: number): string {
 
 export function displayAiringDate(element: HTMLElement, now: Date) {
 	if(element.dataset.startDate === "") {
-		element.innerText = ""
+		element.textContent = ""
 		return
 	}
 
@@ -86,7 +86,7 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 		remainingString = remainingString.substring(1) + " ago"
 	}
 
-	element.innerText = remainingString
+	element.textContent = remainingString
 
 	if(remaining < 0) {
 		airingVerb = "aired"
@@ -104,7 +104,7 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 
 export function displayDate(element: HTMLElement, now: Date) {
 	if(element.dataset.date === "") {
-		element.innerText = ""
+		element.textContent = ""
 		return
 	}
 
@@ -122,7 +122,7 @@ export function displayDate(element: HTMLElement, now: Date) {
 		remainingString = remainingString.substring(1) + " ago"
 	}
 
-	element.innerText = remainingString
+	element.textContent = remainingString
 	let tooltip = dayNames[startDate.getDay()] + " " + startTime
 
 	if(element.classList.contains("no-tip")) {
@@ -135,7 +135,7 @@ export function displayDate(element: HTMLElement, now: Date) {
 
 export function displayTime(element: HTMLElement, now: Date) {
 	if(element.dataset.date === "") {
-		element.innerText = ""
+		element.textContent = ""
 		return
 	}
 
@@ -145,5 +145,5 @@ export function displayTime(element: HTMLElement, now: Date) {
 	let m = startDate.getMinutes()
 	let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
 
-	element.innerText = startTime
+	element.textContent = startTime
 }

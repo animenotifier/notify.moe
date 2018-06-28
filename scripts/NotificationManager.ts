@@ -27,7 +27,7 @@ export default class NotificationManager {
 
 	render() {
 		Diff.mutations.queue(() => {
-			this.counter.innerText = this.unseen.toString()
+			this.counter.textContent = this.unseen.toString()
 
 			if(this.unseen === 0) {
 				this.counter.classList.add("hidden")

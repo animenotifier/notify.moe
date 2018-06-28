@@ -26,7 +26,7 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 		return
 	}
 
-	button.innerText = "Removing..."
+	button.textContent = "Removing..."
 
 	let {animeId, nick} = button.dataset
 	let apiEndpoint = arn.findAPIEndpoint(button)

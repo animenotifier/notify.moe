@@ -4,7 +4,7 @@ import AnimeNotifier from "../AnimeNotifier"
 export async function save(arn: AnimeNotifier, input: HTMLElement) {
 	let obj = {}
 	let isContentEditable = input.isContentEditable
-	let value = isContentEditable ? input.innerText : (input as HTMLInputElement).value
+	let value = isContentEditable ? input.textContent : (input as HTMLInputElement).value
 
 	if(value === undefined) {
 		return
@@ -134,8 +134,8 @@ export function increaseEpisode(arn: AnimeNotifier, element: HTMLElement) {
 	}
 
 	let prev = element.previousSibling as HTMLElement
-	let episodes = parseInt(prev.innerText)
-	prev.innerText = String(episodes + 1)
+	let episodes = parseInt(prev.textContent)
+	prev.textContent = String(episodes + 1)
 	save(arn, prev)
 }
 

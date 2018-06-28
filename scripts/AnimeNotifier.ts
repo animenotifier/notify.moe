@@ -168,14 +168,18 @@ export default class AnimeNotifier {
 		])
 
 		// Apply page title
+		this.applyPageTitle()
+	}
+
+	applyPageTitle() {
 		let headers = document.getElementsByTagName("h1")
 
-		if(this.app.currentPath === "/" || headers.length === 0 || headers[0].innerText === "NOTIFY.MOE") {
+		if(this.app.currentPath === "/" || headers.length === 0 || headers[0].textContent === "NOTIFY.MOE") {
 			if(document.title !== this.title) {
 				document.title = this.title
 			}
 		} else {
-			document.title = headers[0].innerText
+			document.title = headers[0].textContent
 		}
 	}
 
@@ -445,11 +449,11 @@ export default class AnimeNotifier {
 		}
 
 		for(let element of findAll("count-up")) {
-			let final = parseInt(element.innerText)
+			let final = parseInt(element.textContent)
 			let duration = 2000.0
 			let start = Date.now()
 
-			element.innerText = "0"
+			element.textContent = "0"
 
 			let callback = () => {
 				let progress = (Date.now() - start) / duration
@@ -458,7 +462,7 @@ export default class AnimeNotifier {
 					progress = 1
 				}
 
-				element.innerText = String(Math.round(progress * final))
+				element.textContent = String(Math.round(progress * final))
 
 				if(progress < 1) {
 					window.requestAnimationFrame(callback)
@@ -917,12 +921,9 @@ export default class AnimeNotifier {
 
 	scrollTo(target: HTMLElement) {
 		const duration = 250.0
-		const steps = 60
-		const interval = duration / steps
 		const fullSin = Math.PI / 2
 		const contentPadding = 24
 
-		let scrollHandle: number
 		let newScroll = 0
 		let finalScroll = Math.max(target.offsetTop - contentPadding, 0)
 

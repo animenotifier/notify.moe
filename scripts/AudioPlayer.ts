@@ -201,7 +201,7 @@ export default class AudioPlayer {
 
 		// Remove title
 		this.trackLink.href = ""
-		this.trackLink.innerText = ""
+		this.trackLink.textContent = ""
 
 		// Hide anime info
 		this.animeLink.href = ""
@@ -287,7 +287,7 @@ export default class AudioPlayer {
 		let trackInfoResponse = await fetch("/api/soundtrack/" + trackId)
 		let track = await trackInfoResponse.json()
 		this.trackLink.href = "/soundtrack/" + track.id
-		this.trackLink.innerText = track.title.canonical || track.title.native
+		this.trackLink.textContent = track.title.canonical || track.title.native
 
 		let animeId = ""
 
