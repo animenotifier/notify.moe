@@ -6,7 +6,5 @@
 		"baseUrl": ".",
 		"strict": false,
 		"strictFunctionTypes": false
-	},
-	"compileOnSave": true,
-	"buildOnSave": false
+	}
 }
