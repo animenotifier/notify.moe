@@ -3,7 +3,13 @@
 echo "Checking prerequisites..."
 
 if hash go 2>/dev/null; then
-	go version
+	if [[ ":$PATH:" == *":$GOPATH/bin:"* || ":$PATH:" == *":$GOPATH/bin/:"* ]]; then
+		go version
+	else
+		echo "Your \$PATH is missing \$GOPATH/bin, you should add this to your ~/.profile:"
+		echo "export PATH=\$PATH:/usr/local/go/bin:\$GOPATH/bin"
+		exit
+	fi
 else
 	echo "Go is not installed"
 	exit
