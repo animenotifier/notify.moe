@@ -60,4 +60,20 @@ SidebarButton("Foobar", "/foobar", "plus")
 
 Navigate to `beta.notify.moe` and you should see the button to access your newly made page! Yay!
 
-Feel free to play around with the code now. You can utilize pixy components by using the `components` package inside your controller.
+Feel free to play around with the code now. You can utilize pixy components by using the `components` package inside your controller:
+
+```go
+package foobar
+
+import (
+	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/components"
+)
+
+// Get returns the contents of our amazing page.
+func Get(ctx *aero.Context) string {
+	return ctx.HTML(components.FooBar())
+}
+```
+
+This would now return the contents of your pixy component instead of a hard-coded string.
