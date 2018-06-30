@@ -15,7 +15,7 @@ import (
 	"github.com/aerogo/aero"
 )
 
-// Get ...
+// Get returns the contents of our amazing page.
 func Get(ctx *aero.Context) string {
 	return ctx.HTML("Hey it's me, foobar!")
 }
