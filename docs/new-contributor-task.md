@@ -1,6 +1,6 @@
 # Task for new contributors
 
-This task assumes that you have [installed](https://github.com/animenotifier/notify.moe#installation) notify.moe already, started the server with the `run` tool and have the code open in Visual Studio Code.
+This task assumes that you have [installed](https://github.com/animenotifier/notify.moe#installation) notify.moe already, started the server with the `run` tool and have the code open in Visual Studio Code. It will teach you the basics by creating an entirely empty page within notify.moe.
 
 # Step 1: Create a new page
 
