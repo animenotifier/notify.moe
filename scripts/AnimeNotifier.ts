@@ -774,7 +774,7 @@ export default class AnimeNotifier {
 
 	modifyDelayed(elements: IterableIterator<HTMLElement>, func: (element: HTMLElement) => void) {
 		const maxDelay = 2500
-		const delay = 18
+		const delay = 40
 
 		let time = 0
 		let start = Date.now()
@@ -859,8 +859,8 @@ export default class AnimeNotifier {
 			this.unmountMountables()
 			this.loading(true)
 
-			// Delay by transition-speed
-			await delay(150)
+			// Delay by mountable-transition-speed
+			await delay(250)
 
 			let html = await request
 

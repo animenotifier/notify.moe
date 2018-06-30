@@ -143,4 +143,4 @@ const anime-image-large-height = 350px
 // Timings
 fade-speed = 150ms
 transition-speed = 150ms
-mountable-transition-speed = 150ms
+mountable-transition-speed = 250ms
