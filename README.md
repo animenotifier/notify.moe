@@ -33,3 +33,9 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 [goreportcard-url]: https://goreportcard.com/report/github.com/animenotifier/notify.moe
 [travis-image]: https://travis-ci.org/animenotifier/notify.moe.svg?branch=go
 [travis-url]: https://travis-ci.org/animenotifier/notify.moe
+
+## Author
+
+| [![Eduard Urbach on Twitter](https://gravatar.com/avatar/16ed4d41a5f244d1b10de1b791657989?s=70)](http://twitter.com/eduardurbach "Follow @eduardurbach on Twitter") |
+|---|
+| [Eduard Urbach](https://eduardurbach.com) |
