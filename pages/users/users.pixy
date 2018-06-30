@@ -2,10 +2,9 @@ component Users(users []*arn.User, url string)
 	h1.page-title Users
 	UsersTabs(url)
 
-	.user-avatars
+	.user-avatars.mountable
 		each user in users
-			.mountable
-				Avatar(user)
+			Avatar(user)
 
 component ProUsers(users []*arn.User, url string)
 	h1.page-title Supporters

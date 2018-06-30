@@ -23,7 +23,7 @@ func Get(ctx *aero.Context) string {
 
 	// Fetch posts
 	postObjects := arn.DB.GetMany("Post", thread.Posts)
-	posts := make([]*arn.Post, len(postObjects), len(postObjects))
+	posts := make([]*arn.Post, len(postObjects))
 
 	for i, obj := range postObjects {
 		posts[i] = obj.(*arn.Post)

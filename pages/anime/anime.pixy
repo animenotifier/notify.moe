@@ -7,18 +7,18 @@ component Anime(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.Sou
 
 component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, amvAppearances []*arn.AMV, episodes []*arn.AnimeEpisode, user *arn.User)
 	.anime-header(data-id=anime.ID)
-		a.anime-image-container.mountable(href=anime.ImageLink("original"), target="_blank")
+		a.anime-image-container.mountable(href=anime.ImageLink("original"), target="_blank", data-mountable-type="header")
 			img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 		.space
 
 		.anime-info
-			h1.anime-title.mountable(title=anime.Type)= anime.Title.ByUser(user)
+			h1.anime-title.mountable(title=anime.Type, data-mountable-type="header")= anime.Title.ByUser(user)
 
-			h2.anime-alternative-title.mountable
+			h2.anime-alternative-title.mountable(data-mountable-type="header")
 				Japanese(anime.Title.Japanese)
 
-			p.anime-summary.mountable= anime.Summary
+			p.anime-summary.mountable(data-mountable-type="header")= anime.Summary
 
 			.anime-summary-footer-container
 				.anime-summary-footer
@@ -43,26 +43,26 @@ component AnimeActions(anime *arn.Anime, listItem *arn.AnimeListItem, user *arn.
 	if user != nil
 		.buttons.anime-actions
 			if user.Role == "editor" || user.Role == "admin"
-				a.button.mountable(href=anime.Link() + "/edit", data-mountable-type="footer")
+				a.button.mountable(href=anime.Link() + "/edit", data-mountable-type="header")
 					Icon("pencil-square-o")
 					span Edit anime
 
 			if listItem != nil
-				a.button.mountable(href="/+" + user.Nick + "/animelist/anime/" + anime.ID, data-mountable-type="footer")
+				a.button.mountable(href="/+" + user.Nick + "/animelist/anime/" + anime.ID, data-mountable-type="header")
 					Icon("pencil")
 					span= listItem.StatusHumanReadable()
 			else
-				button.mountable.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID, data-mountable-type="footer")
+				button.mountable.action(data-api="/api/animelist/" + user.ID, data-action="addAnimeToCollection", data-trigger="click", data-anime-id=anime.ID, data-mountable-type="header")
 					Icon("plus")
 					span Add to collection
 
 component AnimeRatings(anime *arn.Anime, user *arn.User)
-	section.anime-section.mountable
+	section.anime-section.mountable(data-mountable-type="sidebar")
 		h3.anime-section-name Ratings
 
 		table.anime-info-table
 			tbody
-				tr.mountable(data-mountable-type="info")
+				tr.mountable(data-mountable-type="ratings")
 					td.anime-info-key
 						if anime.Status == "upcoming"
 							span Hype:
@@ -72,56 +72,56 @@ component AnimeRatings(anime *arn.Anime, user *arn.User)
 						Rating(anime.Rating.Overall, anime.Rating.Count.Overall, user)
 
 				if anime.Rating.Count.Story > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="ratings")
 						td.anime-info-key Story:
 						td.anime-info-value
 							Rating(anime.Rating.Story, anime.Rating.Count.Story, user)
 
 				if anime.Rating.Count.Visuals > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="ratings")
 						td.anime-info-key Visuals:
 						td.anime-info-value
 							Rating(anime.Rating.Visuals, anime.Rating.Count.Visuals, user)
 
 				if anime.Rating.Count.Soundtrack > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="ratings")
 						td.anime-info-key Soundtrack:
 						td.anime-info-value
 							Rating(anime.Rating.Soundtrack, anime.Rating.Count.Soundtrack, user)
 
 component AnimePopularity(anime *arn.Anime)
 	if anime.Popularity.Total() > 0
-		section.anime-section.mountable
+		section.anime-section.mountable(data-mountable-type="sidebar")
 			h3.anime-section-name Popularity
 
 			table.anime-info-table
 				if anime.Popularity.Watching > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="popularity")
 						td.anime-info-key Watching:
 						td.anime-info-value= anime.Popularity.Watching
 
 				if anime.Popularity.Completed > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="popularity")
 						td.anime-info-key Completed:
 						td.anime-info-value= anime.Popularity.Completed
 
 				if anime.Popularity.Planned > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="popularity")
 						td.anime-info-key Planned:
 						td.anime-info-value= anime.Popularity.Planned
 
 				if anime.Popularity.Hold > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="popularity")
 						td.anime-info-key On hold:
 						td.anime-info-value= anime.Popularity.Hold
 
 				if anime.Popularity.Dropped > 0
-					tr.mountable(data-mountable-type="info")
+					tr.mountable(data-mountable-type="popularity")
 						td.anime-info-key Dropped:
 						td.anime-info-value= anime.Popularity.Dropped
 
 component AnimeLinks(anime *arn.Anime, user *arn.User)
-	section.anime-section.mountable
+	section.anime-section.mountable(data-mountable-type="sidebar")
 		h3.anime-section-name Links
 		
 		.light-button-group
@@ -146,7 +146,7 @@ component AnimeLinks(anime *arn.Anime, user *arn.User)
 component AnimeGenres(anime *arn.Anime)
 	.anime-genres
 		each genre in anime.Genres
-			a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="footer")
+			a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="header")
 				span= genre
 
 component AnimeTrailer(anime *arn.Anime)
@@ -154,14 +154,14 @@ component AnimeTrailer(anime *arn.Anime)
 		AnimeTrailerByIndex(anime, len(anime.Trailers)-1)
 
 component AnimeTrailerByIndex(anime *arn.Anime, index int)
-	section.anime-section.mountable
+	section.anime-section.mountable(data-mountable-type="sidebar")
 		h3.anime-section-name Trailer
 		.anime-trailer.video-container
 			iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[index].ServiceID + "?showinfo=0", allowfullscreen="allowfullscreen")
 
 component AnimeFriends(friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem)
 	if len(friends) > 0
-		section.anime-section.mountable
+		section.anime-section.mountable(data-mountable-type="sidebar")
 			h3.anime-section-name Friends
 
 			.anime-friends
@@ -176,7 +176,7 @@ component AnimeFriends(friends []*arn.User, listItems map[*arn.User]*arn.AnimeLi
 										FriendEntry(friend, listItems)
 
 component AnimeInformation(anime *arn.Anime)
-	section.anime-section.mountable
+	section.anime-section.mountable(data-mountable-type="sidebar")
 		h3.anime-section-name Information
 		table.anime-info-table
 			tr.mountable(data-mountable-type="info")

@@ -27,6 +27,12 @@ curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh
 
 * If you restart your operating system, run `make ports` to update your port bindings
 
+## Author
+
+| [![Eduard Urbach on Twitter](https://gravatar.com/avatar/16ed4d41a5f244d1b10de1b791657989?s=70)](https://twitter.com/eduardurbach "Follow @eduardurbach on Twitter") |
+|---|
+| [Eduard Urbach](https://eduardurbach.com) |
+
 [godoc-image]: https://godoc.org/github.com/animenotifier/notify.moe?status.svg
 [godoc-url]: https://godoc.org/github.com/animenotifier/notify.moe
 [goreportcard-image]: https://goreportcard.com/badge/github.com/animenotifier/notify.moe

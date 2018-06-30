@@ -34,7 +34,7 @@ func Get(ctx *aero.Context) string {
 	weekdayIndex := int(now.Weekday())
 
 	// Create days
-	days := make([]*utils.CalendarDay, 7, 7)
+	days := make([]*utils.CalendarDay, 7)
 
 	for i := 0; i < 7; i++ {
 		days[i] = &utils.CalendarDay{
