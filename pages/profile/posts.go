@@ -29,7 +29,7 @@ func GetPostsByUser(ctx *aero.Context) string {
 		posts = posts[:postLimit]
 	}
 
-	postables = make([]arn.Postable, len(posts), len(posts))
+	postables = make([]arn.Postable, len(posts))
 
 	for i, post := range posts {
 		postables[i] = arn.ToPostable(post)
