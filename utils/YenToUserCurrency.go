@@ -9,8 +9,8 @@ import (
 
 // Current currency rates
 const (
-	yenToEuro   = 0.0075
-	yenToDollar = 0.0093
+	yenToEuro   = 0.0077
+	yenToDollar = 0.0090
 )
 
 var countryQuery = gountries.New()
