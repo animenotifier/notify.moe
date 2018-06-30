@@ -60,6 +60,8 @@ SidebarButton("Foobar", "/foobar", "plus")
 
 Navigate to `beta.notify.moe` and you should see the button to access your newly made page! Yay!
 
+## Step 5: Play around!
+
 Feel free to play around with the code now. You can utilize pixy components by using the `components` package inside your controller:
 
 ```go
@@ -76,4 +78,4 @@ func Get(ctx *aero.Context) string {
 }
 ```
 
-This would now return the contents of your pixy component instead of a hard-coded string.
+This would now return the contents of your previously defined pixy component instead of a hard-coded string.
