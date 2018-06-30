@@ -27,9 +27,12 @@ var jobInfo = map[string]*utils.JobInfo{
 	"mal-parse": &utils.JobInfo{
 		Name: "mal-parse",
 	},
-	// "mal-sync": &utils.JobInfo{
-	// 	Name: "mal-sync",
-	// },
+	"mal-sync": &utils.JobInfo{
+		Name: "mal-sync",
+	},
+	"test": &utils.JobInfo{
+		Name: "test",
+	},
 }
 
 var jobLogs = []string{}
