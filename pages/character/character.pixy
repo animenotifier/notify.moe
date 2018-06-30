@@ -9,23 +9,23 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 	.character-page
 		.character-left-column
 			.character-header
-				.character-image-container.mountable
+				.character-image-container.mountable(data-mountable-type="header")
 					img.character-image-large.lazy(data-src=character.ImageLink("large"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.Canonical)
 					
 					.buttons
 						LikeButton(strconv.Itoa(len(character.Likes)), "heart", "character", character, user)
 
 						if user != nil && (user.Role == "editor" || user.Role == "admin")
-							a.button.tip.mountable(href=character.Link() + "/edit", aria-label="Edit character")
+							a.button.tip.mountable(href=character.Link() + "/edit", aria-label="Edit character", data-mountable-type="header")
 								RawIcon("pencil")
 				
 				.character-description-container
 					if character.Name.Canonical == ""
-						h1.character-name.mountable untitled
+						h1.character-name.mountable(data-mountable-type="header") untitled
 					else
-						h1.character-name.mountable= character.Name.Canonical
+						h1.character-name.mountable(data-mountable-type="header")= character.Name.Canonical
 
-					.anime-alternative-title.mountable
+					.anime-alternative-title.mountable(data-mountable-type="header")
 						if character.Name.Japanese != ""
 							Japanese(character.Name.Japanese)
 						else
@@ -35,7 +35,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 						.character-quotes
 							Quote(mainQuote, user)
 					
-					.character-description.mountable!= markdown.Render(character.Description)
+					.character-description.mountable(data-mountable-type="header")!= markdown.Render(character.Description)
 			
 			.character-main-column
 				if len(characterAnime) > 0
@@ -61,9 +61,9 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 component CharacterSidebar(character *arn.Character, friends []*arn.User, relevantCharacters []*arn.Character, user *arn.User)
 	.character-sidebar
 		if len(character.Attributes) > 0
-			h3.mountable Information
+			h3.mountable(data-mountable-type="sidebar") Information
 
-			table.character-attributes.mountable
+			table.character-attributes.mountable(data-mountable-type="sidebar")
 				each attribute in character.Attributes
 					tr.mountable(data-mountable-type="info")
 						td.character-attributes-name= attribute.Name + ":"
@@ -74,18 +74,18 @@ component CharacterSidebar(character *arn.Character, friends []*arn.User, releva
 							td.character-attributes-value= attribute.Value
 		
 		if len(relevantCharacters) > 0
-			h3.mountable Relevant
+			h3.mountable(data-mountable-type="sidebar") Relevant
 
-			.relevant-characters.mountable
+			.relevant-characters.mountable(data-mountable-type="sidebar")
 				each relevantCharacter in relevantCharacters
 					.mountable(data-mountable-type="relevant-character")
 						CharacterSmall(relevantCharacter, user)
 		
 		if len(friends) > 0
 			.character-friends
-				h3.mountable Friends
+				h3.mountable(data-mountable-type="sidebar") Friends
 
-				.user-avatars.mountable
+				.user-avatars.mountable(data-mountable-type="sidebar")
 					each friend in friends
 						.mountable(data-mountable-type="friend")
 							if friend.IsActive()
@@ -94,9 +94,9 @@ component CharacterSidebar(character *arn.Character, friends []*arn.User, releva
 								.inactive-user
 									Avatar(friend)
 
-		h3.mountable Links
+		h3.mountable(data-mountable-type="sidebar") Links
 
-		.light-button-group.mountable
+		.light-button-group.mountable(data-mountable-type="sidebar")
 			if character.GetMapping("myanimelist/character") != ""
 				a.light-button(href="https://myanimelist.net/character/" + character.GetMapping("myanimelist/character"), target="_blank", rel="noopener")
 					Icon("external-link")
