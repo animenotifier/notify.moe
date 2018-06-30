@@ -2,10 +2,10 @@
 
 ## Links
 
-- [About](ABOUT.md)
+- [Installation](README.md#installation)
+- [Task for new contributors](docs/new-contributor-task.md)
 - [Issues](https://github.com/animenotifier/notify.moe/projects/10)
-- [Code Style](CODE_STYLE.md)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Code Style](docs/code-style.md)
 
 ## Communication
 
