@@ -3,7 +3,7 @@
 	justify-content center
 	border-radius ui-element-border-radius
 
-	.user-image
+	.user
 		margin 0.4rem
 
 .pro-avatars
@@ -25,6 +25,15 @@
 
 .user
 	display flex
+	position relative
 
 .user-list-name
 	text-align center
+
+.user-pro-icon
+	display inline-flex
+	position absolute
+	bottom -2px
+	right -2px
+	font-size 1.1rem
+	filter drop-shadow(0 0 3px hsla(link-color-h, link-color-s, link-color-l, 0.5))
