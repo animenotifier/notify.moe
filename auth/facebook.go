@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"net/http"
@@ -11,6 +10,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
+	jsoniter "github.com/json-iterator/go"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/facebook"
 )
@@ -88,7 +88,7 @@ func InstallFacebookAuth(app *aero.Application) {
 
 		// Construct a FacebookUser object
 		fbUser := FacebookUser{}
-		err = json.Unmarshal(body, &fbUser)
+		err = jsoniter.Unmarshal(body, &fbUser)
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)

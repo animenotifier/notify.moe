@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"net/http"
@@ -11,6 +10,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
+	jsoniter "github.com/json-iterator/go"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -94,7 +94,7 @@ func InstallGoogleAuth(app *aero.Application) {
 
 		// Construct a GoogleUser object
 		var googleUser GoogleUser
-		err = json.Unmarshal(data, &googleUser)
+		err = jsoniter.Unmarshal(data, &googleUser)
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed parsing user data (JSON)", err)
