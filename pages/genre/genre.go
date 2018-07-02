@@ -45,15 +45,17 @@ func Get(ctx *aero.Context) string {
 func userAverage(user *arn.User, realGenreName string) float64 {
 	genreItems := user.AnimeList().Genres()[realGenreName]
 	average := 0.0
+	count := 0.0
 	for _, item := range genreItems {
 		if item.Rating.IsNotRated() {
 			continue
 		}
 
 		average += item.Rating.Overall
+		count++
 	}
 
-	return average / float64(len(genreItems))
+	return average / count
 }
 
 // getGenreName return the normally used genre name from it's lowercase counterpart
