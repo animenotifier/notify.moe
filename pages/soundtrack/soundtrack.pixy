@@ -12,7 +12,7 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 				.widget.mountable
 					h3.widget-title= media.Service
 					.soundtrack-media.video-container
-						iframe.lazy.video(data-src=media.EmbedLink(), allowfullscreen="allowfullscreen")
+						iframe.lazy.video(data-src=media.EmbedLink(), allowfullscreen)
 					
 					if user != nil && media.Service == "Youtube" && track.File != ""
 						.buttons
