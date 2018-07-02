@@ -1,7 +1,10 @@
 package main
 
 import (
+	"math/rand"
 	"strings"
+
+	"github.com/animenotifier/arn"
 
 	"github.com/animenotifier/arn/search"
 	"github.com/bwmarrin/discordgo"
@@ -14,12 +17,13 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 		return
 	}
 
-	if msg.Content == "!commands" {
+	if msg.Content == "!help" || msg.Content == "!commands" {
 		s.ChannelMessageSend(msg.ChannelID, `
-**!user** [username]
-**!anime** [id]
+**!a** [anime search term]
 **!animelist** [username]
-**!tag** [forum tag]`)
+**!play** [status text]
+**!randomquote**
+**!source**`)
 	}
 
 	// Has the bot been mentioned?
@@ -30,31 +34,7 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 		}
 	}
 
-	if strings.HasPrefix(msg.Content, "!user ") {
-		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1])
-		return
-	}
-
-	if strings.HasPrefix(msg.Content, "!animelist ") {
-		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1]+"/animelist")
-		return
-	}
-
-	if strings.HasPrefix(msg.Content, "!tag ") {
-		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/forum/"+strings.ToLower(strings.Split(msg.Content, " ")[1]))
-		return
-	}
-
-	if strings.HasPrefix(msg.Content, "!play ") {
-		s.UpdateStatus(0, msg.Content[len("!play "):])
-		return
-	}
-
-	if msg.Content == "!source" {
-		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+" B-baaaaaaaka! Y..you...you want to...TOUCH MY CODE?!\n\nhttps://github.com/animenotifier/notify.moe/tree/go/bots/discord")
-		return
-	}
-
+	// Anime search
 	if strings.HasPrefix(msg.Content, "!a ") {
 		term := msg.Content[len("!a "):]
 		animes := search.Anime(term, 3)
@@ -69,6 +49,32 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 		}
 
 		s.ChannelMessageSend(msg.ChannelID, message)
+		return
+	}
+
+	// Anime list of user
+	if strings.HasPrefix(msg.Content, "!animelist ") {
+		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1]+"/animelist")
+		return
+	}
+
+	// Play status
+	if strings.HasPrefix(msg.Content, "!play ") {
+		s.UpdateStatus(0, msg.Content[len("!play "):])
+		return
+	}
+
+	// Random quote
+	if msg.Content == "!randomquote" {
+		allQuotes := arn.AllQuotes()
+		quote := allQuotes[rand.Intn(len(allQuotes))]
+		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe"+quote.Link())
+		return
+	}
+
+	// GitHub source of the bot
+	if msg.Content == "!source" {
+		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+" B-baaaaaaaka! Y..you...you want to...TOUCH MY CODE?!\n\nhttps://github.com/animenotifier/notify.moe/tree/go/bots/discord")
 		return
 	}
 }
