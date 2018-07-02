@@ -16,6 +16,29 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	genreName := ctx.Get("name")
 	animes := []*arn.Anime{}
+	mean := 0.0
+
+	var realGenreName string
+
+	for _, realGenre := range arn.Genres {
+		if strings.ToLower(realGenre) == genreName {
+			realGenreName = realGenre
+			break
+		}
+	}
+
+	completedItems := user.AnimeList().FilterStatus(arn.AnimeListStatusCompleted).Genres()[realGenreName]
+	completed := len(completedItems)
+
+	genreItems := user.AnimeList().Genres()[realGenreName]
+	for _, item := range genreItems {
+		if item.Rating.IsNotRated() {
+			continue
+		}
+		mean += item.Rating.Overall
+	}
+
+	mean = mean / float64(len(genreItems))
 
 	for anime := range arn.StreamAnime() {
 		if containsLowerCase(anime.Genres, genreName) {
@@ -29,7 +52,7 @@ func Get(ctx *aero.Context) string {
 		animes = animes[:animePerPage]
 	}
 
-	return ctx.HTML(components.Genre(genreName, animes, user))
+	return ctx.HTML(components.Genre(genreName, animes, user, mean, completed))
 }
 
 // containsLowerCase tells you whether the given element exists when all elements are lowercased.
