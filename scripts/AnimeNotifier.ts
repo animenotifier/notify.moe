@@ -992,6 +992,8 @@ export default class AnimeNotifier {
 	}
 
 	onKeyDown(e: KeyboardEvent) {
+		console.log(e.keyCode)
+
 		let activeElement = document.activeElement
 
 		// Ignore hotkeys on input elements
