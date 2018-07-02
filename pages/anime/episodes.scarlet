@@ -10,7 +10,7 @@ const episode-margin = 0.5rem
 	button-hover
 	margin episode-margin
 	padding 0.5rem
-	flex-basis calc(50% - episode-margin * 2)
+	width calc(50% - episode-margin * 2)
 	overflow hidden
 	color text-color
 	box-shadow shadow-light
@@ -28,7 +28,7 @@ const episode-margin = 0.5rem
 		justify-content flex-start
 
 	.episode
-		flex-basis 190px
+		width 190px
 
 .episode-number
 	display flex
