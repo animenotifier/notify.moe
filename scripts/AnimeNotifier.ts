@@ -1056,13 +1056,13 @@ export default class AnimeNotifier {
 
 
 		// "+" = Audio speed up
-		if(e.keyCode === 107 || e.keyCode === 187 || e.key == "+") {
+		if(e.key == "+") {
 			this.audioPlayer.addSpeed(0.05)
 			return preventDefault()
 		}
 
 		// "-" = Audio speed down
-		if(e.keyCode === 109 || e.keyCode === 189 || e.key == "-") {
+		if(e.key == "-") {
 			this.audioPlayer.addSpeed(-0.05)
 			return preventDefault()
 		}
