@@ -1058,13 +1058,21 @@ export default class AnimeNotifier {
 
 
 		// "+" = Audio speed up
+<<<<<<< HEAD
 		if(e.keyCode === 107 || e.keyCode === 187 || e.key == "+") {
+=======
+		if(e.key == "+") {
+>>>>>>> bd6291290bff210ed9ae2e70fc3820181899470d
 			this.audioPlayer.addSpeed(0.05)
 			return preventDefault()
 		}
 
 		// "-" = Audio speed down
+<<<<<<< HEAD
 		if(e.keyCode === 109 || e.keyCode === 189 || e.key == "-") {
+=======
+		if(e.key == "-") {
+>>>>>>> bd6291290bff210ed9ae2e70fc3820181899470d
 			this.audioPlayer.addSpeed(-0.05)
 			return preventDefault()
 		}

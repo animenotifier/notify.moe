@@ -1,5 +1,6 @@
 component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User)
-	h1= anime.Title.ByUser(user)
+	h1
+		a(href=anime.Link())= anime.Title.ByUser(user)
 
 	.episode-view-image-container
 		a(href=anime.Link(), title=anime.Title.ByUser(user))

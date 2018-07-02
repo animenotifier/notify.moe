@@ -15,11 +15,10 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, user *ar
 							if episode.Number != -1
 								span= episode.Number
 						
-						.episode-title
-							if episode.Title.Japanese != ""
-								span= episode.Title.Japanese
-							else
-								span -
+						if episode.Title.Japanese != ""
+							span.episode-title= episode.Title.Japanese
+						else
+							span.episode-title -
 						
 						if validate.DateTime(episode.AiringDate.Start)
 							.episode-airing-date-start.utc-airing-date.no-tip(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
