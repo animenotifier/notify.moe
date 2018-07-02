@@ -1,6 +1,7 @@
 component Genre(genre string, animes []*arn.Anime, user *arn.User, mean float64, completed int)
 	h1(title=fmt.Sprint(len(animes)) + " anime")= strings.Title(genre)
-	h2= fmt.Sprintf("Your average rating is %." + strconv.Itoa(user.Settings().Format.RatingsPrecision) + "f", mean)
+	if user != nil
+		h2(title=fmt.Sprint(completed) + " anime completed")= fmt.Sprintf("Your average rating is %." + strconv.Itoa(user.Settings().Format.RatingsPrecision) + "f", mean)
 
 	.corner-buttons-hide-on-mobile
 		if user != nil
