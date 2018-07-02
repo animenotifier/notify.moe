@@ -54,7 +54,7 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 
 	// Anime list of user
 	if strings.HasPrefix(msg.Content, "!animelist ") {
-		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1]+"/animelist")
+		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1]+"/animelist/watching")
 		return
 	}
 
