@@ -66,7 +66,10 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 
 	// Random quote
 	if msg.Content == "!randomquote" {
-		allQuotes := arn.AllQuotes()
+		allQuotes := arn.FilterQuotes(func(quote *arn.Quote) bool {
+			return !quote.IsDraft && quote.IsValid()
+		})
+
 		quote := allQuotes[rand.Intn(len(allQuotes))]
 		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe"+quote.Link())
 		return
