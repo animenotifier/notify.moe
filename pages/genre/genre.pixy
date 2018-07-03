@@ -1,7 +1,8 @@
-component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore string)
+component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore float64)
 	h1(title=fmt.Sprint(len(animes)) + " anime")= strings.Title(genre)
-	h2()= userScore
-
+	if user != nil
+		h2= fmt.Sprintf("%.1f", userScore)
+	
 	.corner-buttons-hide-on-mobile
 		if user != nil
 			button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")

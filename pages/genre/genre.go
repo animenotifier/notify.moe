@@ -1,7 +1,6 @@
 package genre
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/aerogo/aero"
@@ -24,7 +23,7 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
-	userScore := averageGenreScore(user, animes)
+	userScore := averageScore(user, animes)
 
 	arn.SortAnimeByQuality(animes)
 
@@ -46,21 +45,28 @@ func containsLowerCase(array []string, search string) bool {
 	return false
 }
 
-func averageGenreScore(user *arn.User, animes []*arn.Anime) string {
+// Counts users average score in genre
+func averageScore(user *arn.User, animes []*arn.Anime) float64 {
 	if user == nil {
-		return ""
+		return 0
 	}
 
-	counter := 0.0
+	count := 0.0
 	scores := 0.0
 
-	for _, anime := range animes {
+	animeList := user.AnimeList()
 
-		if user.AnimeList().Contains(anime.ID) {
-			scores = scores + user.AnimeList().Find(anime.ID).Rating.Overall
-			counter = counter + 1
+	for _, anime := range animes {
+		userAnime := animeList.Find(anime.ID)
+		if userAnime != nil && !userAnime.Rating.IsNotRated() {
+			scores += userAnime.Rating.Overall
+			count += 1
 		}
 	}
 
-	return strconv.FormatFloat(scores/counter, 'f', 6, 64)
+	if count == 0.0 || scores == 0.0 {
+		return 0
+	}
+
+	return scores / count
 }
