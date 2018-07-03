@@ -45,7 +45,7 @@ func containsLowerCase(array []string, search string) bool {
 	return false
 }
 
-// Counts users average score in genre
+// Counts users average score for selected animes
 func averageScore(user *arn.User, animes []*arn.Anime) float64 {
 	if user == nil {
 		return 0
