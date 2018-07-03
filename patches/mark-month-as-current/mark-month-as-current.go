@@ -27,6 +27,4 @@ func main() {
 			anime.Save()
 		}
 	}
-
-	time.Sleep(1 * time.Second)
 }

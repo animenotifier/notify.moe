@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"sort"
-	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -41,6 +40,4 @@ func main() {
 			}
 		}
 	}
-
-	time.Sleep(1 * time.Second)
 }

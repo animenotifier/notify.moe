@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"sort"
-	"time"
 
 	_ "image/gif"
 	_ "image/jpeg"
@@ -33,8 +32,6 @@ func main() {
 		fmt.Printf("[%d / %d] %s %s\n", index+1, len(characters), character.ID, color.CyanString(character.String()))
 		download(character.ID)
 	}
-
-	time.Sleep(time.Second)
 }
 
 func download(characterID string) {

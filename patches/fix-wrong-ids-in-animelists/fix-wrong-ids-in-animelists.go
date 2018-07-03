@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -40,6 +39,4 @@ func main() {
 			animeList.Save()
 		}
 	}
-
-	time.Sleep(time.Second)
 }

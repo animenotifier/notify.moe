@@ -21,6 +21,5 @@ func main() {
 	// 	newID := arn.GenerateID("Anime")
 	// 	fmt.Printf("[%d / %d] Old [%s] New [%s] %s\n", counter+1, len(allAnime), color.YellowString(anime.ID), color.GreenString(newID), anime)
 	// 	anime.SetID(newID)
-	// 	time.Sleep(100 * time.Millisecond)
 	// }
 }

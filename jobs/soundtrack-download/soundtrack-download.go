@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -32,8 +31,5 @@ func main() {
 
 		// Save the file information
 		track.Save()
-
-		// Delay a little
-		time.Sleep(delayBetweenRequests)
 	}
 }

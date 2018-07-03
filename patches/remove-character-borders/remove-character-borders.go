@@ -6,7 +6,6 @@ import (
 	"image"
 	"os"
 	"path"
-	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -20,7 +19,6 @@ import (
 func main() {
 	defer color.Green("Finished.")
 	defer arn.Node.Close()
-	defer time.Sleep(time.Second)
 
 	characters := arn.FilterCharacters(func(character *arn.Character) bool {
 		return character.HasImage()

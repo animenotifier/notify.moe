@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
@@ -55,5 +54,4 @@ func main() {
 	}
 
 	fmt.Println(len(used), len(characters))
-	time.Sleep(2 * time.Second)
 }

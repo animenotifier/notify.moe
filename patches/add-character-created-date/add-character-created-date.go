@@ -40,6 +40,4 @@ func main() {
 
 		character.Save()
 	}
-
-	time.Sleep(1 * time.Second)
 }
