@@ -7,8 +7,6 @@ import (
 	"github.com/fatih/color"
 )
 
-const delayBetweenRequests = 1000
-
 func main() {
 	color.Yellow("Downloading soundtracks")
 
