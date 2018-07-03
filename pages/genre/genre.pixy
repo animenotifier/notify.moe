@@ -1,8 +1,8 @@
 component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore float64)
 	h1(title=fmt.Sprint(len(animes)) + " anime")= strings.Title(genre)
 
-	if user != nil
-		h2= fmt.Sprintf("%.1f", userScore)
+	//- if user != nil
+	//- 	h2= fmt.Sprintf("%.1f", userScore)
 	
 	.corner-buttons-hide-on-mobile
 		if user != nil
