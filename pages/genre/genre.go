@@ -60,7 +60,7 @@ func averageScore(user *arn.User, animes []*arn.Anime) float64 {
 		userAnime := animeList.Find(anime.ID)
 		if userAnime != nil && !userAnime.Rating.IsNotRated() {
 			scores += userAnime.Rating.Overall
-			count += 1
+			count++
 		}
 	}
 
