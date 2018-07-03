@@ -23,13 +23,15 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
+	userScore := averageScore(user, animes)
+
 	arn.SortAnimeByQuality(animes)
 
 	if len(animes) > animePerPage {
 		animes = animes[:animePerPage]
 	}
 
-	return ctx.HTML(components.Genre(genreName, animes, user))
+	return ctx.HTML(components.Genre(genreName, animes, user, userScore))
 }
 
 // containsLowerCase tells you whether the given element exists when all elements are lowercased.
@@ -41,4 +43,31 @@ func containsLowerCase(array []string, search string) bool {
 	}
 
 	return false
+}
+
+// Counts users average score for selected animes
+func averageScore(user *arn.User, animes []*arn.Anime) float64 {
+	if user == nil {
+		return 0
+	}
+
+	count := 0.0
+	scores := 0.0
+
+	animeList := user.AnimeList()
+
+	for _, anime := range animes {
+		userAnime := animeList.Find(anime.ID)
+
+		if userAnime != nil && !userAnime.Rating.IsNotRated() {
+			scores += userAnime.Rating.Overall
+			count++
+		}
+	}
+
+	if count == 0.0 {
+		return 0
+	}
+
+	return scores / count
 }
