@@ -139,6 +139,30 @@ var routeTests = map[string][]string{
 		"/forum/general",
 	},
 
+	"/genre/:name": []string{
+		"/genre/action",
+	},
+
+	"/company/:id": []string{
+		"/company/xCAUr7UkRaz",
+	},
+
+	"/company/:id/history": []string{
+		"/company/xCAUr7UkRaz/history",
+	},
+
+	"/companies/from/:index": []string{
+		"/companies/from/3",
+	},
+
+	"/explore/color/:color/anime": []string{
+		"/explore/color/hsl:0.050,0.25,0.5/anime",
+	},
+
+	"/explore/color/:color/anime/from/:index": []string{
+		"/explore/color/hsl:0.050,0.25,0.5/anime/from/3",
+	},
+
 	"/search/:term": []string{
 		"/search/Dragon Ball",
 	},
@@ -424,6 +448,9 @@ var routeTests = map[string][]string{
 	"/anime/:id/edit/episodes":                       nil,
 	"/anime/:id/edit/history":                        nil,
 	"/new/thread":                                    nil,
+	"/thread/:id/edit":                               nil,
+	"/post/:id/edit":                                 nil,
+	"/company/:id/edit":                              nil,
 	"/admin/purchases":                               nil,
 	"/admin/registrations":                           nil,
 	"/explore/sequels":                               nil,
@@ -443,6 +470,7 @@ var routeTests = map[string][]string{
 	"/support":                                       nil,
 	"/charge":                                        nil,
 	"/log":                                           nil,
+	"/log/from/:index":                               nil,
 	"/inventory":                                     nil,
 	"/extension/embed":                               nil,
 }
