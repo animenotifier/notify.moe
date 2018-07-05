@@ -13,6 +13,7 @@ import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
 import { checkNewVersionDelayed } from "./NewVersionCheck"
 import * as actions from "./Actions"
+import { hideAddedAnime } from "./Actions";
 
 export default class AnimeNotifier {
 	app: Application
@@ -164,7 +165,8 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.dragAndDrop()),
 			Promise.resolve().then(() => this.colorStripes()),
 			Promise.resolve().then(() => this.assignTooltipOffsets()),
-			Promise.resolve().then(() => this.countUp())
+			Promise.resolve().then(() => this.countUp()),
+			Promise.resolve().then(() => this.hideMyAnimeInExplorer())
 		])
 
 		// Apply page title
@@ -470,6 +472,17 @@ export default class AnimeNotifier {
 			}
 
 			window.requestAnimationFrame(callback)
+		}
+	}
+
+	hideMyAnimeInExplorer() {
+		if(!this.app.currentPath.includes("/explore")){
+			return
+		}
+
+		const storage = localStorage.getItem("hide")
+		if(storage === "true"){
+			hideAddedAnime()
 		}
 	}
 
