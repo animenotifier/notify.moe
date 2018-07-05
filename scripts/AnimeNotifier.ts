@@ -13,7 +13,6 @@ import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
 import { checkNewVersionDelayed } from "./NewVersionCheck"
 import * as actions from "./Actions"
-import { hideAddedAnime } from "./Actions";
 
 export default class AnimeNotifier {
 	app: Application
@@ -166,7 +165,7 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.colorStripes()),
 			Promise.resolve().then(() => this.assignTooltipOffsets()),
 			Promise.resolve().then(() => this.countUp()),
-			Promise.resolve().then(() => this.hideMyAnimeInExplorer())
+			Promise.resolve().then(() => this.hideAddedAnime())
 		])
 
 		// Apply page title
@@ -476,14 +475,13 @@ export default class AnimeNotifier {
 	}
 
 	// Hides user anime automatically if localStorage.hide is true
-	hideMyAnimeInExplorer() {
-		if(!this.app.currentPath.includes("/explore")){
+	hideAddedAnime() {
+		if(!this.app.currentPath.includes("/explore") && !this.app.currentPath.includes("/genre")) {
 			return
 		}
 
-		const storage = localStorage.getItem("hide")
-		if(storage === "true"){
-			hideAddedAnime()
+		if(localStorage.getItem("hideAdded") === "true") {
+			actions.hideAddedAnime()
 		}
 	}
 

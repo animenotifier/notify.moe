@@ -26,15 +26,16 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 }
 
 // Hides anime that are already in your list. And "toggles" localStorage.hide if button is pressed
-export function hideAddedAnime(arn?: AnimeNotifier, input?: HTMLInputElement) {
-	if (input != undefined && input.type == "submit") {
-		if(localStorage.hide === "true")
-			localStorage.hide = "false"
-		else
-			localStorage.hide = "true"
+export function hideAddedAnime(arn?: AnimeNotifier, input?: HTMLButtonElement) {
+	if(input) {
+		if(localStorage.getItem("hideAdded") === "true") {
+			localStorage.setItem("hideAdded", "false")
+		} else {
+			localStorage.setItem("hideAdded", "true")
+		}
 	}
 
-	if(localStorage.hide === "true" || input.type === "submit"){
+	if(localStorage.getItem("hideAdded") === "true" || input.type === "submit") {
 		for(let anime of findAll("anime-grid-cell")) {
 			if(anime.dataset.added === "true") {
 				anime.classList.toggle("anime-grid-cell-hide")
