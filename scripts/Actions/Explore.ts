@@ -25,11 +25,21 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 	arn.diff(`${root.dataset.url}/${year}/${season}/${status}/${type}`)
 }
 
-// Hides anime that are already in your list.
-export function hideAddedAnime() {
-	for(let anime of findAll("anime-grid-cell")) {
-		if(anime.dataset.added === "true") {
-			anime.classList.toggle("anime-grid-cell-hide")
+// Hides anime that are already in your list. And "toggles" localStorage.hide if button is pressed
+export function hideAddedAnime(arn?: AnimeNotifier, input?: HTMLButtonElement) {
+	if(input) {
+		if(localStorage.getItem("hide-added-anime") === "true") {
+			localStorage.setItem("hide-added-anime", "false")
+		} else {
+			localStorage.setItem("hide-added-anime", "true")
+		}
+	}
+
+	if(input || localStorage.getItem("hide-added-anime") === "true") {
+		for(let anime of findAll("anime-grid-cell")) {
+			if(anime.dataset.added === "true") {
+				anime.classList.toggle("anime-grid-cell-hide")
+			}
 		}
 	}
 }

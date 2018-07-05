@@ -164,7 +164,8 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.dragAndDrop()),
 			Promise.resolve().then(() => this.colorStripes()),
 			Promise.resolve().then(() => this.assignTooltipOffsets()),
-			Promise.resolve().then(() => this.countUp())
+			Promise.resolve().then(() => this.countUp()),
+			Promise.resolve().then(() => this.hideAddedAnime())
 		])
 
 		// Apply page title
@@ -470,6 +471,17 @@ export default class AnimeNotifier {
 			}
 
 			window.requestAnimationFrame(callback)
+		}
+	}
+
+	// Hides user anime automatically if localStorage.hide is true
+	hideAddedAnime() {
+		if(!this.app.currentPath.includes("/explore") && !this.app.currentPath.includes("/genre")) {
+			return
+		}
+
+		if(localStorage.getItem("hide-added-anime") === "true") {
+			actions.hideAddedAnime()
 		}
 	}
 
