@@ -27,14 +27,6 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 
 // Toggle hiding added anime.
 export function toggleHideAddedAnime(arn: AnimeNotifier, input: HTMLButtonElement) {
-	// Toggle state
-	if(localStorage.getItem("hide-added-anime") === "true") {
-		localStorage.setItem("hide-added-anime", "false")
-	} else {
-		localStorage.setItem("hide-added-anime", "true")
-	}
-
-	// Hide anime
 	hideAddedAnime()
 }
 
@@ -45,11 +37,7 @@ export function hideAddedAnime() {
 			continue
 		}
 
-		if(localStorage.getItem("hide-added-anime") === "true") {
-			anime.classList.add("anime-grid-cell-hide")
-		} else {
-			anime.classList.remove("anime-grid-cell-hide")
-		}
+		anime.classList.toggle("anime-grid-cell-hide")
 	}
 }
 
