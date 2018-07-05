@@ -41,7 +41,6 @@ export function hideAddedAnime(arn?: AnimeNotifier, input?: HTMLInputElement) {
 			}
 		}
 	}
-
 }
 
 // Hides anime that are not in your list.

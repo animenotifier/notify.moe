@@ -475,6 +475,7 @@ export default class AnimeNotifier {
 		}
 	}
 
+	// Hides user anime automatically if localStorage.hide is true
 	hideMyAnimeInExplorer() {
 		if(!this.app.currentPath.includes("/explore")){
 			return
