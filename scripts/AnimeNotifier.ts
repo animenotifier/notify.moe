@@ -546,16 +546,16 @@ export default class AnimeNotifier {
 			credentials: "same-origin",
 			headers
 		})
-			.then(response => {
-				if(this.app.currentPath !== path) {
-					return Promise.reject("old request")
-				}
+		.then(response => {
+			if(this.app.currentPath !== path) {
+				return Promise.reject("old request")
+			}
 
-				return Promise.resolve(response)
-			})
-			.then(response => response.text())
-			.then(html => Diff.innerHTML(this.app.content, html))
-			.then(() => this.app.emit("DOMContentLoaded"))
+			return Promise.resolve(response)
+		})
+		.then(response => response.text())
+		.then(html => Diff.innerHTML(this.app.content, html))
+		.then(() => this.app.emit("DOMContentLoaded"))
 	}
 
 	reloadPage() {
@@ -567,17 +567,17 @@ export default class AnimeNotifier {
 		return fetch(path, {
 			credentials: "same-origin"
 		})
-			.then(response => {
-				if(this.app.currentPath !== path) {
-					return Promise.reject("old request")
-				}
+		.then(response => {
+			if(this.app.currentPath !== path) {
+				return Promise.reject("old request")
+			}
 
-				return Promise.resolve(response)
-			})
-			.then(response => response.text())
-			.then(html => Diff.root(document.documentElement, html))
-			.then(() => this.app.emit("DOMContentLoaded"))
-			.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
+			return Promise.resolve(response)
+		})
+		.then(response => response.text())
+		.then(html => Diff.root(document.documentElement, html))
+		.then(() => this.app.emit("DOMContentLoaded"))
+		.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
 	}
 
 	loading(newState: boolean) {
@@ -878,7 +878,7 @@ export default class AnimeNotifier {
 			let request = fetch(path, {
 				credentials: "same-origin"
 			})
-				.then(response => response.text())
+			.then(response => response.text())
 
 			history.pushState(url, null, url)
 			this.app.currentPath = url
@@ -930,22 +930,22 @@ export default class AnimeNotifier {
 			body,
 			credentials: "same-origin"
 		})
-			.then(response => {
-				this.loading(false)
+		.then(response => {
+			this.loading(false)
 
-				if(response.status === 200) {
-					return Promise.resolve(response)
-				}
+			if(response.status === 200) {
+				return Promise.resolve(response)
+			}
 
-				return response.text().then(err => {
-					throw err
-				})
-			})
-			.catch(err => {
-				this.loading(false)
+			return response.text().then(err => {
 				throw err
 			})
-				}
+		})
+		.catch(err => {
+			this.loading(false)
+			throw err
+		})
+	}
 
 	scrollTo(target: HTMLElement) {
 		const duration = 250.0
@@ -1140,7 +1140,7 @@ export default class AnimeNotifier {
 		}
 
 		this.post("/api/new/clienterrorreport", report)
-			.then(() => console.log("Successfully reported the error to the website staff."))
-			.catch(() => console.warn("Failed reporting the error to the website staff."))
-				}
+		.then(() => console.log("Successfully reported the error to the website staff."))
+		.catch(() => console.warn("Failed reporting the error to the website staff."))
+	}
 }
