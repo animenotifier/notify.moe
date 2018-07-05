@@ -41,12 +41,14 @@ export function toggleHideAddedAnime(arn: AnimeNotifier, input: HTMLButtonElemen
 // Hides anime that are already in your list.
 export function hideAddedAnime() {
 	for(let anime of findAll("anime-grid-cell")) {
-		if(anime.dataset.added === "true") {
-			if(localStorage.getItem("hide-added-anime") === "true") {
-				anime.classList.add("anime-grid-cell-hide")
-			} else {
-				anime.classList.remove("anime-grid-cell-hide")
-			}
+		if(anime.dataset.added !== "true") {
+			continue
+		}
+
+		if(localStorage.getItem("hide-added-anime") === "true") {
+			anime.classList.add("anime-grid-cell-hide")
+		} else {
+			anime.classList.remove("anime-grid-cell-hide")
 		}
 	}
 }
