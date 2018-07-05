@@ -6,7 +6,7 @@ component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore flo
 	
 	.corner-buttons-hide-on-mobile
 		if user != nil
-			button.action(data-trigger="click", data-action="hideAddedAnime", title="Hide anime in my collection")
+			button.action(data-trigger="click", data-action="toggleHideAddedAnime", title="Hide anime in my collection")
 				RawIcon("eye-slash")
 
 		a.button(href="/genres", title="View genres")

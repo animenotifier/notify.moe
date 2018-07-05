@@ -1,5 +1,6 @@
 import AnimeNotifier from "../AnimeNotifier"
 import { findAll } from "scripts/Utils";
+import toggleBoolString from "../Utils/toggleBoolString";
 
 // Filter anime on explore page
 export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
@@ -25,20 +26,27 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 	arn.diff(`${root.dataset.url}/${year}/${season}/${status}/${type}`)
 }
 
-// Hides anime that are already in your list. And "toggles" localStorage.hide if button is pressed
-export function hideAddedAnime(arn?: AnimeNotifier, input?: HTMLButtonElement) {
-	if(input) {
-		if(localStorage.getItem("hide-added-anime") === "true") {
-			localStorage.setItem("hide-added-anime", "false")
-		} else {
-			localStorage.setItem("hide-added-anime", "true")
-		}
+// Toggle hiding added anime.
+export function toggleHideAddedAnime(arn: AnimeNotifier, input: HTMLButtonElement) {
+	// Toggle state
+	if(localStorage.getItem("hide-added-anime") === "true") {
+		localStorage.setItem("hide-added-anime", "false")
+	} else {
+		localStorage.setItem("hide-added-anime", "true")
 	}
 
-	if(input || localStorage.getItem("hide-added-anime") === "true") {
-		for(let anime of findAll("anime-grid-cell")) {
-			if(anime.dataset.added === "true") {
-				anime.classList.toggle("anime-grid-cell-hide")
+	// Hide anime
+	hideAddedAnime()
+}
+
+// Hides anime that are already in your list.
+export function hideAddedAnime() {
+	for(let anime of findAll("anime-grid-cell")) {
+		if(anime.dataset.added === "true") {
+			if(localStorage.getItem("hide-added-anime") === "true") {
+				anime.classList.add("anime-grid-cell-hide")
+			} else {
+				anime.classList.remove("anime-grid-cell-hide")
 			}
 		}
 	}
