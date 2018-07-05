@@ -1,6 +1,5 @@
 import AnimeNotifier from "../AnimeNotifier"
-import { findAll } from "scripts/Utils";
-import toggleBoolString from "../Utils/toggleBoolString";
+import { findAll } from "scripts/Utils"
 
 // Filter anime on explore page
 export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
