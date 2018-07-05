@@ -10,9 +10,10 @@ import SideBar from "./SideBar"
 import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
-import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
+import { findAll, canUseWebP, requestIdleCallback, swapElements, delay, hideValues } from "./Utils"
 import { checkNewVersionDelayed } from "./NewVersionCheck"
 import * as actions from "./Actions"
+
 
 export default class AnimeNotifier {
 	app: Application
@@ -35,6 +36,7 @@ export default class AnimeNotifier {
 	diffCompletedForCurrentPath: boolean
 	lastReloadContentPath: string
 	currentSoundTrackId: string
+
 
 	constructor(app: Application) {
 		this.app = app
@@ -476,15 +478,27 @@ export default class AnimeNotifier {
 
 	// Hides anime already existing in the user's anime list automatically
 	hideAddedAnime() {
-		if(!this.app.currentPath.includes("/explore") && !this.app.currentPath.includes("/genre")) {
+		if(!this.app.currentPath.includes("/explore") && !this.app.currentPath.includes("/genre/")) {
+			localStorage.setItem(hideValues.hideExplore, "false")
+			localStorage.setItem(hideValues.hideGenre, "false")
 			return
 		}
 
-		if(localStorage.getItem("hide-added-anime") !== "true") {
+		if(localStorage.getItem(hideValues.hideGenre) === "false" &&
+		   localStorage.getItem(hideValues.hideExplore) === "false") {
 			return
 		}
 
-		actions.hideAddedAnime()
+		let whereAmI
+		if(this.app.currentPath.includes("/explore")) {
+			whereAmI = hideValues.hideExplore
+			localStorage.setItem(hideValues.hideGenre, "false")
+		} else {
+			whereAmI = hideValues.hideGenre
+			localStorage.setItem(hideValues.hideExplore, "false")
+		}
+
+		actions.hideAddedAnime(whereAmI)
 	}
 
 	markPlayingSoundTrack() {
@@ -532,16 +546,16 @@ export default class AnimeNotifier {
 			credentials: "same-origin",
 			headers
 		})
-		.then(response => {
-			if(this.app.currentPath !== path) {
-				return Promise.reject("old request")
-			}
+			.then(response => {
+				if(this.app.currentPath !== path) {
+					return Promise.reject("old request")
+				}
 
-			return Promise.resolve(response)
-		})
-		.then(response => response.text())
-		.then(html => Diff.innerHTML(this.app.content, html))
-		.then(() => this.app.emit("DOMContentLoaded"))
+				return Promise.resolve(response)
+			})
+			.then(response => response.text())
+			.then(html => Diff.innerHTML(this.app.content, html))
+			.then(() => this.app.emit("DOMContentLoaded"))
 	}
 
 	reloadPage() {
@@ -553,17 +567,17 @@ export default class AnimeNotifier {
 		return fetch(path, {
 			credentials: "same-origin"
 		})
-		.then(response => {
-			if(this.app.currentPath !== path) {
-				return Promise.reject("old request")
-			}
+			.then(response => {
+				if(this.app.currentPath !== path) {
+					return Promise.reject("old request")
+				}
 
-			return Promise.resolve(response)
-		})
-		.then(response => response.text())
-		.then(html => Diff.root(document.documentElement, html))
-		.then(() => this.app.emit("DOMContentLoaded"))
-		.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
+				return Promise.resolve(response)
+			})
+			.then(response => response.text())
+			.then(html => Diff.root(document.documentElement, html))
+			.then(() => this.app.emit("DOMContentLoaded"))
+			.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
 	}
 
 	loading(newState: boolean) {
@@ -864,7 +878,7 @@ export default class AnimeNotifier {
 			let request = fetch(path, {
 				credentials: "same-origin"
 			})
-			.then(response => response.text())
+				.then(response => response.text())
 
 			history.pushState(url, null, url)
 			this.app.currentPath = url
@@ -916,22 +930,22 @@ export default class AnimeNotifier {
 			body,
 			credentials: "same-origin"
 		})
-		.then(response => {
-			this.loading(false)
+			.then(response => {
+				this.loading(false)
 
-			if(response.status === 200) {
-				return Promise.resolve(response)
-			}
+				if(response.status === 200) {
+					return Promise.resolve(response)
+				}
 
-			return response.text().then(err => {
+				return response.text().then(err => {
+					throw err
+				})
+			})
+			.catch(err => {
+				this.loading(false)
 				throw err
 			})
-		})
-		.catch(err => {
-			this.loading(false)
-			throw err
-		})
-	}
+				}
 
 	scrollTo(target: HTMLElement) {
 		const duration = 250.0
@@ -1126,7 +1140,7 @@ export default class AnimeNotifier {
 		}
 
 		this.post("/api/new/clienterrorreport", report)
-		.then(() => console.log("Successfully reported the error to the website staff."))
-		.catch(() => console.warn("Failed reporting the error to the website staff."))
-	}
+			.then(() => console.log("Successfully reported the error to the website staff."))
+			.catch(() => console.warn("Failed reporting the error to the website staff."))
+				}
 }
