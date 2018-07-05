@@ -474,15 +474,17 @@ export default class AnimeNotifier {
 		}
 	}
 
-	// Hides user anime automatically if localStorage.hide is true
+	// Hides anime already existing in the user's anime list automatically
 	hideAddedAnime() {
 		if(!this.app.currentPath.includes("/explore") && !this.app.currentPath.includes("/genre")) {
 			return
 		}
 
-		if(localStorage.getItem("hide-added-anime") === "true") {
-			actions.hideAddedAnime()
+		if(localStorage.getItem("hide-added-anime") !== "true") {
+			return
 		}
+
+		actions.hideAddedAnime()
 	}
 
 	markPlayingSoundTrack() {
