@@ -480,7 +480,7 @@ export default class AnimeNotifier {
 			return
 		}
 
-		if(localStorage.getItem("hideAdded") === "true") {
+		if(localStorage.getItem("hide-added-anime") === "true") {
 			actions.hideAddedAnime()
 		}
 	}
