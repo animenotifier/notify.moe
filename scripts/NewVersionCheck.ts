@@ -18,7 +18,8 @@ async function checkNewVersion(url: string, statusMessage: StatusMessage) {
 		}
 
 		let response = await fetch(url, {
-			headers
+			headers,
+			credentials: "omit",
 		})
 
 		// Not modified response
