@@ -12,7 +12,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number - 1))
 	//- 		Icon("chevron-left")
 
-	//- if episode.Number + 1 < anime.EpisodeCount
+	//- if episode.Number + 1 <= len(anime.Episodes().Items)
 	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number + 1))
 	//- 		Icon("chevron-right")
 
