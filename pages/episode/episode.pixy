@@ -8,11 +8,11 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 
-	//- if (previousIndex != -1)
+	//- if previousIndex != -1
 	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[previousIndex].Number))
 	//- 		Icon("chevron-left")
 
-	//- if (nextIndex != -1)
+	//- if nextIndex != -1
 	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[nextIndex].Number))
 	//- 		Icon("chevron-right")
 
