@@ -8,13 +8,13 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 
-	//- if episode.Number - 1 > 0
-	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number - 1))
-	//- 		Icon("chevron-left")
+	if episode.Number - 1 >= anime.Episodes().Items[0].Number
+		a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number - 1))
+			Icon("chevron-left")
 
-	//- if episode.Number + 1 <= len(anime.Episodes().Items)
-	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number + 1))
-	//- 		Icon("chevron-right")
+	if episode.Number + 1 <= len(anime.Episodes().Items)
+		a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number + 1))
+			Icon("chevron-right")
 
 	if episode.Title.Japanese != ""
 		.episode-view-title
