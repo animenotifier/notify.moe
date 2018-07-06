@@ -1,4 +1,4 @@
-component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User)
+component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User, previousIndex int, nextIndex int)
 	h1
 		a(href=anime.Link())= anime.Title.ByUser(user)
 
@@ -8,13 +8,13 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 
-	if episode.Number > anime.Episodes().Items[0].Number
-		a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number - 1))
-			Icon("chevron-left")
+	//- if (previousIndex != -1)
+	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[previousIndex].Number))
+	//- 		Icon("chevron-left")
 
-	if episode.Number < anime.Episodes().Items[len(anime.Episodes().Items) - 1].Number
-		a.button(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number + 1))
-			Icon("chevron-right")
+	//- if (nextIndex != -1)
+	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[nextIndex].Number))
+	//- 		Icon("chevron-right")
 
 	if episode.Title.Japanese != ""
 		.episode-view-title
