@@ -27,6 +27,7 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 
 // Toggle hiding added anime.
 export function toggleHideAddedAnime(arn: AnimeNotifier, input: HTMLButtonElement) {
+
 	// Toggle state
 	let whereAmI
 	if(arn.app.currentPath.includes("/explore")) {

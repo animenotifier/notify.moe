@@ -166,8 +166,7 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.dragAndDrop()),
 			Promise.resolve().then(() => this.colorStripes()),
 			Promise.resolve().then(() => this.assignTooltipOffsets()),
-			Promise.resolve().then(() => this.countUp()),
-			Promise.resolve().then(() => this.hideAddedAnime())
+			Promise.resolve().then(() => this.countUp())
 		])
 
 		// Apply page title
@@ -475,7 +474,7 @@ export default class AnimeNotifier {
 			window.requestAnimationFrame(callback)
 		}
 	}
-
+  
 	// Hides anime already existing in the user's anime list automatically
 	hideAddedAnime() {
 		if(!this.app.currentPath.includes("/explore") && !this.app.currentPath.includes("/genre/")) {
