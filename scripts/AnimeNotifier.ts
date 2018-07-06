@@ -10,9 +10,10 @@ import SideBar from "./SideBar"
 import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
-import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
+import { findAll, canUseWebP, requestIdleCallback, swapElements, delay, hideValues } from "./Utils"
 import { checkNewVersionDelayed } from "./NewVersionCheck"
 import * as actions from "./Actions"
+
 
 export default class AnimeNotifier {
 	app: Application
@@ -35,6 +36,7 @@ export default class AnimeNotifier {
 	diffCompletedForCurrentPath: boolean
 	lastReloadContentPath: string
 	currentSoundTrackId: string
+
 
 	constructor(app: Application) {
 		this.app = app
@@ -471,6 +473,31 @@ export default class AnimeNotifier {
 
 			window.requestAnimationFrame(callback)
 		}
+	}
+  
+	// Hides anime already existing in the user's anime list automatically
+	hideAddedAnime() {
+		if(!this.app.currentPath.includes("/explore") && !this.app.currentPath.includes("/genre/")) {
+			localStorage.setItem(hideValues.hideExplore, "false")
+			localStorage.setItem(hideValues.hideGenre, "false")
+			return
+		}
+
+		if(localStorage.getItem(hideValues.hideGenre) === "false" &&
+		   localStorage.getItem(hideValues.hideExplore) === "false") {
+			return
+		}
+
+		let whereAmI
+		if(this.app.currentPath.includes("/explore")) {
+			whereAmI = hideValues.hideExplore
+			localStorage.setItem(hideValues.hideGenre, "false")
+		} else {
+			whereAmI = hideValues.hideGenre
+			localStorage.setItem(hideValues.hideExplore, "false")
+		}
+
+		actions.hideAddedAnime(whereAmI)
 	}
 
 	markPlayingSoundTrack() {

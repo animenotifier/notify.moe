@@ -1,5 +1,5 @@
 import AnimeNotifier from "../AnimeNotifier"
-import { findAll } from "scripts/Utils"
+import { findAll, hideValues } from "scripts/Utils"
 
 // Filter anime on explore page
 export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
@@ -27,17 +27,39 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 
 // Toggle hiding added anime.
 export function toggleHideAddedAnime(arn: AnimeNotifier, input: HTMLButtonElement) {
-	hideAddedAnime()
+
+	// Toggle state
+	let whereAmI
+	if(arn.app.currentPath.includes("/explore")) {
+		whereAmI = hideValues.hideExplore
+		localStorage.setItem(hideValues.hideGenre, "false")
+	} else {
+		whereAmI = hideValues.hideGenre
+		localStorage.setItem(hideValues.hideExplore, "false")
+	}
+
+	if(localStorage.getItem(whereAmI) === "true") {
+		localStorage.setItem(whereAmI, "false")
+	} else {
+		localStorage.setItem(whereAmI, "true")
+	}
+
+	// Hide anime
+	hideAddedAnime(whereAmI)
 }
 
 // Hides anime that are already in your list.
-export function hideAddedAnime() {
+export function hideAddedAnime(whereAmI: string) {
 	for(let anime of findAll("anime-grid-cell")) {
 		if(anime.dataset.added !== "true") {
 			continue
 		}
 
-		anime.classList.toggle("anime-grid-cell-hide")
+		if(localStorage.getItem(whereAmI) === "true") {
+			anime.classList.add("anime-grid-cell-hide")
+		} else {
+			anime.classList.remove("anime-grid-cell-hide")
+		}
 	}
 }
 
