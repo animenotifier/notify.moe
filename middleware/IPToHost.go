@@ -2,15 +2,20 @@ package middleware
 
 import (
 	"net"
+	"sync"
 	"time"
 
 	cache "github.com/patrickmn/go-cache"
 )
 
 var ipToHosts = cache.New(60*time.Minute, 30*time.Minute)
+var ipToHostsMutex sync.Mutex
 
 // GetHostsForIP returns all host names for the given IP (if cached).
 func GetHostsForIP(ip string) ([]string, bool) {
+	ipToHostsMutex.Lock()
+	defer ipToHostsMutex.Unlock()
+
 	hosts, found := ipToHosts.Get(ip)
 
 	if !found {
