@@ -1,4 +1,4 @@
-component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User)
+component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User, episodeIndex int)
 	h1
 		a(href=anime.Link())= anime.Title.ByUser(user)
 
@@ -7,6 +7,14 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 			img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
+
+	//- if episodeIndex > 0
+	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number))
+	//- 		Icon("chevron-left")
+
+	//- if episodeIndex < len(anime.Episodes().Items) - 1
+	//- 	a.button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number))
+	//- 		Icon("chevron-right")
 
 	if episode.Title.Japanese != ""
 		.episode-view-title
