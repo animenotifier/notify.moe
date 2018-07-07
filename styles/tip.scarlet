@@ -53,6 +53,7 @@ mixin tip-after
 // When the browser is idle, we give all tips the "tip-active" class.
 .tip-active
 	position relative
+	z-index 9999
 
 	:before
 		tip-before

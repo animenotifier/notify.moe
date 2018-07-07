@@ -140,6 +140,11 @@ const anime-image-medium-height = 200px
 const anime-image-large-width = 250px
 const anime-image-large-height = 350px
 
+const character-image-small-width = 56px
+const character-image-small-height = 56px
+
+const grid-cell-margin = 0.5rem
+
 // Timings
 fade-speed = 150ms
 transition-speed = 150ms

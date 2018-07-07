@@ -20,8 +20,8 @@
 	object-fit cover
 
 .character-image-small
-	width 56px
-	height 56px
+	width character-image-small-width
+	height character-image-small-height
 	border-radius ui-element-border-radius
 	box-shadow shadow-light
 	object-fit cover
