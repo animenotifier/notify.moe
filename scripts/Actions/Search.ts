@@ -126,6 +126,11 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 		.catch(console.error)
 
 		requestIdleCallback(() => {
+			// Check that the term hasn't changed in the meantime
+			if(term !== search.value.trim()) {
+				return
+			}
+
 			fetch("/_/character-search/" + term, fetchOptions)
 			.then(showResponseInElement(arn, url, "character", characterSearchResults))
 			.catch(console.error)
