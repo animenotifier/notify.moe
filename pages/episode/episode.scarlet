@@ -14,4 +14,17 @@
 .episode-view-image-container
 	horizontal
 	justify-content center
+	align-items center
+	position relative
+	height anime-image-large-height
 	margin-bottom content-padding
+
+.episode-arrow
+	position absolute
+	top 50%
+
+.episode-arrow-previous
+	left 0
+
+.episode-arrow-next
+	right 0
