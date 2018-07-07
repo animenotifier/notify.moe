@@ -1,4 +1,4 @@
-component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.User, episodeIndex int)
+component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex int, user *arn.User)
 	h1
 		a(href=anime.Link())= anime.Title.ByUser(user)
 
