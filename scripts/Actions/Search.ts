@@ -199,7 +199,7 @@ export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
 	recognition = new SpeechRecognition()
 	recognition.continuous = false
 	recognition.interimResults = false
-	recognition.lang = "en-US"
+	recognition.lang = navigator.language
 
 	recognition.onresult = evt => {
 		if(evt.results.length > 0) {
