@@ -33,14 +33,11 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime episodes not found", err)
 	}
 
-	episode, _ := animeEpisodes.Find(episodeNumber)
+	episode, episodeIndex := animeEpisodes.Find(episodeNumber)
 
 	if episode == nil {
 		return ctx.Error(http.StatusNotFound, "Anime episode not found", nil)
 	}
 
-	_, previousIndex := animeEpisodes.Find(episodeNumber - 1)
-	_, nextIndex := animeEpisodes.Find(episodeNumber + 1)
-
-	return ctx.HTML(components.AnimeEpisode(anime, episode, user, previousIndex, nextIndex))
+	return ctx.HTML(components.AnimeEpisode(anime, episode, user, episodeIndex))
 }
