@@ -22,9 +22,17 @@
 .episode-arrow
 	position absolute
 	top 50%
+	z-index 1
 
 .episode-arrow-previous
-	left 0
+	left calc(content-padding * -1 + 3px)
 
 .episode-arrow-next
-	right 0
+	right calc(content-padding * -1 + 3px)
+
+> 500px
+	.episode-arrow-previous
+		left 0
+
+	.episode-arrow-next
+		right 0

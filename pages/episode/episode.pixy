@@ -5,18 +5,16 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, user *arn.Us
 	.episode-view-image-container
 		if episodeIndex > 0
 			.episode-arrow.episode-arrow-previous
-				a.button.tip(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number), aria-label="Previous episode")
-					Icon("chevron-left")
-					span= anime.Episodes().Items[episodeIndex - 1].Number
+				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number), title="Previous episode")
+					RawIcon("chevron-left")
 				
 		a(href=anime.Link(), title=anime.Title.ByUser(user))
 			img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 		if episodeIndex < len(anime.Episodes().Items) - 1
 			.episode-arrow.episode-arrow-next
-				a.button.tip(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number), aria-label="Next episode")
-					Icon("chevron-right")
-					span= anime.Episodes().Items[episodeIndex + 1].Number
+				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number), title="Next episode")
+					RawIcon("chevron-right")
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 
