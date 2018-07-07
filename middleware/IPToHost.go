@@ -10,7 +10,7 @@ import (
 var ipToHosts = cache.New(60*time.Minute, 30*time.Minute)
 
 // GetHostsForIP returns all host names for the given IP (if cached).
-func GetHostsForIP(ip string) []string {
+func GetHostsForIP(ip string) ([]string, bool) {
 	hosts, found := ipToHosts.Get(ip)
 
 	if !found {
@@ -18,10 +18,10 @@ func GetHostsForIP(ip string) []string {
 	}
 
 	if hosts == nil {
-		return nil
+		return nil, found
 	}
 
-	return hosts.([]string)
+	return hosts.([]string), found
 }
 
 // Finds all host names for the given IP

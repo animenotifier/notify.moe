@@ -12,15 +12,16 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-var request = log.New()
-var err = log.New()
+var requestLog = log.New()
+var errorLog = log.New()
+var ipLog = log.New()
 
 // Initialize log files
 func init() {
-	request.AddOutput(log.File("logs/request.log"))
-
-	err.AddOutput(log.File("logs/error.log"))
-	err.AddOutput(os.Stderr)
+	requestLog.AddOutput(log.File("logs/request.log"))
+	errorLog.AddOutput(log.File("logs/error.log"))
+	errorLog.AddOutput(os.Stderr)
+	ipLog.AddOutput(log.File("logs/ip.log"))
 }
 
 // Log middleware logs every request into logs/request.log and errors into logs/error.log.
@@ -47,13 +48,10 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 
 	user := utils.GetUser(ctx)
 	ip := ctx.RealIP()
+	hostNames, cached := GetHostsForIP(ip)
 
-	hostName := "<unknown host>"
-	hostNames := GetHostsForIP(ip)
-
-	if len(hostNames) != 0 {
-		hostName = hostNames[0]
-		hostName = strings.TrimSuffix(hostName, ".")
+	if !cached && len(hostNames) > 0 {
+		ipLog.Info(ip, strings.Join(hostNames, ", "))
 	}
 
 	// Log every request
@@ -65,7 +63,7 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 		nick = user.Nick
 	}
 
-	request.Info(nick, id, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+	requestLog.Info(nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
 
 	// Log all requests that failed
 	switch ctx.StatusCode {
@@ -73,12 +71,12 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 		// Ok.
 
 	default:
-		err.Error(nick, id, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI(), ctx.ErrorMessage)
+		errorLog.Error(nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI(), ctx.ErrorMessage)
 	}
 
 	// Notify us about long requests.
 	// However ignore requests under /auth/ because those depend on 3rd party servers.
 	if responseTime >= 300*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") && !strings.HasPrefix(ctx.URI(), "/sitemap/") {
-		err.Error("Long response time", nick, id, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+		errorLog.Error("Long response time", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
 	}
 }
