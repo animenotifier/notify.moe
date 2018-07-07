@@ -1,9 +1,10 @@
 import { delay, requestIdleCallback } from "./Utils"
 import StatusMessage from "./StatusMessage"
 
+const newVersionCheckDelay = location.hostname === "notify.moe" ? 60000 : 3000
+
 let etags = new Map<string, string>()
 let hasNewVersion = false
-let newVersionCheckDelay = 60000
 
 async function checkNewVersion(url: string, statusMessage: StatusMessage) {
 	if(hasNewVersion) {
