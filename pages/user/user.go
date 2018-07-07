@@ -13,11 +13,11 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	if user.Nick == "" {
-		return ctx.Error(http.StatusInternalServerError, "User did not set a nickname", nil)
+		return ctx.Error(http.StatusInternalServerError, "User did not set a nickname")
 	}
 
 	return profile.Profile(ctx, user)

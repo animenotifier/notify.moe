@@ -36,7 +36,7 @@ func Get(ctx *aero.Context) string {
 	episode := animeEpisodes.Find(episodeNumber)
 
 	if episode == nil {
-		return ctx.Error(http.StatusNotFound, "Anime episode not found", nil)
+		return ctx.Error(http.StatusNotFound, "Anime episode not found")
 	}
 
 	return ctx.HTML(components.AnimeEpisode(anime, episode, user))

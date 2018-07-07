@@ -15,7 +15,7 @@ func AnimeImage(ctx *aero.Context) string {
 	animeID := ctx.Get("id")
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
 	anime, err := arn.GetAnime(animeID)

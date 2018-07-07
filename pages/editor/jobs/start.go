@@ -21,18 +21,18 @@ func Start(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
 	jobName := ctx.Get("job")
 	job := jobInfo[jobName]
 
 	if job == nil {
-		return ctx.Error(http.StatusBadRequest, "Job not available", nil)
+		return ctx.Error(http.StatusBadRequest, "Job not available")
 	}
 
 	if job.IsRunning() {
-		return ctx.Error(http.StatusBadRequest, "Job is currently running!", nil)
+		return ctx.Error(http.StatusBadRequest, "Job is currently running!")
 	}
 
 	job.Start()

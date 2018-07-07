@@ -57,11 +57,15 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 	}
 
 	// Log every request
+	id := "[id]"
+	nick := "[guest]"
+
 	if user != nil {
-		request.Info(user.Nick, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
-	} else {
-		request.Info("[guest]", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+		id = user.ID
+		nick = user.Nick
 	}
+
+	request.Info(nick, id, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
 
 	// Log all requests that failed
 	switch ctx.StatusCode {
@@ -69,12 +73,12 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 		// Ok.
 
 	default:
-		err.Error(http.StatusText(ctx.StatusCode), ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+		err.Error(nick, id, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI(), ctx.ErrorMessage)
 	}
 
 	// Notify us about long requests.
 	// However ignore requests under /auth/ because those depend on 3rd party servers.
 	if responseTime >= 300*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") && !strings.HasPrefix(ctx.URI(), "/sitemap/") {
-		err.Error("Long response time", ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
+		err.Error("Long response time", nick, id, ip, hostName, responseTimeString, ctx.StatusCode, ctx.URI())
 	}
 }

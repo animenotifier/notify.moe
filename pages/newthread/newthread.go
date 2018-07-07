@@ -13,7 +13,7 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	return ctx.HTML(components.NewThread(user))

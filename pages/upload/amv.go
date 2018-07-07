@@ -15,7 +15,7 @@ func AMVFile(ctx *aero.Context) string {
 	amvID := ctx.Get("id")
 
 	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
 	amv, err := arn.GetAMV(amvID)

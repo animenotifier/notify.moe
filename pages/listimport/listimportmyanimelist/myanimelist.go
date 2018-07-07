@@ -16,7 +16,7 @@ func Preview(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	matches, response := getMatches(ctx)
@@ -33,7 +33,7 @@ func Finish(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	matches, response := getMatches(ctx)
@@ -83,7 +83,7 @@ func getMatches(ctx *aero.Context) ([]*arn.MyAnimeListMatch, string) {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return nil, ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	malAnimeList, err := mal.GetAnimeList(user.Accounts.MyAnimeList.Nick)

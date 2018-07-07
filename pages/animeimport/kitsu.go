@@ -19,7 +19,7 @@ func Kitsu(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
 	kitsuAnimeObj, err := arn.Kitsu.Get("Anime", id)

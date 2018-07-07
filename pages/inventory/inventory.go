@@ -17,7 +17,7 @@ func Get(ctx *aero.Context) string {
 	viewUser := user
 
 	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
 	inventory, err := arn.GetInventory(viewUser.ID)

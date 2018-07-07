@@ -15,7 +15,7 @@ func Edit(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || user.Role != "admin" {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this user", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this user")
 	}
 
 	viewUser, err := arn.GetUserByNick(nick)

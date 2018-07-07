@@ -15,7 +15,7 @@ func CreatePayment(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
 	// Verify amount
@@ -29,7 +29,7 @@ func CreatePayment(ctx *aero.Context) string {
 	case "1000", "2000", "3000", "6000", "12000", "25000", "50000", "75000":
 		// OK
 	default:
-		return ctx.Error(http.StatusBadRequest, "Incorrect amount", nil)
+		return ctx.Error(http.StatusBadRequest, "Incorrect amount")
 	}
 
 	// Initiate PayPal client

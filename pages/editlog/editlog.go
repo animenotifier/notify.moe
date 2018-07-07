@@ -24,7 +24,7 @@ func Get(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
 	viewUser, err := arn.GetUserByNick(nick)

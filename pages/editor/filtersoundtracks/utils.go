@@ -17,7 +17,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.SoundTrack) bo
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
-		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
 	tracks, count := filterSoundTracks(ctx, user, filter)

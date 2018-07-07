@@ -16,7 +16,7 @@ func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this post", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this post")
 	}
 
 	post, err := arn.GetPost(id)

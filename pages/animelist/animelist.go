@@ -38,7 +38,7 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 	animeList := viewUser.AnimeList()
 
 	if animeList == nil {
-		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
+		return ctx.Error(http.StatusNotFound, "Anime list not found")
 	}
 
 	statusList := animeList.FilterStatus(status)

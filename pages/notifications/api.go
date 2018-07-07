@@ -14,7 +14,7 @@ func CountUnseen(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	unseen := user.Notifications().CountUnseen()
@@ -27,7 +27,7 @@ func MarkNotificationsAsSeen(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	notifications := user.Notifications().Notifications()
@@ -45,7 +45,7 @@ func Test(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	user.SendNotification(&arn.PushNotification{

@@ -21,7 +21,7 @@ func BuyItem(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
 	// Item ID and quantity
@@ -42,7 +42,7 @@ func BuyItem(ctx *aero.Context) string {
 	totalPrice := int(item.Price) * quantity
 
 	if user.Balance < totalPrice {
-		return ctx.Error(http.StatusBadRequest, "Not enough gems. You need to charge up your balance before you can buy this item.", nil)
+		return ctx.Error(http.StatusBadRequest, "Not enough gems. You need to charge up your balance before you can buy this item.")
 	}
 
 	user.Balance -= totalPrice

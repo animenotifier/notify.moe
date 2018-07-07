@@ -15,11 +15,11 @@ func PurchaseHistory(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
 	if user.Role != "admin" {
-		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
 	purchases, err := arn.AllPurchases()

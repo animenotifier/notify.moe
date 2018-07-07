@@ -16,7 +16,7 @@ func RedirectByMapping(mappingName string) func(*aero.Context) string {
 		anime := finder.GetAnime(id)
 
 		if anime == nil {
-			return ctx.Error(http.StatusNotFound, "Anime not found", nil)
+			return ctx.Error(http.StatusNotFound, "Anime not found")
 		}
 
 		return utils.SmartRedirect(ctx, "/anime/"+anime.ID)

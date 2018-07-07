@@ -12,11 +12,11 @@ func Cover(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
 	if !user.IsPro() {
-		return ctx.Error(http.StatusUnauthorized, "Only available for PRO users", nil)
+		return ctx.Error(http.StatusUnauthorized, "Only available for PRO users")
 	}
 
 	// Retrieve file from post body

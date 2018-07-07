@@ -16,7 +16,7 @@ func Main(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this anime", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this anime")
 	}
 
 	anime, err := arn.GetAnime(id)
@@ -34,7 +34,7 @@ func Images(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this anime", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this anime")
 	}
 
 	anime, err := arn.GetAnime(id)
@@ -52,7 +52,7 @@ func Characters(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit")
 	}
 
 	anime, err := arn.GetAnime(id)
@@ -76,7 +76,7 @@ func Relations(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit")
 	}
 
 	anime, err := arn.GetAnime(id)
@@ -100,7 +100,7 @@ func Episodes(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit")
 	}
 
 	anime, err := arn.GetAnime(id)

@@ -18,7 +18,7 @@ func ByUser(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return ctx.Error(http.StatusBadRequest, "Not logged in", nil)
+		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
 	var viewUser *arn.User

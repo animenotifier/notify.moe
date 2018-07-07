@@ -25,7 +25,7 @@ func Get(ctx *aero.Context) string {
 	animeList := user.AnimeList()
 
 	if animeList == nil {
-		return ctx.Error(http.StatusNotFound, "Anime list not found", nil)
+		return ctx.Error(http.StatusNotFound, "Anime list not found")
 	}
 
 	watchingList := animeList.Watching()

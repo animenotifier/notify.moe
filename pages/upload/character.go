@@ -15,7 +15,7 @@ func CharacterImage(ctx *aero.Context) string {
 	characterID := ctx.Get("id")
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
-		return ctx.Error(http.StatusUnauthorized, "Not authorized", nil)
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
 	character, err := arn.GetCharacter(characterID)
