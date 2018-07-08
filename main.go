@@ -49,12 +49,9 @@ func configure(app *aero.Application) *aero.Application {
 	// API
 	arn.API.Install(app)
 
-	// Development server configuration
+	// Domain
 	if arn.IsDevelopment() {
 		app.Config.Domain = "beta.notify.moe"
-
-		// Test connectivity
-		app.OnStart(testConnectivity)
 	}
 
 	// Authentication
