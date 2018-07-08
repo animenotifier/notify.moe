@@ -1,3 +1,3 @@
-component EditFormImagePreview(link string, imageURL string, webp bool)
-	a(href=link, target="_blank")
+component EditFormImagePreview(link string, imageURL string, webp bool, title string)
+	a.tip(href=link, target="_blank", aria-label=title)
 		img.lazy(data-src=imageURL, alt="Preview", data-webp=webp)

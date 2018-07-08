@@ -214,7 +214,7 @@ func renderStringField(b *bytes.Buffer, v *reflect.Value, field reflect.StructFi
 		anime, err := arn.GetAnime(animeID)
 
 		if err == nil {
-			b.WriteString(components.EditFormImagePreview(anime.Link(), anime.ImageLink("small"), true))
+			b.WriteString(components.EditFormImagePreview(anime.Link(), anime.ImageLink("small"), true, anime.Title.ByUser(nil)))
 		}
 
 	case "Character":
@@ -222,7 +222,7 @@ func renderStringField(b *bytes.Buffer, v *reflect.Value, field reflect.StructFi
 		character, err := arn.GetCharacter(characterID)
 
 		if err == nil {
-			b.WriteString(components.EditFormImagePreview(character.Link(), character.ImageLink("medium"), false))
+			b.WriteString(components.EditFormImagePreview(character.Link(), character.ImageLink("medium"), true, character.Name.ByUser(nil)))
 		}
 
 	case "":
