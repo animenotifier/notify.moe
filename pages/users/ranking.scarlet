@@ -15,6 +15,9 @@
 		width calc(avatar-size / 2)
 		height calc(avatar-size / 2)
 
+	.user-pro-icon
+		font-size calc(user-pro-icon-size / 2)
+
 .ranking-user-nick
 	margin-left 0.8rem
 

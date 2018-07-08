@@ -145,6 +145,8 @@ const character-image-small-height = 56px
 
 const grid-cell-margin = 0.5rem
 
+const user-pro-icon-size = 1.1rem
+
 // Timings
 fade-speed = 150ms
 transition-speed = 150ms

@@ -35,5 +35,5 @@
 	position absolute
 	bottom -2px
 	right -2px
-	font-size 1.1rem
+	font-size user-pro-icon-size
 	filter drop-shadow(0 0 3px hsla(link-color-h, link-color-s, link-color-l, 0.35))
