@@ -23,7 +23,8 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 **!animelist** [username]
 **!play** [status text]
 **!randomquote**
-**!source**`)
+**!source**
+**!region** [region]`)
 	}
 
 	// Has the bot been mentioned?
