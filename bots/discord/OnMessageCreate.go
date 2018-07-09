@@ -97,10 +97,35 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 
 		// check to make sure the region is in the region map
 		if _, ok := regions[region]; ok {
-			// try to set the role
+			// Get the channel, this is used to get the guild ID
 			c, _ := s.Channel(msg.ChannelID)
-			err := s.GuildMemberRoleAdd(c.GuildID, msg.Author.ID, regions[region])
 
+			// Check to see if user already has a region role
+			user, _ := s.GuildMember(c.GuildID, msg.Author.ID)
+
+			for _, role := range user.Roles {
+				match := false
+				// we also need to loop through our map because discord doesn't return roles as names
+				// but rather IDs.
+				for _, id := range regions {
+
+					if role == id {
+						// remove the role and set match to true
+						s.GuildMemberRoleRemove(c.GuildID, msg.Author.ID, id)
+						match = true
+						break
+					}
+
+				}
+
+				if match {
+					break
+				}
+
+			}
+
+			// try to set the role
+			err := s.GuildMemberRoleAdd(c.GuildID, msg.Author.ID, regions[region])
 			if err != nil {
 				s.ChannelMessageSend(msg.ChannelID, "The region role could not be set!")
 				return
