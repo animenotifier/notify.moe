@@ -81,4 +81,37 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+" B-baaaaaaaka! Y..you...you want to...TOUCH MY CODE?!\n\nhttps://github.com/animenotifier/notify.moe/tree/go/bots/discord")
 		return
 	}
+
+	// Set the specific region role for the user
+	if strings.HasPrefix(msg.Content, "!region ") {
+
+		regions := map[string]string{
+			"africa":    "465876853236826112",
+			"america":   "465876808311635979",
+			"asia":      "465876834031108096",
+			"australia": "465876893036707840",
+			"europe":    "465876773029019659",
+		}
+
+		region := msg.Content[len("!region "):]
+
+		// check to make sure the region is in the region map
+		if _, ok := regions[region]; ok {
+			// try to set the role
+			c, _ := s.Channel(msg.ChannelID)
+			err := s.GuildMemberRoleAdd(c.GuildID, msg.Author.ID, regions[region])
+
+			if err != nil {
+				s.ChannelMessageSend(msg.ChannelID, "The region role could not be set!")
+				return
+			}
+
+			s.ChannelMessageSend(msg.ChannelID, "The "+region+" role has been set on your user!")
+
+		} else {
+			s.ChannelMessageSend(msg.ChannelID, "This is not a region!")
+		}
+
+		return
+	}
 }
