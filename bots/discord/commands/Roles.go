@@ -9,9 +9,12 @@ import (
 // Guild ID
 const guildID = "134910939140063232"
 
-// Roles prints out all roles.
+// Admin ID
+const adminID = "122970452632141826"
+
+// Roles prints out all roles for the server admin.
 func Roles(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
-	if msg.Content != "!roles" {
+	if msg.Content != "!roles" || msg.Author.ID != adminID {
 		return false
 	}
 
