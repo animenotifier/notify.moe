@@ -9,7 +9,7 @@ import (
 
 // AnimeSearch shows the link for the anime list of a user.
 func AnimeSearch(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
-	if strings.HasPrefix(msg.Content, "!a ") {
+	if !strings.HasPrefix(msg.Content, "!a ") {
 		return false
 	}
 

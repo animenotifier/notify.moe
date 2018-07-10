@@ -8,7 +8,7 @@ import (
 
 // Play changes the status of the bot.
 func Play(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
-	if strings.HasPrefix(msg.Content, "!play ") {
+	if !strings.HasPrefix(msg.Content, "!play ") {
 		return false
 	}
 

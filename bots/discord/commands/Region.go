@@ -7,16 +7,16 @@ import (
 )
 
 var regions = map[string]string{
-	"africa":    "465876853236826112",
-	"america":   "465876808311635979",
-	"asia":      "465876834031108096",
-	"australia": "465876893036707840",
-	"europe":    "465876773029019659",
+	"africa":    "465387147629953034",
+	"america":   "465386843706359840",
+	"asia":      "465386826006528001",
+	"australia": "465387169888862230",
+	"europe":    "465386794914152448",
 }
 
 // Region sets the specific region role for the user.
 func Region(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
-	if strings.HasPrefix(msg.Content, "!region ") {
+	if !strings.HasPrefix(msg.Content, "!region ") {
 		return false
 	}
 

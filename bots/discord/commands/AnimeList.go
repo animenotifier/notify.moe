@@ -8,7 +8,7 @@ import (
 
 // AnimeList shows the link for the anime list of a user.
 func AnimeList(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
-	if strings.HasPrefix(msg.Content, "!animelist ") {
+	if !strings.HasPrefix(msg.Content, "!animelist ") {
 		return false
 	}
 

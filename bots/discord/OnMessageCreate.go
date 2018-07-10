@@ -15,6 +15,7 @@ var allCommands = []Command{
 	commands.Play,
 	commands.RandomQuote,
 	commands.Region,
+	commands.Roles,
 	commands.Source,
 }
 
