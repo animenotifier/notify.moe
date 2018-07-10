@@ -3,6 +3,7 @@ package commands
 import (
 	"strings"
 
+	"github.com/animenotifier/arn/stringutils"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -63,6 +64,6 @@ func Region(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 		return true
 	}
 
-	s.ChannelMessageSend(msg.ChannelID, "Set region "+region+" for your account!")
+	s.ChannelMessageSend(msg.ChannelID, "Set region "+stringutils.Capitalize(region)+" for your account!")
 	return true
 }
