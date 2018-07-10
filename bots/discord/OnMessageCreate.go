@@ -1,21 +1,21 @@
 package main
 
 import (
-	"math/rand"
-	"strings"
+	"github.com/animenotifier/notify.moe/bots/discord/commands"
 
-	"github.com/animenotifier/arn"
-
-	"github.com/animenotifier/arn/search"
 	"github.com/bwmarrin/discordgo"
 )
 
-var regions = map[string]string{
-	"africa":    "465876853236826112",
-	"america":   "465876808311635979",
-	"asia":      "465876834031108096",
-	"australia": "465876893036707840",
-	"europe":    "465876773029019659",
+// Command represents a single bot command function signature.
+type Command func(*discordgo.Session, *discordgo.MessageCreate) bool
+
+var allCommands = []Command{
+	commands.AnimeList,
+	commands.AnimeSearch,
+	commands.Play,
+	commands.RandomQuote,
+	commands.Region,
+	commands.Source,
 }
 
 // OnMessageCreate is called every time a new message is created on any channel.
@@ -43,97 +43,12 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 		}
 	}
 
-	// Anime search
-	if strings.HasPrefix(msg.Content, "!a ") {
-		term := msg.Content[len("!a "):]
-		animes := search.Anime(term, 3)
-		message := ""
-
-		for _, anime := range animes {
-			message += "https://notify.moe" + anime.Link() + "\n"
-		}
-
-		if len(animes) == 0 {
-			message = "Sorry, I couldn't find anything using that term."
-		}
-
-		s.ChannelMessageSend(msg.ChannelID, message)
-		return
-	}
-
-	// Anime list of user
-	if strings.HasPrefix(msg.Content, "!animelist ") {
-		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1]+"/animelist/watching")
-		return
-	}
-
-	// Play status
-	if strings.HasPrefix(msg.Content, "!play ") {
-		s.UpdateStatus(0, msg.Content[len("!play "):])
-		return
-	}
-
-	// Random quote
-	if msg.Content == "!randomquote" {
-		allQuotes := arn.FilterQuotes(func(quote *arn.Quote) bool {
-			return !quote.IsDraft && quote.IsValid()
-		})
-
-		quote := allQuotes[rand.Intn(len(allQuotes))]
-		s.ChannelMessageSend(msg.ChannelID, "https://notify.moe"+quote.Link())
-		return
-	}
-
-	// GitHub source of the bot
-	if msg.Content == "!source" {
-		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+" B-baaaaaaaka! Y..you...you want to...TOUCH MY CODE?!\n\nhttps://github.com/animenotifier/notify.moe/tree/go/bots/discord")
-		return
-	}
-
-	// Set the specific region role for the user
-	if strings.HasPrefix(msg.Content, "!region ") {
-		region := strings.ToLower(msg.Content[len("!region "):])
-
-		// check to make sure the region is in the region map
-		if _, ok := regions[region]; !ok {
-			s.ChannelMessageSend(msg.ChannelID, "This is not a region!")
+	// Has the user invoked a command?
+	for _, cmd := range allCommands {
+		if cmd(s, msg) {
 			return
 		}
-
-		// Get the channel, this is used to get the guild ID
-		c, _ := s.Channel(msg.ChannelID)
-
-		// Check to see if user already has a region role
-		user, _ := s.GuildMember(c.GuildID, msg.Author.ID)
-
-		for _, role := range user.Roles {
-			match := false
-
-			// We also need to loop through our map because discord doesn't return roles as names
-			// but rather IDs.
-			for _, id := range regions {
-				if role == id {
-					// Remove the role and set match to true.
-					s.GuildMemberRoleRemove(c.GuildID, msg.Author.ID, id)
-					match = true
-					break
-				}
-			}
-
-			if match {
-				break
-			}
-		}
-
-		// Try to set the role.
-		err := s.GuildMemberRoleAdd(c.GuildID, msg.Author.ID, regions[region])
-
-		if err != nil {
-			s.ChannelMessageSend(msg.ChannelID, "The region role could not be set!")
-			return
-		}
-
-		s.ChannelMessageSend(msg.ChannelID, "The "+region+" role has been set on your user!")
 	}
+
 	return
 }
