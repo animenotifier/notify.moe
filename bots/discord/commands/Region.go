@@ -28,11 +28,13 @@ func Region(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 		return true
 	}
 
-	// Get the channel, this is used to get the guild ID
-	c, _ := s.Channel(msg.ChannelID)
-
 	// Check to see if user already has a region role
-	user, _ := s.GuildMember(c.GuildID, msg.Author.ID)
+	user, err := s.GuildMember(guildID, msg.Author.ID)
+
+	if err != nil {
+		s.ChannelMessageSend(msg.ChannelID, "Error: User not found")
+		return true
+	}
 
 	for _, role := range user.Roles {
 		match := false
@@ -42,7 +44,7 @@ func Region(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 		for _, id := range regions {
 			if role == id {
 				// Remove the role and set match to true
-				s.GuildMemberRoleRemove(c.GuildID, msg.Author.ID, id)
+				s.GuildMemberRoleRemove(guildID, msg.Author.ID, id)
 				match = true
 				break
 			}
@@ -54,7 +56,7 @@ func Region(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	}
 
 	// Try to set the role
-	err := s.GuildMemberRoleAdd(c.GuildID, msg.Author.ID, regions[region])
+	err = s.GuildMemberRoleAdd(guildID, msg.Author.ID, regions[region])
 
 	if err != nil {
 		s.ChannelMessageSend(msg.ChannelID, "The region role could not be set!")
