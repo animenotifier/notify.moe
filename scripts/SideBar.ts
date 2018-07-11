@@ -32,8 +32,10 @@ export default class SideBar {
 		let visible = this.element.style.display !== "none"
 
 		if(visible) {
+			Diff.mutations.queue(() => this.element.classList.remove("sidebar-visible"))
 			this.element.style.display = "none"
 		} else {
+			Diff.mutations.queue(() => this.element.classList.add("sidebar-visible"))
 			this.element.style.display = "flex"
 		}
 	}
