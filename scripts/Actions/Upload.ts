@@ -15,6 +15,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 	// Click on virtual file input element
 	let input = document.createElement("input")
 	input.setAttribute("type", "file")
+	input.value = null
 
 	input.onchange = () => {
 		let file = input.files[0]
@@ -38,10 +39,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 		// Preview image
 		if(fileType === "image") {
 			let previews = document.getElementsByClassName(button.id + "-preview")
-
-			for(let preview of previews) {
-				previewImage(file, endpoint, previews)
-			}
+			previewImage(file, endpoint, previews)
 		}
 
 		uploadFile(file, fileType, endpoint, arn)

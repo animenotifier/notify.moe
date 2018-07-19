@@ -39,7 +39,7 @@ input
 
 button, .button
 	horizontal
-	padding 0.5rem 1rem
+	padding 0rem 1rem
 	color button-color
 	align-items center
 	pointer-events all

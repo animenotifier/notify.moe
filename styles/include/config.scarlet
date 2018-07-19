@@ -14,9 +14,8 @@ link-color-s = 87%
 link-color-l = 45%
 link-color = hsl(link-color-h, link-color-s, link-color-l)
 
-link-hover-color-l = 53%
+link-hover-color-l = calc(link-color-l + 8%)
 link-hover-color = hsl(link-color-h, link-color-s, link-hover-color-l)
-// link-hover-color = hsl(8, 89%, 53%)
 
 link-active-color = link-hover-color
 pro-color = hsla(0, 100%, 73%, 0.87)
