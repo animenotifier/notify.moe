@@ -28,6 +28,7 @@ func FilterByStatus(status string) aero.Handle {
 func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 	nick := ctx.Get("nick")
 	index, _ := ctx.GetInt("index")
+	sort := ctx.Query("sort")
 	viewUser, err := arn.GetUserByNick(nick)
 
 	if err != nil {
@@ -49,7 +50,7 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 	}
 
 	// Sort the items
-	statusList.Sort()
+	statusList.SortByAlgo(sort, user)
 
 	// These are all animer list items for the given status
 	allItems := statusList.Items
