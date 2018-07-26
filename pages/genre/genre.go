@@ -24,6 +24,7 @@ func Get(ctx *aero.Context) string {
 	}
 
 	userScore := averageScore(user, animes)
+	userCompleted := totalCompleted(user, animes)
 
 	arn.SortAnimeByQuality(animes)
 
@@ -31,7 +32,7 @@ func Get(ctx *aero.Context) string {
 		animes = animes[:animePerPage]
 	}
 
-	return ctx.HTML(components.Genre(genreName, animes, user, userScore))
+	return ctx.HTML(components.Genre(genreName, animes, user, userScore, userCompleted))
 }
 
 // containsLowerCase tells you whether the given element exists when all elements are lowercased.
@@ -70,4 +71,25 @@ func averageScore(user *arn.User, animes []*arn.Anime) float64 {
 	}
 
 	return scores / count
+}
+
+// totalCompleted counts the number of animes the user has completed from a given list of anime
+func totalCompleted(user *arn.User, animes []*arn.Anime) int {
+	if user == nil {
+		return 0
+	}
+
+	count := 0
+
+	completedList := user.AnimeList().FilterStatus(arn.AnimeListStatusCompleted)
+
+	for _, anime := range animes {
+		userAnime := completedList.Find(anime.ID)
+
+		if userAnime != nil {
+			count++;
+		}
+	}
+
+	return count;
 }

@@ -1,2 +1,3 @@
-.average-score
+.average-score-total-completed
 	text-align center
+	font-size 1.25em
