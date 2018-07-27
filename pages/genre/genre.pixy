@@ -1,9 +1,9 @@
 component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore float64, userCompleted int)
 	h1(title=fmt.Sprint(len(animes)) + " anime")= strings.Title(genre)
 
-	.average-score-total-completed
-		if user != nil
-			p= fmt.Sprintf("Average Score: %.1f | Total Completed: %d", userScore, userCompleted)
+	if user != nil
+		.average-score-total-completed
+			p= fmt.Sprintf("Average rating: %." + strconv.Itoa(user.Settings().Format.RatingsPrecision) + "f | Total completed: %d", userScore, userCompleted)
 	
 	.corner-buttons-hide-on-mobile
 		if user != nil
