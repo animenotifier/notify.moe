@@ -84,12 +84,10 @@ func totalCompleted(user *arn.User, animes []*arn.Anime) int {
 	completedList := user.AnimeList().FilterStatus(arn.AnimeListStatusCompleted)
 
 	for _, anime := range animes {
-		userAnime := completedList.Find(anime.ID)
-
-		if userAnime != nil {
-			count++;
+		if completedList.Contains(anime.ID) {
+			count++
 		}
 	}
 
-	return count;
+	return count
 }
