@@ -1,7 +1,7 @@
-component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore float64, userCompleted int)
+component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore float64, userCompleted int, globalScore float64)
 	h1(title=fmt.Sprint(len(animes)) + " anime")= strings.Title(genre)
 
-	GenreStatistics(user, userScore, userCompleted)
+	GenreStatistics(user, userScore, userCompleted, globalScore)
 	
 	.corner-buttons-hide-on-mobile
 		if user != nil
@@ -13,7 +13,7 @@ component Genre(genre string, animes []*arn.Anime, user *arn.User, userScore flo
 
 	AnimeGrid(animes, user)
 
-component GenreStatistics(user *arn.User, userScore float64, userCompleted int)
+component GenreStatistics(user *arn.User, userScore float64, userCompleted int, globalScore float64)
 	if user != nil
 		.average-score-total-completed
 			p= fmt.Sprintf("Average rating: %." + strconv.Itoa(user.Settings().Format.RatingsPrecision) + "f | Total completed: %d", userScore, userCompleted)
