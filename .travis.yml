@@ -7,7 +7,7 @@ language: go
 # in the next version of Go. Don't worry! Later we declare that test runs
 # are allowed to fail on Go tip.
 go:
-  - 1.10.x
+  - 1.11.x
   - master
 
 # Setting this to true will skip the `go get` dependencies step.
