@@ -50,6 +50,4 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 			return
 		}
 	}
-
-	return
 }
