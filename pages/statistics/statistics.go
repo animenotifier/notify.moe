@@ -31,6 +31,7 @@ func getUserStats() []*arn.PieChart {
 	connectionType := stats{}
 	roundTripTime := stats{}
 	downLink := stats{}
+	theme := stats{}
 
 	for info := range arn.StreamAnalytics() {
 		user, err := arn.GetUser(info.UserID)
@@ -106,6 +107,9 @@ func getUserStats() []*arn.PieChart {
 		} else {
 			pro["Free accounts"]++
 		}
+
+		settings := user.Settings()
+		theme[settings.Theme]++
 	}
 
 	return []*arn.PieChart{
@@ -122,5 +126,6 @@ func getUserStats() []*arn.PieChart {
 		arn.NewPieChart("Connection", connectionType),
 		arn.NewPieChart("IP version", ip),
 		arn.NewPieChart("PRO accounts", pro),
+		arn.NewPieChart("Theme", theme),
 	}
 }
