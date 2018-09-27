@@ -15,7 +15,7 @@ const (
 	// The maximum age of files we accept until we force a refresh.
 	maxAge               = 24 * time.Hour
 	delayBetweenRequests = 1100 * time.Millisecond
-	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
 )
 
 var headers = map[string]string{
