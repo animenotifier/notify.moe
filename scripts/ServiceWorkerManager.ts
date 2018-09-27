@@ -67,7 +67,7 @@ export default class ServiceWorkerManager {
 		navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
 	}
 
-	onMessage(evt: ServiceWorkerMessageEvent) {
+	onMessage(evt: MessageEvent) {
 		let message = JSON.parse(evt.data)
 
 		switch(message.type) {

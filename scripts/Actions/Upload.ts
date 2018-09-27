@@ -53,7 +53,8 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 	let reader = new FileReader()
 
 	reader.onloadend = async () => {
-		let fileSize = reader.result.byteLength
+		let result = reader.result as ArrayBuffer
+		let fileSize = result.byteLength
 
 		if(fileSize === 0) {
 			arn.statusMessage.showError("File is empty")
@@ -96,6 +97,8 @@ function previewImage(file: File, endpoint: string, previews: HTMLCollectionOf<E
 	let reader = new FileReader()
 
 	reader.onloadend = () => {
+		let dataURL = reader.result as string
+
 		if(endpoint === "/api/upload/avatar") {
 			let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
 
@@ -114,7 +117,7 @@ function previewImage(file: File, endpoint: string, previews: HTMLCollectionOf<E
 				img.classList.add("element-found")
 			}
 
-			img.src = reader.result
+			img.src = dataURL
 		}
 	}
 
