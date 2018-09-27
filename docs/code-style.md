@@ -8,6 +8,7 @@ This document is only meant to teach you the code style used in this project and
 * [Variable names](#variable-names)
 * [Types at the top](#types-at-the-top)
 * [Private fields at the end of a struct](#private-fields-at-the-end-of-a-struct)
+* [Don't comment out outdated code](#dont-comment-out-outdated-code)
 * [Package names](#package-names)
 * [Use gofmt](#use-gofmt)
 * [Code editor](#code-editor)
@@ -150,6 +151,10 @@ type MyType struct {
 	privateA int
 }
 ```
+
+## Don't comment out outdated code
+
+You should delete outdated code instead of commenting it out. Comments should be used for explanation of existing code and outdated code is saved in the git history anyway if you ever need it (in most cases outdated code is never re-used).
 
 ## Package names
 
