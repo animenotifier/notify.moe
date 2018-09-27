@@ -21,7 +21,7 @@ component NewKitsuAnime(animes []*kitsu.Anime, url string, user *arn.User)
 						td
 							a(href="https://kitsu.io/anime/" + anime.ID, target="_blank")
 								img.profile-watching-list-item-image(src=anime.Attributes.PosterImage.Tiny, alt=anime.Attributes.CanonicalTitle)
-						td
+						td.kitsu-import-title
 							a(href="https://kitsu.io/anime/" + anime.ID, target="_blank")= anime.Attributes.CanonicalTitle
 						td= anime.Attributes.ShowType
 						td
@@ -29,8 +29,8 @@ component NewKitsuAnime(animes []*kitsu.Anime, url string, user *arn.User)
 								span= anime.Attributes.StartDate[:4]
 						td
 							.buttons
-								button.action(data-action="importKitsuAnime", data-trigger="click", data-id=anime.ID)
+								button.tip.action(data-action="importKitsuAnime", data-trigger="click", data-id=anime.ID, aria-label="Import")
 									RawIcon("download")
 								
-								button.action(data-action="deleteKitsuAnime", data-trigger="click", data-id=anime.ID)
+								button.tip.action(data-action="deleteKitsuAnime", data-trigger="click", data-id=anime.ID, aria-label="Delete")
 									RawIcon("trash")
