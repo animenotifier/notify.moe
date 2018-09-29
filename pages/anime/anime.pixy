@@ -150,14 +150,15 @@ component AnimeGenres(anime *arn.Anime)
 				span= genre
 
 component AnimeTrailer(anime *arn.Anime)
-	if len(anime.Trailers) > 0 && anime.Trailers[len(anime.Trailers) - 1].Service == "Youtube" && anime.Trailers[len(anime.Trailers) - 1].ServiceID != ""
+	if len(anime.Trailers) > 0 && anime.Trailers[len(anime.Trailers) - 1].ServiceID != ""
 		AnimeTrailerByIndex(anime, len(anime.Trailers)-1)
 
 component AnimeTrailerByIndex(anime *arn.Anime, index int)
 	section.anime-section.mountable(data-mountable-type="sidebar")
-		h3.anime-section-name Trailer
+		h3.anime-section-name
+			a(href=anime.TrailersLink()) Trailer
 		.anime-trailer.video-container
-			iframe.video(src="https://www.youtube.com/embed/" + anime.Trailers[index].ServiceID + "?showinfo=0", allowfullscreen)
+			iframe.video.lazy(data-src=anime.Trailers[index].EmbedLink(), allowfullscreen)
 
 component AnimeFriends(friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem)
 	if len(friends) > 0
