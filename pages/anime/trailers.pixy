@@ -1,13 +1,12 @@
 component AnimeTrailers(anime *arn.Anime, user *arn.User)
+	h1.mountable
+		a(href=anime.Link())= anime.Title.ByUser(user)
 	if anime.Trailers != nil && len(anime.Trailers) > 0
 		.anime-section.mountable
 			h3.anime-section-name
 				a(href=anime.TrailersLink()) Trailers
-
-			.trailers.anime-trailers
+			.anime-trailers
 				each trailer in anime.Trailers
 					if trailer.ServiceID != ""
 						.trailer.mountable(data-mountable-type="trailer")
-							.anime-trailer.video-container
-								//iframe.video(src="https://www.youtube.com/embed/" + trailer.ServiceID + "?showinfo=0", allowfullscreen)
-								ExternalMedia(trailer)
+							iframe.lazy(data-src=trailer.EmbedLink(), allowfullscreen)
