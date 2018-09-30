@@ -14,7 +14,7 @@ func AniList(ctx *aero.Context) string {
 			return anime.GetMapping("anilist/anime") == ""
 		},
 		func(anime *arn.Anime) string {
-			return "https://anilist.co/search?type=anime&q=" + anime.Title.Canonical
+			return "https://anilist.co/search/anime?sort=SEARCH_MATCH&search=" + anime.Title.Canonical
 		},
 	)
 }
