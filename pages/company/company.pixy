@@ -15,7 +15,7 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 		.company-sidebar
 			if company.Location.Latitude != 0 && company.Location.Longitude != 0
 				h3.mountable Location
-				iframe.company-location.mountable(src="https://www.google.com/maps/embed/v1/place?q=" + fmt.Sprint(company.Location.Latitude) + "," + fmt.Sprint(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0")
+				iframe.company-location.mountable(src="https://www.google.com/maps/embed/v1/place?q=" + fmt.Sprint(company.Location.Latitude) + "," + fmt.Sprint(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0", importance="low")
 			
 			if len(closeCompanies) > 0
 				h3.mountable Within 1 km radius
