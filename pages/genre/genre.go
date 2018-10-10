@@ -10,6 +10,7 @@ import (
 )
 
 const animePerPage = 100
+const animeRatingThreshold = 5
 
 // Get ...
 func Get(ctx *aero.Context) string {
@@ -23,7 +24,9 @@ func Get(ctx *aero.Context) string {
 		}
 	}
 
-	userScore := averageScore(user, animes)
+	userScore := averageUserScore(user, animes)
+	userCompleted := totalCompleted(user, animes)
+	globalScore := averageGlobalScore(animes)
 
 	arn.SortAnimeByQuality(animes)
 
@@ -31,7 +34,7 @@ func Get(ctx *aero.Context) string {
 		animes = animes[:animePerPage]
 	}
 
-	return ctx.HTML(components.Genre(genreName, animes, user, userScore))
+	return ctx.HTML(components.Genre(genreName, animes, user, userScore, userCompleted, globalScore))
 }
 
 // containsLowerCase tells you whether the given element exists when all elements are lowercased.
@@ -45,8 +48,8 @@ func containsLowerCase(array []string, search string) bool {
 	return false
 }
 
-// averageScore counts the user's average score for the given animes.
-func averageScore(user *arn.User, animes []*arn.Anime) float64 {
+// averageUserScore counts the user's average score for the given animes.
+func averageUserScore(user *arn.User, animes []*arn.Anime) float64 {
 	if user == nil {
 		return 0
 	}
@@ -70,4 +73,38 @@ func averageScore(user *arn.User, animes []*arn.Anime) float64 {
 	}
 
 	return scores / count
+}
+
+// averageGlobalScore returns the average overall score for the given anime
+func averageGlobalScore(animes []*arn.Anime) float64 {
+	sum := 0.0
+	count := 0
+
+	for _, anime := range animes {
+		if anime.Rating.Count.Overall >= animeRatingThreshold {
+			sum += anime.Rating.Overall
+			count++
+		}
+	}
+
+	return sum / float64(count)
+}
+
+// totalCompleted counts the number of animes the user has completed from a given list of anime
+func totalCompleted(user *arn.User, animes []*arn.Anime) int {
+	if user == nil {
+		return 0
+	}
+
+	count := 0
+
+	completedList := user.AnimeList().FilterStatus(arn.AnimeListStatusCompleted)
+
+	for _, anime := range animes {
+		if completedList.Contains(anime.ID) {
+			count++
+		}
+	}
+
+	return count
 }
