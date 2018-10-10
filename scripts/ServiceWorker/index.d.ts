@@ -618,7 +618,7 @@ interface ServiceWorkerGlobalScope extends EventTarget {
      * make sure it's compatible with `window.onmessage`
      */
     // onmessage: (messageevent: ExtendableMessageEvent) => void;
-    onmessage: (messageevent: MessageEvent) => void;
+    //onmessage: (messageevent: MessageEvent) => void;
 
     /**
      * An event handler fired whenever a notificationclick event occurs — when
