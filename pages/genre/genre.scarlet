@@ -1,3 +1,8 @@
-.average-score-total-completed
+.genre-title
+	margin-bottom 0.5rem
+
+.genre-statistics
 	text-align center
-	font-size 1.25em
+	opacity 0.5
+	font-size 0.9rem
+	margin-bottom content-padding

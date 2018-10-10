@@ -10,9 +10,9 @@ import (
 )
 
 const animePerPage = 100
-const animeRatingThreshold = 5
+const animeRatingCountThreshold = 5
 
-// Get ...
+// Get renders the genre page.
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	genreName := ctx.Get("name")
@@ -48,7 +48,7 @@ func containsLowerCase(array []string, search string) bool {
 	return false
 }
 
-// averageUserScore counts the user's average score for the given animes.
+// averageUserScore counts the user's average score for a list of anime.
 func averageUserScore(user *arn.User, animes []*arn.Anime) float64 {
 	if user == nil {
 		return 0
@@ -75,13 +75,13 @@ func averageUserScore(user *arn.User, animes []*arn.Anime) float64 {
 	return scores / count
 }
 
-// averageGlobalScore returns the average overall score for the given anime
+// averageGlobalScore returns the average overall score for the given anime.
 func averageGlobalScore(animes []*arn.Anime) float64 {
 	sum := 0.0
 	count := 0
 
 	for _, anime := range animes {
-		if anime.Rating.Count.Overall >= animeRatingThreshold {
+		if anime.Rating.Count.Overall >= animeRatingCountThreshold {
 			sum += anime.Rating.Overall
 			count++
 		}
@@ -90,7 +90,7 @@ func averageGlobalScore(animes []*arn.Anime) float64 {
 	return sum / float64(count)
 }
 
-// totalCompleted counts the number of animes the user has completed from a given list of anime
+// totalCompleted counts the number of anime the user has completed from a given list of anime.
 func totalCompleted(user *arn.User, animes []*arn.Anime) int {
 	if user == nil {
 		return 0
