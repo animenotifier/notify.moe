@@ -18,6 +18,7 @@ func main() {
 			continue
 		}
 
+		fmt.Println("--------------------------------------------------------------------------------")
 		fmt.Println(track.Title)
 
 		err := track.Download()
@@ -25,6 +26,8 @@ func main() {
 		if err != nil {
 			color.Red(err.Error())
 			continue
+		} else {
+			color.Green("Downloaded %s!", track.File)
 		}
 
 		// Save the file information
