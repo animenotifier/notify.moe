@@ -1,0 +1,22 @@
+.anime-trailers
+	horizontal-wrap
+	justify-content space-around
+	.trailer
+		margin 1rem 0
+		box-shadow shadow-light
+		min-height 180px
+		border-radius ui-element-border-radius
+		width 320px
+		overflow hidden
+		display flex
+
+		iframe
+			width 100%
+
+> 500px
+	.anime-trailers
+		justify-content flex-start
+
+		.trailer
+			margin calc(content-padding / 2)
+			margin-bottom media-bottom-margin
