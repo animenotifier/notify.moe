@@ -105,10 +105,27 @@ func Get(ctx *aero.Context) string {
 		animeListItem = user.AnimeList().Find(anime.ID)
 	}
 
+	// Last youtube anime trailer
+	lastAnimeTrailer := getLastValidTrailer(anime.Trailers)
+
 	// Open Graph
 	ctx.Data = getOpenGraph(ctx, anime)
 
-	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, user))
+	return ctx.HTML(components.Anime(anime, lastAnimeTrailer, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, user))
+}
+
+func getLastValidTrailer(trailers []*arn.ExternalMedia) *arn.ExternalMedia {
+	for i := len(trailers) - 1; i >= 0; i-- {
+		var trailer = trailers[i]
+
+		if trailer.Service != "Youtube" || trailer.ServiceID == "" {
+			continue
+		}
+
+		return trailer
+	}
+
+	return nil
 }
 
 func getOpenGraph(ctx *aero.Context, anime *arn.Anime) *arn.OpenGraph {

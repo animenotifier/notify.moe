@@ -1,9 +1,9 @@
-component Anime(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, amvAppearances []*arn.AMV, episodes []*arn.AnimeEpisode, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+component Anime(anime *arn.Anime, trailer *arn.ExternalMedia, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, amvAppearances []*arn.AMV, episodes []*arn.AnimeEpisode, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	.anime
 		.anime-main-column
 			AnimeMainColumn(anime, listItem, tracks, amvs, amvAppearances, episodes, user)
 		.anime-side-column
-			AnimeSideColumn(anime, friends, listItems, user)
+			AnimeSideColumn(anime, trailer, friends, listItems, user)
 
 component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks []*arn.SoundTrack, amvs []*arn.AMV, amvAppearances []*arn.AMV, episodes []*arn.AnimeEpisode, user *arn.User)
 	.anime-header(data-id=anime.ID)
@@ -31,8 +31,8 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 	AnimeAMVs(anime, amvs, amvAppearances, user)
 	AnimeEpisodes(anime, episodes, user, false)
 
-component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
-	AnimeTrailer(anime)
+component AnimeSideColumn(anime *arn.Anime, trailer *arn.ExternalMedia, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
+	AnimeTrailer(anime, trailer)
 	AnimeInformation(anime)
 	AnimeRatings(anime, user)
 	AnimePopularity(anime)
@@ -149,16 +149,13 @@ component AnimeGenres(anime *arn.Anime)
 			a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="header")
 				span= genre
 
-component AnimeTrailer(anime *arn.Anime)
-	if len(anime.Trailers) > 0 && anime.Trailers[len(anime.Trailers) - 1].ServiceID != ""
-		AnimeTrailerByIndex(anime, len(anime.Trailers)-1)
-
-component AnimeTrailerByIndex(anime *arn.Anime, index int)
-	section.anime-section.mountable(data-mountable-type="sidebar")
-		h3.anime-section-name
-			a(href=anime.TrailersLink()) Trailer
-		.anime-trailer.video-container
-			iframe.video.lazy(data-src=anime.Trailers[index].EmbedLink(), allowfullscreen)
+component AnimeTrailer(anime *arn.Anime, trailer *arn.ExternalMedia)
+	if trailer != nil
+		section.anime-section.mountable(data-mountable-type="sidebar")
+			h3.anime-section-name
+				a(href=anime.TrailersLink()) Trailer
+			.anime-trailer.video-container
+				iframe.video.lazy(data-src=trailer.EmbedLink(), allowfullscreen)
 
 component AnimeFriends(friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem)
 	if len(friends) > 0
