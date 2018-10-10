@@ -49,8 +49,8 @@ func main() {
 	// We don't need the database anymore
 	arn.Node.Close()
 
-	// Create files directory if it's missing
-	os.Mkdir("files", 0777)
+	// Create anime directory if it's missing
+	os.Mkdir("anime", 0777)
 
 	// Create crawler
 	malCrawler := crawler.New(
