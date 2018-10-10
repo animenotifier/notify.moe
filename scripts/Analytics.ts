@@ -23,10 +23,12 @@ export default class Analytics {
 		}
 
 		if("connection" in navigator) {
+			let connection = navigator["connection"] as any
+
 			analytics.connection = {
-				downLink: navigator["connection"].downlink,
-				roundTripTime: navigator["connection"].rtt,
-				effectiveType: navigator["connection"].effectiveType
+				downLink: connection.downlink,
+				roundTripTime: connection.rtt,
+				effectiveType: connection.effectiveType
 			}
 		}
 

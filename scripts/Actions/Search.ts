@@ -195,7 +195,7 @@ export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
 	let searchInput = document.getElementById("search") as HTMLInputElement
 	let oldPlaceholder = searchInput.placeholder
 
-	let SpeechRecognition: SpeechRecognitionStatic = window["SpeechRecognition"] || window["webkitSpeechRecognition"]
+	let SpeechRecognition: any = window["SpeechRecognition"] || window["webkitSpeechRecognition"]
 	recognition = new SpeechRecognition()
 	recognition.continuous = false
 	recognition.interimResults = false

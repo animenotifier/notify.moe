@@ -193,7 +193,7 @@ export default class Application {
 		this.content.innerHTML = html
 	}
 
-	markActiveLinks(links?: NodeListOf<HTMLAnchorElement>) {
+	markActiveLinks(links?: HTMLCollectionOf<HTMLAnchorElement>) {
 		if(!links) {
 			links = document.getElementsByTagName("a")
 		}
@@ -211,7 +211,7 @@ export default class Application {
 		}
 	}
 
-	ajaxify(links?: NodeListOf<HTMLAnchorElement>) {
+	ajaxify(links?: HTMLCollectionOf<HTMLAnchorElement>) {
 		if(!links) {
 			links = document.getElementsByTagName("a")
 		}
@@ -241,9 +241,9 @@ export default class Application {
 					return
 				}
 
-				let url = this.getAttribute("href")
-
 				e.preventDefault()
+
+				let url = (this as HTMLAnchorElement).getAttribute("href")
 
 				if(!url || url === self.currentPath) {
 					return
