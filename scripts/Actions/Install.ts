@@ -13,5 +13,5 @@ export function installExtension(arn: AnimeNotifier, button: HTMLElement) {
 
 // Desktop app installation
 export function installApp() {
-	alert("Open your browser menu > 'More tools' > 'Add to desktop' and enable 'Open as window'.")
+	alert("Open your browser menu > 'Install Anime Notifier'.")
 }

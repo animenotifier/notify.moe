@@ -1019,8 +1019,7 @@ export default class AnimeNotifier {
 			// Disallow Enter key in contenteditables and make it blur the element instead
 			if(e.keyCode === 13) {
 				if("blur" in activeElement) {
-					let blur = activeElement["blur"] as Function
-					blur()
+					(activeElement["blur"] as Function)()
 				}
 
 				return preventDefault()
