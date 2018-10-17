@@ -2,6 +2,7 @@ package notifications
 
 import (
 	"net/http"
+	"sort"
 	"strconv"
 
 	"github.com/aerogo/aero"
@@ -38,6 +39,29 @@ func MarkNotificationsAsSeen(ctx *aero.Context) string {
 	}
 
 	return "ok"
+}
+
+// Latest returns the latest notifications.
+func Latest(ctx *aero.Context) string {
+	userID := ctx.Get("id")
+	user, err := arn.GetUser(userID)
+
+	if err != nil {
+		return ctx.Error(http.StatusBadRequest, "Invalid user ID")
+	}
+
+	notifications := user.Notifications().Notifications()
+
+	// Sort by date
+	sort.Slice(notifications, func(i, j int) bool {
+		return notifications[i].Created > notifications[j].Created
+	})
+
+	if len(notifications) > maxNotifications {
+		notifications = notifications[:maxNotifications]
+	}
+
+	return ctx.JSON(notifications)
 }
 
 // Test sends a test notification to the logged in user.

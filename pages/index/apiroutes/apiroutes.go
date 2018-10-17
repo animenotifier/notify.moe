@@ -13,7 +13,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editor/jobs"
 	"github.com/animenotifier/notify.moe/pages/me"
 	"github.com/animenotifier/notify.moe/pages/notifications"
-	"github.com/animenotifier/notify.moe/pages/notifications/feed"
 	"github.com/animenotifier/notify.moe/pages/popular"
 	"github.com/animenotifier/notify.moe/pages/soundtrack"
 	"github.com/animenotifier/notify.moe/pages/upload"
@@ -34,6 +33,7 @@ func Register(l *layout.Layout, app *aero.Application) {
 	app.Get("/api/test/notification", notifications.Test)
 	app.Get("/api/count/notifications/unseen", notifications.CountUnseen)
 	app.Get("/api/mark/notifications/seen", notifications.MarkNotificationsAsSeen)
+	app.Get("/api/user/:id/notifications/latest", notifications.Latest)
 	app.Get("/api/random/soundtrack", soundtrack.Random)
 	app.Get("/api/next/soundtrack", soundtrack.Next)
 
@@ -50,9 +50,4 @@ func Register(l *layout.Layout, app *aero.Application) {
 
 	// Jobs
 	app.Post("/api/job/:job/start", jobs.Start)
-
-	// Feed
-	app.Get("/api/user/:id/notifications/feed", notificationsfeed.JSON)
-	app.Get("/api/user/:id/notifications/feed/atom", notificationsfeed.Atom)
-	app.Get("/api/user/:id/notifications/feed/rss", notificationsfeed.RSS)
 }
