@@ -13,6 +13,9 @@
 		color link-color
 		opacity 1.0
 
+	::-webkit-search-cancel-button
+		display none
+
 // Microphone icon
 .speech-input
 	display none
