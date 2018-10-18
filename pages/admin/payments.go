@@ -1,0 +1,36 @@
+package admin
+
+import (
+	"net/http"
+	"sort"
+
+	"github.com/aerogo/aero"
+	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/utils"
+)
+
+// PaymentHistory ...
+func PaymentHistory(ctx *aero.Context) string {
+	user := utils.GetUser(ctx)
+
+	if user == nil {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
+	}
+
+	if user.Role != "admin" {
+		return ctx.Error(http.StatusUnauthorized, "Not authorized")
+	}
+
+	payments, err := arn.AllPayPalPayments()
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Error fetching shop item data", err)
+	}
+
+	sort.Slice(payments, func(i, j int) bool {
+		return payments[i].Created > payments[j].Created
+	})
+
+	return ctx.HTML(components.GlobalPaymentHistory(payments))
+}

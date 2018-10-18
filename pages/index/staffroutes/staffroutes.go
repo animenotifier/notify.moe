@@ -78,4 +78,5 @@ func Register(l *layout.Layout) {
 	l.Page("/admin/registrations", admin.UserRegistrations)
 	l.Page("/admin/errors/client", admin.ClientErrors)
 	l.Page("/admin/purchases", admin.PurchaseHistory)
+	l.Page("/admin/payments", admin.PaymentHistory)
 }

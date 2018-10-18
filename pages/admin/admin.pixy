@@ -5,6 +5,7 @@ component AdminTabs
 		Tab("Client errors", "exclamation", "/admin/errors/client")
 		Tab("Registrations", "user-plus", "/admin/registrations")
 		Tab("Purchases", "shopping-cart", "/admin/purchases")
+		Tab("Payments", "paypal", "/admin/payments")
 	
 	.corner-buttons
 		a.button(href="/editor", aria-label="Editor")
