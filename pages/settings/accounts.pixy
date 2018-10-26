@@ -1,0 +1,63 @@
+component SettingsAccounts(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Accounts settings
+
+	.settings
+		.widget.mountable(data-api="/api/user/" + user.ID)
+			h3.widget-title
+				Icon("cubes")
+				span Accounts
+
+			InputText("Accounts.AniList.Nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
+			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
+			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
+			InputText("Accounts.Osu.Nick", user.Accounts.Osu.Nick, "Osu", "Your username on osu.ppy.sh")
+			InputText("Accounts.Overwatch.BattleTag", user.Accounts.Overwatch.BattleTag, "Overwatch", "Your battletag on Overwatch")
+			//- InputText("Accounts.AnimePlanet.Nick", user.Accounts.AnimePlanet.Nick, "AnimePlanet", "Your username on anime-planet.com")
+
+		.widget.mountable
+			h3.widget-title
+				Icon("user-plus")
+				span Connect
+
+			.widget-section.social-account
+				label(for="google") Google:
+				
+				a#google.button.social-account-button(href="/auth/google", data-ajax="false")
+					if user.Accounts.Google.ID != ""
+						Icon("check")
+						span Connected
+					else
+						Icon("circle-o")
+						span Not connected
+			
+			.widget-section.social-account
+				label(for="facebook") Facebook:
+
+				a#facebook.button.social-account-button(href="/auth/facebook", data-ajax="false")
+					if user.Accounts.Facebook.ID != ""
+						Icon("check")
+						span Connected
+					else
+						Icon("circle-o")
+						span Not connected
+
+		.widget.mountable
+			h3.widget-title
+				Icon("download")
+				span Import
+			
+			ImportLists(user)
+
+		if len(user.AnimeList().Items) > 0
+			.widget.mountable
+				h3.widget-title
+					Icon("upload")
+					span Export
+				
+				.widget-section
+					label JSON:
+					a.button(href="/api/animelist/" + user.ID, target="_blank")
+						Icon("upload")
+						span Export anime list as JSON

@@ -1,0 +1,26 @@
+component SettingsPro(user *arn.User)
+	SettingsTabs
+
+	h1.page-title PRO settings
+
+	.settings
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("star")
+				span PRO
+			
+			if user.IsPro()
+				.widget-section
+					label
+						span Your PRO account expires in 
+						span.utc-date(data-date=user.ProExpires)
+						span .
+					a.button(href="/shop")
+						Icon("star")
+						span Extend PRO account duration
+			else
+				.widget-section
+					label Would you like to make this website more awesome?
+					a.button(href="/support")
+						Icon("star")
+						span Go PRO

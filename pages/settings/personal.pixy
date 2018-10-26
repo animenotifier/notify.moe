@@ -1,0 +1,72 @@
+component SettingsPersonal(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Personal settings
+	
+	.settings
+		.widget.mountable(data-api="/api/user/" + user.ID)
+			h3.widget-title
+				Icon("user")
+				span Personal
+
+			InputText("Nick", user.Nick, "Username", "Your username on notify.moe")
+			InputText("Tagline", user.Tagline, "Tagline", "Text that appears below your username")
+			InputText("Website", user.Website, "Website", "Your homepage")
+			
+			if arn.IsDevelopment()
+				InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us about yourself (Markdown is allowed)")
+			
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("camera")
+				span Avatar
+
+			//- .widget-section
+			//- 	label(for="Avatar.Source") Source:
+			//- 	select.widget-ui-element.action(id="Avatar.Source", data-field="Avatar.Source", value=user.Settings().Avatar.Source, data-action="save", data-trigger="change")
+			//- 		option(value="") Automatic
+			//- 		option(value="Gravatar") Gravatar
+			//- 		option(value="URL") Link
+			//- 		option(value="FileSystem") Upload
+
+			//- //- URL input
+			//- if user.Settings().Avatar.Source == "URL"
+			//- 	InputText("Avatar.SourceURL", user.Settings().Avatar.SourceURL, "Link", "Post the link to the image here")
+
+			//- //- Gravatar preview image
+			//- if user.Settings().Avatar.Source == "Gravatar" || (user.Settings().Avatar.Source == "" && user.Avatar.Source == "Gravatar")
+			//- 	.profile-image-container.avatar-preview
+			//- 		img.profile-image.mountable(src=user.Gravatar(), alt="Gravatar (" + user.Email + ")", title="Gravatar (" + user.Email + ")")
+			
+			//- //- URL preview image
+			//- if user.Settings().Avatar.Source == "URL" && user.Settings().Avatar.SourceURL != ""
+			//- 	.profile-image-container.avatar-preview
+			//- 		img.profile-image.mountable(src=strings.Replace(user.Settings().Avatar.SourceURL, "http://", "https://", 1), alt="Avatar preview")
+			
+			//- //- File upload
+			//- if user.Settings().Avatar.Source == "FileSystem"
+			
+			InputFileUpload("avatar-input", "File", "image", "/api/upload/avatar")
+
+			.profile-image-container.avatar-preview
+				if user.HasAvatar()
+					img.avatar-input-preview.profile-image.lazy(data-src=user.AvatarLink("large"), data-webp="true", alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
+				else
+					img.avatar-input-preview.profile-image.hidden(src=user.AvatarLink("large"), alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
+
+					#avatar-input-preview-svg
+						SVGProfileImage(user)
+		
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("picture-o")
+				span Cover
+			
+			InputFileUpload("cover-input", "File", "image", "/api/upload/cover")
+
+			.cover-preview(title="Recommended: 1920 x 450 | PNG or JPG")
+				img.profile-cover.cover-input-preview.lazy(data-src=user.CoverLink("small"), data-webp="true", alt="Cover image")
+			
+			if !user.IsPro()
+				.footer
+					p PRO account required.

@@ -1,0 +1,34 @@
+component SettingsApps(user *arn.User)
+	SettingsTabs
+
+	h1.page-title App settings
+
+	.settings
+		.widget.mountable
+			h3.widget-title
+				Icon("puzzle-piece")
+				span Apps
+			
+			.widget-section
+				label Chrome Extension:
+				button.action(data-action="installExtension", data-trigger="click")
+					Icon("chrome")
+					span Get the Chrome Extension
+
+			.widget-section
+				label Firefox Extension:
+				a.button(href="https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/", target="_blank", rel="nofollow")
+					Icon("firefox")
+					span Get the Firefox Extension
+
+			.widget-section
+				label Android Web App:
+				a.button(href="https://www.youtube.com/watch?v=opyt4cw0ep8", target="_blank", rel="noopener")
+					Icon("android")
+					span Get the Android Web App
+
+			.widget-section
+				label Desktop Web App:
+				button.action(data-action="installApp", data-trigger="click")
+					Icon("desktop")
+					span Get the Desktop Web App
