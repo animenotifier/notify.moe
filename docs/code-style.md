@@ -157,7 +157,7 @@ type MyType struct {
 
 You should delete outdated code instead of commenting it out. Comments should be used for explanation of existing code and outdated code is saved in the git history anyway if you ever need it (in most cases outdated code is never re-used).
 
-# Comments start with space and uppercase
+## Comments start with space and uppercase
 
 Example:
 
