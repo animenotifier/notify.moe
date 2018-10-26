@@ -12,10 +12,17 @@ component SettingsAccounts(user *arn.User)
 			InputText("Accounts.AniList.Nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
 			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
 			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
+		
+		.widget.mountable(data-api="/api/user/" + user.ID)
+			h3.widget-title
+				Icon("gamepad")
+				span Games
+			
+			InputText("Accounts.FinalFantasyXIV.Nick", user.Accounts.FinalFantasyXIV.Nick, "Final Fantasy XIV", "Your character name on FFXIV")
+			InputSelection("Accounts.FinalFantasyXIV.Server", user.Accounts.FinalFantasyXIV.Server, "Final Fantasy XIV - World", "Your server/world on FFXIV", arn.DataLists["ffxiv-servers"])
 			InputText("Accounts.Osu.Nick", user.Accounts.Osu.Nick, "Osu", "Your username on osu.ppy.sh")
 			InputText("Accounts.Overwatch.BattleTag", user.Accounts.Overwatch.BattleTag, "Overwatch", "Your battletag on Overwatch")
-			//- InputText("Accounts.AnimePlanet.Nick", user.Accounts.AnimePlanet.Nick, "AnimePlanet", "Your username on anime-planet.com")
-
+			
 		.widget.mountable
 			h3.widget-title
 				Icon("user-plus")
@@ -61,3 +68,10 @@ component SettingsAccounts(user *arn.User)
 					a.button(href="/api/animelist/" + user.ID, target="_blank")
 						Icon("upload")
 						span Export anime list as JSON
+		
+		.widget.mountable
+			h3.widget-title
+				Icon("refresh")
+				span Sync
+			
+			.footer Reserved for upcoming features.
