@@ -1,3 +1,33 @@
+mixin feature-cards
+	horizontal-wrap
+	justify-content center
+	width 100%
+	max-width 1200px
+	margin content-padding auto
+
+mixin feature-card
+	vertical
+	flex-basis 240px
+	border-radius 5px
+	overflow hidden
+	background ui-background
+	box-shadow shadow-light
+	border 1px solid ui-border-color
+	margin 1.2rem
+	default-transition
+
+	:hover
+		box-shadow shadow-medium
+		text-shadow none
+
+mixin feature-card-component
+	horizontal
+	justify-content center
+	align-items center
+	text-align center
+	padding 1rem
+	margin 0
+
 mixin feature-card-footer
 	font-size 0.9rem
 	opacity 0.5
