@@ -5,7 +5,11 @@ component UserRegistrations(total int, years []int, yearInfo map[int]utils.YearR
 	for _, year := range years
 		h3.mountable= year
 		h4.mountable= strconv.Itoa(yearInfo[year].Total) + " registrations"
-		for month := 1; month <= 12; month++
-			p.mountable
-				strong= time.Month(month).String() + ": "
-				span= strconv.Itoa(yearInfo[year].Months[month])
+
+		.feature-cards
+			for month := 1; month <= 12; month++
+				.feature-card.mountable
+					.feature-card-title= time.Month(month).String()
+					.feature-card-text= strconv.Itoa(yearInfo[year].Months[month])
+		
+		hr

@@ -1,0 +1,5 @@
+.feature-card-title
+	feature-card-component
+	font-size 1.5rem
+	background feature-card-color
+	color feature-card-icon-color

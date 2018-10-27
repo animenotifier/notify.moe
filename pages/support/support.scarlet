@@ -26,14 +26,17 @@ mixin feature-card
 .feature-card
 	feature-card
 
-.feature-card-icon,
-.feature-card-text
+mixin feature-card-component
 	horizontal
 	justify-content center
 	align-items center
 	text-align center
 	padding 1rem
 	margin 0
+
+.feature-card-icon,
+.feature-card-text
+	feature-card-component
 
 .feature-card-icon
 	font-size 3rem
