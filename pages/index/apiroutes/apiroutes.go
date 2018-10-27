@@ -10,6 +10,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/animeimport"
 	"github.com/animenotifier/notify.moe/pages/apiview"
 	"github.com/animenotifier/notify.moe/pages/apiview/apidocs"
+	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/editor/jobs"
 	"github.com/animenotifier/notify.moe/pages/me"
 	"github.com/animenotifier/notify.moe/pages/notifications"
@@ -36,6 +37,7 @@ func Register(l *layout.Layout, app *aero.Application) {
 	app.Get("/api/user/:id/notifications/latest", notifications.Latest)
 	app.Get("/api/random/soundtrack", soundtrack.Random)
 	app.Get("/api/next/soundtrack", soundtrack.Next)
+	app.Get("/api/character/:id/ranking", character.Ranking)
 
 	// Upload
 	app.Post("/api/upload/avatar", upload.Avatar)

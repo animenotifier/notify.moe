@@ -163,6 +163,7 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.updatePushUI()),
 			Promise.resolve().then(() => this.dragAndDrop()),
 			Promise.resolve().then(() => this.colorStripes()),
+			Promise.resolve().then(() => this.loadCharacterRanking()),
 			Promise.resolve().then(() => this.assignTooltipOffsets()),
 			Promise.resolve().then(() => this.countUp())
 		])
@@ -428,6 +429,26 @@ export default class AnimeNotifier {
 		} else {
 			enableButton.classList.remove("hidden")
 			disableButton.classList.add("hidden")
+		}
+	}
+
+	loadCharacterRanking() {
+		if(!this.app.currentPath.includes("/character/")) {
+			return
+		}
+
+		for(let element of findAll("character-ranking")) {
+			fetch(`/api/character/${element.dataset.characterId}/ranking`).then(async response => {
+				let ranking = await response.text()
+
+				if(ranking.length === 0) {
+					return
+				}
+
+				Diff.mutations.queue(() => {
+					element.textContent = "#" + ranking
+				})
+			})
 		}
 	}
 

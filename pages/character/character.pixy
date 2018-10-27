@@ -60,18 +60,24 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 
 component CharacterSidebar(character *arn.Character, friends []*arn.User, relevantCharacters []*arn.Character, user *arn.User)
 	.character-sidebar
-		if len(character.Attributes) > 0
-			h3.mountable(data-mountable-type="sidebar") Information
+		h3.mountable(data-mountable-type="sidebar") Information
 
-			table.character-attributes.mountable(data-mountable-type="sidebar")
-				each attribute in character.Attributes
-					tr.mountable(data-mountable-type="info")
-						td.character-attributes-name= attribute.Name + ":"
+		table.character-attributes.mountable(data-mountable-type="sidebar")
+			//- Ranking
+			tr.mountable(data-mountable-type="info")
+				td.character-attributes-name Ranking:
+				td.character-attributes-value
+					a.character-ranking(href="/characters/best", data-character-id=character.ID) View
+			
+			//- Attributes
+			each attribute in character.Attributes
+				tr.mountable(data-mountable-type="info")
+					td.character-attributes-name= attribute.Name + ":"
 
-						if strings.Contains(attribute.Value, "<")
-							td.character-attributes-value!= markdown.Render(attribute.Value)
-						else
-							td.character-attributes-value= attribute.Value
+					if strings.Contains(attribute.Value, "<")
+						td.character-attributes-value!= markdown.Render(attribute.Value)
+					else
+						td.character-attributes-value= attribute.Value
 		
 		if len(relevantCharacters) > 0
 			h3.mountable(data-mountable-type="sidebar") Relevant
