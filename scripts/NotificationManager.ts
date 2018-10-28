@@ -18,6 +18,10 @@ export default class NotificationManager {
 		let body = await response.text()
 		this.unseen = parseInt(body)
 
+		if(isNaN(this.unseen)) {
+			this.unseen = 0
+		}
+
 		if(this.unseen > 99) {
 			this.unseen = 99
 		}
