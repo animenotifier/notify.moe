@@ -1,11 +1,8 @@
 package main
 
 import (
-	"path"
-
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
-	"github.com/animenotifier/arn/video"
 	"github.com/fatih/color"
 )
 
@@ -16,11 +13,7 @@ func main() {
 	defer arn.Node.Close()
 
 	for amv := range arn.StreamAMVs() {
-		if amv.File == "" {
-			continue
-		}
-
-		info, err := video.GetInfo(path.Join(arn.Root, "videos", "amvs", amv.File))
+		err := amv.RefreshInfo()
 
 		if err != nil {
 			color.Red(err.Error())
@@ -28,9 +21,7 @@ func main() {
 		}
 
 		color.Green(amv.Title.Canonical)
-		stringutils.PrettyPrint(info)
-
-		amv.Info = *info
+		stringutils.PrettyPrint(amv.Info)
 		amv.Save()
 	}
 }
