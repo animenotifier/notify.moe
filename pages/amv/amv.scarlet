@@ -52,6 +52,12 @@ const amv-large-width = 854px
 .amv-link
 	//
 
+.amv-details
+	margin-top content-padding
+
+	p
+		margin 0
+
 > 500px
 	.amvs
 		horizontal-wrap

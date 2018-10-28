@@ -51,6 +51,11 @@ component AMVPage(amv *arn.AMV, user *arn.User)
 				.tags.mountable
 					each tag in amv.Tags
 						.tag.mountable= tag
+		
+	if amv.File != "" && amv.Info.Video.Width > 0
+		.footer.amv-details.mountable
+			p= fmt.Sprintf("Video: %dx%d | %.0f FPS | %s", amv.Info.Video.Width, amv.Info.Video.Height, amv.Info.Video.FPS, amv.Info.Video.Codec)
+			p= fmt.Sprintf("Audio: %.0f Hz | %d bits | %s", amv.Info.Audio.SamplingFrequency, amv.Info.Audio.BitDepth, amv.Info.Audio.Codec)
 
 component AnimeGridSmall(animes []*arn.Anime, user *arn.User)
 	each anime in animes
