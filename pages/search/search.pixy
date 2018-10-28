@@ -24,7 +24,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				span Forum
 
 			#forum-search-results
-				ForumSearchResults(posts, threads)
+				ForumSearchResults(posts, threads, user)
 
 		.widget
 			h3.widget-title
@@ -76,7 +76,7 @@ component CharacterSearchResults(characters []*arn.Character, user *arn.User)
 				.mountable(data-mountable-type="character")
 					CharacterSmall(character, user)
 
-component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread)
+component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread, user *arn.User)
 	if len(posts) == 0 && len(threads) == 0
 		p.no-search-results.mountable No posts found.
 	else
@@ -92,7 +92,7 @@ component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread)
 			each post in posts
 				.forum-search-result.mountable(data-mountable-type="forum")
 					.forum-search-result-header
-						a.forum-search-result-title(href=post.Link(), data-mountable-type="forum")= post.Thread().Title
+						a.forum-search-result-title(href=post.Link(), data-mountable-type="forum")= post.Parent().TitleByUser(user)
 						if post.Creator().HasNick()
 							.forum-search-result-author= post.Creator().Nick
 					.forum-search-result-sample= post.Text

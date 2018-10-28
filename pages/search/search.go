@@ -72,6 +72,7 @@ func Characters(ctx *aero.Context) string {
 func Forum(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
+	user := utils.GetUser(ctx)
 
 	var posts []*arn.Post
 	var threads []*arn.Thread
@@ -82,7 +83,7 @@ func Forum(ctx *aero.Context) string {
 		threads = search.Threads(term, maxThreads)
 	})
 
-	return ctx.HTML(components.ForumSearchResults(posts, threads))
+	return ctx.HTML(components.ForumSearchResults(posts, threads, user))
 }
 
 // SoundTracks search.
