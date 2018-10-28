@@ -177,13 +177,20 @@ func Staff(ctx *aero.Context) string {
 		Users: []*arn.User{},
 	}
 
+	contributorIDs := []string{
+		"VJOK1ckvx", // Scott
+		"SUQOAFFkR", // Allen
+		"KQgtMWOiR", // Franksks
+		"9NMYrAHiR", // Amatrelan
+	}
+
 	for _, user := range users {
 		if user.Role == "admin" {
 			admins.Users = append(admins.Users, user)
 			continue
 		}
 
-		if user.ID == "VJOK1ckvx" || user.ID == "SUQOAFFkR" {
+		if arn.Contains(contributorIDs, user.ID) {
 			contributors.Users = append(contributors.Users, user)
 			continue
 		}
