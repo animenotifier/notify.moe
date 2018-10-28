@@ -224,6 +224,17 @@ export default class AnimeNotifier {
 			document.getElementsByClassName("speech-input")[0].classList.add("speech-input-available")
 		}
 
+		// Ensure a minimum size for the desktop app
+		const minWidth = 1420
+		const minHeight = 800
+
+		if(window.outerWidth <= minWidth || window.outerHeight <= minHeight) {
+			let finalWidth = window.outerWidth < minWidth ? minWidth : window.outerWidth
+			let finalHeight = window.outerHeight < minHeight ? minHeight : window.outerHeight
+
+			window.resizeTo(finalWidth, finalHeight)
+		}
+
 		// // Download popular anime titles for the search
 		// let response = await fetch("/api/popular/anime/titles/500")
 		// let titles = await response.json()
