@@ -1,0 +1,18 @@
+component Comments(parent arn.PostParent, user *arn.User)
+	.thread
+		.posts
+			each post in parent.Posts()
+				Postable(post.ToPostable(), user, "")
+			
+			if user != nil
+				if parent.IsLocked()
+					footer.footer.mountable
+						p.text-center= "This " + strings.ToLower(reflect.TypeOf(parent).Elem().Name()) + " is locked."
+				else
+					NewPostArea(user, "Comment")
+	
+				.buttons
+					if !parent.IsLocked()
+						button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type=reflect.TypeOf(parent).Elem().Name(), data-parent-id=parent.GetID())
+							Icon("mail-reply")
+							span Reply

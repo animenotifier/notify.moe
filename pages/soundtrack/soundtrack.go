@@ -20,10 +20,5 @@ func Get(ctx *aero.Context) string {
 	}
 
 	ctx.Data = getOpenGraph(ctx, track)
-
-	// Comments
-	posts := track.Posts()
-	arn.SortPostsLatestFirst(posts)
-
-	return ctx.HTML(components.SoundTrackPage(track, posts, user))
+	return ctx.HTML(components.SoundTrackPage(track, user))
 }
