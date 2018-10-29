@@ -52,6 +52,10 @@ component AMVPage(amv *arn.AMV, user *arn.User)
 					each tag in amv.Tags
 						.tag.mountable= tag
 		
+		.widget
+			h3.widget-title.mountable Comments
+			Comments(amv, user)
+		
 	if amv.File != "" && amv.Info.Video.Width > 0
 		.footer.amv-details.mountable
 			p= fmt.Sprintf("Video: %dx%d | %.0f FPS | %s", amv.Info.Video.Width, amv.Info.Video.Height, amv.Info.Video.FPS, amv.Info.Video.Codec)

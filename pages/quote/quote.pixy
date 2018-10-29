@@ -4,12 +4,18 @@ component QuotePage(quote *arn.Quote, character *arn.Character, user *arn.User)
 	.quote-full-page
 		.quote-main-column
 			QuoteMainColumn(quote, user)
-		.quote-side-column
-			QuoteSideColumn(quote, user)
 
 component QuoteMainColumn(quote *arn.Quote, user *arn.User)
 	.widget-form.mountable
 		QuoteContent(quote, user)
+
+		if quote.Anime() != nil
+			p.quote-anime
+				a(href=quote.Anime().Link())= quote.Anime().Title.ByUser(user)
+
+		.widget.mountable
+			h3.widget-title Comments
+			Comments(quote, user)
 
 	.footer.mountable
 		if quote.EditedBy != ""
@@ -23,30 +29,6 @@ component QuoteMainColumn(quote *arn.Quote, user *arn.User)
 			span  by 
 			a(href=quote.Creator().Link())= quote.Creator().Nick
 			span .
-
-component QuoteSideColumn(quote *arn.Quote, user *arn.User)
-	QuoteInformation(quote, user)
-
-component QuoteInformation(quote *arn.Quote, user *arn.User)
-	section.quote-section.mountable
-		h3.quote-section-name Information
-		
-		table.quote-info-table
-			if quote.AnimeID != "" && quote.Anime() != nil
-				tr.mountable(data-mountable-type="info")
-					td.quote-info-key Anime:
-					td.quote-info-value
-						QuoteAnime(quote.Anime(), user)
-
-			if quote.EpisodeNumber != -1
-				tr.mountable(data-mountable-type="info")
-					td.quote-info-key Episode:
-					td.quote-info-value= quote.EpisodeNumber
-
-			if quote.Time != -1
-				tr.mountable(data-mountable-type="info")
-					td.anime-info-key Time:
-					td.anime-info-value= strconv.Itoa(quote.Time) + " min"
 
 component QuoteTabs(quote *arn.Quote, user *arn.User)
 	.tabs

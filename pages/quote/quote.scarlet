@@ -5,25 +5,11 @@
 	vertical
 	flex 1
 
-.quote-side-column
-	sidebar
-
-> 1250px
-	.quote-full-page
-		horizontal
-
-	.quote-side-column
-		sidebar-medium
-
-> 1400px
-	.quote-side-column
-		sidebar-big
-
-.quote-info-table
-	margin 0
-
-.quote-info-value
-	text-align right
+.quote-anime
+	horizontal
+	justify-content center
+	margin-bottom 1rem
+	font-size 0.9rem
 
 .quote-section
 	margin-top 1rem
