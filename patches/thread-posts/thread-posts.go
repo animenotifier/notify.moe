@@ -12,12 +12,16 @@ func main() {
 
 	// Iterate over the stream
 	for post := range arn.StreamPosts() {
-		_, found := threadToPosts[post.ThreadID]
+		if post.ParentType != "Thread" {
+			continue
+		}
+
+		_, found := threadToPosts[post.ParentID]
 
 		if !found {
-			threadToPosts[post.ThreadID] = []string{post.ID}
+			threadToPosts[post.ParentID] = []string{post.ID}
 		} else {
-			threadToPosts[post.ThreadID] = append(threadToPosts[post.ThreadID], post.ID)
+			threadToPosts[post.ParentID] = append(threadToPosts[post.ParentID], post.ID)
 		}
 	}
 
@@ -26,7 +30,7 @@ func main() {
 		thread, err := arn.GetThread(threadID)
 		arn.PanicOnError(err)
 
-		thread.Posts = posts
+		thread.PostIDs = posts
 		thread.Save()
 	}
 }
