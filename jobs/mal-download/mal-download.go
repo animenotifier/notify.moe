@@ -15,7 +15,8 @@ const (
 	// The maximum age of files we accept until we force a refresh.
 	maxAge               = 24 * time.Hour
 	delayBetweenRequests = 1100 * time.Millisecond
-	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
+	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.20 Safari/537.36"
+	animeDirectory       = "anime"
 )
 
 var headers = map[string]string{
@@ -50,7 +51,7 @@ func main() {
 	arn.Node.Close()
 
 	// Create anime directory if it's missing
-	os.Mkdir("anime", 0777)
+	os.Mkdir(animeDirectory, 0777)
 
 	// Create crawler
 	malCrawler := crawler.New(
@@ -80,7 +81,7 @@ func main() {
 func queue(anime *arn.Anime, malCrawler *crawler.Crawler) {
 	malID := anime.GetMapping("myanimelist/anime")
 	url := "https://myanimelist.net/anime/" + malID
-	filePath := fmt.Sprintf("anime/anime-%s.html", malID)
+	filePath := fmt.Sprintf("%s/%s.html.gz", animeDirectory, malID)
 	fileInfo, err := os.Stat(filePath)
 
 	if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {
@@ -91,5 +92,6 @@ func queue(anime *arn.Anime, malCrawler *crawler.Crawler) {
 	malCrawler.Queue(&crawler.Task{
 		URL:         url,
 		Destination: filePath,
+		Raw:         true,
 	})
 }

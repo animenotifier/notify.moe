@@ -1,6 +1,7 @@
 package main
 
 import (
+	"compress/gzip"
 	"errors"
 	"fmt"
 	"os"
@@ -36,7 +37,7 @@ func main() {
 			return nil
 		}
 
-		if !strings.HasSuffix(name, ".html") {
+		if !strings.HasSuffix(name, ".html.gz") {
 			return nil
 		}
 
@@ -53,7 +54,15 @@ func readFile(name string) error {
 	}
 
 	defer file.Close()
-	anime, characters, err := malparser.ParseAnime(file)
+
+	reader, err := gzip.NewReader(file)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	anime, characters, err := malparser.ParseAnime(reader)
 
 	if err != nil {
 		fmt.Println(err)
