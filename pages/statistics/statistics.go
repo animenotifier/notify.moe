@@ -25,6 +25,7 @@ func getUserStats() []*arn.PieChart {
 	gender := stats{}
 	os := stats{}
 	notifications := stats{}
+	titleLanguage := stats{}
 	avatar := stats{}
 	ip := stats{}
 	pro := stats{}
@@ -110,6 +111,7 @@ func getUserStats() []*arn.PieChart {
 
 		settings := user.Settings()
 		theme[settings.Theme]++
+		titleLanguage[settings.TitleLanguage]++
 	}
 
 	return []*arn.PieChart{
@@ -117,6 +119,7 @@ func getUserStats() []*arn.PieChart {
 		arn.NewPieChart("Screen size", screenSize),
 		arn.NewPieChart("Browser", browser),
 		arn.NewPieChart("Country", country),
+		arn.NewPieChart("Title language", titleLanguage),
 		arn.NewPieChart("Avatar", avatar),
 		arn.NewPieChart("Notifications", notifications),
 		arn.NewPieChart("Gender", gender),
