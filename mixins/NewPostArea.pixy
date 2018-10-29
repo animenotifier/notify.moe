@@ -3,4 +3,4 @@ component NewPostArea(user *arn.User, placeholder string)
 		.post-author
 			Avatar(user)
 		
-		textarea#new-reply.post-content(placeholder=placeholder + "...", aria-label=placeholder)
+		textarea#new-post.post-content(placeholder=placeholder + "...", aria-label=placeholder)

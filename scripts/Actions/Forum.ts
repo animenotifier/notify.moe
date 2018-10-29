@@ -56,15 +56,15 @@ export function deletePost(arn: AnimeNotifier, element: HTMLElement) {
 	.catch(err => arn.statusMessage.showError(err))
 }
 
-// Forum reply
-export function forumReply(arn: AnimeNotifier) {
-	let textarea = document.getElementById("new-reply") as HTMLTextAreaElement
-	let thread = document.getElementById("thread")
+// Create post
+export function createPost(arn: AnimeNotifier, element: HTMLElement) {
+	let textarea = document.getElementById("new-post") as HTMLTextAreaElement
+	let {parentId, parentType} = element.dataset
 
 	let post = {
 		text: textarea.value,
-		parentId: thread.dataset.id,
-		parentType: "Thread",
+		parentId,
+		parentType,
 		tags: []
 	}
 
@@ -72,11 +72,6 @@ export function forumReply(arn: AnimeNotifier) {
 	.then(() => arn.reloadContent())
 	.then(() => textarea.value = "")
 	.catch(err => arn.statusMessage.showError(err))
-}
-
-// Group post
-export function newGroupPost(arn: AnimeNotifier) {
-	// TODO: ...
 }
 
 // Create thread

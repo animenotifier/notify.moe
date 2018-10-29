@@ -32,7 +32,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 				span Soundtracks
 
 			#soundtrack-search-results
-				SoundTrackSearchResults(tracks)
+				SoundTrackSearchResults(tracks, user)
 		
 		//- .widget
 		//- 	h3.widget-title
@@ -97,14 +97,14 @@ component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread, user *arn
 							.forum-search-result-author= post.Creator().Nick
 					.forum-search-result-sample= post.Text
 
-component SoundTrackSearchResults(tracks []*arn.SoundTrack)
+component SoundTrackSearchResults(tracks []*arn.SoundTrack, user *arn.User)
 	if len(tracks) == 0
 		p.no-search-results.mountable No soundtracks found.
 	else
 		ul.soundtrack-search
 			each track in tracks
 				li.mountable(data-mountable-type="track")
-					a(href=track.Link())= track.Title.ByUser(nil)
+					a(href=track.Link())= track.Title.ByUser(user)
 					span.soundtrack-search-anime= " - " + track.MainAnime().Title.Canonical
 
 component CompanySearchResults(companies []*arn.Company)

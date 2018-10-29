@@ -1,4 +1,4 @@
-component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
+component SoundTrackPage(track *arn.SoundTrack, posts []*arn.Post, user *arn.User)
 	SoundTrackTabs(track, user)
 
 	.soundtrack-full-page
@@ -55,6 +55,27 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 				.tags
 					each tag in track.Tags
 						a.tag(href="/soundtracks/tag/" + tag)= tag
+			
+			.widget.mountable
+				h3.widget-title Comments
+
+				.thread
+					.posts
+						each post in posts
+							Postable(post.ToPostable(), user, "")
+						
+						if user != nil
+							if track.Locked
+								footer.footer.mountable
+									p.text-center This soundtrack is locked.
+							else
+								NewPostArea(user, "Comment")
+				
+							.buttons
+								if !track.Locked
+									button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type="SoundTrack", data-parent-id=track.ID)
+										Icon("mail-reply")
+										span Reply
 
 		.footer.mountable
 			if track.EditedBy != ""

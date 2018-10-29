@@ -90,9 +90,10 @@ func Forum(ctx *aero.Context) string {
 func SoundTracks(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
+	user := utils.GetUser(ctx)
 
 	tracks := search.SoundTracks(term, maxSoundTracks)
-	return ctx.HTML(components.SoundTrackSearchResults(tracks))
+	return ctx.HTML(components.SoundTrackSearchResults(tracks, user))
 }
 
 // Users search.

@@ -18,7 +18,7 @@ component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
 			
 				.buttons
 					if !thread.Locked
-						button.mountable.action(data-action="forumReply", data-trigger="click")
+						button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type="Thread", data-parent-id=thread.ID)
 							Icon("mail-reply")
 							span Reply
 					
