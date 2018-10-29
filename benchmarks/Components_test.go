@@ -10,11 +10,11 @@ import (
 func BenchmarkRenderThread(b *testing.B) {
 	thread, _ := arn.GetThread("HJgS7c2K")
 	thread.HTML() // Pre-render markdown
+	replies := thread.Posts()
 
-	replies, _ := arn.FilterPosts(func(post *arn.Post) bool {
-		post.HTML() // Pre-render markdown
-		return post.ThreadID == thread.ID
-	})
+	for _, reply := range replies {
+		reply.HTML() // Pre-render markdown
+	}
 
 	b.ReportAllocs()
 	b.ResetTimer()
