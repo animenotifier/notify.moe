@@ -450,14 +450,17 @@ export default class AnimeNotifier {
 
 		for(let element of findAll("character-ranking")) {
 			fetch(`/api/character/${element.dataset.characterId}/ranking`).then(async response => {
-				let ranking = await response.text()
+				let ranking = await response.json()
 
-				if(ranking.length === 0) {
+				if(!ranking.rank) {
 					return
 				}
 
 				Diff.mutations.queue(() => {
-					element.textContent = "#" + ranking
+					let percentile = Math.ceil(ranking.percentile * 100)
+
+					element.textContent = "#" + ranking.rank.toString()
+					element.title = "Top " + percentile + "%"
 				})
 			})
 		}

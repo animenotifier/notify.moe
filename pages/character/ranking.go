@@ -2,7 +2,6 @@ package character
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -18,10 +17,20 @@ func Ranking(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Character not found", err)
 	}
 
+	// Create response object
+	response := struct {
+		Rank       int     `json:"rank"`
+		Percentile float64 `json:"percentile"`
+	}{}
+
 	// Sort characters
 	characters := arn.FilterCharacters(func(character *arn.Character) bool {
 		return !character.IsDraft
 	})
+
+	if len(characters) == 0 {
+		return ctx.JSON(response)
+	}
 
 	arn.SortCharactersByLikes(characters)
 
@@ -31,11 +40,13 @@ func Ranking(ctx *aero.Context) string {
 	// Return ranking
 	for index, character := range characters {
 		if character.ID == id {
-			return strconv.Itoa(index + 1)
+			response.Rank = index + 1
+			response.Percentile = float64(response.Rank) / float64(len(characters))
+			return ctx.JSON(response)
 		}
 	}
 
 	// If the ID wasn't found for some reason,
 	// return an empty string.
-	return ""
+	return ctx.JSON(response)
 }
