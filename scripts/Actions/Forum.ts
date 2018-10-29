@@ -63,7 +63,8 @@ export function forumReply(arn: AnimeNotifier) {
 
 	let post = {
 		text: textarea.value,
-		threadId: thread.dataset.id,
+		parentId: thread.dataset.id,
+		parentType: "Thread",
 		tags: []
 	}
 

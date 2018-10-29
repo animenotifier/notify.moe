@@ -8,6 +8,6 @@ component ThreadLink(thread *arn.Thread)
 					Icon("thumb-tack")
 				a.thread-link-title(href="/thread/" + thread.ID)= thread.Title
 				.spacer
-				.thread-reply-count= len(thread.Posts)
+				.thread-reply-count= len(thread.PostIDs)
 				.thread-icons
 					Icon(arn.GetForumIcon(thread.Tags[0]))

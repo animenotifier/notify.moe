@@ -22,12 +22,7 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// Fetch posts
-	postObjects := arn.DB.GetMany("Post", thread.Posts)
-	posts := make([]*arn.Post, len(postObjects))
-
-	for i, obj := range postObjects {
-		posts[i] = obj.(*arn.Post)
-	}
+	posts := thread.Posts()
 
 	// Sort posts
 	arn.SortPostsLatestLast(posts)
