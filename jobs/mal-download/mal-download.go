@@ -17,6 +17,7 @@ const (
 	delayBetweenRequests = 1100 * time.Millisecond
 	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.20 Safari/537.36"
 	animeDirectory       = "anime"
+	characterDirectory   = "character"
 )
 
 var headers = map[string]string{
@@ -33,41 +34,59 @@ func main() {
 	}
 
 	// Filter anime with MAL ID
-	animes := []*arn.Anime{}
+	var animes []*arn.Anime
 
-	for anime := range arn.StreamAnime() {
-		malID := anime.GetMapping("myanimelist/anime")
+	if objectType == "all" || objectType == "anime" {
+		animes = arn.FilterAnime(func(anime *arn.Anime) bool {
+			return anime.GetMapping("myanimelist/anime") != ""
+		})
 
-		if malID == "" {
-			continue
-		}
+		color.Yellow("Found %d anime", len(animes))
 
-		animes = append(animes, anime)
+		// Sort so that we download the most important ones first
+		arn.SortAnimeByQuality(animes)
+
+		// Create anime directory if it's missing
+		os.Mkdir(animeDirectory, 0777)
 	}
 
-	color.Yellow("Found %d anime", len(animes))
+	// Filter characters with MAL ID
+	var characters []*arn.Character
+
+	if objectType == "all" || objectType == "character" {
+		characters = arn.FilterCharacters(func(character *arn.Character) bool {
+			return character.GetMapping("myanimelist/character") != ""
+		})
+
+		color.Yellow("Found %d characters", len(characters))
+
+		// Sort so that we download the most important ones first
+		arn.SortCharactersByLikes(characters)
+
+		// Create character directory if it's missing
+		os.Mkdir(characterDirectory, 0777)
+	}
 
 	// We don't need the database anymore
 	arn.Node.Close()
-
-	// Create anime directory if it's missing
-	os.Mkdir(animeDirectory, 0777)
 
 	// Create crawler
 	malCrawler := crawler.New(
 		headers,
 		delayBetweenRequests,
-		len(animes),
+		len(animes)+len(characters),
 	)
-
-	// Sort so that we download the most important ones first
-	arn.SortAnimeByQuality(animes)
 
 	// Queue up URLs
 	count := 0
 
 	for _, anime := range animes {
-		queue(anime, malCrawler)
+		queueAnime(anime, malCrawler)
+		count++
+	}
+
+	for _, character := range characters {
+		queueCharacter(character, malCrawler)
 		count++
 	}
 
@@ -78,10 +97,28 @@ func main() {
 	malCrawler.Wait()
 }
 
-func queue(anime *arn.Anime, malCrawler *crawler.Crawler) {
+func queueAnime(anime *arn.Anime, malCrawler *crawler.Crawler) {
 	malID := anime.GetMapping("myanimelist/anime")
 	url := "https://myanimelist.net/anime/" + malID
 	filePath := fmt.Sprintf("%s/%s.html.gz", animeDirectory, malID)
+	fileInfo, err := os.Stat(filePath)
+
+	if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {
+		// fmt.Println(color.YellowString(url), "skip")
+		return
+	}
+
+	malCrawler.Queue(&crawler.Task{
+		URL:         url,
+		Destination: filePath,
+		Raw:         true,
+	})
+}
+
+func queueCharacter(character *arn.Character, malCrawler *crawler.Crawler) {
+	malID := character.GetMapping("myanimelist/character")
+	url := "https://myanimelist.net/character/" + malID
+	filePath := fmt.Sprintf("%s/%s.html.gz", characterDirectory, malID)
 	fileInfo, err := os.Stat(filePath)
 
 	if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {

@@ -8,23 +8,19 @@ import (
 )
 
 // Shell parameters
-var animeID string
+var objectType string
+var objectID string
 
 // Shell flags
 func init() {
-	flag.StringVar(&animeID, "id", "", "ID of the notify.moe anime you want to refresh")
+	flag.StringVar(&objectType, "type", "all", "all | anime | character")
+	flag.StringVar(&objectID, "id", "", "ID of the notify.moe anime/character you want to refresh")
 	flag.Parse()
 }
 
 // InvokeShellArgs ...
 func InvokeShellArgs() bool {
-	if animeID != "" {
-		anime, err := arn.GetAnime(animeID)
-
-		if err != nil {
-			panic(err)
-		}
-
+	if objectID != "" {
 		// Create crawler
 		malCrawler := crawler.New(
 			headers,
@@ -32,8 +28,17 @@ func InvokeShellArgs() bool {
 			1,
 		)
 
-		// Queue
-		queue(anime, malCrawler)
+		switch objectType {
+		case "anime":
+			anime, err := arn.GetAnime(objectID)
+			arn.PanicOnError(err)
+			queueAnime(anime, malCrawler)
+
+		case "character":
+			character, err := arn.GetCharacter(objectID)
+			arn.PanicOnError(err)
+			queueCharacter(character, malCrawler)
+		}
 
 		// Wait
 		malCrawler.Wait()
