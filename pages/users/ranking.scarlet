@@ -22,5 +22,6 @@
 	margin-left 0.8rem
 
 .ranking-score,
-.ranking-accuracy
+.ranking-accuracy,
+.ranking-level
 	text-align right
