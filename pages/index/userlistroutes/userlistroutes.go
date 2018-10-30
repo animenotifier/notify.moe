@@ -13,6 +13,7 @@ func Register(l *layout.Layout) {
 	l.Page("/users/noavatar", users.ActiveNoAvatar)
 	l.Page("/users/games/osu", users.Osu)
 	l.Page("/users/games/overwatch", users.Overwatch)
+	l.Page("/users/games/ffxiv", users.FFXIV)
 	l.Page("/users/staff", users.Staff)
 	l.Page("/users/pro", users.Pro)
 	l.Page("/users/editors", users.Editors)

@@ -49,6 +49,13 @@ func Render(obj interface{}, title string, user *arn.User) string {
 			}
 		}
 
+		// Redownload button
+		track, isSoundTrack := obj.(*arn.SoundTrack)
+
+		if isSoundTrack && !track.IsDraft && track.HasMediaByService("Youtube") && track.File == "" && (user.Role == "editor" || user.Role == "admin") {
+			b.WriteString(`<button class="mountable action" data-action="downloadSoundTrackFile" data-trigger="click" data-id="` + track.ID + `">` + utils.Icon("refresh") + `Redownload</button>`)
+		}
+
 		// Delete button
 		_, isDeletable := obj.(api.Deletable)
 

@@ -13,7 +13,7 @@ import (
 
 const (
 	// The maximum age of files we accept until we force a refresh.
-	maxAge               = 24 * time.Hour
+	maxAge               = 7 * 24 * time.Hour
 	delayBetweenRequests = 1100 * time.Millisecond
 	userAgent            = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.20 Safari/537.36"
 	animeDirectory       = "anime"

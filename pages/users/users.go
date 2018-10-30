@@ -149,6 +149,24 @@ func Overwatch(ctx *aero.Context) string {
 	return ctx.HTML(components.OverwatchRankingList(users, ctx.URI()))
 }
 
+// FFXIV ...
+func FFXIV(ctx *aero.Context) string {
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.FinalFantasyXIV.ItemLevel > 0
+	})
+
+	// Sort by item level
+	sort.Slice(users, func(i, j int) bool {
+		return users[i].Accounts.FinalFantasyXIV.ItemLevel > users[j].Accounts.FinalFantasyXIV.ItemLevel
+	})
+
+	if len(users) > 50 {
+		users = users[:50]
+	}
+
+	return ctx.HTML(components.FinalFantasyXIVRankingList(users, ctx.URI()))
+}
+
 // Staff ...
 func Staff(ctx *aero.Context) string {
 	users := arn.FilterUsers(func(user *arn.User) bool {

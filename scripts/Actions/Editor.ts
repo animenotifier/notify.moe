@@ -1,6 +1,7 @@
 import AnimeNotifier from "../AnimeNotifier"
 import { findAllInside } from "../Utils";
 import { showSearchResults } from "./Search"
+import { arrayAppend } from "./Serialization";
 
 // newAnimeDiffIgnore
 export function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement) {
@@ -72,6 +73,17 @@ export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAre
 	showSearchResults(arn, results)
 }
 
+// Download soundtrack file
+export async function downloadSoundTrackFile(arn: AnimeNotifier, button: HTMLButtonElement) {
+	let id = button.dataset.id
+
+	try {
+		await arn.post(`/api/soundtrack/${id}/download`)
+		arn.reloadContent()
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
+}
 
 // Start background job
 export async function startJob(arn: AnimeNotifier, button: HTMLButtonElement) {

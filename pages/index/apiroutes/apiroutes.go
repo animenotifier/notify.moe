@@ -39,6 +39,9 @@ func Register(l *layout.Layout, app *aero.Application) {
 	app.Get("/api/next/soundtrack", soundtrack.Next)
 	app.Get("/api/character/:id/ranking", character.Ranking)
 
+	// SoundTrack
+	app.Post("/api/soundtrack/:id/download", soundtrack.Download)
+
 	// Upload
 	app.Post("/api/upload/avatar", upload.Avatar)
 	app.Post("/api/upload/cover", upload.Cover)

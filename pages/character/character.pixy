@@ -78,6 +78,13 @@ component CharacterSidebar(character *arn.Character, friends []*arn.User, releva
 						td.character-attributes-value!= markdown.Render(attribute.Value)
 					else
 						td.character-attributes-value= attribute.Value
+						//- td.character-attributes-value
+						//- 	if strings.Contains(attribute.Value, ",")
+						//- 		ul
+						//- 			each part in strings.Split(attribute.Value, ",")
+						//- 				li= strings.TrimSpace(part)
+						//- 	else
+						//- 		span= attribute.Value
 		
 		if len(relevantCharacters) > 0
 			h3.mountable(data-mountable-type="sidebar") Relevant

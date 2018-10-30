@@ -39,6 +39,10 @@
 .character-attributes-value
 	text-align right
 
+	li
+		list-style-type none
+		margin 0
+
 .character-anime
 	horizontal-wrap
 
