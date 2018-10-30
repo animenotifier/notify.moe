@@ -106,7 +106,7 @@ func syncCharacters(anime *arn.Anime, malAnime *mal.Anime) {
 
 		malCharacter := obj.(*mal.Character)
 
-		if malCharacter.ID == "" || malCharacter.Name == "" || malCharacter.ImagePath == "" {
+		if malCharacter.ID == "" || malCharacter.Name == "" || malCharacter.Image == "" {
 			fmt.Println("Skip character:", malAnimeCharacter.ID)
 			continue
 		}
@@ -159,7 +159,7 @@ func syncCharacters(anime *arn.Anime, malAnime *mal.Anime) {
 
 // import character
 func importCharacter(malCharacter *mal.Character) *arn.Character {
-	fmt.Println("Importing MAL Character:", malCharacter.ID, malCharacter.Name, malCharacter.ImagePath)
+	fmt.Println("Importing MAL Character:", malCharacter.ID, malCharacter.Name, malCharacter.Image)
 
 	character := arn.NewCharacter()
 	character.Name.Canonical = malCharacter.Name

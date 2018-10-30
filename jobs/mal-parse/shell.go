@@ -29,7 +29,7 @@ func InvokeShellArgs() bool {
 			panic("No MAL ID")
 		}
 
-		readFile(path.Join(arn.Root, "jobs/mal-download/anime", "anime-"+anime.GetMapping("myanimelist/anime")+".html"))
+		readAnimeFile(path.Join(arn.Root, "jobs/mal-download/anime", "anime-"+anime.GetMapping("myanimelist/anime")+".html"))
 		return true
 	}
 

@@ -41,11 +41,11 @@ func main() {
 			return nil
 		}
 
-		return readFile(name)
+		return readAnimeFile(name)
 	})
 }
 
-func readFile(name string) error {
+func readAnimeFile(name string) error {
 	file, err := os.Open(name)
 
 	if err != nil {
@@ -89,8 +89,8 @@ func readFile(name string) error {
 			modified = true
 		}
 
-		if existing.ImagePath != character.ImagePath {
-			existing.ImagePath = character.ImagePath
+		if existing.Image != character.Image {
+			existing.Image = character.Image
 			modified = true
 		}
 
@@ -101,5 +101,38 @@ func readFile(name string) error {
 
 	fmt.Println(anime.ID, anime.Title)
 	arn.MAL.Set("Anime", anime.ID, anime)
+	return nil
+}
+
+func readCharacterFile(name string) error {
+	file, err := os.Open(name)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	defer file.Close()
+
+	reader, err := gzip.NewReader(file)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	character, err := malparser.ParseCharacter(reader)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	if character.ID == "" {
+		return errors.New("Empty ID")
+	}
+
+	fmt.Println(character.ID, character.Name)
+	arn.MAL.Set("Character", character.ID, character)
 	return nil
 }
