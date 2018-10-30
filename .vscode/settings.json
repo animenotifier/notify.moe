@@ -6,7 +6,16 @@
 		"**/*.js": {
 			"when": "$(basename).ts"
 		},
-		"components/": true
+		"components/": true,
+		"jobs/mal-download/anime/": true,
+		"jobs/mal-download/character/": true
+	},
+	"files.watcherExclude": {
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/node_modules/*/**": true,
+		"**/mal-download/anime/**": true,
+		"**/mal-download/character/**": true
 	},
 	"files.associations": {
 		"*.pixy": "jade",
