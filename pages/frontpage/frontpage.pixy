@@ -9,8 +9,9 @@ component FrontPage
 		Login("")
 		Footer
 
-	video.bg-video(muted, autoplay, loop)
-		source(src="/videos/elements/violet.webm", type="video/webm")
+	.bg-video-container
+		video.bg-video(muted, autoplay, loop)
+			source(src="/videos/elements/violet.webm", type="video/webm")
 
 component Footer
 	.footer.mountable
