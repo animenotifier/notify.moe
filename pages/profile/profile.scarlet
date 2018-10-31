@@ -24,13 +24,12 @@ const profile-image-size = 280px
 	a
 		color white
 
-.intro-container
+.profile-info
 	vertical
-	align-items center
 	margin-top calc(content-padding * 1.5)
 
 .profile-actions
-	vertical
+	horizontal-wrap
 	margin-top content-padding
 
 	:empty
@@ -50,12 +49,12 @@ const profile-image-size = 280px
 > 740px
 	.profile
 		horizontal
-		align-items flex-start
+		align-items stretch
 
 	.profile-field
 		text-align left
 
-	.intro-container
+	.profile-info
 		align-items flex-start
 		margin-top 0
 		padding content-padding

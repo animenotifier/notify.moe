@@ -1,0 +1,37 @@
+.profile-tags-container
+	// ...
+
+.profile-tags
+	horizontal-wrap
+	justify-content center
+	margin-bottom typography-margin
+	margin-top content-padding
+
+.profile-tag
+	default-transition
+	padding 0.25rem 0.75rem
+	font-size 85%
+	color hsl(0, 0%, 90%)
+	background rgba(255, 255, 255, 0.1)
+	border-radius ui-element-border-radius
+	margin 0.35rem
+
+	&.mounted
+		opacity 0.8
+
+	:hover
+		color hsl(0, 0%, 90%)
+		opacity 1.0
+		text-shadow none
+		background rgba(255, 255, 255, 0.2)
+
+> 800px
+	.profile-tags
+		justify-content flex-start
+		margin-bottom 0
+
+	.profile-tags-container
+		vertical
+		flex 1
+		justify-content flex-end
+		align-items flex-end

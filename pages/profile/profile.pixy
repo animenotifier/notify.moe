@@ -48,83 +48,83 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 		.profile-image-container.mountable.never-unmount
 			ProfileImage(viewUser)
 
-		.intro-container.mountable.never-unmount
+		.profile-info.mountable.never-unmount
 			h1#nick= viewUser.Nick
 
-			if viewUser.Tagline != ""
-				p.profile-field.tagline
-					Icon("comment")
-					span.tagline-text= viewUser.Tagline
-			else
-				p.profile-field.tagline
-					Icon("comment")
-					span.tagline-text No tagline yet.
+			//- if viewUser.Tagline != ""
+			//- 	p.profile-field.tagline
+			//- 		Icon("comment")
+			//- 		span.tagline-text= viewUser.Tagline
+			//- else
+			//- 	p.profile-field.tagline
+			//- 		Icon("comment")
+			//- 		span.tagline-text No tagline yet.
 
-			if viewUser.Website != ""
-				p.profile-field.website
-					Icon("home")
-					a(href=viewUser.WebsiteURL(), target="_blank", rel="nofollow")= viewUser.WebsiteShortURL()
+			.profile-introduction!= markdown.Render(viewUser.Introduction)
 
-			//- if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 100
-			//- 	p.profile-field.osu(title="osu! Level " + fmt.Sprint(int(viewUser.Accounts.Osu.Level)) + " | Accuracy: " + fmt.Sprintf("%.1f", viewUser.Accounts.Osu.Accuracy) + "%")
-			//- 		Icon("trophy")
-			//- 		a(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, target="_blank", rel="noopener")= fmt.Sprint(int(viewUser.Accounts.Osu.PP)) + " pp"
+			.profile-tags-container
+				.profile-tags
+					a.profile-tag.mountable.never-unmount(href="/+" + viewUser.Nick + "/animelist/watching", data-mountable-type="header")
+						Icon("list")
+						span= fmt.Sprintf("%d anime", len(viewUser.AnimeList().Items))
+					
+					if viewUser.Website != ""
+						a.profile-tag.mountable.never-unmount(href=viewUser.WebsiteURL(), target="_blank", rel="nofollow", aria-label="Website", data-mountable-type="header")
+							Icon("home")
+							span= viewUser.WebsiteShortURL()
+					
+					//- if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 100
+					//- 	a.profile-tag.tip.mountable.never-unmount(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, aria-label="osu! | Level " + fmt.Sprint(int(viewUser.Accounts.Osu.Level)) + " | Accuracy: " + fmt.Sprintf("%.1f", viewUser.Accounts.Osu.Accuracy) + "%", target="_blank", rel="noopener", data-mountable-type="header")
+					//- 		Icon("trophy")
+					//- 		span= fmt.Sprint(int(viewUser.Accounts.Osu.PP)) + " pp"
 
-			//- if viewUser.Accounts.Overwatch.BattleTag != "" && viewUser.Accounts.Overwatch.SkillRating >= 1000
-			//- 	p.profile-field.overwatch(title=stringutils.Capitalize(viewUser.Accounts.Overwatch.Tier) + " (Overwatch)")
-			//- 		Icon("overwatch")
-			//- 		a(href="https://playoverwatch.com/en-us/career/pc/" + strings.Replace(viewUser.Accounts.Overwatch.BattleTag, "#", "-", 1), target="_blank", rel="noopener")= fmt.Sprint(viewUser.Accounts.Overwatch.SkillRating) + " SR"
+					//- if viewUser.Accounts.Overwatch.BattleTag != "" && viewUser.Accounts.Overwatch.SkillRating >= 1000
+					//- 	a.profile-tag.tip.mountable.never-unmount(href="https://playoverwatch.com/en-us/career/pc/" + strings.Replace(viewUser.Accounts.Overwatch.BattleTag, "#", "-", 1), aria-label=fmt.Sprintf("Overwatch | %s", stringutils.Capitalize(viewUser.Accounts.Overwatch.Tier)), target="_blank", rel="noopener", data-mountable-type="header")
+					//- 		Icon("overwatch")
+					//- 		span= fmt.Sprint(viewUser.Accounts.Overwatch.SkillRating) + " SR"
+					
+					//- if viewUser.Accounts.FinalFantasyXIV.Nick != "" && viewUser.Accounts.FinalFantasyXIV.Class != ""
+					//- 	.profile-tag.tip.mountable.never-unmount(aria-label=fmt.Sprintf("Final Fantasy XIV | Level %d | IL %d", viewUser.Accounts.FinalFantasyXIV.Level, viewUser.Accounts.FinalFantasyXIV.ItemLevel), data-mountable-type="header")
+					//- 		Icon("gamepad")
+					//- 		span= viewUser.Accounts.FinalFantasyXIV.Class
 
-			//- if viewUser.dataEditCount
-			//- 	p.profile-field.editor-contribution(title="Anime data modifications")
-			//- 		Icon("edit")
-			//- 		span= viewUser.dataEditCount
+					if viewUser.Registered != ""
+						.profile-tag.tip.mountable.never-unmount(aria-label="Member since", data-mountable-type="header")
+							Icon("calendar")
+							span= viewUser.RegisteredTime().Format("Jan 2006")
+					
+					if viewUser.IsPro()
+						a.profile-tag.mountable.never-unmount(href="/support", aria-label="Supporter", data-mountable-type="header")
+							Icon("star")
+							span.profile-pro-status-text PRO
+					
+					if viewUser.Role != ""
+						a.profile-tag.mountable.never-unmount(href="/users/staff", aria-label="Staff member", data-mountable-type="header")
+							Icon("rocket")
+							span= stringutils.Capitalize(viewUser.Role)
 
-			if viewUser.Registered != ""
-				p.profile-field.registration-date(title="Member since")
-					Icon("calendar")
-					//- span= time.Parse(time.RFC3339, viewUser.Registered)
-					span= viewUser.RegisteredTime().Format("Jan 2006")
-					//- span= monthNames[joined.getMonth()] + ' ' + joined.getFullYear()
+					//- if user != nil && user.ID != viewUser.ID
+					//- 	a.button.profile-action(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
+					//- 		Icon("exchange")
+					//- 		span Compare
+					
+					//- a.button.profile-action(href="/+" + viewUser.Nick + "/recommended/anime")
+					//- 	Icon("archive")
+					//- 	span Recomms
 
-			if viewUser.Role != ""
-				p.profile-field.role
-					Icon("rocket")
-					span= stringutils.Capitalize(viewUser.Role)
-
-		if viewUser.IsPro()
-			p.profile-field.profile-pro-status
-				a(href="/shop", title="PRO user")
-					Icon("star")
-					span.profile-pro-status-text PRO
-
+					//- if user != nil && (user.Role == "editor" || user.Role == "admin")
+					//- 	a.button.profile-action(href="/+" + viewUser.Nick + "/log")
+					//- 		Icon("edit")
+					//- 		span Log
 		
 		.profile-actions
 			if user != nil && user.ID != viewUser.ID
 				if !user.Follows().Contains(viewUser.ID)
-					button.profile-action.action(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add/" + viewUser.ID)
+					button.profile-action.action.mountable.never-unmount(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add/" + viewUser.ID)
 						Icon("user-plus")
 						span Follow
 				else
-					button.profile-action.action(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
+					button.profile-action.action.mountable.never-unmount(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
 						Icon("user-times")
 						span Unfollow
-			
-			a.button.profile-action(href="/+" + viewUser.Nick + "/animelist/watching")
-				Icon("list")
-				span Anime list
-
-			if user != nil && user.ID != viewUser.ID
-				a.button.profile-action(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
-					Icon("exchange")
-					span Compare
-			
-			a.button.profile-action(href="/+" + viewUser.Nick + "/recommended/anime")
-				Icon("archive")
-				span Recomms
-
-			if user != nil && (user.Role == "editor" || user.Role == "admin")
-				a.button.profile-action(href="/+" + viewUser.Nick + "/log")
-					Icon("edit")
-					span Log
 				
