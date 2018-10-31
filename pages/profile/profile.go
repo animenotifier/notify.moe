@@ -36,12 +36,12 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 			"og:image":         viewUser.AvatarLink("large"),
 			"og:url":           "https://" + ctx.App.Config.Domain + viewUser.Link(),
 			"og:site_name":     "notify.moe",
-			"og:description":   viewUser.Tagline,
+			"og:description":   viewUser.Introduction,
 			"og:type":          "profile",
 			"profile:username": viewUser.Nick,
 		},
 		Meta: map[string]string{
-			"description": viewUser.Tagline,
+			"description": viewUser.Introduction,
 			"keywords":    viewUser.Nick + ",profile",
 		},
 	}
