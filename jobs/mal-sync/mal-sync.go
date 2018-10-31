@@ -26,28 +26,32 @@ func main() {
 		return
 	}
 
-	// Sync the most important ones first
-	allAnime := arn.FilterAnime(func(anime *arn.Anime) bool {
-		return anime.GetMapping("myanimelist/anime") != ""
-	})
+	// Sync anime
+	if objectType == "all" || objectType == "anime" {
+		allAnime := arn.FilterAnime(func(anime *arn.Anime) bool {
+			return anime.GetMapping("myanimelist/anime") != ""
+		})
 
-	arn.SortAnimeByQuality(allAnime)
-	color.Yellow("%d anime found", len(allAnime))
+		arn.SortAnimeByQuality(allAnime)
+		color.Yellow("%d anime found", len(allAnime))
 
-	for _, anime := range allAnime {
-		syncAnime(anime, anime.GetMapping("myanimelist/anime"))
+		for _, anime := range allAnime {
+			syncAnime(anime, anime.GetMapping("myanimelist/anime"))
+		}
 	}
 
-	// Sync the most important ones first
-	allCharacters := arn.FilterCharacters(func(character *arn.Character) bool {
-		return character.GetMapping("myanimelist/character") != ""
-	})
+	// Sync characters
+	if objectType == "all" || objectType == "character" {
+		allCharacters := arn.FilterCharacters(func(character *arn.Character) bool {
+			return character.GetMapping("myanimelist/character") != ""
+		})
 
-	arn.SortCharactersByLikes(allCharacters)
-	color.Yellow("%d characters found", len(allCharacters))
+		arn.SortCharactersByLikes(allCharacters)
+		color.Yellow("%d characters found", len(allCharacters))
 
-	for _, character := range allCharacters {
-		syncCharacter(character, character.GetMapping("myanimelist/character"))
+		for _, character := range allCharacters {
+			syncCharacter(character, character.GetMapping("myanimelist/character"))
+		}
 	}
 }
 
@@ -99,6 +103,13 @@ func syncCharacter(character *arn.Character, malID string) {
 	description, attributes := parseCharacterDescription(malCharacter.Description)
 	character.Description = description
 	character.Attributes = attributes
+	character.Spoilers = []arn.Spoiler{}
+
+	for _, spoilerText := range malCharacter.Spoilers {
+		character.Spoilers = append(character.Spoilers, arn.Spoiler{
+			Text: spoilerText,
+		})
+	}
 
 	if character.Name.Japanese == "" && malCharacter.JapaneseName != "" {
 		character.Name.Japanese = malCharacter.JapaneseName
