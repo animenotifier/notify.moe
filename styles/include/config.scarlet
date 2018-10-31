@@ -149,4 +149,4 @@ const user-pro-icon-size = 1.1rem
 // Timings
 fade-speed = 150ms
 transition-speed = 150ms
-mountable-transition-speed = 250ms
+mountable-transition-speed = 150ms
