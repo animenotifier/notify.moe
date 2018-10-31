@@ -63,12 +63,6 @@ export default class AudioPlayer {
 		// Stop current track
 		this.stop()
 
-		// Check if we have PRO status after 5 plays
-		if(this.playId >= 6 && this.arn.user.dataset.pro !== "true") {
-			this.arn.statusMessage.showInfo("Please buy a PRO account to get unlimited access to the Anime Radio.", -1)
-			return
-		}
-
 		this.arn.currentSoundTrackId = trackId
 		this.arn.markPlayingSoundTrack()
 		this.arn.loading(true)
