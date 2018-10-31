@@ -3,7 +3,6 @@ package main
 import (
 	"compress/gzip"
 	"errors"
-	"fmt"
 	"os"
 	"path"
 	"path/filepath"
@@ -37,9 +36,11 @@ func main() {
 }
 
 func readFiles(root string, onFile func(string) error) {
+	count := 0
+
 	filepath.Walk(root, func(name string, info os.FileInfo, err error) error {
 		if err != nil {
-			fmt.Println(err)
+			color.Red(err.Error())
 			return err
 		}
 
@@ -51,8 +52,18 @@ func readFiles(root string, onFile func(string) error) {
 			return nil
 		}
 
-		return onFile(name)
+		count++
+		err = onFile(name)
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+
+		// Always continue traversing the directory
+		return nil
 	})
+
+	color.Cyan("%d files found", count)
 }
 
 func readAnimeFile(name string) error {

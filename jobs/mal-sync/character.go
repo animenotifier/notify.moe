@@ -21,6 +21,47 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 	for _, paragraph := range paragraphs {
 		// Is paragraph full of attributes?
 		if strings.Contains(paragraph, "\n") {
+			lines := strings.Split(paragraph, "\n")
+			var lastAttribute *arn.CharacterAttribute
+
+			for _, line := range lines {
+				line = strings.Replace(line, " (\n)", "", -1)
+
+				// Remove all kinds of starting and ending parantheses.
+				if strings.HasPrefix(line, "(") {
+					line = strings.TrimPrefix(line, "(")
+					line = strings.TrimSuffix(line, ")")
+				}
+
+				line = strings.TrimSuffix(line, " (")
+				line = strings.TrimPrefix(line, ")")
+
+				parts := strings.Split(line, ":")
+
+				if len(parts) < 2 {
+					// Add to previous attribute
+					if lastAttribute != nil {
+						lastAttribute.Value += ", " + line
+					}
+
+					continue
+				}
+
+				name := strings.TrimSpace(parts[0])
+				value := strings.TrimSpace(parts[1])
+
+				if value == "" || value == `"` {
+					continue
+				}
+
+				lastAttribute = &arn.CharacterAttribute{
+					Name:  name,
+					Value: value,
+				}
+
+				attributes = append(attributes, lastAttribute)
+			}
+
 			continue
 		}
 

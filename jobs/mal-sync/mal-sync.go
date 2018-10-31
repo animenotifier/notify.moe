@@ -27,31 +27,27 @@ func main() {
 	}
 
 	// Sync the most important ones first
-	allAnime := arn.AllAnime()
+	allAnime := arn.FilterAnime(func(anime *arn.Anime) bool {
+		return anime.GetMapping("myanimelist/anime") != ""
+	})
+
 	arn.SortAnimeByQuality(allAnime)
+	color.Yellow("%d anime found", len(allAnime))
 
 	for _, anime := range allAnime {
-		malID := anime.GetMapping("myanimelist/anime")
-
-		if malID == "" {
-			continue
-		}
-
-		syncAnime(anime, malID)
+		syncAnime(anime, anime.GetMapping("myanimelist/anime"))
 	}
 
 	// Sync the most important ones first
-	allCharacters := arn.AllCharacters()
+	allCharacters := arn.FilterCharacters(func(character *arn.Character) bool {
+		return character.GetMapping("myanimelist/character") != ""
+	})
+
 	arn.SortCharactersByLikes(allCharacters)
+	color.Yellow("%d characters found", len(allCharacters))
 
 	for _, character := range allCharacters {
-		malID := character.GetMapping("myanimelist/character")
-
-		if malID == "" {
-			continue
-		}
-
-		syncCharacter(character, malID)
+		syncCharacter(character, character.GetMapping("myanimelist/character"))
 	}
 }
 
@@ -59,7 +55,6 @@ func syncAnime(anime *arn.Anime, malID string) {
 	obj, err := malDB.Get("Anime", malID)
 
 	if err != nil {
-		fmt.Println(err)
 		return
 	}
 
@@ -91,7 +86,11 @@ func syncCharacter(character *arn.Character, malID string) {
 	obj, err := malDB.Get("Character", malID)
 
 	if err != nil {
-		fmt.Println(err)
+		return
+	}
+
+	// Skip manually created characters
+	if character.CreatedBy != "" {
 		return
 	}
 
