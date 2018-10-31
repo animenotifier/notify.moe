@@ -17,7 +17,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 	input.setAttribute("type", "file")
 	input.value = null
 
-	input.onchange = () => {
+	input.onchange = async () => {
 		let file = input.files[0]
 
 		if(!file) {
@@ -39,7 +39,26 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 		// Preview image
 		if(fileType === "image") {
 			let previews = document.getElementsByClassName(button.id + "-preview")
-			previewImage(file, endpoint, previews)
+			let dataURL = await readImageAsDataURL(file)
+			let img = await loadImage(dataURL)
+
+			switch(endpoint) {
+				case "/api/upload/avatar":
+					if(img.naturalWidth <= 280 || img.naturalHeight < 280) {
+						arn.statusMessage.showError(`Your image has a resolution of ${img.naturalWidth} x ${img.naturalHeight} pixels which is too small. Recommended: 560 x 560. Minimum: 280 x 280.`, 8000)
+						return
+					}
+					break
+
+				case "/api/upload/cover":
+					if(img.naturalWidth <= 960 || img.naturalHeight < 225) {
+						arn.statusMessage.showError(`Your image has a resolution of ${img.naturalWidth} x ${img.naturalHeight} pixels which is too small. Recommended: 1920 x 450. Minimum: 960 x 225.`, 8000)
+						return
+					}
+					break
+			}
+
+			previewImage(dataURL, endpoint, previews)
 		}
 
 		uploadFile(file, fileType, endpoint, arn)
@@ -92,36 +111,63 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 	reader.readAsArrayBuffer(file)
 }
 
-// Preview image
-function previewImage(file: File, endpoint: string, previews: HTMLCollectionOf<Element>) {
-	let reader = new FileReader()
+// Read image as data URL
+function readImageAsDataURL(file: File): Promise<string> {
+	return new Promise((resolve, reject) => {
+		let reader = new FileReader()
 
-	reader.onloadend = () => {
-		let dataURL = reader.result as string
-
-		if(endpoint === "/api/upload/avatar") {
-			let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
-
-			if(svgPreview) {
-				svgPreview.classList.add("hidden")
-			}
+		reader.onloadend = () => {
+			let dataURL = reader.result as string
+			resolve(dataURL)
 		}
 
-		for(let preview of previews) {
-			let img = preview as HTMLImageElement
-			img.classList.remove("hidden")
+		reader.onerror = event => {
+			reader.abort()
+			reject(event)
+		}
 
-			// Make not found images visible again
-			if(img.classList.contains("lazy")) {
-				img.classList.remove("element-not-found")
-				img.classList.add("element-found")
-			}
+		reader.readAsDataURL(file)
+	})
+}
 
-			img.src = dataURL
+// Load image and resolve when loading has finished
+function loadImage(url: string): Promise<HTMLImageElement> {
+	return new Promise((resolve, reject) => {
+		let img = new Image()
+		img.src = url
+
+		img.onload = () => {
+			resolve(img)
+		}
+
+		img.onerror = error => {
+			reject(error)
+		}
+	})
+}
+
+// Preview image
+function previewImage(dataURL: string, endpoint: string, previews: HTMLCollectionOf<Element>) {
+	if(endpoint === "/api/upload/avatar") {
+		let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
+
+		if(svgPreview) {
+			svgPreview.classList.add("hidden")
 		}
 	}
 
-	reader.readAsDataURL(file)
+	for(let preview of previews) {
+		let img = preview as HTMLImageElement
+		img.classList.remove("hidden")
+
+		// Make not found images visible again
+		if(img.classList.contains("lazy")) {
+			img.classList.remove("element-not-found")
+			img.classList.add("element-found")
+		}
+
+		img.src = dataURL
+	}
 }
 
 // Update sidebar avatar

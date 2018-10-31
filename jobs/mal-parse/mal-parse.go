@@ -28,23 +28,31 @@ func main() {
 	}
 
 	if objectType == "all" || objectType == "anime" {
-		filepath.Walk(path.Join(arn.Root, "jobs/mal-download/anime"), func(name string, info os.FileInfo, err error) error {
-			if err != nil {
-				fmt.Println(err)
-				return err
-			}
-
-			if info.IsDir() {
-				return nil
-			}
-
-			if !strings.HasSuffix(name, ".html.gz") {
-				return nil
-			}
-
-			return readAnimeFile(name)
-		})
+		readFiles(path.Join(arn.Root, "jobs", "mal-download", "anime"), readAnimeFile)
 	}
+
+	if objectType == "all" || objectType == "character" {
+		readFiles(path.Join(arn.Root, "jobs", "mal-download", "character"), readCharacterFile)
+	}
+}
+
+func readFiles(root string, onFile func(string) error) {
+	filepath.Walk(root, func(name string, info os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+
+		if info.IsDir() {
+			return nil
+		}
+
+		if !strings.HasSuffix(name, ".html.gz") {
+			return nil
+		}
+
+		return onFile(name)
+	})
 }
 
 func readAnimeFile(name string) error {
