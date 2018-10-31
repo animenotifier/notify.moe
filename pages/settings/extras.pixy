@@ -1,7 +1,7 @@
-component SettingsPro(user *arn.User)
+component SettingsExtras(user *arn.User)
 	SettingsTabs
 
-	h1.page-title PRO settings
+	h1.page-title Extra settings
 
 	.settings
 		.widget.mountable(data-api="/api/settings/" + user.ID)
@@ -24,3 +24,20 @@ component SettingsPro(user *arn.User)
 					a.button(href="/support")
 						Icon("star")
 						span Go PRO
+		
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("code")
+				span Developer
+			
+			.widget-section
+				label API:
+				a.button(href="/api")
+					Icon("code")
+					span API
+			
+			.widget-section
+				label GitHub:
+				a.button(href="https://github.com/animenotifier/notify.moe")
+					Icon("github")
+					span GitHub

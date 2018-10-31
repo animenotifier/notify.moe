@@ -5,4 +5,4 @@ component SettingsTabs
 		Tab("Notifications", "bell", "/settings/notifications")
 		Tab("Apps", "puzzle-piece", "/settings/apps")
 		Tab("Formatting", "font", "/settings/formatting")
-		Tab("PRO", "star", "/settings/pro")
+		Tab("Extras", "star", "/settings/extras")

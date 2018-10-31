@@ -14,5 +14,5 @@ func Register(l *layout.Layout) {
 	l.Page("/settings/notifications", settings.Get(components.SettingsNotifications))
 	l.Page("/settings/apps", settings.Get(components.SettingsApps))
 	l.Page("/settings/formatting", settings.Get(components.SettingsFormatting))
-	l.Page("/settings/pro", settings.Get(components.SettingsPro))
+	l.Page("/settings/extras", settings.Get(components.SettingsExtras))
 }
