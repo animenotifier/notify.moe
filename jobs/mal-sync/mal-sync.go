@@ -37,11 +37,25 @@ func main() {
 			continue
 		}
 
-		sync(anime, malID)
+		syncAnime(anime, malID)
+	}
+
+	// Sync the most important ones first
+	allCharacters := arn.AllCharacters()
+	arn.SortCharactersByLikes(allCharacters)
+
+	for _, character := range allCharacters {
+		malID := character.GetMapping("myanimelist/character")
+
+		if malID == "" {
+			continue
+		}
+
+		syncCharacter(character, malID)
 	}
 }
 
-func sync(anime *arn.Anime, malID string) {
+func syncAnime(anime *arn.Anime, malID string) {
 	obj, err := malDB.Get("Anime", malID)
 
 	if err != nil {
@@ -71,4 +85,26 @@ func sync(anime *arn.Anime, malID string) {
 
 	// Save in database
 	anime.Save()
+}
+
+func syncCharacter(character *arn.Character, malID string) {
+	obj, err := malDB.Get("Character", malID)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	malCharacter := obj.(*mal.Character)
+
+	description, attributes := parseCharacterDescription(malCharacter.Description)
+	character.Description = description
+	character.Attributes = attributes
+
+	if character.Name.Japanese == "" && malCharacter.JapaneseName != "" {
+		character.Name.Japanese = malCharacter.JapaneseName
+	}
+
+	// Save in database
+	character.Save()
 }

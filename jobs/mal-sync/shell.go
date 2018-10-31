@@ -28,7 +28,7 @@ func InvokeShellArgs() bool {
 			panic("No MAL ID")
 		}
 
-		sync(anime, anime.GetMapping("myanimelist/anime"))
+		syncAnime(anime, anime.GetMapping("myanimelist/anime"))
 		return true
 	}
 
