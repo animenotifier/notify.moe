@@ -18,12 +18,6 @@ const profile-image-size = 280px
 
 	overflow hidden
 
-.profile-field
-	text-align center
-
-	a
-		color white
-
 .profile-info
 	vertical
 	margin-top calc(content-padding * 1.5)
@@ -50,9 +44,6 @@ const profile-image-size = 280px
 	.profile
 		horizontal
 		align-items stretch
-
-	.profile-field
-		text-align left
 
 	.profile-info
 		align-items flex-start

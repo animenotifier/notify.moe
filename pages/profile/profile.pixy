@@ -50,18 +50,8 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 
 		.profile-info.mountable.never-unmount
 			h1#nick= viewUser.Nick
-
-			//- if viewUser.Tagline != ""
-			//- 	p.profile-field.tagline
-			//- 		Icon("comment")
-			//- 		span.tagline-text= viewUser.Tagline
-			//- else
-			//- 	p.profile-field.tagline
-			//- 		Icon("comment")
-			//- 		span.tagline-text No tagline yet.
-
 			.profile-introduction!= markdown.Render(viewUser.Introduction)
-
+			
 			.profile-tags-container
 				.profile-tags
 					a.profile-tag.mountable.never-unmount(href="/+" + viewUser.Nick + "/animelist/watching", data-mountable-type="header")

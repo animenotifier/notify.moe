@@ -10,7 +10,7 @@ component FrontPage
 		Footer
 
 	video.bg-video(muted, autoplay, loop)
-		source(src="/videos/elements/frontpage.webm", type="video/webm")
+		source(src="/videos/elements/violet.webm", type="video/webm")
 
 component Footer
 	.footer.mountable
