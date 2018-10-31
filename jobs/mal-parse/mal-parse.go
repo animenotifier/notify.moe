@@ -27,22 +27,24 @@ func main() {
 		return
 	}
 
-	filepath.Walk(path.Join(arn.Root, "jobs/mal-download/anime"), func(name string, info os.FileInfo, err error) error {
-		if err != nil {
-			fmt.Println(err)
-			return err
-		}
+	if objectType == "all" || objectType == "anime" {
+		filepath.Walk(path.Join(arn.Root, "jobs/mal-download/anime"), func(name string, info os.FileInfo, err error) error {
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
 
-		if info.IsDir() {
-			return nil
-		}
+			if info.IsDir() {
+				return nil
+			}
 
-		if !strings.HasSuffix(name, ".html.gz") {
-			return nil
-		}
+			if !strings.HasSuffix(name, ".html.gz") {
+				return nil
+			}
 
-		return readAnimeFile(name)
-	})
+			return readAnimeFile(name)
+		})
+	}
 }
 
 func readAnimeFile(name string) error {
