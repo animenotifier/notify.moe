@@ -59,7 +59,7 @@ func readAnimeFile(name string) error {
 	file, err := os.Open(name)
 
 	if err != nil {
-		fmt.Println(err)
+		color.Red(err.Error())
 		return err
 	}
 
@@ -68,14 +68,14 @@ func readAnimeFile(name string) error {
 	reader, err := gzip.NewReader(file)
 
 	if err != nil {
-		fmt.Println(err)
+		color.Red(err.Error())
 		return err
 	}
 
 	anime, characters, err := malparser.ParseAnime(reader)
 
 	if err != nil {
-		fmt.Println(err)
+		color.Red(err.Error())
 		return err
 	}
 
@@ -109,7 +109,7 @@ func readAnimeFile(name string) error {
 		}
 	}
 
-	fmt.Println(anime.ID, anime.Title)
+	// fmt.Println(anime.ID, anime.Title)
 	arn.MAL.Set("Anime", anime.ID, anime)
 	return nil
 }
@@ -118,7 +118,7 @@ func readCharacterFile(name string) error {
 	file, err := os.Open(name)
 
 	if err != nil {
-		fmt.Println(err)
+		color.Red(err.Error())
 		return err
 	}
 
@@ -127,14 +127,14 @@ func readCharacterFile(name string) error {
 	reader, err := gzip.NewReader(file)
 
 	if err != nil {
-		fmt.Println(err)
+		color.Red(err.Error())
 		return err
 	}
 
 	character, err := malparser.ParseCharacter(reader)
 
 	if err != nil {
-		fmt.Println(err)
+		color.Red(err.Error())
 		return err
 	}
 
@@ -142,7 +142,7 @@ func readCharacterFile(name string) error {
 		return errors.New("Empty ID")
 	}
 
-	fmt.Println(character.ID, character.Name)
+	// fmt.Println(character.ID, character.Name)
 	arn.MAL.Set("Character", character.ID, character)
 	return nil
 }

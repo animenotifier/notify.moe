@@ -28,6 +28,10 @@ var headers = map[string]string{
 func main() {
 	defer color.Green("Finished.")
 
+	// Create directories in case they're missing
+	os.Mkdir(animeDirectory, 0777)
+	os.Mkdir(characterDirectory, 0777)
+
 	// Called with arguments?
 	if InvokeShellArgs() {
 		return
@@ -45,9 +49,6 @@ func main() {
 
 		// Sort so that we download the most important ones first
 		arn.SortAnimeByQuality(animes)
-
-		// Create anime directory if it's missing
-		os.Mkdir(animeDirectory, 0777)
 	}
 
 	// Filter characters with MAL ID
@@ -62,9 +63,6 @@ func main() {
 
 		// Sort so that we download the most important ones first
 		arn.SortCharactersByLikes(characters)
-
-		// Create character directory if it's missing
-		os.Mkdir(characterDirectory, 0777)
 	}
 
 	// We don't need the database anymore
