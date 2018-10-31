@@ -3,9 +3,7 @@ component FrontPage
 
 	.frontpage
 		h1.mountable notify.moe
-
 		h2.mountable Your home for everything about anime.
-
 		Login("")
 		Footer
 
