@@ -3,10 +3,10 @@ component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
 
 	#thread.thread(data-id=thread.ID)
 		.posts
-			Postable(thread.ToPostable(), user, thread.Creator().ID)
+			Postable(thread.ToPostable(), user, "", thread.Creator().ID)
 
 			each post in posts
-				Postable(post.ToPostable(), user, thread.Creator().ID)
+				Postable(post.ToPostable(), user, "", thread.Creator().ID)
 			
 			//- Reply
 			if user != nil

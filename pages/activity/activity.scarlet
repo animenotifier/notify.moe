@@ -1,0 +1,11 @@
+.activities
+	vertical
+	width 100%
+	max-width forum-width
+	margin 0 auto
+
+// .activity
+// 	margin-bottom 1rem
+
+.activity-header
+	font-size 0.9rem

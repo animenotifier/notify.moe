@@ -7,6 +7,9 @@ component ExploreAnime(animes []*arn.Anime, year string, season string, status s
 			button.action(data-trigger="click", data-action="toggleHideAddedAnime", title="Hide anime in my collection")
 				RawIcon("eye-slash")
 		
+		a.button(href="/calendar", title="Calendar")
+			RawIcon("calendar")
+		
 		a.button(href="/halloffame", title="Hall of Fame")
 			RawIcon("trophy")
 		

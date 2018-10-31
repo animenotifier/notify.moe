@@ -1,2 +1,16 @@
-component ActivityFeed
-	h1 Hello
+component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
+	h1 Activity
+
+	.activities
+		each entry in entries
+			if entry.ObjectType == "Post"
+				.activity
+					ActivityPost(entry.Object().(*arn.Post), user)
+
+component ActivityPost(post *arn.Post, user *arn.User)
+	//- .activity-header.mountable
+	//- 	a(href=post.Creator().Link())= post.Creator().Nick
+	//- 	span  commented on 
+	//- 	a(href=post.Parent().Link())= post.Parent().TitleByUser(user)
+
+	Postable(post.ToPostable(), user, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), post.Parent().TitleByUser(user)), "")

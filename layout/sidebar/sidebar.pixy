@@ -30,10 +30,10 @@ component Sidebar(user *arn.User)
 			SidebarButton("Home", "/+" + user.Nick + "/animelist/watching", "home")
 		else
 			SidebarButton("Home", "/", "home")
-
+		
+		SidebarButton("Activity", "/activity", "rss")
 		SidebarButton("Forum", "/forum", "comment")
 		SidebarButton("Explore", "/explore", "th")
-		SidebarButton("Calendar", "/calendar", "calendar")
 		SidebarButton("AMVs", "/amvs", "video-camera")
 		SidebarButton("Soundtracks", "/soundtracks", "headphones")
 		SidebarButton("Quotes", "/quotes", "quote-left")

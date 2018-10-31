@@ -1,3 +1,6 @@
+.side-note-container
+	horizontal
+	justify-content flex-end
+
 .side-note
 	font-size 0.9rem
-	text-align right !important

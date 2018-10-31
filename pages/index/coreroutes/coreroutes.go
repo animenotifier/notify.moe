@@ -2,6 +2,7 @@ package coreroutes
 
 import (
 	"github.com/aerogo/layout"
+	"github.com/animenotifier/notify.moe/pages/activity"
 	"github.com/animenotifier/notify.moe/pages/calendar"
 	"github.com/animenotifier/notify.moe/pages/embed"
 	"github.com/animenotifier/notify.moe/pages/home"
@@ -17,6 +18,9 @@ func Register(l *layout.Layout) {
 
 	// Login
 	l.Page("/login", login.Get)
+
+	// Activity
+	l.Page("/activity", activity.Get)
 
 	// Calendar
 	l.Page("/calendar", calendar.Get)

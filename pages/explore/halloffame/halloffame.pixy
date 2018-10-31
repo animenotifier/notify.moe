@@ -1,6 +1,6 @@
 component HallOfFame(entries []*utils.HallOfFameEntry, user *arn.User)
 	h1.hall-of-fame-page-title Hall of Fame
-	.footer Best TV series for each year.
+	.footer Most popular TV series for each year.
 
 	.hall-of-fame
 		each entry in entries

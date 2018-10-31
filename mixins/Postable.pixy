@@ -1,12 +1,12 @@
-component Postable(post arn.Postable, user *arn.User, highlightAuthorID string)
+component Postable(post arn.Postable, user *arn.User, headerContent string, highlightAuthorID string)
 	.post.mountable(id=strings.ToLower(post.Type()) + "-" + fmt.Sprint(post.ID()), data-highlight=post.Creator().ID == highlightAuthorID, data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.Type()) + "/" + post.ID())
 		.post-author
 			Avatar(post.Creator())
 
-			//- if post.recipient && post.recipient.ID !== post.author.ID
-			//- 	a.user.post-recipient(href="/+" + post.recipient.nick, title=post.recipient.nick)
-			//- 		img.user-image(src=post.recipient.avatar ? (post.recipient.avatar + "?s=100&r=x&d=mm") : "/images/elements/no-gravatar.svg", alt=post.recipient.nick)
 		.post-content
+			if headerContent != ""
+				div!= headerContent
+			
 			div(id="render-" + post.ID())!= post.HTML()
 
 			if user != nil && user.ID == post.Creator().ID

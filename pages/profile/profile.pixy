@@ -79,7 +79,7 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 					//- 		span= viewUser.Accounts.FinalFantasyXIV.Class
 
 					if viewUser.Registered != ""
-						.profile-tag.tip.mountable.never-unmount(aria-label="Member since", data-mountable-type="header")
+						.profile-tag.mountable.never-unmount(title="Member since", data-mountable-type="header")
 							Icon("calendar")
 							span= viewUser.RegisteredTime().Format("Jan 2006")
 					
@@ -92,6 +92,11 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 						a.profile-tag.mountable.never-unmount(href="/users/staff", aria-label="Staff member", data-mountable-type="header")
 							Icon("rocket")
 							span= stringutils.Capitalize(viewUser.Role)
+					
+					if !viewUser.IsActive()
+						.profile-tag.mountable.never-unmount(title="Hasn't been online for the past 2 weeks", data-mountable-type="header")
+							Icon("bed")
+							span Inactive
 
 					//- if user != nil && user.ID != viewUser.ID
 					//- 	a.button.profile-action(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick)
