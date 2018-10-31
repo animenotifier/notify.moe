@@ -25,7 +25,7 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 			var lastAttribute *arn.CharacterAttribute
 
 			for _, line := range lines {
-				line = strings.Replace(line, " (\n)", "", -1)
+				// line = strings.Replace(line, " (\n)", "", -1)
 
 				// Remove all kinds of starting and ending parantheses.
 				if strings.HasPrefix(line, "(") {
@@ -33,26 +33,26 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 					line = strings.TrimSuffix(line, ")")
 				}
 
-				line = strings.TrimSuffix(line, " (")
-				line = strings.TrimPrefix(line, ")")
+				if !strings.Contains(line, ":") {
+					// Remove list indicators
+					line = strings.TrimPrefix(line, "- ")
+					line = strings.TrimPrefix(line, "* ")
 
-				parts := strings.Split(line, ":")
-
-				if len(parts) < 2 {
 					// Add to previous attribute
 					if lastAttribute != nil {
-						lastAttribute.Value += ", " + line
+						if lastAttribute.Value != "" {
+							lastAttribute.Value += ", "
+						}
+
+						lastAttribute.Value += line
 					}
 
 					continue
 				}
 
+				parts := strings.Split(line, ":")
 				name := strings.TrimSpace(parts[0])
 				value := strings.TrimSpace(parts[1])
-
-				if value == "" || value == `"` {
-					continue
-				}
 
 				lastAttribute = &arn.CharacterAttribute{
 					Name:  name,
