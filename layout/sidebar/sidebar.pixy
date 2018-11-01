@@ -5,7 +5,7 @@ component Sidebar(user *arn.User)
 			if user != nil
 				AvatarNoTip(user)
 			else
-				a(href="/")
+				a(href="/", aria-label="Anime Notifier")
 					img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
 			
 			if user != nil
