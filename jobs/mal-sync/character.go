@@ -136,7 +136,7 @@ func parseAttribute(line string) (string, string) {
 		name = "Source"
 	}
 
-	if len(name) > 25 || len(value) > 40 || strings.HasSuffix(value, ".") {
+	if len(name) > 25 || len(value) > 50 || strings.HasSuffix(value, ".") {
 		return "", ""
 	}
 
