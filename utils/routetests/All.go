@@ -119,6 +119,10 @@ var routeTests = map[string][]string{
 		"/anime/74y2cFiiR/episodes",
 	},
 
+	"/anime/:id/comments": []string{
+		"/anime/74y2cFiiR/comments",
+	},
+
 	"/anime/:id/tracks": []string{
 		"/anime/74y2cFiiR/tracks",
 	},
