@@ -12,7 +12,6 @@ import (
 )
 
 const (
-	maxDescriptionLength  = 170
 	maxRelevantCharacters = 12
 )
 
@@ -93,11 +92,7 @@ func Get(ctx *aero.Context) string {
 	arn.SortQuotesPopularFirst(quotes)
 
 	// Set OpenGraph attributes
-	description := character.Description
-
-	if len(description) > maxDescriptionLength {
-		description = description[:maxDescriptionLength-3] + "..."
-	}
+	description := utils.CutLongDescription(character.Description)
 
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{

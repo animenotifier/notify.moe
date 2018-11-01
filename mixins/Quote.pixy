@@ -31,10 +31,7 @@ component QuoteCharacter(quote *arn.Quote, user *arn.User)
 			CharacterSmall(quote.Character(), user)
 
 component QuoteTextPreview(quote *arn.Quote)
-	if len(quote.Text.English) > 170
-		blockquote!= utils.RenderQuoteText(quote.Text.English[:167] + "...")
-	else
-		blockquote!= utils.RenderQuoteText(quote.Text.English)
+	blockquote!= utils.RenderQuoteText(utils.CutLongDescription(quote.Text.English))
 
 component QuoteFooter(quote *arn.Quote)
 	.quote-footer

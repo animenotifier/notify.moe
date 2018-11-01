@@ -86,8 +86,40 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 		paragraph = strings.TrimSpace(paragraph)
 
 		// Skip paragraph if it's too short.
-		if len(paragraph) < 30 {
-			if !strings.HasSuffix(paragraph, ".") || strings.HasSuffix(paragraph, "...") {
+		if len(paragraph) < 30 && !strings.HasSuffix(paragraph, ".") || strings.HasSuffix(paragraph, "...") {
+			continue
+		}
+
+		// Is it an attribute?
+		if strings.Contains(paragraph, ":") {
+			parts := strings.Split(paragraph, ":")
+			name := strings.TrimSpace(parts[0])
+			value := strings.TrimSpace(parts[1])
+
+			// Remove list indicators
+			name = strings.TrimPrefix(name, "- ")
+			name = strings.TrimPrefix(name, "* ")
+
+			if strings.HasPrefix(name, "~") && strings.HasSuffix(value, "~") {
+				name = strings.TrimPrefix(name, "~")
+				value = strings.TrimSuffix(value, "~")
+			}
+
+			if strings.HasPrefix(name, "[") && strings.HasSuffix(value, "]") {
+				name = strings.TrimPrefix(name, "[")
+				value = strings.TrimSuffix(value, "]")
+			}
+
+			if name == "source" || name == "sources" {
+				name = "Source"
+			}
+
+			if len(name) < 25 && len(value) < 40 && !strings.HasSuffix(value, ".") {
+				// fmt.Println(color.GreenString(name), color.YellowString(value))
+				attributes = append(attributes, &arn.CharacterAttribute{
+					Name:  name,
+					Value: value,
+				})
 				continue
 			}
 		}
