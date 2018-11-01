@@ -84,6 +84,10 @@ func Editors(ctx *aero.Context) string {
 		return scoreA > scoreB
 	})
 
+	if len(users) > 10 {
+		users = users[:10]
+	}
+
 	return ctx.HTML(components.EditorRankingList(users, score, ctx.URI()))
 }
 
@@ -124,8 +128,8 @@ func Osu(ctx *aero.Context) string {
 		return users[i].Accounts.Osu.PP > users[j].Accounts.Osu.PP
 	})
 
-	if len(users) > 50 {
-		users = users[:50]
+	if len(users) > 10 {
+		users = users[:10]
 	}
 
 	return ctx.HTML(components.OsuRankingList(users, ctx.URI()))
@@ -142,8 +146,8 @@ func Overwatch(ctx *aero.Context) string {
 		return users[i].Accounts.Overwatch.SkillRating > users[j].Accounts.Overwatch.SkillRating
 	})
 
-	if len(users) > 50 {
-		users = users[:50]
+	if len(users) > 10 {
+		users = users[:10]
 	}
 
 	return ctx.HTML(components.OverwatchRankingList(users, ctx.URI()))
@@ -160,8 +164,8 @@ func FFXIV(ctx *aero.Context) string {
 		return users[i].Accounts.FinalFantasyXIV.ItemLevel > users[j].Accounts.FinalFantasyXIV.ItemLevel
 	})
 
-	if len(users) > 50 {
-		users = users[:50]
+	if len(users) > 10 {
+		users = users[:10]
 	}
 
 	return ctx.HTML(components.FinalFantasyXIVRankingList(users, ctx.URI()))
