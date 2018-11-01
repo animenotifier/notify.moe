@@ -52,6 +52,12 @@
 .character-anime-item-image
 	anime-mini-item-image
 
+.character-spoiler-warning
+	margin content-padding 0
+
+.character-spoiler
+	margin typography-margin 0
+
 .character-quotes
 	justify-content flex-start
 

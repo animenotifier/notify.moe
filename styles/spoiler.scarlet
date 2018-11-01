@@ -1,0 +1,6 @@
+.spoiler
+	transition filter 500ms ease, transform transition-speed ease
+	filter blur(2px)
+
+	:hover
+		filter blur(0)

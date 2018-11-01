@@ -36,6 +36,10 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 							Quote(mainQuote, user)
 					
 					.character-description.mountable(data-mountable-type="header")!= markdown.Render(character.Description)
+					
+					.character-spoilers
+						each spoiler in character.Spoilers
+							.spoiler.character-spoiler.mountable(data-mountable-type="header")!= markdown.Render(spoiler.Text)
 			
 			.character-main-column
 				if len(characterAnime) > 0

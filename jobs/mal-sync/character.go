@@ -83,6 +83,15 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 			continue
 		}
 
+		paragraph = strings.TrimSpace(paragraph)
+
+		// Skip paragraph if it's too short.
+		if len(paragraph) < 30 {
+			if !strings.HasSuffix(paragraph, ".") || strings.HasSuffix(paragraph, "...") {
+				continue
+			}
+		}
+
 		finalParagraphs = append(finalParagraphs, paragraph)
 
 		// originalLine := line
