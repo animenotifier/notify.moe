@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/animenotifier/arn"
+	"github.com/fatih/color"
 )
 
 func parseCharacterDescription(input string) (output string, attributes []*arn.CharacterAttribute) {
@@ -25,14 +27,6 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 			var lastAttribute *arn.CharacterAttribute
 
 			for _, line := range lines {
-				// line = strings.Replace(line, " (\n)", "", -1)
-
-				// Remove all kinds of starting and ending parantheses.
-				if strings.HasPrefix(line, "(") {
-					line = strings.TrimPrefix(line, "(")
-					line = strings.TrimSuffix(line, ")")
-				}
-
 				if !strings.Contains(line, ":") {
 					// Remove list indicators
 					line = strings.TrimPrefix(line, "- ")
@@ -50,16 +44,16 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 					continue
 				}
 
-				parts := strings.Split(line, ":")
-				name := strings.TrimSpace(parts[0])
-				value := strings.TrimSpace(parts[1])
+				name, value := parseAttribute(line)
 
-				lastAttribute = &arn.CharacterAttribute{
-					Name:  name,
-					Value: value,
+				if name != "" && value != "" {
+					lastAttribute = &arn.CharacterAttribute{
+						Name:  name,
+						Value: value,
+					}
+
+					attributes = append(attributes, lastAttribute)
 				}
-
-				attributes = append(attributes, lastAttribute)
 			}
 
 			continue
@@ -91,73 +85,61 @@ func parseCharacterDescription(input string) (output string, attributes []*arn.C
 		}
 
 		// Is it an attribute?
-		if strings.Contains(paragraph, ":") {
-			parts := strings.Split(paragraph, ":")
-			name := strings.TrimSpace(parts[0])
-			value := strings.TrimSpace(parts[1])
+		name, value := parseAttribute(paragraph)
 
-			// Remove list indicators
-			name = strings.TrimPrefix(name, "- ")
-			name = strings.TrimPrefix(name, "* ")
-
-			if strings.HasPrefix(name, "~") && strings.HasSuffix(value, "~") {
-				name = strings.TrimPrefix(name, "~")
-				value = strings.TrimSuffix(value, "~")
-			}
-
-			if strings.HasPrefix(name, "[") && strings.HasSuffix(value, "]") {
-				name = strings.TrimPrefix(name, "[")
-				value = strings.TrimSuffix(value, "]")
-			}
-
-			if name == "source" || name == "sources" {
-				name = "Source"
-			}
-
-			if len(name) < 25 && len(value) < 40 && !strings.HasSuffix(value, ".") {
-				// fmt.Println(color.GreenString(name), color.YellowString(value))
-				attributes = append(attributes, &arn.CharacterAttribute{
-					Name:  name,
-					Value: value,
-				})
-				continue
-			}
+		if name != "" && value != "" {
+			attributes = append(attributes, &arn.CharacterAttribute{
+				Name:  name,
+				Value: value,
+			})
+			continue
 		}
 
 		finalParagraphs = append(finalParagraphs, paragraph)
-
-		// originalLine := line
-
-		// line = strings.TrimSpace(line)
-
-		// colonPos := strings.Index(line, ":")
-
-		// // If a colon has not been found or the colon is too far,
-		// // treat it as a normal line.
-		// if colonPos == -1 || colonPos < 2 || colonPos > 25 {
-		// 	finalLines = append(finalLines, originalLine)
-		// 	continue
-		// }
-
-		// key := line[:colonPos]
-		// value := line[colonPos+1:]
-
-		// value = strings.TrimSpace(value)
-
-		// if key == "source" {
-		// 	key = "Source"
-		// }
-
-		// attributes = append(attributes, &arn.CharacterAttribute{
-		// 	Name:  key,
-		// 	Value: value,
-		// })
-
-		// fmt.Println(color.CyanString(key), color.YellowString(value))
 	}
 
 	output = strings.Join(finalParagraphs, "\n\n")
 	output = strings.TrimSpace(output)
 
 	return output, attributes
+}
+
+func parseAttribute(line string) (string, string) {
+	if !strings.Contains(line, ":") {
+		return "", ""
+	}
+
+	parts := strings.Split(line, ":")
+	name := strings.TrimSpace(parts[0])
+	value := strings.TrimSpace(parts[1])
+
+	// Remove list indicators
+	name = strings.TrimPrefix(name, "- ")
+	name = strings.TrimPrefix(name, "* ")
+
+	if strings.HasPrefix(name, "~") && strings.HasSuffix(value, "~") {
+		name = strings.TrimPrefix(name, "~")
+		value = strings.TrimSuffix(value, "~")
+	}
+
+	if strings.HasPrefix(name, "[") && strings.HasSuffix(value, "]") {
+		name = strings.TrimPrefix(name, "[")
+		value = strings.TrimSuffix(value, "]")
+	}
+
+	if strings.HasPrefix(name, "(") && strings.HasSuffix(value, ")") {
+		name = strings.TrimPrefix(name, "(")
+		value = strings.TrimSuffix(value, ")")
+	}
+
+	if name == "source" || name == "sources" {
+		name = "Source"
+	}
+
+	if len(name) > 25 || len(value) > 40 || strings.HasSuffix(value, ".") {
+		return "", ""
+	}
+
+	fmt.Println(color.GreenString(name), color.YellowString(value))
+	return name, value
 }
