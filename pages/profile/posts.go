@@ -23,18 +23,10 @@ func GetPostsByUser(ctx *aero.Context) string {
 	posts := viewUser.Posts()
 	arn.SortPostsLatestFirst(posts)
 
-	var postables []arn.Postable
-
 	if len(posts) >= postLimit {
 		posts = posts[:postLimit]
 	}
 
-	postables = make([]arn.Postable, len(posts))
-
-	for i, post := range posts {
-		postables[i] = arn.ToPostable(post)
-	}
-
-	return ctx.HTML(components.LatestPosts(postables, viewUser, utils.GetUser(ctx), ctx.URI()))
+	return ctx.HTML(components.LatestPosts(arn.ToPostables(posts), viewUser, utils.GetUser(ctx), ctx.URI()))
 
 }

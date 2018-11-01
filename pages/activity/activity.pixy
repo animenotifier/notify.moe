@@ -13,4 +13,4 @@ component ActivityPost(post *arn.Post, user *arn.User)
 	//- 	span  commented on 
 	//- 	a(href=post.Parent().Link())= post.Parent().TitleByUser(user)
 
-	Postable(post.ToPostable(), user, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), post.Parent().TitleByUser(user)), "")
+	Postable(post, user, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), post.Parent().TitleByUser(user)), "")
