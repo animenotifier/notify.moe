@@ -31,9 +31,9 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 						else
 							Japanese("日本語の名前無し")
 					
-					if mainQuote != nil
-						.character-quotes
-							Quote(mainQuote, user)
+					//- if mainQuote != nil
+					//- 	.character-quotes
+					//- 		Quote(mainQuote, user)
 					
 					.character-description.mountable(data-mountable-type="header")!= markdown.Render(character.Description)
 					
@@ -51,14 +51,13 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 								a.character-anime-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user), data-mountable-type="anime")
 									img.character-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
-				if len(quotes) > 0 && (len(quotes) > 1 || mainQuote != quotes[0])
+				if len(quotes) > 0
 					.character-section
 						h3.character-section-name.mountable Quotes
 
 						.quotes.character-quotes.mountable
 							each quote in quotes
-								if mainQuote == nil || quote.ID != mainQuote.ID
-									Quote(quote, user)
+								Quote(quote, user)
 		
 			.character-section
 				h3.character-section-name.mountable Comments

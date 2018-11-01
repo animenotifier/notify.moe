@@ -62,6 +62,9 @@
 	.quote-footer
 		display none
 
+	.quote
+		max-width 500px
+
 .character-friends
 	.user-avatars
 		justify-content flex-start
