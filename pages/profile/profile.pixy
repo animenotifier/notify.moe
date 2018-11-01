@@ -18,7 +18,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					span JSON
 
 component ProfileTabs(viewUser *arn.User, uri string)
-	.tabs
+	.tabs.mountable.never-unmount
 		Tab("Anime", "th", "/+" + viewUser.Nick)
 		Tab("Characters", "child", "/+" + viewUser.Nick + "/characters/liked")
 		Tab("Forum", "comment", "/+" + viewUser.Nick + "/forum/threads")
