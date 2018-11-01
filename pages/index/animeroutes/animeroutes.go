@@ -17,6 +17,7 @@ func Register(l *layout.Layout) {
 	l.Page("/anime/:id/characters", anime.Characters)
 	l.Page("/anime/:id/tracks", anime.Tracks)
 	l.Page("/anime/:id/relations", anime.Relations)
+	l.Page("/anime/:id/comments", anime.Comments)
 	l.Page("/anime/:id/episode/:episode-number", episode.Get)
 
 	// Anime redirects

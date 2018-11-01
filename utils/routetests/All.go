@@ -465,7 +465,7 @@ var routeTests = map[string][]string{
 	"/settings/apps":                                 nil,
 	"/settings/avatar":                               nil,
 	"/settings/formatting":                           nil,
-	"/settings/pro":                                  nil,
+	"/settings/extras":                               nil,
 	"/shop":                                          nil,
 	"/shop/history":                                  nil,
 	"/support":                                       nil,

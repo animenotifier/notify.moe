@@ -30,6 +30,7 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 	AnimeTracks(anime, tracks, user, false)
 	AnimeAMVs(anime, amvs, amvAppearances, user)
 	AnimeEpisodes(anime, episodes, user, false)
+	AnimeComments(anime, user, false)
 
 component AnimeSideColumn(anime *arn.Anime, friends []*arn.User, listItems map[*arn.User]*arn.AnimeListItem, user *arn.User)
 	AnimeTrailer(anime)

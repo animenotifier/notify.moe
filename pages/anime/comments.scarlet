@@ -1,0 +1,7 @@
+.anime-comments
+	[data-standalone-page="false"]
+		margin-top 1rem
+
+		.thread
+			max-width 600px
+			justify-content flex-start

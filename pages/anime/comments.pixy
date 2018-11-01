@@ -1,0 +1,12 @@
+component AnimeComments(anime *arn.Anime, user *arn.User, standAlonePage bool)
+	if standAlonePage
+		h1.mountable
+			a(href=anime.Link())= anime.Title.ByUser(user)
+	
+	section.anime-section.mountable
+		if !standAlonePage
+			h3.anime-section-name
+				a(href=anime.Link() + "/comments") Comments
+
+		.anime-comments(data-standalone-page=standAlonePage)
+			Comments(anime, user)

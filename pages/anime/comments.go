@@ -10,8 +10,8 @@ import (
 	"github.com/animenotifier/arn"
 )
 
-// Episodes ...
-func Episodes(ctx *aero.Context) string {
+// Comments ...
+func Comments(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	anime, err := arn.GetAnime(id)
@@ -20,5 +20,5 @@ func Episodes(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
-	return ctx.HTML(components.AnimeEpisodes(anime, anime.Episodes().Items, user, true))
+	return ctx.HTML(components.AnimeComments(anime, user, true))
 }
