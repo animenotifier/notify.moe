@@ -1,0 +1,6 @@
+mixin comments-left
+	margin-top 1rem
+
+	.thread
+		max-width 600px
+		justify-content flex-start

@@ -60,6 +60,12 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 								if mainQuote == nil || quote.ID != mainQuote.ID
 									Quote(quote, user)
 		
+			.character-section
+				h3.character-section-name.mountable Comments
+				
+				.character-comments
+					Comments(character, user)
+
 		CharacterSidebar(character, friends, relevantCharacters, user)
 
 component CharacterSidebar(character *arn.Character, friends []*arn.User, relevantCharacters []*arn.Character, user *arn.User)

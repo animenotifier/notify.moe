@@ -75,6 +75,9 @@
 .character-section-name
 	font-weight bold
 
+.character-comments
+	comments-left
+
 > 1250px
 	.character-page
 		horizontal
