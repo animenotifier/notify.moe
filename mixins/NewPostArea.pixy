@@ -6,12 +6,13 @@ component NewPostArea(user *arn.User, placeholder string)
 			
 			textarea#new-post-text.post-content(placeholder=placeholder + "...", aria-label=placeholder)
 
-component NewPostActions(parentType string, parentID string)
+component NewPostActions(parentType string, parentID string, cancelButton bool)
 	#new-post-actions.buttons
 		button#reply-button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type=parentType, data-parent-id=parentID)
 			Icon("mail-reply")
 			span Reply
 
-		button#reply-cancel-button.mountable.action(data-action="cancelReply", data-trigger="click")
-			Icon("close")
-			span Cancel
+		if cancelButton
+			button#reply-cancel-button.mountable.action(data-action="cancelReply", data-trigger="click")
+				Icon("close")
+				span Cancel

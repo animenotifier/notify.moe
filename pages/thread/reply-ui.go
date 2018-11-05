@@ -19,5 +19,5 @@ func ReplyUI(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Thread not found", err)
 	}
 
-	return ctx.HTML(components.NewPostArea(user, "Reply") + components.NewPostActions(thread.Type(), thread.ID))
+	return ctx.HTML(components.NewPostArea(user, "Reply") + components.NewPostActions(thread.Type(), thread.ID, true))
 }
