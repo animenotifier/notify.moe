@@ -16,6 +16,4 @@ component Comments(parent arn.PostParent, user *arn.User)
 	
 				.buttons
 					if !arn.IsLocked(parent)
-						button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type=reflect.TypeOf(parent).Elem().Name(), data-parent-id=parent.GetID())
-							Icon("mail-reply")
-							span Reply
+						NewPostActions(reflect.TypeOf(parent).Elem().Name(), parent.GetID(), false)
