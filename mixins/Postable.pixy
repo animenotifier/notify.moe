@@ -41,10 +41,6 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 								a.post-tool.post-like.tip.action(id="like-" + post.GetID(), aria-label="Like", data-action="like", data-trigger="click")
 									Icon("thumbs-up")
 						
-						//- if user.Role == "admin"
-						//- 	a.post-tool.post-edit.tip(href=post.Link() + "/edit", aria-label="Edit")
-						//- 		Icon("edit")
-						
 						a.post-tool.post-reply.tip.action(data-post-id=post.GetID(), aria-label="Reply", data-action="reply", data-trigger="click")
 							Icon("reply")
 
