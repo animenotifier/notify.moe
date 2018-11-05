@@ -24,17 +24,8 @@ component Group(group *arn.Group, user *arn.User)
 					each member in group.Members
 						Avatar(member.User())
 		
-		.group-feed.mountable
-			if user != nil
-				NewPostArea(user, "Content")
-			
-				.buttons
-					button.action(data-action="newGroupPost", data-trigger="click")
-						Icon("check")
-						span Publish
-
-			each post in group.Posts()
-				p!= post.HTML()
+		.group-feed
+			Comments(group, user)
 
 component GroupTabs(group *arn.Group, user *arn.User)
 	.tabs
