@@ -9,13 +9,6 @@
 
 .post
 	vertical
-	margin-bottom 1.75rem
-
-	:last-child
-		margin-bottom 0
-
-	.post-author
-		margin-bottom 0.25rem
 
 .post-content
 	[data-highlight="true"]
@@ -23,16 +16,23 @@
 
 .post-parent
 	vertical
+	margin-bottom 1.75rem
+
+	.post-author
+		margin-bottom 0.25rem
 
 .replies
-	margin-top 0.75rem
 	margin-left content-padding
 
-	:empty
-		margin-top 0
+// On mobile, don't indent the first level
+< 600px
+	.posts
+		> .post
+			> .replies
+				margin-left 0
 
 > 600px
-	.post
+	.post-parent
 		margin-bottom 0.75rem
 
 		.post-author
