@@ -21,11 +21,5 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Thread not found", err)
 	}
 
-	// Fetch posts
-	posts := thread.Posts()
-
-	// Sort posts
-	arn.SortPostsLatestLast(posts)
-
-	return ctx.HTML(components.Thread(thread, posts, user))
+	return ctx.HTML(components.Thread(thread, user))
 }

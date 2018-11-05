@@ -8,6 +8,6 @@ component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
 
 component ActivityPost(post arn.Postable, user *arn.User)
 	if post.Parent() != nil
-		Postable(post, user, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), html.EscapeString(post.Parent().TitleByUser(user))), "")
+		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), html.EscapeString(post.Parent().TitleByUser(user))), "")
 	else
-		Postable(post, user, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Link(), html.EscapeString(post.TitleByUser(user))), "")
+		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Link(), html.EscapeString(post.TitleByUser(user))), "")

@@ -1,12 +1,9 @@
-component Thread(thread *arn.Thread, posts []*arn.Post, user *arn.User)
+component Thread(thread *arn.Thread, user *arn.User)
 	h1.thread-title= thread.Title
 
 	#thread.thread(data-id=thread.ID)
 		.posts
-			Postable(thread, user, "", thread.Creator().ID)
-
-			each post in posts
-				Postable(post, user, "", thread.Creator().ID)
+			Postable(thread, user, true, "", thread.Creator().ID)
 			
 			//- Reply
 			if user != nil

@@ -5,7 +5,7 @@ component Comments(parent arn.PostParent, user *arn.User)
 				p.no-data.mountable No comments have been written yet.
 			else
 				each post in parent.Posts()
-					Postable(post, user, "", "")
+					Postable(post, user, true, "", "")
 			
 			if user != nil
 				if arn.IsLocked(parent)

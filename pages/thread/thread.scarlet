@@ -14,18 +14,23 @@
 	.post-author
 		margin-bottom 0.25rem
 
+.post-content
 	[data-highlight="true"]
-		.post-content
-			border 2px solid post-highlight-color
+		border 2px solid post-highlight-color
 
-	// [data-pro="true"]
-	// 	.post-content
-	// 		border 2px solid pro-color
+.post-parent
+	vertical
+
+.replies
+	margin-top 0.75rem
+	margin-left content-padding
 
 > 600px
 	.post
-		horizontal
-		margin-bottom 0.75rem
+		margin-bottom 0
 
 		.post-author
 			margin-bottom 0
+
+	.post-parent
+		horizontal

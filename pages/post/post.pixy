@@ -1,7 +1,7 @@
 component Post(post *arn.Post, user *arn.User)
 	.thread
 		.posts
-			Postable(post, user, "", "")
+			Postable(post, user, true, "", "")
 
 			.side-note-container.mountable
 				a.side-note(href=post.Parent().Link())= post.Parent().TitleByUser(user)

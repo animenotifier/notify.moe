@@ -91,6 +91,11 @@ export function createThread(arn: AnimeNotifier) {
 	.catch(err => arn.statusMessage.showError(err))
 }
 
+// Reply to a post
+export function reply(arn: AnimeNotifier, element: HTMLElement) {
+
+}
+
 // Lock thread
 export function lockThread(arn: AnimeNotifier, element: HTMLButtonElement) {
 	setThreadLock(arn, element, true)
