@@ -50,10 +50,6 @@ component Postable(post arn.Postable, user *arn.User, headerContent string, high
 					if user != nil && (user.Role == "admin" || user.Role == "editor")
 						a.post-tool.post-delete.tip.action(data-action="deletePost", data-trigger="click", data-id=post.GetID(), aria-label="Delete")
 							Icon("trash")
-					
-					a.post-tool.post-permalink.tip(href=post.Link(), aria-label="Link")
-						Icon("link")
-
-				//- if type === "Messages" && user && (user.ID === post.authorId || user.ID === post.recipientId)
-				//- 	a.post-tool.post-delete(onclick=`if(confirm("Do you really want to delete this ${typeSingular.toLowerCase()} from ${post.author.nick}?")) $.delete${typeSingular}("${post.ID}")`, title="Delete")
-				//- 		i.fa.fa-trash.fa-fw
+				
+				a.post-tool.post-permalink.tip(href=post.Link(), aria-label="Link")
+					Icon("link")

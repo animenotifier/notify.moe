@@ -21,7 +21,23 @@ func Get(ctx *aero.Context) string {
 	// })
 
 	entries := arn.FilterEditLogEntries(func(entry *arn.EditLogEntry) bool {
-		return entry.Action == "create" && entry.ObjectType == "Post" && entry.Object() != nil
+		if entry.Action != "create" {
+			return false
+		}
+
+		obj := entry.Object()
+
+		if obj == nil {
+			return false
+		}
+
+		_, isPostable := obj.(arn.Postable)
+
+		if !isPostable {
+			return false
+		}
+
+		return true
 	})
 
 	arn.SortEditLogEntriesLatestFirst(entries)
