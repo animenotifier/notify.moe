@@ -14,7 +14,9 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 					.post-edit-interface
 						if post.Type() == "Thread"
 							input.post-title-input.hidden(id="title-" + post.GetID(), value=post.TitleByUser(user), type="text", placeholder="Thread title")
+						
 						textarea.post-text-input.hidden(id="source-" + post.GetID())= post.GetText()
+						
 						.buttons.hidden(id="edit-toolbar-" + post.GetID())
 							a.button.post-save.action(data-action="savePost", data-trigger="click", data-id=post.GetID())
 								Icon("save")
@@ -43,7 +45,7 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 						//- 	a.post-tool.post-edit.tip(href=post.Link() + "/edit", aria-label="Edit")
 						//- 		Icon("edit")
 						
-						a.post-tool.post-reply.tip.action(id="reply-" + post.GetID(), aria-label="Reply", data-action="reply", data-trigger="click")
+						a.post-tool.post-reply.tip.action(data-post-id=post.GetID(), aria-label="Reply", data-action="reply", data-trigger="click")
 							Icon("reply")
 
 						if user.ID == post.Creator().ID
@@ -58,7 +60,7 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 					a.post-tool.post-permalink.tip(href=post.Link(), aria-label="Link")
 						Icon("link")
 
-		.replies
+		.replies(id="replies-" + post.GetID())
 			if includeReplies
 				each reply in post.Posts()
 					Postable(reply, user, true, "", highlightAuthorID)

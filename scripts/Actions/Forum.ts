@@ -58,7 +58,7 @@ export function deletePost(arn: AnimeNotifier, element: HTMLElement) {
 
 // Create post
 export function createPost(arn: AnimeNotifier, element: HTMLElement) {
-	let textarea = document.getElementById("new-post") as HTMLTextAreaElement
+	let textarea = document.getElementById("new-post-text") as HTMLTextAreaElement
 	let {parentId, parentType} = element.dataset
 
 	let post = {
@@ -92,8 +92,40 @@ export function createThread(arn: AnimeNotifier) {
 }
 
 // Reply to a post
-export function reply(arn: AnimeNotifier, element: HTMLElement) {
+export async function reply(arn: AnimeNotifier, element: HTMLElement) {
+	let apiEndpoint = arn.findAPIEndpoint(element)
+	let repliesId = `replies-${element.dataset.postId}`
+	let replies = document.getElementById(repliesId)
 
+	// Delete old reply area
+	let oldReplyArea = document.getElementById("new-post")
+
+	if(oldReplyArea) {
+		oldReplyArea.remove()
+	}
+
+	// Delete old reply button
+	let oldPostActions = document.getElementById("new-post-actions")
+
+	if(oldPostActions) {
+		oldPostActions.remove()
+	}
+
+	// Fetch new reply UI
+	try {
+		let response = await fetch(`${apiEndpoint}/reply/ui`)
+		let html = await response.text()
+		replies.innerHTML = html + replies.innerHTML
+		arn.onNewContent(replies)
+		arn.assignActions()
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
+}
+
+// Cancel replying to a post
+export function cancelReply(arn: AnimeNotifier, element: HTMLElement) {
+	arn.reloadContent()
 }
 
 // Lock thread

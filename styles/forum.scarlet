@@ -83,6 +83,11 @@ post-content-padding-y = 0.75rem
 	align-items flex-start
 	margin-right 0.5rem
 
+#new-post-actions
+	horizontal
+	justify-content flex-end
+	margin-bottom 0.75rem
+
 // Toolbar
 
 .post-toolbar

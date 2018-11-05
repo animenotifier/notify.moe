@@ -3,6 +3,9 @@ package apiroutes
 import (
 	"strings"
 
+	"github.com/animenotifier/notify.moe/pages/post"
+	"github.com/animenotifier/notify.moe/pages/thread"
+
 	"github.com/aerogo/aero"
 
 	"github.com/aerogo/layout"
@@ -38,6 +41,12 @@ func Register(l *layout.Layout, app *aero.Application) {
 	app.Get("/api/random/soundtrack", soundtrack.Random)
 	app.Get("/api/next/soundtrack", soundtrack.Next)
 	app.Get("/api/character/:id/ranking", character.Ranking)
+
+	// Thread
+	app.Get("/api/thread/:id/reply/ui", thread.ReplyUI)
+
+	// Post
+	app.Get("/api/post/:id/reply/ui", post.ReplyUI)
 
 	// SoundTrack
 	app.Post("/api/soundtrack/:id/download", soundtrack.Download)

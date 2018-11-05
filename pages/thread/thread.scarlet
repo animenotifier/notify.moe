@@ -11,6 +11,9 @@
 	vertical
 	margin-bottom 1.75rem
 
+	:last-child
+		margin-bottom 0
+
 	.post-author
 		margin-bottom 0.25rem
 
@@ -25,9 +28,12 @@
 	margin-top 0.75rem
 	margin-left content-padding
 
+	:empty
+		margin-top 0
+
 > 600px
 	.post
-		margin-bottom 0
+		margin-bottom 0.75rem
 
 		.post-author
 			margin-bottom 0

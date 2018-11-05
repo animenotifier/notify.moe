@@ -9,9 +9,9 @@ import Analytics from "./Analytics"
 import SideBar from "./SideBar"
 import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
-import { displayAiringDate, displayDate, displayTime } from "./DateView"
-import { findAll, canUseWebP, requestIdleCallback, swapElements, delay } from "./Utils"
 import { checkNewVersionDelayed } from "./NewVersionCheck"
+import { displayAiringDate, displayDate, displayTime } from "./DateView"
+import { findAll, canUseWebP, requestIdleCallback, swapElements, delay, findAllInside } from "./Utils"
 import * as actions from "./Actions"
 
 export default class AnimeNotifier {
@@ -952,6 +952,15 @@ export default class AnimeNotifier {
 			this.loading(false)
 			throw err
 		})
+	}
+
+	onNewContent(element: HTMLElement) {
+		// Do the same as for the content loaded event,
+		// except here we are limiting it to the element.
+		this.app.ajaxify(element.getElementsByTagName("a"))
+		this.lazyLoad(findAllInside("lazy", element))
+		this.mountMountables(findAllInside("mountable", element))
+		this.assignTooltipOffsets(findAllInside("tip", element))
 	}
 
 	scrollTo(target: HTMLElement) {

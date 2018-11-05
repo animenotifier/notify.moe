@@ -1,5 +1,5 @@
 import AnimeNotifier from "../AnimeNotifier"
-import { delay, requestIdleCallback, findAllInside } from "../Utils"
+import { delay, requestIdleCallback } from "../Utils"
 
 // Search page reference
 var emptySearchHTML = ""
@@ -172,18 +172,8 @@ function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string
 		}
 
 		await arn.innerHTML(element, html)
-
-		showSearchResults(arn, element)
+		arn.onNewContent(element)
 	}
-}
-
-export function showSearchResults(arn: AnimeNotifier, element: HTMLElement) {
-	// Do the same as for the content loaded event,
-	// except here we are limiting it to the element.
-	arn.app.ajaxify(element.getElementsByTagName("a"))
-	arn.lazyLoad(findAllInside("lazy", element))
-	arn.mountMountables(findAllInside("mountable", element))
-	arn.assignTooltipOffsets(findAllInside("tip", element))
 }
 
 export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {

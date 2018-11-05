@@ -1,7 +1,17 @@
 component NewPostArea(user *arn.User, placeholder string)
-	.post.mountable
+	#new-post.post.mountable
 		.post-parent
 			.post-author
 				Avatar(user)
 			
-			textarea#new-post.post-content(placeholder=placeholder + "...", aria-label=placeholder)
+			textarea#new-post-text.post-content(placeholder=placeholder + "...", aria-label=placeholder)
+
+component NewPostActions(parentType string, parentID string)
+	#new-post-actions.buttons
+		button#reply-button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type=parentType, data-parent-id=parentID)
+			Icon("mail-reply")
+			span Reply
+
+		button#reply-cancel-button.mountable.action(data-action="cancelReply", data-trigger="click")
+			Icon("close")
+			span Cancel

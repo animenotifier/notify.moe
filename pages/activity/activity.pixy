@@ -3,8 +3,7 @@ component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
 
 	.activities
 		each entry in entries
-			.activity
-				ActivityPost(entry.Object().(arn.Postable), user)
+			ActivityPost(entry.Object().(arn.Postable), user)
 
 component ActivityPost(post arn.Postable, user *arn.User)
 	if post.Parent() != nil
