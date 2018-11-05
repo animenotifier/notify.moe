@@ -1,7 +1,4 @@
 import AnimeNotifier from "../AnimeNotifier"
-import { findAllInside } from "../Utils";
-import { showSearchResults } from "./Search"
-import { arrayAppend } from "./Serialization";
 
 // newAnimeDiffIgnore
 export function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement) {
@@ -70,7 +67,7 @@ export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAre
 	}
 
 	results.classList.remove("hidden")
-	showSearchResults(arn, results)
+	arn.onNewContent(results)
 }
 
 // Download soundtrack file
