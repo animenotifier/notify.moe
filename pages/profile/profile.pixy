@@ -70,7 +70,7 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 							span= viewUser.AgeInYears()
 					
 					if user != nil && viewUser.Settings().Privacy.ShowLocation && viewUser.Location.CountryName != ""
-						.profile-tag.mountable.never-unmount(data-mountable-type="header")
+						a.profile-tag.mountable.never-unmount(href="/users/country/" + strings.ToLower(viewUser.Location.CountryName), data-mountable-type="header")
 							Icon("map-marker")
 							span= viewUser.Location.CountryName
 					

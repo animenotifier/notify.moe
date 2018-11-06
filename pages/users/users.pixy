@@ -6,6 +6,16 @@ component Users(users []*arn.User, url string)
 		each user in users
 			Avatar(user)
 
+component UsersByCountry(users []*arn.User, countryName string)
+	if len(users) == 0
+		p.no-data.mountable= "Seems like there are no users in " + stringutils.Capitalize(countryName)
+	else
+		h1= "Users in " + users[0].Location.CountryName
+
+		.user-avatars.mountable
+			each user in users
+				Avatar(user)
+
 component ProUsers(users []*arn.User, url string)
 	h1.page-title Supporters
 	UsersTabs(url)

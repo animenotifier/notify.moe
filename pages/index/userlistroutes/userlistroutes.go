@@ -17,4 +17,5 @@ func Register(l *layout.Layout) {
 	l.Page("/users/staff", users.Staff)
 	l.Page("/users/pro", users.Pro)
 	l.Page("/users/editors", users.Editors)
+	l.Page("/users/country/:country", users.ByCountry)
 }

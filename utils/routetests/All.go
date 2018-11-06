@@ -106,6 +106,10 @@ var routeTests = map[string][]string{
 		"/+Akyoto/recommended/anime",
 	},
 
+	"/users/country/:country": []string{
+		"/users/country/japan",
+	},
+
 	// Pages
 	"/anime/:id": []string{
 		"/anime/74y2cFiiR",

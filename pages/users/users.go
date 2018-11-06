@@ -2,6 +2,7 @@ package users
 
 import (
 	"sort"
+	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -15,23 +16,7 @@ func Active(ctx *aero.Context) string {
 		return user.HasAvatar() && user.HasNick() && user.IsActive()
 	})
 
-	followCount := arn.UserFollowerCountMap()
-
-	sort.Slice(users, func(i, j int) bool {
-		if users[i].HasAvatar() != users[j].HasAvatar() {
-			return users[i].HasAvatar()
-		}
-
-		followersA := followCount[users[i].ID]
-		followersB := followCount[users[j].ID]
-
-		if followersA == followersB {
-			return users[i].Nick < users[j].Nick
-		}
-
-		return followersA > followersB
-	})
-
+	arn.SortUsersFollowers(users)
 	return ctx.HTML(components.Users(users, ctx.URI()))
 }
 
@@ -169,6 +154,18 @@ func FFXIV(ctx *aero.Context) string {
 	}
 
 	return ctx.HTML(components.FinalFantasyXIVRankingList(users, ctx.URI()))
+}
+
+// ByCountry ...
+func ByCountry(ctx *aero.Context) string {
+	countryName := ctx.Get("country")
+
+	users := arn.FilterUsers(func(user *arn.User) bool {
+		return strings.ToLower(user.Location.CountryName) == countryName && user.Settings().Privacy.ShowLocation && user.HasAvatar() && user.HasNick() && user.IsActive()
+	})
+
+	arn.SortUsersFollowers(users)
+	return ctx.HTML(components.UsersByCountry(users, countryName))
 }
 
 // Staff ...
