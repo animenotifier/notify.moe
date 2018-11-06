@@ -7,14 +7,14 @@ component GlobalPaymentHistory(payments []*arn.PayPalPayment)
 		thead
 			tr.mountable
 				th User
-				th Amount
-				th Currency
+				th.history-price Amount
+				th.history-price Currency
 				th.history-date Date
 		tbody
 			each payment in payments
 				tr.mountable
 					td
 						a(href=payment.User().Link())= payment.User().Nick
-					td= payment.Amount
-					td= payment.Currency
-					td.utc-date(data-date=payment.Created)
+					td.history-price= payment.Amount
+					td.history-price= payment.Currency
+					td.history-date.utc-date(data-date=payment.Created)

@@ -1,10 +1,16 @@
 package admin
 
 import (
+	"runtime"
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+	"github.com/shirou/gopsutil/cpu"
+	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/host"
+	"github.com/shirou/gopsutil/mem"
 )
 
 // Get admin page.
@@ -16,32 +22,61 @@ func Get(ctx *aero.Context) string {
 	}
 
 	// // CPU
-	// cpuUsage := 0.0
-	// cpuUsages, err := cpu.Percent(1*time.Second, false)
+	cpuModel := ""
+	cpuInfo, err := cpu.Info()
 
-	// if err == nil {
-	// 	cpuUsage = cpuUsages[0]
-	// }
+	if err == nil {
+		cpuModel = cpuInfo[0].ModelName
+	}
 
-	// // Memory
-	// memUsage := 0.0
-	// memInfo, _ := mem.VirtualMemory()
+	cpuUsage := 0.0
+	cpuUsages, err := cpu.Percent(0, false)
 
-	// if err == nil {
-	// 	memUsage = memInfo.UsedPercent
-	// }
+	if err == nil {
+		cpuUsage = cpuUsages[0]
+	}
 
-	// // Disk
-	// diskUsage := 0.0
-	// diskInfo, err := disk.Usage("/")
+	// Memory
+	memUsage := 0.0
+	memTotal := uint64(0)
+	memInfo, err := mem.VirtualMemory()
 
-	// if err == nil {
-	// 	diskUsage = diskInfo.UsedPercent
-	// }
+	if err == nil {
+		memUsage = memInfo.UsedPercent
+		memTotal = memInfo.Total
+	}
+
+	// Disk
+	diskUsage := 0.0
+	diskTotal := uint64(0)
+	diskInfo, err := disk.Usage("/")
+
+	if err == nil {
+		diskUsage = diskInfo.UsedPercent
+		diskTotal = diskInfo.Total
+	}
+
+	// GC
+	memStats := &runtime.MemStats{}
+	runtime.ReadMemStats(memStats)
 
 	// Host
 	platform, family, platformVersion, _ := host.PlatformInformation()
 	kernelVersion, _ := host.KernelVersion()
+	kernelVersion = strings.Replace(kernelVersion, "-generic", "", 1)
 
-	return ctx.HTML(components.Admin(user, platform, family, platformVersion, kernelVersion))
+	return ctx.HTML(components.Admin(
+		user,
+		platform,
+		family,
+		platformVersion,
+		kernelVersion,
+		cpuUsage,
+		memUsage,
+		diskUsage,
+		cpuModel,
+		memTotal,
+		diskTotal,
+		memStats,
+	))
 }

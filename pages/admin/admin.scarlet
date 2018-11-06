@@ -1,0 +1,14 @@
+.admin
+	vertical
+	align-items center
+
+.admin-widget
+	width 100%
+	max-width 500px
+	margin-bottom content-padding
+
+.admin-info-key
+	opacity 0.6
+
+.admin-info-value
+	text-align right
