@@ -10,12 +10,3 @@
 	justify-content center
 	margin-bottom 1rem
 	font-size 0.9rem
-
-.quote-section
-	margin-top 1rem
-
-	:first-child
-		margin-top 0 !important
-
-.quote-section-name
-	font-weight bold

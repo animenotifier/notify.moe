@@ -78,12 +78,3 @@ const frontpage-bg-color = rgb(32, 32, 32)
 
 	:hover
 		background hsl(222, 67%, 47%)
-
-.screenshot
-	max-width 100%
-	border-radius ui-element-border-radius
-	box-shadow shadow-medium
-	margin-bottom 2rem
-
-	:hover
-		cursor pointer

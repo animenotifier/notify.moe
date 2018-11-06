@@ -22,27 +22,3 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, user *ar
 						
 						if validate.DateTime(episode.AiringDate.Start)
 							.episode-airing-date-start.utc-airing-date.no-tip(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
-			
-			//- table.episodes
-			//- 	tbody
-			//- 		each episode in episodes
-			//- 			tr.episode.mountable(data-mountable-type="episode")
-			//- 				td.episode-number
-			//- 					if episode.Number != -1
-			//- 						span= episode.Number
-			//- 				td.episode-title
-			//- 					if episode.Title.Japanese != ""
-			//- 						Japanese(episode.Title.Japanese)
-			//- 					else
-			//- 						span -
-			//- 				if user != nil && user.Location.CountryName != "Japan"
-			//- 					td.episode-actions
-			//- 						for name, link := range episode.Links
-			//- 							a(href=link, target="_blank", rel="noopener", title="Watch episode " + fmt.Sprint(episode.Number) + " on " + name)
-			//- 								RawIcon("eye")
-			//- 						//- a(href="https://translate.google.com/#ja/en/" + episode.Title.Japanese, target="_blank", rel="noopener")
-			//- 						//- 	RawIcon("google")
-			//- 				if validate.DateTime(episode.AiringDate.Start)
-			//- 					td.episode-airing-date-start.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
-			//- 				else
-			//- 					td.episode-airing-date-start

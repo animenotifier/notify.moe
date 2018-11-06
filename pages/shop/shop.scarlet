@@ -49,15 +49,6 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 .shop-item-price
 	// ...
 
-.shop-item-price-currency
-	margin-left 0.3rem
-	margin-right 0
-
-.shop-item-duration
-	opacity 0.5
-	text-align right
-	float right
-
 .shop-buttons
 	flex 0.3
 	white-space nowrap

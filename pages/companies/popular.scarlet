@@ -32,14 +32,8 @@ const popular-company-height = 246px
 	p
 		display inline
 
-.popular-company-icon
-	//
-
 .popular-company-name
 	clip-long-text
-
-.popular-company-anime-preview
-	flex 1
 
 > 800px
 	.popular-company

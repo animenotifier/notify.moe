@@ -1,24 +1,3 @@
-// .widgets
-// 	display grid
-// 	grid-template-columns 1fr
-
-// > 810px
-// 	.widgets
-// 		grid-template-columns repeat(2, 1fr)
-// 		grid-gap content-padding
-
-// > 1240px
-// 	.widgets
-// 		grid-template-columns repeat(3, 1fr)
-
-// > 1640px
-// 	.widgets
-// 		grid-template-columns repeat(4, 1fr)
-
-.widgets
-	horizontal-wrap
-	justify-content center
-
 .widget
 	vertical
 	flex 1
@@ -56,13 +35,6 @@
 	padding 0.5rem 1rem
 	width 100%
 	// max-width 700px
-
-.widget-ui-element-text
-	horizontal
-	clip-long-text
-	justify-content flex-start
-	align-items center
-	width 100%
 
 .widget-form
 	width 100%

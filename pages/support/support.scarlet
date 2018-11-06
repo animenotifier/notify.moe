@@ -18,8 +18,7 @@
 	color text-color
 
 .feature-cards-alternative-color
-	.feature-card-icon,
-	.payment-card-icon
+	.feature-card-icon
 		background feature-card-alternative-color
 
 .support-button-container

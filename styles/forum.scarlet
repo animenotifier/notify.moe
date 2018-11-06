@@ -1,6 +1,3 @@
-// .forum-header
-// 	text-align left
-// 	margin-bottom 1rem
 post-content-padding-y = 0.75rem
 
 .thread-link

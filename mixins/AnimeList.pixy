@@ -46,14 +46,3 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 
 			.anime-list-item-rating.tip(aria-label="O: " + utils.FormatRating(item.Rating.Overall) + " | S: " + utils.FormatRating(item.Rating.Story) + " | V: " + utils.FormatRating(item.Rating.Visuals) + " | M: " + utils.FormatRating(item.Rating.Soundtrack))
 				.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save")= utils.FormatRating(item.Rating.Overall)
-			
-			//- if item.Status == arn.AnimeListStatusCompleted
-			//- 	.anime-list-item-rating(title="Story rating")
-			//- 		span.rating-label S:
-			//- 		.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Story", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Story)
-			//- 	.anime-list-item-rating(title="Visuals rating")
-			//- 		span.rating-label V:
-			//- 		.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Visuals", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Visuals)
-			//- 	.anime-list-item-rating(title="Soundtrack rating")
-			//- 		span.rating-label M:
-			//- 		.action(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Soundtrack", data-type="number", data-trigger="focusout", data-action="save")= fmt.Sprintf("%.1f", item.Rating.Soundtrack)

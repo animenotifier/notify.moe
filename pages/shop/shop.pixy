@@ -19,15 +19,9 @@ component ShopTabs(user *arn.User)
 
 component ShopItem(item *arn.ShopItem, popularity int)
 	.shop-item.mountable(data-item-id=item.ID)
-		//- .shop-item-icon
-		//- 	Icon(item.Icon)
-		
 		.shop-item-info-column
 			h3.shop-item-name= item.Name
 			.shop-item-popularity= stringutils.Plural(popularity, "user") + " bought this"
-
-			//- span.shop-item-duration= " " + duration
-		//- .shop-item-description!= markdown.Render(item.Description)
 
 		.buttons.shop-buttons
 			button.shop-button-buy.action(data-item-id=item.ID, data-item-name=item.Name, data-price=item.Price, data-trigger="click", data-action="buyItem")

@@ -48,7 +48,3 @@ const episode-margin = 0.5rem
 	justify-content center
 	font-size 0.7rem
 	opacity 0.6
-
-< 320px
-	.episode-actions
-		display none

@@ -1,15 +1,3 @@
-// .anime-list-item-progress-edit
-// 	horizontal-wrap
-// 	justify-content space-between
-// 	width 100%
-
-// .anime-list-item-episodes-edit
-// 	flex 1
-// 	margin-right content-padding
-
-// .anime-list-item-status-edit
-// 	flex-basis 50%
-
 .anime-list-item-view
 	vertical
 	width 100%
@@ -21,35 +9,6 @@
 	display grid
 	grid-template-columns repeat(auto-fill, calc(50% - content-padding / 2))
 	grid-gap content-padding
-
-// .anime-list-item-cover
-// 	display none
-
-// > 1200px
-// 	.anime-list-item-cover
-// 		display block
-// 		position absolute
-// 		left content-padding
-// 		top content-padding
-
-// 		&.mounted
-// 			opacity 0 !important
-
-// 			:hover
-// 				opacity 1 !important
-
-// 		img
-// 			width anime-image-medium-width
-// 			height anime-image-medium-height
-
-// 		// .raw-icon
-// 		// 	font-size 2.5rem
-// 		// 	position absolute
-// 		// 	left 0
-// 		// 	top calc(anime-image-medium-height / 2)
-// 		// 	transform translateY(-50%) translateX(-50%)
-// 		// 	opacity 0.85
-// 		// 	color rgb(215, 38, 15)
 
 .anime-list-item-rating-edit
 	horizontal

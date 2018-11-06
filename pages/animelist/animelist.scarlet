@@ -89,16 +89,8 @@
 	flex-shrink 1
 	margin-left 45px
 
-// .rating-label
-// 	opacity 0.5
-// 	margin-right 0.2rem
-
 .anime-list-item-actions
 	display none !important
-
-// 	// Beautify icon alignment
-// 	.raw-icon
-// 		margin-bottom -4px
 
 > 740px
 	.anime-list-item-actions
@@ -113,9 +105,6 @@
 	display none !important
 
 > 700px
-	.anime-list-title
-		display block
-
 	.anime-list-item-airing-date
 		display flex !important
 		text-align right

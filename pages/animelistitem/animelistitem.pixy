@@ -41,7 +41,3 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			Icon("trash")
 			span Remove from collection
 	
-	//- a.anime-list-item-cover.mountable(href=anime.Link(), title="View anime")
-	//- 	img.anime-cover-image.lazy(data-src=anime.ImageLink("medium"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
-	//- 	//- RawIcon("arrow-left")
-	

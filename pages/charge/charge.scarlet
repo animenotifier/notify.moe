@@ -1,7 +1,3 @@
-.shop-video
-	max-width 100%
-	margin calc(content-padding / 2) auto
-
 .paypal-logo
 	width 100%
 	max-width 300px

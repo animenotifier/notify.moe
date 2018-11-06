@@ -1,5 +1,2 @@
-.buttons-vertical
-	width 100%
-
 .import-buttons
 	margin-bottom content-padding
