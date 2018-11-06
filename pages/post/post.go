@@ -19,5 +19,6 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Post not found", err)
 	}
 
+	ctx.Data = getOpenGraph(ctx, post)
 	return ctx.HTML(components.Post(post, user))
 }
