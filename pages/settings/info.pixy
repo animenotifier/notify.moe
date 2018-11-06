@@ -6,7 +6,7 @@ component SettingsInfo(user *arn.User)
 	.settings
 		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
-				Icon("user-circle")
+				Icon("info-circle")
 				span Info
 			
 			InputSelection("Gender", user.Gender, "Gender", "Your gender", arn.DataLists["genders"])
