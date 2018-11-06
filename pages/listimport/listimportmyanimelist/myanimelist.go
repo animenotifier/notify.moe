@@ -49,21 +49,19 @@ func Finish(ctx *aero.Context) string {
 			continue
 		}
 
-		rating, _ := strconv.ParseFloat(match.MyAnimeListItem.MyScore, 64)
-		episodesWatched, _ := strconv.Atoi(match.MyAnimeListItem.MyWatchedEpisodes)
-		rewatchCount, convErr := strconv.Atoi(match.MyAnimeListItem.MyRewatching)
+		rewatchCount := 0
 
-		if convErr != nil {
-			rewatchCount = 0
+		if match.MyAnimeListItem.IsRewatching {
+			rewatchCount = 1
 		}
 
 		item := &arn.AnimeListItem{
 			AnimeID:  match.ARNAnime.ID,
-			Status:   arn.MyAnimeListStatusToARNStatus(match.MyAnimeListItem.MyStatus),
-			Episodes: episodesWatched,
+			Status:   arn.MyAnimeListStatusToARNStatus(match.MyAnimeListItem.Status),
+			Episodes: match.MyAnimeListItem.NumWatchedEpisodes,
 			Notes:    "",
 			Rating: arn.AnimeListItemRating{
-				Overall: rating,
+				Overall: float64(match.MyAnimeListItem.Score),
 			},
 			RewatchCount: rewatchCount,
 			Created:      arn.DateTimeUTC(),
@@ -98,14 +96,14 @@ func getMatches(ctx *aero.Context) ([]*arn.MyAnimeListMatch, string) {
 }
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.
-func findAllMatches(animeList *mal.AnimeList) []*arn.MyAnimeListMatch {
+func findAllMatches(animeList mal.AnimeList) []*arn.MyAnimeListMatch {
 	finder := arn.NewAnimeFinder("myanimelist/anime")
 	matches := []*arn.MyAnimeListMatch{}
 
-	for _, item := range animeList.Items {
+	for _, item := range animeList {
 		matches = append(matches, &arn.MyAnimeListMatch{
 			MyAnimeListItem: item,
-			ARNAnime:        finder.GetAnime(item.AnimeID),
+			ARNAnime:        finder.GetAnime(strconv.Itoa(item.AnimeID)),
 		})
 	}
 

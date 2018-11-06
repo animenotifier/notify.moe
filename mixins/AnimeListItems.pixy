@@ -1,6 +1,9 @@
 component AnimeListItems(animeListItems []*arn.AnimeListItem, nextIndex int, viewUser *arn.User, user *arn.User)
 	if len(animeListItems) == 0
-		p.no-data.mountable= viewUser.Nick + " hasn't added any anime to this list yet."
+		if user != nil && user.ID == viewUser.ID
+			p.no-data.mountable= "You haven't added any anime to this list yet."
+		else
+			p.no-data.mountable= viewUser.Nick + " hasn't added any anime to this list yet."
 	else
 		.anime-list-container
 			AnimeList(animeListItems, nextIndex, viewUser, user)
