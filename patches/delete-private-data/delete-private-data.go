@@ -30,8 +30,8 @@ func main() {
 		user.IP = ""
 		user.Accounts.Facebook.ID = ""
 		user.Accounts.Google.ID = ""
-		user.AgeRange = arn.UserAgeRange{}
 		user.Location = &arn.Location{}
+		user.BirthDay = ""
 
 		user.PushSubscriptions().Items = []*arn.PushSubscription{}
 		user.PushSubscriptions().Save()

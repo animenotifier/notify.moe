@@ -1,13 +1,13 @@
-component SettingsFormatting(user *arn.User)
+component SettingsStyle(user *arn.User)
 	SettingsTabs
 
-	h1.page-title Formatting settings
+	h1.page-title Style settings
 
 	.settings
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
 				Icon("font")
-				span Formatting
+				span Style
 
 			.widget-section
 				label(for="Theme")= "Theme:"

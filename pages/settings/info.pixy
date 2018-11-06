@@ -1,0 +1,27 @@
+component SettingsInfo(user *arn.User)
+	SettingsTabs
+
+	h1.page-title Info settings
+
+	.settings
+		.widget.mountable(data-api="/api/user/" + user.ID)
+			h3.widget-title
+				Icon("user-circle")
+				span Info
+			
+			InputSelection("Gender", user.Gender, "Gender", "Your gender", arn.DataLists["genders"])
+			InputText("BirthDay", user.BirthDay, "Birthday", "YYYY-MM-DD")
+			InputText("Website", user.Website, "Website", "Your homepage")
+
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("user-secret")
+				span Privacy
+			
+			InputBool("Privacy.ShowGender", user.Settings().Privacy.ShowGender, "Show gender", "Shows your gender on the profile page")
+			InputBool("Privacy.ShowAge", user.Settings().Privacy.ShowAge, "Show age", "Shows your age on the profile page")
+			InputBool("Privacy.ShowLocation", user.Settings().Privacy.ShowLocation, "Show location", "Shows your location on the profile page")
+
+			.footer
+				p Can only be made visible to logged in members.
+		

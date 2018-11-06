@@ -10,9 +10,8 @@ component SettingsPersonal(user *arn.User)
 				span Personal
 
 			InputText("Nick", user.Nick, "Username", "Your username on notify.moe")
-			InputText("Website", user.Website, "Website", "Your homepage")
-			InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us about yourself (Markdown is allowed)")
-			
+			InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us about yourself")
+
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
 				Icon("camera")

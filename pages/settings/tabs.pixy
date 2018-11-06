@@ -1,8 +1,8 @@
 component SettingsTabs
 	.tabs
 		Tab("Personal", "user", "/settings")
+		Tab("Info", "info-circle", "/settings/info")
 		Tab("Accounts", "cubes", "/settings/accounts")
 		Tab("Notifications", "bell", "/settings/notifications")
-		Tab("Apps", "puzzle-piece", "/settings/apps")
-		Tab("Formatting", "font", "/settings/formatting")
+		Tab("Style", "font", "/settings/style")
 		Tab("Extras", "star", "/settings/extras")
