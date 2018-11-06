@@ -21,7 +21,7 @@ func BenchmarkRenderThread(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			components.Thread(thread, replies, nil)
+			components.Thread(thread, nil)
 		}
 	})
 }
