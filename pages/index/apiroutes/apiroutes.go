@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/animenotifier/notify.moe/pages/post"
+	"github.com/animenotifier/notify.moe/pages/sse"
 	"github.com/animenotifier/notify.moe/pages/thread"
 
 	"github.com/aerogo/aero"
@@ -41,6 +42,9 @@ func Register(l *layout.Layout, app *aero.Application) {
 	app.Get("/api/random/soundtrack", soundtrack.Random)
 	app.Get("/api/next/soundtrack", soundtrack.Next)
 	app.Get("/api/character/:id/ranking", character.Ranking)
+
+	// Live updates
+	app.Get("/api/sse/events", sse.Events)
 
 	// Thread
 	app.Get("/api/thread/:id/reply/ui", thread.ReplyUI)

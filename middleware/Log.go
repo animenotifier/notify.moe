@@ -76,7 +76,7 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 
 	// Notify us about long requests.
 	// However ignore requests under /auth/ because those depend on 3rd party servers.
-	if responseTime >= 300*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") && !strings.HasPrefix(ctx.URI(), "/sitemap/") {
+	if responseTime >= 300*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") && !strings.HasPrefix(ctx.URI(), "/sitemap/") && !strings.HasPrefix(ctx.URI(), "/api/sse/") {
 		errorLog.Error("Long response time", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
 	}
 }

@@ -9,6 +9,7 @@ import Analytics from "./Analytics"
 import SideBar from "./SideBar"
 import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
+import ServerEvents from "./ServerEvents"
 import { checkNewVersionDelayed } from "./NewVersionCheck"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, canUseWebP, requestIdleCallback, swapElements, delay, findAllInside } from "./Utils"
@@ -35,6 +36,7 @@ export default class AnimeNotifier {
 	diffCompletedForCurrentPath: boolean
 	lastReloadContentPath: string
 	currentSoundTrackId: string
+	serverEvents: ServerEvents
 
 	constructor(app: Application) {
 		this.app = app
@@ -233,6 +235,11 @@ export default class AnimeNotifier {
 			let finalHeight = window.outerHeight < minHeight ? minHeight : window.outerHeight
 
 			window.resizeTo(finalWidth, finalHeight)
+		}
+
+		// Server sent events
+		if(this.user && EventSource) {
+			this.serverEvents = new ServerEvents()
 		}
 
 		// // Download popular anime titles for the search
