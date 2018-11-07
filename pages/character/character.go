@@ -75,7 +75,14 @@ func Get(ctx *aero.Context) string {
 		bRelevance := characterAppearances[relevantCharacters[j].ID]
 
 		if aRelevance == bRelevance {
-			return relevantCharacters[i].Name.Canonical < relevantCharacters[j].Name.Canonical
+			aLikes := len(relevantCharacters[i].Likes)
+			bLikes := len(relevantCharacters[j].Likes)
+
+			if aLikes == bLikes {
+				return relevantCharacters[i].Name.Canonical < relevantCharacters[j].Name.Canonical
+			}
+
+			return aLikes > bLikes
 		}
 
 		return aRelevance > bRelevance
