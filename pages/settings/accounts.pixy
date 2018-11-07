@@ -10,8 +10,9 @@ component SettingsAccounts(user *arn.User)
 				span Accounts
 
 			InputText("Accounts.AniList.Nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
-			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
 			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
+			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
+			InputText("Accounts.Discord.Nick", user.Accounts.Discord.Nick, "Discord", "Your username on Discord")
 		
 		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
