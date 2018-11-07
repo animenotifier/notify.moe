@@ -4,8 +4,17 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/animenotifier/notify.moe/components/css"
+	"github.com/animenotifier/notify.moe/components/js"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/utils"
+)
+
+var (
+	scriptsETag = aero.ETagString(js.Bundle())
+	stylesETag  = aero.ETagString(css.Bundle())
+	streams     = map[string][]*aero.EventStream{}
 )
 
 // Events streams server events to the client.
@@ -17,26 +26,47 @@ func Events(ctx *aero.Context) string {
 	}
 
 	fmt.Println(user.Nick, "receiving live events")
-
-	events := make(chan *aero.Event)
-	disconnected := make(chan struct{})
+	stream := aero.NewEventStream()
+	user.AddEventStream(stream)
 
 	go func() {
 		defer fmt.Println(user.Nick, "disconnected, stop sending events")
 
+		stream.Events <- &aero.Event{
+			Name: "etag",
+			Data: struct {
+				URL  string `json:"url"`
+				ETag string `json:"etag"`
+			}{
+				URL:  "/scripts",
+				ETag: scriptsETag,
+			},
+		}
+
+		stream.Events <- &aero.Event{
+			Name: "etag",
+			Data: struct {
+				URL  string `json:"url"`
+				ETag string `json:"etag"`
+			}{
+				URL:  "/styles",
+				ETag: stylesETag,
+			},
+		}
+
 		for {
 			select {
-			case <-disconnected:
-				close(events)
+			case <-stream.Closed:
+				user.RemoveEventStream(stream)
 				return
 
 				// case <-time.After(10 * time.Second):
-				// 	events <- &aero.Event{
+				// 	stream.Events <- &aero.Event{
 				// 		Name: "ping",
 				// 	}
 			}
 		}
 	}()
 
-	return ctx.EventStream(events, disconnected)
+	return ctx.EventStream(stream)
 }

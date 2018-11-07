@@ -31,7 +31,6 @@ export default class ServiceWorkerManager {
 
 			// A reloadContent call should never trigger another reload
 			if(this.arn.app.currentPath === this.arn.lastReloadContentPath) {
-				console.log("reload finished.")
 				this.arn.lastReloadContentPath = ""
 				return
 			}
@@ -68,32 +67,27 @@ export default class ServiceWorkerManager {
 	}
 
 	onMessage(evt: MessageEvent) {
-		let message = JSON.parse(evt.data)
+		// let message = JSON.parse(evt.data)
 
-		switch(message.type) {
-			case "new notification":
-			case "notifications marked as seen":
-				this.arn.notificationManager.update()
-				break
+		// switch(message.type) {
+		// 	case "new content":
+		// 		if(message.url.includes("/_/")) {
+		// 			// Content reload
+		// 			this.arn.contentLoadedActions.then(() => {
+		// 				this.arn.reloadContent(true)
+		// 			})
+		// 		} else {
+		// 			// Full page reload
+		// 			this.arn.contentLoadedActions.then(() => {
+		// 				this.arn.reloadPage()
+		// 			})
+		// 		}
 
-			case "new content":
-				if(message.url.includes("/_/")) {
-					// Content reload
-					this.arn.contentLoadedActions.then(() => {
-						this.arn.reloadContent(true)
-					})
-				} else {
-					// Full page reload
-					this.arn.contentLoadedActions.then(() => {
-						this.arn.reloadPage()
-					})
-				}
+		// 		break
 
-				break
-
-			// case "offline":
-			// 	this.arn.statusMessage.showError("You are viewing an offline version of the site now.")
-			// 	break
-		}
+		// 	// case "offline":
+		// 	// 	this.arn.statusMessage.showError("You are viewing an offline version of the site now.")
+		// 	// 	break
+		// }
 	}
 }

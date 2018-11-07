@@ -16,7 +16,11 @@ export default class NotificationManager {
 		})
 
 		let body = await response.text()
-		this.unseen = parseInt(body)
+		this.setCounter(parseInt(body))
+	}
+
+	setCounter(unseen: number) {
+		this.unseen = unseen
 
 		if(isNaN(this.unseen)) {
 			this.unseen = 0

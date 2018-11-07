@@ -38,6 +38,12 @@ func MarkNotificationsAsSeen(ctx *aero.Context) string {
 		notification.Save()
 	}
 
+	// Update the counter on all clients
+	user.BroadcastEvent(&aero.Event{
+		Name: "notificationCount",
+		Data: 0,
+	})
+
 	return "ok"
 }
 

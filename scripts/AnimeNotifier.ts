@@ -10,7 +10,6 @@ import SideBar from "./SideBar"
 import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
 import ServerEvents from "./ServerEvents"
-import { checkNewVersionDelayed } from "./NewVersionCheck"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, canUseWebP, requestIdleCallback, swapElements, delay, findAllInside } from "./Utils"
 import * as actions from "./Actions"
@@ -209,17 +208,10 @@ export default class AnimeNotifier {
 		// Notification manager
 		if(this.user) {
 			this.notificationManager.update()
-
-			// Periodically check notifications
-			setInterval(() => this.notificationManager.update(), 300000)
 		}
 
 		// Bind unload event
 		window.addEventListener("beforeunload", this.onBeforeUnload.bind(this))
-
-		// Periodically check etags of scripts and styles to let the user know about page updates
-		checkNewVersionDelayed("/scripts", this.statusMessage)
-		checkNewVersionDelayed("/styles", this.statusMessage)
 
 		// Show microphone icon if speech input is available
 		if(window["SpeechRecognition"] || window["webkitSpeechRecognition"]) {
@@ -239,7 +231,7 @@ export default class AnimeNotifier {
 
 		// Server sent events
 		if(this.user && EventSource) {
-			this.serverEvents = new ServerEvents()
+			this.serverEvents = new ServerEvents(this)
 		}
 
 		// // Download popular anime titles for the search
