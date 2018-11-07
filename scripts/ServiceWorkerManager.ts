@@ -67,27 +67,31 @@ export default class ServiceWorkerManager {
 	}
 
 	onMessage(evt: MessageEvent) {
-		// let message = JSON.parse(evt.data)
+		let message = JSON.parse(evt.data)
 
-		// switch(message.type) {
-		// 	case "new content":
-		// 		if(message.url.includes("/_/")) {
-		// 			// Content reload
-		// 			this.arn.contentLoadedActions.then(() => {
-		// 				this.arn.reloadContent(true)
-		// 			})
-		// 		} else {
-		// 			// Full page reload
-		// 			this.arn.contentLoadedActions.then(() => {
-		// 				this.arn.reloadPage()
-		// 			})
-		// 		}
+		switch(message.type) {
+			case "new notification":
+				this.arn.notificationManager.update()
+				break
 
-		// 		break
+			// case "new content":
+			// 	if(message.url.includes("/_/")) {
+			// 		// Content reload
+			// 		this.arn.contentLoadedActions.then(() => {
+			// 			this.arn.reloadContent(true)
+			// 		})
+			// 	} else {
+			// 		// Full page reload
+			// 		this.arn.contentLoadedActions.then(() => {
+			// 			this.arn.reloadPage()
+			// 		})
+			// 	}
 
-		// 	// case "offline":
-		// 	// 	this.arn.statusMessage.showError("You are viewing an offline version of the site now.")
-		// 	// 	break
-		// }
+			// 	break
+
+			// case "offline":
+			// 	this.arn.statusMessage.showError("You are viewing an offline version of the site now.")
+			// 	break
+		}
 	}
 }
