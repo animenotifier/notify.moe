@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
@@ -93,26 +94,38 @@ func syncCharacter(character *arn.Character, malID string) {
 		return
 	}
 
-	// Skip manually created characters
-	if character.CreatedBy != "" {
-		return
-	}
-
 	malCharacter := obj.(*mal.Character)
-
-	description, attributes := parseCharacterDescription(malCharacter.Description)
-	character.Description = description
-	character.Attributes = attributes
-	character.Spoilers = []arn.Spoiler{}
-
-	for _, spoilerText := range malCharacter.Spoilers {
-		character.Spoilers = append(character.Spoilers, arn.Spoiler{
-			Text: spoilerText,
-		})
-	}
 
 	if character.Name.Japanese == "" && malCharacter.JapaneseName != "" {
 		character.Name.Japanese = malCharacter.JapaneseName
+	}
+
+	// Unless it's a manually created or edited character,
+	// update the description.
+	if character.CreatedBy == "" && character.EditedBy == "" {
+		description, attributes := parseCharacterDescription(malCharacter.Description)
+		character.Name.Canonical = malCharacter.Name
+		character.Description = description
+		character.Attributes = attributes
+		character.Spoilers = []arn.Spoiler{}
+
+		for _, spoilerText := range malCharacter.Spoilers {
+			if !strings.Contains(strings.TrimSpace(spoilerText), "\n\n") {
+				character.Spoilers = append(character.Spoilers, arn.Spoiler{
+					Text: spoilerText,
+				})
+
+				continue
+			}
+
+			paragraphs := strings.Split(spoilerText, "\n\n")
+
+			for _, paragraph := range paragraphs {
+				character.Spoilers = append(character.Spoilers, arn.Spoiler{
+					Text: paragraph,
+				})
+			}
+		}
 	}
 
 	// Save in database
