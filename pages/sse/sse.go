@@ -14,7 +14,6 @@ import (
 var (
 	scriptsETag = aero.ETagString(js.Bundle())
 	stylesETag  = aero.ETagString(css.Bundle())
-	streams     = map[string][]*aero.EventStream{}
 )
 
 // Events streams server events to the client.
@@ -31,6 +30,7 @@ func Events(ctx *aero.Context) string {
 
 	go func() {
 		defer fmt.Println(user.Nick, "disconnected, stop sending events")
+		defer user.RemoveEventStream(stream)
 
 		stream.Events <- &aero.Event{
 			Name: "etag",
@@ -54,18 +54,7 @@ func Events(ctx *aero.Context) string {
 			},
 		}
 
-		for {
-			select {
-			case <-stream.Closed:
-				user.RemoveEventStream(stream)
-				return
-
-				// case <-time.After(10 * time.Second):
-				// 	stream.Events <- &aero.Event{
-				// 		Name: "ping",
-				// 	}
-			}
-		}
+		<-stream.Closed
 	}()
 
 	return ctx.EventStream(stream)

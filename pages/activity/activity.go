@@ -32,12 +32,7 @@ func Get(ctx *aero.Context) string {
 		}
 
 		_, isPostable := obj.(arn.Postable)
-
-		if !isPostable {
-			return false
-		}
-
-		return true
+		return isPostable
 	})
 
 	arn.SortEditLogEntriesLatestFirst(entries)
