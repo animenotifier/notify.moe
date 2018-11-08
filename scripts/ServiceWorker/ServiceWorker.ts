@@ -123,6 +123,14 @@ class MyServiceWorker {
 			return
 		}
 
+		// Video files are always loaded over the network.
+		// We are defaulting to the normal browser handler here
+		// so we can see the HTTP 206 partial responses in DevTools
+		// and it also seems to have slightly smoother video playback.
+		if(request.url.includes("/videos/")) {
+			return
+		}
+
 		return evt.respondWith(fetch(request))
 
 		// // Exclude certain URLs from being cached.
