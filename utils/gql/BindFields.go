@@ -177,37 +177,37 @@ func extractTag(tag reflect.StructTag) string {
 	return t
 }
 
-// BindArg is a lazy way of binding args
-func BindArg(obj interface{}, tags ...string) graphql.FieldConfigArgument {
-	v := reflect.Indirect(reflect.ValueOf(obj))
-	var config = make(graphql.FieldConfigArgument)
+// // BindArg is a lazy way of binding args
+// func BindArg(obj interface{}, tags ...string) graphql.FieldConfigArgument {
+// 	v := reflect.Indirect(reflect.ValueOf(obj))
+// 	var config = make(graphql.FieldConfigArgument)
 
-	for i := 0; i < v.NumField(); i++ {
-		field := v.Type().Field(i)
-		mytag := extractTag(field.Tag)
+// 	for i := 0; i < v.NumField(); i++ {
+// 		field := v.Type().Field(i)
+// 		mytag := extractTag(field.Tag)
 
-		if inArray(tags, mytag) {
-			config[mytag] = &graphql.ArgumentConfig{
-				Type: getGraphType(field.Type),
-			}
-		}
-	}
+// 		if inArray(tags, mytag) {
+// 			config[mytag] = &graphql.ArgumentConfig{
+// 				Type: getGraphType(field.Type),
+// 			}
+// 		}
+// 	}
 
-	return config
-}
+// 	return config
+// }
 
-func inArray(slice interface{}, item interface{}) bool {
-	s := reflect.ValueOf(slice)
+// func inArray(slice interface{}, item interface{}) bool {
+// 	s := reflect.ValueOf(slice)
 
-	if s.Kind() != reflect.Slice {
-		panic("inArray() given a non-slice type")
-	}
+// 	if s.Kind() != reflect.Slice {
+// 		panic("inArray() given a non-slice type")
+// 	}
 
-	for i := 0; i < s.Len(); i++ {
-		if reflect.DeepEqual(item, s.Index(i).Interface()) {
-			return true
-		}
-	}
+// 	for i := 0; i < s.Len(); i++ {
+// 		if reflect.DeepEqual(item, s.Index(i).Interface()) {
+// 			return true
+// 		}
+// 	}
 
-	return false
-}
+// 	return false
+// }
