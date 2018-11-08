@@ -19,7 +19,7 @@ func GetFollowers(ctx *aero.Context) string {
 	}
 
 	followers := viewUser.Followers()
-	arn.SortUsersLastSeen(followers)
+	arn.SortUsersLastSeenFirst(followers)
 
 	return ctx.HTML(components.ProfileFollowers(followers, viewUser, utils.GetUser(ctx), ctx.URI()))
 

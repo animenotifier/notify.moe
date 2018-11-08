@@ -51,7 +51,7 @@ func Get(ctx *aero.Context) string {
 			}
 		}
 
-		arn.SortUsersLastSeen(friends)
+		arn.SortUsersLastSeenFirst(friends)
 	}
 
 	// Sort relations by start date
