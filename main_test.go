@@ -9,6 +9,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils/routetests"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestRoutes(t *testing.T) {
@@ -39,6 +40,7 @@ func TestSoundTrackPages(t *testing.T) {
 
 	for soundtrack := range arn.StreamSoundTracks() {
 		testRoute(t, app, soundtrack.Link())
+		assert.NotNil(t, soundtrack.Creator())
 	}
 }
 
@@ -48,6 +50,7 @@ func TestAMVPages(t *testing.T) {
 
 	for amv := range arn.StreamAMVs() {
 		testRoute(t, app, amv.Link())
+		assert.NotNil(t, amv.Creator())
 	}
 }
 
@@ -66,6 +69,7 @@ func TestThreadPages(t *testing.T) {
 
 	for thread := range arn.StreamThreads() {
 		testRoute(t, app, thread.Link())
+		assert.NotNil(t, thread.Creator())
 	}
 }
 
@@ -75,6 +79,7 @@ func TestPostPages(t *testing.T) {
 
 	for post := range arn.StreamPosts() {
 		testRoute(t, app, post.Link())
+		assert.NotNil(t, post.Creator())
 	}
 }
 
@@ -84,6 +89,7 @@ func TestQuotePages(t *testing.T) {
 
 	for quote := range arn.StreamQuotes() {
 		testRoute(t, app, quote.Link())
+		assert.NotNil(t, quote.Creator())
 	}
 }
 
