@@ -289,7 +289,12 @@ export default class AudioPlayer {
 		this.trackLink.href = "/soundtrack/" + track.id
 		this.trackLink.textContent = track.title.canonical || track.title.native
 
+		// Find anime ID by looking at the tags
 		let animeId = ""
+
+		if(!track.tags) {
+			return
+		}
 
 		for(let tag of (track.tags as string[])) {
 			if(tag.startsWith("anime:")) {
@@ -298,16 +303,18 @@ export default class AudioPlayer {
 			}
 		}
 
-		// Set anime info
-		if(animeId !== "") {
-			this.animeInfo.classList.remove("hidden")
-			let animeResponse = await fetch("/api/anime/" + animeId)
-			let anime = await animeResponse.json() as Anime
-			this.animeLink.title = anime.title.canonical
-			this.animeLink.href = "/anime/" + anime.id
-			this.animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + ".jpg?" + anime.image.lastModified.toString()
-			this.animeImage.classList.remove("hidden")
-			this.animeImage["became visible"]()
+		if(animeId === "") {
+			return
 		}
+
+		// Set anime info
+		this.animeInfo.classList.remove("hidden")
+		let animeResponse = await fetch("/api/anime/" + animeId)
+		let anime = await animeResponse.json() as Anime
+		this.animeLink.title = anime.title.canonical
+		this.animeLink.href = "/anime/" + anime.id
+		this.animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + ".jpg?" + anime.image.lastModified.toString()
+		this.animeImage.classList.remove("hidden")
+		this.animeImage["became visible"]()
 	}
 }
