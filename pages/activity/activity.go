@@ -2,7 +2,6 @@ package activity
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -13,33 +12,26 @@ const maxActivitiesPerPage = 40
 func Get(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 
-	// posts := arn.AllPosts()
-	// arn.SortPostsLatestFirst(posts)
+	// entries := arn.FilterEditLogEntries(func(entry *arn.EditLogEntry) bool {
+	// 	if entry.Action != "create" {
+	// 		return false
+	// 	}
 
-	// posts := arn.FilterPosts(func(post *arn.Post) bool {
-	// 	return post.
+	// 	obj := entry.Object()
+
+	// 	if obj == nil {
+	// 		return false
+	// 	}
+
+	// 	_, isPostable := obj.(arn.Postable)
+	// 	return isPostable
 	// })
 
-	entries := arn.FilterEditLogEntries(func(entry *arn.EditLogEntry) bool {
-		if entry.Action != "create" {
-			return false
-		}
+	// arn.SortEditLogEntriesLatestFirst(entries)
 
-		obj := entry.Object()
+	// if len(entries) > maxActivitiesPerPage {
+	// 	entries = entries[:maxActivitiesPerPage]
+	// }
 
-		if obj == nil {
-			return false
-		}
-
-		_, isPostable := obj.(arn.Postable)
-		return isPostable
-	})
-
-	arn.SortEditLogEntriesLatestFirst(entries)
-
-	if len(entries) > maxActivitiesPerPage {
-		entries = entries[:maxActivitiesPerPage]
-	}
-
-	return ctx.HTML(components.ActivityFeed(entries, user))
+	return ctx.HTML(components.ActivityFeed(nil, user))
 }

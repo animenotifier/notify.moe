@@ -1,12 +1,22 @@
-component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
+component ActivityFeed(entries []*arn.Activity, user *arn.User)
 	h1 Activity
 
 	.activities
 		each entry in entries
-			ActivityPost(entry.Object().(arn.Postable), user)
+			Activity(entry, user)
 
-component ActivityPost(post arn.Postable, user *arn.User)
-	if post.Parent() != nil
-		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), html.EscapeString(post.Parent().TitleByUser(user))), "")
-	else
-		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Link(), html.EscapeString(post.TitleByUser(user))), "")
+component Activity(activity *arn.Activity, user *arn.User)
+	h1= activity.Text()
+
+//- component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
+//- 	h1 Activity
+
+//- 	.activities
+//- 		each entry in entries
+//- 			ActivityPost(entry.Object().(arn.Postable), user)
+
+//- component ActivityPost(post arn.Postable, user *arn.User)
+//- 	if post.Parent() != nil
+//- 		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), html.EscapeString(post.Parent().TitleByUser(user))), "")
+//- 	else
+//- 		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Link(), html.EscapeString(post.TitleByUser(user))), "")
