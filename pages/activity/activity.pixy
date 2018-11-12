@@ -1,22 +1,29 @@
-component ActivityFeed(entries []arn.Activity, user *arn.User)
+component ActivityFeed(entries []arn.Activity, nextIndex int, user *arn.User)
 	h1.page-title Activity
 
 	.tabs
 		Tab("Global", "globe", "/activity")
 		Tab("Followed", "user-plus", "/activity/followed")
 
-	.activities
-		if len(entries) == 0
-			p.no-data.mountable No activity here.
-		else
-			each entry in entries
-				Activity(entry, user)
+	if len(entries) == 0
+		p.no-data.mountable No activity here.
+	else
+		#load-more-target.activities
+			ActivitiesScrollable(entries, user)
+	
+	if nextIndex != -1
+		.buttons
+			LoadMore(nextIndex)
 	
 	#load-new-activities(data-count="0")
 		.buttons
 			button.page-main-action.action(data-action="reloadContent", data-trigger="click")
 				Icon("refresh")
 				span#load-new-activities-text 0 new activities
+
+component ActivitiesScrollable(entries []arn.Activity, user *arn.User)
+	each entry in entries
+		Activity(entry, user)
 
 component Activity(activity arn.Activity, user *arn.User)
 	.activity.post-parent.mountable(id=fmt.Sprintf("activity-%s", activity.GetID()))
@@ -31,7 +38,7 @@ component Activity(activity arn.Activity, user *arn.User)
 						ActivityConsumeAnimeTitle(activity.(*arn.ActivityConsumeAnime), user)
 				
 				if user != nil && user.ID == activity.GetCreatedBy() && activity.Type() == "ActivityConsumeAnime"
-					button.post-delete.activity-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity", data-api=fmt.Sprintf("/api/%s/%s", strings.ToLower(activity.Type()), activity.GetID()))
+					button.activity-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity", data-api=fmt.Sprintf("/api/%s/%s", strings.ToLower(activity.Type()), activity.GetID()))
 						RawIcon("trash")
 				
 				.activity-date.utc-date(data-date=activity.GetCreated())

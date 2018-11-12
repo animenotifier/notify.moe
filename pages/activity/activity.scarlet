@@ -31,6 +31,7 @@
 	height auto
 	margin-right 0.5rem
 	opacity 0
+	color hsla(text-color-h, text-color-s, text-color-l, 0.5)
 
 	:hover
 		color link-hover-color

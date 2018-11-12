@@ -3,24 +3,21 @@ package activity
 import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
-	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
-
-const maxActivitiesPerPage = 40
 
 // Global activity page.
 func Global(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	activities := fetchActivities(user, false)
-	return ctx.HTML(components.ActivityFeed(activities, user))
+	return render(ctx, activities)
 }
 
 // Followed activity page.
 func Followed(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	activities := fetchActivities(user, true)
-	return ctx.HTML(components.ActivityFeed(activities, user))
+	return render(ctx, activities)
 }
 
 // fetchActivities filters the activities by the given filters.
@@ -55,10 +52,5 @@ func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
 	})
 
 	arn.SortActivitiesLatestFirst(activities)
-
-	if len(activities) > maxActivitiesPerPage {
-		activities = activities[:maxActivitiesPerPage]
-	}
-
 	return activities
 }

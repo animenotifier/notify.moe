@@ -21,7 +21,9 @@ func Register(l *layout.Layout) {
 
 	// Activity
 	l.Page("/activity", activity.Global)
+	l.Page("/activity/from/:index", activity.Global)
 	l.Page("/activity/followed", activity.Followed)
+	l.Page("/activity/followed/from/:index", activity.Followed)
 
 	// Calendar
 	l.Page("/calendar", calendar.Get)
