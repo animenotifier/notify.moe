@@ -14,11 +14,24 @@ component Activity(activity arn.Activity, user *arn.User)
 				.activity-parent
 					if activity.Type() == "ActivityCreate"
 						ActivityCreateTitle(activity.(*arn.ActivityCreate), user)
+					else if activity.Type() == "ActivityConsumeAnime"
+						ActivityConsumeAnimeTitle(activity.(*arn.ActivityConsumeAnime), user)
 				
 				.activity-date.utc-date(data-date=activity.GetCreated())
 			
 			if activity.Type() == "ActivityCreate"
 				ActivityCreateText(activity.(*arn.ActivityCreate), user)
+			else if activity.Type() == "ActivityConsumeAnime"
+				ActivityConsumeAnimeText(activity.(*arn.ActivityConsumeAnime), user)
+
+component ActivityConsumeAnimeTitle(activity *arn.ActivityConsumeAnime, user *arn.User)
+	a(href=activity.Anime().Link())= activity.Anime().TitleByUser(user)
+
+component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
+	if activity.ToEpisode > activity.FromEpisode
+		em= fmt.Sprintf("watched episodes %d - %d", activity.FromEpisode, activity.ToEpisode)
+	else
+		em= fmt.Sprintf("watched episode %d", activity.ToEpisode)
 
 component ActivityCreateTitle(activity *arn.ActivityCreate, user *arn.User)
 	if activity.ObjectType == "Post"

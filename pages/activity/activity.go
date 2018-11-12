@@ -22,13 +22,14 @@ func Get(ctx *aero.Context) string {
 			}
 
 			draft, isDraftable := obj.(arn.HasDraft)
-
-			if isDraftable && draft.IsDraft {
-				return false
-			}
+			return !isDraftable || !draft.IsDraft
 		}
 
-		return true
+		if activity.Type() == "ActivityConsumeAnime" {
+			return activity.(*arn.ActivityConsumeAnime).Anime() != nil
+		}
+
+		return false
 	})
 
 	arn.SortActivitiesLatestFirst(activities)
