@@ -1,3 +1,4 @@
+export * from "./Activity"
 export * from "./Audio"
 export * from "./AnimeList"
 export * from "./Diff"

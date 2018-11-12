@@ -7,7 +7,7 @@ component Forum(tag string, threads []*arn.Thread, threadsPerPage int)
 		ThreadList(threads)
 
 	.buttons
-		button#new-thread.action(data-action="load", data-trigger="click", data-url="/new/thread")
+		button#new-thread.page-main-action.action(data-action="load", data-trigger="click", data-url="/new/thread")
 			Icon("plus")
 			span New thread
 		//- if len(threads) == threadsPerPage

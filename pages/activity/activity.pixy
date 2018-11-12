@@ -1,12 +1,25 @@
 component ActivityFeed(entries []arn.Activity, user *arn.User)
-	h1 Activity
+	h1.page-title Activity
+
+	.tabs
+		Tab("Global", "globe", "/activity")
+		Tab("Followed", "user-plus", "/activity/followed")
 
 	.activities
-		each entry in entries
-			Activity(entry, user)
+		if len(entries) == 0
+			p.no-data.mountable No activity here.
+		else
+			each entry in entries
+				Activity(entry, user)
+	
+	#load-new-activities(data-count="0")
+		.buttons
+			button.page-main-action.action(data-action="reloadContent", data-trigger="click")
+				Icon("refresh")
+				span#load-new-activities-text 0 new activities
 
 component Activity(activity arn.Activity, user *arn.User)
-	.activity.post-parent(id=fmt.Sprintf("activity-%s", activity.GetID()))
+	.activity.post-parent.mountable(id=fmt.Sprintf("activity-%s", activity.GetID()))
 		.post-author
 			Avatar(activity.Creator())
 		.post-content
@@ -29,19 +42,23 @@ component ActivityConsumeAnimeTitle(activity *arn.ActivityConsumeAnime, user *ar
 
 component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
 	if activity.ToEpisode > activity.FromEpisode
-		em= fmt.Sprintf("watched episodes %d - %d", activity.FromEpisode, activity.ToEpisode)
+		em.actvity-text-consume-anime= fmt.Sprintf("watched episodes %d - %d", activity.FromEpisode, activity.ToEpisode)
 	else
-		em= fmt.Sprintf("watched episode %d", activity.ToEpisode)
+		em.actvity-text-consume-anime= fmt.Sprintf("watched episode %d", activity.ToEpisode)
 
 component ActivityCreateTitle(activity *arn.ActivityCreate, user *arn.User)
 	if activity.ObjectType == "Post"
 		a(href=activity.Postable().Parent().Link())= activity.Postable().Parent().TitleByUser(user)
 	else if activity.ObjectType == "Thread"
 		a(href=activity.Postable().Link())= activity.Postable().TitleByUser(user)
+	else if activity.ObjectType == "AMV" || activity.ObjectType == "SoundTrack" || activity.ObjectType == "Quote"
+		a(href=activity.Object().(arn.PostParent).Link())= activity.Object().(arn.PostParent).TitleByUser(user)
 
 component ActivityCreateText(activity *arn.ActivityCreate, user *arn.User)
 	if activity.ObjectType == "Post" || activity.ObjectType == "Thread"
 		div!= activity.Postable().HTML()
+	else
+		em.actvity-text-create= "new " + strings.ToLower(activity.ObjectType)
 
 //- component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
 //- 	h1 Activity

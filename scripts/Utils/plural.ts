@@ -1,3 +1,15 @@
+const specialized = {
+	"new activity": "new activities"
+}
+
 export function plural(count: number, singular: string): string {
-	return (count === 1 || count === -1) ? (count + " " + singular) : (count + " " + singular + "s")
+	if(count === 1 || count === -1) {
+		return count + " " + singular
+	}
+
+	if(specialized[singular]) {
+		return count + " " + specialized[singular]
+	}
+
+	return count + " " + singular + "s"
 }

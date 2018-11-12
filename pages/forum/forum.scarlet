@@ -1,13 +1,13 @@
 .forum
 	vertical
 	align-items center
-	
+
 	.thread-link
 		width 100%
 		max-width forum-width
 
 > 1250px
-	#new-thread
+	.page-main-action
 		position fixed
 		right content-padding
 		bottom content-padding

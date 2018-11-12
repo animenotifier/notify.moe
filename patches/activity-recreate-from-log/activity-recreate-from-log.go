@@ -16,9 +16,15 @@ func main() {
 			continue
 		}
 
-		draft, isDraftable := obj.(arn.HasDraft)
+		draft, isDraftable := obj.(arn.Draftable)
 
-		if isDraftable && draft.IsDraft {
+		if isDraftable && draft.GetIsDraft() {
+			continue
+		}
+
+		// We don't create activity entries for anything
+		// other than posts and threads.
+		if entry.ObjectType != "Post" && entry.ObjectType != "Thread" {
 			continue
 		}
 

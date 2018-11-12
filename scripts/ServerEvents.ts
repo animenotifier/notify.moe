@@ -1,4 +1,5 @@
 import AnimeNotifier from "./AnimeNotifier"
+import { plural } from "./Utils"
 
 const reconnectDelay = 3000
 
@@ -35,6 +36,7 @@ export default class ServerEvents {
 
 		this.eventSource.addEventListener("ping", (e: any) => this.ping(e))
 		this.eventSource.addEventListener("etag", (e: any) => this.etag(e))
+		this.eventSource.addEventListener("activity", (e: any) => this.activity(e))
 		this.eventSource.addEventListener("notificationCount", (e: any) => this.notificationCount(e))
 
 		this.eventSource.onerror = () => {
@@ -56,6 +58,26 @@ export default class ServerEvents {
 		}
 
 		this.etags.set(data.url, newETag)
+	}
+
+	activity(e: ServerEvent) {
+		if(!location.pathname.startsWith("/activity")) {
+			return
+		}
+
+		let isFollowingUser = JSON.parse(e.data)
+
+		// If we're on the followed only feed and we receive an activity
+		// about a user we don't follow, ignore the message.
+		if(location.pathname.startsWith("/activity/followed") && !isFollowingUser) {
+			return
+		}
+
+		let button = document.getElementById("load-new-activities")
+		let buttonText = document.getElementById("load-new-activities-text")
+		let newCount = parseInt(button.dataset.count) + 1
+		button.dataset.count = newCount.toString()
+		buttonText.textContent = plural(newCount, "new activity")
 	}
 
 	notificationCount(e: ServerEvent) {

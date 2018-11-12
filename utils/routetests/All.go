@@ -67,7 +67,7 @@ var routeTests = map[string][]string{
 	},
 
 	"/user/:nick/animelist/watching/from/:index": []string{
-		"/+Akyoto/animelist/watching/from/3",
+		"/+Akyoto/animelist/watching/from/1",
 	},
 
 	"/user/:nick/animelist/completed": []string{

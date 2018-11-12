@@ -20,7 +20,8 @@ func Register(l *layout.Layout) {
 	l.Page("/login", login.Get)
 
 	// Activity
-	l.Page("/activity", activity.Get)
+	l.Page("/activity", activity.Global)
+	l.Page("/activity/followed", activity.Followed)
 
 	// Calendar
 	l.Page("/calendar", calendar.Get)
