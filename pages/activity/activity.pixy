@@ -30,6 +30,10 @@ component Activity(activity arn.Activity, user *arn.User)
 					else if activity.Type() == "ActivityConsumeAnime"
 						ActivityConsumeAnimeTitle(activity.(*arn.ActivityConsumeAnime), user)
 				
+				if user != nil && user.ID == activity.GetCreatedBy() && activity.Type() == "ActivityConsumeAnime"
+					button.post-delete.activity-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity", data-api=fmt.Sprintf("/api/%s/%s", strings.ToLower(activity.Type()), activity.GetID()))
+						RawIcon("trash")
+				
 				.activity-date.utc-date(data-date=activity.GetCreated())
 			
 			if activity.Type() == "ActivityCreate"

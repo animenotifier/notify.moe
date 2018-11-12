@@ -29,6 +29,12 @@ export function deleteObject(arn: AnimeNotifier, button: HTMLButtonElement) {
 	let endpoint = arn.findAPIEndpoint(button)
 
 	arn.post(endpoint + "/delete")
-	.then(() => arn.app.load(returnPath))
+	.then(() => {
+		if(returnPath) {
+			arn.app.load(returnPath)
+		} else {
+			arn.reloadContent()
+		}
+	})
 	.catch(err => arn.statusMessage.showError(err))
 }

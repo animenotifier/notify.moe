@@ -4,6 +4,11 @@
 	max-width forum-width
 	margin 0 auto
 
+.activity
+	:hover
+		.activity-action
+			opacity 1
+
 .activity-header
 	horizontal
 
@@ -18,6 +23,18 @@
 
 .actvity-text-create
 	opacity 0.8
+
+.activity-action
+	border none
+	background none
+	padding 0
+	height auto
+	margin-right 0.5rem
+	opacity 0
+
+	:hover
+		color link-hover-color
+		background none
 
 #load-new-activities
 	[data-count="0"]
