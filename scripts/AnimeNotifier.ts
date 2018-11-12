@@ -330,88 +330,190 @@ export default class AnimeNotifier {
 	}
 
 	dragAndDrop() {
-		for(let element of findAll("inventory-slot")) {
-			// Skip elements that have their event listeners attached already
-			if(element["listeners-attached"]) {
-				continue
+		if(location.pathname.includes("/animelist/")) {
+			for(let element of findAll("anime-list-item")) {
+				// Skip elements that have their event listeners attached already
+				if(element["drag-listeners-attached"]) {
+					continue
+				}
+
+				element.addEventListener("dragstart", e => {
+					if(!element.draggable) {
+						return
+					}
+
+					let image = element.getElementsByClassName("anime-list-item-image")[0]
+					e.dataTransfer.setDragImage(image, 0, 0)
+
+					let name = element.getElementsByClassName("anime-list-item-name")[0]
+
+					e.dataTransfer.setData("text/plain", JSON.stringify({
+						api: element.dataset.api,
+						animeTitle: name.textContent
+					}))
+					e.dataTransfer.effectAllowed = "move"
+				}, false)
+
+				// Prevent re-attaching the same listeners
+				element["drag-listeners-attached"] = true
 			}
 
-			element.addEventListener("dragstart", e => {
-				if(!element.draggable) {
-					return
+			for(let element of findAll("tab")) {
+				// Skip elements that have their event listeners attached already
+				if(element["drop-listeners-attached"]) {
+					continue
 				}
 
-				e.dataTransfer.setData("text", element.dataset.index)
-			}, false)
+				element.addEventListener("drop", async e => {
+					let toElement = e.toElement as HTMLElement
 
-			element.addEventListener("dblclick", e => {
-				if(!element.draggable) {
-					return
+					// Find tab element
+					while(toElement && !toElement.classList.contains("tab")) {
+						toElement = toElement.parentElement
+					}
+
+					// Ignore a drop on the current status tab
+					if(!toElement || toElement.classList.contains("active")) {
+						return
+					}
+
+					let data = e.dataTransfer.getData("text/plain")
+					let json = null
+
+					try {
+						json = JSON.parse(data)
+					} catch {
+						return
+					}
+
+					if(!json || !json.api) {
+						return
+					}
+
+					e.stopPropagation()
+					e.preventDefault()
+
+					let tabText = toElement.textContent
+					let newStatus = tabText.toLowerCase()
+
+					if(newStatus === "on hold") {
+						newStatus = "hold"
+					}
+
+					try {
+						await this.post(json.api, {
+							Status: newStatus
+						})
+						await this.reloadContent()
+
+						this.statusMessage.showInfo(`Moved "${json.animeTitle}" to "${tabText}".`)
+					} catch(err) {
+						this.statusMessage.showError(err)
+					}
+
+				}, false)
+
+				element.addEventListener("dragenter", e => {
+					e.preventDefault()
+				}, false)
+
+				element.addEventListener("dragleave", e => {
+					e.preventDefault()
+				}, false)
+
+				element.addEventListener("dragover", e => {
+					e.preventDefault()
+				}, false)
+
+				// Prevent re-attaching the same listeners
+				element["drop-listeners-attached"] = true
+			}
+		}
+
+		if(location.pathname.startsWith("/inventory")) {
+			for(let element of findAll("inventory-slot")) {
+				// Skip elements that have their event listeners attached already
+				if(element["drag-listeners-attached"]) {
+					continue
 				}
 
-				let itemName = element.getAttribute("aria-label")
+				element.addEventListener("dragstart", e => {
+					if(!element.draggable) {
+						return
+					}
 
-				if(element.dataset.consumable !== "true") {
-					return this.statusMessage.showError(itemName + " is not a consumable item.")
-				}
+					e.dataTransfer.setData("text", element.dataset.index)
+				}, false)
 
-				let apiEndpoint = this.findAPIEndpoint(element)
+				element.addEventListener("dblclick", e => {
+					if(!element.draggable) {
+						return
+					}
 
-				this.post(apiEndpoint + "/use/" + element.dataset.index, "")
-				.then(() => this.reloadContent())
-				.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
-				.catch(err => this.statusMessage.showError(err))
-			}, false)
+					let itemName = element.getAttribute("aria-label")
 
-			element.addEventListener("dragenter", e => {
-				element.classList.add("drag-enter")
-			}, false)
+					if(element.dataset.consumable !== "true") {
+						return this.statusMessage.showError(itemName + " is not a consumable item.")
+					}
 
-			element.addEventListener("dragleave", e => {
-				element.classList.remove("drag-enter")
-			}, false)
+					let apiEndpoint = this.findAPIEndpoint(element)
 
-			element.addEventListener("dragover", e => {
-				e.preventDefault()
-			}, false)
+					this.post(apiEndpoint + "/use/" + element.dataset.index, "")
+					.then(() => this.reloadContent())
+					.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
+					.catch(err => this.statusMessage.showError(err))
+				}, false)
 
-			element.addEventListener("drop", e => {
-				let toElement = e.toElement as HTMLElement
-				toElement.classList.remove("drag-enter")
+				element.addEventListener("dragenter", e => {
+					element.classList.add("drag-enter")
+				}, false)
 
-				e.stopPropagation()
-				e.preventDefault()
+				element.addEventListener("dragleave", e => {
+					element.classList.remove("drag-enter")
+				}, false)
 
-				let inventory = e.toElement.parentElement
-				let fromIndex = e.dataTransfer.getData("text")
+				element.addEventListener("dragover", e => {
+					e.preventDefault()
+				}, false)
 
-				if(!fromIndex) {
-					return
-				}
+				element.addEventListener("drop", e => {
+					let toElement = e.toElement as HTMLElement
+					toElement.classList.remove("drag-enter")
 
-				let fromElement = inventory.childNodes[fromIndex] as HTMLElement
+					e.stopPropagation()
+					e.preventDefault()
 
-				let toIndex = toElement.dataset.index
+					let inventory = e.toElement.parentElement
+					let fromIndex = e.dataTransfer.getData("text")
 
-				if(fromElement === toElement || fromIndex === toIndex) {
-					return
-				}
+					if(!fromIndex) {
+						return
+					}
 
-				// Swap in database
-				let apiEndpoint = this.findAPIEndpoint(inventory)
+					let fromElement = inventory.childNodes[fromIndex] as HTMLElement
 
-				this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex, "")
-				.catch(err => this.statusMessage.showError(err))
+					let toIndex = toElement.dataset.index
 
-				// Swap in UI
-				swapElements(fromElement, toElement)
+					if(fromElement === toElement || fromIndex === toIndex) {
+						return
+					}
 
-				fromElement.dataset.index = toIndex
-				toElement.dataset.index = fromIndex
-			}, false)
+					// Swap in database
+					let apiEndpoint = this.findAPIEndpoint(inventory)
 
-			// Prevent re-attaching the same listeners
-			element["listeners-attached"] = true
+					this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex, "")
+					.catch(err => this.statusMessage.showError(err))
+
+					// Swap in UI
+					swapElements(fromElement, toElement)
+
+					fromElement.dataset.index = toIndex
+					toElement.dataset.index = fromIndex
+				}, false)
+
+				// Prevent re-attaching the same listeners
+				element["drag-listeners-attached"] = true
+			}
 		}
 	}
 
