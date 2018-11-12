@@ -33,6 +33,10 @@ func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
 			return false
 		}
 
+		if !activity.Creator().HasNick() {
+			return false
+		}
+
 		if activity.Type() == "ActivityCreate" {
 			obj := activity.(*arn.ActivityCreate).Object()
 
