@@ -16,6 +16,7 @@ func Register(l *layout.Layout) {
 	l.Page("/forum-search/*term", search.Forum)
 	l.Page("/soundtrack-search/*term", search.SoundTracks)
 	l.Page("/user-search/*term", search.Users)
+	l.Page("/amv-search/*term", search.AMVs)
 	l.Page("/company-search/*term", search.Companies)
 
 	// Multi-search

@@ -1,4 +1,4 @@
-component SearchResults(term string, users []*arn.User, animes []*arn.Anime, posts []*arn.Post, threads []*arn.Thread, tracks []*arn.SoundTrack, characters []*arn.Character, companies []*arn.Company, quotes []*arn.Quote, user *arn.User)
+component SearchResults(term string, users []*arn.User, animes []*arn.Anime, posts []*arn.Post, threads []*arn.Thread, tracks []*arn.SoundTrack, characters []*arn.Character, amvs []*arn.AMV, companies []*arn.Company, quotes []*arn.Quote, user *arn.User)
 	h1.page-title= "Search: " + term
 
 	.search
@@ -34,6 +34,14 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			#soundtrack-search-results
 				SoundTrackSearchResults(tracks, user)
 		
+		.widget
+			h3.widget-title
+				Icon("video-camera")
+				span AMVs
+
+			#amv-search-results
+				AMVSearchResults(amvs, user)
+
 		//- .widget
 		//- 	h3.widget-title
 		//- 		Icon("quote-left")
@@ -106,6 +114,20 @@ component SoundTrackSearchResults(tracks []*arn.SoundTrack, user *arn.User)
 				li.mountable(data-mountable-type="track")
 					a(href=track.Link())= track.Title.ByUser(user)
 					span.soundtrack-search-anime= " - " + track.MainAnime().Title.Canonical
+
+component AMVSearchResults(amvs []*arn.AMV, user *arn.User)
+	if len(amvs) == 0
+		p.no-search-results.mountable No AMVs found.
+	else
+		ul.amv-search
+			each amv in amvs
+				li.mountable(data-mountable-type="amv")
+					a(href=amv.Link())= amv.Title.ByUser(user)
+
+					if amv.MainAnime() != nil
+						span.amv-search-anime= " - " + amv.MainAnime().Title.Canonical
+					else
+						span.amv-search-anime= fmt.Sprintf(" - %d anime", len(amv.ExtraAnimeIDs))
 
 component CompanySearchResults(companies []*arn.Company)
 	if len(companies) == 0

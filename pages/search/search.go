@@ -19,6 +19,7 @@ const (
 	maxPosts       = 2
 	maxThreads     = 2
 	maxSoundTracks = 3
+	maxAMVs        = 3
 	maxCharacters  = 22
 	maxCompanies   = 3
 )
@@ -29,7 +30,7 @@ func Get(ctx *aero.Context) string {
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
 
-	users, animes, posts, threads, tracks, characters, companies := search.All(
+	users, animes, posts, threads, tracks, characters, amvs, companies := search.All(
 		term,
 		maxUsers,
 		maxAnime,
@@ -37,15 +38,16 @@ func Get(ctx *aero.Context) string {
 		maxThreads,
 		maxSoundTracks,
 		maxCharacters,
+		maxAMVs,
 		maxCompanies,
 	)
 
-	return ctx.HTML(components.SearchResults(term, users, animes, posts, threads, tracks, characters, companies, nil, user))
+	return ctx.HTML(components.SearchResults(term, users, animes, posts, threads, tracks, characters, amvs, companies, nil, user))
 }
 
 // GetEmptySearch renders the search page with no contents.
 func GetEmptySearch(ctx *aero.Context) string {
-	return ctx.HTML(components.SearchResults("", nil, nil, nil, nil, nil, nil, nil, nil, utils.GetUser(ctx)))
+	return ctx.HTML(components.SearchResults("", nil, nil, nil, nil, nil, nil, nil, nil, nil, utils.GetUser(ctx)))
 }
 
 // Anime search.
@@ -94,6 +96,16 @@ func SoundTracks(ctx *aero.Context) string {
 
 	tracks := search.SoundTracks(term, maxSoundTracks)
 	return ctx.HTML(components.SoundTrackSearchResults(tracks, user))
+}
+
+// AMVs search.
+func AMVs(ctx *aero.Context) string {
+	term := ctx.Get("term")
+	term = strings.TrimPrefix(term, "/")
+	user := utils.GetUser(ctx)
+
+	amvs := search.AMVs(term, maxAMVs)
+	return ctx.HTML(components.AMVSearchResults(amvs, user))
 }
 
 // Users search.

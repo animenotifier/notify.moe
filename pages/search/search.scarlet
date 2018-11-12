@@ -37,7 +37,8 @@
 	margin-bottom 1rem
 	opacity 0.8
 
-.soundtrack-search-anime
+.soundtrack-search-anime,
+.amv-search-anime
 	opacity 0.35
 
 .no-search-results

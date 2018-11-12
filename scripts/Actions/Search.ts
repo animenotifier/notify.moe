@@ -11,6 +11,7 @@ var correctResponseRendered = {
 	"forum": false,
 	"soundtrack": false,
 	"user": false,
+	"amv": false,
 	"company": false
 }
 
@@ -23,6 +24,7 @@ var characterSearchResults: HTMLElement
 var forumSearchResults: HTMLElement
 var soundtrackSearchResults: HTMLElement
 var userSearchResults: HTMLElement
+var amvSearchResults: HTMLElement
 var companySearchResults: HTMLElement
 
 // Delay before a request is sent
@@ -60,6 +62,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 	correctResponseRendered.forum = false
 	correctResponseRendered.soundtrack = false
 	correctResponseRendered.user = false
+	correctResponseRendered.amv = false
 	correctResponseRendered.company = false
 
 	// Set browser URL
@@ -108,6 +111,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 			forumSearchResults = document.getElementById("forum-search-results")
 			soundtrackSearchResults = document.getElementById("soundtrack-search-results")
 			userSearchResults = document.getElementById("user-search-results")
+			amvSearchResults = document.getElementById("amv-search-results")
 			companySearchResults = document.getElementById("company-search-results")
 			searchPageTitle = document.getElementsByTagName("h1")[0]
 		}
@@ -145,6 +149,10 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 
 			fetch("/_/user-search/" + term, fetchOptions)
 			.then(showResponseInElement(arn, url, "user", userSearchResults))
+			.catch(console.error)
+
+			fetch("/_/amv-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "amv", amvSearchResults))
 			.catch(console.error)
 
 			fetch("/_/company-search/" + term, fetchOptions)
