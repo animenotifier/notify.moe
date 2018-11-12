@@ -53,9 +53,9 @@ component ActivityConsumeAnimeTitle(activity *arn.ActivityConsumeAnime, user *ar
 
 component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
 	if activity.ToEpisode > activity.FromEpisode
-		em.actvity-text-consume-anime= fmt.Sprintf("watched episodes %d - %d", activity.FromEpisode, activity.ToEpisode)
+		em.actvity-text-consume-anime= fmt.Sprintf("%s watched episodes %d - %d", activity.Creator().Nick, activity.FromEpisode, activity.ToEpisode)
 	else
-		em.actvity-text-consume-anime= fmt.Sprintf("watched episode %d", activity.ToEpisode)
+		em.actvity-text-consume-anime= fmt.Sprintf("%s watched episode %d", activity.Creator().Nick, activity.ToEpisode)
 
 component ActivityCreateTitle(activity *arn.ActivityCreate, user *arn.User)
 	if activity.ObjectType == "Post"
@@ -70,16 +70,3 @@ component ActivityCreateText(activity *arn.ActivityCreate, user *arn.User)
 		div!= activity.Postable().HTML()
 	else
 		em.actvity-text-create= "new " + strings.ToLower(activity.ObjectType)
-
-//- component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
-//- 	h1 Activity
-
-//- 	.activities
-//- 		each entry in entries
-//- 			ActivityPost(entry.Object().(arn.Postable), user)
-
-//- component ActivityPost(post arn.Postable, user *arn.User)
-//- 	if post.Parent() != nil
-//- 		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Parent().Link(), html.EscapeString(post.Parent().TitleByUser(user))), "")
-//- 	else
-//- 		Postable(post, user, false, fmt.Sprintf(`<p class="activity-header"><a href="%s">%s</a></p>`, post.Link(), html.EscapeString(post.TitleByUser(user))), "")
