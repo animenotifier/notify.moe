@@ -3,3 +3,15 @@
 	width 100%
 	max-width forum-width
 	margin 0 auto
+
+.activity-header
+	horizontal
+
+.activity-user
+	display none
+
+.activity-parent
+	flex 1
+
+.activity-date
+	color hsla(text-color-h, text-color-s, text-color-l, 0.5)

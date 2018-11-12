@@ -1,12 +1,34 @@
-component ActivityFeed(entries []*arn.Activity, user *arn.User)
+component ActivityFeed(entries []arn.Activity, user *arn.User)
 	h1 Activity
 
 	.activities
 		each entry in entries
 			Activity(entry, user)
 
-component Activity(activity *arn.Activity, user *arn.User)
-	h1= activity.Text()
+component Activity(activity arn.Activity, user *arn.User)
+	.activity.post-parent(id=fmt.Sprintf("activity-%s", activity.GetID()))
+		.post-author
+			Avatar(activity.Creator())
+		.post-content
+			.activity-header
+				.activity-parent
+					if activity.Type() == "ActivityCreate"
+						ActivityCreateTitle(activity.(*arn.ActivityCreate), user)
+				
+				.activity-date.utc-date(data-date=activity.GetCreated())
+			
+			if activity.Type() == "ActivityCreate"
+				ActivityCreateText(activity.(*arn.ActivityCreate), user)
+
+component ActivityCreateTitle(activity *arn.ActivityCreate, user *arn.User)
+	if activity.ObjectType == "Post"
+		a(href=activity.Postable().Parent().Link())= activity.Postable().Parent().TitleByUser(user)
+	else if activity.ObjectType == "Thread"
+		a(href=activity.Postable().Link())= activity.Postable().TitleByUser(user)
+
+component ActivityCreateText(activity *arn.ActivityCreate, user *arn.User)
+	if activity.ObjectType == "Post" || activity.ObjectType == "Thread"
+		div!= activity.Postable().HTML()
 
 //- component ActivityFeed(entries []*arn.EditLogEntry, user *arn.User)
 //- 	h1 Activity
