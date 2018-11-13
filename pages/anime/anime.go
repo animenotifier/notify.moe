@@ -24,10 +24,11 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
+	// Episodes
 	episodes := anime.Episodes().Items
 
 	if len(episodes) > maxEpisodes {
-		episodes = anime.Episodes().LastReversed(maxEpisodesLongSeries)
+		episodes = anime.Episodes().Last(maxEpisodesLongSeries)
 	}
 
 	// Friends watching
