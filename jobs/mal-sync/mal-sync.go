@@ -100,12 +100,18 @@ func syncCharacter(character *arn.Character, malID string) {
 		character.Name.Japanese = malCharacter.JapaneseName
 	}
 
-	// Unless it's a manually created or edited character,
-	// update the description.
-	if character.CreatedBy == "" && character.EditedBy == "" {
-		description, attributes := parseCharacterDescription(malCharacter.Description)
+	if character.Name.Canonical == "" && malCharacter.Name != "" {
 		character.Name.Canonical = malCharacter.Name
+	}
+
+	allowUpdating := character.CreatedBy == "" && character.EditedBy == ""
+	description, attributes := parseCharacterDescription(malCharacter.Description)
+
+	if (allowUpdating || character.Description == "") && description != "" {
 		character.Description = description
+	}
+
+	if allowUpdating {
 		character.Attributes = attributes
 		character.Spoilers = []arn.Spoiler{}
 
