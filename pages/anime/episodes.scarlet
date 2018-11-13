@@ -11,7 +11,6 @@ const episode-margin = 0.5rem
 	margin episode-margin
 	padding 0.5rem
 	width calc(50% - episode-margin * 2)
-	overflow hidden
 	color text-color
 	box-shadow shadow-light
 
@@ -48,3 +47,14 @@ const episode-margin = 0.5rem
 	justify-content center
 	font-size 0.7rem
 	opacity 0.6
+
+.episode-friends
+	horizontal
+	position absolute
+	bottom -0.85rem
+	right -0.85rem
+
+	.user-image
+		width calc(avatar-size / 2)
+		height calc(avatar-size / 2)
+		margin-left -0.5rem

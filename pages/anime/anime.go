@@ -10,9 +10,12 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const maxEpisodes = 26
-const maxEpisodesLongSeries = 12
-const maxDescriptionLength = 170
+const (
+	maxEpisodes           = 26
+	maxEpisodesLongSeries = 12
+	maxDescriptionLength  = 170
+	maxFriendsPerEpisode  = 9
+)
 
 // Get anime page.
 func Get(ctx *aero.Context) string {
@@ -34,21 +37,27 @@ func Get(ctx *aero.Context) string {
 	// Friends watching
 	var friends []*arn.User
 	friendsAnimeListItems := map[*arn.User]*arn.AnimeListItem{}
+	episodeToFriends := map[int][]*arn.User{}
 
 	if user != nil {
 		friends = user.Follows().Users()
-
 		deleted := 0
+
 		for i := range friends {
 			j := i - deleted
-			friendAnimeList := friends[j].AnimeList()
+			friend := friends[j]
+			friendAnimeList := friend.AnimeList()
 			friendAnimeListItem := friendAnimeList.Find(anime.ID)
 
 			if friendAnimeListItem == nil || friendAnimeListItem.Private {
 				friends = friends[:j+copy(friends[j:], friends[j+1:])]
 				deleted++
 			} else {
-				friendsAnimeListItems[friends[j]] = friendAnimeListItem
+				friendsAnimeListItems[friend] = friendAnimeListItem
+
+				if len(episodeToFriends[friendAnimeListItem.Episodes]) < maxFriendsPerEpisode {
+					episodeToFriends[friendAnimeListItem.Episodes] = append(episodeToFriends[friendAnimeListItem.Episodes], friend)
+				}
 			}
 		}
 
@@ -109,7 +118,7 @@ func Get(ctx *aero.Context) string {
 	// Open Graph
 	ctx.Data = getOpenGraph(ctx, anime)
 
-	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, user))
+	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, episodeToFriends, user))
 }
 
 func getOpenGraph(ctx *aero.Context, anime *arn.Anime) *arn.OpenGraph {
