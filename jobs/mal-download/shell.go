@@ -10,11 +10,13 @@ import (
 // Shell parameters
 var objectType string
 var objectID string
+var newOnly bool
 
 // Shell flags
 func init() {
 	flag.StringVar(&objectType, "type", "all", "all | anime | character")
 	flag.StringVar(&objectID, "id", "", "ID of the notify.moe anime/character you want to refresh")
+	flag.BoolVar(&newOnly, "new", false, "Skip existing entries and only download new ones")
 	flag.Parse()
 }
 

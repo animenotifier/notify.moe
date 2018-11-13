@@ -5,6 +5,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/animenotifier/arn/osutils"
+
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 
@@ -42,7 +44,13 @@ func main() {
 
 	if objectType == "all" || objectType == "anime" {
 		animes = arn.FilterAnime(func(anime *arn.Anime) bool {
-			return anime.GetMapping("myanimelist/anime") != ""
+			malID := anime.GetMapping("myanimelist/anime")
+
+			if malID == "" {
+				return false
+			}
+
+			return !newOnly || !osutils.Exists(animeFilePath(malID))
 		})
 
 		color.Yellow("Found %d anime", len(animes))
@@ -56,7 +64,13 @@ func main() {
 
 	if objectType == "all" || objectType == "character" {
 		characters = arn.FilterCharacters(func(character *arn.Character) bool {
-			return character.GetMapping("myanimelist/character") != ""
+			malID := character.GetMapping("myanimelist/character")
+
+			if malID == "" {
+				return false
+			}
+
+			return !newOnly || !osutils.Exists(characterFilePath(malID))
 		})
 
 		color.Yellow("Found %d characters", len(characters))
@@ -95,10 +109,18 @@ func main() {
 	malCrawler.Wait()
 }
 
+func animeFilePath(malID string) string {
+	return fmt.Sprintf("%s/%s.html.gz", animeDirectory, malID)
+}
+
+func characterFilePath(malID string) string {
+	return fmt.Sprintf("%s/%s.html.gz", characterDirectory, malID)
+}
+
 func queueAnime(anime *arn.Anime, malCrawler *crawler.Crawler) {
 	malID := anime.GetMapping("myanimelist/anime")
 	url := "https://myanimelist.net/anime/" + malID
-	filePath := fmt.Sprintf("%s/%s.html.gz", animeDirectory, malID)
+	filePath := animeFilePath(malID)
 	fileInfo, err := os.Stat(filePath)
 
 	if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {
@@ -116,7 +138,7 @@ func queueAnime(anime *arn.Anime, malCrawler *crawler.Crawler) {
 func queueCharacter(character *arn.Character, malCrawler *crawler.Crawler) {
 	malID := character.GetMapping("myanimelist/character")
 	url := "https://myanimelist.net/character/" + malID
-	filePath := fmt.Sprintf("%s/%s.html.gz", characterDirectory, malID)
+	filePath := characterFilePath(malID)
 	fileInfo, err := os.Stat(filePath)
 
 	if err == nil && time.Since(fileInfo.ModTime()) <= maxAge {
