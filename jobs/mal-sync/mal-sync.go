@@ -107,6 +107,10 @@ func syncCharacter(character *arn.Character, malID string) {
 	allowUpdating := character.CreatedBy == "" && character.EditedBy == ""
 	description, attributes := parseCharacterDescription(malCharacter.Description)
 
+	if strings.Contains(character.Description, "No biography written.") {
+		character.Description = ""
+	}
+
 	if (allowUpdating || character.Description == "") && description != "" {
 		character.Description = description
 	}
