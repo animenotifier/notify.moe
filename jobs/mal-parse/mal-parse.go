@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"path/filepath"
@@ -49,6 +50,7 @@ func readFiles(root string, onFile func(string) error) {
 		}
 
 		count++
+		fmt.Printf("\r\033[2K[%d] %s ", count, name)
 		err = onFile(name)
 
 		if err != nil {
@@ -58,6 +60,9 @@ func readFiles(root string, onFile func(string) error) {
 		// Always continue traversing the directory
 		return nil
 	})
+
+	// Erase line
+	print("\r\033[2K")
 
 	color.Cyan("%d files found", count)
 }
