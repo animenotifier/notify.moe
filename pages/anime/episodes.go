@@ -15,10 +15,22 @@ func Episodes(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	anime, err := arn.GetAnime(id)
+	episodeToFriends := map[int][]*arn.User{}
+
+	if user != nil {
+		for _, friend := range user.Follows().Users() {
+			friendAnimeList := friend.AnimeList()
+			friendAnimeListItem := friendAnimeList.Find(anime.ID)
+
+			if friendAnimeListItem != nil && !friendAnimeListItem.Private && len(episodeToFriends[friendAnimeListItem.Episodes]) < maxFriendsPerEpisode {
+				episodeToFriends[friendAnimeListItem.Episodes] = append(episodeToFriends[friendAnimeListItem.Episodes], friend)
+			}
+		}
+	}
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
-	return ctx.HTML(components.AnimeEpisodes(anime, anime.Episodes().Items, nil, user, true))
+	return ctx.HTML(components.AnimeEpisodes(anime, anime.Episodes().Items, episodeToFriends, user, true))
 }

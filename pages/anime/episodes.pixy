@@ -23,7 +23,6 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, episodeT
 						if validate.DateTime(episode.AiringDate.Start)
 							.episode-airing-date-start.utc-airing-date.no-tip(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 						
-						if episodeToFriends != nil
-							.episode-friends
-								each friend in episodeToFriends[index+1]
-									AvatarNoLink(friend)
+						.episode-friends
+							each friend in episodeToFriends[index+1]
+								AvatarNoLink(friend)
