@@ -22,9 +22,10 @@ var regions = map[string]string{
 }
 
 const (
-	verifiedRole = "512044929195704330"
-	editorRole   = "141849207404363776"
-	staffRole    = "218221363918274560"
+	verifiedRole  = "512044929195704330"
+	editorRole    = "141849207404363776"
+	staffRole     = "218221363918274560"
+	supporterRole = "365719917426638848"
 )
 
 // Verify verifies that the given user has an account on notify.moe.
@@ -93,6 +94,11 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 				s.GuildMemberRoleAdd(guildID, msg.Author.ID, regionRole)
 			}
 		}
+	}
+
+	// Give supporter role
+	if user.IsPro() {
+		s.GuildMemberRoleAdd(guildID, msg.Author.ID, supporterRole)
 	}
 
 	// Update notify.moe user account
