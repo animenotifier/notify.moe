@@ -50,7 +50,7 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	}
 
 	if user.Accounts.Discord.Nick == "" {
-		s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("You haven't set up your Discord account `%s` on https://notify.moe/settings/accounts", discordTag))
+		s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("You haven't set up your Discord account `%s` on https://notify.moe/settings/accounts yet", discordTag))
 		return true
 	}
 
