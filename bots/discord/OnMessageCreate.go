@@ -14,9 +14,9 @@ var allCommands = []Command{
 	commands.AnimeSearch,
 	commands.Play,
 	commands.RandomQuote,
-	commands.Region,
 	commands.Roles,
 	commands.Source,
+	commands.Verify,
 }
 
 // OnMessageCreate is called every time a new message is created on any channel.
@@ -33,7 +33,7 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 **!play** [status text]
 **!randomquote**
 **!source**
-**!region** [region]`)
+**!verify** [username]`)
 	}
 
 	// Has the bot been mentioned?
