@@ -9,7 +9,7 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, episodeT
 				a(href=anime.Episodes().Link()) Episodes
 			
 			.episodes
-				for index, episode := range episodes
+				each episode in episodes
 					a.episode.mountable(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number), data-mountable-type="episode", data-available=episode.Available())
 						.episode-number
 							if episode.Number != -1
@@ -24,5 +24,5 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, episodeT
 							.episode-airing-date-start.utc-airing-date.no-tip(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 						
 						.episode-friends
-							each friend in episodeToFriends[index+1]
+							each friend in episodeToFriends[episode.Number]
 								AvatarNoLink(friend)
