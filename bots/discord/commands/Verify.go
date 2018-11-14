@@ -96,16 +96,27 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 		}
 	}
 
-	// Give supporter role
+	// Give or remove supporter role
 	if user.IsPro() {
 		s.GuildMemberRoleAdd(guildID, msg.Author.ID, supporterRole)
+	} else {
+		s.GuildMemberRoleRemove(guildID, msg.Author.ID, supporterRole)
+	}
+
+	// Update nickname to notify.moe nick
+	err = s.GuildMemberNickname(guildID, msg.Author.ID, user.Nick)
+
+	if err != nil {
+		color.Red("Error updating nickname: %s", err.Error())
 	}
 
 	// Update notify.moe user account
-	user.Accounts.Discord.Verified = true
-	user.Save()
+	if !user.Accounts.Discord.Verified {
+		user.Accounts.Discord.Verified = true
+		user.Save()
+	}
 
 	// Send success message
-	s.ChannelMessageSend(msg.ChannelID, "Thank you, you are now a verified member of the notify.moe community!")
+	s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("%s Thank you, you are now a verified member of the notify.moe community!", msg.Author.Mention()))
 	return true
 }
