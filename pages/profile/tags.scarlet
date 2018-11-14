@@ -15,15 +15,26 @@
 	background rgba(255, 255, 255, 0.1)
 	border-radius ui-element-border-radius
 	margin 0.35rem
+	display flex
+	justify-content center
+	align-items center
 
 	&.mounted
 		opacity 0.8
+
+	&.action
+		cursor pointer
 
 	:hover
 		color hsl(0, 0%, 90%)
 		opacity 1.0
 		text-shadow none
 		background rgba(255, 255, 255, 0.2)
+
+.show-more
+	&.mounted
+		display none
+		opacity 0
 
 > 800px
 	.profile-tags
