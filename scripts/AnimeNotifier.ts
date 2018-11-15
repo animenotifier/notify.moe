@@ -175,7 +175,10 @@ export default class AnimeNotifier {
 		// Auto-focus first input element on welcome page.
 		if(location.pathname === "/welcome") {
 			let firstInput = this.app.content.getElementsByTagName("input")[0] as HTMLInputElement
-			firstInput.focus()
+
+			if(firstInput) {
+				firstInput.focus()
+			}
 		}
 	}
 
