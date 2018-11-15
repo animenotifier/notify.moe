@@ -81,6 +81,5 @@ textarea
 	button
 		justify-content center
 		margin-left 0.2rem
-		padding 0
-		width 2.7rem
+		width input-height
 		height input-height
