@@ -6,7 +6,6 @@
 	align-items center
 	margin 0.5rem
 	default-transition
-	transform scale(1)
 
 	:hover
 		.image-title

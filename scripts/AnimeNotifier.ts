@@ -159,6 +159,7 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.lazyLoad()),
 			Promise.resolve().then(() => this.displayLocalDates()),
 			Promise.resolve().then(() => this.setSelectBoxValue()),
+			Promise.resolve().then(() => this.textAreaFocus()),
 			Promise.resolve().then(() => this.markPlayingSoundTrack()),
 			Promise.resolve().then(() => this.assignActions()),
 			Promise.resolve().then(() => this.updatePushUI()),
@@ -192,6 +193,26 @@ export default class AnimeNotifier {
 		} else {
 			document.title = headers[0].textContent
 		}
+	}
+
+	textAreaFocus() {
+		const newPostText = document.getElementById("new-post-text") as HTMLTextAreaElement
+
+		if(!newPostText || newPostText["has-input-listener"]) {
+			return
+		}
+
+		newPostText.addEventListener("input", () => {
+			if(newPostText.value.length > 0) {
+				const newPostActions = document.getElementsByClassName("new-post-actions")[0]
+				newPostActions.classList.add("new-post-actions-enabled")
+			} else {
+				const newPostActions = document.getElementsByClassName("new-post-actions")[0]
+				newPostActions.classList.remove("new-post-actions-enabled")
+			}
+		})
+
+		newPostText["has-input-listener"] = true
 	}
 
 	async onIdle() {
@@ -1071,6 +1092,7 @@ export default class AnimeNotifier {
 		this.lazyLoad(findAllInside("lazy", element))
 		this.mountMountables(findAllInside("mountable", element))
 		this.assignTooltipOffsets(findAllInside("tip", element))
+		this.textAreaFocus()
 	}
 
 	scrollTo(target: HTMLElement) {

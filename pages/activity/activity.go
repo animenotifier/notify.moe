@@ -37,7 +37,7 @@ func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
 			return false
 		}
 
-		if activity.Type() == "ActivityCreate" {
+		if activity.TypeName() == "ActivityCreate" {
 			obj := activity.(*arn.ActivityCreate).Object()
 
 			if obj == nil {
@@ -48,7 +48,7 @@ func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
 			return !isDraftable || !draft.GetIsDraft()
 		}
 
-		if activity.Type() == "ActivityConsumeAnime" {
+		if activity.TypeName() == "ActivityConsumeAnime" {
 			return activity.(*arn.ActivityConsumeAnime).Anime() != nil
 		}
 

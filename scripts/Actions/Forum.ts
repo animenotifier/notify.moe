@@ -105,7 +105,7 @@ export async function reply(arn: AnimeNotifier, element: HTMLElement) {
 	}
 
 	// Delete old reply button
-	let oldPostActions = document.getElementById("new-post-actions")
+	let oldPostActions = document.getElementsByClassName("new-post-actions")[0]
 
 	if(oldPostActions) {
 		oldPostActions.remove()

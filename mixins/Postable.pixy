@@ -1,5 +1,5 @@
 component Postable(post arn.Postable, user *arn.User, includeReplies bool, headerContent string, highlightAuthorID string)
-	.post.mountable(id=strings.ToLower(post.Type()) + "-" + fmt.Sprint(post.GetID()), data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.Type()) + "/" + post.GetID())
+	.post.mountable(id=strings.ToLower(post.TypeName()) + "-" + fmt.Sprint(post.GetID()), data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.TypeName()) + "/" + post.GetID())
 		.post-parent
 			.post-author
 				Avatar(post.Creator())
@@ -12,7 +12,7 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 
 				if user != nil && user.ID == post.Creator().ID
 					.post-edit-interface
-						if post.Type() == "Thread"
+						if post.TypeName() == "Thread"
 							input.post-title-input.hidden(id="title-" + post.GetID(), value=post.TitleByUser(user), type="text", placeholder="Thread title")
 						
 						textarea.post-text-input.hidden(id="source-" + post.GetID())= post.GetText()
@@ -48,7 +48,7 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 							a.post-tool.post-edit.tip.action(data-action="editPost", data-trigger="click", data-id=post.GetID(), aria-label="Edit")
 								Icon("pencil")
 
-					if post.Type() != "Thread"
+					if post.TypeName() != "Thread"
 						if user != nil && (user.Role == "admin" || user.Role == "editor")
 							a.post-tool.post-delete.tip.action(data-action="deletePost", data-trigger="click", data-id=post.GetID(), aria-label="Delete")
 								Icon("trash")

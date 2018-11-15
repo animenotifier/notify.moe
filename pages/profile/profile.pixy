@@ -1,48 +1,53 @@
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, uri string)
-	ProfileHeader(viewUser, user, uri)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, characters []*arn.Character, friends []*arn.User, topGenres []string, uri string)
+	.profile
+		ProfileHeader(viewUser, user, uri)
 
-	//- if len(animeList.Items) == 0
-	//- 	p.no-data.mountable= viewUser.Nick + " hasn't added any anime yet."
-	//- else
-	//- 	.profile-watching-list.mountable
-	//- 		each item in animeList.Items
-	//- 			if item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusCompleted
-	//- 				a.profile-watching-list-item.tip(href=item.Anime().Link(), aria-label=item.Anime().Title.ByUser(user) + " (" + fmt.Sprint(item.Episodes) + " / " + arn.EpisodesToString(item.Anime().EpisodeCount) + ")")
-	//- 					img.profile-watching-list-item-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp="true", data-color=item.Anime().AverageColor(), alt=item.Anime().Title.ByUser(user), importance="high")
+		.profile-columns
+			.profile-column.profile-favorites
+				.profile-section
+					h3.profile-column-header.mountable Anime
+					
+					.profile-favorite-anime-container
+						each item in animeList.Top(6)
+							a.profile-favorite-anime.tip.mountable(href=item.Anime().Link(), aria-label=item.Anime().Title.ByUser(user), data-mountable-type="favorites")
+								img.profile-favorite-anime-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp=true, alt=item.Anime().Title.ByUser(user))
 
-	//- .footer
-	//- 	.buttons
-	//- 		if user != nil && (user.Role == "admin" || user.Role == "editor")
-	//- 			a.button.profile-action(href="/api/user/" + viewUser.ID, target="_blank", rel="noopener")
-	//- 				Icon("search-plus")
-	//- 				span JSON
+				.profile-section
+					h3.profile-column-header.mountable(data-mountable-type="favorites") Characters
+					
+					.profile-favorite-characters-container
+						each character in characters
+							.mountable(data-mountable-type="favorites")
+								CharacterSmall(character, user)
+							//- a.profile-favorite-character.tip.mountable(href=character.Link(), aria-label=character.Name.ByUser(user), data-mountable-type="favorite-anime")
+							//- 	img.profile-favorite-character-image.lazy(data-src=character.ImageLink("small"), data-webp=true, alt=character.Name.ByUser(user))
 
-component ProfileTabs(viewUser *arn.User, uri string)
-	.tabs.mountable.never-unmount
-		Tab("Anime", "th", "/+" + viewUser.Nick)
-		Tab("Characters", "child", "/+" + viewUser.Nick + "/characters/liked")
-		Tab("Forum", "comment", "/+" + viewUser.Nick + "/forum/threads")
-		Tab("Tracks", "music", "/+" + viewUser.Nick + "/soundtracks/liked")
-		Tab("Quotes", "quote-left", "/+" + viewUser.Nick + "/quotes/liked")
-		Tab("Stats", "area-chart", "/+" + viewUser.Nick + "/stats")
-		Tab("Followers", "users", "/+" + viewUser.Nick + "/followers")
-	
-	if strings.Contains(uri, "/soundtracks")
-		.tabs
-			Tab("Liked", "heart", "/+" + viewUser.Nick + "/soundtracks/liked")
-			Tab("Added", "plus", "/+" + viewUser.Nick + "/soundtracks/added")
+			.profile-column.profile-activity
+				.profile-section
+					h3.profile-column-header.mountable(data-mountable-type="activity") Activity
+					Comments(viewUser, user)
+			
+			.profile-column.profile-extra
+				.profile-section
+					h3.profile-column-header.mountable(data-mountable-type="extra") Genres
 
-	if strings.Contains(uri, "/quotes")
-		.tabs
-			Tab("Liked", "heart", "/+" + viewUser.Nick + "/quotes/liked")
-			Tab("Added", "plus", "/+" + viewUser.Nick + "/quotes/added")
+					.anime-genres
+						each genre in topGenres
+							a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="extra")= genre
 
+				.profile-section
+					h3.profile-column-header.mountable(data-mountable-type="extra") Friends
+					
+					.profile-friends
+						each friend in friends
+							.profile-friend.mountable(data-mountable-type="extra")
+								Avatar(friend)
+				
 component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	ProfileHead(viewUser, user, uri)
-	//- ProfileTabs(viewUser, uri)
 
 component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
-	.profile
+	.profile-head
 		img.profile-cover.lazy(data-src=viewUser.CoverLink("large"), data-webp="true", alt="Cover image")
 
 		.profile-image-container.mountable.never-unmount
@@ -138,4 +143,3 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 					button.profile-action.action.mountable.never-unmount(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
 						Icon("user-times")
 						span Unfollow
-				

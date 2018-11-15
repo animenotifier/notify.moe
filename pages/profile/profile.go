@@ -1,10 +1,17 @@
 package profile
 
 import (
+	"sort"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
+)
+
+const (
+	maxCharacters = 6
+	maxFriends    = 7
 )
 
 // Get user profile page.
@@ -22,6 +29,8 @@ func Get(ctx *aero.Context) string {
 // Profile renders the user profile page of the given viewUser.
 func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	user := utils.GetUser(ctx)
+
+	// Anime list
 	animeList := viewUser.AnimeList()
 
 	if user == nil || user.ID != viewUser.ID {
@@ -30,6 +39,10 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 
 	animeList.SortByRating()
 
+	// Genres
+	topGenres := animeList.TopGenres(5)
+
+	// Open graph
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":         viewUser.Nick,
@@ -46,7 +59,39 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		},
 	}
 
-	ctx.Data = openGraph
+	// Friends
+	friends := viewUser.Follows().UsersWhoFollowBack()
 
-	return ctx.HTML(components.Profile(viewUser, user, animeList, ctx.URI()))
+	arn.SortUsersFollowers(friends)
+
+	if len(friends) > maxFriends {
+		friends = friends[:maxFriends]
+	}
+
+	// Characters
+	characters := []*arn.Character{}
+
+	for character := range arn.StreamCharacters() {
+		if arn.Contains(character.Likes, viewUser.ID) {
+			characters = append(characters, character)
+		}
+	}
+
+	sort.Slice(characters, func(i, j int) bool {
+		aLikes := len(characters[i].Likes)
+		bLikes := len(characters[j].Likes)
+
+		if aLikes == bLikes {
+			return characters[i].Name.Canonical < characters[j].Name.Canonical
+		}
+
+		return aLikes > bLikes
+	})
+
+	if len(characters) > maxCharacters {
+		characters = characters[:maxCharacters]
+	}
+
+	ctx.Data = openGraph
+	return ctx.HTML(components.Profile(viewUser, user, animeList, characters, friends, topGenres, ctx.URI()))
 }

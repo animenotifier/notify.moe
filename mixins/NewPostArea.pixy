@@ -1,4 +1,4 @@
-component NewPostArea(user *arn.User, placeholder string)
+component NewPostArea(parent arn.PostParent, user *arn.User, placeholder string)
 	#new-post.post.mountable
 		.post-parent
 			.post-author
@@ -6,11 +6,18 @@ component NewPostArea(user *arn.User, placeholder string)
 			
 			textarea#new-post-text.post-content(placeholder=placeholder + "...", aria-label=placeholder)
 
-component NewPostActions(parentType string, parentID string, cancelButton bool)
-	#new-post-actions.buttons
-		button#reply-button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type=parentType, data-parent-id=parentID)
+	if !arn.IsLocked(parent)
+		NewPostActions(parent, false)
+
+component NewPostActions(parent arn.PostParent, cancelButton bool)
+	.buttons.new-post-actions
+		button#reply-button.mountable.action(data-action="createPost", data-trigger="click", data-parent-type=parent.TypeName(), data-parent-id=parent.GetID())
 			Icon("mail-reply")
-			span Reply
+
+			if parent.TypeName() == "Post" || parent.TypeName() == "Thread"
+				span= "Reply to " + parent.Creator().Nick
+			else
+				span Submit
 
 		if cancelButton
 			button#reply-cancel-button.mountable.action(data-action="cancelReply", data-trigger="click")

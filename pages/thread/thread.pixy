@@ -11,11 +11,11 @@ component Thread(thread *arn.Thread, user *arn.User)
 					footer.footer.mountable
 						p.text-center This topic is locked.
 				else
-					NewPostArea(user, "Reply")
+					NewPostArea(thread, user, "Reply")
 			
 				.buttons
 					if !thread.Locked
-						NewPostActions("Thread", thread.ID, false)
+						NewPostActions(thread, false)
 					
 					if user.Role == "admin" || user.Role == "editor"
 						if thread.Locked

@@ -7,8 +7,8 @@ type CanonicalTitle struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *CanonicalTitle) Type() string {
+// TypeName returns the diff type.
+func (diff *CanonicalTitle) TypeName() string {
 	return "CanonicalTitle"
 }
 

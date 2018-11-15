@@ -1,6 +1,6 @@
 const profile-image-size = 280px
 
-.profile
+.profile-head
 	vertical
 	align-items center
 
@@ -40,8 +40,59 @@ const profile-image-size = 280px
 		color pro-color
 		animation sk-pulse 1.5s infinite linear
 
+.profile-columns
+	vertical
+
+.profile-column
+	// border 1px solid red
+	// height 100px
+	padding calc(content-padding / 2)
+
+.profile-column-header
+	font-style bold
+	margin-bottom 1rem
+
+.profile-section
+	margin-bottom 1rem
+
+.profile-favorite-anime-container
+	display grid
+	grid-template-columns repeat(auto-fill, anime-image-small-width)
+	grid-template-rows repeat(auto-fill, anime-image-small-height)
+	grid-gap 0.5rem
+	justify-content space-evenly
+
+.profile-friends
+	display grid
+	grid-template-columns repeat(auto-fill, avatar-size)
+	grid-template-rows repeat(auto-fill, avatar-size)
+	grid-gap 0.5rem
+	margin 0 0.5rem
+	justify-content space-evenly
+
+.profile-favorite-anime
+	// anime-mini-item
+
+.profile-favorite-anime-image
+	// anime-mini-item-image
+	border-radius ui-element-border-radius
+
+.profile-favorite-characters-container
+	display grid
+	grid-template-columns repeat(auto-fill, character-image-small-width)
+	grid-template-rows repeat(auto-fill, character-image-small-height)
+	grid-gap 0.5rem
+	justify-content space-evenly
+
+// .profile-favorite-character
+// 	margin 0.25rem
+
+// .profile-favorite-character-image
+
+// 	border-radius ui-element-border-radius
+
 > 740px
-	.profile
+	.profile-head
 		horizontal
 		align-items stretch
 
@@ -60,6 +111,10 @@ const profile-image-size = 280px
 		right 0
 		padding content-padding
 		margin-top 0
+
+	.profile-columns
+		display grid
+		grid-template-columns 27% 46% 27%
 
 	.profile-pro-status
 		position absolute

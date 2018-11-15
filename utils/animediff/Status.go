@@ -7,8 +7,8 @@ type Status struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *Status) Type() string {
+// TypeName returns the diff type.
+func (diff *Status) TypeName() string {
 	return "Status"
 }
 

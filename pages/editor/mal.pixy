@@ -33,5 +33,5 @@ component CompareMAL(comparisons []*utils.MALComparison, year string, status str
 									.data-comparison-difference-detail= difference.DetailsA()
 									.data-comparison-difference-detail= difference.DetailsB()
 								
-								button.data-comparison-difference-ignore.action(data-action="newAnimeDiffIgnore", data-trigger="click", data-id=arn.CreateDifferenceID(comparison.Anime.ID, "mal", comparison.MALAnime.ID, difference.Type()), data-hash=difference.Hash())
+								button.data-comparison-difference-ignore.action(data-action="newAnimeDiffIgnore", data-trigger="click", data-id=arn.CreateDifferenceID(comparison.Anime.ID, "mal", comparison.MALAnime.ID, difference.TypeName()), data-hash=difference.Hash())
 									RawIcon("trash")

@@ -2,7 +2,7 @@ package animediff
 
 // Difference describes a difference between two anime.
 type Difference interface {
-	Type() string
+	TypeName() string
 	Explanation() string
 	DetailsA() string
 	DetailsB() string

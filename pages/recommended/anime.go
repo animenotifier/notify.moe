@@ -30,7 +30,7 @@ func Anime(ctx *aero.Context) string {
 	completed := animeList.FilterStatus(arn.AnimeListStatusCompleted)
 
 	// Genre affinity
-	bestGenres := getBestGenres(animeList)
+	bestGenres := animeList.TopGenres(bestGenreCount)
 
 	// Get all anime
 	var tv []*arn.Anime

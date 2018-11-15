@@ -9,8 +9,8 @@ type EpisodeCount struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *EpisodeCount) Type() string {
+// TypeName returns the diff type.
+func (diff *EpisodeCount) TypeName() string {
 	return "EpisodeCount"
 }
 

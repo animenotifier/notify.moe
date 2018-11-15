@@ -7,8 +7,8 @@ type EndDate struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *EndDate) Type() string {
+// TypeName returns the diff type.
+func (diff *EndDate) TypeName() string {
 	return "EndDate"
 }
 

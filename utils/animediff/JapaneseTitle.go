@@ -7,8 +7,8 @@ type JapaneseTitle struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *JapaneseTitle) Type() string {
+// TypeName returns the diff type.
+func (diff *JapaneseTitle) TypeName() string {
 	return "JapaneseTitle"
 }
 

@@ -7,8 +7,8 @@ type RomajiTitle struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *RomajiTitle) Type() string {
+// TypeName returns the diff type.
+func (diff *RomajiTitle) TypeName() string {
 	return "RomajiTitle"
 }
 

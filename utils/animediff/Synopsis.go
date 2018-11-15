@@ -7,8 +7,8 @@ type Synopsis struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *Synopsis) Type() string {
+// TypeName returns the diff type.
+func (diff *Synopsis) TypeName() string {
 	return "Synopsis"
 }
 

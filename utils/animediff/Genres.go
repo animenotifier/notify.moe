@@ -9,8 +9,8 @@ type Genres struct {
 	NumericHash uint64
 }
 
-// Type returns the diff type.
-func (diff *Genres) Type() string {
+// TypeName returns the diff type.
+func (diff *Genres) TypeName() string {
 	return "Genres"
 }
 

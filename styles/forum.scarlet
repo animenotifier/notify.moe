@@ -80,10 +80,18 @@ post-content-padding-y = 0.75rem
 	align-items flex-start
 	margin-right 0.5rem
 
-#new-post-actions
-	horizontal
+.new-post-actions
 	justify-content flex-end
+	opacity 0
+	height 0
+	transform translateY(-50%)
+	transition all transition-speed ease
+
+.new-post-actions-enabled
+	opacity 1
+	height auto
 	margin-bottom 0.75rem
+	transform translateY(0)
 
 // Toolbar
 
