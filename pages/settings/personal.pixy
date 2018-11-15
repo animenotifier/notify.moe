@@ -10,7 +10,7 @@ component SettingsPersonal(user *arn.User)
 				span Personal
 
 			InputText("Nick", user.Nick, "Username", "Your username on notify.moe")
-			InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us about yourself")
+			InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us a little bit about yourself")
 
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
