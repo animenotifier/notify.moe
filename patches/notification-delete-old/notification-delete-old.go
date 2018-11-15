@@ -1,13 +1,11 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
 
-const maxNotificationsPerUser = 80
+const maxNotificationsPerUser = 30
 
 func main() {
 	color.Yellow("Deleting old notifications")
@@ -15,11 +13,27 @@ func main() {
 	defer color.Green("Finished")
 	defer arn.Node.Close()
 
+	count := 0
+
 	for user := range arn.StreamUsers() {
-		notificationCount := len(user.Notifications().Items)
+		notifications := user.Notifications()
+		notificationCount := len(notifications.Items)
 
 		if notificationCount > maxNotificationsPerUser {
-			fmt.Println(user.Nick, notificationCount)
+			cut := len(notifications.Items) - maxNotificationsPerUser
+			deletedItems := notifications.Items[:cut]
+			newItems := notifications.Items[cut:]
+
+			for _, notificationID := range deletedItems {
+				arn.DB.Delete("Notification", notificationID)
+			}
+
+			notifications.Items = newItems
+			notifications.Save()
+
+			count += len(deletedItems)
 		}
 	}
+
+	color.Green("Deleted %d notifications", count)
 }
