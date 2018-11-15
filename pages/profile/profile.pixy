@@ -3,45 +3,60 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 		ProfileHeader(viewUser, user, uri)
 
 		.profile-columns
-			.profile-column.profile-favorites
+			//- Favorites
+			.profile-column.profile-favorites.mountable(data-mountable-type="column")
 				.profile-section
-					h3.profile-column-header.mountable Anime
+					h3.profile-column-header.mountable(data-mountable-type="favorites") Anime
 					
-					.profile-favorite-anime-container
-						each item in animeList.Top(6)
-							a.profile-favorite-anime.tip.mountable(href=item.Anime().Link(), aria-label=item.Anime().Title.ByUser(user), data-mountable-type="favorites")
-								img.profile-favorite-anime-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp=true, alt=item.Anime().Title.ByUser(user))
-
+					if len(animeList.Items) == 0
+						p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
+					else
+						.profile-favorite-anime-container
+							each item in animeList.Top(6)
+								a.profile-favorite-anime.tip.mountable(href=item.Anime().Link(), aria-label=item.Anime().Title.ByUser(user), data-mountable-type="favorites")
+									img.profile-favorite-anime-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp=true, alt=item.Anime().Title.ByUser(user))
+				
 				.profile-section
 					h3.profile-column-header.mountable(data-mountable-type="favorites") Characters
 					
-					.profile-favorite-characters-container
-						each character in characters
-							.mountable(data-mountable-type="favorites")
-								CharacterSmall(character, user)
-							//- a.profile-favorite-character.tip.mountable(href=character.Link(), aria-label=character.Name.ByUser(user), data-mountable-type="favorite-anime")
-							//- 	img.profile-favorite-character-image.lazy(data-src=character.ImageLink("small"), data-webp=true, alt=character.Name.ByUser(user))
+					if len(characters) == 0
+						p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
+					else
+						.profile-favorite-characters-container
+							each character in characters
+								.mountable(data-mountable-type="favorites")
+									CharacterSmall(character, user)
+								//- a.profile-favorite-character.tip.mountable(href=character.Link(), aria-label=character.Name.ByUser(user), data-mountable-type="favorite-anime")
+								//- 	img.profile-favorite-character-image.lazy(data-src=character.ImageLink("small"), data-webp=true, alt=character.Name.ByUser(user))
 
-			.profile-column.profile-activity
+			//- Posts
+			.profile-column.profile-activity.mountable(data-mountable-type="column")
 				.profile-section
-					h3.profile-column-header.mountable(data-mountable-type="activity") Activity
+					h3.profile-column-header.mountable(data-mountable-type="activity") Posts
 					Comments(viewUser, user)
 			
-			.profile-column.profile-extra
+			//- Extra
+			.profile-column.profile-extra.mountable(data-mountable-type="column")
 				.profile-section
 					h3.profile-column-header.mountable(data-mountable-type="extra") Genres
 
-					.anime-genres
-						each genre in topGenres
-							a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="extra")= genre
-
+					if len(topGenres) == 0
+						p.no-data.mountable(data-mountable-type="extra") Nothing here yet.
+					else
+						.anime-genres
+							each genre in topGenres
+								a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="extra")= genre
+				
 				.profile-section
 					h3.profile-column-header.mountable(data-mountable-type="extra") Friends
-					
-					.profile-friends
-						each friend in friends
-							.profile-friend.mountable(data-mountable-type="extra")
-								Avatar(friend)
+
+					if len(friends) == 0
+						p.no-data.mountable(data-mountable-type="extra") Nothing here yet.
+					else
+						.profile-friends
+							each friend in friends
+								.profile-friend.mountable(data-mountable-type="extra")
+									Avatar(friend)
 				
 component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	ProfileHead(viewUser, user, uri)

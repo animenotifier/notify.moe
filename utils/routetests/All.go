@@ -380,7 +380,7 @@ var routeTests = map[string][]string{
 	},
 
 	"/api/notification/:id": []string{
-		"/api/notification/u2WHJpkigm",
+		"/api/notification/q6Y6eraig",
 	},
 
 	"/api/quote/:id": []string{

@@ -55,6 +55,12 @@ const profile-image-size = 280px
 .profile-section
 	margin-bottom 1rem
 
+	.no-data
+		text-align left
+
+		&.mounted
+			opacity 0.5 !important
+
 .profile-favorite-anime-container
 	display grid
 	grid-template-columns repeat(auto-fill, anime-image-small-width)
@@ -74,8 +80,7 @@ const profile-image-size = 280px
 	// anime-mini-item
 
 .profile-favorite-anime-image
-	// anime-mini-item-image
-	border-radius ui-element-border-radius
+	anime-mini-item-image
 
 .profile-favorite-characters-container
 	display grid
