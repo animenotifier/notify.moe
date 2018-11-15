@@ -483,6 +483,7 @@ var routeTests = map[string][]string{
 	"/log/from/:index":                               nil,
 	"/inventory":                                     nil,
 	"/extension/embed":                               nil,
+	"/welcome":                                       nil,
 }
 
 // All returns which specific routes to test for a given generic route.

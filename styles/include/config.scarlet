@@ -80,10 +80,10 @@ quote-color = hsl(0, 0%, 45%)
 quote-side-border-color = quote-color
 
 // Forum
-post-like-color = green !important
-post-unlike-color = rgb(255, 32, 12) !important
-post-delete-color = post-unlike-color !important
-post-permalink-color = blue !important
+like-color = green
+unlike-color = rgb(255, 32, 12)
+delete-color = unlike-color
+permalink-color = blue
 
 table-row-hover-background = hsla(0, 0%, 0%, 0.01)
 anime-list-item-name-color = link-color

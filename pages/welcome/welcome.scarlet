@@ -1,0 +1,10 @@
+.welcome
+	max-width 600px
+	margin 0 auto
+
+	label
+		display none
+
+.welcome-text
+	text-align center
+	margin-bottom 1rem

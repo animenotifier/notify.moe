@@ -14,5 +14,9 @@ func Get(ctx *aero.Context) string {
 		return frontpage.Get(ctx)
 	}
 
+	if !user.HasBasicInfo() {
+		return utils.SmartRedirect(ctx, "/welcome")
+	}
+
 	return utils.SmartRedirect(ctx, "/+"+user.Nick+"/animelist/watching")
 }

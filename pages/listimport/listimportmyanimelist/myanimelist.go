@@ -72,8 +72,7 @@ func Finish(ctx *aero.Context) string {
 	}
 
 	animeList.Save()
-
-	return utils.SmartRedirect(ctx, "/+"+user.Nick+"/animelist/watching")
+	return ctx.HTML(components.ImportFinished(user))
 }
 
 // getMatches finds and returns all matches for the logged in user.

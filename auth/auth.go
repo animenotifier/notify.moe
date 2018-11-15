@@ -3,7 +3,7 @@ package auth
 import "github.com/aerogo/aero"
 import "github.com/animenotifier/notify.moe/utils"
 
-const newUserStartRoute = "/settings"
+const newUserStartRoute = "/welcome"
 
 // Install installs the authentication routes in the application.
 func Install(app *aero.Application) {

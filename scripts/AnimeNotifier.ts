@@ -171,6 +171,12 @@ export default class AnimeNotifier {
 
 		// Apply page title
 		this.applyPageTitle()
+
+		// Auto-focus first input element on welcome page.
+		if(location.pathname === "/welcome") {
+			let firstInput = this.app.content.getElementsByTagName("input")[0] as HTMLInputElement
+			firstInput.focus()
+		}
 	}
 
 	applyPageTitle() {
@@ -1118,6 +1124,7 @@ export default class AnimeNotifier {
 		}
 
 		if(!apiObject) {
+			this.statusMessage.showError("API object not found")
 			throw "API object not found"
 		}
 

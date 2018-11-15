@@ -16,6 +16,10 @@ func Get(ctx *aero.Context) string {
 		return utils.AllowEmbed(ctx, ctx.HTML(components.Login("_blank")))
 	}
 
+	if !user.HasBasicInfo() {
+		return utils.AllowEmbed(ctx, ctx.HTML(components.ExtensionEnterBasicInfo()))
+	}
+
 	// Extension is enabled as long as the site isn't finished yet.
 	// ---
 	// if !user.IsPro() && user.TimeSinceRegistered() > 14*24*time.Hour {

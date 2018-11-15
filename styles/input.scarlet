@@ -34,6 +34,14 @@ input, select
 input
 	height input-height
 
+	[pattern]
+		:focus
+			:invalid
+				border-color red !important
+
+			:valid
+				border-color green !important
+
 	:active
 		transform translateY(3px)
 

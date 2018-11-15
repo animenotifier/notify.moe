@@ -1,0 +1,44 @@
+component Welcome(user *arn.User)
+	.welcome
+		if user.HasBasicInfo()
+			h1.mountable Thanks!
+		else
+			h1.mountable Welcome!
+
+		if !user.HasNick()
+			p.welcome-text.mountable To start using notify.moe, please enter a username.
+
+			.mountable(data-api="/api/user/" + user.ID)
+				//- [^\\W\\s\\d]{1,24}[A-Za-z]{1}
+				InputText("Nick", user.CleanNick(), "Nick", "Your username on notify.moe")
+				
+				.footer.mountable
+					p Only letters and underscore.
+		else if !user.HasAvatar()
+			p.welcome-text.mountable Add an avatar so people can recognize you.
+
+			.mountable(data-api="/api/user/" + user.ID)
+				AvatarInput(user)
+
+			.footer.mountable
+				p Recommended size: 560x560 (minimum: 280x280)
+		else if user.Introduction == ""
+			p.welcome-text.mountable Write a little introduction so people know who you are!
+
+			.mountable(data-api="/api/user/" + user.ID)
+				InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us about yourself")
+
+			.footer.mountable
+				p Markdown allowed.
+		else
+			p.welcome-text.mountable You're ready to start using Anime Notifier!
+
+			.buttons.mountable
+				if len(user.AnimeList().Items) == 0
+					a.button(href="/settings/accounts")
+						Icon("download")
+						span Import anime list
+				else
+					a.button(href=user.Link())
+						Icon("user")
+						span= user.Nick

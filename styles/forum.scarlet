@@ -107,16 +107,16 @@ post-content-padding-y = 0.75rem
 	margin-right 0.4em
 
 .post-permalink
-	color post-permalink-color
+	color permalink-color
 
 .post-like
-	color post-like-color
+	color like-color
 
 .post-unlike
-	color post-unlike-color
+	color unlike-color
 
 .post-delete
-	color post-delete-color
+	color delete-color
 
 .post-save
 	//

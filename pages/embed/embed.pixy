@@ -11,3 +11,12 @@ component ExtensionNavigation(user *arn.User)
 
 			a.button(href="/support", target="_blank")
 				RawIcon("heart")
+
+component ExtensionEnterBasicInfo
+	h1.mountable Welcome!
+	p.welcome-text.mountable Please complete some basic information about your profile.
+
+	.buttons.mountable
+		a.button(href="/welcome", target="_blank")
+			Icon("pencil")
+			span Complete profile

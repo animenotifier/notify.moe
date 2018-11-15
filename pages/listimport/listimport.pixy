@@ -23,3 +23,15 @@ component ImportLists(user *arn.User)
 			a.button(href="/import/myanimelist/animelist")
 				Icon("download")
 				span Import MyAnimeList
+
+component ImportFinished(user *arn.User)
+	h1.mountable Import finished
+
+	.buttons
+		a.button.mountable(href=user.Link())
+			Icon("user")
+			span Profile
+		
+		a.button.mountable(href=user.Link() + "/animelist/watching")
+			Icon("list")
+			span Anime list

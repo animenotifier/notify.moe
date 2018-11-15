@@ -41,9 +41,9 @@ const themes = {
 		"tip-bg-color": "hsl(0, 0%, 10%)",
 		// "tip-bg-color": "hsl(var(--bg-color-h), var(--bg-color-s), 10%)",
 
-		"post-like-color": "var(--link-color)",
-		"post-unlike-color": "var(--link-color)",
-		"post-permalink-color": "var(--link-color)",
+		"like-color": "var(--link-color)",
+		"unlike-color": "var(--link-color)",
+		"permalink-color": "var(--link-color)",
 
 		"quote-color": "var(--text-color)",
 

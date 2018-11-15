@@ -42,16 +42,7 @@ component SettingsPersonal(user *arn.User)
 			//- //- File upload
 			//- if user.Settings().Avatar.Source == "FileSystem"
 			
-			InputFileUpload("avatar-input", "File", "image", "/api/upload/avatar")
-
-			.profile-image-container.avatar-preview
-				if user.HasAvatar()
-					img.avatar-input-preview.profile-image.lazy(data-src=user.AvatarLink("large"), data-webp="true", alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
-				else
-					img.avatar-input-preview.profile-image.hidden(src=user.AvatarLink("large"), alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
-
-					#avatar-input-preview-svg
-						SVGProfileImage(user)
+			AvatarInput(user)
 		
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
@@ -66,3 +57,15 @@ component SettingsPersonal(user *arn.User)
 			if !user.IsPro()
 				.footer
 					p PRO account required.
+
+component AvatarInput(user *arn.User)
+	InputFileUpload("avatar-input", "File", "image", "/api/upload/avatar")
+
+	.profile-image-container.avatar-preview
+		if user.HasAvatar()
+			img.avatar-input-preview.profile-image.lazy(data-src=user.AvatarLink("large"), data-webp="true", alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
+		else
+			img.avatar-input-preview.profile-image.hidden(src=user.AvatarLink("large"), alt="Profile image", title="Recommended: 560 x 560 | PNG or JPG")
+
+			#avatar-input-preview-svg
+				SVGProfileImage(user)

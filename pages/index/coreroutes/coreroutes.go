@@ -9,6 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/login"
 	"github.com/animenotifier/notify.moe/pages/statistics"
 	"github.com/animenotifier/notify.moe/pages/terms"
+	"github.com/animenotifier/notify.moe/pages/welcome"
 )
 
 // Register registers the page routes.
@@ -18,6 +19,9 @@ func Register(l *layout.Layout) {
 
 	// Login
 	l.Page("/login", login.Get)
+
+	// Welcome
+	l.Page("/welcome", welcome.Get)
 
 	// Activity
 	l.Page("/activity", activity.Global)
