@@ -27,6 +27,13 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
+	// Anime list item
+	var animeListItem *arn.AnimeListItem
+
+	if user != nil {
+		animeListItem = user.AnimeList().Find(anime.ID)
+	}
+
 	// Episodes
 	episodes := anime.Episodes().Items
 
@@ -59,6 +66,10 @@ func Get(ctx *aero.Context) string {
 					episodeToFriends[friendAnimeListItem.Episodes] = append(episodeToFriends[friendAnimeListItem.Episodes], friend)
 				}
 			}
+		}
+
+		if animeListItem != nil {
+			episodeToFriends[animeListItem.Episodes] = append(episodeToFriends[animeListItem.Episodes], user)
 		}
 
 		arn.SortUsersLastSeenFirst(friends)
@@ -107,13 +118,6 @@ func Get(ctx *aero.Context) string {
 
 		return len(amvs[i].Likes) > len(amvs[j].Likes)
 	})
-
-	// Anime list item
-	var animeListItem *arn.AnimeListItem
-
-	if user != nil {
-		animeListItem = user.AnimeList().Find(anime.ID)
-	}
 
 	// Open Graph
 	ctx.Data = getOpenGraph(ctx, anime)

@@ -26,6 +26,12 @@ func Episodes(ctx *aero.Context) string {
 				episodeToFriends[friendAnimeListItem.Episodes] = append(episodeToFriends[friendAnimeListItem.Episodes], friend)
 			}
 		}
+
+		ownListItem := user.AnimeList().Find(anime.ID)
+
+		if ownListItem != nil {
+			episodeToFriends[ownListItem.Episodes] = append(episodeToFriends[ownListItem.Episodes], user)
+		}
 	}
 
 	if err != nil {
