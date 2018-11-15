@@ -57,7 +57,7 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 
 						.quotes.character-quotes.mountable
 							each quote in quotes
-								Quote(quote, user)
+								QuotePreview(quote, user)
 		
 			.character-section
 				h3.character-section-name.mountable Comments
