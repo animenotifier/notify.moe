@@ -63,6 +63,7 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 
 #pro-benefits-footer
 	margin-top 3rem
+	margin-bottom 1rem
 
 .pro-benefits-button
 	vertical
@@ -78,9 +79,8 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 
 #pro-benefits
 	margin 0 auto
-	margin-top 2rem
 	width 100%
-	max-width 400px
+	max-width 450px
 
 .pro-benefits-header
 	text-align center
@@ -88,6 +88,8 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 
 .pro-benefit
 	list-style-type none
+	font-size 1.2rem
+	line-height 1.6em
 
 	.icon
 		color like-color

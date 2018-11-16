@@ -30,7 +30,7 @@ component Shop(items []*arn.ShopItem, itemPopularity map[string]int, user *arn.U
 
 			li.pro-benefit.mountable 
 				Icon("check")
-				span Show a star near your avatar
+				span Show a star next to your avatar
 
 			li.pro-benefit.mountable 
 				Icon("check")
