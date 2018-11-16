@@ -33,6 +33,18 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 	.then(() => arn.loading(false))
 }
 
+// Toggle fade
+export function toggleFade(arn: AnimeNotifier, button: HTMLElement) {
+	let elementId = button.dataset.elementId
+	let element = document.getElementById(elementId)
+
+	if(element.classList.contains("fade-out")) {
+		element.classList.remove("fade-out")
+	} else {
+		element.classList.add("fade-out")
+	}
+}
+
 // Buy item
 export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
 	let itemId = button.dataset.itemId

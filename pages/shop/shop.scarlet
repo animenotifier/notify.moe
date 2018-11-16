@@ -60,3 +60,34 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	.icon-diamond
 		margin-left 0.3rem
 		margin-right 0
+
+#pro-benefits-footer
+	margin-top 3rem
+
+.pro-benefits-button
+	vertical
+	color hsla(text-color-h, text-color-s, text-color-l, 0.5)
+	background transparent
+	border none
+	font-size 0.8rem
+
+	:hover
+		background transparent
+		border none
+		color link-hover-color
+
+#pro-benefits
+	margin 0 auto
+	margin-top 2rem
+	width 100%
+	max-width 400px
+
+.pro-benefits-header
+	text-align center
+	margin-bottom 1rem
+
+.pro-benefit
+	list-style-type none
+
+	.icon
+		color like-color

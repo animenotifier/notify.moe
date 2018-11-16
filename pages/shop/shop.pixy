@@ -6,6 +6,39 @@ component Shop(items []*arn.ShopItem, itemPopularity map[string]int, user *arn.U
 	.shop-items
 		each item in items
 			ShopItem(item, itemPopularity[item.ID])
+	
+	#pro-benefits-footer.buttons.mountable
+		button.pro-benefits-button.action(data-action="toggleFade", data-trigger="click", data-element-id="pro-benefits")
+			RawIcon("question-circle")
+			p View benefits of PRO accounts
+	
+	#pro-benefits.fade.fade-out
+		h3.pro-benefits-header.mountable PRO accounts let you...
+
+		ul
+			li.pro-benefit.mountable
+				Icon("check")
+				span Access the dark theme
+
+			li.pro-benefit.mountable 
+				Icon("check")
+				span Customize your cover image
+
+			li.pro-benefit.mountable 
+				Icon("check")
+				span Secure a spot on the supporters page
+
+			li.pro-benefit.mountable 
+				Icon("check")
+				span Show a star near your avatar
+
+			li.pro-benefit.mountable 
+				Icon("check")
+				span Receive the supporter role on the Discord server
+
+			li.pro-benefit.mountable 
+				Icon("check")
+				span ...and many more luxury features in the future.
 
 component ShopTabs(user *arn.User)
 	.tabs
