@@ -412,7 +412,7 @@ export default class AnimeNotifier {
 
 					try {
 						json = JSON.parse(data)
-					} catch {
+					} catch(err) {
 						return
 					}
 

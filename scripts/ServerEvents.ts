@@ -74,6 +74,11 @@ export default class ServerEvents {
 		}
 
 		let button = document.getElementById("load-new-activities")
+
+		if(!button) {
+			return
+		}
+
 		let buttonText = document.getElementById("load-new-activities-text")
 		let newCount = parseInt(button.dataset.count) + 1
 		button.dataset.count = newCount.toString()
