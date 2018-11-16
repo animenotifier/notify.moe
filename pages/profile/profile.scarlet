@@ -159,6 +159,9 @@ const profile-image-size = 280px
 // 	100%
 // 		filter brightness(35%) blur(0)
 
+.profile-section-activity
+	margin-bottom 0
+
 .profile-activities
 	horizontal-wrap
 

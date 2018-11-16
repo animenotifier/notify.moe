@@ -51,7 +51,7 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 								a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="genre")= genre
 				
 				//- Activity
-				.profile-section
+				.profile-section.profile-section-activity
 					h3.profile-column-header.mountable(data-mountable-type="extra") Activity
 
 					.profile-activities.mountable(data-mountable-type="extra")
