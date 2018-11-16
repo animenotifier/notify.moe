@@ -21,8 +21,9 @@ export default class InfiniteScroller {
 				return
 			}
 
-			// Otherwise, check immediately.
-			check()
+			// Otherwise, queue up the check immediately.
+			// Don't call check() directly to make scrolling as smooth as possible.
+			Diff.mutations.queue(check)
 		})
 	}
 
