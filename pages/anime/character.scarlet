@@ -5,6 +5,7 @@
 	vertical
 	align-items center
 	margin 0.5rem
+	transform scale(1)
 	default-transition
 
 	:hover
