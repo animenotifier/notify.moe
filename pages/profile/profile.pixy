@@ -50,18 +50,6 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 							each genre in topGenres
 								a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="genre")= genre
 				
-				//- Friends
-				.profile-section
-					h3.profile-column-header.mountable(data-mountable-type="extra") Friends
-
-					if len(friends) == 0
-						p.no-data.mountable(data-mountable-type="extra") Nothing here yet.
-					else
-						.profile-friends.mountable(data-mountable-type="extra")
-							each friend in friends
-								.profile-friend.mountable(data-mountable-type="friend")
-									Avatar(friend)
-				
 				//- Activity
 				.profile-section
 					h3.profile-column-header.mountable(data-mountable-type="extra") Activity
@@ -79,6 +67,18 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 
 											if day == 2
 												.spacer-box
+				
+				//- Friends
+				.profile-section
+					h3.profile-column-header.mountable(data-mountable-type="extra") Friends
+
+					if len(friends) == 0
+						p.no-data.mountable(data-mountable-type="extra") Nothing here yet.
+					else
+						.profile-friends.mountable(data-mountable-type="extra")
+							each friend in friends
+								.profile-friend.mountable(data-mountable-type="friend")
+									Avatar(friend)
 				
 component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
 	ProfileHead(viewUser, user, uri)
