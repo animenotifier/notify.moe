@@ -2,8 +2,8 @@ import AnimeNotifier from "../AnimeNotifier"
 
 let currentThemeName = "light"
 let previewTimeoutID: number = 0
-let themeWheel: HTMLElement
-let themeWheelTimeoutID: number = 0
+// let themeWheel: HTMLElement
+// let themeWheelTimeoutID: number = 0
 
 const themes = {
 	"light": {},

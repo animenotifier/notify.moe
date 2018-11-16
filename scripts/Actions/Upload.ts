@@ -1,5 +1,4 @@
 import AnimeNotifier from "../AnimeNotifier"
-import StatusMessage from "../StatusMessage"
 import { bytesHumanReadable, uploadWithProgress } from "../Utils"
 
 // Select file

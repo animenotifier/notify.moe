@@ -26,7 +26,7 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 }
 
 // Toggle hiding added anime.
-export function toggleHideAddedAnime(arn: AnimeNotifier, input: HTMLButtonElement) {
+export function toggleHideAddedAnime() {
 	hideAddedAnime()
 }
 

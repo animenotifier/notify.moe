@@ -6,12 +6,12 @@ export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
 }
 
 // Pause audio
-export function pauseAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
+export function pauseAudio(arn: AnimeNotifier) {
 	arn.audioPlayer.pause()
 }
 
 // Resume audio
-export function resumeAudio(arn: AnimeNotifier, button: HTMLButtonElement) {
+export function resumeAudio(arn: AnimeNotifier) {
 	arn.audioPlayer.resume()
 }
 

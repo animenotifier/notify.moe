@@ -49,7 +49,7 @@ export default class ServiceWorkerManager {
 
 			this.postMessage({
 				type: "loaded",
-				url: ""
+				url
 			})
 		}
 

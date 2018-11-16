@@ -5,6 +5,8 @@
 		"moduleResolution": "node",
 		"baseUrl": ".",
 		"strict": false,
-		"strictFunctionTypes": false
+		"strictFunctionTypes": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": false
 	}
 }

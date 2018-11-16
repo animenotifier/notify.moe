@@ -55,7 +55,6 @@ export async function deleteKitsuAnime(arn: AnimeNotifier, button: HTMLButtonEle
 export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAreaElement) {
 	let results = document.getElementById("multi-search-anime") as HTMLDivElement
 	let animeTitles = textarea.value.split("\n")
-	let animeIDs = new Array<string>(animeTitles.length)
 
 	results.innerHTML = ""
 
