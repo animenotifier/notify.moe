@@ -18,6 +18,12 @@ func Episodes(ctx *aero.Context) string {
 	episodeToFriends := map[int][]*arn.User{}
 
 	if user != nil {
+		ownListItem := user.AnimeList().Find(anime.ID)
+
+		if ownListItem != nil {
+			episodeToFriends[ownListItem.Episodes] = append(episodeToFriends[ownListItem.Episodes], user)
+		}
+
 		for _, friend := range user.Follows().Users() {
 			friendAnimeList := friend.AnimeList()
 			friendAnimeListItem := friendAnimeList.Find(anime.ID)
@@ -25,12 +31,6 @@ func Episodes(ctx *aero.Context) string {
 			if friendAnimeListItem != nil && !friendAnimeListItem.Private && len(episodeToFriends[friendAnimeListItem.Episodes]) < maxFriendsPerEpisode {
 				episodeToFriends[friendAnimeListItem.Episodes] = append(episodeToFriends[friendAnimeListItem.Episodes], friend)
 			}
-		}
-
-		ownListItem := user.AnimeList().Find(anime.ID)
-
-		if ownListItem != nil {
-			episodeToFriends[ownListItem.Episodes] = append(episodeToFriends[ownListItem.Episodes], user)
 		}
 	}
 

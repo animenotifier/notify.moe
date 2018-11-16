@@ -50,6 +50,10 @@ func Get(ctx *aero.Context) string {
 		friends = user.Follows().Users()
 		deleted := 0
 
+		if animeListItem != nil {
+			episodeToFriends[animeListItem.Episodes] = append(episodeToFriends[animeListItem.Episodes], user)
+		}
+
 		for i := range friends {
 			j := i - deleted
 			friend := friends[j]
@@ -66,10 +70,6 @@ func Get(ctx *aero.Context) string {
 					episodeToFriends[friendAnimeListItem.Episodes] = append(episodeToFriends[friendAnimeListItem.Episodes], friend)
 				}
 			}
-		}
-
-		if animeListItem != nil {
-			episodeToFriends[animeListItem.Episodes] = append(episodeToFriends[animeListItem.Episodes], user)
 		}
 
 		arn.SortUsersLastSeenFirst(friends)
