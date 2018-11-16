@@ -160,13 +160,15 @@ const profile-image-size = 280px
 // 		filter brightness(35%) blur(0)
 
 .profile-activities
-	horizontal
+	horizontal-wrap
 
+// Margin between activity boxes
 const month-margin = 0.4rem
 
 .activities-month
 	horizontal
 	margin 0 calc(month-margin / 2)
+	margin-bottom content-padding
 
 .activities-week
 	vertical
