@@ -61,6 +61,12 @@ const profile-image-size = 280px
 		&.mounted
 			opacity 0.5 !important
 
+.profile-section-friends
+	margin-bottom 1.2rem
+
+.profile-section-activity
+	margin-bottom 0
+
 .profile-favorite-anime-container
 	display grid
 	grid-template-columns repeat(auto-fill, anime-image-small-width)
@@ -158,9 +164,6 @@ const profile-image-size = 280px
 // 		filter brightness(500%) blur(5px)
 // 	100%
 // 		filter brightness(35%) blur(0)
-
-.profile-section-activity
-	margin-bottom 0
 
 .profile-activities
 	horizontal-wrap
