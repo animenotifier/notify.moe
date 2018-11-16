@@ -2,6 +2,7 @@ package profile
 
 import (
 	"sort"
+	"time"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
@@ -68,6 +69,39 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		friends = friends[:maxFriends]
 	}
 
+	// Activities
+	activities := arn.FilterActivities(func(activity arn.Activity) bool {
+		return activity.GetCreatedBy() == viewUser.ID
+	})
+
+	// Time zone offset
+	var timeZoneOffset time.Duration
+	analytics := viewUser.Analytics()
+
+	if analytics != nil {
+		timeZoneOffset = time.Duration(-analytics.General.TimezoneOffset) * time.Minute
+	}
+
+	now := time.Now().UTC().Add(timeZoneOffset)
+	weekDay := int(now.Weekday())
+	currentYearDay := int(now.YearDay())
+
+	// Day offset is the number of days we need to reach Sunday
+	dayOffset := 0
+
+	if weekDay > 0 {
+		dayOffset = 7 - weekDay
+	}
+
+	dayToActivityCount := map[int]int{}
+
+	for _, activity := range activities {
+		activityTime := activity.GetCreatedTime().Add(timeZoneOffset)
+		activityYearDay := activityTime.YearDay()
+		days := currentYearDay - activityYearDay
+		dayToActivityCount[days+dayOffset]++
+	}
+
 	// Characters
 	characters := []*arn.Character{}
 
@@ -93,5 +127,5 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	}
 
 	ctx.Data = openGraph
-	return ctx.HTML(components.Profile(viewUser, user, animeList, characters, friends, topGenres, ctx.URI()))
+	return ctx.HTML(components.Profile(viewUser, user, animeList, characters, friends, topGenres, dayToActivityCount, ctx.URI()))
 }

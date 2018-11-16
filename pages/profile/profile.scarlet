@@ -159,6 +159,39 @@ const profile-image-size = 280px
 // 	100%
 // 		filter brightness(35%) blur(0)
 
+.profile-activities
+	horizontal
+
+const month-margin = 0.4rem
+
+.activities-month
+	horizontal
+	margin 0 calc(month-margin / 2)
+
+.activities-week
+	vertical
+
+.box
+	width 0.75rem
+	height 0.75rem
+	border-radius 1px
+	margin 1px
+	background hsla(link-color-h, link-color-s, link-color-l, 0.75)
+
+	:hover
+		cursor pointer
+		background link-hover-color
+
+	[data-count="0"]
+		background reverse-light-color
+
+		:hover
+			cursor default
+			background reverse-light-color
+
+.spacer-box
+	height month-margin
+
 .profile-image
 	object-fit cover
 	width 100%
