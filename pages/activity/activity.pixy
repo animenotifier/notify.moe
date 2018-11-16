@@ -26,7 +26,7 @@ component ActivitiesScrollable(entries []arn.Activity, user *arn.User)
 		Activity(entry, user)
 
 component Activity(activity arn.Activity, user *arn.User)
-	.activity.post-parent.mountable(id=fmt.Sprintf("activity-%s", activity.GetID()))
+	.activity.post-parent.mountable(id=fmt.Sprintf("activity-%s", activity.GetID()), data-api=utils.ActivityAPILink(activity))
 		.post-author
 			Avatar(activity.Creator())
 		.post-content
@@ -37,9 +37,17 @@ component Activity(activity arn.Activity, user *arn.User)
 					else if activity.TypeName() == "ActivityConsumeAnime"
 						ActivityConsumeAnimeTitle(activity.(*arn.ActivityConsumeAnime), user)
 				
-				if user != nil && user.ID == activity.GetCreatedBy() && activity.TypeName() == "ActivityConsumeAnime"
-					button.activity-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity", data-api=fmt.Sprintf("/api/%s/%s", strings.ToLower(activity.TypeName()), activity.GetID()))
-						RawIcon("trash")
+				if user != nil
+					//- button.activity-action.tip.action(data-action="like", data-trigger="click", aria-label="Like")
+					//- 	Icon("heart")
+					//- 	if activity.TypeName() == "ActivityCreate"
+					//- 		span= activity.(*arn.ActivityCreate).Object().CountLikes()
+					//- 	else
+					//- 		span= len(activity.(*arn.ActivityConsumeAnime).Likes)
+					
+					if user.ID == activity.GetCreatedBy() && activity.TypeName() == "ActivityConsumeAnime"
+						button.activity-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity")
+							RawIcon("trash")
 				
 				.activity-date.utc-date(data-date=activity.GetCreated())
 			
