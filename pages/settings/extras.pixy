@@ -12,13 +12,13 @@ component SettingsExtras(user *arn.User)
 			
 			.widget-section
 				label Chrome Extension:
-				a.button(href="https://chrome.google.com/webstore/detail/anime-notifier/hajchfikckiofgilinkpifobdbiajfch", target="_blank", rel="nofollow")
+				a.button(href="https://chrome.google.com/webstore/detail/anime-notifier/hajchfikckiofgilinkpifobdbiajfch", target="_blank", rel="noopener")
 					Icon("chrome")
 					span Get the Chrome Extension
 
 			.widget-section
 				label Firefox Extension:
-				a.button(href="https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/", target="_blank", rel="nofollow")
+				a.button(href="https://addons.mozilla.org/en-US/firefox/addon/anime-notifier/", target="_blank", rel="noopener")
 					Icon("firefox")
 					span Get the Firefox Extension
 
