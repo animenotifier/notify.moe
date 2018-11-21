@@ -1,0 +1,14 @@
+.group-image-container
+	vertical
+	align-items center
+
+.group-image
+	flex-shrink 0
+	width 70px
+	height 70px
+	margin-right 1rem
+	border-radius ui-element-border-radius
+	object-fit cover
+
+.group-image-input-preview
+	margin 0

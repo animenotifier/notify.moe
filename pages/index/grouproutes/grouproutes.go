@@ -14,4 +14,5 @@ func Register(l *layout.Layout) {
 	l.Page("/group/:id/info", group.Info)
 	l.Page("/group/:id/members", group.Members)
 	l.Page("/group/:id/edit", group.Edit)
+	l.Page("/group/:id/edit/image", group.EditImage)
 }

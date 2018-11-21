@@ -12,6 +12,14 @@ component GroupInfo(group *arn.Group, member *arn.GroupMember, user *arn.User)
 			.group-info-section
 				h3.mountable Rules
 				.group-rules.mountable!= markdown.Render(group.Rules)
+
+		if len(group.Tags) > 0
+			.group-info-section
+				h3.mountable Tags
+
+				.tags.group-tags.mountable
+					each tag in group.Tags
+						.tag= tag
 		
 		.group-info-section
 			h3.mountable Founder

@@ -3,7 +3,7 @@ const inventory-slot-size = 64px
 .inventory
 	display grid
 	grid-gap 0.25rem
-	grid-template-columns repeat(auto-fit, inventory-slot-size)
+	grid-template-columns repeat(auto-fill, inventory-slot-size)
 	grid-auto-rows inventory-slot-size
 	justify-content center
 	width 100%

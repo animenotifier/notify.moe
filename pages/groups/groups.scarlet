@@ -4,8 +4,11 @@ const group-padding-x = 0.75rem
 .groups
 	display grid
 	grid-gap content-padding-half
-	// grid-template-columns repeat(auto-fill, min(100%, 520px))
-	// justify-content center
+
+> 600px
+	.groups
+		grid-template-columns repeat(auto-fit, 520px)
+		justify-content center
 
 .group
 	horizontal
@@ -21,21 +24,18 @@ const group-padding-x = 0.75rem
 		background-color theme-black
 		text-shadow none
 
-.group-image
-	width 70px
-	height 70px
-	margin-right 1rem
-	border-radius ui-element-border-radius
-
 .group-info
 	vertical
+	overflow hidden
 
 .group-name
-	horizontal
-	align-items center
+	// horizontal
+	// align-items center
+	clip-long-text
 
 .group-tagline
 	opacity 0.6
+	clip-long-text
 
 .group-member-count
 	position absolute

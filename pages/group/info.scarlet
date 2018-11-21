@@ -1,2 +1,5 @@
 .group-info-section
 	margin-bottom content-padding
+
+.group-founder
+	justify-content flex-start !important

@@ -6,3 +6,4 @@ component GroupTabs(group *arn.Group, member *arn.GroupMember, user *arn.User)
 
 		if member != nil && member.Role == "founder"
 			Tab("Edit", "pencil", group.Link() + "/edit")
+			Tab("Edit image", "image", group.Link() + "/edit/image")

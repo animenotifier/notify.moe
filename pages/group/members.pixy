@@ -9,4 +9,4 @@ component GroupMembers(group *arn.Group, member *arn.GroupMember, user *arn.User
 	.buttons
 		button.mountable
 			Icon("user-plus")
-			span= fmt.Sprintf("Join %s", group.Name)
+			span= fmt.Sprintf(`Join "%s"`, group.Name)

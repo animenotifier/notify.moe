@@ -1,0 +1,15 @@
+component EditGroupImage(group *arn.Group, member *arn.GroupMember, user *arn.User)
+	GroupTabs(group, member, user)
+
+	.widget-form
+		h1.mountable Edit group image
+
+		.widget.mountable(data-api="/api/group/" + group.ID)
+			h3.widget-title
+				Icon("picture-o")
+				span Image
+			
+			InputFileUpload("group-image-input", "File", "image", "/api/upload/group/" + group.ID + "/image")
+
+			.group-image-container.mountable
+				img.group-image.group-image-input-preview.lazy(data-src=group.ImageLink("small"), data-webp="true", data-color=group.AverageColor(), alt="Group image")

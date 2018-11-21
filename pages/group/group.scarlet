@@ -1,19 +1,11 @@
 .group-view
-	horizontal-wrap
+	vertical
 	width 100%
 	max-width 900px
 	margin 0 auto
 
-< 1100px
-	.group-view
-		vertical
-
 .group-feed
 	flex 1
-
-.group-members
-	margin-bottom 0.5rem
-	justify-content flex-start
 
 .group-header
 	margin-bottom content-padding

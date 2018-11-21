@@ -819,7 +819,7 @@ export default class AnimeNotifier {
 			let extension = ""
 
 			// Replace URL with WebP if supported
-			if(this.webpEnabled && element.dataset.webp === "true") {
+			if(this.webpEnabled && element.dataset.webp === "true" && !dataSrc.endsWith(".svg")) {
 				let queryPos = dataSrc.lastIndexOf("?")
 
 				if(queryPos !== -1) {

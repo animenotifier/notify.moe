@@ -18,7 +18,7 @@ component Groups(groups []*arn.Group, groupsPerPage int, user *arn.User)
 	#load-more-target.groups
 		each group in groups
 			a.group.mountable(href=group.Link())
-				img.group-image.lazy(data-src=group.ImageURL(), alt=group.Name)
+				img.group-image.lazy(data-src=group.ImageLink("small"), data-webp="true", data-color=group.AverageColor(), alt=group.Name)
 				
 				.group-info
 					h3.group-name= group.Name
