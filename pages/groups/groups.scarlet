@@ -3,7 +3,7 @@ const group-padding-x = 0.75rem
 
 .groups
 	display grid
-	grid-gap calc(content-padding / 2)
+	grid-gap content-padding-half
 	// grid-template-columns repeat(auto-fill, min(100%, 520px))
 	// justify-content center
 

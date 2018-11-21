@@ -1,10 +1,10 @@
 .explore-filters
 	horizontal
 	justify-content center
-	margin-bottom calc(content-padding / 2)
+	margin-bottom content-padding-half
 
 .explore-anime
-	margin-top calc(content-padding / 2)
+	margin-top content-padding-half
 
 .option-any
 	color reverse-light-hover-color

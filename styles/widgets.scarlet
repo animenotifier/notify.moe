@@ -1,7 +1,7 @@
 .widget
 	vertical
 	flex 1
-	margin calc(content-padding / 2)
+	margin content-padding-half
 
 .widget-section
 	vertical

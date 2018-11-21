@@ -14,7 +14,7 @@
 		flex-basis 170px
 		flex-grow 0
 		height 230px
-		margin calc(content-padding / 2)
+		margin content-padding-half
 		position relative
 		border ui-border
 		box-shadow shadow-light

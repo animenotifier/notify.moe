@@ -4,7 +4,7 @@
 	bottom 0
 	left 0
 	width 100%
-	padding calc(content-padding / 2) content-padding
+	padding content-padding-half content-padding
 	pointer-events none
 	z-index 1000
 

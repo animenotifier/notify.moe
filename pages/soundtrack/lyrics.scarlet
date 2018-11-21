@@ -6,7 +6,7 @@
 	flex 1
 	min-width 300px
 	max-width 500px
-	padding calc(content-padding / 2)
+	padding content-padding-half
 
 .lyrics-paragraph
 	margin 1rem 0

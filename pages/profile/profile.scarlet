@@ -46,7 +46,7 @@ const profile-image-size = 280px
 .profile-column
 	// border 1px solid red
 	// height 100px
-	padding calc(content-padding / 2)
+	padding content-padding-half
 
 .profile-column-header
 	font-style bold

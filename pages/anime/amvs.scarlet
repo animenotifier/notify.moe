@@ -5,4 +5,4 @@
 	.anime-amvs
 		.amv
 			max-width 200px
-			margin calc(content-padding / 2)
+			margin content-padding-half

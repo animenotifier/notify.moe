@@ -3,7 +3,7 @@
 	width 100%
 	max-width 530px
 	margin 0 auto
-	margin-top calc(content-padding / 2)
+	margin-top content-padding-half
 
 .anime-list-item-others
 	display grid

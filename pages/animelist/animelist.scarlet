@@ -1,7 +1,7 @@
 .anime-list-user-avatar
 	position absolute
-	top calc(content-padding / 2)
-	left calc(content-padding / 2)
+	top content-padding-half
+	left content-padding-half
 
 .anime-list-container
 	width 100%

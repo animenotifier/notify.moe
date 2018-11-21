@@ -40,11 +40,11 @@ component Sidebar(user *arn.User)
 		SidebarButton("Companies", "/companies", "building")
 		SidebarButton("Users", "/users", "globe")
 
-		if user != nil
-			SidebarButton("Support", "/support", "heart")
-		
 		if arn.IsDevelopment()
 			SidebarButton("Groups", "/groups", "users")
+
+		if user != nil
+			SidebarButton("Support", "/support", "heart")
 
 		//- Disabled:
 		//- SidebarButton("Dash", "/dashboard", "tachometer")

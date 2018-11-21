@@ -18,7 +18,7 @@
 
 		.soundtrack
 			max-width 200px
-			margin calc(content-padding / 2)
+			margin content-padding-half
 
 		.soundtrack-content
 			min-height 112px

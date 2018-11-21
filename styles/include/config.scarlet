@@ -122,6 +122,7 @@ outline-shadow-heavy = 0 0 6px rgba(0, 0, 0, 0.6)
 // Distances
 const content-padding = 1.6rem
 const content-padding-top = 1.6rem
+const content-padding-half = calc(content-padding / 2)
 const content-line-height = 1.7em
 const typography-margin = 0.4rem
 const media-bottom-margin = 2rem
