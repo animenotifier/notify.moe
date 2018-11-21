@@ -20,6 +20,12 @@ func Edit(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
+	var member *arn.GroupMember
+
+	if user != nil {
+		member = group.FindMember(user.ID)
+	}
+
 	ctx.Data = &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     group.Name,
@@ -28,5 +34,5 @@ func Edit(ctx *aero.Context) string {
 		},
 	}
 
-	return ctx.HTML(components.GroupTabs(group, user) + editform.Render(group, "Edit group", user))
+	return ctx.HTML(components.GroupTabs(group, member, user) + editform.Render(group, "Edit group", user))
 }

@@ -12,9 +12,6 @@
 .activity-header
 	horizontal
 
-.activity-user
-	display none
-
 .activity-parent
 	flex 1
 

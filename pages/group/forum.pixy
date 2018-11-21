@@ -1,4 +1,0 @@
-component GroupForum(group *arn.Group, user *arn.User)
-	GroupTabs(group, user)
-	
-	h1 Forum

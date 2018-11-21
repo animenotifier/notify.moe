@@ -8,7 +8,7 @@ component Users(users []*arn.User, url string)
 
 component UsersByCountry(users []*arn.User, countryName string)
 	if len(users) == 0
-		p.no-data.mountable= "Seems like there are no users in " + stringutils.Capitalize(countryName)
+		p.no-data.mountable= "Seems like there are no active users in " + stringutils.Capitalize(countryName)
 	else
 		h1= "Users in " + users[0].Location.CountryName
 

@@ -1,0 +1,17 @@
+component GroupFeed(group *arn.Group, member *arn.GroupMember, user *arn.User)
+	GroupTabs(group, member, user)
+	
+	.group-header
+		if group.Name != ""
+			h1.group-page-name.mountable= group.Name
+		else
+			h1.group-page-name.mountable untitled
+
+		if group.Tagline != ""
+			p.group-page-tagline.mountable= group.Tagline
+		else
+			p.group-page-tagline.mountable no tagline yet
+
+	.group-view
+		.group-feed
+			Comments(group, user)

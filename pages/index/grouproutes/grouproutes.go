@@ -10,7 +10,8 @@ import (
 func Register(l *layout.Layout) {
 	// Groups
 	l.Page("/groups", groups.Get)
-	l.Page("/group/:id", group.Get)
+	l.Page("/group/:id", group.Feed)
+	l.Page("/group/:id/info", group.Info)
+	l.Page("/group/:id/members", group.Members)
 	l.Page("/group/:id/edit", group.Edit)
-	l.Page("/group/:id/forum", group.Forum)
 }

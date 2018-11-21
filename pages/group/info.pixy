@@ -1,0 +1,19 @@
+component GroupInfo(group *arn.Group, member *arn.GroupMember, user *arn.User)
+	GroupTabs(group, member, user)
+	h1.page-title= fmt.Sprintf("%s - Info", group.Name)
+
+	.group-view
+		if group.Description != ""
+			.group-info-section
+				h3.mountable Description
+				.group-description.mountable!= markdown.Render(group.Description)
+
+		if group.Rules != ""
+			.group-info-section
+				h3.mountable Rules
+				.group-rules.mountable!= markdown.Render(group.Rules)
+		
+		.group-info-section
+			h3.mountable Founder
+			.user-avatars.group-founder.mountable
+				Avatar(group.Creator())

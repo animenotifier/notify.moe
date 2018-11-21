@@ -1,0 +1,8 @@
+component GroupTabs(group *arn.Group, member *arn.GroupMember, user *arn.User)
+	.tabs
+		Tab("Posts", "comment", group.Link())
+		Tab("Info", "info-circle", group.Link() + "/info")
+		Tab("Members", "globe", group.Link() + "/members")
+
+		if member != nil && member.Role == "founder"
+			Tab("Edit", "pencil", group.Link() + "/edit")

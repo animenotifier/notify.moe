@@ -5,7 +5,7 @@ component Comments(parent arn.PostParent, user *arn.User)
 				if arn.IsLocked(parent)
 					footer.footer.mountable
 						p.text-center= "This " + strings.ToLower(reflect.TypeOf(parent).Elem().Name()) + " is locked."
-				else
+				else if parent.TypeName() != "Group" || parent.(*arn.Group).FindMember(user.ID) != nil
 					NewPostArea(parent, user, "Comment")
 			
 			if user == nil && parent.CountPosts() == 0

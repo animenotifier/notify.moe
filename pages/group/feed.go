@@ -9,8 +9,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Get ...
-func Get(ctx *aero.Context) string {
+// Feed shows the group front page.
+func Feed(ctx *aero.Context) string {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
@@ -19,13 +19,12 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Group not found", err)
 	}
 
-	ctx.Data = &arn.OpenGraph{
-		Tags: map[string]string{
-			"og:title":     group.Name,
-			"og:url":       "https://" + ctx.App.Config.Domain + group.Link(),
-			"og:site_name": "notify.moe",
-		},
+	var member *arn.GroupMember
+
+	if user != nil {
+		member = group.FindMember(user.ID)
 	}
 
-	return ctx.HTML(components.Group(group, user))
+	ctx.Data = getOpenGraph(ctx, group)
+	return ctx.HTML(components.GroupFeed(group, member, user))
 }

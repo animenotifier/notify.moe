@@ -28,9 +28,6 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 							each character in characters
 								.mountable(data-mountable-type="character")
 									CharacterSmall(character, user)
-								//- a.profile-favorite-character.tip.mountable(href=character.Link(), aria-label=character.Name.ByUser(user), data-mountable-type="favorite-anime")
-								//- 	img.profile-favorite-character-image.lazy(data-src=character.ImageLink("small"), data-webp=true, alt=character.Name.ByUser(user))
-
 			//- Posts
 			.profile-column.profile-activity.mountable(data-mountable-type="column")
 				.profile-section

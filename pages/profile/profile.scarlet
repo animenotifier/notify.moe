@@ -95,13 +95,6 @@ const profile-image-size = 280px
 	grid-gap 0.5rem
 	justify-content space-evenly
 
-// .profile-favorite-character
-// 	margin 0.25rem
-
-// .profile-favorite-character-image
-
-// 	border-radius ui-element-border-radius
-
 > 740px
 	.profile-head
 		horizontal

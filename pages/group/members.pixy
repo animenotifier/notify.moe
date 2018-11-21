@@ -1,0 +1,12 @@
+component GroupMembers(group *arn.Group, member *arn.GroupMember, user *arn.User)
+	GroupTabs(group, member, user)
+	h1.page-title= fmt.Sprintf("%s - Members", group.Name)
+
+	.user-avatars.group-members.mountable
+		each member in group.Members
+			Avatar(member.User())
+	
+	.buttons
+		button.mountable
+			Icon("user-plus")
+			span= fmt.Sprintf("Join %s", group.Name)
