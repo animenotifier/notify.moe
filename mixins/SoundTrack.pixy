@@ -50,4 +50,4 @@ component SoundTrackMiniFooter(track *arn.SoundTrack, user *arn.User)
 			a(href=track.Link())= track.Title.ByUser(user)
 
 component ExternalMedia(media *arn.ExternalMedia)
-	iframe.lazy(data-src=media.EmbedLink(), allowfullscreen)
+	iframe.lazy(data-src=media.EmbedLink(), title=media.Service + " media", allowfullscreen)
