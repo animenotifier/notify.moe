@@ -1,0 +1,31 @@
+import AnimeNotifier from "scripts/AnimeNotifier"
+
+// join
+export async function join(arn: AnimeNotifier, element: HTMLElement) {
+	arn.statusMessage.showInfo("Joined group!", 1000)
+	let apiEndpoint = arn.findAPIEndpoint(element)
+
+	try {
+		await arn.post(apiEndpoint + "/join", null)
+		arn.reloadContent()
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
+}
+
+// leave
+export async function leave(arn: AnimeNotifier, element: HTMLElement) {
+	if(!confirm(`Are you sure you want to leave the group?`)) {
+		return
+	}
+
+	arn.statusMessage.showInfo("Left group!", 1000)
+	let apiEndpoint = arn.findAPIEndpoint(element)
+
+	try {
+		await arn.post(apiEndpoint + "/leave", null)
+		arn.reloadContent()
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
+}

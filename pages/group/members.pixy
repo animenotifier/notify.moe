@@ -6,7 +6,12 @@ component GroupMembers(group *arn.Group, member *arn.GroupMember, user *arn.User
 		each member in group.Members
 			Avatar(member.User())
 	
-	.buttons
-		button.mountable
-			Icon("user-plus")
-			span= fmt.Sprintf(`Join "%s"`, group.Name)
+	.buttons(data-api="/api" + group.Link())
+		if member == nil
+			button.mountable.action(data-action="join", data-trigger="click")
+				Icon("user-plus")
+				span= fmt.Sprintf(`Join "%s"`, group.Name)
+		else
+			button.mountable.action(data-action="leave", data-trigger="click")
+				Icon("user-times")
+				span= fmt.Sprintf(`Leave "%s"`, group.Name)
