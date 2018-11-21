@@ -23,7 +23,7 @@ component Welcome(user *arn.User)
 			.footer.mountable
 				p Recommended size: 560x560 (minimum: 280x280)
 		else if user.Introduction == ""
-			p.welcome-text.mountable Write a little introduction so people know who you are!
+			p.welcome-text.mountable Write a little introduction for your profile.
 
 			.mountable(data-api="/api/user/" + user.ID)
 				InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us a little bit about yourself")
