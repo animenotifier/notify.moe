@@ -1,9 +1,8 @@
 .group-view
 	horizontal-wrap
 	width 100%
-	max-width 900px
+	max-width 1000px
 	margin 0 auto
-	border 1px solid red
 
 < 1100px
 	.group-view
@@ -11,10 +10,11 @@
 
 .group-feed
 	flex 1
-	padding 1rem
+	padding 0 1rem
 
 .group-sidebar
 	flex-basis 300px
+	max-width 300px
 
 .group-sidebar-section
 	ui-element
@@ -24,3 +24,15 @@
 .group-members
 	margin-bottom 0.5rem
 	justify-content flex-start
+
+.group-header
+	margin-bottom content-padding
+
+.group-page-name
+	margin 0
+
+.group-page-tagline
+	text-align center
+
+	&.mounted
+		opacity 0.6 !important

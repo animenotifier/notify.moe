@@ -2,17 +2,18 @@ const group-padding-y = 0.75rem
 const group-padding-x = 0.75rem
 
 .groups
-	horizontal-wrap
-	justify-content space-around
+	display grid
+	grid-gap calc(content-padding / 2)
+	// grid-template-columns repeat(auto-fill, min(100%, 520px))
+	// justify-content center
 
 .group
 	horizontal
 	ui-element
 	position relative
-	width 100%
-	max-width 520px
+	// width 100%
+	// max-width 520px
 	padding group-padding-y group-padding-x
-	margin calc(content-padding / 2)
 	color text-color
 
 	:hover

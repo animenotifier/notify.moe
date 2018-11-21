@@ -1,0 +1,2 @@
+mixin debug-border
+	border 1px solid red
