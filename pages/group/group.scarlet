@@ -1,7 +1,7 @@
 .group-view
 	vertical
 	width 100%
-	max-width 900px
+	max-width 650px
 	margin 0 auto
 
 .group-feed
@@ -24,18 +24,17 @@
 
 .group-header-intro
 	vertical
-	align-self center
 	align-items center
 	margin-top content-padding
 
-> 800px
+> 900px
 	.group-header
 		horizontal
+		align-items stretch
 
 	.group-header-intro
 		margin-top 0
 		margin-left calc(content-padding * 2)
-		align-self flex-start
 		align-items flex-start
 
 	.group-page-name

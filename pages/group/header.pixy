@@ -29,9 +29,14 @@ component GroupHeader(group *arn.Group, member *arn.GroupMember, user *arn.User)
 		
 		.profile-actions(data-api="/api" + group.Link())
 			if member == nil
-				button.profile-action.action.mountable.never-unmount(data-action="join", data-trigger="click")
-					Icon("user-plus")
-					span Join group
+				if group.Restricted
+					button.profile-action.mountable.never-unmount
+						Icon("lock")
+						span Locked group
+				else
+					button.profile-action.action.mountable.never-unmount(data-action="join", data-trigger="click")
+						Icon("user-plus")
+						span Join group
 			else
 				button.profile-action.action.mountable.never-unmount(data-action="leave", data-trigger="click")
 					Icon("user-times")
