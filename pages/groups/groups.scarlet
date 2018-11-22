@@ -20,9 +20,9 @@ const group-padding-x = 0.75rem
 	:hover
 		color text-color
 		text-shadow none
-		border 1px solid input-focus-border-color !important
+		border 1px solid input-focus-border-color
 		// TODO: Replace with alpha(main-color, 20%) function
-		box-shadow 0 0 6px rgba(248, 165, 130, 0.2) !important
+		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
 
 .group-info
 	vertical
