@@ -20,23 +20,27 @@ component Shop(items []*arn.ShopItem, itemPopularity map[string]int, user *arn.U
 				Icon("check")
 				span Access the dark theme
 
-			li.pro-benefit.mountable 
+			li.pro-benefit.mountable
 				Icon("check")
 				span Customize your cover image
 
-			li.pro-benefit.mountable 
+			li.pro-benefit.mountable
+				Icon("check")
+				span Gain early access to new features
+
+			li.pro-benefit.mountable
 				Icon("check")
 				span Secure a spot on the supporters page
 
-			li.pro-benefit.mountable 
+			li.pro-benefit.mountable
 				Icon("check")
 				span Show a star next to your avatar
 
-			li.pro-benefit.mountable 
+			li.pro-benefit.mountable
 				Icon("check")
 				span Receive the supporter role on the Discord server
 
-			li.pro-benefit.mountable 
+			li.pro-benefit.mountable
 				Icon("check")
 				span ...and many more luxury features in the future.
 

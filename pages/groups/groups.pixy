@@ -10,10 +10,11 @@ component Groups(groups []*arn.Group, nextIndex int, user *arn.User)
 	
 	.corner-buttons
 		if user != nil
-			if user.DraftIndex().GroupID == "" && user.IsPro()
-				button.action(data-action="newObject", data-trigger="click", data-type="group")
-					Icon("plus")
-					span New group
+			if user.DraftIndex().GroupID == ""
+				if user.IsPro()
+					button.action(data-action="newObject", data-trigger="click", data-type="group")
+						Icon("plus")
+						span New group
 			else
 				a.button(href="/group/" + user.DraftIndex().GroupID + "/edit")
 					Icon("pencil")
