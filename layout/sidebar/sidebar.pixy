@@ -39,7 +39,7 @@ component Sidebar(user *arn.User)
 		SidebarButton("Quotes", "/quotes", "quote-left")
 
 		if arn.IsDevelopment()
-			SidebarButton("Groups", "/groups", "users")
+			SidebarButton("Groups BETA", "/groups", "users")
 
 		SidebarButton("Users", "/users", "globe")
 
