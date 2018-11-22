@@ -95,6 +95,13 @@ const profile-image-size = 280px
 	grid-gap 0.5rem
 	justify-content space-evenly
 
+.profile-introduction
+	a
+		color white
+
+		:hover
+			text-shadow 0 0 6px rgba(255, 255, 255, 0.2)
+
 > 740px
 	.profile-head
 		horizontal
