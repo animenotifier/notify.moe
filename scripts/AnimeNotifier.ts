@@ -833,7 +833,7 @@ export default class AnimeNotifier {
 
 			// Anime and character images on Retina displays
 			if(pixelRatio > 1) {
-				if(base.includes("/anime/") || (base.includes("/characters/") && !base.includes("/large/"))) {
+				if(base.includes("/anime/") || base.includes("/groups/") || (base.includes("/characters/") && !base.includes("/large/"))) {
 					base += "@2"
 				}
 			}
