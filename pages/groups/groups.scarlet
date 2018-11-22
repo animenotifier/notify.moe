@@ -4,6 +4,7 @@ const group-padding-x = 0.75rem
 .groups
 	display grid
 	grid-gap content-padding-half
+	grid-template-columns repeat(auto-fit, 100%)
 
 > 600px
 	.groups
