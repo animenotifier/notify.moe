@@ -1,6 +1,7 @@
 component Groups(groups []*arn.Group, nextIndex int, user *arn.User)
 	.tabs
-		Tab("Groups", "users", "/groups")
+		Tab("Latest", "users", "/groups")
+		Tab("Popular", "globe", "/groups/popular")
 
 	h1.page-title Groups
 	

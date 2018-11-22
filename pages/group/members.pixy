@@ -10,8 +10,8 @@ component GroupMembers(group *arn.Group, member *arn.GroupMember, user *arn.User
 		if member == nil
 			button.mountable.action(data-action="join", data-trigger="click")
 				Icon("user-plus")
-				span= fmt.Sprintf(`Join "%s"`, group.Name)
+				span Join group
 		else
 			button.mountable.action(data-action="leave", data-trigger="click")
 				Icon("user-times")
-				span= fmt.Sprintf(`Leave "%s"`, group.Name)
+				span Leave group

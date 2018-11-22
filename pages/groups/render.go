@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	groupsFirstLoad = 12
-	groupsPerScroll = 9
+	groupsFirstLoad = 24
+	groupsPerScroll = 12
 )
 
 // render renders the groups page with the given groups.

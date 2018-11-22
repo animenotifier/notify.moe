@@ -2,6 +2,10 @@ import AnimeNotifier from "scripts/AnimeNotifier"
 
 // join
 export async function join(arn: AnimeNotifier, element: HTMLElement) {
+	if(!confirm(`Are you sure you want to join this group?`)) {
+		return
+	}
+
 	arn.statusMessage.showInfo("Joined group!", 1000)
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
@@ -15,7 +19,7 @@ export async function join(arn: AnimeNotifier, element: HTMLElement) {
 
 // leave
 export async function leave(arn: AnimeNotifier, element: HTMLElement) {
-	if(!confirm(`Are you sure you want to leave the group?`)) {
+	if(!confirm(`Are you sure you want to leave this group?`)) {
 		return
 	}
 
