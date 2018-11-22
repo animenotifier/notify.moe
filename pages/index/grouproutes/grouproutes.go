@@ -13,6 +13,8 @@ func Register(l *layout.Layout) {
 	l.Page("/groups/from/:index", groups.Latest)
 	l.Page("/groups/popular", groups.Popular)
 	l.Page("/groups/popular/from/:index", groups.Popular)
+	l.Page("/groups/joined", groups.Joined)
+	l.Page("/groups/joined/from/:index", groups.Joined)
 	l.Page("/group/:id", group.Feed)
 	l.Page("/group/:id/info", group.Info)
 	l.Page("/group/:id/members", group.Members)

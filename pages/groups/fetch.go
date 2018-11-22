@@ -2,8 +2,16 @@ package groups
 
 import "github.com/animenotifier/arn"
 
-func fetchGroups() []*arn.Group {
+func fetchGroups(memberID string) []*arn.Group {
 	return arn.FilterGroups(func(group *arn.Group) bool {
-		return !group.IsDraft
+		if group.IsDraft {
+			return false
+		}
+
+		if memberID != "" && !group.HasMember(memberID) {
+			return false
+		}
+
+		return true
 	})
 }

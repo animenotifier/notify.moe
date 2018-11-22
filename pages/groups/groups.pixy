@@ -3,6 +3,9 @@ component Groups(groups []*arn.Group, nextIndex int, user *arn.User)
 		Tab("Latest", "users", "/groups")
 		Tab("Popular", "globe", "/groups/popular")
 
+		if user != nil
+			Tab("Joined", "user-plus", "/groups/joined")
+
 	h1.page-title Groups
 	
 	.corner-buttons
