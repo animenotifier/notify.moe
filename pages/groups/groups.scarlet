@@ -18,9 +18,11 @@ const group-padding-x = 0.75rem
 	color text-color
 
 	:hover
-		color theme-white
-		background-color theme-black
+		color text-color
 		text-shadow none
+		border 1px solid input-focus-border-color !important
+		// TODO: Replace with alpha(main-color, 20%) function
+		box-shadow 0 0 6px rgba(248, 165, 130, 0.2) !important
 
 .group-info
 	vertical
