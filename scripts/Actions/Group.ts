@@ -6,12 +6,12 @@ export async function join(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	arn.statusMessage.showInfo("Joined group!", 1000)
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
-		await arn.post(apiEndpoint + "/join", null)
+		await arn.post(`${apiEndpoint}/join`, null)
 		arn.reloadContent()
+		arn.statusMessage.showInfo("Joined group!", 1000)
 	} catch(err) {
 		arn.statusMessage.showError(err)
 	}
@@ -23,12 +23,12 @@ export async function leave(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	arn.statusMessage.showInfo("Left group!", 1000)
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
-		await arn.post(apiEndpoint + "/leave", null)
+		await arn.post(`${apiEndpoint}/leave`, null)
 		arn.reloadContent()
+		arn.statusMessage.showInfo("Left group!", 1000)
 	} catch(err) {
 		arn.statusMessage.showError(err)
 	}

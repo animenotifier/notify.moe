@@ -28,7 +28,7 @@ mixin corner-buttons
 		position static
 		opacity 1
 
-< 1200px
+< 1300px
 	.corner-buttons-hide-on-mobile
 		flex-flow row
 
@@ -55,6 +55,9 @@ mixin corner-buttons
 
 				:nth-child(5)
 					transform translateX(-400%)
+
+				:nth-child(6)
+					transform translateX(-500%)
 
 < 600px
 	.corner-buttons-hide-on-mobile

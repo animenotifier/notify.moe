@@ -37,16 +37,17 @@ component Sidebar(user *arn.User)
 		SidebarButton("AMVs", "/amvs", "video-camera")
 		SidebarButton("Soundtracks", "/soundtracks", "headphones")
 		SidebarButton("Quotes", "/quotes", "quote-left")
-		SidebarButton("Companies", "/companies", "building")
-		SidebarButton("Users", "/users", "globe")
 
 		if arn.IsDevelopment()
 			SidebarButton("Groups", "/groups", "users")
+
+		SidebarButton("Users", "/users", "globe")
 
 		if user != nil
 			SidebarButton("Support", "/support", "heart")
 
 		//- Disabled:
+		//- SidebarButton("Companies", "/companies", "building")
 		//- SidebarButton("Dash", "/dashboard", "tachometer")
 		//- SidebarButton("Artworks", "/artworks", "paint-brush")
 		//- SidebarButton("AMVs", "/amvs", "video-camera")

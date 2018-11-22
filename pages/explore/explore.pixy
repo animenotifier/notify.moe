@@ -9,6 +9,9 @@ component ExploreAnime(animes []*arn.Anime, year string, season string, status s
 		
 		a.button(href="/calendar", title="Calendar")
 			RawIcon("calendar")
+
+		a.button(href="/companies", title="Companies")
+			RawIcon("building")
 		
 		a.button(href="/halloffame", title="Hall of Fame")
 			RawIcon("trophy")
