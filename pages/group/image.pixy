@@ -1,5 +1,5 @@
 component EditGroupImage(group *arn.Group, member *arn.GroupMember, user *arn.User)
-	GroupTabs(group, member, user)
+	GroupHeader(group, member, user)
 
 	.widget-form
 		h1.mountable Edit group image

@@ -1,0 +1,9 @@
+mixin cover-image-container
+	position relative
+	left content-padding-negative
+	top content-padding-negative
+	min-width calc(100% + content-padding * 2)
+	padding calc(content-padding * 2)
+	color white
+	text-shadow 0px 0px 2px rgb(0, 0, 0, 0.5)
+	overflow hidden

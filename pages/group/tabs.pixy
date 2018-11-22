@@ -1,8 +1,8 @@
 component GroupTabs(group *arn.Group, member *arn.GroupMember, user *arn.User)
-	.tabs
+	.tabs.mountable.never-unmount
 		Tab("Posts", "comment", group.Link())
 		Tab("Info", "info-circle", group.Link() + "/info")
-		Tab("Members", "globe", group.Link() + "/members")
+		Tab("Members", "user", group.Link() + "/members")
 
 		if member != nil && member.Role == "founder"
 			Tab("Edit", "pencil", group.Link() + "/edit")

@@ -2,21 +2,10 @@ const profile-image-size = 280px
 
 .profile-head
 	vertical
+	cover-image-container
 	align-items center
-
-	position relative
-	left calc(content-padding * -1)
-	top calc(content-padding-top * -1)
-	min-width calc(100% + content-padding * 2)
-	padding calc(content-padding * 2)
-
-	color white
-	text-shadow 0px 0px 2px rgb(0, 0, 0, 0.5)
-
 	// default-transition
 	// animation appear transition-speed
-
-	overflow hidden
 
 .profile-info
 	vertical

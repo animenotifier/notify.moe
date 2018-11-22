@@ -1,0 +1,40 @@
+component GroupHeader(group *arn.Group, member *arn.GroupMember, user *arn.User)
+	.group-header
+		img.profile-cover.lazy(data-src="/images/elements/default-group-cover.jpg", data-webp="true", alt="Cover image")
+		
+		.group-avatar-container
+			img.group-avatar.group-image-input-preview.lazy(data-src=group.ImageLink("large"), data-webp="true", data-color=group.AverageColor(), alt=group.Name)
+
+		.group-header-intro
+			if group.Name != ""
+				h1.group-page-name.mountable.never-unmount= group.Name
+			else
+				h1.group-page-name.mountable.never-unmount untitled
+
+			if group.Tagline != ""
+				p.group-page-tagline.mountable.never-unmount= group.Tagline
+			else
+				p.group-page-tagline.mountable.never-unmount no tagline yet
+			
+			.profile-tags-container
+				.profile-tags
+					a.profile-tag.mountable.never-unmount.action(href=group.Link() + "/members", data-action="diff", data-trigger="click")
+						Icon("user")
+						span= stringutils.Plural(len(group.Members), "member")
+					
+					each tag in group.Tags
+						.profile-tag.mountable.never-unmount
+							Icon("tag")
+							span= tag
+		
+		.profile-actions(data-api="/api" + group.Link())
+			if member == nil
+				button.profile-action.action.mountable.never-unmount(data-action="join", data-trigger="click")
+					Icon("user-plus")
+					span Join group
+			else
+				button.profile-action.action.mountable.never-unmount(data-action="leave", data-trigger="click")
+					Icon("user-times")
+					span Leave group
+	
+	GroupTabs(group, member, user)

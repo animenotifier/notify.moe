@@ -26,7 +26,7 @@ func Edit(ctx *aero.Context) string {
 		member = group.FindMember(user.ID)
 	}
 
-	return ctx.HTML(components.GroupTabs(group, member, user) + editform.Render(group, "Edit group", user))
+	return ctx.HTML(components.GroupHeader(group, member, user) + editform.Render(group, "Edit group", user))
 }
 
 // EditImage renders the form to edit the group images.

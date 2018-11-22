@@ -1098,16 +1098,16 @@ export default class AnimeNotifier {
 	scrollTo(target: HTMLElement) {
 		const duration = 250.0
 		const fullSin = Math.PI / 2
-		const contentPadding = 24
+		const contentPadding = 23
 
 		let newScroll = 0
-		let finalScroll = Math.max(target.offsetTop - contentPadding, 0)
+		let finalScroll = Math.max(target.getBoundingClientRect().top - contentPadding, 0)
 
 		// Calculating scrollTop will force a layout - careful!
 		let oldScroll = this.app.content.parentElement.scrollTop
 		let scrollDistance = finalScroll - oldScroll
 
-		if(scrollDistance > 0 && scrollDistance < 4) {
+		if(scrollDistance > 0 && scrollDistance < 1) {
 			return
 		}
 

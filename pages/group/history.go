@@ -17,5 +17,5 @@ func renderHistory(obj interface{}, entries []*arn.EditLogEntry, user *arn.User)
 		member = group.FindMember(user.ID)
 	}
 
-	return components.GroupTabs(group, member, user) + components.EditLog(entries, user)
+	return components.GroupHeader(group, member, user) + components.EditLog(entries, user)
 }

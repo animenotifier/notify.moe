@@ -1,5 +1,4 @@
 #content
 	vertical
 	padding content-padding
-	padding-top content-padding-top
 	line-height content-line-height

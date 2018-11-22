@@ -7,8 +7,43 @@
 .group-feed
 	flex 1
 
+.group-avatar-container
+	display flex
+	justify-content center
+
+.group-avatar
+	width 280px
+	height 280px
+	border-radius ui-element-border-radius
+	object-fit cover
+
 .group-header
-	margin-bottom content-padding
+	vertical
+	cover-image-container
+	align-items center
+
+.group-header-intro
+	vertical
+	align-self center
+	align-items center
+	margin-top content-padding
+
+> 800px
+	.group-header
+		horizontal
+
+	.group-header-intro
+		margin-top 0
+		margin-left calc(content-padding * 2)
+		align-self flex-start
+		align-items flex-start
+
+	.group-page-name
+		margin-top 0
+
+	.group-page-name,
+	.group-page-tagline
+		text-align left
 
 .group-page-name
 	margin 0
@@ -17,4 +52,4 @@
 	text-align center
 
 	&.mounted
-		opacity 0.6 !important
+		opacity 0.7 !important
