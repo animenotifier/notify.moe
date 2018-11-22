@@ -14,8 +14,6 @@ const group-padding-x = 0.75rem
 	horizontal
 	ui-element
 	position relative
-	// width 100%
-	// max-width 520px
 	padding group-padding-y group-padding-x
 	color text-color
 
@@ -29,8 +27,6 @@ const group-padding-x = 0.75rem
 	overflow hidden
 
 .group-name
-	// horizontal
-	// align-items center
 	clip-long-text
 
 .group-tagline

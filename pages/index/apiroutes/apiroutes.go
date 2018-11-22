@@ -60,6 +60,7 @@ func Register(l *layout.Layout, app *aero.Application) {
 	app.Post("/api/upload/cover", upload.Cover)
 	app.Post("/api/upload/anime/:id/image", upload.AnimeImage)
 	app.Post("/api/upload/character/:id/image", upload.CharacterImage)
+	app.Post("/api/upload/group/:id/image", upload.GroupImage)
 	app.Post("/api/upload/amv/:id/file", upload.AMVFile)
 
 	// Import anime

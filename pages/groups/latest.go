@@ -1,0 +1,18 @@
+package groups
+
+import (
+	"sort"
+
+	"github.com/aerogo/aero"
+)
+
+// Latest shows the latest groups.
+func Latest(ctx *aero.Context) string {
+	groups := fetchGroups()
+
+	sort.Slice(groups, func(i, j int) bool {
+		return groups[i].Created > groups[j].Created
+	})
+
+	return render(ctx, groups)
+}
