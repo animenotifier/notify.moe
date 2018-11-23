@@ -41,6 +41,9 @@ export async function save(arn: AnimeNotifier, input: HTMLElement) {
 		} else if(apiEndpoint.startsWith("/api/settings/") && input.dataset.field === "Theme") {
 			// Apply theme instantly
 			applyTheme((input as HTMLInputElement).value)
+
+			// Reload to update theme settings
+			return arn.reloadContent()
 		} else {
 			return arn.reloadContent()
 		}

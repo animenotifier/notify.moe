@@ -5,7 +5,7 @@ component InputText(id string, value string, label string, placeholder string)
 
 component InputBool(id string, value bool, label string, title string)
 	.widget-section
-		label(for=id)= label + ":"
+		label= label + ":"
 		if value
 			button.action(id=id, data-action="disable", data-trigger="click", data-field=id, title=title)
 				Icon("toggle-on")
@@ -45,7 +45,7 @@ component InputSelection(id string, value string, label string, placeholder stri
 
 component InputFileUpload(id string, label string, uploadType string, endpoint string)
 	.widget-section
-		label(for=id)= label + ":"
+		label= label + ":"
 		button.action(id=id, data-action="selectFile", data-trigger="click", data-endpoint=endpoint, data-type=uploadType)
 			Icon("upload")
 			span Select file

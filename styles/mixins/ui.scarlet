@@ -9,5 +9,6 @@ mixin ui-element
 		// box-shadow outline-shadow-medium
 
 mixin ui-disabled
-	background-color ui-disabled-color
-	cursor not-allowed
+	color button-color !important
+	background-color ui-disabled-color !important
+	cursor not-allowed !important

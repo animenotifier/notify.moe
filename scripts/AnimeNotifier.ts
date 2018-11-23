@@ -164,7 +164,7 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.assignActions()),
 			Promise.resolve().then(() => this.updatePushUI()),
 			Promise.resolve().then(() => this.dragAndDrop()),
-			Promise.resolve().then(() => this.colorStripes()),
+			Promise.resolve().then(() => this.colorBoxes()),
 			Promise.resolve().then(() => this.loadCharacterRanking()),
 			Promise.resolve().then(() => this.assignTooltipOffsets()),
 			Promise.resolve().then(() => this.countUp())
@@ -597,12 +597,12 @@ export default class AnimeNotifier {
 		}
 	}
 
-	colorStripes() {
-		if(!this.app.currentPath.includes("/explore/color/")) {
+	colorBoxes() {
+		if(!this.app.currentPath.includes("/explore/color/") && !this.app.currentPath.includes("/settings")) {
 			return
 		}
 
-		for(let element of findAll("color-stripe")) {
+		for(let element of findAll("color-box")) {
 			Diff.mutations.queue(() => {
 				element.style.backgroundColor = element.dataset.color
 			})

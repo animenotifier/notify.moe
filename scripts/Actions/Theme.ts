@@ -39,6 +39,7 @@ const themes = {
 		"anime-alternative-title-color": "hsla(0, 0%, 100%, 0.5)",
 		"anime-list-item-name-color": "var(--text-color)",
 		"tip-bg-color": "hsl(0, 0%, 10%)",
+		"ui-disabled-color": "hsla(0, 0%, 100%, 0.1)"
 		// "tip-bg-color": "hsl(var(--bg-color-h), var(--bg-color-s), 10%)",
 
 		"like-color": "var(--link-color)",
@@ -137,7 +138,7 @@ export function applyThemeAndPreview(arn: AnimeNotifier, themeName: string) {
 
 // Apply theme
 export function applyTheme(themeName: string) {
-	let root = document.documentElement
+	let rootStyle = document.documentElement.style
 	let theme = themes[themeName]
 
 	// Apply base theme
@@ -155,11 +156,24 @@ export function applyTheme(themeName: string) {
 		}
 
 		if(themes.light[property] === undefined) {
-			themes.light[property] = root.style.getPropertyValue(`--${property}`)
+			themes.light[property] = rootStyle.getPropertyValue(`--${property}`)
 		}
 
-		root.style.setProperty(`--${property}`, theme[property])
+		rootStyle.setProperty(`--${property}`, theme[property])
 	}
 
 	currentThemeName = themeName
+}
+
+// Color picker
+export function pickColor(arn: AnimeNotifier, element: HTMLElement) {
+	let rootStyle = document.documentElement.style
+	let variableName = `--${element.dataset.variable}`
+
+	let input = document.createElement("input")
+	input.type = "color"
+	input.click()
+	input.oninput = () => {
+		rootStyle.setProperty(variableName, input.value)
+	}
 }

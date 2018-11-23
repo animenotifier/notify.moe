@@ -24,3 +24,27 @@ component SettingsStyle(user *arn.User)
 					option(value="japanese") 日本語
 
 			InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
+		
+		if arn.IsDevelopment()
+			.widget.mountable(data-api="/api/settings/" + user.ID)
+				h3.widget-title
+					Icon("paint-brush")
+					span= stringutils.Capitalize(user.Settings().Theme)
+				
+				.widget-section
+					label(for="LinkColor")= "Link color:"
+
+					.color-picker-container
+						.widget-ui-element.color-picker.color-box.action(data-color="var(--link-color)", data-variable="link-color", data-action="pickColor", data-trigger="click")
+
+						button.tip(aria-label="Reset", disabled)
+							RawIcon("power-off")
+
+				.widget-section
+					label(for="BackgroundColor")= "Background color:"
+
+					.color-picker-container
+						.widget-ui-element.color-picker.color-box.action(data-color="var(--bg-color)", data-variable="bg-color", data-action="pickColor", data-trigger="click")
+
+						button.tip(aria-label="Reset", disabled)
+							RawIcon("power-off")

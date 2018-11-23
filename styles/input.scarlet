@@ -45,6 +45,21 @@ input
 	:active
 		transform translateY(3px)
 
+.color-picker-container
+	horizontal
+
+.color-picker
+	ui-element
+	flex 1
+	height input-height
+	margin-right content-padding-half
+
+	:hover
+		cursor pointer
+
+	:active
+		transform translateY(3px)
+
 button, .button
 	horizontal
 	padding 0rem 1rem
@@ -54,6 +69,9 @@ button, .button
 	height input-height
 
 	button-hover
+
+	:disabled
+		ui-disabled
 
 select
 	appearance none
