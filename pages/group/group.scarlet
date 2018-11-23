@@ -15,6 +15,9 @@
 	width 280px
 	height 280px
 	border-radius ui-element-border-radius
+
+	// For image upload previews,
+	// cover mode should be activated.
 	object-fit cover
 
 .group-header
