@@ -8,6 +8,7 @@
 	height auto
 	flex-grow 1
 	opacity 0.5
+	-webkit-appearance none
 
 	:focus
 		color link-color
