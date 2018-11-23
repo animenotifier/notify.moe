@@ -172,8 +172,10 @@ export function pickColor(arn: AnimeNotifier, element: HTMLElement) {
 
 	let input = document.createElement("input")
 	input.type = "color"
-	input.click()
+
 	input.oninput = () => {
 		rootStyle.setProperty(variableName, input.value)
 	}
+
+	input.click()
 }
