@@ -38,6 +38,7 @@ p
 
 .furigana
 	opacity 0.25
+	font-size 50%
 	transition opacity transition-speed ease, transform transition-speed ease
 	transform translateY(0)
 
