@@ -30,21 +30,8 @@ component SettingsStyle(user *arn.User)
 				h3.widget-title
 					Icon("paint-brush")
 					span= stringutils.Capitalize(user.Settings().Theme)
-				
-				.widget-section
-					label(for="LinkColor")= "Link color:"
 
-					.color-picker-container
-						.widget-ui-element.color-picker.color-box.action(data-color="var(--link-color)", data-variable="link-color", data-action="pickColor", data-trigger="click")
-
-						button.tip(aria-label="Reset", disabled)
-							RawIcon("power-off")
-
-				.widget-section
-					label(for="BackgroundColor")= "Background color:"
-
-					.color-picker-container
-						.widget-ui-element.color-picker.color-box.action(data-color="var(--bg-color)", data-variable="bg-color", data-action="pickColor", data-trigger="click")
-
-						button.tip(aria-label="Reset", disabled)
-							RawIcon("power-off")
+				InputColor("TextColor", "text-color", "Text color:")
+				InputColor("LinkColor", "link-color", "Link color:")
+				InputColor("UIBackground", "ui-background", "UI background:")
+				InputColor("BackgroundColor", "bg-color", "Background color:")
