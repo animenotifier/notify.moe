@@ -1,7 +1,7 @@
 .group-view
 	vertical
 	width 100%
-	max-width 650px
+	max-width 540px
 	margin 0 auto
 
 .group-feed
