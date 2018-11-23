@@ -1,15 +1,14 @@
 component Comments(parent arn.PostParent, user *arn.User)
-	.thread
-		.posts
-			if user != nil
-				if arn.IsLocked(parent)
-					footer.footer.mountable
-						p.text-center= "This " + strings.ToLower(reflect.TypeOf(parent).Elem().Name()) + " is locked."
-				else if parent.TypeName() != "Group" || parent.(*arn.Group).FindMember(user.ID) != nil
-					NewPostArea(parent, user, "Comment")
-			
-			//- if parent.CountPosts() == 0
-			//- 	p.no-data.mountable No comments have been written yet.
-			//- else
-			each post in parent.PostsRelevantFirst(5)
-				Postable(post, user, true, "", "")
+	.posts
+		if user != nil
+			if arn.IsLocked(parent)
+				footer.footer.mountable
+					p.text-center= "This " + strings.ToLower(reflect.TypeOf(parent).Elem().Name()) + " is locked."
+			else if parent.TypeName() != "Group" || parent.(*arn.Group).FindMember(user.ID) != nil
+				NewPostArea(parent, user, "Comment")
+		
+		//- if parent.CountPosts() == 0
+		//- 	p.no-data.mountable No comments have been written yet.
+		//- else
+		each post in parent.PostsRelevantFirst(5)
+			Postable(post, user, true, "", "")

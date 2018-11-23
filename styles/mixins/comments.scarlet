@@ -1,6 +1,4 @@
 mixin comments-left
 	margin-top 1rem
-
-	.thread
-		max-width 600px
-		justify-content flex-start
+	max-width comment-width
+	justify-content flex-start

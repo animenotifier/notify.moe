@@ -6,6 +6,9 @@
 		width 100%
 		max-width forum-width
 
+	.posts
+		max-width forum-post-width
+
 > 1250px
 	.page-main-action
 		position fixed

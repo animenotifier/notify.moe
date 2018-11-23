@@ -1,11 +1,11 @@
 .group-view
 	vertical
 	width 100%
-	max-width 540px
+	max-width group-post-width
 	margin 0 auto
 
 .group-feed
-	flex 1
+	// ...
 
 .group-avatar-container
 	display flex

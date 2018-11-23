@@ -41,6 +41,9 @@ post-content-padding-y = 0.75rem
 
 	img
 		max-width 100%
+		max-height 450px
+		width 100%
+		object-fit cover
 
 	:hover
 		.post-toolbar
@@ -78,7 +81,7 @@ post-content-padding-y = 0.75rem
 	horizontal
 	justify-content center
 	align-items flex-start
-	margin-right 0.5rem
+	margin-right post-avatar-text-margin
 
 .new-post-actions
 	justify-content flex-end
@@ -87,11 +90,17 @@ post-content-padding-y = 0.75rem
 	transform translateY(-50%)
 	transition all transition-speed ease
 
+	button
+		pointer-events none
+
 .new-post-actions-enabled
 	opacity 1
 	height auto
 	margin-bottom 0.75rem
 	transform translateY(0)
+
+	button
+		pointer-events all
 
 // Toolbar
 

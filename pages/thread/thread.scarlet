@@ -1,11 +1,10 @@
 .thread
-	horizontal
-	justify-content center
+	max-width forum-thread-width
+	margin 0 auto
 
 .posts
 	vertical
 	width 100%
-	max-width forum-width
 
 .post
 	vertical
