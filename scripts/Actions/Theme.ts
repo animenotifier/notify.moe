@@ -105,26 +105,34 @@ export function nextTheme(arn: AnimeNotifier) {
 	for(let i = 0; i < themesSorted.length; i++) {
 		if(themesSorted[i] === currentThemeName) {
 			let newIndex = (i + 1) % themesSorted.length
-			applyTheme(themesSorted[newIndex])
+			applyThemeAndPreview(arn, themesSorted[newIndex])
 			break
 		}
 	}
+}
+
+// Apply theme and check for PRO accounts
+export function applyThemeAndPreview(arn: AnimeNotifier, themeName: string) {
+	applyTheme(themeName)
 
 	// Clear preview timeout
 	clearTimeout(previewTimeoutID)
 
-	// Show preview message
-	if(currentThemeName !== "light" && (!arn.user || arn.user.dataset.pro !== "true")) {
-		arn.statusMessage.showInfo(`Previewing "${currentThemeName}" theme for 30 seconds. If you would like to use it permanently, please support us.`, 5000)
-
-		// After 30 seconds, switch back to default theme if the user doesn't own a PRO account
-		previewTimeoutID = setTimeout(() => {
-			if(currentThemeName !== "light") {
-				applyTheme("light")
-				arn.statusMessage.showInfo("Theme preview time has ended. If you would like to use it permanently, please support us.", 5000)
-			}
-		}, 30000)
+	// If it's the free light theme or a PRO user, nothing to do here
+	if(currentThemeName === "light" || (arn.user && arn.user.dataset.pro == "true")) {
+		return
 	}
+
+	// Show preview message
+	arn.statusMessage.showInfo(`Previewing "${currentThemeName}" theme for 30 seconds. If you would like to use it permanently, please support us.`, 5000)
+
+	// After 30 seconds, switch back to default theme if the user doesn't own a PRO account
+	previewTimeoutID = setTimeout(() => {
+		if(currentThemeName !== "light") {
+			applyTheme("light")
+			arn.statusMessage.showInfo("Theme preview time has ended. If you would like to use it permanently, please support us.", 5000)
+		}
+	}, 30000)
 }
 
 // Apply theme

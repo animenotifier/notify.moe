@@ -1,4 +1,5 @@
 import AnimeNotifier from "../AnimeNotifier"
+import { applyTheme } from "./Theme"
 
 // Save new data from an input field
 export async function save(arn: AnimeNotifier, input: HTMLElement) {
@@ -38,8 +39,8 @@ export async function save(arn: AnimeNotifier, input: HTMLElement) {
 			// Update nickname based links on the page
 			return arn.reloadPage()
 		} else if(apiEndpoint.startsWith("/api/settings/") && input.dataset.field === "Theme") {
-			// Reload for the theme to take effect
-			location.reload()
+			// Apply theme instantly
+			applyTheme((input as HTMLInputElement).value)
 		} else {
 			return arn.reloadContent()
 		}
