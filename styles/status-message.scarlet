@@ -4,8 +4,7 @@
 	bottom 0
 	left 0
 	width 100%
-	line-height content-line-height
-	padding content-padding-half content-padding
+	padding 0.5rem content-padding
 	pointer-events none
 	z-index 1000
 
@@ -15,6 +14,7 @@
 #status-message-text
 	flex 1
 	text-align center
+	line-height content-line-height
 
 .status-message-action
 	color white !important
@@ -22,6 +22,7 @@
 	display flex
 	justify-content center
 	align-items center
+	margin-left 0.5rem
 
 .error-message
 	color white
