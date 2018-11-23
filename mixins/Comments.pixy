@@ -8,8 +8,8 @@ component Comments(parent arn.PostParent, user *arn.User)
 				else if parent.TypeName() != "Group" || parent.(*arn.Group).FindMember(user.ID) != nil
 					NewPostArea(parent, user, "Comment")
 			
-			if parent.CountPosts() == 0
-				p.no-data.mountable No comments have been written yet.
-			else
-				each post in parent.PostsRelevantFirst(5)
-					Postable(post, user, true, "", "")
+			//- if parent.CountPosts() == 0
+			//- 	p.no-data.mountable No comments have been written yet.
+			//- else
+			each post in parent.PostsRelevantFirst(5)
+				Postable(post, user, true, "", "")
