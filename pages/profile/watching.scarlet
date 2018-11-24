@@ -1,15 +1,15 @@
-// .profile-watching-list
-// 	horizontal-wrap
-// 	justify-content center
+.profile-watching-list
+	horizontal-wrap
+	justify-content center
 
-// 	// CSS grid variant:
-// 	// display grid
-// 	// grid-gap 0.5rem
-// 	// grid-template-columns repeat(auto-fill, 55px)
-// 	// justify-content center
+	// CSS grid variant:
+	// display grid
+	// grid-gap 0.5rem
+	// grid-template-columns repeat(auto-fill, 55px)
+	// justify-content center
 
-// .profile-watching-list-item
-// 	anime-mini-item
+.profile-watching-list-item
+	anime-mini-item
 
-// .profile-watching-list-item-image
-// 	anime-mini-item-image
+.profile-watching-list-item-image
+	anime-mini-item-image
