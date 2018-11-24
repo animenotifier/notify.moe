@@ -39,7 +39,7 @@ const themes = {
 		"anime-alternative-title-color": "hsla(0, 0%, 100%, 0.5)",
 		"anime-list-item-name-color": "var(--text-color)",
 		"tip-bg-color": "hsl(0, 0%, 10%)",
-		"ui-disabled-color": "hsla(0, 0%, 100%, 0.1)"
+		"ui-disabled-color": "hsla(0, 0%, 100%, 0.1)",
 		// "tip-bg-color": "hsl(var(--bg-color-h), var(--bg-color-s), 10%)",
 
 		"like-color": "var(--link-color)",
