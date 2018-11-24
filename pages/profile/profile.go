@@ -38,7 +38,8 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		animeList = animeList.WithoutPrivateItems()
 	}
 
-	animeList.SortByRating()
+	completedList := animeList.FilterStatus(arn.AnimeListStatusCompleted)
+	completedList.SortByRating()
 
 	// Genres
 	topGenres := animeList.TopGenres(5)
@@ -127,5 +128,5 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	}
 
 	ctx.Data = openGraph
-	return ctx.HTML(components.Profile(viewUser, user, animeList, characters, friends, topGenres, dayToActivityCount, ctx.URI()))
+	return ctx.HTML(components.Profile(viewUser, user, animeList, completedList, characters, friends, topGenres, dayToActivityCount, ctx.URI()))
 }

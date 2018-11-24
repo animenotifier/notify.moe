@@ -1,21 +1,21 @@
-component ProfileSoundTracks(tracks []*arn.SoundTrack, viewUser *arn.User, nextIndex int, user *arn.User, uri string)
-	ProfileHeader(viewUser, user, uri)
+//- component ProfileSoundTracks(tracks []*arn.SoundTrack, viewUser *arn.User, nextIndex int, user *arn.User, uri string)
+//- 	ProfileHeader(viewUser, user, uri)
 
-	if strings.Contains(uri, "/added")
-		h1.page-title= "Tracks added by " + viewUser.Nick
-	else
-		h1.page-title= "Tracks liked by " + viewUser.Nick
+//- 	if strings.Contains(uri, "/added")
+//- 		h1.page-title= "Tracks added by " + viewUser.Nick
+//- 	else
+//- 		h1.page-title= "Tracks liked by " + viewUser.Nick
 
-	if len(tracks) == 0
-		if strings.Contains(uri, "/added")
-			p.no-data.mountable= viewUser.Nick + " hasn't added any tracks yet."
-		else
-			p.no-data.mountable= viewUser.Nick + " hasn't liked any tracks yet."
-	else
-		#load-more-target.soundtracks
-			SoundTracksScrollable(tracks, user)
+//- 	if len(tracks) == 0
+//- 		if strings.Contains(uri, "/added")
+//- 			p.no-data.mountable= viewUser.Nick + " hasn't added any tracks yet."
+//- 		else
+//- 			p.no-data.mountable= viewUser.Nick + " hasn't liked any tracks yet."
+//- 	else
+//- 		#load-more-target.soundtracks
+//- 			SoundTracksScrollable(tracks, user)
 
-		if nextIndex != -1
-			.buttons
-				LoadMore(nextIndex)
+//- 		if nextIndex != -1
+//- 			.buttons
+//- 				LoadMore(nextIndex)
 	

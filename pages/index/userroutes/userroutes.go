@@ -8,9 +8,6 @@ import (
 	"github.com/animenotifier/notify.moe/pages/compare"
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/profile"
-	"github.com/animenotifier/notify.moe/pages/profile/profilecharacters"
-	"github.com/animenotifier/notify.moe/pages/profile/profilequotes"
-	"github.com/animenotifier/notify.moe/pages/profile/profiletracks"
 	"github.com/animenotifier/notify.moe/pages/recommended"
 	"github.com/animenotifier/notify.moe/pages/user"
 )
@@ -20,19 +17,19 @@ func Register(l *layout.Layout) {
 	// User profiles
 	l.Page("/user", user.Get)
 	l.Page("/user/:nick", profile.Get)
-	l.Page("/user/:nick/characters/liked", profilecharacters.Liked)
-	l.Page("/user/:nick/forum/threads", profile.GetThreadsByUser)
-	l.Page("/user/:nick/forum/posts", profile.GetPostsByUser)
-	l.Page("/user/:nick/soundtracks/added", profiletracks.Added)
-	l.Page("/user/:nick/soundtracks/added/from/:index", profiletracks.Added)
-	l.Page("/user/:nick/soundtracks/liked", profiletracks.Liked)
-	l.Page("/user/:nick/soundtracks/liked/from/:index", profiletracks.Liked)
-	l.Page("/user/:nick/quotes/added", profilequotes.Added)
-	l.Page("/user/:nick/quotes/added/from/:index", profilequotes.Added)
-	l.Page("/user/:nick/quotes/liked", profilequotes.Liked)
-	l.Page("/user/:nick/quotes/liked/from/:index", profilequotes.Liked)
-	l.Page("/user/:nick/stats", profile.GetStatsByUser)
-	l.Page("/user/:nick/followers", profile.GetFollowers)
+	// l.Page("/user/:nick/characters/liked", profilecharacters.Liked)
+	// l.Page("/user/:nick/forum/threads", profile.GetThreadsByUser)
+	// l.Page("/user/:nick/forum/posts", profile.GetPostsByUser)
+	// l.Page("/user/:nick/soundtracks/added", profiletracks.Added)
+	// l.Page("/user/:nick/soundtracks/added/from/:index", profiletracks.Added)
+	// l.Page("/user/:nick/soundtracks/liked", profiletracks.Liked)
+	// l.Page("/user/:nick/soundtracks/liked/from/:index", profiletracks.Liked)
+	// l.Page("/user/:nick/quotes/added", profilequotes.Added)
+	// l.Page("/user/:nick/quotes/added/from/:index", profilequotes.Added)
+	// l.Page("/user/:nick/quotes/liked", profilequotes.Liked)
+	// l.Page("/user/:nick/quotes/liked/from/:index", profilequotes.Liked)
+	// l.Page("/user/:nick/stats", profile.GetStatsByUser)
+	// l.Page("/user/:nick/followers", profile.GetFollowers)
 	l.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
 	l.Page("/user/:nick/recommended/anime", recommended.Anime)
 	l.Page("/user/:nick/notifications", notifications.ByUser)

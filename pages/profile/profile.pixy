@@ -1,6 +1,6 @@
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, characters []*arn.Character, friends []*arn.User, topGenres []string, dayToActivityCount map[int]int, uri string)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, completedList *arn.AnimeList, characters []*arn.Character, friends []*arn.User, topGenres []string, dayToActivityCount map[int]int, uri string)
 	.profile
-		ProfileHeader(viewUser, user, uri)
+		ProfileHeader(viewUser, animeList, user, uri)
 
 		.profile-columns
 			//- Favorites
@@ -9,11 +9,11 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 				.profile-section
 					h3.profile-column-header.mountable(data-mountable-type="favorites") Anime
 					
-					if len(animeList.Items) == 0
+					if len(completedList.Items) == 0
 						p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
 					else
 						.profile-favorite-anime-container.mountable(data-mountable-type="favorites")
-							each item in animeList.Top(6)
+							each item in completedList.Top(6)
 								a.profile-favorite-anime.tip.mountable(href=item.Anime().Link(), aria-label=item.Anime().Title.ByUser(user), data-mountable-type="anime")
 									img.profile-favorite-anime-image.lazy(data-src=item.Anime().ImageLink("small"), data-webp=true, alt=item.Anime().Title.ByUser(user))
 				
@@ -77,10 +77,10 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 											if day == 2
 												.spacer-box
 				
-component ProfileHeader(viewUser *arn.User, user *arn.User, uri string)
-	ProfileHead(viewUser, user, uri)
+component ProfileHeader(viewUser *arn.User, animeList *arn.AnimeList, user *arn.User, uri string)
+	ProfileHead(viewUser, animeList, user, uri)
 
-component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
+component ProfileHead(viewUser *arn.User, animeList *arn.AnimeList, user *arn.User, uri string)
 	.profile-head
 		img.profile-cover.lazy(data-src=viewUser.CoverLink("large"), data-webp="true", alt="Cover image")
 
@@ -95,7 +95,7 @@ component ProfileHead(viewUser *arn.User, user *arn.User, uri string)
 				.profile-tags
 					a.profile-tag.mountable.never-unmount(href="/+" + viewUser.Nick + "/animelist/watching", data-mountable-type="header")
 						Icon("list")
-						span= fmt.Sprintf("%d anime", len(viewUser.AnimeList().Items))
+						span= fmt.Sprintf("%d anime", len(animeList.Items))
 					
 					if user != nil && viewUser.Settings().Privacy.ShowAge && viewUser.Settings().Privacy.ShowGender && viewUser.AgeInYears() != 0
 						.profile-tag.mountable.never-unmount(data-mountable-type="header")

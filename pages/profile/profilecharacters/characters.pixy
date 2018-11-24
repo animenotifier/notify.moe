@@ -1,11 +1,10 @@
-component ProfileCharacters(characters []*arn.Character, viewUser *arn.User, user *arn.User, uri string)
-	ProfileHeader(viewUser, user, uri)
+//- component ProfileCharacters(characters []*arn.Character, viewUser *arn.User, user *arn.User, uri string)
+//- 	ProfileHeader(viewUser, user, uri)
 
-	if len(characters) == 0
-		p.no-data.mountable= viewUser.Nick + " hasn't liked any characters yet."
-	else
-		.characters.profile-characters
-			each character in characters
-				.mountable
-					Character(character, user)
-			
+//- 	if len(characters) == 0
+//- 		p.no-data.mountable= viewUser.Nick + " hasn't liked any characters yet."
+//- 	else
+//- 		.characters.profile-characters
+//- 			each character in characters
+//- 				.mountable
+//- 					Character(character, user)
