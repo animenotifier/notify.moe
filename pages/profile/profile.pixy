@@ -1,4 +1,4 @@
-component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, completedList *arn.AnimeList, characters []*arn.Character, friends []*arn.User, topGenres []string, dayToActivityCount map[int]int, uri string)
+component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, completedList *arn.AnimeList, characters []*arn.Character, friends []*arn.User, topGenres []string, topStudios []*arn.Company, animeWatchingTime time.Duration, dayToActivityCount map[int]int, uri string)
 	.profile
 		ProfileHeader(viewUser, animeList, user, uri)
 
@@ -47,6 +47,17 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 							each genre in topGenres
 								a.anime-genre.mountable(href="/genre/" + strings.ToLower(genre), data-mountable-type="genre")= genre
 				
+				//- Studios
+				.profile-section
+					h3.profile-column-header.mountable(data-mountable-type="extra") Studios
+
+					if len(topStudios) == 0
+						p.no-data.mountable(data-mountable-type="extra") Nothing here yet.
+					else
+						.anime-studios.mountable(data-mountable-type="extra")
+							each company in topStudios
+								a.anime-studio.mountable(href=company.Link(), data-mountable-type="company")= company.Name.English
+
 				//- Friends
 				.profile-section.profile-section-friends
 					h3.profile-column-header.mountable(data-mountable-type="extra") Friends
@@ -76,6 +87,11 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 
 											if day == 2
 												.spacer-box
+				
+					.footer.activities-footer.mountable(data-mountable-type="extra")
+						span= viewUser.Nick + " spent "
+						span= int(animeWatchingTime / time.Hour / 24)
+						span  days watching anime.
 				
 component ProfileHeader(viewUser *arn.User, animeList *arn.AnimeList, user *arn.User, uri string)
 	ProfileHead(viewUser, animeList, user, uri)

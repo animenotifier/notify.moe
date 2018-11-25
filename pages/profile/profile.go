@@ -13,6 +13,7 @@ import (
 const (
 	maxCharacters = 6
 	maxFriends    = 7
+	maxStudios    = 4
 )
 
 // Get user profile page.
@@ -43,6 +44,47 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 
 	// Genres
 	topGenres := animeList.TopGenres(5)
+
+	// Studios
+	animeWatchingTime := time.Duration(0)
+	studios := map[string]float64{}
+	var topStudios []*arn.Company
+
+	for _, item := range animeList.Items {
+		if item.Status == arn.AnimeListStatusPlanned {
+			continue
+		}
+
+		currentWatch := item.Episodes * item.Anime().EpisodeLength
+		reWatch := item.RewatchCount * item.Anime().EpisodeCount * item.Anime().EpisodeLength
+		duration := time.Duration(currentWatch + reWatch)
+		animeWatchingTime += duration * time.Minute
+
+		for _, studio := range item.Anime().Studios() {
+			count, exists := studios[studio.ID]
+
+			if !exists {
+				topStudios = append(topStudios, studio)
+			}
+
+			studios[studio.ID] = count + 1
+		}
+	}
+
+	sort.Slice(topStudios, func(i, j int) bool {
+		affinityA := studios[topStudios[i].ID]
+		affinityB := studios[topStudios[j].ID]
+
+		if affinityA == affinityB {
+			return topStudios[i].Name.English < topStudios[j].Name.English
+		}
+
+		return affinityA > affinityB
+	})
+
+	if len(topStudios) > maxStudios {
+		topStudios = topStudios[:maxStudios]
+	}
 
 	// Open graph
 	openGraph := &arn.OpenGraph{
@@ -128,5 +170,18 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	}
 
 	ctx.Data = openGraph
-	return ctx.HTML(components.Profile(viewUser, user, animeList, completedList, characters, friends, topGenres, dayToActivityCount, ctx.URI()))
+
+	return ctx.HTML(components.Profile(
+		viewUser,
+		user,
+		animeList,
+		completedList,
+		characters,
+		friends,
+		topGenres,
+		topStudios,
+		animeWatchingTime,
+		dayToActivityCount,
+		ctx.URI(),
+	))
 }
