@@ -90,8 +90,8 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 				
 					.footer.activities-footer.mountable(data-mountable-type="extra")
 						span= viewUser.Nick + " spent "
-						span= int(animeWatchingTime / time.Hour / 24)
-						span  days watching anime.
+						span= stringutils.Plural(int(animeWatchingTime / time.Hour / 24), "day")
+						span  watching anime.
 				
 component ProfileHeader(viewUser *arn.User, animeList *arn.AnimeList, user *arn.User, uri string)
 	ProfileHead(viewUser, animeList, user, uri)
