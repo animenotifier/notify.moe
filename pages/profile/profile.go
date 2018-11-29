@@ -51,7 +51,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 	var topStudios []*arn.Company
 
 	for _, item := range animeList.Items {
-		if item.Status == arn.AnimeListStatusPlanned {
+		if item.Status != arn.AnimeListStatusCompleted {
 			continue
 		}
 
@@ -59,15 +59,23 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		reWatch := item.RewatchCount * item.Anime().EpisodeCount * item.Anime().EpisodeLength
 		duration := time.Duration(currentWatch + reWatch)
 		animeWatchingTime += duration * time.Minute
+		rating := 0.0
+
+		if item.Rating.Overall != 0 {
+			rating = item.Rating.Overall - arn.AverageRating
+		} else {
+			// Add 0.1 to avoid all affinities being 0 when a user doesn't have any rated anime.
+			rating = 0.1
+		}
 
 		for _, studio := range item.Anime().Studios() {
-			count, exists := studios[studio.ID]
+			affinity, exists := studios[studio.ID]
 
 			if !exists {
 				topStudios = append(topStudios, studio)
 			}
 
-			studios[studio.ID] = count + 1
+			studios[studio.ID] = affinity + rating
 		}
 	}
 
