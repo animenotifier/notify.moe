@@ -10,7 +10,7 @@ import (
 )
 
 // testConnectivity will test if port 443 is accessible or not.
-// If not, it will attempt to run "sudo make ports" and consume
+// If not, it will attempt to run "sudo make ports" and resume
 // execution once the user has entered the password.
 func testConnectivity() {
 	config := tls.Config{
