@@ -3,10 +3,14 @@ package main
 import (
 	"net/http"
 	"net/http/pprof"
+
+	"github.com/animenotifier/arn"
 )
 
 func init() {
-	// Uncomment these if you want to enable live profiling via /debug/pprof
+	if !arn.IsDevelopment() {
+		return
+	}
 
 	app.Router.HandlerFunc("GET", "/debug/pprof/", http.HandlerFunc(pprof.Index))
 	app.Router.HandlerFunc("GET", "/debug/pprof/cmdline", http.HandlerFunc(pprof.Cmdline))
