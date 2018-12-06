@@ -9,21 +9,21 @@ import (
 )
 
 var jobInfo = map[string]*utils.JobInfo{
-	"anime-ratings": &utils.JobInfo{
-		Name: "anime-ratings",
-	},
 	"kitsu-import-anime": &utils.JobInfo{
 		Name: "kitsu-import-anime",
 	},
-	"twist": &utils.JobInfo{
-		Name: "twist",
-	},
-	"refresh-games": &utils.JobInfo{
-		Name: "refresh-games",
-	},
-	"test": &utils.JobInfo{
-		Name: "test",
-	},
+	// "anime-ratings": &utils.JobInfo{
+	// 	Name: "anime-ratings",
+	// },
+	// "twist": &utils.JobInfo{
+	// 	Name: "twist",
+	// },
+	// "refresh-games": &utils.JobInfo{
+	// 	Name: "refresh-games",
+	// },
+	// "test": &utils.JobInfo{
+	// 	Name: "test",
+	// },
 }
 
 var jobLogs = []string{}
