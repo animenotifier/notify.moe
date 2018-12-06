@@ -26,11 +26,7 @@ var colorPool = []*color.Color{
 var jobs = map[string]time.Duration{
 	"anime-ratings": 10 * time.Minute,
 	"twist":         2 * time.Hour,
-	// "test":             1 * time.Hour,
-	// "refresh-episodes": 10 * time.Hour,
-	// "refresh-osu":      12 * time.Hour,
-	// "sync-anime":       12 * time.Hour,
-	// "sync-shoboi":      24 * time.Hour,
+	"refresh-games": 6 * time.Hour,
 }
 
 func main() {
