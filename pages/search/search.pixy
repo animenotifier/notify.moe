@@ -2,7 +2,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 	h1.page-title= "Search: " + term
 
 	.search
-		.widget
+		.widget(class=utils.SearchClass(animes))
 			h3.widget-title
 				Icon("tv")
 				span Anime
@@ -10,7 +10,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			#anime-search-results
 				AnimeSearchResults(animes, user)
 
-		.widget
+		.widget(class=utils.SearchClass(characters))
 			h3.widget-title
 				Icon("user")
 				span Characters
@@ -18,15 +18,23 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			#character-search-results
 				CharacterSearchResults(characters, user)
 
-		.widget
+		.widget(class=utils.SearchClass(posts))
 			h3.widget-title
 				Icon("comment")
-				span Forum
+				span Posts
 
-			#forum-search-results
-				ForumSearchResults(posts, threads, user)
+			#posts-search-results
+				PostsSearchResults(posts, user)
+		
+		.widget(class=utils.SearchClass(threads))
+			h3.widget-title
+				Icon("comments")
+				span Threads
 
-		.widget
+			#threads-search-results
+				ThreadsSearchResults(threads, user)
+
+		.widget(class=utils.SearchClass(tracks))
 			h3.widget-title
 				Icon("music")
 				span Soundtracks
@@ -34,7 +42,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			#soundtrack-search-results
 				SoundTrackSearchResults(tracks, user)
 		
-		.widget
+		.widget(class=utils.SearchClass(amvs))
 			h3.widget-title
 				Icon("video-camera")
 				span AMVs
@@ -50,7 +58,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 		//- 	#quote-search-results
 		//- 		QuoteSearchResults(quotes)
 
-		.widget
+		.widget(class=utils.SearchClass(companies))
 			h3.widget-title
 				Icon("building")
 				span Companies
@@ -58,7 +66,7 @@ component SearchResults(term string, users []*arn.User, animes []*arn.Anime, pos
 			#company-search-results
 				CompanySearchResults(companies)
 
-		.widget
+		.widget(class=utils.SearchClass(users))
 			h3.widget-title
 				Icon("user")
 				span Users
@@ -84,26 +92,34 @@ component CharacterSearchResults(characters []*arn.Character, user *arn.User)
 				.mountable(data-mountable-type="character")
 					CharacterSmall(character, user)
 
-component ForumSearchResults(posts []*arn.Post, threads []*arn.Thread, user *arn.User)
-	if len(posts) == 0 && len(threads) == 0
+component PostsSearchResults(posts []*arn.Post, user *arn.User)
+	if len(posts) == 0
 		p.no-search-results.mountable No posts found.
 	else
-		.forum-search-results
-			each thread in threads
-				.forum-search-result.mountable(data-mountable-type="forum")
-					.forum-search-result-header
-						a.forum-search-result-title(href=thread.Link())= thread.Title
-						if thread.Creator().HasNick()
-							.forum-search-result-author= thread.Creator().Nick
-					.forum-search-result-sample= thread.Text
-
+		.posts-search-results
 			each post in posts
-				.forum-search-result.mountable(data-mountable-type="forum")
-					.forum-search-result-header
-						a.forum-search-result-title(href=post.Link(), data-mountable-type="forum")= post.Parent().TitleByUser(user)
+				.posts-search-result.mountable(data-mountable-type="post")
+					.posts-search-result-header
+						a.posts-search-result-title(href=post.Link(), data-mountable-type="post")= post.Parent().TitleByUser(user)
+						
 						if post.Creator().HasNick()
-							.forum-search-result-author= post.Creator().Nick
-					.forum-search-result-sample= post.Text
+							.posts-search-result-author= post.Creator().Nick
+					
+					.posts-search-result-sample= post.Text
+
+component ThreadsSearchResults(threads []*arn.Thread, user *arn.User)
+	if len(threads) == 0
+		p.no-search-results.mountable No threads found.
+	else
+		each thread in threads
+			.posts-search-result.mountable(data-mountable-type="thread")
+				.posts-search-result-header
+					a.posts-search-result-title(href=thread.Link())= thread.Title
+
+					if thread.Creator().HasNick()
+						.posts-search-result-author= thread.Creator().Nick
+				
+				.posts-search-result-sample= thread.Text
 
 component SoundTrackSearchResults(tracks []*arn.SoundTrack, user *arn.User)
 	if len(tracks) == 0

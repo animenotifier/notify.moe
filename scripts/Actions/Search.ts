@@ -1,5 +1,6 @@
 import AnimeNotifier from "../AnimeNotifier"
 import { delay, requestIdleCallback } from "../Utils"
+import Diff from "scripts/Diff";
 
 // Search page reference
 var emptySearchHTML = ""
@@ -8,7 +9,8 @@ var searchPageTitle: HTMLElement
 var correctResponseRendered = {
 	"anime": false,
 	"character": false,
-	"forum": false,
+	"posts": false,
+	"threads": false,
 	"soundtrack": false,
 	"user": false,
 	"amv": false,
@@ -21,7 +23,8 @@ var oldTerm = ""
 // Containers for all the search results
 var animeSearchResults: HTMLElement
 var characterSearchResults: HTMLElement
-var forumSearchResults: HTMLElement
+var postsSearchResults: HTMLElement
+var threadsSearchResults: HTMLElement
 var soundtrackSearchResults: HTMLElement
 var userSearchResults: HTMLElement
 var amvSearchResults: HTMLElement
@@ -59,7 +62,8 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 	// Reset
 	correctResponseRendered.anime = false
 	correctResponseRendered.character = false
-	correctResponseRendered.forum = false
+	correctResponseRendered.posts = false
+	correctResponseRendered.threads = false
 	correctResponseRendered.soundtrack = false
 	correctResponseRendered.user = false
 	correctResponseRendered.amv = false
@@ -108,7 +112,8 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 		if(!animeSearchResults) {
 			animeSearchResults = document.getElementById("anime-search-results")
 			characterSearchResults = document.getElementById("character-search-results")
-			forumSearchResults = document.getElementById("forum-search-results")
+			postsSearchResults = document.getElementById("posts-search-results")
+			threadsSearchResults = document.getElementById("threads-search-results")
 			soundtrackSearchResults = document.getElementById("soundtrack-search-results")
 			userSearchResults = document.getElementById("user-search-results")
 			amvSearchResults = document.getElementById("amv-search-results")
@@ -139,8 +144,12 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 			.then(showResponseInElement(arn, url, "character", characterSearchResults))
 			.catch(console.error)
 
-			fetch("/_/forum-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "forum", forumSearchResults))
+			fetch("/_/posts-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "posts", postsSearchResults))
+			.catch(console.error)
+
+			fetch("/_/threads-search/" + term, fetchOptions)
+			.then(showResponseInElement(arn, url, "threads", threadsSearchResults))
 			.catch(console.error)
 
 			fetch("/_/soundtrack-search/" + term, fetchOptions)
@@ -169,6 +178,12 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string, element: HTMLElement) {
 	return async (response: Response) => {
 		let html = await response.text()
+
+		if(html.includes("no-search-results")) {
+			Diff.mutations.queue(() => element.parentElement.classList.add("search-section-disabled"))
+		} else {
+			Diff.mutations.queue(() => element.parentElement.classList.remove("search-section-disabled"))
+		}
 
 		if(arn.app.currentPath !== url) {
 			// Return if this result would overwrite the already arrived correct result

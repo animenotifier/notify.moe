@@ -48,7 +48,7 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 		body
 			#container(class=utils.GetContainerClass(ctx))
 				#columns
-					Sidebar(user)
+					Sidebar(ctx.Get("term"), user)
 					Content(content)
 				
 				LoadingAnimation

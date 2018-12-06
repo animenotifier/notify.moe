@@ -10,29 +10,29 @@
 	width anime-image-small-width !important
 	height anime-image-small-height !important
 
-.forum-search-results
+.posts-search-results
 	horizontal-wrap
 	justify-content space-around
 
-.forum-search-result
+.posts-search-result
 	vertical
 	flex 1
 	flex-basis 380px
 	padding 0.75rem
 	overflow hidden
 
-.forum-search-result-header
+.posts-search-result-header
 	horizontal
 
-.forum-search-result-title
+.posts-search-result-title
 	flex 1
 	clip-long-text
 
-.forum-search-result-author
+.posts-search-result-author
 	text-align right
 	opacity 0.5
 
-.forum-search-result-sample
+.posts-search-result-sample
 	clip-long-text
 	margin-bottom 1rem
 	opacity 0.8
@@ -44,3 +44,6 @@
 .no-search-results
 	text-align left
 	padding-bottom typography-margin
+
+.search-section-disabled
+	display none !important

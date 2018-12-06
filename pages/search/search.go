@@ -5,10 +5,7 @@ import (
 
 	"github.com/animenotifier/notify.moe/utils"
 
-	"github.com/aerogo/flow"
-
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/search"
 	"github.com/animenotifier/notify.moe/components"
 )
@@ -70,22 +67,24 @@ func Characters(ctx *aero.Context) string {
 	return ctx.HTML(components.CharacterSearchResults(characters, user))
 }
 
-// Forum search.
-func Forum(ctx *aero.Context) string {
+// Posts search.
+func Posts(ctx *aero.Context) string {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
+	posts := search.Posts(term, maxPosts)
 
-	var posts []*arn.Post
-	var threads []*arn.Thread
+	return ctx.HTML(components.PostsSearchResults(posts, user))
+}
 
-	flow.Parallel(func() {
-		posts = search.Posts(term, maxPosts)
-	}, func() {
-		threads = search.Threads(term, maxThreads)
-	})
+// Threads search.
+func Threads(ctx *aero.Context) string {
+	term := ctx.Get("term")
+	term = strings.TrimPrefix(term, "/")
+	user := utils.GetUser(ctx)
+	threads := search.Threads(term, maxThreads)
 
-	return ctx.HTML(components.ForumSearchResults(posts, threads, user))
+	return ctx.HTML(components.ThreadsSearchResults(threads, user))
 }
 
 // SoundTracks search.
