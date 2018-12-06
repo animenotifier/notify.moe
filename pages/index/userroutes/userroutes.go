@@ -6,6 +6,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/compare"
+	"github.com/animenotifier/notify.moe/pages/explore/explorerelations"
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/profile"
 	"github.com/animenotifier/notify.moe/pages/recommended"
@@ -31,7 +32,8 @@ func Register(l *layout.Layout) {
 	// l.Page("/user/:nick/stats", profile.GetStatsByUser)
 	// l.Page("/user/:nick/followers", profile.GetFollowers)
 	l.Page("/user/:nick/animelist/anime/:id", animelistitem.Get)
-	l.Page("/user/:nick/recommended/anime", recommended.Anime)
+	l.Page("/user/:nick/anime/recommended", recommended.Anime)
+	l.Page("/user/:nick/anime/sequels", explorerelations.Sequels)
 	l.Page("/user/:nick/notifications", notifications.ByUser)
 	l.Page("/user/:nick/edit", user.Edit)
 

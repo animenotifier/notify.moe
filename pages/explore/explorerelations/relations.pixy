@@ -1,4 +1,4 @@
-component ExploreAnimeSequels(entries []*utils.AnimeWithRelatedAnime, user *arn.User)
+component ExploreAnimeSequels(entries []*utils.AnimeWithRelatedAnime, viewUser *arn.User, user *arn.User)
 	h1 Sequels of my completed anime
 
 	.explore-anime

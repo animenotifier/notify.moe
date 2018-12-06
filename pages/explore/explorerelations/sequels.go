@@ -13,13 +13,20 @@ import (
 
 // Sequels ...
 func Sequels(ctx *aero.Context) string {
+	nick := ctx.Get("nick")
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
-	animeList := user.AnimeList()
+	viewUser, err := arn.GetUserByNick(nick)
+
+	if err != nil {
+		return ctx.Error(http.StatusNotFound, "User not found", err)
+	}
+
+	animeList := viewUser.AnimeList()
 	sequels := []*utils.AnimeWithRelatedAnime{}
 
 	for anime := range arn.StreamAnime() {
@@ -56,5 +63,5 @@ func Sequels(ctx *aero.Context) string {
 		return aScore > bScore
 	})
 
-	return ctx.HTML(components.ExploreAnimeSequels(sequels, user))
+	return ctx.HTML(components.ExploreAnimeSequels(sequels, viewUser, user))
 }

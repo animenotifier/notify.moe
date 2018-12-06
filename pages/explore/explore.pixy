@@ -19,10 +19,6 @@ component ExploreAnime(animes []*arn.Anime, year string, season string, status s
 		a.button(href="/genres", title="View genres")
 			RawIcon("clone")
 		
-		if user != nil
-			a.button(href="/explore/sequels", title="View sequels of my completed anime")
-				RawIcon("forward")
-		
 		a.button(href="/explore/color/any/anime", title="View colors")
 			RawIcon("paint-brush")
 

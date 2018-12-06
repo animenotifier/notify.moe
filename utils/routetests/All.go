@@ -463,7 +463,6 @@ var routeTests = map[string][]string{
 	"/admin/purchases":                               nil,
 	"/admin/registrations":                           nil,
 	"/admin/payments":                                nil,
-	"/explore/sequels":                               nil,
 	"/editor/anilist":                                nil,
 	"/editor/shoboi":                                 nil,
 	"/dark-flame-master":                             nil,

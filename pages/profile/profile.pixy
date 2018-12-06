@@ -176,12 +176,19 @@ component ProfileHead(viewUser *arn.User, animeList *arn.AnimeList, user *arn.Us
 						a.profile-tag.tip.mountable.never-unmount.show-more(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick, aria-label="Compare", data-mountable-type="header")
 							RawIcon("exchange")
 					
-					a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/recommended/anime", aria-label="Recommendations", data-mountable-type="header")
+					a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/anime/recommended", aria-label="Recommendations", data-mountable-type="header")
 						RawIcon("archive")
+
+					a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/anime/sequels", aria-label="Sequels", data-mountable-type="header")
+						RawIcon("forward")
 
 					if user != nil && (user.Role == "editor" || user.Role == "admin")
 						a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/log", aria-label="Log", data-mountable-type="header")
 							RawIcon("list")
+					
+					if user != nil && user.Role == "admin"
+						a.profile-tag.tip.mountable.never-unmount.show-more(href="/api/user/" + viewUser.ID, aria-label="API", target="_blank", rel="noopener", data-mountable-type="header")
+							RawIcon("search-plus")
 		
 		.profile-actions
 			if user != nil && user.ID != viewUser.ID
