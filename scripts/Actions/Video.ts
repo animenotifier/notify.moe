@@ -28,10 +28,12 @@ function togglePlayVideo(video: HTMLVideoElement) {
 export function toggleFullscreen(arn: AnimeNotifier, button: HTMLElement) {
 	let elementId = button.dataset.id
 	let element = document.getElementById(elementId)
+	let requestFullscreen = element.requestFullscreen || element["mozRequestFullScreen"] || element["webkitRequestFullScreen"] || element["msRequestFullscreen"]
+	let exitFullscreen = document.exitFullscreen || document["mozCancelFullScreen"] || document["webkitExitFullscreen"] || document["msExitFullscreen"]
 
 	if(document.fullscreen) {
-		document.exitFullscreen()
+		exitFullscreen.call(document)
 	} else {
-		element.requestFullscreen()
+		requestFullscreen.call(element)
 	}
 }
