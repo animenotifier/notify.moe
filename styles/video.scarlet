@@ -1,4 +1,5 @@
 const video-padding = 56.25%
+const video-control-color = rgba(255, 255, 255, 0.75)
 
 .video-container
 	position relative
@@ -22,16 +23,31 @@ const video-padding = 56.25%
 
 .video-controls
 	position absolute
-	bottom 1rem
-	right 1rem
+	bottom 0.5rem
+	right 0.75rem
 	opacity 0
+	horizontal
+	align-items center
 	default-transition
 
+	:hover
+		opacity 1 !important
+
+.video-duration
+	color video-control-color
+
 .video-control
-	background transparent
+	background transparent !important
+	color video-control-color
 	border none
-	color white
 	font-size 1.2rem
+	line-height 1em
+	height auto
+	padding 0
+	margin-left 0.5rem
+
+	:hover
+		color white
 
 ::-webkit-media-controls
 	display none !important

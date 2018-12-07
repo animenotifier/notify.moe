@@ -891,12 +891,29 @@ export default class AnimeNotifier {
 	}
 
 	lazyLoadVideo(video: HTMLVideoElement) {
+		const hideControlsDelay = 1500
+
 		// Once the video becomes visible, load it
 		video["became visible"] = () => {
-			// video.pause()
-
 			// Prevent context menu
 			video.addEventListener("contextmenu", e => e.preventDefault())
+
+			// Show and hide controls on mouse movement
+			let controls = video.parentElement.getElementsByClassName("video-controls")[0]
+
+			let hideControls = () => {
+				controls.classList.add("fade-out")
+			}
+
+			let showControls = () => {
+				controls.classList.remove("fade-out")
+			}
+
+			video.addEventListener("mousemove", () => {
+				showControls()
+				clearTimeout(video["hideControlsTimeout"])
+				video["hideControlsTimeout"] = setTimeout(hideControls, hideControlsDelay)
+			})
 
 			let modified = false
 
@@ -916,7 +933,6 @@ export default class AnimeNotifier {
 
 			if(modified) {
 				Diff.mutations.queue(() => {
-					// video.load()
 					video.classList.add("element-found")
 				})
 			}

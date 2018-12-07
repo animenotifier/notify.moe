@@ -9,7 +9,7 @@ component AMVMini(amv *arn.AMV, user *arn.User)
 		AMVMiniFooter(amv, user)
 
 component AMVVideo(amv *arn.AMV)
-	.video-container(id=amv.ID)
+	.video-container(id=amv.ID, data-api="/api/amv/" + amv.ID)
 		video.video.media-play-area.lazy.action(data-action="playVideo", data-trigger="click", data-media-id=amv.ID)
 			source(data-src="https://notify.moe/videos/amvs/" + amv.File, data-type="video/webm")
 
@@ -17,7 +17,12 @@ component AMVVideo(amv *arn.AMV)
 			//- 	RawIcon("play")
 		
 		.video-controls
-			button.video-control.action(data-action="toggleFullscreen", data-trigger="click", data-id=amv.ID)
+			.video-duration= fmt.Sprintf("%d:%02d", int(amv.Info.Duration.Minutes()), int(amv.Info.Duration.Seconds()) % 60)
+
+			//- button.video-control.action(data-action="like", data-trigger="click")
+			//- 	RawIcon("heart-o")
+			
+			button.video-control.action(data-action="toggleFullscreen", data-trigger="click", data-id=amv.ID, aria-label="Fullscreen")
 				RawIcon("square-o")
 
 component AMVFooter(amv *arn.AMV, user *arn.User)

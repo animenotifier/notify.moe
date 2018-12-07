@@ -9,11 +9,11 @@ export function playVideo(arn: AnimeNotifier, video: HTMLVideoElement) {
 		return
 	}
 
-	video.load()
-
 	video.addEventListener("loadeddata", () => {
 		togglePlayVideo(video)
 	})
+
+	video.load()
 }
 
 function togglePlayVideo(video: HTMLVideoElement) {
