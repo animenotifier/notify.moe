@@ -26,7 +26,7 @@ component AMVVideo(amv *arn.AMV)
 			//- 	RawIcon("heart-o")
 			
 			button.video-control.action(data-action="toggleFullscreen", data-trigger="click", data-id=amv.ID, aria-label="Fullscreen")
-				RawIcon("square-o")
+				RawIcon("fullscreen")
 
 component AMVFooter(amv *arn.AMV, user *arn.User)
 	.amv-footer
