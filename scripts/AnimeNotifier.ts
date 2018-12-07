@@ -895,55 +895,67 @@ export default class AnimeNotifier {
 
 		// Once the video becomes visible, load it
 		video["became visible"] = () => {
-			// Prevent context menu
-			video.addEventListener("contextmenu", e => e.preventDefault())
+			if(!video["listeners attached"]) {
+				// Prevent context menu
+				video.addEventListener("contextmenu", e => e.preventDefault())
 
-			// Show and hide controls on mouse movement
-			let controls = video.parentElement.getElementsByClassName("video-controls")[0]
+				// Show and hide controls on mouse movement
+				let controls = video.parentElement.getElementsByClassName("video-controls")[0]
 
-			let hideControls = () => {
-				controls.classList.add("fade-out")
+				let hideControls = () => {
+					controls.classList.add("fade-out")
+				}
+
+				let showControls = () => {
+					controls.classList.remove("fade-out")
+				}
+
+				video.addEventListener("mousemove", () => {
+					showControls()
+					clearTimeout(video["hideControlsTimeout"])
+					video["hideControlsTimeout"] = setTimeout(hideControls, hideControlsDelay)
+				})
+
+				let progressElement = video.parentElement.getElementsByClassName("video-progress")[0] as HTMLElement
+				let progressContainer = video.parentElement.getElementsByClassName("video-progress-container")[0]
+				let timeElement = video.parentElement.getElementsByClassName("video-time")[0]
+
+				video.addEventListener("canplay", () => {
+					video["playable"] = true
+				})
+
+				video.addEventListener("timeupdate", () => {
+					if(!video["playable"]) {
+						return
+					}
+
+					let time = video.currentTime
+					let minutes = Math.trunc(time / 60)
+					let seconds = Math.trunc(time) % 60
+					let paddedSeconds = ("00" + seconds).slice(-2)
+					timeElement.textContent = `${minutes}:${paddedSeconds}`
+					progressElement.style.transform = `scaleX(${time / video.duration})`
+				})
+
+				video.addEventListener("waiting", () => {
+					this.loading(true)
+				})
+
+				video.addEventListener("playing", () => {
+					this.loading(false)
+				})
+
+				progressContainer.addEventListener("click", (e: MouseEvent) => {
+					let rect = progressContainer.getBoundingClientRect()
+					let x = e.clientX
+					let progress = (x - rect.left) / rect.width
+					video.currentTime = progress * video.duration
+					video.dispatchEvent(new Event("timeupdate"))
+					e.stopPropagation()
+				})
+
+				video["listeners attached"] = true
 			}
-
-			let showControls = () => {
-				controls.classList.remove("fade-out")
-			}
-
-			video.addEventListener("mousemove", () => {
-				showControls()
-				clearTimeout(video["hideControlsTimeout"])
-				video["hideControlsTimeout"] = setTimeout(hideControls, hideControlsDelay)
-			})
-
-			let progressElement = video.parentElement.getElementsByClassName("video-progress")[0] as HTMLElement
-			let progressContainer = video.parentElement.getElementsByClassName("video-progress-container")[0]
-			let timeElement = video.parentElement.getElementsByClassName("video-time")[0]
-
-			video.addEventListener("timeupdate", () => {
-				let time = video.currentTime
-				let minutes = Math.trunc(time / 60)
-				let seconds = Math.trunc(time) % 60
-				let paddedSeconds = ("00" + seconds).slice(-2)
-				timeElement.textContent = `${minutes}:${paddedSeconds}`
-				progressElement.style.transform = `scaleX(${time / video.duration})`
-			})
-
-			video.addEventListener("waiting", () => {
-				this.loading(true)
-			})
-
-			video.addEventListener("playing", () => {
-				this.loading(false)
-			})
-
-			progressContainer.addEventListener("click", (e: MouseEvent) => {
-				let rect = progressContainer.getBoundingClientRect()
-				let x = e.clientX
-				let progress = (x - rect.left) / rect.width
-				video.currentTime = progress * video.duration
-				video.dispatchEvent(new Event("timeupdate"))
-				e.stopPropagation()
-			})
 
 			let modified = false
 
@@ -962,6 +974,8 @@ export default class AnimeNotifier {
 			}
 
 			if(modified) {
+				video["playable"] = false
+
 				Diff.mutations.queue(() => {
 					video.load()
 					video.classList.add("element-found")
