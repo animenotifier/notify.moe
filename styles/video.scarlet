@@ -57,7 +57,6 @@ const video-control-color = rgba(255, 255, 255, 0.75)
 	background transparent !important
 	color video-control-color
 	border none
-	font-size 1.2rem
 	line-height 1em
 	height auto
 	padding 0
