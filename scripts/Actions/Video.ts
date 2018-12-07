@@ -30,8 +30,9 @@ export function toggleFullscreen(arn: AnimeNotifier, button: HTMLElement) {
 	let element = document.getElementById(elementId)
 	let requestFullscreen = element.requestFullscreen || element["mozRequestFullScreen"] || element["webkitRequestFullScreen"] || element["msRequestFullscreen"]
 	let exitFullscreen = document.exitFullscreen || document["mozCancelFullScreen"] || document["webkitExitFullscreen"] || document["msExitFullscreen"]
+	let fullscreen = document.fullscreen || document["webkitIsFullScreen"] || document["mozFullScreen"]
 
-	if(document.fullscreen) {
+	if(fullscreen) {
 		exitFullscreen.call(document)
 	} else {
 		requestFullscreen.call(element)
