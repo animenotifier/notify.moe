@@ -933,8 +933,11 @@ export default class AnimeNotifier {
 					let minutes = Math.trunc(time / 60)
 					let seconds = Math.trunc(time) % 60
 					let paddedSeconds = ("00" + seconds).slice(-2)
-					timeElement.textContent = `${minutes}:${paddedSeconds}`
-					progressElement.style.transform = `scaleX(${time / video.duration})`
+
+					Diff.mutations.queue(() => {
+						timeElement.textContent = `${minutes}:${paddedSeconds}`
+						progressElement.style.transform = `scaleX(${time / video.duration})`
+					})
 				})
 
 				video.addEventListener("waiting", () => {
