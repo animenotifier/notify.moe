@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
-	"github.com/aerogo/session-store-nano"
+	nanostore "github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/middleware"

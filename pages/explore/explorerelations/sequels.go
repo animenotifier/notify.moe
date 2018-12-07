@@ -15,11 +15,6 @@ import (
 func Sequels(ctx *aero.Context) string {
 	nick := ctx.Get("nick")
 	user := utils.GetUser(ctx)
-
-	if user == nil {
-		return ctx.Error(http.StatusUnauthorized, "Not logged in")
-	}
-
 	viewUser, err := arn.GetUserByNick(nick)
 
 	if err != nil {

@@ -6,57 +6,57 @@ var routeTests = map[string][]string{
 		"/+Akyoto",
 	},
 
-	"/user/:nick/characters/liked": []string{
-		"/+Akyoto/characters/liked",
-	},
+	// "/user/:nick/characters/liked": []string{
+	// 	"/+Akyoto/characters/liked",
+	// },
 
-	"/user/:nick/forum/threads": []string{
-		"/+Akyoto/forum/threads",
-	},
+	// "/user/:nick/forum/threads": []string{
+	// 	"/+Akyoto/forum/threads",
+	// },
 
-	"/user/:nick/forum/posts": []string{
-		"/+Akyoto/forum/posts",
-	},
+	// "/user/:nick/forum/posts": []string{
+	// 	"/+Akyoto/forum/posts",
+	// },
 
-	"/user/:nick/soundtracks/added": []string{
-		"/+Akyoto/soundtracks/added",
-	},
+	// "/user/:nick/soundtracks/added": []string{
+	// 	"/+Akyoto/soundtracks/added",
+	// },
 
-	"/user/:nick/soundtracks/added/from/:index": []string{
-		"/+Akyoto/soundtracks/added/from/3",
-	},
+	// "/user/:nick/soundtracks/added/from/:index": []string{
+	// 	"/+Akyoto/soundtracks/added/from/3",
+	// },
 
-	"/user/:nick/soundtracks/liked": []string{
-		"/+Akyoto/soundtracks/liked",
-	},
+	// "/user/:nick/soundtracks/liked": []string{
+	// 	"/+Akyoto/soundtracks/liked",
+	// },
 
-	"/user/:nick/soundtracks/liked/from/:index": []string{
-		"/+Akyoto/soundtracks/liked/from/3",
-	},
+	// "/user/:nick/soundtracks/liked/from/:index": []string{
+	// 	"/+Akyoto/soundtracks/liked/from/3",
+	// },
 
-	"/user/:nick/quotes/added": []string{
-		"/+Scott/quotes/added",
-	},
+	// "/user/:nick/quotes/added": []string{
+	// 	"/+Scott/quotes/added",
+	// },
 
-	"/user/:nick/quotes/added/from/:index": []string{
-		"/+Scott/quotes/added/from/3",
-	},
+	// "/user/:nick/quotes/added/from/:index": []string{
+	// 	"/+Scott/quotes/added/from/3",
+	// },
 
-	"/user/:nick/quotes/liked": []string{
-		"/+Scott/quotes/liked",
-	},
+	// "/user/:nick/quotes/liked": []string{
+	// 	"/+Scott/quotes/liked",
+	// },
 
-	"/user/:nick/quotes/liked/from/:index": []string{
-		"/+Scott/quotes/liked/from/3",
-	},
+	// "/user/:nick/quotes/liked/from/:index": []string{
+	// 	"/+Scott/quotes/liked/from/3",
+	// },
 
-	"/user/:nick/followers": []string{
-		"/+Akyoto/followers",
-	},
+	// "/user/:nick/followers": []string{
+	// 	"/+Akyoto/followers",
+	// },
 
-	"/user/:nick/stats": []string{
-		"/+Akyoto/stats",
-	},
+	// "/user/:nick/stats": []string{
+	// 	"/+Akyoto/stats",
+	// },
 
 	"/user/:nick/animelist/anime/:id": []string{
 		"/+Akyoto/animelist/anime/74y2cFiiR",
@@ -102,8 +102,12 @@ var routeTests = map[string][]string{
 		"/+Akyoto/animelist/dropped/from/3",
 	},
 
-	"/user/:nick/recommended/anime": []string{
-		"/+Akyoto/recommended/anime",
+	"/user/:nick/anime/recommended": []string{
+		"/+Akyoto/anime/recommended",
+	},
+
+	"/user/:nick/anime/sequels": []string{
+		"/+Akyoto/anime/sequels",
 	},
 
 	"/users/country/:country": []string{
