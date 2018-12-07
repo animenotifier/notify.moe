@@ -23,9 +23,11 @@ const video-control-color = rgba(255, 255, 255, 0.75)
 
 .video-controls
 	position absolute
-	bottom 0.5rem
-	right 0.75rem
+	bottom 0
+	right 0
+	padding 0.5rem 0.75rem
 	opacity 0
+	width 100%
 	horizontal
 	align-items center
 	default-transition
@@ -33,8 +35,23 @@ const video-control-color = rgba(255, 255, 255, 0.75)
 	:hover
 		opacity 1 !important
 
-.video-duration
+.video-progress-bar
+	flex 1
+	height 5px
+	background rgba(255, 255, 255, 0.5)
+	border-radius ui-element-border-radius
+	overflow hidden
+
+.video-current-progress
+	background rgba(255, 255, 255, 0.75)
+	width 100%
+	height 100%
+	transform scaleX(0)
+	transform-origin 0
+
+.video-time
 	color video-control-color
+	margin-left 0.5rem
 
 .video-control
 	background transparent !important
