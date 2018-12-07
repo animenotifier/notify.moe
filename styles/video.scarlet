@@ -8,6 +8,10 @@ const video-padding = 56.25%
 	border-radius ui-element-border-radius
 	overflow hidden
 
+	:hover
+		.video-controls
+			opacity 1
+
 .video
 	position absolute
 	width 100%
@@ -15,3 +19,19 @@ const video-padding = 56.25%
 	left 0
 	top 0
 	background-color black
+
+.video-controls
+	position absolute
+	bottom 1rem
+	right 1rem
+	opacity 0
+	default-transition
+
+.video-control
+	background transparent
+	border none
+	color white
+	font-size 1.2rem
+
+::-webkit-media-controls
+	display none !important

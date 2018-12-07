@@ -31,7 +31,7 @@ const soundtrack-margin = 1rem
 	iframe
 		width 100%
 
-.soundtrack-image
+.media-image
 	object-fit cover
 	width 100%
 	height 100%
@@ -39,7 +39,7 @@ const soundtrack-margin = 1rem
 	filter brightness(100%)
 	transition filter transition-speed ease
 
-.soundtrack-play-button
+.media-play-button
 	position absolute
 	top 50%
 	left 50%
@@ -56,7 +56,7 @@ const soundtrack-margin = 1rem
 	.icon-play
 		transform translateX(27%)
 
-.soundtrack-visualizer
+.media-visualizer
 	horizontal
 	justify-content center
 	align-items center
@@ -101,33 +101,6 @@ animation change-color
 	100%
 		background-color hsl(235, 100%, 68%)
 
-.soundtrack-play-area
-	position absolute
-	top 0
-	left 0
-	width 100%
-	height 100%
-	cursor pointer
-	transition opacity 250ms ease
-
-	&.playing
-		.soundtrack-play-button
-			opacity 0
-
-		.soundtrack-visualizer
-			opacity 1
-
-		.soundtrack-image
-			filter brightness(0) !important
-
-	:hover
-		.soundtrack-play-button
-			color button-hover-color
-			background button-hover-background
-
-		.soundtrack-image
-			filter brightness(50%)
-
 .soundtrack-footer
 	media-footer
 
@@ -142,7 +115,7 @@ animation change-color
 		border-bottom-right-radius 0
 		border-top-right-radius 0
 
-	.soundtrack-image
+	.media-image
 		border-bottom-left-radius 0
 		border-top-left-radius 0
 

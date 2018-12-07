@@ -1,0 +1,26 @@
+.media-play-area
+	position absolute
+	top 0
+	left 0
+	width 100%
+	height 100%
+	cursor pointer
+	transition opacity 250ms ease
+
+	&.playing
+		.media-play-button
+			opacity 0
+
+		.media-visualizer
+			opacity 1
+
+		.media-image
+			filter brightness(0) !important
+
+	:hover
+		.media-play-button
+			color button-hover-color
+			background button-hover-background
+
+		.media-image
+			filter brightness(50%)

@@ -19,12 +19,13 @@ component SoundTrackContent(track *arn.SoundTrack, user *arn.User)
 component SoundTrackMedia(track *arn.SoundTrack)
 	if track.File != "" && track.HasMediaByService("Youtube")
 		.soundtrack-media
-			.soundtrack-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-soundtrack-id=track.ID)
-				img.soundtrack-image.lazy(data-src="https://img.youtube.com/vi/" + track.MediaByService("Youtube")[0].ServiceID + "/0.jpg", alt=track.Title)
-				button.soundtrack-play-button
+			.media-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-media-id=track.ID)
+				img.media-image.lazy(data-src="https://img.youtube.com/vi/" + track.MediaByService("Youtube")[0].ServiceID + "/0.jpg", alt=track.Title)
+				
+				button.media-play-button
 					RawIcon("play")
 				
-				.soundtrack-visualizer
+				.media-visualizer
 					.visualizer-box.visualizer-box-1
 					.visualizer-box.visualizer-box-2
 					.visualizer-box.visualizer-box-3

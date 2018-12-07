@@ -24,7 +24,7 @@
 			min-height 112px
 			height 112px
 
-		.soundtrack-play-button
+		.media-play-button
 			width 48px
 			height 48px
 			font-size 1rem

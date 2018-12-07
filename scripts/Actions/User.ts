@@ -1,5 +1,5 @@
 import AnimeNotifier from "../AnimeNotifier"
-import Diff from "scripts/Diff";
+import Diff from "scripts/Diff"
 
 // Follow user
 export async function followUser(arn: AnimeNotifier, element: HTMLElement) {

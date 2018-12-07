@@ -34,7 +34,7 @@ export default class AnimeNotifier {
 	isLoading: boolean
 	diffCompletedForCurrentPath: boolean
 	lastReloadContentPath: string
-	currentSoundTrackId: string
+	currentMediaId: string
 	serverEvents: ServerEvents
 
 	constructor(app: Application) {
@@ -160,7 +160,7 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.displayLocalDates()),
 			Promise.resolve().then(() => this.setSelectBoxValue()),
 			Promise.resolve().then(() => this.textAreaFocus()),
-			Promise.resolve().then(() => this.markPlayingSoundTrack()),
+			Promise.resolve().then(() => this.markPlayingMedia()),
 			Promise.resolve().then(() => this.assignActions()),
 			Promise.resolve().then(() => this.updatePushUI()),
 			Promise.resolve().then(() => this.dragAndDrop()),
@@ -639,9 +639,9 @@ export default class AnimeNotifier {
 		}
 	}
 
-	markPlayingSoundTrack() {
-		for(let element of findAll("soundtrack-play-area")) {
-			if(element.dataset.soundtrackId === this.currentSoundTrackId) {
+	markPlayingMedia() {
+		for(let element of findAll("media-play-area")) {
+			if(element.dataset.mediaId === this.currentMediaId) {
 				element.classList.add("playing")
 			}
 		}
@@ -893,7 +893,7 @@ export default class AnimeNotifier {
 	lazyLoadVideo(video: HTMLVideoElement) {
 		// Once the video becomes visible, load it
 		video["became visible"] = () => {
-			video.pause()
+			// video.pause()
 
 			// Prevent context menu
 			video.addEventListener("contextmenu", e => e.preventDefault())
@@ -907,11 +907,16 @@ export default class AnimeNotifier {
 					element.src = element.dataset.src
 					modified = true
 				}
+
+				if(element.type !== element.dataset.type) {
+					element.type = element.dataset.type
+					modified = true
+				}
 			}
 
 			if(modified) {
 				Diff.mutations.queue(() => {
-					video.load()
+					// video.load()
 					video.classList.add("element-found")
 				})
 			}

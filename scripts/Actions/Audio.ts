@@ -2,7 +2,7 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
-	arn.audioPlayer.play(element.dataset.soundtrackId, element.dataset.audioSrc)
+	arn.audioPlayer.play(element.dataset.mediaId, element.dataset.audioSrc)
 }
 
 // Pause audio
@@ -45,7 +45,7 @@ export function playPauseAudio(arn: AnimeNotifier) {
 export function toggleAudio(arn: AnimeNotifier, element: HTMLElement) {
 	// If we're clicking on the same track again, stop playing.
 	// Otherwise, start the track we clicked on.
-	if(arn.currentSoundTrackId && element.dataset.soundtrackId === arn.currentSoundTrackId) {
+	if(arn.currentMediaId && element.dataset.mediaId === arn.currentMediaId) {
 		stopAudio(arn)
 	} else {
 		playAudio(arn, element)

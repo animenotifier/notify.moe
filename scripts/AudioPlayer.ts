@@ -63,8 +63,8 @@ export default class AudioPlayer {
 		// Stop current track
 		this.stop()
 
-		this.arn.currentSoundTrackId = trackId
-		this.arn.markPlayingSoundTrack()
+		this.arn.currentMediaId = trackId
+		this.arn.markPlayingMedia()
 		this.arn.loading(true)
 
 		// Mark as loading
@@ -187,7 +187,7 @@ export default class AudioPlayer {
 
 	// Stop
 	stop() {
-		this.arn.currentSoundTrackId = undefined
+		this.arn.currentMediaId = undefined
 
 		// Remove CSS class "playing"
 		let playingElements = document.getElementsByClassName("playing")
@@ -242,6 +242,8 @@ export default class AudioPlayer {
 
 	// Set volume
 	setVolume(volume: number) {
+		this.volume = volume
+
 		if(!this.gainNode) {
 			return
 		}
