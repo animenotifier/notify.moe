@@ -915,6 +915,36 @@ export default class AnimeNotifier {
 				video["hideControlsTimeout"] = setTimeout(hideControls, hideControlsDelay)
 			})
 
+			let progressElement = video.parentElement.getElementsByClassName("video-progress")[0] as HTMLElement
+			let progressContainer = video.parentElement.getElementsByClassName("video-progress-container")[0]
+			let timeElement = video.parentElement.getElementsByClassName("video-time")[0]
+
+			video.addEventListener("timeupdate", () => {
+				let time = video.currentTime
+				let minutes = Math.trunc(time / 60)
+				let seconds = Math.trunc(time) % 60
+				let paddedSeconds = ("00" + seconds).slice(-2)
+				timeElement.textContent = `${minutes}:${paddedSeconds}`
+				progressElement.style.transform = `scaleX(${time / video.duration})`
+			})
+
+			video.addEventListener("waiting", () => {
+				this.loading(true)
+			})
+
+			video.addEventListener("playing", () => {
+				this.loading(false)
+			})
+
+			progressContainer.addEventListener("click", (e: MouseEvent) => {
+				let rect = progressContainer.getBoundingClientRect()
+				let x = e.clientX
+				let progress = (x - rect.left) / rect.width
+				video.currentTime = progress * video.duration
+				video.dispatchEvent(new Event("timeupdate"))
+				e.stopPropagation()
+			})
+
 			let modified = false
 
 			for(let child of video.children) {
@@ -933,6 +963,7 @@ export default class AnimeNotifier {
 
 			if(modified) {
 				Diff.mutations.queue(() => {
+					video.load()
 					video.classList.add("element-found")
 				})
 			}

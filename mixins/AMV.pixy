@@ -17,8 +17,8 @@ component AMVVideo(amv *arn.AMV)
 			//- 	RawIcon("play")
 		
 		.video-controls
-			.video-progress-bar
-				.video-current-progress
+			.video-progress-container
+				.video-progress
 			
 			.video-time= fmt.Sprintf("%d:%02d", int(amv.Info.Duration.Minutes()), int(amv.Info.Duration.Seconds()) % 60)
 
