@@ -40,14 +40,16 @@ const video-control-color = rgba(255, 255, 255, 0.75)
 	height 5px
 	background rgba(255, 255, 255, 0.3)
 	border-radius ui-element-border-radius
+	transform translateZ(0)
 	overflow hidden
 
 .video-progress
-	background rgba(255, 255, 255, 0.85)
+	background white
 	width 100%
 	height 100%
 	transform scaleX(0)
 	transform-origin 0
+	will-change transform
 
 .video-time
 	color video-control-color
