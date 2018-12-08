@@ -1,0 +1,13 @@
+component VideoControls(containerId string, duration time.Duration)
+	.video-controls
+		.video-progress-clickable
+			.video-progress-container
+				.video-progress
+		
+		.video-time= fmt.Sprintf("%d:%02d", int(duration.Minutes()), int(duration.Seconds()) % 60)
+
+		//- button.video-control.action(data-action="like", data-trigger="click")
+		//- 	RawIcon("heart-o")
+		
+		button.video-control.action(data-action="toggleFullscreen", data-trigger="click", data-id=containerId, aria-label="Fullscreen")
+			RawIcon("fullscreen")

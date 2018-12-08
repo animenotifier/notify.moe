@@ -1,20 +1,30 @@
 component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex int, user *arn.User)
 	h1
 		a(href=anime.Link())= anime.Title.ByUser(user)
-
-	.episode-view-image-container
-		if episodeIndex > 0
-			.episode-arrow.episode-arrow-previous
-				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number), title="Previous episode")
-					RawIcon("chevron-left")
+	
+	if anime.ID == "VhRKhKimR" && episode.Number == 10
+		.widget-form.amv-page
+			.video-container(id="stream-test")
+				video.video.lazy.action(data-action="playVideo", data-trigger="click", data-media-id="stream-test")
+					source(data-src="https://arn.sfo2.cdn.digitaloceanspaces.com/videos/anime/VhRKhKimR/10.webm", data-type="video/webm")
 				
-		a(href=anime.Link(), title=anime.Title.ByUser(user))
-			img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
+				VideoControls("stream-test", time.Duration(0))
+		
+		br
+	else
+		.episode-view-image-container
+			if episodeIndex > 0
+				.episode-arrow.episode-arrow-previous
+					a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number), title="Previous episode")
+						RawIcon("chevron-left")
+					
+			a(href=anime.Link(), title=anime.Title.ByUser(user))
+				img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
-		if episodeIndex < len(anime.Episodes().Items) - 1
-			.episode-arrow.episode-arrow-next
-				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number), title="Next episode")
-					RawIcon("chevron-right")
+			if episodeIndex < len(anime.Episodes().Items) - 1
+				.episode-arrow.episode-arrow-next
+					a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number), title="Next episode")
+						RawIcon("chevron-right")
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 
@@ -25,18 +35,19 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex
 	if validate.DateTime(episode.AiringDate.Start)
 		p.episode-view-airing-date
 			span.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
-	
-	if user != nil && user.Location.CountryName != "Japan"
-		.buttons
-			for serviceName, link := range episode.Links
-				a.button(href=link, title="Watch episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
-					Icon("eye")
-					span= serviceName
+
+	if anime.ID != "VhRKhKimR" || episode.Number != 10
+		if user != nil && user.Location.CountryName != "Japan"
+			.buttons
+				for serviceName, link := range episode.Links
+					a.button(href=link, title="Watch episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
+						Icon("eye")
+						span= serviceName
+				
+				//- a.button(href=arn.Nyaa.GetLink(anime, fmt.Sprintf("%02d", episode.Number)), title="Download episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
+				//- 	Icon("download")
+				//- 	span nyaa.si
 			
-			//- a.button(href=arn.Nyaa.GetLink(anime, fmt.Sprintf("%02d", episode.Number)), title="Download episode " + strconv.Itoa(episode.Number), target="_blank", rel="noopener")
-			//- 	Icon("download")
-			//- 	span nyaa.si
-		
-		.footer
-			p Make sure to support the anime you're watching by buying officially released Blu-rays and merchandise.
-			p Anime Notifier provides links to external websites for convenience reasons. By clicking on these links you are leaving our site. Thus we can not, under no circumstances, be held responsible for the content on external websites.
+			.footer
+				p Make sure to support the anime you're watching by buying officially released Blu-rays and merchandise.
+				p Anime Notifier provides links to external websites for convenience reasons. By clicking on these links you are leaving our site. Thus we can not, under no circumstances, be held responsible for the content on external websites.

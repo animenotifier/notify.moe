@@ -16,18 +16,7 @@ component AMVVideo(amv *arn.AMV)
 			//- button.media-play-button
 			//- 	RawIcon("play")
 		
-		.video-controls
-			.video-progress-clickable
-				.video-progress-container
-					.video-progress
-			
-			.video-time= fmt.Sprintf("%d:%02d", int(amv.Info.Duration.Minutes()), int(amv.Info.Duration.Seconds()) % 60)
-
-			//- button.video-control.action(data-action="like", data-trigger="click")
-			//- 	RawIcon("heart-o")
-			
-			button.video-control.action(data-action="toggleFullscreen", data-trigger="click", data-id=amv.ID, aria-label="Fullscreen")
-				RawIcon("fullscreen")
+		VideoControls(amv.ID, amv.Info.Duration)
 
 component AMVFooter(amv *arn.AMV, user *arn.User)
 	.amv-footer
