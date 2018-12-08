@@ -904,10 +904,12 @@ export default class AnimeNotifier {
 
 				let hideControls = () => {
 					controls.classList.add("fade-out")
+					video.style.cursor = "none"
 				}
 
 				let showControls = () => {
 					controls.classList.remove("fade-out")
+					video.style.cursor = "default"
 				}
 
 				video.addEventListener("mousemove", () => {

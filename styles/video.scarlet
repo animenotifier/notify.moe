@@ -41,6 +41,9 @@ const video-progress-clickable-height-buffer = 0.4rem
 	flex 1
 	padding video-progress-clickable-height-buffer 0
 
+	:hover
+		cursor pointer
+
 .video-progress-container
 	height video-progress-height
 	background rgba(255, 255, 255, 0.3)
