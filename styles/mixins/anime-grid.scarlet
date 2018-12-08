@@ -33,3 +33,8 @@ mixin anime-list-item-image
 	// Make it easier for the browser to layout by specifying max size as well
 	max-width anime-image-tiny-width
 	max-height anime-image-tiny-height
+
+mixin dark-gradient-bottom
+	background linear-gradient(to top, hsla(0, 0%, 0%, 0.8), hsla(0, 0%, 0%, 0))
+	border-bottom-left-radius ui-element-border-radius
+	border-bottom-right-radius ui-element-border-radius

@@ -24,14 +24,14 @@ const video-progress-clickable-height-buffer = 0.4rem
 	background-color black
 
 .video-controls
+	horizontal
+	align-items center
 	position absolute
 	bottom 0
 	right 0
 	padding 0.5rem 0.75rem
 	opacity 0
 	width 100%
-	horizontal
-	align-items center
 	default-transition
 
 	:hover

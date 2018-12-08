@@ -5,10 +5,8 @@
 	left 0
 	width 100%
 	padding 0.7rem 0.5rem
-	background linear-gradient(to top, hsla(0, 0%, 0%, 0.8), hsla(0, 0%, 0%, 0))
-	border-bottom-left-radius ui-element-border-radius
-	border-bottom-right-radius ui-element-border-radius
 	pointer-events none
+	dark-gradient-bottom
 	default-transition
 
 .image-title-text
