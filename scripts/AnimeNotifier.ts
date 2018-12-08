@@ -917,7 +917,7 @@ export default class AnimeNotifier {
 				})
 
 				let progressElement = video.parentElement.getElementsByClassName("video-progress")[0] as HTMLElement
-				let progressContainer = video.parentElement.getElementsByClassName("video-progress-container")[0]
+				let progressClickable = video.parentElement.getElementsByClassName("video-progress-clickable")[0]
 				let timeElement = video.parentElement.getElementsByClassName("video-time")[0]
 
 				video.addEventListener("canplay", () => {
@@ -948,8 +948,8 @@ export default class AnimeNotifier {
 					this.loading(false)
 				})
 
-				progressContainer.addEventListener("click", (e: MouseEvent) => {
-					let rect = progressContainer.getBoundingClientRect()
+				progressClickable.addEventListener("click", (e: MouseEvent) => {
+					let rect = progressClickable.getBoundingClientRect()
 					let x = e.clientX
 					let progress = (x - rect.left) / rect.width
 					video.currentTime = progress * video.duration

@@ -1,5 +1,7 @@
 const video-padding = 56.25%
 const video-control-color = rgba(255, 255, 255, 0.75)
+const video-progress-height = 0.35rem
+const video-progress-clickable-height-buffer = 0.4rem
 
 .video-container
 	position relative
@@ -35,9 +37,12 @@ const video-control-color = rgba(255, 255, 255, 0.75)
 	:hover
 		opacity 1 !important
 
-.video-progress-container
+.video-progress-clickable
 	flex 1
-	height 5px
+	padding video-progress-clickable-height-buffer 0
+
+.video-progress-container
+	height video-progress-height
 	background rgba(255, 255, 255, 0.3)
 	border-radius ui-element-border-radius
 	transform translateZ(0)
@@ -46,7 +51,7 @@ const video-control-color = rgba(255, 255, 255, 0.75)
 .video-progress
 	background white
 	width 100%
-	height 100%
+	height video-progress-height
 	transform scaleX(0)
 	transform-origin 0
 	will-change transform
