@@ -5,6 +5,7 @@ import PushManager from "./PushManager"
 import TouchController from "./TouchController"
 import NotificationManager from "./NotificationManager"
 import AudioPlayer from "./AudioPlayer"
+import VideoPlayer from "./VideoPlayer"
 import Analytics from "./Analytics"
 import SideBar from "./SideBar"
 import InfiniteScroller from "./InfiniteScroller"
@@ -28,6 +29,7 @@ export default class AnimeNotifier {
 	notificationManager: NotificationManager
 	touchController: TouchController
 	audioPlayer: AudioPlayer
+	videoPlayer: VideoPlayer
 	sideBar: SideBar
 	infiniteScroller: InfiniteScroller
 	mainPageLoaded: boolean
@@ -1342,6 +1344,13 @@ export default class AnimeNotifier {
 		// "L" = Next track
 		if(e.keyCode === 76) {
 			this.audioPlayer.next()
+			return preventDefault()
+		}
+
+		// Space = Toggle play
+		if(e.keyCode === 32) {
+			// this.audioPlayer.playPause()
+			this.videoPlayer.playPause()
 			return preventDefault()
 		}
 

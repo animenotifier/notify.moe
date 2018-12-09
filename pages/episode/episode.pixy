@@ -5,7 +5,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex
 	if anime.ID == "GWyShKmiR" && episode.Number == 10
 		.widget-form.amv-page
 			.video-container(id="stream-test")
-				video.video.lazy.action(data-action="togglePlayVideo", data-trigger="click", data-media-id="stream-test")
+				video.video.lazy.action(data-action="toggleFullscreen", data-trigger="dblclick", data-id="stream-test")
 					source(data-src="https://arn.sfo2.cdn.digitaloceanspaces.com/videos/anime/GWyShKmiR/10.webm", data-type="video/webm")
 					track(label="English", kind="subtitles", srclang="en", src="https://arn.sfo2.cdn.digitaloceanspaces.com/videos/anime/GWyShKmiR/10.en.vtt", default)
 				
