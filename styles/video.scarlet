@@ -1,5 +1,5 @@
 const video-padding = 56.25%
-const video-control-color = rgba(255, 255, 255, 0.75)
+const video-control-color = rgba(255, 255, 255, 0.85)
 const video-progress-height = 0.35rem
 const video-progress-clickable-height-buffer = 0.4rem
 
@@ -52,7 +52,7 @@ const video-progress-clickable-height-buffer = 0.4rem
 	overflow hidden
 
 .video-progress
-	background white
+	background link-color
 	width 100%
 	height video-progress-height
 	transform scaleX(0)
