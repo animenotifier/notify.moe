@@ -982,6 +982,10 @@ export default class AnimeNotifier {
 			let modified = false
 
 			for(let child of video.children) {
+				if(child.tagName !== "SOURCE") {
+					continue
+				}
+
 				let element = child as HTMLSourceElement
 
 				if(element.src !== element.dataset.src) {

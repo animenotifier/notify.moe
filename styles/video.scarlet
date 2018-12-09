@@ -84,5 +84,13 @@ const video-progress-clickable-height-buffer = 0.4rem
 .video-control-pause
 	display none
 
+::cue
+	background transparent
+	font-family "Ubuntu", "Trebuchet MS", sans-serif
+	line-height 1.5em
+
+	// Use a blurry shadow and a solid outline on each side
+	text-shadow 0 0 1em black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black
+
 ::-webkit-media-controls
 	display none !important
