@@ -139,6 +139,9 @@ export default class AnimeNotifier {
 		// Audio player
 		this.audioPlayer = new AudioPlayer(this)
 
+		// Video player
+		this.videoPlayer = new VideoPlayer(this)
+
 		// Analytics
 		this.analytics = new Analytics()
 
