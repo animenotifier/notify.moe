@@ -1,22 +1,25 @@
 import AnimeNotifier from "../AnimeNotifier"
 
-// Play video
-export function playVideo(arn: AnimeNotifier, video: HTMLVideoElement) {
+// Toggle play video
+export function togglePlayVideo(arn: AnimeNotifier, element: HTMLElement) {
+	let container = document.getElementById(element.dataset.mediaId)
+	let video = container.getElementsByTagName("video")[0]
+
 	video.volume = arn.audioPlayer.volume
 
 	if(video.readyState >= 2) {
-		togglePlayVideo(video)
+		togglePlayVideoElement(video)
 		return
 	}
 
 	video.addEventListener("canplay", () => {
-		togglePlayVideo(video)
+		togglePlayVideoElement(video)
 	})
 
 	video.load()
 }
 
-function togglePlayVideo(video: HTMLVideoElement) {
+function togglePlayVideoElement(video: HTMLVideoElement) {
 	if(video.paused) {
 		video.play()
 	} else {

@@ -1,5 +1,11 @@
 component VideoControls(containerId string, duration time.Duration)
 	.video-controls
+		button.video-control.video-control-play.action(data-action="togglePlayVideo", data-trigger="click", data-media-id=containerId, aria-label="Play")
+			RawIcon("play")
+		
+		button.video-control.video-control-pause.action(data-action="togglePlayVideo", data-trigger="click", data-media-id=containerId, aria-label="Pause")
+			RawIcon("pause")
+		
 		.video-progress-clickable
 			.video-progress-container
 				.video-progress
@@ -9,5 +15,5 @@ component VideoControls(containerId string, duration time.Duration)
 		//- button.video-control.action(data-action="like", data-trigger="click")
 		//- 	RawIcon("heart-o")
 		
-		button.video-control.action(data-action="toggleFullscreen", data-trigger="click", data-id=containerId, aria-label="Fullscreen")
+		button.video-control.video-control-fullscreen.action(data-action="toggleFullscreen", data-trigger="click", data-id=containerId, aria-label="Fullscreen")
 			RawIcon("fullscreen")

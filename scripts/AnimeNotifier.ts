@@ -901,6 +901,8 @@ export default class AnimeNotifier {
 
 				// Show and hide controls on mouse movement
 				let controls = video.parentElement.getElementsByClassName("video-controls")[0]
+				let playButton = video.parentElement.getElementsByClassName("video-control-play")[0] as HTMLElement
+				let pauseButton = video.parentElement.getElementsByClassName("video-control-pause")[0] as HTMLElement
 
 				let hideControls = () => {
 					controls.classList.add("fade-out")
@@ -948,6 +950,16 @@ export default class AnimeNotifier {
 
 				video.addEventListener("playing", () => {
 					this.loading(false)
+				})
+
+				video.addEventListener("play", () => {
+					playButton.style.display = "none"
+					pauseButton.style.display = "block"
+				})
+
+				video.addEventListener("pause", () => {
+					playButton.style.display = "block"
+					pauseButton.style.display = "none"
 				})
 
 				progressClickable.addEventListener("click", (e: MouseEvent) => {

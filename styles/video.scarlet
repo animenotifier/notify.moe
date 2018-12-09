@@ -70,10 +70,19 @@ const video-progress-clickable-height-buffer = 0.4rem
 	line-height 1em
 	height auto
 	padding 0
-	margin-left 0.5rem
 
 	:hover
 		color white
+
+.video-control-fullscreen
+	margin-left 0.5rem
+
+.video-control-play,
+.video-control-pause
+	margin-right 0.5rem
+
+.video-control-pause
+	display none
 
 ::-webkit-media-controls
 	display none !important
