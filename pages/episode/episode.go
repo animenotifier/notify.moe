@@ -15,6 +15,10 @@ import (
 var spaces *minio.Client
 
 func init() {
+	if arn.APIKeys.S3.ID == "" || arn.APIKeys.S3.Secret == "" {
+		return
+	}
+
 	go func() {
 		var err error
 		endpoint := "sfo2.digitaloceanspaces.com"
