@@ -1,31 +1,31 @@
-component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex int, user *arn.User)
+component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex int, uploaded bool, user *arn.User)
 	h1
 		a(href=anime.Link())= anime.Title.ByUser(user)
 	
-	if anime.ID == "GWyShKmiR" && episode.Number == 10
-		.widget-form.amv-page
-			.video-container(id="stream-test")
-				video.video.lazy.action(data-action="toggleFullscreen", data-trigger="dblclick", data-id="stream-test")
-					source(data-src="https://arn.sfo2.cdn.digitaloceanspaces.com/videos/anime/GWyShKmiR/10.webm", data-type="video/webm")
-					track(label="English", kind="subtitles", srclang="en", src="/subtitles/anime/GWyShKmiR/10.en.vtt", default)
-				
-				VideoControls("stream-test", time.Duration(0))
+	.episode-navigation-container
+		if episodeIndex > 0
+			.episode-arrow.episode-arrow-previous
+				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number), title="Previous episode")
+					RawIcon("chevron-left")
 		
-		br
-	else
-		.episode-view-image-container
-			if episodeIndex > 0
-				.episode-arrow.episode-arrow-previous
-					a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number), title="Previous episode")
-						RawIcon("chevron-left")
-					
-			a(href=anime.Link(), title=anime.Title.ByUser(user))
-				img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
+		.episode-video
+			if uploaded
+				.video-container(id="stream-test")
+					video.video.lazy.action(data-action="toggleFullscreen", data-trigger="dblclick", data-id="stream-test")
+						source(data-src=fmt.Sprintf("https://arn.sfo2.cdn.digitaloceanspaces.com/videos/anime/%s/%d.webm", anime.ID, episode.Number), data-type="video/webm")
+						track(label="English", kind="subtitles", srclang="en", src=fmt.Sprintf("/subtitles/anime/%s/%d.en.vtt", anime.ID, episode.Number), default)
 
-			if episodeIndex < len(anime.Episodes().Items) - 1
-				.episode-arrow.episode-arrow-next
-					a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number), title="Next episode")
-						RawIcon("chevron-right")
+					VideoControls("stream-test", time.Duration(0))
+			else
+				.video-container.episode-not-available(title="Episode not available yet")
+		
+		//- a(href=anime.Link(), title=anime.Title.ByUser(user))
+		//- 	img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
+
+		if episodeIndex < len(anime.Episodes().Items) - 1
+			.episode-arrow.episode-arrow-next
+				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number), title="Next episode")
+					RawIcon("chevron-right")
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)
 

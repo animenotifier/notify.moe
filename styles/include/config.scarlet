@@ -152,6 +152,8 @@ const grid-cell-margin = 0.5rem
 
 const user-pro-icon-size = 1.1rem
 
+const amv-large-width = 854px
+
 // Timings
 fade-speed = 150ms
 transition-speed = 150ms

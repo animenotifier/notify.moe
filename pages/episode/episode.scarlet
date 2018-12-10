@@ -11,13 +11,19 @@
 	font-size 0.9rem
 	half-opacity-text
 
-.episode-view-image-container
+.episode-navigation-container
 	horizontal
 	justify-content center
 	align-items center
 	position relative
-	height anime-image-large-height
 	margin-bottom content-padding
+
+.episode-video
+	width 100%
+	max-width amv-large-width
+
+.episode-not-available
+	background reverse-light-color
 
 .episode-arrow
 	position absolute

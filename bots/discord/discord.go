@@ -40,6 +40,7 @@ func main() {
 	}
 
 	defer discord.Close()
+	defer arn.Node.Close()
 
 	// Receive events
 	discord.AddHandler(OnMessageCreate)

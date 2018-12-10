@@ -1,5 +1,3 @@
-const amv-large-width = 854px
-
 .amvs
 	vertical
 
