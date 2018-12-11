@@ -3,7 +3,7 @@ package pages
 import (
 	"github.com/aerogo/aero"
 	"github.com/aerogo/layout"
-	"github.com/animenotifier/notify.moe/layout"
+	fullpage "github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/pages/index/amvroutes"
 	"github.com/animenotifier/notify.moe/pages/index/animeroutes"
 	"github.com/animenotifier/notify.moe/pages/index/apiroutes"
@@ -38,7 +38,7 @@ func Configure(app *aero.Application) {
 	exploreroutes.Register(l)
 	amvroutes.Register(l)
 	forumroutes.Register(l)
-	animeroutes.Register(l)
+	animeroutes.Register(l, app)
 	userlistroutes.Register(l)
 	quoteroutes.Register(l)
 	companyroutes.Register(l)

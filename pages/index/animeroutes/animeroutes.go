@@ -1,6 +1,7 @@
 package animeroutes
 
 import (
+	"github.com/aerogo/aero"
 	"github.com/aerogo/layout"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/anime/editanime"
@@ -10,7 +11,7 @@ import (
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout) {
+func Register(l *layout.Layout, app *aero.Application) {
 	// Anime
 	l.Page("/anime/:id", anime.Get)
 	l.Page("/anime/:id/episodes", anime.Episodes)
@@ -19,6 +20,7 @@ func Register(l *layout.Layout) {
 	l.Page("/anime/:id/relations", anime.Relations)
 	l.Page("/anime/:id/comments", anime.Comments)
 	l.Page("/anime/:id/episode/:episode-number", episode.Get)
+	app.Get("/anime/:id/episode/:episode-number/subtitles/:language", episode.Subtitles)
 
 	// Anime redirects
 	l.Page("/kitsu/anime/:id", anime.RedirectByMapping("kitsu/anime"))

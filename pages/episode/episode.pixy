@@ -13,7 +13,7 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex
 				.video-container(id="stream-test")
 					video.video.lazy.action(data-action="toggleFullscreen", data-trigger="dblclick", data-id="stream-test")
 						source(data-src=fmt.Sprintf("https://arn.sfo2.cdn.digitaloceanspaces.com/videos/anime/%s/%d.webm", anime.ID, episode.Number), data-type="video/webm")
-						track(label="English", kind="subtitles", srclang="en", src=fmt.Sprintf("/subtitles/anime/%s/%d.en.vtt", anime.ID, episode.Number), default)
+						track(label="English", kind="subtitles", srclang="en", src=fmt.Sprintf("/anime/%s/episode/%d/subtitles/en", anime.ID, episode.Number), default)
 
 					VideoControls("stream-test", time.Duration(0))
 			else
