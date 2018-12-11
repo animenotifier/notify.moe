@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/animenotifier/arn"
 	"github.com/fatih/color"
 )
@@ -17,10 +19,9 @@ func main() {
 	defer color.Green("Finished.")
 	defer arn.Node.Close()
 
-	allAnimeLists, err := arn.AllAnimeLists()
-	arn.PanicOnError(err)
+	fmt.Println("Processing anime lists")
 
-	for _, animeList := range allAnimeLists {
+	for animeList := range arn.StreamAnimeLists() {
 		extractRatings(animeList)
 		extractPopularity(animeList)
 	}
@@ -80,7 +81,9 @@ func main() {
 		finalRating[animeID].Soundtrack = average(soundtrack)
 	}
 
-	// Save
+	// Save rating
+	fmt.Println("Saving rating")
+
 	for animeID := range finalRating {
 		anime, err := arn.GetAnime(animeID)
 		arn.PanicOnError(err)
@@ -89,6 +92,8 @@ func main() {
 	}
 
 	// Save popularity
+	fmt.Println("Saving popularity")
+
 	for animeID := range popularity {
 		anime, err := arn.GetAnime(animeID)
 		arn.PanicOnError(err)
