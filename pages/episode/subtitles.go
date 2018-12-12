@@ -36,15 +36,5 @@ func Subtitles(ctx *aero.Context) string {
 	}
 
 	defer obj.Close()
-
-	data := make([]byte, 0, 65535)
-	buffer := make([]byte, 4096)
-	n := 0
-
-	for err == nil {
-		n, err = obj.Read(buffer)
-		data = append(data, buffer[:n]...)
-	}
-
-	return string(data)
+	return ctx.ReadAll(obj)
 }

@@ -15,6 +15,7 @@ var popularity = map[string]*arn.AnimePopularity{}
 // made to it.
 func main() {
 	color.Yellow("Updating anime ratings")
+	color.Cyan(arn.Node.Address().String())
 
 	defer color.Green("Finished.")
 	defer arn.Node.Close()
