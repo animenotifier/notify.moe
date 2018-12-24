@@ -4,7 +4,6 @@ import (
 	"flag"
 
 	"github.com/animenotifier/arn"
-	"github.com/fatih/color"
 )
 
 var nick string
@@ -22,7 +21,7 @@ func main() {
 	defer arn.Node.Close()
 
 	if itemID == "" {
-		color.Red("Missing parameters")
+		flag.Usage()
 		return
 	}
 
