@@ -19,7 +19,7 @@ func Register(l *layout.Layout) {
 
 	// Editor links can be filtered by year, status and type
 	editorFilterable := func(route string, handler func(ctx *aero.Context) string) {
-		l.Page(route+"/:year/:season/:status/:type", handler)
+		l.Page(route+"/:year/:season/:status/:type/:sort", handler)
 	}
 
 	// Editor - Anime

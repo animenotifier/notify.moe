@@ -1,8 +1,6 @@
 package editor
 
 import (
-	"sort"
-
 	"github.com/animenotifier/notify.moe/utils/animediff"
 
 	"github.com/aerogo/aero"
@@ -24,6 +22,7 @@ func CompareMAL(ctx *aero.Context) string {
 	status := ctx.Get("status")
 	season := ctx.Get("season")
 	typ := ctx.Get("type")
+	sort := ctx.Get("sort")
 
 	if year == "any" {
 		year = ""
@@ -41,11 +40,16 @@ func CompareMAL(ctx *aero.Context) string {
 		typ = ""
 	}
 
+	if sort == "Popularity" {
+		sort = ""
+	}
+
 	settings := user.Settings()
 	settings.Editor.Filter.Year = year
 	settings.Editor.Filter.Season = season
 	settings.Editor.Filter.Status = status
 	settings.Editor.Filter.Type = typ
+	settings.Editor.Filter.Sort = sort
 	settings.Save()
 
 	animes := arn.FilterAnime(func(anime *arn.Anime) bool {
@@ -68,19 +72,7 @@ func CompareMAL(ctx *aero.Context) string {
 		return anime.GetMapping("myanimelist/anime") != ""
 	})
 
-	sort.Slice(animes, func(i, j int) bool {
-		a := animes[i]
-		b := animes[j]
-
-		aPop := a.Popularity.Total()
-		bPop := b.Popularity.Total()
-
-		if aPop == bPop {
-			return a.Title.Canonical < b.Title.Canonical
-		}
-
-		return aPop > bPop
-	})
+	arn.SortAnimeWithAlgo(animes, status, sort, user)
 
 	comparisons := compare(animes)
 
