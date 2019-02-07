@@ -16,6 +16,7 @@ func Filter(ctx *aero.Context) string {
 	season := ctx.Get("season")
 	status := ctx.Get("status")
 	typ := ctx.Get("type")
+	sort := ctx.Get("sort")
 	user := utils.GetUser(ctx)
 	now := time.Now()
 
@@ -35,7 +36,7 @@ func Filter(ctx *aero.Context) string {
 		typ = "tv"
 	}
 
-	results := filterAnime(year, season, status, typ)
+	results := filterAnime(year, season, status, typ, sort, user)
 
 	if year == "any" {
 		year = ""
@@ -53,10 +54,14 @@ func Filter(ctx *aero.Context) string {
 		typ = ""
 	}
 
-	return ctx.HTML(components.ExploreAnime(results, year, season, status, typ, user))
+	if sort == "Popularity" {
+		sort = ""
+	}
+
+	return ctx.HTML(components.ExploreAnime(results, year, season, status, typ, sort, user))
 }
 
-func filterAnime(year, season, status, typ string) []*arn.Anime {
+func filterAnime(year, season, status, typ string, sortAlgo string, user *arn.User) []*arn.Anime {
 	var results []*arn.Anime
 
 	for anime := range arn.StreamAnime() {
@@ -85,6 +90,6 @@ func filterAnime(year, season, status, typ string) []*arn.Anime {
 		results = append(results, anime)
 	}
 
-	arn.SortAnimeByQualityDetailed(results, status)
+	arn.SortAnimeWithAlgo(results, status, sortAlgo, user)
 	return results
 }

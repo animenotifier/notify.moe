@@ -9,6 +9,7 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 	let elementSeason = document.getElementById("filter-season") as HTMLSelectElement
 	let elementStatus = document.getElementById("filter-status") as HTMLSelectElement
 	let elementType = document.getElementById("filter-type") as HTMLSelectElement
+	let elementSort = document.getElementById("sort") as HTMLSelectElement
 
 	for(let element of findAll("anime-grid-image")) {
 		let img = element as HTMLImageElement
@@ -21,8 +22,9 @@ export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
 	let season = elementSeason.value || "any"
 	let status = elementStatus.value || "any"
 	let type = elementType.value || "any"
+	let sort = elementSort.value || "Popularity"
 
-	arn.diff(`${root.dataset.url}/${year}/${season}/${status}/${type}`)
+	arn.diff(`${root.dataset.url}/${year}/${season}/${status}/${type}/${sort}`)
 }
 
 // Toggle hiding added anime.
