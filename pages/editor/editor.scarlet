@@ -25,6 +25,52 @@
 .feature-card-color-character
 	background hsl(273, feature-card-saturation, feature-card-lightness) !important
 
+.search-links
+	position fixed
+	top 25%
+	left 95%
+	vertical
+	width fit-content
+
+.search-link
+	horizontal
+	justify-content center
+	align-items center
+	background reverse-light-color
+	border-radius 50%
+	padding 0.5rem
+	color text-color
+	width 30px
+	height 30px
+	position relative
+	margin-top 0.2em
+	margin-bottom 0.2em
+
+	:hover
+		color text-color
+		background reverse-light-hover-color
+
+	:active
+		transform scale(1.2)
+
+.google-badge,.shoboi-badge
+	background rgba(255, 255, 255, 0.80) !important
+
+	:hover
+		background rgba(255, 255, 255, 1) !important
+
+.annilist-badge
+	background rgba(31, 38, 49, 0.80) !important
+
+	:hover
+		background rgba(31, 38, 49, 1) !important
+
+.mal-badge
+	background rgba(46, 81, 181, 0.80) !important
+
+	:hover
+		background rgba(46, 81, 181, 1) !important
+
 > 1550px
 	.editor-filters
 		position fixed
