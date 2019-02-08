@@ -32,6 +32,8 @@
 	vertical
 	width fit-content
 
+
+// This is a copy of the .badge style, but the position:absolute broke the layout
 .search-link
 	horizontal
 	justify-content center
