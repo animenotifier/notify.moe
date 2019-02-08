@@ -78,3 +78,9 @@ const frontpage-bg-color = rgb(32, 32, 32)
 
 	:hover
 		background hsl(222, 67%, 47%)
+
+.login-button-twitter
+	background hsl(203, 89%, 53%)
+
+	:hover
+		background hsl(203, 89%, 58%)

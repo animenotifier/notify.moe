@@ -418,6 +418,8 @@ var routeTests = map[string][]string{
 	"/auth/google/callback":                          nil,
 	"/auth/facebook":                                 nil,
 	"/auth/facebook/callback":                        nil,
+	"/auth/twitter":                                 nil,
+	"/auth/twitter/callback":                        nil,
 	"/dashboard":                                     nil,
 	"/import":                                        nil,
 	"/import/anilist/animelist":                      nil,

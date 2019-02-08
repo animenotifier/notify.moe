@@ -50,6 +50,17 @@ component SettingsAccounts(user *arn.User)
 					else
 						Icon("circle-o")
 						span Not connected
+			
+			.widget-section.social-account
+				label(for="twitter") Twitter:
+
+				a#twitter.button.social-account-button(href="/auth/twitter", data-ajax="false")
+					if user.Accounts.Twitter.ID != ""
+						Icon("check")
+						span Connected
+					else
+						Icon("circle-o")
+						span Not connected
 
 		.widget.mountable
 			h3.widget-title
