@@ -3,21 +3,22 @@ package auth
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"net/http"
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
 	"github.com/gomodule/oauth1/oauth"
 	jsoniter "github.com/json-iterator/go"
-	"io/ioutil"
-	"net/http"
-	"strings"
 )
 
 // TwitterUser is the user data we receive from Twitter
 type TwitterUser struct {
-	ID     string `json:"id_str"`
-	Email  string `json:"email"`
-	Name   string `json:"name"`
+	ID    string `json:"id_str"`
+	Email string `json:"email"`
+	Name  string `json:"name"`
 }
 
 // InstallTwitterAuth enables Twitter login for the app.
@@ -63,7 +64,7 @@ func InstallTwitterAuth(app *aero.Application) {
 
 		session := ctx.Session()
 
-		// get back the request token to get the access token
+		// Get back the request token to get the access token
 		tempCred, _ := session.Get("tempCred").(*oauth.Credentials)
 
 		if tempCred == nil || tempCred.Token != ctx.Query("oauth_token") {
@@ -78,7 +79,7 @@ func InstallTwitterAuth(app *aero.Application) {
 		}
 
 		// Fetch user data from Twitter
-		resp, err := config.Get(nil, tokenCred, "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true1skip_status=true", nil)
+		resp, err := config.Get(nil, tokenCred, "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true&skip_status=true", nil)
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed requesting user data from Twitter", err)
@@ -146,9 +147,10 @@ func InstallTwitterAuth(app *aero.Application) {
 		user = arn.NewUser()
 		user.Nick = "tw" + twUser.ID
 		user.Email = twUser.Email
-		// The full name is in Name and separated like other services
-		user.FirstName = twUser.Name
 		user.LastLogin = arn.DateTimeUTC()
+
+		// TODO: The full name is in the Name field
+		user.FirstName = twUser.Name
 
 		// Save basic user info already to avoid data inconsistency problems
 		user.Save()
