@@ -13,6 +13,9 @@ func Install(app *aero.Application) {
 	// Facebook
 	InstallFacebookAuth(app)
 
+	// Twitter
+	InstallTwitterAuth(app)
+
 	// Logout
 	app.Get("/logout", func(ctx *aero.Context) string {
 		if ctx.HasSession() {

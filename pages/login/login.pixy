@@ -9,3 +9,8 @@ component Login(target string)
 			a.login-button.login-button-facebook(href="/auth/facebook", target=target, data-ajax="false")
 				Icon("facebook")
 				span Sign in via Facebook
+
+		if arn.APIKeys.Twitter.Secret != ""
+			a.login-button.login-button-twitter(href="/auth/twitter", target=target, data-ajax="false")
+				Icon("twitter")
+				span Sign in via Twitter
