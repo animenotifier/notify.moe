@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/aerogo/aero"
@@ -79,7 +80,8 @@ func InstallTwitterAuth(app *aero.Application) {
 		}
 
 		// Fetch user data from Twitter
-		resp, err := config.Get(nil, tokenCred, "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true&skip_status=true", nil)
+		params := url.Values{"include_email": {"true"}, "skip_status": {"true"}}
+		resp, err := config.Get(nil, tokenCred, "https://api.twitter.com/1.1/account/verify_credentials.json", params)
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed requesting user data from Twitter", err)
