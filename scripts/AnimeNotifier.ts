@@ -378,7 +378,10 @@ export default class AnimeNotifier {
 					}
 
 					let image = element.getElementsByClassName("anime-list-item-image")[0]
-					e.dataTransfer.setDragImage(image, 0, 0)
+
+					if(image) {
+						e.dataTransfer.setDragImage(image, 0, 0)
+					}
 
 					let name = element.getElementsByClassName("anime-list-item-name")[0]
 
