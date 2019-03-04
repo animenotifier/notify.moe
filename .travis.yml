@@ -46,3 +46,4 @@ script:
   - gocyclo -over 19 $GO_FILES                 # forbid code with huge functions
   - golint -set_exit_status $(go list ./...)   # one last linter
   - codecoroner -ignore components funcs ./... # dead code analysis
+  - curl -s https://codecov.io/bash
