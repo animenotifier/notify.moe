@@ -11,6 +11,10 @@ const video-progress-clickable-height-buffer = 0.4rem
 	border-radius ui-element-border-radius
 	overflow hidden
 
+	:fullscreen
+		padding-bottom 0
+		height 100%
+
 	:hover
 		.video-controls
 			opacity 1
