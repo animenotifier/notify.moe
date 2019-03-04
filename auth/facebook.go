@@ -77,14 +77,14 @@ func InstallFacebookAuth(app *aero.Application) {
 		client := config.Client(context.Background(), token)
 
 		// Fetch user data from Facebook
-		resp, err := client.Get("https://graph.facebook.com/me?fields=email,first_name,last_name,gender")
+		response, err := client.Get("https://graph.facebook.com/me?fields=email,first_name,last_name,gender")
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed requesting user data from Facebook", err)
 		}
 
-		defer resp.Body.Close()
-		body, _ := ioutil.ReadAll(resp.Body)
+		defer response.Body.Close()
+		body, _ := ioutil.ReadAll(response.Body)
 
 		// Construct a FacebookUser object
 		fbUser := FacebookUser{}

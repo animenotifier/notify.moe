@@ -84,14 +84,14 @@ func InstallGoogleAuth(app *aero.Application) {
 		client := config.Client(context.Background(), token)
 
 		// Fetch user data from Google
-		resp, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
+		response, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed requesting user data from Google", err)
 		}
 
-		defer resp.Body.Close()
-		data, _ := ioutil.ReadAll(resp.Body)
+		defer response.Body.Close()
+		data, _ := ioutil.ReadAll(response.Body)
 
 		// Construct a GoogleUser object
 		var googleUser GoogleUser

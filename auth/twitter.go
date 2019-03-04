@@ -80,15 +80,19 @@ func InstallTwitterAuth(app *aero.Application) {
 		}
 
 		// Fetch user data from Twitter
-		params := url.Values{"include_email": {"true"}, "skip_status": {"true"}}
-		resp, err := config.Get(nil, tokenCred, "https://api.twitter.com/1.1/account/verify_credentials.json", params)
+		params := url.Values{
+			"include_email": {"true"},
+			"skip_status":   {"true"},
+		}
+
+		response, err := config.Get(nil, tokenCred, "https://api.twitter.com/1.1/account/verify_credentials.json", params)
 
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Failed requesting user data from Twitter", err)
 		}
 
-		defer resp.Body.Close()
-		body, _ := ioutil.ReadAll(resp.Body)
+		defer response.Body.Close()
+		body, _ := ioutil.ReadAll(response.Body)
 
 		// Construct a TwitterUser object
 		twUser := TwitterUser{}
