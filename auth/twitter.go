@@ -142,6 +142,9 @@ func InstallTwitterAuth(app *aero.Application) {
 		if getErr == nil && user != nil {
 			authLog.Info("User logged in via Email", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
+			// Add TwitterToUser reference
+			user.ConnectTwitter(twUser.ID)
+
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
 

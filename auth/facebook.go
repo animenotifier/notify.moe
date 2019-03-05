@@ -121,6 +121,9 @@ func InstallFacebookAuth(app *aero.Application) {
 		if getErr == nil && user != nil {
 			authLog.Info("User logged in via Facebook ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
+			// Add FacebookToUser reference
+			user.ConnectFacebook(fbUser.ID)
+
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
 

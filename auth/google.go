@@ -145,6 +145,9 @@ func InstallGoogleAuth(app *aero.Application) {
 		if getErr == nil && user != nil {
 			authLog.Info("User logged in via Email", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
 
+			// Add GoogleToUser reference
+			user.ConnectGoogle(googleUser.Sub)
+
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
 
