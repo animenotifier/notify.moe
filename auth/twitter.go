@@ -17,9 +17,11 @@ import (
 
 // TwitterUser is the user data we receive from Twitter
 type TwitterUser struct {
-	ID    string `json:"id_str"`
-	Email string `json:"email"`
-	Name  string `json:"name"`
+	ID          string `json:"id_str"`
+	Email       string `json:"email"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	ScreenName  string `json:"screen_name"`
 }
 
 // InstallTwitterAuth enables Twitter login for the app.
@@ -93,6 +95,7 @@ func InstallTwitterAuth(app *aero.Application) {
 
 		defer response.Body.Close()
 		body, _ := ioutil.ReadAll(response.Body)
+		fmt.Println(string(body))
 
 		// Construct a TwitterUser object
 		twUser := TwitterUser{}
@@ -113,6 +116,7 @@ func InstallTwitterAuth(app *aero.Application) {
 			user.ConnectTwitter(twUser.ID)
 
 			// Save in DB
+			user.Accounts.Twitter.Nick = twUser.ScreenName
 			user.Save()
 
 			// Log
@@ -145,6 +149,7 @@ func InstallTwitterAuth(app *aero.Application) {
 			// Add TwitterToUser reference
 			user.ConnectTwitter(twUser.ID)
 
+			user.Accounts.Twitter.Nick = twUser.ScreenName
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
 
@@ -169,6 +174,10 @@ func InstallTwitterAuth(app *aero.Application) {
 
 		// Connect account to a Twitter account
 		user.ConnectTwitter(twUser.ID)
+
+		// Copy fields
+		user.Accounts.Twitter.Nick = twUser.ScreenName
+		user.Introduction = twUser.Description
 
 		// Save user object again with updated data
 		user.Save()
