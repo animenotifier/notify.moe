@@ -70,11 +70,8 @@ const sidebar-spacing-y = 0.7rem
 	horizontal
 	justify-content center
 	align-items center
-	position absolute
-	top 50%
 	background reverse-light-color
 	border-radius 50%
-	transform translateY(-50%)
 	padding 0.5rem
 	color text-color
 	width 30px
@@ -83,6 +80,11 @@ const sidebar-spacing-y = 0.7rem
 	:hover
 		color text-color
 		background reverse-light-hover-color
+
+.sidebar-badge
+	position absolute
+	top 50%
+	transform translateY(-50%)
 
 	:active
 		transform translateY(-50%) translateY(3px)

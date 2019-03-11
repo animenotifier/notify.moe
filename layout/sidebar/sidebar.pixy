@@ -9,13 +9,13 @@ component Sidebar(searchTerm string, user *arn.User)
 					img.user-image.lazy(src=utils.EmptyImage(), data-src="/images/brand/64.png", data-webp="true", alt="Anime Notifier")
 			
 			if user != nil
-				a.badge.left-badge(href="/settings", title="Settings")
+				a.badge.sidebar-badge.left-badge(href="/settings", title="Settings")
 					RawIcon("cog")
 				
-				a#notification-icon.badge.right-badge(href="/notifications", title="Notifications")
+				a#notification-icon.badge.sidebar-badge.right-badge(href="/notifications", title="Notifications")
 					RawIcon("bell")
 				
-				a#notification-count.badge.right-badge.badge-important.hidden(href="/notifications", title="Notifications") 0
+				a#notification-count.badge.sidebar-badge.right-badge.badge-important.hidden(href="/notifications", title="Notifications") 0
 
 		//- Search
 		div(aria-label="Search")

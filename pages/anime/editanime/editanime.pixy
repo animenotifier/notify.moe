@@ -10,16 +10,22 @@ component EditAnimeTabs(anime *arn.Anime)
 		Tab("Relations", "exchange", anime.Link() + "/edit/relations")
 		Tab("Episodes", "list-ol", anime.Link() + "/edit/episodes")
 		Tab("History", "history", anime.Link() + "/edit/history")
+	
 	.search-links
-		a.search-link.google-badge.tip(href="https://www.google.com/search?q=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="Google")
+		a.badge.search-link.google-badge.tip(href="https://www.google.com/search?q=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="Google")
 			RawIcon("google")
-		a.search-link.annilist-badge.tip(href="https://anilist.co/search/anime?sort=SEARCH_MATCH&search=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="Annilist")
-			RawIcon("annilist")
-		a.search-link.mal-badge.tip(href="https://myanimelist.net/anime.php?q=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="MyAnimeList")
+		
+		a.badge.search-link.anilist-badge.tip(href="https://anilist.co/search/anime?sort=SEARCH_MATCH&search=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="Anilist")
+			RawIcon("anilist")
+		
+		a.badge.search-link.mal-badge.tip(href="https://myanimelist.net/anime.php?q=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="MyAnimeList")
 			RawIcon("mal")
-		a.search-link.shoboi-badge.tip(href="http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese, target="_blank", rel="noopener", aria-label="Shoboi")
+		
+		a.badge.search-link.shoboi-badge.tip(href="http://cal.syoboi.jp/find?type=quick&sd=1&kw=" + anime.Title.Japanese, target="_blank", rel="noopener", aria-label="Shoboi")
 			RawIcon("shoboi")
-		a.search-link.tip(href="https://www.google.com/search?q=" + anime.Title.Canonical + " anime cover&tbm=isch&tbs=imgo:1,isz:lt,islt:qsvga", target="_blank", rel="noopener", aria-label="Cover image")
+		
+		a.badge.search-link.tip(href="https://www.google.com/search?q=" + anime.Title.Canonical + " anime cover&tbm=isch&tbs=imgo:1,isz:lt,islt:qsvga", target="_blank", rel="noopener", aria-label="Cover image")
 			RawIcon("image")
-		a.search-link.tip(href="https://www.youtube.com/results?search_query=" + strings.Replace(anime.Title.Canonical+" PV", " ", "+", -1), target="_blank", rel="noopener", aria-label="Trailer")
+		
+		a.badge.search-link.tip(href="https://www.youtube.com/results?search_query=" + strings.Replace(anime.Title.Canonical+" PV", " ", "+", -1), target="_blank", rel="noopener", aria-label="Trailer")
 			RawIcon("youtube-full-color")
