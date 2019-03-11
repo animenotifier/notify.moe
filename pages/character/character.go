@@ -58,12 +58,12 @@ func Get(ctx *aero.Context) string {
 	for characterID := range characterAppearances {
 		relevantCharacter, err := arn.GetCharacter(characterID)
 
-		if !relevantCharacter.HasImage() {
+		if err != nil {
+			color.Red(err.Error())
 			continue
 		}
 
-		if err != nil {
-			color.Red(err.Error())
+		if !relevantCharacter.HasImage() {
 			continue
 		}
 
