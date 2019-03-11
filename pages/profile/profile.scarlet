@@ -227,6 +227,9 @@ const box-margin = 2px
 #nick
 	margin-bottom 1rem
 
+	> a
+		color white
+
 .no-data
 	width 100%
 	text-align center

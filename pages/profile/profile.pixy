@@ -19,7 +19,8 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 				
 				//- Characters
 				.profile-section
-					h3.profile-column-header.mountable(data-mountable-type="favorites") Characters
+					h3.profile-column-header.mountable(data-mountable-type="favorites")
+						a(href=viewUser.Link() + "/characters/liked") Characters
 					
 					if len(characters) == 0
 						p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
@@ -101,10 +102,13 @@ component ProfileHead(viewUser *arn.User, animeList *arn.AnimeList, user *arn.Us
 		img.profile-cover.lazy(data-src=viewUser.CoverLink("large"), data-webp="true", alt="Cover image")
 
 		.profile-image-container.mountable.never-unmount
-			ProfileImage(viewUser)
+			a(href=viewUser.Link())
+				ProfileImage(viewUser)
 
 		.profile-info.mountable.never-unmount
-			h1#nick= viewUser.Nick
+			h1#nick
+				a(href=viewUser.Link())= viewUser.Nick
+			
 			.profile-introduction!= markdown.Render(viewUser.Introduction)
 			
 			.profile-tags-container

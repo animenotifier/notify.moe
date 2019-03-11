@@ -9,6 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/explore/explorerelations"
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/profile"
+	"github.com/animenotifier/notify.moe/pages/profile/profilecharacters"
 	"github.com/animenotifier/notify.moe/pages/recommended"
 	"github.com/animenotifier/notify.moe/pages/user"
 )
@@ -18,7 +19,7 @@ func Register(l *layout.Layout) {
 	// User profiles
 	l.Page("/user", user.Get)
 	l.Page("/user/:nick", profile.Get)
-	// l.Page("/user/:nick/characters/liked", profilecharacters.Liked)
+	l.Page("/user/:nick/characters/liked", profilecharacters.Liked)
 	// l.Page("/user/:nick/forum/threads", profile.GetThreadsByUser)
 	// l.Page("/user/:nick/forum/posts", profile.GetPostsByUser)
 	// l.Page("/user/:nick/soundtracks/added", profiletracks.Added)
