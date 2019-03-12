@@ -41,6 +41,9 @@ echo "Looks like the prerequisites were installed correctly!"
 # Use sudo here to request permissions for later
 sudo echo "---"
 
+# Humanize library is only used in templates
+go get -v github.com/dustin/go-humanize
+
 # Clone and build main repository
 go get -t -v github.com/animenotifier/notify.moe/...
 cd $GOPATH/src/github.com/animenotifier/notify.moe
