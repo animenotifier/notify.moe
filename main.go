@@ -26,6 +26,7 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Content security policy
 	app.ContentSecurityPolicy.Set("img-src", "https: data:")
+	app.ContentSecurityPolicy.Set("connect-src", "https: wss: data:")
 
 	// Security
 	configureHTTPS(app)

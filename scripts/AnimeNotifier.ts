@@ -12,7 +12,7 @@ import InfiniteScroller from "./InfiniteScroller"
 import ServiceWorkerManager from "./ServiceWorkerManager"
 import ServerEvents from "./ServerEvents"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
-import { findAll, canUseWebP, requestIdleCallback, swapElements, delay, findAllInside } from "./Utils"
+import { findAll, supportsWebP, requestIdleCallback, swapElements, delay, findAllInside } from "./Utils"
 import * as actions from "./Actions"
 
 export default class AnimeNotifier {
@@ -106,10 +106,7 @@ export default class AnimeNotifier {
 		this.run()
 	}
 
-	run() {
-		// Check for WebP support
-		this.webpEnabled = canUseWebP()
-
+	async run() {
 		// Initiate the elements we need
 		this.user = document.getElementById("user")
 		this.app.content = document.getElementById("content")
@@ -150,6 +147,9 @@ export default class AnimeNotifier {
 
 		// Infinite scrolling
 		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 150)
+
+		// WebP
+		this.webpEnabled = await supportsWebP()
 
 		// Loading
 		this.loading(false)

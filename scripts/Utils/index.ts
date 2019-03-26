@@ -1,4 +1,4 @@
-export * from "./canUseWebP"
+export * from "./supportsWebP"
 export * from "./delay"
 export * from "./findAll"
 export * from "./plural"
