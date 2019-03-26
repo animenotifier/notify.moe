@@ -20,6 +20,7 @@ export default class AnimeNotifier {
 	analytics: Analytics
 	user: HTMLElement
 	title: string
+	webpCheck: Promise<boolean>
 	webpEnabled: boolean
 	contentLoadedActions: Promise<any>
 	statusMessage: StatusMessage
@@ -106,7 +107,7 @@ export default class AnimeNotifier {
 		this.run()
 	}
 
-	async run() {
+	run() {
 		// Initiate the elements we need
 		this.user = document.getElementById("user")
 		this.app.content = document.getElementById("content")
@@ -149,7 +150,7 @@ export default class AnimeNotifier {
 		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 150)
 
 		// WebP
-		this.webpEnabled = await supportsWebP()
+		this.webpCheck = supportsWebP().then(val => this.webpEnabled = val)
 
 		// Loading
 		this.loading(false)
@@ -790,10 +791,12 @@ export default class AnimeNotifier {
 		}
 	}
 
-	lazyLoad(elements?: IterableIterator<Element>) {
+	async lazyLoad(elements?: IterableIterator<Element>) {
 		if(!elements) {
 			elements = findAll("lazy")
 		}
+
+		await this.webpCheck
 
 		for(let element of elements) {
 			switch(element.tagName) {
