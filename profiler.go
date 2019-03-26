@@ -3,14 +3,12 @@ package main
 import (
 	"net/http"
 	"net/http/pprof"
-
-	"github.com/animenotifier/arn"
 )
 
 func init() {
-	if !arn.IsDevelopment() {
-		return
-	}
+	// if !arn.IsDevelopment() {
+	// 	return
+	// }
 
 	app.Router.HandlerFunc("GET", "/debug/pprof/", http.HandlerFunc(pprof.Index))
 	app.Router.HandlerFunc("GET", "/debug/pprof/cmdline", http.HandlerFunc(pprof.Cmdline))
@@ -22,4 +20,6 @@ func init() {
 	app.Router.Handler("GET", "/debug/pprof/heap", pprof.Handler("heap"))
 	app.Router.Handler("GET", "/debug/pprof/threadcreate", pprof.Handler("threadcreate"))
 	app.Router.Handler("GET", "/debug/pprof/block", pprof.Handler("block"))
+	app.Router.Handler("GET", "/debug/pprof/allocs", pprof.Handler("allocs"))
+	app.Router.Handler("GET", "/debug/pprof/mutex", pprof.Handler("mutex"))
 }
