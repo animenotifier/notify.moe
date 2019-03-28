@@ -6,7 +6,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
-	"github.com/logpacker/PayPal-Go-SDK"
+	paypalsdk "github.com/logpacker/PayPal-Go-SDK"
 )
 
 // CreatePayment creates the PayPal payment, typically via a JSON API route.
