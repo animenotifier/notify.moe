@@ -21,6 +21,7 @@ matrix:
   fast_finish: true
 
 env:
+  - GO111MODULE=on
   - ARN_ROOT=$TRAVIS_BUILD_DIR
 
 # Anything in before_script that returns a nonzero exit code will
