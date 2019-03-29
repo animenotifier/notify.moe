@@ -20,6 +20,9 @@ matrix:
   # tests pass on the stable versions of Go.
   fast_finish: true
 
+env:
+  - ARN_ROOT=$TRAVIS_BUILD_DIR
+
 # Anything in before_script that returns a nonzero exit code will
 # flunk the build and immediately stop. It's sorta like having
 # set -e enabled in bash.
