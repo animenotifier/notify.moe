@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/animenotifier/arn"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 // JobInfo gives you information about a background job.

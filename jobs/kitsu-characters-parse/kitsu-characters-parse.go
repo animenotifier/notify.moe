@@ -8,7 +8,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/kitsu"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 func main() {

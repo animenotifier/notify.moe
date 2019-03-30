@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 // testConnectivity will test if port 443 is accessible or not.

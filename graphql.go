@@ -8,7 +8,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils/gql"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 	"github.com/graphql-go/graphql"
 )
 

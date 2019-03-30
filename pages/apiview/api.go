@@ -8,7 +8,7 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/autodocs"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 // Get api page.

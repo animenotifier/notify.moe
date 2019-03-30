@@ -9,7 +9,7 @@ import (
 	"github.com/aerogo/http/client"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 	"github.com/mssola/user_agent"
 )
 

@@ -6,7 +6,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 var tickerOW = time.NewTicker(1100 * time.Millisecond)

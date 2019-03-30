@@ -7,7 +7,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/twist"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 var rateLimiter = time.NewTicker(500 * time.Millisecond)

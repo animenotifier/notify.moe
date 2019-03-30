@@ -5,7 +5,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/autocorrect"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 func main() {

@@ -6,7 +6,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
-	"github.com/fatih/color"
+	"github.com/blitzprog/color"
 )
 
 var malDB = arn.Node.Namespace("mal").RegisterTypes((*mal.Anime)(nil))
