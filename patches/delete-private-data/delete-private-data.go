@@ -30,6 +30,8 @@ func main() {
 		user.IP = ""
 		user.Accounts.Facebook.ID = ""
 		user.Accounts.Google.ID = ""
+		user.Accounts.Twitter.ID = ""
+		user.Accounts.Twitter.Nick = ""
 		user.Location = &arn.Location{}
 		user.BirthDay = ""
 
