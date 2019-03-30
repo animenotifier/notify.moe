@@ -118,7 +118,14 @@ export default class AudioPlayer {
 
 					this.next()
 				}
-			}, console.error)
+			}, err => {
+				if(currentPlayId !== this.playId) {
+					return
+				}
+
+				this.arn.statusMessage.showError("Your browser can't decode this audio file.")
+				console.error(err)
+			})
 		}
 
 		request.onprogress = e => {
