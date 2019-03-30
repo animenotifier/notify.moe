@@ -13,7 +13,7 @@ component EditAnimeTabs(anime *arn.Anime)
 	
 	.search-links
 		a.badge.search-link.google-badge.tip(href="https://www.google.com/search?q=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="Google")
-			RawIcon("google")
+			RawIcon("google-color")
 		
 		a.badge.search-link.anilist-badge.tip(href="https://anilist.co/search/anime?sort=SEARCH_MATCH&search=" + anime.Title.Canonical, target="_blank", rel="noopener", aria-label="Anilist")
 			RawIcon("anilist")
