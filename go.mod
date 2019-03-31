@@ -23,12 +23,14 @@ require (
 	github.com/animenotifier/twist v0.0.0-20171021152718-743481a0ebff
 	github.com/blitzprog/color v1.8.0
 	github.com/bwmarrin/discordgo v0.19.0
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-ini/ini v1.42.0 // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/graphql-go/graphql v0.7.8
 	github.com/json-iterator/go v1.1.6
+	github.com/klauspost/compress v1.4.1 // indirect
 	github.com/logpacker/PayPal-Go-SDK v1.1.4+incompatible
 	github.com/minio/minio-go v6.0.14+incompatible
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
