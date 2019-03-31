@@ -7,11 +7,11 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
 	github.com/aerogo/aero v1.0.1
 	github.com/aerogo/api v0.1.0
-	github.com/aerogo/crawler v0.1.0
+	github.com/aerogo/crawler v0.1.1
 	github.com/aerogo/http v0.1.1
 	github.com/aerogo/layout v0.1.0
 	github.com/aerogo/log v0.1.0
-	github.com/aerogo/markdown v0.1.0
+	github.com/aerogo/markdown v0.1.1
 	github.com/aerogo/nano v0.1.0
 	github.com/aerogo/session-store-nano v0.1.0
 	github.com/aerogo/sitemap v0.0.0-20171118144810-926059a596ae
@@ -19,7 +19,7 @@ require (
 	github.com/animenotifier/arn v1.0.2
 	github.com/animenotifier/kitsu v0.0.0-20190311000532-8310b34f18d8
 	github.com/animenotifier/mal v0.0.0-20190306012317-15db3840fd60
-	github.com/animenotifier/shoboi v0.0.0-20180321032539-68de8dd8046b
+	github.com/animenotifier/shoboi v0.0.0-20190331140329-ad885767c824
 	github.com/animenotifier/twist v0.0.0-20171021152718-743481a0ebff
 	github.com/blitzprog/color v1.8.0
 	github.com/bwmarrin/discordgo v0.19.0
