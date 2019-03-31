@@ -32,6 +32,7 @@ func Events(ctx *aero.Context) string {
 		defer fmt.Println(user.Nick, "disconnected, stop sending events")
 		defer user.RemoveEventStream(stream)
 
+		// Send the ETag for the scripts
 		stream.Events <- &aero.Event{
 			Name: "etag",
 			Data: struct {
@@ -43,6 +44,7 @@ func Events(ctx *aero.Context) string {
 			},
 		}
 
+		// Send the ETag for the styles
 		stream.Events <- &aero.Event{
 			Name: "etag",
 			Data: struct {
@@ -54,6 +56,7 @@ func Events(ctx *aero.Context) string {
 			},
 		}
 
+		// Wait until the user closes the tab or disconnects
 		<-stream.Closed
 	}()
 
