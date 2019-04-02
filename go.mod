@@ -16,7 +16,7 @@ require (
 	github.com/aerogo/session-store-nano v0.1.0
 	github.com/aerogo/sitemap v0.0.0-20171118144810-926059a596ae
 	github.com/animenotifier/anilist v0.0.0-20190305235615-d1d5baf3760a
-	github.com/animenotifier/arn v1.0.3
+	github.com/animenotifier/arn v1.0.4
 	github.com/animenotifier/kitsu v0.0.0-20190311000532-8310b34f18d8
 	github.com/animenotifier/mal v0.0.0-20190306012317-15db3840fd60
 	github.com/animenotifier/shoboi v0.0.0-20190331140329-ad885767c824

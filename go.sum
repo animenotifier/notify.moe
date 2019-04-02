@@ -48,6 +48,8 @@ github.com/animenotifier/anilist v0.0.0-20190305235615-d1d5baf3760a h1:vEYWNIsi5
 github.com/animenotifier/anilist v0.0.0-20190305235615-d1d5baf3760a/go.mod h1:i4CfOYnA7J3413w8AhRJkrmky/7t+827W0lJ3A28JHQ=
 github.com/animenotifier/arn v1.0.3 h1:elw0aUWv+aEGFWZdRv7Sz6oSJ16xJ8JP+zdqr3jAuFM=
 github.com/animenotifier/arn v1.0.3/go.mod h1:mDyMipZQv4cFaBpUC6mmL9MnGSLhDS1hxoiFge4OpRw=
+github.com/animenotifier/arn v1.0.4 h1:FnCABUsDfEdbp1Fg8QfOcawiYw+WJEayfidgoFvbTKM=
+github.com/animenotifier/arn v1.0.4/go.mod h1:mDyMipZQv4cFaBpUC6mmL9MnGSLhDS1hxoiFge4OpRw=
 github.com/animenotifier/ffxiv v0.0.0-20181026222628-4707c5739ff1 h1:nHYxZmkB79cBr/fNrYxoY0k1a8qcDT1rIItwnwKFGP0=
 github.com/animenotifier/ffxiv v0.0.0-20181026222628-4707c5739ff1/go.mod h1:oBHhRzQAUv+dBe4qFJAFnTg7qv5Gl6QFHQphyJla74Q=
 github.com/animenotifier/japanese v0.0.0-20180702005159-9ae021c00c3c h1:P/18+VJ+UmhxYBCQLAA/7hiqhvWLQqLyIoDCIi99JNA=
