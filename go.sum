@@ -46,10 +46,8 @@ github.com/andybalholm/cascadia v1.0.0 h1:hOCXnnZ5A+3eVDX8pvgl4kofXv2ELss0bKcqRy
 github.com/andybalholm/cascadia v1.0.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/animenotifier/anilist v0.0.0-20190305235615-d1d5baf3760a h1:vEYWNIsi5TRRjfBVLKDUdQLCcqV7fvTOEFtCOO0GJpE=
 github.com/animenotifier/anilist v0.0.0-20190305235615-d1d5baf3760a/go.mod h1:i4CfOYnA7J3413w8AhRJkrmky/7t+827W0lJ3A28JHQ=
-github.com/animenotifier/arn v1.0.3 h1:elw0aUWv+aEGFWZdRv7Sz6oSJ16xJ8JP+zdqr3jAuFM=
-github.com/animenotifier/arn v1.0.3/go.mod h1:mDyMipZQv4cFaBpUC6mmL9MnGSLhDS1hxoiFge4OpRw=
-github.com/animenotifier/arn v1.0.4 h1:FnCABUsDfEdbp1Fg8QfOcawiYw+WJEayfidgoFvbTKM=
-github.com/animenotifier/arn v1.0.4/go.mod h1:mDyMipZQv4cFaBpUC6mmL9MnGSLhDS1hxoiFge4OpRw=
+github.com/animenotifier/arn v1.0.5 h1:uECcjmMro52GVLv7/6AiOe2uDUejmgFm16gzK+BFSEc=
+github.com/animenotifier/arn v1.0.5/go.mod h1:gqORFYS9hckiwGhcuid8ylusR0Z+hQ8rZiuSXqRDVB4=
 github.com/animenotifier/ffxiv v0.0.0-20181026222628-4707c5739ff1 h1:nHYxZmkB79cBr/fNrYxoY0k1a8qcDT1rIItwnwKFGP0=
 github.com/animenotifier/ffxiv v0.0.0-20181026222628-4707c5739ff1/go.mod h1:oBHhRzQAUv+dBe4qFJAFnTg7qv5Gl6QFHQphyJla74Q=
 github.com/animenotifier/japanese v0.0.0-20180702005159-9ae021c00c3c h1:P/18+VJ+UmhxYBCQLAA/7hiqhvWLQqLyIoDCIi99JNA=
@@ -165,8 +163,8 @@ github.com/shurcooL/sanitized_anchor_name v1.0.0 h1:PdmoCO6wvbs+7yrJyMORt4/BmY5I
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d h1:zE9ykElWQ6/NYmHa3jpm/yHnI4xSofP+UP6SpjHcSeM=
 github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d/go.mod h1:OnSkiWE9lh6wB0YB77sQom3nweQdgAjqCqsofrRNTgc=
-github.com/smartystreets/assertions v0.0.0-20190215210624-980c5ac6f3ac h1:wbW+Bybf9pXxnCFAOWZTqkRjAc7rAIwo2e1ArUhiHxg=
-github.com/smartystreets/assertions v0.0.0-20190215210624-980c5ac6f3ac/go.mod h1:OnSkiWE9lh6wB0YB77sQom3nweQdgAjqCqsofrRNTgc=
+github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3 h1:hBSHahWMEgzwRyS6dRpxY0XyjZsHyQ61s084wo5PJe0=
+github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3/go.mod h1:OnSkiWE9lh6wB0YB77sQom3nweQdgAjqCqsofrRNTgc=
 github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a h1:pa8hGb/2YqsZKovtsgrwcDH1RZhVbTKCjLp47XpqCDs=
 github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a/go.mod h1:syvi0/a8iFYH4r/RixwvyeAJjdLS9QV7WQ/tjFTllLA=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
