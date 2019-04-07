@@ -1,4 +1,22 @@
-*.sh text eol=lf
+# Autodetect text files
+* text=auto
+
+# These are always text files
+*.go text
+*.sh text
+*.svg text
+*.pixy text
+*.scarlet text
+*.md text
+*.json text
+
+# These are always binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.webm binary
+
+# Git LFS
 *.psd filter=lfs diff=lfs merge=lfs -text
 *.webm filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
