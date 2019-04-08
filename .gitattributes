@@ -1,5 +1,5 @@
 # Autodetect text files
-* text=auto
+* text=auto eol=lf
 
 # These are always text files
 *.go text
