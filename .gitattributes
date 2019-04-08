@@ -9,6 +9,8 @@
 *.scarlet text
 *.md text
 *.json text
+*.mod text
+*.sum text
 
 # These are always binary
 *.png binary
