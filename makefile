@@ -47,13 +47,10 @@ test:
 bench:
 	$(GOTEST) -bench .
 pack:
-	go get -u github.com/aerogo/pack
 	go install github.com/aerogo/pack
 run:
-	go get -u github.com/aerogo/run
 	go install github.com/aerogo/run
 goimports:
-	go get -u golang.org/x/tools/cmd/goimports
 	go install golang.org/x/tools/cmd/goimports
 tools:
 ifeq ($(OSNAME),OSX)
@@ -74,11 +71,6 @@ versions:
 assets:
 	$(TSCMD)
 	@pack
-deps:
-	# Ignore errors using the "-" because components directory can not be fetched.
-	@-go get -t -v ./...
-depslist:
-	$(GOCMD) list -f {{.Deps}} | sed -e 's/\[//g' -e 's/\]//g' | tr " " "\n"
 clean:
 	find . -type f | xargs file | grep "ELF.*executable" | awk -F: '{print $1}' | xargs rm
 ports:
