@@ -28,7 +28,7 @@ RUN pack && \
 
 # Production
 FROM alpine:latest as production
-RUN apk add ca-certificates
+RUN apk add --no-cache ca-certificates
 COPY --from=builder /root/.aero /root/.aero
 COPY --from=builder /notify.moe /notify.moe
 ENV ARN_ROOT=/notify.moe

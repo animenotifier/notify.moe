@@ -3,6 +3,7 @@ module github.com/animenotifier/notify.moe
 go 1.12
 
 require (
+	cloud.google.com/go v0.37.4 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
 	github.com/aerogo/aero v1.0.1
@@ -11,7 +12,6 @@ require (
 	github.com/aerogo/http v0.1.1
 	github.com/aerogo/layout v0.1.0
 	github.com/aerogo/log v0.1.0
-	github.com/aerogo/markdown v0.1.1
 	github.com/aerogo/nano v0.1.0
 	github.com/aerogo/session-store-nano v0.1.0
 	github.com/aerogo/sitemap v0.0.0-20171118144810-926059a596ae
@@ -23,12 +23,13 @@ require (
 	github.com/animenotifier/twist v0.0.0-20171021152718-743481a0ebff
 	github.com/blitzprog/color v1.8.0
 	github.com/bwmarrin/discordgo v0.19.0
-	github.com/dustin/go-humanize v1.0.0
 	github.com/go-ini/ini v1.42.0 // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
+	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/graphql-go/graphql v0.7.8
 	github.com/json-iterator/go v1.1.6
+	github.com/kr/pretty v0.1.0 // indirect
 	github.com/logpacker/PayPal-Go-SDK v1.1.4+incompatible
 	github.com/minio/minio-go v6.0.14+incompatible
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
@@ -41,7 +42,13 @@ require (
 	go.uber.org/atomic v1.3.2 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.9.1 // indirect
-	golang.org/x/oauth2 v0.0.0-20190319182350-c85d3e98c914
+	golang.org/x/crypto v0.0.0-20190404164418-38d8ce5564a5 // indirect
+	golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3 // indirect
+	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
+	golang.org/x/sys v0.0.0-20190405154228-4b34438f7a67 // indirect
+	golang.org/x/tools v0.0.0-20190408220357-e5b8258f4918 // indirect
+	google.golang.org/appengine v1.5.0 // indirect
+	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 )

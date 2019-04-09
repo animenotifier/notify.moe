@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    container_name: "notify.moe"
+    build: .
+    ports:
+      - "443:4001"
+    environment:
+      ARN_ROOT: "/notify.moe"
