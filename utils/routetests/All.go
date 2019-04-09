@@ -255,8 +255,8 @@ var routeTests = map[string][]string{
 		"/compare/animelist/Akyoto/Scott",
 	},
 
-	"/explore/anime/:year/:season/:status/:type": []string{
-		"/explore/anime/2011/any/finished/tv",
+	"/explore/anime/:year/:season/:status/:type/:sort": []string{
+		"/explore/anime/2011/any/finished/tv/Popularity",
 	},
 
 	// AMV

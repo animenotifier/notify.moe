@@ -11,7 +11,7 @@ import (
 func Register(l *layout.Layout) {
 	// Explore
 	l.Page("/explore", explore.Filter)
-	l.Page("/explore/anime/:year/:season/:status/:type", explore.Filter)
+	l.Page("/explore/anime/:year/:season/:status/:type/:sort", explore.Filter)
 	l.Page("/explore/color/:color/anime", explorecolor.AnimeByAverageColor)
 	l.Page("/explore/color/:color/anime/from/:index", explorecolor.AnimeByAverageColor)
 	l.Page("/halloffame", halloffame.Get)

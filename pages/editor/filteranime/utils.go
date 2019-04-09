@@ -25,7 +25,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.Anime) bool, s
 	// Determine URL
 	url := strings.TrimPrefix(ctx.URI(), "/_")
 	urlParts := strings.Split(url, "/")
-	urlParts = urlParts[:len(urlParts)-4]
+	urlParts = urlParts[:len(urlParts)-5]
 	url = strings.Join(urlParts, "/")
 
 	return ctx.HTML(components.AnimeEditorListFull(
@@ -45,6 +45,7 @@ func filterAnime(ctx *aero.Context, user *arn.User, filter func(*arn.Anime) bool
 	status := ctx.Get("status")
 	season := ctx.Get("season")
 	typ := ctx.Get("type")
+	sort := ctx.Get("sort")
 
 	if year == "any" {
 		year = ""
@@ -62,11 +63,16 @@ func filterAnime(ctx *aero.Context, user *arn.User, filter func(*arn.Anime) bool
 		typ = ""
 	}
 
+	if sort == "Popularity" {
+		sort = ""
+	}
+
 	settings := user.Settings()
 	settings.Editor.Filter.Year = year
 	settings.Editor.Filter.Season = season
 	settings.Editor.Filter.Status = status
 	settings.Editor.Filter.Type = typ
+	settings.Editor.Filter.Sort = sort
 	settings.Save()
 
 	// Filter
@@ -91,7 +97,7 @@ func filterAnime(ctx *aero.Context, user *arn.User, filter func(*arn.Anime) bool
 	})
 
 	// Sort
-	arn.SortAnimeByQuality(animes)
+	arn.SortAnimeWithAlgo(animes, status, sort, user)
 
 	// Limit
 	count := len(animes)

@@ -1,6 +1,6 @@
-component ExploreAnime(animes []*arn.Anime, year string, season string, status string, typ string, user *arn.User)
+component ExploreAnime(animes []*arn.Anime, year string, season string, status string, typ string, sort string, user *arn.User)
 	#filter-root(data-url="/explore/anime")
-	ExploreFilters(year, season, status, typ, false)
+	ExploreFilters(year, season, status, typ, sort, false)
 
 	.corner-buttons-hide-on-mobile
 		if user != nil
@@ -30,7 +30,7 @@ component ExploreAnime(animes []*arn.Anime, year string, season string, status s
 		else
 			AnimeGrid(animes, user)
 
-component ExploreFilters(year string, season string, status string, typ string, advancedFilters bool)
+component ExploreFilters(year string, season string, status string, typ string, sort string, advancedFilters bool)
 	.explore-filters
 		.filter-select-container
 			select#filter-year.filter-select.action(value=year, data-action="filterAnime", data-trigger="change")
@@ -77,3 +77,13 @@ component ExploreFilters(year string, season string, status string, typ string, 
 					option(value="music") Music
 
 			.filter-label Type
+	
+		.filter-select-container
+			select#sort.filter-select.action(value=sort, data-action="filterAnime", data-trigger="change")
+				option.option-any(value="") Popularity
+				option(value="Title") Title
+				option(value="StartDate") Start date
+				option(value="EpisodeCount") Episode count
+				option(value="EpisodeLength") Episode length
+
+			.filter-label Order By

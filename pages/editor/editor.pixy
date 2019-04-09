@@ -99,5 +99,5 @@ component EditorTabs(url string, user *arn.User)
 	if strings.Contains(url, "/editor/anime/") || strings.Contains(url, "/editor/mal/diff/anime")
 		.editor-filters
 			#filter-root(data-url=url)
-			ExploreFilters(user.Settings().Editor.Filter.Year, user.Settings().Editor.Filter.Season, user.Settings().Editor.Filter.Status, user.Settings().Editor.Filter.Type, true)
+			ExploreFilters(user.Settings().Editor.Filter.Year, user.Settings().Editor.Filter.Season, user.Settings().Editor.Filter.Status, user.Settings().Editor.Filter.Type, user.Settings().Editor.Filter.Sort, true)
 	
