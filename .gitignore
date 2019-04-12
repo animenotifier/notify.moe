@@ -24,6 +24,9 @@ _testmain.go
 *.prof
 *.pprof
 
+# Windows artifacts
+desktop.ini
+
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
