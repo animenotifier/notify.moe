@@ -28,6 +28,7 @@ docker-compose run notify.moe
 
 ## Run the server
 
+* Compile TypeScript files using: `tsc`
 * Start the web server in notify.moe directory using: `run`
 * In your browser, import the file `security/default/root.crt` as a trusted Root authority
 * Open `https://beta.notify.moe`

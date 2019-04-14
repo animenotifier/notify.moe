@@ -73,6 +73,8 @@ assets:
 	@pack
 clean:
 	find . -type f | xargs file | grep "ELF.*executable" | awk -F: '{print $1}' | xargs rm
+	rm -rf ./components
+	find . -type f | grep /scripts/ | grep .js | xargs rm
 ports:
 ifeq ($(OSNAME),LINUX)
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 4000

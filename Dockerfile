@@ -1,9 +1,14 @@
 # Install development environment
 FROM blitzprog/aero
-RUN git clone --progress --verbose --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn
 
-# Expect ~/notify.moe to be mounted as a volume
-RUN cd ~/notify.moe && \
-	tsc && \
-	pack && \
-	go build
+# Download database
+RUN git clone --progress --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn
+
+# Download notify.moe dependencies
+RUN curl -s -o go.mod https://raw.githubusercontent.com/animenotifier/notify.moe/go/go.mod && \
+	curl -s -o go.sum https://raw.githubusercontent.com/animenotifier/notify.moe/go/go.sum && \
+	go mod download && \
+	rm go.*
+
+# Create empty working directory
+WORKDIR /home/developer/notify.moe
