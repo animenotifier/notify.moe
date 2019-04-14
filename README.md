@@ -6,15 +6,24 @@
 
 ## Prerequisites
 
-* Install [Ubuntu](https://www.ubuntu.com/) or [MacOS](https://en.wikipedia.org/wiki/MacOS)
-* Install [Go](https://golang.org/dl/)
-* Install [TypeScript](https://www.typescriptlang.org/)
-* Install [Git LFS](https://git-lfs.github.com/)
+* Install [Docker](https://www.docker.com/get-started) and [Compose](https://docs.docker.com/compose/install/)
 
-## Start the installation
+## Clone the repository
 
 ```bash
-curl -s https://raw.githubusercontent.com/animenotifier/notify.moe/go/install.sh | bash
+git clone https://github.com/animenotifier/notify.moe.git
+```
+
+## Download the dev image
+
+```bash
+docker pull animenotifier/notify.moe
+```
+
+## Run the dev image
+
+```bash
+docker-compose run notify.moe
 ```
 
 ## Run the server

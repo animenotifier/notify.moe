@@ -25,10 +25,13 @@ require (
 	github.com/blitzprog/color v1.8.0
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
+	github.com/elazarl/goproxy v0.0.0-20190410145444-c548f45dcf1d // indirect
+	github.com/elazarl/goproxy/ext v0.0.0-20190410145444-c548f45dcf1d // indirect
 	github.com/go-ini/ini v1.42.0 // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
+	github.com/gopherjs/gopherjs v0.0.0-20190411002643-bd77b112433e // indirect
 	github.com/graphql-go/graphql v0.7.8
 	github.com/json-iterator/go v1.1.6
 	github.com/kr/pretty v0.1.0 // indirect
@@ -47,7 +50,8 @@ require (
 	golang.org/x/crypto v0.0.0-20190411191339-88737f569e3a // indirect
 	golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3 // indirect
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
-	golang.org/x/sys v0.0.0-20190411185658-b44545bcd369 // indirect
+	golang.org/x/sync v0.0.0-20190412183630-56d357773e84 // indirect
+	golang.org/x/sys v0.0.0-20190412213103-97732733099d // indirect
 	google.golang.org/appengine v1.5.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/ini.v1 v1.42.0 // indirect

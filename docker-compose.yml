@@ -1,6 +1,9 @@
-version: '3'
+version: "3"
 services:
   notify.moe:
     build: .
+    image: animenotifier/notify.moe
+    stdin_open: true
+    tty: true
     ports:
       - "443:4001"
