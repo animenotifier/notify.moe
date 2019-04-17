@@ -5,7 +5,7 @@ services:
     image: animenotifier/notify.moe
     stdin_open: true
     tty: true
-    network_mode: bridge
+    network_mode: host
     ports:
       - "443:4001"
     volumes:
