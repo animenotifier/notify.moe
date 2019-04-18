@@ -27,8 +27,8 @@ docker-compose run notify.moe
 
 Your home directory is mounted as `/my` inside Docker. Usually you'd want to clone all repositories you use into a `projects` directory. This directory can be accessed by both your favourite editor on the host machine and also inside Docker.
 
-* Clone notify.moe repository `git clone https://github.com/animenotifier/notify.moe.git`
-* Enter notify.moe repository `cd notify.moe`
+* Clone notify.moe repository: `git clone https://github.com/animenotifier/notify.moe.git`
+* Enter notify.moe repository: `cd notify.moe`
 * Compile TypeScript files using: `tsc`
 * Compile template/style files using: `pack` (optional)
 * Start the web server using: `run`
