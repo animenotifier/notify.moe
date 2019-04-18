@@ -1,12 +1,15 @@
-version: "3"
+version: "3.4"
 services:
   notify.moe:
-    build: .
+    build:
+      context: .
+      network: host
     image: animenotifier/notify.moe
     stdin_open: true
     tty: true
     network_mode: host
     ports:
+      - "80:4000"
       - "443:4001"
     volumes:
-      - .:/home/developer/notify.moe
+      - ~:/host

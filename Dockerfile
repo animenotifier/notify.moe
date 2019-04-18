@@ -11,4 +11,4 @@ RUN curl -s -o go.mod https://raw.githubusercontent.com/animenotifier/notify.moe
 	rm go.*
 
 # Create empty working directory
-WORKDIR /home/developer/notify.moe
+WORKDIR /host
