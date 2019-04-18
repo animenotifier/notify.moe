@@ -5,6 +5,7 @@ services:
       context: .
       network: host
     image: animenotifier/notify.moe
+    hostname: docker
     stdin_open: true
     tty: true
     network_mode: host
@@ -12,4 +13,4 @@ services:
       - "80:4000"
       - "443:4001"
     volumes:
-      - ~:/host
+      - ~:/my
