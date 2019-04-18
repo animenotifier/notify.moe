@@ -11,7 +11,7 @@
 
 ## Setup
 
-Download the developer image:
+Download the developer image (2.5 GB):
 
 ```bash
 docker pull animenotifier/notify.moe
