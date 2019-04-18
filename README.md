@@ -9,15 +9,21 @@
 * Install [Docker](https://www.docker.com/get-started)
 * Install [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Setup
+## How to
 
-Download the developer image (2.5 GB):
+1. Download the source code:
+
+```bash
+git clone https://github.com/animenotifier/notify.moe.git && cd notify.moe
+```
+
+2. Download the developer tools:
 
 ```bash
 docker pull animenotifier/notify.moe
 ```
 
-Run the developer image:
+3. Run the developer tools:
 
 ```bash
 docker-compose run notify.moe
@@ -25,23 +31,26 @@ docker-compose run notify.moe
 
 ## Usage
 
-Your home directory is mounted as `/my` inside Docker. Usually you'd want to clone all repositories you use into a `projects` directory. This directory can be accessed by both your favourite editor on the host machine and also inside Docker.
+Your home directory is mounted as `/my` inside Docker.
 
-* Clone notify.moe repository: `git clone https://github.com/animenotifier/notify.moe.git`
-* Enter notify.moe repository: `cd notify.moe`
+Usually you'd want to clone all repositories you use into a `projects` directory. This directory can be accessed by both your favourite editor on the host machine and also inside Docker.
+
+* Fork the notify.moe repository on GitHub
+* Enter the notify.moe directory: `cd notify.moe`
 * Compile TypeScript files using: `tsc`
 * Compile template/style files using: `pack` (optional)
 * Start the web server using: `run`
 
-The `run` binary is a development server that will restart the web server when it detects code changes.
+The `run` binary is a file watcher that will restart the web server when it detects code changes.
 
 ## Networking
 
-* Add `beta.notify.moe 127.0.0.1` to your hosts file
+* Add `beta.notify.moe 127.0.0.1` to your `hosts` file
 * Forward TCP port 4001 to 443 (Linux / MacOS users can run `make ports`)
 
 ## In your browser
 
+* Open the settings, search for certificates
 * Import the file `security/default/root.crt` as a trusted Root authority
 * Open `https://beta.notify.moe`
 
