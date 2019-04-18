@@ -38,7 +38,7 @@ The `run` binary is a development server that will restart the web server when i
 ## Networking
 
 * Add `beta.notify.moe 127.0.0.1` to your hosts file
-* Forward local TCP port 4001 to 443 on your host
+* Forward TCP port 4001 to 443 (Linux / MacOS users can run `make ports`)
 
 ## In your browser
 
