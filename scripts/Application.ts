@@ -49,6 +49,7 @@ export default class Application {
 		return new Promise((resolve, reject) => {
 			let request = new XMLHttpRequest()
 
+			request.timeout = 20000
 			request.onerror = () => reject(new Error("You are either offline or the requested page doesn't exist."))
 			request.ontimeout = () => reject(new Error("The page took too much time to respond."))
 			request.onload = () => {
