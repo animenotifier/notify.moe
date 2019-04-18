@@ -35,6 +35,11 @@ Your home directory is mounted as `/my` inside Docker. Usually you'd want to clo
 
 The `run` binary is a development server that will restart the web server when it detects code changes.
 
+## Networking
+
+* Add `beta.notify.moe 127.0.0.1` to your hosts file
+* Forward local TCP port 4001 to 443 on your host
+
 ## In your browser
 
 * Import the file `security/default/root.crt` as a trusted Root authority
