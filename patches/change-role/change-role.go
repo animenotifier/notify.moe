@@ -20,6 +20,12 @@ func init() {
 func main() {
 	defer arn.Node.Close()
 
+	// Show usage if needed
+	if userID == "" || role == "" {
+		flag.Usage()
+		return
+	}
+
 	// Get user
 	user, err := arn.GetUser(userID)
 	arn.PanicOnError(err)
