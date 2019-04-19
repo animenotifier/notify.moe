@@ -6,9 +6,13 @@
 		"**/*.js": {
 			"when": "$(basename).ts"
 		},
+		"notify.moe": true,
 		"components/": true,
+		"audio/": true,
+		"videos/": true,
+		"logs/": true,
 		"jobs/mal-download/anime/": true,
-		"jobs/mal-download/character/": true
+		"jobs/mal-download/character/": true,
 	},
 	"files.watcherExclude": {
 		"**/.git/objects/**": true,
@@ -24,7 +28,7 @@
 	"search.exclude": {
 		"components/": true,
 		"audio/": true,
-		"video/": true,
+		"videos/": true,
 		"**/*.svg": true,
 		"**/*.html": true,
 		"**/*.opus": true,
