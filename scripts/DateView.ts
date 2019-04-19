@@ -103,7 +103,7 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 }
 
 export function displayDate(element: HTMLElement, now: Date) {
-	if(element.dataset.date === "") {
+	if(!element.dataset.date) {
 		element.textContent = ""
 		return
 	}

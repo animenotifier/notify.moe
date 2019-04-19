@@ -77,7 +77,10 @@ export default class ServiceWorkerManager {
 
 		switch(message.type) {
 			case "new notification":
-				this.arn.notificationManager.update()
+				if(this.arn.notificationManager) {
+					this.arn.notificationManager.update()
+				}
+
 				break
 
 			// case "new content":

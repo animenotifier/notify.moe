@@ -6,7 +6,7 @@ export default class AudioPlayer {
 
 	// Web audio
 	audioContext: AudioContext
-	audioNode: AudioBufferSourceNode
+	audioNode: AudioBufferSourceNode | null
 	gainNode: GainNode
 
 	// Parameters
@@ -30,7 +30,7 @@ export default class AudioPlayer {
 
 	constructor(arn: AnimeNotifier) {
 		this.arn = arn
-		this.audioPlayer = document.getElementById("audio-player")
+		this.audioPlayer = document.getElementById("audio-player") as HTMLElement
 		this.audioPlayerPlay = document.getElementById("audio-player-play") as HTMLButtonElement
 		this.audioPlayerPause = document.getElementById("audio-player-pause") as HTMLButtonElement
 		this.trackLink = document.getElementById("audio-player-track-title") as HTMLLinkElement

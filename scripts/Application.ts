@@ -257,7 +257,7 @@ export default class Application {
 	}
 
 	scrollToTop() {
-		let parent : HTMLElement | null = this.content
+		let parent: any = this.content
 
 		Diff.mutations.queue(() => {
 			while(parent = parent.parentElement) {

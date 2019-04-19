@@ -5,9 +5,9 @@ export default class NotificationManager {
 	icon: HTMLElement
 	counter: HTMLElement
 
-	constructor() {
-		this.icon = document.getElementById("notification-icon")
-		this.counter = document.getElementById("notification-count")
+	constructor(icon: HTMLElement, counter: HTMLElement) {
+		this.icon = icon
+		this.counter = counter
 	}
 
 	async update() {

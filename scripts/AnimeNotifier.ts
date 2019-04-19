@@ -27,7 +27,7 @@ export default class AnimeNotifier {
 	visibilityObserver: IntersectionObserver
 	pushManager: PushManager
 	serviceWorkerManager: ServiceWorkerManager
-	notificationManager: NotificationManager
+	notificationManager: NotificationManager | undefined
 	touchController: TouchController
 	audioPlayer: AudioPlayer
 	videoPlayer: VideoPlayer
@@ -126,8 +126,8 @@ export default class AnimeNotifier {
 
 		// Status message
 		this.statusMessage = new StatusMessage(
-			document.getElementById("status-message"),
-			document.getElementById("status-message-text")
+			document.getElementById("status-message") as HTMLElement,
+			document.getElementById("status-message-text") as HTMLElement
 		)
 
 		this.app.onError = (error: Error) => {
@@ -138,7 +138,12 @@ export default class AnimeNotifier {
 		this.pushManager = new PushManager()
 
 		// Notification manager
-		this.notificationManager = new NotificationManager()
+		if(this.user) {
+			this.notificationManager = new NotificationManager(
+				document.getElementById("notification-icon") as HTMLElement,
+				document.getElementById("notification-count") as HTMLElement
+			)
+		}
 
 		// Audio player
 		this.audioPlayer = new AudioPlayer(this)
@@ -248,7 +253,7 @@ export default class AnimeNotifier {
 		}
 
 		// Notification manager
-		if(this.user) {
+		if(this.notificationManager) {
 			this.notificationManager.update()
 		}
 

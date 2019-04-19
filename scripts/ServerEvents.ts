@@ -91,6 +91,10 @@ export default class ServerEvents {
 	}
 
 	notificationCount(e: ServerEvent) {
+		if(!this.arn.notificationManager) {
+			return
+		}
+
 		this.arn.notificationManager.setCounter(parseInt(e.data))
 	}
 }
