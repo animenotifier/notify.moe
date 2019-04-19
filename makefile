@@ -59,7 +59,7 @@ service:
 	sudo sed -i "s|MAKEFILE_PWD|$(PWD)|g" $(SERVICEFILE)
 	sudo sed -i "s|MAKEFILE_EXEC|$(PWD)/notify.moe|g" $(SERVICEFILE)
 	sudo systemctl daemon-reload
-	@echo -e "\nYou can now start the service using:\n\nsudo systemctl start animenotifier"
+	@echo -e "\nYou can now start the service using:\n\nsudo systemctl start animenotifier.service"
 tools:
 ifeq ($(OSNAME),OSX)
 	brew install coreutils
