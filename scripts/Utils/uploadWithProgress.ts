@@ -20,8 +20,10 @@ export function uploadWithProgress(url, options: RequestInit, onProgress: ((ev: 
 
 		xhr.open(options.method || "GET", url, true)
 
-		for(let k in options.headers || {}) {
-			xhr.setRequestHeader(k, options.headers[k])
+		if(options.headers) {
+			for(let key in options.headers) {
+				xhr.setRequestHeader(key, options.headers[key])
+			}
 		}
 
 		xhr.send(options.body)

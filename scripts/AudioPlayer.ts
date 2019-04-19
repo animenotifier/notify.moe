@@ -17,7 +17,7 @@ export default class AudioPlayer {
 	playId = 0
 
 	// Save last request so that we can cancel it
-	lastRequest: XMLHttpRequest
+	lastRequest: XMLHttpRequest | null
 
 	// DOM elements
 	audioPlayer: HTMLElement
@@ -194,7 +194,7 @@ export default class AudioPlayer {
 
 	// Stop
 	stop() {
-		this.arn.currentMediaId = undefined
+		this.arn.currentMediaId = ""
 
 		// Remove CSS class "playing"
 		let playingElements = document.getElementsByClassName("playing")

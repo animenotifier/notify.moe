@@ -18,7 +18,7 @@ import * as actions from "./Actions"
 export default class AnimeNotifier {
 	app: Application
 	analytics: Analytics
-	user: HTMLElement
+	user: HTMLElement | null
 	title: string
 	webpCheck: Promise<boolean>
 	webpEnabled: boolean
@@ -110,12 +110,18 @@ export default class AnimeNotifier {
 	run() {
 		// Initiate the elements we need
 		this.user = document.getElementById("user")
-		this.app.content = document.getElementById("content")
-		this.app.loading = document.getElementById("loading")
+		this.app.content = document.getElementById("content") as HTMLElement
+		this.app.loading = document.getElementById("loading") as HTMLElement
 
 		// Theme
-		if(this.user && this.user.dataset.pro === "true" && this.user.dataset.theme !== "light") {
-			actions.applyTheme(this.user.dataset.theme)
+		if(this.user && this.user.dataset.pro === "true") {
+			const theme = this.user.dataset.theme
+
+			// Don't apply light theme on load because
+			// it's already the standard theme.
+			if(theme && theme !== "light") {
+				actions.applyTheme(theme)
+			}
 		}
 
 		// Status message
@@ -196,7 +202,7 @@ export default class AnimeNotifier {
 			if(document.title !== this.title) {
 				document.title = this.title
 			}
-		} else {
+		} else if(headers[0].textContent) {
 			document.title = headers[0].textContent
 		}
 	}
@@ -289,7 +295,7 @@ export default class AnimeNotifier {
 	}
 
 	async onBeforeUnload(e: BeforeUnloadEvent) {
-		let message = undefined
+		let message = ""
 
 		// Prevent closing tab on new thread page
 		if(this.app.currentPath === "/new/thread" && document.activeElement.tagName === "TEXTAREA" && (document.activeElement as HTMLTextAreaElement).value.length > 20) {
@@ -325,7 +331,14 @@ export default class AnimeNotifier {
 
 						// Dynamic label assignment to prevent label texts overflowing
 						// and taking horizontal space at page load.
-						element.dataset.label = element.getAttribute("aria-label")
+						let label = element.getAttribute("aria-label")
+
+						if(!label) {
+							console.error("Tooltip without a label:", element)
+							return
+						}
+
+						element.dataset.label = label
 
 						// This is the most expensive call in this whole function,
 						// it consumes about 2-4 ms every time you call it.
@@ -350,7 +363,7 @@ export default class AnimeNotifier {
 
 							let tipChild = document.createElement("div")
 							tipChild.classList.add("tip-offset-child")
-							tipChild.setAttribute("data-label", element.getAttribute("data-label"))
+							tipChild.setAttribute("data-label", element.dataset.label)
 							tipChild.style.left = Math.round(leftOffset) + "px"
 							tipChild.style.width = rect.width + "px"
 							tipChild.style.height = rect.height + "px"
@@ -373,24 +386,25 @@ export default class AnimeNotifier {
 					continue
 				}
 
-				element.addEventListener("dragstart", e => {
-					if(!element.draggable) {
+				element.addEventListener("dragstart", evt => {
+					if(!element.draggable || !evt.dataTransfer) {
 						return
 					}
 
 					let image = element.getElementsByClassName("anime-list-item-image")[0]
 
 					if(image) {
-						e.dataTransfer.setDragImage(image, 0, 0)
+						evt.dataTransfer.setDragImage(image, 0, 0)
 					}
 
 					let name = element.getElementsByClassName("anime-list-item-name")[0]
 
-					e.dataTransfer.setData("text/plain", JSON.stringify({
+					evt.dataTransfer.setData("text/plain", JSON.stringify({
 						api: element.dataset.api,
 						animeTitle: name.textContent
 					}))
-					e.dataTransfer.effectAllowed = "move"
+
+					evt.dataTransfer.effectAllowed = "move"
 				}, false)
 
 				// Prevent re-attaching the same listeners
@@ -404,7 +418,7 @@ export default class AnimeNotifier {
 				}
 
 				element.addEventListener("drop", async e => {
-					let toElement = e.toElement as HTMLElement
+					let toElement = e.toElement
 
 					// Find tab element
 					while(toElement && !toElement.classList.contains("tab")) {
@@ -412,12 +426,12 @@ export default class AnimeNotifier {
 					}
 
 					// Ignore a drop on the current status tab
-					if(!toElement || toElement.classList.contains("active")) {
+					if(!toElement || toElement.classList.contains("active") || !e.dataTransfer) {
 						return
 					}
 
 					let data = e.dataTransfer.getData("text/plain")
-					let json = null
+					let json: any
 
 					try {
 						json = JSON.parse(data)
@@ -433,6 +447,11 @@ export default class AnimeNotifier {
 					e.preventDefault()
 
 					let tabText = toElement.textContent
+
+					if(!tabText) {
+						return
+					}
+
 					let newStatus = tabText.toLowerCase()
 
 					if(newStatus === "on hold") {
@@ -477,7 +496,7 @@ export default class AnimeNotifier {
 				}
 
 				element.addEventListener("dragstart", e => {
-					if(!element.draggable) {
+					if(!element.draggable || !e.dataTransfer) {
 						return
 					}
 
@@ -1236,8 +1255,10 @@ export default class AnimeNotifier {
 			return element.dataset.api
 		}
 
-		let apiObject: HTMLElement
-		let parent = element
+		let apiObject: HTMLElement | undefined
+		let parent: HTMLElement | null
+
+		parent = element
 
 		while(parent = parent.parentElement) {
 			if(parent.dataset.api !== undefined) {
@@ -1246,7 +1267,7 @@ export default class AnimeNotifier {
 			}
 		}
 
-		if(!apiObject) {
+		if(!apiObject || !apiObject.dataset.api) {
 			this.statusMessage.showError("API object not found")
 			throw "API object not found"
 		}
@@ -1268,6 +1289,10 @@ export default class AnimeNotifier {
 
 	onKeyDown(e: KeyboardEvent) {
 		let activeElement = document.activeElement
+
+		if(!activeElement) {
+			return
+		}
 
 		// Ignore hotkeys on input elements
 		switch(activeElement.tagName) {

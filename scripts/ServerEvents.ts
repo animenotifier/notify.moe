@@ -75,11 +75,16 @@ export default class ServerEvents {
 
 		let button = document.getElementById("load-new-activities")
 
-		if(!button) {
+		if(!button || !button.dataset.count) {
 			return
 		}
 
 		let buttonText = document.getElementById("load-new-activities-text")
+
+		if(!buttonText) {
+			return
+		}
+
 		let newCount = parseInt(button.dataset.count) + 1
 		button.dataset.count = newCount.toString()
 		buttonText.textContent = plural(newCount, "new activity")

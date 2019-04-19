@@ -15,6 +15,8 @@ export default class TouchController {
 
 		this.downSwipe = this.upSwipe = this.rightSwipe = this.leftSwipe = () => null
 		this.threshold = 3
+		this.x = -1
+		this.y = -1
 	}
 
 	handleTouchStart(evt) {
@@ -23,7 +25,7 @@ export default class TouchController {
 	}
 
 	handleTouchMove(evt) {
-		if(!this.x || !this.y) {
+		if(this.x === -1 || this.y === -1) {
 			return
 		}
 
@@ -47,7 +49,7 @@ export default class TouchController {
 			}
 		}
 
-		this.x = undefined
-		this.y = undefined
+		this.x = -1
+		this.y = -1
 	}
 }

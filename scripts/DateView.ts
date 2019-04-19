@@ -60,7 +60,7 @@ function getRemainingTime(remaining: number): string {
 }
 
 export function displayAiringDate(element: HTMLElement, now: Date) {
-	if(element.dataset.startDate === "") {
+	if(!element.dataset.startDate || !element.dataset.endDate) {
 		element.textContent = ""
 		return
 	}
@@ -133,8 +133,8 @@ export function displayDate(element: HTMLElement, now: Date) {
 	}
 }
 
-export function displayTime(element: HTMLElement, now: Date) {
-	if(element.dataset.date === "") {
+export function displayTime(element: HTMLElement) {
+	if(!element.dataset.date) {
 		element.textContent = ""
 		return
 	}

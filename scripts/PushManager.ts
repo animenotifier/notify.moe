@@ -5,7 +5,7 @@ export default class PushManager {
 		this.pushSupported = ("serviceWorker" in navigator) && ("PushManager" in window)
 	}
 
-	async subscription(): Promise<PushSubscription> {
+	async subscription() {
 		if(!this.pushSupported) {
 			return Promise.resolve(null)
 		}
@@ -13,11 +13,7 @@ export default class PushManager {
 		let registration = await navigator.serviceWorker.ready
 		let subscription = await registration.pushManager.getSubscription()
 
-		if(subscription) {
-			return Promise.resolve(subscription)
-		}
-
-		return Promise.resolve(null)
+		return Promise.resolve(subscription)
 	}
 
 	async subscribe(userId: string) {

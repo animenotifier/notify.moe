@@ -99,12 +99,19 @@ function onActivate(evt: any) {
 	// Only keep current version of the cache and delete old caches
 	let cacheWhitelist = [cache.version]
 
+	// Query existing cache keys
 	let deleteOldCache = caches.keys().then(keyList => {
-		return Promise.all(keyList.map(key => {
+		// Create a deletion for every key that's not whitelisted
+		let deletions = keyList.map(key => {
 			if(cacheWhitelist.indexOf(key) === -1) {
 				return caches.delete(key)
 			}
-		}))
+
+			return Promise.resolve(false)
+		})
+
+		// Wait for deletions
+		return Promise.all(deletions)
 	})
 
 	// Immediate claim helps us gain control over a new client immediately
@@ -334,7 +341,7 @@ function broadcast(msg: object) {
 }
 
 // installCache is called when the service worker is installed for the first time.
-async function installCache() {
+function installCache() {
 	let urls = [
 		"/",
 		"/scripts",
@@ -343,19 +350,17 @@ async function installCache() {
 		"https://media.notify.moe/images/elements/noise-strong.png",
 	]
 
-	let promises = []
-
-	for(let url of urls) {
+	let requests = urls.map(async url => {
 		let request = new Request(url, {
 			credentials: "same-origin",
 			mode: "cors"
 		})
 
-		let promise = fetch(request).then(response => cache.store(request, response))
-		promises.push(promise)
-	}
+		const response = await fetch(request)
+		await cache.store(request, response)
+	})
 
-	return Promise.all(promises)
+	return Promise.all(requests)
 }
 
 // Serve network first.

@@ -63,7 +63,13 @@ export default class ServiceWorkerManager {
 	}
 
 	postMessage(message: any) {
-		navigator.serviceWorker.controller.postMessage(JSON.stringify(message))
+		const controller = navigator.serviceWorker.controller
+
+		if(!controller) {
+			return
+		}
+
+		controller.postMessage(JSON.stringify(message))
 	}
 
 	onMessage(evt: MessageEvent) {

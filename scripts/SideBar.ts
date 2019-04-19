@@ -9,8 +9,9 @@ export default class SideBar {
 		this.element = element
 
 		document.body.addEventListener("click", e => {
-			if(document.activeElement.id === "search")
-				return;
+			if(document.activeElement && document.activeElement.id === "search") {
+				return
+			}
 
 			this.hide()
 		})
