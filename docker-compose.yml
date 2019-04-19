@@ -3,6 +3,7 @@ services:
   notify.moe:
     build:
       context: .
+      dockerfile: docker/development.Dockerfile
       network: host
     image: animenotifier/notify.moe
     hostname: docker
@@ -10,7 +11,6 @@ services:
     tty: true
     network_mode: host
     ports:
-      - "80:4000"
       - "443:4001"
     volumes:
       - ~:/my

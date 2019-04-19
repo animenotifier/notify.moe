@@ -55,9 +55,6 @@ func configure(app *aero.Application) *aero.Application {
 		app.Config.Domain = "beta.notify.moe"
 		app.Config.Title += " - Beta"
 		app.Config.Manifest.Name = app.Config.Title
-
-		// Test connectivity
-		app.OnStart(testConnectivity)
 	}
 
 	// Authentication
