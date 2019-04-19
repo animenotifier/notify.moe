@@ -56,7 +56,7 @@ The `run` binary is a file watcher that will restart the web server when it dete
 * Import the file `security/default/root.crt` as a trusted Root authority
 * Open `https://beta.notify.moe`
 
-## Find Us
+## Find us
 
 * [Discord](https://discord.gg/0kimAmMCeXGXuzNF)
 * [Facebook](https://www.facebook.com/animenotifier)
