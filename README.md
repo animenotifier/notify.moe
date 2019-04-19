@@ -1,35 +1,37 @@
-# Installation
+# Anime Notifier
 
 [![Godoc reference][godoc-image]][godoc-url]
 [![Go report card][goreportcard-image]][goreportcard-url]
 [![Build status][travis-image]][travis-url]
 
-## Prerequisites
+## How to
+
+### Prerequisites
 
 * Install [Docker](https://www.docker.com/get-started)
 * Install [Docker Compose](https://docs.docker.com/compose/install/)
 
-## How to
+### Installation
 
-1. Download the source code:
+Download the source code:
 
 ```bash
 git clone https://github.com/animenotifier/notify.moe.git && cd notify.moe
 ```
 
-2. Download the developer tools:
+Download the developer tools:
 
 ```bash
 docker pull animenotifier/notify.moe
 ```
 
-3. Run the developer tools:
+Run the developer tools:
 
 ```bash
 docker-compose run notify.moe
 ```
 
-## Usage
+### Usage
 
 Your home directory is mounted as `/my` inside Docker.
 
@@ -43,16 +45,32 @@ Usually you'd want to clone all repositories you use into a `projects` directory
 
 The `run` binary is a file watcher that will restart the web server when it detects code changes.
 
-## Networking
+### Networking
 
 * Add `beta.notify.moe 127.0.0.1` to your `hosts` file
 * Forward TCP port 4001 to 443 (Linux / MacOS users can run `make ports`)
 
-## In your browser
+### In your browser
 
 * Open the settings, search for certificates
 * Import the file `security/default/root.crt` as a trusted Root authority
 * Open `https://beta.notify.moe`
+
+## Find Us
+
+* [Discord](https://discord.gg/0kimAmMCeXGXuzNF)
+* [Facebook](https://www.facebook.com/animenotifier)
+* [Twitter](https://twitter.com/animenotifier)
+* [Google+](https://plus.google.com/+AnimeReleaseNotifierOfficial)
+* [GitHub](https://github.com/animenotifier/notify.moe)
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/animenotifier/notify.moe/blob/go/CONTRIBUTING.md) for details on how to contribute to this project.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/animenotifier/notify.moe/blob/go/LICENSE).
 
 ## Author
 
