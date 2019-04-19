@@ -303,7 +303,7 @@ export default class AnimeNotifier {
 		let message = ""
 
 		// Prevent closing tab on new thread page
-		if(this.app.currentPath === "/new/thread" && document.activeElement.tagName === "TEXTAREA" && (document.activeElement as HTMLTextAreaElement).value.length > 20) {
+		if(this.app.currentPath === "/new/thread" && document.activeElement && document.activeElement.tagName === "TEXTAREA" && (document.activeElement as HTMLTextAreaElement).value.length > 20) {
 			message = "You have unsaved changes on the current page. Are you sure you want to leave?"
 		}
 
@@ -351,6 +351,12 @@ export default class AnimeNotifier {
 
 						// Calculate offsets
 						let tipStyle = window.getComputedStyle(element, ":before")
+
+						if(!tipStyle.width || !tipStyle.paddingLeft) {
+							console.error("Tooltip with incorrect computed style:", element)
+							return
+						}
+
 						let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
 						let tipStartX = rect.left + rect.width / 2 - tipWidth / 2 - contentRect.left
 						let tipEndX = tipStartX + tipWidth
@@ -423,7 +429,7 @@ export default class AnimeNotifier {
 				}
 
 				element.addEventListener("drop", async e => {
-					let toElement = e.toElement
+					let toElement: Element | null = e.toElement
 
 					// Find tab element
 					while(toElement && !toElement.classList.contains("tab")) {
@@ -682,7 +688,14 @@ export default class AnimeNotifier {
 
 	setSelectBoxValue() {
 		for(let element of document.getElementsByTagName("select")) {
-			element.value = element.getAttribute("value")
+			let attributeValue = element.getAttribute("value")
+
+			if(!attributeValue) {
+				console.error("Select box without a value:", element)
+				continue
+			}
+
+			element.value = attributeValue
 		}
 	}
 
@@ -698,7 +711,7 @@ export default class AnimeNotifier {
 		}
 
 		for(let element of findAll("utc-date-absolute")) {
-			displayTime(element, now)
+			displayTime(element)
 		}
 	}
 

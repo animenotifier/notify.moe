@@ -8,10 +8,15 @@ export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 		return
 	}
 
+	const target = document.getElementById("load-more-target")
+
+	if(!target) {
+		return
+	}
+
 	arn.loading(true)
 	button.disabled = true
 
-	let target = document.getElementById("load-more-target")
 	let index = button.dataset.index
 
 	try {
@@ -26,25 +31,19 @@ export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 		let newIndex = response.headers.get("X-LoadMore-Index")
 
 		// End of data?
-		if(newIndex === "-1") {
+		if(!newIndex || newIndex === "-1") {
 			button.disabled = true
 			button.classList.add("hidden")
 		} else {
 			button.dataset.index = newIndex
 		}
 
-		let body = await response.text()
+		// Get the HTML response
+		let html = await response.text()
 
-		let tmp = document.createElement(target.tagName)
-		tmp.innerHTML = body
-
-		let children = [...tmp.childNodes]
-
+		// Add the HTML to the existing target
 		Diff.mutations.queue(() => {
-			for(let child of children) {
-				target.appendChild(child)
-			}
-
+			target.insertAdjacentHTML("beforeend", html)
 			arn.app.emit("DOMContentLoaded")
 		})
 	} catch(err) {
