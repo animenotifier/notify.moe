@@ -13,6 +13,7 @@ IP6TABLES=@sudo ip6tables
 PACK:=$(shell command -v pack 2> /dev/null)
 RUN:=$(shell command -v run 2> /dev/null)
 GOIMPORTS:=$(shell command -v goimports 2> /dev/null)
+SERVICEFILE=/etc/systemd/system/animenotifier.service
 
 # Determine the name of the platform
 OSNAME=
@@ -52,6 +53,13 @@ run:
 	go install github.com/aerogo/run
 goimports:
 	go install golang.org/x/tools/cmd/goimports
+service:
+	sudo cp systemd.service $(SERVICEFILE)
+	sudo sed -i "s|MAKEFILE_USER|$(USER)|g" $(SERVICEFILE)
+	sudo sed -i "s|MAKEFILE_PWD|$(PWD)|g" $(SERVICEFILE)
+	sudo sed -i "s|MAKEFILE_EXEC|$(PWD)/notify.moe|g" $(SERVICEFILE)
+	sudo systemctl daemon-reload
+	@echo -e "\nYou can now start the service using:\n\nsudo systemctl start animenotifier"
 tools:
 ifeq ($(OSNAME),OSX)
 	brew install coreutils
