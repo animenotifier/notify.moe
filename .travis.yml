@@ -37,11 +37,11 @@ before_script:
   - npm install -g typescript                                                    # TypeScript
   - git clone --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn # Database
   - make tools                                                                   # Install tools
-  - tsc                                                                          # Compile scripts (allow this to fail for now)
 
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
 script:
+  - tsc || true                                   # Compile scripts (allow this to fail for now)
   - pack                                          # Pack assets
   - make server bots jobs patches                 # Build
   - go test -v .                                  # Run all the tests
