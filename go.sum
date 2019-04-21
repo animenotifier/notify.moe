@@ -14,8 +14,8 @@ github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 h1:UUppSQnhf4Yc6
 github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705/go.mod h1:3eOhrUMpNV+6aFIbp5/iudMxNCF27Vw2OZgy4xEx0Fg=
 github.com/aerogo/aero v1.0.1 h1:9YpWV2YAzq1cidiGK/JD1W0Ub14U1Mwo8H3rZZeyO0M=
 github.com/aerogo/aero v1.0.1/go.mod h1:5SEmHzcetTWlszMRfB44gZq+7iPScPOQYFMixr/wspg=
-github.com/aerogo/aero v1.0.2 h1:eZNZgjc/aBEu6StdtINyDsYVCpndPZD259X8Tt1DprI=
-github.com/aerogo/aero v1.0.2/go.mod h1:8FALSyyUbx5H1PSnarF2qMfiuqOsgJgcLtZPLlJL+CY=
+github.com/aerogo/aero v1.0.3 h1:dywT6jDOGjLlcxekV77+8TS1dTFSRD127+7WPQLYV+Q=
+github.com/aerogo/aero v1.0.3/go.mod h1:GY3ZcLbfrylmJxfImrqnEOTqCxBWtWuK2jVWcP4mNWM=
 github.com/aerogo/api v0.1.0 h1:u1sqJWJS0cDKyopNpaOE10tVoIfL0rqZR929q9ESd2M=
 github.com/aerogo/api v0.1.0/go.mod h1:OVHGZDrfsM80Nr3biKxsvDHy9S/JKop/i2JS6QgI3qg=
 github.com/aerogo/cluster v0.1.0 h1:CZOY8ONzyRonu4tN2vLsAeZEME3vu2DlNhmuoAEgLQQ=
@@ -240,7 +240,6 @@ github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a h1:pa8hGb/2
 github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a/go.mod h1:syvi0/a8iFYH4r/RixwvyeAJjdLS9QV7WQ/tjFTllLA=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.1.1/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
-github.com/stretchr/objx v0.2.0/go.mod h1:qt09Ya8vawLte6SNmTgCsAVtYtaKzEcn8ATUoHMkEqE=
 github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
 github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0Q=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=

@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go v0.37.4 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
-	github.com/aerogo/aero v1.0.2
+	github.com/aerogo/aero v1.0.3
 	github.com/aerogo/api v0.1.0
 	github.com/aerogo/crawler v0.1.1
 	github.com/aerogo/http v0.1.1
@@ -47,7 +47,9 @@ require (
 	go.uber.org/atomic v1.3.2 // indirect
 	go.uber.org/multierr v1.1.0 // indirect
 	go.uber.org/zap v1.9.1 // indirect
+	golang.org/x/crypto v0.0.0-20190418165655-df01cb2cc480 // indirect
 	golang.org/x/image v0.0.0-20190417020941-4e30a6eb7d9a // indirect
+	golang.org/x/net v0.0.0-20190420063019-afa5a82059c6 // indirect
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
 	google.golang.org/appengine v1.5.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
