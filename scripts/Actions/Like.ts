@@ -6,7 +6,7 @@ export async function like(arn: AnimeNotifier, element: HTMLElement) {
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
-		await arn.post(apiEndpoint + "/like", null)
+		await arn.post(apiEndpoint + "/like")
 		arn.reloadContent()
 	} catch(err) {
 		arn.statusMessage.showError(err)
@@ -19,7 +19,7 @@ export async function unlike(arn: AnimeNotifier, element: HTMLElement) {
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
-		await arn.post(apiEndpoint + "/unlike", null)
+		await arn.post(apiEndpoint + "/unlike")
 		arn.reloadContent()
 	} catch(err) {
 		arn.statusMessage.showError(err)

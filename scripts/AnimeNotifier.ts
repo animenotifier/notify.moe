@@ -527,7 +527,7 @@ export default class AnimeNotifier {
 
 					let apiEndpoint = this.findAPIEndpoint(element)
 
-					this.post(apiEndpoint + "/use/" + element.dataset.index, "")
+					this.post(apiEndpoint + "/use/" + element.dataset.index)
 					.then(() => this.reloadContent())
 					.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
 					.catch(err => this.statusMessage.showError(err))
@@ -546,13 +546,17 @@ export default class AnimeNotifier {
 				}, false)
 
 				element.addEventListener("drop", e => {
-					let toElement = e.toElement as HTMLElement
-					toElement.classList.remove("drag-enter")
+					element.classList.remove("drag-enter")
 
 					e.stopPropagation()
 					e.preventDefault()
 
-					let inventory = e.toElement.parentElement
+					let inventory = element.parentElement
+
+					if(!inventory || !e.dataTransfer) {
+						return
+					}
+
 					let fromIndex = e.dataTransfer.getData("text")
 
 					if(!fromIndex) {
@@ -560,24 +564,24 @@ export default class AnimeNotifier {
 					}
 
 					let fromElement = inventory.childNodes[fromIndex] as HTMLElement
+					let toIndex = element.dataset.index
 
-					let toIndex = toElement.dataset.index
-
-					if(fromElement === toElement || fromIndex === toIndex) {
+					if(!toIndex || fromElement === element || fromIndex === toIndex) {
+						console.error("Invalid drag & drop from", fromIndex, "to", toIndex)
 						return
 					}
 
 					// Swap in database
 					let apiEndpoint = this.findAPIEndpoint(inventory)
 
-					this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex, "")
+					this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex)
 					.catch(err => this.statusMessage.showError(err))
 
 					// Swap in UI
-					swapElements(fromElement, toElement)
+					swapElements(fromElement, element)
 
 					fromElement.dataset.index = toIndex
-					toElement.dataset.index = fromIndex
+					element.dataset.index = fromIndex
 				}, false)
 
 				// Prevent re-attaching the same listeners
