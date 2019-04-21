@@ -29,7 +29,7 @@ env:
 # flunk the build and immediately stop. It's sorta like having
 # set -e enabled in bash.
 before_script:
-  - go get golang.org/x/lint/golint                                              # Linter
+  - go get -u github.com/mgechev/revive                                          # Linter
   - go get honnef.co/go/tools/cmd/staticcheck                                    # Badass static analyzer/linter
   - go get github.com/fzipp/gocyclo                                              # Cyclomatic complexity
 # - go get github.com/3rf/codecoroner                                            # Dead code analysis
@@ -43,13 +43,13 @@ before_script:
 script:
   - tsc || true                                   # Compile scripts (allow this to fail for now)
   - pack                                          # Pack assets
+  - revive ./...                                  # Linter
   - make server bots jobs patches                 # Build
   - go test -v .                                  # Run all the tests
 # - go test -v -race ./...                        # Run all the tests with the race detector enabled
   - go vet ./...                                  # go vet is the official Go static analyzer
   - staticcheck -checks all,-ST1000,-ST1005 ./... # static analysis
-  - gocyclo -over 19 ./                    # forbid code with huge functions
-  - golint -set_exit_status $(go list ./...)      # one last linter
+  - gocyclo -over 19 ./                           # forbid code with huge functions
 # - codecoroner -ignore components funcs ./...    # dead code analysis
 
 after_success:

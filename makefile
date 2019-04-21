@@ -53,6 +53,13 @@ run:
 	go install github.com/aerogo/run
 goimports:
 	go install golang.org/x/tools/cmd/goimports
+tools:
+ifeq ($(OSNAME),OSX)
+	brew install coreutils
+endif
+	@make goimports
+	@make pack
+	@make run
 service:
 	sudo cp systemd.service $(SERVICEFILE)
 	sudo sed -i "s|MAKEFILE_USER|$(USER)|g" $(SERVICEFILE)
@@ -60,29 +67,13 @@ service:
 	sudo sed -i "s|MAKEFILE_EXEC|$(PWD)/notify.moe|g" $(SERVICEFILE)
 	sudo systemctl daemon-reload
 	@echo -e "\nYou can now start the service using:\n\nsudo systemctl start animenotifier.service"
-tools:
-ifeq ($(OSNAME),OSX)
-	brew install coreutils
-endif
-ifndef GOIMPORTS
-	@make goimports
-endif
-ifndef PACK
-	@make pack
-endif
-ifndef RUN
-	@make run
-endif
-versions:
-	@go version
-	$(TSCMD) --version
 assets:
 	$(TSCMD)
 	@pack
 clean:
 	find . -type f | xargs file | grep "ELF.*executable" | awk -F: '{print $1}' | xargs rm
-	rm -rf ./components
 	find . -type f | grep /scripts/ | grep .js | xargs rm
+	rm -rf ./components
 ports:
 ifeq ($(OSNAME),LINUX)
 	$(IPTABLES) -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 4000
@@ -92,13 +83,6 @@ ifeq ($(OSNAME),LINUX)
 endif
 ifeq ($(OSNAME),OSX)
 	@echo "rdr pass inet proto tcp from any to any port 443 -> 127.0.0.1 port 4001" | sudo pfctl -ef -
-endif
-browser:
-ifeq ($(OSNAME),LINUX)
-	@google-chrome --ignore-certificate-errors
-endif
-ifeq ($(OSNAME),OSX)
-	@/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --ignore-certificate-errors
 endif
 all: tools assets server bots jobs patches
 
