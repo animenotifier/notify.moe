@@ -507,7 +507,7 @@ export default class AnimeNotifier {
 				}
 
 				element.addEventListener("dragstart", e => {
-					if(!element.draggable || !e.dataTransfer) {
+					if(!element.draggable || !element.dataset.index || !e.dataTransfer) {
 						return
 					}
 
@@ -515,7 +515,7 @@ export default class AnimeNotifier {
 				}, false)
 
 				element.addEventListener("dblclick", e => {
-					if(!element.draggable) {
+					if(!element.draggable || !element.dataset.index) {
 						return
 					}
 
@@ -647,6 +647,11 @@ export default class AnimeNotifier {
 
 		for(let element of findAll("color-box")) {
 			Diff.mutations.queue(() => {
+				if(!element.dataset.color) {
+					console.error("color-box missing data-color attribute:", element)
+					return
+				}
+
 				element.style.backgroundColor = element.dataset.color
 			})
 		}
@@ -658,6 +663,11 @@ export default class AnimeNotifier {
 		}
 
 		for(let element of findAll("count-up")) {
+			if(!element.textContent) {
+				console.error("count-up missing text content:", element)
+				continue
+			}
+
 			let final = parseInt(element.textContent)
 			let duration = 2000.0
 			let start = Date.now()
@@ -813,6 +823,10 @@ export default class AnimeNotifier {
 
 			// Register the actual action handler
 			let actionHandler = e => {
+				if(!actionName) {
+					return
+				}
+
 				actions[actionName](this, element, e)
 
 				e.stopPropagation()
@@ -866,6 +880,12 @@ export default class AnimeNotifier {
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
 			let dataSrc = element.dataset.src
+
+			if(!dataSrc) {
+				console.error("Image missing data-src attribute:", element)
+				return
+			}
+
 			let dotPos = dataSrc.lastIndexOf(".")
 			let base = dataSrc.substring(0, dotPos)
 			let extension = ""
@@ -931,6 +951,11 @@ export default class AnimeNotifier {
 	lazyLoadIFrame(element: HTMLIFrameElement) {
 		// Once the iframe becomes visible, load it
 		element["became visible"] = () => {
+			if(!element.dataset.src) {
+				console.error("IFrame missing data-src attribute:", element)
+				return
+			}
+
 			// If the source is already set correctly, don't set it again to avoid iframe flickering.
 			if(element.src !== element.dataset.src && element.src !== (window.location.protocol + element.dataset.src)) {
 				element.src = element.dataset.src
@@ -948,13 +973,20 @@ export default class AnimeNotifier {
 		// Once the video becomes visible, load it
 		video["became visible"] = () => {
 			if(!video["listeners attached"]) {
+				let videoParent = video.parentElement
+
+				if(!videoParent) {
+					console.error("video has no parent element")
+					return
+				}
+
 				// Prevent context menu
 				video.addEventListener("contextmenu", e => e.preventDefault())
 
 				// Show and hide controls on mouse movement
-				let controls = video.parentElement.getElementsByClassName("video-controls")[0]
-				let playButton = video.parentElement.getElementsByClassName("video-control-play")[0] as HTMLElement
-				let pauseButton = video.parentElement.getElementsByClassName("video-control-pause")[0] as HTMLElement
+				let controls = videoParent.getElementsByClassName("video-controls")[0]
+				let playButton = videoParent.getElementsByClassName("video-control-play")[0] as HTMLElement
+				let pauseButton = videoParent.getElementsByClassName("video-control-pause")[0] as HTMLElement
 
 				let hideControls = () => {
 					controls.classList.add("fade-out")
@@ -972,9 +1004,9 @@ export default class AnimeNotifier {
 					video["hideControlsTimeout"] = setTimeout(hideControls, hideControlsDelay)
 				})
 
-				let progressElement = video.parentElement.getElementsByClassName("video-progress")[0] as HTMLElement
-				let progressClickable = video.parentElement.getElementsByClassName("video-progress-clickable")[0]
-				let timeElement = video.parentElement.getElementsByClassName("video-time")[0]
+				let progressElement = videoParent.getElementsByClassName("video-progress")[0] as HTMLElement
+				let progressClickable = videoParent.getElementsByClassName("video-progress-clickable")[0]
+				let timeElement = videoParent.getElementsByClassName("video-time")[0]
 
 				video.addEventListener("canplay", () => {
 					video["playable"] = true
@@ -1035,6 +1067,11 @@ export default class AnimeNotifier {
 
 				let element = child as HTMLSourceElement
 
+				if(!element.dataset.src || !element.dataset.type) {
+					console.error("Source element missing data-src or data-type attribute:", element)
+					continue
+				}
+
 				if(element.src !== element.dataset.src) {
 					element.src = element.dataset.src
 					modified = true
@@ -1086,7 +1123,7 @@ export default class AnimeNotifier {
 		let maxTime = start + maxDelay
 
 		let mountableTypes = new Map<string, number>()
-		let mountableTypeMutations = new Map<string, Array<any>>()
+		let mountableTypeMutations = new Map<string, any[]>()
 
 		for(let element of elements) {
 			// Skip already mounted elements.
@@ -1097,9 +1134,10 @@ export default class AnimeNotifier {
 			}
 
 			let type = element.dataset.mountableType || "general"
+			let typeTime = mountableTypes.get(type)
 
-			if(mountableTypes.has(type)) {
-				time = mountableTypes.get(type) + delay
+			if(typeTime !== undefined) {
+				time = typeTime + delay
 				mountableTypes.set(type, time)
 			} else {
 				time = start
@@ -1111,14 +1149,15 @@ export default class AnimeNotifier {
 				time = maxTime
 			}
 
-			mountableTypeMutations.get(type).push({
+			const mutations = mountableTypeMutations.get(type) as any[]
+
+			mutations.push({
 				element,
 				time
 			})
 		}
 
-		for(let mountableType of mountableTypeMutations.keys()) {
-			let mutations = mountableTypeMutations.get(mountableType)
+		for(const mutations of mountableTypeMutations.values()) {
 			let mutationIndex = 0
 
 			let updateBatch = () => {
@@ -1157,7 +1196,7 @@ export default class AnimeNotifier {
 			})
 			.then(response => response.text())
 
-			history.pushState(url, null, url)
+			history.pushState(url, "", url)
 			this.app.currentPath = url
 			this.diffCompletedForCurrentPath = false
 			this.app.markActiveLinks()
@@ -1243,7 +1282,8 @@ export default class AnimeNotifier {
 		let finalScroll = Math.max(target.getBoundingClientRect().top - contentPadding, 0)
 
 		// Calculating scrollTop will force a layout - careful!
-		let oldScroll = this.app.content.parentElement.scrollTop
+		let contentContainer = this.app.content.parentElement as HTMLElement
+		let oldScroll = contentContainer.scrollTop
 		let scrollDistance = finalScroll - oldScroll
 
 		if(scrollDistance > 0 && scrollDistance < 1) {
@@ -1262,7 +1302,7 @@ export default class AnimeNotifier {
 			}
 
 			newScroll = oldScroll + scrollDistance * Math.sin(progress * fullSin)
-			this.app.content.parentElement.scrollTop = newScroll
+			contentContainer.scrollTop = newScroll
 
 			if(time < timeEnd && newScroll != finalScroll) {
 				window.requestAnimationFrame(scroll)
