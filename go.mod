@@ -6,16 +6,17 @@ require (
 	cloud.google.com/go v0.37.4 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
-	github.com/aerogo/aero v1.0.3
-	github.com/aerogo/api v0.1.0
+	github.com/aerogo/aero v1.0.4
+	github.com/aerogo/api v0.1.1
 	github.com/aerogo/crawler v0.1.1
+	github.com/aerogo/flow v0.1.1 // indirect
 	github.com/aerogo/http v0.1.1
-	github.com/aerogo/layout v0.1.0
+	github.com/aerogo/layout v0.1.1
 	github.com/aerogo/log v0.1.0
 	github.com/aerogo/markdown v0.1.1
-	github.com/aerogo/nano v0.1.0
-	github.com/aerogo/session-store-nano v0.1.0
-	github.com/aerogo/sitemap v0.0.0-20171118144810-926059a596ae
+	github.com/aerogo/nano v0.1.1
+	github.com/aerogo/session-store-nano v0.1.1
+	github.com/aerogo/sitemap v0.1.1
 	github.com/animenotifier/anilist v0.0.0-20190305235615-d1d5baf3760a
 	github.com/animenotifier/arn v1.0.5
 	github.com/animenotifier/kitsu v0.0.0-20190311000532-8310b34f18d8
@@ -25,8 +26,8 @@ require (
 	github.com/blitzprog/color v1.8.0
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
-	github.com/elazarl/goproxy v0.0.0-20190410145444-c548f45dcf1d // indirect
-	github.com/elazarl/goproxy/ext v0.0.0-20190410145444-c548f45dcf1d // indirect
+	github.com/elazarl/goproxy v0.0.0-20190421051319-9d40249d3c2f // indirect
+	github.com/elazarl/goproxy/ext v0.0.0-20190421051319-9d40249d3c2f // indirect
 	github.com/go-ini/ini v1.42.0 // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/protobuf v1.3.1 // indirect
