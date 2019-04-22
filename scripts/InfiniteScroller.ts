@@ -14,7 +14,7 @@ export default class InfiniteScroller {
 			}
 		}
 
-		this.container.addEventListener("scroll", e => {
+		this.container.addEventListener("scroll", _ => {
 			// Wait for mutations to finish before checking if we need infinite scroll to trigger.
 			if(Diff.mutations.mutations.length > 0) {
 				Diff.mutations.wait(() => check())

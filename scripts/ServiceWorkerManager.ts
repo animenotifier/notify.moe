@@ -15,9 +15,7 @@ export default class ServiceWorkerManager {
 			return
 		}
 
-		navigator.serviceWorker.register(this.uri).then(registration => {
-			// registration.update()
-		})
+		navigator.serviceWorker.register(this.uri)
 
 		navigator.serviceWorker.addEventListener("message", evt => {
 			this.onMessage(evt)

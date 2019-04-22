@@ -111,7 +111,7 @@ export default class AudioPlayer {
 				this.audioNode.playbackRate.setValueAtTime(this.targetSpeed, 0)
 				this.audioNode.start(0)
 
-				this.audioNode.onended = (event: MediaStreamErrorEvent) => {
+				this.audioNode.onended = (_: MediaStreamErrorEvent) => {
 					if(currentPlayId !== this.playId) {
 						return
 					}

@@ -166,7 +166,7 @@ export function applyTheme(themeName: string) {
 }
 
 // Color picker
-export function pickColor(arn: AnimeNotifier, element: HTMLElement) {
+export function pickColor(_: AnimeNotifier, element: HTMLElement) {
 	let rootStyle = document.documentElement.style
 	let variableName = `--${element.dataset.variable}`
 

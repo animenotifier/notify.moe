@@ -31,7 +31,7 @@ async function updateFollow(arn: AnimeNotifier, element: HTMLElement, message: s
 }
 
 // Show more
-export function showMore(arn: AnimeNotifier, showMoreElement: HTMLElement) {
+export function showMore(_: AnimeNotifier, showMoreElement: HTMLElement) {
 	const elements = [...document.getElementsByClassName("show-more")]
 
 	for(let element of elements) {

@@ -199,11 +199,11 @@ export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
 		recognition.stop()
 	}
 
-	recognition.onerror = e => {
+	recognition.onerror = _ => {
 		recognition.stop()
 	}
 
-	recognition.onend = e => {
+	recognition.onend = _ => {
 		searchInput.placeholder = oldPlaceholder
 		element.classList.remove("speech-listening")
 	}

@@ -44,7 +44,7 @@ export default class ServerEvents {
 		}
 	}
 
-	ping(e: ServerEvent) {
+	ping(_: ServerEvent) {
 		console.log("ping")
 	}
 

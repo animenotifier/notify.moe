@@ -2,7 +2,7 @@ import AnimeNotifier from "../AnimeNotifier"
 import { findAll } from "scripts/Utils"
 
 // Filter anime on explore page
-export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
+export function filterAnime(arn: AnimeNotifier, _: HTMLInputElement) {
 	let root = document.getElementById("filter-root") as HTMLElement
 
 	let elementYear = document.getElementById("filter-year") as HTMLSelectElement

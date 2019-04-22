@@ -8,7 +8,7 @@ export default class SideBar {
 	constructor(element) {
 		this.element = element
 
-		document.body.addEventListener("click", e => {
+		document.body.addEventListener("click", _ => {
 			if(document.activeElement && document.activeElement.id === "search") {
 				return
 			}

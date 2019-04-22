@@ -40,7 +40,7 @@ function togglePlayVideoElement(video: HTMLVideoElement) {
 }
 
 // Toggle fullscreen
-export function toggleFullscreen(arn: AnimeNotifier, button: HTMLElement) {
+export function toggleFullscreen(_: AnimeNotifier, button: HTMLElement) {
 	let elementId = button.dataset.id
 
 	if(!elementId) {

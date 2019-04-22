@@ -7,7 +7,7 @@ export default class VideoPlayer {
 		this.arn = arn
 	}
 
-	play(video: HTMLVideoElement) {
+	play(_: HTMLVideoElement) {
 
 	}
 

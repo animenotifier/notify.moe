@@ -1,7 +1,7 @@
 import AnimeNotifier from "../AnimeNotifier"
 
 // Edit post
-export function editPost(arn: AnimeNotifier, element: HTMLElement) {
+export function editPost(_: AnimeNotifier, element: HTMLElement) {
 	let postId = element.dataset.id
 
 	if(!postId) {
@@ -147,7 +147,7 @@ export async function reply(arn: AnimeNotifier, element: HTMLElement) {
 }
 
 // Cancel replying to a post
-export function cancelReply(arn: AnimeNotifier, element: HTMLElement) {
+export function cancelReply(arn: AnimeNotifier, _: HTMLElement) {
 	arn.reloadContent()
 }
 

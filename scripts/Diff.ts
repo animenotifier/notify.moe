@@ -21,7 +21,7 @@ export default class Diff {
 		let container = document.createElement("main")
 		container.innerHTML = html
 
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve, _) => {
 			Diff.childNodes(aRoot, container)
 			this.mutations.wait(resolve)
 		})
@@ -29,7 +29,7 @@ export default class Diff {
 
 	// root will diff the document root element with the given HTML string and apply DOM mutations.
 	static root(aRoot: HTMLElement, html: string) {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve, _) => {
 			let rootContainer = document.createElement("html")
 			rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
 

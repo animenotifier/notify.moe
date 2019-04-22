@@ -85,15 +85,18 @@ let excludeCache = new Set<string>([
 ])
 
 // onInstall
-async function onInstall(evt: InstallEvent) {
+async function onInstall(_: InstallEvent) {
 	console.log("service worker install")
 
+	// Skip waiting for the old service worker to shutdown
 	await self.skipWaiting()
+
+	// Install cache
 	await installCache()
 }
 
 // onActivate
-function onActivate(evt: any) {
+function onActivate(_: any) {
 	console.log("service worker activate")
 
 	// Only keep current version of the cache and delete old caches
@@ -450,7 +453,7 @@ class MyClient {
 
 	// onDOMContentLoaded is called when the client sent this service worker
 	// a message that the page has been loaded.
-	onDOMContentLoaded(url: string) {
+	onDOMContentLoaded(_: string) {
 		// ...
 	}
 }

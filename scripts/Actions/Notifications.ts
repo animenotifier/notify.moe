@@ -1,7 +1,7 @@
 import AnimeNotifier from "../AnimeNotifier"
 
 // Enable notifications
-export async function enableNotifications(arn: AnimeNotifier, button: HTMLElement) {
+export async function enableNotifications(arn: AnimeNotifier, _: HTMLElement) {
 	if(!arn.user || !arn.user.dataset.id) {
 		return
 	}
@@ -13,7 +13,7 @@ export async function enableNotifications(arn: AnimeNotifier, button: HTMLElemen
 }
 
 // Disable notifications
-export async function disableNotifications(arn: AnimeNotifier, button: HTMLElement) {
+export async function disableNotifications(arn: AnimeNotifier, _: HTMLElement) {
 	if(!arn.user || !arn.user.dataset.id) {
 		return
 	}

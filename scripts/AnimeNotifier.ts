@@ -75,7 +75,7 @@ export default class AnimeNotifier {
 				observe: (elem: HTMLElement) => {
 					elem["became visible"]()
 				},
-				unobserve: (elem: HTMLElement) => {}
+				unobserve: (_: HTMLElement) => {}
 			} as IntersectionObserver
 		}
 	}
@@ -514,7 +514,7 @@ export default class AnimeNotifier {
 					e.dataTransfer.setData("text", element.dataset.index)
 				}, false)
 
-				element.addEventListener("dblclick", async e => {
+				element.addEventListener("dblclick", async _ => {
 					if(!element.draggable || !element.dataset.index) {
 						return
 					}
@@ -536,11 +536,11 @@ export default class AnimeNotifier {
 					}
 				}, false)
 
-				element.addEventListener("dragenter", e => {
+				element.addEventListener("dragenter", _ => {
 					element.classList.add("drag-enter")
 				}, false)
 
-				element.addEventListener("dragleave", e => {
+				element.addEventListener("dragleave", _ => {
 					element.classList.remove("drag-enter")
 				}, false)
 
