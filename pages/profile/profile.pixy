@@ -30,15 +30,15 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 								.mountable(data-mountable-type="character")
 									CharacterSmall(character, user)
 				
-				//- People
-				.profile-section
-					h3.profile-column-header.mountable(data-mountable-type="favorites") People
-					p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
+				//- //- People
+				//- .profile-section
+				//- 	h3.profile-column-header.mountable(data-mountable-type="favorites") People
+				//- 	p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
 				
-				//- Quotes
-				.profile-section
-					h3.profile-column-header.mountable(data-mountable-type="favorites") Quotes
-					p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
+				//- //- Quotes
+				//- .profile-section
+				//- 	h3.profile-column-header.mountable(data-mountable-type="favorites") Quotes
+				//- 	p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
 
 			//- Posts
 			.profile-column.profile-activity.mountable(data-mountable-type="column")
