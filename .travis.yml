@@ -41,7 +41,7 @@ before_script:
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
 script:
-  - tsc || true                                   # Compile scripts (allow this to fail for now)
+  - tsc                                           # Compile scripts
   - pack                                          # Pack assets
   - revive ./...                                  # Linter
   - make server bots jobs patches                 # Build
