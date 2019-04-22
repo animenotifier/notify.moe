@@ -3,18 +3,20 @@ import { requestIdleCallback } from "../Utils"
 
 // Load
 export function load(arn: AnimeNotifier, element: HTMLElement) {
-	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
+	let url = element.dataset.url || (element as HTMLAnchorElement).href
 	arn.app.load(url)
 }
 
 // Diff
-export function diff(arn: AnimeNotifier, element: HTMLElement) {
-	let url = element.dataset.url || (element as HTMLAnchorElement).getAttribute("href")
+export async function diff(arn: AnimeNotifier, element: HTMLElement) {
+	let url = element.dataset.url || (element as HTMLAnchorElement).href
 
-	arn.diff(url)
-	.then(() => {
+	try {
+		await arn.diff(url)
+
 		// Avoid instant layout thrashing
 		requestIdleCallback(() => arn.scrollTo(element))
-	})
-	.catch(console.error)
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
 }

@@ -3,7 +3,7 @@ import { findAll } from "scripts/Utils"
 
 // Filter anime on explore page
 export function filterAnime(arn: AnimeNotifier, input: HTMLInputElement) {
-	let root = document.getElementById("filter-root")
+	let root = document.getElementById("filter-root") as HTMLElement
 
 	let elementYear = document.getElementById("filter-year") as HTMLSelectElement
 	let elementSeason = document.getElementById("filter-season") as HTMLSelectElement

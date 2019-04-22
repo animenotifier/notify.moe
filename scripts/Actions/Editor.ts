@@ -1,7 +1,7 @@
 import AnimeNotifier from "../AnimeNotifier"
 
 // newAnimeDiffIgnore
-export function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement) {
+export async function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement) {
 	if(!confirm("Are you sure you want to permanently ignore this difference?")) {
 		return
 	}
@@ -9,14 +9,16 @@ export function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonElement
 	let id = button.dataset.id
 	let hash = button.dataset.hash
 
-	arn.post(`/api/new/ignoreanimedifference`, {
-		id,
-		hash
-	})
-	.then(() => {
+	try {
+		await arn.post(`/api/new/ignoreanimedifference`, {
+			id,
+			hash
+		})
+
 		arn.reloadContent()
-	})
-	.catch(err => arn.statusMessage.showError(err))
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
 }
 
 // Import Kitsu anime
@@ -26,6 +28,12 @@ export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonEle
 	}
 
 	let newTab = window.open()
+
+	if(!newTab) {
+		arn.statusMessage.showError("Error opening new tab")
+		return
+	}
+
 	let animeId = button.dataset.id
 	let response = await fetch(`/api/import/kitsu/anime/${animeId}`, {
 		method: "POST",

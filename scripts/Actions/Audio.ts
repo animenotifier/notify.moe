@@ -2,7 +2,14 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
-	arn.audioPlayer.play(element.dataset.mediaId, element.dataset.audioSrc)
+	let {mediaId, audioSrc} = element.dataset
+
+	if(!mediaId || !audioSrc) {
+		console.error("Invalid media ID or audio source:", element)
+		return
+	}
+
+	arn.audioPlayer.play(mediaId, audioSrc)
 }
 
 // Pause audio

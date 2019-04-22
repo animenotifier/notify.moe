@@ -514,7 +514,7 @@ export default class AnimeNotifier {
 					e.dataTransfer.setData("text", element.dataset.index)
 				}, false)
 
-				element.addEventListener("dblclick", e => {
+				element.addEventListener("dblclick", async e => {
 					if(!element.draggable || !element.dataset.index) {
 						return
 					}
@@ -527,10 +527,13 @@ export default class AnimeNotifier {
 
 					let apiEndpoint = this.findAPIEndpoint(element)
 
-					this.post(apiEndpoint + "/use/" + element.dataset.index)
-					.then(() => this.reloadContent())
-					.then(() => this.statusMessage.showInfo(`You used ${itemName}.`))
-					.catch(err => this.statusMessage.showError(err))
+					try {
+						await this.post(apiEndpoint + "/use/" + element.dataset.index)
+						await this.reloadContent()
+						this.statusMessage.showInfo(`You used ${itemName}.`)
+					} catch(err) {
+						this.statusMessage.showError(err)
+					}
 				}, false)
 
 				element.addEventListener("dragenter", e => {

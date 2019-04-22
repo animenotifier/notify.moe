@@ -5,6 +5,12 @@ export async function addAnimeToCollection(arn: AnimeNotifier, button: HTMLButto
 	button.disabled = true
 
 	let {animeId} = button.dataset
+
+	if(!animeId) {
+		console.error("Button without anime ID:", button)
+		return
+	}
+
 	let apiEndpoint = arn.findAPIEndpoint(button)
 
 	try {
@@ -21,7 +27,7 @@ export async function addAnimeToCollection(arn: AnimeNotifier, button: HTMLButto
 }
 
 // Remove anime from collection
-export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElement) {
+export async function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElement) {
 	if(!confirm("Are you sure you want to remove it from your collection?")) {
 		return
 	}
@@ -29,9 +35,19 @@ export function removeAnimeFromCollection(arn: AnimeNotifier, button: HTMLElemen
 	button.textContent = "Removing..."
 
 	let {animeId, nick} = button.dataset
-	let apiEndpoint = arn.findAPIEndpoint(button)
 
-	arn.post(apiEndpoint + "/remove/" + animeId)
-	.then(() => arn.app.load(`/+${nick}/animelist/` + (document.getElementById("Status") as HTMLSelectElement).value))
-	.catch(err => arn.statusMessage.showError(err))
+	if(!animeId || !nick) {
+		console.error("Button without nick or anime ID:", button)
+		return
+	}
+
+	let apiEndpoint = arn.findAPIEndpoint(button)
+	let status = document.getElementById("Status") as HTMLSelectElement
+
+	try {
+		await arn.post(apiEndpoint + "/remove/" + animeId)
+		await arn.app.load(`/+${nick}/animelist/` + status.value)
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
 }
