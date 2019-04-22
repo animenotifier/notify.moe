@@ -3,11 +3,16 @@ import { applyTheme } from "./Theme"
 
 // Save new data from an input field
 export async function save(arn: AnimeNotifier, input: HTMLElement) {
+	if(!input.dataset.field) {
+		console.error("Input element missing data-field:", input)
+		return
+	}
+
 	let obj = {}
 	let isContentEditable = input.isContentEditable
 	let value = isContentEditable ? input.textContent : (input as HTMLInputElement).value
 
-	if(value === undefined) {
+	if(value === undefined || value === null) {
 		return
 	}
 
@@ -61,6 +66,11 @@ export async function save(arn: AnimeNotifier, input: HTMLElement) {
 
 // Enable (bool field)
 export async function enable(arn: AnimeNotifier, button: HTMLButtonElement) {
+	if(!button.dataset.field) {
+		console.error("Button missing data-field:", button)
+		return
+	}
+
 	let obj = {}
 	let apiEndpoint = arn.findAPIEndpoint(button)
 
@@ -84,6 +94,11 @@ export async function enable(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 // Disable (bool field)
 export async function disable(arn: AnimeNotifier, button: HTMLButtonElement) {
+	if(!button.dataset.field) {
+		console.error("Button missing data-field:", button)
+		return
+	}
+
 	let obj = {}
 	let apiEndpoint = arn.findAPIEndpoint(button)
 
@@ -106,18 +121,21 @@ export async function disable(arn: AnimeNotifier, button: HTMLButtonElement) {
 }
 
 // Append new element to array
-export function arrayAppend(arn: AnimeNotifier, element: HTMLElement) {
+export async function arrayAppend(arn: AnimeNotifier, element: HTMLElement) {
 	let field = element.dataset.field
 	let object = element.dataset.object || ""
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
-	arn.post(apiEndpoint + "/field/" + field + "/append", object)
-	.then(() => arn.reloadContent())
-	.catch(err => arn.statusMessage.showError(err))
+	try {
+		await arn.post(apiEndpoint + "/field/" + field + "/append", object)
+		await arn.reloadContent()
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
 }
 
 // Remove element from array
-export function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
+export async function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
 	if(!confirm("Are you sure you want to remove this element?")) {
 		return
 	}
@@ -126,9 +144,12 @@ export function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
 	let index = element.dataset.index
 	let apiEndpoint = arn.findAPIEndpoint(element)
 
-	arn.post(apiEndpoint + "/field/" + field + "/remove/" + index)
-	.then(() => arn.reloadContent())
-	.catch(err => arn.statusMessage.showError(err))
+	try {
+		await arn.post(apiEndpoint + "/field/" + field + "/remove/" + index)
+		await arn.reloadContent()
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
 }
 
 // Increase episode
@@ -137,15 +158,26 @@ export function increaseEpisode(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let prev = element.previousSibling as HTMLElement
+	let prev = element.previousSibling
+
+	if(prev === null || !(prev instanceof HTMLElement) || prev.textContent === null) {
+		console.error("Previous sibling is invalid:", element)
+		return
+	}
+
 	let episodes = parseInt(prev.textContent)
 	prev.textContent = String(episodes + 1)
-	save(arn, prev)
+	return save(arn, prev)
 }
 
 // Add number
 export function addNumber(arn: AnimeNotifier, element: HTMLElement) {
 	if(arn.isLoading) {
+		return
+	}
+
+	if(!element.dataset.id || !element.dataset.add) {
+		console.error("Element is missing the data-id or data-add attribute:", element)
 		return
 	}
 
@@ -167,5 +199,5 @@ export function addNumber(arn: AnimeNotifier, element: HTMLElement) {
 	}
 
 	input.value = newValue.toString()
-	save(arn, input)
+	return save(arn, input)
 }

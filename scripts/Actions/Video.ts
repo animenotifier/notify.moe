@@ -2,9 +2,21 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Toggle play video
 export function togglePlayVideo(arn: AnimeNotifier, element: HTMLElement) {
-	let container = document.getElementById(element.dataset.mediaId)
-	let video = container.getElementsByTagName("video")[0]
+	let mediaId = element.dataset.mediaId
 
+	if(!mediaId) {
+		console.error("Missing data-media-id:", element)
+		return
+	}
+
+	let container = document.getElementById(mediaId)
+
+	if(!container) {
+		console.error("Invalid data-media-id:", element)
+		return
+	}
+
+	let video = container.getElementsByTagName("video")[0]
 	video.volume = arn.audioPlayer.volume
 
 	if(video.readyState >= 2) {
@@ -30,7 +42,19 @@ function togglePlayVideoElement(video: HTMLVideoElement) {
 // Toggle fullscreen
 export function toggleFullscreen(arn: AnimeNotifier, button: HTMLElement) {
 	let elementId = button.dataset.id
+
+	if(!elementId) {
+		console.error("Missing data-id:", button)
+		return
+	}
+
 	let element = document.getElementById(elementId)
+
+	if(!element) {
+		console.error("Invalid data-id:", button)
+		return
+	}
+
 	let requestFullscreen = element.requestFullscreen || element["mozRequestFullScreen"] || element["webkitRequestFullScreen"] || element["msRequestFullscreen"]
 	let exitFullscreen = document.exitFullscreen || document["mozCancelFullScreen"] || document["webkitExitFullscreen"] || document["msExitFullscreen"]
 	let fullscreen = document.fullscreen || document["webkitIsFullScreen"] || document["mozFullScreen"]

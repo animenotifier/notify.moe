@@ -3,25 +3,30 @@ import { bytesHumanReadable, uploadWithProgress } from "../Utils"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
-	if(button.dataset.endpoint === "/api/upload/cover" && arn.user.dataset.pro !== "true") {
+	let fileType = button.dataset.type
+	let endpoint = button.dataset.endpoint
+
+	if(endpoint === "/api/upload/cover" && arn.user && arn.user.dataset.pro !== "true") {
 		alert("Please buy a PRO account to use this feature.")
 		return
 	}
 
-	let fileType = button.dataset.type
-	let endpoint = button.dataset.endpoint
-
 	// Click on virtual file input element
 	let input = document.createElement("input")
 	input.setAttribute("type", "file")
-	input.value = null
+	input.value = ""
 
 	input.onchange = async () => {
-		let file = input.files[0]
-
-		if(!file) {
+		if(!fileType || !endpoint) {
+			console.error("Missing data-type or data-endpoint:", button)
 			return
 		}
+
+		if(!input.files || input.files.length === 0) {
+			return
+		}
+
+		let file = input.files[0]
 
 		// Check mime type for images
 		if(fileType === "image" && !file.type.startsWith("image/")) {
@@ -171,7 +176,7 @@ function previewImage(dataURL: string, endpoint: string, previews: HTMLCollectio
 
 // Update sidebar avatar
 function updateSideBarAvatar(url: string) {
-	let sidebar = document.getElementById("sidebar")
+	let sidebar = document.getElementById("sidebar") as HTMLElement
 	let userImage = sidebar.getElementsByClassName("user-image")[0] as HTMLImageElement
 	let lazyLoad = userImage["became visible"]
 

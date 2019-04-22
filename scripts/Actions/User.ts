@@ -3,21 +3,28 @@ import Diff from "scripts/Diff"
 
 // Follow user
 export async function followUser(arn: AnimeNotifier, element: HTMLElement) {
-	try {
-		await arn.post(element.dataset.api)
-		await arn.reloadContent()
-		arn.statusMessage.showInfo("You are now following " + document.getElementById("nick").textContent + ".")
-	} catch(err) {
-		arn.statusMessage.showError(err)
-	}
+	return updateFollow(arn, element, "You are now following")
 }
 
 // Unfollow user
 export async function unfollowUser(arn: AnimeNotifier, element: HTMLElement) {
+	return updateFollow(arn, element, "You stopped following")
+}
+
+// Update follow
+async function updateFollow(arn: AnimeNotifier, element: HTMLElement, message: string) {
+	let api = element.dataset.api
+	let nick = document.getElementById("nick")
+
+	if(!api || !nick || !nick.textContent) {
+		console.error("Missing data-api or invalid nick:", element)
+		return
+	}
+
 	try {
-		await arn.post(element.dataset.api)
+		await arn.post(api)
 		await arn.reloadContent()
-		arn.statusMessage.showInfo("You stopped following " + document.getElementById("nick").textContent + ".")
+		arn.statusMessage.showInfo(`${message} ${nick.textContent}.`)
 	} catch(err) {
 		arn.statusMessage.showError(err)
 	}

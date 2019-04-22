@@ -1474,7 +1474,7 @@ export default class AnimeNotifier {
 	}
 
 	// This is called every time an uncaught JavaScript error is thrown
-	onError(evt: ErrorEvent) {
+	async onError(evt: ErrorEvent) {
 		let report = {
 			message: evt.message,
 			stack: evt.error.stack,
@@ -1483,8 +1483,11 @@ export default class AnimeNotifier {
 			columnNumber: evt.colno,
 		}
 
-		this.post("/api/new/clienterrorreport", report)
-		.then(() => console.log("Successfully reported the error to the website staff."))
-		.catch(() => console.warn("Failed reporting the error to the website staff."))
+		try {
+			await this.post("/api/new/clienterrorreport", report)
+			console.log("Successfully reported the error to the website staff.")
+		} catch(err) {
+			console.warn("Failed reporting the error to the website staff:", err)
+		}
 	}
 }

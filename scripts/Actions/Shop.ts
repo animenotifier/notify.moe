@@ -36,7 +36,18 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 // Toggle fade
 export function toggleFade(arn: AnimeNotifier, button: HTMLElement) {
 	let elementId = button.dataset.elementId
+
+	if(!elementId) {
+		console.error("Missing element ID:", elementId)
+		return
+	}
+
 	let element = document.getElementById(elementId)
+
+	if(!element) {
+		console.error("Invalid element ID:", elementId)
+		return
+	}
 
 	if(element.classList.contains("fade-out")) {
 		element.classList.remove("fade-out")

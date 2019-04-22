@@ -17,18 +17,14 @@ var correctResponseRendered = {
 	"company": false
 }
 
+// Search types
+var searchTypes = Object.keys(correctResponseRendered)
+
 // Save old term to compare
 var oldTerm = ""
 
 // Containers for all the search results
-var animeSearchResults: HTMLElement
-var characterSearchResults: HTMLElement
-var postsSearchResults: HTMLElement
-var threadsSearchResults: HTMLElement
-var soundtrackSearchResults: HTMLElement
-var userSearchResults: HTMLElement
-var amvSearchResults: HTMLElement
-var companySearchResults: HTMLElement
+var results = new Map<string, HTMLElement>()
 
 // Delay before a request is sent
 const searchDelay = 140
@@ -60,14 +56,9 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 	oldTerm = term
 
 	// Reset
-	correctResponseRendered.anime = false
-	correctResponseRendered.character = false
-	correctResponseRendered.posts = false
-	correctResponseRendered.threads = false
-	correctResponseRendered.soundtrack = false
-	correctResponseRendered.user = false
-	correctResponseRendered.amv = false
-	correctResponseRendered.company = false
+	for(let key of searchTypes) {
+		correctResponseRendered[key] = false
+	}
 
 	// Set browser URL
 	let url = "/search/" + term
@@ -109,15 +100,11 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 			return
 		}
 
-		if(!animeSearchResults) {
-			animeSearchResults = document.getElementById("anime-search-results")
-			characterSearchResults = document.getElementById("character-search-results")
-			postsSearchResults = document.getElementById("posts-search-results")
-			threadsSearchResults = document.getElementById("threads-search-results")
-			soundtrackSearchResults = document.getElementById("soundtrack-search-results")
-			userSearchResults = document.getElementById("user-search-results")
-			amvSearchResults = document.getElementById("amv-search-results")
-			companySearchResults = document.getElementById("company-search-results")
+		if(!results["anime"]) {
+			for(let key of searchTypes) {
+				results[key] = document.getElementById(`${key}-search-results`)
+			}
+
 			searchPageTitle = document.getElementsByTagName("h1")[0]
 		}
 
@@ -129,9 +116,9 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 			return
 		}
 
-		// Start searching
+		// Start searching anime
 		fetch("/_/anime-search/" + term, fetchOptions)
-		.then(showResponseInElement(arn, url, "anime", animeSearchResults))
+		.then(showResponseInElement(arn, url, "anime", results["anime"]))
 		.catch(console.error)
 
 		requestIdleCallback(() => {
@@ -140,33 +127,16 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 				return
 			}
 
-			fetch("/_/character-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "character", characterSearchResults))
-			.catch(console.error)
+			// Search the other types (everything except anime)
+			for(let key of searchTypes) {
+				if(key === "anime") {
+					continue
+				}
 
-			fetch("/_/posts-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "posts", postsSearchResults))
-			.catch(console.error)
-
-			fetch("/_/threads-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "threads", threadsSearchResults))
-			.catch(console.error)
-
-			fetch("/_/soundtrack-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "soundtrack", soundtrackSearchResults))
-			.catch(console.error)
-
-			fetch("/_/user-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "user", userSearchResults))
-			.catch(console.error)
-
-			fetch("/_/amv-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "amv", amvSearchResults))
-			.catch(console.error)
-
-			fetch("/_/company-search/" + term, fetchOptions)
-			.then(showResponseInElement(arn, url, "company", companySearchResults))
-			.catch(console.error)
+				fetch(`/_/${key}-search/` + term, fetchOptions)
+				.then(showResponseInElement(arn, url, key, results[key]))
+				.catch(console.error)
+			}
 		})
 	} catch(err) {
 		console.error(err)
@@ -180,9 +150,9 @@ function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string
 		let html = await response.text()
 
 		if(html.includes("no-search-results")) {
-			Diff.mutations.queue(() => element.parentElement.classList.add("search-section-disabled"))
+			Diff.mutations.queue(() => (element.parentElement as HTMLElement).classList.add("search-section-disabled"))
 		} else {
-			Diff.mutations.queue(() => element.parentElement.classList.remove("search-section-disabled"))
+			Diff.mutations.queue(() => (element.parentElement as HTMLElement).classList.remove("search-section-disabled"))
 		}
 
 		if(arn.app.currentPath !== url) {
@@ -236,7 +206,6 @@ export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
 	recognition.onend = e => {
 		searchInput.placeholder = oldPlaceholder
 		element.classList.remove("speech-listening")
-		recognition = null
 	}
 
 	// Focus search field
