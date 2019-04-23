@@ -56,7 +56,7 @@ The `run` binary is a file watcher that will restart the web server when it dete
 
 * Add `beta.notify.moe 127.0.0.1` to your `hosts` file :page_facing_up:
 * If you're a Linux or Mac user, run `make ports` to forward ports :penguin:
-* Otherwise, forward TCP port 4001 to 443 manually :thought_balloon:
+* Otherwise, forward TCP port 443 to 4001 manually :thought_balloon:
 
 ### In your browser
 
