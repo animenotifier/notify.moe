@@ -8,7 +8,7 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
 	"github.com/animenotifier/mal/parser"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 // Read anime file

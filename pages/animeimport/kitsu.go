@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/animenotifier/kitsu"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 
 	"github.com/animenotifier/arn"
 

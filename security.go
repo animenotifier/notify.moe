@@ -6,7 +6,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 func configureHTTPS(app *aero.Application) {

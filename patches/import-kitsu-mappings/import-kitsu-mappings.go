@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 func main() {

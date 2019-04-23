@@ -4,7 +4,7 @@ import (
 	"flag"
 
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 // Shell parameters

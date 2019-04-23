@@ -23,7 +23,7 @@ require (
 	github.com/animenotifier/mal v0.0.0-20190306012317-15db3840fd60
 	github.com/animenotifier/shoboi v0.0.0-20190331140329-ad885767c824
 	github.com/animenotifier/twist v0.0.0-20171021152718-743481a0ebff
-	github.com/blitzprog/color v1.8.0
+	github.com/akyoto/color v1.8.0
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
 	github.com/elazarl/goproxy v0.0.0-20190421051319-9d40249d3c2f // indirect

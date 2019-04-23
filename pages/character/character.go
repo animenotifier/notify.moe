@@ -8,7 +8,7 @@ import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 const (

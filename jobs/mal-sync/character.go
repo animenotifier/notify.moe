@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 func parseCharacterDescription(input string) (output string, attributes []*arn.CharacterAttribute) {

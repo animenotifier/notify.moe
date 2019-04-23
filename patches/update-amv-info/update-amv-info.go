@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 func main() {

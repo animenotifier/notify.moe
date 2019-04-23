@@ -11,7 +11,7 @@ import (
 
 	"github.com/aerogo/http/client"
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 func main() {

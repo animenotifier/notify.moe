@@ -14,7 +14,7 @@ import (
 
 	"github.com/aerogo/http/client"
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 var ticker = time.NewTicker(50 * time.Millisecond)

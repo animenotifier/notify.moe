@@ -6,7 +6,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 var tickerFFXIV = time.NewTicker(1100 * time.Millisecond)

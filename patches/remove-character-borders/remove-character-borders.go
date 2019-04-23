@@ -8,7 +8,7 @@ import (
 	"path"
 
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 
 	icolor "image/color"
 	_ "image/gif"

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 var ratings = map[string][]arn.AnimeListItemRating{}

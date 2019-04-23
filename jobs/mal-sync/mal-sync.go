@@ -6,7 +6,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 const imageWidthThreshold = 225

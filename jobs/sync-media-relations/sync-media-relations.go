@@ -7,7 +7,7 @@ import (
 	"github.com/animenotifier/arn"
 
 	"github.com/animenotifier/kitsu"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 func main() {

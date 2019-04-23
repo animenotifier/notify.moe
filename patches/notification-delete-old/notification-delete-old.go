@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/animenotifier/arn"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 const maxNotificationsPerUser = 30

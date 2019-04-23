@@ -7,7 +7,7 @@ import (
 
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal/parser"
-	"github.com/blitzprog/color"
+	"github.com/akyoto/color"
 )
 
 // Read character file
