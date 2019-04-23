@@ -12,7 +12,6 @@ IPTABLES=@sudo iptables
 IP6TABLES=@sudo ip6tables
 PACK:=$(shell command -v pack 2> /dev/null)
 RUN:=$(shell command -v run 2> /dev/null)
-GOIMPORTS:=$(shell command -v goimports 2> /dev/null)
 SERVICEFILE=/etc/systemd/system/animenotifier.service
 
 # Determine the name of the platform
@@ -51,13 +50,10 @@ pack:
 	go install github.com/aerogo/pack
 run:
 	go install github.com/aerogo/run
-goimports:
-	go install golang.org/x/tools/cmd/goimports
 tools:
 ifeq ($(OSNAME),OSX)
 	brew install coreutils
 endif
-	@make goimports
 	@make pack
 	@make run
 service:

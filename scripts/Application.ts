@@ -58,6 +58,7 @@ export default class Application {
 				else
 					resolve(request.responseText)
 			}
+			request.onabort = () => console.warn("Request canceled:", request)
 
 			request.open("GET", url, true)
 			request.send()
