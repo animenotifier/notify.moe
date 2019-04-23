@@ -12,6 +12,7 @@ require (
 	github.com/aerogo/http v0.1.2
 	github.com/aerogo/layout v0.1.3
 	github.com/aerogo/log v0.1.1
+	github.com/aerogo/markdown v0.1.3
 	github.com/aerogo/nano v0.1.2
 	github.com/aerogo/session-store-nano v0.1.1
 	github.com/aerogo/sitemap v0.1.1
