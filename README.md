@@ -8,26 +8,26 @@
 
 ### Prerequisites
 
-* Install [Docker](https://www.docker.com/get-started)
-* Install [Docker Compose](https://docs.docker.com/compose/install/)
+* Install [Docker](https://www.docker.com/get-started) :whale:
+* Install [Docker Compose](https://docs.docker.com/compose/install/) :whale:
 
 ### Installation
 
 Download the source code:
 
-```bash
+```shell
 git clone https://github.com/animenotifier/notify.moe.git && cd notify.moe
 ```
 
 Download the developer tools:
 
-```bash
+```shell
 docker pull animenotifier/notify.moe
 ```
 
 Run the developer tools:
 
-```bash
+```shell
 docker-compose run notify.moe
 ```
 
@@ -35,26 +35,34 @@ docker-compose run notify.moe
 
 Your home directory is mounted as `/my` inside Docker.
 
-Usually you'd want to clone all repositories you use into a `projects` directory. This directory can be accessed by both your favourite editor on the host machine and also inside Docker.
+Usually you'd want to clone all repositories you use into a `projects` directory inside your home files. This directory can be accessed by both your favourite editor on the host machine and also inside Docker.
 
-* Fork the notify.moe repository on GitHub
-* Enter the notify.moe directory: `cd notify.moe`
-* Compile TypeScript files using: `tsc`
-* Compile template/style files using: `pack` (optional)
-* Start the web server using: `run`
+On your host:
+
+* Fork the notify.moe repository on GitHub :new:
+* Download the fork to your home directory :arrow_down:
+* Enter the notify.moe directory: `cd notify.moe` :open_file_folder:
+* Start the development tools `docker-compose run notify.moe` :whale:
+
+Inside the docker container:
+
+* Enter the notify.moe directory again `cd notify.moe` :open_file_folder:
+* Compile TypeScript files using: `tsc` :shaved_ice:
+* Start the web server using: `run` :pray:
 
 The `run` binary is a file watcher that will restart the web server when it detects code changes.
 
 ### Networking
 
-* Add `beta.notify.moe 127.0.0.1` to your `hosts` file
-* Forward TCP port 4001 to 443 (Linux / MacOS users can run `make ports`)
+* Add `beta.notify.moe 127.0.0.1` to your `hosts` file :page_facing_up:
+* If you're a Linux or Mac user, run `make ports` to forward ports :penguin:
+* Otherwise, forward TCP port 4001 to 443 manually :thought_balloon:
 
 ### In your browser
 
-* Open the settings, search for certificates
-* Import the file `security/default/root.crt` as a trusted Root authority
-* Open `https://beta.notify.moe`
+* Open the settings, search for certificates :key:
+* Import the file `security/default/root.crt` as a trusted Root authority :closed_lock_with_key:
+* Open `https://beta.notify.moe` :house_with_garden:
 
 ## Find us
 
