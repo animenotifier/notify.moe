@@ -10,8 +10,8 @@ import (
 	_ "image/png"
 
 	"github.com/aerogo/http/client"
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 func main() {

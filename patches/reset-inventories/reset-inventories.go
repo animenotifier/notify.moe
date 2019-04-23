@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 // Shell parameters

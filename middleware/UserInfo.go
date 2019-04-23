@@ -7,9 +7,9 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/aerogo/http/client"
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/utils"
-	"github.com/akyoto/color"
 	"github.com/mssola/user_agent"
 )
 

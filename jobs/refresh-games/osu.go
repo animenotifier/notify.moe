@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
-	"github.com/akyoto/color"
 )
 
 var tickerOsu = time.NewTicker(500 * time.Millisecond)

@@ -3,8 +3,8 @@ package main
 import (
 	"regexp"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 var flaggedWords = regexp.MustCompile("fuck|fucking|freaking|shit|bad|terrible|awful|wtf")

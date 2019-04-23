@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/autocorrect"
-	"github.com/akyoto/color"
 )
 
 func main() {

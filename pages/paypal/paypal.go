@@ -52,7 +52,7 @@ func CreatePayment(ctx *aero.Context) string {
 		Payer: &paypalsdk.Payer{
 			PaymentMethod: "paypal",
 		},
-		Transactions: []paypalsdk.Transaction{paypalsdk.Transaction{
+		Transactions: []paypalsdk.Transaction{{
 			Amount: &paypalsdk.Amount{
 				Currency: "JPY",
 				Total:    amount,

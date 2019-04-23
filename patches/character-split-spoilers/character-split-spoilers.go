@@ -3,8 +3,8 @@ package main
 import (
 	"strings"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 func main() {

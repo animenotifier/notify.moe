@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 	"github.com/pariz/gountries"
 
 	"github.com/bwmarrin/discordgo"

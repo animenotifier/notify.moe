@@ -4,7 +4,7 @@ import "github.com/animenotifier/arn"
 
 var items = []*arn.ShopItem{
 	// 1 month
-	&arn.ShopItem{
+	{
 		ID:    "pro-account-1",
 		Name:  "PRO Account - 1 month",
 		Price: 300,
@@ -27,7 +27,7 @@ Includes:
 	},
 
 	// 3 months
-	&arn.ShopItem{
+	{
 		ID:    "pro-account-3",
 		Name:  "PRO Account - 3 months",
 		Price: 900,
@@ -50,7 +50,7 @@ Includes:
 	},
 
 	// 6 months
-	&arn.ShopItem{
+	{
 		ID:    "pro-account-6",
 		Name:  "PRO Account - 6 months",
 		Price: 1600,
@@ -71,7 +71,7 @@ Includes:
 		Order:      3,
 		Consumable: true,
 	},
-	&arn.ShopItem{
+	{
 		ID:    "pro-account-12",
 		Name:  "PRO Account - 1 year",
 		Price: 3000,
@@ -92,7 +92,7 @@ Includes:
 		Order:      4,
 		Consumable: true,
 	},
-	&arn.ShopItem{
+	{
 		ID:    "pro-account-24",
 		Name:  "PRO Account - 2 years",
 		Price: 5900,

@@ -5,8 +5,8 @@ import (
 	"path"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 func configureHTTPS(app *aero.Application) {

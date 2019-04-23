@@ -5,10 +5,10 @@ import (
 	"errors"
 	"os"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
 	"github.com/animenotifier/mal/parser"
-	"github.com/akyoto/color"
 )
 
 // Read anime file

@@ -3,9 +3,9 @@ package main
 import (
 	"time"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/shoboi"
-	"github.com/akyoto/color"
 )
 
 func main() {

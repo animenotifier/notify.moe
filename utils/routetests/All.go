@@ -2,7 +2,7 @@ package routetests
 
 var routeTests = map[string][]string{
 	// User
-	"/user/:nick": []string{
+	"/user/:nick": {
 		"/+Akyoto",
 	},
 
@@ -58,188 +58,188 @@ var routeTests = map[string][]string{
 	// 	"/+Akyoto/stats",
 	// },
 
-	"/user/:nick/animelist/anime/:id": []string{
+	"/user/:nick/animelist/anime/:id": {
 		"/+Akyoto/animelist/anime/74y2cFiiR",
 	},
 
-	"/user/:nick/animelist/watching": []string{
+	"/user/:nick/animelist/watching": {
 		"/+Akyoto/animelist/watching",
 	},
 
-	"/user/:nick/animelist/watching/from/:index": []string{
+	"/user/:nick/animelist/watching/from/:index": {
 		"/+Akyoto/animelist/watching/from/1",
 	},
 
-	"/user/:nick/animelist/completed": []string{
+	"/user/:nick/animelist/completed": {
 		"/+Akyoto/animelist/completed",
 	},
 
-	"/user/:nick/animelist/completed/from/:index": []string{
+	"/user/:nick/animelist/completed/from/:index": {
 		"/+Akyoto/animelist/completed/from/3",
 	},
 
-	"/user/:nick/animelist/planned": []string{
+	"/user/:nick/animelist/planned": {
 		"/+Akyoto/animelist/planned",
 	},
 
-	"/user/:nick/animelist/planned/from/:index": []string{
+	"/user/:nick/animelist/planned/from/:index": {
 		"/+Akyoto/animelist/planned/from/3",
 	},
 
-	"/user/:nick/animelist/hold": []string{
+	"/user/:nick/animelist/hold": {
 		"/+Akyoto/animelist/hold",
 	},
 
-	"/user/:nick/animelist/hold/from/:index": []string{
+	"/user/:nick/animelist/hold/from/:index": {
 		"/+Akyoto/animelist/hold/from/3",
 	},
 
-	"/user/:nick/animelist/dropped": []string{
+	"/user/:nick/animelist/dropped": {
 		"/+Akyoto/animelist/dropped",
 	},
 
-	"/user/:nick/animelist/dropped/from/:index": []string{
+	"/user/:nick/animelist/dropped/from/:index": {
 		"/+Akyoto/animelist/dropped/from/3",
 	},
 
-	"/user/:nick/anime/recommended": []string{
+	"/user/:nick/anime/recommended": {
 		"/+Akyoto/anime/recommended",
 	},
 
-	"/user/:nick/anime/sequels": []string{
+	"/user/:nick/anime/sequels": {
 		"/+Akyoto/anime/sequels",
 	},
 
-	"/users/country/:country": []string{
+	"/users/country/:country": {
 		"/users/country/japan",
 	},
 
 	// Pages
-	"/anime/:id": []string{
+	"/anime/:id": {
 		"/anime/74y2cFiiR",
 	},
 
-	"/anime/:id/characters": []string{
+	"/anime/:id/characters": {
 		"/anime/74y2cFiiR/characters",
 	},
 
-	"/anime/:id/episodes": []string{
+	"/anime/:id/episodes": {
 		"/anime/74y2cFiiR/episodes",
 	},
 
-	"/anime/:id/comments": []string{
+	"/anime/:id/comments": {
 		"/anime/74y2cFiiR/comments",
 	},
 
-	"/anime/:id/tracks": []string{
+	"/anime/:id/tracks": {
 		"/anime/74y2cFiiR/tracks",
 	},
 
-	"/anime/:id/relations": []string{
+	"/anime/:id/relations": {
 		"/anime/74y2cFiiR/relations",
 	},
 
-	"/thread/:id": []string{
+	"/thread/:id": {
 		"/thread/HJgS7c2K",
 	},
 
-	"/post/:id": []string{
+	"/post/:id": {
 		"/post/B1RzshnK",
 	},
 
-	"/forum/:tag": []string{
+	"/forum/:tag": {
 		"/forum/general",
 	},
 
-	"/genre/:name": []string{
+	"/genre/:name": {
 		"/genre/action",
 	},
 
-	"/company/:id": []string{
+	"/company/:id": {
 		"/company/xCAUr7UkRaz",
 	},
 
-	"/company/:id/history": []string{
+	"/company/:id/history": {
 		"/company/xCAUr7UkRaz/history",
 	},
 
-	"/companies/from/:index": []string{
+	"/companies/from/:index": {
 		"/companies/from/3",
 	},
 
-	"/explore/color/:color/anime": []string{
+	"/explore/color/:color/anime": {
 		"/explore/color/hsl:0.050,0.25,0.5/anime",
 	},
 
-	"/explore/color/:color/anime/from/:index": []string{
+	"/explore/color/:color/anime/from/:index": {
 		"/explore/color/hsl:0.050,0.25,0.5/anime/from/3",
 	},
 
-	"/search/:term": []string{
+	"/search/:term": {
 		"/search/Dragon Ball",
 	},
 
-	"/quote/:id": []string{
+	"/quote/:id": {
 		"/quote/gUZugd6zR",
 	},
 
-	"/quote/:id/edit": []string{
+	"/quote/:id/edit": {
 		"/quote/gUZugd6zR/edit",
 	},
 
-	"/quote/:id/history": []string{
+	"/quote/:id/history": {
 		"/quote/gUZugd6zR/history",
 	},
 
-	"/quotes/from/:index": []string{
+	"/quotes/from/:index": {
 		"/quotes/from/2",
 	},
 
-	"/quotes/best/from/:index": []string{
+	"/quotes/best/from/:index": {
 		"/quotes/best/from/2",
 	},
 
-	"/soundtrack/:id": []string{
+	"/soundtrack/:id": {
 		"/soundtrack/h0ac8sKkg",
 	},
 
-	"/soundtrack/:id/lyrics": []string{
+	"/soundtrack/:id/lyrics": {
 		"/soundtrack/vS64GbpzR/lyrics",
 	},
 
-	"/soundtrack/:id/edit": []string{
+	"/soundtrack/:id/edit": {
 		"/soundtrack/h0ac8sKkg/edit",
 	},
 
-	"/soundtrack/:id/history": []string{
+	"/soundtrack/:id/history": {
 		"/soundtrack/h0ac8sKkg/history",
 	},
 
-	"/soundtracks": []string{
+	"/soundtracks": {
 		"/soundtracks",
 	},
 
-	"/soundtracks/from/:index": []string{
+	"/soundtracks/from/:index": {
 		"/soundtracks/from/12",
 	},
 
-	"/soundtracks/best": []string{
+	"/soundtracks/best": {
 		"/soundtracks/best",
 	},
 
-	"/soundtracks/best/from/:index": []string{
+	"/soundtracks/best/from/:index": {
 		"/soundtracks/best/from/12",
 	},
 
-	"/soundtracks/tag/:tag": []string{
+	"/soundtracks/tag/:tag": {
 		"/soundtracks/tag/moe",
 	},
 
-	"/soundtracks/tag/:tag/from/:index": []string{
+	"/soundtracks/tag/:tag/from/:index": {
 		"/soundtracks/tag/moe/from/3",
 	},
 
-	"/character/:id": []string{
+	"/character/:id": {
 		"/character/dfrNQrmmg-",
 	},
 
@@ -251,165 +251,165 @@ var routeTests = map[string][]string{
 	// 	"/mal/character/498",
 	// },
 
-	"/compare/animelist/:nick-1/:nick-2": []string{
+	"/compare/animelist/:nick-1/:nick-2": {
 		"/compare/animelist/Akyoto/Scott",
 	},
 
-	"/explore/anime/:year/:season/:status/:type": []string{
+	"/explore/anime/:year/:season/:status/:type": {
 		"/explore/anime/2011/any/finished/tv",
 	},
 
 	// AMV
-	"/amv/:id": []string{
+	"/amv/:id": {
 		"/amv/07scvSWmg",
 	},
 
-	"/amv/:id/edit": []string{
+	"/amv/:id/edit": {
 		"/amv/07scvSWmg/edit",
 	},
 
-	"/amv/:id/history": []string{
+	"/amv/:id/history": {
 		"/amv/07scvSWmg/history",
 	},
 
 	// AMVs
-	"/amvs/from/:index": []string{
+	"/amvs/from/:index": {
 		"/amvs/from/3",
 	},
 
-	"/amvs/best/from/:index": []string{
+	"/amvs/best/from/:index": {
 		"/amvs/best/from/3",
 	},
 
 	// Redirects
-	"/mal/anime/:id": []string{
+	"/mal/anime/:id": {
 		"/mal/anime/33352",
 	},
 
-	"/kitsu/anime/:id": []string{
+	"/kitsu/anime/:id": {
 		"/kitsu/anime/12230",
 	},
 
-	"/anilist/anime/:id": []string{
+	"/anilist/anime/:id": {
 		"/anilist/anime/21827",
 	},
 
 	// API
-	"/api/anime/:id": []string{
+	"/api/anime/:id": {
 		"/api/anime/74y2cFiiR",
 	},
 
-	"/api/thread/:id": []string{
+	"/api/thread/:id": {
 		"/api/thread/HJgS7c2K",
 	},
 
-	"/api/post/:id": []string{
+	"/api/post/:id": {
 		"/api/post/B1RzshnK",
 	},
 
-	"/api/animelist/:id": []string{
+	"/api/animelist/:id": {
 		"/api/animelist/4J6qpK1ve",
 	},
 
-	"/api/settings/:id": []string{
+	"/api/settings/:id": {
 		"/api/settings/4J6qpK1ve",
 	},
 
-	"/api/user/:id": []string{
+	"/api/user/:id": {
 		"/api/user/4J6qpK1ve",
 	},
 
-	"/api/googletouser/:id": []string{
+	"/api/googletouser/:id": {
 		"/api/googletouser/106530160120373282283",
 	},
 
-	"/api/facebooktouser/:id": []string{
+	"/api/facebooktouser/:id": {
 		"/api/facebooktouser/10207576239700188",
 	},
 
-	"/api/nicktouser/:id": []string{
+	"/api/nicktouser/:id": {
 		"/api/nicktouser/Akyoto",
 	},
 
-	"/api/analytics/:id": []string{
+	"/api/analytics/:id": {
 		"/api/analytics/4J6qpK1ve",
 	},
 
-	"/api/soundtrack/:id": []string{
+	"/api/soundtrack/:id": {
 		"/api/soundtrack/h0ac8sKkg",
 	},
 
-	"/api/userfollows/:id": []string{
+	"/api/userfollows/:id": {
 		"/api/userfollows/4J6qpK1ve",
 	},
 
-	"/api/animecharacters/:id": []string{
+	"/api/animecharacters/:id": {
 		"/api/animecharacters/74y2cFiiR",
 	},
 
-	"/api/animerelations/:id": []string{
+	"/api/animerelations/:id": {
 		"/api/animerelations/74y2cFiiR",
 	},
 
-	"/api/animeepisodes/:id": []string{
+	"/api/animeepisodes/:id": {
 		"/api/animeepisodes/74y2cFiiR",
 	},
 
-	"/anime/:id/episode/:episode-number": []string{
+	"/anime/:id/episode/:episode-number": {
 		"/anime/74y2cFiiR/episode/5",
 	},
 
-	"/api/amv/:id": []string{
+	"/api/amv/:id": {
 		"/api/amv/07scvSWmg",
 	},
 
-	"/api/character/:id": []string{
+	"/api/character/:id": {
 		"/api/character/dfrNQrmmg-",
 	},
 
-	"/api/company/:id": []string{
+	"/api/company/:id": {
 		"/api/company/xCAUr7UkRaz",
 	},
 
-	"/api/draftindex/:id": []string{
+	"/api/draftindex/:id": {
 		"/api/draftindex/4J6qpK1ve",
 	},
 
-	"/api/inventory/:id": []string{
+	"/api/inventory/:id": {
 		"/api/inventory/4J6qpK1ve",
 	},
 
-	"/api/shopitem/:id": []string{
+	"/api/shopitem/:id": {
 		"/api/shopitem/pro-account-3",
 	},
 
-	"/api/notification/:id": []string{
+	"/api/notification/:id": {
 		"/api/notification/q6Y6eraig",
 	},
 
-	"/api/quote/:id": []string{
+	"/api/quote/:id": {
 		"/api/quote/GXp675zmR",
 	},
 
-	"/api/usernotifications/:id": []string{
+	"/api/usernotifications/:id": {
 		"/api/usernotifications/4J6qpK1ve",
 	},
 
-	"/api/pushsubscriptions/:id": []string{
+	"/api/pushsubscriptions/:id": {
 		"/api/pushsubscriptions/4J6qpK1ve",
 	},
 
 	// Images
-	"/images/*file": []string{
+	"/images/*file": {
 		"/images/elements/no-avatar.svg",
 	},
 
 	// Extra tests for higher coverage
-	"/_/+Akyoto": []string{
+	"/_/+Akyoto": {
 		"/_/+Akyoto",
 	},
 
-	"/_/search/dragon": []string{
+	"/_/search/dragon": {
 		"/_/search/dragon",
 	},
 

@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/aerogo/log"
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 var colorPool = []*color.Color{

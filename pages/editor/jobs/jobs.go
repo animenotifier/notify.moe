@@ -9,7 +9,7 @@ import (
 )
 
 var jobInfo = map[string]*utils.JobInfo{
-	"kitsu-import-anime": &utils.JobInfo{
+	"kitsu-import-anime": {
 		Name: "kitsu-import-anime",
 	},
 	// "anime-ratings": &utils.JobInfo{

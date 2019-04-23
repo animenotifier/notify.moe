@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/kitsu"
-	"github.com/akyoto/color"
 )
 
 func main() {
@@ -37,7 +37,7 @@ func main() {
 			Attributes:  []*arn.CharacterAttribute{},
 			HasMappings: arn.HasMappings{
 				Mappings: []*arn.Mapping{
-					&arn.Mapping{
+					{
 						Service:   "kitsu/character",
 						ServiceID: kitsuCharacter.ID,
 					},

@@ -13,8 +13,8 @@ import (
 	_ "image/png"
 
 	"github.com/aerogo/http/client"
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 var ticker = time.NewTicker(50 * time.Millisecond)

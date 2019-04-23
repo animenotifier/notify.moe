@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/animenotifier/kitsu"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/kitsu"
 
 	"github.com/animenotifier/arn"
 

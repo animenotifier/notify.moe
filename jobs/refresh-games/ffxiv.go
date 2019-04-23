@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
-	"github.com/akyoto/color"
 )
 
 var tickerFFXIV = time.NewTicker(1100 * time.Millisecond)

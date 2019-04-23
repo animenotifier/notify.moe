@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
-	"github.com/akyoto/color"
 )
 
 func main() {

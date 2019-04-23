@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 var ratings = map[string][]arn.AnimeListItemRating{}

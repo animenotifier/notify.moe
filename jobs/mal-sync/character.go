@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 func parseCharacterDescription(input string) (output string, attributes []*arn.CharacterAttribute) {

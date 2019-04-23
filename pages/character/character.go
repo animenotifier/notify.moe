@@ -5,10 +5,10 @@ import (
 	"sort"
 
 	"github.com/aerogo/aero"
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
-	"github.com/akyoto/color"
 )
 
 const (

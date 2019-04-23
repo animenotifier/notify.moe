@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 func main() {

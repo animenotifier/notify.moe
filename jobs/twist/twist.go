@@ -5,9 +5,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/twist"
-	"github.com/akyoto/color"
 )
 
 var rateLimiter = time.NewTicker(500 * time.Millisecond)

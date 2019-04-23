@@ -7,8 +7,8 @@ import (
 
 	"github.com/animenotifier/arn/osutils"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 
 	"github.com/aerogo/crawler"
 )

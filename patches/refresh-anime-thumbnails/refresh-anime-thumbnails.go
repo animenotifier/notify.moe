@@ -7,8 +7,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/animenotifier/arn"
 	"github.com/akyoto/color"
+	"github.com/animenotifier/arn"
 )
 
 func main() {
