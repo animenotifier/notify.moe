@@ -14,6 +14,8 @@ github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 h1:UUppSQnhf4Yc6
 github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705/go.mod h1:3eOhrUMpNV+6aFIbp5/iudMxNCF27Vw2OZgy4xEx0Fg=
 github.com/aerogo/aero v1.0.5 h1:nzKBINPlV2SSauexoNcXbFEipjaPV6W0lCHytwgH/E4=
 github.com/aerogo/aero v1.0.5/go.mod h1:kTOk0z9+PYwZqFfyXwky1Zam7a06fq2IN/qmf6mRgdg=
+github.com/aerogo/aero v1.0.6 h1:wGtdBYhieRHkdLJIT8ekIkQH8NUfnI8fzPNtLZHI7Pk=
+github.com/aerogo/aero v1.0.6/go.mod h1:Ai+qMqlGpSg5oq3lVqPqOh0zpyCJwT7bLxecdM164+0=
 github.com/aerogo/api v0.1.3 h1:5lYFrFjDX+/y8/oHK1p4MwdD6ZFXAXVCrscC3T31yDk=
 github.com/aerogo/api v0.1.3/go.mod h1:txxRYzUDA2FRqCCLOfyPqHfHD/Ww0Zlbr8rB0a3psAM=
 github.com/aerogo/cluster v0.1.1 h1:RWAhomVQ0WVxklVz/ezfaKXuyZvuDJ/1WFns+qzfqzQ=
@@ -36,6 +38,8 @@ github.com/aerogo/layout v0.1.3 h1:aYFpVqY4p9B4YOS/iYJXlZ7kt6IM73ZCEw3r8H+twLo=
 github.com/aerogo/layout v0.1.3/go.mod h1:YjIBiw8jz96SVrbCr09wkdF5IS/IxsF/TbHhB6jMaQ4=
 github.com/aerogo/linter-performance v0.1.2 h1:eKETM6L+7PGTh40p9dtZFE4ZXIS8Fho8wDSvGQwiqB0=
 github.com/aerogo/linter-performance v0.1.2/go.mod h1:JSCLikuDNLUERoJ4jmGJqgp8yE/gDPF+4v4yfdEviYw=
+github.com/aerogo/linter-performance v0.1.3 h1:nHdUfSZwZQZR2P9hmVIbjPXtqghgzLDQjAJ6rmV9Yxg=
+github.com/aerogo/linter-performance v0.1.3/go.mod h1:/W99F0NTxhldKvxnvaYTnx25MKUNbcHlt+T/jeOJ6m8=
 github.com/aerogo/log v0.1.1 h1:INGJffAf2SoPys78rl10ZS7iPlYsmq1FNAjLkWhsTNQ=
 github.com/aerogo/log v0.1.1/go.mod h1:M0mRC9Fm5Ql/cEIzfFE+1uIPgugaYXkA6Sar+/ByMcc=
 github.com/aerogo/markdown v0.1.3 h1:7qPQJYWq71woPhk2asFFRpDby7sXeWnrMiRcg+vhqI4=
