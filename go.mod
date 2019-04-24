@@ -18,7 +18,7 @@ require (
 	github.com/aerogo/sitemap v0.1.1
 	github.com/akyoto/color v1.8.1
 	github.com/animenotifier/anilist v0.1.0
-	github.com/animenotifier/arn v1.0.6
+	github.com/animenotifier/arn v1.0.7
 	github.com/animenotifier/kitsu v0.1.0
 	github.com/animenotifier/mal v0.1.0
 	github.com/animenotifier/shoboi v0.1.0
@@ -32,7 +32,7 @@ require (
 	github.com/graphql-go/graphql v0.7.8
 	github.com/json-iterator/go v1.1.6
 	github.com/kr/pretty v0.1.0 // indirect
-	github.com/logpacker/PayPal-Go-SDK v1.1.4+incompatible
+	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/minio/minio-go v6.0.14+incompatible
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mssola/user_agent v0.5.0
@@ -47,3 +47,5 @@ require (
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 )
+
+exclude github.com/logpacker/PayPal-Go-SDK v2.0.0+incompatible
