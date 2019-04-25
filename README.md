@@ -58,6 +58,7 @@ The `run` binary is a file watcher that will restart the web server when it dete
 ### Tips
 
 * You can detach from the terminal using `Ctrl P -> Ctrl Q`.
+* If you need to shutdown everything, use `docker-compose down`.
 * Your home directory is mounted as `/my` inside Docker.
 * Fork the notify.moe repository and upload your changes to the fork.
 * Clone all the repositories you use into a `projects` directory inside your home files.
