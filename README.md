@@ -62,6 +62,7 @@ The `run` binary is a file watcher that will restart the web server when it dete
 * Fork the notify.moe repository and upload your changes to the fork.
 * Clone all the repositories you use into a `projects` directory inside your home files.
 * Use an editor like [Visual Studio Code](http://code.visualstudio.com) to access the source code on the host.
+* To automatically compile TypeScript files in VS Code, press `Ctrl Shift B` and select `tsc: watch`
 
 ## Find us
 
