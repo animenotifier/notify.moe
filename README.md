@@ -40,6 +40,7 @@ docker attach notify.moe
 ### Start the server
 
 * Enter the notify.moe directory: `cd notify.moe`
+* Download dependencies: `go mod download`
 * Compile TypeScript files using: `tsc`
 * Start the web server using: `run`
 
