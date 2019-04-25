@@ -29,14 +29,15 @@ env:
 # flunk the build and immediately stop. It's sorta like having
 # set -e enabled in bash.
 before_script:
-  - go get -u github.com/mgechev/revive                                          # Linter
-  - go get honnef.co/go/tools/cmd/staticcheck                                    # Badass static analyzer/linter
-  - go get github.com/fzipp/gocyclo                                              # Cyclomatic complexity
-# - go get github.com/3rf/codecoroner                                            # Dead code analysis
-  - go get github.com/dustin/go-humanize                                         # Dependency used in pixy files only
+  - go install github.com/mgechev/revive                                         # Linter
+  - go install honnef.co/go/tools/cmd/staticcheck                                # Badass static analyzer/linter
+  - go install github.com/fzipp/gocyclo                                          # Cyclomatic complexity
+# - go install github.com/3rf/codecoroner                                        # Dead code analysis
+  - go install github.com/dustin/go-humanize                                     # Dependency used in pixy files only
   - npm install -g typescript                                                    # TypeScript
   - git clone --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn # Database
   - make tools                                                                   # Install tools
+  - go mod download                                                              # Download dependencies (required for pack)
 
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
