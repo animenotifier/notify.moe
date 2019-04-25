@@ -13,3 +13,7 @@ services:
       - "443:4001"
     volumes:
       - ~/:/my
+
+networks:
+  default:
+    name: notify.moe
