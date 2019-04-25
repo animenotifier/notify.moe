@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.7"
 services:
   notify.moe:
     build:
@@ -6,11 +6,12 @@ services:
       dockerfile: docker/development.Dockerfile
       network: host
     image: animenotifier/notify.moe
-    hostname: docker
+    hostname: arn
+    container_name: notify.moe
     stdin_open: true
     tty: true
     network_mode: host
     ports:
       - "443:4001"
     volumes:
-      - ~:/my
+      - ~/:/my
