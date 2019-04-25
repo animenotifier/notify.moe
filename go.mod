@@ -20,7 +20,7 @@ require (
 	github.com/animenotifier/anilist v0.1.0
 	github.com/animenotifier/arn v1.0.9
 	github.com/animenotifier/kitsu v0.1.0
-	github.com/animenotifier/mal v0.1.0
+	github.com/animenotifier/mal v0.1.2
 	github.com/animenotifier/shoboi v0.1.0
 	github.com/animenotifier/twist v0.1.0
 	github.com/bwmarrin/discordgo v0.19.0
