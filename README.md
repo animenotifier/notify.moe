@@ -8,30 +8,30 @@
 
 ### Prerequisites
 
-* Install [Docker](https://www.docker.com/get-started) :whale:
-* Install [Docker Compose](https://docs.docker.com/compose/install/) :whale:
+* Install [Docker](https://www.docker.com/get-started)
+* Install [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Installation
 
-:arrow_down: Download the source code:
+Download the source code:
 
 ```shell
 git clone https://github.com/animenotifier/notify.moe.git && cd notify.moe
 ```
 
-:arrow_down: Download the developer tools:
+Download the developer tools:
 
 ```shell
 docker pull animenotifier/notify.moe
 ```
 
-:whale: Start the developer tools:
+Start the developer tools:
 
 ```shell
 docker-compose up -d
 ```
 
-:whale: Attach to a terminal:
+Attach to a terminal:
 
 ```shell
 docker attach notify.moe
@@ -39,21 +39,19 @@ docker attach notify.moe
 
 ### Start the server
 
-* Enter the notify.moe directory: `cd notify.moe` :open_file_folder:
-* Compile TypeScript files using: `tsc` :shaved_ice:
-* Start the web server using: `run` :pray:
-
-The `run` binary is a file watcher that will restart the web server when it detects code changes.
+* Enter the notify.moe directory: `cd notify.moe`
+* Compile TypeScript files using: `tsc`
+* Start the web server using: `run`
 
 ### Networking
 
-* Add `beta.notify.moe 127.0.0.1` to your `hosts` file :page_facing_up:
+* Add `beta.notify.moe 127.0.0.1` to your `hosts` file
 
 ### In your browser
 
-* Open the settings, search for certificates :key:
-* Import the file `security/default/root.crt` as a trusted Root authority :closed_lock_with_key:
-* Open `https://beta.notify.moe` :house_with_garden:
+* Open the settings, search for certificates
+* Import the file `security/default/root.crt` as a trusted Root authority
+* Open `https://beta.notify.moe`
 
 ### Tips
 
@@ -62,8 +60,11 @@ The `run` binary is a file watcher that will restart the web server when it dete
 * Your home directory is mounted as `/my` inside Docker.
 * Fork the notify.moe repository and upload your changes to the fork.
 * Clone all the repositories you use into a `projects` directory inside your home files.
+* The `run` binary is a file watcher that will restart the web server when it detects code changes.
+* File modification events [don't work](https://github.com/docker/for-win/issues/56) on Docker for Windows.
 * Use an editor like [Visual Studio Code](http://code.visualstudio.com) to access the source code on the host.
-* To automatically compile TypeScript files in VS Code, press `Ctrl Shift B` and select `tsc: watch`
+* To automatically compile TypeScript files in VS Code, press `Ctrl Shift B` and select `tsc: watch`.
+* Use a Linux system for maximum performance.
 
 ## Find us
 
