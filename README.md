@@ -13,40 +13,33 @@
 
 ### Installation
 
-Download the source code:
+:arrow_down: Download the source code:
 
 ```shell
 git clone https://github.com/animenotifier/notify.moe.git && cd notify.moe
 ```
 
-Download the developer tools:
+:arrow_down: Download the developer tools:
 
 ```shell
 docker pull animenotifier/notify.moe
 ```
 
-Run the developer tools:
+:whale: Start the developer tools:
 
 ```shell
-docker-compose run notify.moe
+docker-compose up -d
 ```
 
-### Usage
+:whale: Attach to a terminal:
 
-Your home directory is mounted as `/my` inside Docker.
+```shell
+docker attach notify.moe
+```
 
-Usually you'd want to clone all repositories you use into a `projects` directory inside your home files. This directory can be accessed by both your favourite editor on the host machine and also inside Docker.
+### Start the server
 
-On your host:
-
-* Fork the notify.moe repository on GitHub :new:
-* Download the fork to your home directory :arrow_down:
 * Enter the notify.moe directory: `cd notify.moe` :open_file_folder:
-* Start the development tools `docker-compose run notify.moe` :whale:
-
-Inside the docker container:
-
-* Enter the notify.moe directory again `cd notify.moe` :open_file_folder:
 * Compile TypeScript files using: `tsc` :shaved_ice:
 * Start the web server using: `run` :pray:
 
@@ -55,8 +48,6 @@ The `run` binary is a file watcher that will restart the web server when it dete
 ### Networking
 
 * Add `beta.notify.moe 127.0.0.1` to your `hosts` file :page_facing_up:
-* If you're a Linux or Mac user, run `make ports` to forward ports :penguin:
-* Otherwise, forward TCP port 443 to 4001 manually :thought_balloon:
 
 ### In your browser
 
@@ -64,12 +55,20 @@ The `run` binary is a file watcher that will restart the web server when it dete
 * Import the file `security/default/root.crt` as a trusted Root authority :closed_lock_with_key:
 * Open `https://beta.notify.moe` :house_with_garden:
 
+### Tips
+
+* You can detach from the terminal using `Ctrl P -> Ctrl Q`.
+* Your home directory is mounted as `/my` inside Docker.
+* Fork the notify.moe repository and upload your changes to the fork.
+* Clone all the repositories you use into a `projects` directory inside your home files.
+* Use an editor like [Visual Studio Code](http://code.visualstudio.com) to access the source code on the host.
+
 ## Find us
 
 * [Discord](https://discord.gg/0kimAmMCeXGXuzNF)
 * [Facebook](https://www.facebook.com/animenotifier)
 * [Twitter](https://twitter.com/animenotifier)
-* [Google+](https://plus.google.com/+AnimeReleaseNotifierOfficial)
+* [Docker](https://hub.docker.com/r/animenotifier/notify.moe)
 * [GitHub](https://github.com/animenotifier/notify.moe)
 
 ## Contributing

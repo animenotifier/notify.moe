@@ -4,13 +4,11 @@ services:
     build:
       context: .
       dockerfile: docker/development.Dockerfile
-      network: host
     image: animenotifier/notify.moe
-    hostname: arn
+    hostname: docker
     container_name: notify.moe
     stdin_open: true
     tty: true
-    network_mode: host
     ports:
       - "443:4001"
     volumes:
