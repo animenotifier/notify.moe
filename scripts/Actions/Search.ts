@@ -34,6 +34,9 @@ const fetchOptions: RequestInit = {
 	credentials: "same-origin"
 }
 
+// Error message
+const searchErrorMessage = "Looks like the website is offline, please retry later."
+
 // Speech recognition
 let recognition: SpeechRecognition
 
@@ -119,7 +122,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 		// Start searching anime
 		fetch("/_/anime-search/" + term, fetchOptions)
 		.then(showResponseInElement(arn, url, "anime", results["anime"]))
-		.catch(console.error)
+		.catch(_ => arn.statusMessage.showError(searchErrorMessage))
 
 		requestIdleCallback(() => {
 			// Check that the term hasn't changed in the meantime
@@ -135,7 +138,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 
 				fetch(`/_/${key}-search/` + term, fetchOptions)
 				.then(showResponseInElement(arn, url, key, results[key]))
-				.catch(console.error)
+				.catch(_ => arn.statusMessage.showError(searchErrorMessage))
 			}
 		})
 	} catch(err) {
@@ -147,6 +150,10 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 
 function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string, element: HTMLElement) {
 	return async (response: Response) => {
+		if(!response.ok) {
+			throw response.statusText
+		}
+
 		let html = await response.text()
 
 		if(html.includes("no-search-results")) {
