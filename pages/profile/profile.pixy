@@ -123,87 +123,7 @@ component ProfileHead(viewUser *arn.User, animeList *arn.AnimeList, user *arn.Us
 			.profile-introduction!= markdown.Render(viewUser.Introduction)
 			
 			.profile-tags-container
-				.profile-tags
-					a.profile-tag.mountable.never-unmount(href="/+" + viewUser.Nick + "/animelist/watching", data-mountable-type="header")
-						Icon("list")
-						span= fmt.Sprintf("%d anime", len(animeList.Items))
-					
-					if user != nil && viewUser.Settings().Privacy.ShowAge && viewUser.Settings().Privacy.ShowGender && viewUser.AgeInYears() != 0
-						.profile-tag.mountable.never-unmount(data-mountable-type="header")
-							if viewUser.Gender == "male"
-								Icon("mars")
-							else if viewUser.Gender == "female"
-								Icon("venus")
-							else
-								Icon("venus-mars")
-							
-							span= viewUser.AgeInYears()
-					
-					if user != nil && viewUser.Settings().Privacy.ShowLocation && viewUser.Location.CountryName != ""
-						a.profile-tag.mountable.never-unmount(href="/users/country/" + strings.ToLower(viewUser.Location.CountryName), data-mountable-type="header")
-							Icon("map-marker")
-							span= viewUser.Location.CountryName
-
-					if viewUser.IsPro()
-						a.profile-tag.mountable.never-unmount(href="/support", aria-label="Supporter", data-mountable-type="header")
-							Icon("star")
-							span.profile-pro-status-text PRO
-					
-					if viewUser.Role != ""
-						a.profile-tag.mountable.never-unmount(href="/users/staff", aria-label="Staff member", data-mountable-type="header")
-							Icon("rocket")
-							span= stringutils.Capitalize(viewUser.Role)
-					
-					if viewUser.Registered != ""
-						.profile-tag.mountable.never-unmount(title="Member since", data-mountable-type="header")
-							Icon("calendar")
-							span= viewUser.RegisteredTime().Format("Jan 2006")
-
-					if !viewUser.IsActive()
-						.profile-tag.mountable.never-unmount(title="Hasn't been online for the past 2 weeks", data-mountable-type="header")
-							Icon("bed")
-							span Inactive
-					
-					.profile-tag.action.tip.mountable.never-unmount(data-action="showMore", data-trigger="click", aria-label="Show more", data-mountable-type="header")
-						RawIcon("ellipsis-h")
-
-					if viewUser.Website != ""
-						a.profile-tag.tip.mountable.never-unmount.show-more(href=viewUser.WebsiteURL(), target="_blank", rel="noopener", aria-label=viewUser.WebsiteShortURL(), data-mountable-type="header")
-							RawIcon("globe")
-
-					if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 100
-						a.profile-tag.tip.mountable.never-unmount.show-more(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, aria-label=fmt.Sprintf("osu! | %.0f pp | Level %.0f | Accuracy: %.1f%%", viewUser.Accounts.Osu.PP, viewUser.Accounts.Osu.Level, viewUser.Accounts.Osu.Accuracy), target="_blank", rel="noopener", data-mountable-type="header")
-							RawIcon("trophy")
-
-					if viewUser.Accounts.Overwatch.BattleTag != "" && viewUser.Accounts.Overwatch.SkillRating >= 1000
-						a.profile-tag.tip.mountable.never-unmount.show-more(href="https://playoverwatch.com/en-us/career/pc/" + strings.Replace(viewUser.Accounts.Overwatch.BattleTag, "#", "-", 1), aria-label=fmt.Sprintf("Overwatch | %d SR | %s", viewUser.Accounts.Overwatch.SkillRating, stringutils.Capitalize(viewUser.Accounts.Overwatch.Tier)), target="_blank", rel="noopener", data-mountable-type="header")
-							RawIcon("overwatch")
-					
-					if viewUser.Accounts.FinalFantasyXIV.Nick != "" && viewUser.Accounts.FinalFantasyXIV.Class != ""
-						.profile-tag.tip.mountable.never-unmount.show-more(aria-label=fmt.Sprintf("Final Fantasy XIV | %s | Level %d | IL %d", viewUser.Accounts.FinalFantasyXIV.Class, viewUser.Accounts.FinalFantasyXIV.Level, viewUser.Accounts.FinalFantasyXIV.ItemLevel), data-mountable-type="header")
-							RawIcon("gamepad")
-					
-					if viewUser.Accounts.Discord.Nick != "" && viewUser.Accounts.Discord.Verified
-						a.profile-tag.tip.mountable.never-unmount.show-more(href="https://discord.gg/0kimAmMCeXGXuzNF", aria-label=fmt.Sprintf("Discord | %s", viewUser.Accounts.Discord.Nick), data-mountable-type="header")
-							RawIcon("discord")
-
-					if user != nil && user.ID != viewUser.ID
-						a.profile-tag.tip.mountable.never-unmount.show-more(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick, aria-label="Compare", data-mountable-type="header")
-							RawIcon("exchange")
-					
-					a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/anime/recommended", aria-label="Recommendations", data-mountable-type="header")
-						RawIcon("archive")
-
-					a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/anime/sequels", aria-label="Sequels", data-mountable-type="header")
-						RawIcon("forward")
-
-					if user != nil && (user.Role == "editor" || user.Role == "admin")
-						a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/log", aria-label="Log", data-mountable-type="header")
-							RawIcon("list")
-					
-					if user != nil && user.Role == "admin"
-						a.profile-tag.tip.mountable.never-unmount.show-more(href="/api/user/" + viewUser.ID, aria-label="API", target="_blank", rel="noopener", data-mountable-type="header")
-							RawIcon("search-plus")
+				ProfileTags(viewUser, animeList, user)
 		
 		.profile-actions
 			if user != nil && user.ID != viewUser.ID
@@ -215,3 +135,86 @@ component ProfileHead(viewUser *arn.User, animeList *arn.AnimeList, user *arn.Us
 					button.profile-action.action.mountable.never-unmount(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
 						Icon("user-times")
 						span Unfollow
+
+component ProfileTags(viewUser *arn.User, animeList *arn.AnimeList, user *arn.User)
+	.profile-tags
+		a.profile-tag.mountable.never-unmount(href="/+" + viewUser.Nick + "/animelist/watching", data-mountable-type="header")
+			Icon("list")
+			span= fmt.Sprintf("%d anime", len(animeList.Items))
+		
+		if user != nil && viewUser.Settings().Privacy.ShowAge && viewUser.Settings().Privacy.ShowGender && viewUser.AgeInYears() != 0
+			.profile-tag.mountable.never-unmount(data-mountable-type="header")
+				if viewUser.Gender == "male"
+					Icon("mars")
+				else if viewUser.Gender == "female"
+					Icon("venus")
+				else
+					Icon("venus-mars")
+				
+				span= viewUser.AgeInYears()
+		
+		if user != nil && viewUser.Settings().Privacy.ShowLocation && viewUser.Location.CountryName != ""
+			a.profile-tag.mountable.never-unmount(href="/users/country/" + strings.ToLower(viewUser.Location.CountryName), data-mountable-type="header")
+				Icon("map-marker")
+				span= viewUser.Location.CountryName
+
+		if viewUser.IsPro()
+			a.profile-tag.mountable.never-unmount(href="/support", aria-label="Supporter", data-mountable-type="header")
+				Icon("star")
+				span.profile-pro-status-text PRO
+		
+		if viewUser.Role != ""
+			a.profile-tag.mountable.never-unmount(href="/users/staff", aria-label="Staff member", data-mountable-type="header")
+				Icon("rocket")
+				span= stringutils.Capitalize(viewUser.Role)
+		
+		if viewUser.Registered != ""
+			.profile-tag.mountable.never-unmount(title="Member since", data-mountable-type="header")
+				Icon("calendar")
+				span= viewUser.RegisteredTime().Format("Jan 2006")
+
+		if !viewUser.IsActive()
+			.profile-tag.mountable.never-unmount(title="Hasn't been online for the past 2 weeks", data-mountable-type="header")
+				Icon("bed")
+				span Inactive
+		
+		.profile-tag.action.tip.mountable.never-unmount(data-action="showMore", data-trigger="click", aria-label="Show more", data-mountable-type="header")
+			RawIcon("ellipsis-h")
+
+		if viewUser.Website != ""
+			a.profile-tag.tip.mountable.never-unmount.show-more(href=viewUser.WebsiteURL(), target="_blank", rel="noopener", aria-label=viewUser.WebsiteShortURL(), data-mountable-type="header")
+				RawIcon("globe")
+
+		if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 100
+			a.profile-tag.tip.mountable.never-unmount.show-more(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, aria-label=fmt.Sprintf("osu! | %.0f pp | Level %.0f | Accuracy: %.1f%%", viewUser.Accounts.Osu.PP, viewUser.Accounts.Osu.Level, viewUser.Accounts.Osu.Accuracy), target="_blank", rel="noopener", data-mountable-type="header")
+				RawIcon("trophy")
+
+		if viewUser.Accounts.Overwatch.BattleTag != "" && viewUser.Accounts.Overwatch.SkillRating >= 1000
+			a.profile-tag.tip.mountable.never-unmount.show-more(href="https://playoverwatch.com/en-us/career/pc/" + strings.Replace(viewUser.Accounts.Overwatch.BattleTag, "#", "-", 1), aria-label=fmt.Sprintf("Overwatch | %d SR | %s", viewUser.Accounts.Overwatch.SkillRating, stringutils.Capitalize(viewUser.Accounts.Overwatch.Tier)), target="_blank", rel="noopener", data-mountable-type="header")
+				RawIcon("overwatch")
+		
+		if viewUser.Accounts.FinalFantasyXIV.Nick != "" && viewUser.Accounts.FinalFantasyXIV.Class != ""
+			.profile-tag.tip.mountable.never-unmount.show-more(aria-label=fmt.Sprintf("Final Fantasy XIV | %s | Level %d | IL %d", viewUser.Accounts.FinalFantasyXIV.Class, viewUser.Accounts.FinalFantasyXIV.Level, viewUser.Accounts.FinalFantasyXIV.ItemLevel), data-mountable-type="header")
+				RawIcon("gamepad")
+		
+		if viewUser.Accounts.Discord.Nick != "" && viewUser.Accounts.Discord.Verified
+			a.profile-tag.tip.mountable.never-unmount.show-more(href="https://discord.gg/0kimAmMCeXGXuzNF", aria-label=fmt.Sprintf("Discord | %s", viewUser.Accounts.Discord.Nick), data-mountable-type="header")
+				RawIcon("discord")
+
+		if user != nil && user.ID != viewUser.ID
+			a.profile-tag.tip.mountable.never-unmount.show-more(href="/compare/animelist/" + user.Nick + "/" + viewUser.Nick, aria-label="Compare", data-mountable-type="header")
+				RawIcon("exchange")
+		
+		a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/anime/recommended", aria-label="Recommendations", data-mountable-type="header")
+			RawIcon("archive")
+
+		a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/anime/sequels", aria-label="Sequels", data-mountable-type="header")
+			RawIcon("forward")
+
+		if user != nil && (user.Role == "editor" || user.Role == "admin")
+			a.profile-tag.tip.mountable.never-unmount.show-more(href="/+" + viewUser.Nick + "/log", aria-label="Log", data-mountable-type="header")
+				RawIcon("list")
+		
+		if user != nil && user.Role == "admin"
+			a.profile-tag.tip.mountable.never-unmount.show-more(href="/api/user/" + viewUser.ID, aria-label="API", target="_blank", rel="noopener", data-mountable-type="header")
+				RawIcon("search-plus")

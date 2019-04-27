@@ -46,10 +46,10 @@ script:
   - pack                                          # Pack assets
   - revive ./...                                  # Linter
   - go vet ./...                                  # go vet is the official Go static analyzer
-  - gocyclo -over 19 ./                           # forbid code with huge functions
 # - go test -v -race ./...                        # Run all the tests with the race detector enabled
 # - codecoroner -ignore components funcs ./...    # dead code analysis
   - staticcheck -checks all,-ST1000,-ST1005 ./... # static analysis
+  - gocyclo -top 10 ./                            # List huge functions
   - make server bots jobs patches                 # Build
   - go test -v .                                  # Run all the tests
 
