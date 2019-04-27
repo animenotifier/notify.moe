@@ -42,10 +42,21 @@ export function hideAddedAnime() {
 }
 
 // Hides anime that are not in your list.
-export function calendarShowAddedAnimeOnly() {
+export function calendarShowAddedAnimeOnly(arn: AnimeNotifier, element: HTMLInputElement) {
 	for(let anime of findAll("calendar-entry")) {
 		if(anime.dataset.added === "false") {
 			anime.classList.toggle("hidden")
 		}
 	}
+
+	const showUserList = !Array.from(document.getElementsByClassName("calendar-entry"))
+		.some(value => value.classList.contains("hidden"));
+
+	let obj = {
+		"CalendarSettings.ShowUserList": showUserList
+	}
+
+	let apiEndpoint = arn.findAPIEndpoint(element);
+	arn.post(apiEndpoint, obj)
+		.catch(err => arn.statusMessage.showError(err));
 }
