@@ -1,3 +1,9 @@
+#calendar
+	[data-show-added-anime-only="true"]
+		.calendar-entry
+			[data-added="false"]
+				display none
+
 .week
 	vertical
 

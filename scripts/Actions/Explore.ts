@@ -42,21 +42,29 @@ export function hideAddedAnime() {
 }
 
 // Hides anime that are not in your list.
-export function calendarShowAddedAnimeOnly(arn: AnimeNotifier, element: HTMLInputElement) {
-	for(let anime of findAll("calendar-entry")) {
-		if(anime.dataset.added === "false") {
-			anime.classList.toggle("hidden")
-		}
+export async function calendarShowAddedAnimeOnly(arn: AnimeNotifier, element: HTMLInputElement) {
+	let calendar = document.getElementById("calendar")
+
+	if(!calendar || calendar.dataset.showAddedAnimeOnly === undefined) {
+		return
 	}
 
-	const showUserList = !Array.from(document.getElementsByClassName("calendar-entry"))
-		.some(value => value.classList.contains("hidden"));
-
-	let obj = {
-		"CalendarSettings.ShowUserList": showUserList
+	// Toggling the switch will trigger the CSS rules
+	if(calendar.dataset.showAddedAnimeOnly === "true") {
+		calendar.dataset.showAddedAnimeOnly = "false"
+	} else {
+		calendar.dataset.showAddedAnimeOnly = "true"
 	}
 
-	let apiEndpoint = arn.findAPIEndpoint(element);
-	arn.post(apiEndpoint, obj)
-		.catch(err => arn.statusMessage.showError(err));
+	// Save the state in the database
+	let showAddedAnimeOnly = calendar.dataset.showAddedAnimeOnly === "true"
+	let apiEndpoint = arn.findAPIEndpoint(element)
+
+	try {
+		await arn.post(apiEndpoint, {
+			"Calendar.ShowAddedAnimeOnly": showAddedAnimeOnly
+		})
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
 }
