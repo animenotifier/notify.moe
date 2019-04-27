@@ -84,8 +84,8 @@ github.com/andybalholm/cascadia v1.0.0 h1:hOCXnnZ5A+3eVDX8pvgl4kofXv2ELss0bKcqRy
 github.com/andybalholm/cascadia v1.0.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/animenotifier/anilist v0.2.0 h1:ntjGlRbJIUGJaXuvE+561vwvmUA8ZyYpLLCKR3SoQ2o=
 github.com/animenotifier/anilist v0.2.0/go.mod h1:giZcbmITsICRCZHJ1eWcuYpQp5ZJK0gnMMaiUD0P4Yo=
-github.com/animenotifier/arn v1.1.3 h1:bt9O6du9H1pcpkAXuK1a8+U7/gGr4n8oYjtaioLHWzs=
-github.com/animenotifier/arn v1.1.3/go.mod h1:orUD7qxAoRPov0bPpehfT5xsSDdiGoZiln2BOyd91S0=
+github.com/animenotifier/arn v1.1.5 h1:R1Mp/17v/XsHzUBCXkrKFWD5tePy06sgn5/M8AiBsL8=
+github.com/animenotifier/arn v1.1.5/go.mod h1:orUD7qxAoRPov0bPpehfT5xsSDdiGoZiln2BOyd91S0=
 github.com/animenotifier/ffxiv v0.1.0 h1:N9gX5iUtD+g/KW4OjKIclS0y2WrL/+Ko9rGEFDaLf1w=
 github.com/animenotifier/ffxiv v0.1.0/go.mod h1:oBHhRzQAUv+dBe4qFJAFnTg7qv5Gl6QFHQphyJla74Q=
 github.com/animenotifier/japanese v0.2.0 h1:REdBmsBGB1LY8/bnAJ3akb5W4mKzQfathGTQp1pO4K8=
