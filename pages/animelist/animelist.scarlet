@@ -85,9 +85,9 @@
 	horizontal
 	text-align right
 	justify-content flex-end
-	flex-basis 20px
+	flex-basis 40px
 	flex-shrink 1
-	margin-left 45px
+	margin-left 25px
 
 .anime-list-item-actions
 	display none !important
