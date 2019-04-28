@@ -2,6 +2,16 @@ kind: pipeline
 name: default
 
 steps:
+- name: clearcache1
+  image: blitzprog/archlinux:latest
+  commands:
+  - echo "Hello"
+
+- name: clearcache2
+  image: blitzprog/aero:latest
+  commands:
+  - echo "World"
+
 - name: test
   image: animenotifier/notify.moe:latest
   environment:
