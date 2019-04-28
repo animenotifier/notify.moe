@@ -74,6 +74,8 @@ docker attach notify.moe
 * Try the [example task for newcomers](docs/new-contributor-task.md).
 * Install Pug/Jade and Stylus extensions for your editor.
 * If you're **not** using VS Code, map Pug/Jade to `.pixy` and Stylus to `.scarlet` files (they're similar).
+* Make some changes and upload them to your fork.
+* Create a pull request on this repository (with the diffs of your fork).
 
 ### Bookmark
 
