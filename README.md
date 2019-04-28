@@ -69,6 +69,12 @@ docker attach notify.moe
 * To automatically compile TypeScript files in VS Code, press `Ctrl Shift B` and select `tsc: watch`.
 * Use a Linux system for maximum performance.
 
+### What now?
+
+* Try the [example task for newcomers](docs/new-contributor-task.md).
+* Install Pug/Jade and Stylus extensions for your editor.
+* If you're **not** using VS Code, map Pug/Jade to `.pixy` and Stylus to `.scarlet` files (they're similar).
+
 ### Bookmark
 
 Create a bookmark in your browser and set this code as the URL:
