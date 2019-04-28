@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: docker/development.Dockerfile
+      network: host
     image: animenotifier/notify.moe
     hostname: docker
     container_name: notify.moe

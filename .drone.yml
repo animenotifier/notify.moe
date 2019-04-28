@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: test
-  image: animenotifier/notify.moe
+  image: animenotifier/notify.moe:latest
   environment:
     GO111MODULE: on
   commands:
@@ -11,7 +11,7 @@ steps:
   - go mod download
   - tsc
   - pack
-  - go build
+  - go build -v
   - go test -v -coverprofile=coverage.txt ./...
   # - go mod download
   # - make tools
