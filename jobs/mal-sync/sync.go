@@ -71,7 +71,11 @@ func syncImage(anime *arn.Anime, malAnime *mal.Anime) {
 	response, err := client.Get(malAnime.Image).End()
 
 	if err == nil && response.StatusCode() == 200 {
-		anime.SetImageBytes(response.Bytes())
+		err := anime.SetImageBytes(response.Bytes())
+
+		if err != nil {
+			color.Red("Error setting image: %s", err.Error())
+		}
 	} else {
 		color.Red("Error downloading image")
 	}
@@ -124,7 +128,7 @@ func syncCharacters(anime *arn.Anime, malAnime *mal.Anime) {
 			// Download image if missing
 			if !character.HasImage() {
 				fmt.Println("Downloading missing image for character:", character)
-				character.DownloadImage(malCharacter.ImageLink())
+				err := character.DownloadImage(malCharacter.ImageLink())
 
 				// Cancel import if that character has no image
 				if err != nil {

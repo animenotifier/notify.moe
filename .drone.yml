@@ -1,0 +1,37 @@
+kind: pipeline
+name: default
+
+steps:
+- name: test
+  image: golang
+  environment:
+    GO111MODULE: on
+  commands:
+  - go version
+  - go get ./...
+  - make server bots jobs patches
+  - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.16.0
+  - golangci-lint run
+  - git clone --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn
+  - make tools
+  - go mod download
+  - go test -v -coverprofile=coverage.txt ./...
+
+- name: coverage
+  image: plugins/codecov
+  settings:
+    token:
+      from_secret: codecov-token
+    files:
+      - coverage.txt
+
+- name: discord
+  image: appleboy/drone-discord
+  when:
+    status:
+    - failure
+  settings:
+    webhook_id:
+      from_secret: discord-id
+    webhook_token:
+      from_secret: discord-token
