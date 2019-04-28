@@ -3,6 +3,8 @@
 [![Godoc reference][godoc-image]][godoc-url]
 [![Go report card][goreportcard-image]][goreportcard-url]
 [![Tests][tests-image]][tests-url]
+[![Code coverage][codecov-image]][codecov-url]
+[![License][license-image]][license-url]
 
 ## How to
 
@@ -108,3 +110,7 @@ This project is licensed under the [MIT License](https://github.com/animenotifie
 [goreportcard-url]: https://goreportcard.com/report/github.com/animenotifier/notify.moe
 [tests-image]: https://cloud.drone.io/api/badges/animenotifier/notify.moe/status.svg
 [tests-url]: https://cloud.drone.io/animenotifier/notify.moe
+[codecov-image]: https://codecov.io/gh/animenotifier/notify.moe/branch/go/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/animenotifier/notify.moe
+[license-image]: https://img.shields.io/badge/license-MIT-blue.svg
+[license-url]: https://github.com/animenotifier/notify.moe/blob/go/LICENSE
