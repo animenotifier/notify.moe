@@ -3,8 +3,7 @@ name: default
 
 steps:
 - name: test
-  image: animenotifier/notify.moe:latest
-  pull: always
+  image: animenotifier/notify.moe
   environment:
     GO111MODULE: on
   commands:
