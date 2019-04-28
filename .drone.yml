@@ -2,18 +2,6 @@ kind: pipeline
 name: default
 
 steps:
-- name: clearcache1
-  image: blitzprog/archlinux:latest
-  pull: always
-  commands:
-  - echo "Hello"
-
-- name: clearcache2
-  image: blitzprog/aero:latest
-  pull: always
-  commands:
-  - echo "World"
-
 - name: test
   image: animenotifier/notify.moe:latest
   pull: always
