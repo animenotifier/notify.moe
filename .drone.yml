@@ -6,13 +6,14 @@ steps:
   image: animenotifier/notify.moe
   environment:
     GO111MODULE: on
+    ARN_ROOT: /drone/src
   commands:
   - go version
   - go mod download
   - tsc
   - pack
   - go build -v
-  - go test -v -coverprofile=coverage.txt ./...
+  - go test -v -coverprofile=coverage.txt .
   # - go mod download
   # - make tools
   # - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
