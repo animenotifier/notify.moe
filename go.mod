@@ -16,7 +16,7 @@ require (
 	github.com/aerogo/nano v0.1.4
 	github.com/aerogo/session-store-nano v0.1.1
 	github.com/aerogo/sitemap v0.1.1
-	github.com/akyoto/color v1.8.1
+	github.com/akyoto/color v1.8.2
 	github.com/animenotifier/anilist v0.2.0
 	github.com/animenotifier/arn v1.1.6
 	github.com/animenotifier/kitsu v0.2.0
