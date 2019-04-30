@@ -23,7 +23,7 @@ steps:
   # - pack
   # - make server
   # - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.16.0
-  # - golangci-lint run
+  # - golangci-lint run --enable dupl
   # - make bots jobs patches
   # - git clone --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn
   # - go test -v -coverprofile=coverage.txt ./...
