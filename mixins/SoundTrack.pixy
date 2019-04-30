@@ -22,7 +22,7 @@ component SoundTrackMedia(track *arn.SoundTrack)
 			.media-play-area.action(data-action="toggleAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-media-id=track.ID)
 				img.media-image.lazy(data-src="https://img.youtube.com/vi/" + track.MediaByService("Youtube")[0].ServiceID + "/0.jpg", alt=track.Title)
 				
-				button.media-play-button
+				button.media-play-button(aria-label="Play soundtrack")
 					RawIcon("play")
 				
 				.media-visualizer

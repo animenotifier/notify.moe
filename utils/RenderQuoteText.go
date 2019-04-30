@@ -1,14 +1,13 @@
 package utils
 
 import (
-	"bytes"
 	"html"
 	"strings"
 )
 
 // RenderQuoteText renders the given quote text.
 func RenderQuoteText(text string) string {
-	buffer := bytes.Buffer{}
+	buffer := strings.Builder{}
 	buffer.WriteString("<p>")
 
 	lines := strings.Split(text, "\n")

@@ -7,7 +7,7 @@ import (
 
 	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
-	"github.com/animenotifier/mal/parser"
+	malparser "github.com/animenotifier/mal/parser"
 )
 
 // Read character file

@@ -1,7 +1,6 @@
 package editform
 
 import (
-	"bytes"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -21,7 +20,7 @@ func Render(obj interface{}, title string, user *arn.User) string {
 	lowerCaseTypeName := strings.ToLower(t.Name())
 	endpoint := `/api/` + lowerCaseTypeName + `/` + id.String()
 
-	var b bytes.Buffer
+	var b strings.Builder
 
 	b.WriteString(`<div class="widget-form">`)
 	b.WriteString(`<div class="widget" data-api="` + endpoint + `">`)
@@ -85,7 +84,7 @@ func Render(obj interface{}, title string, user *arn.User) string {
 
 // RenderObject renders the UI for the object into the bytes buffer and appends an ID prefix for all API requests.
 // The ID prefix should either be empty or end with a dot character.
-func RenderObject(b *bytes.Buffer, obj interface{}, idPrefix string) {
+func RenderObject(b *strings.Builder, obj interface{}, idPrefix string) {
 	t := reflect.TypeOf(obj)
 	v := reflect.ValueOf(obj)
 
@@ -102,7 +101,7 @@ func RenderObject(b *bytes.Buffer, obj interface{}, idPrefix string) {
 }
 
 // RenderField ...
-func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, idPrefix string) {
+func RenderField(b *strings.Builder, v *reflect.Value, field reflect.StructField, idPrefix string) {
 	fieldValue := reflect.Indirect(v.FieldByName(field.Name))
 
 	// Embedded fields
@@ -173,7 +172,7 @@ func RenderField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, i
 }
 
 // String field
-func renderStringField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, idPrefix string, fieldValue reflect.Value) {
+func renderStringField(b *strings.Builder, v *reflect.Value, field reflect.StructField, idPrefix string, fieldValue reflect.Value) {
 	idType := field.Tag.Get("idType")
 
 	// Try to infer the ID type by the field name
@@ -246,7 +245,7 @@ func renderStringField(b *bytes.Buffer, v *reflect.Value, field reflect.StructFi
 }
 
 // Slice field
-func renderSliceField(b *bytes.Buffer, v *reflect.Value, field reflect.StructField, idPrefix string, fieldType string, fieldValue reflect.Value) {
+func renderSliceField(b *strings.Builder, v *reflect.Value, field reflect.StructField, idPrefix string, fieldType string, fieldValue reflect.Value) {
 	b.WriteString(`<div class="widget-section">`)
 	b.WriteString(`<h3 class="widget-title">`)
 	b.WriteString(field.Name)
