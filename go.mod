@@ -14,9 +14,12 @@ require (
 	github.com/aerogo/log v0.1.3
 	github.com/aerogo/markdown v0.1.5
 	github.com/aerogo/nano v0.1.6
+	github.com/aerogo/pack v0.3.1
+	github.com/aerogo/run v0.1.4
 	github.com/aerogo/session-store-nano v0.1.3
 	github.com/aerogo/sitemap v0.1.1
 	github.com/akyoto/color v1.8.3
+	github.com/akyoto/ignore v1.0.1 // indirect
 	github.com/animenotifier/anilist v0.2.2
 	github.com/animenotifier/arn v1.1.9
 	github.com/animenotifier/kitsu v0.2.2
@@ -29,7 +32,7 @@ require (
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
-	github.com/gopherjs/gopherjs v0.0.0-20190411002643-bd77b112433e // indirect
+	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/graphql-go/graphql v0.7.8
 	github.com/json-iterator/go v1.1.6
 	github.com/kr/pretty v0.1.0 // indirect
