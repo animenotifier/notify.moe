@@ -105,8 +105,8 @@ github.com/andybalholm/cascadia v1.0.0 h1:hOCXnnZ5A+3eVDX8pvgl4kofXv2ELss0bKcqRy
 github.com/andybalholm/cascadia v1.0.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/animenotifier/anilist v0.2.2 h1:zLL9KabDJx2a+yNT+b13ORWvKlLTsFL67hBKLXyImSI=
 github.com/animenotifier/anilist v0.2.2/go.mod h1:orL7qr/k64K2YEUYESjr1rhp6+0BXdJmiANxG3OV30U=
-github.com/animenotifier/arn v1.1.9 h1:ucdhinLzQDbVPPhh9M0dUCD0ZRAb3CnuaTNQPd5tA4k=
-github.com/animenotifier/arn v1.1.9/go.mod h1:g+CU4VlycjzRCVArVCp/8UMWGjYcMcB+1kjnPWvpsdI=
+github.com/animenotifier/arn v1.1.10 h1:JKfOHlEqWv+kLqich46f55RzBvBI9MVheCkHYgSl19o=
+github.com/animenotifier/arn v1.1.10/go.mod h1:g+CU4VlycjzRCVArVCp/8UMWGjYcMcB+1kjnPWvpsdI=
 github.com/animenotifier/ffxiv v0.1.0 h1:N9gX5iUtD+g/KW4OjKIclS0y2WrL/+Ko9rGEFDaLf1w=
 github.com/animenotifier/ffxiv v0.1.0/go.mod h1:oBHhRzQAUv+dBe4qFJAFnTg7qv5Gl6QFHQphyJla74Q=
 github.com/animenotifier/japanese v0.2.1 h1:O2Fui6+8pmdniQ+swSf+Yp276+iTrSTfvImPRclbFFU=
@@ -297,6 +297,8 @@ golang.org/x/image v0.0.0-20180708004352-c73c2afc3b81 h1:00VmoueYNlNz/aHIilyyQz/
 golang.org/x/image v0.0.0-20180708004352-c73c2afc3b81/go.mod h1:ux5Hcp/YLpHSI86hEcLt0YII63i6oz57MZXIpbrjZUs=
 golang.org/x/image v0.0.0-20190424155947-59b11bec70c7 h1:OIchhgIITCxOyycwe8n9adxV37/WqbetxrpXNm7oPqI=
 golang.org/x/image v0.0.0-20190424155947-59b11bec70c7/go.mod h1:kZ7UVZpmo3dzQBMxlp+ypCbDeSB+sBbTgSJuh5dn5js=
+golang.org/x/image v0.0.0-20190501045829-6d32002ffd75 h1:TbGuee8sSq15Iguxu4deQ7+Bqq/d2rsQejGcEtADAMQ=
+golang.org/x/image v0.0.0-20190501045829-6d32002ffd75/go.mod h1:kZ7UVZpmo3dzQBMxlp+ypCbDeSB+sBbTgSJuh5dn5js=
 golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3/go.mod h1:UVdnD1Gm6xHRNCYTkRU2/jEulfH38KcIWyp/GAMgvoE=
 golang.org/x/lint v0.0.0-20190227174305-5b3e6a55c961/go.mod h1:wehouNa3lNwaWXcvxsM5YxQ5yQlVC4a0KAMCusXpPoU=
 golang.org/x/lint v0.0.0-20190301231843-5614ed5bae6f/go.mod h1:UVdnD1Gm6xHRNCYTkRU2/jEulfH38KcIWyp/GAMgvoE=
@@ -314,6 +316,8 @@ golang.org/x/net v0.0.0-20190311183353-d8887717615a/go.mod h1:t9HGtf8HONx5eT2rtn
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20190424112056-4829fb13d2c6 h1:FP8hkuE6yUEaJnK7O2eTuejKWwW+Rhfj80dQ2JcKxCU=
 golang.org/x/net v0.0.0-20190424112056-4829fb13d2c6/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
+golang.org/x/net v0.0.0-20190501004415-9ce7a6920f09 h1:KaQtG+aDELoNmXYas3TVkGNYRuq8JQ1aa7LJt8EXVyo=
+golang.org/x/net v0.0.0-20190501004415-9ce7a6920f09/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=
 golang.org/x/oauth2 v0.0.0-20190226205417-e64efc72b421/go.mod h1:gOpvHmFTYa4IltrdGE7lF6nIHvwfUNPOp7c8zoXwtLw=
 golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a h1:tImsplftrFpALCYumobsd0K86vlAs/eXGFms2txfJfA=

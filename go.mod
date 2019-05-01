@@ -21,7 +21,7 @@ require (
 	github.com/akyoto/color v1.8.3
 	github.com/akyoto/ignore v1.0.1 // indirect
 	github.com/animenotifier/anilist v0.2.2
-	github.com/animenotifier/arn v1.1.9
+	github.com/animenotifier/arn v1.1.10
 	github.com/animenotifier/kitsu v0.2.2
 	github.com/animenotifier/mal v0.2.2
 	github.com/animenotifier/shoboi v0.2.2
@@ -47,6 +47,8 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
+	golang.org/x/image v0.0.0-20190501045829-6d32002ffd75 // indirect
+	golang.org/x/net v0.0.0-20190501004415-9ce7a6920f09 // indirect
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.5.0 // indirect
