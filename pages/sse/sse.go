@@ -1,7 +1,6 @@
 package sse
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/animenotifier/notify.moe/components/css"
@@ -24,12 +23,10 @@ func Events(ctx *aero.Context) string {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
-	fmt.Println(user.Nick, "receiving live events")
 	stream := aero.NewEventStream()
 	user.AddEventStream(stream)
 
 	go func() {
-		defer fmt.Println(user.Nick, "disconnected, stop sending events")
 		defer user.RemoveEventStream(stream)
 
 		// Send the ETag for the scripts
