@@ -11,9 +11,9 @@ component SocialMediaLinks
 		Icon("twitter")
 		span Twitter
 
-	a.footer-element(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", target="_blank", rel="noopener")
-		Icon("google-plus")
-		span Google+
+	a.footer-element(href="https://patreon.com/eduardurbach", target="_blank", rel="noopener")
+		Icon("patreon")
+		span Patreon
 
 	a.footer-element(href="https://github.com/animenotifier/notify.moe", target="_blank", rel="noopener")
 		Icon("github")
@@ -29,8 +29,8 @@ component SocialMediaButtons
 	a.social-media-button.circle-3(href="https://twitter.com/animenotifier", title="Twitter", target="_blank", rel="noopener")
 		RawIcon("twitter-square")
 
-	a.social-media-button.circle-4(href="https://plus.google.com/+AnimeReleaseNotifierOfficial", title="Google+", target="_blank", rel="noopener")
-		RawIcon("google-plus-square")
+	a.social-media-button.circle-4(href="https://patreon.com/eduardurbach", title="Patreon", target="_blank", rel="noopener")
+		RawIcon("patreon")
 
 	a.social-media-button.circle-5(href="https://github.com/animenotifier/notify.moe", title="GitHub", target="_blank", rel="noopener")
 		RawIcon("github")
