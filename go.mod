@@ -22,7 +22,7 @@ require (
 	github.com/aerogo/sitemap v0.1.1
 	github.com/akyoto/color v1.8.3
 	github.com/animenotifier/anilist v0.2.2
-	github.com/animenotifier/arn v1.1.12
+	github.com/animenotifier/arn v1.1.13
 	github.com/animenotifier/kitsu v0.2.2
 	github.com/animenotifier/mal v0.2.2
 	github.com/animenotifier/shoboi v0.2.2
