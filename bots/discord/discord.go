@@ -11,12 +11,18 @@ import (
 )
 
 // Session provides access to the Discord session.
-var discord *discordgo.Session
+var (
+	discord    *discordgo.Session
+	logChannel = "574579302843154442"
+)
 
 func main() {
-	var err error
+	discord, err := discordgo.New()
 
-	discord, _ = discordgo.New()
+	if err != nil {
+		panic(err)
+	}
+
 	discord.Token = "Bot " + arn.APIKeys.Discord.Token
 
 	// Verify a Token was provided
@@ -41,6 +47,7 @@ func main() {
 
 	defer discord.Close()
 	defer arn.Node.Close()
+	defer discord.ChannelMessageSend(logChannel, "I'm feeling like shit today so I'm shutting down. B-baka!")
 
 	// Receive events
 	discord.AddHandler(OnMessageCreate)
@@ -48,6 +55,7 @@ func main() {
 	discord.AddHandler(OnGuildMemberRemove)
 
 	// Wait for a CTRL-C
+	discord.ChannelMessageSend(logChannel, "Hooray, I'm up again! Did you miss me?")
 	log.Printf("Tsundere is ready. Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
