@@ -14,7 +14,7 @@ require (
 	github.com/aerogo/log v0.1.3
 	github.com/aerogo/markdown v0.1.5
 	github.com/aerogo/nano v0.1.7
-	github.com/aerogo/pack v0.3.3
+	github.com/aerogo/pack v0.4.0
 	github.com/aerogo/run v0.1.4
 	github.com/aerogo/session-store-nano v0.1.3
 	github.com/aerogo/sitemap v0.1.1
