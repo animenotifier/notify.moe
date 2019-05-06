@@ -2,11 +2,6 @@
 
 {go:header}
 
-![Uptime (30 days)](https://img.shields.io/uptimerobot/ratio/m777678498-177cb6b2990056768877bc2a.svg)
-![Mozilla Observatory](https://img.shields.io/mozilla-observatory/grade/notify.moe.svg?publish)
-![Chrome Extension](https://img.shields.io/chrome-web-store/users/hajchfikckiofgilinkpifobdbiajfch.svg?label=chrome%20users)
-![Firefox Extension](https://img.shields.io/amo/users/anime-notifier.svg?label=firefox%20users)
-
 ## How to
 
 ### Prerequisites
@@ -102,5 +97,12 @@ Clicking this bookmark will let you switch between `notify.moe` (live) and `beta
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/animenotifier/notify.moe/blob/go/CONTRIBUTING.md) for details on how to contribute to this project.
+
+## Statistics
+
+![Uptime (30 days)](https://img.shields.io/uptimerobot/ratio/m777678498-177cb6b2990056768877bc2a.svg)
+![Mozilla Observatory](https://img.shields.io/mozilla-observatory/grade/notify.moe.svg?publish)
+![Chrome Extension](https://img.shields.io/chrome-web-store/users/hajchfikckiofgilinkpifobdbiajfch.svg?label=chrome%20users)
+![Firefox Extension](https://img.shields.io/amo/users/anime-notifier.svg?label=firefox%20users)
 
 {go:footer}
