@@ -98,8 +98,4 @@ Clicking this bookmark will let you switch between `notify.moe` (live) and `beta
 
 Please read [CONTRIBUTING.md](https://github.com/animenotifier/notify.moe/blob/go/CONTRIBUTING.md) for details on how to contribute to this project.
 
-## License
-
-This project is licensed under the [MIT License](https://github.com/animenotifier/notify.moe/blob/go/LICENSE).
-
 {go:footer}
