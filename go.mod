@@ -6,8 +6,8 @@ require (
 	cloud.google.com/go v0.38.0 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
-	github.com/aerogo/aero v1.1.6
-	github.com/aerogo/api v0.1.5
+	github.com/aerogo/aero v1.1.7
+	github.com/aerogo/api v0.1.6
 	github.com/aerogo/crawler v0.2.1
 	github.com/aerogo/http v1.0.3
 	github.com/aerogo/layout v0.1.5
