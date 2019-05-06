@@ -37,12 +37,12 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 
 	// Has the bot been mentioned?
-	for _, user := range msg.Mentions {
-		if user.ID == discord.State.User.ID {
-			s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+" :heart:")
-			return
-		}
-	}
+	// for _, user := range msg.Mentions {
+	// 	if user.ID == discord.State.User.ID {
+	// 		s.ChannelMessageSend(msg.ChannelID, msg.Author.Mention()+" :heart:")
+	// 		return
+	// 	}
+	// }
 
 	// Has the user invoked a command?
 	for _, cmd := range allCommands {
