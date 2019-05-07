@@ -8,11 +8,13 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
 	github.com/aerogo/aero v1.1.7
 	github.com/aerogo/api v0.1.6
+	github.com/aerogo/cluster v0.1.6 // indirect
 	github.com/aerogo/crawler v0.2.1
 	github.com/aerogo/http v1.0.3
 	github.com/aerogo/layout v0.1.5
-	github.com/aerogo/log v0.1.3
+	github.com/aerogo/log v0.2.4
 	github.com/aerogo/markdown v0.1.5
+	github.com/aerogo/mirror v0.1.4 // indirect
 	github.com/aerogo/nano v0.1.7
 	github.com/aerogo/pack v0.4.0
 	github.com/aerogo/run v0.1.4
@@ -20,7 +22,7 @@ require (
 	github.com/aerogo/sitemap v0.1.1
 	github.com/akyoto/color v1.8.3
 	github.com/animenotifier/anilist v0.2.2
-	github.com/animenotifier/arn v1.1.15
+	github.com/animenotifier/arn v1.1.16
 	github.com/animenotifier/kitsu v0.2.2
 	github.com/animenotifier/mal v0.2.2
 	github.com/animenotifier/shoboi v0.2.2

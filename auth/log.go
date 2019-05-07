@@ -9,6 +9,6 @@ import (
 var authLog = log.New()
 
 func init() {
-	authLog.AddOutput(os.Stdout)
-	authLog.AddOutput(log.File("logs/auth.log"))
+	authLog.AddWriter(os.Stdout)
+	authLog.AddWriter(log.File("logs/auth.log"))
 }

@@ -108,7 +108,7 @@ func InstallFacebookAuth(app *aero.Application) {
 			user.Save()
 
 			// Log
-			authLog.Info("Added Facebook ID to existing account", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("Added Facebook ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			return ctx.Redirect("/")
 		}
@@ -119,7 +119,7 @@ func InstallFacebookAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByFacebookID(fbUser.ID)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Facebook ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Facebook ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			// Add FacebookToUser reference
 			user.ConnectFacebook(fbUser.ID)
@@ -135,7 +135,7 @@ func InstallFacebookAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByEmail(fbUser.Email)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Email", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
@@ -169,7 +169,7 @@ func InstallFacebookAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user via Facebook", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Facebook | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
 		return ctx.Redirect(newUserStartRoute)

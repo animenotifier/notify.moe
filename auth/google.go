@@ -119,7 +119,7 @@ func InstallGoogleAuth(app *aero.Application) {
 			user.Save()
 
 			// Log
-			authLog.Info("Added Google ID to existing account", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("Added Google ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			return ctx.Redirect("/")
 		}
@@ -130,7 +130,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByGoogleID(googleUser.Sub)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Google ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Google ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
@@ -143,7 +143,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByEmail(googleUser.Email)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Email", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			// Add GoogleToUser reference
 			user.ConnectGoogle(googleUser.Sub)
@@ -180,7 +180,7 @@ func InstallGoogleAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user via Google", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Google | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
 		return ctx.Redirect(newUserStartRoute)

@@ -120,7 +120,7 @@ func InstallTwitterAuth(app *aero.Application) {
 			user.Save()
 
 			// Log
-			authLog.Info("Added Twitter ID to existing account", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("Added Twitter ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			return ctx.Redirect("/")
 		}
@@ -131,7 +131,7 @@ func InstallTwitterAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByTwitterID(twUser.ID)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Twitter ID", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Twitter ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
@@ -144,7 +144,7 @@ func InstallTwitterAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByEmail(twUser.Email)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Email", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 			// Add TwitterToUser reference
 			user.ConnectTwitter(twUser.ID)
@@ -186,7 +186,7 @@ func InstallTwitterAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user via Twitter", user.ID, user.Nick, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Twitter | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
 		return ctx.Redirect(newUserStartRoute)

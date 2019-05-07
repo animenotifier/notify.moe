@@ -18,10 +18,15 @@ var ipLog = log.New()
 
 // Initialize log files
 func init() {
-	requestLog.AddOutput(log.File("logs/request.log"))
-	errorLog.AddOutput(log.File("logs/error.log"))
-	errorLog.AddOutput(os.Stderr)
-	ipLog.AddOutput(log.File("logs/ip.log"))
+	// The request log contains every single request to the server
+	requestLog.AddWriter(log.File("logs/request.log"))
+
+	// The IP log contains the IPs accessing the server
+	ipLog.AddWriter(log.File("logs/ip.log"))
+
+	// The error log contains all failed requests
+	errorLog.AddWriter(log.File("logs/error.log"))
+	errorLog.AddWriter(os.Stderr)
 }
 
 // Log middleware logs every request into logs/request.log and errors into logs/error.log.
@@ -51,19 +56,19 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 	hostNames, cached := GetHostsForIP(ip)
 
 	if !cached && len(hostNames) > 0 {
-		ipLog.Info(ip, strings.Join(hostNames, ", "))
+		ipLog.Info("%s = %s", ip, strings.Join(hostNames, ", "))
 	}
 
 	// Log every request
-	id := "[id]"
-	nick := "[guest]"
+	id := "id"
+	nick := "guest"
 
 	if user != nil {
 		id = user.ID
 		nick = user.Nick
 	}
 
-	requestLog.Info(nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
+	requestLog.Info("%s | %s | %s | %s | %d | %s", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
 
 	// Log all requests that failed
 	switch ctx.StatusCode {
@@ -71,12 +76,12 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 		// Ok.
 
 	default:
-		errorLog.Error(nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI(), ctx.ErrorMessage)
+		errorLog.Error("%s | %s | %s | %s | %d | %s (%s)", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI(), ctx.ErrorMessage)
 	}
 
 	// Notify us about long requests.
 	// However ignore requests under /auth/ because those depend on 3rd party servers.
-	if responseTime >= 300*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") && !strings.HasPrefix(ctx.URI(), "/sitemap/") && !strings.HasPrefix(ctx.URI(), "/api/sse/") {
-		errorLog.Error("Long response time", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
+	if responseTime >= 500*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") && !strings.HasPrefix(ctx.URI(), "/sitemap/") && !strings.HasPrefix(ctx.URI(), "/api/sse/") {
+		errorLog.Error("%s | %s | %s | %s | %d | %s (long response time)", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
 	}
 }

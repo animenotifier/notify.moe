@@ -1,7 +1,9 @@
 package auth
 
-import "github.com/aerogo/aero"
-import "github.com/animenotifier/notify.moe/utils"
+import (
+	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/utils"
+)
 
 const newUserStartRoute = "/welcome"
 
@@ -22,7 +24,7 @@ func Install(app *aero.Application) {
 			user := utils.GetUser(ctx)
 
 			if user != nil {
-				authLog.Info("User logged out", user.ID, ctx.RealIP(), user.Email, user.RealName())
+				authLog.Info("%s logged out | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 			}
 
 			ctx.Session().Set("userId", nil)
