@@ -10,12 +10,6 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-// Session provides access to the Discord session.
-var (
-	discord    *discordgo.Session
-	logChannel = "574579302843154442"
-)
-
 func main() {
 	discord, err := discordgo.New()
 
