@@ -45,8 +45,8 @@ func startJobs() {
 
 	// Scheduler log
 	mainLog := log.New()
-	mainLog.AddOutput(os.Stdout)
-	mainLog.AddOutput(log.File(path.Join(logsPath, "scheduler.log")))
+	mainLog.AddWriter(os.Stdout)
+	mainLog.AddWriter(log.File(path.Join(logsPath, "scheduler.log")))
 	schedulerLog := mainLog
 
 	// Color index
@@ -60,7 +60,7 @@ func startJobs() {
 		jobColor := colorPool[colorIndex].SprintFunc()
 
 		jobLog := log.New()
-		jobLog.AddOutput(log.File(path.Join(jobLogsPath, jobName+".log")))
+		jobLog.AddWriter(log.File(path.Join(jobLogsPath, jobName+".log")))
 
 		fmt.Printf("Registered job %s for execution every %v\n", jobColor(jobName), interval)
 
@@ -73,7 +73,7 @@ func startJobs() {
 				<-ticker.C
 
 				// Now start
-				schedulerLog.Info("Starting " + jobColor(jobName))
+				schedulerLog.Info("Starting %s", jobColor(jobName))
 
 				cmd := exec.Command(executable)
 				cmd.Stdout = jobLog
@@ -82,16 +82,16 @@ func startJobs() {
 				err := cmd.Start()
 
 				if err != nil {
-					schedulerLog.Error("Error starting job", jobColor(jobName), err)
+					schedulerLog.Error("Error starting job %s %v", jobColor(jobName), err)
 				}
 
 				err = cmd.Wait()
 
 				if err != nil {
-					schedulerLog.Error("Job exited with error", jobColor(jobName), err)
+					schedulerLog.Error("Job %s exited with error %v", jobColor(jobName), err)
 				}
 
-				schedulerLog.Info("Finished " + jobColor(jobName))
+				schedulerLog.Info("Finished %s", jobColor(jobName))
 				jobLog.Info("--------------------------------------------------------------------------------")
 			}
 		}()
