@@ -13,6 +13,8 @@ steps:
   - tsc
   - pack
   - go build -v
+  - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.16.0
+  - golangci-lint run --disable-all --enable deadcode --enable misspell --enable prealloc
   - go test -v -coverprofile=coverage.txt .
   # - go mod download
   # - make tools
@@ -22,8 +24,6 @@ steps:
   # - tsc
   # - pack
   # - make server
-  # - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.16.0
-  # - golangci-lint run --enable dupl
   # - make bots jobs patches
   # - git clone --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn
   # - go test -v -coverprofile=coverage.txt ./...

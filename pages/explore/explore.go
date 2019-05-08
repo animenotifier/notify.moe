@@ -57,7 +57,7 @@ func Filter(ctx *aero.Context) string {
 }
 
 func filterAnime(year, season, status, typ string) []*arn.Anime {
-	var results []*arn.Anime
+	results := make([]*arn.Anime, 0, 1024)
 
 	for anime := range arn.StreamAnime() {
 		if year != "any" {

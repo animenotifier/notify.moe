@@ -122,6 +122,7 @@ func compare(animes []*arn.Anime) []*utils.MALComparison {
 
 // diff returns all the differences between an anime and its MAL counterpart.
 func diff(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
+	// nolint (prealloc linter would complain, but this is best left as nil by default)
 	var differences []animediff.Difference
 
 	// We'll use the following diffs
