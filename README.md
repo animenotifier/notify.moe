@@ -77,16 +77,6 @@ docker attach notify.moe
 * Make some changes and upload them to your fork.
 * Create a pull request on this repository (with the diffs of your fork).
 
-### Bookmark
-
-Create a bookmark in your browser and set this code as the URL:
-
-```js
-javascript:(() => )();
-```
-
-Clicking this bookmark will let you switch between `notify.moe` (live) and `beta.notify.moe` (development).
-
 ## Find us
 
 * [Discord](https://discord.gg/0kimAmMCeXGXuzNF)
