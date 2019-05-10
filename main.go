@@ -61,7 +61,7 @@ func configure(app *aero.Application) *aero.Application {
 	auth.Install(app)
 
 	// GraphQL
-	app.Post("/api", graphql.Handler(arn.DB))
+	app.Post("/graphql", graphql.Handler(arn.DB))
 
 	// Close the database node on shutdown
 	app.OnEnd(arn.Node.Close)
