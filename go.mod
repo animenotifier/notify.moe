@@ -10,7 +10,7 @@ require (
 	github.com/aerogo/api v0.1.6
 	github.com/aerogo/codetree v1.2.2 // indirect
 	github.com/aerogo/crawler v0.2.1
-	github.com/aerogo/graphql v0.1.2
+	github.com/aerogo/graphql v0.1.4
 	github.com/aerogo/http v1.0.3
 	github.com/aerogo/layout v0.1.5
 	github.com/aerogo/log v0.2.4
@@ -50,6 +50,7 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
+	golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529 // indirect
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.5.0 // indirect

@@ -43,6 +43,8 @@ github.com/aerogo/csp v0.1.5 h1:4l8AaMWndSb0t/03onf4lc0th2zoaapmtKgysDIznW4=
 github.com/aerogo/csp v0.1.5/go.mod h1:KNqnTFffuDwIPJxBEFTl3baBx+x3Vw+9kcMfu5APFJA=
 github.com/aerogo/flow v0.1.2 h1:fZ3V7Bo7jwBjqnM1mWxYbg5O/FlQX2XovzMZU2D+o5M=
 github.com/aerogo/flow v0.1.2/go.mod h1:xXIb7GY0AKouhbp4/ViCsiOmvvgRGonqPG30d6FnACI=
+github.com/aerogo/graphql v0.1.4 h1:NMMr0N5lTtaC8gfLhlKN46gVLCkrDHDZWPdjdmPRIYQ=
+github.com/aerogo/graphql v0.1.4/go.mod h1:qAPqMXgv4ZUpDTIZzJT/AHDoWq7h6IMnDeaOCw52zyM=
 github.com/aerogo/http v1.0.0 h1:15a7Px8wGZbmgFqJMR1kBy3fWFkDfMZWexJzxhmFKe4=
 github.com/aerogo/http v1.0.0/go.mod h1:B1igUmMLpE6KabMpc9reHCJJNUOJ2U/PR9s1fF3TpPQ=
 github.com/aerogo/http v1.0.1 h1:KTzYarhp5yougurxuAhJKFh3YvZ7R7CfaDVwJv5+xIs=
@@ -266,6 +268,8 @@ golang.org/x/crypto v0.0.0-20190426145343-a29dc8fdc734 h1:p/H982KKEjUnLJkM3tt/Le
 golang.org/x/crypto v0.0.0-20190426145343-a29dc8fdc734/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
 golang.org/x/crypto v0.0.0-20190506204251-e1dfcc566284 h1:rlLehGeYg6jfoyz/eDqDU1iRXLKfR42nnNh57ytKEWo=
 golang.org/x/crypto v0.0.0-20190506204251-e1dfcc566284/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
+golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529 h1:iMGN4xG0cnqj3t+zOM8wUB0BiPKHEwSxEZCvzcbZuvk=
+golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
 golang.org/x/exp v0.0.0-20190121172915-509febef88a4/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
 golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3/go.mod h1:UVdnD1Gm6xHRNCYTkRU2/jEulfH38KcIWyp/GAMgvoE=
 golang.org/x/lint v0.0.0-20190227174305-5b3e6a55c961/go.mod h1:wehouNa3lNwaWXcvxsM5YxQ5yQlVC4a0KAMCusXpPoU=
