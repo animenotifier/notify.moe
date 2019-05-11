@@ -1,8 +1,17 @@
 package middleware
 
+// import (
+// 	"strings"
+// 	"time"
+
+// 	"github.com/aerogo/aero"
+// 	"github.com/akyoto/cache"
+// 	"github.com/animenotifier/notify.moe/utils"
+// )
+
 // const requestThreshold = 10
 
-// var ipToStats = cache.New(15*time.Minute, 15*time.Minute)
+// var ipToStats = cache.New(15 * time.Minute)
 
 // // IPStats captures the statistics for a single IP.
 // type IPStats struct {
@@ -31,7 +40,7 @@ package middleware
 // 				Requests: []string{},
 // 			}
 
-// 			ipToStats.Set(ip, stats, cache.DefaultExpiration)
+// 			ipToStats.Set(ip, stats, 15*time.Minute)
 // 		}
 
 // 		// Add requested URI to the list of requests

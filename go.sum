@@ -43,6 +43,8 @@ github.com/aerogo/csp v0.1.5 h1:4l8AaMWndSb0t/03onf4lc0th2zoaapmtKgysDIznW4=
 github.com/aerogo/csp v0.1.5/go.mod h1:KNqnTFffuDwIPJxBEFTl3baBx+x3Vw+9kcMfu5APFJA=
 github.com/aerogo/flow v0.1.2 h1:fZ3V7Bo7jwBjqnM1mWxYbg5O/FlQX2XovzMZU2D+o5M=
 github.com/aerogo/flow v0.1.2/go.mod h1:xXIb7GY0AKouhbp4/ViCsiOmvvgRGonqPG30d6FnACI=
+github.com/aerogo/graphql v0.3.6 h1:6rAM4yFXa0qLaNz7bnLja3JAyV5fu2kq833Nsyzjizo=
+github.com/aerogo/graphql v0.3.6/go.mod h1:bcAaQk3IGODFLF2gFwVszP3hyumWOhwKKuOh1xClSeI=
 github.com/aerogo/http v1.0.0 h1:15a7Px8wGZbmgFqJMR1kBy3fWFkDfMZWexJzxhmFKe4=
 github.com/aerogo/http v1.0.0/go.mod h1:B1igUmMLpE6KabMpc9reHCJJNUOJ2U/PR9s1fF3TpPQ=
 github.com/aerogo/http v1.0.1 h1:KTzYarhp5yougurxuAhJKFh3YvZ7R7CfaDVwJv5+xIs=
@@ -105,6 +107,8 @@ github.com/akyoto/autoimport v0.6.1 h1:Udg0g6QscjeSniLuCGTRGGdSJ56A3JZXwwr5jlgPk
 github.com/akyoto/autoimport v0.6.1/go.mod h1:bW8Dn5oxnbF7pkAIECGV9RMb3d+DD92fKoMWq9M9q2o=
 github.com/akyoto/autoimport v0.6.2 h1:HEJ3WshEAbO7IrQsSiVQibqX6wSZCpWoLvuvNWxdSNU=
 github.com/akyoto/autoimport v0.6.2/go.mod h1:bW8Dn5oxnbF7pkAIECGV9RMb3d+DD92fKoMWq9M9q2o=
+github.com/akyoto/cache v1.0.0 h1:nFKwB1bd/KPIHnw7WJOrsmwzhVr2FTJo9UrSSxDlH5g=
+github.com/akyoto/cache v1.0.0/go.mod h1:MgYroBUaHREY9mmTcavctH4NDzQohCr4WMWPUKv7pq4=
 github.com/akyoto/color v1.8.1 h1:HpoHQMGnBYZNpNuayXDKJMlGKvbvGipLYRtGV24SOgM=
 github.com/akyoto/color v1.8.1/go.mod h1:M0u9nnLt9zM2qp08X40EVVFeR+FgNI2NG0InuiDBTQ0=
 github.com/akyoto/color v1.8.2 h1:FOTpvfQkCk00yCl8oU/wjO3+jBi3FWpwUogLkeyzWfU=
@@ -221,8 +225,6 @@ github.com/mssola/user_agent v0.5.0 h1:gRF7/x8cKt8qzAosYGsBNyirta+F8fvYDlJrgXws9
 github.com/mssola/user_agent v0.5.0/go.mod h1:UFiKPVaShrJGW93n4uo8dpPdg1BSVpw2P9bneo0Mtp8=
 github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3 h1:lmQNznFSupyfCDE9d7wdKOU8UiVwWEoYwv8wo6rSgy0=
 github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3/go.mod h1:U0ETmPPEsfd7CpUKNMYi68xIOL8Ww4jPZlaqNngcwqs=
-github.com/patrickmn/go-cache v2.1.0+incompatible h1:HRMgzkcYKYpi3C8ajMPV8OFXaaRUnok+kx1WdO15EQc=
-github.com/patrickmn/go-cache v2.1.0+incompatible/go.mod h1:3Qf8kWWT7OJRJbdiICTKqZju1ZixQ/KpMGzzAfe6+WQ=
 github.com/pkg/profile v1.3.0/go.mod h1:hJw3o1OdXxsrSjjVksARp5W95eeEaEfptyVZyv6JUPA=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

@@ -10,7 +10,7 @@ require (
 	github.com/aerogo/api v0.1.6
 	github.com/aerogo/codetree v1.2.2 // indirect
 	github.com/aerogo/crawler v0.2.1
-	github.com/aerogo/graphql v0.3.4
+	github.com/aerogo/graphql v0.3.6
 	github.com/aerogo/http v1.0.3
 	github.com/aerogo/layout v0.1.5
 	github.com/aerogo/log v0.2.4
@@ -23,6 +23,7 @@ require (
 	github.com/aerogo/session-store-nano v0.1.3
 	github.com/aerogo/sitemap v0.1.1
 	github.com/akyoto/autoimport v0.6.2 // indirect
+	github.com/akyoto/cache v1.0.0
 	github.com/akyoto/color v1.8.3
 	github.com/animenotifier/anilist v0.2.2
 	github.com/animenotifier/arn v1.1.18
@@ -44,7 +45,6 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
-	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3 // indirect
@@ -58,7 +58,5 @@ require (
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 )
-
-replace github.com/aerogo/graphql => /home/eduard/projects/aerogo/graphql
 
 exclude github.com/logpacker/PayPal-Go-SDK v2.0.0+incompatible
