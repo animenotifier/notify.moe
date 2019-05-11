@@ -4,10 +4,10 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
-	"github.com/aerogo/graphql"
 	nanostore "github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/auth"
+	"github.com/animenotifier/notify.moe/graphql"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages"
 	"github.com/animenotifier/notify.moe/utils/routetests"
@@ -61,7 +61,7 @@ func configure(app *aero.Application) *aero.Application {
 	auth.Install(app)
 
 	// GraphQL
-	app.Post("/graphql", graphql.Handler(arn.DB))
+	graphql.Install(app)
 
 	// Close the database node on shutdown
 	app.OnEnd(arn.Node.Close)

@@ -10,7 +10,7 @@ require (
 	github.com/aerogo/api v0.1.6
 	github.com/aerogo/codetree v1.2.2 // indirect
 	github.com/aerogo/crawler v0.2.1
-	github.com/aerogo/graphql v0.1.4
+	github.com/aerogo/graphql v0.3.3
 	github.com/aerogo/http v1.0.3
 	github.com/aerogo/layout v0.1.5
 	github.com/aerogo/log v0.2.4
