@@ -10,7 +10,7 @@ require (
 	github.com/aerogo/api v0.1.6
 	github.com/aerogo/codetree v1.2.2 // indirect
 	github.com/aerogo/crawler v0.2.1
-	github.com/aerogo/graphql v0.3.3
+	github.com/aerogo/graphql v0.3.4
 	github.com/aerogo/http v1.0.3
 	github.com/aerogo/layout v0.1.5
 	github.com/aerogo/log v0.2.4
@@ -58,5 +58,7 @@ require (
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 )
+
+replace github.com/aerogo/graphql => /home/eduard/projects/aerogo/graphql
 
 exclude github.com/logpacker/PayPal-Go-SDK v2.0.0+incompatible

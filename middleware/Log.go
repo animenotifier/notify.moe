@@ -12,9 +12,11 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-var requestLog = log.New()
-var errorLog = log.New()
-var ipLog = log.New()
+var (
+	requestLog = log.New()
+	errorLog   = log.New()
+	ipLog      = log.New()
+)
 
 // Initialize log files
 func init() {
