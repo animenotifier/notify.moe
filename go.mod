@@ -18,7 +18,7 @@ require (
 	github.com/aerogo/nano v0.2.1
 	github.com/aerogo/pack v0.4.1
 	github.com/aerogo/pixy v1.2.3 // indirect
-	github.com/aerogo/run v0.1.6
+	github.com/aerogo/run v1.0.0
 	github.com/aerogo/scarlet v0.2.3 // indirect
 	github.com/aerogo/session-store-nano v0.1.4
 	github.com/aerogo/sitemap v0.1.2
