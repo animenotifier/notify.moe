@@ -123,6 +123,10 @@ const profile-image-size = 280px
 		padding content-padding
 		margin-top 0
 
+	.profile-introduction
+		h1, h2, h3, h4, h5, h6
+			text-align left
+
 // const profile-boot-duration = 2s
 // animation appear
 // 	0%
