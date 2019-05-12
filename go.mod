@@ -6,31 +6,32 @@ require (
 	cloud.google.com/go v0.38.0 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
-	github.com/aerogo/aero v1.1.9
-	github.com/aerogo/api v0.1.6
-	github.com/aerogo/codetree v1.2.3 // indirect
-	github.com/aerogo/crawler v0.2.1
+	github.com/aerogo/aero v1.1.10
+	github.com/aerogo/api v0.1.7
+	github.com/aerogo/codetree v1.2.4 // indirect
+	github.com/aerogo/crawler v0.2.2
 	github.com/aerogo/graphql v0.3.6
-	github.com/aerogo/http v1.0.3
-	github.com/aerogo/layout v0.1.5
-	github.com/aerogo/log v0.2.4
-	github.com/aerogo/markdown v0.1.6
-	github.com/aerogo/nano v0.2.0
-	github.com/aerogo/pack v0.4.0
-	github.com/aerogo/pixy v1.2.2 // indirect
-	github.com/aerogo/run v0.1.5
-	github.com/aerogo/scarlet v0.2.2 // indirect
-	github.com/aerogo/session-store-nano v0.1.3
-	github.com/aerogo/sitemap v0.1.1
-	github.com/akyoto/autoimport v0.6.2 // indirect
+	github.com/aerogo/http v1.0.4
+	github.com/aerogo/layout v0.1.6
+	github.com/aerogo/log v0.2.5
+	github.com/aerogo/markdown v0.1.7
+	github.com/aerogo/nano v0.2.1
+	github.com/aerogo/pack v0.4.1
+	github.com/aerogo/pixy v1.2.3 // indirect
+	github.com/aerogo/run v0.1.6
+	github.com/aerogo/scarlet v0.2.3 // indirect
+	github.com/aerogo/session-store-nano v0.1.4
+	github.com/aerogo/sitemap v0.1.2
+	github.com/akyoto/autoimport v0.6.3 // indirect
 	github.com/akyoto/cache v1.0.1
-	github.com/akyoto/color v1.8.3
-	github.com/animenotifier/anilist v0.2.2
-	github.com/animenotifier/arn v1.1.18
-	github.com/animenotifier/kitsu v0.2.2
-	github.com/animenotifier/mal v0.2.2
-	github.com/animenotifier/shoboi v0.2.2
-	github.com/animenotifier/twist v0.2.2
+	github.com/akyoto/color v1.8.4
+	github.com/akyoto/ignore v1.0.2 // indirect
+	github.com/animenotifier/anilist v0.2.3
+	github.com/animenotifier/arn v1.1.20
+	github.com/animenotifier/kitsu v0.2.3
+	github.com/animenotifier/mal v0.2.3
+	github.com/animenotifier/shoboi v0.2.3
+	github.com/animenotifier/twist v0.2.3
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-ini/ini v1.42.0 // indirect
@@ -50,7 +51,6 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
-	golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529 // indirect
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.5.0 // indirect
