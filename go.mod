@@ -3,29 +3,24 @@ module github.com/animenotifier/notify.moe
 go 1.12
 
 require (
-	cloud.google.com/go v0.38.0 // indirect
+	cloud.google.com/go v0.39.0 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
-	github.com/aerogo/aero v1.1.10
+	github.com/aerogo/aero v1.1.12
 	github.com/aerogo/api v0.1.7
-	github.com/aerogo/codetree v1.2.4 // indirect
-	github.com/aerogo/crawler v0.2.2
+	github.com/aerogo/crawler v0.2.3
 	github.com/aerogo/graphql v0.3.6
-	github.com/aerogo/http v1.0.4
+	github.com/aerogo/http v1.0.6
 	github.com/aerogo/layout v0.1.6
 	github.com/aerogo/log v0.2.5
-	github.com/aerogo/markdown v0.1.7
+	github.com/aerogo/markdown v0.1.8
 	github.com/aerogo/nano v0.2.1
-	github.com/aerogo/pack v0.4.1
-	github.com/aerogo/pixy v1.2.3 // indirect
+	github.com/aerogo/pack v0.4.2
 	github.com/aerogo/run v1.0.0
-	github.com/aerogo/scarlet v0.2.3 // indirect
 	github.com/aerogo/session-store-nano v0.1.4
 	github.com/aerogo/sitemap v0.1.2
-	github.com/akyoto/autoimport v0.6.3 // indirect
-	github.com/akyoto/cache v1.0.1
+	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.4
-	github.com/akyoto/ignore v1.0.2 // indirect
 	github.com/animenotifier/anilist v0.2.3
 	github.com/animenotifier/arn v1.1.20
 	github.com/animenotifier/kitsu v0.2.3
@@ -51,9 +46,10 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
+	golang.org/x/crypto v0.0.0-20190513172903-22d7a77e9e5f // indirect
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
 	golang.org/x/text v0.3.2 // indirect
-	google.golang.org/appengine v1.5.0 // indirect
+	google.golang.org/appengine v1.6.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
