@@ -6,18 +6,18 @@ require (
 	cloud.google.com/go v0.39.0 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
-	github.com/aerogo/aero v1.1.13
+	github.com/aerogo/aero v1.1.14
 	github.com/aerogo/api v0.1.7
-	github.com/aerogo/crawler v0.2.3
+	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/graphql v0.3.6
 	github.com/aerogo/http v1.0.6
-	github.com/aerogo/layout v0.1.6
+	github.com/aerogo/layout v0.1.9
 	github.com/aerogo/log v0.2.5
 	github.com/aerogo/markdown v0.1.8
 	github.com/aerogo/nano v0.2.1
 	github.com/aerogo/pack v0.4.2
 	github.com/aerogo/run v1.0.0
-	github.com/aerogo/session-store-nano v0.1.4
+	github.com/aerogo/session-store-nano v0.1.5
 	github.com/aerogo/sitemap v0.1.2
 	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.4
@@ -47,7 +47,7 @@ require (
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
-	golang.org/x/sys v0.0.0-20190516014833-cab07311ab81 // indirect
+	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.6.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect

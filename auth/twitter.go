@@ -69,6 +69,7 @@ func InstallTwitterAuth(app *aero.Application) {
 
 		// Get back the request token to get the access token
 		tempCred, _ := session.Get("tempCred").(*oauth.Credentials)
+		session.Delete("tempCred")
 
 		if tempCred == nil || tempCred.Token != ctx.Query("oauth_token") {
 			return ctx.Error(http.StatusBadRequest, "Unknown OAuth request token", nil)

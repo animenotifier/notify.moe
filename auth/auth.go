@@ -27,7 +27,7 @@ func Install(app *aero.Application) {
 				authLog.Info("%s logged out | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
 			}
 
-			ctx.Session().Set("userId", nil)
+			ctx.Session().Delete("userId")
 		}
 
 		return ctx.Redirect("/")
