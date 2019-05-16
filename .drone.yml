@@ -14,7 +14,7 @@ steps:
   - pack
   - go build -v
   - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.16.0
-  - golangci-lint run --disable-all --enable deadcode --enable misspell --enable prealloc --enable typecheck --enable varcheck
+  - golangci-lint run --disable errcheck
   - go test -v -coverprofile=coverage.txt .
   # - go mod download
   # - make tools
