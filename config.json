@@ -6,7 +6,6 @@
 	],
 	"styles": [
 		"include/config",
-		"include/dark",
 		"mixins/layout",
 		"mixins/utils",
 		"mixins/effects",
@@ -31,7 +30,6 @@
 		"video",
 		"loading",
 		"fade",
-		"mobile",
 		"embedded"
 	],
 	"scripts": {

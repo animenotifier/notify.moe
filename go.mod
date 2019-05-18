@@ -15,8 +15,8 @@ require (
 	github.com/aerogo/log v0.2.5
 	github.com/aerogo/markdown v0.1.8
 	github.com/aerogo/nano v0.2.1
-	github.com/aerogo/pack v0.4.2
-	github.com/aerogo/run v1.0.0
+	github.com/aerogo/pack v0.5.0
+	github.com/aerogo/run v1.0.1
 	github.com/aerogo/session-store-nano v0.1.5
 	github.com/aerogo/sitemap v0.1.2
 	github.com/akyoto/cache v1.0.2
@@ -46,7 +46,7 @@ require (
 	github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
-	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
+	golang.org/x/oauth2 v0.0.0-20190517181255-950ef44c6e07
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.6.0 // indirect
