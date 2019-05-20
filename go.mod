@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go v0.39.0 // indirect
 	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
-	github.com/aerogo/aero v1.1.14
+	github.com/aerogo/aero v1.1.15
 	github.com/aerogo/api v0.1.7
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/graphql v0.3.6
@@ -22,7 +22,7 @@ require (
 	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.4
 	github.com/animenotifier/anilist v0.2.3
-	github.com/animenotifier/arn v1.1.21
+	github.com/animenotifier/arn v1.1.22
 	github.com/animenotifier/kitsu v0.2.3
 	github.com/animenotifier/mal v0.2.3
 	github.com/animenotifier/shoboi v0.2.3
@@ -35,7 +35,6 @@ require (
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/json-iterator/go v1.1.6
-	github.com/kr/pretty v0.1.0 // indirect
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/minio/minio-go v6.0.14+incompatible
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
