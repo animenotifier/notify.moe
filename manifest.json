@@ -1,0 +1,58 @@
+{
+	"name": "Anime Notifier",
+	"short_name": "Anime",
+	"theme_color": "#ef371f",
+	"background_color": "#f6f6f6",
+	"icons": [
+		{
+			"src": "images/brand/1024.png",
+			"sizes": "1024x1024",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/384.png",
+			"sizes": "384x384",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/256.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/220.png",
+			"sizes": "220x220",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/180.png",
+			"sizes": "180x180",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/144.png",
+			"sizes": "144x144",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/128.png",
+			"sizes": "128x128",
+			"type": "image/png"
+		},
+		{
+			"src": "images/brand/64.png",
+			"sizes": "64x64",
+			"type": "image/png"
+		}
+	]
+}

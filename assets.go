@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/manifest"
 	"github.com/aerogo/sitemap"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components/css"
@@ -17,13 +18,21 @@ func configureAssets(app *aero.Application) {
 
 	// Service worker
 	serviceWorkerBytes, err := ioutil.ReadFile("scripts/ServiceWorker/ServiceWorker.js")
+
+	if err != nil {
+		panic("Couldn't load service worker")
+	}
+
 	serviceWorker := string(serviceWorkerBytes)
 
 	// CSS bundle
 	cssBundle := css.Bundle()
 
+	// Manifest
+	webManifest, err := manifest.FromFile("manifest.json")
+
 	if err != nil {
-		panic("Couldn't load service worker")
+		panic("Couldn't load web manifest")
 	}
 
 	app.Get("/scripts", func(ctx *aero.Context) string {
@@ -40,7 +49,7 @@ func configureAssets(app *aero.Application) {
 
 	// Web manifest
 	app.Get("/manifest.json", func(ctx *aero.Context) string {
-		return ctx.JSON(app.Config.Manifest)
+		return ctx.JSON(webManifest)
 	})
 
 	// Favicon
