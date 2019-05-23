@@ -1,26 +1,13 @@
-package fullpage
+package layout
 
 import (
-	"io/ioutil"
 	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
-	jsoniter "github.com/json-iterator/go"
 )
-
-var organization map[string]interface{}
-var organizationString string
-
-func init() {
-	// Load structured data
-	organizationBytes, _ := ioutil.ReadFile("organization.json")
-	jsoniter.Unmarshal(organizationBytes, &organization)
-	organizationBytes, _ = jsoniter.Marshal(organization)
-	organizationString = string(organizationBytes)
-}
 
 // Render layout.
 func Render(ctx *aero.Context, content string) string {
@@ -46,5 +33,5 @@ func Render(ctx *aero.Context, content string) string {
 		sort.Strings(tags)
 	}
 
-	return components.Layout(ctx.App, ctx, user, openGraph, meta, tags, organizationString, content)
+	return components.Layout(ctx, user, openGraph, meta, tags, content)
 }

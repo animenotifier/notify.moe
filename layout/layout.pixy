@@ -1,4 +1,4 @@
-component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, meta, tags []string, organization string, content string)
+component Layout(ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, meta, tags []string, content string)
 	html(lang="en")
 		head
 			link(rel="stylesheet", href="/styles", importance="high")
@@ -6,7 +6,7 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 			if openGraph != nil
 				title= openGraph.Tags["og:title"]
 			else
-				title= app.Config.Title
+				title= ctx.App.Config.Title
 
 			//- Viewport
 			meta(name="viewport", content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
@@ -44,7 +44,7 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 
 			//- Color of the embed sidebar in Discord,
 			//- also the color of tabs on mobile browsers.
-			meta(name="theme-color", content=app.Config.Manifest.ThemeColor)
+			meta(name="theme-color", content=assets.Manifest.ThemeColor)
 
 			//- Google site verification
 			meta(name="google-site-verification", content="1U-E2pDaYbFHyOSWl6AX3DvixQuDc4kfem9Kde_jZ8A")
@@ -62,7 +62,7 @@ component Layout(app *aero.Application, ctx *aero.Context, user *arn.User, openG
 				#user(data-id=user.ID, data-pro=user.IsPro(), data-theme=user.Settings().Theme)
 			
 			script(src="/scripts", importance="high", crossorigin="anonymous")
-			script(type="application/ld+json")!= organization
+			script(type="application/ld+json")!= assets.Organization
 
 component Content(content string)
 	#content-container

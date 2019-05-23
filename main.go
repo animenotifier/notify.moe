@@ -6,6 +6,7 @@ import (
 	"github.com/aerogo/aero"
 	nanostore "github.com/aerogo/session-store-nano"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/graphql"
 	"github.com/animenotifier/notify.moe/middleware"
@@ -32,7 +33,7 @@ func configure(app *aero.Application) *aero.Application {
 	configureHTTPS(app)
 
 	// Assets
-	configureAssets(app)
+	assets.Configure(app)
 
 	// Pages
 	pages.Configure(app)
@@ -54,7 +55,7 @@ func configure(app *aero.Application) *aero.Application {
 	if arn.IsDevelopment() {
 		app.Config.Domain = "beta.notify.moe"
 		app.Config.Title += " - Beta"
-		app.Config.Manifest.Name = app.Config.Title
+		assets.Manifest.Name = app.Config.Title
 	}
 
 	// Authentication

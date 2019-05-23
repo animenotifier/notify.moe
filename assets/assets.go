@@ -1,55 +1,81 @@
-package main
+package assets
 
 import (
 	"io/ioutil"
+	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/aerogo/manifest"
 	"github.com/aerogo/sitemap"
+	"github.com/akyoto/stringutils/unsafe"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/components/js"
 )
 
-// configureAssets adds all the routes used for media assets.
-func configureAssets(app *aero.Application) {
-	// Script bundle
-	scriptBundle := js.Bundle()
+var (
+	Manifest      *manifest.Manifest
+	JS            string
+	CSS           string
+	ServiceWorker string
+	Organization  string
+)
+
+// load loads all the necessary assets into memory.
+func load() {
+	var err error
+
+	// Manifest
+	Manifest, err = manifest.FromFile("manifest.json")
+
+	if err != nil {
+		panic("Couldn't load manifest.json")
+	}
 
 	// Service worker
-	serviceWorkerBytes, err := ioutil.ReadFile("scripts/ServiceWorker/ServiceWorker.js")
+	data, err := ioutil.ReadFile("scripts/ServiceWorker/ServiceWorker.js")
 
 	if err != nil {
 		panic("Couldn't load service worker")
 	}
 
-	serviceWorker := string(serviceWorkerBytes)
+	ServiceWorker = unsafe.BytesToString(data)
 
-	// CSS bundle
-	cssBundle := css.Bundle()
-
-	// Manifest
-	webManifest, err := manifest.FromFile("manifest.json")
+	// Organization
+	data, err = ioutil.ReadFile("organization.json")
 
 	if err != nil {
-		panic("Couldn't load web manifest")
+		panic("Couldn't load organization.json")
 	}
 
+	Organization = unsafe.BytesToString(data)
+	Organization = strings.ReplaceAll(Organization, "\n", "")
+	Organization = strings.ReplaceAll(Organization, "\t", "")
+
+	// Bundles
+	JS = js.Bundle()
+	CSS = css.Bundle()
+}
+
+// Configure adds all the routes used for media assets.
+func Configure(app *aero.Application) {
+	load()
+
 	app.Get("/scripts", func(ctx *aero.Context) string {
-		return ctx.JavaScript(scriptBundle)
+		return ctx.JavaScript(JS)
 	})
 
 	app.Get("/styles", func(ctx *aero.Context) string {
-		return ctx.CSS(cssBundle)
+		return ctx.CSS(CSS)
 	})
 
 	app.Get("/service-worker", func(ctx *aero.Context) string {
-		return ctx.JavaScript(serviceWorker)
+		return ctx.JavaScript(ServiceWorker)
 	})
 
 	// Web manifest
 	app.Get("/manifest.json", func(ctx *aero.Context) string {
-		return ctx.JSON(webManifest)
+		return ctx.JSON(Manifest)
 	})
 
 	// Favicon
