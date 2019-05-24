@@ -31,8 +31,8 @@ component Layout(ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, me
 			link(rel="manifest", href="/manifest.json")
 
 			//- Preconnect to CDN
-			link(rel="preconnect", href="//fonts.gstatic.com", crossorigin="anonymous")
-			link(rel="preconnect", href="//media.notify.moe", crossorigin="anonymous")
+			link(rel="preconnect", href="//fonts.gstatic.com")
+			link(rel="preconnect", href="//media.notify.moe")
 
 			//- Icons
 			link(rel="icon", type="image/webp", sizes="64x64", href="//media.notify.moe/images/brand/64.webp")
