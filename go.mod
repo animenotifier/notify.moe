@@ -17,11 +17,12 @@ require (
 	github.com/aerogo/markdown v0.1.8
 	github.com/aerogo/nano v0.2.1
 	github.com/aerogo/pack v0.5.0
+	github.com/aerogo/packet v0.1.7 // indirect
 	github.com/aerogo/run v1.0.1
 	github.com/aerogo/session-store-nano v0.1.5
 	github.com/aerogo/sitemap v0.1.2
 	github.com/akyoto/cache v1.0.2
-	github.com/akyoto/color v1.8.4
+	github.com/akyoto/color v1.8.5
 	github.com/akyoto/stringutils v0.2.0
 	github.com/animenotifier/anilist v0.2.3
 	github.com/animenotifier/arn v1.1.23
@@ -38,7 +39,6 @@ require (
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/json-iterator/go v1.1.6
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
-	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/minio/minio-go v6.0.14+incompatible
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mssola/user_agent v0.5.0
@@ -49,8 +49,6 @@ require (
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
 	golang.org/x/oauth2 v0.0.0-20190523182746-aaccbc9213b0
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
-	golang.org/x/sys v0.0.0-20190523142557-0e01d883c5c5 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.6.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
