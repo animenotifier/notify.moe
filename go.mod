@@ -15,9 +15,8 @@ require (
 	github.com/aerogo/log v0.2.5
 	github.com/aerogo/manifest v0.1.4
 	github.com/aerogo/markdown v0.1.8
-	github.com/aerogo/nano v0.2.1
+	github.com/aerogo/nano v0.3.1
 	github.com/aerogo/pack v0.5.0
-	github.com/aerogo/packet v0.1.7 // indirect
 	github.com/aerogo/run v1.0.1
 	github.com/aerogo/session-store-nano v0.1.5
 	github.com/aerogo/sitemap v0.1.2
@@ -25,7 +24,7 @@ require (
 	github.com/akyoto/color v1.8.5
 	github.com/akyoto/stringutils v0.2.0
 	github.com/animenotifier/anilist v0.2.3
-	github.com/animenotifier/arn v1.1.23
+	github.com/animenotifier/arn v1.1.24
 	github.com/animenotifier/kitsu v0.2.3
 	github.com/animenotifier/mal v0.2.3
 	github.com/animenotifier/shoboi v0.2.3
@@ -49,7 +48,6 @@ require (
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
 	golang.org/x/oauth2 v0.0.0-20190523182746-aaccbc9213b0
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.6.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
