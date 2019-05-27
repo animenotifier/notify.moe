@@ -21,9 +21,6 @@ func main() {
 
 	for kitsuCharacter := range kitsuCharacters {
 		character := &arn.Character{
-			HasID: arn.HasID{
-				ID: kitsuCharacter.ID,
-			},
 			Name: arn.CharacterName{
 				Canonical: kitsuCharacter.Attributes.CanonicalName,
 				English:   kitsuCharacter.Attributes.Names.En,
@@ -35,13 +32,13 @@ func main() {
 			},
 			Description: kitsuCharacter.Attributes.Description,
 			Attributes:  []*arn.CharacterAttribute{},
-			HasMappings: arn.HasMappings{
-				Mappings: []*arn.Mapping{
-					{
-						Service:   "kitsu/character",
-						ServiceID: kitsuCharacter.ID,
-					},
-				},
+		}
+
+		character.ID = kitsuCharacter.ID
+		character.Mappings = []*arn.Mapping{
+			{
+				Service:   "kitsu/character",
+				ServiceID: kitsuCharacter.ID,
 			},
 		}
 
