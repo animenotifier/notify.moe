@@ -106,7 +106,20 @@ func RenderField(b *strings.Builder, v *reflect.Value, field reflect.StructField
 
 	// Embedded fields
 	if field.Anonymous {
-		RenderObject(b, fieldValue.Interface(), idPrefix)
+		// If it's exported, render it normally.
+		if field.PkgPath == "" {
+			RenderObject(b, fieldValue.Interface(), idPrefix)
+		}
+
+		// If it's an unexported struct, we try to access the field names
+		// given to us from the anonymous struct on the actual object.
+		if field.Type.Kind() == reflect.Struct {
+			for i := 0; i < field.Type.NumField(); i++ {
+				f := field.Type.Field(i)
+				RenderField(b, v, f, idPrefix)
+			}
+		}
+
 		return
 	}
 

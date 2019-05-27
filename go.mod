@@ -4,7 +4,6 @@ go 1.12
 
 require (
 	cloud.google.com/go v0.39.0 // indirect
-	github.com/OneOfOne/xxhash v1.2.5
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
 	github.com/aerogo/aero v1.2.5
 	github.com/aerogo/api v0.1.7
@@ -22,9 +21,10 @@ require (
 	github.com/aerogo/sitemap v0.1.2
 	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.5
-	github.com/akyoto/stringutils v0.2.0
+	github.com/akyoto/hash v0.3.3
+	github.com/akyoto/stringutils v0.2.1
 	github.com/animenotifier/anilist v0.2.3
-	github.com/animenotifier/arn v1.1.24
+	github.com/animenotifier/arn v1.1.25
 	github.com/animenotifier/kitsu v0.2.3
 	github.com/animenotifier/mal v0.2.3
 	github.com/animenotifier/shoboi v0.2.3
@@ -48,6 +48,7 @@ require (
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/stretchr/testify v1.3.0
 	golang.org/x/oauth2 v0.0.0-20190523182746-aaccbc9213b0
+	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.6.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect

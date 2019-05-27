@@ -1,6 +1,7 @@
 package editor
 
 import (
+	"github.com/akyoto/hash"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/mal"
 	"github.com/animenotifier/notify.moe/utils"
@@ -13,7 +14,7 @@ func diffTitles(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
 
 	// Canonical title
 	if anime.Title.Canonical != malAnime.Title {
-		hash := utils.HashString(malAnime.Title)
+		hash := hash.String(malAnime.Title)
 
 		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "CanonicalTitle", hash) {
 			differences = append(differences, &animediff.CanonicalTitle{
@@ -26,7 +27,7 @@ func diffTitles(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
 
 	// Japanese title
 	if anime.Title.Japanese != malAnime.JapaneseTitle {
-		hash := utils.HashString(malAnime.JapaneseTitle)
+		hash := hash.String(malAnime.JapaneseTitle)
 
 		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "JapaneseTitle", hash) {
 			differences = append(differences, &animediff.JapaneseTitle{
@@ -39,7 +40,7 @@ func diffTitles(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
 
 	// Romaji title
 	if anime.Title.Romaji != malAnime.Title {
-		hash := utils.HashString(malAnime.Title)
+		hash := hash.String(malAnime.Title)
 
 		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "RomajiTitle", hash) {
 			differences = append(differences, &animediff.RomajiTitle{
@@ -59,7 +60,7 @@ func diffDates(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
 
 	// Airing start date
 	if anime.StartDate != malAnime.StartDate && malAnime.StartDate != "" {
-		hash := utils.HashString(malAnime.StartDate)
+		hash := hash.String(malAnime.StartDate)
 
 		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "StartDate", hash) {
 			differences = append(differences, &animediff.StartDate{
@@ -72,7 +73,7 @@ func diffDates(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
 
 	// Airing end date
 	if anime.EndDate != malAnime.EndDate && malAnime.EndDate != "" {
-		hash := utils.HashString(malAnime.EndDate)
+		hash := hash.String(malAnime.EndDate)
 
 		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "EndDate", hash) {
 			differences = append(differences, &animediff.EndDate{
@@ -112,7 +113,7 @@ func diffStatus(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference {
 
 	// Status
 	if anime.Status != malAnime.Status {
-		hash := utils.HashString(malAnime.Status)
+		hash := hash.String(malAnime.Status)
 
 		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Status", hash) {
 			differences = append(differences, &animediff.Status{
@@ -132,7 +133,7 @@ func diffSynopsis(anime *arn.Anime, malAnime *mal.Anime) []animediff.Difference 
 
 	// Synopsis
 	if len(anime.Summary) < 300 && len(anime.Summary)+50 < len(malAnime.Synopsis) {
-		hash := utils.HashString(malAnime.Synopsis)
+		hash := hash.String(malAnime.Synopsis)
 
 		if !arn.IsAnimeDifferenceIgnored(anime.ID, "mal", malAnime.ID, "Synopsis", hash) {
 			differences = append(differences, &animediff.Synopsis{
