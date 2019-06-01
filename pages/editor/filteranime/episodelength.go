@@ -6,7 +6,7 @@ import (
 )
 
 // EpisodeLength ...
-func EpisodeLength(ctx *aero.Context) string {
+func EpisodeLength(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without an episode length",

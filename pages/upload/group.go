@@ -9,7 +9,7 @@ import (
 )
 
 // GroupImage handles the group image upload.
-func GroupImage(ctx *aero.Context) string {
+func GroupImage(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	groupID := ctx.Get("id")
 
@@ -44,5 +44,5 @@ func GroupImage(ctx *aero.Context) string {
 	logEntry := arn.NewEditLogEntry(user.ID, "edit", "Group", group.ID, "Image", "", "")
 	logEntry.Save()
 
-	return "ok"
+	return nil
 }

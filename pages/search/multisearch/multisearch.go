@@ -6,6 +6,6 @@ import (
 )
 
 // Anime search page.
-func Anime(ctx *aero.Context) string {
+func Anime(ctx aero.Context) error {
 	return ctx.HTML(components.MultiSearch())
 }

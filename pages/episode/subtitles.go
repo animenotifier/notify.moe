@@ -10,7 +10,7 @@ import (
 )
 
 // Subtitles returns the subtitles.
-func Subtitles(ctx *aero.Context) string {
+func Subtitles(ctx aero.Context) error {
 	id := ctx.Get("id")
 	language := ctx.Get("language")
 	episodeNumber, err := ctx.GetInt("episode-number")
@@ -26,8 +26,8 @@ func Subtitles(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
-	ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
-	ctx.Response().Header().Set("Content-Type", "text/vtt; charset=utf-8")
+	ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
+	ctx.Response().SetHeader("Content-Type", "text/vtt; charset=utf-8")
 
 	obj, err := spaces.GetObject("arn", fmt.Sprintf("videos/anime/%s/%d.%s.vtt", anime.ID, episodeNumber, language), minio.GetObjectOptions{})
 

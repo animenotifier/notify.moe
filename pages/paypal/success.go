@@ -8,6 +8,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/arn/stringutils"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -16,7 +17,7 @@ const adminID = "4J6qpK1ve"
 
 // Success is called once the payment has been confirmed by the user on the PayPal website.
 // However, the actual payment still needs to be executed and can fail.
-func Success(ctx *aero.Context) string {
+func Success(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
@@ -90,7 +91,7 @@ func Success(ctx *aero.Context) string {
 			Title:   user.Nick + " bought " + strconv.Itoa(payment.Gems()) + " gems",
 			Message: user.Nick + " paid " + payment.Amount + " " + payment.Currency + " making his new balance " + strconv.Itoa(user.Balance),
 			Icon:    user.AvatarLink("large"),
-			Link:    "https://" + ctx.App.Config.Domain + "/api/paypalpayment/" + payment.ID,
+			Link:    "https://" + assets.Domain + "/api/paypalpayment/" + payment.ID,
 			Type:    arn.NotificationTypePurchase,
 		})
 	}()

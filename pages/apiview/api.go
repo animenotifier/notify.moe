@@ -12,7 +12,7 @@ import (
 )
 
 // Get api page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	types := []*autodocs.Type{}
 
 	for typeName := range arn.DB.Types() {

@@ -6,7 +6,7 @@ import (
 )
 
 // Relations ...
-func Relations(ctx *aero.Context) string {
+func Relations(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without relations",

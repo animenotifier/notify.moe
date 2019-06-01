@@ -9,8 +9,8 @@ import (
 )
 
 // RedirectByMapping redirects to the anime with the given mapping ID.
-func RedirectByMapping(mappingName string) func(*aero.Context) string {
-	return func(ctx *aero.Context) string {
+func RedirectByMapping(mappingName string) func(aero.Context) error {
+	return func(ctx aero.Context) error {
 		id := ctx.Get("id")
 		finder := arn.NewAnimeFinder(mappingName)
 		anime := finder.GetAnime(id)

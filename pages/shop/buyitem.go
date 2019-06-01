@@ -12,7 +12,7 @@ import (
 var itemBuyMutex sync.Mutex
 
 // BuyItem ...
-func BuyItem(ctx *aero.Context) string {
+func BuyItem(ctx aero.Context) error {
 	// Lock via mutex to prevent race conditions
 	itemBuyMutex.Lock()
 	defer itemBuyMutex.Unlock()
@@ -57,5 +57,5 @@ func BuyItem(ctx *aero.Context) string {
 	purchase := arn.NewPurchase(user.ID, itemID, quantity, int(item.Price), "gem")
 	purchase.Save()
 
-	return "ok"
+	return nil
 }

@@ -15,7 +15,7 @@ package profile
 // type stats map[string]float64
 
 // // GetStatsByUser shows statistics for a given user.
-// func GetStatsByUser(ctx *aero.Context) string {
+// func GetStatsByUser(ctx aero.Context) error {
 // 	nick := ctx.Get("nick")
 // 	viewUser, err := arn.GetUserByNick(nick)
 // 	userStats := utils.UserStats{}
@@ -98,5 +98,5 @@ package profile
 // 		arn.NewPieChart("Soundtracks", trackTags),
 // 	}
 
-// 	return ctx.HTML(components.ProfileStats(&userStats, viewUser, utils.GetUser(ctx), ctx.URI()))
+// 	return ctx.HTML(components.ProfileStats(&userStats, viewUser, utils.GetUser(ctx), ctx.Path()))
 // }

@@ -6,7 +6,7 @@ package profilequotes
 // )
 
 // // Liked shows all quotes liked by a particular user.
-// func Liked(ctx *aero.Context) string {
+// func Liked(ctx aero.Context) error {
 // 	return render(ctx, likedQuotes)
 // }
 

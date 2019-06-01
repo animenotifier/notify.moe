@@ -6,6 +6,6 @@ import (
 )
 
 // Get ...
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	return ctx.HTML(components.TermsOfService())
 }

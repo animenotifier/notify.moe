@@ -18,7 +18,7 @@ func Register(l *layout.Layout) {
 	l.Page("/editor", editor.Get)
 
 	// Editor links can be filtered by year, status and type
-	editorFilterable := func(route string, handler func(ctx *aero.Context) string) {
+	editorFilterable := func(route string, handler func(ctx aero.Context) error) {
 		l.Page(route+"/:year/:season/:status/:type", handler)
 	}
 

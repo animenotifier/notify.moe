@@ -6,7 +6,7 @@ import (
 )
 
 // Latest renders the latest soundtracks.
-func Latest(ctx *aero.Context) string {
+func Latest(ctx aero.Context) error {
 	// Fetch all eligible tracks
 	tracks := fetchAll()
 

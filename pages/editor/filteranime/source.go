@@ -6,7 +6,7 @@ import (
 )
 
 // Source ...
-func Source(ctx *aero.Context) string {
+func Source(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without a source",

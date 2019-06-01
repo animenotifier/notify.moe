@@ -11,7 +11,7 @@ import (
 const maxQuotes = 12
 
 // Latest renders the latest quotes.
-func Latest(ctx *aero.Context) string {
+func Latest(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 

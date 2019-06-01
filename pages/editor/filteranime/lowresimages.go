@@ -6,16 +6,16 @@ import (
 )
 
 // LowResolutionAnimeImages filters anime with low resolution images.
-func LowResolutionAnimeImages(ctx *aero.Context) string {
+func LowResolutionAnimeImages(ctx aero.Context) error {
 	return filterAnimeImages(ctx, "Anime with low resolution images", arn.AnimeImageLargeWidth, arn.AnimeImageLargeHeight)
 }
 
 // UltraLowResolutionAnimeImages filters anime with ultra low resolution images.
-func UltraLowResolutionAnimeImages(ctx *aero.Context) string {
+func UltraLowResolutionAnimeImages(ctx aero.Context) error {
 	return filterAnimeImages(ctx, "Anime with ultra low resolution images", arn.AnimeImageLargeWidth/2, arn.AnimeImageLargeHeight/2)
 }
 
-func filterAnimeImages(ctx *aero.Context, title string, minExpectedWidth int, minExpectedHeight int) string {
+func filterAnimeImages(ctx aero.Context, title string, minExpectedWidth int, minExpectedHeight int) error {
 	return editorList(
 		ctx,
 		title,

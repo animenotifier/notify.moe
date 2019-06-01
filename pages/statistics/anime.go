@@ -9,7 +9,7 @@ import (
 )
 
 // Anime ...
-func Anime(ctx *aero.Context) string {
+func Anime(ctx aero.Context) error {
 	pieCharts := getAnimeStats()
 	return ctx.HTML(components.Statistics(pieCharts))
 }

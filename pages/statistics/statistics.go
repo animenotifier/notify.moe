@@ -12,7 +12,7 @@ import (
 type stats map[string]float64
 
 // Get ...
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	pieCharts := getUserStats()
 	return ctx.HTML(components.Statistics(pieCharts))
 }

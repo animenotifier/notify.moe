@@ -5,12 +5,14 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get quote.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	quote, err := arn.GetQuote(id)
@@ -23,7 +25,7 @@ func Get(ctx *aero.Context) string {
 		Tags: map[string]string{
 			"og:title":       "Quote",
 			"og:description": quote.Text.English,
-			"og:url":         "https://" + ctx.App.Config.Domain + quote.Link(),
+			"og:url":         "https://" + assets.Domain + quote.Link(),
 			"og:site_name":   "notify.moe",
 			"og:type":        "article",
 		},
@@ -36,6 +38,7 @@ func Get(ctx *aero.Context) string {
 		openGraph.Tags["og:image"] = "https:" + character.ImageLink("large")
 	}
 
-	ctx.Data = openGraph
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = openGraph
 	return ctx.HTML(components.QuotePage(quote, character, user))
 }

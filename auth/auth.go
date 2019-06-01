@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"net/http"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -19,17 +21,17 @@ func Install(app *aero.Application) {
 	InstallTwitterAuth(app)
 
 	// Logout
-	app.Get("/logout", func(ctx *aero.Context) string {
+	app.Get("/logout", func(ctx aero.Context) error {
 		if ctx.HasSession() {
 			user := utils.GetUser(ctx)
 
 			if user != nil {
-				authLog.Info("%s logged out | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+				authLog.Info("%s logged out | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 			}
 
 			ctx.Session().Delete("userId")
 		}
 
-		return ctx.Redirect("/")
+		return ctx.Redirect(http.StatusFound, "/")
 	})
 }

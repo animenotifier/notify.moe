@@ -13,7 +13,7 @@ import (
 const minYear = 1963
 
 // Get ...
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	maxYear := time.Now().Year() - 1
 	hallOfFameEntries := []*utils.HallOfFameEntry{}

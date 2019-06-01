@@ -18,7 +18,7 @@ const (
 )
 
 // Get edit log.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 	nick := ctx.Get("nick")

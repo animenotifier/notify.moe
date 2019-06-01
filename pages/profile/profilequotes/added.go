@@ -6,7 +6,7 @@ package profilequotes
 // )
 
 // // Added shows all quotes added by a particular user.
-// func Added(ctx *aero.Context) string {
+// func Added(ctx aero.Context) error {
 // 	return render(ctx, addedQuotes)
 // }
 

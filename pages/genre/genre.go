@@ -13,7 +13,7 @@ const animePerPage = 100
 const animeRatingCountThreshold = 5
 
 // Get renders the genre page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	genreName := ctx.Get("name")
 	animes := []*arn.Anime{}

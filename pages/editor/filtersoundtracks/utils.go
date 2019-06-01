@@ -13,7 +13,7 @@ import (
 const maxSoundTrackEntries = 70
 
 // editorList renders the soundtrack list with the given title and filter.
-func editorList(ctx *aero.Context, title string, filter func(*arn.SoundTrack) bool, searchLink func(*arn.SoundTrack) string) string {
+func editorList(ctx aero.Context, title string, filter func(*arn.SoundTrack) bool, searchLink func(*arn.SoundTrack) string) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
@@ -21,7 +21,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.SoundTrack) bo
 	}
 
 	tracks, count := filterSoundTracks(ctx, user, filter)
-	url := strings.TrimPrefix(ctx.URI(), "/_")
+	url := strings.TrimPrefix(ctx.Path(), "/_")
 
 	return ctx.HTML(components.SoundTracksEditorListFull(
 		title,
@@ -34,7 +34,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.SoundTrack) bo
 }
 
 // filterSoundTracks filters soundtracks by the given filter function.
-func filterSoundTracks(ctx *aero.Context, user *arn.User, filter func(*arn.SoundTrack) bool) ([]*arn.SoundTrack, int) {
+func filterSoundTracks(ctx aero.Context, user *arn.User, filter func(*arn.SoundTrack) bool) ([]*arn.SoundTrack, int) {
 	// Filter
 	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && filter(track)

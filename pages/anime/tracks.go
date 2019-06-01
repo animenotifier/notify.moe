@@ -12,7 +12,7 @@ import (
 )
 
 // Tracks ...
-func Tracks(ctx *aero.Context) string {
+func Tracks(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 

@@ -6,7 +6,9 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
@@ -17,15 +19,15 @@ const (
 )
 
 // FilterByStatus returns a handler for the given anime list item status.
-func FilterByStatus(status string) aero.Handle {
-	return func(ctx *aero.Context) string {
+func FilterByStatus(status string) aero.Handler {
+	return func(ctx aero.Context) error {
 		user := utils.GetUser(ctx)
 		return AnimeList(ctx, user, status)
 	}
 }
 
 // AnimeList renders the anime list items.
-func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
+func AnimeList(ctx aero.Context, user *arn.User, status string) error {
 	nick := ctx.Get("nick")
 	index, _ := ctx.GetInt("index")
 	viewUser, err := arn.GetUserByNick(nick)
@@ -70,11 +72,12 @@ func AnimeList(ctx *aero.Context, user *arn.User, status string) string {
 	nextIndex := infinitescroll.NextIndex(ctx, len(allItems), maxLength, index)
 
 	// OpenGraph data
-	ctx.Data = &arn.OpenGraph{
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       viewUser.Nick + "'s anime list",
 			"og:image":       "https:" + viewUser.AvatarLink("large"),
-			"og:url":         "https://" + ctx.App.Config.Domain + viewUser.Link(),
+			"og:url":         "https://" + assets.Domain + viewUser.Link(),
 			"og:site_name":   "notify.moe",
 			"og:description": strconv.Itoa(len(animeList.Items)) + " anime",
 

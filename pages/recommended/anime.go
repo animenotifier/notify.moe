@@ -17,7 +17,7 @@ const (
 )
 
 // Anime shows a list of recommended anime.
-func Anime(ctx *aero.Context) string {
+func Anime(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)

@@ -11,7 +11,7 @@ import (
 )
 
 // PurchaseHistory ...
-func PurchaseHistory(ctx *aero.Context) string {
+func PurchaseHistory(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

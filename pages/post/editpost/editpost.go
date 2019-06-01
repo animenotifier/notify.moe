@@ -11,7 +11,7 @@ import (
 )
 
 // Get post edit page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 

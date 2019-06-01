@@ -10,7 +10,7 @@ import (
 )
 
 // Edit user.
-func Edit(ctx *aero.Context) string {
+func Edit(ctx aero.Context) error {
 	nick := ctx.Get("nick")
 	user := utils.GetUser(ctx)
 

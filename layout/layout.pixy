@@ -1,4 +1,4 @@
-component Layout(ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, meta, tags []string, content string)
+component Layout(ctx aero.Context, user *arn.User, openGraph *arn.OpenGraph, meta, tags []string, content string)
 	html(lang="en")
 		head
 			link(rel="stylesheet", href="/styles", importance="high")
@@ -6,7 +6,7 @@ component Layout(ctx *aero.Context, user *arn.User, openGraph *arn.OpenGraph, me
 			if openGraph != nil
 				title= openGraph.Tags["og:title"]
 			else
-				title= ctx.App.Config.Title
+				title= assets.Manifest.Name
 
 			//- Viewport
 			meta(name="viewport", content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")

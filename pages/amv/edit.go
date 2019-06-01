@@ -11,7 +11,7 @@ import (
 )
 
 // Edit track.
-func Edit(ctx *aero.Context) string {
+func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	amv, err := arn.GetAMV(id)
 	user := utils.GetUser(ctx)

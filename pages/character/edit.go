@@ -11,7 +11,7 @@ import (
 )
 
 // Edit character.
-func Edit(ctx *aero.Context) string {
+func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	character, err := arn.GetCharacter(id)
 	user := utils.GetUser(ctx)
@@ -24,7 +24,7 @@ func Edit(ctx *aero.Context) string {
 }
 
 // EditImages renders the form to edit the character images.
-func EditImages(ctx *aero.Context) string {
+func EditImages(ctx aero.Context) error {
 	id := ctx.Get("id")
 	character, err := arn.GetCharacter(id)
 	user := utils.GetUser(ctx)

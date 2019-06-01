@@ -10,7 +10,7 @@ import (
 )
 
 // Relations ...
-func Relations(ctx *aero.Context) string {
+func Relations(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 

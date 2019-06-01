@@ -6,7 +6,7 @@ import (
 )
 
 // FilterByTag renders the best soundtracks filtered by tag.
-func FilterByTag(ctx *aero.Context) string {
+func FilterByTag(ctx aero.Context) error {
 	tag := ctx.Get("tag")
 
 	// Fetch all eligible tracks

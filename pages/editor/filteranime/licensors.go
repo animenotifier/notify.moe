@@ -6,7 +6,7 @@ import (
 )
 
 // Licensors ...
-func Licensors(ctx *aero.Context) string {
+func Licensors(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without licensors",

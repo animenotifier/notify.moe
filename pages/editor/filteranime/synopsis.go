@@ -6,7 +6,7 @@ import (
 )
 
 // Synopsis ...
-func Synopsis(ctx *aero.Context) string {
+func Synopsis(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without a long synopsis",

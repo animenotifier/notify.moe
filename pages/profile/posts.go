@@ -12,7 +12,7 @@ package profile
 // const postLimit = 10
 
 // // GetPostsByUser shows all forum posts of a particular user.
-// func GetPostsByUser(ctx *aero.Context) string {
+// func GetPostsByUser(ctx aero.Context) error {
 // 	nick := ctx.Get("nick")
 // 	viewUser, err := arn.GetUserByNick(nick)
 
@@ -27,6 +27,6 @@ package profile
 // 		posts = posts[:postLimit]
 // 	}
 
-// 	return ctx.HTML(components.LatestPosts(arn.ToPostables(posts), viewUser, utils.GetUser(ctx), ctx.URI()))
+// 	return ctx.HTML(components.LatestPosts(arn.ToPostables(posts), viewUser, utils.GetUser(ctx), ctx.Path()))
 
 // }

@@ -34,7 +34,7 @@ func init() {
 }
 
 // Get renders the anime episode.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	episodeNumber, err := ctx.GetInt("episode-number")

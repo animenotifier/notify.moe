@@ -7,7 +7,7 @@ import (
 )
 
 // Best AMVs.
-func Best(ctx *aero.Context) string {
+func Best(ctx aero.Context) error {
 	amvs := fetchAll()
 
 	sort.Slice(amvs, func(i, j int) bool {

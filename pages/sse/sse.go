@@ -16,7 +16,7 @@ var (
 )
 
 // Events streams server events to the client.
-func Events(ctx *aero.Context) string {
+func Events(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

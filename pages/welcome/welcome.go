@@ -9,7 +9,7 @@ import (
 )
 
 // Get returns the welcome page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

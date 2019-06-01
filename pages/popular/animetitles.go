@@ -9,7 +9,7 @@ import (
 )
 
 // AnimeTitles returns a list of the 500 most popular anime titles.
-func AnimeTitles(ctx *aero.Context) string {
+func AnimeTitles(ctx aero.Context) error {
 	maxLength, err := ctx.GetInt("count")
 
 	if err != nil {

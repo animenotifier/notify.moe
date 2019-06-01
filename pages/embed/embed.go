@@ -9,21 +9,21 @@ import (
 )
 
 // Get anime list in the browser extension.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return utils.AllowEmbed(ctx, ctx.HTML(components.Login("_blank")))
+		return ctx.HTML(components.Login("_blank"))
 	}
 
 	if !user.HasBasicInfo() {
-		return utils.AllowEmbed(ctx, ctx.HTML(components.ExtensionEnterBasicInfo()))
+		return ctx.HTML(components.ExtensionEnterBasicInfo())
 	}
 
 	// Extension is enabled as long as the site isn't finished yet.
 	// ---
 	// if !user.IsPro() && user.TimeSinceRegistered() > 14*24*time.Hour {
-	// 	return utils.AllowEmbed(ctx, ctx.HTML(components.EmbedProNotice(user)))
+	// 	return ctx.HTML(components.EmbedProNotice(user))
 	// }
 
 	animeList := user.AnimeList()
@@ -35,5 +35,5 @@ func Get(ctx *aero.Context) string {
 	watchingList := animeList.Watching()
 	watchingList.Sort()
 
-	return utils.AllowEmbed(ctx, ctx.HTML(components.BrowserExtension(watchingList, animeList.User(), user)))
+	return ctx.HTML(components.BrowserExtension(watchingList, animeList.User(), user))
 }

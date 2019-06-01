@@ -7,7 +7,7 @@ import (
 )
 
 // Latest AMVs.
-func Latest(ctx *aero.Context) string {
+func Latest(ctx aero.Context) error {
 	amvs := fetchAll()
 
 	sort.Slice(amvs, func(i, j int) bool {

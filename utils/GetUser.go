@@ -6,7 +6,7 @@ import (
 )
 
 // GetUser returns the logged in user for the given context.
-func GetUser(ctx *aero.Context) *arn.User {
+func GetUser(ctx aero.Context) *arn.User {
 	return arn.GetUserFromContext(ctx)
 }
 

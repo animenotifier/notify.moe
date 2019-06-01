@@ -1,6 +1,8 @@
 package filtercompanies
 
 import (
+	"net/http"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
@@ -10,11 +12,11 @@ import (
 const maxEntries = 70
 
 // NoDescription ...
-func NoDescription(ctx *aero.Context) string {
+func NoDescription(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
-		return ctx.Redirect("/")
+		return ctx.Redirect(http.StatusFound, "/")
 	}
 
 	companies := arn.FilterCompanies(func(company *arn.Company) bool {
@@ -29,5 +31,5 @@ func NoDescription(ctx *aero.Context) string {
 		companies = companies[:maxEntries]
 	}
 
-	return ctx.HTML(components.CompaniesEditorList(companies, count, ctx.URI(), user))
+	return ctx.HTML(components.CompaniesEditorList(companies, count, ctx.Path(), user))
 }

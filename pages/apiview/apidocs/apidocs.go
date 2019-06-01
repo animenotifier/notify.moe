@@ -13,8 +13,8 @@ import (
 )
 
 // ByType renders the api docs page for the given type.
-func ByType(typeName string) func(*aero.Context) string {
-	return func(ctx *aero.Context) string {
+func ByType(typeName string) func(aero.Context) error {
+	return func(ctx aero.Context) error {
 		t := arn.API.Type(typeName)
 		fields := []*utils.APIField{}
 

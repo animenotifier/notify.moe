@@ -10,7 +10,7 @@ import (
 )
 
 // ReplyUI renders a new post area.
-func ReplyUI(ctx *aero.Context) string {
+func ReplyUI(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 	thread, err := arn.GetThread(id)

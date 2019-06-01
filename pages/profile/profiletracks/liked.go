@@ -6,7 +6,7 @@ package profiletracks
 // )
 
 // // Liked shows all soundtracks liked by a particular user.
-// func Liked(ctx *aero.Context) string {
+// func Liked(ctx aero.Context) error {
 // 	return render(ctx, likedTracks)
 // }
 

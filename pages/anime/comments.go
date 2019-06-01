@@ -11,7 +11,7 @@ import (
 )
 
 // Comments ...
-func Comments(ctx *aero.Context) string {
+func Comments(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	anime, err := arn.GetAnime(id)

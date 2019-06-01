@@ -12,7 +12,7 @@ import (
 )
 
 // AnimeList ...
-func AnimeList(ctx *aero.Context) string {
+func AnimeList(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	nickA := ctx.Get("nick-1")
 	nickB := ctx.Get("nick-2")

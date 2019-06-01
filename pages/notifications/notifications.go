@@ -14,7 +14,7 @@ import (
 const maxNotifications = 30
 
 // ByUser shows all notifications sent to the given user.
-func ByUser(ctx *aero.Context) string {
+func ByUser(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

@@ -11,7 +11,7 @@ import (
 const maxPopularCompanies = 10
 
 // Popular renders the best companies.
-func Popular(ctx *aero.Context) string {
+func Popular(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 

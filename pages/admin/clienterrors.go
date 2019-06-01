@@ -11,7 +11,7 @@ import (
 const maxReports = 80
 
 // ClientErrors shows client-side errors.
-func ClientErrors(ctx *aero.Context) string {
+func ClientErrors(ctx aero.Context) error {
 	reports := arn.AllClientErrorReports()
 
 	sort.Slice(reports, func(i, j int) bool {

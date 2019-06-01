@@ -8,7 +8,7 @@ import (
 )
 
 // Avatar handles the avatar upload.
-func Avatar(ctx *aero.Context) string {
+func Avatar(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
@@ -32,5 +32,5 @@ func Avatar(ctx *aero.Context) string {
 	// Save avatar information
 	user.Save()
 
-	return user.AvatarLink("small")
+	return ctx.Text(user.AvatarLink("small"))
 }

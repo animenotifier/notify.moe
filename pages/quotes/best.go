@@ -9,7 +9,7 @@ import (
 )
 
 // Best renders the best quotes.
-func Best(ctx *aero.Context) string {
+func Best(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 

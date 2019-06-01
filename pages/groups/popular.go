@@ -7,7 +7,7 @@ import (
 )
 
 // Popular shows the most popular groups.
-func Popular(ctx *aero.Context) string {
+func Popular(ctx aero.Context) error {
 	groups := fetchGroups("")
 
 	sort.Slice(groups, func(i, j int) bool {

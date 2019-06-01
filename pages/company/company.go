@@ -6,12 +6,14 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get renders a company page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	company, err := arn.GetCompany(id)
@@ -25,7 +27,7 @@ func Get(ctx *aero.Context) string {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     company.Name.English,
-			"og:url":       "https://" + ctx.App.Config.Domain + company.Link(),
+			"og:url":       "https://" + assets.Domain + company.Link(),
 			"og:site_name": "notify.moe",
 			"og:type":      "article",
 		},
@@ -41,7 +43,8 @@ func Get(ctx *aero.Context) string {
 		openGraph.Tags["og:description"] = company.Name.English + " company information."
 	}
 
-	ctx.Data = openGraph
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = openGraph
 
 	studioAnime, producedAnime, licensedAnime := company.Anime()
 

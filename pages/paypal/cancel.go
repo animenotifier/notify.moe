@@ -7,7 +7,7 @@ import (
 )
 
 // Cancel ...
-func Cancel(ctx *aero.Context) string {
+func Cancel(ctx aero.Context) error {
 	token := ctx.Query("token")
 	fmt.Println("cancel", token)
 

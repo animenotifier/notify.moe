@@ -14,7 +14,7 @@ import (
 )
 
 // Kitsu anime import.
-func Kitsu(ctx *aero.Context) string {
+func Kitsu(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 
@@ -45,5 +45,5 @@ func Kitsu(ctx *aero.Context) string {
 	// Log
 	fmt.Println(color.GreenString("✔"), anime.ID, anime.Title.Canonical)
 
-	return ""
+	return nil
 }

@@ -6,11 +6,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get post.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 	post, err := arn.GetPost(id)
@@ -19,6 +20,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Post not found", err)
 	}
 
-	ctx.Data = getOpenGraph(ctx, post)
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = getOpenGraph(ctx, post)
 	return ctx.HTML(components.Post(post, user))
 }

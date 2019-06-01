@@ -6,7 +6,7 @@ import (
 )
 
 // Tags shows soundtracks with less than 3 tags.
-func Tags(ctx *aero.Context) string {
+func Tags(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Soundtracks with less than 3 tags",

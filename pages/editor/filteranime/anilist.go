@@ -6,7 +6,7 @@ import (
 )
 
 // AniList ...
-func AniList(ctx *aero.Context) string {
+func AniList(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without Anilist mappings",

@@ -8,7 +8,7 @@ import (
 )
 
 // Random returns a random soundtrack.
-func Random(ctx *aero.Context) string {
+func Random(ctx aero.Context) error {
 	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft
 	})
@@ -20,7 +20,7 @@ func Random(ctx *aero.Context) string {
 }
 
 // Next returns the next soundtrack for the audio player.
-func Next(ctx *aero.Context) string {
+func Next(ctx aero.Context) error {
 	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && track.File != ""
 	})

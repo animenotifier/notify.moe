@@ -22,7 +22,7 @@ const (
 )
 
 // Get search page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
@@ -43,12 +43,12 @@ func Get(ctx *aero.Context) string {
 }
 
 // GetEmptySearch renders the search page with no contents.
-func GetEmptySearch(ctx *aero.Context) string {
+func GetEmptySearch(ctx aero.Context) error {
 	return ctx.HTML(components.SearchResults("", nil, nil, nil, nil, nil, nil, nil, nil, nil, utils.GetUser(ctx)))
 }
 
 // Anime search.
-func Anime(ctx *aero.Context) string {
+func Anime(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
@@ -58,7 +58,7 @@ func Anime(ctx *aero.Context) string {
 }
 
 // Characters search.
-func Characters(ctx *aero.Context) string {
+func Characters(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
@@ -68,7 +68,7 @@ func Characters(ctx *aero.Context) string {
 }
 
 // Posts search.
-func Posts(ctx *aero.Context) string {
+func Posts(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
@@ -78,7 +78,7 @@ func Posts(ctx *aero.Context) string {
 }
 
 // Threads search.
-func Threads(ctx *aero.Context) string {
+func Threads(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
@@ -88,7 +88,7 @@ func Threads(ctx *aero.Context) string {
 }
 
 // SoundTracks search.
-func SoundTracks(ctx *aero.Context) string {
+func SoundTracks(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
@@ -98,7 +98,7 @@ func SoundTracks(ctx *aero.Context) string {
 }
 
 // AMVs search.
-func AMVs(ctx *aero.Context) string {
+func AMVs(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
@@ -108,7 +108,7 @@ func AMVs(ctx *aero.Context) string {
 }
 
 // Users search.
-func Users(ctx *aero.Context) string {
+func Users(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 
@@ -117,7 +117,7 @@ func Users(ctx *aero.Context) string {
 }
 
 // Companies search.
-func Companies(ctx *aero.Context) string {
+func Companies(ctx aero.Context) error {
 	term := ctx.Get("term")
 	term = strings.TrimPrefix(term, "/")
 

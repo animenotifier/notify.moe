@@ -14,7 +14,7 @@ const (
 )
 
 // render renders the activities page with the given activities.
-func render(ctx *aero.Context, allActivities []arn.Activity) string {
+func render(ctx aero.Context, allActivities []arn.Activity) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 

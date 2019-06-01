@@ -20,10 +20,10 @@ package middleware
 
 // // Firewall middleware detects malicious requests.
 // func Firewall() aero.Middleware {
-// 	return func(ctx *aero.Context, next func()) {
+// 	return func(ctx aero.Context, next func()) {
 // 		var stats *IPStats
 
-// 		ip := ctx.RealIP()
+// 		ip := ctx.IP()
 
 // 		// Allow localhost
 // 		if ip == "127.0.0.1" {
@@ -44,7 +44,7 @@ package middleware
 // 		}
 
 // 		// Add requested URI to the list of requests
-// 		stats.Requests = append(stats.Requests, ctx.URI())
+// 		stats.Requests = append(stats.Requests, ctx.Path())
 
 // 		if len(stats.Requests) > requestThreshold {
 // 			stats.Requests = stats.Requests[len(stats.Requests)-requestThreshold:]
@@ -69,7 +69,7 @@ package middleware
 // 			}
 
 // 			// Disallow request
-// 			request.Error("[guest]", ip, "BLOCKED BY FIREWALL", ctx.URI())
+// 			request.Error("[guest]", ip, "BLOCKED BY FIREWALL", ctx.Path())
 // 			return
 // 		}
 

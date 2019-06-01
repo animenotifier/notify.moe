@@ -9,7 +9,7 @@ import (
 )
 
 // Download tries to refresh the soundtrack file.
-func Download(ctx *aero.Context) string {
+func Download(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 
@@ -24,6 +24,5 @@ func Download(ctx *aero.Context) string {
 	}
 
 	track.Download()
-
-	return ""
+	return nil
 }

@@ -8,7 +8,7 @@ import (
 )
 
 // MissingLyrics shows soundtracks without lyrics.
-func MissingLyrics(ctx *aero.Context) string {
+func MissingLyrics(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Soundtracks without lyrics",
@@ -26,7 +26,7 @@ func MissingLyrics(ctx *aero.Context) string {
 }
 
 // UnalignedLyrics shows soundtracks with unaligned lyrics.
-func UnalignedLyrics(ctx *aero.Context) string {
+func UnalignedLyrics(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Soundtracks with unaligned lyrics",

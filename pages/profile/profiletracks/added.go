@@ -6,7 +6,7 @@ package profiletracks
 // )
 
 // // Added shows all soundtracks added by a particular user.
-// func Added(ctx *aero.Context) string {
+// func Added(ctx aero.Context) error {
 // 	return render(ctx, addedTracks)
 // }
 

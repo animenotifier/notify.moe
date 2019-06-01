@@ -10,7 +10,7 @@ import (
 )
 
 // AMVFile handles the video upload for AMV files.
-func AMVFile(ctx *aero.Context) string {
+func AMVFile(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	amvID := ctx.Get("id")
 
@@ -45,5 +45,5 @@ func AMVFile(ctx *aero.Context) string {
 	logEntry := arn.NewEditLogEntry(user.ID, "edit", "AMV", amv.ID, "File", "", "")
 	logEntry.Save()
 
-	return "ok"
+	return nil
 }

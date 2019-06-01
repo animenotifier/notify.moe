@@ -10,7 +10,7 @@ import (
 )
 
 // CharacterImage handles the character image upload.
-func CharacterImage(ctx *aero.Context) string {
+func CharacterImage(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	characterID := ctx.Get("id")
 
@@ -45,5 +45,5 @@ func CharacterImage(ctx *aero.Context) string {
 	logEntry := arn.NewEditLogEntry(user.ID, "edit", "Character", character.ID, "Image", "", "")
 	logEntry.Save()
 
-	return "ok"
+	return nil
 }

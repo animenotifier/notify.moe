@@ -8,7 +8,7 @@ import (
 )
 
 // Cover handles the cover image upload.
-func Cover(ctx *aero.Context) string {
+func Cover(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
@@ -36,5 +36,5 @@ func Cover(ctx *aero.Context) string {
 	// Save cover image information
 	user.Save()
 
-	return "ok"
+	return nil
 }

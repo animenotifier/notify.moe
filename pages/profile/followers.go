@@ -10,7 +10,7 @@ package profile
 // )
 
 // // GetFollowers shows the followers of a particular user.
-// func GetFollowers(ctx *aero.Context) string {
+// func GetFollowers(ctx aero.Context) error {
 // 	nick := ctx.Get("nick")
 // 	viewUser, err := arn.GetUserByNick(nick)
 
@@ -21,6 +21,6 @@ package profile
 // 	followers := viewUser.Followers()
 // 	arn.SortUsersLastSeenFirst(followers)
 
-// 	return ctx.HTML(components.ProfileFollowers(followers, viewUser, utils.GetUser(ctx), ctx.URI()))
+// 	return ctx.HTML(components.ProfileFollowers(followers, viewUser, utils.GetUser(ctx), ctx.Path()))
 
 // }

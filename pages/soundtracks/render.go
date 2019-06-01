@@ -14,7 +14,7 @@ const (
 )
 
 // render renders the soundracks page with the given tracks.
-func render(ctx *aero.Context, allTracks []*arn.SoundTrack) string {
+func render(ctx aero.Context, allTracks []*arn.SoundTrack) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 	tag := ctx.Get("tag")

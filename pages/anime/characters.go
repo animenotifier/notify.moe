@@ -12,7 +12,7 @@ import (
 )
 
 // Characters ...
-func Characters(ctx *aero.Context) string {
+func Characters(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 	anime, err := arn.GetAnime(id)

@@ -11,7 +11,7 @@ import (
 )
 
 // NewKitsuAnime ...
-func NewKitsuAnime(ctx *aero.Context) string {
+func NewKitsuAnime(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	finder := arn.NewAnimeFinder("kitsu/anime")
 	deletedIDs, err := arn.GetIDList("deleted kitsu anime")
@@ -31,5 +31,5 @@ func NewKitsuAnime(ctx *aero.Context) string {
 		return a.ID > b.ID
 	})
 
-	return ctx.HTML(components.NewKitsuAnime(animes, ctx.URI(), user))
+	return ctx.HTML(components.NewKitsuAnime(animes, ctx.Path(), user))
 }

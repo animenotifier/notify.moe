@@ -7,7 +7,7 @@ import (
 )
 
 // Get support page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	profileLink := "/"
 

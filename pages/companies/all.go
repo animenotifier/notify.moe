@@ -12,7 +12,7 @@ import (
 )
 
 // All renders an index of all companies.
-func All(ctx *aero.Context) string {
+func All(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	companies := arn.FilterCompanies(func(company *arn.Company) bool {

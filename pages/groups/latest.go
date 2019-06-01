@@ -7,7 +7,7 @@ import (
 )
 
 // Latest shows the latest groups.
-func Latest(ctx *aero.Context) string {
+func Latest(ctx aero.Context) error {
 	groups := fetchGroups("")
 
 	sort.Slice(groups, func(i, j int) bool {

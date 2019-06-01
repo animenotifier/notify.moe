@@ -6,6 +6,6 @@ import (
 )
 
 // Map shows a map of all users.
-func Map(ctx *aero.Context) string {
-	return ctx.HTML(components.UserMap(ctx.URI()))
+func Map(ctx aero.Context) error {
+	return ctx.HTML(components.UserMap(ctx.Path()))
 }

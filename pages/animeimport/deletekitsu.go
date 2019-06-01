@@ -10,7 +10,7 @@ import (
 )
 
 // DeleteKitsu marks an anime for deletion.
-func DeleteKitsu(ctx *aero.Context) string {
+func DeleteKitsu(ctx aero.Context) error {
 	id := ctx.Get("id")
 
 	// Is the user allowed to delete?
@@ -39,5 +39,5 @@ func DeleteKitsu(ctx *aero.Context) string {
 	// Save in database
 	arn.DB.Set("IDList", "deleted kitsu anime", &deletedKitsuAnime)
 
-	return ""
+	return nil
 }

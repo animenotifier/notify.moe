@@ -19,6 +19,7 @@ var (
 	CSS           string
 	ServiceWorker string
 	Organization  string
+	Domain        = "notify.moe"
 )
 
 // load loads all the necessary assets into memory.
@@ -57,55 +58,55 @@ func load() {
 	CSS = css.Bundle()
 }
 
-// Configure adds all the routes used for media assets.
+// Configure adds all the routes used for media
 func Configure(app *aero.Application) {
 	load()
 
-	app.Get("/scripts", func(ctx *aero.Context) string {
+	app.Get("/scripts", func(ctx aero.Context) error {
 		return ctx.JavaScript(JS)
 	})
 
-	app.Get("/styles", func(ctx *aero.Context) string {
+	app.Get("/styles", func(ctx aero.Context) error {
 		return ctx.CSS(CSS)
 	})
 
-	app.Get("/service-worker", func(ctx *aero.Context) string {
+	app.Get("/service-worker", func(ctx aero.Context) error {
 		return ctx.JavaScript(ServiceWorker)
 	})
 
 	// Web manifest
-	app.Get("/manifest.json", func(ctx *aero.Context) string {
+	app.Get("/manifest.json", func(ctx aero.Context) error {
 		return ctx.JSON(Manifest)
 	})
 
 	// Favicon
-	app.Get("/favicon.ico", func(ctx *aero.Context) string {
-		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
+	app.Get("/favicon.ico", func(ctx aero.Context) error {
+		ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 		return ctx.File("images/brand/64.png")
 	})
 
 	// Images
-	app.Get("/images/*file", func(ctx *aero.Context) string {
-		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
+	app.Get("/images/*file", func(ctx aero.Context) error {
+		ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 		return ctx.File("images/" + ctx.Get("file"))
 	})
 
 	// Videos
-	app.Get("/videos/*file", func(ctx *aero.Context) string {
-		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
+	app.Get("/videos/*file", func(ctx aero.Context) error {
+		ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 		return ctx.File("videos/" + ctx.Get("file"))
 	})
 
 	// Audio
-	app.Get("/audio/*file", func(ctx *aero.Context) string {
-		ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
+	app.Get("/audio/*file", func(ctx aero.Context) error {
+		ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 		return ctx.File("audio/" + ctx.Get("file"))
 	})
 
 	// Anime sitemap
-	app.Get("/sitemap/anime.txt", func(ctx *aero.Context) string {
+	app.Get("/sitemap/anime.txt", func(ctx aero.Context) error {
 		sitemap := sitemap.New()
-		prefix := "https://" + app.Config.Domain
+		prefix := "https://" + Domain
 
 		for anime := range arn.StreamAnime() {
 			sitemap.Add(prefix + anime.Link())
@@ -115,9 +116,9 @@ func Configure(app *aero.Application) {
 	})
 
 	// Character sitemap
-	app.Get("/sitemap/character.txt", func(ctx *aero.Context) string {
+	app.Get("/sitemap/character.txt", func(ctx aero.Context) error {
 		sitemap := sitemap.New()
-		prefix := "https://" + app.Config.Domain
+		prefix := "https://" + Domain
 
 		for character := range arn.StreamCharacters() {
 			sitemap.Add(prefix + character.Link())
@@ -127,9 +128,9 @@ func Configure(app *aero.Application) {
 	})
 
 	// User sitemap
-	app.Get("/sitemap/user.txt", func(ctx *aero.Context) string {
+	app.Get("/sitemap/user.txt", func(ctx aero.Context) error {
 		sitemap := sitemap.New()
-		prefix := "https://" + app.Config.Domain
+		prefix := "https://" + Domain
 
 		for user := range arn.StreamUsers() {
 			if !user.HasNick() {
@@ -143,9 +144,9 @@ func Configure(app *aero.Application) {
 	})
 
 	// SoundTrack sitemap
-	app.Get("/sitemap/soundtrack.txt", func(ctx *aero.Context) string {
+	app.Get("/sitemap/soundtrack.txt", func(ctx aero.Context) error {
 		sitemap := sitemap.New()
-		prefix := "https://" + app.Config.Domain
+		prefix := "https://" + Domain
 
 		for soundTrack := range arn.StreamSoundTracks() {
 			sitemap.Add(prefix + soundTrack.Link())
@@ -155,9 +156,9 @@ func Configure(app *aero.Application) {
 	})
 
 	// Thread sitemap
-	app.Get("/sitemap/thread.txt", func(ctx *aero.Context) string {
+	app.Get("/sitemap/thread.txt", func(ctx aero.Context) error {
 		sitemap := sitemap.New()
-		prefix := "https://" + app.Config.Domain
+		prefix := "https://" + Domain
 
 		for thread := range arn.StreamThreads() {
 			sitemap.Add(prefix + thread.Link())
@@ -167,9 +168,9 @@ func Configure(app *aero.Application) {
 	})
 
 	// Post sitemap
-	app.Get("/sitemap/post.txt", func(ctx *aero.Context) string {
+	app.Get("/sitemap/post.txt", func(ctx aero.Context) error {
 		sitemap := sitemap.New()
-		prefix := "https://" + app.Config.Domain
+		prefix := "https://" + Domain
 
 		for post := range arn.StreamPosts() {
 			sitemap.Add(prefix + post.Link())
@@ -179,7 +180,7 @@ func Configure(app *aero.Application) {
 	})
 
 	// For benchmarks
-	app.Get("/hello", func(ctx *aero.Context) string {
+	app.Get("/hello", func(ctx aero.Context) error {
 		return ctx.Text("Hello World")
 	})
 }

@@ -3,7 +3,9 @@ package soundtrack
 import (
 	"net/http"
 
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/editform"
 
@@ -12,7 +14,7 @@ import (
 )
 
 // Edit track.
-func Edit(ctx *aero.Context) string {
+func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	track, err := arn.GetSoundTrack(id)
 	user := utils.GetUser(ctx)
@@ -21,17 +23,18 @@ func Edit(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
-	ctx.Data = &arn.OpenGraph{
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     track.Title.ByUser(user),
-			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
+			"og:url":       "https://" + assets.Domain + track.Link(),
 			"og:site_name": "notify.moe",
 			"og:type":      "music.song",
 		},
 	}
 
 	if track.MainAnime() != nil {
-		ctx.Data.(*arn.OpenGraph).Tags["og:image"] = track.MainAnime().ImageLink("large")
+		customCtx.OpenGraph.Tags["og:image"] = track.MainAnime().ImageLink("large")
 	}
 
 	return ctx.HTML(components.SoundTrackTabs(track, user) + editform.Render(track, "Edit soundtrack", user))

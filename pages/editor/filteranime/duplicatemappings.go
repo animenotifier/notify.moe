@@ -6,7 +6,7 @@ import (
 )
 
 // DuplicateMappings ...
-func DuplicateMappings(ctx *aero.Context) string {
+func DuplicateMappings(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime with duplicate mappings",

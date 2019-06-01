@@ -10,7 +10,7 @@ import (
 )
 
 // AnimeImage handles the anime image upload.
-func AnimeImage(ctx *aero.Context) string {
+func AnimeImage(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	animeID := ctx.Get("id")
 
@@ -45,5 +45,5 @@ func AnimeImage(ctx *aero.Context) string {
 	logEntry := arn.NewEditLogEntry(user.ID, "edit", "Anime", anime.ID, "Image", "", "")
 	logEntry.Save()
 
-	return "ok"
+	return nil
 }

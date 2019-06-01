@@ -112,7 +112,7 @@ func testRoute(t *testing.T, app *aero.Application, route string) {
 
 	// Record the response
 	responseRecorder := httptest.NewRecorder()
-	app.Handler().ServeHTTP(responseRecorder, request)
+	app.ServeHTTP(responseRecorder, request)
 	status := responseRecorder.Code
 
 	switch status {

@@ -6,7 +6,7 @@ import (
 )
 
 // Links shows soundtracks without links.
-func Links(ctx *aero.Context) string {
+func Links(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Soundtracks without links",

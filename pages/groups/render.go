@@ -14,7 +14,7 @@ const (
 )
 
 // render renders the groups page with the given groups.
-func render(ctx *aero.Context, allGroups []*arn.Group) string {
+func render(ctx aero.Context, allGroups []*arn.Group) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 

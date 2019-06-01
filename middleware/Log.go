@@ -32,18 +32,19 @@ func init() {
 }
 
 // Log middleware logs every request into logs/request.log and errors into logs/error.log.
-func Log() aero.Middleware {
-	return func(ctx *aero.Context, next func()) {
+func Log(next aero.Handler) aero.Handler {
+	return func(ctx aero.Context) error {
 		start := time.Now()
-		next()
+		err := next(ctx)
 		responseTime := time.Since(start)
 
 		go logRequest(ctx, responseTime)
+		return err
 	}
 }
 
 // Logs a single request
-func logRequest(ctx *aero.Context, responseTime time.Duration) {
+func logRequest(ctx aero.Context, responseTime time.Duration) {
 	responseTimeString := strconv.Itoa(int(responseTime.Nanoseconds()/1000000)) + " ms"
 	repeatSpaceCount := 8 - len(responseTimeString)
 
@@ -54,7 +55,7 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 	responseTimeString = strings.Repeat(" ", repeatSpaceCount) + responseTimeString
 
 	user := utils.GetUser(ctx)
-	ip := ctx.RealIP()
+	ip := ctx.IP()
 	hostNames, cached := GetHostsForIP(ip)
 
 	if !cached && len(hostNames) > 0 {
@@ -70,20 +71,20 @@ func logRequest(ctx *aero.Context, responseTime time.Duration) {
 		nick = user.Nick
 	}
 
-	requestLog.Info("%s | %s | %s | %s | %d | %s", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
+	requestLog.Info("%s | %s | %s | %s | %d | %s", nick, id, ip, responseTimeString, ctx.Status(), ctx.Path())
 
 	// Log all requests that failed
-	switch ctx.StatusCode {
+	switch ctx.Status() {
 	case http.StatusOK, http.StatusFound, http.StatusMovedPermanently, http.StatusPermanentRedirect, http.StatusTemporaryRedirect:
 		// Ok.
 
 	default:
-		errorLog.Error("%s | %s | %s | %s | %d | %s (%s)", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI(), ctx.ErrorMessage)
+		errorLog.Error("%s | %s | %s | %s | %d | %s", nick, id, ip, responseTimeString, ctx.Status(), ctx.Path())
 	}
 
 	// Notify us about long requests.
 	// However ignore requests under /auth/ because those depend on 3rd party servers.
-	if responseTime >= 500*time.Millisecond && !strings.HasPrefix(ctx.URI(), "/auth/") && !strings.HasPrefix(ctx.URI(), "/sitemap/") && !strings.HasPrefix(ctx.URI(), "/api/sse/") {
-		errorLog.Error("%s | %s | %s | %s | %d | %s (long response time)", nick, id, ip, responseTimeString, ctx.StatusCode, ctx.URI())
+	if responseTime >= 500*time.Millisecond && !strings.HasPrefix(ctx.Path(), "/auth/") && !strings.HasPrefix(ctx.Path(), "/sitemap/") && !strings.HasPrefix(ctx.Path(), "/api/sse/") {
+		errorLog.Error("%s | %s | %s | %s | %d | %s (long response time)", nick, id, ip, responseTimeString, ctx.Status(), ctx.Path())
 	}
 }

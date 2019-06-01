@@ -12,7 +12,7 @@ package profile
 // const maxThreads = 20
 
 // // GetThreadsByUser shows all forum threads of a particular user.
-// func GetThreadsByUser(ctx *aero.Context) string {
+// func GetThreadsByUser(ctx aero.Context) error {
 // 	nick := ctx.Get("nick")
 // 	viewUser, err := arn.GetUserByNick(nick)
 
@@ -27,5 +27,5 @@ package profile
 // 		threads = threads[:maxThreads]
 // 	}
 
-// 	return ctx.HTML(components.ProfileThreads(threads, viewUser, utils.GetUser(ctx), ctx.URI()))
+// 	return ctx.HTML(components.ProfileThreads(threads, viewUser, utils.GetUser(ctx), ctx.Path()))
 // }

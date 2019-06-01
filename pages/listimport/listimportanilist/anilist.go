@@ -1,6 +1,8 @@
 package listimportanilist
 
 import (
+	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -12,34 +14,34 @@ import (
 )
 
 // Preview shows an import preview.
-func Preview(ctx *aero.Context) string {
+func Preview(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
-	matches, response := getMatches(ctx)
+	matches, err := getMatches(ctx)
 
-	if response != "" {
-		return response
+	if err != nil {
+		return ctx.Error(http.StatusBadRequest, err)
 	}
 
 	return ctx.HTML(components.ImportAnilist(user, matches))
 }
 
 // Finish ...
-func Finish(ctx *aero.Context) string {
+func Finish(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
-	matches, response := getMatches(ctx)
+	matches, err := getMatches(ctx)
 
-	if response != "" {
-		return response
+	if err != nil {
+		return ctx.Error(http.StatusBadRequest, err)
 	}
 
 	animeList := user.AnimeList()
@@ -71,31 +73,29 @@ func Finish(ctx *aero.Context) string {
 }
 
 // getMatches finds and returns all matches for the logged in user.
-func getMatches(ctx *aero.Context) ([]*arn.AniListMatch, string) {
+func getMatches(ctx aero.Context) ([]*arn.AniListMatch, error) {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Not logged in")
+		return nil, errors.New("Not logged in")
 	}
 
-	// Get user
 	anilistUser, err := anilist.GetUser(user.Accounts.AniList.Nick)
 
 	if err != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "User doesn't exist on AniList", err)
+		return nil, fmt.Errorf("User doesn't exist on AniList: %s", err.Error())
 	}
 
-	// Get anime list
 	anilistAnimeList, err := anilist.GetAnimeList(anilistUser.ID)
 
 	if err != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load your anime list from AniList", err)
+		return nil, fmt.Errorf("Couldn't load your anime list from AniList: %s", err.Error())
 	}
 
 	// Find matches
 	matches := findAllMatches(anilistAnimeList)
 
-	return matches, ""
+	return matches, nil
 }
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.

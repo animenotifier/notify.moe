@@ -14,7 +14,7 @@ const (
 )
 
 // render renders the characters page with the given characters.
-func render(ctx *aero.Context, allCharacters []*arn.Character) string {
+func render(ctx aero.Context, allCharacters []*arn.Character) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 	tag := ctx.Get("tag")

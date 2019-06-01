@@ -9,6 +9,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
 	jsoniter "github.com/json-iterator/go"
 	"golang.org/x/oauth2"
@@ -33,7 +34,7 @@ func InstallFacebookAuth(app *aero.Application) {
 	config := &oauth2.Config{
 		ClientID:     arn.APIKeys.Facebook.ID,
 		ClientSecret: arn.APIKeys.Facebook.Secret,
-		RedirectURL:  "https://" + app.Config.Domain + "/auth/facebook/callback",
+		RedirectURL:  "https://" + assets.Domain + "/auth/facebook/callback",
 		Scopes: []string{
 			"public_profile",
 			"email",
@@ -44,10 +45,10 @@ func InstallFacebookAuth(app *aero.Application) {
 	// When a user visits /auth/facebook, we ask OAuth2 config for a URL
 	// to redirect the user to. Once the user has logged in on that page,
 	// he'll be redirected back to our servers to the callback page.
-	app.Get("/auth/facebook", func(ctx *aero.Context) string {
+	app.Get("/auth/facebook", func(ctx aero.Context) error {
 		state := ctx.Session().ID()
 		url := config.AuthCodeURL(state)
-		return ctx.Redirect(url)
+		return ctx.Redirect(http.StatusFound, url)
 	})
 
 	// This is the redirect URL that we specified in the OAuth2 config.
@@ -55,7 +56,7 @@ func InstallFacebookAuth(app *aero.Application) {
 	// Now we have to check for fraud requests and request user information.
 	// If both Facebook ID and email can't be found in our DB, register a new user.
 	// Otherwise, log in the user with the given Facebook ID or email.
-	app.Get("/auth/facebook/callback", func(ctx *aero.Context) string {
+	app.Get("/auth/facebook/callback", func(ctx aero.Context) error {
 		if !ctx.HasSession() {
 			return ctx.Error(http.StatusUnauthorized, "Facebook login failed", errors.New("Session does not exist"))
 		}
@@ -108,9 +109,9 @@ func InstallFacebookAuth(app *aero.Application) {
 			user.Save()
 
 			// Log
-			authLog.Info("Added Facebook ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("Added Facebook ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		var getErr error
@@ -119,7 +120,7 @@ func InstallFacebookAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByFacebookID(fbUser.ID)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Facebook ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Facebook ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 			// Add FacebookToUser reference
 			user.ConnectFacebook(fbUser.ID)
@@ -128,20 +129,20 @@ func InstallFacebookAuth(app *aero.Application) {
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		// Try to find an existing user via the associated e-mail address
 		user, getErr = arn.GetUserByEmail(fbUser.Email)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		// Register new user
@@ -169,9 +170,9 @@ func InstallFacebookAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user via Facebook | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Facebook | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
-		return ctx.Redirect(newUserStartRoute)
+		return ctx.Redirect(http.StatusFound, newUserStartRoute)
 	})
 }

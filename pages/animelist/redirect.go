@@ -8,12 +8,12 @@ import (
 )
 
 // Redirect to the full URL including the user nick.
-func Redirect(ctx *aero.Context) string {
+func Redirect(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
-	return ctx.Redirect("/+" + user.Nick + ctx.URI())
+	return ctx.Redirect(http.StatusFound, "/+" + user.Nick + ctx.Path())
 }

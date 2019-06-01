@@ -12,7 +12,7 @@ import (
 )
 
 // UserRegistrations ...
-func UserRegistrations(ctx *aero.Context) string {
+func UserRegistrations(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

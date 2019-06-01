@@ -6,7 +6,7 @@ import (
 )
 
 // Producers ...
-func Producers(ctx *aero.Context) string {
+func Producers(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without producers",

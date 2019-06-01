@@ -18,7 +18,7 @@ const maxCompareMALEntries = 15
 type diffFunction func(*arn.Anime, *mal.Anime) []animediff.Difference
 
 // CompareMAL ...
-func CompareMAL(ctx *aero.Context) string {
+func CompareMAL(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	year := ctx.Get("year")
 	status := ctx.Get("status")

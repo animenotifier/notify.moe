@@ -4,15 +4,16 @@ import (
 	"sort"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Render layout.
-func Render(ctx *aero.Context, content string) string {
+func Render(ctx aero.Context, content string) string {
 	user := utils.GetUser(ctx)
-	openGraph, _ := ctx.Data.(*arn.OpenGraph)
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	openGraph := customCtx.OpenGraph
 
 	// Make output order deterministic to profit from Aero caching.
 	// To do this, we need to create slices and sort the tags.

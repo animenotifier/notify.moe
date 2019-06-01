@@ -8,7 +8,7 @@ import (
 )
 
 // Trailers ...
-func Trailers(ctx *aero.Context) string {
+func Trailers(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without trailers",

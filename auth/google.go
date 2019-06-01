@@ -9,6 +9,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
 	jsoniter "github.com/json-iterator/go"
 	"golang.org/x/oauth2"
@@ -38,7 +39,7 @@ func InstallGoogleAuth(app *aero.Application) {
 	config := &oauth2.Config{
 		ClientID:     arn.APIKeys.Google.ID,
 		ClientSecret: arn.APIKeys.Google.Secret,
-		RedirectURL:  "https://" + app.Config.Domain + "/auth/google/callback",
+		RedirectURL:  "https://" + assets.Domain + "/auth/google/callback",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email",
 			"https://www.googleapis.com/auth/userinfo.profile",
@@ -51,10 +52,10 @@ func InstallGoogleAuth(app *aero.Application) {
 	// When a user visits /auth/google, we ask OAuth2 config for a URL
 	// to redirect the user to. Once the user has logged in on that page,
 	// he'll be redirected back to our servers to the callback page.
-	app.Get("/auth/google", func(ctx *aero.Context) string {
+	app.Get("/auth/google", func(ctx aero.Context) error {
 		state := ctx.Session().ID()
 		url := config.AuthCodeURL(state)
-		return ctx.Redirect(url)
+		return ctx.Redirect(http.StatusFound, url)
 	})
 
 	// This is the redirect URL that we specified in the OAuth2 config.
@@ -62,7 +63,7 @@ func InstallGoogleAuth(app *aero.Application) {
 	// Now we have to check for fraud requests and request user information.
 	// If both Google ID and email can't be found in our DB, register a new user.
 	// Otherwise, log in the user with the given Google ID or email.
-	app.Get("/auth/google/callback", func(ctx *aero.Context) string {
+	app.Get("/auth/google/callback", func(ctx aero.Context) error {
 		if !ctx.HasSession() {
 			return ctx.Error(http.StatusUnauthorized, "Google login failed", errors.New("Session does not exist"))
 		}
@@ -119,9 +120,9 @@ func InstallGoogleAuth(app *aero.Application) {
 			user.Save()
 
 			// Log
-			authLog.Info("Added Google ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("Added Google ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		var getErr error
@@ -130,20 +131,20 @@ func InstallGoogleAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByGoogleID(googleUser.Sub)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Google ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Google ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		// Try to find an existing user via the associated e-mail address
 		user, getErr = arn.GetUserByEmail(googleUser.Email)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 			// Add GoogleToUser reference
 			user.ConnectGoogle(googleUser.Sub)
@@ -152,7 +153,7 @@ func InstallGoogleAuth(app *aero.Application) {
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		// Register new user
@@ -180,9 +181,9 @@ func InstallGoogleAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user via Google | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Google | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
-		return ctx.Redirect(newUserStartRoute)
+		return ctx.Redirect(http.StatusFound, newUserStartRoute)
 	})
 }

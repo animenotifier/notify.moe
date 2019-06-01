@@ -6,7 +6,9 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
@@ -18,7 +20,7 @@ const (
 )
 
 // Get anime page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 	anime, err := arn.GetAnime(id)
@@ -120,12 +122,13 @@ func Get(ctx *aero.Context) string {
 	})
 
 	// Open Graph
-	ctx.Data = getOpenGraph(ctx, anime)
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = getOpenGraph(ctx, anime)
 
 	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, episodeToFriends, user))
 }
 
-func getOpenGraph(ctx *aero.Context, anime *arn.Anime) *arn.OpenGraph {
+func getOpenGraph(ctx aero.Context, anime *arn.Anime) *arn.OpenGraph {
 	description := anime.Summary
 
 	if len(description) > maxDescriptionLength {
@@ -136,7 +139,7 @@ func getOpenGraph(ctx *aero.Context, anime *arn.Anime) *arn.OpenGraph {
 		Tags: map[string]string{
 			"og:title":       anime.Title.Canonical,
 			"og:image":       "https:" + anime.ImageLink("large"),
-			"og:url":         "https://" + ctx.App.Config.Domain + anime.Link(),
+			"og:url":         "https://" + assets.Domain + anime.Link(),
 			"og:site_name":   "notify.moe",
 			"og:description": description,
 		},

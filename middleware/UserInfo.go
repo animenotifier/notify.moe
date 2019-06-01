@@ -14,33 +14,35 @@ import (
 )
 
 // UserInfo updates user related information after each request.
-func UserInfo() aero.Middleware {
-	return func(ctx *aero.Context, next func()) {
-		next()
+func UserInfo(next aero.Handler) aero.Handler {
+	return func(ctx aero.Context) error {
+		err := next(ctx)
 
 		// Ignore non-HTML requests
-		contentType := ctx.Response().Header().Get("Content-Type")
+		contentType := ctx.Response().Header("Content-Type")
 
 		if !strings.HasPrefix(contentType, "text/html") {
-			return
+			return nil
 		}
 
 		user := utils.GetUser(ctx)
 
 		// When there's no user logged in, nothing to update
 		if user == nil {
-			return
+			return nil
 		}
 
 		// This works asynchronously so it doesn't block the response
 		go updateUserInfo(ctx, user)
+
+		return err
 	}
 }
 
 // Update browser and OS data
-func updateUserInfo(ctx *aero.Context, user *arn.User) {
-	newIP := ctx.RealIP()
-	newUserAgent := ctx.UserAgent()
+func updateUserInfo(ctx aero.Context, user *arn.User) {
+	newIP := ctx.IP()
+	newUserAgent := ctx.Request().Header("User-Agent")
 
 	if user.UserAgent != newUserAgent {
 		user.UserAgent = newUserAgent
@@ -91,7 +93,12 @@ func updateUserLocation(user *arn.User, newIP string) {
 	}
 
 	newLocation := arn.IPInfoDBLocation{}
-	response.Unmarshal(&newLocation)
+	err = response.Unmarshal(&newLocation)
+
+	if err != nil {
+		color.Red("Couldn't deserialize location data | Status: %d | IP: %s", response.StatusCode, user.IP)
+		return
+	}
 
 	if newLocation.CountryName != "-" {
 		user.Location.CountryName = newLocation.CountryName

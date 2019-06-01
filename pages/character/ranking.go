@@ -8,7 +8,7 @@ import (
 )
 
 // Ranking returns the ranking information for the character via the API.
-func Ranking(ctx *aero.Context) string {
+func Ranking(ctx aero.Context) error {
 	// Check character ID
 	id := ctx.Get("id")
 	_, err := arn.GetCharacter(id)
@@ -35,7 +35,7 @@ func Ranking(ctx *aero.Context) string {
 	arn.SortCharactersByLikes(characters)
 
 	// Allow CORS
-	ctx.Response().Header().Set("Access-Control-Allow-Origin", "*")
+	ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 
 	// Return ranking
 	for index, character := range characters {

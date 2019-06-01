@@ -14,7 +14,7 @@ import (
 var jobStartMutex sync.Mutex
 
 // Start will start the specified background job.
-func Start(ctx *aero.Context) string {
+func Start(ctx aero.Context) error {
 	jobStartMutex.Lock()
 	defer jobStartMutex.Unlock()
 
@@ -38,5 +38,5 @@ func Start(ctx *aero.Context) string {
 	job.Start()
 	jobLogs = append(jobLogs, user.Nick+" started "+job.Name+" job ("+arn.DateTimeUTC()+").")
 
-	return "ok"
+	return nil
 }

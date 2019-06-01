@@ -6,7 +6,7 @@ import (
 )
 
 // Best renders the best soundtracks.
-func Best(ctx *aero.Context) string {
+func Best(ctx aero.Context) error {
 	// Fetch all eligible tracks
 	tracks := fetchAll()
 

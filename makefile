@@ -47,9 +47,9 @@ test:
 bench:
 	$(GOTEST) -bench .
 pack:
-	go install github.com/aerogo/pack
+	go install github.com/aerogo/pack/...
 run:
-	go install github.com/aerogo/run
+	go install github.com/aerogo/run/...
 tools:
 ifeq ($(OSNAME),OSX)
 	brew install coreutils

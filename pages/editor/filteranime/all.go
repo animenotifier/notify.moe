@@ -6,7 +6,7 @@ import (
 )
 
 // All ...
-func All(ctx *aero.Context) string {
+func All(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"All anime",

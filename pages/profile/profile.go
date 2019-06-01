@@ -6,7 +6,9 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
@@ -17,7 +19,7 @@ const (
 )
 
 // Get user profile page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)
 
@@ -29,7 +31,7 @@ func Get(ctx *aero.Context) string {
 }
 
 // Profile renders the user profile page of the given viewUser.
-func Profile(ctx *aero.Context, viewUser *arn.User) string {
+func Profile(ctx aero.Context, viewUser *arn.User) error {
 	user := utils.GetUser(ctx)
 
 	// Anime list
@@ -99,7 +101,7 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		Tags: map[string]string{
 			"og:title":         viewUser.Nick,
 			"og:image":         viewUser.AvatarLink("large"),
-			"og:url":           "https://" + ctx.App.Config.Domain + viewUser.Link(),
+			"og:url":           "https://" + assets.Domain + viewUser.Link(),
 			"og:site_name":     "notify.moe",
 			"og:description":   utils.CutLongDescription(viewUser.Introduction),
 			"og:type":          "profile",
@@ -177,7 +179,8 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		characters = characters[:maxCharacters]
 	}
 
-	ctx.Data = openGraph
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = openGraph
 
 	return ctx.HTML(components.Profile(
 		viewUser,
@@ -190,6 +193,6 @@ func Profile(ctx *aero.Context, viewUser *arn.User) string {
 		topStudios,
 		animeWatchingTime,
 		dayToActivityCount,
-		ctx.URI(),
+		ctx.Path(),
 	))
 }

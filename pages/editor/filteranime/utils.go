@@ -13,7 +13,7 @@ import (
 const maxAnimeEntries = 70
 
 // editorList renders the anime list with the given title and filter.
-func editorList(ctx *aero.Context, title string, filter func(*arn.Anime) bool, searchLink func(*arn.Anime) string) string {
+func editorList(ctx aero.Context, title string, filter func(*arn.Anime) bool, searchLink func(*arn.Anime) string) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
@@ -23,7 +23,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.Anime) bool, s
 	animes, count := filterAnime(ctx, user, filter)
 
 	// Determine URL
-	url := strings.TrimPrefix(ctx.URI(), "/_")
+	url := strings.TrimPrefix(ctx.Path(), "/_")
 	urlParts := strings.Split(url, "/")
 	urlParts = urlParts[:len(urlParts)-4]
 	url = strings.Join(urlParts, "/")
@@ -40,7 +40,7 @@ func editorList(ctx *aero.Context, title string, filter func(*arn.Anime) bool, s
 
 // filterAnime filters anime by the given filter function and
 // additionally applies year and types filters if specified.
-func filterAnime(ctx *aero.Context, user *arn.User, filter func(*arn.Anime) bool) ([]*arn.Anime, int) {
+func filterAnime(ctx aero.Context, user *arn.User, filter func(*arn.Anime) bool) ([]*arn.Anime, int) {
 	year := ctx.Get("year")
 	status := ctx.Get("status")
 	season := ctx.Get("season")

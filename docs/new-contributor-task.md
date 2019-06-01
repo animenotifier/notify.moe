@@ -16,7 +16,7 @@ import (
 )
 
 // Get returns the contents of our amazing page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	return ctx.HTML("Hey it's me, foobar!")
 }
 ```
@@ -73,7 +73,7 @@ import (
 )
 
 // Get returns the contents of our amazing page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	return ctx.HTML(components.FooBar())
 }
 ```

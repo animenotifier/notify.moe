@@ -16,7 +16,7 @@ package profiletracks
 // )
 
 // // render renders the soundtracks on user profiles.
-// func render(ctx *aero.Context, fetch func(userID string) []*arn.SoundTrack) string {
+// func render(ctx aero.Context, fetch func(userID string) []*arn.SoundTrack) string {
 // 	nick := ctx.Get("nick")
 // 	index, _ := ctx.GetInt("index")
 // 	user := utils.GetUser(ctx)
@@ -53,5 +53,5 @@ package profiletracks
 // 	}
 
 // 	// Otherwise, send the full page
-// 	return ctx.HTML(components.ProfileSoundTracks(tracks, viewUser, nextIndex, user, ctx.URI()))
+// 	return ctx.HTML(components.ProfileSoundTracks(tracks, viewUser, nextIndex, user, ctx.Path()))
 // }

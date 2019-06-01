@@ -11,7 +11,7 @@ import (
 )
 
 // Liked shows all liked characters of a particular user.
-func Liked(ctx *aero.Context) string {
+func Liked(ctx aero.Context) error {
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)
 
@@ -40,5 +40,5 @@ func Liked(ctx *aero.Context) string {
 		// return aLikes > bLikes
 	})
 
-	return ctx.HTML(components.ProfileCharacters(characters, viewUser, utils.GetUser(ctx), ctx.URI()))
+	return ctx.HTML(components.ProfileCharacters(characters, viewUser, utils.GetUser(ctx), ctx.Path()))
 }

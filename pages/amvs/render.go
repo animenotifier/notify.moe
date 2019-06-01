@@ -14,7 +14,7 @@ const (
 )
 
 // render renders the AMVs page with the given AMVs.
-func render(ctx *aero.Context, allAMVs []*arn.AMV) string {
+func render(ctx aero.Context, allAMVs []*arn.AMV) error {
 	user := utils.GetUser(ctx)
 	index, _ := ctx.GetInt("index")
 	tag := ctx.Get("tag")

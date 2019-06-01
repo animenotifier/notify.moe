@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"net/http"
 	"runtime"
 	"strings"
 
@@ -14,11 +15,11 @@ import (
 )
 
 // Get admin page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
-		return ctx.Redirect("/")
+		return ctx.Redirect(http.StatusFound, "/")
 	}
 
 	// // CPU

@@ -7,7 +7,9 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/akyoto/color"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
@@ -16,7 +18,7 @@ const (
 )
 
 // Get character.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	character, err := arn.GetCharacter(id)
@@ -101,11 +103,12 @@ func Get(ctx *aero.Context) string {
 	// Set OpenGraph attributes
 	description := utils.CutLongDescription(character.Description)
 
-	ctx.Data = &arn.OpenGraph{
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       character.Name.Canonical,
 			"og:image":       "https:" + character.ImageLink("large"),
-			"og:url":         "https://" + ctx.App.Config.Domain + character.Link(),
+			"og:url":         "https://" + assets.Domain + character.Link(),
 			"og:site_name":   "notify.moe",
 			"og:description": description,
 

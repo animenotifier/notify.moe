@@ -7,7 +7,7 @@ import (
 )
 
 // Get the anime list or the frontpage when logged out.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

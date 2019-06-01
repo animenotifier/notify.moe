@@ -1,6 +1,8 @@
 package listimportkitsu
 
 import (
+	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/aerogo/aero"
@@ -11,34 +13,34 @@ import (
 )
 
 // Preview shows an import preview.
-func Preview(ctx *aero.Context) string {
+func Preview(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
-	matches, response := getMatches(ctx)
+	matches, err := getMatches(ctx)
 
-	if response != "" {
-		return response
+	if err != nil {
+		return ctx.Error(http.StatusBadRequest, err)
 	}
 
 	return ctx.HTML(components.ImportKitsu(user, matches))
 }
 
 // Finish ...
-func Finish(ctx *aero.Context) string {
+func Finish(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
 	}
 
-	matches, response := getMatches(ctx)
+	matches, err := getMatches(ctx)
 
-	if response != "" {
-		return response
+	if err != nil {
+		return ctx.Error(http.StatusBadRequest, err)
 	}
 
 	animeList := user.AnimeList()
@@ -82,23 +84,23 @@ func Finish(ctx *aero.Context) string {
 }
 
 // getMatches finds and returns all matches for the logged in user.
-func getMatches(ctx *aero.Context) ([]*arn.KitsuMatch, string) {
+func getMatches(ctx aero.Context) ([]*arn.KitsuMatch, error) {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Not logged in")
+		return nil, errors.New("Not logged in")
 	}
 
 	kitsuUser, err := kitsu.GetUser(user.Accounts.Kitsu.Nick)
 
 	if err != nil {
-		return nil, ctx.Error(http.StatusBadRequest, "Couldn't load your user info from Kitsu", err)
+		return nil, fmt.Errorf("Couldn't load your user info from Kitsu: %s", err.Error())
 	}
 
 	library := kitsuUser.StreamLibraryEntries()
 	matches := findAllMatches(library)
 
-	return matches, ""
+	return matches, nil
 }
 
 // findAllMatches returns all matches for the anime inside an anilist anime list.

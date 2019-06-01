@@ -5,13 +5,15 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/editform"
 )
 
 // Edit company.
-func Edit(ctx *aero.Context) string {
+func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	company, err := arn.GetCompany(id)
 	user := utils.GetUser(ctx)
@@ -20,10 +22,11 @@ func Edit(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Company not found", err)
 	}
 
-	ctx.Data = &arn.OpenGraph{
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     company.Name.English,
-			"og:url":       "https://" + ctx.App.Config.Domain + company.Link(),
+			"og:url":       "https://" + assets.Domain + company.Link(),
 			"og:site_name": "notify.moe",
 			// "og:image":     company.Image,
 		},

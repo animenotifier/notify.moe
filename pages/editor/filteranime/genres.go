@@ -6,7 +6,7 @@ import (
 )
 
 // Genres ...
-func Genres(ctx *aero.Context) string {
+func Genres(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without genres",

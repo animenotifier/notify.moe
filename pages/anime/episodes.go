@@ -11,7 +11,7 @@ import (
 )
 
 // Episodes ...
-func Episodes(ctx *aero.Context) string {
+func Episodes(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	anime, err := arn.GetAnime(id)

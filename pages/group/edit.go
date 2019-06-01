@@ -11,7 +11,7 @@ import (
 )
 
 // Edit ...
-func Edit(ctx *aero.Context) string {
+func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
 	user := utils.GetUser(ctx)
@@ -30,7 +30,7 @@ func Edit(ctx *aero.Context) string {
 }
 
 // EditImage renders the form to edit the group images.
-func EditImage(ctx *aero.Context) string {
+func EditImage(ctx aero.Context) error {
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
 	user := utils.GetUser(ctx)

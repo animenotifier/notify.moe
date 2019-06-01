@@ -12,7 +12,7 @@ import (
 )
 
 // Sequels ...
-func Sequels(ctx *aero.Context) string {
+func Sequels(ctx aero.Context) error {
 	nick := ctx.Get("nick")
 	user := utils.GetUser(ctx)
 	viewUser, err := arn.GetUserByNick(nick)

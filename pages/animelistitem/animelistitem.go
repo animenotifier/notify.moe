@@ -11,7 +11,7 @@ import (
 )
 
 // Get anime page.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)

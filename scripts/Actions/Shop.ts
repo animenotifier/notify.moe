@@ -74,7 +74,7 @@ export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
 	})
 	.then(response => response.text())
 	.then(body => {
-		if(body !== "ok") {
+		if(body !== "") {
 			throw body
 		}
 

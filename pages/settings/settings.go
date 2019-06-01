@@ -9,8 +9,8 @@ import (
 )
 
 // Get settings.
-func Get(component func(*arn.User) string) func(*aero.Context) string {
-	return func(ctx *aero.Context) string {
+func Get(component func(*arn.User) string) func(aero.Context) error {
+	return func(ctx aero.Context) error {
 		user := utils.GetUser(ctx)
 
 		if user == nil {

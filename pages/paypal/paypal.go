@@ -5,12 +5,13 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
 	paypalsdk "github.com/logpacker/PayPal-Go-SDK"
 )
 
 // CreatePayment creates the PayPal payment, typically via a JSON API route.
-func CreatePayment(ctx *aero.Context) string {
+func CreatePayment(ctx aero.Context) error {
 	// Make sure the user is logged in
 	user := utils.GetUser(ctx)
 
@@ -60,8 +61,8 @@ func CreatePayment(ctx *aero.Context) string {
 			Description: "Top Up Balance",
 		}},
 		RedirectURLs: &paypalsdk.RedirectURLs{
-			ReturnURL: "https://" + ctx.App.Config.Domain + "/paypal/success",
-			CancelURL: "https://" + ctx.App.Config.Domain + "/paypal/cancel",
+			ReturnURL: "https://" + assets.Domain + "/paypal/success",
+			CancelURL: "https://" + assets.Domain + "/paypal/cancel",
 		},
 	}
 

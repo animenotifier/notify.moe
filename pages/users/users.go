@@ -11,17 +11,17 @@ import (
 )
 
 // Active ...
-func Active(ctx *aero.Context) string {
+func Active(ctx aero.Context) error {
 	users := arn.FilterUsers(func(user *arn.User) bool {
 		return user.HasAvatar() && user.HasNick() && user.IsActive()
 	})
 
 	arn.SortUsersFollowers(users)
-	return ctx.HTML(components.Users(users, ctx.URI()))
+	return ctx.HTML(components.Users(users, ctx.Path()))
 }
 
 // Pro ...
-func Pro(ctx *aero.Context) string {
+func Pro(ctx aero.Context) error {
 	users := arn.FilterUsers(func(user *arn.User) bool {
 		return user.IsPro()
 	})
@@ -30,11 +30,11 @@ func Pro(ctx *aero.Context) string {
 		return users[i].Registered > users[j].Registered
 	})
 
-	return ctx.HTML(components.ProUsers(users, ctx.URI()))
+	return ctx.HTML(components.ProUsers(users, ctx.Path()))
 }
 
 // Editors ...
-func Editors(ctx *aero.Context) string {
+func Editors(ctx aero.Context) error {
 	score := map[string]int{}
 	users := []*arn.User{}
 
@@ -73,11 +73,11 @@ func Editors(ctx *aero.Context) string {
 		users = users[:10]
 	}
 
-	return ctx.HTML(components.EditorRankingList(users, score, ctx.URI()))
+	return ctx.HTML(components.EditorRankingList(users, score, ctx.Path()))
 }
 
 // ActiveNoAvatar ...
-func ActiveNoAvatar(ctx *aero.Context) string {
+func ActiveNoAvatar(ctx aero.Context) error {
 	users := arn.FilterUsers(func(user *arn.User) bool {
 		return user.IsActive() && !user.HasAvatar()
 	})
@@ -99,11 +99,11 @@ func ActiveNoAvatar(ctx *aero.Context) string {
 		return followersA > followersB
 	})
 
-	return ctx.HTML(components.Users(users, ctx.URI()))
+	return ctx.HTML(components.Users(users, ctx.Path()))
 }
 
 // Osu ...
-func Osu(ctx *aero.Context) string {
+func Osu(ctx aero.Context) error {
 	users := arn.FilterUsers(func(user *arn.User) bool {
 		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.Osu.PP > 0
 	})
@@ -117,11 +117,11 @@ func Osu(ctx *aero.Context) string {
 		users = users[:10]
 	}
 
-	return ctx.HTML(components.OsuRankingList(users, ctx.URI()))
+	return ctx.HTML(components.OsuRankingList(users, ctx.Path()))
 }
 
 // Overwatch ...
-func Overwatch(ctx *aero.Context) string {
+func Overwatch(ctx aero.Context) error {
 	users := arn.FilterUsers(func(user *arn.User) bool {
 		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.Overwatch.SkillRating > 0
 	})
@@ -135,11 +135,11 @@ func Overwatch(ctx *aero.Context) string {
 		users = users[:10]
 	}
 
-	return ctx.HTML(components.OverwatchRankingList(users, ctx.URI()))
+	return ctx.HTML(components.OverwatchRankingList(users, ctx.Path()))
 }
 
 // FFXIV ...
-func FFXIV(ctx *aero.Context) string {
+func FFXIV(ctx aero.Context) error {
 	users := arn.FilterUsers(func(user *arn.User) bool {
 		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.FinalFantasyXIV.ItemLevel > 0
 	})
@@ -153,11 +153,11 @@ func FFXIV(ctx *aero.Context) string {
 		users = users[:10]
 	}
 
-	return ctx.HTML(components.FinalFantasyXIVRankingList(users, ctx.URI()))
+	return ctx.HTML(components.FinalFantasyXIVRankingList(users, ctx.Path()))
 }
 
 // ByCountry ...
-func ByCountry(ctx *aero.Context) string {
+func ByCountry(ctx aero.Context) error {
 	countryName := ctx.Get("country")
 
 	users := arn.FilterUsers(func(user *arn.User) bool {
@@ -169,7 +169,7 @@ func ByCountry(ctx *aero.Context) string {
 }
 
 // Staff ...
-func Staff(ctx *aero.Context) string {
+func Staff(ctx aero.Context) error {
 	users := arn.FilterUsers(func(user *arn.User) bool {
 		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Role != ""
 	})
@@ -226,5 +226,5 @@ func Staff(ctx *aero.Context) string {
 		editors,
 	}
 
-	return ctx.HTML(components.UserLists(userLists, ctx.URI()) + components.StaffRecruitment())
+	return ctx.HTML(components.UserLists(userLists, ctx.Path()) + components.StaffRecruitment())
 }

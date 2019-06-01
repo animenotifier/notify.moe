@@ -5,14 +5,15 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 )
 
-func getOpenGraph(ctx *aero.Context, track *arn.SoundTrack) *arn.OpenGraph {
+func getOpenGraph(ctx aero.Context, track *arn.SoundTrack) *arn.OpenGraph {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     track.Title.ByUser(nil),
-			"og:url":       "https://" + ctx.App.Config.Domain + track.Link(),
-			"og:site_name": ctx.App.Config.Domain,
+			"og:url":       "https://" + assets.Domain + track.Link(),
+			"og:site_name": assets.Domain,
 			"og:type":      "music.song",
 		},
 	}
@@ -33,7 +34,7 @@ func getOpenGraph(ctx *aero.Context, track *arn.SoundTrack) *arn.OpenGraph {
 	}
 
 	if track.File != "" {
-		openGraph.Tags["og:audio"] = "https://" + ctx.App.Config.Domain + "/audio/" + track.File
+		openGraph.Tags["og:audio"] = "https://" + assets.Domain + "/audio/" + track.File
 		openGraph.Tags["og:audio:type"] = "audio/vnd.facebook.bridge"
 	}
 

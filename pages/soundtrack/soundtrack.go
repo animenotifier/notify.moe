@@ -6,11 +6,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get track.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	id := ctx.Get("id")
 	track, err := arn.GetSoundTrack(id)
 	user := utils.GetUser(ctx)
@@ -19,6 +20,7 @@ func Get(ctx *aero.Context) string {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
-	ctx.Data = getOpenGraph(ctx, track)
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = getOpenGraph(ctx, track)
 	return ctx.HTML(components.SoundTrackPage(track, user))
 }

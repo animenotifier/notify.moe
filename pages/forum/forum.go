@@ -10,7 +10,7 @@ import (
 const ThreadsPerPage = 20
 
 // Get forum category.
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	tag := ctx.Get("tag")
 	threads := arn.GetThreadsByTag(tag)
 	arn.SortThreads(threads)

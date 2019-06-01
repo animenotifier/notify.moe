@@ -6,11 +6,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/components"
+	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Feed shows the group front page.
-func Feed(ctx *aero.Context) string {
+func Feed(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
@@ -25,6 +26,7 @@ func Feed(ctx *aero.Context) string {
 		member = group.FindMember(user.ID)
 	}
 
-	ctx.Data = getOpenGraph(ctx, group)
+	customCtx := ctx.(*middleware.OpenGraphContext)
+	customCtx.OpenGraph = getOpenGraph(ctx, group)
 	return ctx.HTML(components.GroupFeed(group, member, user))
 }

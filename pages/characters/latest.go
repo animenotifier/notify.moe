@@ -7,7 +7,7 @@ import (
 )
 
 // Latest characters.
-func Latest(ctx *aero.Context) string {
+func Latest(ctx aero.Context) error {
 	characters := fetchAll()
 
 	sort.Slice(characters, func(i, j int) bool {

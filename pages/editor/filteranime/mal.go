@@ -6,7 +6,7 @@ import (
 )
 
 // MAL ...
-func MAL(ctx *aero.Context) string {
+func MAL(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without MAL mappings",

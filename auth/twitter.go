@@ -10,6 +10,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
 	"github.com/gomodule/oauth1/oauth"
 	jsoniter "github.com/json-iterator/go"
@@ -42,8 +43,8 @@ func InstallTwitterAuth(app *aero.Application) {
 	// a request token and give us a URL to redirect the user to.
 	// Once the user has approved the application on that page,
 	// he'll be redirected back to our servers to the callback page.
-	app.Get("/auth/twitter", func(ctx *aero.Context) string {
-		callback := "https://" + ctx.App.Config.Domain + "/auth/twitter/callback"
+	app.Get("/auth/twitter", func(ctx aero.Context) error {
+		callback := "https://" + assets.Domain + "/auth/twitter/callback"
 		tempCred, err := config.RequestTemporaryCredentials(nil, callback, nil)
 
 		if err != nil {
@@ -52,7 +53,7 @@ func InstallTwitterAuth(app *aero.Application) {
 
 		ctx.Session().Set("tempCred", tempCred)
 		url := config.AuthorizationURL(tempCred, nil)
-		return ctx.Redirect(url)
+		return ctx.Redirect(http.StatusFound, url)
 	})
 
 	// This is the redirect URL that we specified in /auth/twitter.
@@ -60,7 +61,7 @@ func InstallTwitterAuth(app *aero.Application) {
 	// Now we have to check for fraud requests and request user information.
 	// If both Twitter ID and email can't be found in our DB, register a new user.
 	// Otherwise, log in the user with the given Twitter ID or email.
-	app.Get("/auth/twitter/callback", func(ctx *aero.Context) string {
+	app.Get("/auth/twitter/callback", func(ctx aero.Context) error {
 		if !ctx.HasSession() {
 			return ctx.Error(http.StatusUnauthorized, "Twitter login failed", errors.New("Session does not exist"))
 		}
@@ -121,9 +122,9 @@ func InstallTwitterAuth(app *aero.Application) {
 			user.Save()
 
 			// Log
-			authLog.Info("Added Twitter ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("Added Twitter ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		var getErr error
@@ -132,20 +133,20 @@ func InstallTwitterAuth(app *aero.Application) {
 		user, getErr = arn.GetUserByTwitterID(twUser.ID)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Twitter ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Twitter ID | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 			user.LastLogin = arn.DateTimeUTC()
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		// Try to find an existing user via the associated e-mail address
 		user, getErr = arn.GetUserByEmail(twUser.Email)
 
 		if getErr == nil && user != nil {
-			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+			authLog.Info("User logged in via Email | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 			// Add TwitterToUser reference
 			user.ConnectTwitter(twUser.ID)
@@ -155,7 +156,7 @@ func InstallTwitterAuth(app *aero.Application) {
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect("/")
+			return ctx.Redirect(http.StatusFound, "/")
 		}
 
 		// Register new user
@@ -187,9 +188,9 @@ func InstallTwitterAuth(app *aero.Application) {
 		session.Set("userId", user.ID)
 
 		// Log
-		authLog.Info("Registered new user via Twitter | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.RealIP(), user.Email, user.RealName())
+		authLog.Info("Registered new user via Twitter | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
-		return ctx.Redirect(newUserStartRoute)
+		return ctx.Redirect(http.StatusFound, newUserStartRoute)
 	})
 }

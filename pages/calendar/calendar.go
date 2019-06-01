@@ -22,7 +22,7 @@ var weekdayNames = []string{
 }
 
 // Get ...
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	oneWeek := 7 * 24 * time.Hour
 

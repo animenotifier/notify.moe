@@ -5,14 +5,15 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/assets"
 )
 
-func getOpenGraph(ctx *aero.Context, amv *arn.AMV) *arn.OpenGraph {
+func getOpenGraph(ctx aero.Context, amv *arn.AMV) *arn.OpenGraph {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     amv.Title.ByUser(nil) + " (AMV)",
-			"og:url":       "https://" + ctx.App.Config.Domain + amv.Link(),
-			"og:site_name": ctx.App.Config.Domain,
+			"og:url":       "https://" + assets.Domain + amv.Link(),
+			"og:site_name": assets.Domain,
 			"og:type":      "video.other",
 		},
 		Meta: map[string]string{},
@@ -21,7 +22,7 @@ func getOpenGraph(ctx *aero.Context, amv *arn.AMV) *arn.OpenGraph {
 	openGraph.Tags["og:description"] = strings.Join(amv.Tags, ", ")
 
 	if amv.File != "" {
-		openGraph.Tags["og:video"] = "https://" + ctx.App.Config.Domain + "/videos/amvs/" + amv.File
+		openGraph.Tags["og:video"] = "https://" + assets.Domain + "/videos/amvs/" + amv.File
 		openGraph.Tags["og:video:type"] = "video/webm"
 		openGraph.Tags["og:video:width"] = "640"
 		openGraph.Tags["og:video:height"] = "360"

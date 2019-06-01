@@ -9,8 +9,8 @@ import (
 )
 
 // Handler returns a function that renders the history of any object.
-func Handler(render func(interface{}, []*arn.EditLogEntry, *arn.User) string, typeNames ...string) func(ctx *aero.Context) string {
-	return func(ctx *aero.Context) string {
+func Handler(render func(interface{}, []*arn.EditLogEntry, *arn.User) string, typeNames ...string) func(ctx aero.Context) error {
+	return func(ctx aero.Context) error {
 		id := ctx.Get("id")
 		user := utils.GetUser(ctx)
 		obj, err := arn.DB.Get(typeNames[0], id)

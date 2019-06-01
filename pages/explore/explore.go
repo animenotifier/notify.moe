@@ -11,7 +11,7 @@ import (
 )
 
 // Filter ...
-func Filter(ctx *aero.Context) string {
+func Filter(ctx aero.Context) error {
 	year := ctx.Get("year")
 	season := ctx.Get("season")
 	status := ctx.Get("status")

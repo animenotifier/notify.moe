@@ -10,7 +10,7 @@ import (
 )
 
 // Joined shows the most popular joined groups.
-func Joined(ctx *aero.Context) string {
+func Joined(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

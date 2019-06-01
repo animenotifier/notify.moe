@@ -6,7 +6,7 @@ import (
 )
 
 // Characters ...
-func Characters(ctx *aero.Context) string {
+func Characters(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without characters",

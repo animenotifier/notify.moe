@@ -6,7 +6,7 @@ import (
 )
 
 // File shows soundtracks without an audio file.
-func File(ctx *aero.Context) string {
+func File(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Soundtracks without an audio file",

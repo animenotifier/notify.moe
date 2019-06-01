@@ -29,7 +29,7 @@ var jobInfo = map[string]*utils.JobInfo{
 var jobLogs = []string{}
 
 // Overview shows all background jobs.
-func Overview(ctx *aero.Context) string {
+func Overview(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	jobs := []*utils.JobInfo{}
 
@@ -41,5 +41,5 @@ func Overview(ctx *aero.Context) string {
 		return jobs[i].Name < jobs[j].Name
 	})
 
-	return ctx.HTML(components.EditorJobs(jobs, jobLogs, ctx.URI(), user))
+	return ctx.HTML(components.EditorJobs(jobs, jobLogs, ctx.Path(), user))
 }

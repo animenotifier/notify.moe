@@ -6,7 +6,7 @@ import (
 )
 
 // Shoboi ...
-func Shoboi(ctx *aero.Context) string {
+func Shoboi(ctx aero.Context) error {
 	return editorList(
 		ctx,
 		"Anime without Shoboi mappings",

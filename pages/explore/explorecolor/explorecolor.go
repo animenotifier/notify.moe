@@ -18,7 +18,7 @@ const (
 )
 
 // AnimeByAverageColor returns all anime with an image in the given color.
-func AnimeByAverageColor(ctx *aero.Context) string {
+func AnimeByAverageColor(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	color := ctx.Get("color")
 	index, _ := ctx.GetInt("index")

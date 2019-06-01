@@ -12,7 +12,7 @@ import (
 const maxAllNotifications = 150
 
 // All shows all notifications.
-func All(ctx *aero.Context) string {
+func All(ctx aero.Context) error {
 	notifications, err := arn.AllNotifications()
 
 	if err != nil {

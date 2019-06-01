@@ -6,7 +6,7 @@ import (
 )
 
 // Best characters.
-func Best(ctx *aero.Context) string {
+func Best(ctx aero.Context) error {
 	characters := fetchAll()
 
 	arn.SortCharactersByLikes(characters)

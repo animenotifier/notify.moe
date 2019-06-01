@@ -1,6 +1,7 @@
 package editor
 
 import (
+	"net/http"
 	"strconv"
 
 	"github.com/aerogo/aero"
@@ -10,11 +11,11 @@ import (
 )
 
 // Get ...
-func Get(ctx *aero.Context) string {
+func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
-		return ctx.Redirect("/")
+		return ctx.Redirect(http.StatusFound, "/")
 	}
 
 	ignoreDifferences := arn.FilterIgnoreAnimeDifferences(func(entry *arn.IgnoreAnimeDifference) bool {
@@ -43,5 +44,5 @@ func Get(ctx *aero.Context) string {
 		scoreTitle += objectType + ": " + strconv.Itoa(score) + "\n"
 	}
 
-	return ctx.HTML(components.Editor(ctx.URI(), score, scoreTitle, scoreTypes, user))
+	return ctx.HTML(components.Editor(ctx.Path(), score, scoreTitle, scoreTypes, user))
 }

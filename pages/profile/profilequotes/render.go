@@ -16,7 +16,7 @@ package profilequotes
 // )
 
 // // render renders the quotes on user profiles.
-// func render(ctx *aero.Context, fetch func(userID string) []*arn.Quote) string {
+// func render(ctx aero.Context, fetch func(userID string) []*arn.Quote) string {
 // 	nick := ctx.Get("nick")
 // 	index, _ := ctx.GetInt("index")
 // 	user := utils.GetUser(ctx)
@@ -53,5 +53,5 @@ package profilequotes
 // 	}
 
 // 	// Otherwise, send the full page
-// 	return ctx.HTML(components.ProfileQuotes(quotes, viewUser, nextIndex, user, ctx.URI()))
+// 	return ctx.HTML(components.ProfileQuotes(quotes, viewUser, nextIndex, user, ctx.Path()))
 // }

@@ -11,7 +11,7 @@ import (
 )
 
 // Main anime edit page.
-func Main(ctx *aero.Context) string {
+func Main(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 
@@ -29,7 +29,7 @@ func Main(ctx *aero.Context) string {
 }
 
 // Images anime images edit page.
-func Images(ctx *aero.Context) string {
+func Images(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 
@@ -47,7 +47,7 @@ func Images(ctx *aero.Context) string {
 }
 
 // Characters anime characters edit page.
-func Characters(ctx *aero.Context) string {
+func Characters(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 
@@ -71,7 +71,7 @@ func Characters(ctx *aero.Context) string {
 }
 
 // Relations anime relations edit page.
-func Relations(ctx *aero.Context) string {
+func Relations(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 
@@ -95,7 +95,7 @@ func Relations(ctx *aero.Context) string {
 }
 
 // Episodes anime episodes edit page.
-func Episodes(ctx *aero.Context) string {
+func Episodes(ctx aero.Context) error {
 	id := ctx.Get("id")
 	user := utils.GetUser(ctx)
 
