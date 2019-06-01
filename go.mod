@@ -5,12 +5,12 @@ go 1.12
 require (
 	cloud.google.com/go v0.39.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.2
+	github.com/aerogo/aero v1.3.5
 	github.com/aerogo/api v0.2.0
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/graphql v0.4.0
 	github.com/aerogo/http v1.0.6
-	github.com/aerogo/layout v0.3.0
+	github.com/aerogo/layout v0.3.1
 	github.com/aerogo/log v0.2.5
 	github.com/aerogo/manifest v0.1.4
 	github.com/aerogo/markdown v0.1.8
@@ -52,7 +52,5 @@ require (
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 )
-
-replace github.com/aerogo/layout => /home/eduard/projects/aerogo/layout
 
 exclude github.com/logpacker/PayPal-Go-SDK v2.0.0+incompatible

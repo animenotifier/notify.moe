@@ -38,7 +38,7 @@ func Log(next aero.Handler) aero.Handler {
 		err := next(ctx)
 		responseTime := time.Since(start)
 
-		go logRequest(ctx, responseTime)
+		logRequest(ctx, responseTime)
 		return err
 	}
 }

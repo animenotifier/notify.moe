@@ -15,6 +15,7 @@ import (
 func TestRoutes(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	// Iterate through every route
 	for _, examples := range routetests.All() {
@@ -28,6 +29,7 @@ func TestRoutes(t *testing.T) {
 func TestAnimePages(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	for anime := range arn.StreamAnime() {
 		testRoute(t, app, anime.Link())
@@ -37,6 +39,7 @@ func TestAnimePages(t *testing.T) {
 func TestSoundTrackPages(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	for soundtrack := range arn.StreamSoundTracks() {
 		testRoute(t, app, soundtrack.Link())
@@ -47,6 +50,7 @@ func TestSoundTrackPages(t *testing.T) {
 func TestAMVPages(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	for amv := range arn.StreamAMVs() {
 		testRoute(t, app, amv.Link())
@@ -57,6 +61,7 @@ func TestAMVPages(t *testing.T) {
 func TestCompanyPages(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	for company := range arn.StreamCompanies() {
 		testRoute(t, app, company.Link())
@@ -66,6 +71,7 @@ func TestCompanyPages(t *testing.T) {
 func TestThreadPages(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	for thread := range arn.StreamThreads() {
 		testRoute(t, app, thread.Link())
@@ -76,6 +82,7 @@ func TestThreadPages(t *testing.T) {
 func TestPostPages(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	for post := range arn.StreamPosts() {
 		testRoute(t, app, post.Link())
@@ -86,6 +93,7 @@ func TestPostPages(t *testing.T) {
 func TestQuotePages(t *testing.T) {
 	t.Parallel()
 	app := configure(aero.New())
+	app.BindMiddleware()
 
 	for quote := range arn.StreamQuotes() {
 		testRoute(t, app, quote.Link())
@@ -103,17 +111,10 @@ func TestQuotePages(t *testing.T) {
 // }
 
 func testRoute(t *testing.T, app *aero.Application, route string) {
-	// Create a new HTTP request
-	request, err := http.NewRequest("GET", route, nil)
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Record the response
-	responseRecorder := httptest.NewRecorder()
-	app.ServeHTTP(responseRecorder, request)
-	status := responseRecorder.Code
+	request := httptest.NewRequest("GET", route, nil)
+	response := httptest.NewRecorder()
+	app.ServeHTTP(response, request)
+	status := response.Code
 
 	switch status {
 	case 200, 302:

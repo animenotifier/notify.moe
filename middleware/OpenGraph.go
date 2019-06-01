@@ -14,11 +14,11 @@ type OpenGraphContext struct {
 // OpenGraph middleware modifies the context to be an OpenGraphContext.
 func OpenGraph(next aero.Handler) aero.Handler {
 	return func(ctx aero.Context) error {
-		ctx = &OpenGraphContext{
+		openGraphCtx := &OpenGraphContext{
 			Context:   ctx,
 			OpenGraph: nil,
 		}
 
-		return next(ctx)
+		return next(openGraphCtx)
 	}
 }

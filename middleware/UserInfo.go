@@ -32,9 +32,7 @@ func UserInfo(next aero.Handler) aero.Handler {
 			return nil
 		}
 
-		// This works asynchronously so it doesn't block the response
-		go updateUserInfo(ctx, user)
-
+		updateUserInfo(ctx, user)
 		return err
 	}
 }
@@ -59,12 +57,12 @@ func updateUserInfo(ctx aero.Context, user *arn.User) {
 		user.OS.Version = os.Version
 	}
 
-	if user.IP != newIP {
-		updateUserLocation(user, newIP)
-	}
-
 	user.LastSeen = arn.DateTimeUTC()
 	user.Save()
+
+	if user.IP != newIP {
+		go updateUserLocation(user, newIP)
+	}
 }
 
 // Updates the location of the user.
@@ -100,19 +98,23 @@ func updateUserLocation(user *arn.User, newIP string) {
 		return
 	}
 
-	if newLocation.CountryName != "-" {
-		user.Location.CountryName = newLocation.CountryName
-		user.Location.CountryCode = newLocation.CountryCode
-		user.Location.Latitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
-		user.Location.Longitude, _ = strconv.ParseFloat(newLocation.Longitude, 64)
-		user.Location.CityName = newLocation.CityName
-		user.Location.RegionName = newLocation.RegionName
-		user.Location.TimeZone = newLocation.TimeZone
-		user.Location.ZipCode = newLocation.ZipCode
-
-		// Make South Korea easier to read
-		if user.Location.CountryName == "Korea, Republic of" {
-			user.Location.CountryName = "South Korea"
-		}
+	if newLocation.CountryName == "" || newLocation.CountryName == "-" {
+		return
 	}
+
+	user.Location.CountryName = newLocation.CountryName
+	user.Location.CountryCode = newLocation.CountryCode
+	user.Location.Latitude, _ = strconv.ParseFloat(newLocation.Latitude, 64)
+	user.Location.Longitude, _ = strconv.ParseFloat(newLocation.Longitude, 64)
+	user.Location.CityName = newLocation.CityName
+	user.Location.RegionName = newLocation.RegionName
+	user.Location.TimeZone = newLocation.TimeZone
+	user.Location.ZipCode = newLocation.ZipCode
+
+	// Make South Korea easier to read
+	if user.Location.CountryName == "Korea, Republic of" {
+		user.Location.CountryName = "South Korea"
+	}
+
+	user.Save()
 }
