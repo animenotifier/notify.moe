@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/aerogo/aero"
@@ -111,7 +112,7 @@ func TestQuotePages(t *testing.T) {
 // }
 
 func testRoute(t *testing.T, app *aero.Application, route string) {
-	request := httptest.NewRequest("GET", route, nil)
+	request := httptest.NewRequest("GET", strings.ReplaceAll(route, " ", "%20"), nil)
 	response := httptest.NewRecorder()
 	app.ServeHTTP(response, request)
 	status := response.Code
