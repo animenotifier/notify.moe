@@ -32,6 +32,6 @@ func Install(app *aero.Application) {
 			ctx.Session().Delete("userId")
 		}
 
-		return ctx.Redirect(http.StatusFound, "/")
+		return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 	})
 }

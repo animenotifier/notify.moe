@@ -75,7 +75,7 @@ func logRequest(ctx aero.Context, responseTime time.Duration) {
 
 	// Log all requests that failed
 	switch ctx.Status() {
-	case http.StatusOK, http.StatusFound, http.StatusMovedPermanently, http.StatusPermanentRedirect, http.StatusTemporaryRedirect:
+	case http.StatusOK, http.StatusTemporaryRedirect, http.StatusPermanentRedirect:
 		// Ok.
 
 	default:

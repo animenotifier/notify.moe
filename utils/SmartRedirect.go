@@ -16,5 +16,5 @@ func SmartRedirect(ctx aero.Context, uri string) error {
 		prefix = "/_"
 	}
 
-	return ctx.Redirect(http.StatusFound, prefix+uri)
+	return ctx.Redirect(http.StatusTemporaryRedirect, prefix+uri)
 }

@@ -9,6 +9,9 @@ github.com/PuerkitoBio/goquery v1.5.0 h1:uGvmFXOA73IKluu/F84Xd1tt/z07GYm8X49XKHP
 github.com/PuerkitoBio/goquery v1.5.0/go.mod h1:qD2PgZ9lccMbQlc7eEOjaeRlFQON7xY8kdmcsrnKqMg=
 github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d h1:G0m3OIz70MZUWq3EgK3CesDbo8upS2Vm9/P3FtgI+Jk=
 github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d/go.mod h1:3eOhrUMpNV+6aFIbp5/iudMxNCF27Vw2OZgy4xEx0Fg=
+github.com/aerogo/aero v1.3.1/go.mod h1:5rPhXo2DNMFQ7XhDsuZ3L7Zr6TH/349+WczUbrOUZvM=
+github.com/aerogo/aero v1.3.10 h1:KTAscWcducqxa6LcqXe1lJA04E5FPQ6l8MCG3VCNtP4=
+github.com/aerogo/aero v1.3.10/go.mod h1:DZA+Yt0AevLyvNG7w1CyYoZZfoFMysABOOrFrgrQhHM=
 github.com/aerogo/api v0.2.0 h1:mIc/y381e+Qc85eSc2cKPdpDDOmT0hlnEeCw2Dcf7no=
 github.com/aerogo/api v0.2.0/go.mod h1:6objJn5XiKpYpywQUPrFjxZIXD4NVI2LwcBNYCEcS3Y=
 github.com/aerogo/cluster v0.1.6 h1:9HYjJwo19uuh9thIc80T3caap9t9b4BXZ1iN8aztjlU=
@@ -67,6 +70,7 @@ github.com/akyoto/color v1.8.5 h1:xvHRmBJdsT5HJxnfyIT8l3zNbexA/2YIIeAlaHuhYGY=
 github.com/akyoto/color v1.8.5/go.mod h1:mI8lhoKcgnvH8fnaupVUE3BmKUp2bpDn5wFS1xEQ4hw=
 github.com/akyoto/go-matroska v0.1.1 h1:HgoCAkeWrGjYr0FZr3yCzAIkXuOGRiVil7Ul329lm+A=
 github.com/akyoto/go-matroska v0.1.1/go.mod h1:x+GUVwyby6HN/MKKNP4BvGqP9VrHuEznfBf288gehek=
+github.com/akyoto/hash v0.3.5/go.mod h1:uPmnZyhBJIyLON8V9LNi0CcqtwYaH2RiKLFQg67fwq0=
 github.com/akyoto/hash v0.4.0 h1:M9Q3E6cOAxbf7q3yu5SZZdbZxC4thndCkqJctxl1+zg=
 github.com/akyoto/hash v0.4.0/go.mod h1:purxg2OohOWT7H0oLP0xQF1DG/EbazUbw7zomRUk8Y8=
 github.com/akyoto/imageserver v0.3.6 h1:Sxcbgo45Lh7afcSmcU8OS49VYbqh4kE3DK0Lxuuxf74=
@@ -274,6 +278,7 @@ golang.org/x/sys v0.0.0-20190516014833-cab07311ab81 h1:5Q88vZAfC0WB8T1GHRLttQaZd
 golang.org/x/sys v0.0.0-20190516014833-cab07311ab81/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190523142557-0e01d883c5c5 h1:sM3evRHxE/1RuMe1FYAL3j7C7fUfIjkbE+NiDAYUF8U=
 golang.org/x/sys v0.0.0-20190523142557-0e01d883c5c5/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20190531175056-4c3a928424d2/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20190602015325-4c4f7f33c9ed h1:uPxWBzB3+mlnjy9W58qY1j/cjyFjutgw/Vhan2zLy/A=
 golang.org/x/sys v0.0.0-20190602015325-4c4f7f33c9ed/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0 h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg=

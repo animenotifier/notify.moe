@@ -55,7 +55,7 @@ func InstallGoogleAuth(app *aero.Application) {
 	app.Get("/auth/google", func(ctx aero.Context) error {
 		state := ctx.Session().ID()
 		url := config.AuthCodeURL(state)
-		return ctx.Redirect(http.StatusFound, url)
+		return ctx.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
 	// This is the redirect URL that we specified in the OAuth2 config.
@@ -122,7 +122,7 @@ func InstallGoogleAuth(app *aero.Application) {
 			// Log
 			authLog.Info("Added Google ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
-			return ctx.Redirect(http.StatusFound, "/")
+			return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 
 		var getErr error
@@ -137,7 +137,7 @@ func InstallGoogleAuth(app *aero.Application) {
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect(http.StatusFound, "/")
+			return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 
 		// Try to find an existing user via the associated e-mail address
@@ -153,7 +153,7 @@ func InstallGoogleAuth(app *aero.Application) {
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect(http.StatusFound, "/")
+			return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 
 		// Register new user
@@ -184,6 +184,6 @@ func InstallGoogleAuth(app *aero.Application) {
 		authLog.Info("Registered new user via Google | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
-		return ctx.Redirect(http.StatusFound, newUserStartRoute)
+		return ctx.Redirect(http.StatusTemporaryRedirect, newUserStartRoute)
 	})
 }

@@ -9,7 +9,7 @@ package middleware
 
 // 		if !strings.HasPrefix(request.Protocol(), "HTTP/2") && isBrowser {
 // 			fmt.Println("Redirect to HTTPS")
-// 			ctx.Redirect(http.StatusFound, "https://" + request.Host() + request.URL().Path)
+// 			ctx.Redirect(http.StatusTemporaryRedirect, "https://" + request.Host() + request.URL().Path)
 // 			ctx.Response().WriteHeader(ctx.Status())
 // 			return
 // 		}

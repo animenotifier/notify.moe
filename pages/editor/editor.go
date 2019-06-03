@@ -15,7 +15,7 @@ func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
-		return ctx.Redirect(http.StatusFound, "/")
+		return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 	}
 
 	ignoreDifferences := arn.FilterIgnoreAnimeDifferences(func(entry *arn.IgnoreAnimeDifference) bool {

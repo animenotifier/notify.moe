@@ -15,5 +15,5 @@ func Redirect(ctx aero.Context) error {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
-	return ctx.Redirect(http.StatusFound, "/+" + user.Nick + ctx.Path())
+	return ctx.Redirect(http.StatusTemporaryRedirect, "/+" + user.Nick + ctx.Path())
 }

@@ -48,7 +48,7 @@ func InstallFacebookAuth(app *aero.Application) {
 	app.Get("/auth/facebook", func(ctx aero.Context) error {
 		state := ctx.Session().ID()
 		url := config.AuthCodeURL(state)
-		return ctx.Redirect(http.StatusFound, url)
+		return ctx.Redirect(http.StatusTemporaryRedirect, url)
 	})
 
 	// This is the redirect URL that we specified in the OAuth2 config.
@@ -111,7 +111,7 @@ func InstallFacebookAuth(app *aero.Application) {
 			// Log
 			authLog.Info("Added Facebook ID to existing account | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
-			return ctx.Redirect(http.StatusFound, "/")
+			return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 
 		var getErr error
@@ -129,7 +129,7 @@ func InstallFacebookAuth(app *aero.Application) {
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect(http.StatusFound, "/")
+			return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 
 		// Try to find an existing user via the associated e-mail address
@@ -142,7 +142,7 @@ func InstallFacebookAuth(app *aero.Application) {
 			user.Save()
 
 			session.Set("userId", user.ID)
-			return ctx.Redirect(http.StatusFound, "/")
+			return ctx.Redirect(http.StatusTemporaryRedirect, "/")
 		}
 
 		// Register new user
@@ -173,6 +173,6 @@ func InstallFacebookAuth(app *aero.Application) {
 		authLog.Info("Registered new user via Facebook | %s | %s | %s | %s | %s", user.Nick, user.ID, ctx.IP(), user.Email, user.RealName())
 
 		// Redirect to starting page for new users
-		return ctx.Redirect(http.StatusFound, newUserStartRoute)
+		return ctx.Redirect(http.StatusTemporaryRedirect, newUserStartRoute)
 	})
 }
