@@ -11,11 +11,10 @@ import (
 	"time"
 
 	"github.com/aerogo/aero"
-
 	"github.com/aerogo/http/client"
+	"github.com/animenotifier/ffxiv"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
 	"github.com/animenotifier/notify.moe/arn/validate"
-	"github.com/animenotifier/ffxiv"
 	"github.com/animenotifier/osu"
 	"github.com/animenotifier/overwatch"
 	gravatar "github.com/ungerik/go-gravatar"

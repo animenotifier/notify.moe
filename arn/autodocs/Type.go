@@ -21,7 +21,7 @@ func (typ *Type) Endpoint() string {
 
 // GitHubLink returns link to display the type in GitHub.
 func (typ *Type) GitHubLink() string {
-	return fmt.Sprintf("https://github.com/animenotifier/notify.moe/tree/go/arn/blob/go/%s.go#L%d", typ.Name, typ.LineNumber)
+	return fmt.Sprintf("https://github.com/animenotifier/notify.moe/blob/go/arn/%s.go#L%d", typ.Name, typ.LineNumber)
 }
 
 // GetTypeDocumentation tries to gather documentation about the given type.
