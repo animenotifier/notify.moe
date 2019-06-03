@@ -45,8 +45,8 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Middleware
 	app.Use(
+		middleware.Recover,
 		middleware.OpenGraph,
-		middleware.Layout,
 		middleware.Log,
 		middleware.Session,
 		middleware.UserInfo,
@@ -69,6 +69,11 @@ func configure(app *aero.Application) *aero.Application {
 
 	// Close the database node on shutdown
 	app.OnEnd(arn.Node.Close)
+
+	// Don't push when an underscore URL has been requested
+	app.AddPushCondition(func(ctx aero.Context) bool {
+		return !strings.HasPrefix(ctx.Path(), "/_")
+	})
 
 	// Show errors in the console
 	app.OnError(func(ctx aero.Context, err error) {

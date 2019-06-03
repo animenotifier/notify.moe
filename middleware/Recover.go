@@ -3,7 +3,9 @@ package middleware
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"runtime"
+	"strings"
 
 	"github.com/aerogo/aero"
 )
@@ -26,7 +28,11 @@ func Recover(next aero.Handler) aero.Handler {
 
 			stack := make([]byte, 4096)
 			length := runtime.Stack(stack, true)
-			_ = ctx.Error(http.StatusInternalServerError, err, stack[:length])
+			stackString := string(stack[:length])
+			fmt.Fprint(os.Stderr, stackString)
+
+			message := err.Error() + "<br><br>" + strings.ReplaceAll(stackString, "\n", "<br>")
+			_ = ctx.Error(http.StatusInternalServerError, message)
 		}()
 
 		return next(ctx)

@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"sort"
-	"strings"
 
 	"github.com/aerogo/aero"
 	"github.com/akyoto/stringutils/unsafe"
@@ -14,10 +13,6 @@ import (
 // to be wrapped around the general layout.
 func Layout(next aero.Handler) aero.Handler {
 	return func(ctx aero.Context) error {
-		if ctx.Request().Method() != "GET" || !strings.Contains(ctx.Request().Header("Accept"), "text/html") || strings.HasPrefix(ctx.Path(), "/_") || strings.HasPrefix(ctx.Path(), "/api/") || strings.HasPrefix(ctx.Path(), "/graphql") {
-			return next(ctx)
-		}
-
 		ctx.AddModifier(func(content []byte) []byte {
 			user := arn.GetUserFromContext(ctx)
 			customCtx := ctx.(*OpenGraphContext)
@@ -41,6 +36,9 @@ func Layout(next aero.Handler) aero.Handler {
 
 				sort.Strings(tags)
 			}
+
+			// Assure that errors are formatted as HTML
+			ctx.Response().SetHeader("Content-Type", "text/html; charset=utf-8")
 
 			html := components.Layout(ctx, user, openGraph, meta, tags, unsafe.BytesToString(content))
 			return unsafe.StringToBytes(html)
