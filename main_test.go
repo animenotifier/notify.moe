@@ -118,8 +118,8 @@ func testRoute(t *testing.T, app *aero.Application, route string) {
 	status := response.Code
 
 	switch status {
-	case 200, 302:
-		// 200 and 302 are allowed
+	case http.StatusOK, http.StatusTemporaryRedirect, http.StatusPermanentRedirect:
+		// OK
 	default:
 		panic(fmt.Errorf("%s | Wrong status code | %v instead of %v", route, status, http.StatusOK))
 	}
