@@ -4,7 +4,7 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils/history"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // History of the edits.

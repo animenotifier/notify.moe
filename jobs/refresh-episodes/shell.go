@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Shell parameters

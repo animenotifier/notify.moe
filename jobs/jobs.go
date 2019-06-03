@@ -11,7 +11,7 @@ import (
 
 	"github.com/aerogo/log"
 	"github.com/akyoto/color"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 var colorPool = []*color.Color{

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // JobInfo gives you information about a background job.

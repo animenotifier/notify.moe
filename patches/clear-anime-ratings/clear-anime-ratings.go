@@ -1,6 +1,6 @@
 package main
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 func main() {
 	defer arn.Node.Close()

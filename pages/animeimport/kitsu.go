@@ -7,7 +7,7 @@ import (
 	"github.com/akyoto/color"
 	"github.com/animenotifier/kitsu"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/utils"

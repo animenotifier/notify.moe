@@ -3,7 +3,7 @@ package commands
 import (
 	"strings"
 
-	"github.com/animenotifier/arn/search"
+	"github.com/animenotifier/notify.moe/arn/search"
 	"github.com/bwmarrin/discordgo"
 )
 

@@ -2,7 +2,7 @@ package activity
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"

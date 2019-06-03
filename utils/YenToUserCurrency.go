@@ -3,7 +3,7 @@ package utils
 import (
 	"fmt"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/pariz/gountries"
 )
 

@@ -6,7 +6,7 @@ import (
 	"github.com/aerogo/aero"
 	nanostore "github.com/aerogo/session-store-nano"
 	"github.com/akyoto/color"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/auth"
 	"github.com/animenotifier/notify.moe/graphql"

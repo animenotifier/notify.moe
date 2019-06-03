@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 func main() {

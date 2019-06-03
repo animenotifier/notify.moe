@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 // Intersection returns common elements of a and b.
 func Intersection(a []string, b []string) []string {

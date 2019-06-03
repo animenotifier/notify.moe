@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 // CalendarDay is a calendar day.
 type CalendarDay struct {

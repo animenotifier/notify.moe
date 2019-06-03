@@ -6,7 +6,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn/search"
+	"github.com/animenotifier/notify.moe/arn/search"
 	"github.com/animenotifier/notify.moe/components"
 )
 

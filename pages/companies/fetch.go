@@ -1,6 +1,6 @@
 package companies
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 // fetchAll returns all companies
 func fetchAll() []*arn.Company {

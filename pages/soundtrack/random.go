@@ -4,7 +4,7 @@ import (
 	"math/rand"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Random returns a random soundtrack.

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"flag"
 
-	"github.com/animenotifier/arn/stringutils"
+	"github.com/animenotifier/notify.moe/arn/stringutils"
 	"github.com/animenotifier/kitsu"
 )
 

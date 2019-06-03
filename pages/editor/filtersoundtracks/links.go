@@ -2,7 +2,7 @@ package filtersoundtracks
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Links shows soundtracks without links.

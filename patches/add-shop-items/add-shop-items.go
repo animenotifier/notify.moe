@@ -1,6 +1,6 @@
 package main
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 var items = []*arn.ShopItem{
 	// 1 month

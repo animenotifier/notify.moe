@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/akyoto/color"
-	"github.com/animenotifier/arn"
-	"github.com/animenotifier/arn/autocorrect"
+	"github.com/animenotifier/notify.moe/arn"
+	"github.com/animenotifier/notify.moe/arn/autocorrect"
 )
 
 func main() {

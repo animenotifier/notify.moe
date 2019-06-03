@@ -5,7 +5,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/akyoto/stringutils/unsafe"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
 )
 

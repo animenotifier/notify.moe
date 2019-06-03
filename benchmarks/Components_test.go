@@ -3,7 +3,7 @@ package benchmarks
 import (
 	"testing"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
 )
 

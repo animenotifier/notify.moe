@@ -8,7 +8,7 @@ import (
 	"github.com/aerogo/manifest"
 	"github.com/aerogo/sitemap"
 	"github.com/akyoto/stringutils/unsafe"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/components/js"
 )

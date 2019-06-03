@@ -4,7 +4,7 @@ import (
 	"flag"
 	"path"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Shell parameters

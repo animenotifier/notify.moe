@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Ranking returns the ranking information for the character via the API.

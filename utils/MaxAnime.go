@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 // MaxAnime limits the number of anime that will maximally be returned.
 func MaxAnime(animes []*arn.Anime, maxLength int) []*arn.Anime {

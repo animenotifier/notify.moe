@@ -2,7 +2,7 @@ package soundtracks
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Best renders the best soundtracks.

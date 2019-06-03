@@ -1,7 +1,7 @@
 package soundtracks
 
 import (
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // fetchAll returns all soundtracks

@@ -6,8 +6,8 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/akyoto/color"
-	"github.com/animenotifier/arn"
-	"github.com/animenotifier/arn/autodocs"
+	"github.com/animenotifier/notify.moe/arn"
+	"github.com/animenotifier/notify.moe/arn/autodocs"
 	"github.com/animenotifier/notify.moe/components"
 )
 
@@ -20,7 +20,7 @@ func Get(ctx aero.Context) error {
 			continue
 		}
 
-		typ, err := autodocs.GetTypeDocumentation(typeName, path.Join(arn.Root, "..", "arn", typeName+".go"))
+		typ, err := autodocs.GetTypeDocumentation(typeName, path.Join(arn.Root, "arn", typeName+".go"))
 		types = append(types, typ)
 
 		if err != nil {

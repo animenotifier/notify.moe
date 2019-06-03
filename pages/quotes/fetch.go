@@ -1,6 +1,6 @@
 package quotes
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 // fetchAll returns all quotes
 func fetchAll() []*arn.Quote {

@@ -2,7 +2,7 @@ package utils
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // GetUser returns the logged in user for the given context.

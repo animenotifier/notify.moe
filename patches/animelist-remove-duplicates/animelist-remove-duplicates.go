@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 func main() {

@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // OpenGraphContext is a context with open graph data.

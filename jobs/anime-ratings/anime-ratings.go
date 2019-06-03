@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 var ratings = map[string][]arn.AnimeListItemRating{}

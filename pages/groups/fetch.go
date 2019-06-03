@@ -1,6 +1,6 @@
 package groups
 
-import "github.com/animenotifier/arn"
+import "github.com/animenotifier/notify.moe/arn"
 
 func fetchGroups(memberID string) []*arn.Group {
 	return arn.FilterGroups(func(group *arn.Group) bool {

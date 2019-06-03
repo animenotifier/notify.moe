@@ -4,7 +4,7 @@ import (
 	"flag"
 
 	"github.com/aerogo/crawler"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Shell parameters

@@ -2,7 +2,7 @@ package soundtracks
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // FilterByTag renders the best soundtracks filtered by tag.

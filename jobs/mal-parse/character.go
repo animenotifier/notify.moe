@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	malparser "github.com/animenotifier/mal/parser"
 )
 

@@ -2,7 +2,7 @@ package profiletracks
 
 // import (
 // 	"github.com/aerogo/aero"
-// 	"github.com/animenotifier/arn"
+// 	"github.com/animenotifier/notify.moe/arn"
 // )
 
 // // Added shows all soundtracks added by a particular user.

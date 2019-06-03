@@ -2,7 +2,7 @@ package userroutes
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/compare"

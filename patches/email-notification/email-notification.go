@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/animenotifier/arn"
-	"github.com/animenotifier/arn/mailer"
+	"github.com/animenotifier/notify.moe/arn"
+	"github.com/animenotifier/notify.moe/arn/mailer"
 )
 
 func main() {

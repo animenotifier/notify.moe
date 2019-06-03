@@ -10,7 +10,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils/editform"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Edit track.

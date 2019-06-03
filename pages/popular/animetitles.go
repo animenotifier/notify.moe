@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
-	"github.com/animenotifier/arn/stringutils"
+	"github.com/animenotifier/notify.moe/arn"
+	"github.com/animenotifier/notify.moe/arn/stringutils"
 )
 
 // AnimeTitles returns a list of the 500 most popular anime titles.

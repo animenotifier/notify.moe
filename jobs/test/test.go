@@ -4,14 +4,14 @@ import (
 	"os/exec"
 	"sync"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 
 	"github.com/akyoto/color"
 )
 
 var packages = []string{
 	"github.com/animenotifier/notify.moe",
-	"github.com/animenotifier/arn",
+	"github.com/animenotifier/notify.moe/arn",
 	"github.com/animenotifier/kitsu",
 	"github.com/animenotifier/anilist",
 	"github.com/animenotifier/mal",

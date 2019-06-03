@@ -3,7 +3,7 @@ package recommended
 import (
 	"math"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 func getAnimeAffinity(anime *arn.Anime, animeListItem *arn.AnimeListItem, completed *arn.AnimeList, bestGenres []string) float64 {

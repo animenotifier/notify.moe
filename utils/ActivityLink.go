@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // ActivityAPILink returns the API link for any activity.

@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // MissingLyrics shows soundtracks without lyrics.

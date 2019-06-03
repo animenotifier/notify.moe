@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/arn"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
 	jsoniter "github.com/json-iterator/go"
