@@ -43,7 +43,7 @@ component FooBar
 Your page needs to become available on the `/foobar` route. Let's add it to `pages/index.go`, inside `Configure`:
 
 ```go
-l.Page("/foobar", foobar.Get)
+page.Get(app, "/foobar", foobar.Get)
 ```
 
 Your IDE should automatically insert the needed package import upon saving the file.

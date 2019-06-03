@@ -1,18 +1,19 @@
 package companyroutes
 
 import (
-	"github.com/aerogo/layout"
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/companies"
 	"github.com/animenotifier/notify.moe/pages/company"
+	"github.com/animenotifier/notify.moe/utils/page"
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout) {
+func Register(app *aero.Application) {
 	// Companies
-	l.Page("/company/:id", company.Get)
-	l.Page("/company/:id/edit", company.Edit)
-	l.Page("/company/:id/history", company.History)
-	l.Page("/companies", companies.Popular)
-	l.Page("/companies/from/:index", companies.Popular)
-	l.Page("/companies/all", companies.All)
+	page.Get(app, "/company/:id", company.Get)
+	page.Get(app, "/company/:id/edit", company.Edit)
+	page.Get(app, "/company/:id/history", company.History)
+	page.Get(app, "/companies", companies.Popular)
+	page.Get(app, "/companies/from/:index", companies.Popular)
+	page.Get(app, "/companies/all", companies.All)
 }

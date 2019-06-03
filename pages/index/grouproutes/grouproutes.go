@@ -1,24 +1,25 @@
 package grouproutes
 
 import (
-	"github.com/aerogo/layout"
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/group"
 	"github.com/animenotifier/notify.moe/pages/groups"
+	"github.com/animenotifier/notify.moe/utils/page"
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout) {
+func Register(app *aero.Application) {
 	// Groups
-	l.Page("/groups", groups.Latest)
-	l.Page("/groups/from/:index", groups.Latest)
-	l.Page("/groups/popular", groups.Popular)
-	l.Page("/groups/popular/from/:index", groups.Popular)
-	l.Page("/groups/joined", groups.Joined)
-	l.Page("/groups/joined/from/:index", groups.Joined)
-	l.Page("/group/:id", group.Feed)
-	l.Page("/group/:id/info", group.Info)
-	l.Page("/group/:id/members", group.Members)
-	l.Page("/group/:id/edit", group.Edit)
-	l.Page("/group/:id/edit/image", group.EditImage)
-	l.Page("/group/:id/history", group.History)
+	page.Get(app, "/groups", groups.Latest)
+	page.Get(app, "/groups/from/:index", groups.Latest)
+	page.Get(app, "/groups/popular", groups.Popular)
+	page.Get(app, "/groups/popular/from/:index", groups.Popular)
+	page.Get(app, "/groups/joined", groups.Joined)
+	page.Get(app, "/groups/joined/from/:index", groups.Joined)
+	page.Get(app, "/group/:id", group.Feed)
+	page.Get(app, "/group/:id/info", group.Info)
+	page.Get(app, "/group/:id/members", group.Members)
+	page.Get(app, "/group/:id/edit", group.Edit)
+	page.Get(app, "/group/:id/edit/image", group.EditImage)
+	page.Get(app, "/group/:id/history", group.History)
 }

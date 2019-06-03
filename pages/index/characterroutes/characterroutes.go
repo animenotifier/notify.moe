@@ -1,22 +1,23 @@
 package characterroutes
 
 import (
-	"github.com/aerogo/layout"
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/characters"
+	"github.com/animenotifier/notify.moe/utils/page"
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout) {
+func Register(app *aero.Application) {
 	// Characters
-	l.Page("/characters", characters.Latest)
-	l.Page("/characters/from/:index", characters.Latest)
-	l.Page("/characters/best", characters.Best)
-	l.Page("/characters/best/from/:index", characters.Best)
+	page.Get(app, "/characters", characters.Latest)
+	page.Get(app, "/characters/from/:index", characters.Latest)
+	page.Get(app, "/characters/best", characters.Best)
+	page.Get(app, "/characters/best/from/:index", characters.Best)
 
 	// Character
-	l.Page("/character/:id", character.Get)
-	l.Page("/character/:id/edit", character.Edit)
-	l.Page("/character/:id/edit/images", character.EditImages)
-	l.Page("/character/:id/history", character.History)
+	page.Get(app, "/character/:id", character.Get)
+	page.Get(app, "/character/:id/edit", character.Edit)
+	page.Get(app, "/character/:id/edit/images", character.EditImages)
+	page.Get(app, "/character/:id/history", character.History)
 }

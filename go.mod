@@ -5,12 +5,11 @@ go 1.12
 require (
 	cloud.google.com/go v0.39.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.5
+	github.com/aerogo/aero v1.3.8
 	github.com/aerogo/api v0.2.0
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/graphql v0.4.0
 	github.com/aerogo/http v1.0.6
-	github.com/aerogo/layout v0.3.1
 	github.com/aerogo/log v0.2.5
 	github.com/aerogo/manifest v0.1.4
 	github.com/aerogo/markdown v0.1.8
@@ -19,7 +18,7 @@ require (
 	github.com/aerogo/sitemap v0.1.3
 	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.5
-	github.com/akyoto/hash v0.3.5
+	github.com/akyoto/hash v0.4.0
 	github.com/akyoto/stringutils v0.2.1
 	github.com/animenotifier/anilist v0.2.3
 	github.com/animenotifier/arn v1.2.0

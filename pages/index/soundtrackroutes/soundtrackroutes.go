@@ -1,22 +1,23 @@
 package soundtrackroutes
 
 import (
-	"github.com/aerogo/layout"
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/soundtrack"
 	"github.com/animenotifier/notify.moe/pages/soundtracks"
+	"github.com/animenotifier/notify.moe/utils/page"
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout) {
+func Register(app *aero.Application) {
 	// Soundtracks
-	l.Page("/soundtracks", soundtracks.Latest)
-	l.Page("/soundtracks/from/:index", soundtracks.Latest)
-	l.Page("/soundtracks/best", soundtracks.Best)
-	l.Page("/soundtracks/best/from/:index", soundtracks.Best)
-	l.Page("/soundtracks/tag/:tag", soundtracks.FilterByTag)
-	l.Page("/soundtracks/tag/:tag/from/:index", soundtracks.FilterByTag)
-	l.Page("/soundtrack/:id", soundtrack.Get)
-	l.Page("/soundtrack/:id/lyrics", soundtrack.Lyrics)
-	l.Page("/soundtrack/:id/edit", soundtrack.Edit)
-	l.Page("/soundtrack/:id/history", soundtrack.History)
+	page.Get(app, "/soundtracks", soundtracks.Latest)
+	page.Get(app, "/soundtracks/from/:index", soundtracks.Latest)
+	page.Get(app, "/soundtracks/best", soundtracks.Best)
+	page.Get(app, "/soundtracks/best/from/:index", soundtracks.Best)
+	page.Get(app, "/soundtracks/tag/:tag", soundtracks.FilterByTag)
+	page.Get(app, "/soundtracks/tag/:tag/from/:index", soundtracks.FilterByTag)
+	page.Get(app, "/soundtrack/:id", soundtrack.Get)
+	page.Get(app, "/soundtrack/:id/lyrics", soundtrack.Lyrics)
+	page.Get(app, "/soundtrack/:id/edit", soundtrack.Edit)
+	page.Get(app, "/soundtrack/:id/history", soundtrack.History)
 }

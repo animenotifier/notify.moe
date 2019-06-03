@@ -1,7 +1,7 @@
 package coreroutes
 
 import (
-	"github.com/aerogo/layout"
+	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/activity"
 	"github.com/animenotifier/notify.moe/pages/calendar"
 	"github.com/animenotifier/notify.moe/pages/embed"
@@ -10,35 +10,36 @@ import (
 	"github.com/animenotifier/notify.moe/pages/statistics"
 	"github.com/animenotifier/notify.moe/pages/terms"
 	"github.com/animenotifier/notify.moe/pages/welcome"
+	"github.com/animenotifier/notify.moe/utils/page"
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout) {
+func Register(app *aero.Application) {
 	// Front page
-	l.Page("/", home.Get)
+	page.Get(app, "/", home.Get)
 
 	// Login
-	l.Page("/login", login.Get)
+	page.Get(app, "/login", login.Get)
 
 	// Welcome
-	l.Page("/welcome", welcome.Get)
+	page.Get(app, "/welcome", welcome.Get)
 
 	// Activity
-	l.Page("/activity", activity.Global)
-	l.Page("/activity/from/:index", activity.Global)
-	l.Page("/activity/followed", activity.Followed)
-	l.Page("/activity/followed/from/:index", activity.Followed)
+	page.Get(app, "/activity", activity.Global)
+	page.Get(app, "/activity/from/:index", activity.Global)
+	page.Get(app, "/activity/followed", activity.Followed)
+	page.Get(app, "/activity/followed/from/:index", activity.Followed)
 
 	// Calendar
-	l.Page("/calendar", calendar.Get)
+	page.Get(app, "/calendar", calendar.Get)
 
 	// Statistics
-	l.Page("/statistics", statistics.Get)
-	l.Page("/statistics/anime", statistics.Anime)
+	page.Get(app, "/statistics", statistics.Get)
+	page.Get(app, "/statistics/anime", statistics.Anime)
 
 	// Legal stuff
-	l.Page("/terms", terms.Get)
+	page.Get(app, "/terms", terms.Get)
 
 	// Browser extension
-	l.Page("/extension/embed", embed.Get)
+	page.Get(app, "/extension/embed", embed.Get)
 }

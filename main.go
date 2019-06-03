@@ -46,6 +46,7 @@ func configure(app *aero.Application) *aero.Application {
 	// Middleware
 	app.Use(
 		middleware.OpenGraph,
+		middleware.Layout,
 		middleware.Log,
 		middleware.Session,
 		middleware.UserInfo,

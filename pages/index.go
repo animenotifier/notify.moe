@@ -2,8 +2,6 @@ package pages
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/aerogo/layout"
-	fullpage "github.com/animenotifier/notify.moe/layout"
 	"github.com/animenotifier/notify.moe/pages/index/amvroutes"
 	"github.com/animenotifier/notify.moe/pages/index/animeroutes"
 	"github.com/animenotifier/notify.moe/pages/index/apiroutes"
@@ -26,32 +24,27 @@ import (
 
 // Configure registers the page routes in the application.
 func Configure(app *aero.Application) {
-	l := layout.New(app)
-
-	// Set render function for the layout
-	l.Render = fullpage.Render
-
 	// Register the routes
-	coreroutes.Register(l)
-	userroutes.Register(l)
-	characterroutes.Register(l)
-	exploreroutes.Register(l)
-	amvroutes.Register(l)
-	forumroutes.Register(l)
-	animeroutes.Register(l, app)
-	userlistroutes.Register(l)
-	quoteroutes.Register(l)
-	companyroutes.Register(l)
-	soundtrackroutes.Register(l)
-	grouproutes.Register(l)
-	searchroutes.Register(l)
-	importroutes.Register(l)
-	shoproutes.Register(l, app)
-	settingsroutes.Register(l)
-	staffroutes.Register(l)
-	apiroutes.Register(l, app)
+	coreroutes.Register(app)
+	userroutes.Register(app)
+	characterroutes.Register(app)
+	exploreroutes.Register(app)
+	amvroutes.Register(app)
+	forumroutes.Register(app)
+	animeroutes.Register(app)
+	userlistroutes.Register(app)
+	quoteroutes.Register(app)
+	companyroutes.Register(app)
+	soundtrackroutes.Register(app)
+	grouproutes.Register(app)
+	searchroutes.Register(app)
+	importroutes.Register(app)
+	shoproutes.Register(app)
+	settingsroutes.Register(app)
+	staffroutes.Register(app)
+	apiroutes.Register(app)
 
 	// Mixed
-	// l.Page("/database", database.Get)
+	// app.Get("/database", database.Get)
 	// app.Get("/api/select/:data-type/where/:field/is/:field-value", database.Select)
 }

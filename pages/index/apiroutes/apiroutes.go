@@ -3,13 +3,7 @@ package apiroutes
 import (
 	"strings"
 
-	"github.com/animenotifier/notify.moe/pages/post"
-	"github.com/animenotifier/notify.moe/pages/sse"
-	"github.com/animenotifier/notify.moe/pages/thread"
-
 	"github.com/aerogo/aero"
-
-	"github.com/aerogo/layout"
 	"github.com/animenotifier/arn"
 	"github.com/animenotifier/notify.moe/pages/animeimport"
 	"github.com/animenotifier/notify.moe/pages/apiview"
@@ -19,17 +13,21 @@ import (
 	"github.com/animenotifier/notify.moe/pages/me"
 	"github.com/animenotifier/notify.moe/pages/notifications"
 	"github.com/animenotifier/notify.moe/pages/popular"
+	"github.com/animenotifier/notify.moe/pages/post"
 	"github.com/animenotifier/notify.moe/pages/soundtrack"
+	"github.com/animenotifier/notify.moe/pages/sse"
+	"github.com/animenotifier/notify.moe/pages/thread"
 	"github.com/animenotifier/notify.moe/pages/upload"
+	"github.com/animenotifier/notify.moe/utils/page"
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout, app *aero.Application) {
+func Register(app *aero.Application) {
 	// API pages
-	l.Page("/api", apiview.Get)
+	page.Get(app, "/api", apiview.Get)
 
 	for name := range arn.DB.Types() {
-		l.Page("/api/"+strings.ToLower(name), apidocs.ByType(name))
+		page.Get(app, "/api/"+strings.ToLower(name), apidocs.ByType(name))
 	}
 
 	// API

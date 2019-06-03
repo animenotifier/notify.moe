@@ -2,7 +2,6 @@ package staffroutes
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/aerogo/layout"
 	"github.com/animenotifier/notify.moe/pages/admin"
 	"github.com/animenotifier/notify.moe/pages/editlog"
 	"github.com/animenotifier/notify.moe/pages/editor"
@@ -10,16 +9,17 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editor/filtercompanies"
 	"github.com/animenotifier/notify.moe/pages/editor/filtersoundtracks"
 	"github.com/animenotifier/notify.moe/pages/editor/jobs"
+	"github.com/animenotifier/notify.moe/utils/page"
 )
 
 // Register registers the page routes.
-func Register(l *layout.Layout) {
+func Register(app *aero.Application) {
 	// Editor
-	l.Page("/editor", editor.Get)
+	page.Get(app, "/editor", editor.Get)
 
 	// Editor links can be filtered by year, status and type
 	editorFilterable := func(route string, handler func(ctx aero.Context) error) {
-		l.Page(route+"/:year/:season/:status/:type", handler)
+		page.Get(app, route+"/:year/:season/:status/:type", handler)
 	}
 
 	// Editor - Anime
@@ -51,32 +51,32 @@ func Register(l *layout.Layout) {
 	editorFilterable("/editor/mal/diff/anime", editor.CompareMAL)
 
 	// Editor - Kitsu
-	l.Page("/editor/kitsu/new/anime", editor.NewKitsuAnime)
+	page.Get(app, "/editor/kitsu/new/anime", editor.NewKitsuAnime)
 
 	// Editor - Companies
-	l.Page("/editor/companies/description", filtercompanies.NoDescription)
+	page.Get(app, "/editor/companies/description", filtercompanies.NoDescription)
 
 	// Editor - Soundtracks
-	l.Page("/editor/soundtracks/links", filtersoundtracks.Links)
-	l.Page("/editor/soundtracks/lyrics/missing", filtersoundtracks.MissingLyrics)
-	l.Page("/editor/soundtracks/lyrics/unaligned", filtersoundtracks.UnalignedLyrics)
-	l.Page("/editor/soundtracks/tags", filtersoundtracks.Tags)
-	l.Page("/editor/soundtracks/file", filtersoundtracks.File)
+	page.Get(app, "/editor/soundtracks/links", filtersoundtracks.Links)
+	page.Get(app, "/editor/soundtracks/lyrics/missing", filtersoundtracks.MissingLyrics)
+	page.Get(app, "/editor/soundtracks/lyrics/unaligned", filtersoundtracks.UnalignedLyrics)
+	page.Get(app, "/editor/soundtracks/tags", filtersoundtracks.Tags)
+	page.Get(app, "/editor/soundtracks/file", filtersoundtracks.File)
 
 	// Editor - Jobs
-	l.Page("/editor/jobs", jobs.Overview)
+	page.Get(app, "/editor/jobs", jobs.Overview)
 
 	// Log
-	l.Page("/log", editlog.Get)
-	l.Page("/log/from/:index", editlog.Get)
-	l.Page("/user/:nick/log", editlog.Get)
-	l.Page("/user/:nick/log/from/:index", editlog.Get)
+	page.Get(app, "/log", editlog.Get)
+	page.Get(app, "/log/from/:index", editlog.Get)
+	page.Get(app, "/user/:nick/log", editlog.Get)
+	page.Get(app, "/user/:nick/log/from/:index", editlog.Get)
 
 	// Admin
-	l.Page("/admin", admin.Get)
-	l.Page("/admin/webdev", admin.WebDev)
-	l.Page("/admin/registrations", admin.UserRegistrations)
-	l.Page("/admin/errors/client", admin.ClientErrors)
-	l.Page("/admin/purchases", admin.PurchaseHistory)
-	l.Page("/admin/payments", admin.PaymentHistory)
+	page.Get(app, "/admin", admin.Get)
+	page.Get(app, "/admin/webdev", admin.WebDev)
+	page.Get(app, "/admin/registrations", admin.UserRegistrations)
+	page.Get(app, "/admin/errors/client", admin.ClientErrors)
+	page.Get(app, "/admin/purchases", admin.PurchaseHistory)
+	page.Get(app, "/admin/payments", admin.PaymentHistory)
 }
