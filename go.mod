@@ -52,6 +52,4 @@ require (
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 )
 
-replace github.com/aerogo/aero => /home/eduard/projects/aerogo/aero
-
 exclude github.com/logpacker/PayPal-Go-SDK v2.0.0+incompatible
