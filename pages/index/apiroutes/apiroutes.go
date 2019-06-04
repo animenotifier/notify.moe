@@ -54,8 +54,8 @@ func Register(app *aero.Application) {
 	app.Post("/api/soundtrack/:id/download", soundtrack.Download)
 
 	// Upload
-	app.Post("/api/upload/avatar", upload.Avatar)
-	app.Post("/api/upload/cover", upload.Cover)
+	app.Post("/api/upload/user/image", upload.UserImage)
+	app.Post("/api/upload/user/cover", upload.UserCover)
 	app.Post("/api/upload/anime/:id/image", upload.AnimeImage)
 	app.Post("/api/upload/character/:id/image", upload.CharacterImage)
 	app.Post("/api/upload/group/:id/image", upload.GroupImage)

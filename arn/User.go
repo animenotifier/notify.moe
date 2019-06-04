@@ -55,6 +55,7 @@ type User struct {
 	IP           string       `json:"ip" private:"true"`
 	UserAgent    string       `json:"agent" private:"true"`
 	Balance      int          `json:"balance" private:"true"`
+	Image        Image        `json:"image"`
 	Avatar       UserAvatar   `json:"avatar"`
 	Cover        UserCover    `json:"cover"`
 	Accounts     UserAccounts `json:"accounts" private:"true"`
@@ -138,7 +139,7 @@ func RegisterUser(user *User) {
 
 		if err == nil && response.StatusCode() == http.StatusOK {
 			data := response.Bytes()
-			err = user.SetAvatarBytes(data)
+			err = user.SetImageBytes(data)
 
 			if err != nil {
 				fmt.Println(err)

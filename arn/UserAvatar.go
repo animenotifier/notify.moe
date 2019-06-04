@@ -65,8 +65,8 @@ type UserAvatar struct {
 	LastModified int64  `json:"lastModified"`
 }
 
-// SetAvatarBytes accepts a byte buffer that represents an image file and updates the avatar.
-func (user *User) SetAvatarBytes(data []byte) error {
+// SetImageBytes accepts a byte buffer that represents an image file and updates the avatar.
+func (user *User) SetImageBytes(data []byte) error {
 	// Decode
 	img, format, err := image.Decode(bytes.NewReader(data))
 

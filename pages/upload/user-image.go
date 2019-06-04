@@ -7,8 +7,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Avatar handles the avatar upload.
-func Avatar(ctx aero.Context) error {
+// UserImage handles the avatar upload.
+func UserImage(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {
@@ -23,7 +23,7 @@ func Avatar(ctx aero.Context) error {
 	}
 
 	// Set avatar file
-	err = user.SetAvatarBytes(data)
+	err = user.SetImageBytes(data)
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Invalid image format", err)

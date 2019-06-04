@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/kitsu"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 func main() {
@@ -27,7 +27,7 @@ func main() {
 				Japanese:  kitsuCharacter.Attributes.Names.JaJp,
 				Synonyms:  kitsuCharacter.Attributes.OtherNames,
 			},
-			Image: arn.CharacterImage{
+			Image: arn.Image{
 				Extension: path.Ext(kitsu.FixImageURL(kitsuCharacter.Attributes.Image.Original)),
 			},
 			Description: kitsuCharacter.Attributes.Description,

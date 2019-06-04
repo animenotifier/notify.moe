@@ -478,7 +478,6 @@ var routeTests = map[string][]string{
 	"/settings/accounts":                             nil,
 	"/settings/notifications":                        nil,
 	"/settings/info":                                 nil,
-	"/settings/avatar":                               nil,
 	"/settings/style":                                nil,
 	"/settings/extras":                               nil,
 	"/shop":                                          nil,

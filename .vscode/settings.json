@@ -35,6 +35,7 @@
 		"**/*.ogg": true,
 		"**/*.m4a": true,
 		"**/*.webm": true,
+		"**/*.log": true
 	},
 	"[jade]": {
 		"files.trimTrailingWhitespace": false

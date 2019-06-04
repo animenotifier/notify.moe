@@ -7,8 +7,8 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Cover handles the cover image upload.
-func Cover(ctx aero.Context) error {
+// UserCover handles the cover image upload.
+func UserCover(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 
 	if user == nil {

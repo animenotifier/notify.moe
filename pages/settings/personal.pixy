@@ -49,7 +49,7 @@ component SettingsPersonal(user *arn.User)
 				Icon("picture-o")
 				span Cover
 			
-			InputFileUpload("cover-input", "File", "image", "/api/upload/cover")
+			InputFileUpload("cover-input", "File", "image", "/api/upload/user/cover")
 
 			.cover-preview(title="Recommended: 1920 x 450 | PNG or JPG")
 				img.profile-cover.cover-input-preview.lazy(data-src=user.CoverLink("small"), data-webp="true", alt="Cover image")
@@ -59,7 +59,7 @@ component SettingsPersonal(user *arn.User)
 					p PRO account required.
 
 component AvatarInput(user *arn.User)
-	InputFileUpload("avatar-input", "File", "image", "/api/upload/avatar")
+	InputFileUpload("avatar-input", "File", "image", "/api/upload/user/image")
 
 	.profile-image-container.avatar-preview
 		if user.HasAvatar()

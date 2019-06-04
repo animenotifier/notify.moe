@@ -6,7 +6,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 	let fileType = button.dataset.type
 	let endpoint = button.dataset.endpoint
 
-	if(endpoint === "/api/upload/cover" && arn.user && arn.user.dataset.pro !== "true") {
+	if(endpoint === "/api/upload/user/cover" && arn.user && arn.user.dataset.pro !== "true") {
 		alert("Please buy a PRO account to use this feature.")
 		return
 	}
@@ -47,14 +47,14 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 			let img = await loadImage(dataURL)
 
 			switch(endpoint) {
-				case "/api/upload/avatar":
+				case "/api/upload/user/image":
 					if(img.naturalWidth <= 280 || img.naturalHeight < 280) {
 						arn.statusMessage.showError(`Your image has a resolution of ${img.naturalWidth} x ${img.naturalHeight} pixels which is too small. Recommended: 560 x 560. Minimum: 280 x 280.`, 8000)
 						return
 					}
 					break
 
-				case "/api/upload/cover":
+				case "/api/upload/user/cover":
 					if(img.naturalWidth <= 960 || img.naturalHeight < 225) {
 						arn.statusMessage.showError(`Your image has a resolution of ${img.naturalWidth} x ${img.naturalHeight} pixels which is too small. Recommended: 1920 x 450. Minimum: 960 x 225.`, 8000)
 						return
@@ -101,7 +101,7 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 
 			arn.statusMessage.showInfo(`Successfully uploaded your new ${fileType}.`)
 
-			if(endpoint === "/api/upload/avatar") {
+			if(endpoint === "/api/upload/user/image") {
 				// We received the new avatar URL
 				updateSideBarAvatar(responseText)
 			}
@@ -152,7 +152,7 @@ function loadImage(url: string): Promise<HTMLImageElement> {
 
 // Preview image
 function previewImage(dataURL: string, endpoint: string, previews: HTMLCollectionOf<Element>) {
-	if(endpoint === "/api/upload/avatar") {
+	if(endpoint === "/api/upload/user/image") {
 		let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
 
 		if(svgPreview) {
