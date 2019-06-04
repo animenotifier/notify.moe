@@ -5,7 +5,7 @@ go 1.12
 require (
 	cloud.google.com/go v0.39.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.10
+	github.com/aerogo/aero v1.3.11
 	github.com/aerogo/api v0.2.0
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.4
@@ -27,7 +27,7 @@ require (
 	github.com/akyoto/webpush-go v0.1.2
 	github.com/animenotifier/anilist v0.2.4
 	github.com/animenotifier/ffxiv v0.2.1
-	github.com/animenotifier/japanese v0.2.3
+	github.com/animenotifier/japanese v0.2.4
 	github.com/animenotifier/kitsu v0.2.3
 	github.com/animenotifier/mal v0.2.3
 	github.com/animenotifier/osu v0.1.1
