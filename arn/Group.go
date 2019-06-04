@@ -15,7 +15,7 @@ import (
 type Group struct {
 	Name        string         `json:"name" editable:"true"`
 	Tagline     string         `json:"tagline" editable:"true"`
-	Image       GroupImage     `json:"image"`
+	Image       Image          `json:"image"`
 	Description string         `json:"description" editable:"true" type:"textarea"`
 	Rules       string         `json:"rules" editable:"true" type:"textarea"`
 	Restricted  bool           `json:"restricted" editable:"true" tooltip:"Restricted groups can only be joined with the founder's permission."`

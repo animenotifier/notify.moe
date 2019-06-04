@@ -44,7 +44,7 @@ func sync(anime *kitsu.Anime) {
 // 	if err != nil {
 // 		if strings.Contains(err.Error(), "not found") {
 // 			anime = &arn.Anime{
-// 				Title: &arn.AnimeTitle{},
+// 				Title: &arn.MediaTitle{},
 // 			}
 // 		} else {
 // 			panic(err)

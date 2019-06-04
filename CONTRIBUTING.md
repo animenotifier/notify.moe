@@ -5,7 +5,7 @@
 - [Installation](README.md#installation)
 - [Task for new contributors](docs/new-contributor-task.md)
 - [Issues](https://github.com/animenotifier/notify.moe/projects/10)
-- [Code Style](docs/code-style.md)
+- [Code Style](https://github.com/akyoto/quality/blob/master/STYLE.md)
 
 ## Communication
 

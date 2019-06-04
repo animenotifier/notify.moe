@@ -10,8 +10,8 @@ import (
 
 // Person represents a person in real life.
 type Person struct {
-	Name  PersonName  `json:"name" editable:"true"`
-	Image PersonImage `json:"image"`
+	Name  PersonName `json:"name" editable:"true"`
+	Image Image      `json:"image"`
 
 	hasID
 	hasPosts
@@ -33,7 +33,7 @@ func NewPerson() *Person {
 	}
 }
 
-// Link ...
+// Link returns the path to the person.
 func (person *Person) Link() string {
 	return "/person/" + person.ID
 }

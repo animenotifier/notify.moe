@@ -65,7 +65,7 @@ func init() {
 // Anime represents an anime.
 type Anime struct {
 	Type          string           `json:"type" editable:"true" datalist:"anime-types"`
-	Title         *AnimeTitle      `json:"title" editable:"true"`
+	Title         *MediaTitle      `json:"title" editable:"true"`
 	Summary       string           `json:"summary" editable:"true" type:"textarea"`
 	Status        string           `json:"status" editable:"true" datalist:"anime-status"`
 	Genres        []string         `json:"genres" editable:"true"`
@@ -74,7 +74,7 @@ type Anime struct {
 	EpisodeCount  int              `json:"episodeCount" editable:"true"`
 	EpisodeLength int              `json:"episodeLength" editable:"true"`
 	Source        string           `json:"source" editable:"true" datalist:"anime-sources"`
-	Image         AnimeImage       `json:"image"`
+	Image         Image            `json:"image"`
 	FirstChannel  string           `json:"firstChannel"`
 	Rating        *AnimeRating     `json:"rating"`
 	Popularity    *AnimePopularity `json:"popularity"`
@@ -107,7 +107,7 @@ func NewAnime() *Anime {
 		hasID: hasID{
 			ID: GenerateID("Anime"),
 		},
-		Title:      &AnimeTitle{},
+		Title:      &MediaTitle{},
 		Rating:     &AnimeRating{},
 		Popularity: &AnimePopularity{},
 		Trailers:   []*ExternalMedia{},

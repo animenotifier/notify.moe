@@ -11,7 +11,7 @@ import (
 // Character represents an anime or manga character.
 type Character struct {
 	Name        CharacterName         `json:"name" editable:"true"`
-	Image       CharacterImage        `json:"image"`
+	Image       Image                 `json:"image"`
 	MainQuoteID string                `json:"mainQuoteId" editable:"true"`
 	Description string                `json:"description" editable:"true" type:"textarea"`
 	Spoilers    []Spoiler             `json:"spoilers" editable:"true"`

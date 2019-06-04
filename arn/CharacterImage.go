@@ -148,9 +148,6 @@ var characterImageOutputsHighDPI = []imageserver.Output{
 	},
 }
 
-// CharacterImage ...
-type CharacterImage AnimeImage
-
 // SetImageBytes accepts a byte buffer that represents an image file and updates the character image.
 func (character *Character) SetImageBytes(data []byte) error {
 	// Decode

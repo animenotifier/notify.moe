@@ -157,15 +157,6 @@ var animeImageOutputsHighDPI = []imageserver.Output{
 	},
 }
 
-// AnimeImage ...
-type AnimeImage struct {
-	Extension    string   `json:"extension"`
-	Width        int      `json:"width"`
-	Height       int      `json:"height"`
-	AverageColor HSLColor `json:"averageColor"`
-	LastModified int64    `json:"lastModified"`
-}
-
 // SetImageBytes accepts a byte buffer that represents an image file and updates the anime image.
 func (anime *Anime) SetImageBytes(data []byte) error {
 	// Decode

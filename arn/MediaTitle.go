@@ -1,7 +1,7 @@
 package arn
 
-// AnimeTitle ...
-type AnimeTitle struct {
+// MediaTitle represents a title for any kind of media.
+type MediaTitle struct {
 	Canonical string   `json:"canonical" editable:"true"`
 	Romaji    string   `json:"romaji" editable:"true"`
 	English   string   `json:"english" editable:"true"`
@@ -11,7 +11,7 @@ type AnimeTitle struct {
 }
 
 // ByUser returns the preferred title for the given user.
-func (title *AnimeTitle) ByUser(user *User) string {
+func (title *MediaTitle) ByUser(user *User) string {
 	if user == nil {
 		return title.Canonical
 	}

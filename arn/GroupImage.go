@@ -116,9 +116,6 @@ var groupImageOutputsHighDPI = []imageserver.Output{
 	},
 }
 
-// GroupImage ...
-type GroupImage AnimeImage
-
 // SetImageBytes accepts a byte buffer that represents an image file and updates the group image.
 func (group *Group) SetImageBytes(data []byte) error {
 	// Decode
