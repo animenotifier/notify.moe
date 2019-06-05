@@ -20,7 +20,7 @@ func editorList(ctx aero.Context, title string, filter func(*arn.SoundTrack) boo
 		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
-	tracks, count := filterSoundTracks(ctx, user, filter)
+	tracks, count := filterSoundTracks(filter)
 	url := strings.TrimPrefix(ctx.Path(), "/_")
 
 	return ctx.HTML(components.SoundTracksEditorListFull(
@@ -34,7 +34,7 @@ func editorList(ctx aero.Context, title string, filter func(*arn.SoundTrack) boo
 }
 
 // filterSoundTracks filters soundtracks by the given filter function.
-func filterSoundTracks(ctx aero.Context, user *arn.User, filter func(*arn.SoundTrack) bool) ([]*arn.SoundTrack, int) {
+func filterSoundTracks(filter func(*arn.SoundTrack) bool) ([]*arn.SoundTrack, int) {
 	// Filter
 	tracks := arn.FilterSoundTracks(func(track *arn.SoundTrack) bool {
 		return !track.IsDraft && filter(track)

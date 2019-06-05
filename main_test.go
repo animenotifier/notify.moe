@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -121,6 +120,6 @@ func testRoute(t *testing.T, app *aero.Application, route string) {
 	case http.StatusOK, http.StatusTemporaryRedirect, http.StatusPermanentRedirect:
 		// OK
 	default:
-		panic(fmt.Errorf("%s | Wrong status code | %v instead of %v", route, status, http.StatusOK))
+		t.Fatalf("%s | Wrong status code | %v instead of %v", route, status, http.StatusOK)
 	}
 }

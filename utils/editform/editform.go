@@ -168,7 +168,7 @@ func RenderField(b *strings.Builder, v *reflect.Value, field reflect.StructField
 
 	// Any kind of array
 	if strings.HasPrefix(fieldType, "[]") {
-		renderSliceField(b, v, field, idPrefix, fieldType, fieldValue)
+		renderSliceField(b, field, idPrefix, fieldType, fieldValue)
 		return
 	}
 
@@ -258,7 +258,7 @@ func renderStringField(b *strings.Builder, v *reflect.Value, field reflect.Struc
 }
 
 // Slice field
-func renderSliceField(b *strings.Builder, v *reflect.Value, field reflect.StructField, idPrefix string, fieldType string, fieldValue reflect.Value) {
+func renderSliceField(b *strings.Builder, field reflect.StructField, idPrefix string, fieldType string, fieldValue reflect.Value) {
 	b.WriteString(`<div class="widget-section">`)
 	b.WriteString(`<h3 class="widget-title">`)
 	b.WriteString(field.Name)

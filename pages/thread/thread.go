@@ -23,6 +23,6 @@ func Get(ctx aero.Context) error {
 	}
 
 	customCtx := ctx.(*middleware.OpenGraphContext)
-	customCtx.OpenGraph = getOpenGraph(ctx, thread)
+	customCtx.OpenGraph = getOpenGraph(thread)
 	return ctx.HTML(components.Thread(thread, user))
 }

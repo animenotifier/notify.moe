@@ -1,12 +1,11 @@
 package group
 
 import (
-	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 )
 
-func getOpenGraph(ctx aero.Context, group *arn.Group) *arn.OpenGraph {
+func getOpenGraph(group *arn.Group) *arn.OpenGraph {
 	return &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       group.Name,

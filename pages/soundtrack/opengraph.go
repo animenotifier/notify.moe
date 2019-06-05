@@ -3,12 +3,11 @@ package soundtrack
 import (
 	"strings"
 
-	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 )
 
-func getOpenGraph(ctx aero.Context, track *arn.SoundTrack) *arn.OpenGraph {
+func getOpenGraph(track *arn.SoundTrack) *arn.OpenGraph {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     track.Title.ByUser(nil),

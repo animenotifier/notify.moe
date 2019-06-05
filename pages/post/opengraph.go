@@ -1,13 +1,12 @@
 package post
 
 import (
-	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-func getOpenGraph(ctx aero.Context, post *arn.Post) *arn.OpenGraph {
+func getOpenGraph(post *arn.Post) *arn.OpenGraph {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":       post.TitleByUser(nil),

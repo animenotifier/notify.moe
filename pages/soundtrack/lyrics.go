@@ -20,7 +20,7 @@ func Lyrics(ctx aero.Context) error {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
-	openGraph := getOpenGraph(ctx, track)
+	openGraph := getOpenGraph(track)
 
 	if track.Lyrics.Native != "" {
 		openGraph.Tags["og:description"] = utils.CutLongDescription(track.Lyrics.Native)

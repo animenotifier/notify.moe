@@ -27,6 +27,6 @@ func Members(ctx aero.Context) error {
 	}
 
 	customCtx := ctx.(*middleware.OpenGraphContext)
-	customCtx.OpenGraph = getOpenGraph(ctx, group)
+	customCtx.OpenGraph = getOpenGraph(group)
 	return ctx.HTML(components.GroupMembers(group, member, user))
 }

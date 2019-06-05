@@ -21,6 +21,6 @@ func Get(ctx aero.Context) error {
 	}
 
 	customCtx := ctx.(*middleware.OpenGraphContext)
-	customCtx.OpenGraph = getOpenGraph(ctx, track)
+	customCtx.OpenGraph = getOpenGraph(track)
 	return ctx.HTML(components.SoundTrackPage(track, user))
 }

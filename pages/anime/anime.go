@@ -123,12 +123,12 @@ func Get(ctx aero.Context) error {
 
 	// Open Graph
 	customCtx := ctx.(*middleware.OpenGraphContext)
-	customCtx.OpenGraph = getOpenGraph(ctx, anime)
+	customCtx.OpenGraph = getOpenGraph(anime)
 
 	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, episodeToFriends, user))
 }
 
-func getOpenGraph(ctx aero.Context, anime *arn.Anime) *arn.OpenGraph {
+func getOpenGraph(anime *arn.Anime) *arn.OpenGraph {
 	description := anime.Summary
 
 	if len(description) > maxDescriptionLength {
