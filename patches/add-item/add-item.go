@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/arn"
 )
 
@@ -33,17 +34,28 @@ func main() {
 		// Single user
 		user, err := arn.GetUserByNick(nick)
 		arn.PanicOnError(err)
-		addItemToUser(user)
+		err = addItemToUser(user)
+		arn.PanicOnError(err)
 	} else {
 		// All users
 		for user := range arn.StreamUsers() {
-			addItemToUser(user)
+			err = addItemToUser(user)
+
+			if err != nil {
+				color.Red(err.Error())
+			}
 		}
 	}
 }
 
-func addItemToUser(user *arn.User) {
+func addItemToUser(user *arn.User) error {
 	inventory := user.Inventory()
-	inventory.AddItem(itemID, uint(quantity))
+	err := inventory.AddItem(itemID, uint(quantity))
+
+	if err != nil {
+		return err
+	}
+
 	inventory.Save()
+	return nil
 }

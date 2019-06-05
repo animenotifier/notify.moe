@@ -62,7 +62,13 @@ func process(character *arn.Character) {
 		return
 	}
 
-	character.SetImageBytes(buffer.Bytes())
+	err = character.SetImageBytes(buffer.Bytes())
+
+	if err != nil {
+		color.Red(err.Error())
+		return
+	}
+
 	character.Save()
 }
 

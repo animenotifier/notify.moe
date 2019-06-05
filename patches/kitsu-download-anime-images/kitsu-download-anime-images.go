@@ -47,7 +47,11 @@ func main() {
 
 	for index, anime := range allAnime {
 		fmt.Printf("%d / %d\n", index+1, len(allAnime))
-		work(anime)
+		err := work(anime)
+
+		if err != nil {
+			color.Red(err.Error())
+		}
 	}
 
 	// Give file buffers some time, just to be safe
@@ -63,16 +67,18 @@ func work(anime *arn.Anime) error {
 	response, err := client.Get(kitsuOriginal).End()
 
 	if err != nil {
-		color.Red("%s (%s)", err.Error(), kitsuOriginal)
-		return err
+		return fmt.Errorf("%s (%s)", err.Error(), kitsuOriginal)
 	}
 
 	if response.StatusCode() != http.StatusOK {
-		color.Red("Status %d (%s)", response.StatusCode(), kitsuOriginal)
-		return err
+		return fmt.Errorf("Status %d (%s)", response.StatusCode(), kitsuOriginal)
 	}
 
-	anime.SetImageBytes(response.Bytes())
+	err = anime.SetImageBytes(response.Bytes())
+
+	if err != nil {
+		return err
+	}
 
 	// Try to free up some memory
 	runtime.GC()

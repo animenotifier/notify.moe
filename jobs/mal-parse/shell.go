@@ -30,7 +30,11 @@ func InvokeShellArgs() bool {
 				panic("No MAL ID")
 			}
 
-			readAnimeFile(path.Join(arn.Root, "jobs", "mal-download", "anime", anime.GetMapping("myanimelist/anime")+".html.gz"))
+			err = readAnimeFile(path.Join(arn.Root, "jobs", "mal-download", "anime", anime.GetMapping("myanimelist/anime")+".html.gz"))
+
+			if err != nil {
+				panic(err)
+			}
 
 		case "character":
 			character, err := arn.GetCharacter(objectID)
@@ -40,7 +44,11 @@ func InvokeShellArgs() bool {
 				panic("No MAL ID")
 			}
 
-			readCharacterFile(path.Join(arn.Root, "jobs", "mal-download", "character", character.GetMapping("myanimelist/character")+".html.gz"))
+			err = readCharacterFile(path.Join(arn.Root, "jobs", "mal-download", "character", character.GetMapping("myanimelist/character")+".html.gz"))
+
+			if err != nil {
+				panic(err)
+			}
 		}
 
 		return true

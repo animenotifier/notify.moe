@@ -31,8 +31,17 @@ func main() {
 	defer color.Green("Finished.")
 
 	// Create directories in case they're missing
-	os.Mkdir(animeDirectory, 0777)
-	os.Mkdir(characterDirectory, 0777)
+	err := os.Mkdir(animeDirectory, 0777)
+
+	if err != nil {
+		panic(err)
+	}
+
+	err = os.Mkdir(characterDirectory, 0777)
+
+	if err != nil {
+		panic(err)
+	}
 
 	// Called with arguments?
 	if InvokeShellArgs() {
@@ -128,11 +137,15 @@ func queueAnime(anime *arn.Anime, malCrawler *crawler.Crawler) {
 		return
 	}
 
-	malCrawler.Queue(&crawler.Task{
+	err = malCrawler.Queue(&crawler.Task{
 		URL:         url,
 		Destination: filePath,
 		Raw:         true,
 	})
+
+	if err != nil {
+		panic(err)
+	}
 }
 
 func queueCharacter(character *arn.Character, malCrawler *crawler.Crawler) {
@@ -146,9 +159,13 @@ func queueCharacter(character *arn.Character, malCrawler *crawler.Crawler) {
 		return
 	}
 
-	malCrawler.Queue(&crawler.Task{
+	err = malCrawler.Queue(&crawler.Task{
 		URL:         url,
 		Destination: filePath,
 		Raw:         true,
 	})
+
+	if err != nil {
+		panic(err)
+	}
 }

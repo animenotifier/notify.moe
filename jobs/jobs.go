@@ -41,7 +41,11 @@ func startJobs() {
 	// Log paths
 	logsPath := path.Join(arn.Root, "logs")
 	jobLogsPath := path.Join(arn.Root, "logs", "jobs")
-	os.Mkdir(jobLogsPath, 0777)
+	err := os.Mkdir(jobLogsPath, 0777)
+
+	if err != nil {
+		panic(err)
+	}
 
 	// Scheduler log
 	mainLog := log.New()

@@ -23,6 +23,5 @@ func Download(ctx aero.Context) error {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
-	track.Download()
-	return nil
+	return track.Download()
 }

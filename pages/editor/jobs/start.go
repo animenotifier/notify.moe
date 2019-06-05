@@ -35,7 +35,12 @@ func Start(ctx aero.Context) error {
 		return ctx.Error(http.StatusBadRequest, "Job is currently running!")
 	}
 
-	job.Start()
+	err := job.Start()
+
+	if err != nil {
+		return ctx.Error(http.StatusInternalServerError, "Job could not be started!", err)
+	}
+
 	jobLogs = append(jobLogs, user.Nick+" started "+job.Name+" job ("+arn.DateTimeUTC()+").")
 
 	return nil

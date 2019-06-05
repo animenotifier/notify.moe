@@ -33,7 +33,11 @@ func main() {
 		user.ForceSetNick(user.Nick)
 
 		if user.Email != "" {
-			user.SetEmail(user.Email)
+			err := user.SetEmail(user.Email)
+
+			if err != nil {
+				color.Red(err.Error())
+			}
 		}
 
 		if user.Accounts.Google.ID != "" {

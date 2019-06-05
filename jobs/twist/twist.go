@@ -46,7 +46,12 @@ func main() {
 		}
 
 		// Refresh
-		anime.RefreshEpisodes()
+		err := anime.RefreshEpisodes()
+
+		if err != nil {
+			color.Red(err.Error())
+			continue
+		}
 
 		// Ok
 		color.Green("Found %d episodes for anime %s (Kitsu: %s)", len(anime.Episodes().Items), anime.ID, kitsuID)

@@ -64,7 +64,7 @@ func mkclean(file string) error {
 
 // Read files in a given directory and apply a function on them
 func readFiles(root string, onFile func(string) error) {
-	filepath.Walk(root, func(name string, info os.FileInfo, err error) error {
+	err := filepath.Walk(root, func(name string, info os.FileInfo, err error) error {
 		if err != nil {
 			color.Red(err.Error())
 			return err
@@ -87,4 +87,8 @@ func readFiles(root string, onFile func(string) error) {
 		// Always continue traversing the directory
 		return nil
 	})
+
+	if err != nil {
+		color.Red(err.Error())
+	}
 }

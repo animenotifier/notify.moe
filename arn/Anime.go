@@ -400,7 +400,7 @@ func (anime *Anime) RefreshEpisodes() error {
 	shoboiEpisodes, err := anime.ShoboiEpisodes()
 
 	if err != nil {
-		color.Red(err.Error())
+		return err
 	}
 
 	episodes.Merge(shoboiEpisodes)
@@ -409,7 +409,7 @@ func (anime *Anime) RefreshEpisodes() error {
 	twistEpisodes, err := anime.TwistEpisodes()
 
 	if err != nil {
-		color.Red(err.Error())
+		return err
 	}
 
 	episodes.Merge(twistEpisodes)
@@ -485,7 +485,6 @@ func (anime *Anime) RefreshEpisodes() error {
 	}
 
 	episodes.Save()
-
 	return nil
 }
 

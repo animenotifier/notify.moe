@@ -45,13 +45,19 @@ func BuyItem(ctx aero.Context) error {
 		return ctx.Error(http.StatusBadRequest, "Not enough gems. You need to charge up your balance before you can buy this item.")
 	}
 
-	user.Balance -= totalPrice
-	user.Save()
-
 	// Add item to user inventory
 	inventory := user.Inventory()
-	inventory.AddItem(itemID, uint(quantity))
+	err = inventory.AddItem(itemID, uint(quantity))
+
+	if err != nil {
+		return ctx.Error(http.StatusBadRequest, err)
+	}
+
 	inventory.Save()
+
+	// Deduct balance
+	user.Balance -= totalPrice
+	user.Save()
 
 	// Save purchase
 	purchase := arn.NewPurchase(user.ID, itemID, quantity, int(item.Price), "gem")
