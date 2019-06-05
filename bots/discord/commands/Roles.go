@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 
+	"github.com/akyoto/color"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -21,7 +22,11 @@ func Roles(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	roles, _ := s.GuildRoles(guildID)
 
 	for _, role := range roles {
-		s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("%s: %s", role.ID, role.Name))
+		_, err := s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("%s: %s", role.ID, role.Name))
+
+		if err != nil {
+			color.Red(err.Error())
+		}
 	}
 
 	return true

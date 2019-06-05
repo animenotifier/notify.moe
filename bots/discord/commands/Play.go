@@ -3,6 +3,7 @@ package commands
 import (
 	"strings"
 
+	"github.com/akyoto/color"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -12,6 +13,11 @@ func Play(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 		return false
 	}
 
-	s.UpdateStatus(0, msg.Content[len("!play "):])
+	err := s.UpdateStatus(0, msg.Content[len("!play "):])
+
+	if err != nil {
+		color.Red(err.Error())
+	}
+
 	return true
 }

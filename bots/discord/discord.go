@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/bwmarrin/discordgo"
 )
@@ -41,7 +42,13 @@ func main() {
 
 	defer discord.Close()
 	defer arn.Node.Close()
-	defer discord.ChannelMessageSend(logChannel, "I'm feeling like shit today so I'm shutting down. B-baka!")
+	defer func() {
+		_, err := discord.ChannelMessageSend(logChannel, "I'm feeling like shit today so I'm shutting down. B-baka!")
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+	}()
 
 	// Receive events
 	discord.AddHandler(OnMessageCreate)
@@ -49,7 +56,12 @@ func main() {
 	discord.AddHandler(OnGuildMemberRemove)
 
 	// Wait for a CTRL-C
-	discord.ChannelMessageSend(logChannel, "Hooray, I'm up again! Did you miss me?")
+	_, err = discord.ChannelMessageSend(logChannel, "Hooray, I'm up again! Did you miss me?")
+
+	if err != nil {
+		color.Red(err.Error())
+	}
+
 	log.Printf("Tsundere is ready. Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)

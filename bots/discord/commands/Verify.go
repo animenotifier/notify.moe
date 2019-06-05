@@ -33,7 +33,12 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	discordTag := msg.Author.Username + "#" + msg.Author.Discriminator
 
 	if msg.Content == "!verify" {
-		s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("To verify your account, first add `%s` as your Discord account on https://notify.moe/settings/accounts, then type `!verify` followed by your username on notify.moe, e.g. `!verify MyName`", discordTag))
+		_, err := s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("To verify your account, first add `%s` as your Discord account on https://notify.moe/settings/accounts, then type `!verify` followed by your username on notify.moe, e.g. `!verify MyName`", discordTag))
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+
 		return true
 	}
 
@@ -45,17 +50,32 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	user, err := arn.GetUserByNick(arnUserName)
 
 	if err != nil {
-		s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("User `%s` doesn't seem to exist on notify.moe", arnUserName))
+		_, err := s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("User `%s` doesn't seem to exist on notify.moe", arnUserName))
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+
 		return true
 	}
 
 	if user.Accounts.Discord.Nick == "" {
-		s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("You haven't set up your Discord account `%s` on https://notify.moe/settings/accounts yet", discordTag))
+		_, err := s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("You haven't set up your Discord account `%s` on https://notify.moe/settings/accounts yet", discordTag))
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+
 		return true
 	}
 
 	if user.Accounts.Discord.Nick != discordTag {
-		s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("Mismatching Discord accounts: `%s` and `%s`", user.Accounts.Discord.Nick, discordTag))
+		_, err := s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("Mismatching Discord accounts: `%s` and `%s`", user.Accounts.Discord.Nick, discordTag))
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+
 		return true
 	}
 
@@ -63,14 +83,28 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	err = s.GuildMemberRoleAdd(guildID, msg.Author.ID, verifiedRole)
 
 	if err != nil {
-		s.ChannelMessageSend(msg.ChannelID, "There was an error adding the Verified role to your account!")
+		_, err := s.ChannelMessageSend(msg.ChannelID, "There was an error adding the Verified role to your account!")
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+
 		return true
 	}
 
 	// Give editor role
 	if user.Role == "editor" {
-		s.GuildMemberRoleAdd(guildID, msg.Author.ID, editorRole)
-		s.GuildMemberRoleAdd(guildID, msg.Author.ID, staffRole)
+		err := s.GuildMemberRoleAdd(guildID, msg.Author.ID, editorRole)
+
+		if err != nil {
+			color.Red(err.Error())
+		}
+
+		err = s.GuildMemberRoleAdd(guildID, msg.Author.ID, staffRole)
+
+		if err != nil {
+			color.Red(err.Error())
+		}
 	}
 
 	// Give region role
@@ -87,20 +121,36 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 			} else {
 				// Remove old region role
 				for _, roleID := range regions {
-					s.GuildMemberRoleRemove(guildID, msg.Author.ID, roleID)
+					err := s.GuildMemberRoleRemove(guildID, msg.Author.ID, roleID)
+
+					if err != nil {
+						color.Red(err.Error())
+					}
 				}
 
 				// Add new region role
-				s.GuildMemberRoleAdd(guildID, msg.Author.ID, regionRole)
+				err := s.GuildMemberRoleAdd(guildID, msg.Author.ID, regionRole)
+
+				if err != nil {
+					color.Red(err.Error())
+				}
 			}
 		}
 	}
 
 	// Give or remove supporter role
 	if user.IsPro() {
-		s.GuildMemberRoleAdd(guildID, msg.Author.ID, supporterRole)
+		err := s.GuildMemberRoleAdd(guildID, msg.Author.ID, supporterRole)
+
+		if err != nil {
+			color.Red(err.Error())
+		}
 	} else {
-		s.GuildMemberRoleRemove(guildID, msg.Author.ID, supporterRole)
+		err := s.GuildMemberRoleRemove(guildID, msg.Author.ID, supporterRole)
+
+		if err != nil {
+			color.Red(err.Error())
+		}
 	}
 
 	// Update nickname to notify.moe nick
@@ -117,6 +167,11 @@ func Verify(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	}
 
 	// Send success message
-	s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("%s Thank you, you are now a verified member of the notify.moe community!", msg.Author.Mention()))
+	_, err = s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("%s Thank you, you are now a verified member of the notify.moe community!", msg.Author.Mention()))
+
+	if err != nil {
+		color.Red(err.Error())
+	}
+
 	return true
 }

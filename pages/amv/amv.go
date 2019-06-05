@@ -21,6 +21,6 @@ func Get(ctx aero.Context) error {
 	}
 
 	customCtx := ctx.(*middleware.OpenGraphContext)
-	customCtx.OpenGraph = getOpenGraph(ctx, amv)
+	customCtx.OpenGraph = getOpenGraph(amv)
 	return ctx.HTML(components.AMVPage(amv, user))
 }

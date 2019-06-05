@@ -3,6 +3,7 @@ package commands
 import (
 	"strings"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/arn/search"
 	"github.com/bwmarrin/discordgo"
 )
@@ -25,6 +26,11 @@ func AnimeSearch(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 		message = "Sorry, I couldn't find anything using that term."
 	}
 
-	s.ChannelMessageSend(msg.ChannelID, message)
+	_, err := s.ChannelMessageSend(msg.ChannelID, message)
+
+	if err != nil {
+		color.Red(err.Error())
+	}
+
 	return true
 }

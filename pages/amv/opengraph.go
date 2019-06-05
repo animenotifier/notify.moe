@@ -3,12 +3,11 @@ package amv
 import (
 	"strings"
 
-	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 )
 
-func getOpenGraph(ctx aero.Context, amv *arn.AMV) *arn.OpenGraph {
+func getOpenGraph(amv *arn.AMV) *arn.OpenGraph {
 	openGraph := &arn.OpenGraph{
 		Tags: map[string]string{
 			"og:title":     amv.Title.ByUser(nil) + " (AMV)",

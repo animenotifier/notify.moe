@@ -3,6 +3,7 @@ package commands
 import (
 	"math/rand"
 
+	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/bwmarrin/discordgo"
 )
@@ -18,6 +19,11 @@ func RandomQuote(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	})
 
 	quote := allQuotes[rand.Intn(len(allQuotes))]
-	s.ChannelMessageSend(msg.ChannelID, "https://notify.moe"+quote.Link())
+	_, err := s.ChannelMessageSend(msg.ChannelID, "https://notify.moe"+quote.Link())
+
+	if err != nil {
+		color.Red(err.Error())
+	}
+
 	return true
 }

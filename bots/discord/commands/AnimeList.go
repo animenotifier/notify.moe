@@ -3,6 +3,7 @@ package commands
 import (
 	"strings"
 
+	"github.com/akyoto/color"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -12,6 +13,11 @@ func AnimeList(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 		return false
 	}
 
-	s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1]+"/animelist/watching")
+	_, err := s.ChannelMessageSend(msg.ChannelID, "https://notify.moe/+"+strings.Split(msg.Content, " ")[1]+"/animelist/watching")
+
+	if err != nil {
+		color.Red(err.Error())
+	}
+
 	return true
 }

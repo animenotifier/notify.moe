@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/bots/discord/commands"
 
 	"github.com/bwmarrin/discordgo"
@@ -27,13 +28,17 @@ func OnMessageCreate(s *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 
 	if msg.Content == "!help" || msg.Content == "!commands" {
-		s.ChannelMessageSend(msg.ChannelID, `
+		_, err := s.ChannelMessageSend(msg.ChannelID, `
 **!a** [anime search term]
 **!animelist** [username]
 **!play** [status text]
 **!randomquote**
 **!source**
 **!verify** [username]`)
+
+		if err != nil {
+			color.Red(err.Error())
+		}
 	}
 
 	// Has the bot been mentioned?
