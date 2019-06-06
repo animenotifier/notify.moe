@@ -137,7 +137,7 @@ func Profile(ctx aero.Context, viewUser *arn.User) error {
 
 	now := time.Now().UTC().Add(timeZoneOffset)
 	weekDay := int(now.Weekday())
-	currentYearDay := int(now.YearDay())
+	currentYearDay := now.YearDay()
 
 	// Day offset is the number of days we need to reach Sunday
 	dayOffset := 0
