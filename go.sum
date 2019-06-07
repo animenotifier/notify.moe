@@ -13,6 +13,8 @@ github.com/a8m/mark v0.1.1-0.20170507133748-44f2db618845/go.mod h1:c8Mh99Cw82nrs
 github.com/aerogo/aero v1.3.1/go.mod h1:5rPhXo2DNMFQ7XhDsuZ3L7Zr6TH/349+WczUbrOUZvM=
 github.com/aerogo/aero v1.3.11 h1:3kg6cPDwH6/ul6ZU4JMLKJsPaaBGTxy+LzV8lgTW6n0=
 github.com/aerogo/aero v1.3.11/go.mod h1:iTwPGnf6L6G6+FdvnNHoYyIRk2mDOV2JqI7pqqk9RYM=
+github.com/aerogo/aero v1.3.14 h1:Zxx1Wh/OpjujVMUVmMOjZi8jAQAEUWvtnobtXJDZ5ak=
+github.com/aerogo/aero v1.3.14/go.mod h1:iTwPGnf6L6G6+FdvnNHoYyIRk2mDOV2JqI7pqqk9RYM=
 github.com/aerogo/api v0.2.0 h1:mIc/y381e+Qc85eSc2cKPdpDDOmT0hlnEeCw2Dcf7no=
 github.com/aerogo/api v0.2.0/go.mod h1:6objJn5XiKpYpywQUPrFjxZIXD4NVI2LwcBNYCEcS3Y=
 github.com/aerogo/cluster v0.1.6 h1:9HYjJwo19uuh9thIc80T3caap9t9b4BXZ1iN8aztjlU=

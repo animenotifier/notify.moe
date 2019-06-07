@@ -46,6 +46,7 @@ func configure(app *aero.Application) *aero.Application {
 	// Middleware
 	app.Use(
 		middleware.Recover,
+		middleware.HTTPSRedirect,
 		middleware.OpenGraph,
 		middleware.Log,
 		middleware.Session,

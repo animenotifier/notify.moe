@@ -1,20 +1,23 @@
 package middleware
 
-// // HTTPSRedirect middleware redirects to HTTPS if needed.
-// func HTTPSRedirect() aero.Middleware {
-// 	return func(ctx aero.Context, next func()) {
-// 		request := ctx.Request()
-// 		userAgent := request.Header().Get("User-Agent")
-// 		isBrowser := strings.Contains(userAgent, "Mozilla/") || strings.Contains(userAgent, "Chrome/") || strings.Contains(userAgent, "AppleWebKit/")
+import (
+	"net/http"
 
-// 		if !strings.HasPrefix(request.Protocol(), "HTTP/2") && isBrowser {
-// 			fmt.Println("Redirect to HTTPS")
-// 			ctx.Redirect(http.StatusTemporaryRedirect, "https://" + request.Host() + request.URL().Path)
-// 			ctx.Response().WriteHeader(ctx.Status())
-// 			return
-// 		}
+	"github.com/aerogo/aero"
+)
 
-// 		// Handle the request
-// 		next()
-// 	}
-// }
+// HTTPSRedirect middleware redirects to HTTPS if needed.
+func HTTPSRedirect(next aero.Handler) aero.Handler {
+	return func(ctx aero.Context) error {
+		request := ctx.Request()
+		userAgent := request.Header("User-Agent")
+		isBrowser := userAgent != ""
+
+		if isBrowser && request.Scheme() != "https" {
+			return ctx.Redirect(http.StatusPermanentRedirect, "https://"+request.Host()+request.Path())
+		}
+
+		// Handle the request
+		return next(ctx)
+	}
+}
