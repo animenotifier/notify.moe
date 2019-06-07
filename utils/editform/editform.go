@@ -287,7 +287,7 @@ func renderSliceField(b *strings.Builder, field reflect.StructField, idPrefix st
 
 		arrayObj := fieldValue.Index(sliceIndex).Interface()
 		arrayIDPrefix := fmt.Sprintf("%s[%d].", field.Name, sliceIndex)
-		RenderObject(b, arrayObj, arrayIDPrefix)
+		RenderObject(b, arrayObj, idPrefix+arrayIDPrefix)
 
 		// Preview
 		// elementValue := fieldValue.Index(sliceIndex)

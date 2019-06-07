@@ -14,4 +14,3 @@ linters:
     - maligned
     - scopelint
     - stylecheck
-    - unparam
