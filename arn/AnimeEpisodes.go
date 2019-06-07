@@ -11,7 +11,7 @@ import (
 
 // AnimeEpisodes is a list of episodes for an anime.
 type AnimeEpisodes struct {
-	AnimeID AnimeID          `json:"animeId" mainID:"true"`
+	AnimeID AnimeID         `json:"animeId" mainID:"true"`
 	Items   []*AnimeEpisode `json:"items" editable:"true"`
 
 	sync.Mutex

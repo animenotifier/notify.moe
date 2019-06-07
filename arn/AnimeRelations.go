@@ -9,7 +9,7 @@ import (
 
 // AnimeRelations is a list of relations for an anime.
 type AnimeRelations struct {
-	AnimeID AnimeID           `json:"animeId" mainID:"true"`
+	AnimeID AnimeID          `json:"animeId" mainID:"true"`
 	Items   []*AnimeRelation `json:"items" editable:"true"`
 
 	sync.Mutex

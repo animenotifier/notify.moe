@@ -19,7 +19,7 @@ func init() {
 // AnimeRelation ...
 type AnimeRelation struct {
 	AnimeID AnimeID `json:"animeId" editable:"true"`
-	Type    string `json:"type" editable:"true" datalist:"anime-relation-types"`
+	Type    string  `json:"type" editable:"true" datalist:"anime-relation-types"`
 }
 
 // Anime ...
