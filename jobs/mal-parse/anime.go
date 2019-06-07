@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/mal"
 	malparser "github.com/animenotifier/mal/parser"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Read anime file

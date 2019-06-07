@@ -5,8 +5,8 @@ import (
 
 	"github.com/aerogo/http/client"
 	"github.com/akyoto/color"
-	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/mal"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Sync titles

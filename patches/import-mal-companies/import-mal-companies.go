@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/mal"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 var malDB = arn.Node.Namespace("mal").RegisterTypes((*mal.Anime)(nil))

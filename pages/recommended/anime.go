@@ -47,11 +47,12 @@ func Anime(ctx aero.Context) error {
 			continue
 		}
 
-		if anime.Type == "tv" {
+		switch anime.Type {
+		case "tv":
 			tv = append(tv, anime)
-		} else if anime.Type == "movie" {
+		case "movie":
 			movies = append(movies, anime)
-		} else {
+		default:
 			continue
 		}
 

@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/notify.moe/arn"
 	malparser "github.com/animenotifier/mal/parser"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Read character file

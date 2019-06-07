@@ -189,7 +189,8 @@ func (post *Post) Edit(ctx aero.Context, key string, value reflect.Value, newVal
 	consumed := false
 	user := GetUserFromContext(ctx)
 
-	// nolint:gocritic (because this should stay a switch statement)
+	// This should stay a switch statement.
+	// nolint:gocritic
 	switch key {
 	case "ParentID":
 		var newParent PostParent

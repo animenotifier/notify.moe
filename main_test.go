@@ -110,7 +110,7 @@ func TestQuotePages(t *testing.T) {
 // 	}
 // }
 
-func testRoute(t *testing.T, app *aero.Application, route string) {
+func testRoute(t *testing.T, app http.Handler, route string) {
 	request := httptest.NewRequest("GET", strings.ReplaceAll(route, " ", "%20"), nil)
 	response := httptest.NewRecorder()
 	app.ServeHTTP(response, request)

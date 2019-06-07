@@ -2,6 +2,7 @@ package editform
 
 import (
 	"fmt"
+	"io"
 	"reflect"
 	"strconv"
 	"strings"
@@ -185,7 +186,7 @@ func RenderField(b *strings.Builder, v *reflect.Value, field reflect.StructField
 }
 
 // String field
-func renderStringField(b *strings.Builder, v *reflect.Value, field reflect.StructField, idPrefix string, fieldValue reflect.Value) {
+func renderStringField(b io.StringWriter, v *reflect.Value, field reflect.StructField, idPrefix string, fieldValue reflect.Value) {
 	idType := field.Tag.Get("idType")
 
 	// Try to infer the ID type by the field name
@@ -205,20 +206,23 @@ func renderStringField(b *strings.Builder, v *reflect.Value, field reflect.Struc
 		b.WriteString("<div class='widget-section-with-preview'>")
 	}
 
-	// Input field
-	if field.Tag.Get("datalist") != "" {
+	switch {
+	case field.Tag.Get("datalist") != "":
 		dataList := field.Tag.Get("datalist")
 		values := arn.DataLists[dataList]
 		b.WriteString(components.InputSelection(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), values))
-	} else if field.Tag.Get("type") == "textarea" {
+
+	case field.Tag.Get("type") == "textarea":
 		b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
-	} else if field.Tag.Get("type") == "upload" {
+
+	case field.Tag.Get("type") == "upload":
 		endpoint := field.Tag.Get("endpoint")
 		id := v.FieldByName("ID").String()
 		endpoint = strings.Replace(endpoint, ":id", id, 1)
 
 		b.WriteString(components.InputFileUpload(idPrefix+field.Name, field.Name, field.Tag.Get("filetype"), endpoint))
-	} else {
+
+	default:
 		b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
 	}
 

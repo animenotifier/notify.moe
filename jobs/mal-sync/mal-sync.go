@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/mal"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 const imageWidthThreshold = 225

@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/akyoto/color"
-	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/kitsu"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 func main() {

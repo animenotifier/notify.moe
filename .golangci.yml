@@ -1,3 +1,18 @@
 run:
   skip-dirs:
     components
+
+linters:
+  enable-all: true
+  disable:
+    - dupl
+    - errcheck
+    - lll
+    - goconst
+    - gochecknoglobals
+    - gochecknoinits
+    - gocyclo
+    - maligned
+    - scopelint
+    - stylecheck
+    - unparam
