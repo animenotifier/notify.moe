@@ -31,11 +31,11 @@ component Activity(activity arn.Activity, user *arn.User)
 			Avatar(activity.Creator())
 		.post-content
 			.activity-header
-				.activity-parent
+				.activity-creator
+					a(href=activity.Creator().Link())= activity.Creator().Nick
+
 					if activity.TypeName() == "ActivityCreate"
-						ActivityCreateTitle(activity.(*arn.ActivityCreate), user)
-					else if activity.TypeName() == "ActivityConsumeAnime"
-						ActivityConsumeAnimeTitle(activity.(*arn.ActivityConsumeAnime), user)
+						ActivityCreateMeta(activity.(*arn.ActivityCreate), user)
 				
 				if user != nil
 					//- button.activity-action.tip.action(data-action="like", data-trigger="click", aria-label="Like")
@@ -50,22 +50,25 @@ component Activity(activity arn.Activity, user *arn.User)
 							RawIcon("trash")
 				
 				.activity-date.utc-date(data-date=activity.GetCreated())
-			
+
 			if activity.TypeName() == "ActivityCreate"
 				ActivityCreateText(activity.(*arn.ActivityCreate), user)
 			else if activity.TypeName() == "ActivityConsumeAnime"
 				ActivityConsumeAnimeText(activity.(*arn.ActivityConsumeAnime), user)
 
-component ActivityConsumeAnimeTitle(activity *arn.ActivityConsumeAnime, user *arn.User)
-	a(href=activity.Anime().Link())= activity.Anime().TitleByUser(user)
-
 component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
-	if activity.ToEpisode > activity.FromEpisode
-		em.actvity-text-consume-anime= fmt.Sprintf("%s watched episodes %d - %d", activity.Creator().Nick, activity.FromEpisode, activity.ToEpisode)
-	else
-		em.actvity-text-consume-anime= fmt.Sprintf("%s watched episode %d", activity.Creator().Nick, activity.ToEpisode)
+	.activity-text-consume-anime
+		span  watched 
+		a(href=activity.Anime().Link())= activity.Anime().TitleByUser(user)
 
-component ActivityCreateTitle(activity *arn.ActivityCreate, user *arn.User)
+		if activity.ToEpisode > activity.FromEpisode
+			span= fmt.Sprintf(" episodes %d - %d.", activity.FromEpisode, activity.ToEpisode)
+		else
+			span= fmt.Sprintf(" episode %d.", activity.ToEpisode)
+
+component ActivityCreateMeta(activity *arn.ActivityCreate, user *arn.User)
+	span  in 
+
 	if activity.ObjectType == "Post"
 		a(href=activity.Postable().Parent().Link())= activity.Postable().Parent().TitleByUser(user)
 	else if activity.ObjectType == "Thread"
@@ -77,4 +80,4 @@ component ActivityCreateText(activity *arn.ActivityCreate, user *arn.User)
 	if activity.ObjectType == "Post" || activity.ObjectType == "Thread"
 		div!= activity.Postable().HTML()
 	else
-		em.actvity-text-create= "new " + strings.ToLower(activity.ObjectType)
+		em.activity-text-create= "new " + strings.ToLower(activity.ObjectType)

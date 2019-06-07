@@ -1,0 +1,4 @@
+mixin horizontal-line-bottom
+	padding-bottom typography-margin
+	border-bottom 1px solid reverse-light-color
+	margin-bottom typography-margin

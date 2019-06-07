@@ -11,8 +11,9 @@
 
 .activity-header
 	horizontal
+	horizontal-line-bottom
 
-.activity-parent
+.activity-creator
 	flex 1
 
 .activity-date
@@ -20,6 +21,9 @@
 
 .actvity-text-create
 	opacity 0.8
+
+.activity-text-consume-anime
+	// ...
 
 .activity-action
 	border none

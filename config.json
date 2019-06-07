@@ -11,6 +11,7 @@
 		"mixins/sidebar",
 		"mixins/anime-grid",
 		"mixins/feature-card",
+		"mixins/horizontal-line",
 		"mixins/comments",
 		"reset",
 		"base",
