@@ -91,6 +91,7 @@ func Get(ctx aero.Context) error {
 	}
 
 	for i := 0; i < 7; i++ {
+		// nolint:scopelint
 		sort.Slice(days[i].Entries, func(a, b int) bool {
 			airingA := days[i].Entries[a].Episode.AiringDate.Start
 			airingB := days[i].Entries[b].Episode.AiringDate.Start

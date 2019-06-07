@@ -26,6 +26,7 @@ func main() {
 
 	for _, characters := range malIDToCharacters {
 		if len(characters) > 1 {
+			// nolint:scopelint
 			sort.Slice(characters, func(i, j int) bool {
 				return len(characters[i].Likes) > len(characters[j].Likes)
 			})

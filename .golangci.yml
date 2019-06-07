@@ -12,5 +12,4 @@ linters:
     - gochecknoinits
     - gocyclo
     - maligned
-    - scopelint
     - stylecheck
