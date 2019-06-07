@@ -186,6 +186,7 @@ func RenderField(b *strings.Builder, v *reflect.Value, field reflect.StructField
 }
 
 // String field
+// nolint:errcheck
 func renderStringField(b io.StringWriter, v *reflect.Value, field reflect.StructField, idPrefix string, fieldValue reflect.Value) {
 	idType := field.Tag.Get("idType")
 
