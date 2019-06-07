@@ -30,12 +30,12 @@ func GetIgnoreAnimeDifference(id string) (*IgnoreAnimeDifference, error) {
 }
 
 // CreateDifferenceID ...
-func CreateDifferenceID(animeID string, dataProvider string, malAnimeID string, typeName string) string {
+func CreateDifferenceID(animeID AnimeID, dataProvider string, malAnimeID string, typeName string) string {
 	return fmt.Sprintf("arn:%s|%s:%s|%s", animeID, dataProvider, malAnimeID, typeName)
 }
 
 // IsAnimeDifferenceIgnored tells you whether the given difference is being ignored.
-func IsAnimeDifferenceIgnored(animeID string, dataProvider string, malAnimeID string, typeName string, hash uint64) bool {
+func IsAnimeDifferenceIgnored(animeID AnimeID, dataProvider string, malAnimeID string, typeName string, hash uint64) bool {
 	key := CreateDifferenceID(animeID, dataProvider, malAnimeID, typeName)
 	ignore, err := GetIgnoreAnimeDifference(key)
 

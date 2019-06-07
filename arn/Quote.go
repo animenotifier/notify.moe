@@ -14,7 +14,7 @@ import (
 type Quote struct {
 	Text          QuoteText `json:"text" editable:"true"`
 	CharacterID   string    `json:"characterId" editable:"true"`
-	AnimeID       string    `json:"animeId" editable:"true"`
+	AnimeID       AnimeID   `json:"animeId" editable:"true"`
 	EpisodeNumber int       `json:"episode" editable:"true"`
 	Time          int       `json:"time" editable:"true"`
 

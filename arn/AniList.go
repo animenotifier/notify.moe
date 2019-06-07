@@ -39,7 +39,7 @@ func NewAniListAnimeFinder() *AniListAnimeFinder {
 }
 
 // GetAnime tries to find an AniList anime in our anime database.
-func (finder *AniListAnimeFinder) GetAnime(id string, malID string) *Anime {
+func (finder *AniListAnimeFinder) GetAnime(id AnimeID, malID string) *Anime {
 	animeByID, existsByID := finder.idToAnime[id]
 	animeByMALID, existsByMALID := finder.malIDToAnime[malID]
 

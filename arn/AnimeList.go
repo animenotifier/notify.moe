@@ -18,7 +18,7 @@ type AnimeList struct {
 }
 
 // Add adds an anime to the list if it hasn't been added yet.
-func (list *AnimeList) Add(animeID string) error {
+func (list *AnimeList) Add(animeID AnimeID) error {
 	if list.Contains(animeID) {
 		return errors.New("Anime " + animeID + " has already been added")
 	}
@@ -45,7 +45,7 @@ func (list *AnimeList) Add(animeID string) error {
 }
 
 // Remove removes the anime ID from the list.
-func (list *AnimeList) Remove(animeID string) bool {
+func (list *AnimeList) Remove(animeID AnimeID) bool {
 	list.Lock()
 	defer list.Unlock()
 
@@ -60,7 +60,7 @@ func (list *AnimeList) Remove(animeID string) bool {
 }
 
 // Contains checks if the list contains the anime ID already.
-func (list *AnimeList) Contains(animeID string) bool {
+func (list *AnimeList) Contains(animeID AnimeID) bool {
 	list.Lock()
 	defer list.Unlock()
 
@@ -88,7 +88,7 @@ func (list *AnimeList) HasItemsWithStatus(status string) bool {
 }
 
 // Find returns the list item with the specified anime ID, if available.
-func (list *AnimeList) Find(animeID string) *AnimeListItem {
+func (list *AnimeList) Find(animeID AnimeID) *AnimeListItem {
 	list.Lock()
 	defer list.Unlock()
 

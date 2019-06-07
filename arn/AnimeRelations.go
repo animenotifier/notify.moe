@@ -9,7 +9,7 @@ import (
 
 // AnimeRelations is a list of relations for an anime.
 type AnimeRelations struct {
-	AnimeID string           `json:"animeId" mainID:"true"`
+	AnimeID AnimeID           `json:"animeId" mainID:"true"`
 	Items   []*AnimeRelation `json:"items" editable:"true"`
 
 	sync.Mutex
@@ -72,7 +72,7 @@ func (relations *AnimeRelations) Self() Loggable {
 }
 
 // Find returns the relation with the specified anime ID, if available.
-func (relations *AnimeRelations) Find(animeID string) *AnimeRelation {
+func (relations *AnimeRelations) Find(animeID AnimeID) *AnimeRelation {
 	relations.Lock()
 	defer relations.Unlock()
 
@@ -86,7 +86,7 @@ func (relations *AnimeRelations) Find(animeID string) *AnimeRelation {
 }
 
 // Remove removes the anime ID from the relations.
-func (relations *AnimeRelations) Remove(animeID string) bool {
+func (relations *AnimeRelations) Remove(animeID AnimeID) bool {
 	relations.Lock()
 	defer relations.Unlock()
 
@@ -101,7 +101,7 @@ func (relations *AnimeRelations) Remove(animeID string) bool {
 }
 
 // GetAnimeRelations ...
-func GetAnimeRelations(animeID string) (*AnimeRelations, error) {
+func GetAnimeRelations(animeID AnimeID) (*AnimeRelations, error) {
 	obj, err := DB.Get("AnimeRelations", animeID)
 
 	if err != nil {

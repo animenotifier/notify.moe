@@ -4,9 +4,9 @@ import "sort"
 
 // ActivityConsumeAnime is a user activity that consumes anime.
 type ActivityConsumeAnime struct {
-	AnimeID     string `json:"animeId"`
-	FromEpisode int    `json:"fromEpisode"`
-	ToEpisode   int    `json:"toEpisode"`
+	AnimeID     AnimeID `json:"animeId"`
+	FromEpisode int     `json:"fromEpisode"`
+	ToEpisode   int     `json:"toEpisode"`
 
 	hasID
 	hasCreator
@@ -14,7 +14,7 @@ type ActivityConsumeAnime struct {
 }
 
 // NewActivityConsumeAnime creates a new activity.
-func NewActivityConsumeAnime(animeID string, fromEpisode int, toEpisode int, userID UserID) *ActivityConsumeAnime {
+func NewActivityConsumeAnime(animeID AnimeID, fromEpisode int, toEpisode int, userID UserID) *ActivityConsumeAnime {
 	return &ActivityConsumeAnime{
 		hasID: hasID{
 			ID: GenerateID("ActivityConsumeAnime"),
@@ -46,7 +46,7 @@ func (activity *ActivityConsumeAnime) Self() Loggable {
 }
 
 // LastActivityConsumeAnime returns the last activity for the given anime.
-func (user *User) LastActivityConsumeAnime(animeID string) *ActivityConsumeAnime {
+func (user *User) LastActivityConsumeAnime(animeID AnimeID) *ActivityConsumeAnime {
 	activities := FilterActivitiesConsumeAnime(func(activity *ActivityConsumeAnime) bool {
 		return activity.AnimeID == animeID && activity.CreatedBy == user.ID
 	})

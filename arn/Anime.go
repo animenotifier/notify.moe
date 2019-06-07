@@ -62,8 +62,12 @@ func init() {
 	}
 }
 
+// AnimeID represents an anime ID.
+type AnimeID = string
+
 // Anime represents an anime.
 type Anime struct {
+	ID            AnimeID          `json:"id"`
 	Type          string           `json:"type" editable:"true" datalist:"anime-types"`
 	Title         *MediaTitle      `json:"title" editable:"true"`
 	Summary       string           `json:"summary" editable:"true" type:"textarea"`
@@ -81,7 +85,6 @@ type Anime struct {
 	Trailers      []*ExternalMedia `json:"trailers" editable:"true"`
 
 	// Mixins
-	hasID
 	hasMappings
 	hasPosts
 	hasLikes
@@ -104,9 +107,7 @@ type Anime struct {
 // NewAnime creates a new anime.
 func NewAnime() *Anime {
 	return &Anime{
-		hasID: hasID{
-			ID: GenerateID("Anime"),
-		},
+		ID:         GenerateID("Anime"),
 		Title:      &MediaTitle{},
 		Rating:     &AnimeRating{},
 		Popularity: &AnimePopularity{},
@@ -121,7 +122,7 @@ func NewAnime() *Anime {
 }
 
 // GetAnime gets the anime with the given ID.
-func GetAnime(id string) (*Anime, error) {
+func GetAnime(id AnimeID) (*Anime, error) {
 	obj, err := DB.Get("Anime", id)
 
 	if err != nil {
@@ -765,6 +766,11 @@ func (anime *Anime) RefreshAnimeCharacters() (*AnimeCharacters, error) {
 // String implements the default string serialization.
 func (anime *Anime) String() string {
 	return anime.Title.Canonical
+}
+
+// GetID returns the ID.
+func (anime *Anime) GetID() string {
+	return anime.ID
 }
 
 // TypeName returns the type name.

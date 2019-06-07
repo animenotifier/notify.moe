@@ -7,14 +7,14 @@ import (
 
 // DraftIndex has references to unpublished drafts a user created.
 type DraftIndex struct {
-	UserID       string `json:"userId"`
-	GroupID      string `json:"groupId"`
-	SoundTrackID string `json:"soundTrackId"`
-	CompanyID    string `json:"companyId"`
-	QuoteID      string `json:"quoteId"`
-	CharacterID  string `json:"characterId"`
-	AnimeID      string `json:"animeId"`
-	AMVID        string `json:"amvId"`
+	UserID       string  `json:"userId"`
+	GroupID      string  `json:"groupId"`
+	SoundTrackID string  `json:"soundTrackId"`
+	CompanyID    string  `json:"companyId"`
+	QuoteID      string  `json:"quoteId"`
+	CharacterID  string  `json:"characterId"`
+	AnimeID      AnimeID `json:"animeId"`
+	AMVID        string  `json:"amvId"`
 }
 
 // NewDraftIndex ...

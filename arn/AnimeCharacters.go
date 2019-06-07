@@ -10,7 +10,7 @@ import (
 
 // AnimeCharacters is a list of characters for an anime.
 type AnimeCharacters struct {
-	AnimeID string            `json:"animeId" mainID:"true"`
+	AnimeID AnimeID           `json:"animeId" mainID:"true"`
 	Items   []*AnimeCharacter `json:"items" editable:"true"`
 
 	sync.Mutex
@@ -108,7 +108,7 @@ func (characters *AnimeCharacters) First(count int) []*AnimeCharacter {
 }
 
 // GetAnimeCharacters ...
-func GetAnimeCharacters(animeID string) (*AnimeCharacters, error) {
+func GetAnimeCharacters(animeID AnimeID) (*AnimeCharacters, error) {
 	obj, err := DB.Get("AnimeCharacters", animeID)
 
 	if err != nil {

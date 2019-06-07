@@ -11,7 +11,7 @@ const (
 
 // AnimeListItem ...
 type AnimeListItem struct {
-	AnimeID      string              `json:"animeId"`
+	AnimeID      AnimeID             `json:"animeId"`
 	Status       string              `json:"status" editable:"true"`
 	Episodes     int                 `json:"episodes" editable:"true"`
 	Rating       AnimeListItemRating `json:"rating"`
