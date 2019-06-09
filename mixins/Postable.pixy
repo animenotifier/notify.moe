@@ -9,6 +9,31 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, highl
 					.post-creator
 						a(href=post.Creator().Link())= post.Creator().Nick
 					
+					if user == nil || user.ID == post.Creator().ID
+						//- Don't display a like icon.
+					else if post.LikedBy(user.ID)
+						button.post-action.post-likes.tip.action(id="unlike-" + post.GetID(), aria-label="Unlike", data-action="unlike", data-trigger="click")
+							RawIcon("heart")
+					else
+						button.post-action.post-likes.tip.action(id="like-" + post.GetID(), aria-label="Like", data-action="like", data-trigger="click")
+							RawIcon("heart-o")
+
+					if user != nil
+						button.post-action.tip.action(data-post-id=post.GetID(), aria-label="Reply", data-action="reply", data-trigger="click")
+							RawIcon("reply")
+
+						if user.ID == post.Creator().ID
+							button.post-action.tip.action(data-action="editPost", data-trigger="click", data-id=post.GetID(), aria-label="Edit")
+								RawIcon("pencil")
+
+					if post.TypeName() != "Thread"
+						if user != nil && (user.Role == "admin" || user.Role == "editor")
+							button.post-action.tip.action(data-action="deletePost", data-trigger="click", data-id=post.GetID(), aria-label="Delete")
+								RawIcon("trash")
+					
+					a.post-action.tip(href=post.Link(), aria-label="Link")
+						RawIcon("link")
+					
 					.post-date.utc-date(data-date=post.GetCreated())
 
 				div(id="render-" + post.GetID())!= post.HTML()
@@ -28,34 +53,6 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, highl
 							a.button.post-cancel-edit.action(data-action="editPost", data-trigger="click", data-id=post.GetID())
 								Icon("close")
 								span Cancel
-
-				.post-toolbar(id="toolbar-" + post.GetID())
-					.spacer
-					.post-likes.tip(id="likes-" + post.GetID(), aria-label=stringutils.Plural(post.CountLikes(), "like"))= "+" + strconv.Itoa(post.CountLikes())
-
-					if user != nil
-						if user.ID != post.Creator().ID
-							if post.LikedBy(user.ID)
-								a.post-tool.post-unlike.tip.action(id="unlike-" + post.GetID(), aria-label="Unlike", data-action="unlike", data-trigger="click")
-									Icon("thumbs-down")
-							else
-								a.post-tool.post-like.tip.action(id="like-" + post.GetID(), aria-label="Like", data-action="like", data-trigger="click")
-									Icon("thumbs-up")
-						
-						a.post-tool.post-reply.tip.action(data-post-id=post.GetID(), aria-label="Reply", data-action="reply", data-trigger="click")
-							Icon("reply")
-
-						if user.ID == post.Creator().ID
-							a.post-tool.post-edit.tip.action(data-action="editPost", data-trigger="click", data-id=post.GetID(), aria-label="Edit")
-								Icon("pencil")
-
-					if post.TypeName() != "Thread"
-						if user != nil && (user.Role == "admin" || user.Role == "editor")
-							a.post-tool.post-delete.tip.action(data-action="deletePost", data-trigger="click", data-id=post.GetID(), aria-label="Delete")
-								Icon("trash")
-					
-					a.post-tool.post-permalink.tip(href=post.Link(), aria-label="Link")
-						Icon("link")
 
 		.replies(id="replies-" + post.GetID())
 			if includeReplies

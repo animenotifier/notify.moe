@@ -3,7 +3,7 @@ module github.com/animenotifier/notify.moe
 go 1.12
 
 require (
-	cloud.google.com/go v0.39.0 // indirect
+	cloud.google.com/go v0.40.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/aerogo/aero v1.3.14
 	github.com/aerogo/api v0.2.0
@@ -37,12 +37,11 @@ require (
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
-	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/json-iterator/go v1.1.6
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
-	github.com/minio/minio-go/v6 v6.0.27
+	github.com/minio/minio-go/v6 v6.0.28
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
 	github.com/shirou/gopsutil v2.18.12+incompatible
@@ -53,11 +52,10 @@ require (
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
-	golang.org/x/crypto v0.0.0-20190530122614-20be4c3c3ed5 // indirect
-	golang.org/x/net v0.0.0-20190603091049-60506f45cf65 // indirect
-	golang.org/x/oauth2 v0.0.0-20190523182746-aaccbc9213b0
-	golang.org/x/text v0.3.2 // indirect
-	google.golang.org/appengine v1.6.0 // indirect
+	golang.org/x/net v0.0.0-20190607181551-461777fb6f67 // indirect
+	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
+	golang.org/x/sys v0.0.0-20190608050228-5b15430b70e3 // indirect
+	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df

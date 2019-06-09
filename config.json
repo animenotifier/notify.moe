@@ -3,7 +3,7 @@
 		"Ubuntu"
 	],
 	"styles": [
-		"include/config",
+		"config",
 		"mixins/layout",
 		"mixins/utils",
 		"mixins/effects",

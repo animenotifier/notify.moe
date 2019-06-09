@@ -38,7 +38,7 @@ component Activity(activity arn.Activity, user *arn.User)
 						ActivityCreateMeta(activity.(*arn.ActivityCreate), user)
 				
 				if user != nil
-					//- button.activity-action.tip.action(data-action="like", data-trigger="click", aria-label="Like")
+					//- button.post-action.tip.action(data-action="like", data-trigger="click", aria-label="Like")
 					//- 	Icon("heart")
 					//- 	if activity.TypeName() == "ActivityCreate"
 					//- 		span= activity.(*arn.ActivityCreate).Object().CountLikes()
@@ -46,7 +46,7 @@ component Activity(activity arn.Activity, user *arn.User)
 					//- 		span= len(activity.(*arn.ActivityConsumeAnime).Likes)
 					
 					if user.ID == activity.GetCreatedBy() && activity.TypeName() == "ActivityConsumeAnime"
-						button.activity-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity")
+						button.post-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity")
 							RawIcon("trash")
 				
 				.post-date.utc-date(data-date=activity.GetCreated())
@@ -57,14 +57,13 @@ component Activity(activity arn.Activity, user *arn.User)
 				ActivityConsumeAnimeText(activity.(*arn.ActivityConsumeAnime), user)
 
 component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
-	.activity-text-consume-anime
-		span  watched 
-		a(href=activity.Anime().Link())= activity.Anime().TitleByUser(user)
+	span  watched 
+	a(href=activity.Anime().Link())= activity.Anime().TitleByUser(user)
 
-		if activity.ToEpisode > activity.FromEpisode
-			span= fmt.Sprintf(" episodes %d - %d.", activity.FromEpisode, activity.ToEpisode)
-		else
-			span= fmt.Sprintf(" episode %d.", activity.ToEpisode)
+	if activity.ToEpisode > activity.FromEpisode
+		span= fmt.Sprintf(" episodes %d - %d.", activity.FromEpisode, activity.ToEpisode)
+	else
+		span= fmt.Sprintf(" episode %d.", activity.ToEpisode)
 
 component ActivityCreateMeta(activity *arn.ActivityCreate, user *arn.User)
 	span  in 

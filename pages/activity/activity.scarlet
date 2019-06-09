@@ -4,27 +4,6 @@
 	max-width activity-width
 	margin 0 auto
 
-.activity
-	:hover
-		.activity-action
-			opacity 1
-
-.activity-text-consume-anime
-	// ...
-
-.activity-action
-	border none
-	background none
-	padding 0
-	height auto
-	margin-right 0.5rem
-	opacity 0
-	color hsla(text-color-h, text-color-s, text-color-l, 0.5)
-
-	:hover
-		color link-hover-color
-		background none
-
 #load-new-activities
 	[data-count="0"]
 		display none
