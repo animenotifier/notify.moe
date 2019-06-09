@@ -10,12 +10,10 @@ export function editPost(_: AnimeNotifier, element: HTMLElement) {
 	}
 
 	let render = document.getElementById("render-" + postId) as HTMLElement
-	let toolbar = document.getElementById("toolbar-" + postId) as HTMLElement
 	let source = document.getElementById("source-" + postId) as HTMLElement
 	let edit = document.getElementById("edit-toolbar-" + postId) as HTMLElement
 
 	render.classList.toggle("hidden")
-	toolbar.classList.toggle("hidden")
 	source.classList.toggle("hidden")
 	edit.classList.toggle("hidden")
 
