@@ -9,19 +9,6 @@
 		.activity-action
 			opacity 1
 
-.activity-header
-	horizontal
-	horizontal-line-bottom
-
-.activity-creator
-	flex 1
-
-.activity-date
-	color hsla(text-color-h, text-color-s, text-color-l, 0.5)
-
-.actvity-text-create
-	opacity 0.8
-
 .activity-text-consume-anime
 	// ...
 

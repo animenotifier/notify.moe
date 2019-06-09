@@ -30,8 +30,8 @@ component Activity(activity arn.Activity, user *arn.User)
 		.post-author
 			Avatar(activity.Creator())
 		.post-content
-			.activity-header
-				.activity-creator
+			.post-header
+				.post-creator
 					a(href=activity.Creator().Link())= activity.Creator().Nick
 
 					if activity.TypeName() == "ActivityCreate"
@@ -49,7 +49,7 @@ component Activity(activity arn.Activity, user *arn.User)
 						button.activity-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity")
 							RawIcon("trash")
 				
-				.activity-date.utc-date(data-date=activity.GetCreated())
+				.post-date.utc-date(data-date=activity.GetCreated())
 
 			if activity.TypeName() == "ActivityCreate"
 				ActivityCreateText(activity.(*arn.ActivityCreate), user)

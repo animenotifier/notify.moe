@@ -1,13 +1,16 @@
-component Postable(post arn.Postable, user *arn.User, includeReplies bool, headerContent string, highlightAuthorID string)
+component Postable(post arn.Postable, user *arn.User, includeReplies bool, highlightAuthorID string)
 	.post.mountable(id=strings.ToLower(post.TypeName()) + "-" + fmt.Sprint(post.GetID()), data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.TypeName()) + "/" + post.GetID())
 		.post-parent
 			.post-author
 				Avatar(post.Creator())
 
 			.post-content(data-highlight=post.Creator().ID == highlightAuthorID)
-				if headerContent != ""
-					div!= headerContent
-				
+				.post-header
+					.post-creator
+						a(href=post.Creator().Link())= post.Creator().Nick
+					
+					.post-date.utc-date(data-date=post.GetCreated())
+
 				div(id="render-" + post.GetID())!= post.HTML()
 
 				if user != nil && user.ID == post.Creator().ID
@@ -25,8 +28,6 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 							a.button.post-cancel-edit.action(data-action="editPost", data-trigger="click", data-id=post.GetID())
 								Icon("close")
 								span Cancel
-				
-				.post-date.utc-date.no-tip(data-date=post.GetCreated())
 
 				.post-toolbar(id="toolbar-" + post.GetID())
 					.spacer
@@ -59,4 +60,4 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, heade
 		.replies(id="replies-" + post.GetID())
 			if includeReplies
 				each reply in post.Posts()
-					Postable(reply, user, true, "", highlightAuthorID)
+					Postable(reply, user, true, highlightAuthorID)

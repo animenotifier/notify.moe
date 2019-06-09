@@ -1,7 +1,7 @@
 component Post(post *arn.Post, user *arn.User)
 	.thread
 		.posts
-			Postable(post, user, true, "", "")
+			Postable(post, user, true, "")
 
 			.side-note-container.mountable
 				if user != nil && user.Role == "admin"

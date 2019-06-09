@@ -1,22 +1,21 @@
 post-content-padding-y = 0.75rem
 
-.thread-link
-	vertical
-	margin 0.25rem 0
+.post-author
+	horizontal
+	justify-content center
+	align-items flex-start
+	margin-right post-avatar-text-margin
 
-	.post-author
-		margin-bottom 0.25rem
+.post-header
+	horizontal
+	horizontal-line-bottom
 
-> 330px
-	.thread-link
-		horizontal
+.post-creator
+	flex 1
 
-		.post-author
-			margin-bottom 0
-
-		.user-image
-			width 42px
-			height 42px
+.post-date
+	color hsla(text-color-h, text-color-s, text-color-l, 0.5)
+	white-space nowrap
 
 .post-content
 	ui-element
@@ -49,40 +48,6 @@ post-content-padding-y = 0.75rem
 		.post-toolbar
 			opacity 1
 
-		.post-date
-			opacity 0.25
-
-.thread-content
-	horizontal
-	ui-element
-	padding 0.4rem 1rem
-	align-items center
-
-.thread-icons,
-.thread-reply-count
-	horizontal
-	align-items center
-	opacity 0.5
-	text-align right
-	font-size 0.9rem
-
-.thread-reply-count
-	margin-right 0.5rem
-
-.thread-content-container
-	flex 1
-	vertical
-	justify-content center
-
-.thread-link-title
-	color text-color
-
-.post-author
-	horizontal
-	justify-content center
-	align-items flex-start
-	margin-right post-avatar-text-margin
-
 .new-post-actions
 	justify-content flex-end
 	opacity 0
@@ -101,8 +66,6 @@ post-content-padding-y = 0.75rem
 
 	button
 		pointer-events all
-
-// Toolbar
 
 .post-toolbar
 	horizontal
@@ -136,7 +99,7 @@ post-content-padding-y = 0.75rem
 	color delete-color
 
 .post-save
-	//
+	// ...
 
 .post-edit-interface
 	vertical
@@ -146,12 +109,3 @@ post-content-padding-y = 0.75rem
 
 .post-text-input
 	min-height 200px
-
-.post-date
-	position absolute
-	right -1rem
-	top 0.25rem
-	white-space nowrap
-	opacity 0
-	transform translateX(100%)
-	default-transition

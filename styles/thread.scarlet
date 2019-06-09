@@ -1,0 +1,42 @@
+.thread-link
+	vertical
+	margin 0.25rem 0
+
+	.post-author
+		margin-bottom 0.25rem
+
+> 330px
+	.thread-link
+		horizontal
+
+		.post-author
+			margin-bottom 0
+
+		.user-image
+			width 42px
+			height 42px
+
+.thread-content
+	horizontal
+	ui-element
+	padding 0.4rem 1rem
+	align-items center
+
+.thread-icons,
+.thread-reply-count
+	horizontal
+	align-items center
+	opacity 0.5
+	text-align right
+	font-size 0.9rem
+
+.thread-reply-count
+	margin-right 0.5rem
+
+.thread-content-container
+	flex 1
+	vertical
+	justify-content center
+
+.thread-link-title
+	color text-color
