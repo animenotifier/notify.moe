@@ -32,18 +32,19 @@ func UserInfo(next aero.Handler) aero.Handler {
 			return nil
 		}
 
-		updateUserInfo(ctx, user)
+		// Bind local variables and start a coroutine
+		ip := ctx.IP()
+		userAgent := ctx.Request().Header("User-Agent")
+		go updateUserInfo(ip, userAgent, user)
+
 		return err
 	}
 }
 
 // Update browser and OS data
-func updateUserInfo(ctx aero.Context, user *arn.User) {
-	newIP := ctx.IP()
-	newUserAgent := ctx.Request().Header("User-Agent")
-
-	if user.UserAgent != newUserAgent {
-		user.UserAgent = newUserAgent
+func updateUserInfo(ip string, userAgent string, user *arn.User) {
+	if user.UserAgent != userAgent {
+		user.UserAgent = userAgent
 
 		// Parse user agent
 		parsed := user_agent.New(user.UserAgent)
@@ -60,9 +61,11 @@ func updateUserInfo(ctx aero.Context, user *arn.User) {
 	user.LastSeen = arn.DateTimeUTC()
 	user.Save()
 
-	if user.IP != newIP {
-		go updateUserLocation(user, newIP)
+	if user.IP == ip {
+		return
 	}
+
+	updateUserLocation(user, ip)
 }
 
 // Updates the location of the user.
