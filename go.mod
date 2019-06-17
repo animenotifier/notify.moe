@@ -21,7 +21,7 @@ require (
 	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.5
 	github.com/akyoto/go-matroska v0.1.1
-	github.com/akyoto/hash v0.4.0
+	github.com/akyoto/hash v0.4.1
 	github.com/akyoto/imageserver v0.3.6
 	github.com/akyoto/stringutils v0.2.1
 	github.com/akyoto/webpush-go v0.1.2
@@ -42,7 +42,6 @@ require (
 	github.com/json-iterator/go v1.1.6
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/minio/minio-go/v6 v6.0.29
-	github.com/mmcloughlin/avo v0.0.0-20190613184424-cad456ebdea7 // indirect
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
 	github.com/shirou/gopsutil v2.18.12+incompatible
@@ -56,7 +55,6 @@ require (
 	golang.org/x/crypto v0.0.0-20190611184440-5c40567a22f8 // indirect
 	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sys v0.0.0-20190616124812-15dcb6c0061f // indirect
 	google.golang.org/appengine v1.6.1 // indirect
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect

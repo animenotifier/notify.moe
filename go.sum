@@ -77,6 +77,8 @@ github.com/akyoto/go-matroska v0.1.1/go.mod h1:x+GUVwyby6HN/MKKNP4BvGqP9VrHuEznf
 github.com/akyoto/hash v0.3.5/go.mod h1:uPmnZyhBJIyLON8V9LNi0CcqtwYaH2RiKLFQg67fwq0=
 github.com/akyoto/hash v0.4.0 h1:M9Q3E6cOAxbf7q3yu5SZZdbZxC4thndCkqJctxl1+zg=
 github.com/akyoto/hash v0.4.0/go.mod h1:purxg2OohOWT7H0oLP0xQF1DG/EbazUbw7zomRUk8Y8=
+github.com/akyoto/hash v0.4.1 h1:dH6R2THYbkga957mOiWr9xaaViHZ5+HTwnJrOTLprqc=
+github.com/akyoto/hash v0.4.1/go.mod h1:0cSvXSNAA5GRmWFgdwNoiXBWj9HfDJTrKs2G6W9My58=
 github.com/akyoto/imageserver v0.3.6 h1:Sxcbgo45Lh7afcSmcU8OS49VYbqh4kE3DK0Lxuuxf74=
 github.com/akyoto/imageserver v0.3.6/go.mod h1:9AuMUxIt5CPlTmJre4ETwWxRnThOkkE1EhavC8HX4U8=
 github.com/akyoto/stringutils v0.2.0 h1:86gMW/31LO7zc8mGGWB4gLqyFzrNHMZYyj6ebSQbpH4=
