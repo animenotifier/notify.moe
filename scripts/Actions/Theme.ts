@@ -1,4 +1,5 @@
 import AnimeNotifier from "../AnimeNotifier"
+import { hexToHSL } from "scripts/Utils"
 
 let currentThemeName = "light"
 let previewTimeoutID: number = 0
@@ -11,7 +12,6 @@ const themes = {
 		"link-color-h": "45",
 		"link-color-s": "100%",
 		"link-color-l": "66%",
-		"link-hover-color-l": "76%",
 
 		"text-color-l": "90%",
 		"bg-color-l": "18%",
@@ -54,7 +54,6 @@ const themes = {
 	// 	"base-theme": "dark",
 	// 	"link-color-h": "0",
 	// 	"link-color-l": "78%",
-	// 	"link-hover-color-l": "88%",
 	// 	"bg-color-s": "70%"
 	// },
 	// "sakura": {
@@ -62,7 +61,6 @@ const themes = {
 	// 	"link-color-h": "348",
 	// 	"link-color-s": "100%",
 	// 	"link-color-l": "53%",
-	// 	"link-hover-color-l": "58%",
 	// 	"bg-color-h": "348",
 	// 	"bg-color-s": "100%",
 	// 	"bg-color-l": "86%",
@@ -169,12 +167,19 @@ export function applyTheme(themeName: string) {
 export function pickColor(_: AnimeNotifier, element: HTMLElement) {
 	let rootStyle = document.documentElement.style
 	let variableName = `--${element.dataset.variable}`
-
 	let input = document.createElement("input")
 	input.type = "color"
 
 	input.oninput = () => {
-		rootStyle.setProperty(variableName, input.value)
+		let color = hexToHSL(input.value)
+
+		if(!color) {
+			return
+		}
+
+		rootStyle.setProperty(variableName+"-h", (color.h * 360).toString())
+		rootStyle.setProperty(variableName+"-s", (color.s * 100).toString() + "%")
+		rootStyle.setProperty(variableName+"-l", (color.l * 100).toString() + "%")
 	}
 
 	input.click()

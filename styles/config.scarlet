@@ -4,19 +4,22 @@ text-color-s = 0%
 text-color-l = 23.5%
 text-color = hsl(text-color-h, text-color-s, text-color-l)
 
-bg-color-h = 0
-bg-color-s = 0%
-bg-color-l = 96%
-bg-color = hsl(bg-color-h, bg-color-s, bg-color-l)
-
 link-color-h = 7
 link-color-s = 87%
 link-color-l = 45%
 link-color = hsl(link-color-h, link-color-s, link-color-l)
 
-link-hover-color-l = calc(link-color-l + 8%)
-link-hover-color = hsl(link-color-h, link-color-s, link-hover-color-l)
+bg-color-h = 0
+bg-color-s = 0%
+bg-color-l = 96%
+bg-color = hsl(bg-color-h, bg-color-s, bg-color-l)
 
+ui-background-h = bg-color-h
+ui-background-s = bg-color-s
+ui-background-l = 99.5%
+ui-background = hsl(ui-background-h, ui-background-s, ui-background-l)
+
+link-hover-color = hsl(link-color-h, link-color-s, calc(link-color-l + 8%))
 link-active-color = link-hover-color
 pro-color = hsla(0, 100%, 73%, 0.87)
 anime-alternative-title-color = hsla(0, 0%, 0%, 0.5)
@@ -34,9 +37,6 @@ ui-border-color = rgba(0, 0, 0, 0.1)
 ui-border = 1px solid ui-border-color
 ui-hover-border-color = rgba(0, 0, 0, 0.15)
 ui-hover-border = 1px solid ui-hover-border-color
-
-ui-background-l = 99.5%
-ui-background = hsl(bg-color-h, bg-color-s, ui-background-l)
 
 // ui-hover-background = rgb(254, 254, 254)
 // ui-background = linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.037) 100%)

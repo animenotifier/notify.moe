@@ -1,6 +1,7 @@
 export * from "./supportsWebP"
 export * from "./delay"
 export * from "./findAll"
+export * from "./hexToHSL"
 export * from "./plural"
 export * from "./requestIdleCallback"
 export * from "./swapElements"
