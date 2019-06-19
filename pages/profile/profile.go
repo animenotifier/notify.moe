@@ -160,7 +160,7 @@ func Profile(ctx aero.Context, viewUser *arn.User) error {
 	groups := []*arn.Group{}
 
 	for group := range arn.StreamGroups() {
-		if group.HasMember(viewUser.ID) {
+		if !group.IsDraft && group.HasMember(viewUser.ID) {
 			groups = append(groups, group)
 		}
 	}

@@ -37,10 +37,10 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 					if len(groups) == 0
 						p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
 					else
-					.profile-groups.mountable(data-mountable-type="favorites")
-						each group in groups
-							a.profile-group.tip.mountable(href=group.Link(), aria-label=group.Name, data-mountable-type="group")
-								img.group-image.lazy(data-src=group.ImageLink("small"), data-webp=true, alt=group.Name)
+						.profile-groups.mountable(data-mountable-type="favorites")
+							each group in groups
+								a.profile-group.tip.mountable(href=group.Link(), aria-label=group.Name, data-mountable-type="group")
+									img.group-image.lazy(data-src=group.ImageLink("small"), data-webp=true, alt=group.Name)
 				
 				//- //- People
 				//- .profile-section
