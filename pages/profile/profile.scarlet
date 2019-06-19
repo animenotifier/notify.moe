@@ -84,6 +84,13 @@ const profile-image-size = 280px
 	grid-gap 0.5rem
 	justify-content space-evenly
 
+.profile-groups
+	display grid
+	grid-template-columns repeat(auto-fill, 70px)
+	grid-template-rows repeat(auto-fill, 70px)
+	grid-gap 0.5rem
+	justify-content space-evenly
+
 .profile-introduction
 	a
 		color white

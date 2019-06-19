@@ -16,6 +16,7 @@ const (
 	maxCharacters = 6
 	maxFriends    = 7
 	maxStudios    = 4
+	maxGroups     = 5
 )
 
 // Get user profile page.
@@ -155,6 +156,30 @@ func Profile(ctx aero.Context, viewUser *arn.User) error {
 		dayToActivityCount[days+dayOffset]++
 	}
 
+	// Groups
+	groups := []*arn.Group{}
+
+	for group := range arn.StreamGroups() {
+		if group.HasMember(viewUser.ID) {
+			groups = append(groups, group)
+		}
+	}
+
+	sort.Slice(groups, func(i, j int) bool {
+		aMembers := len(groups[i].Members)
+		bMembers := len(groups[j].Members)
+
+		if aMembers == bMembers {
+			return groups[i].Name < groups[j].Name
+		}
+
+		return aMembers > bMembers
+	})
+
+	if len(groups) > maxGroups {
+		groups = groups[:maxGroups]
+	}
+
 	// Characters
 	characters := []*arn.Character{}
 
@@ -188,6 +213,7 @@ func Profile(ctx aero.Context, viewUser *arn.User) error {
 		animeList,
 		completedList,
 		characters,
+		groups,
 		friends,
 		topGenres,
 		topStudios,
