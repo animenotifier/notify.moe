@@ -86,10 +86,15 @@ const profile-image-size = 280px
 
 .profile-groups
 	display grid
-	grid-template-columns repeat(auto-fill, 70px)
-	grid-template-rows repeat(auto-fill, 70px)
+	grid-template-columns repeat(auto-fill, character-image-small-width)
+	grid-template-rows repeat(auto-fill, character-image-small-height)
 	grid-gap 0.5rem
 	justify-content space-evenly
+
+.profile-group
+	.group-image
+		width character-image-small-width
+		height character-image-small-height
 
 .profile-introduction
 	a

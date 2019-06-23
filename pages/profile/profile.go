@@ -16,7 +16,7 @@ const (
 	maxCharacters = 6
 	maxFriends    = 7
 	maxStudios    = 4
-	maxGroups     = 5
+	maxGroups     = 6
 )
 
 // Get user profile page.
