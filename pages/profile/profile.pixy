@@ -7,7 +7,8 @@ component Profile(viewUser *arn.User, user *arn.User, animeList *arn.AnimeList, 
 			.profile-column.profile-favorites.mountable(data-mountable-type="column")
 				//- Anime
 				.profile-section
-					h3.profile-column-header.mountable(data-mountable-type="favorites") Anime
+					h3.profile-column-header.mountable(data-mountable-type="favorites")
+						a(href=viewUser.Link() + "/animelist/watching") Anime
 					
 					if len(completedList.Items) == 0
 						p.no-data.mountable(data-mountable-type="favorites") Nothing here yet.
