@@ -159,12 +159,22 @@ mixin volume-slider-hover-thumb
 
 	::-moz-range-thumb
 		volume-slider-thumb
+		-moz-appearance none
 
 	:active
 		transform none
 
 	:hover
+		cursor pointer
 		background rgba(0, 0, 0, 0.06)
+
+		// Chrome parsing bug forces us to make the following 2 thumb definitions have different statements.
+		// That is why we're adding the appearance statements here, even though they are not really needed.
 
 		::-webkit-slider-thumb
 			volume-slider-hover-thumb
+			-webkit-appearance none
+
+		::-moz-range-thumb
+			volume-slider-hover-thumb
+			-moz-appearance none
