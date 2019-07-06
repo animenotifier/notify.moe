@@ -14,6 +14,7 @@ import ServerEvents from "./ServerEvents"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, supportsWebP, requestIdleCallback, swapElements, delay, findAllInside } from "./Utils"
 import * as actions from "./Actions"
+import ToolTip from "./Elements/tool-tip/tool-tip"
 
 export default class AnimeNotifier {
 	app: Application
@@ -39,6 +40,7 @@ export default class AnimeNotifier {
 	lastReloadContentPath: string
 	currentMediaId: string
 	serverEvents: ServerEvents
+	tip: ToolTip
 
 	constructor(app: Application) {
 		this.app = app
@@ -53,31 +55,6 @@ export default class AnimeNotifier {
 
 		// Never remove src property on diffs
 		Diff.persistentAttributes.add("src")
-
-		// Is intersection observer supported?
-		if("IntersectionObserver" in window) {
-			// Enable lazy load
-			this.visibilityObserver = new IntersectionObserver(
-				entries => {
-					for(let entry of entries) {
-						if(entry.isIntersecting) {
-							entry.target["became visible"]()
-							this.visibilityObserver.unobserve(entry.target)
-						}
-					}
-				},
-				{}
-			)
-		} else {
-			// Disable lazy load feature
-			this.visibilityObserver = {
-				disconnect: () => {},
-				observe: (elem: HTMLElement) => {
-					elem["became visible"]()
-				},
-				unobserve: (_: HTMLElement) => {}
-			} as IntersectionObserver
-		}
 	}
 
 	init() {
@@ -122,6 +99,39 @@ export default class AnimeNotifier {
 			if(theme && theme !== "light") {
 				actions.applyTheme(theme)
 			}
+		}
+
+		// Web components
+		this.registerWebComponents()
+
+		// Tooltip
+		this.tip = new ToolTip()
+		document.body.appendChild(this.tip)
+		document.addEventListener("linkclicked", () => this.tip.classList.add("fade-out"))
+
+		// Intersection observer
+		if("IntersectionObserver" in window) {
+			// Enable lazy load
+			this.visibilityObserver = new IntersectionObserver(
+				entries => {
+					for(let entry of entries) {
+						if(entry.isIntersecting) {
+							entry.target["became visible"]()
+							this.visibilityObserver.unobserve(entry.target)
+						}
+					}
+				},
+				{}
+			)
+		} else {
+			// Disable lazy load feature
+			this.visibilityObserver = {
+				disconnect: () => {},
+				observe: (elem: HTMLElement) => {
+					elem["became visible"]()
+				},
+				unobserve: (_: HTMLElement) => {}
+			} as IntersectionObserver
 		}
 
 		// Status message
@@ -183,7 +193,7 @@ export default class AnimeNotifier {
 			Promise.resolve().then(() => this.dragAndDrop()),
 			Promise.resolve().then(() => this.colorBoxes()),
 			Promise.resolve().then(() => this.loadCharacterRanking()),
-			Promise.resolve().then(() => this.assignTooltipOffsets()),
+			Promise.resolve().then(() => this.prepareTooltips()),
 			Promise.resolve().then(() => this.countUp())
 		])
 
@@ -197,6 +207,23 @@ export default class AnimeNotifier {
 			if(firstInput) {
 				firstInput.focus()
 			}
+		}
+	}
+
+	registerWebComponents() {
+		if(!("customElements" in window)) {
+			console.warn("Web components not supported in your current browser")
+			return
+		}
+
+		// Custom element names must have a dash in their name
+		const elements = new Map<string, Function>([
+			["tool-tip", ToolTip]
+		])
+
+		// Register all custom elements
+		for(const [tag, definition] of elements.entries()) {
+			window.customElements.define(tag, definition)
 		}
 	}
 
@@ -313,80 +340,24 @@ export default class AnimeNotifier {
 		}
 	}
 
-	assignTooltipOffsets(elements?: IterableIterator<HTMLElement>) {
-		requestIdleCallback(() => {
-			const distanceToBorder = 5
-			let contentRect: ClientRect
+	prepareTooltips(elements?: IterableIterator<HTMLElement>) {
+		if(!elements) {
+			elements = findAll("tip")
+		}
 
-			if(!elements) {
-				elements = findAll("tip")
+		this.tip.setAttribute("active", "false")
+
+		// Assign mouse enter event handler
+		for(let element of elements) {
+			element.onmouseenter = () => {
+				this.tip.classList.remove("fade-out")
+				this.tip.show(element)
 			}
 
-			// Assign mouse enter event handler
-			for(let element of elements) {
-				Diff.mutations.queue(() => {
-					element.classList.add("tip-active")
-				})
-
-				element.onmouseenter = () => {
-					Diff.mutations.queue(() => {
-						if(!contentRect) {
-							contentRect = this.app.content.getBoundingClientRect()
-						}
-
-						// Dynamic label assignment to prevent label texts overflowing
-						// and taking horizontal space at page load.
-						let label = element.getAttribute("aria-label")
-
-						if(!label) {
-							console.error("Tooltip without a label:", element)
-							return
-						}
-
-						element.dataset.label = label
-
-						// This is the most expensive call in this whole function,
-						// it consumes about 2-4 ms every time you call it.
-						let rect = element.getBoundingClientRect()
-
-						// Calculate offsets
-						let tipStyle = window.getComputedStyle(element, ":before")
-
-						if(!tipStyle.width || !tipStyle.paddingLeft) {
-							console.error("Tooltip with incorrect computed style:", element)
-							return
-						}
-
-						let tipWidth = parseInt(tipStyle.width) + parseInt(tipStyle.paddingLeft) * 2
-						let tipStartX = rect.left + rect.width / 2 - tipWidth / 2 - contentRect.left
-						let tipEndX = tipStartX + tipWidth
-						let leftOffset = 0
-
-						if(tipStartX < distanceToBorder) {
-							leftOffset = -tipStartX + distanceToBorder
-						} else if(tipEndX > contentRect.width - distanceToBorder) {
-							leftOffset = -(tipEndX - contentRect.width + distanceToBorder)
-						}
-
-						if(leftOffset !== 0) {
-							element.classList.remove("tip-active")
-							element.classList.add("tip-offset-root")
-
-							let tipChild = document.createElement("div")
-							tipChild.classList.add("tip-offset-child")
-							tipChild.setAttribute("data-label", element.dataset.label)
-							tipChild.style.left = Math.round(leftOffset) + "px"
-							tipChild.style.width = rect.width + "px"
-							tipChild.style.height = rect.height + "px"
-							element.appendChild(tipChild)
-						}
-
-						// Unassign event listener
-						element.onmouseenter = null
-					})
-				}
+			element.onmouseleave = () => {
+				this.tip.hide()
 			}
-		})
+		}
 	}
 
 	dragAndDrop() {
@@ -1272,7 +1243,7 @@ export default class AnimeNotifier {
 		this.app.ajaxify(element.getElementsByTagName("a"))
 		this.lazyLoad(findAllInside("lazy", element))
 		this.mountMountables(findAllInside("mountable", element))
-		this.assignTooltipOffsets(findAllInside("tip", element))
+		this.prepareTooltips(findAllInside("tip", element))
 		this.textAreaFocus()
 	}
 

@@ -1,0 +1,38 @@
+const tip-opacity = 1
+const tip-transform-hidden = translateY(20%)
+const tip-transform-visible = translateY(0)
+const tip-offset = -0.6rem
+
+tool-tip
+	position absolute
+	z-index 100000
+	opacity 0
+	transform tip-transform-hidden
+	transition opacity transition-speed ease, transform transition-speed ease
+	pointer-events none
+	margin-top tip-offset
+
+	[active="true"]
+		opacity tip-opacity
+		transform tip-transform-visible
+
+	.box
+		color text-color
+		text-shadow none
+		padding 0.6rem 0.8rem
+		background tip-bg-color
+		font-size 0.92rem
+		border 1px solid ui-border-color
+		border-radius ui-element-border-radius
+		box-shadow shadow-light
+		white-space nowrap
+
+	.arrow
+		position relative
+		width 6px
+		height 6px
+		margin-top -1px
+		transform translateX(-50%)
+		border-style solid
+		border-width 6px 6px 0 6px
+		border-color tip-bg-color transparent transparent transparent

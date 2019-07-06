@@ -237,6 +237,7 @@ export default class Application {
 
 				e.preventDefault()
 
+				// Prevent loading the same page
 				let url = (this as HTMLAnchorElement).getAttribute("href")
 
 				if(!url || url === self.currentPath) {
@@ -245,6 +246,7 @@ export default class Application {
 
 				// Load requested page
 				self.load(url)
+				self.emit("linkclicked")
 			}
 		}
 	}
