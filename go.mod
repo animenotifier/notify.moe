@@ -5,7 +5,7 @@ go 1.12
 require (
 	cloud.google.com/go v0.41.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.16
+	github.com/aerogo/aero v1.3.17
 	github.com/aerogo/api v0.2.0
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.4
@@ -21,7 +21,7 @@ require (
 	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.6
 	github.com/akyoto/go-matroska v0.1.1
-	github.com/akyoto/hash v0.4.1
+	github.com/akyoto/hash v0.4.2
 	github.com/akyoto/imageserver v0.3.6
 	github.com/akyoto/stringutils v0.2.1
 	github.com/akyoto/webpush-go v0.1.2
@@ -37,15 +37,17 @@ require (
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
+	github.com/golang/protobuf v1.3.2 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/json-iterator/go v1.1.6
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
-	github.com/minio/minio-go/v6 v6.0.31
+	github.com/minio/minio-go/v6 v6.0.32
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
 	github.com/shirou/gopsutil v2.19.6+incompatible
 	github.com/smartystreets/assertions v1.0.0 // indirect
+	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
 	github.com/stretchr/testify v1.3.0
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
@@ -57,6 +59,7 @@ require (
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
+	gopkg.in/ini.v1 v1.44.0 // indirect
 )
 
 exclude github.com/logpacker/PayPal-Go-SDK v2.0.0+incompatible
