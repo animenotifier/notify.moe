@@ -5,7 +5,7 @@ go 1.12
 require (
 	cloud.google.com/go v0.41.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.17
+	github.com/aerogo/aero v1.3.18
 	github.com/aerogo/api v0.2.0
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.4
@@ -21,7 +21,7 @@ require (
 	github.com/akyoto/cache v1.0.2
 	github.com/akyoto/color v1.8.6
 	github.com/akyoto/go-matroska v0.1.1
-	github.com/akyoto/hash v0.4.2
+	github.com/akyoto/hash v0.4.3
 	github.com/akyoto/imageserver v0.3.6
 	github.com/akyoto/stringutils v0.2.1
 	github.com/akyoto/webpush-go v0.1.2
@@ -40,7 +40,7 @@ require (
 	github.com/golang/protobuf v1.3.2 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
-	github.com/json-iterator/go v1.1.6
+	github.com/json-iterator/go v1.1.7
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/minio/minio-go/v6 v6.0.32
 	github.com/mssola/user_agent v0.5.0
