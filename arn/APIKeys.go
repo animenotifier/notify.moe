@@ -72,11 +72,10 @@ type APIKeysData struct {
 		PrivateKey string `json:"privateKey"`
 	} `json:"vapid"`
 
-	SMTP struct {
-		Server   string `json:"server"`
-		Address  string `json:"address"`
-		Password string `json:"password"`
-	} `json:"smtp"`
+	Mailgun struct {
+		Domain     string `json:"domain"`
+		PrivateKey string `json:"privateKey"`
+	} `json:"mailgun"`
 
 	S3 struct {
 		ID     string `json:"id"`

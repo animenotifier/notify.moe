@@ -81,6 +81,9 @@ func configure(app *aero.Application) *aero.Application {
 		color.Red(err.Error())
 	})
 
+	// Emails
+	arn.HTMLEmailRenderer = &HTMLEmailRenderer{}
+
 	// Check that this is the server
 	if !arn.Node.IsServer() && !arn.IsTest() {
 		panic("Another program is currently running as the database server")

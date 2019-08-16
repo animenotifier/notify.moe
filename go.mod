@@ -42,6 +42,7 @@ require (
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/json-iterator/go v1.1.7
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
+	github.com/mailgun/mailgun-go/v3 v3.6.0
 	github.com/minio/minio-go/v6 v6.0.32
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3

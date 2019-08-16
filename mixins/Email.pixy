@@ -1,0 +1,10 @@
+component NotificationEmail(notification *arn.Notification)
+	h2= notification.Message
+
+	p
+		img(src=notification.Icon, alt="Icon", style="width:125px; height:125px; object-fit: cover;")
+	
+	p= notification.Message
+
+	if notification.Link != ""
+		a(href=notification.Link, target="_blank") View it on Anime Notifier

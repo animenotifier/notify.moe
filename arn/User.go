@@ -208,6 +208,17 @@ func (user *User) SendNotification(pushNotification *PushNotification) {
 	// Save changes
 	subs.Save()
 
+	// Send email notification
+	if IsDevelopment() && user.ID == "4J6qpK1ve" {
+		subject := notification.Title
+		html := HTMLEmailRenderer.Notification(notification)
+		err := SendEmail(user.Email, subject, html)
+
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
 	// Send an event to the user's open tabs
 	user.BroadcastEvent(&aero.Event{
 		Name: "notificationCount",
