@@ -3,28 +3,28 @@ package arn_test
 import (
 	"testing"
 
+	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestNewAnime(t *testing.T) {
 	anime := arn.NewAnime()
 	assert.NotNil(t, anime)
-	assert.NotEmpty(t, anime.ID)
-	assert.NotEmpty(t, anime.Created)
+	assert.NotEqual(t, anime.ID, "")
+	assert.NotEqual(t, anime.Created, "")
 }
 
 func TestGetAnime(t *testing.T) {
 	// Existing anime
 	anime, err := arn.GetAnime("74y2cFiiR")
-	assert.NoError(t, err)
+	assert.Nil(t, err)
 	assert.NotNil(t, anime)
-	assert.NotEmpty(t, anime.ID)
-	assert.NotEmpty(t, anime.Title.Canonical)
+	assert.NotEqual(t, anime.ID, "")
+	assert.NotEqual(t, anime.Title.Canonical, "")
 
 	// Not existing anime
 	anime, err = arn.GetAnime("does not exist")
-	assert.Error(t, err)
+	assert.NotNil(t, err)
 	assert.Nil(t, anime)
 }
 
@@ -49,14 +49,14 @@ func TestAllAnime(t *testing.T) {
 
 	for _, anime := range allAnime {
 
-		assert.NotEmpty(t, anime.ID)
-		assert.Contains(t, validAnimeStatus, anime.Status, "[%s] %s", anime.ID, anime.String())
-		assert.Contains(t, validAnimeType, anime.Type, "[%s] %s", anime.ID, anime.String())
-		assert.Contains(t, validAnimeStatus, anime.CalculatedStatus(), "[%s] %s", anime.ID, anime.String())
-		assert.NotEmpty(t, anime.StatusHumanReadable(), "[%s] %s", anime.ID, anime.String())
-		assert.NotEmpty(t, anime.TypeHumanReadable(), "[%s] %s", anime.ID, anime.String())
-		assert.NotEmpty(t, anime.Link(), "[%s] %s", anime.ID, anime.String())
-		assert.NotEmpty(t, anime.EpisodeCountString(), "[%s] %s", anime.ID, anime.String())
+		assert.NotEqual(t, anime.ID, "")
+		assert.Contains(t, validAnimeStatus, anime.Status)
+		assert.Contains(t, validAnimeType, anime.Type)
+		assert.Contains(t, validAnimeStatus, anime.CalculatedStatus())
+		assert.NotEqual(t, anime.StatusHumanReadable(), "")
+		assert.NotEqual(t, anime.TypeHumanReadable(), "")
+		assert.NotEqual(t, anime.Link(), "")
+		assert.NotEqual(t, anime.EpisodeCountString(), "")
 
 		anime.Episodes()
 		anime.Characters()

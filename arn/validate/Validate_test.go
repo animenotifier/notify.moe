@@ -3,8 +3,8 @@ package validate_test
 import (
 	"testing"
 
+	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn/validate"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestIsValidNick(t *testing.T) {

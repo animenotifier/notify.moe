@@ -3,8 +3,8 @@ package search_test
 import (
 	"testing"
 
+	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn/search"
-	"github.com/stretchr/testify/assert"
 )
 
 // Run these search terms and expect the
@@ -39,8 +39,8 @@ var tests = map[string]string{
 func TestAnimeSearch(t *testing.T) {
 	for term, expectedAnimeID := range tests {
 		results := search.Anime(term, 1)
-		assert.Len(t, results, 1, "%s -> %s", term, expectedAnimeID)
-		assert.Equal(t, expectedAnimeID, results[0].ID, "%s -> %s", term, expectedAnimeID)
+		assert.Equal(t, len(results), 1)
+		assert.Equal(t, expectedAnimeID, results[0].ID)
 	}
 }
 

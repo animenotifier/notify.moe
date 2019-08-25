@@ -8,15 +8,15 @@ require (
 	github.com/aerogo/aero v1.3.21
 	github.com/aerogo/api v0.2.0
 	github.com/aerogo/crawler v0.2.5
-	github.com/aerogo/flow v0.1.4
-	github.com/aerogo/graphql v0.4.0
+	github.com/aerogo/flow v0.1.5
+	github.com/aerogo/graphql v0.4.1
 	github.com/aerogo/http v1.0.9
 	github.com/aerogo/log v0.2.5
 	github.com/aerogo/manifest v0.1.4
-	github.com/aerogo/markdown v0.1.8
-	github.com/aerogo/mirror v0.2.3
-	github.com/aerogo/nano v0.3.2
-	github.com/aerogo/session-store-nano v0.1.5
+	github.com/aerogo/markdown v0.1.9
+	github.com/aerogo/mirror v0.2.4
+	github.com/aerogo/nano v0.3.4
+	github.com/aerogo/session-store-nano v0.1.7
 	github.com/aerogo/sitemap v0.1.3
 	github.com/akyoto/assert v0.2.0
 	github.com/akyoto/cache v1.0.2
@@ -56,7 +56,6 @@ require (
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
-	golang.org/x/net v0.0.0-20190628185345-da137c7871d7 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df

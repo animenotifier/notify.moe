@@ -3,8 +3,8 @@ package autocorrect_test
 import (
 	"testing"
 
+	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestFixUserNick(t *testing.T) {

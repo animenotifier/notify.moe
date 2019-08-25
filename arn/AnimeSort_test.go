@@ -3,8 +3,8 @@ package arn_test
 import (
 	"testing"
 
+	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestAnimeSort(t *testing.T) {

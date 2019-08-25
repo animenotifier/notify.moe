@@ -3,8 +3,8 @@ package stringutils_test
 import (
 	"testing"
 
+	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn/stringutils"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestRemoveSpecialCharacters(t *testing.T) {
