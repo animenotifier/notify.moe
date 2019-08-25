@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/aerogo/aero"
+	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/utils/routetests"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestRoutes(t *testing.T) {

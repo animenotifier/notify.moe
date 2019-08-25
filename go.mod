@@ -5,12 +5,12 @@ go 1.12
 require (
 	cloud.google.com/go v0.41.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.18
+	github.com/aerogo/aero v1.3.21
 	github.com/aerogo/api v0.2.0
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.4
 	github.com/aerogo/graphql v0.4.0
-	github.com/aerogo/http v1.0.6
+	github.com/aerogo/http v1.0.9
 	github.com/aerogo/log v0.2.5
 	github.com/aerogo/manifest v0.1.4
 	github.com/aerogo/markdown v0.1.8
@@ -18,12 +18,13 @@ require (
 	github.com/aerogo/nano v0.3.2
 	github.com/aerogo/session-store-nano v0.1.5
 	github.com/aerogo/sitemap v0.1.3
+	github.com/akyoto/assert v0.2.0
 	github.com/akyoto/cache v1.0.2
-	github.com/akyoto/color v1.8.6
+	github.com/akyoto/color v1.8.7
 	github.com/akyoto/go-matroska v0.1.1
-	github.com/akyoto/hash v0.4.3
+	github.com/akyoto/hash v0.4.4
 	github.com/akyoto/imageserver v0.3.6
-	github.com/akyoto/stringutils v0.2.1
+	github.com/akyoto/stringutils v0.2.3
 	github.com/akyoto/webpush-go v0.1.2
 	github.com/animenotifier/anilist v0.2.4
 	github.com/animenotifier/ffxiv v0.2.1
@@ -49,7 +50,7 @@ require (
 	github.com/shirou/gopsutil v2.19.6+incompatible
 	github.com/smartystreets/assertions v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
-	github.com/stretchr/testify v1.3.0
+	github.com/stretchr/testify v1.4.0
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
@@ -58,7 +59,6 @@ require (
 	golang.org/x/net v0.0.0-20190628185345-da137c7871d7 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
-	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/ini.v1 v1.44.0 // indirect
 )
