@@ -30,7 +30,7 @@ require (
 	github.com/animenotifier/ffxiv v0.2.1
 	github.com/animenotifier/japanese v0.2.4
 	github.com/animenotifier/kitsu v0.2.3
-	github.com/animenotifier/mal v0.2.3
+	github.com/animenotifier/mal v0.2.4
 	github.com/animenotifier/osu v0.1.1
 	github.com/animenotifier/overwatch v0.1.2
 	github.com/animenotifier/shoboi v0.2.3

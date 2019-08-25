@@ -144,6 +144,7 @@ github.com/animenotifier/kitsu v0.2.3 h1:Ps05auh4irG11O3yqYl5LCMWjhgonGc9QK02k5p
 github.com/animenotifier/kitsu v0.2.3/go.mod h1:VP3vxTAZsaA3oW2EfJ/rP5wNOhnKen74iHNcHvW5nOg=
 github.com/animenotifier/mal v0.2.3 h1:tFMmW4FNwKAbrt7aUnTV4DDqFDyhLM7oSFJtzbEgzSg=
 github.com/animenotifier/mal v0.2.3/go.mod h1:qv99vYPLTEmsAPeSJnXbSYMV6J8eljVKexyygeoJ1Ec=
+github.com/animenotifier/mal v0.2.4/go.mod h1:gVWYkgiSOrMMFY/KOS6LYpB6TXITAGXFIAmmN/9cYck=
 github.com/animenotifier/osu v0.1.1 h1:fFrX7PejFK0nCtuLBfHy80N6kZsGwZU/phZ+8ylxs60=
 github.com/animenotifier/osu v0.1.1/go.mod h1:g6k+a/DkwTAdniOGoI4NslcAfVm1uheX7kC2riFmp2E=
 github.com/animenotifier/overwatch v0.1.2 h1:SdoDMb7SYPBHQnTRuzRS//2lvste8jhX88/eU1Xw/c4=
