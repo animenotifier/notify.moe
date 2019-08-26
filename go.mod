@@ -26,15 +26,15 @@ require (
 	github.com/akyoto/imageserver v0.3.6
 	github.com/akyoto/stringutils v0.2.3
 	github.com/akyoto/webpush-go v0.1.2
-	github.com/animenotifier/anilist v0.2.4
-	github.com/animenotifier/ffxiv v0.2.1
+	github.com/animenotifier/anilist v0.2.5
+	github.com/animenotifier/ffxiv v0.2.2
 	github.com/animenotifier/japanese v0.2.4
 	github.com/animenotifier/kitsu v0.2.3
-	github.com/animenotifier/mal v0.2.4
-	github.com/animenotifier/osu v0.1.1
-	github.com/animenotifier/overwatch v0.1.2
-	github.com/animenotifier/shoboi v0.2.3
-	github.com/animenotifier/twist v0.2.5
+	github.com/animenotifier/mal v0.2.5
+	github.com/animenotifier/osu v0.1.2
+	github.com/animenotifier/overwatch v0.1.3
+	github.com/animenotifier/shoboi v0.2.4
+	github.com/animenotifier/twist v0.2.6
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
@@ -50,15 +50,12 @@ require (
 	github.com/shirou/gopsutil v2.19.6+incompatible
 	github.com/smartystreets/assertions v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
-	github.com/stretchr/testify v1.4.0
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
-	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/ini.v1 v1.44.0 // indirect
 )
 
