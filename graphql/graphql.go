@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
-
 	"github.com/aerogo/graphql"
 	"github.com/animenotifier/notify.moe/arn"
 )
