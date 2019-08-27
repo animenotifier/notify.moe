@@ -16,8 +16,8 @@ func Active(ctx aero.Context) error {
 		return user.HasAvatar() && user.HasNick() && user.IsActive()
 	})
 
-	arn.SortUsersFollowers(users)
-	return ctx.HTML(components.Users(users, ctx.Path()))
+	followerCount := arn.SortUsersFollowers(users)
+	return ctx.HTML(components.Users(users, followerCount, ctx.Path()))
 }
 
 // Pro ...
@@ -82,24 +82,8 @@ func ActiveNoAvatar(ctx aero.Context) error {
 		return user.IsActive() && !user.HasAvatar()
 	})
 
-	followCount := arn.UserFollowerCountMap()
-
-	sort.Slice(users, func(i, j int) bool {
-		if users[i].HasAvatar() != users[j].HasAvatar() {
-			return users[i].HasAvatar()
-		}
-
-		followersA := followCount[users[i].ID]
-		followersB := followCount[users[j].ID]
-
-		if followersA == followersB {
-			return users[i].Nick < users[j].Nick
-		}
-
-		return followersA > followersB
-	})
-
-	return ctx.HTML(components.Users(users, ctx.Path()))
+	followCount := arn.SortUsersFollowers(users)
+	return ctx.HTML(components.Users(users, followCount, ctx.Path()))
 }
 
 // Osu ...

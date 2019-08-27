@@ -1,0 +1,38 @@
+const user-card-padding = 1rem
+
+.user-cards
+	horizontal-wrap
+	justify-content center
+
+.user-card
+	horizontal
+	ui-element
+	padding user-card-padding
+	margin 0.4rem
+	width 100%
+	box-shadow shadow-light
+
+	:hover
+		box-shadow shadow-medium
+
+> 800px
+	.user-card
+		max-width 180px
+
+.user-card-avatar
+	.user-image
+		border-radius ui-element-border-radius
+		box-shadow none
+
+.user-card-info
+	vertical
+	margin-left user-card-padding
+	overflow hidden
+
+.user-card-nick
+	clip-long-text
+
+.user-card-note
+	color text-color
+	text-shadow none
+	opacity 0.5

@@ -1,10 +1,10 @@
-component Users(users []*arn.User, url string)
+component Users(users []*arn.User, followerCount map[string]int, url string)
 	h1.page-title Users
 	UsersTabs(url)
 
-	.user-avatars.mountable
+	.user-cards.mountable
 		each user in users
-			Avatar(user)
+			UserCard(user, stringutils.Plural(followerCount[user.ID], "follower"))
 
 component UsersByCountry(users []*arn.User, countryName string)
 	if len(users) == 0
@@ -12,9 +12,9 @@ component UsersByCountry(users []*arn.User, countryName string)
 	else
 		h1= "Users in " + users[0].Location.CountryName
 
-		.user-avatars.mountable
+		.user-cards.mountable
 			each user in users
-				Avatar(user)
+				UserCard(user, "1 follower")
 
 component ProUsers(users []*arn.User, url string)
 	h1.page-title Supporters

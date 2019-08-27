@@ -146,7 +146,7 @@ func SortUsersLastSeenLast(users []*User) {
 }
 
 // SortUsersFollowers sorts a list of users by their number of followers.
-func SortUsersFollowers(users []*User) {
+func SortUsersFollowers(users []*User) map[string]int {
 	followCount := UserFollowerCountMap()
 
 	sort.Slice(users, func(i, j int) bool {
@@ -163,4 +163,6 @@ func SortUsersFollowers(users []*User) {
 
 		return followersA > followersB
 	})
+
+	return followCount
 }
