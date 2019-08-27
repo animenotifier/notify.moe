@@ -67,8 +67,11 @@ component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn
 
 component ActivityCreateMeta(activity *arn.ActivityCreate, user *arn.User)
 	if activity.ObjectType == "Post"
-		if activity.Postable().GetParentType() != "User" || activity.Postable().GetParentID() != activity.CreatedBy
+		if activity.Postable().GetParentType() != "User"
 			span  in 
+			a(href=activity.Postable().Parent().Link())= activity.Postable().Parent().TitleByUser(user)
+		else if activity.Postable().GetParentID() != activity.CreatedBy
+			span  to 
 			a(href=activity.Postable().Parent().Link())= activity.Postable().Parent().TitleByUser(user)
 	else if activity.ObjectType == "Thread"
 		span  in 
