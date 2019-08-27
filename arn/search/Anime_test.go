@@ -34,13 +34,14 @@ var tests = map[string]string{
 	"fate night":     "74y2cFiiR", // Fate/stay night
 	"stay night":     "74y2cFiiR", // Fate/stay night
 	"re zero":        "Un9XpFimg", // Re:Zero kara Hajimeru Isekai Seikatsu
+	"slime":          "VhRKhKimR", // Tensei shitara Slime Datta Ken
 }
 
 func TestAnimeSearch(t *testing.T) {
 	for term, expectedAnimeID := range tests {
 		results := search.Anime(term, 1)
 		assert.Equal(t, len(results), 1)
-		assert.Equal(t, expectedAnimeID, results[0].ID)
+		assert.Equal(t, results[0].ID, expectedAnimeID)
 	}
 }
 

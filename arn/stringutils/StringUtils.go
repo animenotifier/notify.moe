@@ -49,7 +49,7 @@ func AdvancedStringSimilarity(a string, b string) float64 {
 		s += 0.6
 
 		if strings.HasPrefix(b, a) {
-			s += 5.0
+			s += 0.4
 		}
 	}
 

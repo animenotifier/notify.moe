@@ -24,6 +24,10 @@ func Anime(originalTerm string, maxLength int) []*arn.Anime {
 	add := func(anime *arn.Anime, similarity float64) {
 		similarity += float64(anime.Popularity.Total()) * popularityDamping
 
+		if anime.Type != "tv" && anime.Type != "movie" {
+			similarity -= 0.3
+		}
+
 		results = append(results, &Result{
 			obj:        anime,
 			similarity: similarity,
