@@ -15,9 +15,9 @@ const user-card-padding = 1rem
 	:hover
 		box-shadow shadow-medium
 
-> 800px
+> 600px
 	.user-card
-		max-width 180px
+		max-width 200px
 
 .user-card-avatar
 	.user-image
