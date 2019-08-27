@@ -22,4 +22,4 @@ If you correctly created a new branch for your changes, you can simply upload th
 
 ## How can I get in contact with the team?
 
-Join our [Discord server](discord.gg/0kimAmMCeXGXuzNF).
+Join our [Discord server](https://discord.gg/0kimAmMCeXGXuzNF).
