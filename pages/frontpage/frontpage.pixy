@@ -9,7 +9,7 @@ component FrontPage
 
 	.bg-video-container
 		video.bg-video(muted, autoplay, loop)
-			source(src="/videos/elements/violet.webm", type="video/webm")
+			source(src="https://arn.sfo2.cdn.digitaloceanspaces.com/videos/others/violet.webm", type="video/webm")
 
 component Footer
 	.footer.mountable
