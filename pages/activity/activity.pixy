@@ -66,13 +66,15 @@ component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn
 		span= fmt.Sprintf(" episode %d.", activity.ToEpisode)
 
 component ActivityCreateMeta(activity *arn.ActivityCreate, user *arn.User)
-	span  in 
-
 	if activity.ObjectType == "Post"
-		a(href=activity.Postable().Parent().Link())= activity.Postable().Parent().TitleByUser(user)
+		if activity.Postable().GetParentType() != "User" || activity.Postable().GetParentID() != activity.CreatedBy
+			span  in 
+			a(href=activity.Postable().Parent().Link())= activity.Postable().Parent().TitleByUser(user)
 	else if activity.ObjectType == "Thread"
+		span  in 
 		a(href=activity.Postable().Link())= activity.Postable().TitleByUser(user)
 	else if activity.ObjectType == "AMV" || activity.ObjectType == "SoundTrack" || activity.ObjectType == "Quote"
+		span  in 
 		a(href=activity.Object().(arn.PostParent).Link())= activity.Object().(arn.PostParent).TitleByUser(user)
 
 component ActivityCreateText(activity *arn.ActivityCreate, user *arn.User)

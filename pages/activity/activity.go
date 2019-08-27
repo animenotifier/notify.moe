@@ -28,7 +28,7 @@ func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
 		followedUserIDs = user.Follows().Items
 	}
 
-	activities := arn.FilterActivities(func(activity arn.Activity) bool {
+	activities := arn.FilterActivityCreates(func(activity arn.Activity) bool {
 		if followedOnly && !arn.Contains(followedUserIDs, activity.GetCreatedBy()) {
 			return false
 		}
@@ -37,22 +37,14 @@ func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
 			return false
 		}
 
-		if activity.TypeName() == "ActivityCreate" {
-			obj := activity.(*arn.ActivityCreate).Object()
+		obj := activity.(*arn.ActivityCreate).Object()
 
-			if obj == nil {
-				return false
-			}
-
-			draft, isDraftable := obj.(arn.Draftable)
-			return !isDraftable || !draft.GetIsDraft()
+		if obj == nil {
+			return false
 		}
 
-		if activity.TypeName() == "ActivityConsumeAnime" {
-			return activity.(*arn.ActivityConsumeAnime).Anime() != nil
-		}
-
-		return false
+		draft, isDraftable := obj.(arn.Draftable)
+		return !isDraftable || !draft.GetIsDraft()
 	})
 
 	arn.SortActivitiesLatestFirst(activities)

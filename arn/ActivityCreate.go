@@ -61,3 +61,16 @@ func StreamActivityCreates() <-chan *ActivityCreate {
 
 	return channel
 }
+
+// FilterActivityCreates filters all ActivityCreates by a custom function.
+func FilterActivityCreates(filter func(Activity) bool) []Activity {
+	var filtered []Activity
+
+	for obj := range StreamActivityCreates() {
+		if filter(obj) {
+			filtered = append(filtered, obj)
+		}
+	}
+
+	return filtered
+}

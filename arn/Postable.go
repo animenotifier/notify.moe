@@ -23,6 +23,7 @@ type Postable interface {
 	GetText() string
 	GetCreated() string
 	GetParentID() string
+	GetParentType() string
 }
 
 // ToPostables converts a slice of specific types to a slice of generic postables.

@@ -54,6 +54,11 @@ func (thread *Thread) GetParentID() string {
 	return ""
 }
 
+// GetParentType always returns an empty string for threads.
+func (thread *Thread) GetParentType() string {
+	return ""
+}
+
 // TypeName returns the type name.
 func (thread *Thread) TypeName() string {
 	return "Thread"

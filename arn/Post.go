@@ -56,6 +56,11 @@ func (post *Post) GetParentID() string {
 	return post.ParentID
 }
 
+// GetParentType returns the object type of the parent.
+func (post *Post) GetParentType() string {
+	return post.ParentType
+}
+
 // SetParent sets a new parent.
 func (post *Post) SetParent(newParent PostParent) {
 	// Remove from old parent
