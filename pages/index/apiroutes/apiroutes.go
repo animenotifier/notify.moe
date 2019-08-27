@@ -9,6 +9,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/apiview"
 	"github.com/animenotifier/notify.moe/pages/apiview/apidocs"
 	"github.com/animenotifier/notify.moe/pages/character"
+	"github.com/animenotifier/notify.moe/pages/database"
 	"github.com/animenotifier/notify.moe/pages/editor/jobs"
 	"github.com/animenotifier/notify.moe/pages/me"
 	"github.com/animenotifier/notify.moe/pages/notifications"
@@ -49,6 +50,9 @@ func Register(app *aero.Application) {
 
 	// Post
 	app.Get("/api/post/:id/reply/ui", post.ReplyUI)
+
+	// Post
+	app.Get("/api/types", database.Types)
 
 	// SoundTrack
 	app.Post("/api/soundtrack/:id/download", soundtrack.Download)
