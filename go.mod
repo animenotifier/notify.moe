@@ -16,6 +16,8 @@ require (
 	github.com/aerogo/markdown v0.1.9
 	github.com/aerogo/mirror v0.2.4
 	github.com/aerogo/nano v0.3.4
+	github.com/aerogo/pack v0.6.1
+	github.com/aerogo/run v1.0.2
 	github.com/aerogo/session-store-nano v0.1.7
 	github.com/aerogo/sitemap v0.1.3
 	github.com/akyoto/assert v0.2.0

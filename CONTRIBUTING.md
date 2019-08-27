@@ -1,24 +1,25 @@
 # Contributing
 
-## Links
+## How can I help the project?
 
-- [Installation](README.md#installation)
-- [Task for new contributors](docs/new-contributor-task.md)
-- [Issues](https://github.com/animenotifier/notify.moe/projects/10)
-- [Code Style](https://github.com/akyoto/quality/blob/master/STYLE.md)
+You do not need to be a developer to contribute. There are multiple ways to help our project:
 
-## Communication
+- [Database Editing](https://notify.moe/users/editors)
+- [Donations](https://github.com/users/akyoto/sponsorship)
+- [Pull Requests](https://github.com/animenotifier/notify.moe/pulls)
 
-Please get in contact with the team on the [notify.moe Discord](https://discord.gg/0kimAmMCeXGXuzNF).
-We are willing to help with installations and how to get started with contributions.
-There are no stupid questions so feel free to ask anything if you encounter any troubles.
+## How do I make a proper pull request?
 
-## Installation
+- Fork the project on GitHub
+- Create a new branch
+- Upload the changes to your branch
+- Check the [style guidelines](https://github.com/akyoto/quality/blob/master/STYLE.md)
+- Create a pull request
 
-If you'd like to install this project locally, take a look at the [Installation](README.md#installation) guide.
+## What if I already made a pull request but want to add more commits?
 
-### Youtube guide
+If you correctly created a new branch for your changes, you can simply upload the new commits to your fork and they will automatically appear in the PR.
 
-You can take a look at this Youtube video if you're interested in contributing:
+## How can I get in contact with the team?
 
-[![notify.moe Source Code Guide](https://i1.ytimg.com/vi/c6e-F51e_8w/maxresdefault.jpg)](https://www.youtube.com/watch?v=c6e-F51e_8w&amp=&t=3m42s)
+Join our [Discord server](discord.gg/0kimAmMCeXGXuzNF).
