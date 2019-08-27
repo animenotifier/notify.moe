@@ -6,7 +6,7 @@ component Users(users []*arn.User, followerCount map[string]int, url string)
 		each user in users
 			UserCard(user, stringutils.Plural(followerCount[user.ID], "follower"))
 
-component UsersByCountry(users []*arn.User, countryName string)
+component UsersByCountry(users []*arn.User, followerCount map[string]int, countryName string)
 	if len(users) == 0
 		p.no-data.mountable= "Seems like there are no active users in " + stringutils.Capitalize(countryName)
 	else
@@ -14,7 +14,7 @@ component UsersByCountry(users []*arn.User, countryName string)
 
 		.user-cards.mountable
 			each user in users
-				UserCard(user, "1 follower")
+				UserCard(user, stringutils.Plural(followerCount[user.ID], "follower"))
 
 component ProUsers(users []*arn.User, url string)
 	h1.page-title Supporters

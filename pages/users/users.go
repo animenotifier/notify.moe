@@ -148,8 +148,8 @@ func ByCountry(ctx aero.Context) error {
 		return strings.ToLower(user.Location.CountryName) == countryName && user.Settings().Privacy.ShowLocation && user.HasAvatar() && user.HasNick() && user.IsActive()
 	})
 
-	arn.SortUsersFollowers(users)
-	return ctx.HTML(components.UsersByCountry(users, countryName))
+	followerCount := arn.SortUsersFollowers(users)
+	return ctx.HTML(components.UsersByCountry(users, followerCount, countryName))
 }
 
 // Staff ...
