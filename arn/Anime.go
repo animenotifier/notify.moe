@@ -403,7 +403,7 @@ func (anime *Anime) RefreshEpisodes() error {
 		return err
 	}
 
-	episodes.Merge(shoboiEpisodes)
+	episodes = episodes.Merge(shoboiEpisodes)
 
 	// AnimeTwist
 	twistEpisodes, err := anime.TwistEpisodes()
@@ -412,7 +412,7 @@ func (anime *Anime) RefreshEpisodes() error {
 		return err
 	}
 
-	episodes.Merge(twistEpisodes)
+	episodes = episodes.Merge(twistEpisodes)
 
 	// Count number of available episodes
 	newAvailableCount := episodes.AvailableCount()
@@ -487,8 +487,10 @@ func (anime *Anime) RefreshEpisodes() error {
 	// Save new episode ID list
 	episodeIDs := make([]string, len(episodes))
 
-	for index := range episodes {
-		episodeIDs[index] = episodes[index].ID
+	for index, episode := range episodes {
+		episodeIDs[index] = episode.ID
+		episode.AnimeID = anime.ID
+		episode.Save()
 	}
 
 	anime.EpisodeIDs = episodeIDs

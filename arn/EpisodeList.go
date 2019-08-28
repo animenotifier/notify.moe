@@ -28,7 +28,7 @@ func (episodes EpisodeList) Find(episodeNumber int) (*Episode, int) {
 }
 
 // Merge combines the data of both episode lists to one.
-func (episodes EpisodeList) Merge(b EpisodeList) {
+func (episodes EpisodeList) Merge(b EpisodeList) EpisodeList {
 	for index, episode := range b {
 		if index >= len(episodes) {
 			episodes = append(episodes, episode)
@@ -36,6 +36,8 @@ func (episodes EpisodeList) Merge(b EpisodeList) {
 			episodes[index].Merge(episode)
 		}
 	}
+
+	return episodes
 }
 
 // HumanReadable returns a text representation of the anime episodes.
