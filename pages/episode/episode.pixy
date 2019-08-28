@@ -1,11 +1,11 @@
-component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex int, uploaded bool, user *arn.User)
+component Episode(anime *arn.Anime, episode *arn.Episode, episodeIndex int, uploaded bool, user *arn.User)
 	h1
 		a(href=anime.Link())= anime.Title.ByUser(user)
 	
 	.episode-navigation-container
 		if episodeIndex > 0
 			.episode-arrow.episode-arrow-previous
-				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex - 1].Number), title="Previous episode")
+				a.light-button(href=episode.Previous().Link(), title="Previous episode")
 					RawIcon("chevron-left")
 		
 		.episode-video
@@ -22,9 +22,9 @@ component AnimeEpisode(anime *arn.Anime, episode *arn.AnimeEpisode, episodeIndex
 		//- a(href=anime.Link(), title=anime.Title.ByUser(user))
 		//- 	img.anime-cover-image.lazy(data-src=anime.ImageLink("large"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
-		if episodeIndex < len(anime.Episodes().Items) - 1
+		if episodeIndex < len(anime.Episodes()) - 1
 			.episode-arrow.episode-arrow-next
-				a.light-button(href=anime.Link() + "/episode/" + strconv.Itoa(anime.Episodes().Items[episodeIndex + 1].Number), title="Next episode")
+				a.light-button(href=episode.Next().Link(), title="Next episode")
 					RawIcon("chevron-right")
 
 	h3.episode-view-number= "Episode " + strconv.Itoa(episode.Number)

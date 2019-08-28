@@ -18,7 +18,7 @@ func main() {
 		modified := false
 
 		// Try to find incorrect airing dates
-		for _, episode := range anime.Episodes().Items {
+		for _, episode := range anime.Episodes() {
 			if episode.AiringDate.Start == "" {
 				continue
 			}

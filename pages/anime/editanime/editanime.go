@@ -109,11 +109,12 @@ func Episodes(ctx aero.Context) error {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
-	animeEpisodes, err := arn.GetAnimeEpisodes(id)
+	// episodes := anime.Episodes()
 
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Anime episodes not found", err)
-	}
+	// if err != nil {
+	// 	return ctx.Error(http.StatusNotFound, "Anime episodes not found", err)
+	// }
 
-	return ctx.HTML(components.EditAnimeTabs(anime) + editform.Render(animeEpisodes, "Edit anime episodes", user))
+	// editform.Render(episodes, "Edit anime episodes", user)
+	return ctx.HTML(components.EditAnimeTabs(anime) + "<p class='no-data mountable'>Temporarily disabled.</p>")
 }

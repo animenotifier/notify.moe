@@ -83,6 +83,7 @@ type Anime struct {
 	Rating        *AnimeRating     `json:"rating"`
 	Popularity    *AnimePopularity `json:"popularity"`
 	Trailers      []*ExternalMedia `json:"trailers" editable:"true"`
+	EpisodeIDs    []string         `json:"episodes" editable:"true"`
 
 	// Mixins
 	hasMappings
@@ -356,15 +357,20 @@ func (anime *Anime) EndDateTime() time.Time {
 	return t
 }
 
-// Episodes returns the anime episodes wrapper.
-func (anime *Anime) Episodes() *AnimeEpisodes {
-	record, err := DB.Get("AnimeEpisodes", anime.ID)
+// Episodes returns the anime episodes.
+func (anime *Anime) Episodes() EpisodeList {
+	objects := DB.GetMany("Episode", anime.EpisodeIDs)
+	episodes := make([]*Episode, 0, len(anime.EpisodeIDs))
 
-	if err != nil {
-		return nil
+	for _, obj := range objects {
+		if obj == nil {
+			continue
+		}
+
+		episodes = append(episodes, obj.(*Episode))
 	}
 
-	return record.(*AnimeEpisodes)
+	return episodes
 }
 
 // UsersWatchingOrPlanned returns a list of users who are watching the anime right now.
@@ -386,13 +392,6 @@ func (anime *Anime) UsersWatchingOrPlanned() []*User {
 func (anime *Anime) RefreshEpisodes() error {
 	// Fetch episodes
 	episodes := anime.Episodes()
-
-	if episodes == nil {
-		episodes = &AnimeEpisodes{
-			AnimeID: anime.ID,
-			Items:   []*AnimeEpisode{},
-		}
-	}
 
 	// Save number of available episodes for comparison later
 	oldAvailableCount := episodes.AvailableCount()
@@ -441,7 +440,7 @@ func (anime *Anime) RefreshEpisodes() error {
 	// Number remaining episodes
 	startNumber := 0
 
-	for _, episode := range episodes.Items {
+	for _, episode := range episodes {
 		if episode.Number != -1 {
 			startNumber = episode.Number
 			continue
@@ -456,7 +455,7 @@ func (anime *Anime) RefreshEpisodes() error {
 	lastAiringDate := ""
 	timeDifference := oneWeek
 
-	for _, episode := range episodes.Items {
+	for _, episode := range episodes {
 		if validate.DateTime(episode.AiringDate.Start) {
 			if lastAiringDate != "" {
 				a, _ := time.Parse(time.RFC3339, lastAiringDate)
@@ -485,12 +484,20 @@ func (anime *Anime) RefreshEpisodes() error {
 		lastAiringDate = episode.AiringDate.Start
 	}
 
-	episodes.Save()
+	// Save new episode ID list
+	episodeIDs := make([]string, len(episodes))
+
+	for index := range episodes {
+		episodeIDs[index] = episodes[index].ID
+	}
+
+	anime.EpisodeIDs = episodeIDs
+	anime.Save()
 	return nil
 }
 
 // ShoboiEpisodes returns a slice of episode info from cal.syoboi.jp.
-func (anime *Anime) ShoboiEpisodes() ([]*AnimeEpisode, error) {
+func (anime *Anime) ShoboiEpisodes() (EpisodeList, error) {
 	shoboiID := anime.GetMapping("shoboi/anime")
 
 	if shoboiID == "" {
@@ -503,7 +510,7 @@ func (anime *Anime) ShoboiEpisodes() ([]*AnimeEpisode, error) {
 		return nil, err
 	}
 
-	arnEpisodes := []*AnimeEpisode{}
+	arnEpisodes := []*Episode{}
 	shoboiEpisodes := shoboiAnime.Episodes()
 
 	for _, shoboiEpisode := range shoboiEpisodes {
@@ -529,7 +536,7 @@ func (anime *Anime) ShoboiEpisodes() ([]*AnimeEpisode, error) {
 }
 
 // TwistEpisodes returns a slice of episode info from twist.moe.
-func (anime *Anime) TwistEpisodes() ([]*AnimeEpisode, error) {
+func (anime *Anime) TwistEpisodes() (EpisodeList, error) {
 	idList, err := GetIDList("animetwist index")
 
 	if err != nil {
@@ -566,7 +573,7 @@ func (anime *Anime) TwistEpisodes() ([]*AnimeEpisode, error) {
 		return episodes[a].Number < episodes[b].Number
 	})
 
-	arnEpisodes := []*AnimeEpisode{}
+	arnEpisodes := []*Episode{}
 
 	for _, episode := range episodes {
 		arnEpisode := NewAnimeEpisode()
@@ -584,10 +591,9 @@ func (anime *Anime) TwistEpisodes() ([]*AnimeEpisode, error) {
 // UpcomingEpisodes ...
 func (anime *Anime) UpcomingEpisodes() []*UpcomingEpisode {
 	var upcomingEpisodes []*UpcomingEpisode
-
 	now := time.Now().UTC().Format(time.RFC3339)
 
-	for _, episode := range anime.Episodes().Items {
+	for _, episode := range anime.Episodes() {
 		if episode.AiringDate.Start > now && validate.DateTime(episode.AiringDate.Start) {
 			upcomingEpisodes = append(upcomingEpisodes, &UpcomingEpisode{
 				Anime:   anime,
@@ -603,7 +609,7 @@ func (anime *Anime) UpcomingEpisodes() []*UpcomingEpisode {
 func (anime *Anime) UpcomingEpisode() *UpcomingEpisode {
 	now := time.Now().UTC().Format(time.RFC3339)
 
-	for _, episode := range anime.Episodes().Items {
+	for _, episode := range anime.Episodes() {
 		if episode.AiringDate.Start > now && validate.DateTime(episode.AiringDate.Start) {
 			return &UpcomingEpisode{
 				Anime:   anime,
@@ -719,8 +725,8 @@ func (anime *Anime) CalculatedStatus() string {
 }
 
 // EpisodeByNumber returns the episode with the given number.
-func (anime *Anime) EpisodeByNumber(number int) *AnimeEpisode {
-	for _, episode := range anime.Episodes().Items {
+func (anime *Anime) EpisodeByNumber(number int) *Episode {
+	for _, episode := range anime.Episodes() {
 		if number == episode.Number {
 			return episode
 		}

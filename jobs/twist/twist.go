@@ -54,7 +54,7 @@ func main() {
 		}
 
 		// Ok
-		color.Green("Found %d episodes for anime %s (Kitsu: %s)", len(anime.Episodes().Items), anime.ID, kitsuID)
+		color.Green("Found %d episodes for anime %s (Kitsu: %s)", len(anime.Episodes()), anime.ID, kitsuID)
 
 		// Wait for rate limiter
 		<-rateLimiter.C

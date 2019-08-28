@@ -13,23 +13,25 @@ import (
 func Subtitles(ctx aero.Context) error {
 	id := ctx.Get("id")
 	language := ctx.Get("language")
-	episodeNumber, err := ctx.GetInt("episode-number")
+
+	// Get episode
+	episode, err := arn.GetEpisode(id)
 
 	if err != nil {
-		return ctx.Error(http.StatusBadRequest, "Episode is not a number", err)
+		return ctx.Error(http.StatusNotFound, "Episode not found", err)
 	}
 
 	// Get anime
-	anime, err := arn.GetAnime(id)
+	anime := episode.Anime()
 
-	if err != nil {
+	if anime == nil {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
 	}
 
 	ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 	ctx.Response().SetHeader("Content-Type", "text/vtt; charset=utf-8")
 
-	obj, err := arn.Spaces.GetObject("arn", fmt.Sprintf("videos/anime/%s/%d.%s.vtt", anime.ID, episodeNumber, language), minio.GetObjectOptions{})
+	obj, err := arn.Spaces.GetObject("arn", fmt.Sprintf("videos/anime/%s/%d.%s.vtt", anime.ID, episode.Number, language), minio.GetObjectOptions{})
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, err)

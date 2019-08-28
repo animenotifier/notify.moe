@@ -31,7 +31,7 @@ func Kitsu(ctx aero.Context) error {
 	kitsuAnime := kitsuAnimeObj.(*kitsu.Anime)
 
 	// Convert
-	anime, characters, relations, episodes := arn.NewAnimeFromKitsuAnime(kitsuAnime)
+	anime, characters, relations := arn.NewAnimeFromKitsuAnime(kitsuAnime)
 
 	// Add user ID to the anime
 	anime.CreatedBy = user.ID
@@ -40,7 +40,6 @@ func Kitsu(ctx aero.Context) error {
 	anime.Save()
 	characters.Save()
 	relations.Save()
-	episodes.Save()
 
 	// Log
 	fmt.Println(color.GreenString("✔"), anime.ID, anime.Title.Canonical)

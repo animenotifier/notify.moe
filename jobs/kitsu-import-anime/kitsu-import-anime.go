@@ -154,7 +154,7 @@ func sync(anime *kitsu.Anime) {
 // 	if err != nil || episodes == nil {
 // 		episodes := &arn.AnimeEpisodes{
 // 			AnimeID: anime.ID,
-// 			Items:   []*arn.AnimeEpisode{},
+// 			Items:   []*arn.Episode{},
 // 		}
 
 // 		arn.DB.Set("AnimeEpisodes", anime.ID, episodes)

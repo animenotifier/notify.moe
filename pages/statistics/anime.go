@@ -52,7 +52,7 @@ func getAnimeStats() []*arn.PieChart {
 		rating[fmt.Sprint(int(anime.Rating.Overall+0.5))]++
 
 		found := false
-		for _, episode := range anime.Episodes().Items {
+		for _, episode := range anime.Episodes() {
 			if episode.Links != nil && episode.Links["twist.moe"] != "" {
 				found = true
 				break

@@ -12,6 +12,6 @@ type CalendarDay struct {
 // CalendarEntry is a calendar entry.
 type CalendarEntry struct {
 	Anime   *arn.Anime
-	Episode *arn.AnimeEpisode
+	Episode *arn.Episode
 	Added   bool
 }

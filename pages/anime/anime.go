@@ -37,10 +37,10 @@ func Get(ctx aero.Context) error {
 	}
 
 	// Episodes
-	episodes := anime.Episodes().Items
+	episodes := anime.Episodes()
 
 	if len(episodes) > maxEpisodes {
-		episodes = anime.Episodes().Last(maxEpisodesLongSeries)
+		episodes = episodes[len(episodes)-maxEpisodesLongSeries:]
 	}
 
 	// Friends watching

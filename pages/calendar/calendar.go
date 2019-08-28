@@ -49,45 +49,43 @@ func Get(ctx aero.Context) error {
 	}
 
 	// Add anime episodes to the days
-	for animeEpisodes := range arn.StreamAnimeEpisodes() {
-		if animeEpisodes.Anime().Status == "finished" {
+	for episode := range arn.StreamEpisodes() {
+		if episode.Anime().Status == "finished" {
 			continue
 		}
 
-		for _, episode := range animeEpisodes.Items {
-			if !validate.DateTime(episode.AiringDate.Start) {
-				continue
-			}
-
-			// Since we validated the date earlier, we can ignore the error value.
-			airingDate, _ := time.Parse(time.RFC3339, episode.AiringDate.Start)
-
-			// Subtract from the starting date offset.
-			since := airingDate.Sub(now)
-
-			// Ignore entries in the past and more than 1 week away.
-			if since < 0 || since >= oneWeek {
-				continue
-			}
-
-			dayIndex := int(since / (24 * time.Hour))
-
-			entry := &utils.CalendarEntry{
-				Anime:   animeEpisodes.Anime(),
-				Episode: episode,
-				Added:   false,
-			}
-
-			if user != nil {
-				animeListItem := user.AnimeList().Find(entry.Anime.ID)
-
-				if animeListItem != nil && (animeListItem.Status == arn.AnimeListStatusWatching || animeListItem.Status == arn.AnimeListStatusPlanned) {
-					entry.Added = true
-				}
-			}
-
-			days[dayIndex].Entries = append(days[dayIndex].Entries, entry)
+		if !validate.DateTime(episode.AiringDate.Start) {
+			continue
 		}
+
+		// Since we validated the date earlier, we can ignore the error value.
+		airingDate, _ := time.Parse(time.RFC3339, episode.AiringDate.Start)
+
+		// Subtract from the starting date offset.
+		since := airingDate.Sub(now)
+
+		// Ignore entries in the past and more than 1 week away.
+		if since < 0 || since >= oneWeek {
+			continue
+		}
+
+		dayIndex := int(since / (24 * time.Hour))
+
+		entry := &utils.CalendarEntry{
+			Anime:   episode.Anime(),
+			Episode: episode,
+			Added:   false,
+		}
+
+		if user != nil {
+			animeListItem := user.AnimeList().Find(entry.Anime.ID)
+
+			if animeListItem != nil && (animeListItem.Status == arn.AnimeListStatusWatching || animeListItem.Status == arn.AnimeListStatusPlanned) {
+				entry.Added = true
+			}
+		}
+
+		days[dayIndex].Entries = append(days[dayIndex].Entries, entry)
 	}
 
 	for i := 0; i < 7; i++ {

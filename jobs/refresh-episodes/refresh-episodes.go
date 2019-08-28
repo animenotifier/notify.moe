@@ -72,7 +72,7 @@ func refreshQueue(queue []*arn.Anime) {
 func refresh(anime *arn.Anime) {
 	fmt.Println(anime.ID, "|", anime.Title.Canonical, "|", anime.GetMapping("shoboi/anime"))
 
-	episodeCount := len(anime.Episodes().Items)
+	episodeCount := len(anime.Episodes())
 	availableEpisodeCount := anime.Episodes().AvailableCount()
 
 	err := anime.RefreshEpisodes()
@@ -87,8 +87,8 @@ func refresh(anime *arn.Anime) {
 		faint := color.New(color.Faint).SprintFunc()
 		episodes := anime.Episodes()
 
-		fmt.Println(faint(episodes.ListString()))
-		fmt.Printf("+%d episodes | +%d available (%d total)\n", len(episodes.Items)-episodeCount, episodes.AvailableCount()-availableEpisodeCount, len(episodes.Items))
+		fmt.Println(faint(episodes.HumanReadable()))
+		fmt.Printf("+%d episodes | +%d available (%d total)\n", len(episodes)-episodeCount, episodes.AvailableCount()-availableEpisodeCount, len(episodes))
 		println()
 	}
 }

@@ -144,7 +144,7 @@ func (amv *AMV) MainAnime() *Anime {
 // ExtraAnime returns main anime for the AMV, if available.
 func (amv *AMV) ExtraAnime() []*Anime {
 	objects := DB.GetMany("Anime", amv.ExtraAnimeIDs)
-	animes := []*Anime{}
+	animes := make([]*Anime, 0, len(amv.ExtraAnimeIDs))
 
 	for _, obj := range objects {
 		if obj == nil {

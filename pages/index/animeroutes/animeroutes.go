@@ -19,8 +19,8 @@ func Register(app *aero.Application) {
 	page.Get(app, "/anime/:id/tracks", anime.Tracks)
 	page.Get(app, "/anime/:id/relations", anime.Relations)
 	page.Get(app, "/anime/:id/comments", anime.Comments)
-	page.Get(app, "/anime/:id/episode/:episode-number", episode.Get)
-	app.Get("/anime/:id/episode/:episode-number/subtitles/:language", episode.Subtitles)
+	page.Get(app, "/episode/:id", episode.Get)
+	app.Get("/episode/:id/subtitles/:language", episode.Subtitles)
 
 	// Anime redirects
 	page.Get(app, "/kitsu/anime/:id", anime.RedirectByMapping("kitsu/anime"))

@@ -15,39 +15,34 @@ import (
 func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	id := ctx.Get("id")
-	episodeNumber, err := ctx.GetInt("episode-number")
+
+	// Get episode
+	episode, err := arn.GetEpisode(id)
 
 	if err != nil {
-		return ctx.Error(http.StatusBadRequest, "Episode is not a number", err)
+		return ctx.Error(http.StatusNotFound, "Episode not found", err)
 	}
 
 	// Get anime
-	anime, err := arn.GetAnime(id)
+	anime := episode.Anime()
 
-	if err != nil {
+	if anime == nil {
 		return ctx.Error(http.StatusNotFound, "Anime not found", err)
-	}
-
-	// Get anime episodes
-	animeEpisodes, err := arn.GetAnimeEpisodes(id)
-
-	if err != nil {
-		return ctx.Error(http.StatusNotFound, "Anime episodes not found", err)
 	}
 
 	// Does the episode exist?
 	uploaded := false
 
 	if arn.Spaces != nil {
-		stat, err := arn.Spaces.StatObject("arn", fmt.Sprintf("videos/anime/%s/%d.webm", anime.ID, episodeNumber), minio.StatObjectOptions{})
+		stat, err := arn.Spaces.StatObject("arn", fmt.Sprintf("videos/anime/%s/%d.webm", anime.ID, episode.Number), minio.StatObjectOptions{})
 		uploaded = (err == nil) && (stat.Size > 0)
 	}
 
-	episode, episodeIndex := animeEpisodes.Find(episodeNumber)
+	_, episodeIndex := anime.Episodes().Find(episode.Number)
 
 	if episode == nil {
 		return ctx.Error(http.StatusNotFound, "Anime episode not found")
 	}
 
-	return ctx.HTML(components.AnimeEpisode(anime, episode, episodeIndex, uploaded, user))
+	return ctx.HTML(components.Episode(anime, episode, episodeIndex, uploaded, user))
 }

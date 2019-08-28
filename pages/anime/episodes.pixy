@@ -1,4 +1,4 @@
-component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, episodeToFriends map[int][]*arn.User, user *arn.User, standAlonePage bool)
+component AnimeEpisodes(anime *arn.Anime, episodes []*arn.Episode, episodeToFriends map[int][]*arn.User, user *arn.User, standAlonePage bool)
 	if standAlonePage
 		h1.mountable
 			a(href=anime.Link())= anime.Title.ByUser(user)
@@ -6,11 +6,11 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.AnimeEpisode, episodeT
 	if len(episodes) > 0
 		.anime-section.mountable
 			h3.anime-section-name
-				a(href=anime.Episodes().Link()) Episodes
+				a(href=fmt.Sprintf("/anime/%s/episodes", anime.ID)) Episodes
 			
 			.episodes
 				each episode in episodes
-					a.episode.mountable(href=anime.Link() + "/episode/" + strconv.Itoa(episode.Number), data-mountable-type="episode", data-available=episode.Available())
+					a.episode.mountable(href=episode.Link(), data-mountable-type="episode", data-available=episode.Available())
 						.episode-number
 							if episode.Number != -1
 								span= episode.Number

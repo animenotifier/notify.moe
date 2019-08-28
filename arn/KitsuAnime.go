@@ -11,7 +11,7 @@ import (
 )
 
 // NewAnimeFromKitsuAnime ...
-func NewAnimeFromKitsuAnime(kitsuAnime *kitsu.Anime) (*Anime, *AnimeCharacters, *AnimeRelations, *AnimeEpisodes) {
+func NewAnimeFromKitsuAnime(kitsuAnime *kitsu.Anime) (*Anime, *AnimeCharacters, *AnimeRelations) {
 	anime := NewAnime()
 	attr := kitsuAnime.Attributes
 
@@ -82,16 +82,6 @@ func NewAnimeFromKitsuAnime(kitsuAnime *kitsu.Anime) (*Anime, *AnimeCharacters, 
 		}
 	}
 
-	// Episodes
-	episodes, _ := GetAnimeEpisodes(anime.ID)
-
-	if episodes == nil {
-		episodes = &AnimeEpisodes{
-			AnimeID: anime.ID,
-			Items:   []*AnimeEpisode{},
-		}
-	}
-
 	// Relations
 	relations, _ := GetAnimeRelations(anime.ID)
 
@@ -102,7 +92,7 @@ func NewAnimeFromKitsuAnime(kitsuAnime *kitsu.Anime) (*Anime, *AnimeCharacters, 
 		}
 	}
 
-	return anime, characters, relations, episodes
+	return anime, characters, relations
 }
 
 // StreamKitsuAnime returns a stream of all Kitsu anime.
