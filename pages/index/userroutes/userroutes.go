@@ -2,7 +2,6 @@ package userroutes
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/animelistitem"
 	"github.com/animenotifier/notify.moe/pages/compare"
@@ -40,17 +39,8 @@ func Register(app *aero.Application) {
 	page.Get(app, "/user/:nick/edit", user.Edit)
 
 	// Anime list
-	page.Get(app, "/user/:nick/animelist/watching", animelist.FilterByStatus(arn.AnimeListStatusWatching))
-	page.Get(app, "/user/:nick/animelist/completed", animelist.FilterByStatus(arn.AnimeListStatusCompleted))
-	page.Get(app, "/user/:nick/animelist/planned", animelist.FilterByStatus(arn.AnimeListStatusPlanned))
-	page.Get(app, "/user/:nick/animelist/hold", animelist.FilterByStatus(arn.AnimeListStatusHold))
-	page.Get(app, "/user/:nick/animelist/dropped", animelist.FilterByStatus(arn.AnimeListStatusDropped))
-
-	page.Get(app, "/user/:nick/animelist/watching/from/:index", animelist.FilterByStatus(arn.AnimeListStatusWatching))
-	page.Get(app, "/user/:nick/animelist/completed/from/:index", animelist.FilterByStatus(arn.AnimeListStatusCompleted))
-	page.Get(app, "/user/:nick/animelist/planned/from/:index", animelist.FilterByStatus(arn.AnimeListStatusPlanned))
-	page.Get(app, "/user/:nick/animelist/hold/from/:index", animelist.FilterByStatus(arn.AnimeListStatusHold))
-	page.Get(app, "/user/:nick/animelist/dropped/from/:index", animelist.FilterByStatus(arn.AnimeListStatusDropped))
+	page.Get(app, "/user/:nick/animelist/:status", animelist.Filter)
+	page.Get(app, "/user/:nick/animelist/:status/from/:index", animelist.Filter)
 
 	// Redirects
 	page.Get(app, "/animelist/watching", animelist.Redirect)

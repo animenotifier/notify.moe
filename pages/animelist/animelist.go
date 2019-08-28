@@ -18,12 +18,11 @@ const (
 	animePerScroll = 40
 )
 
-// FilterByStatus returns a handler for the given anime list item status.
-func FilterByStatus(status string) aero.Handler {
-	return func(ctx aero.Context) error {
-		user := utils.GetUser(ctx)
-		return AnimeList(ctx, user, status)
-	}
+// Filter filters a user's anime list item by the status.
+func Filter(ctx aero.Context) error {
+	user := utils.GetUser(ctx)
+	status := ctx.Get("status")
+	return AnimeList(ctx, user, status)
 }
 
 // AnimeList renders the anime list items.
