@@ -2,20 +2,7 @@ component OsuRankingList(users []*arn.User, url string)
 	h1.page-title osu! ranking list
 	UsersTabs(url)
 
-	table.ranking-list
-		thead
-			tr.mountable
-				th #
-				th Player
-				th.ranking-score Performance
-				th.ranking-accuracy Accuracy
-		tbody
-			for index, user := range users
-				tr.ranking.mountable
-					td= fmt.Sprint(index + 1) + "."
-					td.ranking-user
-						Avatar(user)
-						a.ranking-user-nick(href=user.Link())= user.Nick
-					td.ranking-score= fmt.Sprint(int(user.Accounts.Osu.PP + 0.5)) + " pp"
-					td.ranking-accuracy= fmt.Sprintf("%.1f", user.Accounts.Osu.Accuracy) + "%"
+	.user-cards
+		each user in users
+			UserCard(user, fmt.Sprintf("%s pp (%.1f%%)", humanize.Comma(int64(user.Accounts.Osu.PP + 0.5)), user.Accounts.Osu.Accuracy))
 				

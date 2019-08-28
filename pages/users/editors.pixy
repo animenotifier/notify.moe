@@ -2,20 +2,9 @@ component EditorRankingList(users []*arn.User, idToScore map[string]int, url str
 	h1.page-title Editor ranking list
 	UsersTabs(url)
 
-	table.ranking-list
-		thead
-			tr.mountable
-				th #
-				th User
-				th.ranking-score Score
-		tbody
-			for index, user := range users
-				tr.ranking.mountable
-					td= fmt.Sprint(index + 1) + "."
-					td.ranking-user
-						Avatar(user)
-						a.ranking-user-nick(href=user.Link())= user.Nick
-					td.ranking-score= idToScore[user.ID]
+	.user-cards
+		each user in users
+			UserCard(user, fmt.Sprintf("%s points", humanize.Comma(int64(idToScore[user.ID]))))
 	
 	.footer.mountable
 		p Score is generated from new data submissions and data fixes.

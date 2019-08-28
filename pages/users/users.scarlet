@@ -6,23 +6,6 @@
 	.user
 		margin 0.4rem
 
-.pro-avatars
-	horizontal-wrap
-	justify-content center
-
-	.profile-image-container
-		flex-basis 170px
-		flex-grow 0
-		height 230px
-		margin content-padding-half
-		position relative
-		border ui-border
-		box-shadow shadow-light
-
-		:hover
-			.image-title
-				opacity 1
-
 .user
 	display flex
 	position relative

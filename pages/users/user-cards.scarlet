@@ -10,14 +10,16 @@ const user-card-padding = 1rem
 	padding user-card-padding
 	margin 0.4rem
 	width 100%
-	box-shadow shadow-light
+	height calc(avatar-size + user-card-padding * 2)
 
 	:hover
-		box-shadow shadow-medium
+		border 1px solid input-focus-border-color
+		// TODO: Replace with alpha(main-color, 20%) function
+		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
 
 > 600px
 	.user-card
-		max-width 200px
+		max-width 230px
 
 .user-card-avatar
 	.user-image
@@ -33,6 +35,7 @@ const user-card-padding = 1rem
 	clip-long-text
 
 .user-card-note
+	clip-long-text
 	color text-color
 	text-shadow none
 	opacity 0.5

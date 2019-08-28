@@ -2,7 +2,7 @@ component Users(users []*arn.User, followerCount map[string]int, url string)
 	h1.page-title Users
 	UsersTabs(url)
 
-	.user-cards.mountable
+	.user-cards
 		each user in users
 			UserCard(user, stringutils.Plural(followerCount[user.ID], "follower"))
 
@@ -12,7 +12,7 @@ component UsersByCountry(users []*arn.User, followerCount map[string]int, countr
 	else
 		h1= "Users in " + users[0].Location.CountryName
 
-		.user-cards.mountable
+		.user-cards
 			each user in users
 				UserCard(user, stringutils.Plural(followerCount[user.ID], "follower"))
 
@@ -20,12 +20,9 @@ component ProUsers(users []*arn.User, url string)
 	h1.page-title Supporters
 	UsersTabs(url)
 
-	.pro-avatars
+	.user-cards
 		each user in users
-			a.profile-image-container.mountable(href=user.Link())
-				ProfileImage(user)
-				.image-title
-					.image-title-text= user.Nick
+			UserCard(user, "until " + user.ProExpires[:10])
 	
 	.footer.mountable
 		p We are thankful to everyone supporting the site!
@@ -37,10 +34,9 @@ component UserLists(groups []*utils.UserList, url string)
 	each group in groups
 		h3.user-list-name.mountable= group.Name
 
-		.user-avatars
+		.user-cards
 			each user in group.Users
-				.mountable
-					Avatar(user)
+				UserCard(user, stringutils.Capitalize(user.Role))
 
 component StaffRecruitment
 	.footer.mountable

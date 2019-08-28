@@ -97,10 +97,6 @@ func Osu(ctx aero.Context) error {
 		return users[i].Accounts.Osu.PP > users[j].Accounts.Osu.PP
 	})
 
-	if len(users) > 10 {
-		users = users[:10]
-	}
-
 	return ctx.HTML(components.OsuRankingList(users, ctx.Path()))
 }
 
@@ -115,10 +111,6 @@ func Overwatch(ctx aero.Context) error {
 		return users[i].Accounts.Overwatch.SkillRating > users[j].Accounts.Overwatch.SkillRating
 	})
 
-	if len(users) > 10 {
-		users = users[:10]
-	}
-
 	return ctx.HTML(components.OverwatchRankingList(users, ctx.Path()))
 }
 
@@ -132,10 +124,6 @@ func FFXIV(ctx aero.Context) error {
 	sort.Slice(users, func(i, j int) bool {
 		return users[i].Accounts.FinalFantasyXIV.ItemLevel > users[j].Accounts.FinalFantasyXIV.ItemLevel
 	})
-
-	if len(users) > 10 {
-		users = users[:10]
-	}
 
 	return ctx.HTML(components.FinalFantasyXIVRankingList(users, ctx.Path()))
 }

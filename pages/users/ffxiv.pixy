@@ -1,23 +1,8 @@
 component FinalFantasyXIVRankingList(users []*arn.User, url string)
-	h1.page-title FinalFantasy XIV ranking list
+	h1.page-title Final Fantasy XIV ranking list
 	UsersTabs(url)
-
-	table.ranking-list
-		thead
-			tr.mountable
-				th #
-				th Player
-				th.ranking-class Class
-				th.ranking-level Level
-				th.ranking-score Item Level
-		tbody
-			for index, user := range users
-				tr.ranking.mountable
-					td= fmt.Sprint(index + 1) + "."
-					td.ranking-user
-						Avatar(user)
-						a.ranking-user-nick(href=user.Link())= user.Nick
-					td.ranking-class= user.Accounts.FinalFantasyXIV.Class
-					td.ranking-level= strconv.Itoa(user.Accounts.FinalFantasyXIV.Level)
-					td.ranking-score= strconv.Itoa(user.Accounts.FinalFantasyXIV.ItemLevel)
+	
+	.user-cards
+		each user in users
+			UserCard(user, fmt.Sprintf("%s (iLvl %d)", user.Accounts.FinalFantasyXIV.Class, user.Accounts.FinalFantasyXIV.ItemLevel))
 				

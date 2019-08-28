@@ -1,21 +1,8 @@
 component OverwatchRankingList(users []*arn.User, url string)
 	h1.page-title Overwatch ranking list
 	UsersTabs(url)
-
-	table.ranking-list
-		thead
-			tr.mountable
-				th #
-				th Player
-				th.ranking-tier Tier
-				th.ranking-score Rating
-		tbody
-			for index, user := range users
-				tr.ranking.mountable
-					td= fmt.Sprint(index + 1) + "."
-					td.ranking-user
-						Avatar(user)
-						a.ranking-user-nick(href=user.Link())= user.Nick
-					td.ranking-tier= strings.Title(user.Accounts.Overwatch.Tier)
-					td.ranking-score= strconv.Itoa(user.Accounts.Overwatch.SkillRating) + " SR"
+	
+	.user-cards
+		each user in users
+			UserCard(user, fmt.Sprintf("%s (%d SR)", strings.Title(user.Accounts.Overwatch.Tier), user.Accounts.Overwatch.SkillRating))
 				
