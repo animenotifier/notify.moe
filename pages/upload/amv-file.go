@@ -25,20 +25,17 @@ func AMVFile(ctx aero.Context) error {
 	}
 
 	// Retrieve file from post body
-	data, err := ctx.Request().Body().Bytes()
+	reader := ctx.Request().Body().Reader()
+	defer reader.Close()
 
-	if err != nil {
-		return ctx.Error(http.StatusInternalServerError, "Reading request body failed", err)
-	}
-
-	// Set amv image file
-	err = amv.SetVideoBytes(data)
+	// Set amv video file
+	err = amv.SetVideoReader(reader)
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, "Invalid video format", err)
 	}
 
-	// Save image information
+	// Save video information
 	amv.Save()
 
 	// Write log entry

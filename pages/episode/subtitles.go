@@ -29,7 +29,7 @@ func Subtitles(ctx aero.Context) error {
 	ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 	ctx.Response().SetHeader("Content-Type", "text/vtt; charset=utf-8")
 
-	obj, err := spaces.GetObject("arn", fmt.Sprintf("videos/anime/%s/%d.%s.vtt", anime.ID, episodeNumber, language), minio.GetObjectOptions{})
+	obj, err := arn.Spaces.GetObject("arn", fmt.Sprintf("videos/anime/%s/%d.%s.vtt", anime.ID, episodeNumber, language), minio.GetObjectOptions{})
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, err)

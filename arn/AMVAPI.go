@@ -3,8 +3,6 @@ package arn
 import (
 	"errors"
 	"fmt"
-	"os"
-	"path"
 	"reflect"
 
 	"github.com/aerogo/aero"
@@ -104,8 +102,8 @@ func (amv *AMV) Delete() error {
 	}
 
 	// Remove file
-	if amv.File != "" {
-		err := os.Remove(path.Join(Root, "videos", "amvs", amv.File))
+	if amv.File != "" && Spaces != nil {
+		err := Spaces.RemoveObject("arn", fmt.Sprintf("videos/amvs/%s", amv.File))
 
 		if err != nil {
 			return err

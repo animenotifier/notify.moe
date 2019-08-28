@@ -11,7 +11,7 @@ component AMVMini(amv *arn.AMV, user *arn.User)
 component AMVVideo(amv *arn.AMV)
 	.video-container(id=amv.ID, data-api="/api/amv/" + amv.ID)
 		video.video.lazy.action(data-action="toggleFullscreen", data-trigger="dblclick", data-id=amv.ID)
-			source(data-src="https://notify.moe/videos/amvs/" + amv.File, data-type="video/webm")
+			source(data-src=amv.VideoLink(), data-type="video/webm")
 
 			//- button.media-play-button
 			//- 	RawIcon("play")

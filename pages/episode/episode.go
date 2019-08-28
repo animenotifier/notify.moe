@@ -2,7 +2,6 @@ package episode
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/aerogo/aero"
@@ -11,27 +10,6 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 	minio "github.com/minio/minio-go/v6"
 )
-
-var spaces *minio.Client
-
-func init() {
-	if arn.APIKeys.S3.ID == "" || arn.APIKeys.S3.Secret == "" {
-		return
-	}
-
-	go func() {
-		var err error
-		endpoint := "sfo2.digitaloceanspaces.com"
-		ssl := true
-
-		// Initiate a client using DigitalOcean Spaces.
-		spaces, err = minio.New(endpoint, arn.APIKeys.S3.ID, arn.APIKeys.S3.Secret, ssl)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-	}()
-}
 
 // Get renders the anime episode.
 func Get(ctx aero.Context) error {
@@ -60,8 +38,8 @@ func Get(ctx aero.Context) error {
 	// Does the episode exist?
 	uploaded := false
 
-	if spaces != nil {
-		stat, err := spaces.StatObject("arn", fmt.Sprintf("videos/anime/%s/%d.webm", anime.ID, episodeNumber), minio.StatObjectOptions{})
+	if arn.Spaces != nil {
+		stat, err := arn.Spaces.StatObject("arn", fmt.Sprintf("videos/anime/%s/%d.webm", anime.ID, episodeNumber), minio.StatObjectOptions{})
 		uploaded = (err == nil) && (stat.Size > 0)
 	}
 

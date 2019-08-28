@@ -117,4 +117,7 @@ func init() {
 	// Set Anilist API keys
 	anilist.APIKeyID = APIKeys.AniList.ID
 	anilist.APIKeySecret = APIKeys.AniList.Secret
+
+	// Initialize file storage
+	initSpaces()
 }

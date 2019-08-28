@@ -3,6 +3,7 @@ package arn
 import (
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/aerogo/nano"
 	"github.com/animenotifier/notify.moe/arn/video"
+	"github.com/minio/minio-go/v6"
 )
 
 // AMV is an anime music video.
@@ -36,16 +38,37 @@ func (amv *AMV) Link() string {
 	return "/amv/" + amv.ID
 }
 
+// VideoLink returns the permalink for the video file.
+func (amv *AMV) VideoLink() string {
+	domain := "arn.sfo2.cdn"
+
+	if amv.IsDraft {
+		domain = "arn.sfo2"
+	}
+
+	return fmt.Sprintf("https://%s.digitaloceanspaces.com/videos/amvs/%s", domain, amv.File)
+}
+
 // TitleByUser returns the preferred title for the given user.
 func (amv *AMV) TitleByUser(user *User) string {
 	return amv.Title.ByUser(user)
 }
 
-// SetVideoBytes sets the bytes for the video file.
-func (amv *AMV) SetVideoBytes(data []byte) error {
+// SetVideoReader sets the bytes for the video file by reading them from the reader.
+func (amv *AMV) SetVideoReader(reader io.Reader) error {
 	fileName := amv.ID + ".webm"
-	filePath := path.Join(Root, "videos", "amvs", fileName)
-	err := ioutil.WriteFile(filePath, data, 0644)
+	pattern := amv.ID + ".*.webm"
+	file, err := ioutil.TempFile("", pattern)
+
+	if err != nil {
+		return err
+	}
+
+	filePath := file.Name()
+	defer os.Remove(filePath)
+
+	// Write file contents
+	_, err = io.Copy(file, reader)
 
 	if err != nil {
 		return err
@@ -53,6 +76,7 @@ func (amv *AMV) SetVideoBytes(data []byte) error {
 
 	// Run mkclean
 	optimizedFile := filePath + ".optimized"
+	defer os.Remove(optimizedFile)
 
 	cmd := exec.Command(
 		"mkclean",
@@ -79,37 +103,35 @@ func (amv *AMV) SetVideoBytes(data []byte) error {
 		return err
 	}
 
-	// Now delete the original file and replace it with the optimized file
-	err = os.Remove(filePath)
-
-	if err != nil {
-		return err
-	}
-
-	err = os.Rename(optimizedFile, filePath)
-
-	if err != nil {
-		return err
-	}
-
 	// Refresh video file info
-	amv.File = fileName
-	return amv.RefreshInfo()
-}
+	info, err := video.GetInfo(optimizedFile)
 
-// RefreshInfo refreshes the information about the video file.
-func (amv *AMV) RefreshInfo() error {
-	if amv.File == "" {
-		return fmt.Errorf("Video file has not been uploaded yet for AMV %s", amv.ID)
+	if err != nil {
+		return err
 	}
 
-	info, err := video.GetInfo(path.Join(Root, "videos", "amvs", amv.File))
+	// Is our storage server available?
+	if Spaces == nil {
+		return errors.New("File storage client has not been initialized")
+	}
+
+	// Make sure the file is public
+	userMetaData := map[string]string{
+		"x-amz-acl": "public-read",
+	}
+
+	// Upload the file to our storage server
+	_, err = Spaces.FPutObject("arn", fmt.Sprintf("videos/amvs/%s.webm", amv.ID), optimizedFile, minio.PutObjectOptions{
+		ContentType:  "video/webm",
+		UserMetadata: userMetaData,
+	})
 
 	if err != nil {
 		return err
 	}
 
 	amv.Info = *info
+	amv.File = fileName
 	return nil
 }
 
