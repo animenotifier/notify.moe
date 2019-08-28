@@ -21,7 +21,7 @@ func getOpenGraph(amv *arn.AMV) *arn.OpenGraph {
 	openGraph.Tags["og:description"] = strings.Join(amv.Tags, ", ")
 
 	if amv.File != "" {
-		openGraph.Tags["og:video"] = "https://" + assets.Domain + "/videos/amvs/" + amv.File
+		openGraph.Tags["og:video"] = amv.VideoLink()
 		openGraph.Tags["og:video:type"] = "video/webm"
 		openGraph.Tags["og:video:width"] = "640"
 		openGraph.Tags["og:video:height"] = "360"
