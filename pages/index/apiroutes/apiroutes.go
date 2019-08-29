@@ -6,6 +6,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/pages/animeimport"
+	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/apiview"
 	"github.com/animenotifier/notify.moe/pages/apiview/apidocs"
 	"github.com/animenotifier/notify.moe/pages/character"
@@ -56,6 +57,9 @@ func Register(app *aero.Application) {
 
 	// SoundTrack
 	app.Post("/api/soundtrack/:id/download", soundtrack.Download)
+
+	// AnimeList
+	app.Post("/api/delete/animelist", animelist.Delete)
 
 	// Upload
 	app.Post("/api/upload/user/image", upload.UserImage)

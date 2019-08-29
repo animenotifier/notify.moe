@@ -36,6 +36,12 @@ component SettingsStyle(user *arn.User)
 					option(value="airing date") Airing date ⮞ Rating ⮞ Title
 					option(value="rating") Rating ⮞ Title
 					option(value="title") Title
+			
+			.widget-section
+				label Delete:
+				a.button(href="/animelist/delete")
+					Icon("trash")
+					span Delete my anime list
 
 		if arn.IsDevelopment()
 			.widget.mountable(data-api="/api/settings/" + user.ID)

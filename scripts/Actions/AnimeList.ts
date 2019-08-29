@@ -33,7 +33,6 @@ export async function removeAnimeFromCollection(arn: AnimeNotifier, button: HTML
 	}
 
 	button.textContent = "Removing..."
-
 	let {animeId, nick} = button.dataset
 
 	if(!animeId || !nick) {
@@ -47,6 +46,29 @@ export async function removeAnimeFromCollection(arn: AnimeNotifier, button: HTML
 	try {
 		await arn.post(apiEndpoint + "/remove/" + animeId)
 		await arn.app.load(`/+${nick}/animelist/` + status.value)
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
+}
+
+// Delete anime list
+export async function deleteAnimeList(arn: AnimeNotifier, button: HTMLElement) {
+	if(!confirm("Last confirmation: Are you sure you want to delete your entire anime list?")) {
+		return
+	}
+
+	button.textContent = "Deleting..."
+	let {returnPath} = button.dataset
+
+	if(!returnPath) {
+		console.error("Button without data-return-path:", button)
+		return
+	}
+
+	try {
+		await arn.post("/api/delete/animelist")
+		await arn.app.load(returnPath)
+		arn.statusMessage.showInfo("Your anime list has been deleted.")
 	} catch(err) {
 		arn.statusMessage.showError(err)
 	}

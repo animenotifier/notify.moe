@@ -49,6 +49,9 @@ func Register(app *aero.Application) {
 	page.Get(app, "/animelist/hold", animelist.Redirect)
 	page.Get(app, "/animelist/dropped", animelist.Redirect)
 
+	// Delete
+	page.Get(app, "/animelist/delete", animelist.DeleteConfirmation)
+
 	// Compare
 	page.Get(app, "/compare/animelist/:nick-1/:nick-2", compare.AnimeList)
 

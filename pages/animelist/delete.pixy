@@ -1,0 +1,9 @@
+component DeleteAnimeList(user *arn.User)
+	h1.mountable Delete your anime list
+
+	p.text-center.mountable This will delete your entire anime list. Are you sure you want to proceed?
+
+	.buttons
+		button.action.mountable(data-action="deleteAnimeList", data-trigger="click", data-return-path="/+" + user.Nick + "/animelist/watching")
+			Icon("trash")
+			span Yes, delete my anime list.
