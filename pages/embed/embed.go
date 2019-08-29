@@ -20,12 +20,6 @@ func Get(ctx aero.Context) error {
 		return ctx.HTML(components.ExtensionEnterBasicInfo())
 	}
 
-	// Extension is enabled as long as the site isn't finished yet.
-	// ---
-	// if !user.IsPro() && user.TimeSinceRegistered() > 14*24*time.Hour {
-	// 	return ctx.HTML(components.EmbedProNotice(user))
-	// }
-
 	animeList := user.AnimeList()
 
 	if animeList == nil {
