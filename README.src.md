@@ -46,7 +46,7 @@ go build
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/animenotifier/notify.moe/blob/go/CONTRIBUTING.md) for details on how to contribute to this project.
+Please read [CONTRIBUTING.md](docs/contributing.md) for details on how to contribute to this project.
 
 ## Statistics
 

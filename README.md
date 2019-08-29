@@ -35,7 +35,7 @@ go build
 
 ## What now?
 
-Take a look at [how to contribute](https://github.com/animenotifier/notify.moe/blob/go/CONTRIBUTING.md) to this project.
+Take a look at [how to contribute](docs/contributing.md) to this project.
 
 ## Find us
 
