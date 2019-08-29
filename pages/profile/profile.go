@@ -34,6 +34,11 @@ func Get(ctx aero.Context) error {
 // Profile renders the user profile page of the given viewUser.
 func Profile(ctx aero.Context, viewUser *arn.User) error {
 	user := utils.GetUser(ctx)
+	sortBy := arn.SortByRating
+
+	if user != nil {
+		sortBy = user.Settings().SortBy
+	}
 
 	// Anime list
 	animeList := viewUser.AnimeList()
@@ -43,7 +48,7 @@ func Profile(ctx aero.Context, viewUser *arn.User) error {
 	}
 
 	completedList := animeList.FilterStatus(arn.AnimeListStatusCompleted)
-	completedList.SortByRating()
+	completedList.Sort(sortBy)
 
 	// Genres
 	topGenres := animeList.TopGenres(5)

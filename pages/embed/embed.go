@@ -33,7 +33,7 @@ func Get(ctx aero.Context) error {
 	}
 
 	watchingList := animeList.Watching()
-	watchingList.Sort()
+	watchingList.Sort(user.Settings().SortBy)
 
 	return ctx.HTML(components.BrowserExtension(watchingList, animeList.User(), user))
 }

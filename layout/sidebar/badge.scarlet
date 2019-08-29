@@ -1,0 +1,38 @@
+.badge
+	horizontal
+	justify-content center
+	align-items center
+	background reverse-light-color
+	border-radius 50%
+	padding 0.5rem
+	color text-color
+	width 30px
+	height 30px
+
+	:hover
+		color text-color
+		background reverse-light-hover-color
+
+.sidebar-badge
+	position absolute
+	top 50%
+	transform translateY(-50%)
+
+	:active
+		transform translateY(-50%) translateY(3px)
+
+.left-badge
+	left 12%
+
+.right-badge
+	right 12%
+
+.badge-important
+	background badge-important-bg-color
+	color badge-important-text-color
+	font-weight bold
+
+	:hover
+		background badge-important-hover-bg-color
+		color badge-important-text-color
+		text-shadow none

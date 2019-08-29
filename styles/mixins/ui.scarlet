@@ -3,10 +3,9 @@ mixin ui-element
 	background ui-background
 	border-radius ui-element-border-radius
 	default-transition
+
 	:hover
 		border-color ui-hover-border-color
-		// background ui-hover-background
-		// box-shadow outline-shadow-medium
 
 mixin ui-disabled
 	color button-color !important

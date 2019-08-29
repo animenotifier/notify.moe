@@ -7,6 +7,11 @@
 	box-sizing inherit
 	font inherit
 
+// This breaks accessibility, but is needed to ensure a consistent style.
+// Make sure you add your own focus styles.
+::-moz-focus-inner
+	border 0
+
 // Set root element to use border-box sizing,
 // all sub-elements will inherit this property.
 html

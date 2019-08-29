@@ -7,7 +7,7 @@ component SettingsStyle(user *arn.User)
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title
 				Icon("font")
-				span Style
+				span General
 
 			.widget-section
 				label(for="Theme")= "Theme:"
@@ -24,7 +24,19 @@ component SettingsStyle(user *arn.User)
 					option(value="japanese") 日本語
 
 			InputNumber("Format.RatingsPrecision", float64(user.Settings().Format.RatingsPrecision), "Ratings precision", "How many decimals after the comma would you like to display in ratings on anime pages?", "0", "2", "1")
-		
+
+		.widget.mountable(data-api="/api/settings/" + user.ID)
+			h3.widget-title
+				Icon("list")
+				span List
+			
+			.widget-section
+				label(for="SortBy")= "Sort by:"
+				select.widget-ui-element.action(id="SortBy", data-field="SortBy", value=user.Settings().SortBy, title="Sorting algorithm for anime lists", data-action="save", data-trigger="change")
+					option(value="airing date") Airing date ⮞ Rating ⮞ Title
+					option(value="rating") Rating ⮞ Title
+					option(value="title") Title
+
 		if arn.IsDevelopment()
 			.widget.mountable(data-api="/api/settings/" + user.ID)
 				h3.widget-title

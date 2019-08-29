@@ -17,18 +17,14 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 				a(href=item.Link(viewUser.Nick))= item.Anime().Title.ByUser(user)
 
 			.anime-list-item-actions
-				if user != nil && item.Status != arn.AnimeListStatusCompleted && user.Location.CountryName != "Japan"
-					//- if user.ID == "KpdWUlPzR"
-					//- 	a(href=arn.Nyaa.GetLink(item.Anime()), title="Search on Nyaa", target="_blank", rel="noopener")
-					//- 		RawIcon("download")
-					//- else
+				if user != nil && item.Status != arn.AnimeListStatusCompleted
 					if item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
 						for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
 							a.tip(href=link, aria-label="Watch episode " + fmt.Sprint(item.Episodes + 1), target="_blank", rel="noopener")
 								RawIcon("eye")
 
 			.anime-list-item-airing-date
-				if (item.Status == arn.AnimeListStatusWatching || item.Status == arn.AnimeListStatusPlanned) && item.Anime().UpcomingEpisode() != nil
+				if item.Status != arn.AnimeListStatusCompleted && item.Anime().UpcomingEpisode() != nil
 					span.utc-airing-date(data-start-date=item.Anime().UpcomingEpisode().Episode.AiringDate.Start, data-end-date=item.Anime().UpcomingEpisode().Episode.AiringDate.End, data-episode-number=item.Anime().UpcomingEpisode().Episode.Number)
 
 			if item.Status != arn.AnimeListStatusCompleted

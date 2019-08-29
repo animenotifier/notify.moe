@@ -156,63 +156,6 @@ func (list *AnimeList) User() *User {
 	return user
 }
 
-// Sort ...
-func (list *AnimeList) Sort() {
-	list.Lock()
-	defer list.Unlock()
-
-	sort.Slice(list.Items, func(i, j int) bool {
-		a := list.Items[i]
-		b := list.Items[j]
-
-		if (a.Status != AnimeListStatusWatching && a.Status != AnimeListStatusPlanned) && (b.Status != AnimeListStatusWatching && b.Status != AnimeListStatusPlanned) {
-			if a.Rating.Overall == b.Rating.Overall {
-				return a.Anime().Title.Canonical < b.Anime().Title.Canonical
-			}
-
-			return a.Rating.Overall > b.Rating.Overall
-		}
-
-		epsA := a.Anime().UpcomingEpisode()
-		epsB := b.Anime().UpcomingEpisode()
-
-		if epsA == nil && epsB == nil {
-			if a.Rating.Overall == b.Rating.Overall {
-				return a.Anime().Title.Canonical < b.Anime().Title.Canonical
-			}
-
-			return a.Rating.Overall > b.Rating.Overall
-		}
-
-		if epsA == nil {
-			return false
-		}
-
-		if epsB == nil {
-			return true
-		}
-
-		return epsA.Episode.AiringDate.Start < epsB.Episode.AiringDate.Start
-	})
-}
-
-// SortByRating sorts the anime list by overall rating.
-func (list *AnimeList) SortByRating() {
-	list.Lock()
-	defer list.Unlock()
-
-	sort.Slice(list.Items, func(i, j int) bool {
-		a := list.Items[i]
-		b := list.Items[j]
-
-		if a.Rating.Overall == b.Rating.Overall {
-			return a.Anime().Title.Canonical < b.Anime().Title.Canonical
-		}
-
-		return a.Rating.Overall > b.Rating.Overall
-	})
-}
-
 // Top returns the top entries.
 func (list *AnimeList) Top(count int) []*AnimeListItem {
 	list.Lock()

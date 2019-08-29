@@ -3,14 +3,6 @@ html
 	font-family "Ubuntu", "Trebuchet MS", sans-serif
 	font-size 90%
 
-// > 900px
-// 	html
-// 		font-size 90%
-
-// > 1400px
-// 	html
-// 		font-size 95%
-
 body
 	tab-size 4
 	overflow hidden

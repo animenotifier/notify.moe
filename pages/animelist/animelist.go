@@ -22,11 +22,17 @@ const (
 func Filter(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	status := ctx.Get("status")
-	return AnimeList(ctx, user, status)
+	sortBy := arn.SortByRating
+
+	if user != nil {
+		sortBy = user.Settings().SortBy
+	}
+
+	return AnimeList(ctx, user, status, sortBy)
 }
 
 // AnimeList renders the anime list items.
-func AnimeList(ctx aero.Context, user *arn.User, status string) error {
+func AnimeList(ctx aero.Context, user *arn.User, status string, sortBy string) error {
 	nick := ctx.Get("nick")
 	index, _ := ctx.GetInt("index")
 	viewUser, err := arn.GetUserByNick(nick)
@@ -50,9 +56,9 @@ func AnimeList(ctx aero.Context, user *arn.User, status string) error {
 	}
 
 	// Sort the items
-	statusList.Sort()
+	statusList.Sort(sortBy)
 
-	// These are all animer list items for the given status
+	// These are all anime list items for the given status
 	allItems := statusList.Items
 
 	// Slice the part that we need

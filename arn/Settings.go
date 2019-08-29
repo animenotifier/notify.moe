@@ -30,10 +30,9 @@ const (
 // Settings represents user settings.
 type Settings struct {
 	UserID        string               `json:"userId"`
-	SortBy        string               `json:"sortBy"`
+	SortBy        string               `json:"sortBy" editable:"true"`
 	TitleLanguage string               `json:"titleLanguage" editable:"true"`
 	Providers     ServiceProviders     `json:"providers"`
-	Avatar        AvatarSettings       `json:"avatar"`
 	Format        FormatSettings       `json:"format"`
 	Notification  NotificationSettings `json:"notification"`
 	Editor        EditorSettings       `json:"editor"`
@@ -110,29 +109,19 @@ type ServiceProviders struct {
 	Anime string `json:"anime"`
 }
 
-// AvatarSettings ...
-type AvatarSettings struct {
-	Source    string `json:"source" editable:"true"`
-	SourceURL string `json:"sourceUrl" editable:"true"`
-}
-
 // CalendarSettings ...
 type CalendarSettings struct {
 	ShowAddedAnimeOnly bool `json:"showAddedAnimeOnly" editable:"true"`
 }
 
-// NewSettings ...
+// NewSettings creates the default settings for a new user.
 func NewSettings(user *User) *Settings {
 	return &Settings{
 		UserID:        user.ID,
-		SortBy:        SortByAiringDate,
+		SortBy:        SortByRating,
 		TitleLanguage: TitleLanguageCanonical,
 		Providers: ServiceProviders{
 			Anime: "",
-		},
-		Avatar: AvatarSettings{
-			Source:    "",
-			SourceURL: "",
 		},
 		Format: FormatSettings{
 			RatingsPrecision: 1,
