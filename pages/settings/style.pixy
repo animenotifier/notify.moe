@@ -33,8 +33,8 @@ component SettingsStyle(user *arn.User)
 			.widget-section
 				label(for="SortBy")= "Sort by:"
 				select.widget-ui-element.action(id="SortBy", data-field="SortBy", value=user.Settings().SortBy, title="Sorting algorithm for anime lists", data-action="save", data-trigger="change")
-					option(value="airing date") Airing date ⮞ Rating ⮞ Title
-					option(value="rating") Rating ⮞ Title
+					option(value="airing date") Airing date → Rating → Title
+					option(value="rating") Rating → Title
 					option(value="title") Title
 			
 			.widget-section
