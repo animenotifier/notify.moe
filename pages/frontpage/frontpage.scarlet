@@ -28,7 +28,6 @@ const frontpage-bg-color = rgb(32, 32, 32)
 		text-align center
 
 	.footer
-		text-align center
 		margin-top content-padding
 
 .bg-video-container

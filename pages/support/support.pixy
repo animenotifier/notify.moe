@@ -93,6 +93,5 @@ component Support(profileLink string, user *arn.User)
 			span Support us!
 	
 	.footer.support-footer
-		p Thank you to everyone supporting the site. It means a lot to me.
-		p --Akyoto
+		p Thank you to everyone supporting the site. It means a lot to us.
 	
