@@ -39,6 +39,7 @@ export default class ToolTip extends HTMLElement {
 		}
 
 		let offsetX = 0
+		let offsetY = 0
 
 		if(finalX < contentRect.left) {
 			offsetX = contentRect.left - finalX
@@ -46,6 +47,11 @@ export default class ToolTip extends HTMLElement {
 		} else if(finalX + boxRect.width > contentRect.right) {
 			offsetX = contentRect.right - (finalX + boxRect.width)
 			finalX += offsetX
+		}
+
+		if(finalY < contentRect.top) {
+			offsetY = contentRect.top - finalY
+			finalY += offsetY
 		}
 
 		let arrowX = boxRect.width / 2 - offsetX
