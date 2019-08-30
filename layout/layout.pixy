@@ -1,8 +1,6 @@
 component Layout(ctx aero.Context, user *arn.User, openGraph *arn.OpenGraph, meta, tags []string, content string)
 	html(lang="en")
 		head
-			link(rel="stylesheet", href="/styles", importance="high")
-
 			if openGraph != nil
 				title= openGraph.Tags["og:title"]
 			else
@@ -42,6 +40,9 @@ component Layout(ctx aero.Context, user *arn.User, openGraph *arn.OpenGraph, met
 			link(rel="icon", type="image/png", sizes="128x128", href="//media.notify.moe/images/brand/128.png")
 			link(rel="icon", type="image/png", sizes="512x512", href="//media.notify.moe/images/brand/512.png")
 			link(rel="apple-touch-icon", sizes="180x180", type="image/png", href="//media.notify.moe/images/brand/180.png")
+
+			//- Styles
+			link(rel="stylesheet", href="/styles", importance="high")
 
 			//- Color of the embed sidebar in Discord,
 			//- also the color of tabs on mobile browsers.
