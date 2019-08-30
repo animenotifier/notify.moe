@@ -60,6 +60,5 @@ const sidebar-spacing-y = 0.7rem
 	padding sidebar-spacing-y 1rem
 	// background ui-background
 
-	.icon
-		font-size 1rem
+	.padded-icon
 		margin-right 0.75rem

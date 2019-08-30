@@ -174,7 +174,7 @@ component ProfileTags(viewUser *arn.User, animeList *arn.AnimeList, user *arn.Us
 		if viewUser.IsPro()
 			a.profile-tag.mountable.never-unmount(href="/support", aria-label="Supporter", data-mountable-type="header")
 				Icon("star")
-				span.profile-pro-status-text PRO
+				span PRO
 		
 		if viewUser.Role != ""
 			a.profile-tag.mountable.never-unmount(href="/users/staff", aria-label="Staff member", data-mountable-type="header")

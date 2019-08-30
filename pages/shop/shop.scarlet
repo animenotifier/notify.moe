@@ -88,9 +88,11 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	margin-bottom 1rem
 
 .pro-benefit
+	horizontal
+	align-items center
 	list-style-type none
 	font-size 1.2rem
 	line-height 1.6em
 
-	.icon
+	svg-icon
 		color like-color

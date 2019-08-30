@@ -25,8 +25,7 @@ const inventory-slot-size = 64px
 			.shop-item-icon
 				animation hover-item 1s infinite ease-in-out
 
-	.icon
-		margin 0
+	svg-icon
 		pointer-events none
 
 	// [data-item-id="pro-account-3"]

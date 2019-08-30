@@ -22,13 +22,6 @@ const profile-image-size = 280px
 	margin-bottom 0.5rem
 	text-shadow none !important
 
-.profile-pro-status
-	margin-top calc(typography-margin * 2)
-
-	.icon
-		color pro-color
-		animation sk-pulse 1.5s infinite linear
-
 .profile-columns
 	vertical
 

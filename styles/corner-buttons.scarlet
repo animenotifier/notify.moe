@@ -64,8 +64,5 @@ mixin corner-buttons
 		display none
 
 	.corner-buttons
-		.icon
-			margin-right 0
-
 		span
 			display none
