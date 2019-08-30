@@ -57,9 +57,10 @@ const item-color-anime-support-ticket = hsl(217, 64%, 50%)
 	width 100%
 	justify-content center
 
-	.icon-diamond
-		margin-left 0.3rem
-		margin-right 0
+	svg-icon
+		[name="diamond"]
+			margin-left 0.3rem
+			margin-right 0
 
 #pro-benefits-footer
 	margin-top 3rem

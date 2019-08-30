@@ -147,6 +147,12 @@ export default class Diff {
 				}
 			}
 
+			// Never diff the contents of web components
+			if(a.nodeName.includes("-")) {
+				continue
+			}
+
+			// Child nodes
 			Diff.childNodes(a, b)
 		}
 	}

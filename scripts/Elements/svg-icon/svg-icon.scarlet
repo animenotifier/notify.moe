@@ -1,0 +1,10 @@
+svg-icon
+	display inline-block
+	width 1em
+	height 1em
+
+	svg
+		display inherit
+		width 1em
+		height 1em
+		fill currentColor

@@ -47,8 +47,9 @@ const soundtrack-margin = 1rem
 	pointer-events none
 	box-shadow outline-shadow-medium
 
-	.icon-play
-		transform translateX(27%)
+	svg-icon
+		[name="play"]
+			transform translateX(27%)
 
 .media-visualizer
 	horizontal

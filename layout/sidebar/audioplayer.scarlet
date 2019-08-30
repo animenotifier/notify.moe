@@ -92,8 +92,9 @@ animation rotate-x-once
 	&.fade-out
 		pointer-events none
 
-	.icon-play
-		transform translateX(3px)
+	svg-icon
+		[name="play"]
+			transform translateX(3px)
 
 #audio-player-play,
 #audio-player-pause,

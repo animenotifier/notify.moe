@@ -13,8 +13,9 @@ import ServiceWorkerManager from "./ServiceWorkerManager"
 import ServerEvents from "./ServerEvents"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import { findAll, supportsWebP, requestIdleCallback, swapElements, delay, findAllInside } from "./Utils"
-import * as actions from "./Actions"
 import ToolTip from "./Elements/tool-tip/tool-tip"
+import * as actions from "./Actions"
+import * as WebComponents from "./WebComponents"
 
 export default class AnimeNotifier {
 	app: Application
@@ -102,7 +103,7 @@ export default class AnimeNotifier {
 		}
 
 		// Web components
-		this.registerWebComponents()
+		WebComponents.register()
 
 		// Tooltip
 		this.tip = new ToolTip()
@@ -207,23 +208,6 @@ export default class AnimeNotifier {
 			if(firstInput) {
 				firstInput.focus()
 			}
-		}
-	}
-
-	registerWebComponents() {
-		if(!("customElements" in window)) {
-			console.warn("Web components not supported in your current browser")
-			return
-		}
-
-		// Custom element names must have a dash in their name
-		const elements = new Map<string, Function>([
-			["tool-tip", ToolTip]
-		])
-
-		// Register all custom elements
-		for(const [tag, definition] of elements.entries()) {
-			window.customElements.define(tag, definition)
 		}
 	}
 

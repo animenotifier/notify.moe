@@ -13,8 +13,9 @@
 		transform scale(1.1)
 		opacity 1
 
-.icon-discord
-	transform scale(1.1)
+svg-icon
+	[name="discord"]
+		transform scale(1.1)
 
 // .sidebar-social-media
 // 	position relative

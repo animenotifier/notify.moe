@@ -1,5 +1,5 @@
 component Icon(name string)
-	go:utils.Icon(name)
+	svg-icon.padded-icon(name=name, class="icon-" + name)
 
 component RawIcon(name string)
-	go:utils.RawIcon(name)
+	svg-icon(name=name, class="icon-" + name)

@@ -1,4 +1,6 @@
 .tab
+	horizontal
+	align-items center
 	color text-color
 	padding 0.5rem 1rem
 	background-color tab-background
