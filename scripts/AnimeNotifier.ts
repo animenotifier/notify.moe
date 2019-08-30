@@ -908,6 +908,13 @@ export default class AnimeNotifier {
 				}
 
 				element.onerror = () => {
+					// Try loading from the origin server if our CDN failed
+					if(element.src.includes("media.notify.moe/")) {
+						console.warn(`CDN failed loading ${element.src}`)
+						element.src = element.src.replace("media.notify.moe/", "notify.moe/")
+						return
+					}
+
 					if(element.classList.contains("element-found")) {
 						return
 					}
