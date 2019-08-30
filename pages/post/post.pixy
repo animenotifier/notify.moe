@@ -1,11 +1,9 @@
 component Post(post *arn.Post, user *arn.User)
 	.thread
 		.posts
-			Postable(post, user, true, "")
+			Postable(post, user, true, true, "")
 
-			.side-note-container.mountable
-				if user != nil && user.Role == "admin"
+			if user != nil && user.Role == "admin"
+				.side-note-container.mountable
 					a.side-note.tip(href=post.Link() + "/edit", aria-label="Admin Edit")
 						Icon("edit")
-				
-				a.side-note(href=post.Parent().Link())= post.Parent().TitleByUser(user)

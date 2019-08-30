@@ -26,35 +26,43 @@ component ActivitiesScrollable(entries []arn.Activity, user *arn.User)
 		Activity(entry, user)
 
 component Activity(activity arn.Activity, user *arn.User)
-	.activity.post-parent.mountable(id=fmt.Sprintf("activity-%s", activity.GetID()), data-api=utils.ActivityAPILink(activity))
-		.post-author
-			Avatar(activity.Creator())
-		.post-content
-			.post-header
-				.post-creator
-					a(href=activity.Creator().Link())= activity.Creator().Nick
+	if activity.TypeName() == "ActivityCreate"
+		ActivityCreate(activity.(*arn.ActivityCreate), user)
+	else if activity.TypeName() == "ActivityConsumeAnime"
+		ActivityConsumeAnime(activity.(*arn.ActivityConsumeAnime), user)
 
-					if activity.TypeName() == "ActivityCreate"
-						ActivityCreateMeta(activity.(*arn.ActivityCreate), user)
+	//- .activity.post-parent.mountable(id=fmt.Sprintf("activity-%s", activity.GetID()), data-api=utils.ActivityAPILink(activity))
+	//- 	.post-author
+	//- 		Avatar(activity.Creator())
+	//- 	.post-content
+	//- 		.post-header
+	//- 			.post-creator
+	//- 				a(href=activity.Creator().Link())= activity.Creator().Nick
+
+	//- 				if activity.TypeName() == "ActivityCreate"
+	//- 					ActivityCreateMeta(activity.(*arn.ActivityCreate), user)
 				
-				if user != nil
-					//- button.post-action.tip.action(data-action="like", data-trigger="click", aria-label="Like")
-					//- 	Icon("heart")
-					//- 	if activity.TypeName() == "ActivityCreate"
-					//- 		span= activity.(*arn.ActivityCreate).Object().CountLikes()
-					//- 	else
-					//- 		span= len(activity.(*arn.ActivityConsumeAnime).Likes)
+	//- 			if user != nil
+	//- 				//- button.post-action.tip.action(data-action="like", data-trigger="click", aria-label="Like")
+	//- 				//- 	Icon("heart")
+	//- 				//- 	if activity.TypeName() == "ActivityCreate"
+	//- 				//- 		span= activity.(*arn.ActivityCreate).Object().CountLikes()
+	//- 				//- 	else
+	//- 				//- 		span= len(activity.(*arn.ActivityConsumeAnime).Likes)
 					
-					if user.ID == activity.GetCreatedBy() && activity.TypeName() == "ActivityConsumeAnime"
-						button.post-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity")
-							RawIcon("trash")
+	//- 				if user.ID == activity.GetCreatedBy() && activity.TypeName() == "ActivityConsumeAnime"
+	//- 					button.post-action.tip.action(data-action="deleteObject", data-trigger="click", aria-label="Delete", data-return-path="/activity", data-confirm-type="activity")
+	//- 						RawIcon("trash")
 				
-				.post-date.utc-date(data-date=activity.GetCreated())
+	//- 			.post-date.utc-date(data-date=activity.GetCreated())
 
-			if activity.TypeName() == "ActivityCreate"
-				ActivityCreateText(activity.(*arn.ActivityCreate), user)
-			else if activity.TypeName() == "ActivityConsumeAnime"
-				ActivityConsumeAnimeText(activity.(*arn.ActivityConsumeAnime), user)
+	//- 		if activity.TypeName() == "ActivityCreate"
+	//- 			ActivityCreateText(activity.(*arn.ActivityCreate), user)
+	//- 		else if activity.TypeName() == "ActivityConsumeAnime"
+	//- 			ActivityConsumeAnimeText(activity.(*arn.ActivityConsumeAnime), user)
+
+component ActivityConsumeAnime(activity *arn.ActivityConsumeAnime, user *arn.User)
+	h1 TODO
 
 component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
 	span  watched 
@@ -64,6 +72,9 @@ component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn
 		span= fmt.Sprintf(" episodes %d - %d.", activity.FromEpisode, activity.ToEpisode)
 	else
 		span= fmt.Sprintf(" episode %d.", activity.ToEpisode)
+
+component ActivityCreate(activity *arn.ActivityCreate, user *arn.User)
+	Postable(activity.Postable(), user, false, true, "")
 
 component ActivityCreateMeta(activity *arn.ActivityCreate, user *arn.User)
 	if activity.ObjectType == "Post"

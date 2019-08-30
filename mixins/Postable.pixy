@@ -1,5 +1,5 @@
-component Postable(post arn.Postable, user *arn.User, includeReplies bool, highlightAuthorID string)
-	.post.mountable(id=strings.ToLower(post.TypeName()) + "-" + fmt.Sprint(post.GetID()), data-pro=post.Creator().IsPro(), data-api="/api/" + strings.ToLower(post.TypeName()) + "/" + post.GetID())
+component Postable(post arn.Postable, user *arn.User, includeReplies bool, showParent bool, highlightAuthorID string)
+	.post.mountable(id=fmt.Sprintf("%s-%s", strings.ToLower(post.TypeName()), post.GetID()), data-pro=post.Creator().IsPro(), data-api=fmt.Sprintf("/api/%s/%s", strings.ToLower(post.TypeName()), post.GetID()))
 		.post-parent
 			.post-author
 				Avatar(post.Creator())
@@ -8,6 +8,15 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, highl
 				.post-header
 					.post-creator
 						a(href=post.Creator().Link())= post.Creator().Nick
+
+						if showParent
+							if post.GetParentType() == "User"
+								if post.GetParentID() != post.Creator().ID
+									span  to 
+									a(href=post.Parent().Link())= post.Parent().TitleByUser(user)
+							else if post.GetParentType() != ""
+								span  in 
+								a(href=post.Parent().Link())= post.Parent().TitleByUser(user)
 					
 					if user == nil || user.ID == post.Creator().ID
 						//- Don't display a like icon.
@@ -57,4 +66,4 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, highl
 		.replies(id="replies-" + post.GetID())
 			if includeReplies
 				each reply in post.Posts()
-					Postable(reply, user, true, highlightAuthorID)
+					Postable(reply, user, true, false, highlightAuthorID)
