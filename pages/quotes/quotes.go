@@ -8,7 +8,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
-const maxQuotes = 12
+const maxQuotes = 15
 
 // Latest renders the latest quotes.
 func Latest(ctx aero.Context) error {
