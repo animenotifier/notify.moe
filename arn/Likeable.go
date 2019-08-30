@@ -35,13 +35,19 @@ func LikeAction() *api.Action {
 				return errors.New("Drafts need to be published before they can be liked")
 			}
 
-			likeable := obj.(Likeable)
 			user := GetUserFromContext(ctx)
 
 			if user == nil {
 				return errors.New("Not logged in")
 			}
 
+			postable, isPostable := obj.(Postable)
+
+			if isPostable && postable.Creator().ID == user.ID {
+				return errors.New("You can't like your own posts")
+			}
+
+			likeable := obj.(Likeable)
 			likeable.Like(user.ID)
 
 			// Call OnLike if the object implements it

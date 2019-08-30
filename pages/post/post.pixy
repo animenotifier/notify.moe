@@ -4,6 +4,7 @@ component Post(post *arn.Post, user *arn.User)
 			Postable(post, user, true, true, "")
 
 			if user != nil && user.Role == "admin"
-				.side-note-container.mountable
-					a.side-note.tip(href=post.Link() + "/edit", aria-label="Admin Edit")
+				.buttons
+					a.button.mountable(href=post.Link() + "/edit")
 						Icon("edit")
+						span Edit (admin)

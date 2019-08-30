@@ -10,8 +10,9 @@ post-content-padding-y = 0.75rem
 	horizontal
 	horizontal-line-bottom
 
-.post-creator
+.post-header-info
 	flex 1
+	clip-long-text
 
 .post-action
 	display flex
@@ -20,23 +21,26 @@ post-content-padding-y = 0.75rem
 	background none
 	padding 0
 	height auto
-	margin-right 0.5rem
-	opacity 0
 	color hsla(text-color-h, text-color-s, text-color-l, 0.5)
 
 	:hover
 		color link-hover-color
 		background none
 
+.post-header-action
+	opacity 0
+	margin-right 0.5rem
+
 .post-date
 	color hsla(text-color-h, text-color-s, text-color-l, 0.5)
 	white-space nowrap
 
-.post-content
+.post-box
 	ui-element
 	flex-grow 1
 	padding 0.75rem 1rem
 	position relative
+	overflow hidden
 
 	h1, h2, h3
 		font-weight bold
@@ -60,8 +64,21 @@ post-content-padding-y = 0.75rem
 		object-fit cover
 
 	:hover
-		.post-action
+		.post-header-action
 			opacity 1
+
+.post-toolbar
+	horizontal
+	justify-content flex-end
+	margin-top typography-margin
+	padding-top typography-margin
+	border-top 1px solid reverse-light-color
+
+.post-toolbar-action
+	margin-left 1rem
+
+	[data-like="true"]
+		color hsla(0, 90%, 50%, 1)
 
 .new-post-actions
 	justify-content flex-end
@@ -81,10 +98,6 @@ post-content-padding-y = 0.75rem
 
 	button
 		pointer-events all
-
-.post-likes
-	color hsla(text-color-h, text-color-s, text-color-l, 0.4)
-	margin-right 0.4em
 
 .post-edit-interface
 	vertical

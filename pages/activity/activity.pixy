@@ -36,7 +36,7 @@ component Activity(activity arn.Activity, user *arn.User)
 	//- 		Avatar(activity.Creator())
 	//- 	.post-content
 	//- 		.post-header
-	//- 			.post-creator
+	//- 			.post-header-info
 	//- 				a(href=activity.Creator().Link())= activity.Creator().Nick
 
 	//- 				if activity.TypeName() == "ActivityCreate"
