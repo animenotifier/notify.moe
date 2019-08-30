@@ -42,7 +42,6 @@ blockquote
 		line-height 2em
 		quotes "\201C""\201D"
 		color text-color
-		text-shadow none
 
 		:before
 			color quote-color

@@ -18,7 +18,6 @@ const themes = {
 		"bg-color-s": "0%",
 		"ui-background-l": "14%",
 
-		"link-hover-text-shadow": "0 0 8px hsla(var(--link-color-h), var(--link-color-s), var(--link-color-l), 0.5)",
 		"reverse-light-color": "rgba(255, 255, 255, 0.1)",
 		"reverse-light-hover-color": "rgba(255, 255, 255, 0.2)",
 		"sidebar-background": "hsla(0, 0%, 0%, 0.2)",

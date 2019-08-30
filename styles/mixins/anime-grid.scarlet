@@ -2,9 +2,6 @@ mixin anime-mini-item
 	margin 0.25rem
 	flex-basis anime-image-small-width
 
-	:hover
-		text-shadow none
-
 mixin anime-generic-item-image
 	object-fit cover
 	border-radius 2px

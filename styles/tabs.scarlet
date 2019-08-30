@@ -9,7 +9,6 @@
 	:hover
 		color text-color
 		background-color tab-hover-background
-		text-shadow none
 		cursor pointer
 
 	:active
@@ -18,7 +17,6 @@
 	&.active
 		background-color tab-active-background
 		color tab-active-color
-		text-shadow tab-active-text-shadow
 
 	:first-child
 		border-left ui-border

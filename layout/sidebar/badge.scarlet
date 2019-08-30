@@ -35,4 +35,3 @@
 	:hover
 		background badge-important-hover-bg-color
 		color badge-important-text-color
-		text-shadow none

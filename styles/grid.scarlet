@@ -12,12 +12,6 @@ mixin grid-cell
 	border-radius ui-element-border-radius
 	margin 0.5rem
 
-	// If text-shadow is enabled, the whole container will repaint.
-	// We need to disable text-shadow to reduce re-painting.
-	a
-		:hover
-			text-shadow none
-
 mixin grid-text
 	vertical
 	width 100%

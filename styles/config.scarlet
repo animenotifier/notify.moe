@@ -29,8 +29,6 @@ reverse-light-lite-color = rgba(0, 0, 0, 0.02)
 
 theme-white = bg-color
 theme-black = text-color
-link-hover-text-shadow = none
-tab-active-text-shadow = none
 
 // UI
 ui-border-color = rgba(0, 0, 0, 0.1)

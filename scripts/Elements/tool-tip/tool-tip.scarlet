@@ -18,7 +18,6 @@ tool-tip
 
 	.box
 		color text-color
-		text-shadow none
 		padding 0.6rem 0.8rem
 		background tip-bg-color
 		font-size 0.92rem

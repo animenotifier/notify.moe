@@ -10,12 +10,6 @@ const soundtrack-margin = 1rem
 	flex-basis 500px
 	margin soundtrack-margin 0
 
-	// If text-shadow is enabled, the whole container will repaint.
-	// We need to disable text-shadow to reduce re-painting.
-	a
-		:hover
-			text-shadow none
-
 > 500px
 	.soundtrack
 		margin soundtrack-margin

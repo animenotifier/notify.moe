@@ -32,7 +32,6 @@
 	font-size 1.5rem
 	color text-color
 	opacity 0.85
-	text-shadow none
 
 .hall-of-fame-anime
 	saturate-up

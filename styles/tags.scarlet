@@ -18,7 +18,6 @@ mixin genre-tag
 	:hover
 		color text-color
 		opacity 1.0
-		text-shadow none
 		background reverse-light-hover-color
 
 .tags

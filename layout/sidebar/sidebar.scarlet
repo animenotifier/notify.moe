@@ -53,8 +53,6 @@ const sidebar-spacing-y = 0.7rem
 		.sidebar-button
 			color tab-active-color
 			background tab-active-background
-			text-shadow tab-active-text-shadow
-			background tab-active-background
 
 .sidebar-button
 	horizontal

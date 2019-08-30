@@ -37,7 +37,6 @@
 	vertical
 	flex 1
 	color text-color
-	text-shadow none
 
 .notification-footer
 	horizontal

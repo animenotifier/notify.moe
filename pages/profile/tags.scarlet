@@ -28,7 +28,6 @@
 	:hover
 		color hsl(0, 0%, 90%)
 		opacity 1.0
-		text-shadow none
 		background rgba(255, 255, 255, 0.2)
 
 .show-more

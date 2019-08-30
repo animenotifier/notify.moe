@@ -18,7 +18,6 @@ mixin feature-card
 
 	:hover
 		box-shadow shadow-medium
-		text-shadow none
 
 mixin feature-card-component
 	horizontal

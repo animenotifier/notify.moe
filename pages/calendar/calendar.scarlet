@@ -68,7 +68,6 @@
 	flex 0.5
 	color text-color
 	line-height 1.6em
-	text-shadow none
 
 .calendar-entry-time
 	opacity 0.85

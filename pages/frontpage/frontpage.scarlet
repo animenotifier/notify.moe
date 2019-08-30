@@ -52,7 +52,7 @@ const frontpage-bg-color = rgb(32, 32, 32)
 	width auto
 	height auto
 
-> 1100px
+> 600px
 	.bg-video
 		display block
 
