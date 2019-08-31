@@ -1,7 +1,7 @@
 import Diff from "scripts/Diff"
 
 export default class SVGIcon extends HTMLElement {
-	static cache = new Map<string, Promise<string>>()
+	static cache = new Map<string, Promise<Node>>()
 
 	static get observedAttributes() {
 		return ["name"]
@@ -17,8 +17,18 @@ export default class SVGIcon extends HTMLElement {
 		let cache = SVGIcon.cache.get(this.name)
 
 		if(cache) {
-			let text = await cache
-			Diff.mutations.queue(() => this.innerHTML = text)
+			let svg = await cache
+
+			Diff.mutations.queue(() => {
+				// Remove all existing child nodes
+				while(this.firstChild) {
+					this.removeChild(this.firstChild)
+				}
+
+				// Append a clone of the cached SVG node
+				this.appendChild(svg.cloneNode(true))
+			})
+
 			return
 		}
 
@@ -33,8 +43,18 @@ export default class SVGIcon extends HTMLElement {
 			}
 
 			let text = await response.text()
-			Diff.mutations.queue(() => this.innerHTML = text)
-			resolve(text)
+
+			Diff.mutations.queue(() => {
+				this.innerHTML = text
+				let svg = this.firstChild
+
+				if(!svg) {
+					console.warn("Invalid SVG icon:", svg)
+					return
+				}
+
+				resolve(svg)
+			})
 		}))
 	}
 
