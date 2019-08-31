@@ -122,5 +122,5 @@
 		flex-basis 130px
 
 < 1100px
-	.anime-list-item-rating
+	.anime-list-item-rating-container
 		display none !important
