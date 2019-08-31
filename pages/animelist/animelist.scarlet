@@ -81,13 +81,18 @@
 	flex 0.3
 	opacity 0.5
 
-.anime-list-item-rating
+.anime-list-item-rating-container
 	horizontal
-	text-align right
 	justify-content flex-end
-	flex-basis 40px
+	flex-basis 65px
 	flex-shrink 1
-	margin-left 25px
+
+.anime-list-item-rating
+	default-transition
+
+	:hover,
+	:focus
+		transform scale(1.5)
 
 .anime-list-item-actions
 	display none !important

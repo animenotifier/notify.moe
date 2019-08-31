@@ -346,35 +346,39 @@ export default class AnimeNotifier {
 
 	dragAndDrop() {
 		if(location.pathname.includes("/animelist/")) {
-			for(let element of findAll("anime-list-item")) {
+			for(let listItem of findAll("anime-list-item")) {
 				// Skip elements that have their event listeners attached already
-				if(element["drag-listeners-attached"]) {
+				if(listItem["drag-listeners-attached"]) {
 					continue
 				}
 
-				element.addEventListener("dragstart", evt => {
-					if(!element.draggable || !evt.dataTransfer) {
+				let name = listItem.getElementsByClassName("anime-list-item-name")[0]
+				let imageContainer = listItem.getElementsByClassName("anime-list-item-image-container")[0]
+
+				let onDrag = evt => {
+					if(!evt.dataTransfer) {
 						return
 					}
 
-					let image = element.getElementsByClassName("anime-list-item-image")[0]
+					let image = imageContainer.getElementsByClassName("anime-list-item-image")[0]
 
 					if(image) {
 						evt.dataTransfer.setDragImage(image, 0, 0)
 					}
 
-					let name = element.getElementsByClassName("anime-list-item-name")[0]
-
 					evt.dataTransfer.setData("text/plain", JSON.stringify({
-						api: element.dataset.api,
+						api: listItem.dataset.api,
 						animeTitle: name.textContent
 					}))
 
 					evt.dataTransfer.effectAllowed = "move"
-				}, false)
+				}
+
+				name.addEventListener("dragstart", onDrag, false)
+				imageContainer.addEventListener("dragstart", onDrag, false)
 
 				// Prevent re-attaching the same listeners
-				element["drag-listeners-attached"] = true
+				listItem["drag-listeners-attached"] = true
 			}
 
 			for(let element of findAll("tab")) {
