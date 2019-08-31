@@ -36,6 +36,19 @@ p
 		display inherit
 		margin 0 auto
 
+pre
+	font-family monospace-font-family
+	font-size inherit
+	background-color reverse-light-color
+
+	code
+		background-color transparent
+
+code
+	font-family monospace-font-family
+	font-size inherit
+	background-color reverse-light-color
+
 .furigana
 	opacity 0.25
 	font-size 50%

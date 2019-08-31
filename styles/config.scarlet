@@ -152,6 +152,9 @@ const user-pro-icon-size = 1.1rem
 
 const amv-large-width = 854px
 
+// Monospace font for `code` and `pre`
+const monospace-font-family = "Ubuntu Mono", "Consolas", monospace
+
 // Timings
 fade-speed = 150ms
 transition-speed = 150ms
