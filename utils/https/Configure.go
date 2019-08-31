@@ -1,4 +1,4 @@
-package main
+package https
 
 import (
 	"os"
@@ -9,7 +9,8 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 )
 
-func configureHTTPS(app *aero.Application) {
+// Configure loads the certificates.
+func Configure(app *aero.Application) {
 	fullCertPath := path.Join(arn.Root, "security", "fullchain.pem")
 	fullKeyPath := path.Join(arn.Root, "security", "privkey.pem")
 

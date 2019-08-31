@@ -12,6 +12,8 @@ import (
 	"github.com/animenotifier/notify.moe/graphql"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages"
+	"github.com/animenotifier/notify.moe/utils/htmlemail"
+	"github.com/animenotifier/notify.moe/utils/https"
 	"github.com/animenotifier/notify.moe/utils/routetests"
 )
 
@@ -32,7 +34,7 @@ func configure(app *aero.Application) *aero.Application {
 	app.ContentSecurityPolicy.Set("font-src", "https: data:")
 
 	// Security
-	configureHTTPS(app)
+	https.Configure(app)
 
 	// Assets
 	assets.Configure(app)
@@ -41,7 +43,7 @@ func configure(app *aero.Application) *aero.Application {
 	pages.Configure(app)
 
 	// Rewrite
-	app.Rewrite(rewrite)
+	app.Rewrite(pages.Rewrite)
 
 	// Middleware
 	app.Use(
@@ -82,7 +84,7 @@ func configure(app *aero.Application) *aero.Application {
 	})
 
 	// Emails
-	arn.HTMLEmailRenderer = &HTMLEmailRenderer{}
+	arn.HTMLEmailRenderer = &htmlemail.Renderer{}
 
 	// Check that this is the server
 	if !arn.Node.IsServer() && !arn.IsTest() {

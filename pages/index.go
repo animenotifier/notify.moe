@@ -1,6 +1,8 @@
 package pages
 
 import (
+	"strings"
+
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/index/amvroutes"
 	"github.com/animenotifier/notify.moe/pages/index/animeroutes"
@@ -47,4 +49,30 @@ func Configure(app *aero.Application) {
 	// Mixed
 	// app.Get("/database", database.Get)
 	// app.Get("/api/select/:data-type/where/:field/is/:field-value", database.Select)
+}
+
+// Rewrite will rewrite the path before routing happens.
+func Rewrite(ctx aero.RewriteContext) {
+	requestURI := ctx.Path()
+
+	// User profiles
+	if strings.HasPrefix(requestURI, "/+") {
+		newURI := "/user/"
+		userName := requestURI[2:]
+		ctx.SetPath(newURI + userName)
+		return
+	}
+
+	if strings.HasPrefix(requestURI, "/_/+") {
+		newURI := "/_/user/"
+		userName := requestURI[4:]
+		ctx.SetPath(newURI + userName)
+		return
+	}
+
+	// Analytics
+	if requestURI == "/dark-flame-master" {
+		ctx.SetPath("/api/new/analytics")
+		return
+	}
 }
