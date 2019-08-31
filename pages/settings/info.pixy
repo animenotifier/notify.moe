@@ -10,8 +10,8 @@ component SettingsInfo(user *arn.User)
 				span Info
 			
 			InputSelection("Gender", user.Gender, "Gender", "Your gender", arn.DataLists["genders"])
-			InputText("BirthDay", user.BirthDay, "Birthday", "YYYY-MM-DD")
-			InputText("Website", user.Website, "Website", "Your homepage")
+			InputText("BirthDay", user.BirthDay, "Birthday", "YYYY-MM-DD", len("YYYY-MM-DD"))
+			InputText("Website", user.Website, "Website", "Your homepage", 100)
 
 		.widget.mountable(data-api="/api/settings/" + user.ID)
 			h3.widget-title

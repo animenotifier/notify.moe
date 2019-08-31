@@ -1,7 +1,7 @@
 package search
 
 import (
-	"strings"
+	"net/http"
 
 	"github.com/animenotifier/notify.moe/utils"
 
@@ -24,8 +24,11 @@ const (
 // Get search page.
 func Get(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
+
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
 
 	users, animes, posts, threads, tracks, characters, amvs, companies := search.All(
 		term,
@@ -50,8 +53,11 @@ func GetEmptySearch(ctx aero.Context) error {
 // Anime search.
 func Anime(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
+
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
 
 	animes := search.Anime(term, maxAnime)
 	return ctx.HTML(components.AnimeSearchResults(animes, user))
@@ -60,8 +66,11 @@ func Anime(ctx aero.Context) error {
 // Characters search.
 func Characters(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
+
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
 
 	characters := search.Characters(term, maxCharacters)
 	return ctx.HTML(components.CharacterSearchResults(characters, user))
@@ -70,28 +79,37 @@ func Characters(ctx aero.Context) error {
 // Posts search.
 func Posts(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
-	posts := search.Posts(term, maxPosts)
 
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
+
+	posts := search.Posts(term, maxPosts)
 	return ctx.HTML(components.PostsSearchResults(posts, user))
 }
 
 // Threads search.
 func Threads(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
-	threads := search.Threads(term, maxThreads)
 
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
+
+	threads := search.Threads(term, maxThreads)
 	return ctx.HTML(components.ThreadsSearchResults(threads, user))
 }
 
 // SoundTracks search.
 func SoundTracks(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
+
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
 
 	tracks := search.SoundTracks(term, maxSoundTracks)
 	return ctx.HTML(components.SoundTrackSearchResults(tracks, user))
@@ -100,8 +118,11 @@ func SoundTracks(ctx aero.Context) error {
 // AMVs search.
 func AMVs(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
 	user := utils.GetUser(ctx)
+
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
 
 	amvs := search.AMVs(term, maxAMVs)
 	return ctx.HTML(components.AMVSearchResults(amvs, user))
@@ -110,7 +131,10 @@ func AMVs(ctx aero.Context) error {
 // Users search.
 func Users(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
+
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
 
 	users := search.Users(term, maxUsers)
 	return ctx.HTML(components.UserSearchResults(users))
@@ -119,7 +143,10 @@ func Users(ctx aero.Context) error {
 // Companies search.
 func Companies(ctx aero.Context) error {
 	term := ctx.Get("term")
-	term = strings.TrimPrefix(term, "/")
+
+	if len(term) > search.MaxSearchTermLength {
+		ctx.SetStatus(http.StatusRequestEntityTooLarge)
+	}
 
 	companies := search.Companies(term, maxCompanies)
 	return ctx.HTML(components.CompanySearchResults(companies))

@@ -1,7 +1,7 @@
-component InputText(id string, value string, label string, placeholder string)
+component InputText(id string, value string, label string, placeholder string, maxLength int)
 	.widget-section
 		label(for=id)= label + ":"
-		input.widget-ui-element.action(id=id, data-field=id, type="text", value=value, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
+		input.widget-ui-element.action(id=id, data-field=id, type="text", value=value, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change", maxlength=maxLength)
 
 component InputBool(id string, value bool, label string, title string)
 	.widget-section
@@ -16,10 +16,10 @@ component InputBool(id string, value bool, label string, title string)
 				span OFF
 		//- input.widget-ui-element.action(id=id, data-field=id, type="checkbox", value=value, checked=value, data-action="save", data-trigger="change")
 
-component InputTextArea(id string, value string, label string, placeholder string)
+component InputTextArea(id string, value string, label string, placeholder string, maxLength int)
 	.widget-section
 		label(for=id)= label + ":"
-		textarea.widget-ui-element.action(id=id, data-field=id, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")= value
+		textarea.widget-ui-element.action(id=id, data-field=id, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change", maxlength=maxLength)= value
 
 component InputNumber(id string, value float64, label string, placeholder string, min string, max string, step string)
 	.widget-section

@@ -42,7 +42,7 @@ func Anime(originalTerm string, maxLength int) []*arn.Anime {
 		// Canonical title
 		similarity := check(anime.Title.Canonical)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			add(anime, similarity)
 			continue
 		}
@@ -50,7 +50,7 @@ func Anime(originalTerm string, maxLength int) []*arn.Anime {
 		// English
 		similarity = check(anime.Title.English)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			add(anime, similarity)
 			continue
 		}
@@ -58,7 +58,7 @@ func Anime(originalTerm string, maxLength int) []*arn.Anime {
 		// Romaji
 		similarity = check(anime.Title.Romaji)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			add(anime, similarity)
 			continue
 		}
@@ -67,7 +67,7 @@ func Anime(originalTerm string, maxLength int) []*arn.Anime {
 		for _, synonym := range anime.Title.Synonyms {
 			similarity := check(synonym)
 
-			if similarity >= MinimumStringSimilarity {
+			if similarity >= MinStringSimilarity {
 				add(anime, similarity)
 				goto nextAnime
 			}
@@ -76,7 +76,7 @@ func Anime(originalTerm string, maxLength int) []*arn.Anime {
 		// Japanese
 		similarity = check(anime.Title.Japanese)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			add(anime, similarity)
 			continue
 		}

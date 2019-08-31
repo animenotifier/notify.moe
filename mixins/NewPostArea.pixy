@@ -4,7 +4,7 @@ component NewPostArea(parent arn.PostParent, user *arn.User, placeholder string)
 			.post-author
 				Avatar(user)
 			
-			textarea#new-post-text.post-content(placeholder=placeholder + "...", aria-label=placeholder)
+			textarea#new-post-text.post-content(placeholder=placeholder + "...", aria-label=placeholder, maxlength=limits.DefaultTextAreaMaxLength)
 
 	if !arn.IsLocked(parent)
 		NewPostActions(parent, false)

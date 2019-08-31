@@ -25,7 +25,7 @@ func Companies(originalTerm string, maxLength int) []*arn.Company {
 		text := strings.ToLower(stringutils.RemoveSpecialCharacters(company.Name.English))
 		similarity := stringutils.AdvancedStringSimilarity(term, text)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			results = append(results, &Result{
 				obj:        company,
 				similarity: similarity,

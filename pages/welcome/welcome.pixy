@@ -10,7 +10,7 @@ component Welcome(user *arn.User)
 
 			.mountable(data-api="/api/user/" + user.ID)
 				//- [^\\W\\s\\d]{1,24}[A-Za-z]{1}
-				InputText("Nick", user.CleanNick(), "Nick", "Your username on notify.moe")
+				InputText("Nick", user.CleanNick(), "Nick", "Your username on notify.moe", 25)
 				
 				.footer.mountable
 					p Only letters and underscore.
@@ -26,7 +26,7 @@ component Welcome(user *arn.User)
 			p.welcome-text.mountable Write a little introduction for your profile.
 
 			.mountable(data-api="/api/user/" + user.ID)
-				InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us a little bit about yourself")
+				InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us a little bit about yourself", 2000)
 
 			.footer.mountable
 				p Markdown allowed.

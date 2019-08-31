@@ -25,7 +25,7 @@ func SoundTracks(originalTerm string, maxLength int) []*arn.SoundTrack {
 		text := strings.ToLower(track.Title.Canonical)
 		similarity := stringutils.AdvancedStringSimilarity(term, text)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			results = append(results, &Result{
 				obj:        track,
 				similarity: similarity,
@@ -36,7 +36,7 @@ func SoundTracks(originalTerm string, maxLength int) []*arn.SoundTrack {
 		text = strings.ToLower(track.Title.Native)
 		similarity = stringutils.AdvancedStringSimilarity(term, text)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			results = append(results, &Result{
 				obj:        track,
 				similarity: similarity,

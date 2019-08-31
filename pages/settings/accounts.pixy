@@ -9,20 +9,20 @@ component SettingsAccounts(user *arn.User)
 				Icon("cubes")
 				span Accounts
 
-			InputText("Accounts.AniList.Nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co")
-			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io")
-			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net")
-			InputText("Accounts.Discord.Nick", user.Accounts.Discord.Nick, "Discord", "Your username on Discord")
+			InputText("Accounts.AniList.Nick", user.Accounts.AniList.Nick, "AniList", "Your username on anilist.co", 30)
+			InputText("Accounts.Kitsu.Nick", user.Accounts.Kitsu.Nick, "Kitsu", "Your username on kitsu.io", 30)
+			InputText("Accounts.MyAnimeList.Nick", user.Accounts.MyAnimeList.Nick, "MyAnimeList", "Your username on myanimelist.net", 30)
+			InputText("Accounts.Discord.Nick", user.Accounts.Discord.Nick, "Discord", "Your username on Discord", 30)
 		
 		.widget.mountable(data-api="/api/user/" + user.ID)
 			h3.widget-title
 				Icon("gamepad")
 				span Games
 			
-			InputText("Accounts.FinalFantasyXIV.Nick", user.Accounts.FinalFantasyXIV.Nick, "Final Fantasy XIV", "Your character name on FFXIV")
+			InputText("Accounts.FinalFantasyXIV.Nick", user.Accounts.FinalFantasyXIV.Nick, "Final Fantasy XIV", "Your character name on FFXIV", 30)
 			InputSelection("Accounts.FinalFantasyXIV.Server", user.Accounts.FinalFantasyXIV.Server, "Final Fantasy XIV - World", "Your server/world on FFXIV", arn.DataLists["ffxiv-servers"])
-			InputText("Accounts.Osu.Nick", user.Accounts.Osu.Nick, "Osu", "Your username on osu.ppy.sh")
-			InputText("Accounts.Overwatch.BattleTag", user.Accounts.Overwatch.BattleTag, "Overwatch", "Your battletag on Overwatch")
+			InputText("Accounts.Osu.Nick", user.Accounts.Osu.Nick, "Osu", "Your username on osu.ppy.sh", 30)
+			InputText("Accounts.Overwatch.BattleTag", user.Accounts.Overwatch.BattleTag, "Overwatch", "Your battletag on Overwatch", 30)
 			
 		.widget.mountable
 			h3.widget-title

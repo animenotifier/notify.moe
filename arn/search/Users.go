@@ -23,7 +23,7 @@ func Users(originalTerm string, maxLength int) []*arn.User {
 		// Similarity check
 		similarity := stringutils.AdvancedStringSimilarity(term, text)
 
-		if similarity < MinimumStringSimilarity {
+		if similarity < MinStringSimilarity {
 			continue
 		}
 

@@ -40,7 +40,7 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, showP
 						if post.TypeName() == "Thread"
 							input.post-title-input.hidden(id="title-" + post.GetID(), value=post.TitleByUser(user), type="text", placeholder="Thread title")
 						
-						textarea.post-text-input.hidden(id="source-" + post.GetID())= post.GetText()
+						textarea.post-text-input.hidden(id="source-" + post.GetID(), maxlength=limits.DefaultTextAreaMaxLength)= post.GetText()
 						
 						.buttons.hidden(id="edit-toolbar-" + post.GetID())
 							a.button.post-save.action(data-action="savePost", data-trigger="click", data-id=post.GetID())

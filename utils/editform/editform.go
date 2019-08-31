@@ -9,6 +9,7 @@ import (
 
 	"github.com/aerogo/api"
 	"github.com/animenotifier/notify.moe/arn"
+	"github.com/animenotifier/notify.moe/arn/limits"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -214,7 +215,13 @@ func renderStringField(b io.StringWriter, v *reflect.Value, field reflect.Struct
 		b.WriteString(components.InputSelection(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), values))
 
 	case field.Tag.Get("type") == "textarea":
-		b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
+		maxLength, err := strconv.Atoi(field.Tag.Get("maxLength"))
+
+		if err != nil {
+			maxLength = limits.DefaultTextAreaMaxLength
+		}
+
+		b.WriteString(components.InputTextArea(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), maxLength))
 
 	case field.Tag.Get("type") == "upload":
 		endpoint := field.Tag.Get("endpoint")
@@ -224,7 +231,13 @@ func renderStringField(b io.StringWriter, v *reflect.Value, field reflect.Struct
 		b.WriteString(components.InputFileUpload(idPrefix+field.Name, field.Name, field.Tag.Get("filetype"), endpoint))
 
 	default:
-		b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip")))
+		maxLength, err := strconv.Atoi(field.Tag.Get("maxLength"))
+
+		if err != nil {
+			maxLength = limits.DefaultTextMaxLength
+		}
+
+		b.WriteString(components.InputText(idPrefix+field.Name, fieldValue.String(), field.Name, field.Tag.Get("tooltip"), maxLength))
 	}
 
 	if showPreview {

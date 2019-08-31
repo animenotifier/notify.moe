@@ -5,7 +5,7 @@ component NewThread(user *arn.User)
 		.widget
 			input#title.widget-ui-element(type="text", placeholder="Title")
 			
-			textarea#text.widget-ui-element(placeholder="Content")
+			textarea#text.widget-ui-element(placeholder="Content", maxlength=limits.DefaultTextAreaMaxLength)
 
 			select#tag.widget-ui-element(value="general")
 				option(value="general") General

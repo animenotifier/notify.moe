@@ -25,7 +25,7 @@ func AMVs(originalTerm string, maxLength int) []*arn.AMV {
 		text := strings.ToLower(amv.Title.Canonical)
 		similarity := stringutils.AdvancedStringSimilarity(term, text)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			results = append(results, &Result{
 				obj:        amv,
 				similarity: similarity,
@@ -36,7 +36,7 @@ func AMVs(originalTerm string, maxLength int) []*arn.AMV {
 		text = strings.ToLower(amv.Title.Native)
 		similarity = stringutils.AdvancedStringSimilarity(term, text)
 
-		if similarity >= MinimumStringSimilarity {
+		if similarity >= MinStringSimilarity {
 			results = append(results, &Result{
 				obj:        amv,
 				similarity: similarity,

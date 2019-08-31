@@ -26,7 +26,7 @@ component AnimeListItem(viewUser *arn.User, item *arn.AnimeListItem, anime *arn.
 			InputBool("Private", item.Private, "Private", "Hidden entry")
 		
 		.mountable
-			InputTextArea("Notes", item.Notes, "Notes", "Your notes")
+			InputTextArea("Notes", item.Notes, "Notes", "Your notes", 2000)
 
 	.buttons.mountable
 		a.button.mountable(href="/+" + viewUser.Nick + "/animelist/" + item.Status)
