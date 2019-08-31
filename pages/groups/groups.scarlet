@@ -40,6 +40,8 @@ const group-padding-x = 0.75rem
 	clip-long-text
 
 .group-member-count
+	horizontal
+	align-items center
 	position absolute
 	top 0.5rem
 	right 1rem
