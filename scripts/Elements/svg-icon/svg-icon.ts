@@ -14,7 +14,7 @@ export default class SVGIcon extends HTMLElement {
 	}
 
 	async render() {
-		let cache = SVGIcon.cache[this.name]
+		let cache = SVGIcon.cache.get(this.name)
 
 		if(cache) {
 			let text = await cache
@@ -22,7 +22,7 @@ export default class SVGIcon extends HTMLElement {
 			return
 		}
 
-		SVGIcon.cache[this.name] = new Promise(async (resolve, reject) => {
+		SVGIcon.cache.set(this.name, new Promise(async (resolve, reject) => {
 			let url = `//media.notify.moe/images/icons/${this.name}.svg`
 			let response = await fetch(url)
 
@@ -35,7 +35,7 @@ export default class SVGIcon extends HTMLElement {
 			let text = await response.text()
 			Diff.mutations.queue(() => this.innerHTML = text)
 			resolve(text)
-		})
+		}))
 	}
 
 	get name() {
