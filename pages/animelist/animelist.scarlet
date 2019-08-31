@@ -95,23 +95,23 @@
 		transform scale(1.5)
 
 .anime-list-item-actions
-	display none !important
+	display none
 
 > 740px
 	.anime-list-item-actions
-		display flex !important
+		display flex
 		flex-basis 30px
 		flex-shrink 1
 
 		:empty
-			display none !important
+			display none
 
 .anime-list-item-airing-date
-	display none !important
+	display none
 
 > 700px
 	.anime-list-item-airing-date
-		display flex !important
+		display flex
 		text-align right
 		flex-basis 150px
 		flex-shrink 1
@@ -123,4 +123,4 @@
 
 < 1100px
 	.anime-list-item-rating-container
-		display none !important
+		display none
