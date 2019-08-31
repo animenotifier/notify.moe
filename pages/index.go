@@ -45,10 +45,6 @@ func Configure(app *aero.Application) {
 	settingsroutes.Register(app)
 	staffroutes.Register(app)
 	apiroutes.Register(app)
-
-	// Mixed
-	// app.Get("/database", database.Get)
-	// app.Get("/api/select/:data-type/where/:field/is/:field-value", database.Select)
 }
 
 // Rewrite will rewrite the path before routing happens.
