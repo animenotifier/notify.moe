@@ -3,7 +3,6 @@ package soundtrack
 import (
 	"net/http"
 
-	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/utils"
@@ -24,18 +23,6 @@ func Edit(ctx aero.Context) error {
 	}
 
 	customCtx := ctx.(*middleware.OpenGraphContext)
-	customCtx.OpenGraph = &arn.OpenGraph{
-		Tags: map[string]string{
-			"og:title":     track.Title.ByUser(user),
-			"og:url":       "https://" + assets.Domain + track.Link(),
-			"og:site_name": "notify.moe",
-			"og:type":      "music.song",
-		},
-	}
-
-	if track.MainAnime() != nil {
-		customCtx.OpenGraph.Tags["og:image"] = track.MainAnime().ImageLink("large")
-	}
-
+	customCtx.OpenGraph = getOpenGraph(track)
 	return ctx.HTML(components.SoundTrackTabs(track, user) + editform.Render(track, "Edit soundtrack", user))
 }
