@@ -19,7 +19,7 @@ component PopularCompaniesScrollable(companies []*arn.Company, companyToAnime ma
 			
 			.popular-company-body.popular-company-description!= markdown.Render(company.Description)
 			
-			.popular-company-footer
+			footer.popular-company-footer
 				.company-anime
 					each anime in utils.MaxAnime(companyToAnime[company.ID], 12)
 						CompanyAnimeNoTip(anime, user)

@@ -86,4 +86,4 @@ component SettingsAccounts(user *arn.User)
 				Icon("refresh")
 				span Sync
 			
-			.footer Reserved for upcoming features.
+			footer.footer Reserved for upcoming features.

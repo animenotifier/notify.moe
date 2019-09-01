@@ -29,4 +29,4 @@ component Charge(user *arn.User)
 			Icon("diamond")
 			span 12000
 
-	.footer.mountable Different currencies will automatically be converted.
+	footer.footer.mountable Different currencies will automatically be converted.

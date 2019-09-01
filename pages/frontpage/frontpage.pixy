@@ -12,5 +12,5 @@ component FrontPage
 			source(src="https://arn.sfo2.cdn.digitaloceanspaces.com/videos/others/violet.webm", type="video/webm")
 
 component Footer
-	.footer.mountable
+	footer.footer.mountable
 		SocialMediaLinks

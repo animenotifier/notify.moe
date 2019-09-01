@@ -31,7 +31,7 @@ component Notification(notification *arn.Notification)
 		.notification-info
 			h3.notification-title= notification.Title
 
-			.notification-footer
+			footer.notification-footer
 				p.notification-text= notification.Message
 				.notification-date.utc-date(data-date=notification.Created)
 		

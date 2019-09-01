@@ -22,6 +22,6 @@ component SettingsInfo(user *arn.User)
 			InputBool("Privacy.ShowAge", user.Settings().Privacy.ShowAge, "Show age", "Shows your age on the profile page")
 			InputBool("Privacy.ShowLocation", user.Settings().Privacy.ShowLocation, "Show location", "Shows your location on the profile page")
 
-			.footer
+			footer.footer
 				p Can only be made visible to logged in members.
 		

@@ -61,7 +61,7 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 				h3.widget-title Comments
 				Comments(track, user)
 
-		.footer.mountable
+		footer.footer.mountable
 			if track.EditedBy != ""
 				span Edited 
 				span.utc-date(data-date=track.Edited)

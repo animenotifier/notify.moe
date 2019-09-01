@@ -21,7 +21,7 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 			p.anime-summary.mountable(data-mountable-type="header")= anime.Summary
 
 			.anime-summary-footer-container
-				.anime-summary-footer
+				footer.anime-summary-footer
 					AnimeGenres(anime)
 					AnimeActions(anime, listItem, user)
 

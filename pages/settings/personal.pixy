@@ -30,7 +30,7 @@ component SettingsPersonal(user *arn.User)
 				img.profile-cover.cover-input-preview.lazy(data-src=user.CoverLink("small"), data-webp="true", alt="Cover image")
 			
 			if !user.IsPro()
-				.footer
+				footer.footer
 					p PRO account required.
 
 component AvatarInput(user *arn.User)

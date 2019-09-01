@@ -7,7 +7,7 @@ component Shop(items []*arn.ShopItem, itemPopularity map[string]int, user *arn.U
 		each item in items
 			ShopItem(item, itemPopularity[item.ID])
 	
-	#pro-benefits-footer.buttons.mountable
+	footer#pro-benefits-footer.buttons.mountable
 		button.pro-benefits-button.action(data-action="toggleFade", data-trigger="click", data-element-id="pro-benefits")
 			RawIcon("question-circle")
 			p View benefits of PRO accounts

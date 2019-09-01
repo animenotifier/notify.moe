@@ -24,7 +24,7 @@ component ProUsers(users []*arn.User, url string)
 		each user in users
 			UserCard(user, "until " + user.ProExpires[:10])
 	
-	.footer.mountable
+	footer.footer.mountable
 		p We are thankful to everyone supporting the site!
 
 component UserLists(groups []*utils.UserList, url string)
@@ -39,7 +39,7 @@ component UserLists(groups []*utils.UserList, url string)
 				UserCard(user, stringutils.Capitalize(user.Role))
 
 component StaffRecruitment
-	.footer.mountable
+	footer.footer.mountable
 		p
 			a(href="https://github.com/animenotifier/notify.moe#installation", target="_blank", rel="noopener") Interested in contributing code?
 			br

@@ -17,7 +17,7 @@ component QuoteMainColumn(quote *arn.Quote, user *arn.User)
 			h3.widget-title Comments
 			Comments(quote, user)
 
-	.footer.mountable
+	footer.footer.mountable
 		if quote.EditedBy != ""
 			span Edited 
 			span.utc-date(data-date=quote.Edited)

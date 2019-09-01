@@ -34,7 +34,7 @@ component QuoteTextPreview(quote *arn.Quote)
 	blockquote!= utils.RenderQuoteText(utils.CutLongDescription(quote.Text.English))
 
 component QuoteFooter(quote *arn.Quote)
-	.quote-footer
+	footer.quote-footer
 		span  posted 
 		span.utc-date.no-tip(data-date=quote.Created)
 		span  by 

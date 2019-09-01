@@ -1,6 +1,4 @@
 .footer
-	horizontal-wrap
-	justify-content center
 	text-align center
 	font-size 0.8rem
 	opacity 0.7
@@ -13,7 +11,7 @@
 		opacity 0.7 !important
 
 .footer-element
-	horizontal
+	display inline-flex
 	align-items center
 
 	:after

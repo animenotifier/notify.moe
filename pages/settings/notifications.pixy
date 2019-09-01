@@ -27,7 +27,7 @@ component SettingsNotifications(user *arn.User)
 					Icon("paper-plane")
 					span Send test notification
 			
-			.footer
+			footer.footer
 				p(title="This setting is not account bound, instead it is bound to your browser.") You can customize this setting on every device you own.
 		
 		.widget.mountable(data-api="/api/settings/" + user.ID)

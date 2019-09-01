@@ -19,7 +19,7 @@ component AMVVideo(amv *arn.AMV)
 		VideoControls(amv.ID, amv.Info.Duration)
 
 component AMVFooter(amv *arn.AMV, user *arn.User)
-	.amv-footer
+	footer.amv-footer
 		if amv.Title.ByUser(user) == ""
 			a(href=amv.Link() + "/edit") untitled
 		else
@@ -30,7 +30,7 @@ component AMVFooter(amv *arn.AMV, user *arn.User)
 		a(href=amv.Creator().Link())= amv.Creator().Nick + " "
 
 component AMVMiniFooter(amv *arn.AMV, user *arn.User)
-	.amv-footer
+	footer.amv-footer
 		if amv.Title.ByUser(user) == ""
 			a(href=amv.Link() + "/edit") untitled
 		else

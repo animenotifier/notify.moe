@@ -33,7 +33,7 @@ component SoundTrackMedia(track *arn.SoundTrack)
 		ExternalMedia(track.Media[0])
 
 component SoundTrackFooter(track *arn.SoundTrack, user *arn.User)
-	.soundtrack-footer
+	footer.soundtrack-footer
 		if track.Title.ByUser(user) == ""
 			a(href=track.Link() + "/edit") untitled
 		else
@@ -44,7 +44,7 @@ component SoundTrackFooter(track *arn.SoundTrack, user *arn.User)
 		a(href=track.Creator().Link())= track.Creator().Nick + " "
 
 component SoundTrackMiniFooter(track *arn.SoundTrack, user *arn.User)
-	.soundtrack-footer
+	footer.soundtrack-footer
 		if track.Title.ByUser(user) == ""
 			a(href=track.Link() + "/edit") untitled
 		else

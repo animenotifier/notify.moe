@@ -6,5 +6,5 @@ component EditorRankingList(users []*arn.User, idToScore map[string]int, url str
 		each user in users
 			UserCard(user, fmt.Sprintf("%s points", humanize.Comma(int64(idToScore[user.ID]))))
 	
-	.footer.mountable
+	footer.footer.mountable
 		p Score is generated from new data submissions and data fixes.

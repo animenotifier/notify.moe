@@ -12,7 +12,7 @@ component Welcome(user *arn.User)
 				//- [^\\W\\s\\d]{1,24}[A-Za-z]{1}
 				InputText("Nick", user.CleanNick(), "Nick", "Your username on notify.moe", 25)
 				
-				.footer.mountable
+				footer.footer.mountable
 					p Only letters and underscore.
 		else if !user.HasAvatar()
 			p.welcome-text.mountable Add an avatar so people can recognize you.
@@ -20,7 +20,7 @@ component Welcome(user *arn.User)
 			.mountable(data-api="/api/user/" + user.ID)
 				AvatarInput(user)
 
-			.footer.mountable
+			footer.footer.mountable
 				p Recommended size: 560x560 (minimum: 280x280)
 		else if user.Introduction == ""
 			p.welcome-text.mountable Write a little introduction for your profile.
@@ -28,7 +28,7 @@ component Welcome(user *arn.User)
 			.mountable(data-api="/api/user/" + user.ID)
 				InputTextArea("Introduction", user.Introduction, "Introduction", "Tell us a little bit about yourself", 2000)
 
-			.footer.mountable
+			footer.footer.mountable
 				p Markdown allowed.
 		else
 			p.welcome-text.mountable You're ready to start using Anime Notifier!

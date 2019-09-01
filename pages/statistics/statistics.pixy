@@ -9,7 +9,7 @@ component Statistics(pieCharts []*arn.PieChart)
 				h3.widget-title= pie.Title
 				PieChart(pie.Slices)
 		
-		.footer
+		footer.footer
 			p Data is collected for statistical purposes only. We respect user privacy and we will never display or sell critical data to 3rd party services.
 
 component StatisticsHeader

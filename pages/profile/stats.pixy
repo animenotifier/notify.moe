@@ -9,7 +9,7 @@
 //- 					span= pie.Title
 //- 				PieChart(pie.Slices)
 
-//- 	.footer.mountable
+//- 	footer.footer.mountable
 //- 		span= viewUser.Nick + " spent "
 //- 		span= int(stats.AnimeWatchingTime / time.Hour / 24)
 //- 		span  days watching anime.

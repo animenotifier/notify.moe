@@ -37,5 +37,5 @@ component Episode(anime *arn.Anime, episode *arn.Episode, episodeIndex int, uplo
 		p.episode-view-airing-date
 			span.utc-airing-date(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 	
-	.footer
+	footer.footer
 		p Make sure to support the anime you're watching by buying officially released Blu-rays and merchandise.
