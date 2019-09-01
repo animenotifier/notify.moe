@@ -6,16 +6,19 @@
 [![Coverage][coverage-image]][coverage-url]
 [![Sponsor][sponsor-image]][sponsor-url]
 
-## Prerequisites
+## How to
+
+### Prerequisites
 
 * Install [Go](https://golang.org/)
 * Install [TypeScript](https://www.typescriptlang.org/)
 
-## Installation
+### Installation
 
 ```shell
 git clone https://github.com/animenotifier/notify.moe.git
 cd notify.moe
+go mod download
 make tools
 make assets
 go build
@@ -33,9 +36,11 @@ go build
 * Import the file `security/default/root.crt` as a trusted Root authority
 * Open `https://beta.notify.moe`
 
-## What now?
+### What now?
 
-Take a look at [how to contribute](docs/contributing.md) to this project.
+* Try the [example task for newcomers](docs/new-contributor-task.md).
+* Make some changes and upload them to a new branch on your fork.
+* Create a pull request on this repository.
 
 ## Find us
 
@@ -43,6 +48,10 @@ Take a look at [how to contribute](docs/contributing.md) to this project.
 * [Facebook](https://www.facebook.com/animenotifier)
 * [Twitter](https://twitter.com/animenotifier)
 * [GitHub](https://github.com/animenotifier/notify.moe)
+
+## Contributing
+
+Please read [CONTRIBUTING.md](docs/contributing.md) for details on how to contribute to this project.
 
 ## Statistics
 

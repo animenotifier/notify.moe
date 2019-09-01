@@ -14,6 +14,7 @@
 ```shell
 git clone https://github.com/animenotifier/notify.moe.git
 cd notify.moe
+go mod download
 make tools
 make assets
 go build
