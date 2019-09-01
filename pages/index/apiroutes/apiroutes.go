@@ -52,8 +52,9 @@ func Register(app *aero.Application) {
 	// Post
 	app.Get("/api/post/:id/reply/ui", post.ReplyUI)
 
-	// Post
+	// Types
 	app.Get("/api/types", database.Types)
+	app.Get("/api/types/:type/all", database.Download)
 
 	// SoundTrack
 	app.Post("/api/soundtrack/:id/download", soundtrack.Download)

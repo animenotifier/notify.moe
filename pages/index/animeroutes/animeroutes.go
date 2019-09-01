@@ -4,9 +4,11 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/anime/editanime"
+	"github.com/animenotifier/notify.moe/pages/calendar"
 	"github.com/animenotifier/notify.moe/pages/episode"
 	"github.com/animenotifier/notify.moe/pages/genre"
 	"github.com/animenotifier/notify.moe/pages/genres"
+	"github.com/animenotifier/notify.moe/pages/statistics"
 	"github.com/animenotifier/notify.moe/utils/page"
 )
 
@@ -38,4 +40,11 @@ func Register(app *aero.Application) {
 	// Genres
 	page.Get(app, "/genres", genres.Get)
 	page.Get(app, "/genre/:name", genre.Get)
+
+	// Calendar
+	page.Get(app, "/calendar", calendar.Get)
+
+	// Statistics
+	page.Get(app, "/statistics", statistics.Get)
+	page.Get(app, "/statistics/anime", statistics.Anime)
 }

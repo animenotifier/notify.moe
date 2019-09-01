@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/pages/index/activityroutes"
 	"github.com/animenotifier/notify.moe/pages/index/amvroutes"
 	"github.com/animenotifier/notify.moe/pages/index/animeroutes"
 	"github.com/animenotifier/notify.moe/pages/index/apiroutes"
@@ -31,6 +32,7 @@ func Configure(app *aero.Application) {
 	userroutes.Register(app)
 	characterroutes.Register(app)
 	exploreroutes.Register(app)
+	activityroutes.Register(app)
 	amvroutes.Register(app)
 	forumroutes.Register(app)
 	animeroutes.Register(app)
