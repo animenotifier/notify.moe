@@ -31,6 +31,7 @@ component Layout(ctx aero.Context, user *arn.User, openGraph *arn.OpenGraph, met
 			//- Preconnect to CDN
 			link(rel="preconnect", href="//fonts.gstatic.com")
 			link(rel="preconnect", href="//media.notify.moe")
+			link(rel="dns-prefetch", href="//arn.sfo2.cdn.digitaloceanspaces.com")
 
 			//- Icons
 			link(rel="icon", type="image/webp", sizes="64x64", href="//media.notify.moe/images/brand/64.webp")
