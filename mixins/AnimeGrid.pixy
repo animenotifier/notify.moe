@@ -30,5 +30,5 @@ component AnimeGridWithRelationScrollable(entries []*utils.AnimeWithRelatedAnime
 
 component AnimeGridButton(anime *arn.Anime, user *arn.User)
 	if user != nil && !user.AnimeList().Contains(anime.ID)
-		button.anime-grid-add-button.action(data-action="addAnimeToCollection", data-trigger="click", data-api="/api/animelist/" + user.ID, data-anime-id=anime.ID)
+		button.anime-grid-add-button.action(data-action="addAnimeToCollection", data-trigger="click", data-api="/api/animelist/" + user.ID, data-anime-id=anime.ID, aria-label="Add anime to my list")
 			RawIcon("plus")
