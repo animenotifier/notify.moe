@@ -60,7 +60,7 @@ func Date(date string) bool {
 
 // YearMonth tells you whether the date contain only the year and the month.
 func YearMonth(date string) bool {
-	if date == "" || strings.HasPrefix(date, "0001") {
+	if len(date) != len(YearMonthFormat) || strings.HasPrefix(date, "0001") {
 		return false
 	}
 
