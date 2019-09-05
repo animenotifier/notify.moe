@@ -13,6 +13,9 @@ const (
 	// DateFormat is the format used for short dates that don't include the time.
 	DateFormat = "2006-01-02"
 
+	// YearMonthFormat is the format used for validating dates that include the year and month.
+	YearMonthFormat = "2006-01"
+
 	// DateTimeFormat is the format used for long dates that include the time.
 	DateTimeFormat = time.RFC3339
 )
@@ -52,6 +55,16 @@ func Date(date string) bool {
 	}
 
 	_, err := time.Parse(DateFormat, date)
+	return err == nil
+}
+
+// YearMonth tells you whether the date contain only the year and the month.
+func YearMonth(date string) bool {
+	if date == "" || strings.HasPrefix(date, "0001") {
+		return false
+	}
+
+	_, err := time.Parse(YearMonthFormat, date)
 	return err == nil
 }
 
