@@ -3,16 +3,19 @@ name: default
 
 steps:
 - name: test
-  image: animenotifier/notify.moe
+  image: golang
   environment:
     GO111MODULE: on
     ARN_ROOT: /drone/src
   commands:
   - go version
   - go mod download
-  - tsc
-  - pack
-  - go build -v
+  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  - nvm install node
+  - npm install -g typescript
+  - make tools
+  - make assets
+  - make server
   - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.17.1
   - golangci-lint run
   - go test -v -coverprofile=coverage.txt .

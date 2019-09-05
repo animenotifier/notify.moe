@@ -23,7 +23,7 @@ endif
 
 # Build targets
 server:
-	@go build
+	@go build -v
 deps:
 	go mod download
 jobs:
