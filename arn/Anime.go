@@ -289,7 +289,7 @@ func (anime *Anime) AverageColor() string {
 
 // Season returns the season the anime started airing in.
 func (anime *Anime) Season() string {
-	if !validate.Date(anime.StartDate) {
+	if !validate.Date(anime.StartDate) && !validate.YearMonth(anime.StartDate) {
 		return ""
 	}
 
