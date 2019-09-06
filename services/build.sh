@@ -6,7 +6,7 @@ cd $(dirname $0)
 for service in *.service; do
 	[ -f "$service" ] &&
 	echo "Installing services/$service" &&
-	sudo cp "services/$service" "$INSTALLPATH/$service" &&
+	sudo cp "$service" "$INSTALLPATH/$service" &&
 	sudo sed -i "s|MAKEFILE_USER|$USER|g" "$INSTALLPATH/$service" &&
 	sudo sed -i "s|MAKEFILE_GOBIN|$GOBIN|g" "$INSTALLPATH/$service" &&
 	sudo sed -i "s|MAKEFILE_PWD|$PWD|g" "$INSTALLPATH/$service"
