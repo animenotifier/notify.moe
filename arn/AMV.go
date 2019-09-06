@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"path"
 
 	"github.com/aerogo/nano"
 	"github.com/animenotifier/notify.moe/arn/video"
@@ -185,12 +184,15 @@ func (amv *AMV) Publish() error {
 		return errors.New("Need to specify at least one anime")
 	}
 
-	// No file uploaded
+	// Check that the file name exists
 	if amv.File == "" {
 		return errors.New("You need to upload a WebM file for this AMV")
 	}
 
-	if _, err := os.Stat(path.Join(Root, "videos", "amvs", amv.File)); os.IsNotExist(err) {
+	// No file uploaded
+	_, err := Spaces.StatObject("arn", fmt.Sprintf("videos/amvs/%s", amv.File), minio.StatObjectOptions{})
+
+	if err != nil {
 		return errors.New("You need to upload a WebM file for this AMV")
 	}
 
