@@ -141,7 +141,7 @@ func RenderField(b *strings.Builder, v *reflect.Value, field reflect.StructField
 	}
 
 	// Int
-	if fieldType == "int" {
+	if fieldType == "int" || fieldType == "int64" {
 		b.WriteString(components.InputNumber(idPrefix+field.Name, float64(fieldValue.Int()), field.Name, field.Tag.Get("tooltip"), "", "", "1"))
 		return
 	}

@@ -26,7 +26,6 @@ func getUserStats() []*arn.PieChart {
 	os := stats{}
 	notifications := stats{}
 	titleLanguage := stats{}
-	avatar := stats{}
 	ip := stats{}
 	pro := stats{}
 	connectionType := stats{}
@@ -91,12 +90,6 @@ func getUserStats() []*arn.PieChart {
 			notifications["Disabled"]++
 		}
 
-		if user.Avatar.Source == "" {
-			avatar["none"]++
-		} else {
-			avatar[user.Avatar.Source]++
-		}
-
 		if arn.IsIPv6(user.IP) {
 			ip["IPv6"]++
 		} else {
@@ -120,7 +113,6 @@ func getUserStats() []*arn.PieChart {
 		arn.NewPieChart("Browser", browser),
 		arn.NewPieChart("Country", country),
 		arn.NewPieChart("Title language", titleLanguage),
-		arn.NewPieChart("Avatar", avatar),
 		arn.NewPieChart("Notifications", notifications),
 		arn.NewPieChart("Gender", gender),
 		arn.NewPieChart("Pixel ratio", pixelRatio),

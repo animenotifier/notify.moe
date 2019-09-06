@@ -56,7 +56,7 @@ type User struct {
 	UserAgent    string       `json:"agent" private:"true"`
 	Balance      int          `json:"balance" private:"true"`
 	Image        Image        `json:"image"`
-	Avatar       UserAvatar   `json:"avatar"`
+	Avatar       UserAvatar   `json:"avatar" editable:"true"`
 	Cover        UserCover    `json:"cover"`
 	Accounts     UserAccounts `json:"accounts" private:"true"`
 	Browser      UserBrowser  `json:"browser" private:"true"`

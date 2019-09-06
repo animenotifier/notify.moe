@@ -96,10 +96,10 @@ func (user *User) Edit(ctx aero.Context, key string, value reflect.Value, newVal
 		user.BirthDay = newBirthDay
 		return true, nil
 
-	case "ProExpires":
-		user := GetUserFromContext(ctx)
+	case "ProExpires", "Avatar.Extension", "Avatar.LastModified":
+		editor := GetUserFromContext(ctx)
 
-		if user == nil || user.Role != "admin" {
+		if editor == nil || editor.Role != "admin" {
 			return true, errors.New("Not authorized to edit")
 		}
 

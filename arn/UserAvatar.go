@@ -60,9 +60,8 @@ var avatarOutputs = []imageserver.Output{
 
 // UserAvatar ...
 type UserAvatar struct {
-	Extension    string `json:"extension"`
-	Source       string `json:"source"`
-	LastModified int64  `json:"lastModified"`
+	Extension    string `json:"extension" editable:"true"`
+	LastModified int64  `json:"lastModified" editable:"true"`
 }
 
 // SetImageBytes accepts a byte buffer that represents an image file and updates the avatar.
