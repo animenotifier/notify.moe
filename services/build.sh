@@ -1,4 +1,5 @@
 #!/bin/sh
+ROOT=$PWD
 INSTALLPATH="/etc/systemd/system/"
 GOBIN="$(go env GOPATH)/bin"
 cd $(dirname $0)
@@ -9,7 +10,7 @@ for service in *.service; do
 	sudo cp "$service" "$INSTALLPATH/$service" &&
 	sudo sed -i "s|MAKEFILE_USER|$USER|g" "$INSTALLPATH/$service" &&
 	sudo sed -i "s|MAKEFILE_GOBIN|$GOBIN|g" "$INSTALLPATH/$service" &&
-	sudo sed -i "s|MAKEFILE_PWD|$PWD|g" "$INSTALLPATH/$service"
+	sudo sed -i "s|MAKEFILE_PWD|$ROOT|g" "$INSTALLPATH/$service"
 done
 
 sudo systemctl daemon-reload &&
