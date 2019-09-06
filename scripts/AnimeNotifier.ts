@@ -388,7 +388,7 @@ export default class AnimeNotifier {
 				}
 
 				element.addEventListener("drop", async e => {
-					let toElement: Element | null = e.toElement
+					let toElement: HTMLElement | null = e.target as HTMLElement
 
 					// Find tab element
 					while(toElement && !toElement.classList.contains("tab")) {
@@ -507,7 +507,7 @@ export default class AnimeNotifier {
 					e.preventDefault()
 				}, false)
 
-				element.addEventListener("drop", e => {
+				element.addEventListener("drop", async e => {
 					element.classList.remove("drag-enter")
 
 					e.stopPropagation()
@@ -536,8 +536,11 @@ export default class AnimeNotifier {
 					// Swap in database
 					let apiEndpoint = this.findAPIEndpoint(inventory)
 
-					this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex)
-					.catch(err => this.statusMessage.showError(err))
+					try {
+						await this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex)
+					} catch(err) {
+						this.statusMessage.showError(err)
+					}
 
 					// Swap in UI
 					swapElements(fromElement, element)
