@@ -1,0 +1,13 @@
+[Unit]
+Description=Background Jobs
+After=animenotifier.service
+
+[Service]
+Type=simple
+User=MAKEFILE_USER
+ExecStart=MAKEFILE_PWD/jobs/jobs
+WorkingDirectory=MAKEFILE_PWD
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

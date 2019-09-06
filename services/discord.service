@@ -1,0 +1,13 @@
+[Unit]
+Description=Discord Bot
+After=animenotifier.service
+
+[Service]
+Type=simple
+User=MAKEFILE_USER
+ExecStart=MAKEFILE_PWD/bots/discord/discord
+WorkingDirectory=MAKEFILE_PWD
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

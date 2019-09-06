@@ -5,14 +5,9 @@ After=network.target
 [Service]
 Type=simple
 User=MAKEFILE_USER
-ExecStart=MAKEFILE_EXEC
+ExecStart=MAKEFILE_PWD/notify.moe
 WorkingDirectory=MAKEFILE_PWD
 Restart=on-failure
-#Nice=-19
-#CPUSchedulingPolicy=fifo
-#CPUSchedulingPriority=99
-#IOSchedulingClass=realtime
-#IOSchedulingPriority=0
 
 [Install]
 WantedBy=multi-user.target

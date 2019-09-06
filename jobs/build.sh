@@ -1,5 +1,11 @@
 #!/bin/sh
-MYDIR="$(dirname "$(readlink -f "$0")")"
-cd "$MYDIR"
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+cd "$SCRIPTPATH"
 go build
-for dir in ./*; do ([ -d "$dir" ] && cd "$dir" && echo "Building jobs/$dir" && go build); done
+
+for dir in *; do
+	[ -d "$SCRIPTPATH/$dir" ] &&
+	cd "$SCRIPTPATH/$dir" &&
+	echo "Building jobs/$dir" &&
+	go build
+done
