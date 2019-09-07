@@ -8,7 +8,8 @@ import (
 
 // Force interface implementations
 var (
-	_ api.Newable = (*Analytics)(nil)
+	_ Identifiable = (*Analytics)(nil)
+	_ api.Newable  = (*Analytics)(nil)
 )
 
 // Authorize returns an error if the given API POST request is not authorized.

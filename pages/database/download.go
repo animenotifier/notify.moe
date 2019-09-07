@@ -15,11 +15,14 @@ import (
 
 // privateTypes are types that are not available for download.
 var privateTypes = []string{
+	"Analytics",
 	"EditLogEntry",
 	"EmailToUser",
+	"FacebookToUser",
 	"PayPalPayment",
 	"Purchase",
 	"Session",
+	"TwitterToUser",
 }
 
 // Download downloads a snapshot of a database collection.

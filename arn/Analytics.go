@@ -38,6 +38,11 @@ type ConnectionAnalytics struct {
 	EffectiveType string  `json:"effectiveType"`
 }
 
+// GetID returns the ID.
+func (analytics *Analytics) GetID() string {
+	return analytics.UserID
+}
+
 // GetAnalytics returns the analytics for the given user ID.
 func GetAnalytics(userID UserID) (*Analytics, error) {
 	obj, err := DB.Get("Analytics", userID)

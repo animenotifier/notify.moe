@@ -55,6 +55,11 @@ func (list *PushSubscriptions) Find(id string) *PushSubscription {
 	return nil
 }
 
+// GetID returns the ID.
+func (list *PushSubscriptions) GetID() string {
+	return list.UserID
+}
+
 // GetPushSubscriptions ...
 func GetPushSubscriptions(id string) (*PushSubscriptions, error) {
 	obj, err := DB.Get("PushSubscriptions", id)

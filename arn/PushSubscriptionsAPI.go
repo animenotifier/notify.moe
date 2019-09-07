@@ -10,6 +10,7 @@ import (
 
 // Force interface implementations
 var (
+	_ Identifiable = (*PushSubscriptions)(nil)
 	_ api.Editable = (*PushSubscriptions)(nil)
 	_ api.Filter   = (*PushSubscriptions)(nil)
 )
@@ -91,6 +92,10 @@ func (list *PushSubscriptions) Filter() {
 		item.P256DH = ""
 		item.Auth = ""
 		item.Endpoint = ""
+		item.Platform = ""
+		item.UserAgent = ""
+		item.Screen.Width = 0
+		item.Screen.Height = 0
 	}
 }
 
