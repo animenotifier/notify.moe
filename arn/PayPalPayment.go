@@ -8,13 +8,29 @@ import (
 
 // PayPalPayment is an approved and exeucted PayPal payment.
 type PayPalPayment struct {
-	ID       string `json:"id"`
 	UserID   string `json:"userId"`
 	PayerID  string `json:"payerId"`
 	Amount   string `json:"amount"`
 	Currency string `json:"currency"`
 	Method   string `json:"method"`
 	Created  string `json:"created"`
+
+	hasID
+}
+
+// NewPayPalPayment creates a new PayPalPayment object with the paypal provided ID.
+func NewPayPalPayment(paymentID, payerID, userID, method, amount, currency string) *PayPalPayment {
+	return &PayPalPayment{
+		hasID: hasID{
+			ID: paymentID,
+		},
+		PayerID:  payerID,
+		UserID:   userID,
+		Method:   method,
+		Amount:   amount,
+		Currency: currency,
+		Created:  DateTimeUTC(),
+	}
 }
 
 // Gems returns the total amount of gems.

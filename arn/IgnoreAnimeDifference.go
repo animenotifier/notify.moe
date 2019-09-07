@@ -11,10 +11,10 @@ const IgnoreAnimeDifferenceEditorScore = 2
 
 // IgnoreAnimeDifference saves which differences between anime databases can be ignored.
 type IgnoreAnimeDifference struct {
-	// The ID is built like this: arn:323|mal:356|JapaneseTitle
-	ID        string `json:"id"`
 	ValueHash uint64 `json:"valueHash"`
 
+	// The ID is built like this: arn:323|mal:356|JapaneseTitle
+	hasID
 	hasCreator
 }
 

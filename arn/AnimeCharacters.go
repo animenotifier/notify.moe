@@ -10,7 +10,7 @@ import (
 
 // AnimeCharacters is a list of characters for an anime.
 type AnimeCharacters struct {
-	AnimeID AnimeID           `json:"animeId" mainID:"true"`
+	AnimeID AnimeID           `json:"animeId" primary:"true"`
 	Items   []*AnimeCharacter `json:"items" editable:"true"`
 
 	sync.Mutex

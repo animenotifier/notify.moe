@@ -9,7 +9,7 @@ import (
 
 // Loggable applies to any type that has a TypeName function.
 type Loggable interface {
-	GetID() string
+	Identifiable
 	TypeName() string
 	Self() Loggable
 }

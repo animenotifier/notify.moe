@@ -8,7 +8,7 @@ import (
 
 // UserNotifications is a list including IDs to your notifications.
 type UserNotifications struct {
-	UserID UserID   `json:"userId"`
+	UserID UserID   `json:"userId" primary:"true"`
 	Items  []string `json:"items"`
 }
 

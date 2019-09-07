@@ -4,13 +4,14 @@ import "github.com/aerogo/nano"
 
 // Purchase represents an item purchase by a user.
 type Purchase struct {
-	ID       string `json:"id"`
 	UserID   string `json:"userId"`
 	ItemID   string `json:"itemId"`
 	Quantity int    `json:"quantity"`
 	Price    int    `json:"price"`
 	Currency string `json:"currency"`
 	Date     string `json:"date"`
+
+	hasID
 }
 
 // Item returns the item the user bought.
@@ -28,7 +29,9 @@ func (purchase *Purchase) User() *User {
 // NewPurchase creates a new Purchase object with a generated ID.
 func NewPurchase(userID UserID, itemID string, quantity int, price int, currency string) *Purchase {
 	return &Purchase{
-		ID:       GenerateID("Purchase"),
+		hasID: hasID{
+			ID: GenerateID("Purchase"),
+		},
 		UserID:   userID,
 		ItemID:   itemID,
 		Quantity: quantity,

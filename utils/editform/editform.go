@@ -18,7 +18,7 @@ import (
 func Render(obj interface{}, title string, user *arn.User) string {
 	t := reflect.TypeOf(obj).Elem()
 	v := reflect.ValueOf(obj).Elem()
-	id := findMainID(t, v)
+	id := findPrimaryID(t, v)
 	lowerCaseTypeName := strings.ToLower(t.Name())
 	endpoint := `/api/` + lowerCaseTypeName + `/` + id.String()
 
@@ -319,8 +319,8 @@ func renderSliceField(b *strings.Builder, field reflect.StructField, idPrefix st
 	b.WriteString(`</div>`)
 }
 
-// findMainID finds the main ID of the object.
-func findMainID(t reflect.Type, v reflect.Value) reflect.Value {
+// findPrimaryID finds the primary ID of the object.
+func findPrimaryID(t reflect.Type, v reflect.Value) reflect.Value {
 	idField := v.FieldByName("ID")
 
 	if idField.IsValid() {
@@ -330,7 +330,7 @@ func findMainID(t reflect.Type, v reflect.Value) reflect.Value {
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
 
-		if field.Tag.Get("mainID") == "true" {
+		if field.Tag.Get("primary") == "true" {
 			return reflect.Indirect(v.Field(i))
 		}
 	}

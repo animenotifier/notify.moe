@@ -2,6 +2,6 @@ package arn
 
 // GoogleToUser stores the user ID by Google user ID.
 type GoogleToUser struct {
-	ID     string `json:"id"`
+	ID     string `json:"id" primary:"true"`
 	UserID UserID `json:"userId"`
 }

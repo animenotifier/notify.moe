@@ -9,10 +9,11 @@ import (
 
 // Notification represents a user-associated notification.
 type Notification struct {
-	ID      string `json:"id"`
 	UserID  string `json:"userId"`
 	Created string `json:"created"`
 	Seen    string `json:"seen"`
+
+	hasID
 	PushNotification
 }
 
@@ -36,7 +37,9 @@ func (notification *Notification) String() string {
 // NewNotification creates a new notification.
 func NewNotification(userID UserID, pushNotification *PushNotification) *Notification {
 	return &Notification{
-		ID:               GenerateID("Notification"),
+		hasID: hasID{
+			ID: GenerateID("Notification"),
+		},
 		UserID:           userID,
 		Created:          DateTimeUTC(),
 		Seen:             "",

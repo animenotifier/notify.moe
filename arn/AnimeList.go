@@ -11,7 +11,7 @@ import (
 
 // AnimeList is a list of anime list items.
 type AnimeList struct {
-	UserID UserID           `json:"userId"`
+	UserID UserID           `json:"userId" primary:"true"`
 	Items  []*AnimeListItem `json:"items"`
 
 	sync.Mutex

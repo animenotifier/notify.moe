@@ -9,7 +9,7 @@ import (
 
 // EditLogEntry is an entry in the editor log.
 type EditLogEntry struct {
-	ID         string `json:"id"`
+	ID         string `json:"id" primary:"true"`
 	UserID     string `json:"userId"`
 	Action     string `json:"action"`
 	ObjectType string `json:"objectType"` // The typename of what was edited

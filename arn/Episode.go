@@ -9,7 +9,7 @@ import (
 
 // Episode represents a single episode for an anime.
 type Episode struct {
-	ID         string            `json:"id"`
+	ID         string            `json:"id" primary:"true"`
 	AnimeID    AnimeID           `json:"animeId"`
 	Number     int               `json:"number" editable:"true"`
 	Title      EpisodeTitle      `json:"title" editable:"true"`

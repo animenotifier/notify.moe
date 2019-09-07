@@ -9,7 +9,7 @@ const DefaultInventorySlotCount = 24
 
 // Inventory has inventory slots that store shop item IDs and their quantity.
 type Inventory struct {
-	UserID UserID           `json:"userId"`
+	UserID UserID           `json:"userId" primary:"true"`
 	Slots  []*InventorySlot `json:"slots"`
 }
 

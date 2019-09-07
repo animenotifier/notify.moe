@@ -29,7 +29,7 @@ const (
 
 // Settings represents user settings.
 type Settings struct {
-	UserID        string               `json:"userId"`
+	UserID        string               `json:"userId" primary:"true"`
 	SortBy        string               `json:"sortBy" editable:"true"`
 	TitleLanguage string               `json:"titleLanguage" editable:"true"`
 	Providers     ServiceProviders     `json:"providers"`
@@ -160,6 +160,11 @@ func GetSettings(userID UserID) (*Settings, error) {
 	}
 
 	return obj.(*Settings), nil
+}
+
+// GetID returns the ID.
+func (settings *Settings) GetID() string {
+	return settings.UserID
 }
 
 // User returns the user object for the settings.

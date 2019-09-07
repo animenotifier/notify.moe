@@ -37,7 +37,7 @@ type UserID = string
 
 // User is a registered person.
 type User struct {
-	ID           UserID       `json:"id"`
+	ID           UserID       `json:"id" primary:"true"`
 	Nick         string       `json:"nick" editable:"true"`
 	FirstName    string       `json:"firstName" private:"true"`
 	LastName     string       `json:"lastName" private:"true"`

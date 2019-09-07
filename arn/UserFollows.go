@@ -8,7 +8,7 @@ import (
 
 // UserFollows is a list including IDs to users you follow.
 type UserFollows struct {
-	UserID UserID   `json:"userId"`
+	UserID UserID   `json:"userId" primary:"true"`
 	Items  []string `json:"items"`
 }
 

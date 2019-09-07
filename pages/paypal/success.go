@@ -63,19 +63,8 @@ func Success(ctx aero.Context) error {
 	}
 
 	stringutils.PrettyPrint(sdkPayment)
-
 	transaction := sdkPayment.Transactions[0]
-
-	payment := &arn.PayPalPayment{
-		ID:       paymentID,
-		PayerID:  payerID,
-		UserID:   user.ID,
-		Method:   sdkPayment.Payer.PaymentMethod,
-		Amount:   transaction.Amount.Total,
-		Currency: transaction.Amount.Currency,
-		Created:  arn.DateTimeUTC(),
-	}
-
+	payment := arn.NewPayPalPayment(paymentID, payerID, user.ID, sdkPayment.Payer.PaymentMethod, transaction.Amount.Total, transaction.Amount.Currency)
 	payment.Save()
 
 	// Increase user's balance

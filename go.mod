@@ -49,6 +49,7 @@ require (
 	github.com/mailgun/mailgun-go/v3 v3.6.0
 	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
 	github.com/minio/minio-go/v6 v6.0.34
+	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
 	github.com/shirou/gopsutil v2.18.12+incompatible

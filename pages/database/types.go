@@ -13,6 +13,10 @@ func Types(ctx aero.Context) error {
 	types := make([]string, 0, len(typeMap))
 
 	for typeName := range typeMap {
+		if arn.Contains(privateTypes, typeName) {
+			continue
+		}
+
 		types = append(types, typeName)
 	}
 

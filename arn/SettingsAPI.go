@@ -10,6 +10,7 @@ import (
 
 // Force interface implementations
 var (
+	_ Identifiable = (*Settings)(nil)
 	_ api.Editable = (*Settings)(nil)
 	_ api.Filter   = (*Settings)(nil)
 )

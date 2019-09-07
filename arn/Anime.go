@@ -67,7 +67,7 @@ type AnimeID = string
 
 // Anime represents an anime.
 type Anime struct {
-	ID            AnimeID          `json:"id"`
+	ID            AnimeID          `json:"id" primary:"true"`
 	Type          string           `json:"type" editable:"true" datalist:"anime-types"`
 	Title         *MediaTitle      `json:"title" editable:"true"`
 	Summary       string           `json:"summary" editable:"true" type:"textarea"`
