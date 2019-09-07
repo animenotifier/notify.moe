@@ -1,0 +1,13 @@
+[Unit]
+Description=Backup
+After=animenotifier.service
+
+[Service]
+Type=simple
+User=MAKEFILE_USER
+ExecStart=MAKEFILE_GOBIN/nano-backup
+WorkingDirectory=MAKEFILE_PWD
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
