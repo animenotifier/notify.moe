@@ -20,11 +20,6 @@ component Groups(groups []*arn.Group, nextIndex int, user *arn.User)
 					Icon("pencil")
 					span Edit draft
 
-	if user == nil || !user.IsPro()
-		p.groups-beta-message.mountable
-			a(href="/support") Supporters
-			span  are currently receiving early access to group creation during the BETA phase.
-
 	#load-more-target.groups
 		GroupsScrollable(groups, user)
 	
