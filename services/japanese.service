@@ -8,6 +8,7 @@ User=MAKEFILE_USER
 ExecStart=MAKEFILE_GOBIN/japanese
 WorkingDirectory=MAKEFILE_PWD
 Restart=on-failure
+Nice=1
 
 [Install]
 WantedBy=multi-user.target

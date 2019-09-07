@@ -8,6 +8,7 @@ User=MAKEFILE_USER
 ExecStart=MAKEFILE_PWD/bots/discord/discord
 WorkingDirectory=MAKEFILE_PWD
 Restart=on-failure
+Nice=5
 
 [Install]
 WantedBy=multi-user.target

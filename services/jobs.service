@@ -8,6 +8,7 @@ User=MAKEFILE_USER
 ExecStart=MAKEFILE_PWD/jobs/jobs
 WorkingDirectory=MAKEFILE_PWD
 Restart=on-failure
+Nice=10
 
 [Install]
 WantedBy=multi-user.target
