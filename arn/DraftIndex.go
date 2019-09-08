@@ -24,8 +24,8 @@ func NewDraftIndex(userID UserID) *DraftIndex {
 	}
 }
 
-// GetID gets the ID for the given type name.
-func (index *DraftIndex) GetID(typeName string) (string, error) {
+// DraftID gets the ID for the given type name.
+func (index *DraftIndex) DraftID(typeName string) (string, error) {
 	v := reflect.ValueOf(index).Elem()
 	fieldValue := v.FieldByName(typeName + "ID")
 
@@ -36,8 +36,8 @@ func (index *DraftIndex) GetID(typeName string) (string, error) {
 	return fieldValue.String(), nil
 }
 
-// SetID sets the ID for the given type name.
-func (index *DraftIndex) SetID(typeName string, id string) error {
+// SetDraftID sets the ID for the given type name.
+func (index *DraftIndex) SetDraftID(typeName string, id string) error {
 	v := reflect.ValueOf(index).Elem()
 	fieldValue := v.FieldByName(typeName + "ID")
 
@@ -47,6 +47,11 @@ func (index *DraftIndex) SetID(typeName string, id string) error {
 
 	fieldValue.SetString(id)
 	return nil
+}
+
+// GetID returns the ID.
+func (index *DraftIndex) GetID() string {
+	return index.UserID
 }
 
 // GetDraftIndex ...

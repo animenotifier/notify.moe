@@ -78,7 +78,7 @@ func publish(draft Publishable) error {
 		return err
 	}
 
-	currentDraftID, _ := draftIndex.GetID(typ.Name())
+	currentDraftID, _ := draftIndex.DraftID(typ.Name())
 
 	if currentDraftID != draft.GetID() {
 		return errors.New(typ.Name() + " draft doesn't exist in the user draft index")
@@ -86,7 +86,7 @@ func publish(draft Publishable) error {
 
 	// Publish the object
 	draft.SetIsDraft(false)
-	err = draftIndex.SetID(typ.Name(), "")
+	err = draftIndex.SetDraftID(typ.Name(), "")
 
 	if err != nil {
 		return err
@@ -113,14 +113,14 @@ func unpublish(draft Publishable) error {
 		return err
 	}
 
-	draftIndexID, _ := draftIndex.GetID(typ.Name())
+	draftIndexID, _ := draftIndex.DraftID(typ.Name())
 
 	if draftIndexID != "" {
 		return errors.New("You still have an unfinished draft")
 	}
 
 	draft.SetIsDraft(true)
-	err = draftIndex.SetID(typ.Name(), draft.GetID())
+	err = draftIndex.SetDraftID(typ.Name(), draft.GetID())
 
 	if err != nil {
 		return err

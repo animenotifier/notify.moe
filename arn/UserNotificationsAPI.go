@@ -2,6 +2,7 @@ package arn
 
 // Force interface implementations
 var (
+	_ Identifiable = (*UserNotifications)(nil)
 	_ IDCollection = (*UserNotifications)(nil)
 )
 

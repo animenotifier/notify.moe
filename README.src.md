@@ -17,7 +17,8 @@ cd notify.moe
 go mod download
 make tools
 make assets
-go build
+make server
+make db
 ./notify.moe
 ```
 

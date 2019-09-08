@@ -4,7 +4,8 @@ import "github.com/aerogo/api"
 
 // Force interface implementations
 var (
-	_ api.Savable = (*DraftIndex)(nil)
+	_ Identifiable = (*DraftIndex)(nil)
+	_ api.Savable  = (*DraftIndex)(nil)
 )
 
 // Save saves the index in the database.

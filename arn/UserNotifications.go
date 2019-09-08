@@ -83,6 +83,11 @@ func (list *UserNotifications) Notifications() []*Notification {
 	return notifications
 }
 
+// GetID returns the ID.
+func (list *UserNotifications) GetID() string {
+	return list.UserID
+}
+
 // GetUserNotifications ...
 func GetUserNotifications(id UserID) (*UserNotifications, error) {
 	obj, err := DB.Get("UserNotifications", id)

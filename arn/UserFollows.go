@@ -107,6 +107,11 @@ func (list *UserFollows) UsersWhoFollowBack() []*User {
 	return friends
 }
 
+// GetID returns the ID.
+func (list *UserFollows) GetID() string {
+	return list.UserID
+}
+
 // UserFollowerCountMap returns a map of user ID keys and their corresping number of followers as the value.
 func UserFollowerCountMap() map[string]int {
 	followCount := map[string]int{}

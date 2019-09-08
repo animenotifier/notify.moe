@@ -1,6 +1,8 @@
 package arn
 
 import (
+	"path"
+
 	"github.com/aerogo/api"
 	"github.com/aerogo/nano"
 	"github.com/animenotifier/kitsu"
@@ -9,7 +11,8 @@ import (
 
 // Node represents the database node.
 var Node = nano.New(nano.Configuration{
-	Port: 5000,
+	Port:      5000,
+	Directory: path.Join(Root, "db"),
 })
 
 // DB is the main database client.
@@ -67,5 +70,5 @@ var Kitsu = Node.Namespace("kitsu").RegisterTypes(
 	(*kitsu.Character)(nil),
 )
 
-// API ...
+// API is used to install the REST API.
 var API = api.New("/api/", DB)

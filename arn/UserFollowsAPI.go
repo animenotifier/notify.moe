@@ -7,6 +7,7 @@ import (
 
 // Force interface implementations
 var (
+	_ Identifiable = (*UserFollows)(nil)
 	_ IDCollection = (*UserFollows)(nil)
 	_ api.Editable = (*UserFollows)(nil)
 )
