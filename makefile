@@ -55,6 +55,10 @@ ifeq ($(OSNAME),OSX)
 	@echo "rdr pass inet proto tcp from any to any port 443 -> 127.0.0.1 port 4001" | sudo pfctl -ef -
 endif
 
+# downloads the database
+db:
+	@./db/build.sh
+
 # installs systemd service files for all required services
 services:
 	@./services/build.sh
@@ -79,4 +83,4 @@ bench:
 
 all: tools assets server bots jobs patches
 
-.PHONY: tools assets server bots jobs patches services ports clean
+.PHONY: tools assets server bots jobs patches services db ports clean

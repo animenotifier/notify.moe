@@ -1,0 +1,11 @@
+#!/bin/sh
+TYPES=`curl -sS 'https://notify.moe/api/types' | jq '.[]' | cut -d '"' -f 2`
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+cd "$SCRIPTPATH"
+mkdir -p arn2
+
+for TYPENAME in $TYPES; do
+	echo "Downloading db/arn/$TYPENAME.dat"
+	URL=https://notify.moe/api/types/$TYPENAME/download
+	curl -sS $URL -o arn2/$TYPENAME.dat
+done
