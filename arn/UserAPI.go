@@ -225,7 +225,6 @@ func (user *User) Filter() {
 	user.IP = ""
 	user.UserAgent = ""
 	user.LastLogin = ""
-	user.LastSeen = ""
 	user.Accounts.Facebook.ID = ""
 	user.Accounts.Google.ID = ""
 	user.Accounts.Twitter.ID = ""
