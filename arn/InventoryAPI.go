@@ -7,6 +7,11 @@ import (
 	"github.com/aerogo/api"
 )
 
+// Force interface implementations
+var (
+	_ Identifiable = (*Inventory)(nil)
+)
+
 // Actions
 func init() {
 	API.RegisterActions("Inventory", []*api.Action{

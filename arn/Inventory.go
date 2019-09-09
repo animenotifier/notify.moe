@@ -62,6 +62,11 @@ func (inventory *Inventory) SwapSlots(a, b int) error {
 	return nil
 }
 
+// GetID returns the ID.
+func (inventory *Inventory) GetID() string {
+	return inventory.UserID
+}
+
 // NewInventory creates a new inventory with the default number of slots.
 func NewInventory(userID UserID) *Inventory {
 	inventory := &Inventory{
