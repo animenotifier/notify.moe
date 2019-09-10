@@ -2,14 +2,13 @@
 
 {go:header}
 
-## How to
+## Prerequisites
 
-### Prerequisites
-
+* Install [Linux](https://en.wikipedia.org/wiki/Linux), [MacOS](https://en.wikipedia.org/wiki/MacOS) or [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux)
 * Install [Go](https://golang.org/)
 * Install [TypeScript](https://www.typescriptlang.org/)
 
-### Installation
+## Installation
 
 ```shell
 git clone https://github.com/animenotifier/notify.moe.git
@@ -22,18 +21,18 @@ make db
 ./notify.moe
 ```
 
-### Networking
+## Networking
 
 * Add `beta.notify.moe 127.0.0.1` to your `hosts` file
 * Run `make ports`
 
-### In your browser
+## In your browser
 
 * Open the settings, search for certificates
 * Import the file `security/default/root.crt` as a trusted Root authority
 * Open `https://beta.notify.moe`
 
-### What now?
+## What now?
 
 * Try the [example task for newcomers](docs/new-contributor-task.md).
 * Make some changes and upload them to a new branch on your fork.
