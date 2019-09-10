@@ -10,7 +10,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Filter ...
+// Filter filters the anime for the explore page.
 func Filter(ctx aero.Context) error {
 	year := ctx.Get("year")
 	season := ctx.Get("season")

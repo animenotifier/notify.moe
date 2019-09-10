@@ -92,7 +92,7 @@ func PostText(text string) string {
 	return text
 }
 
-// ThreadTitle ...
+// ThreadTitle fixes a thread title by trimming spaces.
 func ThreadTitle(title string) string {
 	return strings.TrimSpace(title)
 }

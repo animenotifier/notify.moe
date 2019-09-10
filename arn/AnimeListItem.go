@@ -9,7 +9,7 @@ const (
 	AnimeListStatusDropped   = "dropped"
 )
 
-// AnimeListItem ...
+// AnimeListItem represents a single item in an anime list.
 type AnimeListItem struct {
 	AnimeID      AnimeID             `json:"animeId"`
 	Status       string              `json:"status" editable:"true"`

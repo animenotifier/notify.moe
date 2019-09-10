@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-// HSLColor ...
+// HSLColor represents a color in the HSL format.
 type HSLColor struct {
 	Hue        float64 `json:"hue"`
 	Saturation float64 `json:"saturation"`

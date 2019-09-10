@@ -102,7 +102,8 @@ func RenderObject(b *strings.Builder, obj interface{}, idPrefix string) {
 	}
 }
 
-// RenderField ...
+// RenderField renders a single field. If that field is a struct,
+// it will recursively go through all subfields.
 func RenderField(b *strings.Builder, v *reflect.Value, field reflect.StructField, idPrefix string) {
 	fieldValue := reflect.Indirect(v.FieldByName(field.Name))
 

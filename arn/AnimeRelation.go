@@ -16,7 +16,7 @@ func init() {
 	}
 }
 
-// AnimeRelation ...
+// AnimeRelation represents a relation to another anime.
 type AnimeRelation struct {
 	AnimeID AnimeID `json:"animeId" editable:"true"`
 	Type    string  `json:"type" editable:"true" datalist:"anime-relation-types"`

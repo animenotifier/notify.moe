@@ -16,7 +16,7 @@ var Root = os.Getenv("ARN_ROOT")
 // APIKeys are global API keys for several services
 var APIKeys APIKeysData
 
-// APIKeysData ...
+// APIKeysData represents the API keys defined in "security/api-keys.json".
 type APIKeysData struct {
 	Google struct {
 		ID     string `json:"id"`

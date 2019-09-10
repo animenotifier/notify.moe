@@ -260,7 +260,7 @@ func (anime *Anime) Prequels() []*Anime {
 	return prequels
 }
 
-// ImageLink ...
+// ImageLink requires a size parameter and returns a link to the image in the given size.
 func (anime *Anime) ImageLink(size string) string {
 	extension := ".jpg"
 
@@ -296,7 +296,7 @@ func (anime *Anime) Season() string {
 	return DateToSeason(anime.StartDateTime())
 }
 
-// Characters ...
+// Characters returns the anime characters for this anime.
 func (anime *Anime) Characters() *AnimeCharacters {
 	characters, _ := GetAnimeCharacters(anime.ID)
 
@@ -623,7 +623,8 @@ func (anime *Anime) UpcomingEpisode() *UpcomingEpisode {
 	return nil
 }
 
-// EpisodeCountString ...
+// EpisodeCountString formats the episode count and displays
+// a question mark when the number of episodes is unknown.
 func (anime *Anime) EpisodeCountString() string {
 	if anime.EpisodeCount == 0 {
 		return "?"

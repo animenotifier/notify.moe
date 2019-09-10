@@ -21,7 +21,7 @@ var weekdayNames = []string{
 	"Saturday",
 }
 
-// Get ...
+// Get renders the calendar page.
 func Get(ctx aero.Context) error {
 	user := utils.GetUser(ctx)
 	oneWeek := 7 * 24 * time.Hour
