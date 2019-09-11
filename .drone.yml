@@ -7,7 +7,7 @@ steps:
   environment:
     ARN_ROOT: /drone/src
   commands:
-  - pacman -S go nodejs npm
+  - pacman -Syu --noconfirm go nodejs npm
   - go version
   - npm install -g typescript
   - go mod download
