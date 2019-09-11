@@ -5,7 +5,7 @@ steps:
 - name: test
   image: golang
   environment:
-    NVM_DIR: /root/.nvm
+    NVM_DIR: /tmp/.nvm
     ARN_ROOT: /drone/src
   commands:
   - go version
