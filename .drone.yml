@@ -5,9 +5,10 @@ steps:
 - name: test
   image: archlinux/base
   environment:
+    CGO_ENABLED: 0
     ARN_ROOT: /drone/src
   commands:
-  - pacman -Syu --noconfirm go nodejs npm
+  - pacman -Syu --noconfirm go nodejs npm make
   - go version
   - npm install -g typescript
   - go mod download
@@ -18,17 +19,6 @@ steps:
   - golangci-lint run
   - make db
   - go test -v -coverprofile=coverage.txt .
-  # - go mod download
-  # - make tools
-  # - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-  # - nvm install node
-  # - npm install -g typescript
-  # - tsc
-  # - pack
-  # - make server
-  # - make bots jobs patches
-  # - git clone --depth=1 https://github.com/animenotifier/database ~/.aero/db/arn
-  # - go test -v -coverprofile=coverage.txt ./...
 
 - name: coverage
   image: plugins/codecov
