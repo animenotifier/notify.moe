@@ -2,8 +2,8 @@
 
 # Constants
 GOTEST=@./utils/test/go-test-color.sh
-PACK=$(shell command -v pack 2> /dev/null)
-RUN=$(shell command -v run 2> /dev/null)
+GOBINARIES=`go env GOPATH`/bin
+PACK=$(GOBINARIES)/pack
 
 # Determine the name of the platform
 OSNAME=
@@ -35,7 +35,7 @@ endif
 # compiles assets for the server
 assets:
 	@tsc
-	@pack
+	@$(PACK)
 
 # cleans all binaries and generated files
 clean:
