@@ -5,19 +5,21 @@ steps:
 - name: test
   image: golang
   environment:
-    GO111MODULE: on
+    NVM_DIR: /root/.nvm
     ARN_ROOT: /drone/src
   commands:
   - go version
-  - go mod download
   - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  - $NVM_DIR/nvm.sh
   - nvm install node
   - npm install -g typescript
+  - go mod download
   - make tools
   - make assets
   - make server
-  - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.17.1
+  - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.18.0
   - golangci-lint run
+  - make db
   - go test -v -coverprofile=coverage.txt .
   # - go mod download
   # - make tools

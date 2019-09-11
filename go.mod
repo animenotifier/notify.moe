@@ -5,7 +5,7 @@ go 1.12
 require (
 	cloud.google.com/go v0.45.1 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.24
+	github.com/aerogo/aero v1.3.25
 	github.com/aerogo/api v0.2.2
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
@@ -16,14 +16,14 @@ require (
 	github.com/aerogo/markdown v0.1.9
 	github.com/aerogo/mirror v0.2.4
 	github.com/aerogo/nano v0.3.5
-	github.com/aerogo/pack v0.6.1
+	github.com/aerogo/pack v0.6.4
 	github.com/aerogo/packet v0.2.2 // indirect
 	github.com/aerogo/run v1.0.2
 	github.com/aerogo/session-store-nano v0.1.7
 	github.com/aerogo/sitemap v0.1.4
 	github.com/akyoto/assert v0.2.1
 	github.com/akyoto/cache v1.0.3
-	github.com/akyoto/color v1.8.7
+	github.com/akyoto/color v1.8.8
 	github.com/akyoto/go-matroska v0.1.1
 	github.com/akyoto/hash v0.4.5
 	github.com/akyoto/imageserver v0.3.7
@@ -47,7 +47,7 @@ require (
 	github.com/json-iterator/go v1.1.7
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.0
-	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
+	github.com/mailru/easyjson v0.7.0 // indirect
 	github.com/minio/minio-go/v6 v6.0.34
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
@@ -60,10 +60,9 @@ require (
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
-	golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472 // indirect
-	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297 // indirect
+	golang.org/x/crypto v0.0.0-20190909091759-094676da4a83 // indirect
+	golang.org/x/net v0.0.0-20190909003024-a7b16738d86b // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sys v0.0.0-20190904154756-749cb33beabd // indirect
 	google.golang.org/appengine v1.6.2 // indirect
 	gopkg.in/ini.v1 v1.46.0 // indirect
 )
