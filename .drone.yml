@@ -3,12 +3,12 @@ name: default
 
 steps:
 - name: test
-  image: golang
+  image: archlinux/base
   environment:
     ARN_ROOT: /drone/src
   commands:
+  - pacman -S go nodejs npm
   - go version
-  - apt-get install nodejs npm
   - npm install -g typescript
   - go mod download
   - make tools
