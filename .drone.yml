@@ -5,15 +5,10 @@ steps:
 - name: test
   image: golang
   environment:
-    NVM_DIR: /tmp/.nvm
     ARN_ROOT: /drone/src
   commands:
   - go version
-  - mkdir $NVM_DIR
-  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-  - chmod +x $NVM_DIR/nvm.sh
-  - $NVM_DIR/nvm.sh
-  - nvm install node
+  - apt-get install nodejs npm
   - npm install -g typescript
   - go mod download
   - make tools
