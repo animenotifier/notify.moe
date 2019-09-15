@@ -175,11 +175,11 @@ func (user *User) SendNotification(pushNotification *PushNotification) {
 	expired := []*PushSubscription{}
 
 	for _, sub := range subs.Items {
-		resp, err := sub.SendNotification(pushNotification)
+		response, err := sub.SendNotification(pushNotification)
 
-		if resp != nil && resp.StatusCode == http.StatusGone {
+		// It is possible to receive a non-nil response with an error, so check the status.
+		if response != nil && response.StatusCode == http.StatusGone {
 			expired = append(expired, sub)
-			continue
 		}
 
 		// Print errors
@@ -188,10 +188,13 @@ func (user *User) SendNotification(pushNotification *PushNotification) {
 			continue
 		}
 
+		// Response body must be closed if no error was returned
+		defer response.Body.Close()
+
 		// Print bad status codes
-		if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
-			body, _ := ioutil.ReadAll(resp.Body)
-			fmt.Println(resp.StatusCode, string(body))
+		if response.StatusCode != http.StatusOK && response.StatusCode != http.StatusCreated {
+			body, _ := ioutil.ReadAll(response.Body)
+			fmt.Println(response.StatusCode, string(body))
 			continue
 		}
 

@@ -15,8 +15,6 @@ func main() {
 	futureThreshold := 8 * 7 * 24 * time.Hour
 
 	for anime := range arn.StreamAnime() {
-		modified := false
-
 		// Try to find incorrect airing dates
 		for _, episode := range anime.Episodes() {
 			if episode.AiringDate.Start == "" {
@@ -35,12 +33,7 @@ func main() {
 			// Delete the wrong airing date
 			episode.AiringDate.Start = ""
 			episode.AiringDate.End = ""
-
-			modified = true
-		}
-
-		if modified {
-			anime.Episodes().Save()
+			episode.Save()
 		}
 	}
 }

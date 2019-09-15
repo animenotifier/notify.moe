@@ -1,7 +1,10 @@
 package utils
 
-import "time"
-import "github.com/animenotifier/notify.moe/arn"
+import (
+	"time"
+
+	"github.com/animenotifier/notify.moe/arn"
+)
 
 // UserStats ...
 type UserStats struct {

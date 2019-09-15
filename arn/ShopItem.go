@@ -21,6 +21,7 @@ const (
 
 // ShopItem is a purchasable item in the shop.
 type ShopItem struct {
+	ID          string `json:"id" primary:"true"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Price       uint   `json:"price"`
@@ -28,8 +29,11 @@ type ShopItem struct {
 	Rarity      string `json:"rarity"`
 	Order       int    `json:"order"`
 	Consumable  bool   `json:"consumable"`
+}
 
-	hasID
+// GetID returns the ID.
+func (item *ShopItem) GetID() string {
+	return item.ID
 }
 
 // GetShopItem ...
