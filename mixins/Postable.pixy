@@ -10,7 +10,10 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, showP
 						a(href=post.Creator().Link())= post.Creator().Nick
 					
 						if showParent
-							if post.GetParentType() == "User"
+							if post.TypeName() == "Thread"
+								span  in 
+								a(href=post.Link())= post.TitleByUser(user)
+							else if post.GetParentType() == "User"
 								if post.GetParentID() != post.Creator().ID
 									span  to 
 									a(href=post.Parent().Link())= post.Parent().TitleByUser(user)
