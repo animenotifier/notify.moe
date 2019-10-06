@@ -111,7 +111,13 @@ func (anime *Anime) Delete() error {
 	DB.Delete("AnimeRelations", anime.ID)
 
 	// Delete anime episodes
-	DB.Delete("AnimeEpisodes", anime.ID)
+	for _, episode := range anime.Episodes() {
+		err := episode.Delete()
+
+		if err != nil {
+			return err
+		}
+	}
 
 	// Delete anime list items
 	for animeList := range StreamAnimeLists() {
