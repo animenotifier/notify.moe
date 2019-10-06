@@ -29,6 +29,7 @@ require (
 	github.com/akyoto/imageserver v0.3.7
 	github.com/akyoto/stringutils v0.2.4
 	github.com/akyoto/webpush-go v0.1.2
+	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/animenotifier/anilist v0.2.5
 	github.com/animenotifier/ffxiv v0.2.2
 	github.com/animenotifier/japanese v0.2.5
@@ -48,11 +49,11 @@ require (
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.0
 	github.com/mailru/easyjson v0.7.0 // indirect
-	github.com/minio/minio-go/v6 v6.0.37
+	github.com/minio/minio-go/v6 v6.0.38
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
-	github.com/shirou/gopsutil v2.18.12+incompatible
+	github.com/shirou/gopsutil v2.19.9+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/smartystreets/assertions v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
@@ -60,9 +61,11 @@ require (
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
-	golang.org/x/crypto v0.0.0-20190927123631-a832865fa7ad // indirect
-	golang.org/x/net v0.0.0-20190926025831-c00fd9afed17 // indirect
+	golang.org/x/crypto v0.0.0-20191002192127-34f69633bfdc // indirect
+	golang.org/x/net v0.0.0-20191003171128-d98b1b443823 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
+	golang.org/x/sys v0.0.0-20191005200804-aed5e4c7ecf9 // indirect
 	google.golang.org/appengine v1.6.4 // indirect
 	gopkg.in/ini.v1 v1.48.0 // indirect
+	gopkg.in/yaml.v2 v2.2.4 // indirect
 )
