@@ -1,12 +1,9 @@
 package arn
 
 import (
-	"net/http"
 	"strings"
 
-	"github.com/aerogo/http/client"
 	"github.com/aerogo/nano"
-	"github.com/akyoto/color"
 	"github.com/animenotifier/kitsu"
 )
 
@@ -47,17 +44,17 @@ func NewAnimeFromKitsuAnime(kitsuAnime *kitsu.Anime) (*Anime, *AnimeCharacters, 
 	}
 
 	// Download image
-	response, err := client.Get(attr.PosterImage.Original).End()
+	// response, err := client.Get(attr.PosterImage.Original).End()
 
-	if err == nil && response.StatusCode() == http.StatusOK {
-		err := anime.SetImageBytes(response.Bytes())
+	// if err == nil && response.StatusCode() == http.StatusOK {
+	// 	err := anime.SetImageBytes(response.Bytes())
 
-		if err != nil {
-			color.Red("Couldn't set image for [%s] %s (%s)", anime.ID, anime, err.Error())
-		}
-	} else {
-		color.Red("No image for [%s] %s (%d)", anime.ID, anime, response.StatusCode())
-	}
+	// 	if err != nil {
+	// 		color.Red("Couldn't set image for [%s] %s (%s)", anime.ID, anime, err.Error())
+	// 	}
+	// } else {
+	// 	color.Red("No image for [%s] %s (%d)", anime.ID, anime, response.StatusCode())
+	// }
 
 	// Rating
 	if anime.Rating.IsNotRated() {
