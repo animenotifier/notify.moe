@@ -2,7 +2,6 @@ package character
 
 import (
 	"net/http"
-
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 )
@@ -21,7 +20,7 @@ func Ranking(ctx aero.Context) error {
 	response := struct {
 		Rank       int     `json:"rank"`
 		Percentile float64 `json:"percentile"`
-	}{}
+	}
 
 	// Sort characters
 	characters := arn.FilterCharacters(func(character *arn.Character) bool {
