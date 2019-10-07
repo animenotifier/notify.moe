@@ -11,7 +11,7 @@ import (
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-// Sequels ...
+// Sequels- returns sequel if it's "Planned" status.
 func Sequels(ctx aero.Context) error {
 	nick := ctx.Get("nick")
 	user := utils.GetUser(ctx)
@@ -27,7 +27,7 @@ func Sequels(ctx aero.Context) error {
 	for anime := range arn.StreamAnime() {
 		item := animeList.Find(anime.ID)
 
-		// Ignore if user added the anime and it's not "Planned" status
+		// Ignore if user added the anime and it's not "Planned" status.
 		if item != nil && item.Status != arn.AnimeListStatusPlanned {
 			continue
 		}
