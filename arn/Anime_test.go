@@ -48,7 +48,6 @@ func TestAllAnime(t *testing.T) {
 	allAnime := arn.AllAnime()
 
 	for _, anime := range allAnime {
-
 		assert.NotEqual(t, anime.ID, "")
 		assert.Contains(t, validAnimeStatus, anime.Status)
 		assert.Contains(t, validAnimeType, anime.Type)
