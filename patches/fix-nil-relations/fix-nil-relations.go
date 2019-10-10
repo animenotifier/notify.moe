@@ -7,8 +7,9 @@ import (
 
 func main() {
 	color.Yellow("Fixing non-existing anime relations")
-	defer color.Green("Finished.")
 	defer arn.Node.Close()
+
+	count := 0
 
 	for anime := range arn.StreamAnime() {
 		relations := anime.Relations()
@@ -19,6 +20,9 @@ func main() {
 			}
 
 			relations.Save()
+			count++
 		}
 	}
+
+	color.Green("Finished adding %d anime relations objects.", count)
 }
