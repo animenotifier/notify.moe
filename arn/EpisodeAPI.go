@@ -49,6 +49,6 @@ func (episode *Episode) Save() {
 
 // Delete deletes the episode list from the database.
 func (episode *Episode) Delete() error {
-	DB.Delete("Episode", episode.AnimeID)
+	DB.Delete("Episode", episode.ID)
 	return nil
 }
