@@ -35,6 +35,10 @@ func Anime(originalTerm string, maxLength int) []*arn.Anime {
 	}
 
 	for anime := range arn.StreamAnime() {
+		if anime.IsDraft {
+			continue
+		}
+
 		if anime.ID == originalTerm {
 			return []*arn.Anime{anime}
 		}

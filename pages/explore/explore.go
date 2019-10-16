@@ -60,6 +60,10 @@ func filterAnime(year, season, status, typ string) []*arn.Anime {
 	results := make([]*arn.Anime, 0, 1024)
 
 	for anime := range arn.StreamAnime() {
+		if anime.IsDraft {
+			continue
+		}
+
 		if year != "any" {
 			if len(anime.StartDate) < 4 {
 				continue

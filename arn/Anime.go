@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aerogo/api"
 	"github.com/aerogo/nano"
 	"github.com/animenotifier/notify.moe/arn/validate"
 	"github.com/animenotifier/twist"
@@ -60,6 +61,14 @@ func init() {
 	for _, option := range DataLists["anime-sources"] {
 		AnimeSourceHumanReadable[option.Value] = option.Label
 	}
+
+	API.RegisterActions("Anime", []*api.Action{
+		// Publish
+		PublishAction(),
+
+		// Unpublish
+		UnpublishAction(),
+	})
 }
 
 // AnimeID represents an anime ID.
@@ -69,7 +78,7 @@ type AnimeID = string
 type Anime struct {
 	ID            AnimeID          `json:"id" primary:"true"`
 	Type          string           `json:"type" editable:"true" datalist:"anime-types"`
-	Title         *MediaTitle      `json:"title" editable:"true"`
+	Title         MediaTitle       `json:"title" editable:"true"`
 	Summary       string           `json:"summary" editable:"true" type:"textarea"`
 	Status        string           `json:"status" editable:"true" datalist:"anime-status"`
 	Genres        []string         `json:"genres" editable:"true"`
@@ -80,10 +89,10 @@ type Anime struct {
 	Source        string           `json:"source" editable:"true" datalist:"anime-sources"`
 	Image         Image            `json:"image"`
 	FirstChannel  string           `json:"firstChannel"`
-	Rating        *AnimeRating     `json:"rating"`
-	Popularity    *AnimePopularity `json:"popularity"`
+	Rating        AnimeRating      `json:"rating"`
+	Popularity    AnimePopularity  `json:"popularity"`
 	Trailers      []*ExternalMedia `json:"trailers" editable:"true"`
-	EpisodeIDs    []string         `json:"episodes" editable:"true"`
+	EpisodeIDs    []string         `json:"episodes"`
 
 	// Mixins
 	hasMappings
@@ -107,19 +116,19 @@ type Anime struct {
 
 // NewAnime creates a new anime.
 func NewAnime() *Anime {
-	return &Anime{
-		ID:         GenerateID("Anime"),
-		Title:      &MediaTitle{},
-		Rating:     &AnimeRating{},
-		Popularity: &AnimePopularity{},
-		Trailers:   []*ExternalMedia{},
-		hasCreator: hasCreator{
-			Created: DateTimeUTC(),
-		},
-		hasMappings: hasMappings{
-			Mappings: []*Mapping{},
-		},
-	}
+	anime := Anime{}
+	return anime.init()
+}
+
+// init is the constructor for Anime.
+func (anime *Anime) init() *Anime {
+	anime.ID = GenerateID("Anime")
+	anime.Type = "tv"
+	anime.Status = "upcoming"
+	anime.Trailers = []*ExternalMedia{}
+	anime.Mappings = []*Mapping{}
+	anime.Created = DateTimeUTC()
+	return anime
 }
 
 // GetAnime gets the anime with the given ID.
@@ -136,6 +145,41 @@ func GetAnime(id AnimeID) (*Anime, error) {
 // TitleByUser returns the preferred title for the given user.
 func (anime *Anime) TitleByUser(user *User) string {
 	return anime.Title.ByUser(user)
+}
+
+// Publish publishes the anime draft.
+func (anime *Anime) Publish() error {
+	// No type
+	if anime.Type == "" {
+		return errors.New("No type")
+	}
+
+	// No name
+	if anime.Title.Canonical == "" {
+		return errors.New("No canonical anime name")
+	}
+
+	// No status
+	if anime.Status == "" {
+		return errors.New("No status")
+	}
+
+	// No genres
+	if len(anime.Genres) == 0 {
+		return errors.New("No genres")
+	}
+
+	// No image
+	if !anime.HasImage() {
+		return errors.New("No anime image")
+	}
+
+	return publish(anime)
+}
+
+// Unpublish turns the anime into a draft.
+func (anime *Anime) Unpublish() error {
+	return unpublish(anime)
 }
 
 // AddStudio adds the company ID to the studio ID list if it doesn't exist already.
@@ -299,16 +343,6 @@ func (anime *Anime) Season() string {
 // Characters returns the anime characters for this anime.
 func (anime *Anime) Characters() *AnimeCharacters {
 	characters, _ := GetAnimeCharacters(anime.ID)
-
-	if characters != nil {
-		// TODO: Sort by role in sync-characters job
-		// Sort by role
-		sort.Slice(characters.Items, func(i, j int) bool {
-			// A little trick because "main" < "supporting"
-			return characters.Items[i].Role < characters.Items[j].Role
-		})
-	}
-
 	return characters
 }
 

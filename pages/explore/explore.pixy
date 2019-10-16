@@ -29,6 +29,17 @@ component ExploreAnime(animes []*arn.Anime, year string, season string, status s
 			p.no-data.mountable No anime found using the above filters.
 		else
 			AnimeGrid(animes, user)
+	
+	if user != nil && (user.Role == "editor" || user.Role == "admin")
+		.buttons
+			if user.DraftIndex().AnimeID == ""
+				button.mountable.action(data-action="newObject", data-trigger="click", data-type="anime")
+					Icon("plus")
+					span Add anime
+			else
+				a.button.mountable(href="/anime/" + user.DraftIndex().AnimeID + "/edit")
+					Icon("pencil")
+					span Edit draft
 
 component ExploreFilters(year string, season string, status string, typ string, advancedFilters bool)
 	.explore-filters

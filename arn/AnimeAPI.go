@@ -18,6 +18,8 @@ var (
 	_ fmt.Stringer           = (*Anime)(nil)
 	_ Likeable               = (*Anime)(nil)
 	_ PostParent             = (*Anime)(nil)
+	_ Publishable            = (*Anime)(nil)
+	_ api.Creatable          = (*Anime)(nil)
 	_ api.Deletable          = (*Anime)(nil)
 	_ api.Editable           = (*Anime)(nil)
 	_ api.CustomEditable     = (*Anime)(nil)
@@ -33,6 +35,48 @@ func init() {
 		// Unlike anime
 		UnlikeAction(),
 	})
+}
+
+// Create sets the data for a new anime.
+func (anime *Anime) Create(ctx aero.Context) error {
+	user := GetUserFromContext(ctx)
+
+	if user == nil {
+		return errors.New("Not logged in")
+	}
+
+	anime.init()
+	anime.CreatedBy = user.ID
+
+	// Characters
+	characters := anime.Characters()
+
+	if characters == nil {
+		characters = &AnimeCharacters{
+			AnimeID: anime.ID,
+			Items:   []*AnimeCharacter{},
+		}
+
+		characters.Save()
+	}
+
+	// Relations
+	relations := anime.Relations()
+
+	if relations == nil {
+		relations = &AnimeRelations{
+			AnimeID: anime.ID,
+			Items:   []*AnimeRelation{},
+		}
+
+		relations.Save()
+	}
+
+	// Write log entry
+	logEntry := NewEditLogEntry(user.ID, "create", "Anime", anime.ID, "", "", "")
+	logEntry.Save()
+
+	return anime.Unpublish()
 }
 
 // Edit creates an edit log entry.
@@ -104,6 +148,12 @@ func (anime *Anime) DeleteInContext(ctx aero.Context) error {
 
 // Delete deletes the anime from the database.
 func (anime *Anime) Delete() error {
+	if anime.IsDraft {
+		draftIndex := anime.Creator().DraftIndex()
+		draftIndex.AnimeID = ""
+		draftIndex.Save()
+	}
+
 	// Delete anime characters
 	DB.Delete("AnimeCharacters", anime.ID)
 

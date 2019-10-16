@@ -93,7 +93,6 @@ func publish(draft Publishable) error {
 	}
 
 	draftIndex.Save()
-
 	return nil
 }
 

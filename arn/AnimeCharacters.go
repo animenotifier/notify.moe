@@ -2,6 +2,7 @@ package arn
 
 import (
 	"errors"
+	"sort"
 	"sync"
 
 	"github.com/aerogo/nano"
@@ -79,6 +80,17 @@ func (characters *AnimeCharacters) TypeName() string {
 // Self returns the object itself.
 func (characters *AnimeCharacters) Self() Loggable {
 	return characters
+}
+
+// Sort sorts the characters by role.
+func (characters *AnimeCharacters) Sort() {
+	characters.Lock()
+	defer characters.Unlock()
+
+	sort.Slice(characters.Items, func(i, j int) bool {
+		// A little trick because "main" < "supporting"
+		return characters.Items[i].Role < characters.Items[j].Role
+	})
 }
 
 // Contains tells you whether the given character ID exists.

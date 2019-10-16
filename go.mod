@@ -3,9 +3,9 @@ module github.com/animenotifier/notify.moe
 go 1.12
 
 require (
-	cloud.google.com/go v0.46.3 // indirect
+	cloud.google.com/go v0.47.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.26
+	github.com/aerogo/aero v1.3.27
 	github.com/aerogo/api v0.2.2
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
@@ -23,7 +23,7 @@ require (
 	github.com/aerogo/sitemap v0.1.4
 	github.com/akyoto/assert v0.2.1
 	github.com/akyoto/cache v1.0.3
-	github.com/akyoto/color v1.8.8
+	github.com/akyoto/color v1.8.9
 	github.com/akyoto/go-matroska v0.1.1
 	github.com/akyoto/hash v0.4.6
 	github.com/akyoto/imageserver v0.3.7
@@ -49,7 +49,7 @@ require (
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.0
 	github.com/mailru/easyjson v0.7.0 // indirect
-	github.com/minio/minio-go/v6 v6.0.38
+	github.com/minio/minio-go/v6 v6.0.39
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
@@ -61,11 +61,11 @@ require (
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
-	golang.org/x/crypto v0.0.0-20191002192127-34f69633bfdc // indirect
-	golang.org/x/net v0.0.0-20191003171128-d98b1b443823 // indirect
+	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
+	golang.org/x/net v0.0.0-20191014212845-da9a3fd4c582 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sys v0.0.0-20191005200804-aed5e4c7ecf9 // indirect
-	google.golang.org/appengine v1.6.4 // indirect
+	golang.org/x/sys v0.0.0-20191010194322-b09406accb47 // indirect
+	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/ini.v1 v1.48.0 // indirect
 	gopkg.in/yaml.v2 v2.2.4 // indirect
 )
