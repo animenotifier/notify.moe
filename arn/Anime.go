@@ -10,12 +10,11 @@ import (
 
 	"github.com/aerogo/api"
 	"github.com/aerogo/nano"
-	"github.com/animenotifier/notify.moe/arn/validate"
-	"github.com/animenotifier/twist"
-
 	"github.com/akyoto/color"
 	"github.com/animenotifier/kitsu"
+	"github.com/animenotifier/notify.moe/arn/validate"
 	"github.com/animenotifier/shoboi"
+	"github.com/animenotifier/twist"
 )
 
 // AnimeDateFormat describes the anime date format for the date conversion.
