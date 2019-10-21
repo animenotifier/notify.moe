@@ -87,8 +87,12 @@ func main() {
 
 	for animeID := range finalRating {
 		anime, err := arn.GetAnime(animeID)
-		arn.PanicOnError(err)
-		anime.Rating = finalRating[animeID]
+
+		if err != nil {
+			panic(err)
+		}
+
+		anime.Rating = *finalRating[animeID]
 		anime.Save()
 	}
 
@@ -97,8 +101,12 @@ func main() {
 
 	for animeID := range popularity {
 		anime, err := arn.GetAnime(animeID)
-		arn.PanicOnError(err)
-		anime.Popularity = popularity[animeID]
+
+		if err != nil {
+			panic(err)
+		}
+
+		anime.Popularity = *popularity[animeID]
 		anime.Save()
 	}
 }
