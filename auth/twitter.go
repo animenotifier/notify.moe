@@ -164,8 +164,6 @@ func InstallTwitterAuth(app *aero.Application) {
 		user.Nick = "tw" + twUser.ID
 		user.Email = twUser.Email
 		user.LastLogin = arn.DateTimeUTC()
-
-		// TODO: The full name is in the Name field
 		user.FirstName = twUser.Name
 
 		// Save basic user info already to avoid data inconsistency problems

@@ -16,7 +16,7 @@ func main() {
 
 		if anime == nil {
 			color.Yellow(episode.AnimeID)
-			episode.Delete()
+			_ = episode.Delete()
 			count++
 		}
 	}

@@ -11,6 +11,9 @@ linters:
     - gochecknoglobals
     - gochecknoinits
     - gocyclo
+    - gocognit
+    - gosec
     - maligned
     - stylecheck
     - funlen
+    - wsl

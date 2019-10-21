@@ -28,6 +28,9 @@ func TestIsValidNick(t *testing.T) {
 
 func TestIsValidEmail(t *testing.T) {
 	assert.False(t, validate.Email(""))
+	assert.False(t, validate.Email("ç$€§/az@gmail.com"))
+	assert.False(t, validate.Email("abc@gmail_yahoo.com"))
+	assert.True(t, validate.Email("abc@gmail-yahoo.com"))
 	assert.True(t, validate.Email("support@notify.moe"))
 }
 

@@ -22,6 +22,7 @@ const (
 
 var (
 	discordNickRegex = regexp.MustCompile(`^([^#]{2,32})#(\d{4})$`)
+	emailRegex       = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 )
 
 // Nick tests if the given nickname is valid.
@@ -70,8 +71,7 @@ func YearMonth(date string) bool {
 
 // Email tests if the given email address is valid.
 func Email(email string) bool {
-	// TODO: Add email check
-	return email != ""
+	return emailRegex.MatchString(email)
 }
 
 // URI validates a URI.
