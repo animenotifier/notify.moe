@@ -331,10 +331,6 @@ var routeTests = map[string][]string{
 		"/api/nicktouser/Akyoto",
 	},
 
-	"/api/analytics/:id": {
-		"/api/analytics/4J6qpK1ve",
-	},
-
 	"/api/soundtrack/:id": {
 		"/api/soundtrack/h0ac8sKkg",
 	},
