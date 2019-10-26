@@ -45,6 +45,7 @@ require (
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
+	github.com/itchyny/gojq v0.6.0
 	github.com/json-iterator/go v1.1.7
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.1

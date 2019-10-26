@@ -1,5 +1,5 @@
 #!/bin/sh
-TYPES=`curl -sS 'https://notify.moe/api/types' | jq '.[]' | cut -d '"' -f 2`
+TYPES=`curl -sS 'https://notify.moe/api/types' | gojq '.[]' | cut -d '"' -f 2`
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 cd "$SCRIPTPATH"
 mkdir -p arn
