@@ -9,7 +9,7 @@ steps:
     ARN_ROOT: /drone/src
   commands:
   - apt-get update
-  - apt-get -y install nodejs
+  - apt-get -y install nodejs npm make
   - go version
   - npm install -g typescript
   - go mod download
