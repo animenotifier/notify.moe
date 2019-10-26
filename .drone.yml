@@ -8,6 +8,7 @@ steps:
     CGO_ENABLED: 0
     ARN_ROOT: /drone/src
   commands:
+  - apt-get update
   - apt-get -y install nodejs
   - go version
   - npm install -g typescript
