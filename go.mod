@@ -21,11 +21,11 @@ require (
 	github.com/aerogo/run v1.0.2
 	github.com/aerogo/session-store-nano v0.1.7
 	github.com/aerogo/sitemap v0.1.4
-	github.com/akyoto/assert v0.2.1
-	github.com/akyoto/cache v1.0.3
-	github.com/akyoto/color v1.8.9
+	github.com/akyoto/assert v0.2.3
+	github.com/akyoto/cache v1.0.5
+	github.com/akyoto/color v1.8.10
 	github.com/akyoto/go-matroska v0.1.1
-	github.com/akyoto/hash v0.4.7
+	github.com/akyoto/hash v0.4.8
 	github.com/akyoto/imageserver v0.3.7
 	github.com/akyoto/stringutils v0.2.4
 	github.com/akyoto/webpush-go v0.1.2
@@ -46,13 +46,14 @@ require (
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/json-iterator/go v1.1.7
-	github.com/logpacker/PayPal-Go-SDK v1.1.4
-	github.com/mailgun/mailgun-go/v3 v3.6.0
+	github.com/logpacker/PayPal-Go-SDK v2.0.5+incompatible
+	github.com/mailgun/mailgun-go/v3 v3.6.1
 	github.com/mailru/easyjson v0.7.0 // indirect
 	github.com/minio/minio-go/v6 v6.0.39
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
+	github.com/plutov/paypal v2.0.5+incompatible // indirect
 	github.com/shirou/gopsutil v2.19.9+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/smartystreets/assertions v1.0.0 // indirect
@@ -62,7 +63,7 @@ require (
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
 	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
-	golang.org/x/net v0.0.0-20191014212845-da9a3fd4c582 // indirect
+	golang.org/x/net v0.0.0-20191021144547-ec77196f6094 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/ini.v1 v1.49.0 // indirect
