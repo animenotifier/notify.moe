@@ -3,12 +3,12 @@ name: default
 
 steps:
 - name: test
-  image: archlinux/base
+  image: golang
   environment:
     CGO_ENABLED: 0
     ARN_ROOT: /drone/src
   commands:
-  - pacman -Syu --noconfirm go nodejs npm make
+  - apt -y install go nodejs npm make
   - go version
   - npm install -g typescript
   - go mod download

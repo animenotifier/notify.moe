@@ -243,6 +243,10 @@ var routeTests = map[string][]string{
 		"/character/dfrNQrmmg-",
 	},
 
+	"/episode/:id": {
+		"/episode/oFlqThKWga",
+	},
+
 	// "/kitsu/character/:id": []string{
 	// 	"/kitsu/character/6556",
 	// },
@@ -323,10 +327,6 @@ var routeTests = map[string][]string{
 		"/api/googletouser/106530160120373282283",
 	},
 
-	"/api/facebooktouser/:id": {
-		"/api/facebooktouser/10207576239700188",
-	},
-
 	"/api/nicktouser/:id": {
 		"/api/nicktouser/Akyoto",
 	},
@@ -349,14 +349,6 @@ var routeTests = map[string][]string{
 
 	"/api/animerelations/:id": {
 		"/api/animerelations/74y2cFiiR",
-	},
-
-	"/api/animeepisodes/:id": {
-		"/api/animeepisodes/74y2cFiiR",
-	},
-
-	"/anime/:id/episode/:episode-number": {
-		"/anime/74y2cFiiR/episode/5",
 	},
 
 	"/api/amv/:id": {

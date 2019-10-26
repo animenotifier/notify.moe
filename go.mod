@@ -5,16 +5,16 @@ go 1.12
 require (
 	cloud.google.com/go v0.47.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.28
-	github.com/aerogo/api v0.2.2
+	github.com/aerogo/aero v1.3.30
+	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
-	github.com/aerogo/graphql v0.4.2
-	github.com/aerogo/http v1.0.10
+	github.com/aerogo/graphql v0.4.3
+	github.com/aerogo/http v1.0.12
 	github.com/aerogo/log v0.2.6
 	github.com/aerogo/manifest v0.1.5
 	github.com/aerogo/markdown v0.1.9
-	github.com/aerogo/mirror v0.2.4
+	github.com/aerogo/mirror v0.2.5
 	github.com/aerogo/nano v0.3.5
 	github.com/aerogo/pack v0.6.4
 	github.com/aerogo/packet v0.2.2 // indirect
@@ -23,11 +23,11 @@ require (
 	github.com/aerogo/sitemap v0.1.4
 	github.com/akyoto/assert v0.2.3
 	github.com/akyoto/cache v1.0.5
-	github.com/akyoto/color v1.8.10
+	github.com/akyoto/color v1.8.11
 	github.com/akyoto/go-matroska v0.1.1
 	github.com/akyoto/hash v0.4.8
 	github.com/akyoto/imageserver v0.3.7
-	github.com/akyoto/stringutils v0.2.4
+	github.com/akyoto/stringutils v0.2.6
 	github.com/akyoto/webpush-go v0.1.2
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/animenotifier/anilist v0.2.5
@@ -46,14 +46,13 @@ require (
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/json-iterator/go v1.1.7
-	github.com/logpacker/PayPal-Go-SDK v2.0.5+incompatible
+	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.1
 	github.com/mailru/easyjson v0.7.0 // indirect
 	github.com/minio/minio-go/v6 v6.0.39
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
-	github.com/plutov/paypal v2.0.5+incompatible // indirect
 	github.com/shirou/gopsutil v2.19.9+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/smartystreets/assertions v1.0.0 // indirect
