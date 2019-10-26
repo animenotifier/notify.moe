@@ -1,7 +1,7 @@
-component StatusTabs(urlPrefix string)
+component StatusTabs(urlPrefix string, statusLists map[string]*arn.AnimeList)
 	.tabs
-		Tab("Watching", "play", urlPrefix + "/watching")
-		Tab("Completed", "check", urlPrefix + "/completed")
-		Tab("Planned", "forward", urlPrefix + "/planned")
-		Tab("On Hold", "pause", urlPrefix + "/hold")
-		Tab("Dropped", "stop", urlPrefix + "/dropped")
+		TabWithCount("Watching", len(statusLists[arn.AnimeListStatusWatching].Items), "play", urlPrefix + "/watching")
+		TabWithCount("Completed", len(statusLists[arn.AnimeListStatusCompleted].Items), "check", urlPrefix + "/completed")
+		TabWithCount("Planned", len(statusLists[arn.AnimeListStatusPlanned].Items), "forward", urlPrefix + "/planned")
+		TabWithCount("On Hold", len(statusLists[arn.AnimeListStatusHold].Items), "pause", urlPrefix + "/hold")
+		TabWithCount("Dropped", len(statusLists[arn.AnimeListStatusDropped].Items), "stop", urlPrefix + "/dropped")

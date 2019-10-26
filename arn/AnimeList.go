@@ -226,31 +226,12 @@ func (list *AnimeList) WithoutPrivateItems() *AnimeList {
 
 // SplitByStatus splits the anime list into multiple ones by status.
 func (list *AnimeList) SplitByStatus() map[string]*AnimeList {
-	statusToList := map[string]*AnimeList{}
-
-	statusToList[AnimeListStatusWatching] = &AnimeList{
-		UserID: list.UserID,
-		Items:  []*AnimeListItem{},
-	}
-
-	statusToList[AnimeListStatusCompleted] = &AnimeList{
-		UserID: list.UserID,
-		Items:  []*AnimeListItem{},
-	}
-
-	statusToList[AnimeListStatusPlanned] = &AnimeList{
-		UserID: list.UserID,
-		Items:  []*AnimeListItem{},
-	}
-
-	statusToList[AnimeListStatusHold] = &AnimeList{
-		UserID: list.UserID,
-		Items:  []*AnimeListItem{},
-	}
-
-	statusToList[AnimeListStatusDropped] = &AnimeList{
-		UserID: list.UserID,
-		Items:  []*AnimeListItem{},
+	statusToList := map[string]*AnimeList{
+		AnimeListStatusWatching:  {UserID: list.UserID},
+		AnimeListStatusCompleted: {UserID: list.UserID},
+		AnimeListStatusPlanned:   {UserID: list.UserID},
+		AnimeListStatusHold:      {UserID: list.UserID},
+		AnimeListStatusDropped:   {UserID: list.UserID},
 	}
 
 	list.Lock()

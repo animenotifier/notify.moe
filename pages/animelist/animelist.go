@@ -48,18 +48,19 @@ func AnimeList(ctx aero.Context, user *arn.User, status string, sortBy string) e
 		return ctx.Error(http.StatusNotFound, "Anime list not found")
 	}
 
-	statusList := animeList.FilterStatus(status)
-
 	// Filter private items
 	if user == nil || user.ID != viewUser.ID {
-		statusList = statusList.WithoutPrivateItems()
+		animeList = animeList.WithoutPrivateItems()
 	}
 
-	// Sort the items
-	statusList.Sort(sortBy)
+	statusLists := animeList.SplitByStatus()
+
+	// Sort the items for the requested status only
+	animeList = statusLists[status]
+	animeList.Sort(sortBy)
 
 	// These are all anime list items for the given status
-	allItems := statusList.Items
+	allItems := statusLists[status].Items
 
 	// Slice the part that we need
 	items := allItems[index:]
@@ -102,5 +103,5 @@ func AnimeList(ctx aero.Context, user *arn.User, status string, sortBy string) e
 	}
 
 	// Otherwise, send the full page
-	return ctx.HTML(components.AnimeListPage(items, nextIndex, viewUser, user, status))
+	return ctx.HTML(components.AnimeListPage(items, nextIndex, viewUser, user, statusLists))
 }

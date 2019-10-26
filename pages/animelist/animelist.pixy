@@ -1,9 +1,9 @@
-component AnimeListPage(animeListItems []*arn.AnimeListItem, nextIndex int, viewUser *arn.User, user *arn.User, status string)
+component AnimeListPage(animeListItems []*arn.AnimeListItem, nextIndex int, viewUser *arn.User, user *arn.User, statusLists map[string]*arn.AnimeList)
 	h1.page-title= viewUser.Nick + "'s anime list"
 
 	if user == nil || user.ID != viewUser.ID
 		.anime-list-user-avatar
 			AvatarNoTip(viewUser)
 	
-	StatusTabs("/+" + viewUser.Nick + "/animelist")
+	StatusTabs("/+" + viewUser.Nick + "/animelist", statusLists)
 	AnimeListItems(animeListItems, nextIndex, viewUser, user)

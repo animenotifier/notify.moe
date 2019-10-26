@@ -31,6 +31,10 @@ const tab-padding-x = 1rem
 		border-top-right-radius ui-element-border-radius
 		border-bottom-right-radius ui-element-border-radius
 
+.tab-count
+	margin-left typography-margin
+	opacity 0.5
+
 < 920px
 	.tab
 		padding 0.75rem tab-padding-x
@@ -38,7 +42,8 @@ const tab-padding-x = 1rem
 		.padded-icon
 			margin-right 0
 
-	.tab-text
+	.tab-text,
+	.tab-count
 		display none
 
 .tabs
