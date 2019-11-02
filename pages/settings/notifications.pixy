@@ -30,14 +30,14 @@ component SettingsNotifications(user *arn.User)
 			footer.footer
 				p(title="This setting is not account bound, instead it is bound to your browser.") You can customize this setting on every device you own.
 		
-		.widget.mountable(data-api="/api/settings/" + user.ID)
-			h3.widget-title
-				Icon("filter")
-				span Filter
+		//- .widget.mountable(data-api="/api/settings/" + user.ID)
+		//- 	h3.widget-title
+		//- 		Icon("filter")
+		//- 		span Filter
 			
-			InputBool("Notification.AnimeEpisodeReleases", user.Settings().Notification.AnimeEpisodeReleases, "New episodes", "Notifications about new episodes")
-			InputBool("Notification.AnimeFinished", user.Settings().Notification.AnimeFinished, "Finished anime series", "Notifications about finished anime series")
-			//- InputBool("Notification.NewFollowers", user.Settings().Notification.NewFollowers, "New followers", "Notifications about new followers")
+		//- 	InputBool("Notification.AnimeEpisodeReleases", user.Settings().Notification.AnimeEpisodeReleases, "New episodes", "Notifications about new episodes")
+		//- 	InputBool("Notification.AnimeFinished", user.Settings().Notification.AnimeFinished, "Finished anime series", "Notifications about finished anime series")
+		//- 	//- InputBool("Notification.NewFollowers", user.Settings().Notification.NewFollowers, "New followers", "Notifications about new followers")
 		
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)
 		//- 	h3.widget-title

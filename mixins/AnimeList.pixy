@@ -16,12 +16,12 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 			.anime-list-item-name(draggable="true")
 				a(href=item.Link(viewUser.Nick))= item.Anime().Title.ByUser(user)
 
-			.anime-list-item-actions
-				if user != nil && item.Status != arn.AnimeListStatusCompleted
-					if item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
-						for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
-							a.tip(href=link, aria-label="Watch episode " + fmt.Sprint(item.Episodes + 1), target="_blank", rel="noopener")
-								RawIcon("eye")
+			//- .anime-list-item-actions
+			//- 	if user != nil && item.Status != arn.AnimeListStatusCompleted
+			//- 		if item.Anime().EpisodeByNumber(item.Episodes + 1) != nil
+			//- 			for _, link := range item.Anime().EpisodeByNumber(item.Episodes + 1).Links
+			//- 				a.tip(href=link, aria-label="Watch episode " + fmt.Sprint(item.Episodes + 1), target="_blank", rel="noopener")
+			//- 					RawIcon("eye")
 
 			.anime-list-item-airing-date
 				if item.Status != arn.AnimeListStatusCompleted && item.Anime().UpcomingEpisode() != nil
