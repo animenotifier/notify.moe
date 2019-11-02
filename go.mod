@@ -9,7 +9,7 @@ require (
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
-	github.com/aerogo/graphql v0.4.3
+	github.com/aerogo/graphql v0.4.4
 	github.com/aerogo/http v1.0.12
 	github.com/aerogo/log v0.2.6
 	github.com/aerogo/manifest v0.1.5
@@ -46,15 +46,15 @@ require (
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/itchyny/gojq v0.6.0
-	github.com/json-iterator/go v1.1.7
+	github.com/json-iterator/go v1.1.8
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.1
 	github.com/mailru/easyjson v0.7.0 // indirect
-	github.com/minio/minio-go/v6 v6.0.39
+	github.com/minio/minio-go/v6 v6.0.40
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
-	github.com/pariz/gountries v0.0.0-20171019111738-adb00f6513a3
-	github.com/shirou/gopsutil v2.19.9+incompatible
+	github.com/pariz/gountries v0.0.0-20191029140926-233bc78cf5b5
+	github.com/shirou/gopsutil v2.19.10+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/smartystreets/assertions v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
@@ -62,9 +62,10 @@ require (
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
-	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550 // indirect
-	golang.org/x/net v0.0.0-20191021144547-ec77196f6094 // indirect
+	golang.org/x/crypto v0.0.0-20191029031824-8986dd9e96cf // indirect
+	golang.org/x/net v0.0.0-20191101175033-0deb6923b6d9 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
+	golang.org/x/sys v0.0.0-20191029155521-f43be2a4598c // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/ini.v1 v1.49.0 // indirect
 	gopkg.in/yaml.v2 v2.2.4 // indirect
