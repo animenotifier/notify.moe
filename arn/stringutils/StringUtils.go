@@ -1,12 +1,12 @@
 package stringutils
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"unicode"
 	"unicode/utf8"
 
-	jsoniter "github.com/json-iterator/go"
 	"github.com/xrash/smetrics"
 )
 
@@ -97,7 +97,7 @@ func PrettyPrint(obj interface{}) {
 	// Currently, MarshalIndent doesn't support tabs.
 	// Change this back to using \t when it's implemented.
 	// See: https://github.com/json-iterator/go/pull/273
-	pretty, _ := jsoniter.MarshalIndent(obj, "", "    ")
+	pretty, _ := json.MarshalIndent(obj, "", "    ")
 	fmt.Println(string(pretty))
 }
 

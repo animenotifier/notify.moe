@@ -1,8 +1,9 @@
 package arn
 
 import (
+	"encoding/json"
+
 	"github.com/animenotifier/anilist"
-	jsoniter "github.com/json-iterator/go"
 )
 
 // AniListMatch ...
@@ -13,7 +14,7 @@ type AniListMatch struct {
 
 // JSON ...
 func (match *AniListMatch) JSON() string {
-	b, err := jsoniter.Marshal(match)
+	b, err := json.Marshal(match)
 	PanicOnError(err)
 	return string(b)
 }

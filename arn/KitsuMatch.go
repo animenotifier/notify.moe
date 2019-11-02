@@ -1,8 +1,9 @@
 package arn
 
 import (
+	"encoding/json"
+
 	"github.com/animenotifier/kitsu"
-	jsoniter "github.com/json-iterator/go"
 )
 
 // KitsuMatch ...
@@ -13,7 +14,7 @@ type KitsuMatch struct {
 
 // JSON ...
 func (match *KitsuMatch) JSON() string {
-	b, err := jsoniter.Marshal(match)
+	b, err := json.Marshal(match)
 	PanicOnError(err)
 	return string(b)
 }

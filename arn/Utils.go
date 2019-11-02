@@ -1,6 +1,7 @@
 package arn
 
 import (
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
@@ -17,7 +18,6 @@ import (
 	"github.com/akyoto/color"
 	"github.com/animenotifier/kitsu"
 	"github.com/animenotifier/mal"
-	jsoniter "github.com/json-iterator/go"
 	shortid "github.com/ventu-io/go-shortid"
 )
 
@@ -139,7 +139,7 @@ func AgeInYears(birthDayString string) int {
 
 // JSON turns the object into a JSON string.
 func JSON(obj interface{}) string {
-	data, err := jsoniter.Marshal(obj)
+	data, err := json.Marshal(obj)
 
 	if err == nil {
 		return string(data)
