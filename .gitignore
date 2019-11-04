@@ -1,15 +1,12 @@
-# Binaries for programs and plugins
+# General ignore patterns
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
-
-# Test binary, build with `go test -c`
 *.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+*.prof
 
 # Log files
 *.log

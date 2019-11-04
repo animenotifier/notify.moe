@@ -1,6 +1,6 @@
 module github.com/animenotifier/notify.moe
 
-go 1.12
+go 1.13
 
 require (
 	cloud.google.com/go v0.47.0 // indirect
@@ -41,11 +41,13 @@ require (
 	github.com/animenotifier/twist v0.2.6
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/dustin/go-humanize v1.0.0
+	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
 	github.com/go-chi/chi v4.0.2+incompatible // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/itchyny/gojq v0.6.0
+	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/json-iterator/go v1.1.8
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.1
@@ -58,6 +60,7 @@ require (
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/smartystreets/assertions v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
+	github.com/tebeka/strftime v0.1.3 // indirect
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
