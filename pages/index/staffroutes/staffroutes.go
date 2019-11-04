@@ -26,6 +26,7 @@ func Register(app *aero.Application) {
 	editorFilterable("/editor/anime/mapping/shoboi", filteranime.Shoboi)
 	editorFilterable("/editor/anime/mapping/anilist", filteranime.AniList)
 	editorFilterable("/editor/anime/mapping/mal", filteranime.MAL)
+	editorFilterable("/editor/anime/mapping/kitsu", filteranime.Kitsu)
 	editorFilterable("/editor/anime/mapping/duplicate", filteranime.DuplicateMappings)
 
 	editorFilterable("/editor/anime/image/lowres", filteranime.LowResolutionAnimeImages)

@@ -77,6 +77,7 @@ component EditorTabs(url string, user *arn.User)
 			Tab("MAL", "arrows-h", "/editor/anime/mapping/mal" + user.Settings().Editor.Filter.Suffix())
 			Tab("Shoboi", "arrows-h", "/editor/anime/mapping/shoboi" + user.Settings().Editor.Filter.Suffix())
 			Tab("AniList", "arrows-h", "/editor/anime/mapping/anilist" + user.Settings().Editor.Filter.Suffix())
+			Tab("Kitsu", "arrows-h", "/editor/anime/mapping/kitsu" + user.Settings().Editor.Filter.Suffix())
 			Tab("Duplicate", "exclamation-circle", "/editor/anime/mapping/duplicate" + user.Settings().Editor.Filter.Suffix())
 
 	if strings.Contains(url, "/editor/anime/image/")
