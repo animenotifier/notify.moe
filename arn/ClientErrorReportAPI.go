@@ -7,6 +7,7 @@ import (
 	"github.com/aerogo/api"
 )
 
+// Force interface implementations
 var (
 	_ api.Newable = (*ClientErrorReport)(nil)
 )

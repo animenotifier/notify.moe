@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Recover recovers from panics and shows them as the response body.
@@ -27,11 +28,28 @@ func Recover(next aero.Handler) aero.Handler {
 			}
 
 			stack := make([]byte, 4096)
-			length := runtime.Stack(stack, true)
+			length := runtime.Stack(stack, false)
 			stackString := string(stack[:length])
 			fmt.Fprint(os.Stderr, stackString)
 
-			message := err.Error() + "<br><br>" + strings.ReplaceAll(stackString, "\n", "<br>")
+			// Save crash in database
+			crash := &arn.Crash{
+				Error: err.Error(),
+				Stack: stackString,
+			}
+
+			crash.ID = arn.GenerateID("Crash")
+			crash.Created = arn.DateTimeUTC()
+			user := arn.GetUserFromContext(ctx)
+
+			if user != nil {
+				crash.CreatedBy = user.ID
+			}
+
+			crash.Save()
+
+			// Send HTML
+			message := "<div class='crash'>" + err.Error() + "<br><br>" + strings.ReplaceAll(stackString, "\n", "<br>") + "</div>"
 			_ = ctx.Error(http.StatusInternalServerError, message)
 		}()
 

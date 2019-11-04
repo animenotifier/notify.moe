@@ -25,6 +25,7 @@ var DB = Node.Namespace("arn").RegisterTypes(
 	(*AnimeCharacters)(nil),
 	(*AnimeRelations)(nil),
 	(*AnimeList)(nil),
+	(*Crash)(nil),
 	(*Character)(nil),
 	(*ClientErrorReport)(nil),
 	(*Company)(nil),

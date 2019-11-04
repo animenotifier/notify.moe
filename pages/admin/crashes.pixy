@@ -1,0 +1,19 @@
+component Crashes(crashes []*arn.Crash)
+	AdminTabs
+	h1.mountable Server-side crashes
+
+	table
+		tbody
+			each crash in crashes
+				tr.mountable
+					td
+						a(href="/api/crash/" + crash.ID, target="_blank")= crash.Error
+					td
+						each line in strings.Split(crash.Stack, "\n")
+							p= line
+					td.utc-date(data-date=crash.Created)
+					td.edit-log-user
+						if crash.CreatedBy != ""
+							Avatar(crash.Creator())
+						else
+							span anonymous

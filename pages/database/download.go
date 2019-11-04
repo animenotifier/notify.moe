@@ -16,6 +16,8 @@ import (
 // privateTypes are types that are not available for download.
 var privateTypes = []string{
 	"Analytics",
+	"Crash",
+	"ClientErrorReport",
 	"EditLogEntry",
 	"EmailToUser",
 	"FacebookToUser",

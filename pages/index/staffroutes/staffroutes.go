@@ -77,6 +77,7 @@ func Register(app *aero.Application) {
 	page.Get(app, "/admin", admin.Get)
 	page.Get(app, "/admin/webdev", admin.WebDev)
 	page.Get(app, "/admin/registrations", admin.UserRegistrations)
+	page.Get(app, "/admin/crashes", admin.Crashes)
 	page.Get(app, "/admin/errors/client", admin.ClientErrors)
 	page.Get(app, "/admin/purchases", admin.PurchaseHistory)
 	page.Get(app, "/admin/payments", admin.PaymentHistory)

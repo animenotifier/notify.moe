@@ -14,7 +14,7 @@ type ClientErrorReport struct {
 	hasCreator
 }
 
-// StreamClientErrorReports returns a stream of all characters.
+// StreamClientErrorReports returns a stream of all client error reports.
 func StreamClientErrorReports() <-chan *ClientErrorReport {
 	channel := make(chan *ClientErrorReport, nano.ChannelBufferSize)
 
@@ -29,10 +29,9 @@ func StreamClientErrorReports() <-chan *ClientErrorReport {
 	return channel
 }
 
-// AllClientErrorReports returns a slice of all characters.
+// AllClientErrorReports returns a slice of all client error reports.
 func AllClientErrorReports() []*ClientErrorReport {
 	all := make([]*ClientErrorReport, 0, DB.Collection("ClientErrorReport").Count())
-
 	stream := StreamClientErrorReports()
 
 	for obj := range stream {
