@@ -36,6 +36,7 @@ func Recover(next aero.Handler) aero.Handler {
 			crash := &arn.Crash{
 				Error: err.Error(),
 				Stack: stackString,
+				Path:  ctx.Path(),
 			}
 
 			crash.ID = arn.GenerateID("Crash")

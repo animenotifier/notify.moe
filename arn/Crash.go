@@ -6,6 +6,7 @@ import "github.com/aerogo/nano"
 type Crash struct {
 	Error string `json:"error"`
 	Stack string `json:"stack"`
+	Path  string `json:"path"`
 
 	hasID
 	hasCreator

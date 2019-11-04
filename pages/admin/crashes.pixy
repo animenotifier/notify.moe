@@ -8,6 +8,7 @@ component Crashes(crashes []*arn.Crash)
 				tr.mountable
 					td
 						a(href="/api/crash/" + crash.ID, target="_blank")= crash.Error
+					td= crash.Path
 					td
 						each line in strings.Split(crash.Stack, "\n")
 							p= line
