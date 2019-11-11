@@ -10,8 +10,8 @@ steps:
   commands:
   - apt-get update
   - apt-get -y install nodejs npm make
+    - npm install -g typescript
   - go version
-  - npm install -g typescript
   - go mod download
   - make tools
   - make assets
