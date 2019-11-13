@@ -28,6 +28,8 @@ github.com/aerogo/aero v1.3.30 h1:VOMS3FoURs4kFS/aEcpE3HN48qHV6FNT12F9JxUT1jQ=
 github.com/aerogo/aero v1.3.30/go.mod h1:iAzV2JRnKAFOo/c+4KIgf35JGS82qMU4tI06ocHeRrk=
 github.com/aerogo/aero v1.3.33 h1:ueTZqMRsCbI05lmn1OEzRycWHI/1pjt8XaJnYqgfquQ=
 github.com/aerogo/aero v1.3.33/go.mod h1:D78sTImatwMvmfx1EDZd35NiBkQP7hsChUVkd4ut588=
+github.com/aerogo/aero v1.3.35 h1:KURaoefVsCn0F1VhEkJJnt0z6rXnWEkLTsrv9VoSEeo=
+github.com/aerogo/aero v1.3.35/go.mod h1:txzRPPK6C3KsmGmSuoDm42K6R6vDVNLd/uO0g7d1T7U=
 github.com/aerogo/api v0.2.3 h1:REQR3a6WXzaHpNSF9NCjj4HjvSQdcHrMWGnp/xIpCh4=
 github.com/aerogo/api v0.2.3/go.mod h1:cClK+FXNc0IRGdDxAH5XmtibBxwUXCM2lLKMF7jKB+8=
 github.com/aerogo/cluster v0.1.8 h1:N/jU2t7kQfKjXzQIArBQvtNkJCiaP9+jgdEid3P2Omc=
@@ -100,6 +102,7 @@ github.com/akyoto/assert v0.2.0/go.mod h1:g5e6ag+ksCEQENq/LnmU9z04wCAIFDr8KacBus
 github.com/akyoto/assert v0.2.2/go.mod h1:g5e6ag+ksCEQENq/LnmU9z04wCAIFDr8KacBusVL0H8=
 github.com/akyoto/assert v0.2.3 h1:ftENRGDEK5AKuKmZb9LtbDIHeE8p8cIYI4M92CbA9nE=
 github.com/akyoto/assert v0.2.3/go.mod h1:g5e6ag+ksCEQENq/LnmU9z04wCAIFDr8KacBusVL0H8=
+github.com/akyoto/assert v0.2.4/go.mod h1:SoqVayyOmM/YSBnwOxJHCt4BCocoIrgeceWtJV701C0=
 github.com/akyoto/autoimport v0.6.5 h1:JNTVc4sXfQA903EjzROJJZbsPNakmNT+KOH/CwRIZSg=
 github.com/akyoto/autoimport v0.6.5/go.mod h1:yP4lTn4zmizMCgLIeVC88setvSdpZcIqd+a+48JetZk=
 github.com/akyoto/cache v1.0.5 h1:DaZo1JUBZ5ivHHS4RWZRN9qfyqVJiL8KZWRy3UCogX0=

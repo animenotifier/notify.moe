@@ -5,7 +5,7 @@ go 1.13
 require (
 	cloud.google.com/go v0.47.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.33
+	github.com/aerogo/aero v1.3.35
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
@@ -21,7 +21,7 @@ require (
 	github.com/aerogo/run v1.0.2
 	github.com/aerogo/session-store-nano v0.1.7
 	github.com/aerogo/sitemap v0.1.4
-	github.com/akyoto/assert v0.2.3
+	github.com/akyoto/assert v0.2.4
 	github.com/akyoto/cache v1.0.5
 	github.com/akyoto/color v1.8.11
 	github.com/akyoto/go-matroska v0.1.1
