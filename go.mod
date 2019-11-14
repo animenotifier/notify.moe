@@ -5,7 +5,7 @@ go 1.13
 require (
 	cloud.google.com/go v0.48.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.39
+	github.com/aerogo/aero v1.3.40
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
@@ -73,3 +73,5 @@ require (
 	gopkg.in/ini.v1 v1.51.0 // indirect
 	gopkg.in/yaml.v2 v2.2.5 // indirect
 )
+
+replace github.com/aerogo/aero => /home/eduard/projects/aerogo/aero
