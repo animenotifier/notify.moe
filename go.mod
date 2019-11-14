@@ -73,5 +73,3 @@ require (
 	gopkg.in/ini.v1 v1.51.0 // indirect
 	gopkg.in/yaml.v2 v2.2.5 // indirect
 )
-
-replace github.com/aerogo/aero => /home/eduard/projects/aerogo/aero
