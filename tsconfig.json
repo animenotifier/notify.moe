@@ -7,7 +7,9 @@
 		"strict": false,
 		"strictFunctionTypes": false,
 		"strictNullChecks": true,
+		"noImplicitReturns": true,
 		"noUnusedLocals": true,
-		"noUnusedParameters": true
+		"noUnusedParameters": true,
+		"forceConsistentCasingInFileNames": true
 	}
 }

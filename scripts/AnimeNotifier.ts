@@ -310,18 +310,25 @@ export default class AnimeNotifier {
 		// search.setAttribute("list", titleList.id)
 	}
 
-	async onBeforeUnload(e: BeforeUnloadEvent) {
-		let message = ""
+	onBeforeUnload(e: BeforeUnloadEvent) {
+		if(this.app.currentPath !== "/new/thread") {
+			return
+		}
+
+		if(!document.activeElement) {
+			return
+		}
+
+		if(document.activeElement.tagName !== "TEXTAREA") {
+			return
+		}
+
+		if((document.activeElement as HTMLTextAreaElement).value.length < 20) {
+			return
+		}
 
 		// Prevent closing tab on new thread page
-		if(this.app.currentPath === "/new/thread" && document.activeElement && document.activeElement.tagName === "TEXTAREA" && (document.activeElement as HTMLTextAreaElement).value.length > 20) {
-			message = "You have unsaved changes on the current page. Are you sure you want to leave?"
-		}
-
-		if(message) {
-			e.returnValue = message
-			return message
-		}
+		e.returnValue = "You have unsaved changes on the current page. Are you sure you want to leave?"
 	}
 
 	prepareTooltips(elements?: IterableIterator<HTMLElement>) {
@@ -1156,7 +1163,7 @@ export default class AnimeNotifier {
 
 	async diff(url: string) {
 		if(url === this.app.currentPath) {
-			return null
+			return
 		}
 
 		const path = "/_" + url

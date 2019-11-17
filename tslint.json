@@ -11,7 +11,8 @@
 		"arrow-parens": false,
 		"trailing-comma": false,
 		"prefer-const": true,
-		"no-var-keyword": true
+		"no-var-keyword": true,
+		"eofline": true
 	},
 	"rulesDirectory": []
 }
