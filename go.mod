@@ -5,7 +5,7 @@ go 1.13
 require (
 	cloud.google.com/go v0.48.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.42
+	github.com/aerogo/aero v1.3.44
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
@@ -25,9 +25,9 @@ require (
 	github.com/akyoto/cache v1.0.5
 	github.com/akyoto/color v1.8.11
 	github.com/akyoto/go-matroska v0.1.1
-	github.com/akyoto/hash v0.4.8
+	github.com/akyoto/hash v0.4.9
 	github.com/akyoto/imageserver v0.3.7
-	github.com/akyoto/stringutils v0.3.0
+	github.com/akyoto/stringutils v0.3.1
 	github.com/akyoto/webpush-go v0.1.2
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/animenotifier/anilist v0.2.6
@@ -68,7 +68,6 @@ require (
 	golang.org/x/crypto v0.0.0-20191112222119-e1110fd1c708 // indirect
 	golang.org/x/net v0.0.0-20191116160921-f9c825593386 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sys v0.0.0-20191115151921-52ab43148777 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/ini.v1 v1.51.0 // indirect
 	gopkg.in/yaml.v2 v2.2.5 // indirect
