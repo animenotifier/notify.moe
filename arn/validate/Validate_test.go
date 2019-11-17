@@ -18,6 +18,7 @@ func TestIsValidNick(t *testing.T) {
 	assert.False(t, validate.Nick("Tsun.Dere"))
 	assert.False(t, validate.Nick("Tsun Dere"))
 	assert.False(t, validate.Nick("さとう"))
+	assert.False(t, validate.Nick(string([]byte{0xff, 0xfe, 0xfd})))
 
 	// Valid nicknames
 	assert.True(t, validate.Nick("Tsundere"))

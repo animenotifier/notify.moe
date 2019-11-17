@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
 )
@@ -28,6 +29,10 @@ var (
 // Nick tests if the given nickname is valid.
 func Nick(nick string) bool {
 	if len(nick) < 2 {
+		return false
+	}
+
+	if !utf8.ValidString(nick) {
 		return false
 	}
 
