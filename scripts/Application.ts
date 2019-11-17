@@ -1,21 +1,18 @@
 import Diff from "./Diff"
+import LoadOptions from "./LoadOptions"
 import { delay } from "./Utils"
 
-class LoadOptions {
-	addToHistory?: boolean
-	forceReload?: boolean
-}
-
 export default class Application {
-	fadeOutClass: string
-	activeLinkClass: string
-	content: HTMLElement
-	loading: HTMLElement
-	currentPath: string
-	originalPath: string
-	lastRequestController: AbortController | null
-	contentInvisible: boolean
-	onError: (err: Error) => void
+	public originalPath: string
+	public currentPath: string
+	public content: HTMLElement
+	public loading: HTMLElement
+	public fadeOutClass: string
+	public onError: (err: Error) => void
+
+	private activeLinkClass: string
+	private lastRequestController: AbortController | null
+	private contentInvisible: boolean
 
 	constructor() {
 		this.currentPath = window.location.pathname
@@ -25,18 +22,11 @@ export default class Application {
 		this.onError = console.error
 	}
 
-	init() {
+	public init() {
 		document.addEventListener("DOMContentLoaded", this.onContentLoaded.bind(this))
 	}
 
-	onContentLoaded() {
-		let links = document.getElementsByTagName("a")
-
-		this.markActiveLinks(links)
-		this.ajaxify(links)
-	}
-
-	async get(url: string): Promise<string> {
+	public async get(url: string): Promise<string> {
 		if(this.lastRequestController) {
 			this.lastRequestController.abort()
 		}
@@ -59,7 +49,7 @@ export default class Application {
 		}
 	}
 
-	load(url: string, options?: LoadOptions) {
+	public load(url: string, options?: LoadOptions) {
 		// Remove protocol and hostname if it was specified
 		if(url.startsWith(location.origin)) {
 			url = url.substr(location.origin.length)
@@ -68,7 +58,7 @@ export default class Application {
 		// Start sending a network request
 		let request: Promise<string>
 
-		let retry = () => {
+		const retry = () => {
 			return this.get("/_" + url).catch(async error => {
 				// Are we still on that page?
 				if(this.currentPath !== url) {
@@ -112,8 +102,8 @@ export default class Application {
 		// Mark active links
 		this.markActiveLinks()
 
-		let consume = async () => {
-			let html = await request
+		const consume = async () => {
+			const html = await request
 
 			if(this.currentPath !== url) {
 				return
@@ -124,7 +114,7 @@ export default class Application {
 			this.scrollToTop()
 
 			// Fade in listener
-			let onFadedIn: EventListener = (e: Event) => {
+			const onFadedIn: EventListener = (e: Event) => {
 				// Ignore transitions of child elements.
 				// We only care about the transition event on the content element.
 				if(e.target !== this.content) {
@@ -152,7 +142,7 @@ export default class Application {
 			consume()
 		} else {
 			// Fade out listener
-			let onFadedOut: EventListener = (e: Event) => {
+			const onFadedOut: EventListener = (e: Event) => {
 				// Ignore transitions of child elements.
 				// We only care about the transition event on the content element.
 				if(e.target !== this.content) {
@@ -183,36 +173,12 @@ export default class Application {
 		return request
 	}
 
-	setContent(html: string) {
-		this.content.innerHTML = html
-	}
-
-	markActiveLinks(links?: HTMLCollectionOf<HTMLAnchorElement>) {
+	public ajaxify(links?: HTMLCollectionOf<HTMLAnchorElement>) {
 		if(!links) {
 			links = document.getElementsByTagName("a")
 		}
 
-		for(let i = 0; i < links.length; i++) {
-			let link = links[i]
-
-			Diff.mutations.queue(() => {
-				if(link.getAttribute("href") === this.currentPath) {
-					link.classList.add(this.activeLinkClass)
-				} else {
-					link.classList.remove(this.activeLinkClass)
-				}
-			})
-		}
-	}
-
-	ajaxify(links?: HTMLCollectionOf<HTMLAnchorElement>) {
-		if(!links) {
-			links = document.getElementsByTagName("a")
-		}
-
-		for(let i = 0; i < links.length; i++) {
-			let link = links[i] as HTMLAnchorElement
-
+		for(const link of links) {
 			// Don't ajaxify links to a different host
 			if(link.hostname !== window.location.hostname) {
 				if(!link.target) {
@@ -227,7 +193,7 @@ export default class Application {
 				continue
 			}
 
-			let self = this
+			const self = this
 
 			link.onclick = function(e) {
 				// Middle mouse button and Ctrl clicks should have standard behaviour
@@ -238,7 +204,7 @@ export default class Application {
 				e.preventDefault()
 
 				// Prevent loading the same page
-				let url = (this as HTMLAnchorElement).getAttribute("href")
+				const url = (this as HTMLAnchorElement).getAttribute("href")
 
 				if(!url || url === self.currentPath) {
 					return
@@ -251,17 +217,45 @@ export default class Application {
 		}
 	}
 
-	scrollToTop() {
-		let parent: any = this.content
+	public markActiveLinks(links?: HTMLCollectionOf<HTMLAnchorElement>) {
+		if(!links) {
+			links = document.getElementsByTagName("a")
+		}
 
-		Diff.mutations.queue(() => {
-			while(parent = parent.parentElement) {
-				parent.scrollTop = 0
-			}
-		})
+		for(const link of links) {
+			Diff.mutations.queue(() => {
+				if(link.getAttribute("href") === this.currentPath) {
+					link.classList.add(this.activeLinkClass)
+				} else {
+					link.classList.remove(this.activeLinkClass)
+				}
+			})
+		}
 	}
 
-	emit(eventName: string) {
+	public emit(eventName: string) {
 		document.dispatchEvent(new Event(eventName))
+	}
+
+	private onContentLoaded() {
+		const links = document.getElementsByTagName("a")
+
+		this.markActiveLinks(links)
+		this.ajaxify(links)
+	}
+
+	private setContent(html: string) {
+		this.content.innerHTML = html
+	}
+
+	private scrollToTop() {
+		let parent: HTMLElement | null = this.content
+
+		Diff.mutations.queue(() => {
+			while(parent) {
+				parent.scrollTop = 0
+				parent = parent.parentElement
+			}
+		})
 	}
 }

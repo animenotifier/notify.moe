@@ -1,16 +1,32 @@
 import { delay } from "./Utils"
 
 export default class StatusMessage {
-	container: HTMLElement
-	text: HTMLElement
+	private container: HTMLElement
+	private text: HTMLElement
 
 	constructor(container: HTMLElement, text: HTMLElement) {
 		this.container = container
 		this.text = text
 	}
 
-	show(message: string, duration: number) {
-		let messageId = String(Date.now())
+	public showError(message: string | Error, duration?: number) {
+		this.clearStyle()
+		this.show(message.toString(), duration || 4000)
+		this.container.classList.add("error-message")
+	}
+
+	public showInfo(message: string, duration?: number) {
+		this.clearStyle()
+		this.show(message, duration || 2000)
+		this.container.classList.add("info-message")
+	}
+
+	public close() {
+		this.container.classList.add("fade-out")
+	}
+
+	private show(message: string, duration: number) {
+		const messageId = String(Date.now())
 
 		this.text.textContent = message
 
@@ -31,24 +47,8 @@ export default class StatusMessage {
 		})
 	}
 
-	clearStyle() {
+	private clearStyle() {
 		this.container.classList.remove("info-message")
 		this.container.classList.remove("error-message")
-	}
-
-	showError(message: string | Error, duration?: number) {
-		this.clearStyle()
-		this.show(message.toString(), duration || 4000)
-		this.container.classList.add("error-message")
-	}
-
-	showInfo(message: string, duration?: number) {
-		this.clearStyle()
-		this.show(message, duration || 2000)
-		this.container.classList.add("info-message")
-	}
-
-	close() {
-		this.container.classList.add("fade-out")
 	}
 }

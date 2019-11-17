@@ -1,10 +1,7 @@
-import Application from "./Application"
 import AnimeNotifier from "./AnimeNotifier"
+import Application from "./Application"
 
-let app = new Application()
-let arn = new AnimeNotifier(app)
+const app = new Application()
+const arn = new AnimeNotifier(app)
 
 arn.init()
-
-// For debugging purposes
-window["arn"] = arn
