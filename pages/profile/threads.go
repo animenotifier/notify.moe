@@ -27,5 +27,5 @@ package profile
 // 		threads = threads[:maxThreads]
 // 	}
 
-// 	return ctx.HTML(components.ProfileThreads(threads, viewUser, utils.GetUser(ctx), ctx.Path()))
+// 	return ctx.HTML(components.ProfileThreads(threads, viewUser, arn.GetUserFromContext(ctx), ctx.Path()))
 // }

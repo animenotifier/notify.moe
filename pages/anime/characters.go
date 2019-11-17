@@ -3,8 +3,6 @@ package anime
 import (
 	"net/http"
 
-	"github.com/animenotifier/notify.moe/utils"
-
 	"github.com/animenotifier/notify.moe/components"
 
 	"github.com/aerogo/aero"
@@ -14,7 +12,7 @@ import (
 // Characters ...
 func Characters(ctx aero.Context) error {
 	id := ctx.Get("id")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	anime, err := arn.GetAnime(id)
 
 	if err != nil {

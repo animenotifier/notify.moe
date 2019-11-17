@@ -7,13 +7,12 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/middleware"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get thread.
 func Get(ctx aero.Context) error {
 	id := ctx.Get("id")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	// Fetch thread
 	thread, err := arn.GetThread(id)

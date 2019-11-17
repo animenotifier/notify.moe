@@ -98,5 +98,5 @@ package profile
 // 		arn.NewPieChart("Soundtracks", trackTags),
 // 	}
 
-// 	return ctx.HTML(components.ProfileStats(&userStats, viewUser, utils.GetUser(ctx), ctx.Path()))
+// 	return ctx.HTML(components.ProfileStats(&userStats, viewUser, arn.GetUserFromContext(ctx), ctx.Path()))
 // }

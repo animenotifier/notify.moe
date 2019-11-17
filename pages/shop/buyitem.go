@@ -6,7 +6,6 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 var itemBuyMutex sync.Mutex
@@ -18,7 +17,7 @@ func BuyItem(ctx aero.Context) error {
 	defer itemBuyMutex.Unlock()
 
 	// Logged in user
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

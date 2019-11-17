@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
@@ -12,7 +11,7 @@ import (
 
 // Episodes ...
 func Episodes(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	id := ctx.Get("id")
 	anime, err := arn.GetAnime(id)
 	episodeToFriends := map[int][]*arn.User{}

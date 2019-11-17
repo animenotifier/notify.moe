@@ -21,6 +21,6 @@ package profile
 // 	followers := viewUser.Followers()
 // 	arn.SortUsersLastSeenFirst(followers)
 
-// 	return ctx.HTML(components.ProfileFollowers(followers, viewUser, utils.GetUser(ctx), ctx.Path()))
+// 	return ctx.HTML(components.ProfileFollowers(followers, viewUser, arn.GetUserFromContext(ctx), ctx.Path()))
 
 // }

@@ -7,7 +7,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Liked shows all liked characters of a particular user.
@@ -40,5 +39,5 @@ func Liked(ctx aero.Context) error {
 		// return aLikes > bLikes
 	})
 
-	return ctx.HTML(components.ProfileCharacters(characters, viewUser, utils.GetUser(ctx), ctx.Path()))
+	return ctx.HTML(components.ProfileCharacters(characters, viewUser, arn.GetUserFromContext(ctx), ctx.Path()))
 }

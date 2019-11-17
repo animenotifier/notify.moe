@@ -4,13 +4,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
 // Best renders the best quotes.
 func Best(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	index, _ := ctx.GetInt("index")
 
 	// Fetch all eligible quotes

@@ -8,7 +8,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
@@ -19,7 +18,7 @@ const (
 
 // AnimeByAverageColor returns all anime with an image in the given color.
 func AnimeByAverageColor(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	color := ctx.Get("color")
 	index, _ := ctx.GetInt("index")
 

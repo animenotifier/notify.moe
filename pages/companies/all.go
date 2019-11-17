@@ -8,12 +8,11 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // All renders an index of all companies.
 func All(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	companies := arn.FilterCompanies(func(company *arn.Company) bool {
 		return !company.IsDraft

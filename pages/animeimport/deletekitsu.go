@@ -6,7 +6,6 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // DeleteKitsu marks an anime for deletion.
@@ -14,7 +13,7 @@ func DeleteKitsu(ctx aero.Context) error {
 	id := ctx.Get("id")
 
 	// Is the user allowed to delete?
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
 		return ctx.Error(http.StatusUnauthorized, "Not authorized")

@@ -5,14 +5,13 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Handler returns a function that renders the history of any object.
 func Handler(render func(interface{}, []*arn.EditLogEntry, *arn.User) string, typeNames ...string) func(ctx aero.Context) error {
 	return func(ctx aero.Context) error {
 		id := ctx.Get("id")
-		user := utils.GetUser(ctx)
+		user := arn.GetUserFromContext(ctx)
 		obj, err := arn.DB.Get(typeNames[0], id)
 
 		if err != nil {

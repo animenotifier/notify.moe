@@ -7,7 +7,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Filter filters the anime for the explore page.
@@ -16,7 +15,7 @@ func Filter(ctx aero.Context) error {
 	season := ctx.Get("season")
 	status := ctx.Get("status")
 	typ := ctx.Get("type")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	now := time.Now()
 
 	if year == "" {

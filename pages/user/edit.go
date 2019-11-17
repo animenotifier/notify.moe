@@ -5,14 +5,13 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/editform"
 )
 
 // Edit user.
 func Edit(ctx aero.Context) error {
 	nick := ctx.Get("nick")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil || user.Role != "admin" {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this user")

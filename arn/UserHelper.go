@@ -166,3 +166,20 @@ func SortUsersFollowers(users []*User) map[string]int {
 
 	return followCount
 }
+
+// SameUser returns true or false depending on if the users are the same.
+func SameUser(a *User, b *User) bool {
+	if a == nil {
+		return false
+	}
+
+	if b == nil {
+		return false
+	}
+
+	if a.ID == b.ID {
+		return true
+	}
+
+	return false
+}

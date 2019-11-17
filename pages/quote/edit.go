@@ -9,13 +9,12 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/editform"
 )
 
 // Edit quote.
 func Edit(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	id := ctx.Get("id")
 	quote, err := arn.GetQuote(id)
 

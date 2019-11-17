@@ -5,7 +5,6 @@ import (
 
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/middleware"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/editform"
 
 	"github.com/aerogo/aero"
@@ -16,7 +15,7 @@ import (
 func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	track, err := arn.GetSoundTrack(id)
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)

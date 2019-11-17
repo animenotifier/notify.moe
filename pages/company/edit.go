@@ -8,7 +8,6 @@ import (
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/middleware"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/editform"
 )
 
@@ -16,7 +15,7 @@ import (
 func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	company, err := arn.GetCompany(id)
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Company not found", err)

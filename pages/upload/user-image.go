@@ -4,12 +4,12 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // UserImage handles the avatar upload.
 func UserImage(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

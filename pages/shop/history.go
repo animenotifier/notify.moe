@@ -7,12 +7,11 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // PurchaseHistory ...
 func PurchaseHistory(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

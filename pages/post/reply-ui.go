@@ -6,13 +6,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // ReplyUI renders a new post area.
 func ReplyUI(ctx aero.Context) error {
 	id := ctx.Get("id")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	post, err := arn.GetPost(id)
 
 	if err != nil {

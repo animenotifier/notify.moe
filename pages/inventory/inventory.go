@@ -8,12 +8,11 @@ import (
 	"github.com/animenotifier/notify.moe/components"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Get inventory page.
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	viewUser := user
 
 	if user == nil {

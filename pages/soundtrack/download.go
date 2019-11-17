@@ -5,13 +5,12 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Download tries to refresh the soundtrack file.
 func Download(ctx aero.Context) error {
 	id := ctx.Get("id")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in or not auhorized to edit this soundtrack")

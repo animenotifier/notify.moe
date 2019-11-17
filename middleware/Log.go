@@ -9,7 +9,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/aerogo/log"
-	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 var (
@@ -54,7 +54,7 @@ func logRequest(ctx aero.Context, responseTime time.Duration) {
 
 	responseTimeString = strings.Repeat(" ", repeatSpaceCount) + responseTimeString
 
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	ip := ctx.IP()
 	hostNames, cached := GetHostsForIP(ip)
 

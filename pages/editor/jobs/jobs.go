@@ -4,6 +4,7 @@ import (
 	"sort"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/utils"
 )
@@ -30,7 +31,7 @@ var jobLogs = []string{}
 
 // Overview shows all background jobs.
 func Overview(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	jobs := []*utils.JobInfo{}
 
 	for _, job := range jobInfo {

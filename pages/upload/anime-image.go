@@ -6,12 +6,11 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // AnimeImage handles the anime image upload.
 func AnimeImage(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	animeID := ctx.Get("id")
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {

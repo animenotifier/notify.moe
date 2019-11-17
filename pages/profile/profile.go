@@ -33,7 +33,7 @@ func Get(ctx aero.Context) error {
 
 // Profile renders the user profile page of the given viewUser.
 func Profile(ctx aero.Context, viewUser *arn.User) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	sortBy := arn.SortByRating
 
 	if user != nil {

@@ -19,7 +19,7 @@ package profilequotes
 // func render(ctx aero.Context, fetch func(userID string) []*arn.Quote) string {
 // 	nick := ctx.Get("nick")
 // 	index, _ := ctx.GetInt("index")
-// 	user := utils.GetUser(ctx)
+// 	user := arn.GetUserFromContext(ctx)
 // 	viewUser, err := arn.GetUserByNick(nick)
 
 // 	if err != nil {

@@ -4,14 +4,13 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/animenotifier/notify.moe/utils"
-
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Joined shows the most popular joined groups.
 func Joined(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

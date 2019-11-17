@@ -6,12 +6,11 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // AMVFile handles the video upload for AMV files.
 func AMVFile(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	amvID := ctx.Get("id")
 
 	if user == nil {

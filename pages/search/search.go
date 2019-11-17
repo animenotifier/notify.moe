@@ -3,9 +3,8 @@ package search
 import (
 	"net/http"
 
-	"github.com/animenotifier/notify.moe/utils"
-
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/arn/search"
 	"github.com/animenotifier/notify.moe/components"
 )
@@ -24,7 +23,7 @@ const (
 // Get search page.
 func Get(ctx aero.Context) error {
 	term := ctx.Get("term")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if len(term) > search.MaxSearchTermLength {
 		ctx.SetStatus(http.StatusRequestEntityTooLarge)
@@ -47,13 +46,13 @@ func Get(ctx aero.Context) error {
 
 // GetEmptySearch renders the search page with no contents.
 func GetEmptySearch(ctx aero.Context) error {
-	return ctx.HTML(components.SearchResults("", nil, nil, nil, nil, nil, nil, nil, nil, nil, utils.GetUser(ctx)))
+	return ctx.HTML(components.SearchResults("", nil, nil, nil, nil, nil, nil, nil, nil, nil, arn.GetUserFromContext(ctx)))
 }
 
 // Anime search.
 func Anime(ctx aero.Context) error {
 	term := ctx.Get("term")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if len(term) > search.MaxSearchTermLength {
 		ctx.SetStatus(http.StatusRequestEntityTooLarge)
@@ -66,7 +65,7 @@ func Anime(ctx aero.Context) error {
 // Characters search.
 func Characters(ctx aero.Context) error {
 	term := ctx.Get("term")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if len(term) > search.MaxSearchTermLength {
 		ctx.SetStatus(http.StatusRequestEntityTooLarge)
@@ -79,7 +78,7 @@ func Characters(ctx aero.Context) error {
 // Posts search.
 func Posts(ctx aero.Context) error {
 	term := ctx.Get("term")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if len(term) > search.MaxSearchTermLength {
 		ctx.SetStatus(http.StatusRequestEntityTooLarge)
@@ -92,7 +91,7 @@ func Posts(ctx aero.Context) error {
 // Threads search.
 func Threads(ctx aero.Context) error {
 	term := ctx.Get("term")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if len(term) > search.MaxSearchTermLength {
 		ctx.SetStatus(http.StatusRequestEntityTooLarge)
@@ -105,7 +104,7 @@ func Threads(ctx aero.Context) error {
 // SoundTracks search.
 func SoundTracks(ctx aero.Context) error {
 	term := ctx.Get("term")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if len(term) > search.MaxSearchTermLength {
 		ctx.SetStatus(http.StatusRequestEntityTooLarge)
@@ -118,7 +117,7 @@ func SoundTracks(ctx aero.Context) error {
 // AMVs search.
 func AMVs(ctx aero.Context) error {
 	term := ctx.Get("term")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if len(term) > search.MaxSearchTermLength {
 		ctx.SetStatus(http.StatusRequestEntityTooLarge)

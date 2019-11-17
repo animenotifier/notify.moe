@@ -9,7 +9,6 @@ import (
 	"github.com/aerogo/http/client"
 	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/mssola/user_agent"
 )
 
@@ -25,7 +24,7 @@ func UserInfo(next aero.Handler) aero.Handler {
 			return nil
 		}
 
-		user := utils.GetUser(ctx)
+		user := arn.GetUserFromContext(ctx)
 
 		// When there's no user logged in, nothing to update
 		if user == nil {

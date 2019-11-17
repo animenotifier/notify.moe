@@ -11,7 +11,6 @@ import (
 	"github.com/aerogo/log"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
-	"github.com/animenotifier/notify.moe/utils"
 	jsoniter "github.com/json-iterator/go"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
@@ -111,7 +110,7 @@ func Google(app *aero.Application, authLog *log.Log) {
 		googleUser.Email = strings.Replace(googleUser.Email, "googlemail.com", "gmail.com", 1)
 
 		// Is this an existing user connecting another social account?
-		user := utils.GetUser(ctx)
+		user := arn.GetUserFromContext(ctx)
 
 		if user != nil {
 			// Add GoogleToUser reference

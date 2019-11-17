@@ -7,7 +7,6 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Only allow one job to be started at a time
@@ -18,7 +17,7 @@ func Start(ctx aero.Context) error {
 	jobStartMutex.Lock()
 	defer jobStartMutex.Unlock()
 
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
 		return ctx.Error(http.StatusUnauthorized, "Not authorized")

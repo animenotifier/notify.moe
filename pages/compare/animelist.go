@@ -13,7 +13,7 @@ import (
 
 // AnimeList ...
 func AnimeList(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	nickA := ctx.Get("nick-1")
 	nickB := ctx.Get("nick-2")
 

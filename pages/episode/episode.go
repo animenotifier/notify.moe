@@ -7,13 +7,12 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 	minio "github.com/minio/minio-go/v6"
 )
 
 // Get renders the anime episode.
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	id := ctx.Get("id")
 
 	// Get episode

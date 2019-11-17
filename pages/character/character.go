@@ -19,7 +19,7 @@ const (
 
 // Get character.
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	id := ctx.Get("id")
 	character, err := arn.GetCharacter(id)
 

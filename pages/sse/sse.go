@@ -3,11 +3,10 @@ package sse
 import (
 	"net/http"
 
+	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/components/js"
-
-	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 var (
@@ -17,7 +16,7 @@ var (
 
 // Events streams server events to the client.
 func Events(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

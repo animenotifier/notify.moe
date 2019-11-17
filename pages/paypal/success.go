@@ -10,7 +10,6 @@ import (
 	"github.com/animenotifier/notify.moe/arn/stringutils"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 const adminID = "4J6qpK1ve"
@@ -18,7 +17,7 @@ const adminID = "4J6qpK1ve"
 // Success is called once the payment has been confirmed by the user on the PayPal website.
 // However, the actual payment still needs to be executed and can fail.
 func Success(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

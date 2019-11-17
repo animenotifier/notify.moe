@@ -27,6 +27,6 @@ package profile
 // 		posts = posts[:postLimit]
 // 	}
 
-// 	return ctx.HTML(components.LatestPosts(arn.ToPostables(posts), viewUser, utils.GetUser(ctx), ctx.Path()))
+// 	return ctx.HTML(components.LatestPosts(arn.ToPostables(posts), viewUser, arn.GetUserFromContext(ctx), ctx.Path()))
 
 // }

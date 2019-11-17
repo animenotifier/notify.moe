@@ -9,7 +9,6 @@ import (
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/middleware"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
@@ -20,7 +19,7 @@ const (
 
 // Filter filters a user's anime list item by the status.
 func Filter(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	status := ctx.Get("status")
 	sortBy := arn.SortByRating
 

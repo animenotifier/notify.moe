@@ -2,12 +2,12 @@ package me
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
+	"github.com/animenotifier/notify.moe/arn"
 )
 
 // Get ...
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.JSON(nil)

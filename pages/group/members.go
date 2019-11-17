@@ -7,12 +7,11 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/middleware"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Members shows the group members.
 func Members(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
 

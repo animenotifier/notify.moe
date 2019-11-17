@@ -4,7 +4,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
@@ -15,7 +14,7 @@ const (
 
 // render renders the characters page with the given characters.
 func render(ctx aero.Context, allCharacters []*arn.Character) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	index, _ := ctx.GetInt("index")
 	tag := ctx.Get("tag")
 

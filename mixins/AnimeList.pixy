@@ -30,7 +30,7 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 			if item.Status != arn.AnimeListStatusCompleted
 				.anime-list-item-episodes
 					.anime-list-item-episodes-watched
-						.action(contenteditable=utils.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
+						.action(contenteditable=arn.SameUser(user, viewUser), data-field="Episodes", data-type="number", data-trigger="focusout", data-action="save")= item.Episodes
 						
 						if item.Status == arn.AnimeListStatusWatching && user != nil && user.ID == viewUser.ID
 							.plus-episode.action(data-action="increaseEpisode", data-trigger="click") +
@@ -41,4 +41,4 @@ component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn
 					.anime-list-item-episodes-max= item.Anime().EpisodeCountString()
 
 			.anime-list-item-rating-container
-				.anime-list-item-rating.action.tip(contenteditable=utils.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save", aria-label="O: " + utils.FormatRating(item.Rating.Overall) + " | S: " + utils.FormatRating(item.Rating.Story) + " | V: " + utils.FormatRating(item.Rating.Visuals) + " | M: " + utils.FormatRating(item.Rating.Soundtrack))= utils.FormatRating(item.Rating.Overall)
+				.anime-list-item-rating.action.tip(contenteditable=arn.SameUser(user, viewUser), data-field="Rating.Overall", data-type="number", data-trigger="focusout", data-action="save", aria-label="O: " + utils.FormatRating(item.Rating.Overall) + " | S: " + utils.FormatRating(item.Rating.Story) + " | V: " + utils.FormatRating(item.Rating.Visuals) + " | M: " + utils.FormatRating(item.Rating.Soundtrack))= utils.FormatRating(item.Rating.Overall)

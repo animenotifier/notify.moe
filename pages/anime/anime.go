@@ -9,7 +9,6 @@ import (
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/middleware"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 const (
@@ -22,7 +21,7 @@ const (
 // Get anime page.
 func Get(ctx aero.Context) error {
 	id := ctx.Get("id")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	anime, err := arn.GetAnime(id)
 
 	if err != nil {

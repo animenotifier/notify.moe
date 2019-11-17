@@ -19,7 +19,7 @@ package profiletracks
 // func render(ctx aero.Context, fetch func(userID string) []*arn.SoundTrack) string {
 // 	nick := ctx.Get("nick")
 // 	index, _ := ctx.GetInt("index")
-// 	user := utils.GetUser(ctx)
+// 	user := arn.GetUserFromContext(ctx)
 // 	viewUser, err := arn.GetUserByNick(nick)
 
 // 	if err != nil {

@@ -14,7 +14,7 @@ import (
 
 // Get renders a company page.
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	id := ctx.Get("id")
 	company, err := arn.GetCompany(id)
 

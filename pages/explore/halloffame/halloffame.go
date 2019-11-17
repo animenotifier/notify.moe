@@ -14,7 +14,7 @@ const minYear = 1963
 
 // Get ...
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	maxYear := time.Now().Year() - 1
 	hallOfFameEntries := []*utils.HallOfFameEntry{}
 

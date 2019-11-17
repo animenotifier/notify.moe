@@ -8,14 +8,13 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 const maxNotifications = 30
 
 // ByUser shows all notifications sent to the given user.
 func ByUser(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")

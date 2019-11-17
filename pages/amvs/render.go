@@ -4,7 +4,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 )
 
@@ -15,7 +14,7 @@ const (
 
 // render renders the AMVs page with the given AMVs.
 func render(ctx aero.Context, allAMVs []*arn.AMV) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	index, _ := ctx.GetInt("index")
 	tag := ctx.Get("tag")
 

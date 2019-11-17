@@ -19,7 +19,7 @@ type diffFunction func(*arn.Anime, *mal.Anime) []animediff.Difference
 
 // CompareMAL ...
 func CompareMAL(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	year := ctx.Get("year")
 	status := ctx.Get("status")
 	season := ctx.Get("season")

@@ -8,12 +8,11 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // CountUnseen sends the number of unseen notifications.
 func CountUnseen(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
@@ -26,7 +25,7 @@ func CountUnseen(ctx aero.Context) error {
 
 // MarkNotificationsAsSeen marks all notifications as seen.
 func MarkNotificationsAsSeen(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
@@ -73,7 +72,7 @@ func Latest(ctx aero.Context) error {
 
 // Test sends a test notification to the logged in user.
 func Test(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")

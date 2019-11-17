@@ -6,7 +6,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 const animePerPage = 100
@@ -14,7 +13,7 @@ const animeRatingCountThreshold = 5
 
 // Get renders the genre page.
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	genreName := ctx.Get("name")
 	animes := []*arn.Anime{}
 

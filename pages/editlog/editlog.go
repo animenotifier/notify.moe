@@ -9,7 +9,6 @@ import (
 	"github.com/animenotifier/notify.moe/utils/infinitescroll"
 
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 const (
@@ -19,7 +18,7 @@ const (
 
 // Get edit log.
 func Get(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	index, _ := ctx.GetInt("index")
 	nick := ctx.Get("nick")
 

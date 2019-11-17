@@ -13,7 +13,7 @@ import (
 
 // UserRegistrations ...
 func UserRegistrations(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

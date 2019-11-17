@@ -7,12 +7,11 @@ import (
 	"github.com/animenotifier/kitsu"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // NewKitsuAnime ...
 func NewKitsuAnime(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	finder := arn.NewAnimeFinder("kitsu/anime")
 	deletedIDs, err := arn.GetIDList("deleted kitsu anime")
 

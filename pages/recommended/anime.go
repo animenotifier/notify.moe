@@ -7,7 +7,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 const (
@@ -18,7 +17,7 @@ const (
 
 // Anime shows a list of recommended anime.
 func Anime(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	nick := ctx.Get("nick")
 	viewUser, err := arn.GetUserByNick(nick)
 

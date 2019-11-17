@@ -7,14 +7,13 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 const maxAnimeEntries = 70
 
 // editorList renders the anime list with the given title and filter.
 func editorList(ctx aero.Context, title string, filter func(*arn.Anime) bool, searchLink func(*arn.Anime) string) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil || (user.Role != "admin" && user.Role != "editor") {
 		return ctx.Error(http.StatusUnauthorized, "Not authorized")

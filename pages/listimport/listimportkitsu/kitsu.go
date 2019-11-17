@@ -9,12 +9,11 @@ import (
 	"github.com/animenotifier/kitsu"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Preview shows an import preview.
 func Preview(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
@@ -31,7 +30,7 @@ func Preview(ctx aero.Context) error {
 
 // Finish ...
 func Finish(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusBadRequest, "Not logged in")
@@ -85,7 +84,7 @@ func Finish(ctx aero.Context) error {
 
 // getMatches finds and returns all matches for the logged in user.
 func getMatches(ctx aero.Context) ([]*arn.KitsuMatch, error) {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return nil, errors.New("Not logged in")

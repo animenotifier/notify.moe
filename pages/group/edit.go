@@ -6,7 +6,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/animenotifier/notify.moe/utils/editform"
 )
 
@@ -14,7 +13,7 @@ import (
 func Edit(ctx aero.Context) error {
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Group not found", err)
@@ -33,7 +32,7 @@ func Edit(ctx aero.Context) error {
 func EditImage(ctx aero.Context) error {
 	id := ctx.Get("id")
 	group, err := arn.GetGroup(id)
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Group not found", err)

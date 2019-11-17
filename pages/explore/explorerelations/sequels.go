@@ -14,7 +14,7 @@ import (
 // Sequels ...
 func Sequels(ctx aero.Context) error {
 	nick := ctx.Get("nick")
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	viewUser, err := arn.GetUserByNick(nick)
 
 	if err != nil {

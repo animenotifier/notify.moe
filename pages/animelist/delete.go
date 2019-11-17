@@ -4,13 +4,13 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
+	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // DeleteConfirmation shows the confirmation page before deleting an anime list.
 func DeleteConfirmation(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")
@@ -21,7 +21,7 @@ func DeleteConfirmation(ctx aero.Context) error {
 
 // Delete deletes your entire anime list.
 func Delete(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")

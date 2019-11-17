@@ -12,7 +12,6 @@ import (
 	"github.com/aerogo/log"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
-	"github.com/animenotifier/notify.moe/utils"
 	"github.com/gomodule/oauth1/oauth"
 	jsoniter "github.com/json-iterator/go"
 )
@@ -112,7 +111,7 @@ func Twitter(app *aero.Application, authLog *log.Log) {
 		twUser.Email = strings.Replace(twUser.Email, "googlemail.com", "gmail.com", 1)
 
 		// Is this an existing user connecting another social account?
-		user := utils.GetUser(ctx)
+		user := arn.GetUserFromContext(ctx)
 
 		if user != nil {
 			// Add TwitterToUser reference

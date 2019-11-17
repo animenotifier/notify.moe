@@ -3,19 +3,18 @@ package activity
 import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/animenotifier/notify.moe/utils"
 )
 
 // Global activity page.
 func Global(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	activities := fetchActivities(user, false)
 	return render(ctx, activities)
 }
 
 // Followed activity page.
 func Followed(ctx aero.Context) error {
-	user := utils.GetUser(ctx)
+	user := arn.GetUserFromContext(ctx)
 	activities := fetchActivities(user, true)
 	return render(ctx, activities)
 }
