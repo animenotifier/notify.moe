@@ -32,10 +32,10 @@
  * within. Note that this option is ignored by Cache.match().
  */
 interface CacheOptions {
-    ignoreSearch?: boolean;
-    ignoreMethod?: boolean;
-    ignoreVary?: boolean;
-    cacheName?: string;
+	ignoreSearch?: boolean;
+	ignoreMethod?: boolean;
+	ignoreVary?: boolean;
+	cacheName?: string;
 }
 
 /**
@@ -43,65 +43,65 @@ interface CacheOptions {
  * part of the ServiceWorker life cycle.
  */
 interface Cache {
-    /**
-     * Returns a Promise that resolves to the response associated with the first
-     * matching request in the Cache object.
-     *
-     * @param request The Request you are attempting to find in the Cache.
-     * @param [options] An object that sets options for the match operation.
-     */
-    match(request: Request | string, options?: CacheOptions): Promise<Response>;
+	/**
+	 * Returns a Promise that resolves to the response associated with the first
+	 * matching request in the Cache object.
+	 *
+	 * @param request The Request you are attempting to find in the Cache.
+	 * @param [options] An object that sets options for the match operation.
+	 */
+	match(request: Request | string, options?: CacheOptions): Promise<Response>;
 
-    /**
-     * Returns a Promise that resolves to an array of all matching responses in
-     * the Cache object.
-     *
-     * @param request The Request you are attempting to find in the Cache.
-     * @param [options] An object that sets options for the match operation.
-     */
-    matchAll(request: Request | string, options?: CacheOptions): Promise<Response[]>;
+	/**
+	 * Returns a Promise that resolves to an array of all matching responses in
+	 * the Cache object.
+	 *
+	 * @param request The Request you are attempting to find in the Cache.
+	 * @param [options] An object that sets options for the match operation.
+	 */
+	matchAll(request: Request | string, options?: CacheOptions): Promise<Response[]>;
 
-    /**
-     * Returns a Promise that resolves to a new Cache entry whose key
-     * is the request.
-     *
-     * @param request The Request you want to add to the cache.
-     */
-    add(request: Request | string): Promise<void>;
+	/**
+	 * Returns a Promise that resolves to a new Cache entry whose key
+	 * is the request.
+	 *
+	 * @param request The Request you want to add to the cache.
+	 */
+	add(request: Request | string): Promise<void>;
 
-    /**
-     * Returns a Promise that resolves to a new array of Cache entries whose
-     * keys are the requests.
-     *
-     * @param request An array of Request objects you want to add to the cache.
-     */
-    addAll(requests: Array<Request | string>): Promise<void>;
+	/**
+	 * Returns a Promise that resolves to a new array of Cache entries whose
+	 * keys are the requests.
+	 *
+	 * @param request An array of Request objects you want to add to the cache.
+	 */
+	addAll(requests: Array<Request | string>): Promise<void>;
 
-    /**
-     * Adds additional key/value pairs to the current Cache object.
-     *
-     * @param request The Request you want to add to the cache.
-     * @param response The response you want to match up to the request.
-     */
-    put(request: Request, response: Response): Promise<void>;
+	/**
+	 * Adds additional key/value pairs to the current Cache object.
+	 *
+	 * @param request The Request you want to add to the cache.
+	 * @param response The response you want to match up to the request.
+	 */
+	put(request: Request, response: Response): Promise<void>;
 
-    /**
-     * Finds the Cache entry whose key is the request, and if found, deletes the
-     * Cache entry and returns a Promise that resolves to true. If no Cache
-     * entry is found, it returns false.
-     *
-     * @param request The Request you are looking to delete.
-     * @param [options] An object that sets options for the match operation.
-     */
-    delete(request: Request | string, options?: CacheOptions): Promise<boolean>;
+	/**
+	 * Finds the Cache entry whose key is the request, and if found, deletes the
+	 * Cache entry and returns a Promise that resolves to true. If no Cache
+	 * entry is found, it returns false.
+	 *
+	 * @param request The Request you are looking to delete.
+	 * @param [options] An object that sets options for the match operation.
+	 */
+	delete(request: Request | string, options?: CacheOptions): Promise<boolean>;
 
-    /**
-     * Returns a Promise that resolves to an array of Cache keys.
-     *
-     * @param request The Request want to return, if a specific key is desired.
-     * @param [options] An object that sets options for the match operation.
-     */
-    keys(request?: Request, options?: CacheOptions): Promise<Request[]>;
+	/**
+	 * Returns a Promise that resolves to an array of Cache keys.
+	 *
+	 * @param request The Request want to return, if a specific key is desired.
+	 * @param [options] An object that sets options for the match operation.
+	 */
+	keys(request?: Request, options?: CacheOptions): Promise<Request[]>;
 }
 
 /**
@@ -110,49 +110,49 @@ interface Cache {
  * of string names to corresponding Cache objects.
  */
 interface CacheStorage {
-    /**
-     * Checks if a given Request is a key in any of the Cache objects that the
-     * CacheStorage object tracks and returns a Promise that resolves
-     * to that match.
-     *
-     * @param request The Request you are looking for a match for in the CacheStorage.
-     * @param [options] An object that sets options for the match operation.
-     */
-    match(request: Request | string, options?: CacheOptions): Promise<Response>;
+	/**
+	 * Checks if a given Request is a key in any of the Cache objects that the
+	 * CacheStorage object tracks and returns a Promise that resolves
+	 * to that match.
+	 *
+	 * @param request The Request you are looking for a match for in the CacheStorage.
+	 * @param [options] An object that sets options for the match operation.
+	 */
+	match(request: Request | string, options?: CacheOptions): Promise<Response>;
 
-    /**
-     * Returns a Promise that resolves to true if a Cache object matching
-     * the cacheName exists.
-     *
-     * @param cacheName The Request you are looking for a match for in the
-     * CacheStorage.
-     */
-    has(cacheName: string): Promise<boolean>;
+	/**
+	 * Returns a Promise that resolves to true if a Cache object matching
+	 * the cacheName exists.
+	 *
+	 * @param cacheName The Request you are looking for a match for in the
+	 * CacheStorage.
+	 */
+	has(cacheName: string): Promise<boolean>;
 
-    /**
-     * Returns a Promise that resolves to the Cache object matching
-     * the cacheName.
-     *
-     * @param cacheName The name of the cache you want to open.
-     */
-    open(cacheName: string): Promise<Cache>;
+	/**
+	 * Returns a Promise that resolves to the Cache object matching
+	 * the cacheName.
+	 *
+	 * @param cacheName The name of the cache you want to open.
+	 */
+	open(cacheName: string): Promise<Cache>;
 
-    /**
-     * Finds the Cache object matching the cacheName, and if found, deletes the
-     * Cache object and returns a Promise that resolves to true. If no
-     * Cache object is found, it returns false.
-     *
-     * @param cacheName The name of the cache you want to delete.
-     */
-    delete(cacheName: string): Promise<boolean>;
+	/**
+	 * Finds the Cache object matching the cacheName, and if found, deletes the
+	 * Cache object and returns a Promise that resolves to true. If no
+	 * Cache object is found, it returns false.
+	 *
+	 * @param cacheName The name of the cache you want to delete.
+	 */
+	delete(cacheName: string): Promise<boolean>;
 
-    /**
-     * Returns a Promise that will resolve with an array containing strings
-     * corresponding to all of the named Cache objects tracked by the
-     * CacheStorage. Use this method to iterate over a list of all the
-     * Cache objects.
-     */
-    keys(): Promise<string[]>;
+	/**
+	 * Returns a Promise that will resolve with an array containing strings
+	 * corresponding to all of the named Cache objects tracked by the
+	 * CacheStorage. Use this method to iterate over a list of all the
+	 * Cache objects.
+	 */
+	keys(): Promise<string[]>;
 }
 
 /**
@@ -161,53 +161,53 @@ interface CacheStorage {
  * by an active worker.
  */
 interface ServiceWorkerClient {
-    /**
-     * Allows a service worker client to send a message to a ServiceWorker.
-     *
-     * @param message The message to send to the service worker.
-     * @param [transfer] A transferable object such as, for example, a reference
-     * to a port.
-     */
-    postMessage(message: any, transfer?: any): void;
+	/**
+	 * Allows a service worker client to send a message to a ServiceWorker.
+	 *
+	 * @param message The message to send to the service worker.
+	 * @param [transfer] A transferable object such as, for example, a reference
+	 * to a port.
+	 */
+	postMessage(message: any, transfer?: any): void;
 
-    /**
-     * Indicates the type of browsing context of the current client.
-     * This value can be one of auxiliary, top-level, nested, or none.
-     */
-    readonly frameType: string;
+	/**
+	 * Indicates the type of browsing context of the current client.
+	 * This value can be one of auxiliary, top-level, nested, or none.
+	 */
+	readonly frameType: string;
 
-    /**
-     * Returns the id of the Client object.
-     */
-    readonly id: string;
+	/**
+	 * Returns the id of the Client object.
+	 */
+	readonly id: string;
 
-    /**
-     * The URL of the current service worker client.
-     */
-    readonly url: string;
+	/**
+	 * The URL of the current service worker client.
+	 */
+	readonly url: string;
 }
 
 interface WindowClient extends ServiceWorkerClient {
-    /**
-     * Gives user input focus to the current client.
-     */
-    focus(): Promise<WindowClient>;
+	/**
+	 * Gives user input focus to the current client.
+	 */
+	focus(): Promise<WindowClient>;
 
-    /**
-     * A boolean that indicates whether the current client has focus.
-     */
-    readonly focused: boolean;
+	/**
+	 * A boolean that indicates whether the current client has focus.
+	 */
+	readonly focused: boolean;
 
-    /**
-     * Indicates the visibility of the current client. This value can be one of
-     * hidden, visible, prerender, or unloaded.
-     */
-    readonly visibilityState: string;
+	/**
+	 * Indicates the visibility of the current client. This value can be one of
+	 * hidden, visible, prerender, or unloaded.
+	 */
+	readonly visibilityState: string;
 }
 
 interface ServiceWorkerClientsMatchOptions {
-    includeUncontrolled?: boolean;
-    type?: string;
+	includeUncontrolled?: boolean;
+	type?: string;
 }
 
 /**
@@ -215,36 +215,36 @@ interface ServiceWorkerClientsMatchOptions {
  * the active service worker clients at the current origin.
  */
 interface ServiceWorkerClients {
-    /**
-     * Gets a service worker client matching a given id and returns it in a Promise.
-     * @param clientId The ID of the client you want to get.
-     */
-    get(clientId: string): Promise<ServiceWorkerClient>;
+	/**
+	 * Gets a service worker client matching a given id and returns it in a Promise.
+	 * @param clientId The ID of the client you want to get.
+	 */
+	get(clientId: string): Promise<ServiceWorkerClient>;
 
-    /**
-     * Gets a list of service worker clients and returns them in a Promise.
-     * Include the options parameter to return all service worker clients whose
-     * origin is the same as the associated service worker's origin. If options
-     * are not included, the method returns only the service worker clients
-     * controlled by the service worker.
-     *
-     * @param [options] An options object allowing you to set options for the matching operation.
-     */
-    matchAll(options?: ServiceWorkerClientsMatchOptions): Promise<ServiceWorkerClient[]>;
+	/**
+	 * Gets a list of service worker clients and returns them in a Promise.
+	 * Include the options parameter to return all service worker clients whose
+	 * origin is the same as the associated service worker's origin. If options
+	 * are not included, the method returns only the service worker clients
+	 * controlled by the service worker.
+	 *
+	 * @param [options] An options object allowing you to set options for the matching operation.
+	 */
+	matchAll(options?: ServiceWorkerClientsMatchOptions): Promise<ServiceWorkerClient[]>;
 
-    /**
-     * Opens a service worker Client in a new browser window.
-     *
-     * @param url A string representing the URL of the client you want to open
-     * in the window.
-     */
-    openWindow(url: string): Promise<WindowClient>;
+	/**
+	 * Opens a service worker Client in a new browser window.
+	 *
+	 * @param url A string representing the URL of the client you want to open
+	 * in the window.
+	 */
+	openWindow(url: string): Promise<WindowClient>;
 
-    /**
-     * Allows an active Service Worker to set itself as the active worker for a
-     * client page when the worker and the page are in the same scope.
-     */
-    claim(): Promise<void>;
+	/**
+	 * Allows an active Service Worker to set itself as the active worker for a
+	 * client page when the worker and the page are in the same scope.
+	 */
+	claim(): Promise<void>;
 }
 
 /**
@@ -252,12 +252,12 @@ interface ServiceWorkerClients {
  * etc.) can be associated with the same ServiceWorker object.
  */
 interface ServiceWorker extends Worker {
-    /**
-     * Returns the ServiceWorker serialized script URL defined as part of
-     * ServiceWorkerRegistration. The URL must be on the same origin as the
-     * document that registers the ServiceWorker.
-     */
-    readonly scriptURL: string;
+	/**
+	 * Returns the ServiceWorker serialized script URL defined as part of
+	 * ServiceWorkerRegistration. The URL must be on the same origin as the
+	 * document that registers the ServiceWorker.
+	 */
+	readonly scriptURL: string;
 }
 
 /**
@@ -265,26 +265,26 @@ interface ServiceWorker extends Worker {
  * methods which let you retrieve the push data sent by a server in various formats.
  */
 interface PushMessageData {
-    /**
-     * Extracts the data as an ArrayBuffer object.
-     */
-    arrayBuffer(): ArrayBuffer;
+	/**
+	 * Extracts the data as an ArrayBuffer object.
+	 */
+	arrayBuffer(): ArrayBuffer;
 
-    /**
-     * Extracts the data as a Blob object.
-     */
-    blob(): Blob;
+	/**
+	 * Extracts the data as a Blob object.
+	 */
+	blob(): Blob;
 
-    /**
-     * Extracts the data as a JSON object.
-     */
-    json(): any;
-    json<T>(): T;
+	/**
+	 * Extracts the data as a JSON object.
+	 */
+	json(): any;
+	json<T>(): T;
 
-    /**
-     * Extracts the data as a plain text string.
-     */
-    text(): string;
+	/**
+	 * Extracts the data as a plain text string.
+	 */
+	text(): string;
 }
 
 /**
@@ -292,26 +292,26 @@ interface PushMessageData {
  * subscription ID.
  */
 interface PushSubscription {
-    /**
-     * The endpoint associated with the push subscription.
-     */
-    readonly endpoint: string;
+	/**
+	 * The endpoint associated with the push subscription.
+	 */
+	readonly endpoint: string;
 
-    /**
-     * The subscription ID associated with the push subscription.
-     */
-    readonly subscriptionId: any;
+	/**
+	 * The subscription ID associated with the push subscription.
+	 */
+	readonly subscriptionId: any;
 }
 
 /**
  * Object containing optional subscribe parameters.
  */
 interface PushSubscriptionOptions {
-    /**
-     * A boolean indicating that the returned push subscription will only be used for
-     * messages whose effect is made visible to the user.
-     */
-    readonly userVisibleOnly: boolean;
+	/**
+	 * A boolean indicating that the returned push subscription will only be used for
+	 * messages whose effect is made visible to the user.
+	 */
+	readonly userVisibleOnly: boolean;
 }
 
 /**
@@ -321,25 +321,25 @@ interface PushSubscriptionOptions {
  * PushRegistrationManager.
  */
 interface PushManager {
-    /**
-     * Returns a promise that resolves to a PushSubscription with details of a
-     * new push subscription.
-     *
-     * @param [options] An object containing optional configuration parameters.
-     */
-    subscribe(options?: PushSubscriptionOptions): Promise<PushSubscription>;
+	/**
+	 * Returns a promise that resolves to a PushSubscription with details of a
+	 * new push subscription.
+	 *
+	 * @param [options] An object containing optional configuration parameters.
+	 */
+	subscribe(options?: PushSubscriptionOptions): Promise<PushSubscription>;
 
-    /**
-     * Returns a promise that resolves to a PushSubscription details of
-     * the retrieved push subscription.
-     */
-    getSubscription(): Promise<PushSubscription>;
+	/**
+	 * Returns a promise that resolves to a PushSubscription details of
+	 * the retrieved push subscription.
+	 */
+	getSubscription(): Promise<PushSubscription>;
 
-    /**
-     * Returns a promise that resolves to the PushPermissionStatus of the
-     * requesting webapp, which will be one of granted, denied, or default.
-     */
-    hasPermission(): Promise<any>;
+	/**
+	 * Returns a promise that resolves to the PushPermissionStatus of the
+	 * requesting webapp, which will be one of granted, denied, or default.
+	 */
+	hasPermission(): Promise<any>;
 }
 
 /////// Service Worker Events ///////
@@ -352,14 +352,14 @@ interface PushManager {
  * entries, etc.
  */
 interface ExtendableEvent extends Event {
-    /**
-     * Extends the lifetime of the event.
-     * It is intended to be called in the install EventHandler for the
-     * installing worker and on the active EventHandler for the active worker.
-     *
-     * @param promise
-     */
-    waitUntil(promise: Promise<any>): void;
+	/**
+	 * Extends the lifetime of the event.
+	 * It is intended to be called in the install EventHandler for the
+	 * installing worker and on the active EventHandler for the active worker.
+	 *
+	 * @param promise
+	 */
+	waitUntil(promise: Promise<any>): void;
 }
 
 /**
@@ -371,29 +371,29 @@ interface ExtendableEvent extends Event {
  * controlled page.
  */
 interface FetchEvent extends Event {
-    /**
-     * Returns a Boolean that is true if the event was dispatched with the
-     * user's intention for the page to reload, and false otherwise. Typically,
-     * pressing the refresh button in a browser is a reload, while clicking a
-     * link and pressing the back button is not.
-     */
-    readonly isReload: boolean;
+	/**
+	 * Returns a Boolean that is true if the event was dispatched with the
+	 * user's intention for the page to reload, and false otherwise. Typically,
+	 * pressing the refresh button in a browser is a reload, while clicking a
+	 * link and pressing the back button is not.
+	 */
+	readonly isReload: boolean;
 
-    /**
-     * Returns the Request that triggered the event handler.
-     */
-    readonly request: Request;
+	/**
+	 * Returns the Request that triggered the event handler.
+	 */
+	readonly request: Request;
 
-    /**
-     * Returns the id of the client that the current service worker is controlling.
-     */
-    readonly clientId: string;
+	/**
+	 * Returns the id of the client that the current service worker is controlling.
+	 */
+	readonly clientId: string;
 
-    /**
-     * Resolves by returning a Response or a network error to Fetch.
-     *
-     * @param all Any custom response-generating code.
-     */
+	/**
+	 * Resolves by returning a Response or a network error to Fetch.
+	 *
+	 * @param all Any custom response-generating code.
+	 */
 	respondWith(all: any): any;
 
 	waitUntil(promise: Promise<any>): void;
@@ -407,31 +407,31 @@ interface FetchEvent extends Event {
  * — extends the lifetime of such events.
  */
 interface ExtendableMessageEvent extends ExtendableEvent {
-    /**
-     * Returns the event's data. It can be any data type.
-     */
-    readonly data: any;
+	/**
+	 * Returns the event's data. It can be any data type.
+	 */
+	readonly data: any;
 
-    /**
-     * Returns the origin of the ServiceWorkerClient that sent the message
-     */
-    readonly origin: string;
+	/**
+	 * Returns the origin of the ServiceWorkerClient that sent the message
+	 */
+	readonly origin: string;
 
-    /**
-     * Represents, in server-sent events, the last event ID of the event source.
-     */
-    readonly lastEventId: string;
+	/**
+	 * Represents, in server-sent events, the last event ID of the event source.
+	 */
+	readonly lastEventId: string;
 
-    /**
-     * Returns a reference to the service worker that sent the message.
-     */
-    readonly source: ServiceWorkerClient;
+	/**
+	 * Returns a reference to the service worker that sent the message.
+	 */
+	readonly source: ServiceWorkerClient;
 
-    /**
-     * Returns the array containing the MessagePort objects
-     * representing the ports of the associated message channel.
-     */
-    readonly ports: MessagePort[];
+	/**
+	 * Returns the array containing the MessagePort objects
+	 * representing the ports of the associated message channel.
+	 */
+	readonly ports: MessagePort[];
 }
 
 /**
@@ -442,10 +442,10 @@ interface ExtendableMessageEvent extends ExtendableEvent {
  * during installation.
  */
 interface InstallEvent extends ExtendableEvent {
-    /**
-     * Returns the ServiceWorker that is currently actively controlling the page.
-     */
-    readonly activeWorker: ServiceWorker;
+	/**
+	 * Returns the ServiceWorker that is currently actively controlling the page.
+	 */
+	readonly activeWorker: ServiceWorker;
 }
 
 /**
@@ -455,19 +455,19 @@ interface InstallEvent extends ExtendableEvent {
  * the ServiceWorkerGlobalScope of a ServiceWorker.
  */
 interface NotificationEvent extends ExtendableEvent {
-    /**
-     * Returns a Notification object representing
-     * the notification that was clicked to fire the event.
-     */
-    notification: any; // need to be replaced with `Notification` when possible
+	/**
+	 * Returns a Notification object representing
+	 * the notification that was clicked to fire the event.
+	 */
+	notification: any; // need to be replaced with `Notification` when possible
 
-    /**
-     * Returns the string ID of the notification button the user clicked.
-     * This value returns undefined if the user clicked
-     * the notification somewhere other than an action button,
-     * or the notification does not have a button.
-     */
-    action: string;
+	/**
+	 * Returns the string ID of the notification button the user clicked.
+	 * This value returns undefined if the user clicked
+	 * the notification somewhere other than an action button,
+	 * or the notification does not have a button.
+	 */
+	action: string;
 }
 
 /**
@@ -477,27 +477,27 @@ interface NotificationEvent extends ExtendableEvent {
  * It contains the information sent from an application server to a PushSubscription.
  */
 interface PushEvent extends ExtendableEvent {
-    /**
-     * Returns a reference to a PushMessageData object containing
-     * data sent to the PushSubscription.
-     */
-    readonly data: PushMessageData;
+	/**
+	 * Returns a reference to a PushMessageData object containing
+	 * data sent to the PushSubscription.
+	 */
+	readonly data: PushMessageData;
 }
 
 interface ServiceWorkerContainerEventMap {
-    "error": ErrorEvent;
-    "controllerchange": Event;
+	"error": ErrorEvent;
+	"controllerchange": Event;
 }
 
 interface ServiceWorkerEventMap {
-    "activate": ExtendableEvent;
-    "fetch": FetchEvent;
-    "install": InstallEvent;
-    // "message": ExtendableMessageEvent;
-    "message": MessageEvent;
-    "notificationclick": NotificationEvent;
-    "push": PushEvent;
-    "pushsubscriptionchang": PushEvent;
+	"activate": ExtendableEvent;
+	"fetch": FetchEvent;
+	"install": InstallEvent;
+	// "message": ExtendableMessageEvent;
+	"message": MessageEvent;
+	"notificationclick": NotificationEvent;
+	"push": PushEvent;
+	"pushsubscriptionchang": PushEvent;
 }
 
 /**
@@ -506,7 +506,7 @@ interface ServiceWorkerEventMap {
  * URLs a service worker can control. This is usually a relative URL, and it defaults to '/' when not specified.
  */
 interface ServiceWorkerRegisterOptions {
-    scope: string;
+	scope: string;
 }
 
 /**
@@ -516,9 +516,9 @@ interface ServiceWorkerRegisterOptions {
  * @param [icon] A USVString containg the URL of an icon to display with the action.
  */
 interface NotificationAction { // TODO: Maybe need to moved if NotificationApi types are defined
-    action: string;
-    title: string;
-    icon?: string;
+	action: string;
+	title: string;
+	icon?: string;
 }
 
 /**
@@ -547,17 +547,17 @@ interface NotificationAction { // TODO: Maybe need to moved if NotificationApi t
  * @param [data] Arbitrary data that you want associated with the notification. This can be of any data type.
  */
 interface ServiceWorkerNotificationOptions {
-    actions?: NotificationAction[];
-    badge?: string;
-    body?: string;
-    dir?: 'auto' | 'ltr' | 'rtl';
-    icon?: string;
-    lang?: string;
-    renotify?: boolean;
-    requireInteraction?: boolean;
-    tag?: string;
-    vibrate?: number[];
-    data?: any;
+	actions?: NotificationAction[];
+	badge?: string;
+	body?: string;
+	dir?: 'auto' | 'ltr' | 'rtl';
+	icon?: string;
+	lang?: string;
+	renotify?: boolean;
+	requireInteraction?: boolean;
+	tag?: string;
+	vibrate?: number[];
+	data?: any;
 }
 
 /**
@@ -566,90 +566,90 @@ interface ServiceWorkerNotificationOptions {
  * will be returned.
  */
 interface ServiceWorkerGetNotificationOptions {
-    tag: string;
+	tag: string;
 }
 
 interface ServiceWorkerGlobalScope extends EventTarget {
-    /**
-     * Contains the CacheStorage object associated with the service worker.
-     */
-    readonly caches: CacheStorage;
-    /**
-     * Contains the Clients object associated with the service worker.
-     */
-    readonly clients: ServiceWorkerClients;
+	/**
+	 * Contains the CacheStorage object associated with the service worker.
+	 */
+	readonly caches: CacheStorage;
+	/**
+	 * Contains the Clients object associated with the service worker.
+	 */
+	readonly clients: ServiceWorkerClients;
 
-    /**
-     * Contains the ServiceWorkerRegistration object that represents the
-     * service worker's registration.
-     */
-    readonly registration: ServiceWorkerRegistration;
+	/**
+	 * Contains the ServiceWorkerRegistration object that represents the
+	 * service worker's registration.
+	 */
+	readonly registration: ServiceWorkerRegistration;
 
-    /**
-     * An event handler fired whenever an activate event occurs — when a
-     * ServiceWorkerRegistration acquires a new ServiceWorkerRegistration.active
-     * worker.
-     */
-    onactivate: (activateevent: ExtendableEvent) => void;
+	/**
+	 * An event handler fired whenever an activate event occurs — when a
+	 * ServiceWorkerRegistration acquires a new ServiceWorkerRegistration.active
+	 * worker.
+	 */
+	onactivate: (activateevent: ExtendableEvent) => void;
 
-    /**
-     * An event handler fired whenever a fetch event occurs — when a fetch()
-     * is called.
-     */
-    onfetch: (fetchevent: FetchEvent) => void;
+	/**
+	 * An event handler fired whenever a fetch event occurs — when a fetch()
+	 * is called.
+	 */
+	onfetch: (fetchevent: FetchEvent) => void;
 
-    /**
-     * An event handler fired whenever an install event occurs — when a
-     * ServiceWorkerRegistration acquires a new
-     * ServiceWorkerRegistration.installing worker.
-     */
-    oninstall: (installevent: InstallEvent) => void;
+	/**
+	 * An event handler fired whenever an install event occurs — when a
+	 * ServiceWorkerRegistration acquires a new
+	 * ServiceWorkerRegistration.installing worker.
+	 */
+	oninstall: (installevent: InstallEvent) => void;
 
-    /**
-     * An event handler fired whenever a message event occurs — when incoming
-     * messages are received. Controlled pages can use the
-     * MessagePort.postMessage() method to send messages to service workers.
-     * The service worker can optionally send a response back via the
-     * MessagePort exposed in event.data.port, corresponding to the controlled
-     * page.
-     *
-     * `onmessage` is actually fired with `ExtendableMessageEvent`, but
-     * since we are merging the interface into `Window`, we should
-     * make sure it's compatible with `window.onmessage`
-     */
-    // onmessage: (messageevent: ExtendableMessageEvent) => void;
-    //onmessage: (messageevent: MessageEvent) => void;
+	/**
+	 * An event handler fired whenever a message event occurs — when incoming
+	 * messages are received. Controlled pages can use the
+	 * MessagePort.postMessage() method to send messages to service workers.
+	 * The service worker can optionally send a response back via the
+	 * MessagePort exposed in event.data.port, corresponding to the controlled
+	 * page.
+	 *
+	 * `onmessage` is actually fired with `ExtendableMessageEvent`, but
+	 * since we are merging the interface into `Window`, we should
+	 * make sure it's compatible with `window.onmessage`
+	 */
+	// onmessage: (messageevent: ExtendableMessageEvent) => void;
+	//onmessage: (messageevent: MessageEvent) => void;
 
-    /**
-     * An event handler fired whenever a notificationclick event occurs — when
-     * a user clicks on a displayed notification.
-     */
-    onnotificationclick: (notificationclickevent: NotificationEvent) => void;
+	/**
+	 * An event handler fired whenever a notificationclick event occurs — when
+	 * a user clicks on a displayed notification.
+	 */
+	onnotificationclick: (notificationclickevent: NotificationEvent) => void;
 
-    /**
-     * An event handler fired whenever a push event occurs — when a server
-     * push notification is received.
-     */
-    onpush: (onpushevent: PushEvent) => void;
+	/**
+	 * An event handler fired whenever a push event occurs — when a server
+	 * push notification is received.
+	 */
+	onpush: (onpushevent: PushEvent) => void;
 
-    /**
-     * An event handler fired whenever a pushsubscriptionchange event occurs —
-     * when a push subscription has been invalidated, or is about to be
-     * invalidated (e.g. when a push service sets an expiration time).
-     */
-    onpushsubscriptionchange: (pushsubscriptionchangeevent: PushEvent) => void;
+	/**
+	 * An event handler fired whenever a pushsubscriptionchange event occurs —
+	 * when a push subscription has been invalidated, or is about to be
+	 * invalidated (e.g. when a push service sets an expiration time).
+	 */
+	onpushsubscriptionchange: (pushsubscriptionchangeevent: PushEvent) => void;
 
-    /**
-     * Allows the current service worker registration to progress from waiting
-     * to active state while service worker clients are using it.
-     */
-    skipWaiting(): Promise<void>;
+	/**
+	 * Allows the current service worker registration to progress from waiting
+	 * to active state while service worker clients are using it.
+	 */
+	skipWaiting(): Promise<void>;
 
-    addEventListener<K extends keyof ServiceWorkerEventMap>(
-        type: K,
-        listener: (event: ServiceWorkerEventMap[K]) => any,
-        useCapture?: boolean
-    ): void;
+	addEventListener<K extends keyof ServiceWorkerEventMap>(
+		type: K,
+		listener: (event: ServiceWorkerEventMap[K]) => any,
+		useCapture?: boolean
+	): void;
 }
 
 interface NotificationOptions {
