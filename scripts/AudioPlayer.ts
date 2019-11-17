@@ -53,7 +53,7 @@ export default class AudioPlayer {
 		}
 
 		this.playId++
-		let currentPlayId = this.playId
+		const currentPlayId = this.playId
 
 		if(this.lastRequest) {
 			this.lastRequest.abort()
@@ -73,7 +73,7 @@ export default class AudioPlayer {
 		this.audioPlayer.classList.remove("decoded")
 
 		// Request
-		let request = new XMLHttpRequest()
+		const request = new XMLHttpRequest()
 		request.open("GET", trackUrl, true)
 		request.responseType = "arraybuffer"
 
@@ -133,7 +133,7 @@ export default class AudioPlayer {
 				return
 			}
 
-			let progress = e.loaded / e.total * 100
+			const progress = e.loaded / e.total * 100
 			this.arn.statusMessage.showInfo(`Loading audio...${progress.toFixed(1)}%`, -1)
 		}
 
@@ -197,9 +197,9 @@ export default class AudioPlayer {
 		this.arn.currentMediaId = ""
 
 		// Remove CSS class "playing"
-		let playingElements = document.getElementsByClassName("playing")
+		const playingElements = document.getElementsByClassName("playing")
 
-		for(let playing of playingElements) {
+		for(const playing of playingElements) {
 			playing.classList.remove("playing")
 		}
 
@@ -238,8 +238,8 @@ export default class AudioPlayer {
 	// Next track
 	async next() {
 		// Get random track
-		let response = await fetch("/api/next/soundtrack")
-		let track = await response.json()
+		const response = await fetch("/api/next/soundtrack")
+		const track = await response.json()
 
 		this.play(track.id, "https://notify.moe/audio/" + track.file)
 		// arn.statusMessage.showInfo("Now playing: " + track.title)
@@ -293,8 +293,8 @@ export default class AudioPlayer {
 	// Update track info
 	async updateTrackInfo(trackId: string) {
 		// Set track title
-		let trackInfoResponse = await fetch("/api/soundtrack/" + trackId)
-		let track = await trackInfoResponse.json()
+		const trackInfoResponse = await fetch("/api/soundtrack/" + trackId)
+		const track = await trackInfoResponse.json()
 		this.trackLink.href = "/soundtrack/" + track.id
 		this.trackLink.textContent = track.title.canonical || track.title.native
 
@@ -305,7 +305,7 @@ export default class AudioPlayer {
 			return
 		}
 
-		for(let tag of (track.tags as string[])) {
+		for(const tag of (track.tags as string[])) {
 			if(tag.startsWith("anime:")) {
 				animeId = tag.split(":")[1]
 				break
@@ -318,8 +318,8 @@ export default class AudioPlayer {
 
 		// Set anime info
 		this.animeInfo.classList.remove("hidden")
-		let animeResponse = await fetch("/api/anime/" + animeId)
-		let anime = await animeResponse.json() as Anime
+		const animeResponse = await fetch("/api/anime/" + animeId)
+		const anime = await animeResponse.json() as Anime
 		this.animeLink.title = anime.title.canonical
 		this.animeLink.href = "/anime/" + anime.id
 		this.animeImage.dataset.src = "//media.notify.moe/images/anime/medium/" + anime.id + ".jpg?" + anime.image.lastModified.toString()

@@ -47,7 +47,7 @@ class MyCache {
 	async store(request: RequestInfo, response: Response) {
 		try {
 			// This can fail if the disk space quota has been exceeded.
-			let cache = await caches.open(this.version)
+			const cache = await caches.open(this.version)
 			await cache.put(request, response)
 		} catch(err) {
 			console.log("Disk quota exceeded, can't store in cache:", request, response, err)
@@ -55,8 +55,8 @@ class MyCache {
 	}
 
 	async serve(request: RequestInfo): Promise<Response> {
-		let cache = await caches.open(this.version)
-		let matching = await cache.match(request)
+		const cache = await caches.open(this.version)
+		const matching = await cache.match(request)
 
 		if(matching) {
 			return matching
@@ -100,12 +100,12 @@ function onActivate(_: any) {
 	console.log("service worker activate")
 
 	// Only keep current version of the cache and delete old caches
-	let cacheWhitelist = [cache.version]
+	const cacheWhitelist = [cache.version]
 
 	// Query existing cache keys
-	let deleteOldCache = caches.keys().then(keyList => {
+	const deleteOldCache = caches.keys().then(keyList => {
 		// Create a deletion for every key that's not whitelisted
-		let deletions = keyList.map(key => {
+		const deletions = keyList.map(key => {
 			if(cacheWhitelist.indexOf(key) === -1) {
 				return caches.delete(key)
 			}
@@ -118,7 +118,7 @@ function onActivate(_: any) {
 	})
 
 	// Immediate claim helps us gain control over a new client immediately
-	let immediateClaim = self.clients.claim()
+	const immediateClaim = self.clients.claim()
 
 	return Promise.all([
 		deleteOldCache,
@@ -130,7 +130,7 @@ function onActivate(_: any) {
 // Simply returning, without calling evt.respondWith(),
 // will let the browser deal with the request normally.
 async function onRequest(evt: FetchEvent) {
-	let request = evt.request as Request
+	const request = evt.request as Request
 
 	// If it's not a GET request, fetch it normally.
 	// Let the browser handle XHR upload requests via POST,
@@ -248,16 +248,16 @@ async function onRequest(evt: FetchEvent) {
 
 // onMessage is called when the service worker receives a message from a client (browser tab).
 async function onMessage(evt: ServiceWorkerMessageEvent) {
-	let message = JSON.parse(evt.data)
-	let clientId = (evt.source as any).id
-	let client = await MyClient.get(clientId)
+	const message = JSON.parse(evt.data)
+	const clientId = (evt.source as any).id
+	const client = await MyClient.get(clientId)
 
 	client.onMessage(message)
 }
 
 // onPush is called on push events and requires the payload to contain JSON information about the notification.
 function onPush(evt: PushEvent) {
-	var payload = evt.data ? evt.data.json() : {}
+	const payload = evt.data ? evt.data.json() : {}
 
 	// Notify all clients about the new notification so they can update their notification counter
 	broadcast({
@@ -278,15 +278,15 @@ function onPushSubscriptionChange(evt: any) {
 	.then(async subscription => {
 		console.log("send subscription to server...")
 
-		let rawKey = subscription.getKey("p256dh")
-		let key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
+		const rawKey = subscription.getKey("p256dh")
+		const key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
 
-		let rawSecret = subscription.getKey("auth")
-		let secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
+		const rawSecret = subscription.getKey("auth")
+		const secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
 
-		let endpoint = subscription.endpoint
+		const endpoint = subscription.endpoint
 
-		let pushSubscription = {
+		const pushSubscription = {
 			endpoint,
 			p256dh: key,
 			auth: secret,
@@ -298,8 +298,8 @@ function onPushSubscriptionChange(evt: any) {
 			}
 		}
 
-		let response = await fetch("/api/me", {credentials: "same-origin"})
-		let user = await response.json()
+		const response = await fetch("/api/me", {credentials: "same-origin"})
+		const user = await response.json()
 
 		return fetch("/api/pushsubscriptions/" + user.id + "/add", {
 			method: "POST",
@@ -311,12 +311,12 @@ function onPushSubscriptionChange(evt: any) {
 
 // onNotificationClick is called when the user clicks on a notification.
 function onNotificationClick(evt: NotificationEvent) {
-	let notification = evt.notification
+	const notification = evt.notification
 	notification.close()
 
 	return self.clients.matchAll().then(function(clientList) {
 		// If we have a link, use that link to open a new window.
-		let url = notification.data
+		const url = notification.data
 
 		if(url) {
 			return self.clients.openWindow(url)
@@ -337,7 +337,7 @@ function broadcast(msg: object) {
 	const msgText = JSON.stringify(msg)
 
 	self.clients.matchAll().then(function(clientList) {
-		for(let client of clientList) {
+		for(const client of clientList) {
 			client.postMessage(msgText)
 		}
 	})
@@ -345,7 +345,7 @@ function broadcast(msg: object) {
 
 // installCache is called when the service worker is installed for the first time.
 function installCache() {
-	let urls = [
+	const urls = [
 		"/",
 		"/scripts",
 		"/styles",
@@ -353,8 +353,8 @@ function installCache() {
 		"https://media.notify.moe/images/elements/noise-strong.png",
 	]
 
-	let requests = urls.map(async url => {
-		let request = new Request(url, {
+	const requests = urls.map(async url => {
+		const request = new Request(url, {
 			credentials: "same-origin",
 			mode: "cors"
 		})

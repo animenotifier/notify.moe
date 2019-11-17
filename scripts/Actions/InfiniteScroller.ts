@@ -17,10 +17,10 @@ export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 	arn.loading(true)
 	button.disabled = true
 
-	let index = button.dataset.index
+	const index = button.dataset.index
 
 	try {
-		let response = await fetch("/_" + arn.app.currentPath + "/from/" + index, {
+		const response = await fetch("/_" + arn.app.currentPath + "/from/" + index, {
 			credentials: "same-origin"
 		})
 
@@ -28,7 +28,7 @@ export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 			throw response.statusText
 		}
 
-		let newIndex = response.headers.get("X-LoadMore-Index")
+		const newIndex = response.headers.get("X-LoadMore-Index")
 
 		// End of data?
 		if(!newIndex || newIndex === "-1") {
@@ -39,7 +39,7 @@ export async function loadMore(arn: AnimeNotifier, button: HTMLButtonElement) {
 		}
 
 		// Get the HTML response
-		let html = await response.text()
+		const html = await response.text()
 
 		// Add the HTML to the existing target
 		Diff.mutations.queue(() => {

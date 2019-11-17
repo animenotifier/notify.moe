@@ -3,8 +3,8 @@ import { bytesHumanReadable, uploadWithProgress } from "../Utils"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let fileType = button.dataset.type
-	let endpoint = button.dataset.endpoint
+	const fileType = button.dataset.type
+	const endpoint = button.dataset.endpoint
 
 	if(endpoint === "/api/upload/user/cover" && arn.user && arn.user.dataset.pro !== "true") {
 		alert("Please buy a PRO account to use this feature.")
@@ -12,7 +12,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 	}
 
 	// Click on virtual file input element
-	let input = document.createElement("input")
+	const input = document.createElement("input")
 	input.setAttribute("type", "file")
 	input.value = ""
 
@@ -26,7 +26,7 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 			return
 		}
 
-		let file = input.files[0]
+		const file = input.files[0]
 
 		// Check mime type for images
 		if(fileType === "image" && !file.type.startsWith("image/")) {
@@ -42,9 +42,9 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 		// Preview image
 		if(fileType === "image") {
-			let previews = document.getElementsByClassName(button.id + "-preview")
-			let dataURL = await readImageAsDataURL(file)
-			let img = await loadImage(dataURL)
+			const previews = document.getElementsByClassName(button.id + "-preview")
+			const dataURL = await readImageAsDataURL(file)
+			const img = await loadImage(dataURL)
 
 			switch(endpoint) {
 				case "/api/upload/user/image":
@@ -73,11 +73,11 @@ export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 // Upload file
 function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNotifier) {
-	let reader = new FileReader()
+	const reader = new FileReader()
 
 	reader.onloadend = async () => {
-		let result = reader.result as ArrayBuffer
-		let fileSize = result.byteLength
+		const result = reader.result as ArrayBuffer
+		const fileSize = result.byteLength
 
 		if(fileSize === 0) {
 			arn.statusMessage.showError("File is empty")
@@ -87,7 +87,7 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 		arn.statusMessage.showInfo(`Preparing to upload ${fileType} (${bytesHumanReadable(fileSize)})`, -1)
 
 		try {
-			let responseText = await uploadWithProgress(endpoint, {
+			const responseText = await uploadWithProgress(endpoint, {
 				method: "POST",
 				credentials: "include",
 				headers: {
@@ -95,7 +95,7 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 				},
 				body: reader.result
 			}, e => {
-				let progress = e.loaded / (e.lengthComputable ? e.total : fileSize) * 100
+				const progress = e.loaded / (e.lengthComputable ? e.total : fileSize) * 100
 				arn.statusMessage.showInfo(`Uploading ${fileType}...${progress.toFixed(1)}%`, -1)
 			})
 
@@ -118,10 +118,10 @@ function uploadFile(file: File, fileType: string, endpoint: string, arn: AnimeNo
 // Read image as data URL
 function readImageAsDataURL(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
-		let reader = new FileReader()
+		const reader = new FileReader()
 
 		reader.onloadend = () => {
-			let dataURL = reader.result as string
+			const dataURL = reader.result as string
 			resolve(dataURL)
 		}
 
@@ -137,7 +137,7 @@ function readImageAsDataURL(file: File): Promise<string> {
 // Load image and resolve when loading has finished
 function loadImage(url: string): Promise<HTMLImageElement> {
 	return new Promise((resolve, reject) => {
-		let img = new Image()
+		const img = new Image()
 		img.src = url
 
 		img.onload = () => {
@@ -153,15 +153,15 @@ function loadImage(url: string): Promise<HTMLImageElement> {
 // Preview image
 function previewImage(dataURL: string, endpoint: string, previews: HTMLCollectionOf<Element>) {
 	if(endpoint === "/api/upload/user/image") {
-		let svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
+		const svgPreview = document.getElementById("avatar-input-preview-svg") as HTMLImageElement
 
 		if(svgPreview) {
 			svgPreview.classList.add("hidden")
 		}
 	}
 
-	for(let preview of previews) {
-		let img = preview as HTMLImageElement
+	for(const preview of previews) {
+		const img = preview as HTMLImageElement
 		img.classList.remove("hidden")
 
 		// Make not found images visible again
@@ -176,9 +176,9 @@ function previewImage(dataURL: string, endpoint: string, previews: HTMLCollectio
 
 // Update sidebar avatar
 function updateSideBarAvatar(url: string) {
-	let sidebar = document.getElementById("sidebar") as HTMLElement
-	let userImage = sidebar.getElementsByClassName("user-image")[0] as HTMLImageElement
-	let lazyLoad = userImage["became visible"]
+	const sidebar = document.getElementById("sidebar") as HTMLElement
+	const userImage = sidebar.getElementsByClassName("user-image")[0] as HTMLImageElement
+	const lazyLoad = userImage["became visible"]
 
 	if(lazyLoad) {
 		userImage.dataset.src = url

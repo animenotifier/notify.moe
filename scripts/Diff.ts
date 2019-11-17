@@ -18,7 +18,7 @@ export default class Diff {
 
 	// innerHTML will diff the element with the given HTML string and apply DOM mutations.
 	static innerHTML(aRoot: HTMLElement, html: string): Promise<void> {
-		let container = document.createElement("main")
+		const container = document.createElement("main")
 		container.innerHTML = html
 
 		return new Promise((resolve, _) => {
@@ -30,7 +30,7 @@ export default class Diff {
 	// root will diff the document root element with the given HTML string and apply DOM mutations.
 	static root(aRoot: HTMLElement, html: string) {
 		return new Promise((resolve, _) => {
-			let rootContainer = document.createElement("html")
+			const rootContainer = document.createElement("html")
 			rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
 
 			Diff.childNodes(aRoot.getElementsByTagName("body")[0], rootContainer.getElementsByTagName("body")[0])
@@ -40,12 +40,12 @@ export default class Diff {
 
 	// childNodes diffs the child nodes of 2 given elements and applies DOM mutations.
 	static childNodes(aRoot: Node, bRoot: Node) {
-		let aChild = [...aRoot.childNodes]
-		let bChild = [...bRoot.childNodes]
-		let numNodes = Math.max(aChild.length, bChild.length)
+		const aChild = [...aRoot.childNodes]
+		const bChild = [...bRoot.childNodes]
+		const numNodes = Math.max(aChild.length, bChild.length)
 
 		for(let i = 0; i < numNodes; i++) {
-			let a = aChild[i]
+			const a = aChild[i]
 
 			// Remove nodes at the end of a that do not exist in b
 			if(i >= bChild.length) {
@@ -53,7 +53,7 @@ export default class Diff {
 				continue
 			}
 
-			let b = bChild[i]
+			const b = bChild[i]
 
 			// If a doesn't have that many nodes, simply append at the end of a
 			if(i >= aChild.length) {
@@ -77,13 +77,13 @@ export default class Diff {
 
 			// HTML element:
 			if(a.nodeType === Node.ELEMENT_NODE) {
-				let elemA = a as HTMLElement
-				let elemB = b as HTMLElement
+				const elemA = a as HTMLElement
+				const elemB = b as HTMLElement
 
-				let removeAttributes: Attr[] = []
+				const removeAttributes: Attr[] = []
 
 				for(let x = 0; x < elemA.attributes.length; x++) {
-					let attrib = elemA.attributes[x]
+					const attrib = elemA.attributes[x]
 
 					if(attrib.specified) {
 						if(!elemB.hasAttribute(attrib.name) && !Diff.persistentAttributes.has(attrib.name)) {
@@ -93,13 +93,13 @@ export default class Diff {
 				}
 
 				this.mutations.queue(() => {
-					for(let attr of removeAttributes) {
+					for(const attr of removeAttributes) {
 						elemA.removeAttributeNode(attr)
 					}
 				})
 
 				for(let x = 0; x < elemB.attributes.length; x++) {
-					let attrib = elemB.attributes[x]
+					const attrib = elemB.attributes[x]
 
 					if(!attrib.specified) {
 						continue
@@ -111,22 +111,22 @@ export default class Diff {
 					}
 
 					if(attrib.name === "class") {
-						let classesA = elemA.classList
-						let classesB = elemB.classList
-						let removeClasses: string[] = []
+						const classesA = elemA.classList
+						const classesB = elemB.classList
+						const removeClasses: string[] = []
 
-						for(let className of classesA) {
+						for(const className of classesA) {
 							if(!classesB.contains(className) && !Diff.persistentClasses.has(className)) {
 								removeClasses.push(className)
 							}
 						}
 
 						this.mutations.queue(() => {
-							for(let className of removeClasses) {
+							for(const className of removeClasses) {
 								classesA.remove(className)
 							}
 
-							for(let className of classesB) {
+							for(const className of classesB) {
 								if(!classesA.contains(className)) {
 									classesA.add(className)
 								}

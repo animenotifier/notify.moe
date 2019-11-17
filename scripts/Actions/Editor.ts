@@ -6,8 +6,8 @@ export async function newAnimeDiffIgnore(arn: AnimeNotifier, button: HTMLButtonE
 		return
 	}
 
-	let id = button.dataset.id
-	let hash = button.dataset.hash
+	const id = button.dataset.id
+	const hash = button.dataset.hash
 
 	try {
 		await arn.post(`/api/new/ignoreanimedifference`, {
@@ -27,15 +27,15 @@ export async function importKitsuAnime(arn: AnimeNotifier, button: HTMLButtonEle
 		return
 	}
 
-	let newTab = window.open()
+	const newTab = window.open()
 
 	if(!newTab) {
 		arn.statusMessage.showError("Error opening new tab")
 		return
 	}
 
-	let animeId = button.dataset.id
-	let response = await fetch(`/api/import/kitsu/anime/${animeId}`, {
+	const animeId = button.dataset.id
+	const response = await fetch(`/api/import/kitsu/anime/${animeId}`, {
 		method: "POST",
 		credentials: "same-origin"
 	})
@@ -54,22 +54,22 @@ export async function deleteKitsuAnime(arn: AnimeNotifier, button: HTMLButtonEle
 		return
 	}
 
-	let animeId = button.dataset.id
+	const animeId = button.dataset.id
 	await arn.post(`/api/delete/kitsu/anime/${animeId}`)
 	arn.reloadContent()
 }
 
 // Multi-search anime
 export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAreaElement) {
-	let results = document.getElementById("multi-search-anime") as HTMLDivElement
-	let animeTitles = textarea.value.split("\n")
+	const results = document.getElementById("multi-search-anime") as HTMLDivElement
+	const animeTitles = textarea.value.split("\n")
 
 	results.innerHTML = ""
 
 	for(let i = 0; i < animeTitles.length; i++) {
 		console.log(animeTitles[i])
-		let response = await fetch("/_/anime-search/" + animeTitles[i])
-		let html = await response.text()
+		const response = await fetch("/_/anime-search/" + animeTitles[i])
+		const html = await response.text()
 		results.innerHTML += "<h3>" + animeTitles[i] + "</h3>" + html
 	}
 
@@ -79,7 +79,7 @@ export async function multiSearchAnime(arn: AnimeNotifier, textarea: HTMLTextAre
 
 // Download soundtrack file
 export async function downloadSoundTrackFile(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let id = button.dataset.id
+	const id = button.dataset.id
 
 	try {
 		await arn.post(`/api/soundtrack/${id}/download`)
@@ -96,7 +96,7 @@ export async function startJob(arn: AnimeNotifier, button: HTMLButtonElement) {
 		return
 	}
 
-	let jobName = button.dataset.job
+	const jobName = button.dataset.job
 
 	if(!confirm(`Are you sure you want to start the "${jobName}" job?`)) {
 		return

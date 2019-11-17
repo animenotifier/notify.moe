@@ -1,5 +1,5 @@
 export function hexToHSL(hex: string) {
-	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
 
 	if(!result) {
 		return null
@@ -13,17 +13,17 @@ export function hexToHSL(hex: string) {
 	g /= 255
 	b /= 255
 
-	let max = Math.max(r, g, b)
-	let min = Math.min(r, g, b)
+	const max = Math.max(r, g, b)
+	const min = Math.min(r, g, b)
 
 	let h = 0
 	let s = 0
-	let l = (max + min) / 2
+	const l = (max + min) / 2
 
 	if(max == min) {
 		h = s = 0
 	} else {
-		let d = max - min
+		const d = max - min
 		s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
 
 		switch(max) {

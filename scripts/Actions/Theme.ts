@@ -102,7 +102,7 @@ export function nextTheme(arn: AnimeNotifier) {
 	// Find current index and apply theme of next index
 	for(let i = 0; i < themesSorted.length; i++) {
 		if(themesSorted[i] === currentThemeName) {
-			let newIndex = (i + 1) % themesSorted.length
+			const newIndex = (i + 1) % themesSorted.length
 			applyThemeAndPreview(arn, themesSorted[newIndex])
 			break
 		}
@@ -135,15 +135,15 @@ export function applyThemeAndPreview(arn: AnimeNotifier, themeName: string) {
 
 // Apply theme
 export function applyTheme(themeName: string) {
-	let rootStyle = document.documentElement.style
-	let theme = themes[themeName]
+	const rootStyle = document.documentElement.style
+	const theme = themes[themeName]
 
 	// Apply base theme
 	if(theme["base-theme"]) {
 		applyTheme(theme["base-theme"])
 	}
 
-	for(let property in theme) {
+	for(const property in theme) {
 		if(!theme.hasOwnProperty(property)) {
 			continue
 		}
@@ -164,13 +164,13 @@ export function applyTheme(themeName: string) {
 
 // Color picker
 export function pickColor(_: AnimeNotifier, element: HTMLElement) {
-	let rootStyle = document.documentElement.style
-	let variableName = `--${element.dataset.variable}`
-	let input = document.createElement("input")
+	const rootStyle = document.documentElement.style
+	const variableName = `--${element.dataset.variable}`
+	const input = document.createElement("input")
 	input.type = "color"
 
 	input.oninput = () => {
-		let color = hexToHSL(input.value)
+		const color = hexToHSL(input.value)
 
 		if(!color) {
 			return

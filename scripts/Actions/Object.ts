@@ -2,7 +2,7 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // New
 export async function newObject(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let dataType = button.dataset.type
+	const dataType = button.dataset.type
 
 	if(!dataType) {
 		console.error("Missing data type:", button)
@@ -10,13 +10,13 @@ export async function newObject(arn: AnimeNotifier, button: HTMLButtonElement) {
 	}
 
 	try {
-		let response = await arn.post(`/api/new/${dataType}`)
+		const response = await arn.post(`/api/new/${dataType}`)
 
 		if(!response) {
 			throw `Failed creating ${dataType}`
 		}
 
-		let json = await response.json()
+		const json = await response.json()
 		await arn.app.load(`/${dataType}/${json.id}/edit`)
 	} catch(err) {
 		arn.statusMessage.showError(err)
@@ -25,8 +25,8 @@ export async function newObject(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 // Delete
 export async function deleteObject(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let confirmType = button.dataset.confirmType
-	let returnPath = button.dataset.returnPath
+	const confirmType = button.dataset.confirmType
+	const returnPath = button.dataset.returnPath
 
 	if(!confirm(`Are you sure you want to delete this ${confirmType}?`)) {
 		return
@@ -39,7 +39,7 @@ export async function deleteObject(arn: AnimeNotifier, button: HTMLButtonElement
 		}
 	}
 
-	let endpoint = arn.findAPIEndpoint(button)
+	const endpoint = arn.findAPIEndpoint(button)
 
 	try {
 		await arn.post(endpoint + "/delete")

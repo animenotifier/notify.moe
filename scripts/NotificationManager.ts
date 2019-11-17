@@ -11,11 +11,11 @@ export default class NotificationManager {
 	}
 
 	async update() {
-		let response = await fetch("/api/count/notifications/unseen", {
+		const response = await fetch("/api/count/notifications/unseen", {
 			credentials: "same-origin"
 		})
 
-		let body = await response.text()
+		const body = await response.text()
 		this.setCounter(parseInt(body))
 	}
 

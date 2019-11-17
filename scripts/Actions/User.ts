@@ -13,8 +13,8 @@ export async function unfollowUser(arn: AnimeNotifier, element: HTMLElement) {
 
 // Update follow
 async function updateFollow(arn: AnimeNotifier, element: HTMLElement, message: string) {
-	let api = element.dataset.api
-	let nick = document.getElementById("nick")
+	const api = element.dataset.api
+	const nick = document.getElementById("nick")
 
 	if(!api || !nick || !nick.textContent) {
 		console.error("Missing data-api or invalid nick:", element)
@@ -34,7 +34,7 @@ async function updateFollow(arn: AnimeNotifier, element: HTMLElement, message: s
 export function showMore(_: AnimeNotifier, showMoreElement: HTMLElement) {
 	const elements = [...document.getElementsByClassName("show-more")]
 
-	for(let element of elements) {
+	for(const element of elements) {
 		Diff.mutations.queue(() => element.classList.remove("show-more"))
 	}
 

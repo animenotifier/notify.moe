@@ -22,7 +22,7 @@ export default class ServiceWorkerManager {
 		})
 
 		// This will send a message to the service worker that the DOM has been loaded
-		let sendContentLoadedEvent = () => {
+		const sendContentLoadedEvent = () => {
 			if(!navigator.serviceWorker.controller) {
 				return
 			}
@@ -71,7 +71,7 @@ export default class ServiceWorkerManager {
 	}
 
 	onMessage(evt: MessageEvent) {
-		let message = JSON.parse(evt.data)
+		const message = JSON.parse(evt.data)
 
 		switch(message.type) {
 			case "new notification":

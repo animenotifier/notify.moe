@@ -14,10 +14,10 @@ export default class SVGIcon extends HTMLElement {
 	}
 
 	async render() {
-		let cache = SVGIcon.cache.get(this.name)
+		const cache = SVGIcon.cache.get(this.name)
 
 		if(cache) {
-			let svg = await cache
+			const svg = await cache
 
 			Diff.mutations.queue(() => {
 				// Remove all existing child nodes
@@ -33,8 +33,8 @@ export default class SVGIcon extends HTMLElement {
 		}
 
 		SVGIcon.cache.set(this.name, new Promise(async (resolve, reject) => {
-			let url = `//media.notify.moe/images/icons/${this.name}.svg`
-			let response = await fetch(url)
+			const url = `//media.notify.moe/images/icons/${this.name}.svg`
+			const response = await fetch(url)
 
 			if(!response.ok) {
 				console.warn(`Failed loading SVG icon: ${url}`)
@@ -42,11 +42,11 @@ export default class SVGIcon extends HTMLElement {
 				return
 			}
 
-			let text = await response.text()
+			const text = await response.text()
 
 			Diff.mutations.queue(() => {
 				this.innerHTML = text
-				let svg = this.firstChild
+				const svg = this.firstChild
 
 				if(!svg) {
 					console.warn("Invalid SVG icon:", svg)

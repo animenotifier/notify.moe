@@ -4,22 +4,22 @@ import AnimeNotifier from "../AnimeNotifier"
 export async function addAnimeToCollection(arn: AnimeNotifier, button: HTMLButtonElement) {
 	button.disabled = true
 
-	let {animeId} = button.dataset
+	const {animeId} = button.dataset
 
 	if(!animeId) {
 		console.error("Button without anime ID:", button)
 		return
 	}
 
-	let apiEndpoint = arn.findAPIEndpoint(button)
+	const apiEndpoint = arn.findAPIEndpoint(button)
 
 	try {
 		await arn.post(apiEndpoint + "/add/" + animeId)
 		arn.reloadContent()
 
 		// Show status message
-		let response = await fetch("/api/anime/" + animeId)
-		let anime = await response.json()
+		const response = await fetch("/api/anime/" + animeId)
+		const anime = await response.json()
 		arn.statusMessage.showInfo(`Added ${anime.title.canonical} to your collection.`)
 	} catch(err) {
 		arn.statusMessage.showError(err)
@@ -33,15 +33,15 @@ export async function removeAnimeFromCollection(arn: AnimeNotifier, button: HTML
 	}
 
 	button.textContent = "Removing..."
-	let {animeId, nick} = button.dataset
+	const {animeId, nick} = button.dataset
 
 	if(!animeId || !nick) {
 		console.error("Button without nick or anime ID:", button)
 		return
 	}
 
-	let apiEndpoint = arn.findAPIEndpoint(button)
-	let status = document.getElementById("Status") as HTMLSelectElement
+	const apiEndpoint = arn.findAPIEndpoint(button)
+	const status = document.getElementById("Status") as HTMLSelectElement
 
 	try {
 		await arn.post(apiEndpoint + "/remove/" + animeId)
@@ -58,7 +58,7 @@ export async function deleteAnimeList(arn: AnimeNotifier, button: HTMLElement) {
 	}
 
 	button.textContent = "Deleting..."
-	let {returnPath} = button.dataset
+	const {returnPath} = button.dataset
 
 	if(!returnPath) {
 		console.error("Button without data-return-path:", button)

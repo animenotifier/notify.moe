@@ -2,7 +2,7 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Charge up
 export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
-	let amount = button.dataset.amount
+	const amount = button.dataset.amount
 
 	arn.loading(true)
 	arn.statusMessage.showInfo("Creating PayPal transaction... This might take a few seconds.")
@@ -18,7 +18,7 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 			throw "Error creating PayPal payment"
 		}
 
-		let link = payment.links.find(link => link.rel === "approval_url")
+		const link = payment.links.find(link => link.rel === "approval_url")
 
 		if(!link) {
 			throw "Error finding PayPal payment link"
@@ -26,7 +26,7 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 
 		arn.statusMessage.showInfo("Redirecting to PayPal...", 5000)
 
-		let url = link.href
+		const url = link.href
 		window.location.href = url
 	})
 	.catch(err => arn.statusMessage.showError(err))
@@ -35,14 +35,14 @@ export function chargeUp(arn: AnimeNotifier, button: HTMLElement) {
 
 // Toggle fade
 export function toggleFade(_: AnimeNotifier, button: HTMLElement) {
-	let elementId = button.dataset.elementId
+	const elementId = button.dataset.elementId
 
 	if(!elementId) {
 		console.error("Missing element ID:", elementId)
 		return
 	}
 
-	let element = document.getElementById(elementId)
+	const element = document.getElementById(elementId)
 
 	if(!element) {
 		console.error("Invalid element ID:", elementId)
@@ -58,9 +58,9 @@ export function toggleFade(_: AnimeNotifier, button: HTMLElement) {
 
 // Buy item
 export function buyItem(arn: AnimeNotifier, button: HTMLElement) {
-	let itemId = button.dataset.itemId
-	let itemName = button.dataset.itemName
-	let price = button.dataset.price
+	const itemId = button.dataset.itemId
+	const itemName = button.dataset.itemName
+	const price = button.dataset.price
 
 	if(!confirm(`Would you like to buy ${itemName} for ${price} gems?`)) {
 		return

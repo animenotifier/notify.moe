@@ -30,7 +30,7 @@ export default class SideBar {
 	}
 
 	toggle() {
-		let visible = this.element.style.display !== "none"
+		const visible = this.element.style.display !== "none"
 
 		if(visible) {
 			this.element.style.display = "none"

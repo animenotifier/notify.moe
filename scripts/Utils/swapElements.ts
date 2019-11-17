@@ -1,7 +1,7 @@
 // swapElements assumes that both elements have valid parent nodes.
 export function swapElements(a: Node, b: Node) {
-	let bParent = b.parentNode as Node
-	let bNext = b.nextSibling
+	const bParent = b.parentNode as Node
+	const bNext = b.nextSibling
 
 	// Special case for when a is the next sibling of b
 	if(bNext === a) {

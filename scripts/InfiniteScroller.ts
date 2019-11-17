@@ -8,7 +8,7 @@ export default class InfiniteScroller {
 		this.container = container
 		this.threshold = threshold
 
-		let check = () => {
+		const check = () => {
 			if(this.container.scrollTop + this.container.clientHeight >= this.container.scrollHeight - threshold) {
 				this.loadMore()
 			}
@@ -28,7 +28,7 @@ export default class InfiniteScroller {
 	}
 
 	loadMore() {
-		let button = document.getElementById("load-more-button")
+		const button = document.getElementById("load-more-button")
 
 		if(!button) {
 			return

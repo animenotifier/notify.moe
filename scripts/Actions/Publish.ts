@@ -2,7 +2,7 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Publish
 export async function publish(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let endpoint = arn.findAPIEndpoint(button)
+	const endpoint = arn.findAPIEndpoint(button)
 
 	try {
 		await arn.post(endpoint + "/publish")
@@ -14,7 +14,7 @@ export async function publish(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 // Unpublish
 export async function unpublish(arn: AnimeNotifier, button: HTMLButtonElement) {
-	let endpoint = arn.findAPIEndpoint(button)
+	const endpoint = arn.findAPIEndpoint(button)
 
 	try {
 		await arn.post(endpoint + "/unpublish")

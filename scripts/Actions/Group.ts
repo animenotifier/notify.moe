@@ -6,7 +6,7 @@ export async function join(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let apiEndpoint = arn.findAPIEndpoint(element)
+	const apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
 		await arn.post(`${apiEndpoint}/join`)
@@ -23,7 +23,7 @@ export async function leave(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let apiEndpoint = arn.findAPIEndpoint(element)
+	const apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
 		await arn.post(`${apiEndpoint}/leave`)

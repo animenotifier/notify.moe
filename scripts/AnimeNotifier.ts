@@ -115,7 +115,7 @@ export default class AnimeNotifier {
 			// Enable lazy load
 			this.visibilityObserver = new IntersectionObserver(
 				entries => {
-					for(let entry of entries) {
+					for(const entry of entries) {
 						if(entry.isIntersecting) {
 							entry.target["became visible"]()
 							this.visibilityObserver.unobserve(entry.target)
@@ -203,7 +203,7 @@ export default class AnimeNotifier {
 
 		// Auto-focus first input element on welcome page.
 		if(location.pathname === "/welcome") {
-			let firstInput = this.app.content.getElementsByTagName("input")[0] as HTMLInputElement
+			const firstInput = this.app.content.getElementsByTagName("input")[0] as HTMLInputElement
 
 			if(firstInput) {
 				firstInput.focus()
@@ -212,7 +212,7 @@ export default class AnimeNotifier {
 	}
 
 	applyPageTitle() {
-		let headers = document.getElementsByTagName("h1")
+		const headers = document.getElementsByTagName("h1")
 
 		if(this.app.currentPath === "/" || headers.length === 0 || headers[0].textContent === "NOTIFY.MOE") {
 			if(document.title !== this.title) {
@@ -281,8 +281,8 @@ export default class AnimeNotifier {
 		const minHeight = 800
 
 		if(window.outerWidth <= minWidth || window.outerHeight <= minHeight) {
-			let finalWidth = window.outerWidth < minWidth ? minWidth : window.outerWidth
-			let finalHeight = window.outerHeight < minHeight ? minHeight : window.outerHeight
+			const finalWidth = window.outerWidth < minWidth ? minWidth : window.outerWidth
+			const finalHeight = window.outerHeight < minHeight ? minHeight : window.outerHeight
 
 			window.resizeTo(finalWidth, finalHeight)
 		}
@@ -332,7 +332,7 @@ export default class AnimeNotifier {
 		this.tip.setAttribute("active", "false")
 
 		// Assign mouse enter event handler
-		for(let element of elements) {
+		for(const element of elements) {
 			element.onmouseenter = () => {
 				this.tip.classList.remove("fade-out")
 				this.tip.show(element)
@@ -346,21 +346,21 @@ export default class AnimeNotifier {
 
 	dragAndDrop() {
 		if(location.pathname.includes("/animelist/")) {
-			for(let listItem of findAll("anime-list-item")) {
+			for(const listItem of findAll("anime-list-item")) {
 				// Skip elements that have their event listeners attached already
 				if(listItem["drag-listeners-attached"]) {
 					continue
 				}
 
-				let name = listItem.getElementsByClassName("anime-list-item-name")[0]
-				let imageContainer = listItem.getElementsByClassName("anime-list-item-image-container")[0]
+				const name = listItem.getElementsByClassName("anime-list-item-name")[0]
+				const imageContainer = listItem.getElementsByClassName("anime-list-item-image-container")[0]
 
-				let onDrag = evt => {
+				const onDrag = evt => {
 					if(!evt.dataTransfer) {
 						return
 					}
 
-					let image = imageContainer.getElementsByClassName("anime-list-item-image")[0]
+					const image = imageContainer.getElementsByClassName("anime-list-item-image")[0]
 
 					if(image) {
 						evt.dataTransfer.setDragImage(image, 0, 0)
@@ -381,7 +381,7 @@ export default class AnimeNotifier {
 				listItem["drag-listeners-attached"] = true
 			}
 
-			for(let element of findAll("tab")) {
+			for(const element of findAll("tab")) {
 				// Skip elements that have their event listeners attached already
 				if(element["drop-listeners-attached"]) {
 					continue
@@ -400,7 +400,7 @@ export default class AnimeNotifier {
 						return
 					}
 
-					let data = e.dataTransfer.getData("text/plain")
+					const data = e.dataTransfer.getData("text/plain")
 					let json: any
 
 					try {
@@ -416,7 +416,7 @@ export default class AnimeNotifier {
 					e.stopPropagation()
 					e.preventDefault()
 
-					let tabText = toElement.textContent
+					const tabText = toElement.textContent
 
 					if(!tabText) {
 						return
@@ -459,7 +459,7 @@ export default class AnimeNotifier {
 		}
 
 		if(location.pathname.startsWith("/inventory")) {
-			for(let element of findAll("inventory-slot")) {
+			for(const element of findAll("inventory-slot")) {
 				// Skip elements that have their event listeners attached already
 				if(element["drag-listeners-attached"]) {
 					continue
@@ -478,13 +478,13 @@ export default class AnimeNotifier {
 						return
 					}
 
-					let itemName = element.getAttribute("aria-label")
+					const itemName = element.getAttribute("aria-label")
 
 					if(element.dataset.consumable !== "true") {
 						return this.statusMessage.showError(itemName + " is not a consumable item.")
 					}
 
-					let apiEndpoint = this.findAPIEndpoint(element)
+					const apiEndpoint = this.findAPIEndpoint(element)
 
 					try {
 						await this.post(apiEndpoint + "/use/" + element.dataset.index)
@@ -513,20 +513,20 @@ export default class AnimeNotifier {
 					e.stopPropagation()
 					e.preventDefault()
 
-					let inventory = element.parentElement
+					const inventory = element.parentElement
 
 					if(!inventory || !e.dataTransfer) {
 						return
 					}
 
-					let fromIndex = e.dataTransfer.getData("text")
+					const fromIndex = e.dataTransfer.getData("text")
 
 					if(!fromIndex) {
 						return
 					}
 
-					let fromElement = inventory.childNodes[fromIndex] as HTMLElement
-					let toIndex = element.dataset.index
+					const fromElement = inventory.childNodes[fromIndex] as HTMLElement
+					const toIndex = element.dataset.index
 
 					if(!toIndex || fromElement === element || fromIndex === toIndex) {
 						console.error("Invalid drag & drop from", fromIndex, "to", toIndex)
@@ -534,7 +534,7 @@ export default class AnimeNotifier {
 					}
 
 					// Swap in database
-					let apiEndpoint = this.findAPIEndpoint(inventory)
+					const apiEndpoint = this.findAPIEndpoint(inventory)
 
 					try {
 						await this.post(apiEndpoint + "/swap/" + fromIndex + "/" + toIndex)
@@ -560,9 +560,9 @@ export default class AnimeNotifier {
 			return
 		}
 
-		let enableButton = document.getElementById("enable-notifications") as HTMLButtonElement
-		let disableButton = document.getElementById("disable-notifications") as HTMLButtonElement
-		let testButton = document.getElementById("test-notification") as HTMLButtonElement
+		const enableButton = document.getElementById("enable-notifications") as HTMLButtonElement
+		const disableButton = document.getElementById("disable-notifications") as HTMLButtonElement
+		const testButton = document.getElementById("test-notification") as HTMLButtonElement
 
 		if(!this.pushManager.pushSupported) {
 			enableButton.classList.add("hidden")
@@ -571,7 +571,7 @@ export default class AnimeNotifier {
 			return
 		}
 
-		let subscription = await this.pushManager.subscription()
+		const subscription = await this.pushManager.subscription()
 
 		if(subscription) {
 			enableButton.classList.add("hidden")
@@ -587,16 +587,16 @@ export default class AnimeNotifier {
 			return
 		}
 
-		for(let element of findAll("character-ranking")) {
+		for(const element of findAll("character-ranking")) {
 			fetch(`/api/character/${element.dataset.characterId}/ranking`).then(async response => {
-				let ranking = await response.json()
+				const ranking = await response.json()
 
 				if(!ranking.rank) {
 					return
 				}
 
 				Diff.mutations.queue(() => {
-					let percentile = Math.ceil(ranking.percentile * 100)
+					const percentile = Math.ceil(ranking.percentile * 100)
 
 					element.textContent = "#" + ranking.rank.toString()
 					element.title = "Top " + percentile + "%"
@@ -610,7 +610,7 @@ export default class AnimeNotifier {
 			return
 		}
 
-		for(let element of findAll("color-box")) {
+		for(const element of findAll("color-box")) {
 			Diff.mutations.queue(() => {
 				if(!element.dataset.color) {
 					console.error("color-box missing data-color attribute:", element)
@@ -627,19 +627,19 @@ export default class AnimeNotifier {
 			return
 		}
 
-		for(let element of findAll("count-up")) {
+		for(const element of findAll("count-up")) {
 			if(!element.textContent) {
 				console.error("count-up missing text content:", element)
 				continue
 			}
 
-			let final = parseInt(element.textContent)
-			let duration = 2000.0
-			let start = Date.now()
+			const final = parseInt(element.textContent)
+			const duration = 2000.0
+			const start = Date.now()
 
 			element.textContent = "0"
 
-			let callback = () => {
+			const callback = () => {
 				let progress = (Date.now() - start) / duration
 
 				if(progress > 1) {
@@ -658,7 +658,7 @@ export default class AnimeNotifier {
 	}
 
 	markPlayingMedia() {
-		for(let element of findAll("media-play-area")) {
+		for(const element of findAll("media-play-area")) {
 			if(element.dataset.mediaId === this.currentMediaId) {
 				element.classList.add("playing")
 			}
@@ -666,8 +666,8 @@ export default class AnimeNotifier {
 	}
 
 	setSelectBoxValue() {
-		for(let element of document.getElementsByTagName("select")) {
-			let attributeValue = element.getAttribute("value")
+		for(const element of document.getElementsByTagName("select")) {
+			const attributeValue = element.getAttribute("value")
 
 			if(!attributeValue) {
 				console.error("Select box without a value:", element)
@@ -681,21 +681,21 @@ export default class AnimeNotifier {
 	displayLocalDates() {
 		const now = new Date()
 
-		for(let element of findAll("utc-airing-date")) {
+		for(const element of findAll("utc-airing-date")) {
 			displayAiringDate(element, now)
 		}
 
-		for(let element of findAll("utc-date")) {
+		for(const element of findAll("utc-date")) {
 			displayDate(element, now)
 		}
 
-		for(let element of findAll("utc-date-absolute")) {
+		for(const element of findAll("utc-date-absolute")) {
 			displayTime(element)
 		}
 	}
 
 	reloadContent(cached?: boolean) {
-		let headers = new Headers()
+		const headers = new Headers()
 
 		if(cached) {
 			headers.set("X-Force-Cache", "true")
@@ -703,7 +703,7 @@ export default class AnimeNotifier {
 			headers.set("X-No-Cache", "true")
 		}
 
-		let path = this.lastReloadContentPath = this.app.currentPath
+		const path = this.lastReloadContentPath = this.app.currentPath
 
 		return fetch("/_" + path, {
 			credentials: "same-origin",
@@ -724,7 +724,7 @@ export default class AnimeNotifier {
 	reloadPage() {
 		console.log("reload page", this.app.currentPath)
 
-		let path = this.app.currentPath
+		const path = this.app.currentPath
 		this.lastReloadContentPath = path
 
 		return fetch(path, {
@@ -756,16 +756,16 @@ export default class AnimeNotifier {
 	}
 
 	assignActions() {
-		for(let element of findAll("action")) {
-			let actionTrigger = element.dataset.trigger
-			let actionName = element.dataset.action
+		for(const element of findAll("action")) {
+			const actionTrigger = element.dataset.trigger
+			const actionName = element.dataset.action
 
 			// Filter out invalid definitions
 			if(!actionTrigger || !actionName) {
 				continue
 			}
 
-			let oldAction = element["action assigned"]
+			const oldAction = element["action assigned"]
 
 			if(oldAction) {
 				if(oldAction.trigger === actionTrigger && oldAction.action === actionName) {
@@ -787,7 +787,7 @@ export default class AnimeNotifier {
 			}
 
 			// Register the actual action handler
-			let actionHandler = e => {
+			const actionHandler = e => {
 				if(!actionName) {
 					return
 				}
@@ -818,7 +818,7 @@ export default class AnimeNotifier {
 
 		await this.webpCheck
 
-		for(let element of elements) {
+		for(const element of elements) {
 			switch(element.tagName) {
 				case "IMG":
 					this.lazyLoadImage(element as HTMLImageElement)
@@ -840,24 +840,24 @@ export default class AnimeNotifier {
 	}
 
 	lazyLoadImage(element: HTMLImageElement) {
-		let pixelRatio = window.devicePixelRatio
+		const pixelRatio = window.devicePixelRatio
 
 		// Once the image becomes visible, load it
 		element["became visible"] = () => {
-			let dataSrc = element.dataset.src
+			const dataSrc = element.dataset.src
 
 			if(!dataSrc) {
 				console.error("Image missing data-src attribute:", element)
 				return
 			}
 
-			let dotPos = dataSrc.lastIndexOf(".")
+			const dotPos = dataSrc.lastIndexOf(".")
 			let base = dataSrc.substring(0, dotPos)
 			let extension = ""
 
 			// Replace URL with WebP if supported
 			if(this.webpEnabled && element.dataset.webp === "true" && !dataSrc.endsWith(".svg")) {
-				let queryPos = dataSrc.lastIndexOf("?")
+				const queryPos = dataSrc.lastIndexOf("?")
 
 				if(queryPos !== -1) {
 					extension = ".webp" + dataSrc.substring(queryPos)
@@ -875,7 +875,7 @@ export default class AnimeNotifier {
 				}
 			}
 
-			let finalSrc = base + extension
+			const finalSrc = base + extension
 
 			if(element.src !== finalSrc && element.src !== "https:" + finalSrc && element.src !== "https://notify.moe" + finalSrc) {
 				// Show average color
@@ -945,7 +945,7 @@ export default class AnimeNotifier {
 		// Once the video becomes visible, load it
 		video["became visible"] = () => {
 			if(!video["listeners attached"]) {
-				let videoParent = video.parentElement
+				const videoParent = video.parentElement
 
 				if(!videoParent) {
 					console.error("video has no parent element")
@@ -956,16 +956,16 @@ export default class AnimeNotifier {
 				video.addEventListener("contextmenu", e => e.preventDefault())
 
 				// Show and hide controls on mouse movement
-				let controls = videoParent.getElementsByClassName("video-controls")[0]
-				let playButton = videoParent.getElementsByClassName("video-control-play")[0] as HTMLElement
-				let pauseButton = videoParent.getElementsByClassName("video-control-pause")[0] as HTMLElement
+				const controls = videoParent.getElementsByClassName("video-controls")[0]
+				const playButton = videoParent.getElementsByClassName("video-control-play")[0] as HTMLElement
+				const pauseButton = videoParent.getElementsByClassName("video-control-pause")[0] as HTMLElement
 
-				let hideControls = () => {
+				const hideControls = () => {
 					controls.classList.add("fade-out")
 					video.style.cursor = "none"
 				}
 
-				let showControls = () => {
+				const showControls = () => {
 					controls.classList.remove("fade-out")
 					video.style.cursor = "default"
 				}
@@ -976,9 +976,9 @@ export default class AnimeNotifier {
 					video["hideControlsTimeout"] = setTimeout(hideControls, hideControlsDelay)
 				})
 
-				let progressElement = videoParent.getElementsByClassName("video-progress")[0] as HTMLElement
-				let progressClickable = videoParent.getElementsByClassName("video-progress-clickable")[0]
-				let timeElement = videoParent.getElementsByClassName("video-time")[0]
+				const progressElement = videoParent.getElementsByClassName("video-progress")[0] as HTMLElement
+				const progressClickable = videoParent.getElementsByClassName("video-progress-clickable")[0]
+				const timeElement = videoParent.getElementsByClassName("video-time")[0]
 
 				video.addEventListener("canplay", () => {
 					video["playable"] = true
@@ -989,10 +989,10 @@ export default class AnimeNotifier {
 						return
 					}
 
-					let time = video.currentTime
-					let minutes = Math.trunc(time / 60)
-					let seconds = Math.trunc(time) % 60
-					let paddedSeconds = ("00" + seconds).slice(-2)
+					const time = video.currentTime
+					const minutes = Math.trunc(time / 60)
+					const seconds = Math.trunc(time) % 60
+					const paddedSeconds = ("00" + seconds).slice(-2)
 
 					Diff.mutations.queue(() => {
 						timeElement.textContent = `${minutes}:${paddedSeconds}`
@@ -1019,9 +1019,9 @@ export default class AnimeNotifier {
 				})
 
 				progressClickable.addEventListener("click", (e: MouseEvent) => {
-					let rect = progressClickable.getBoundingClientRect()
-					let x = e.clientX
-					let progress = (x - rect.left) / rect.width
+					const rect = progressClickable.getBoundingClientRect()
+					const x = e.clientX
+					const progress = (x - rect.left) / rect.width
 					video.currentTime = progress * video.duration
 					video.dispatchEvent(new Event("timeupdate"))
 					e.stopPropagation()
@@ -1032,12 +1032,12 @@ export default class AnimeNotifier {
 
 			let modified = false
 
-			for(let child of video.children) {
+			for(const child of video.children) {
 				if(child.tagName !== "SOURCE") {
 					continue
 				}
 
-				let element = child as HTMLSourceElement
+				const element = child as HTMLSourceElement
 
 				if(!element.dataset.src || !element.dataset.type) {
 					console.error("Source element missing data-src or data-type attribute:", element)
@@ -1077,7 +1077,7 @@ export default class AnimeNotifier {
 	}
 
 	unmountMountables() {
-		for(let element of findAll("mountable")) {
+		for(const element of findAll("mountable")) {
 			if(element.classList.contains("never-unmount")) {
 				continue
 			}
@@ -1091,13 +1091,13 @@ export default class AnimeNotifier {
 		const delay = 20
 
 		let time = 0
-		let start = Date.now()
-		let maxTime = start + maxDelay
+		const start = Date.now()
+		const maxTime = start + maxDelay
 
-		let mountableTypes = new Map<string, number>()
-		let mountableTypeMutations = new Map<string, any[]>()
+		const mountableTypes = new Map<string, number>()
+		const mountableTypeMutations = new Map<string, any[]>()
 
-		for(let element of elements) {
+		for(const element of elements) {
 			// Skip already mounted elements.
 			// This helps a lot when dealing with infinite scrolling
 			// where the first elements are already mounted.
@@ -1105,8 +1105,8 @@ export default class AnimeNotifier {
 				continue
 			}
 
-			let type = element.dataset.mountableType || "general"
-			let typeTime = mountableTypes.get(type)
+			const type = element.dataset.mountableType || "general"
+			const typeTime = mountableTypes.get(type)
 
 			if(typeTime !== undefined) {
 				time = typeTime + delay
@@ -1132,11 +1132,11 @@ export default class AnimeNotifier {
 		for(const mutations of mountableTypeMutations.values()) {
 			let mutationIndex = 0
 
-			let updateBatch = () => {
-				let now = Date.now()
+			const updateBatch = () => {
+				const now = Date.now()
 
 				for(; mutationIndex < mutations.length; mutationIndex++) {
-					let mutation = mutations[mutationIndex]
+					const mutation = mutations[mutationIndex]
 
 					if(mutation.time > now) {
 						break
@@ -1159,11 +1159,11 @@ export default class AnimeNotifier {
 			return null
 		}
 
-		let path = "/_" + url
+		const path = "/_" + url
 
 		try {
 			// Start the request
-			let request = fetch(path, {
+			const request = fetch(path, {
 				credentials: "same-origin"
 			})
 			.then(response => response.text())
@@ -1178,7 +1178,7 @@ export default class AnimeNotifier {
 			// Delay by mountable-transition-speed
 			await delay(150)
 
-			let html = await request
+			const html = await request
 
 			// If the response for the correct path has not arrived yet, show this response
 			if(!this.diffCompletedForCurrentPath) {
@@ -1251,22 +1251,22 @@ export default class AnimeNotifier {
 		const contentPadding = 23
 
 		let newScroll = 0
-		let finalScroll = Math.max(target.getBoundingClientRect().top - contentPadding, 0)
+		const finalScroll = Math.max(target.getBoundingClientRect().top - contentPadding, 0)
 
 		// Calculating scrollTop will force a layout - careful!
-		let contentContainer = this.app.content.parentElement as HTMLElement
-		let oldScroll = contentContainer.scrollTop
-		let scrollDistance = finalScroll - oldScroll
+		const contentContainer = this.app.content.parentElement as HTMLElement
+		const oldScroll = contentContainer.scrollTop
+		const scrollDistance = finalScroll - oldScroll
 
 		if(scrollDistance > 0 && scrollDistance < 1) {
 			return
 		}
 
-		let timeStart = Date.now()
-		let timeEnd = timeStart + duration
+		const timeStart = Date.now()
+		const timeEnd = timeStart + duration
 
-		let scroll = () => {
-			let time = Date.now()
+		const scroll = () => {
+			const time = Date.now()
 			let progress = (time - timeStart) / duration
 
 			if(progress > 1.0) {
@@ -1322,7 +1322,7 @@ export default class AnimeNotifier {
 	}
 
 	onKeyDown(e: KeyboardEvent) {
-		let activeElement = document.activeElement
+		const activeElement = document.activeElement
 
 		if(!activeElement) {
 			return
@@ -1343,7 +1343,7 @@ export default class AnimeNotifier {
 		}
 
 		// When called, this will prevent the default action for that key.
-		let preventDefault = () => {
+		const preventDefault = () => {
 			e.preventDefault()
 			e.stopPropagation()
 		}
@@ -1375,7 +1375,7 @@ export default class AnimeNotifier {
 
 		// "F" = Search
 		if(e.keyCode === 70) {
-			let search = document.getElementById("search") as HTMLInputElement
+			const search = document.getElementById("search") as HTMLInputElement
 
 			search.focus()
 			search.select()
@@ -1429,11 +1429,11 @@ export default class AnimeNotifier {
 		// Number keys activate sidebar menus
 		for(let i = 48; i <= 57; i++) {
 			if(e.keyCode === i) {
-				let index = i === 48 ? 9 : i - 49
-				let links = [...findAll("sidebar-link")]
+				const index = i === 48 ? 9 : i - 49
+				const links = [...findAll("sidebar-link")]
 
 				if(index < links.length) {
-					let element = links[index] as HTMLElement
+					const element = links[index] as HTMLElement
 
 					element.click()
 					return preventDefault()
@@ -1444,7 +1444,7 @@ export default class AnimeNotifier {
 
 	// This is called every time an uncaught JavaScript error is thrown
 	async onError(evt: ErrorEvent) {
-		let report = {
+		const report = {
 			message: evt.message,
 			stack: evt.error.stack,
 			fileName: evt.filename,

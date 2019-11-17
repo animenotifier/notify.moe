@@ -25,13 +25,13 @@ export default class ToolTip extends HTMLElement {
 		this.anchor = anchor
 		this.box.textContent = this.anchor.getAttribute("aria-label")
 
-		let anchorRect = this.anchor.getBoundingClientRect()
-		let boxRect = this.box.getBoundingClientRect()
+		const anchorRect = this.anchor.getBoundingClientRect()
+		const boxRect = this.box.getBoundingClientRect()
 
 		let finalX = anchorRect.left + anchorRect.width / 2 - boxRect.width / 2
 		let finalY = anchorRect.top - boxRect.height
 
-		let contentRect = {
+		const contentRect = {
 			left: distanceToBorder,
 			top: distanceToBorder,
 			right: document.body.clientWidth - distanceToBorder,
@@ -54,7 +54,7 @@ export default class ToolTip extends HTMLElement {
 			finalY += offsetY
 		}
 
-		let arrowX = boxRect.width / 2 - offsetX
+		const arrowX = boxRect.width / 2 - offsetX
 
 		Diff.mutations.queue(() => {
 			this.style.left = finalX + "px"

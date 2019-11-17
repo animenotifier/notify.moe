@@ -1,6 +1,6 @@
 export function uploadWithProgress(url, options: RequestInit, onProgress: ((ev: ProgressEvent) => any) | null): Promise<string> {
 	return new Promise((resolve, reject) => {
-		let xhr = new XMLHttpRequest()
+		const xhr = new XMLHttpRequest()
 
 		xhr.onload = () => {
 			if(xhr.status >= 400) {
@@ -21,7 +21,7 @@ export function uploadWithProgress(url, options: RequestInit, onProgress: ((ev: 
 		xhr.open(options.method || "GET", url, true)
 
 		if(options.headers) {
-			for(let key in options.headers) {
+			for(const key in options.headers) {
 				xhr.setRequestHeader(key, options.headers[key])
 			}
 		}

@@ -8,8 +8,8 @@ export async function save(arn: AnimeNotifier, input: HTMLElement) {
 		return
 	}
 
-	let obj = {}
-	let isContentEditable = input.isContentEditable
+	const obj = {}
+	const isContentEditable = input.isContentEditable
 	let value = isContentEditable ? input.textContent : (input as HTMLInputElement).value
 
 	if(value === undefined || value === null) {
@@ -35,7 +35,7 @@ export async function save(arn: AnimeNotifier, input: HTMLElement) {
 		(input as HTMLInputElement).disabled = true
 	}
 
-	let apiEndpoint = arn.findAPIEndpoint(input)
+	const apiEndpoint = arn.findAPIEndpoint(input)
 
 	try {
 		await arn.post(apiEndpoint, obj)
@@ -71,8 +71,8 @@ export async function enable(arn: AnimeNotifier, button: HTMLButtonElement) {
 		return
 	}
 
-	let obj = {}
-	let apiEndpoint = arn.findAPIEndpoint(button)
+	const obj = {}
+	const apiEndpoint = arn.findAPIEndpoint(button)
 
 	obj[button.dataset.field] = true
 	button.disabled = true
@@ -99,8 +99,8 @@ export async function disable(arn: AnimeNotifier, button: HTMLButtonElement) {
 		return
 	}
 
-	let obj = {}
-	let apiEndpoint = arn.findAPIEndpoint(button)
+	const obj = {}
+	const apiEndpoint = arn.findAPIEndpoint(button)
 
 	obj[button.dataset.field] = false
 	button.disabled = true
@@ -122,9 +122,9 @@ export async function disable(arn: AnimeNotifier, button: HTMLButtonElement) {
 
 // Append new element to array
 export async function arrayAppend(arn: AnimeNotifier, element: HTMLElement) {
-	let field = element.dataset.field
-	let object = element.dataset.object || ""
-	let apiEndpoint = arn.findAPIEndpoint(element)
+	const field = element.dataset.field
+	const object = element.dataset.object || ""
+	const apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
 		await arn.post(apiEndpoint + "/field/" + field + "/append", object)
@@ -140,9 +140,9 @@ export async function arrayRemove(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let field = element.dataset.field
-	let index = element.dataset.index
-	let apiEndpoint = arn.findAPIEndpoint(element)
+	const field = element.dataset.field
+	const index = element.dataset.index
+	const apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
 		await arn.post(apiEndpoint + "/field/" + field + "/remove/" + index)
@@ -158,14 +158,14 @@ export function increaseEpisode(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let prev = element.previousSibling
+	const prev = element.previousSibling
 
 	if(prev === null || !(prev instanceof HTMLElement) || prev.textContent === null) {
 		console.error("Previous sibling is invalid:", element)
 		return
 	}
 
-	let episodes = parseInt(prev.textContent)
+	const episodes = parseInt(prev.textContent)
 	prev.textContent = String(episodes + 1)
 	return save(arn, prev)
 }
@@ -181,12 +181,12 @@ export function addNumber(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let input = document.getElementById(element.dataset.id) as HTMLInputElement
-	let add = parseInt(element.dataset.add)
-	let num = parseInt(input.value)
-	let newValue = num + add
-	let min = parseInt(input.min)
-	let max = parseInt(input.max)
+	const input = document.getElementById(element.dataset.id) as HTMLInputElement
+	const add = parseInt(element.dataset.add)
+	const num = parseInt(input.value)
+	const newValue = num + add
+	const min = parseInt(input.min)
+	const max = parseInt(input.max)
 
 	if(newValue > max) {
 		arn.statusMessage.showError("Maximum: " + max)

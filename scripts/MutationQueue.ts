@@ -26,7 +26,7 @@ export default class MutationQueue {
 	}
 
 	mutateAll() {
-		let start = performance.now()
+		const start = performance.now()
 
 		for(let i = 0; i < this.mutations.length; i++) {
 			if(performance.now() - start > timeCapacity) {
@@ -49,7 +49,7 @@ export default class MutationQueue {
 		this.mutations.length = 0
 
 		if(this.onClearCallBacks.length > 0) {
-			for(let callback of this.onClearCallBacks) {
+			for(const callback of this.onClearCallBacks) {
 				callback()
 			}
 

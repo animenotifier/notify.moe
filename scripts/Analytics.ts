@@ -1,6 +1,6 @@
 export default class Analytics {
 	push() {
-		let analytics = {
+		const analytics = {
 			general: {
 				timezoneOffset: new Date().getTimezoneOffset()
 			},
@@ -23,7 +23,7 @@ export default class Analytics {
 		}
 
 		if("connection" in navigator) {
-			let connection = navigator["connection"] as any
+			const connection = navigator["connection"] as any
 
 			analytics.connection = {
 				downLink: connection.downlink,

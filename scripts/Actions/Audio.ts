@@ -2,7 +2,7 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Play audio
 export function playAudio(arn: AnimeNotifier, element: HTMLElement) {
-	let {mediaId, audioSrc} = element.dataset
+	const {mediaId, audioSrc} = element.dataset
 
 	if(!mediaId || !audioSrc) {
 		console.error("Invalid media ID or audio source:", element)
@@ -39,7 +39,7 @@ export async function playNextTrack(arn: AnimeNotifier) {
 
 // Set volume
 export function setVolume(arn: AnimeNotifier, element: HTMLInputElement) {
-	let volume = parseFloat(element.value) / 100.0
+	const volume = parseFloat(element.value) / 100.0
 	arn.audioPlayer.setVolume(volume)
 }
 

@@ -8,14 +8,14 @@ const oneWeek = 7 * oneDay
 const oneMonth = 30 * oneDay
 const oneYear = 365.25 * oneDay
 
-export var monthNames = [
+export let monthNames = [
 	"January", "February", "March",
 	"April", "May", "June", "July",
 	"August", "September", "October",
 	"November", "December"
 ]
 
-export var dayNames = [
+export let dayNames = [
 	"Sunday",
 	"Monday",
 	"Tuesday",
@@ -26,7 +26,7 @@ export var dayNames = [
 ]
 
 function getRemainingTime(remaining: number): string {
-	let remainingAbs = Math.abs(remaining)
+	const remainingAbs = Math.abs(remaining)
 
 	if(remainingAbs >= oneYear) {
 		return plural(Math.round(remaining / oneYear), "year")
@@ -65,20 +65,20 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 		return
 	}
 
-	let startDate = new Date(element.dataset.startDate)
-	let endDate = new Date(element.dataset.endDate)
+	const startDate = new Date(element.dataset.startDate)
+	const endDate = new Date(element.dataset.endDate)
 
 	let h = startDate.getHours()
 	let m = startDate.getMinutes()
-	let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+	const startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
 
 	h = endDate.getHours()
 	m = endDate.getMinutes()
-	let endTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+	const endTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
 
 	let airingVerb = "will be airing"
 
-	let remaining = startDate.getTime() - now.getTime()
+	const remaining = startDate.getTime() - now.getTime()
 	let remainingString = getRemainingTime(remaining)
 
 	// Add "ago" if the date is in the past
@@ -92,7 +92,7 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 		airingVerb = "aired"
 	}
 
-	let tooltip = "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + dayNames[startDate.getDay()] + " from " + startTime + " - " + endTime
+	const tooltip = "Episode " + element.dataset.episodeNumber + " " + airingVerb + " " + dayNames[startDate.getDay()] + " from " + startTime + " - " + endTime
 
 	if(element.classList.contains("no-tip")) {
 		element.title = tooltip
@@ -108,13 +108,13 @@ export function displayDate(element: HTMLElement, now: Date) {
 		return
 	}
 
-	let startDate = new Date(element.dataset.date)
+	const startDate = new Date(element.dataset.date)
 
-	let h = startDate.getHours()
-	let m = startDate.getMinutes()
-	let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+	const h = startDate.getHours()
+	const m = startDate.getMinutes()
+	const startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
 
-	let remaining = startDate.getTime() - now.getTime()
+	const remaining = startDate.getTime() - now.getTime()
 	let remainingString = getRemainingTime(remaining)
 
 	// Add "ago" if the date is in the past
@@ -123,7 +123,7 @@ export function displayDate(element: HTMLElement, now: Date) {
 	}
 
 	element.textContent = remainingString
-	let tooltip = dayNames[startDate.getDay()] + " " + startTime
+	const tooltip = dayNames[startDate.getDay()] + " " + startTime
 
 	if(element.classList.contains("no-tip")) {
 		element.title = tooltip
@@ -139,11 +139,11 @@ export function displayTime(element: HTMLElement) {
 		return
 	}
 
-	let startDate = new Date(element.dataset.date)
+	const startDate = new Date(element.dataset.date)
 
-	let h = startDate.getHours()
-	let m = startDate.getMinutes()
-	let startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
+	const h = startDate.getHours()
+	const m = startDate.getMinutes()
+	const startTime = (h <= 9 ? "0" + h : h) + ":" + (m <= 9 ? "0" + m : m)
 
 	element.textContent = startTime
 }

@@ -10,8 +10,8 @@ export default class PushManager {
 			return Promise.resolve(null)
 		}
 
-		let registration = await navigator.serviceWorker.ready
-		let subscription = await registration.pushManager.getSubscription()
+		const registration = await navigator.serviceWorker.ready
+		const subscription = await registration.pushManager.getSubscription()
 
 		return Promise.resolve(subscription)
 	}
@@ -21,7 +21,7 @@ export default class PushManager {
 			return
 		}
 
-		let registration = await navigator.serviceWorker.ready
+		const registration = await navigator.serviceWorker.ready
 		let subscription = await registration.pushManager.getSubscription()
 
 		if(!subscription) {
@@ -41,8 +41,8 @@ export default class PushManager {
 			return
 		}
 
-		let registration = await navigator.serviceWorker.ready
-		let subscription = await registration.pushManager.getSubscription()
+		const registration = await navigator.serviceWorker.ready
+		const subscription = await registration.pushManager.getSubscription()
 
 		if(!subscription) {
 			console.error("Subscription does not exist")
@@ -57,15 +57,15 @@ export default class PushManager {
 	subscribeOnServer(subscription: PushSubscription, userId: string) {
 		console.log("Send subscription to server...")
 
-		let rawKey = subscription.getKey("p256dh")
-		let key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
+		const rawKey = subscription.getKey("p256dh")
+		const key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
 
-		let rawSecret = subscription.getKey("auth")
-		let secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
+		const rawSecret = subscription.getKey("auth")
+		const secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
 
-		let endpoint = subscription.endpoint
+		const endpoint = subscription.endpoint
 
-		let pushSubscription = {
+		const pushSubscription = {
 			endpoint,
 			p256dh: key,
 			auth: secret,
@@ -88,7 +88,7 @@ export default class PushManager {
 		console.log("Send unsubscription to server...")
 		console.log(subscription)
 
-		let pushSubscription = {
+		const pushSubscription = {
 			endpoint: subscription.endpoint
 		}
 

@@ -49,9 +49,9 @@ export default class ServerEvents {
 	}
 
 	etag(e: ServerEvent) {
-		let data = JSON.parse(e.data)
-		let oldETag = this.etags.get(data.url)
-		let newETag = data.etag
+		const data = JSON.parse(e.data)
+		const oldETag = this.etags.get(data.url)
+		const newETag = data.etag
 
 		if(oldETag && newETag && oldETag != newETag) {
 			this.arn.statusMessage.showInfo("A new version of the website is available. Please refresh the page.", -1)
@@ -65,7 +65,7 @@ export default class ServerEvents {
 			return
 		}
 
-		let isFollowingUser = JSON.parse(e.data)
+		const isFollowingUser = JSON.parse(e.data)
 
 		// If we're on the followed only feed and we receive an activity
 		// about a user we don't follow, ignore the message.
@@ -73,19 +73,19 @@ export default class ServerEvents {
 			return
 		}
 
-		let button = document.getElementById("load-new-activities")
+		const button = document.getElementById("load-new-activities")
 
 		if(!button || !button.dataset.count) {
 			return
 		}
 
-		let buttonText = document.getElementById("load-new-activities-text")
+		const buttonText = document.getElementById("load-new-activities-text")
 
 		if(!buttonText) {
 			return
 		}
 
-		let newCount = parseInt(button.dataset.count) + 1
+		const newCount = parseInt(button.dataset.count) + 1
 		button.dataset.count = newCount.toString()
 		buttonText.textContent = plural(newCount, "new activity")
 	}

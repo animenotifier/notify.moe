@@ -3,10 +3,10 @@ import { delay, requestIdleCallback } from "../Utils"
 import Diff from "scripts/Diff";
 
 // Search page reference
-var emptySearchHTML = ""
-var searchPage: HTMLElement
-var searchPageTitle: HTMLElement
-var correctResponseRendered = {
+let emptySearchHTML = ""
+let searchPage: HTMLElement
+let searchPageTitle: HTMLElement
+const correctResponseRendered = {
 	"anime": false,
 	"character": false,
 	"posts": false,
@@ -18,13 +18,13 @@ var correctResponseRendered = {
 }
 
 // Search types
-var searchTypes = Object.keys(correctResponseRendered)
+const searchTypes = Object.keys(correctResponseRendered)
 
 // Save old term to compare
-var oldTerm = ""
+let oldTerm = ""
 
 // Containers for all the search results
-var results = new Map<string, HTMLElement>()
+const results = new Map<string, HTMLElement>()
 
 // Delay before a request is sent
 const searchDelay = 140
@@ -44,10 +44,10 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 	}
 
 	// Determine if we're already seeing the search page
-	let searchPageActivated = (searchPage === arn.app.content.children[0])
+	const searchPageActivated = (searchPage === arn.app.content.children[0])
 
 	// Check if the search term really changed
-	let term = search.value.trim()
+	const term = search.value.trim()
 
 	if(term === oldTerm && searchPageActivated) {
 		return
@@ -56,12 +56,12 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 	oldTerm = term
 
 	// Reset
-	for(let key of searchTypes) {
+	for(const key of searchTypes) {
 		correctResponseRendered[key] = false
 	}
 
 	// Set browser URL
-	let url = "/search/" + term
+	const url = "/search/" + term
 	document.title = "Search: " + term
 	arn.app.currentPath = url
 
@@ -74,7 +74,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 	try {
 		// Fetch empty search frame if needed
 		if(emptySearchHTML === "") {
-			let response = await fetch("/_/empty-search")
+			const response = await fetch("/_/empty-search")
 			emptySearchHTML = await response.text()
 		}
 
@@ -101,7 +101,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 		}
 
 		if(!results["anime"]) {
-			for(let key of searchTypes) {
+			for(const key of searchTypes) {
 				results[key] = document.getElementById(`${key}-search-results`)
 			}
 
@@ -128,7 +128,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 			}
 
 			// Search the other types (everything except anime)
-			for(let key of searchTypes) {
+			for(const key of searchTypes) {
 				if(key === "anime") {
 					continue
 				}
@@ -151,7 +151,7 @@ function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string
 			throw response.statusText
 		}
 
-		let html = await response.text()
+		const html = await response.text()
 
 		if(html.includes("no-search-results")) {
 			Diff.mutations.queue(() => (element.parentElement as HTMLElement).classList.add("search-section-disabled"))
@@ -179,10 +179,10 @@ export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let searchInput = document.getElementById("search") as HTMLInputElement
-	let oldPlaceholder = searchInput.placeholder
+	const searchInput = document.getElementById("search") as HTMLInputElement
+	const oldPlaceholder = searchInput.placeholder
 
-	let SpeechRecognition: any = window["SpeechRecognition"] || window["webkitSpeechRecognition"]
+	const SpeechRecognition: any = window["SpeechRecognition"] || window["webkitSpeechRecognition"]
 	recognition = new SpeechRecognition()
 	recognition.continuous = false
 	recognition.interimResults = false
@@ -190,8 +190,8 @@ export function searchBySpeech(arn: AnimeNotifier, element: HTMLElement) {
 
 	recognition.onresult = evt => {
 		if(evt.results.length > 0) {
-			let result = evt.results.item(0).item(0)
-			let term = result.transcript
+			const result = evt.results.item(0).item(0)
+			const term = result.transcript
 
 			if(term !== "") {
 				searchInput.value = term

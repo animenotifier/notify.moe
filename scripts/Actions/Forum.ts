@@ -2,22 +2,22 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Edit post
 export function editPost(_: AnimeNotifier, element: HTMLElement) {
-	let postId = element.dataset.id
+	const postId = element.dataset.id
 
 	if(!postId) {
 		console.error("Post missing post ID:", postId)
 		return
 	}
 
-	let render = document.getElementById("render-" + postId) as HTMLElement
-	let source = document.getElementById("source-" + postId) as HTMLElement
-	let edit = document.getElementById("edit-toolbar-" + postId) as HTMLElement
+	const render = document.getElementById("render-" + postId) as HTMLElement
+	const source = document.getElementById("source-" + postId) as HTMLElement
+	const edit = document.getElementById("edit-toolbar-" + postId) as HTMLElement
 
 	render.classList.toggle("hidden")
 	source.classList.toggle("hidden")
 	edit.classList.toggle("hidden")
 
-	let title = document.getElementById("title-" + postId)
+	const title = document.getElementById("title-" + postId)
 
 	if(title) {
 		title.classList.toggle("hidden")
@@ -26,12 +26,12 @@ export function editPost(_: AnimeNotifier, element: HTMLElement) {
 
 // Save post
 export async function savePost(arn: AnimeNotifier, element: HTMLElement) {
-	let postId = element.dataset.id
-	let source = document.getElementById("source-" + postId) as HTMLTextAreaElement
-	let title = document.getElementById("title-" + postId) as HTMLInputElement
-	let text = source.value
+	const postId = element.dataset.id
+	const source = document.getElementById("source-" + postId) as HTMLTextAreaElement
+	const title = document.getElementById("title-" + postId) as HTMLInputElement
+	const text = source.value
 
-	let updates: any = {
+	const updates: any = {
 		Text: text,
 	}
 
@@ -40,7 +40,7 @@ export async function savePost(arn: AnimeNotifier, element: HTMLElement) {
 		updates.Title = title.value
 	}
 
-	let apiEndpoint = arn.findAPIEndpoint(element)
+	const apiEndpoint = arn.findAPIEndpoint(element)
 
 	try {
 		await arn.post(apiEndpoint, updates)
@@ -56,7 +56,7 @@ export async function deletePost(arn: AnimeNotifier, element: HTMLElement) {
 		return
 	}
 
-	let endpoint = arn.findAPIEndpoint(element)
+	const endpoint = arn.findAPIEndpoint(element)
 
 	try {
 		await arn.post(endpoint + "/delete")
@@ -68,10 +68,10 @@ export async function deletePost(arn: AnimeNotifier, element: HTMLElement) {
 
 // Create post
 export async function createPost(arn: AnimeNotifier, element: HTMLElement) {
-	let textarea = document.getElementById("new-post-text") as HTMLTextAreaElement
-	let {parentId, parentType} = element.dataset
+	const textarea = document.getElementById("new-post-text") as HTMLTextAreaElement
+	const {parentId, parentType} = element.dataset
 
-	let post = {
+	const post = {
 		text: textarea.value,
 		parentId,
 		parentType,
@@ -89,11 +89,11 @@ export async function createPost(arn: AnimeNotifier, element: HTMLElement) {
 
 // Create thread
 export async function createThread(arn: AnimeNotifier) {
-	let title = document.getElementById("title") as HTMLInputElement
-	let text = document.getElementById("text") as HTMLTextAreaElement
-	let category = document.getElementById("tag") as HTMLInputElement
+	const title = document.getElementById("title") as HTMLInputElement
+	const text = document.getElementById("text") as HTMLTextAreaElement
+	const category = document.getElementById("tag") as HTMLInputElement
 
-	let thread = {
+	const thread = {
 		title: title.value,
 		text: text.value,
 		tags: [category.value]
@@ -109,9 +109,9 @@ export async function createThread(arn: AnimeNotifier) {
 
 // Reply to a post
 export async function reply(arn: AnimeNotifier, element: HTMLElement) {
-	let apiEndpoint = arn.findAPIEndpoint(element)
-	let repliesId = `replies-${element.dataset.postId}`
-	let replies = document.getElementById(repliesId)
+	const apiEndpoint = arn.findAPIEndpoint(element)
+	const repliesId = `replies-${element.dataset.postId}`
+	const replies = document.getElementById(repliesId)
 
 	if(!replies) {
 		console.error("Missing replies container:", element)
@@ -119,14 +119,14 @@ export async function reply(arn: AnimeNotifier, element: HTMLElement) {
 	}
 
 	// Delete old reply area
-	let oldReplyArea = document.getElementById("new-post")
+	const oldReplyArea = document.getElementById("new-post")
 
 	if(oldReplyArea) {
 		oldReplyArea.remove()
 	}
 
 	// Delete old reply button
-	let oldPostActions = document.getElementsByClassName("new-post-actions")[0]
+	const oldPostActions = document.getElementsByClassName("new-post-actions")[0]
 
 	if(oldPostActions) {
 		oldPostActions.remove()
@@ -134,8 +134,8 @@ export async function reply(arn: AnimeNotifier, element: HTMLElement) {
 
 	// Fetch new reply UI
 	try {
-		let response = await fetch(`${apiEndpoint}/reply/ui`)
-		let html = await response.text()
+		const response = await fetch(`${apiEndpoint}/reply/ui`)
+		const html = await response.text()
 		replies.innerHTML = html + replies.innerHTML
 		arn.onNewContent(replies)
 		arn.assignActions()
@@ -161,13 +161,13 @@ export function unlockThread(arn: AnimeNotifier, element: HTMLButtonElement) {
 
 // Set thread locked state
 async function setThreadLock(arn: AnimeNotifier, element: HTMLButtonElement, state: boolean) {
-	let verb = state ? "lock" : "unlock"
+	const verb = state ? "lock" : "unlock"
 
 	if(!confirm(`Are you sure you want to ${verb} this Thread?`)) {
 		return
 	}
 
-	let endpoint = arn.findAPIEndpoint(element)
+	const endpoint = arn.findAPIEndpoint(element)
 
 	try {
 		await arn.post(`${endpoint}/${verb}`)

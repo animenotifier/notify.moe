@@ -9,7 +9,9 @@
 		"indent": [true, "tabs", 4],
 		"whitespace": false,
 		"arrow-parens": false,
-		"trailing-comma": false
+		"trailing-comma": false,
+		"prefer-const": true,
+		"no-var-keyword": true
 	},
 	"rulesDirectory": []
 }
