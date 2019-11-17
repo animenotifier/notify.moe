@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/log"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
@@ -25,8 +26,8 @@ type FacebookUser struct {
 	Gender    string `json:"gender"`
 }
 
-// InstallFacebookAuth enables Facebook login for the app.
-func InstallFacebookAuth(app *aero.Application) {
+// Facebook enables Facebook login for the app.
+func Facebook(app *aero.Application, authLog *log.Log) {
 	// OAuth2 configuration defines the API keys,
 	// scopes of required data and the redirect URL
 	// that Facebook should send the user to after

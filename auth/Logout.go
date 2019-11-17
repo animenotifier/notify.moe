@@ -4,23 +4,13 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/log"
 	"github.com/animenotifier/notify.moe/utils"
 )
 
-const newUserStartRoute = "/welcome"
-
-// Install installs the authentication routes in the application.
-func Install(app *aero.Application) {
-	// Google
-	InstallGoogleAuth(app)
-
-	// Facebook
-	InstallFacebookAuth(app)
-
-	// Twitter
-	InstallTwitterAuth(app)
-
-	// Logout
+// Logout is called when the user clicks the logout button.
+// It deletes the "userId" from the session.
+func Logout(app *aero.Application, authLog *log.Log) {
 	app.Get("/logout", func(ctx aero.Context) error {
 		if ctx.HasSession() {
 			user := utils.GetUser(ctx)

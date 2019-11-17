@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/log"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/utils"
@@ -25,8 +26,8 @@ type TwitterUser struct {
 	ScreenName  string `json:"screen_name"`
 }
 
-// InstallTwitterAuth enables Twitter login for the app.
-func InstallTwitterAuth(app *aero.Application) {
+// Twitter enables Twitter login for the app.
+func Twitter(app *aero.Application, authLog *log.Log) {
 	// oauth1 configuration defines the API keys,
 	// the url for the request token, the access token and the authorisation.
 	config := &oauth.Client{
