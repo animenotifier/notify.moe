@@ -1,4 +1,4 @@
-package apiview
+package api
 
 import (
 	"path"

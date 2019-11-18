@@ -1,5 +1,5 @@
-component APIDocs(t reflect.Type, examples []string, fields []*utils.APIField)
-	.api-docs-page
+component APIType(t reflect.Type, examples []string, fields []*utils.APIField, embedded []string)
+	.api-docs
 		h1.mountable= t.Name()
 
 		h2.mountable Examples
@@ -25,6 +25,13 @@ component APIDocs(t reflect.Type, examples []string, fields []*utils.APIField)
 					tr.api-field.mountable
 						td.api-field-json(title=field.Name + " (Go)")= field.JSON
 						td.api-field-type= field.Type
+		
+		if len(embedded) > 0
+			h2.mountable Embeds
+
+			ul
+				each embed in embedded
+					li.mountable= embed
 
 		.corner-buttons
 			a.button(href="/api")

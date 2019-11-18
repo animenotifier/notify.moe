@@ -1,5 +1,5 @@
 component API(types []*autodocs.Type)
-	.api-docs-page
+	.api-docs
 		h1.mountable API
 
 		h2.mountable Endpoints

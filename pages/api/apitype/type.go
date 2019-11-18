@@ -1,9 +1,8 @@
-package apidocs
+package apitype
 
 import (
 	"reflect"
 	"strings"
-	"unicode"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
@@ -17,12 +16,18 @@ func ByType(typeName string) func(aero.Context) error {
 	return func(ctx aero.Context) error {
 		t := arn.API.Type(typeName)
 		fields := []*utils.APIField{}
+		embedded := []string{}
 
 		if t.Kind() == reflect.Struct {
 			for i := 0; i < t.NumField(); i++ {
 				field := t.Field(i)
 
-				if field.Anonymous || !unicode.IsUpper(rune(field.Name[0])) {
+				if field.Anonymous {
+					embedded = append(embedded, field.Name)
+					continue
+				}
+
+				if len(field.PkgPath) > 0 {
 					continue
 				}
 
@@ -56,6 +61,6 @@ func ByType(typeName string) func(aero.Context) error {
 		route := "/api/" + strings.ToLower(typeName) + "/:id"
 		examples := routetests.All()[route]
 
-		return ctx.HTML(components.APIDocs(t, examples, fields))
+		return ctx.HTML(components.APIType(t, examples, fields, embedded))
 	}
 }

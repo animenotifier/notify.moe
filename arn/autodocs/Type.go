@@ -16,7 +16,7 @@ type Type struct {
 
 // Endpoint returns the REST endpoint for that type.
 func (typ *Type) Endpoint() string {
-	return "/api/" + strings.ToLower(typ.Name) + "/"
+	return "/api/" + strings.ToLower(typ.Name)
 }
 
 // GitHubLink returns link to display the type in GitHub.

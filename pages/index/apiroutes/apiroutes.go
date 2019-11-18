@@ -7,8 +7,8 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/pages/animeimport"
 	"github.com/animenotifier/notify.moe/pages/animelist"
-	"github.com/animenotifier/notify.moe/pages/apiview"
-	"github.com/animenotifier/notify.moe/pages/apiview/apidocs"
+	"github.com/animenotifier/notify.moe/pages/api"
+	"github.com/animenotifier/notify.moe/pages/api/apitype"
 	"github.com/animenotifier/notify.moe/pages/character"
 	"github.com/animenotifier/notify.moe/pages/database"
 	"github.com/animenotifier/notify.moe/pages/editor/jobs"
@@ -26,10 +26,10 @@ import (
 // Register registers the page routes.
 func Register(app *aero.Application) {
 	// API pages
-	page.Get(app, "/api", apiview.Get)
+	page.Get(app, "/api", api.Get)
 
 	for name := range arn.DB.Types() {
-		page.Get(app, "/api/"+strings.ToLower(name), apidocs.ByType(name))
+		page.Get(app, "/api/"+strings.ToLower(name), apitype.ByType(name))
 	}
 
 	// API

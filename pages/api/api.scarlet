@@ -1,4 +1,4 @@
-.api-docs-page
+.api-docs
 	h1,
 	h2,
 	p
@@ -10,11 +10,5 @@
 	.buttons
 		justify-content flex-start
 
-.api-field
-	//
-
-.api-field-json
-	//
-
-.api-field-type
-	opacity 0.5
+.api-types
+	// ...
