@@ -19,23 +19,7 @@ func BenchmarkRenderThread(b *testing.B) {
 	b.ReportAllocs()
 	b.ResetTimer()
 
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			components.Thread(thread, nil)
-		}
-	})
-}
-
-func BenchmarkRenderAnimeList(b *testing.B) {
-	user, _ := arn.GetUser("4J6qpK1ve")
-	animeList := user.AnimeList()
-
-	b.ReportAllocs()
-	b.ResetTimer()
-
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			components.AnimeList(animeList.Items, -1, user, user)
-		}
-	})
+	for i := 0; i < b.N; i++ {
+		components.Thread(thread, nil)
+	}
 }
