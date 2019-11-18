@@ -2,7 +2,7 @@ package page
 
 import (
 	"github.com/aerogo/aero"
-	"github.com/animenotifier/notify.moe/middleware"
+	"github.com/animenotifier/notify.moe/server/middleware"
 )
 
 // Get registers a layout rendered route and a contents-only route.

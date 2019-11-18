@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/middleware"
+	"github.com/animenotifier/notify.moe/server/middleware"
 	"github.com/animenotifier/notify.moe/utils/editform"
 
 	"github.com/aerogo/aero"

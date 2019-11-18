@@ -7,7 +7,7 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
-	"github.com/animenotifier/notify.moe/middleware"
+	"github.com/animenotifier/notify.moe/server/middleware"
 )
 
 // Get quote.

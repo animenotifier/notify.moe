@@ -3,7 +3,7 @@ package quote
 import (
 	"net/http"
 
-	"github.com/animenotifier/notify.moe/middleware"
+	"github.com/animenotifier/notify.moe/server/middleware"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"

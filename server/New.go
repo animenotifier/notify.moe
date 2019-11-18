@@ -9,15 +9,16 @@ import (
 	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
-	"github.com/animenotifier/notify.moe/auth"
-	"github.com/animenotifier/notify.moe/graphql"
-	"github.com/animenotifier/notify.moe/middleware"
 	"github.com/animenotifier/notify.moe/pages"
+	"github.com/animenotifier/notify.moe/server/auth"
+	"github.com/animenotifier/notify.moe/server/graphql"
+	"github.com/animenotifier/notify.moe/server/https"
+	"github.com/animenotifier/notify.moe/server/middleware"
 	"github.com/animenotifier/notify.moe/utils/htmlemail"
-	"github.com/animenotifier/notify.moe/utils/https"
 	"github.com/animenotifier/notify.moe/utils/routetests"
 )
 
+// New creates a new web server.
 func New() *aero.Application {
 	app := aero.New()
 
