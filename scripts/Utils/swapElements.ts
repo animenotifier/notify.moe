@@ -1,5 +1,5 @@
 // swapElements assumes that both elements have valid parent nodes.
-export function swapElements(a: Node, b: Node) {
+export default function swapElements(a: Node, b: Node) {
 	const bParent = b.parentNode as Node
 	const bNext = b.nextSibling
 

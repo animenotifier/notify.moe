@@ -12,7 +12,12 @@
 		"trailing-comma": false,
 		"prefer-const": true,
 		"no-var-keyword": true,
-		"eofline": true
+		"eofline": true,
+		"no-console": false,
+		"object-literal-sort-keys": false,
+		"no-string-literal": false,
+		"max-line-length": false,
+		"no-string-throw": false
 	},
 	"rulesDirectory": []
 }

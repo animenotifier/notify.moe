@@ -1,6 +1,6 @@
 import Diff from "./Diff"
 import LoadOptions from "./LoadOptions"
-import { delay } from "./Utils"
+import delay from "./Utils/delay"
 
 export default class Application {
 	public originalPath: string

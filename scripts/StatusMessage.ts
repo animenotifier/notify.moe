@@ -1,4 +1,4 @@
-import { delay } from "./Utils"
+import delay from "./Utils/delay"
 
 export default class StatusMessage {
 	private container: HTMLElement

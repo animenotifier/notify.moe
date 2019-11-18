@@ -1,51 +1,50 @@
 import * as actions from "./Actions"
-import Analytics from "./Analytics"
+import { uploadAnalytics } from "./Analytics"
 import Application from "./Application"
 import AudioPlayer from "./AudioPlayer"
 import { displayAiringDate, displayDate, displayTime } from "./DateView"
 import Diff from "./Diff"
 import ToolTip from "./Elements/tool-tip/tool-tip"
-import InfiniteScroller from "./InfiniteScroller"
+import infiniteScroll from "./infiniteScroll"
 import NotificationManager from "./NotificationManager"
 import PushManager from "./PushManager"
-import ServerEvents from "./ServerEvents"
+import receiveServerEvents from "./ServerEvent/receiveServerEvents"
 import ServiceWorkerManager from "./ServiceWorkerManager"
 import SideBar from "./SideBar"
 import StatusMessage from "./StatusMessage"
-import TouchController from "./TouchController"
-import { delay, findAll, findAllInside, requestIdleCallback, supportsWebP, swapElements } from "./Utils"
+import User from "./User"
+import delay from "./Utils/delay"
+import emptyPixel from "./Utils/emptyPixel"
+import findAll from "./Utils/findAll"
+import findAllInside from "./Utils/findAllInside"
+import requestIdleCallback from "./Utils/requestIdleCallback"
+import supportsWebP from "./Utils/supportsWebP"
+import swapElements from "./Utils/swapElements"
 import VideoPlayer from "./VideoPlayer"
 import * as WebComponents from "./WebComponents"
 
 export default class AnimeNotifier {
-	app: Application
-	analytics: Analytics
-	user: HTMLElement | null
-	title: string
-	webpCheck: Promise<boolean>
-	webpEnabled: boolean
-	contentLoadedActions: Promise<any>
-	statusMessage: StatusMessage
-	visibilityObserver: IntersectionObserver
-	pushManager: PushManager
-	serviceWorkerManager: ServiceWorkerManager
-	notificationManager: NotificationManager | undefined
-	touchController: TouchController
-	audioPlayer: AudioPlayer
-	videoPlayer: VideoPlayer
-	sideBar: SideBar
-	infiniteScroller: InfiniteScroller
-	mainPageLoaded: boolean
-	isLoading: boolean
-	diffCompletedForCurrentPath: boolean
-	lastReloadContentPath: string
-	currentMediaId: string
-	serverEvents: ServerEvents
-	tip: ToolTip
+	public isLoading: boolean
+	public app: Application
+	public statusMessage: StatusMessage
+	public notificationManager: NotificationManager | undefined
+	public currentMediaId: string
+	public audioPlayer: AudioPlayer
+	public videoPlayer: VideoPlayer
+	public user: User | null
+	public sideBar: SideBar
+	public pushManager: PushManager
 
-	constructor(app: Application) {
-		this.app = app
-		this.user = null
+	private title: string
+	private webpCheck: Promise<boolean>
+	private webpEnabled: boolean
+	private visibilityObserver: IntersectionObserver
+	private serviceWorkerManager: ServiceWorkerManager
+	private diffCompletedForCurrentPath: boolean
+	private tip: ToolTip
+
+	constructor() {
+		this.app = new Application()
 		this.title = "Anime Notifier"
 		this.isLoading = true
 
@@ -58,13 +57,13 @@ export default class AnimeNotifier {
 		Diff.persistentAttributes.add("src")
 	}
 
-	init() {
+	public init() {
 		// App init
 		this.app.init()
 
 		// Event listeners
-		document.addEventListener("readystatechange", this.onReadyStateChange.bind(this))
-		document.addEventListener("DOMContentLoaded", this.onContentLoaded.bind(this))
+		document.addEventListener("readystatechange", () => this.onReadyStateChange())
+		document.addEventListener("DOMContentLoaded", () => this.onContentLoaded())
 
 		// If we finished loading the DOM (either "interactive" or "complete" state),
 		// immediately trigger the event listener functions.
@@ -74,10 +73,318 @@ export default class AnimeNotifier {
 		}
 
 		// Idle
-		requestIdleCallback(this.onIdle.bind(this))
+		requestIdleCallback(() => this.onIdle())
 	}
 
-	onReadyStateChange() {
+	public reloadContent(cached?: boolean) {
+		const headers = new Headers()
+
+		if(cached) {
+			headers.set("X-Force-Cache", "true")
+		} else {
+			headers.set("X-No-Cache", "true")
+		}
+
+		const path = this.app.currentPath
+
+		return fetch("/_" + path, {
+			credentials: "same-origin",
+			headers
+		})
+		.then(response => {
+			if(this.app.currentPath !== path) {
+				return Promise.reject("old request")
+			}
+
+			return Promise.resolve(response)
+		})
+		.then(response => response.text())
+		.then(html => Diff.innerHTML(this.app.content, html))
+		.then(() => this.app.emit("DOMContentLoaded"))
+	}
+
+	public reloadPage() {
+		console.log("reload page", this.app.currentPath)
+
+		const path = this.app.currentPath
+
+		return fetch(path, {
+			credentials: "same-origin"
+		})
+		.then(response => {
+			if(this.app.currentPath !== path) {
+				return Promise.reject("old request")
+			}
+
+			return Promise.resolve(response)
+		})
+		.then(response => response.text())
+		.then(html => Diff.root(document.documentElement, html))
+		.then(() => this.app.emit("DOMContentLoaded"))
+		.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
+	}
+
+	public async diff(url: string) {
+		if(url === this.app.currentPath) {
+			return
+		}
+
+		const path = "/_" + url
+
+		try {
+			// Start the request
+			const request = fetch(path, {
+				credentials: "same-origin"
+			})
+			.then(response => response.text())
+
+			history.pushState(url, "", url)
+			this.app.currentPath = url
+			this.diffCompletedForCurrentPath = false
+			this.app.markActiveLinks()
+			this.unmountMountables()
+			this.loading(true)
+
+			// Delay by mountable-transition-speed
+			await delay(150)
+
+			const html = await request
+
+			// If the response for the correct path has not arrived yet, show this response
+			if(!this.diffCompletedForCurrentPath) {
+				// If this response was the most recently requested one, mark the requests as completed
+				if(this.app.currentPath === url) {
+					this.diffCompletedForCurrentPath = true
+				}
+
+				// Update contents
+				await Diff.innerHTML(this.app.content, html)
+				this.app.emit("DOMContentLoaded")
+			}
+		} catch(err) {
+			console.error(err)
+		} finally {
+			this.loading(false)
+		}
+	}
+
+	public post(url: string, body?: any) {
+		if(this.isLoading) {
+			return Promise.resolve(null)
+		}
+
+		if(body !== undefined && typeof body !== "string") {
+			body = JSON.stringify(body)
+		}
+
+		this.loading(true)
+
+		return fetch(url, {
+			method: "POST",
+			body,
+			credentials: "same-origin"
+		})
+		.then(response => {
+			this.loading(false)
+
+			if(response.status === 200) {
+				return Promise.resolve(response)
+			}
+
+			return response.text().then(err => {
+				throw err
+			})
+		})
+		.catch(err => {
+			this.loading(false)
+			throw err
+		})
+	}
+
+	public loading(newState: boolean) {
+		this.isLoading = newState
+
+		if(this.isLoading) {
+			document.documentElement.style.cursor = "progress"
+			this.app.loading.classList.remove(this.app.fadeOutClass)
+		} else {
+			document.documentElement.style.cursor = "auto"
+			this.app.loading.classList.add(this.app.fadeOutClass)
+		}
+	}
+
+	public onNewContent(element: HTMLElement) {
+		// Do the same as for the content loaded event,
+		// except here we are limiting it to the element.
+		this.app.ajaxify(element.getElementsByTagName("a"))
+		this.lazyLoad(findAllInside("lazy", element))
+		this.mountMountables(findAllInside("mountable", element))
+		this.prepareTooltips(findAllInside("tip", element))
+		this.textAreaFocus()
+	}
+
+	public scrollTo(target: HTMLElement) {
+		const duration = 250.0
+		const fullSin = Math.PI / 2
+		const contentPadding = 23
+
+		let newScroll = 0
+		const finalScroll = Math.max(target.getBoundingClientRect().top - contentPadding, 0)
+
+		// Calculating scrollTop will force a layout - careful!
+		const contentContainer = this.app.content.parentElement as HTMLElement
+		const oldScroll = contentContainer.scrollTop
+		const scrollDistance = finalScroll - oldScroll
+
+		if(scrollDistance > 0 && scrollDistance < 1) {
+			return
+		}
+
+		const timeStart = Date.now()
+		const timeEnd = timeStart + duration
+
+		const scroll = () => {
+			const time = Date.now()
+			let progress = (time - timeStart) / duration
+
+			if(progress > 1.0) {
+				progress = 1.0
+			}
+
+			newScroll = oldScroll + scrollDistance * Math.sin(progress * fullSin)
+			contentContainer.scrollTop = newScroll
+
+			if(time < timeEnd && newScroll !== finalScroll) {
+				window.requestAnimationFrame(scroll)
+			}
+		}
+
+		window.requestAnimationFrame(scroll)
+	}
+
+	public findAPIEndpoint(element: HTMLElement | null): string {
+		while(element) {
+			if(element.dataset.api !== undefined) {
+				return element.dataset.api
+			}
+
+			element = element.parentElement
+		}
+
+		this.statusMessage.showError("API object not found")
+		throw "API object not found"
+	}
+
+	public markPlayingMedia() {
+		for(const element of findAll("media-play-area")) {
+			if(element.dataset.mediaId === this.currentMediaId) {
+				element.classList.add("playing")
+			}
+		}
+	}
+
+	public mountMountables(elements?: IterableIterator<HTMLElement>) {
+		if(!elements) {
+			elements = findAll("mountable")
+		}
+
+		this.modifyDelayed(elements, element => element.classList.add("mounted"))
+	}
+
+	public unmountMountables() {
+		for(const element of findAll("mountable")) {
+			if(element.classList.contains("never-unmount")) {
+				continue
+			}
+
+			Diff.mutations.queue(() => element.classList.remove("mounted"))
+		}
+	}
+
+	public async updatePushUI() {
+		if(!this.app.currentPath.includes("/settings/notifications")) {
+			return
+		}
+
+		const enableButton = document.getElementById("enable-notifications") as HTMLButtonElement
+		const disableButton = document.getElementById("disable-notifications") as HTMLButtonElement
+		const testButton = document.getElementById("test-notification") as HTMLButtonElement
+
+		if(!this.pushManager.pushSupported) {
+			enableButton.classList.add("hidden")
+			disableButton.classList.add("hidden")
+			testButton.innerHTML = "Your browser doesn't support push notifications!"
+			return
+		}
+
+		const subscription = await this.pushManager.subscription()
+
+		if(subscription) {
+			enableButton.classList.add("hidden")
+			disableButton.classList.remove("hidden")
+		} else {
+			enableButton.classList.remove("hidden")
+			disableButton.classList.add("hidden")
+		}
+	}
+
+	public assignActions() {
+		for(const element of findAll("action")) {
+			const actionTrigger = element.dataset.trigger
+			const actionName = element.dataset.action
+
+			// Filter out invalid definitions
+			if(!actionTrigger || !actionName) {
+				continue
+			}
+
+			const oldAction = element["action assigned"]
+
+			if(oldAction) {
+				if(oldAction.trigger === actionTrigger && oldAction.action === actionName) {
+					continue
+				}
+
+				element.removeEventListener(oldAction.trigger, oldAction.handler)
+			}
+
+			// This prevents default actions on links
+			if(actionTrigger === "click" && element.tagName === "A") {
+				element.onclick = null
+			}
+
+			// Warn us about undefined actions
+			if(!(actionName in actions)) {
+				this.statusMessage.showError(`Action '${actionName}' has not been defined`)
+				continue
+			}
+
+			// Register the actual action handler
+			const actionHandler = e => {
+				if(!actionName) {
+					return
+				}
+
+				actions[actionName](this, element, e)
+
+				e.stopPropagation()
+				e.preventDefault()
+			}
+
+			element.addEventListener(actionTrigger, actionHandler)
+
+			// Use "action assigned" flag instead of removing the class.
+			// This will make sure that DOM diffs which restore the class name
+			// will not assign the action multiple times to the same element.
+			element["action assigned"] = {
+				trigger: actionTrigger,
+				action: actionName,
+				handler: actionHandler
+			}
+		}
+	}
+
+	private onReadyStateChange() {
 		if(document.readyState !== "interactive") {
 			return
 		}
@@ -85,22 +392,10 @@ export default class AnimeNotifier {
 		this.run()
 	}
 
-	run() {
+	private run() {
 		// Initiate the elements we need
-		this.user = document.getElementById("user")
 		this.app.content = document.getElementById("content") as HTMLElement
 		this.app.loading = document.getElementById("loading") as HTMLElement
-
-		// Theme
-		if(this.user && this.user.dataset.pro === "true") {
-			const theme = this.user.dataset.theme
-
-			// Don't apply light theme on load because
-			// it's already the standard theme.
-			if(theme && theme !== "light") {
-				actions.applyTheme(theme)
-			}
-		}
 
 		// Web components
 		WebComponents.register()
@@ -110,30 +405,18 @@ export default class AnimeNotifier {
 		document.body.appendChild(this.tip)
 		document.addEventListener("linkclicked", () => this.tip.classList.add("fade-out"))
 
-		// Intersection observer
-		if("IntersectionObserver" in window) {
-			// Enable lazy load
-			this.visibilityObserver = new IntersectionObserver(
-				entries => {
-					for(const entry of entries) {
-						if(entry.isIntersecting) {
-							entry.target["became visible"]()
-							this.visibilityObserver.unobserve(entry.target)
-						}
+		// Enable lazy load
+		this.visibilityObserver = new IntersectionObserver(
+			entries => {
+				for(const entry of entries) {
+					if(entry.isIntersecting) {
+						entry.target["became visible"]()
+						this.visibilityObserver.unobserve(entry.target)
 					}
-				},
-				{}
-			)
-		} else {
-			// Disable lazy load feature
-			this.visibilityObserver = {
-				disconnect: () => {},
-				observe: (elem: HTMLElement) => {
-					elem["became visible"]()
-				},
-				unobserve: (_: HTMLElement) => {}
-			} as IntersectionObserver
-		}
+				}
+			},
+			{}
+		)
 
 		// Status message
 		this.statusMessage = new StatusMessage(
@@ -143,6 +426,23 @@ export default class AnimeNotifier {
 
 		this.app.onError = (error: Error) => {
 			this.statusMessage.showError(error, 3000)
+		}
+
+		// User
+		const userElement = document.getElementById("user")
+
+		if(userElement && userElement.dataset.id) {
+			this.user = new User(userElement.dataset.id)
+
+			if(userElement.dataset.pro === "true") {
+				const theme = userElement.dataset.theme
+
+				// Don't apply light theme on load because
+				// it's already the standard theme.
+				if(theme && theme !== "light") {
+					actions.applyTheme(theme)
+				}
+			}
 		}
 
 		// Push manager
@@ -162,14 +462,13 @@ export default class AnimeNotifier {
 		// Video player
 		this.videoPlayer = new VideoPlayer(this)
 
-		// Analytics
-		this.analytics = new Analytics()
-
 		// Sidebar control
 		this.sideBar = new SideBar(document.getElementById("sidebar"))
 
 		// Infinite scrolling
-		this.infiniteScroller = new InfiniteScroller(this.app.content.parentElement, 150)
+		if(this.app.content.parentElement) {
+			infiniteScroll(this.app.content.parentElement, 150)
+		}
 
 		// WebP
 		this.webpCheck = supportsWebP().then(val => this.webpEnabled = val)
@@ -178,11 +477,11 @@ export default class AnimeNotifier {
 		this.loading(false)
 	}
 
-	onContentLoaded() {
+	private onContentLoaded() {
 		// Stop watching all the objects from the previous page.
 		this.visibilityObserver.disconnect()
 
-		this.contentLoadedActions = Promise.all([
+		Promise.all([
 			Promise.resolve().then(() => this.mountMountables()),
 			Promise.resolve().then(() => this.lazyLoad()),
 			Promise.resolve().then(() => this.displayLocalDates()),
@@ -211,7 +510,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	applyPageTitle() {
+	private applyPageTitle() {
 		const headers = document.getElementsByTagName("h1")
 
 		if(this.app.currentPath === "/" || headers.length === 0 || headers[0].textContent === "NOTIFY.MOE") {
@@ -223,7 +522,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	textAreaFocus() {
+	private textAreaFocus() {
 		const newPostText = document.getElementById("new-post-text") as HTMLTextAreaElement
 
 		if(!newPostText || newPostText["has-input-listener"]) {
@@ -243,7 +542,7 @@ export default class AnimeNotifier {
 		newPostText["has-input-listener"] = true
 	}
 
-	async onIdle() {
+	private async onIdle() {
 		// Register event listeners
 		document.addEventListener("keydown", this.onKeyDown.bind(this), false)
 		window.addEventListener("popstate", this.onPopState.bind(this))
@@ -255,7 +554,7 @@ export default class AnimeNotifier {
 
 		// Analytics
 		if(this.user) {
-			this.analytics.push()
+			uploadAnalytics()
 		}
 
 		// Offline message
@@ -289,7 +588,7 @@ export default class AnimeNotifier {
 
 		// Server sent events
 		if(this.user && EventSource) {
-			this.serverEvents = new ServerEvents(this)
+			receiveServerEvents(this)
 		}
 
 		// // Download popular anime titles for the search
@@ -310,7 +609,7 @@ export default class AnimeNotifier {
 		// search.setAttribute("list", titleList.id)
 	}
 
-	onBeforeUnload(e: BeforeUnloadEvent) {
+	private onBeforeUnload(e: BeforeUnloadEvent) {
 		if(this.app.currentPath !== "/new/thread") {
 			return
 		}
@@ -331,7 +630,7 @@ export default class AnimeNotifier {
 		e.returnValue = "You have unsaved changes on the current page. Are you sure you want to leave?"
 	}
 
-	prepareTooltips(elements?: IterableIterator<HTMLElement>) {
+	private prepareTooltips(elements?: IterableIterator<HTMLElement>) {
 		if(!elements) {
 			elements = findAll("tip")
 		}
@@ -351,7 +650,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	dragAndDrop() {
+	private dragAndDrop() {
 		if(location.pathname.includes("/animelist/")) {
 			for(const listItem of findAll("anime-list-item")) {
 				// Skip elements that have their event listeners attached already
@@ -562,34 +861,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	async updatePushUI() {
-		if(!this.app.currentPath.includes("/settings/notifications")) {
-			return
-		}
-
-		const enableButton = document.getElementById("enable-notifications") as HTMLButtonElement
-		const disableButton = document.getElementById("disable-notifications") as HTMLButtonElement
-		const testButton = document.getElementById("test-notification") as HTMLButtonElement
-
-		if(!this.pushManager.pushSupported) {
-			enableButton.classList.add("hidden")
-			disableButton.classList.add("hidden")
-			testButton.innerHTML = "Your browser doesn't support push notifications!"
-			return
-		}
-
-		const subscription = await this.pushManager.subscription()
-
-		if(subscription) {
-			enableButton.classList.add("hidden")
-			disableButton.classList.remove("hidden")
-		} else {
-			enableButton.classList.remove("hidden")
-			disableButton.classList.add("hidden")
-		}
-	}
-
-	loadCharacterRanking() {
+	private loadCharacterRanking() {
 		if(!this.app.currentPath.includes("/character/")) {
 			return
 		}
@@ -612,7 +884,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	colorBoxes() {
+	private colorBoxes() {
 		if(!this.app.currentPath.includes("/explore/color/") && !this.app.currentPath.includes("/settings")) {
 			return
 		}
@@ -629,7 +901,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	countUp() {
+	private countUp() {
 		if(!this.app.currentPath.includes("/paypal/success")) {
 			return
 		}
@@ -640,7 +912,7 @@ export default class AnimeNotifier {
 				continue
 			}
 
-			const final = parseInt(element.textContent)
+			const final = parseInt(element.textContent, 10)
 			const duration = 2000.0
 			const start = Date.now()
 
@@ -664,15 +936,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	markPlayingMedia() {
-		for(const element of findAll("media-play-area")) {
-			if(element.dataset.mediaId === this.currentMediaId) {
-				element.classList.add("playing")
-			}
-		}
-	}
-
-	setSelectBoxValue() {
+	private setSelectBoxValue() {
 		for(const element of document.getElementsByTagName("select")) {
 			const attributeValue = element.getAttribute("value")
 
@@ -685,7 +949,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	displayLocalDates() {
+	private displayLocalDates() {
 		const now = new Date()
 
 		for(const element of findAll("utc-airing-date")) {
@@ -701,124 +965,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	reloadContent(cached?: boolean) {
-		const headers = new Headers()
-
-		if(cached) {
-			headers.set("X-Force-Cache", "true")
-		} else {
-			headers.set("X-No-Cache", "true")
-		}
-
-		const path = this.lastReloadContentPath = this.app.currentPath
-
-		return fetch("/_" + path, {
-			credentials: "same-origin",
-			headers
-		})
-		.then(response => {
-			if(this.app.currentPath !== path) {
-				return Promise.reject("old request")
-			}
-
-			return Promise.resolve(response)
-		})
-		.then(response => response.text())
-		.then(html => Diff.innerHTML(this.app.content, html))
-		.then(() => this.app.emit("DOMContentLoaded"))
-	}
-
-	reloadPage() {
-		console.log("reload page", this.app.currentPath)
-
-		const path = this.app.currentPath
-		this.lastReloadContentPath = path
-
-		return fetch(path, {
-			credentials: "same-origin"
-		})
-		.then(response => {
-			if(this.app.currentPath !== path) {
-				return Promise.reject("old request")
-			}
-
-			return Promise.resolve(response)
-		})
-		.then(response => response.text())
-		.then(html => Diff.root(document.documentElement, html))
-		.then(() => this.app.emit("DOMContentLoaded"))
-		.then(() => this.loading(false)) // Because our loading element gets reset due to full page diff
-	}
-
-	loading(newState: boolean) {
-		this.isLoading = newState
-
-		if(this.isLoading) {
-			document.documentElement.style.cursor = "progress"
-			this.app.loading.classList.remove(this.app.fadeOutClass)
-		} else {
-			document.documentElement.style.cursor = "auto"
-			this.app.loading.classList.add(this.app.fadeOutClass)
-		}
-	}
-
-	assignActions() {
-		for(const element of findAll("action")) {
-			const actionTrigger = element.dataset.trigger
-			const actionName = element.dataset.action
-
-			// Filter out invalid definitions
-			if(!actionTrigger || !actionName) {
-				continue
-			}
-
-			const oldAction = element["action assigned"]
-
-			if(oldAction) {
-				if(oldAction.trigger === actionTrigger && oldAction.action === actionName) {
-					continue
-				}
-
-				element.removeEventListener(oldAction.trigger, oldAction.handler)
-			}
-
-			// This prevents default actions on links
-			if(actionTrigger === "click" && element.tagName === "A") {
-				element.onclick = null
-			}
-
-			// Warn us about undefined actions
-			if(!(actionName in actions)) {
-				this.statusMessage.showError(`Action '${actionName}' has not been defined`)
-				continue
-			}
-
-			// Register the actual action handler
-			const actionHandler = e => {
-				if(!actionName) {
-					return
-				}
-
-				actions[actionName](this, element, e)
-
-				e.stopPropagation()
-				e.preventDefault()
-			}
-
-			element.addEventListener(actionTrigger, actionHandler)
-
-			// Use "action assigned" flag instead of removing the class.
-			// This will make sure that DOM diffs which restore the class name
-			// will not assign the action multiple times to the same element.
-			element["action assigned"] = {
-				trigger: actionTrigger,
-				action: actionName,
-				handler: actionHandler
-			}
-		}
-	}
-
-	async lazyLoad(elements?: IterableIterator<Element>) {
+	private async lazyLoad(elements?: IterableIterator<Element>) {
 		if(!elements) {
 			elements = findAll("lazy")
 		}
@@ -842,11 +989,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	emptyPixel() {
-		return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-	}
-
-	lazyLoadImage(element: HTMLImageElement) {
+	private lazyLoadImage(element: HTMLImageElement) {
 		const pixelRatio = window.devicePixelRatio
 
 		// Once the image becomes visible, load it
@@ -887,7 +1030,7 @@ export default class AnimeNotifier {
 			if(element.src !== finalSrc && element.src !== "https:" + finalSrc && element.src !== "https://notify.moe" + finalSrc) {
 				// Show average color
 				if(element.dataset.color) {
-					element.src = this.emptyPixel()
+					element.src = emptyPixel
 					element.style.backgroundColor = element.dataset.color
 					Diff.mutations.queue(() => element.classList.add("element-color-preview"))
 				}
@@ -927,7 +1070,7 @@ export default class AnimeNotifier {
 		this.visibilityObserver.observe(element)
 	}
 
-	lazyLoadIFrame(element: HTMLIFrameElement) {
+	private lazyLoadIFrame(element: HTMLIFrameElement) {
 		// Once the iframe becomes visible, load it
 		element["became visible"] = () => {
 			if(!element.dataset.src) {
@@ -946,7 +1089,7 @@ export default class AnimeNotifier {
 		this.visibilityObserver.observe(element)
 	}
 
-	lazyLoadVideo(video: HTMLVideoElement) {
+	private lazyLoadVideo(video: HTMLVideoElement) {
 		const hideControlsDelay = 1500
 
 		// Once the video becomes visible, load it
@@ -1075,27 +1218,9 @@ export default class AnimeNotifier {
 		this.visibilityObserver.observe(video)
 	}
 
-	mountMountables(elements?: IterableIterator<HTMLElement>) {
-		if(!elements) {
-			elements = findAll("mountable")
-		}
-
-		this.modifyDelayed(elements, element => element.classList.add("mounted"))
-	}
-
-	unmountMountables() {
-		for(const element of findAll("mountable")) {
-			if(element.classList.contains("never-unmount")) {
-				continue
-			}
-
-			Diff.mutations.queue(() => element.classList.remove("mounted"))
-		}
-	}
-
-	modifyDelayed(elements: IterableIterator<HTMLElement>, func: (element: HTMLElement) => void) {
+	private modifyDelayed(elements: IterableIterator<HTMLElement>, func: (element: HTMLElement) => void) {
 		const maxDelay = 2500
-		const delay = 20
+		const delayTime = 20
 
 		let time = 0
 		const start = Date.now()
@@ -1116,7 +1241,7 @@ export default class AnimeNotifier {
 			const typeTime = mountableTypes.get(type)
 
 			if(typeTime !== undefined) {
-				time = typeTime + delay
+				time = typeTime + delayTime
 				mountableTypes.set(type, time)
 			} else {
 				time = start
@@ -1161,162 +1286,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	async diff(url: string) {
-		if(url === this.app.currentPath) {
-			return
-		}
-
-		const path = "/_" + url
-
-		try {
-			// Start the request
-			const request = fetch(path, {
-				credentials: "same-origin"
-			})
-			.then(response => response.text())
-
-			history.pushState(url, "", url)
-			this.app.currentPath = url
-			this.diffCompletedForCurrentPath = false
-			this.app.markActiveLinks()
-			this.unmountMountables()
-			this.loading(true)
-
-			// Delay by mountable-transition-speed
-			await delay(150)
-
-			const html = await request
-
-			// If the response for the correct path has not arrived yet, show this response
-			if(!this.diffCompletedForCurrentPath) {
-				// If this response was the most recently requested one, mark the requests as completed
-				if(this.app.currentPath === url) {
-					this.diffCompletedForCurrentPath = true
-				}
-
-				// Update contents
-				await Diff.innerHTML(this.app.content, html)
-				this.app.emit("DOMContentLoaded")
-			}
-		} catch(err) {
-			console.error(err)
-		} finally {
-			this.loading(false)
-		}
-	}
-
-	innerHTML(element: HTMLElement, html: string) {
-		return Diff.innerHTML(element, html)
-	}
-
-	post(url: string, body?: any) {
-		if(this.isLoading) {
-			return Promise.resolve(null)
-		}
-
-		if(body !== undefined && typeof body !== "string") {
-			body = JSON.stringify(body)
-		}
-
-		this.loading(true)
-
-		return fetch(url, {
-			method: "POST",
-			body,
-			credentials: "same-origin"
-		})
-		.then(response => {
-			this.loading(false)
-
-			if(response.status === 200) {
-				return Promise.resolve(response)
-			}
-
-			return response.text().then(err => {
-				throw err
-			})
-		})
-		.catch(err => {
-			this.loading(false)
-			throw err
-		})
-	}
-
-	onNewContent(element: HTMLElement) {
-		// Do the same as for the content loaded event,
-		// except here we are limiting it to the element.
-		this.app.ajaxify(element.getElementsByTagName("a"))
-		this.lazyLoad(findAllInside("lazy", element))
-		this.mountMountables(findAllInside("mountable", element))
-		this.prepareTooltips(findAllInside("tip", element))
-		this.textAreaFocus()
-	}
-
-	scrollTo(target: HTMLElement) {
-		const duration = 250.0
-		const fullSin = Math.PI / 2
-		const contentPadding = 23
-
-		let newScroll = 0
-		const finalScroll = Math.max(target.getBoundingClientRect().top - contentPadding, 0)
-
-		// Calculating scrollTop will force a layout - careful!
-		const contentContainer = this.app.content.parentElement as HTMLElement
-		const oldScroll = contentContainer.scrollTop
-		const scrollDistance = finalScroll - oldScroll
-
-		if(scrollDistance > 0 && scrollDistance < 1) {
-			return
-		}
-
-		const timeStart = Date.now()
-		const timeEnd = timeStart + duration
-
-		const scroll = () => {
-			const time = Date.now()
-			let progress = (time - timeStart) / duration
-
-			if(progress > 1.0) {
-				progress = 1.0
-			}
-
-			newScroll = oldScroll + scrollDistance * Math.sin(progress * fullSin)
-			contentContainer.scrollTop = newScroll
-
-			if(time < timeEnd && newScroll != finalScroll) {
-				window.requestAnimationFrame(scroll)
-			}
-		}
-
-		window.requestAnimationFrame(scroll)
-	}
-
-	findAPIEndpoint(element: HTMLElement) {
-		if(element.dataset.api !== undefined) {
-			return element.dataset.api
-		}
-
-		let apiObject: HTMLElement | undefined
-		let parent: HTMLElement | null
-
-		parent = element
-
-		while(parent = parent.parentElement) {
-			if(parent.dataset.api !== undefined) {
-				apiObject = parent
-				break
-			}
-		}
-
-		if(!apiObject || !apiObject.dataset.api) {
-			this.statusMessage.showError("API object not found")
-			throw "API object not found"
-		}
-
-		return apiObject.dataset.api
-	}
-
-	onPopState(e: PopStateEvent) {
+	private onPopState(e: PopStateEvent) {
 		if(e.state) {
 			this.app.load(e.state, {
 				addToHistory: false
@@ -1328,7 +1298,7 @@ export default class AnimeNotifier {
 		}
 	}
 
-	onKeyDown(e: KeyboardEvent) {
+	private onKeyDown(e: KeyboardEvent) {
 		const activeElement = document.activeElement
 
 		if(!activeElement) {
@@ -1360,7 +1330,7 @@ export default class AnimeNotifier {
 			// Disallow Enter key in contenteditables and make it blur the element instead
 			if(e.keyCode === 13) {
 				if("blur" in activeElement) {
-					(activeElement["blur"] as Function)()
+					(activeElement["blur"] as () => void)()
 				}
 
 				return preventDefault()
@@ -1395,15 +1365,14 @@ export default class AnimeNotifier {
 			return preventDefault()
 		}
 
-
 		// "+" = Audio speed up
-		if(e.key == "+") {
+		if(e.key === "+") {
 			this.audioPlayer.addSpeed(0.05)
 			return preventDefault()
 		}
 
 		// "-" = Audio speed down
-		if(e.key == "-") {
+		if(e.key === "-") {
 			this.audioPlayer.addSpeed(-0.05)
 			return preventDefault()
 		}
@@ -1450,7 +1419,7 @@ export default class AnimeNotifier {
 	}
 
 	// This is called every time an uncaught JavaScript error is thrown
-	async onError(evt: ErrorEvent) {
+	private async onError(evt: ErrorEvent) {
 		const report = {
 			message: evt.message,
 			stack: evt.error.stack,

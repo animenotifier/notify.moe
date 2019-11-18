@@ -1,4 +1,4 @@
-export function uploadWithProgress(url, options: RequestInit, onProgress: ((ev: ProgressEvent) => any) | null): Promise<string> {
+export default function uploadWithProgress(url, options: RequestInit, onProgress: ((ev: ProgressEvent) => any) | null): Promise<string> {
 	return new Promise((resolve, reject) => {
 		const xhr = new XMLHttpRequest()
 

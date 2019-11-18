@@ -1,4 +1,4 @@
-import { plural } from "./Utils"
+import plural from "./Utils/plural"
 
 const oneSecond = 1000
 const oneMinute = 60 * oneSecond

@@ -1,4 +1,4 @@
-export function hexToHSL(hex: string) {
+export default function hexToHSL(hex: string) {
 	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
 
 	if(!result) {
@@ -20,7 +20,7 @@ export function hexToHSL(hex: string) {
 	let s = 0
 	const l = (max + min) / 2
 
-	if(max == min) {
+	if(max === min) {
 		h = s = 0
 	} else {
 		const d = max - min

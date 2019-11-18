@@ -1,12 +1,13 @@
+import bytesHumanReadable from "scripts/Utils/bytesHumanReadable"
+import uploadWithProgress from "scripts/Utils/uploadWithProgress"
 import AnimeNotifier from "../AnimeNotifier"
-import { bytesHumanReadable, uploadWithProgress } from "../Utils"
 
 // Select file
 export function selectFile(arn: AnimeNotifier, button: HTMLButtonElement) {
 	const fileType = button.dataset.type
 	const endpoint = button.dataset.endpoint
 
-	if(endpoint === "/api/upload/user/cover" && arn.user && arn.user.dataset.pro !== "true") {
+	if(endpoint === "/api/upload/user/cover" && arn.user && !arn.user.IsPro()) {
 		alert("Please buy a PRO account to use this feature.")
 		return
 	}

@@ -2,24 +2,24 @@ import AnimeNotifier from "../AnimeNotifier"
 
 // Enable notifications
 export async function enableNotifications(arn: AnimeNotifier, _: HTMLElement) {
-	if(!arn.user || !arn.user.dataset.id) {
+	if(!arn.user) {
 		return
 	}
 
 	arn.statusMessage.showInfo("Enabling instant notifications...")
-	await arn.pushManager.subscribe(arn.user.dataset.id)
+	await arn.pushManager.subscribe(arn.user.id)
 	arn.updatePushUI()
 	arn.statusMessage.showInfo("Enabled instant notifications for this device.")
 }
 
 // Disable notifications
 export async function disableNotifications(arn: AnimeNotifier, _: HTMLElement) {
-	if(!arn.user || !arn.user.dataset.id) {
+	if(!arn.user) {
 		return
 	}
 
 	arn.statusMessage.showInfo("Disabling instant notifications...")
-	await arn.pushManager.unsubscribe(arn.user.dataset.id)
+	await arn.pushManager.unsubscribe(arn.user.id)
 	arn.updatePushUI()
 	arn.statusMessage.showInfo("Disabled instant notifications for this device.")
 }

@@ -1,5 +1,5 @@
+import requestIdleCallback from "scripts/Utils/requestIdleCallback"
 import AnimeNotifier from "../AnimeNotifier"
-import { requestIdleCallback } from "../Utils"
 
 // Load
 export function load(arn: AnimeNotifier, element: HTMLElement) {

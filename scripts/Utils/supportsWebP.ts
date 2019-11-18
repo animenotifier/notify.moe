@@ -1,4 +1,4 @@
-export async function supportsWebP(): Promise<boolean> {
+export default async function supportsWebP(): Promise<boolean> {
 	if(!window.createImageBitmap) {
 		return false
 	}

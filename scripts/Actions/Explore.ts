@@ -1,5 +1,6 @@
+import emptyPixel from "scripts/Utils/emptyPixel"
+import findAll from "scripts/Utils/findAll"
 import AnimeNotifier from "../AnimeNotifier"
-import { findAll } from "scripts/Utils"
 
 // Filter anime on explore page
 export function filterAnime(arn: AnimeNotifier, _: HTMLInputElement) {
@@ -12,7 +13,7 @@ export function filterAnime(arn: AnimeNotifier, _: HTMLInputElement) {
 
 	for(const element of findAll("anime-grid-image")) {
 		const img = element as HTMLImageElement
-		img.src = arn.emptyPixel()
+		img.src = emptyPixel
 		img.classList.remove("element-found")
 		img.classList.remove("element-color-preview")
 	}

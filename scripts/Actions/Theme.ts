@@ -1,5 +1,5 @@
+import hexToHSL from "scripts/Utils/hexToHSL"
 import AnimeNotifier from "../AnimeNotifier"
-import { hexToHSL } from "scripts/Utils"
 
 let currentThemeName = "light"
 let previewTimeoutID: number = 0
@@ -7,8 +7,8 @@ let previewTimeoutID: number = 0
 // let themeWheelTimeoutID: number = 0
 
 const themes = {
-	"light": {},
-	"dark": {
+	light: {},
+	dark: {
 		"link-color-h": "45",
 		"link-color-s": "100%",
 		"link-color-l": "66%",
@@ -117,7 +117,7 @@ export function applyThemeAndPreview(arn: AnimeNotifier, themeName: string) {
 	clearTimeout(previewTimeoutID)
 
 	// If it's the free light theme or a PRO user, nothing to do here
-	if(currentThemeName === "light" || (arn.user && arn.user.dataset.pro == "true")) {
+	if(currentThemeName === "light" || (arn.user && arn.user.IsPro())) {
 		return
 	}
 

@@ -2,7 +2,7 @@ const specialized = {
 	"new activity": "new activities"
 }
 
-export function plural(count: number, singular: string): string {
+export default function plural(count: number, singular: string): string {
 	if(count === 1 || count === -1) {
 		return count + " " + singular
 	}

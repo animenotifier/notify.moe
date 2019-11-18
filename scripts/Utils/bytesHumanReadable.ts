@@ -1,4 +1,4 @@
-export function bytesHumanReadable(fileSize: number): string {
+export default function bytesHumanReadable(fileSize: number): string {
 	let unit = "bytes"
 
 	if(fileSize >= 1024) {

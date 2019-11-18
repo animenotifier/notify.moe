@@ -1,6 +1,7 @@
+import Diff from "scripts/Diff"
+import delay from "scripts/Utils/delay"
+import requestIdleCallback from "scripts/Utils/requestIdleCallback"
 import AnimeNotifier from "../AnimeNotifier"
-import { delay, requestIdleCallback } from "../Utils"
-import Diff from "scripts/Diff";
 
 // Search page reference
 let emptySearchHTML = ""
@@ -111,7 +112,7 @@ export async function search(arn: AnimeNotifier, search: HTMLInputElement, evt?:
 		searchPageTitle.textContent = document.title
 
 		if(!term || term.length < 1) {
-			await arn.innerHTML(searchPage, emptySearchHTML)
+			await Diff.innerHTML(searchPage, emptySearchHTML)
 			arn.app.emit("DOMContentLoaded")
 			return
 		}
@@ -168,7 +169,7 @@ function showResponseInElement(arn: AnimeNotifier, url: string, typeName: string
 			correctResponseRendered[typeName] = true
 		}
 
-		await arn.innerHTML(element, html)
+		await Diff.innerHTML(element, html)
 		arn.onNewContent(element)
 	}
 }
