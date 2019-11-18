@@ -8,7 +8,7 @@ export default class User {
 	}
 
 	public IsPro(): boolean {
-		return new Date() > new Date(this.proExpires)
+		return new Date() < new Date(this.proExpires)
 	}
 
 	private async sync() {
