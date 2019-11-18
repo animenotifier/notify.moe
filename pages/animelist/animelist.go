@@ -62,7 +62,12 @@ func AnimeList(ctx aero.Context, user *arn.User, status string, sortBy string) e
 	allItems := statusLists[status].Items
 
 	// Slice the part that we need
-	items := allItems[index:]
+	var items []*arn.AnimeListItem
+
+	if index < len(allItems) {
+		items = allItems[index:]
+	}
+
 	maxLength := animeFirstLoad
 
 	if index > 0 {
