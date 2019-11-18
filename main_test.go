@@ -6,111 +6,103 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aerogo/aero"
 	"github.com/akyoto/assert"
 	"github.com/animenotifier/notify.moe/arn"
+	"github.com/animenotifier/notify.moe/server"
 	"github.com/animenotifier/notify.moe/utils/routetests"
 )
 
 func TestRoutes(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+	app := server.New()
 	app.BindMiddleware()
 
 	// Iterate through every route
 	for _, examples := range routetests.All() {
 		// Iterate through every example specified for that route
 		for _, example := range examples {
-			testRoute(t, app, example)
+			fetch(t, app, example)
 		}
 	}
 }
 
-func TestAnimePages(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+func TestAnime(t *testing.T) {
+	app := server.New()
 	app.BindMiddleware()
 
 	for anime := range arn.StreamAnime() {
-		testRoute(t, app, anime.Link())
+		fetch(t, app, anime.Link())
 	}
 }
 
-func TestSoundTrackPages(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+func TestSoundTracks(t *testing.T) {
+	app := server.New()
 	app.BindMiddleware()
 
 	for soundtrack := range arn.StreamSoundTracks() {
-		testRoute(t, app, soundtrack.Link())
+		fetch(t, app, soundtrack.Link())
 		assert.NotNil(t, soundtrack.Creator())
 	}
 }
 
-func TestAMVPages(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+func TestAMVs(t *testing.T) {
+	app := server.New()
 	app.BindMiddleware()
 
 	for amv := range arn.StreamAMVs() {
-		testRoute(t, app, amv.Link())
+		fetch(t, app, amv.Link())
 		assert.NotNil(t, amv.Creator())
 	}
 }
 
-func TestCompanyPages(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+func TestCompanies(t *testing.T) {
+	app := server.New()
 	app.BindMiddleware()
 
 	for company := range arn.StreamCompanies() {
-		testRoute(t, app, company.Link())
+		fetch(t, app, company.Link())
 	}
 }
 
-func TestThreadPages(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+func TestThreads(t *testing.T) {
+	app := server.New()
 	app.BindMiddleware()
 
 	for thread := range arn.StreamThreads() {
-		testRoute(t, app, thread.Link())
+		fetch(t, app, thread.Link())
 		assert.NotNil(t, thread.Creator())
 	}
 }
 
-func TestPostPages(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+func TestPosts(t *testing.T) {
+	app := server.New()
 	app.BindMiddleware()
 
 	for post := range arn.StreamPosts() {
-		testRoute(t, app, post.Link())
+		fetch(t, app, post.Link())
 		assert.NotNil(t, post.Creator())
 	}
 }
 
-func TestQuotePages(t *testing.T) {
-	t.Parallel()
-	app := configure(aero.New())
+func TestQuotes(t *testing.T) {
+	app := server.New()
 	app.BindMiddleware()
 
 	for quote := range arn.StreamQuotes() {
-		testRoute(t, app, quote.Link())
+		fetch(t, app, quote.Link())
 		assert.NotNil(t, quote.Creator())
 	}
 }
 
-// func TestUserPages(t *testing.T) {
-// 	t.Parallel()
-// 	app := configure(aero.New())
+func TestUsers(t *testing.T) {
+	app := server.New()
+	app.BindMiddleware()
 
-// 	for user := range arn.StreamUsers() {
-// 		testRoute(t, app, user.Link())
-// 	}
-// }
+	for user := range arn.StreamUsers() {
+		fetch(t, app, user.Link())
+	}
+}
 
-func testRoute(t *testing.T, app http.Handler, route string) {
+func fetch(t *testing.T, app http.Handler, route string) {
 	request := httptest.NewRequest("GET", strings.ReplaceAll(route, " ", "%20"), nil)
 	response := httptest.NewRecorder()
 	app.ServeHTTP(response, request)
