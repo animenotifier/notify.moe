@@ -21,7 +21,6 @@ type Group struct {
 	Image       Image          `json:"image"`
 	Description string         `json:"description" editable:"true" type:"textarea"`
 	Rules       string         `json:"rules" editable:"true" type:"textarea"`
-	Restricted  bool           `json:"restricted" editable:"true" tooltip:"Restricted groups can only be joined with the founder's permission."`
 	Tags        []string       `json:"tags" editable:"true"`
 	Members     []*GroupMember `json:"members"`
 	Neighbors   []GroupID      `json:"neighbors"`
@@ -36,6 +35,9 @@ type Group struct {
 
 	// Mutex
 	membersMutex sync.Mutex
+
+	// Moved this boolean field to the bottom because the structure consumes less bytes that way
+	Restricted bool `json:"restricted" editable:"true" tooltip:"Restricted groups can only be joined with the founder's permission."`
 }
 
 // Link returns the URI to the group page.

@@ -9,10 +9,6 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 )
 
-var (
-	empty = struct{}{}
-)
-
 func Install(app *aero.Application) {
 	api := graphql.New(arn.DB)
 
