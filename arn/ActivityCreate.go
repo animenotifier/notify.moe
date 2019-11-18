@@ -5,7 +5,7 @@ import "github.com/aerogo/nano"
 // ActivityCreate is a user activity that creates something.
 type ActivityCreate struct {
 	ObjectType string `json:"objectType"`
-	ObjectID   string `json:"objectId"`
+	ObjectID   ID     `json:"objectId"`
 
 	hasID
 	hasCreator

@@ -8,7 +8,7 @@ import (
 
 // PayPalPayment is an approved and exeucted PayPal payment.
 type PayPalPayment struct {
-	UserID   string `json:"userId"`
+	UserID   UserID `json:"userId"`
 	PayerID  string `json:"payerId"`
 	Amount   string `json:"amount"`
 	Currency string `json:"currency"`

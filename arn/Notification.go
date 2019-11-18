@@ -9,7 +9,7 @@ import (
 
 // Notification represents a user-associated notification.
 type Notification struct {
-	UserID  string `json:"userId"`
+	UserID  UserID `json:"userId"`
 	Created string `json:"created"`
 	Seen    string `json:"seen"`
 

@@ -3,7 +3,7 @@ package arn
 // HasEditor includes user ID and date for the last edit of this object.
 type hasEditor struct {
 	Edited   string `json:"edited"`
-	EditedBy string `json:"editedBy"`
+	EditedBy UserID `json:"editedBy"`
 }
 
 // Editor returns the user who last edited this object.

@@ -11,6 +11,9 @@ import (
 	"github.com/akyoto/color"
 )
 
+// GroupID represents a group ID.
+type GroupID = ID
+
 // Group represents a group of users.
 type Group struct {
 	Name        string         `json:"name" editable:"true"`
@@ -21,7 +24,7 @@ type Group struct {
 	Restricted  bool           `json:"restricted" editable:"true" tooltip:"Restricted groups can only be joined with the founder's permission."`
 	Tags        []string       `json:"tags" editable:"true"`
 	Members     []*GroupMember `json:"members"`
-	Neighbors   []string       `json:"neighbors"`
+	Neighbors   []GroupID      `json:"neighbors"`
 	// Applications []UserApplication `json:"applications"`
 
 	// Mixins

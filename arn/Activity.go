@@ -12,7 +12,7 @@ import (
 type Activity interface {
 	Creator() *User
 	TypeName() string
-	GetID() string
+	GetID() ID
 	GetCreated() string
 	GetCreatedBy() UserID
 	GetCreatedTime() time.Time

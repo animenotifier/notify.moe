@@ -6,7 +6,7 @@ import (
 
 // HasPosts includes a list of Post IDs.
 type hasPosts struct {
-	PostIDs []string `json:"posts"`
+	PostIDs []PostID `json:"posts"`
 }
 
 // AddPost adds a post to the object.

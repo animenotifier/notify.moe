@@ -32,7 +32,7 @@ var (
 )
 
 // GenerateID generates a unique ID for a given collection.
-func GenerateID(collection string) string {
+func GenerateID(collection string) ID {
 	id, _ := shortid.Generate()
 
 	// Retry until we find an unused ID

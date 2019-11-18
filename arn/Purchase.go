@@ -4,8 +4,8 @@ import "github.com/aerogo/nano"
 
 // Purchase represents an item purchase by a user.
 type Purchase struct {
-	UserID   string `json:"userId"`
-	ItemID   string `json:"itemId"`
+	UserID   UserID `json:"userId"`
+	ItemID   ID     `json:"itemId"`
 	Quantity int    `json:"quantity"`
 	Price    int    `json:"price"`
 	Currency string `json:"currency"`

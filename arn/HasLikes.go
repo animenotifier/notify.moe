@@ -2,7 +2,7 @@ package arn
 
 // HasLikes implements common like and unlike methods.
 type hasLikes struct {
-	Likes []string `json:"likes"`
+	Likes []UserID `json:"likes"`
 }
 
 // Like makes the given user ID like the object.

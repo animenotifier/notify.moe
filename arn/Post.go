@@ -10,10 +10,13 @@ import (
 	"github.com/aerogo/nano"
 )
 
+// PostID represents a post ID.
+type PostID = ID
+
 // Post is a comment related to any parent type in the database.
 type Post struct {
 	Tags       []string `json:"tags" editable:"true"`
-	ParentID   string   `json:"parentId" editable:"true"`
+	ParentID   ID       `json:"parentId" editable:"true"`
 	ParentType string   `json:"parentType"`
 	Edited     string   `json:"edited"`
 

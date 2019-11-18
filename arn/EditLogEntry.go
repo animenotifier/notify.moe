@@ -9,21 +9,24 @@ import (
 
 // EditLogEntry is an entry in the editor log.
 type EditLogEntry struct {
-	ID         string `json:"id" primary:"true"`
-	UserID     string `json:"userId"`
+	UserID     UserID `json:"userId"`
 	Action     string `json:"action"`
+	ObjectID   ID     `json:"objectId"`   // The ID of what was edited
 	ObjectType string `json:"objectType"` // The typename of what was edited
-	ObjectID   string `json:"objectId"`   // The ID of what was edited
 	Key        string `json:"key"`
 	OldValue   string `json:"oldValue"`
 	NewValue   string `json:"newValue"`
 	Created    string `json:"created"`
+
+	hasID
 }
 
-// NewEditLogEntry ...
-func NewEditLogEntry(userID, action, objectType, objectID, key, oldValue, newValue string) *EditLogEntry {
+// NewEditLogEntry creates a new edit log entry.
+func NewEditLogEntry(userID UserID, action string, objectType string, objectID ID, key string, oldValue string, newValue string) *EditLogEntry {
 	return &EditLogEntry{
-		ID:         GenerateID("EditLogEntry"),
+		hasID: hasID{
+			ID: GenerateID("EditLogEntry"),
+		},
 		UserID:     userID,
 		Action:     action,
 		ObjectType: objectType,

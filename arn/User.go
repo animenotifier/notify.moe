@@ -33,7 +33,7 @@ func init() {
 }
 
 // UserID represents a user ID.
-type UserID = string
+type UserID = ID
 
 // User is a registered person.
 type User struct {

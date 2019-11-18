@@ -6,6 +6,9 @@ import (
 	"github.com/aerogo/nano"
 )
 
+// CompanyID represents a company ID.
+type CompanyID = ID
+
 // Company represents an anime studio, producer or licensor.
 type Company struct {
 	Name        CompanyName `json:"name" editable:"true"`

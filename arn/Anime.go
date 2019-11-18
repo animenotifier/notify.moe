@@ -71,7 +71,7 @@ func init() {
 }
 
 // AnimeID represents an anime ID.
-type AnimeID = string
+type AnimeID = ID
 
 // Anime represents an anime.
 type Anime struct {
@@ -102,15 +102,12 @@ type Anime struct {
 	hasDraft
 
 	// Company IDs
-	StudioIDs   []string `json:"studios" editable:"true"`
-	ProducerIDs []string `json:"producers" editable:"true"`
-	LicensorIDs []string `json:"licensors" editable:"true"`
+	StudioIDs   []CompanyID `json:"studios" editable:"true"`
+	ProducerIDs []CompanyID `json:"producers" editable:"true"`
+	LicensorIDs []CompanyID `json:"licensors" editable:"true"`
 
 	// Links to external websites
 	Links []*Link `json:"links" editable:"true"`
-
-	// SynopsisSource string        `json:"synopsisSource" editable:"true"`
-	// Hashtag        string        `json:"hashtag"`
 }
 
 // NewAnime creates a new anime.

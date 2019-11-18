@@ -29,7 +29,7 @@ const (
 
 // Settings represents user settings.
 type Settings struct {
-	UserID        string               `json:"userId" primary:"true"`
+	UserID        UserID               `json:"userId" primary:"true"`
 	SortBy        string               `json:"sortBy" editable:"true"`
 	TitleLanguage string               `json:"titleLanguage" editable:"true"`
 	Providers     ServiceProviders     `json:"providers"`

@@ -7,6 +7,9 @@ import (
 	"github.com/aerogo/nano"
 )
 
+// ThreadID represents a thread ID.
+type ThreadID = ID
+
 // Thread is a forum thread.
 type Thread struct {
 	Title  string   `json:"title" editable:"true"`

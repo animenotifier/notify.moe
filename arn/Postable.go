@@ -19,10 +19,10 @@ type Postable interface {
 
 	// Use Get prefix for these to avoid a
 	// name clash with the internal fields.
-	GetID() string
+	GetID() ID
 	GetText() string
 	GetCreated() string
-	GetParentID() string
+	GetParentID() ID
 	GetParentType() string
 }
 

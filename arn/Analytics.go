@@ -4,7 +4,7 @@ import "github.com/aerogo/nano"
 
 // Analytics stores user-related statistics.
 type Analytics struct {
-	UserID     string              `json:"userId" primary:"true"`
+	UserID     UserID              `json:"userId" primary:"true"`
 	General    GeneralAnalytics    `json:"general"`
 	Screen     ScreenAnalytics     `json:"screen"`
 	System     SystemAnalytics     `json:"system"`

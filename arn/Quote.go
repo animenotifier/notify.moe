@@ -10,13 +10,16 @@ import (
 	"github.com/akyoto/color"
 )
 
+// QuoteID represents a quote ID.
+type QuoteID = ID
+
 // Quote is a quote made by a character in an anime.
 type Quote struct {
-	Text          QuoteText `json:"text" editable:"true"`
-	CharacterID   string    `json:"characterId" editable:"true"`
-	AnimeID       AnimeID   `json:"animeId" editable:"true"`
-	EpisodeNumber int       `json:"episode" editable:"true"`
-	Time          int       `json:"time" editable:"true"`
+	Text          QuoteText   `json:"text" editable:"true"`
+	CharacterID   CharacterID `json:"characterId" editable:"true"`
+	AnimeID       AnimeID     `json:"animeId" editable:"true"`
+	EpisodeNumber int         `json:"episode" editable:"true"`
+	Time          int         `json:"time" editable:"true"`
 
 	hasID
 	hasPosts

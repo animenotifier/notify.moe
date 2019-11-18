@@ -7,14 +7,18 @@ import (
 	"github.com/animenotifier/notify.moe/arn/validate"
 )
 
+// EpisodeID represents an episode ID.
+type EpisodeID = ID
+
 // Episode represents a single episode for an anime.
 type Episode struct {
-	ID         string            `json:"id" primary:"true"`
 	AnimeID    AnimeID           `json:"animeId"`
 	Number     int               `json:"number" editable:"true"`
 	Title      EpisodeTitle      `json:"title" editable:"true"`
 	AiringDate AiringDate        `json:"airingDate" editable:"true"`
 	Links      map[string]string `json:"links"`
+
+	hasID
 }
 
 // EpisodeTitle contains the title information for an anime episode.
@@ -27,7 +31,9 @@ type EpisodeTitle struct {
 // NewAnimeEpisode creates a new anime episode.
 func NewAnimeEpisode() *Episode {
 	return &Episode{
-		ID:     GenerateID("Episode"),
+		hasID: hasID{
+			ID: GenerateID("Episode"),
+		},
 		Number: -1,
 	}
 }
