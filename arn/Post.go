@@ -154,7 +154,7 @@ func (post *Post) OnLike(likedBy *User) {
 }
 
 // GetPost ...
-func GetPost(id string) (*Post, error) {
+func GetPost(id PostID) (*Post, error) {
 	obj, err := DB.Get("Post", id)
 
 	if err != nil {

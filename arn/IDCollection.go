@@ -9,8 +9,8 @@ import (
 
 // IDCollection ...
 type IDCollection interface {
-	Add(id string) error
-	Remove(id string) bool
+	Add(id ID) error
+	Remove(id ID) bool
 	Save()
 }
 

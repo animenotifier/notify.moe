@@ -109,7 +109,7 @@ func (thread *Thread) TitleByUser(user *User) string {
 }
 
 // GetThread ...
-func GetThread(id string) (*Thread, error) {
+func GetThread(id ThreadID) (*Thread, error) {
 	obj, err := DB.Get("Thread", id)
 
 	if err != nil {

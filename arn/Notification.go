@@ -48,7 +48,7 @@ func NewNotification(userID UserID, pushNotification *PushNotification) *Notific
 }
 
 // GetNotification ...
-func GetNotification(id string) (*Notification, error) {
+func GetNotification(id ID) (*Notification, error) {
 	obj, err := DB.Get("Notification", id)
 
 	if err != nil {

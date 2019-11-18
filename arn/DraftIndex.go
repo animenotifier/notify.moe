@@ -7,14 +7,14 @@ import (
 
 // DraftIndex has references to unpublished drafts a user created.
 type DraftIndex struct {
-	UserID       string  `json:"userId" primary:"true"`
-	GroupID      string  `json:"groupId"`
-	SoundTrackID string  `json:"soundTrackId"`
-	CompanyID    string  `json:"companyId"`
-	QuoteID      string  `json:"quoteId"`
-	CharacterID  string  `json:"characterId"`
-	AnimeID      AnimeID `json:"animeId"`
-	AMVID        string  `json:"amvId"`
+	UserID       UserID      `json:"userId" primary:"true"`
+	GroupID      GroupID     `json:"groupId"`
+	SoundTrackID ID          `json:"soundTrackId"`
+	CompanyID    CompanyID   `json:"companyId"`
+	QuoteID      QuoteID     `json:"quoteId"`
+	CharacterID  CharacterID `json:"characterId"`
+	AnimeID      AnimeID     `json:"animeId"`
+	AMVID        ID          `json:"amvId"`
 }
 
 // NewDraftIndex ...
@@ -55,7 +55,7 @@ func (index *DraftIndex) GetID() string {
 }
 
 // GetDraftIndex ...
-func GetDraftIndex(id string) (*DraftIndex, error) {
+func GetDraftIndex(id ID) (*DraftIndex, error) {
 	obj, err := DB.Get("DraftIndex", id)
 
 	if err != nil {

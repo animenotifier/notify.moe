@@ -237,7 +237,7 @@ func (amv *AMV) Self() Loggable {
 }
 
 // GetAMV returns the AMV with the given ID.
-func GetAMV(id string) (*AMV, error) {
+func GetAMV(id ID) (*AMV, error) {
 	obj, err := DB.Get("AMV", id)
 
 	if err != nil {

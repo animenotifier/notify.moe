@@ -134,7 +134,7 @@ func (character *Character) Anime() []*Anime {
 }
 
 // GetCharacter ...
-func GetCharacter(id string) (*Character, error) {
+func GetCharacter(id CharacterID) (*Character, error) {
 	obj, err := DB.Get("Character", id)
 
 	if err != nil {

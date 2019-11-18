@@ -21,7 +21,7 @@ const (
 
 // ShopItem is a purchasable item in the shop.
 type ShopItem struct {
-	ID          string `json:"id" primary:"true"`
+	ID          ID     `json:"id" primary:"true"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Price       uint   `json:"price"`
@@ -37,7 +37,7 @@ func (item *ShopItem) GetID() string {
 }
 
 // GetShopItem ...
-func GetShopItem(id string) (*ShopItem, error) {
+func GetShopItem(id ID) (*ShopItem, error) {
 	obj, err := DB.Get("ShopItem", id)
 
 	if err != nil {

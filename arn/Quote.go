@@ -153,7 +153,7 @@ func (quote *Quote) String() string {
 }
 
 // GetQuote returns a single quote.
-func GetQuote(id string) (*Quote, error) {
+func GetQuote(id QuoteID) (*Quote, error) {
 	obj, err := DB.Get("Quote", id)
 
 	if err != nil {

@@ -159,7 +159,7 @@ func StreamEpisodes() <-chan *Episode {
 }
 
 // GetEpisode returns the episode with the given ID.
-func GetEpisode(id string) (*Episode, error) {
+func GetEpisode(id EpisodeID) (*Episode, error) {
 	obj, err := DB.Get("Episode", id)
 
 	if err != nil {

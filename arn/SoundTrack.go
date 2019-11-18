@@ -347,7 +347,7 @@ func SortSoundTracksPopularFirst(tracks []*SoundTrack) {
 }
 
 // GetSoundTrack ...
-func GetSoundTrack(id string) (*SoundTrack, error) {
+func GetSoundTrack(id ID) (*SoundTrack, error) {
 	track, err := DB.Get("SoundTrack", id)
 
 	if err != nil {

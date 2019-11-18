@@ -262,7 +262,7 @@ func (group *Group) DeleteImages() {
 }
 
 // GetGroup ...
-func GetGroup(id string) (*Group, error) {
+func GetGroup(id GroupID) (*Group, error) {
 	obj, err := DB.Get("Group", id)
 
 	if err != nil {

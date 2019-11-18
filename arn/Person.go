@@ -95,7 +95,7 @@ func (person *Person) HasImage() bool {
 }
 
 // GetPerson ...
-func GetPerson(id string) (*Person, error) {
+func GetPerson(id ID) (*Person, error) {
 	obj, err := DB.Get("Person", id)
 
 	if err != nil {

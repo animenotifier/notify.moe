@@ -32,6 +32,6 @@ func (finder *CharacterFinder) Add(character *Character) {
 }
 
 // GetCharacter tries to find an external anime in our anime database.
-func (finder *CharacterFinder) GetCharacter(id string) *Character {
+func (finder *CharacterFinder) GetCharacter(id CharacterID) *Character {
 	return finder.idToCharacter[id]
 }

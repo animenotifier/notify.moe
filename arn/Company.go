@@ -108,7 +108,7 @@ func (company *Company) Self() Loggable {
 }
 
 // GetCompany returns a single company.
-func GetCompany(id string) (*Company, error) {
+func GetCompany(id CompanyID) (*Company, error) {
 	obj, err := DB.Get("Company", id)
 
 	if err != nil {

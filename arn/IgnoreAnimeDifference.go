@@ -19,7 +19,7 @@ type IgnoreAnimeDifference struct {
 }
 
 // GetIgnoreAnimeDifference ...
-func GetIgnoreAnimeDifference(id string) (*IgnoreAnimeDifference, error) {
+func GetIgnoreAnimeDifference(id ID) (*IgnoreAnimeDifference, error) {
 	obj, err := DB.Get("IgnoreAnimeDifference", id)
 
 	if err != nil {
