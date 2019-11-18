@@ -13,7 +13,7 @@ func Get(ctx aero.Context) error {
 	user := arn.GetUserFromContext(ctx)
 
 	if user == nil {
-		return ctx.HTML(components.Login(""))
+		return ctx.HTML(components.Login("_blank"))
 	}
 
 	if !user.HasBasicInfo() {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"strings"
 
 	"github.com/aerogo/aero"
@@ -27,6 +28,7 @@ func configure(app *aero.Application) *aero.Application {
 	// Sessions
 	app.Sessions.Duration = 3600 * 24 * 30 * 6
 	app.Sessions.Store = nanostore.New(arn.DB.Collection("Session"))
+	app.Sessions.SameSite = http.SameSiteNoneMode
 
 	// Content security policy
 	app.ContentSecurityPolicy.Set("img-src", "https: data:")

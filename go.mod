@@ -5,7 +5,7 @@ go 1.13
 require (
 	cloud.google.com/go v0.48.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.46
+	github.com/aerogo/aero v1.3.48
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
