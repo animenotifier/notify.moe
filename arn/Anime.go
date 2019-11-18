@@ -714,40 +714,6 @@ func (anime *Anime) EpisodeByNumber(number int) *Episode {
 	return nil
 }
 
-// RefreshAnimeCharacters ...
-func (anime *Anime) RefreshAnimeCharacters() (*AnimeCharacters, error) {
-	resp, err := kitsu.GetAnimeCharactersForAnime(anime.GetMapping("kitsu/anime"))
-
-	if err != nil {
-		return nil, err
-	}
-
-	animeCharacters := &AnimeCharacters{
-		AnimeID: anime.ID,
-		Items:   []*AnimeCharacter{},
-	}
-
-	for _, incl := range resp.Included {
-		if incl.Type != "animeCharacters" {
-			continue
-		}
-
-		role := incl.Attributes["role"].(string)
-		characterID := incl.Relationships.Character.Data.ID
-
-		animeCharacter := &AnimeCharacter{
-			CharacterID: characterID,
-			Role:        role,
-		}
-
-		animeCharacters.Items = append(animeCharacters.Items, animeCharacter)
-	}
-
-	animeCharacters.Save()
-
-	return animeCharacters, nil
-}
-
 // String implements the default string serialization.
 func (anime *Anime) String() string {
 	return anime.Title.Canonical
