@@ -47,10 +47,18 @@
 	horizontal-wrap
 
 .character-anime-item
+	horizontal
+	width 100%
+	max-width 440px
+
+.character-anime-item-overview
 	anime-mini-item
 
 .character-anime-item-image
 	anime-mini-item-image
+
+.character-anime-item-details
+	margin-left 1rem
 
 .character-spoiler
 	margin typography-margin 0
