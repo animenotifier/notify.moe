@@ -10,14 +10,7 @@ import (
 )
 
 var (
-	empty              = struct{}{}
-	privateCollections = map[string]struct{}{
-		"PayPalPayment": empty,
-		"Purchase":      empty,
-		"EmailToUser":   empty,
-		"Session":       empty,
-		"EditLogEntry":  empty,
-	}
+	empty = struct{}{}
 )
 
 func Install(app *aero.Application) {
@@ -27,9 +20,8 @@ func Install(app *aero.Application) {
 	api.AddRootResolver(func(name string, arguments graphql.Map) (interface{}, error, bool) {
 		typeName := strings.TrimPrefix(name, "all")
 		typeName = strings.TrimPrefix(typeName, "like")
-		_, private := privateCollections[typeName]
 
-		if private {
+		if arn.IsPrivateType(typeName) {
 			return nil, fmt.Errorf("Type '%s' is private", typeName), true
 		}
 

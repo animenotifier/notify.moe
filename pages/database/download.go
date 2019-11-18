@@ -13,20 +13,6 @@ import (
 	"github.com/mohae/deepcopy"
 )
 
-// privateTypes are types that are not available for download.
-var privateTypes = []string{
-	"Analytics",
-	"Crash",
-	"ClientErrorReport",
-	"EditLogEntry",
-	"EmailToUser",
-	"FacebookToUser",
-	"PayPalPayment",
-	"Purchase",
-	"Session",
-	"TwitterToUser",
-}
-
 // Download downloads a snapshot of a database collection.
 func Download(ctx aero.Context) error {
 	typ := ctx.Get("type")
@@ -35,7 +21,7 @@ func Download(ctx aero.Context) error {
 		return ctx.Error(http.StatusNotFound, "Type doesn't exist")
 	}
 
-	if arn.Contains(privateTypes, typ) {
+	if arn.IsPrivateType(typ) {
 		return ctx.Error(http.StatusUnauthorized, "Type is private and can not be downloaded")
 	}
 
