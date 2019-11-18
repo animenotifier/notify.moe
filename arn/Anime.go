@@ -370,7 +370,7 @@ func (anime *Anime) RefreshEpisodes() error {
 	episodes := anime.Episodes()
 
 	// Save number of available episodes for comparison later
-	// oldAvailableCount := episodes.AvailableCount()
+	oldAvailableCount := episodes.AvailableCount()
 
 	// Shoboi
 	shoboiEpisodes, err := anime.ShoboiEpisodes()
@@ -382,36 +382,36 @@ func (anime *Anime) RefreshEpisodes() error {
 	episodes = episodes.Merge(shoboiEpisodes)
 
 	// AnimeTwist
-	// twistEpisodes, err := anime.TwistEpisodes()
+	twistEpisodes, err := anime.TwistEpisodes()
 
-	// if err != nil {
-	// 	return err
-	// }
+	if err != nil {
+		return err
+	}
 
-	// episodes = episodes.Merge(twistEpisodes)
+	episodes = episodes.Merge(twistEpisodes)
 
 	// Count number of available episodes
-	// newAvailableCount := episodes.AvailableCount()
+	newAvailableCount := episodes.AvailableCount()
 
-	// if anime.Status != "finished" && newAvailableCount > oldAvailableCount {
-	// 	// New episodes have been released.
-	// 	// Notify all users who are watching the anime.
-	// 	go func() {
-	// 		for _, user := range anime.UsersWatchingOrPlanned() {
-	// 			if !user.Settings().Notification.AnimeEpisodeReleases {
-	// 				continue
-	// 			}
+	if anime.Status != "finished" && newAvailableCount > oldAvailableCount {
+		// New episodes have been released.
+		// Notify all users who are watching the anime.
+		go func() {
+			for _, user := range anime.UsersWatchingOrPlanned() {
+				if !user.Settings().Notification.AnimeEpisodeReleases {
+					continue
+				}
 
-	// 			user.SendNotification(&PushNotification{
-	// 				Title:   anime.Title.ByUser(user),
-	// 				Message: "Episode " + strconv.Itoa(newAvailableCount) + " has been released!",
-	// 				Icon:    anime.ImageLink("medium"),
-	// 				Link:    "https://notify.moe" + anime.Link(),
-	// 				Type:    NotificationTypeAnimeEpisode,
-	// 			})
-	// 		}
-	// 	}()
-	// }
+				user.SendNotification(&PushNotification{
+					Title:   anime.Title.ByUser(user),
+					Message: "Episode " + strconv.Itoa(newAvailableCount) + " has been released!",
+					Icon:    anime.ImageLink("medium"),
+					Link:    "https://notify.moe" + anime.Link(),
+					Type:    NotificationTypeAnimeEpisode,
+				})
+			}
+		}()
+	}
 
 	// Number remaining episodes
 	startNumber := 0
