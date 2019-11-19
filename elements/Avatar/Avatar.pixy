@@ -1,0 +1,2 @@
+component Avatar(user *arn.User)
+	CustomAvatar(user, user.Link(), user.Nick)

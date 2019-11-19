@@ -1,0 +1,2 @@
+component ExternalMedia(media *arn.ExternalMedia)
+	iframe.lazy(data-src=media.EmbedLink(), title=media.Service + " media", allowfullscreen)

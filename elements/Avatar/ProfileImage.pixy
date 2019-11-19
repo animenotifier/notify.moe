@@ -1,0 +1,5 @@
+component ProfileImage(user *arn.User)
+	if user.HasAvatar()
+		img.profile-image.lazy(data-src=user.AvatarLink("large"), data-webp="true", alt="Profile image", importance="high")
+	else
+		SVGProfileImage(user)

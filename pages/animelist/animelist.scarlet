@@ -94,17 +94,17 @@
 	:focus
 		transform scale(1.5)
 
-.anime-list-item-actions
-	display none
+// .anime-list-item-actions
+// 	display none
 
-> 740px
-	.anime-list-item-actions
-		display flex
-		flex-basis 30px
-		flex-shrink 1
+// > 740px
+// 	.anime-list-item-actions
+// 		display flex
+// 		flex-basis 30px
+// 		flex-shrink 1
 
-		:empty
-			display none
+// 		:empty
+// 			display none
 
 .anime-list-item-airing-date
 	display none

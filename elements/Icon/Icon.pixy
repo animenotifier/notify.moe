@@ -1,0 +1,2 @@
+component Icon(name string)
+	svg-icon.padded-icon(name=name, class="icon-" + name)

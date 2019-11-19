@@ -1,0 +1,9 @@
+component SVGAvatar(user *arn.User)
+	svg.user-image(viewBox="0 0 50 50")
+		circle.head(cx="25", cy="19", r="10")
+		circle.body(cx="25", cy="50", r="20")
+
+		if len(user.Nick) <= 6
+			text.svg-nick(x="25", y="44", text-anchor="middle")= user.Nick
+		else
+			text.svg-nick(x="25", y="44", text-anchor="middle")= user.Nick[:6]

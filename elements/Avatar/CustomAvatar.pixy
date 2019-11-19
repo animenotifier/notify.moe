@@ -1,0 +1,7 @@
+component CustomAvatar(user *arn.User, link string, title string)
+	a.user.tip(href=link, aria-label=title)
+		AvatarNoLink(user)
+
+		if user.IsPro()
+			.user-pro-icon
+				RawIcon("star")

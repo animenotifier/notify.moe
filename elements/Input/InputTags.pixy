@@ -1,0 +1,13 @@
+component InputTags(id string, value []string, label string, tooltip string)
+	.widget-section
+		label(for=id)= label + ":"
+		.tags(id=id)
+			for index, tag := range value
+				.tag.tag-edit.action(contenteditable="true", data-action="save", data-trigger="focusout", data-field=id + "[" + strconv.Itoa(index) + "]")= tag
+				button.tag-remove.action(data-action="arrayRemove", data-trigger="click", data-field=id, data-index=index)
+					RawIcon("trash")
+			
+			button.tag-add.action(data-action="arrayAppend", data-trigger="click", data-field=id, title="Add more")
+				RawIcon("plus")
+		
+		p!= tooltip

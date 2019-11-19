@@ -1,0 +1,3 @@
+component AvatarNoTip(user *arn.User)
+	a.user(href=user.Link(), title=user.Nick)
+		AvatarNoLink(user)

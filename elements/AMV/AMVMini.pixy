@@ -1,0 +1,11 @@
+component AMVMini(amv *arn.AMV, user *arn.User)
+	.amv.mountable
+		AMVVideo(amv)
+		AMVMiniFooter(amv, user)
+
+component AMVMiniFooter(amv *arn.AMV, user *arn.User)
+	footer.amv-footer
+		if amv.Title.ByUser(user) == ""
+			a(href=amv.Link() + "/edit") untitled
+		else
+			a(href=amv.Link())= amv.Title.ByUser(user)

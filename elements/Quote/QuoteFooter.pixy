@@ -1,0 +1,6 @@
+component QuoteFooter(quote *arn.Quote)
+	footer.quote-footer
+		span  posted 
+		span.utc-date.no-tip(data-date=quote.Created)
+		span  by 
+		a(href=quote.Creator().Link())= quote.Creator().Nick

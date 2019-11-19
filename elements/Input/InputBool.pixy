@@ -1,0 +1,11 @@
+component InputBool(id string, value bool, label string, title string)
+	.widget-section
+		label= label + ":"
+		if value
+			button.action(id=id, data-action="disable", data-trigger="click", data-field=id, title=title)
+				Icon("toggle-on")
+				span ON
+		else
+			button.action(id=id, data-action="enable", data-trigger="click", data-field=id, title=title)
+				Icon("toggle-off")
+				span OFF

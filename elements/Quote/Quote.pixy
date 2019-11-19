@@ -1,0 +1,14 @@
+component Quote(quote *arn.Quote, user *arn.User)
+	.quote.mountable
+		QuoteContent(quote, user)
+		QuoteFooter(quote)
+
+component QuoteContent(quote *arn.Quote, user *arn.User)
+	.quote-content
+		a.quotation(href=quote.Link())
+			QuoteText(quote)
+		
+		QuoteCharacter(quote, user)
+
+component QuoteText(quote *arn.Quote)
+	blockquote!= utils.RenderQuoteText(quote.Text.English)

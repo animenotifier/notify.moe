@@ -1,0 +1,7 @@
+component AnimeList(animeListItems []*arn.AnimeListItem, nextIndex int, viewUser *arn.User, user *arn.User)
+	#load-more-target.anime-list
+		AnimeListScrollable(animeListItems, viewUser, user)
+	
+	if nextIndex != -1
+		.buttons
+			LoadMore(nextIndex)

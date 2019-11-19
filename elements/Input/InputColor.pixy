@@ -1,0 +1,9 @@
+component InputColor(id string, variable string, label string)
+	.widget-section
+		label(for=id)= label
+
+		.color-picker-container
+			.widget-ui-element.color-picker.color-box.action(data-color="var(--" + variable + ")", data-variable=variable, data-action="pickColor", data-trigger="click")
+
+			button.tip(aria-label="Reset", disabled)
+				RawIcon("power-off")

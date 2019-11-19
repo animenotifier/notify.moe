@@ -1,11 +1,3 @@
-component AnimeList(animeListItems []*arn.AnimeListItem, nextIndex int, viewUser *arn.User, user *arn.User)
-	#load-more-target.anime-list
-		AnimeListScrollable(animeListItems, viewUser, user)
-	
-	if nextIndex != -1
-		.buttons
-			LoadMore(nextIndex)
-
 component AnimeListScrollable(animeListItems []*arn.AnimeListItem, viewUser *arn.User, user *arn.User)
 	each item in animeListItems
 		.anime-list-item.mountable(title=item.Notes, data-api="/api/animelist/" + viewUser.ID + "/field/Items[AnimeID=\"" + item.AnimeID + "\"]")

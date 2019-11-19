@@ -1,0 +1,15 @@
+component AMV(amv *arn.AMV, user *arn.User)
+	.amv.mountable
+		AMVVideo(amv)
+		AMVFooter(amv, user)
+
+component AMVFooter(amv *arn.AMV, user *arn.User)
+	footer.amv-footer
+		if amv.Title.ByUser(user) == ""
+			a(href=amv.Link() + "/edit") untitled
+		else
+			a(href=amv.Link())= amv.Title.ByUser(user)
+		span  posted 
+		span.utc-date.no-tip(data-date=amv.Created)
+		span  by 
+		a(href=amv.Creator().Link())= amv.Creator().Nick + " "

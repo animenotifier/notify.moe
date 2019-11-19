@@ -1,0 +1,14 @@
+component InputNumber(id string, value float64, label string, placeholder string, min string, max string, step string)
+	.widget-section
+		label(for=id)= label + ":"
+		input.widget-ui-element.action(id=id, data-field=id, type="number", value=value, min=min, max=max, step=step, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
+
+component InputNumberWithButtons(id string, value float64, label string, placeholder string, min string, max string, step string)
+	.widget-section
+		label(for=id)= label + ":"
+		.number-input-container
+			input.widget-ui-element.action(id=id, data-field=id, type="number", value=value, min=min, max=max, step=step, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change")
+			button.action.tip(data-action="addNumber", data-trigger="click", data-id=id, data-add="1", aria-label="Increase by 1")
+				RawIcon("plus")
+			button.action.tip(data-action="addNumber", data-trigger="click", data-id=id, data-add="-1", aria-label="Decrease by 1")
+				RawIcon("minus")

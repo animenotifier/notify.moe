@@ -1,10 +1,6 @@
 const group-padding-y = 0.75rem
 const group-padding-x = 0.75rem
 
-.groups-beta-message
-	text-align center
-	margin-bottom 1rem
-
 .groups
 	display grid
 	grid-gap content-padding-half

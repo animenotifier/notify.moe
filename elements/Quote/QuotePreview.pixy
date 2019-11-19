@@ -1,0 +1,14 @@
+component QuotePreview(quote *arn.Quote, user *arn.User)
+	.quote.mountable
+		QuoteContentPreview(quote, user)
+		QuoteFooter(quote)
+
+component QuoteContentPreview(quote *arn.Quote, user *arn.User)
+	.quote-content
+		a.quotation(href=quote.Link())
+			QuoteTextPreview(quote)
+		
+		QuoteCharacter(quote, user)
+
+component QuoteTextPreview(quote *arn.Quote)
+	blockquote!= utils.RenderQuoteText(utils.CutLongDescription(quote.Text.English))

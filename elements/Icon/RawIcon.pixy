@@ -1,0 +1,2 @@
+component RawIcon(name string)
+	svg-icon(name=name, class="icon-" + name)

@@ -1,0 +1,6 @@
+component InputSelection(id string, value string, label string, placeholder string, options []*arn.Option)
+	.widget-section
+		label(for=id)= label + ":"
+		select.widget-ui-element.action(id=id, data-field=id, value=value, title=placeholder, data-action="save", data-trigger="change")
+			each option in options
+				option(value=option.Value)= option.Label

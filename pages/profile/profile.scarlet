@@ -121,13 +121,6 @@ const profile-image-size = 280px
 		display grid
 		grid-template-columns 27% 46% 27%
 
-	.profile-pro-status
-		position absolute
-		right 0
-		bottom 0
-		padding content-padding
-		margin-top 0
-
 	.profile-introduction
 		h1, h2, h3, h4, h5, h6
 			text-align left

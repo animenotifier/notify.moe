@@ -1,0 +1,4 @@
+component QuoteCharacter(quote *arn.Quote, user *arn.User)
+	if quote.CharacterID != "" && quote.Character() != nil
+		footer.quote-character
+			CharacterSmall(quote.Character(), user)

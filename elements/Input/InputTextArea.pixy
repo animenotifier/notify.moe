@@ -1,0 +1,4 @@
+component InputTextArea(id string, value string, label string, placeholder string, maxLength int)
+	.widget-section
+		label(for=id)= label + ":"
+		textarea.widget-ui-element.action(id=id, data-field=id, placeholder=placeholder, title=placeholder, data-action="save", data-trigger="change", maxlength=maxLength)= value

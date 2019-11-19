@@ -1,0 +1,4 @@
+component SVGProfileImage(user *arn.User)
+	svg.profile-image(viewBox="0 0 50 50", alt="Profile image")
+		circle.head(cx="25", cy="19", r="10")
+		circle.body(cx="25", cy="50", r="20")

@@ -1,0 +1,9 @@
+component AMVVideo(amv *arn.AMV)
+	.video-container(id=amv.ID, data-api="/api/amv/" + amv.ID)
+		video.video.lazy.action(data-action="toggleFullscreen", data-trigger="dblclick", data-id=amv.ID)
+			source(data-src=amv.VideoLink(), data-type="video/webm")
+
+			//- button.media-play-button
+			//- 	RawIcon("play")
+		
+		VideoControls(amv.ID, amv.Info.Duration)

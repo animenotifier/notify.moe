@@ -1,0 +1,5 @@
+component AvatarNoLink(user *arn.User)
+	if user.HasAvatar()
+		img.user-image.lazy(data-src=user.AvatarLink("small"), data-webp="true", alt=user.Nick)
+	else
+		SVGAvatar(user)

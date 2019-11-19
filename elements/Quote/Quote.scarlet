@@ -1,0 +1,56 @@
+const quote-margin = 1rem
+
+.quote
+	vertical
+	flex 1
+	flex-basis 500px
+	margin quote-margin 0
+
+> 500px
+	.quote
+		margin quote-margin
+
+.quote-content
+	vertical
+	ui-element
+	border-left 5px solid quote-side-border-color !important
+	box-shadow shadow-light
+
+.quote-line
+	// ...
+
+.quote-character
+	horizontal
+	align-self flex-end
+	margin 0 1em 1em 0
+
+	.character
+		margin 0
+
+.quote-footer
+	media-footer
+
+blockquote
+	flex-grow 1
+	padding 1em
+
+	p
+		line-height 2em
+		quotes "\201C""\201D"
+		color text-color
+
+		:before
+			color quote-color
+			content open-quote
+			font-size 4em
+			line-height 0.1em
+			margin-right 0.25em
+			vertical-align -0.4em
+
+		:after
+			color quote-color
+			content close-quote
+			font-size 4em
+			line-height 0.1em
+			margin-left  0.25em
+			vertical-align -0.4em

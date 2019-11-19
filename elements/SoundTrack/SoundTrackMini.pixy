@@ -1,0 +1,11 @@
+component SoundTrackMini(track *arn.SoundTrack, user *arn.User)
+	.soundtrack.mountable(id=track.ID)
+		SoundTrackContent(track, user)
+		SoundTrackMiniFooter(track, user)
+
+component SoundTrackMiniFooter(track *arn.SoundTrack, user *arn.User)
+	footer.soundtrack-footer
+		if track.Title.ByUser(user) == ""
+			a(href=track.Link() + "/edit") untitled
+		else
+			a(href=track.Link())= track.Title.ByUser(user)
