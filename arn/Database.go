@@ -54,7 +54,6 @@ var DB = Node.Namespace("arn").RegisterTypes(
 	(*Thread)(nil),
 	(*TwitterToUser)(nil),
 	(*User)(nil),
-	(*UserFollows)(nil),
 	(*UserNotifications)(nil),
 )
 
