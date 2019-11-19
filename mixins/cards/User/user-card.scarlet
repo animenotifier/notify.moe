@@ -17,7 +17,7 @@
 		width avatar-size
 		height avatar-size
 		border-radius ui-element-border-radius
-		box-shadow none
+		box-shadow none !important
 
 .user-card-info
 	vertical
