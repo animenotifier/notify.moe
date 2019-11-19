@@ -80,7 +80,7 @@ component AnimeSearchResults(animes []*arn.Anime, user *arn.User)
 	else
 		.profile-watching-list.anime-search
 			each anime in animes
-				a.profile-watching-list-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user), data-mountable-type="anime")
+				a.profile-watching-list-item.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user), data-mountable-type="anime", data-added=(user != nil && user.AnimeList().Contains(anime.ID)))
 					img.anime-cover-image.anime-search-result.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
 
 component CharacterSearchResults(characters []*arn.Character, user *arn.User)
