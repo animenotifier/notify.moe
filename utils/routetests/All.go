@@ -335,10 +335,6 @@ var routeTests = map[string][]string{
 		"/api/soundtrack/h0ac8sKkg",
 	},
 
-	"/api/userfollows/:id": {
-		"/api/userfollows/4J6qpK1ve",
-	},
-
 	"/api/animecharacters/:id": {
 		"/api/animecharacters/74y2cFiiR",
 	},
@@ -434,8 +430,6 @@ var routeTests = map[string][]string{
 	"/api/test/notification":                         nil,
 	"/api/paypal/payment/create":                     nil,
 	"/api/emailtouser/:id":                           nil,
-	"/api/userfollows/:id/get/:item":                 nil,
-	"/api/userfollows/:id/get/:item/:property":       nil,
 	"/api/pushsubscriptions/:id/get/:item":           nil,
 	"/api/pushsubscriptions/:id/get/:item/:property": nil,
 	"/api/count/notifications/unseen":                nil,
