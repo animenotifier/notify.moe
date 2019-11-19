@@ -13,7 +13,7 @@ component AnimeMainColumn(anime *arn.Anime, listItem *arn.AnimeListItem, tracks 
 		.space
 
 		.anime-info
-			h1.anime-title.mountable(title=anime.Type, data-mountable-type="header")= anime.Title.ByUser(user)
+			h1.anime-title.mountable(data-mountable-type="header")= anime.Title.ByUser(user)
 
 			h2.anime-alternative-title.mountable(data-mountable-type="header")
 				Japanese(anime.Title.Japanese)
