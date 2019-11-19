@@ -21,14 +21,8 @@ func Followed(ctx aero.Context) error {
 
 // fetchActivities filters the activities by the given filters.
 func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
-	var followedUserIDs []string
-
-	if followedOnly && user != nil {
-		followedUserIDs = user.Follows().Items
-	}
-
 	activities := arn.FilterActivityCreates(func(activity arn.Activity) bool {
-		if followedOnly && !arn.Contains(followedUserIDs, activity.GetCreatedBy()) {
+		if followedOnly && user != nil && !user.IsFollowing(activity.GetCreatedBy()) {
 			return false
 		}
 

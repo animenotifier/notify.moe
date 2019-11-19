@@ -46,11 +46,9 @@ func (item *AnimeListItem) Edit(ctx aero.Context, key string, value reflect.Valu
 
 				// Broadcast event to all users so they can reload the activity page if needed.
 				for receiver := range StreamUsers() {
-					receiverIsFollowing := Contains(receiver.Follows().Items, user.ID)
-
 					receiver.BroadcastEvent(&aero.Event{
 						Name: "activity",
-						Data: receiverIsFollowing,
+						Data: receiver.IsFollowing(user.ID),
 					})
 				}
 			}

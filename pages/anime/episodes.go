@@ -23,7 +23,7 @@ func Episodes(ctx aero.Context) error {
 			episodeToFriends[ownListItem.Episodes] = append(episodeToFriends[ownListItem.Episodes], user)
 		}
 
-		for _, friend := range user.Follows().Users() {
+		for _, friend := range user.Follows() {
 			friendAnimeList := friend.AnimeList()
 			friendAnimeListItem := friendAnimeList.Find(anime.ID)
 

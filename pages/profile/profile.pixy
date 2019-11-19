@@ -141,12 +141,12 @@ component ProfileHead(viewUser *arn.User, animeList *arn.AnimeList, user *arn.Us
 		
 		.profile-actions
 			if user != nil && user.ID != viewUser.ID
-				if !user.Follows().Contains(viewUser.ID)
-					button.profile-action.action.mountable.never-unmount(data-action="followUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/add/" + viewUser.ID)
+				if !user.IsFollowing(viewUser.ID)
+					button.profile-action.action.mountable.never-unmount(data-action="followUser", data-trigger="click", data-api="/api/user/" + user.ID + "/follow/" + viewUser.ID)
 						Icon("user-plus")
 						span Follow
 				else
-					button.profile-action.action.mountable.never-unmount(data-action="unfollowUser", data-trigger="click", data-api="/api/userfollows/" + user.ID + "/remove/" + viewUser.ID)
+					button.profile-action.action.mountable.never-unmount(data-action="unfollowUser", data-trigger="click", data-api="/api/user/" + user.ID + "/unfollow/" + viewUser.ID)
 						Icon("user-times")
 						span Unfollow
 

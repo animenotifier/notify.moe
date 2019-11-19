@@ -120,7 +120,7 @@ func Profile(ctx aero.Context, viewUser *arn.User) error {
 	}
 
 	// Friends
-	friends := viewUser.Follows().UsersWhoFollowBack()
+	friends := viewUser.Friends()
 
 	arn.SortUsersFollowers(friends)
 

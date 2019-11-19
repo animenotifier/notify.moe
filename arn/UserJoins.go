@@ -42,49 +42,10 @@ func (user *User) Inventory() *Inventory {
 	return inventory
 }
 
-// Follows returns the list of user follows.
-func (user *User) Follows() *UserFollows {
-	follows, _ := GetUserFollows(user.ID)
-	return follows
-}
-
 // Notifications returns the list of user notifications.
 func (user *User) Notifications() *UserNotifications {
 	notifications, _ := GetUserNotifications(user.ID)
 	return notifications
-}
-
-// Followers ...
-func (user *User) Followers() []*User {
-	var followerIDs []string
-
-	for list := range StreamUserFollows() {
-		if list.Contains(user.ID) {
-			followerIDs = append(followerIDs, list.UserID)
-		}
-	}
-
-	usersObj := DB.GetMany("User", followerIDs)
-	users := make([]*User, len(usersObj))
-
-	for i, obj := range usersObj {
-		users[i] = obj.(*User)
-	}
-
-	return users
-}
-
-// FollowersCount ...
-func (user *User) FollowersCount() int {
-	count := 0
-
-	for list := range StreamUserFollows() {
-		if list.Contains(user.ID) {
-			count++
-		}
-	}
-
-	return count
 }
 
 // DraftIndex ...

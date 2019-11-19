@@ -20,17 +20,10 @@ import (
 	gravatar "github.com/ungerik/go-gravatar"
 )
 
-var setNickMutex sync.Mutex
-var setEmailMutex sync.Mutex
-
-// Register data lists.
-func init() {
-	DataLists["genders"] = []*Option{
-		// &Option{"", "Prefer not to say"},
-		{"male", "Male"},
-		{"female", "Female"},
-	}
-}
+var (
+	setNickMutex  sync.Mutex
+	setEmailMutex sync.Mutex
+)
 
 // UserID represents a user ID.
 type UserID = ID
@@ -62,6 +55,7 @@ type User struct {
 	Browser      UserBrowser  `json:"browser" private:"true"`
 	OS           UserOS       `json:"os" private:"true"`
 	Location     *Location    `json:"location" private:"true"`
+	FollowIDs    []UserID     `json:"follows"`
 
 	hasPosts
 
@@ -123,9 +117,6 @@ func RegisterUser(user *User) {
 		UserID: user.ID,
 		Items:  []*PushSubscription{},
 	})
-
-	// Add empty follow list
-	NewUserFollows(user.ID).Save()
 
 	// Add empty notifications list
 	NewUserNotifications(user.ID).Save()

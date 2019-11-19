@@ -126,7 +126,7 @@ func Get(ctx aero.Context) error {
 	var friends []*arn.User
 
 	if user != nil {
-		friendIDs := utils.Intersection(character.Likes, user.Follows().Items)
+		friendIDs := utils.Intersection(character.Likes, user.FollowIDs)
 		friendObjects := arn.DB.GetMany("User", friendIDs)
 
 		for _, obj := range friendObjects {

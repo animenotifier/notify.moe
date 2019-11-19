@@ -47,7 +47,7 @@ func Get(ctx aero.Context) error {
 	episodeToFriends := map[int][]*arn.User{}
 
 	if user != nil {
-		friends = user.Follows().Users()
+		friends = user.Follows()
 		deleted := 0
 
 		if animeListItem != nil {
