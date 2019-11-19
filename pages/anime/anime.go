@@ -6,7 +6,6 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
-	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/components"
 	"github.com/animenotifier/notify.moe/server/middleware"
 )
@@ -125,35 +124,4 @@ func Get(ctx aero.Context) error {
 	customCtx.OpenGraph = getOpenGraph(anime)
 
 	return ctx.HTML(components.Anime(anime, animeListItem, tracks, amvs, amvAppearances, episodes, friends, friendsAnimeListItems, episodeToFriends, user))
-}
-
-func getOpenGraph(anime *arn.Anime) *arn.OpenGraph {
-	description := anime.Summary
-
-	if len(description) > maxDescriptionLength {
-		description = description[:maxDescriptionLength-3] + "..."
-	}
-
-	openGraph := &arn.OpenGraph{
-		Tags: map[string]string{
-			"og:title":       anime.Title.Canonical,
-			"og:image":       "https:" + anime.ImageLink("large"),
-			"og:url":         "https://" + assets.Domain + anime.Link(),
-			"og:site_name":   "notify.moe",
-			"og:description": description,
-		},
-		Meta: map[string]string{
-			"description": description,
-			"keywords":    anime.Title.Canonical + ",anime",
-		},
-	}
-
-	switch anime.Type {
-	case "tv":
-		openGraph.Tags["og:type"] = "video.tv_show"
-	case "movie":
-		openGraph.Tags["og:type"] = "video.movie"
-	}
-
-	return openGraph
 }
