@@ -1,6 +1,7 @@
 package server
 
 import (
+	"flag"
 	"net/http"
 	"strings"
 
@@ -45,14 +46,18 @@ func New() *aero.Application {
 	app.Rewrite(pages.Rewrite)
 
 	// Middleware
-	app.Use(
-		middleware.Recover,
-		middleware.HTTPSRedirect,
-		middleware.OpenGraph,
-		middleware.Log,
-		middleware.Session,
-		middleware.UserInfo,
-	)
+	if IsTest() {
+		app.Use(middleware.OpenGraph)
+	} else {
+		app.Use(
+			middleware.Recover,
+			middleware.HTTPSRedirect,
+			middleware.OpenGraph,
+			middleware.Log,
+			middleware.Session,
+			middleware.UserInfo,
+		)
+	}
 
 	// API
 	arn.API.Install(app)
@@ -86,7 +91,7 @@ func New() *aero.Application {
 	arn.HTMLEmailRenderer = &htmlemail.Renderer{}
 
 	// Check that this is the server
-	if !arn.Node.IsServer() && !arn.IsTest() {
+	if !arn.Node.IsServer() && !IsTest() {
 		panic("Another program is currently running as the database server")
 	}
 
@@ -104,4 +109,9 @@ func New() *aero.Application {
 	}
 
 	return app
+}
+
+// IsTest returns true if the program is currently running in the "go test" tool.
+func IsTest() bool {
+	return flag.Lookup("test.v") != nil
 }

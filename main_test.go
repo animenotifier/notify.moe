@@ -93,14 +93,14 @@ func TestQuotes(t *testing.T) {
 	}
 }
 
-func TestUsers(t *testing.T) {
-	app := server.New()
-	app.BindMiddleware()
+// func TestUsers(t *testing.T) {
+// 	app := server.New()
+// 	app.BindMiddleware()
 
-	for user := range arn.StreamUsers() {
-		fetch(t, app, user.Link())
-	}
-}
+// 	for user := range arn.StreamUsers() {
+// 		fetch(t, app, user.Link())
+// 	}
+// }
 
 func fetch(t *testing.T, app http.Handler, route string) {
 	request := httptest.NewRequest("GET", strings.ReplaceAll(route, " ", "%20"), nil)

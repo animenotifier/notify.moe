@@ -3,7 +3,6 @@ package arn
 import (
 	"encoding/json"
 	"errors"
-	"flag"
 	"fmt"
 	"os"
 	"path"
@@ -309,11 +308,6 @@ func ListItemStatusName(status string) string {
 	default:
 		return ""
 	}
-}
-
-// IsTest returns true if the program is currently running in the "go test" tool.
-func IsTest() bool {
-	return flag.Lookup("test.v") != nil
 }
 
 // PanicOnError will panic if the error is not nil.
