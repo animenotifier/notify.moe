@@ -30,6 +30,7 @@ func TestAnime(t *testing.T) {
 	app.BindMiddleware()
 
 	for anime := range arn.StreamAnime() {
+		assert.True(t, anime.Title.Canonical != "")
 		fetch(t, app, anime.Link())
 	}
 }
@@ -39,8 +40,8 @@ func TestSoundTracks(t *testing.T) {
 	app.BindMiddleware()
 
 	for soundtrack := range arn.StreamSoundTracks() {
-		fetch(t, app, soundtrack.Link())
 		assert.NotNil(t, soundtrack.Creator())
+		fetch(t, app, soundtrack.Link())
 	}
 }
 
@@ -49,8 +50,8 @@ func TestAMVs(t *testing.T) {
 	app.BindMiddleware()
 
 	for amv := range arn.StreamAMVs() {
-		fetch(t, app, amv.Link())
 		assert.NotNil(t, amv.Creator())
+		fetch(t, app, amv.Link())
 	}
 }
 
@@ -68,8 +69,8 @@ func TestThreads(t *testing.T) {
 	app.BindMiddleware()
 
 	for thread := range arn.StreamThreads() {
-		fetch(t, app, thread.Link())
 		assert.NotNil(t, thread.Creator())
+		fetch(t, app, thread.Link())
 	}
 }
 
@@ -78,8 +79,8 @@ func TestPosts(t *testing.T) {
 	app.BindMiddleware()
 
 	for post := range arn.StreamPosts() {
-		fetch(t, app, post.Link())
 		assert.NotNil(t, post.Creator())
+		fetch(t, app, post.Link())
 	}
 }
 
@@ -93,14 +94,15 @@ func TestQuotes(t *testing.T) {
 	}
 }
 
-// func TestUsers(t *testing.T) {
-// 	app := server.New()
-// 	app.BindMiddleware()
+func TestUsers(t *testing.T) {
+	app := server.New()
+	app.BindMiddleware()
 
-// 	for user := range arn.StreamUsers() {
-// 		fetch(t, app, user.Link())
-// 	}
-// }
+	for user := range arn.StreamUsers() {
+		assert.True(t, user.Nick != "")
+		// fetch(t, app, user.Link())
+	}
+}
 
 func fetch(t *testing.T, app http.Handler, route string) {
 	request := httptest.NewRequest("GET", strings.ReplaceAll(route, " ", "%20"), nil)
