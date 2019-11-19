@@ -11,6 +11,7 @@ component AnimeRelations(anime *arn.Anime, user *arn.User, standAlonePage bool)
 			.anime-relations
 				each relation in anime.Relations().Items
 					if relation.Anime() != nil
+						//- AnimeCard(relation.Anime(), fmt.Sprintf("%s (%d)", relation.HumanReadableType(), anime.StartDateTime().Year()), user)
 						a.anime-relation.tip.mountable(href=relation.Anime().Link(), aria-label=relation.Anime().Title.ByUser(user), data-mountable-type="relation")
 							img.anime-relation-image.lazy(data-src=relation.Anime().ImageLink("small"), data-webp="true", data-color=relation.Anime().AverageColor(), alt=relation.Anime().Title.ByUser(user))
 							.anime-relation-type= relation.HumanReadableType()

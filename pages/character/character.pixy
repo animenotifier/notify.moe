@@ -46,20 +46,15 @@ component CharacterDetails(character *arn.Character, characterAnime []*arn.Anime
 					.character-section
 						h3.character-section-name.mountable Anime
 
-						.character-anime.mountable
+						.anime-cards
 							each anime in characterAnime
-								.character-anime-item
-									.character-anime-item-overview
-										a.tip.mountable(href=anime.Link(), aria-label=anime.Title.ByUser(user), data-mountable-type="anime")
-											img.character-anime-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
-									.character-anime-item-details
-										a(href=anime.Link())= anime.TitleByUser(user)
+								AnimeCard(anime, fmt.Sprintf("%s %d", stringutils.Capitalize(anime.Season()), anime.StartDateTime().Year()), user)
 
 				if len(quotes) > 0
 					.character-section
 						h3.character-section-name.mountable Quotes
 
-						.quotes.character-quotes.mountable
+						.character-quotes.mountable
 							each quote in quotes
 								QuotePreview(quote, user)
 		
@@ -109,7 +104,7 @@ component CharacterSidebar(character *arn.Character, friends []*arn.User, releva
 		
 		if len(friends) > 0
 			.character-friends
-				h3.mountable(data-mountable-type="sidebar") Friends
+				h3.mountable(data-mountable-type="sidebar") Likes
 
 				.user-avatars.mountable(data-mountable-type="sidebar")
 					each friend in friends

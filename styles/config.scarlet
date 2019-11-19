@@ -71,7 +71,7 @@ const group-post-width = comment-width
 const post-avatar-text-margin = 0.5rem
 
 // Avatar
-avatar-size = 50px
+const avatar-size = 50px
 
 // Badge
 badge-important-bg-color = rgb(215, 38, 15)

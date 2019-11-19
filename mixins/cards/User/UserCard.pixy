@@ -1,7 +1,7 @@
 component UserCard(user *arn.User, note string)
 	a.user-card.mountable(href=user.Link(), data-pro=user.IsPro())
-		.user-card-avatar
+		.user-card-image-container
 			AvatarNoLink(user)
 		.user-card-info
-			.user-card-nick= user.Nick
-			.user-card-note= note
+			.user-card-info-main= user.Nick
+			.user-card-info-details= note

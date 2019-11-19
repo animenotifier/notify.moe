@@ -1,0 +1,32 @@
+.anime-cards
+	horizontal-wrap
+
+.anime-card
+	card
+
+> 600px
+	.anime-card
+		max-width 300px
+
+.anime-card-image-container
+	width anime-image-small-width
+	height anime-image-small-width
+
+	img
+		width anime-image-small-width
+		height anime-image-small-width
+		border-radius ui-element-border-radius
+		object-fit cover
+
+.anime-card-info
+	vertical
+	margin-left card-padding
+	font-size 0.95em
+
+.anime-card-info-main
+	flex 1
+	line-height 1.3em
+
+.anime-card-info-details
+	color text-color
+	opacity 0.5

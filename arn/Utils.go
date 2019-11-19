@@ -18,7 +18,6 @@ import (
 	"github.com/akyoto/color"
 	"github.com/animenotifier/kitsu"
 	"github.com/animenotifier/mal"
-	shortid "github.com/ventu-io/go-shortid"
 )
 
 var (
@@ -30,30 +29,6 @@ var (
 	sourceRegex    = regexp.MustCompile(`\(Source: (.*?)\)`)
 	writtenByRegex = regexp.MustCompile(`\[Written by (.*?)\]`)
 )
-
-// GenerateID generates a unique ID for a given collection.
-func GenerateID(collection string) ID {
-	id, _ := shortid.Generate()
-
-	// Retry until we find an unused ID
-	retry := 0
-
-	for {
-		_, err := DB.Get(collection, id)
-
-		if err != nil && strings.Contains(err.Error(), "not found") {
-			return id
-		}
-
-		retry++
-
-		if retry > 10 {
-			panic(errors.New("Can't generate unique ID"))
-		}
-
-		id, _ = shortid.Generate()
-	}
-}
 
 // GetUserFromContext returns the logged in user for the given context.
 func GetUserFromContext(ctx aero.Context) *User {
@@ -208,23 +183,22 @@ func FixGender(gender string) string {
 func DateToSeason(date time.Time) string {
 	month := date.Month()
 
-	if month >= 4 && month <= 6 {
+	switch {
+	case month >= 4 && month <= 6:
 		return "spring"
-	}
 
-	if month >= 7 && month <= 9 {
+	case month >= 7 && month <= 9:
 		return "summer"
-	}
 
-	if month >= 10 && month <= 12 {
+	case month >= 10 && month <= 12:
 		return "autumn"
-	}
 
-	if month >= 1 && month < 4 {
+	case month >= 1 && month < 4:
 		return "winter"
-	}
 
-	return ""
+	default:
+		return ""
+	}
 }
 
 // BroadcastEvent sends the given event to the event streams of all users.

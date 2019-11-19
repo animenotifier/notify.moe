@@ -1,0 +1,33 @@
+.user-cards
+	horizontal-wrap
+	justify-content center
+
+.user-card
+	card
+
+> 600px
+	.user-card
+		max-width 230px
+
+.user-card-image-container
+	width avatar-size
+	height avatar-size
+
+	img
+		width avatar-size
+		height avatar-size
+		border-radius ui-element-border-radius
+		box-shadow none
+
+.user-card-info
+	vertical
+	margin-left card-padding
+	overflow hidden
+
+.user-card-info-main
+	clip-long-text
+
+.user-card-info-details
+	clip-long-text
+	color text-color
+	opacity 0.5

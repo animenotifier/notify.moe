@@ -1,0 +1,7 @@
+component AnimeCard(anime *arn.Anime, note string, user *arn.User)
+	a.anime-card.mountable(href=anime.Link())
+		.anime-card-image-container
+			img.anime-card-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
+		.anime-card-info
+			.anime-card-info-main= anime.Title.ByUser(user)
+			.anime-card-info-details= note

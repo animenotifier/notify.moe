@@ -1,0 +1,13 @@
+const card-padding = 1rem
+
+mixin card
+	horizontal
+	ui-element
+	padding card-padding
+	margin 0.4rem
+	width 100%
+
+	:hover
+		border 1px solid input-focus-border-color
+		// TODO: Replace with alpha(main-color, 20%) function
+		box-shadow 0 0 6px rgba(248, 165, 130, 0.2)
