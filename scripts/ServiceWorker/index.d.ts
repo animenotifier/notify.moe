@@ -484,6 +484,11 @@ interface PushEvent extends ExtendableEvent {
 	readonly data: PushMessageData;
 }
 
+interface PushSubscriptionChangeEvent extends ExtendableEvent {
+	readonly newSubscription: PushSubscription;
+	readonly oldSubscription: PushSubscription;
+}
+
 interface ServiceWorkerContainerEventMap {
 	"error": ErrorEvent;
 	"controllerchange": Event;

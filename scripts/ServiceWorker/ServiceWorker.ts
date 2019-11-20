@@ -273,39 +273,46 @@ function onPush(evt: PushEvent) {
 	})
 }
 
-function onPushSubscriptionChange(evt: any) {
-	return self.registration.pushManager.subscribe(evt.oldSubscription.options)
-	.then(async subscription => {
-		console.log("send subscription to server...")
+async function onPushSubscriptionChange(evt: PushSubscriptionChangeEvent) {
+	const userResponse = await fetch("/api/me", {credentials: "same-origin"})
+	const user = await userResponse.json()
 
-		const rawKey = subscription.getKey("p256dh")
-		const key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
-
-		const rawSecret = subscription.getKey("auth")
-		const secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
-
-		const endpoint = subscription.endpoint
-
-		const pushSubscription = {
-			endpoint,
-			p256dh: key,
-			auth: secret,
-			platform: navigator.platform,
-			userAgent: navigator.userAgent,
-			screen: {
-				width: window.screen.width,
-				height: window.screen.height
-			}
-		}
-
-		const response = await fetch("/api/me", {credentials: "same-origin"})
-		const user = await response.json()
-
-		return fetch("/api/pushsubscriptions/" + user.id + "/add", {
-			method: "POST",
-			credentials: "same-origin",
-			body: JSON.stringify(pushSubscription)
+	await fetch(`/api/pushsubscriptions/${user.id}/remove`, {
+		method: "POST",
+		credentials: "same-origin",
+		body: JSON.stringify({
+			endpoint: evt.oldSubscription.endpoint
 		})
+	})
+
+	const subscription = evt.newSubscription || await self.registration.pushManager.subscribe(evt.oldSubscription.options)
+
+	if(!subscription || !subscription.endpoint) {
+		return
+	}
+
+	const rawKey = subscription.getKey("p256dh")
+	const key = rawKey ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) : ""
+
+	const rawSecret = subscription.getKey("auth")
+	const secret = rawSecret ? btoa(String.fromCharCode.apply(null, new Uint8Array(rawSecret))) : ""
+
+	const pushSubscription = {
+		endpoint: subscription.endpoint,
+		p256dh: key,
+		auth: secret,
+		platform: navigator.platform,
+		userAgent: navigator.userAgent,
+		screen: {
+			width: window.screen.width,
+			height: window.screen.height
+		}
+	}
+
+	await fetch(`/api/pushsubscriptions/${user.id}/add`, {
+		method: "POST",
+		credentials: "same-origin",
+		body: JSON.stringify(pushSubscription)
 	})
 }
 
