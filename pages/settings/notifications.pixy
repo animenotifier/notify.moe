@@ -9,25 +9,25 @@ component SettingsNotifications(user *arn.User)
 				Icon("bell")
 				span Instant notifications
 			
-			#enable-notifications.widget-section
+			#notifications-enable.widget-section
 				label Instant notifications:
 				button.action(data-action="enableNotifications", data-trigger="click")
 					Icon("toggle-off")
 					span OFF
 
-			#disable-notifications.widget-section.hidden
+			#notifications-disable.widget-section.hidden
 				label Instant notifications:
 				button.action(data-action="disableNotifications", data-trigger="click")
 					Icon("toggle-on")
 					span ON
 
-			#test-notification.widget-section
+			#notifications-test.widget-section
 				label Test:
 				button.action(data-action="testNotification", data-trigger="click")
 					Icon("paper-plane")
 					span Send test notification
 			
-			footer.footer
+			footer#notifications-footer.footer
 				p(title="This setting is not account bound, instead it is bound to your browser.") You can customize this setting on every device you own.
 		
 		//- .widget.mountable(data-api="/api/settings/" + user.ID)

@@ -306,14 +306,16 @@ export default class AnimeNotifier {
 			return
 		}
 
-		const enableButton = document.getElementById("enable-notifications") as HTMLButtonElement
-		const disableButton = document.getElementById("disable-notifications") as HTMLButtonElement
-		const testButton = document.getElementById("test-notification") as HTMLButtonElement
+		const enableButton = document.getElementById("notifications-enable") as HTMLButtonElement
+		const disableButton = document.getElementById("notifications-disable") as HTMLButtonElement
+		const testButton = document.getElementById("notifications-test") as HTMLButtonElement
+		const footer = document.getElementById("notifications-footer") as HTMLElement
 
 		if(!this.pushManager.pushSupported) {
 			enableButton.classList.add("hidden")
 			disableButton.classList.add("hidden")
-			testButton.innerHTML = "Your browser doesn't support push notifications!"
+			testButton.classList.add("hidden")
+			footer.innerHTML = "Your browser doesn't support push notifications!"
 			return
 		}
 

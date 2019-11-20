@@ -166,10 +166,15 @@ func (user *User) SendNotification(pushNotification *PushNotification) {
 	expired := []*PushSubscription{}
 
 	for _, sub := range subs.Items {
+		if sub.Endpoint == "" {
+			expired = append(expired, sub)
+			continue
+		}
+
 		response, err := sub.SendNotification(pushNotification)
 
 		// It is possible to receive a non-nil response with an error, so check the status.
-		if response != nil && response.StatusCode == http.StatusGone {
+		if response != nil && (response.StatusCode == http.StatusGone || response.StatusCode == http.StatusForbidden) {
 			expired = append(expired, sub)
 		}
 

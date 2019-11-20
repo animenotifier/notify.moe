@@ -77,7 +77,7 @@ export default class PushManager {
 			}
 		}
 
-		return fetch("/api/pushsubscriptions/" + userId + "/add", {
+		return fetch(`/api/pushsubscriptions/${userId}/add`, {
 			method: "POST",
 			credentials: "same-origin",
 			body: JSON.stringify(pushSubscription)
