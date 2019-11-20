@@ -3,8 +3,6 @@
 
 .anime-grid-cell
 	grid-cell
-	saturate-up
-	shadow-up
 	default-transition
 
 	:hover
