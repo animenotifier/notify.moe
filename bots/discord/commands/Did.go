@@ -62,8 +62,9 @@ func Did(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 
 	anime := results[0]
 	animeList := user.AnimeList()
+	listItem := animeList.Find(anime.ID)
 
-	if animeList.Contains(anime.ID) {
+	if listItem != nil && listItem.Status == arn.AnimeListStatusCompleted {
 		_, err := s.ChannelMessageSend(msg.ChannelID, fmt.Sprintf("Yes, %s has watched %s.", user.Nick, anime.Title.Canonical))
 
 		if err != nil {
