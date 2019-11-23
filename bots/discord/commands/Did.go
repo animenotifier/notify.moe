@@ -36,7 +36,7 @@ func Did(s *discordgo.Session, msg *discordgo.MessageCreate) bool {
 	userName := matches[1]
 	animeName := matches[2]
 
-	user, err := arn.GetUser(userName)
+	user, err := arn.GetUserByNick(userName)
 
 	if err != nil {
 		_, err := s.ChannelMessageSend(msg.ChannelID, "User not found")
