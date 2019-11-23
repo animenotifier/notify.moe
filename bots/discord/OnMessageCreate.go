@@ -13,6 +13,7 @@ type Command func(*discordgo.Session, *discordgo.MessageCreate) bool
 var allCommands = []Command{
 	commands.AnimeList,
 	commands.AnimeSearch,
+	commands.Did,
 	commands.Play,
 	commands.RandomQuote,
 	commands.Roles,
