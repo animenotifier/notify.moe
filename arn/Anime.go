@@ -381,14 +381,14 @@ func (anime *Anime) RefreshEpisodes() error {
 
 	episodes = episodes.Merge(shoboiEpisodes)
 
-	// AnimeTwist
-	twistEpisodes, err := anime.TwistEpisodes()
+	// // AnimeTwist
+	// twistEpisodes, err := anime.TwistEpisodes()
 
-	if err != nil {
-		return err
-	}
+	// if err != nil {
+	// 	return err
+	// }
 
-	episodes = episodes.Merge(twistEpisodes)
+	// episodes = episodes.Merge(twistEpisodes)
 
 	// Count number of available episodes
 	newAvailableCount := episodes.AvailableCount()
