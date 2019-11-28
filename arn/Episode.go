@@ -2,6 +2,7 @@ package arn
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/aerogo/nano"
 	"github.com/animenotifier/notify.moe/arn/validate"
@@ -66,12 +67,13 @@ func (episode *Episode) Link() string {
 
 // Available tells you whether the episode is available (triggered when it has a link).
 func (episode *Episode) Available() bool {
-	return len(episode.Links) > 0
-}
+	availableDate, err := time.Parse(time.RFC3339, episode.AiringDate.End)
 
-// AvailableOn tells you whether the episode is available on a given service.
-func (episode *Episode) AvailableOn(serviceName string) bool {
-	return episode.Links[serviceName] != ""
+	if err != nil {
+		return false
+	}
+
+	return time.Now().UnixNano() > availableDate.UnixNano()
 }
 
 // Previous returns the previous episode, if available.
