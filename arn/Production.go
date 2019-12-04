@@ -2,21 +2,14 @@ package arn
 
 import (
 	"os"
-	"strings"
 )
 
-// IsProduction returns true if the hostname contains "arn".
+// IsProduction returns true if PRODUCTION is set to 1.
 func IsProduction() bool {
-	return strings.Contains(HostName(), "arn")
+	return os.Getenv("PRODUCTION") == "1"
 }
 
-// IsDevelopment returns true if the hostname does not contain "arn".
+// IsDevelopment returns true if PRODUCTION is not set to 1.
 func IsDevelopment() bool {
 	return !IsProduction()
-}
-
-// HostName returns the hostname.
-func HostName() string {
-	host, _ := os.Hostname()
-	return host
 }
