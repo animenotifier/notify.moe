@@ -17,28 +17,26 @@ func (user *User) Follow(followUserID UserID) error {
 		return errors.New("User " + followUserID + " has already been added")
 	}
 
+	followedUser, err := GetUser(followUserID)
+
+	if err != nil {
+		return err
+	}
+
 	user.FollowIDs = append(user.FollowIDs, followUserID)
 
 	// Send notification
-	user, err := GetUser(followUserID)
-
-	if err == nil {
-		if !user.Settings().Notification.NewFollowers {
-			return nil
-		}
-
-		follower, err := GetUser(user.ID)
-
-		if err == nil {
-			user.SendNotification(&PushNotification{
-				Title:   "You have a new follower!",
-				Message: follower.Nick + " started following you.",
-				Icon:    "https:" + follower.AvatarLink("large"),
-				Link:    "https://notify.moe" + follower.Link(),
-				Type:    NotificationTypeFollow,
-			})
-		}
+	if !followedUser.Settings().Notification.NewFollowers {
+		return nil
 	}
+
+	followedUser.SendNotification(&PushNotification{
+		Title:   "You have a new follower!",
+		Message: user.Nick + " started following you.",
+		Icon:    "https:" + user.AvatarLink("large"),
+		Link:    "https://notify.moe" + user.Link(),
+		Type:    NotificationTypeFollow,
+	})
 
 	return nil
 }
