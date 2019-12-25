@@ -3,14 +3,14 @@ module github.com/animenotifier/notify.moe
 go 1.13
 
 require (
-	cloud.google.com/go v0.49.0 // indirect
+	cloud.google.com/go v0.50.0 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.49
+	github.com/aerogo/aero v1.3.52
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
 	github.com/aerogo/graphql v0.4.4
-	github.com/aerogo/http v1.1.2
+	github.com/aerogo/http v1.1.3
 	github.com/aerogo/log v0.2.6
 	github.com/aerogo/manifest v0.1.5
 	github.com/aerogo/markdown v0.1.9
@@ -48,11 +48,11 @@ require (
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/itchyny/gojq v0.6.0
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
-	github.com/json-iterator/go v1.1.8
+	github.com/json-iterator/go v1.1.9
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.3
 	github.com/mailru/easyjson v0.7.0 // indirect
-	github.com/minio/minio-go/v6 v6.0.43
+	github.com/minio/minio-go/v6 v6.0.44
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.0
 	github.com/pariz/gountries v0.0.0-20191029140926-233bc78cf5b5
@@ -65,11 +65,11 @@ require (
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
-	golang.org/x/crypto v0.0.0-20191202143827-86a70503ff7e // indirect
-	golang.org/x/net v0.0.0-20191126235420-ef20fe5d7933 // indirect
+	golang.org/x/crypto v0.0.0-20191219195013-becbf705a915 // indirect
+	golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553 // indirect
 	golang.org/x/oauth2 v0.0.0-20191202225959-858c2ad4c8b6
-	golang.org/x/sys v0.0.0-20191128015809-6d18c012aee9 // indirect
+	golang.org/x/sys v0.0.0-20191224085550-c709ea063b76 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
-	gopkg.in/ini.v1 v1.51.0 // indirect
+	gopkg.in/ini.v1 v1.51.1 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
