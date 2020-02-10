@@ -16,11 +16,12 @@ const (
 	entriesPerScroll = 40
 )
 
-// Get edit log.
-func Get(ctx aero.Context) error {
+// All edit log.
+func All(ctx aero.Context) error {
 	user := arn.GetUserFromContext(ctx)
 	index, _ := ctx.GetInt("index")
 	nick := ctx.Get("nick")
+	compact := ctx.Query("compact") == "true"
 
 	if user == nil || (user.Role != "editor" && user.Role != "admin") {
 		return ctx.Error(http.StatusUnauthorized, "Not authorized")
@@ -42,6 +43,23 @@ func Get(ctx aero.Context) error {
 
 	// Sort by creation date
 	arn.SortEditLogEntriesLatestFirst(allEntries)
+
+	// Show only one entry for a single object in compact mode
+	if compact {
+		filteredEntries := make([]*arn.EditLogEntry, 0, len(allEntries))
+		lastObjectID := ""
+
+		for _, entry := range allEntries {
+			if lastObjectID == entry.ObjectID {
+				continue
+			}
+
+			filteredEntries = append(filteredEntries, entry)
+			lastObjectID = entry.ObjectID
+		}
+
+		allEntries = filteredEntries
+	}
 
 	// Slice the part that we need
 	entries := allEntries[index:]

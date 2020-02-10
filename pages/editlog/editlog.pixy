@@ -4,6 +4,13 @@ component EditLogPage(entries []*arn.EditLogEntry, nextIndex int, viewUser *arn.
 	else
 		h1.mountable Editor log
 	
+	.corner-buttons
+		a.button(href="/log", title="Full list")
+			RawIcon("list")
+		
+		a.button(href="/log?compact=true", title="Compact list")
+			RawIcon("list-alt")
+	
 	EditLog(entries, user)
 
 	if nextIndex != -1

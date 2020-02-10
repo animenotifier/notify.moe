@@ -68,10 +68,10 @@ func Register(app *aero.Application) {
 	page.Get(app, "/editor/jobs", jobs.Overview)
 
 	// Log
-	page.Get(app, "/log", editlog.Get)
-	page.Get(app, "/log/from/:index", editlog.Get)
-	page.Get(app, "/user/:nick/log", editlog.Get)
-	page.Get(app, "/user/:nick/log/from/:index", editlog.Get)
+	page.Get(app, "/log", editlog.All)
+	page.Get(app, "/log/from/:index", editlog.All)
+	page.Get(app, "/user/:nick/log", editlog.All)
+	page.Get(app, "/user/:nick/log/from/:index", editlog.All)
 
 	// Admin
 	page.Get(app, "/admin", admin.Get)
