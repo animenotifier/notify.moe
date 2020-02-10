@@ -21,6 +21,7 @@ func Get(ctx aero.Context) error {
 
 	relatedTracks := make([]*arn.SoundTrack, 0, 5)
 	for _, anime := range track.Anime() {
+		anime := anime
 		tracks := arn.FilterSoundTracks(func(t *arn.SoundTrack) bool {
 			return !t.IsDraft && len(t.Media) > 0 && t.ID != track.ID && arn.Contains(t.Tags, "anime:"+anime.ID)
 		})
