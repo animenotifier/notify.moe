@@ -19,7 +19,15 @@ func Get(ctx aero.Context) error {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
+	var relatedTracks []*arn.SoundTrack
+	for _, anime := range track.Anime() {
+		tracks := arn.FilterSoundTracks(func(t *arn.SoundTrack) bool {
+			return !t.IsDraft && len(t.Media) > 0 && t.ID != track.ID && arn.Contains(t.Tags, "anime:"+anime.ID)
+		})
+		relatedTracks = append(relatedTracks, tracks...)
+	}
+
 	customCtx := ctx.(*middleware.OpenGraphContext)
 	customCtx.OpenGraph = getOpenGraph(track)
-	return ctx.HTML(components.SoundTrackPage(track, user))
+	return ctx.HTML(components.SoundTrackPage(track, relatedTracks, user))
 }
