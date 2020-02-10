@@ -12,6 +12,7 @@ linters:
     - gochecknoinits
     - gocyclo
     - gocognit
+    - gomnd
     - gosec
     - stylecheck
     - funlen
