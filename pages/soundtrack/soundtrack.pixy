@@ -39,7 +39,7 @@ component SoundTrackPage(track *arn.SoundTrack, relatedTracks []*arn.SoundTrack,
 
 			if len(relatedTracks) > 0
 				.widget.mountable
-					h3.widget-title Related SoundTracks
+					h3.widget-title Related
 					.soundtracks.anime-soundtracks
 						each relatedTrack in relatedTracks
 							SoundTrackMini(relatedTrack, user)
