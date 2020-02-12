@@ -40,9 +40,10 @@ component SoundTrackPage(track *arn.SoundTrack, relatedTracks []*arn.SoundTrack,
 			if len(relatedTracks) > 0
 				.widget.mountable
 					h3.widget-title Related
-					.soundtracks.anime-soundtracks
+					ul.related-tracks
 						each relatedTrack in relatedTracks
-							SoundTrackMini(relatedTrack, user)
+							li
+								a(href=relatedTrack.Link())= relatedTrack.TitleByUser(user)
 
 			//- TODO: This is quite ineffective, performance-wise
 			if len(track.OsuBeatmaps()) > 0 || len(track.EtternaBeatmaps()) > 0
