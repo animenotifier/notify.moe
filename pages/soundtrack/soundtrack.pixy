@@ -1,4 +1,4 @@
-component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
+component SoundTrackPage(track *arn.SoundTrack, relatedTracks []*arn.SoundTrack, user *arn.User)
 	SoundTrackTabs(track, user)
 
 	.soundtrack-full-page
@@ -36,6 +36,13 @@ component SoundTrackPage(track *arn.SoundTrack, user *arn.User)
 						for _, link := range track.Links
 							li
 								a.soundtrack-link(href=link.URL, target="_blank")= link.Title
+
+			if len(relatedTracks) > 0
+				.widget.mountable
+					h3.widget-title Related
+					.soundtracks.anime-soundtracks
+						each relatedTrack in relatedTracks
+							SoundTrackMini(relatedTrack, user)
 
 			//- TODO: This is quite ineffective, performance-wise
 			if len(track.OsuBeatmaps()) > 0 || len(track.EtternaBeatmaps()) > 0
