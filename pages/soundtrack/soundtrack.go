@@ -13,14 +13,16 @@ import (
 func Get(ctx aero.Context) error {
 	id := ctx.Get("id")
 	track, err := arn.GetSoundTrack(id)
-	user := arn.GetUserFromContext(ctx)
 
 	if err != nil {
 		return ctx.Error(http.StatusNotFound, "Track not found", err)
 	}
 
+	user := arn.GetUserFromContext(ctx)
+	animes := track.Anime()
+
 	relatedTracks := arn.FilterSoundTracks(func(t *arn.SoundTrack) bool {
-		return !t.IsDraft && len(t.Media) > 0 && t.ID != track.ID && isRelated(track.Anime(), t)
+		return !t.IsDraft && len(t.Media) > 0 && t.ID != track.ID && isRelated(animes, t)
 	})
 
 	customCtx := ctx.(*middleware.OpenGraphContext)
@@ -28,8 +30,8 @@ func Get(ctx aero.Context) error {
 	return ctx.HTML(components.SoundTrackPage(track, relatedTracks, user))
 }
 
-func isRelated(anime []*arn.Anime, track *arn.SoundTrack) bool {
-	for _, anime := range anime {
+func isRelated(animes []*arn.Anime, track *arn.SoundTrack) bool {
+	for _, anime := range animes {
 		if arn.Contains(track.Tags, "anime:"+anime.ID) {
 			return true
 		}
