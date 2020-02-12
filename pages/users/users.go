@@ -173,6 +173,7 @@ func Staff(ctx aero.Context) error {
 		"SUQOAFFkR", // Allen
 		"KQgtMWOiR", // Franksks
 		"9NMYrAHiR", // Amatrelan
+		"EyRehEmul", // YoussefHabri
 	}
 
 	for _, user := range users {
