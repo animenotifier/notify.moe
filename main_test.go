@@ -30,6 +30,10 @@ func TestAnime(t *testing.T) {
 	app.BindMiddleware()
 
 	for anime := range arn.StreamAnime() {
+		if anime.IsDraft {
+			continue
+		}
+
 		assert.True(t, anime.Title.Canonical != "")
 		fetch(t, app, anime.Link())
 	}
