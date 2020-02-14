@@ -1,18 +1,65 @@
-.soundtrack-media-list
+.soundtrack-page
 	vertical
 
-.soundtrack-media
-	width 100%
-	position relative
+.soundtrack-header
+	horizontal
+	align-items center
+	margin-left 1em
 
-	iframe
-		width 100%
+	button
+		border none
+		background none
+		border-radius 50%
+		width 3em
+		height 3em
+		font-size 1.5rem
+		display flex
+		justify-content center
+		align-items center
+
+.soundtrack-main
+	vertical
+	flex 1
+
+.soundtrack-sidebar
+	sidebar
+
+.soundtrack-page-title
+	text-align left
+	margin-top 0
+	margin-left 1rem
+
+.soundtrack-details-value
+	text-align right
 
 .soundtrack-anime-list
 	horizontal-wrap
 
-.soundtrack-anime-list-item
-	anime-mini-item
+.soundtrack-media-list
+	vertical
 
-.soundtrack-anime-list-item-image
-	anime-mini-item-image
+	.soundtrack-media
+		margin-bottom 1rem
+
+.soundtrack-comments
+	// ...
+
+.soundtrack-buttons
+	justify-content left
+
+.soundtrack-section
+	margin-top 1rem
+
+.soundtrack-section-name
+	font-weight bold
+
+> 1250px
+	.soundtrack-page
+		horizontal
+
+	.soundtrack-sidebar
+		sidebar-medium
+
+> 1400px
+	.soundtrack-sidebar
+		sidebar-big

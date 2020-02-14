@@ -2,6 +2,7 @@ package soundtrack
 
 import (
 	"net/http"
+	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
@@ -23,6 +24,10 @@ func Get(ctx aero.Context) error {
 
 	relatedTracks := arn.FilterSoundTracks(func(t *arn.SoundTrack) bool {
 		return !t.IsDraft && len(t.Media) > 0 && t.ID != track.ID && isRelated(animes, t)
+	})
+
+	sort.Slice(relatedTracks, func(i, j int) bool {
+		return relatedTracks[i].Title.ByUser(user) < relatedTracks[j].Title.ByUser(user)
 	})
 
 	customCtx := ctx.(*middleware.OpenGraphContext)

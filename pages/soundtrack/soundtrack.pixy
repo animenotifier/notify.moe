@@ -1,91 +1,83 @@
 component SoundTrackPage(track *arn.SoundTrack, relatedTracks []*arn.SoundTrack, user *arn.User)
 	SoundTrackTabs(track, user)
 
-	.soundtrack-full-page
-		if track.Title.ByUser(user) == ""
-			h1.mountable untitled
-		else
-			h1.mountable= track.Title.ByUser(user)
+	.soundtrack-page
+		.soundtrack-main
+			.soundtrack-header
+				if user != nil && track.File != ""
+					button.action.mountable(data-action="playAudio", data-trigger="click", data-audio-src="/audio/" + track.File, data-media-id=track.ID)
+						RawIcon("play")
 
-		.widget-form.soundtrack-media-list
-			each media in track.Media
-				.widget.mountable
-					h3.widget-title= media.Service
-					
-					.soundtrack-media.video-container
-						iframe.lazy.video(data-src=media.EmbedLink(), title=media.Service + " media source", allowfullscreen)
-					
-					if user != nil && media.Service == "Youtube" && track.File != ""
-						.buttons
-							button.action(data-action="playAudio", data-trigger="click", data-audio-src="/audio/" + track.File, data-media-id=track.ID)
-								Icon("play")
-								span Play in background
+				if track.Title.ByUser(user) == ""
+					h1.soundtrack-page-title.mountable untitled
+				else
+					h1.soundtrack-page-title.mountable= track.Title.ByUser(user)
 
-			.widget.mountable
-				h3.widget-title Anime
+			//- if user != nil
+			//- 	.buttons.soundtrack-buttons
+			//- 		LikeButton(strconv.Itoa(len(track.Likes)), "heart", "soundtrack", track, user)
+
+			.soundtrack-section.mountable
+				h3.soundtrack-section-name.widget-title Anime
 
 				.soundtrack-anime-list
 					each anime in track.Anime()
-						a.soundtrack-anime-list-item.tip(href=anime.Link(), aria-label=anime.Title.ByUser(user))
-							img.soundtrack-anime-list-item-image.lazy(data-src=anime.ImageLink("small"), data-webp="true", data-color=anime.AverageColor(), alt=anime.Title.ByUser(user))
+						AnimeCard(anime, fmt.Sprintf("%s %d", stringutils.Capitalize(anime.Season()), anime.StartDateTime().Year()), user)
 
-			if len(track.Links) > 0
-				.widget.mountable
-					h3.widget-title Links
-					ul.soundtrack-links
-						for _, link := range track.Links
-							li
-								a.soundtrack-link(href=link.URL, target="_blank")= link.Title
-
-			if len(relatedTracks) > 0
-				.widget.mountable
-					h3.widget-title Related
-					ul.related-tracks
-						each relatedTrack in relatedTracks
-							li
-								a(href=relatedTrack.Link())= relatedTrack.TitleByUser(user)
-
-			//- TODO: This is quite ineffective, performance-wise
-			if len(track.OsuBeatmaps()) > 0 || len(track.EtternaBeatmaps()) > 0
-				.widget.mountable
-					h3.widget-title Beatmaps
-					ul.beatmaps
-						for index, beatmap := range track.OsuBeatmaps()
-							li
-								a.beatmap(href="https://osu.ppy.sh/s/" + beatmap, target="_blank")= "Osu Beatmap #" + strconv.Itoa(index + 1)
-						
-						for index, beatmap := range track.EtternaBeatmaps()
-							li
-								a.beatmap(href="https://etternaonline.com/song/view/" + beatmap, target="_blank")= "Etterna Beatmap #" + strconv.Itoa(index + 1)	
-
-			.widget.mountable
-				h3.widget-title Tags
+			.soundtrack-section.soundtrack-tags.mountable
+				h3.soundtrack-section-name.widget-title Tags
 
 				.tags
 					each tag in track.Tags
 						a.tag(href="/soundtracks/tag/" + tag)= tag
 
-			.widget.mountable
-				h3.widget-title Comments
+			.soundtrack-section.soundtrack-comments.mountable
+				h3.soundtrack-section-name.widget-title Comments
 				Comments(track, user)
+		
+		.soundtrack-sidebar
+			.soundtrack-section.mountable(data-mountable-type="sidebar")
+				h3.soundtrack-section-name.widget-title Information
 
-		footer.footer.mountable
-			if track.EditedBy != ""
-				span Edited 
-				span.utc-date(data-date=track.Edited)
-				span  by 
-				span= track.Editor().Nick
-			else
-				span Posted 
-				span.utc-date(data-date=track.Created)
-				span  by 
-				span= track.Creator().Nick
+				table.soundtrack-details
+					tr(data-mountable-type="info")
+						td.soundtrack-details-name Created:
+						td.soundtrack-details-value.utc-date(data-date=track.Created)
 
-			span .
+					if track.Edited != ""
+						tr(data-mountable-type="info")
+							td.soundtrack-details-name Edited:
+							td.soundtrack-details-value.utc-date(data-date=track.Edited)
+			
+			.soundtrack-section.mountable(data-mountable-type="sidebar")
+				h3.soundtrack-section-name.widget-title Media
+				
+				.soundtrack-media-list
+					each media in track.Media
+						.soundtrack-media.video-container
+							iframe.lazy.video(data-src=media.EmbedLink(), title=media.Service + " media source", allowfullscreen)
+
+			if len(relatedTracks) > 0
+				.soundtrack-section.mountable(data-mountable-type="sidebar")
+					h3.soundtrack-section-name.widget-title Related
+					
+					ul.related-tracks
+						each relatedTrack in relatedTracks
+							li(data-mountable-type="info")
+								a(href=relatedTrack.Link())= relatedTrack.TitleByUser(user)
+			
+			if len(track.Links) > 0
+				.soundtrack-section.mountable(data-mountable-type="sidebar")
+					h3.soundtrack-section-name.widget-title Links
+
+					.light-button-group
+						each link in track.Links
+							a.light-button(href=link.URL, target="_blank")
+								Icon("external-link")
+								span= link.Title
 
 component SoundTrackTabs(track *arn.SoundTrack, user *arn.User)
 	.tabs
-		LikeTab(strconv.Itoa(len(track.Likes)), "heart", "track", track, user)
 		Tab("Soundtrack", "music", track.Link())
 
 		if track.HasLyrics()
