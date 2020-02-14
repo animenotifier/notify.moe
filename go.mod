@@ -3,7 +3,8 @@ module github.com/animenotifier/notify.moe
 go 1.13
 
 require (
-	cloud.google.com/go v0.52.0 // indirect
+	cloud.google.com/go v0.53.0 // indirect
+	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
 	github.com/aerogo/aero v1.3.52
 	github.com/aerogo/api v0.2.3
@@ -29,7 +30,6 @@ require (
 	github.com/akyoto/imageserver v0.3.7
 	github.com/akyoto/stringutils v0.3.1
 	github.com/akyoto/webpush-go v0.1.2
-	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/animenotifier/anilist v0.2.6
 	github.com/animenotifier/ffxiv v0.2.2
 	github.com/animenotifier/japanese v0.2.5
@@ -52,12 +52,12 @@ require (
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.4
 	github.com/mailru/easyjson v0.7.0 // indirect
-	github.com/minio/minio-go/v6 v6.0.45
+	github.com/minio/minio-go/v6 v6.0.47
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.1
 	github.com/pariz/gountries v0.0.0-20191029140926-233bc78cf5b5
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/shirou/gopsutil v2.19.12+incompatible
+	github.com/shirou/gopsutil v2.20.1+incompatible
 	github.com/smartystreets/assertions v1.0.0 // indirect
 	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
 	github.com/tebeka/strftime v0.1.3 // indirect
@@ -66,9 +66,8 @@ require (
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
 	github.com/zeebo/xxh3 v0.0.0-20191227220208-65f423c10688 // indirect
-	golang.org/x/crypto v0.0.0-20200128174031-69ecbb4d6d5d // indirect
+	golang.org/x/crypto v0.0.0-20200214034016-1d94cc7ab1c6 // indirect
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
-	golang.org/x/sys v0.0.0-20200124204421-9fbb57f87de9 // indirect
-	gopkg.in/ini.v1 v1.51.1 // indirect
+	gopkg.in/ini.v1 v1.52.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
