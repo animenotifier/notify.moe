@@ -45,6 +45,7 @@ func Register(app *aero.Application) {
 	editorFilterable("/editor/anime/details/startdate", filteranime.StartDate)
 	editorFilterable("/editor/anime/details/episodelength", filteranime.EpisodeLength)
 	editorFilterable("/editor/anime/details/source", filteranime.Source)
+	editorFilterable("/editor/anime/details/status", filteranime.Status)
 
 	editorFilterable("/editor/anime/all", filteranime.All)
 
