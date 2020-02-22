@@ -18,7 +18,7 @@ func characterList(ctx aero.Context, title string, filter func(*arn.Character) b
 		return ctx.Error(http.StatusUnauthorized, "Not authorized")
 	}
 
-	characters, count := filterCharacters(ctx, user, filter)
+	characters, count := filterCharacters(filter)
 
 	return ctx.HTML(components.CharacterEditorListFull(
 		title,
@@ -31,7 +31,7 @@ func characterList(ctx aero.Context, title string, filter func(*arn.Character) b
 
 // filterCharacters filters anime by the given filter function and
 // additionally applies year and types filters if specified.
-func filterCharacters(ctx aero.Context, user *arn.User, filter func(*arn.Character) bool) ([]*arn.Character, int) {
+func filterCharacters(filter func(*arn.Character) bool) ([]*arn.Character, int) {
 	// Filter
 	characters := arn.FilterCharacters(func(character *arn.Character) bool {
 		if character.IsDraft {
