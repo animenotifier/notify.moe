@@ -64,6 +64,7 @@ component EditorTabs(url string, user *arn.User)
 			Tab("Status", "calendar-check-o", "/editor/anime/details/status" + user.Settings().Editor.Filter.Suffix())
 			Tab("Trailers", "youtube", "/editor/anime/details/trailers" + user.Settings().Editor.Filter.Suffix())
 			Tab("Start date", "calendar", "/editor/anime/details/startdate" + user.Settings().Editor.Filter.Suffix())
+			Tab("End date", "calendar", "/editor/anime/details/enddate" + user.Settings().Editor.Filter.Suffix())
 			Tab("Ep. Length", "clock-o", "/editor/anime/details/episodelength" + user.Settings().Editor.Filter.Suffix())
 			Tab("Source", "book", "/editor/anime/details/source" + user.Settings().Editor.Filter.Suffix())
 	

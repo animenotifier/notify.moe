@@ -6,6 +6,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/editlog"
 	"github.com/animenotifier/notify.moe/pages/editor"
 	"github.com/animenotifier/notify.moe/pages/editor/filteranime"
+	"github.com/animenotifier/notify.moe/pages/editor/filtercharacters"
 	"github.com/animenotifier/notify.moe/pages/editor/filtercompanies"
 	"github.com/animenotifier/notify.moe/pages/editor/filtersoundtracks"
 	"github.com/animenotifier/notify.moe/pages/editor/jobs"
@@ -43,11 +44,15 @@ func Register(app *aero.Application) {
 	editorFilterable("/editor/anime/details/genres", filteranime.Genres)
 	editorFilterable("/editor/anime/details/trailers", filteranime.Trailers)
 	editorFilterable("/editor/anime/details/startdate", filteranime.StartDate)
+	editorFilterable("/editor/anime/details/enddate", filteranime.EndDate)
 	editorFilterable("/editor/anime/details/episodelength", filteranime.EpisodeLength)
 	editorFilterable("/editor/anime/details/source", filteranime.Source)
 	editorFilterable("/editor/anime/details/status", filteranime.Status)
 
 	editorFilterable("/editor/anime/all", filteranime.All)
+
+	// Editor - Characters
+	page.Get(app, "/editor/character/image/none", filtercharacters.NoImage)
 
 	// Editor - MALdiff
 	editorFilterable("/editor/mal/diff/anime", editor.CompareMAL)

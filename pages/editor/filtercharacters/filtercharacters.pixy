@@ -1,0 +1,30 @@
+component CharacterEditorListFull(title string, missing []*arn.Character, count int, generateSearchLink func(*arn.Character) string, user *arn.User)
+	.corner-buttons-left
+		a.button(href="/editor")
+			RawIcon("arrow-left")
+
+	h1.editor-list-page-title.mountable= title
+	footer.footer.editor-list-entry-count.mountable= strconv.Itoa(count) + " characters"
+	CharacterEditorList(missing, generateSearchLink)
+
+component CharacterEditorList(characters []*arn.Character, generateSearchLink func(*arn.Character) string)
+	table.editor-list
+		thead
+			tr.mountable
+				th Name
+
+				if generateSearchLink != nil
+					th Tools
+		tbody
+			each character in characters
+				tr.mountable
+					td
+						a(href=character.Link(), target="_blank", rel="noopener")
+							if character.HasImage()
+								img.character-list-item-image.lazy(data-src=character.ImageLink("small"), data-webp="true", data-color=character.AverageColor(), alt=character.Name.Canonical)
+							
+							span= character.Name.Canonical
+					
+					if generateSearchLink != nil
+						td
+							a(href=generateSearchLink(character), target="_blank", rel="noopener") 🔍
