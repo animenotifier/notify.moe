@@ -5,7 +5,7 @@ component SoundTrackPage(track *arn.SoundTrack, relatedTracks []*arn.SoundTrack,
 		.soundtrack-main
 			.soundtrack-header
 				if user != nil && track.File != ""
-					button.action.mountable(data-action="playAudio", data-trigger="click", data-audio-src="/audio/" + track.File, data-media-id=track.ID)
+					button.action.mountable(data-action="playAudio", data-trigger="click", data-audio-src="https://notify.moe/audio/" + track.File, data-media-id=track.ID)
 						RawIcon("play")
 
 				if track.Title.ByUser(user) == ""
