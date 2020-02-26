@@ -23,7 +23,7 @@ require (
 	github.com/aerogo/session-store-nano v0.1.7
 	github.com/aerogo/sitemap v0.1.4
 	github.com/akyoto/assert v0.2.4
-	github.com/akyoto/cache v1.0.5
+	github.com/akyoto/cache v1.0.6
 	github.com/akyoto/color v1.8.11
 	github.com/akyoto/go-matroska v0.1.1
 	github.com/akyoto/hash v0.4.9
@@ -44,6 +44,7 @@ require (
 	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
 	github.com/go-chi/chi v4.0.3+incompatible // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
+	github.com/golang/protobuf v1.3.4 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
 	github.com/itchyny/gojq v0.6.0
@@ -51,8 +52,8 @@ require (
 	github.com/json-iterator/go v1.1.9
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
 	github.com/mailgun/mailgun-go/v3 v3.6.4
-	github.com/mailru/easyjson v0.7.0 // indirect
-	github.com/minio/minio-go/v6 v6.0.47
+	github.com/mailru/easyjson v0.7.1 // indirect
+	github.com/minio/minio-go/v6 v6.0.49
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.1
 	github.com/pariz/gountries v0.0.0-20191029140926-233bc78cf5b5
@@ -66,8 +67,10 @@ require (
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9
 	github.com/zeebo/xxh3 v0.0.0-20191227220208-65f423c10688 // indirect
-	golang.org/x/crypto v0.0.0-20200214034016-1d94cc7ab1c6 // indirect
+	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d // indirect
+	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b // indirect
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
+	golang.org/x/sys v0.0.0-20200223170610-d5e6a3e2c0ae // indirect
 	gopkg.in/ini.v1 v1.52.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
