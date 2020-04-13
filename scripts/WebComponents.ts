@@ -15,6 +15,6 @@ export function register() {
 
 	// Register all custom elements
 	for(const [tag, definition] of elements.entries()) {
-		window.customElements.define(tag, definition)
+		window.customElements.define(tag, definition as CustomElementConstructor)
 	}
 }
