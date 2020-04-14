@@ -10,6 +10,7 @@ import (
 	"github.com/aerogo/api"
 	"github.com/aerogo/markdown"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
+	"github.com/animenotifier/notify.moe/arn/limits"
 )
 
 // Force interface implementations
@@ -83,8 +84,8 @@ func (post *Post) Create(ctx aero.Context) error {
 	// Post-process text
 	post.Text = autocorrect.PostText(post.Text)
 
-	if len(post.Text) < 5 {
-		return errors.New("Text too short: Should be at least 5 characters")
+	if len(post.Text) < limits.PostMinCharacters {
+		return fmt.Errorf("Text too short: Should be at least %d characters", limits.PostMinCharacters)
 	}
 
 	// Tags
@@ -206,6 +207,17 @@ func (post *Post) Edit(ctx aero.Context, key string, value reflect.Value, newVal
 		}
 
 		post.SetParent(newParent)
+		consumed = true
+
+	case "Text":
+		newText := newValue.String()
+		newText = autocorrect.PostText(newText)
+
+		if len(newText) < limits.PostMinCharacters {
+			return false, fmt.Errorf("Text too short: Should be at least %d characters", limits.PostMinCharacters)
+		}
+
+		post.Text = newText
 		consumed = true
 	}
 

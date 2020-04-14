@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go v0.56.0 // indirect
 	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
-	github.com/aerogo/aero v1.3.52
+	github.com/aerogo/aero v1.3.53
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
