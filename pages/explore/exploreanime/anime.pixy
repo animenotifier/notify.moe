@@ -1,0 +1,90 @@
+component ExploreAnime(animes []*arn.Anime, year string, season string, status string, typ string, user *arn.User)
+	#filter-root(data-url="/explore/anime")
+	ExploreFilters(year, season, status, typ, false)
+
+	.corner-buttons-hide-on-mobile
+		if user != nil
+			button.action(data-trigger="click", data-action="toggleHideAddedAnime", title="Hide anime in my collection")
+				RawIcon("eye-slash")
+		
+		a.button(href="/calendar", title="Calendar")
+			RawIcon("calendar")
+
+		a.button(href="/companies", title="Companies")
+			RawIcon("building")
+		
+		a.button(href="/halloffame", title="Hall of Fame")
+			RawIcon("trophy")
+		
+		a.button(href="/genres", title="View genres")
+			RawIcon("clone")
+		
+		a.button(href="/explore/color/any/anime", title="View colors")
+			RawIcon("paint-brush")
+
+	h1.page-title Explore
+
+	.explore-anime
+		if len(animes) == 0
+			p.no-data.mountable No anime found using the above filters.
+		else
+			AnimeGrid(animes, user)
+	
+	if user != nil && (user.Role == "editor" || user.Role == "admin")
+		.buttons
+			if user.DraftIndex().AnimeID == ""
+				button.mountable.action(data-action="newObject", data-trigger="click", data-type="anime")
+					Icon("plus")
+					span Add anime
+			else
+				a.button.mountable(href="/anime/" + user.DraftIndex().AnimeID + "/edit")
+					Icon("pencil")
+					span Edit draft
+
+component ExploreFilters(year string, season string, status string, typ string, advancedFilters bool)
+	.explore-filters
+		.filter-select-container
+			select#filter-year.filter-select.action(value=year, data-action="filterAnime", data-trigger="change")
+				if advancedFilters
+					option.option-any(value="") Any
+
+				for year := time.Now().Year()+1; year >= 1951; year--
+					option(value=year)= year
+				
+			.filter-label Year
+
+		.filter-select-container
+			select#filter-season.filter-select.action(value=season, data-action="filterAnime", data-trigger="change")
+				option.option-any(value="") Any
+				option(value="winter") Winter
+				option(value="spring") Spring
+				option(value="summer") Summer
+				option(value="autumn") Autumn
+			
+			.filter-label Season
+
+		.filter-select-container
+			select#filter-status.filter-select.action(value=status, data-action="filterAnime", data-trigger="change")
+				option.option-any(value="") Any
+				option(value="current") Current
+				option(value="upcoming") Upcoming
+				option(value="finished") Finished
+
+				if advancedFilters
+					option(value="tba") TBA
+				
+			.filter-label Status
+
+		.filter-select-container
+			select#filter-type.filter-select.action(value=typ, data-action="filterAnime", data-trigger="change")
+				option.option-any(value="") Any
+				option(value="tv") TV
+				option(value="movie") Movie
+				option(value="ova") OVA
+				option(value="ona") ONA
+				option(value="special") Special
+
+				if advancedFilters
+					option(value="music") Music
+
+			.filter-label Type

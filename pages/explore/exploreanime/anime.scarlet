@@ -1,0 +1,30 @@
+.explore-filters
+	horizontal
+	justify-content center
+	margin-bottom content-padding-half
+
+.explore-anime
+	margin-top content-padding-half
+
+.option-any
+	color reverse-light-hover-color
+
+.filter-select-container
+	vertical
+	justify-content center
+	margin 1px
+
+.filter-select
+	[value=""]
+		opacity 0.25
+
+		:focus
+			border-color ui-border-color !important
+
+.filter-label
+	opacity 0.5
+	font-size 0.7rem
+	text-align center
+
+#filter-year
+	width 75px

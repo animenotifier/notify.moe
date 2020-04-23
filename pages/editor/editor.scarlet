@@ -16,15 +16,6 @@
 .editor-score
 	feature-card-footer
 
-.feature-card-color-soundtrack
-	background hsl(200, feature-card-saturation, feature-card-lightness) !important
-
-.feature-card-color-company
-	background hsl(150, feature-card-saturation, feature-card-lightness) !important
-
-.feature-card-color-character
-	background hsl(273, feature-card-saturation, feature-card-lightness) !important
-
 .search-links
 	horizontal
 	margin 0 auto

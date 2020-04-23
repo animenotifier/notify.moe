@@ -34,9 +34,11 @@ component Sidebar(searchTerm string, user *arn.User)
 		SidebarButton("Activity", "/activity", "rss")
 		SidebarButton("Forum", "/forum", "comment")
 		SidebarButton("Explore", "/explore", "th")
-		SidebarButton("AMVs", "/amvs", "video-camera")
-		SidebarButton("Soundtracks", "/soundtracks", "headphones")
-		SidebarButton("Quotes", "/quotes", "quote-left")
+
+		//- SidebarButton("AMVs", "/amvs", "video-camera")
+		//- SidebarButton("Soundtracks", "/soundtracks", "headphones")
+		//- SidebarButton("Quotes", "/quotes", "quote-left")
+
 		SidebarButton("Groups", "/groups", "users")
 		SidebarButton("Users", "/users", "globe")
 
@@ -66,12 +68,12 @@ component Sidebar(searchTerm string, user *arn.User)
 		//- if user != nil && user.Role == "admin"
 		//- 	SidebarButton("Admin", "/admin", "wrench")
 
-		a.sidebar-link.action(href="#", data-action="nextTheme", data-trigger="click")
-			.sidebar-button
-				Icon("paint-brush")
-				span.sidebar-text Theme
+		//- a.sidebar-link.action(href="#", data-action="nextTheme", data-trigger="click")
+		//- 	.sidebar-button
+		//- 		Icon("paint-brush")
+		//- 		span.sidebar-text Theme
 
-		SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
+		//- SidebarButton("Help", "/thread/I3MMiOtzR", "question-circle")
 
 		if user != nil
 			SidebarButtonNoAJAX("Logout", "/logout", "sign-out")
