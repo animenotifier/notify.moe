@@ -9,7 +9,6 @@
 		"notify.moe": true,
 		"components/": true,
 		"audio/": true,
-		"videos/": true,
 		"logs/": true,
 		"jobs/mal-download/anime/": true,
 		"jobs/mal-download/character/": true,
@@ -28,7 +27,6 @@
 	"search.exclude": {
 		"components/": true,
 		"audio/": true,
-		"videos/": true,
 		"**/*.svg": true,
 		"**/*.html": true,
 		"**/*.opus": true,
