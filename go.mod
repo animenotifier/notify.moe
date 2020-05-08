@@ -17,9 +17,9 @@ require (
 	github.com/aerogo/markdown v0.1.9
 	github.com/aerogo/mirror v0.2.5
 	github.com/aerogo/nano v0.3.5
-	github.com/aerogo/pack v0.6.4
+	github.com/aerogo/pack v0.6.5
 	github.com/aerogo/packet v0.2.2 // indirect
-	github.com/aerogo/run v1.0.2
+	github.com/aerogo/run v1.0.3
 	github.com/aerogo/session-store-nano v0.1.7
 	github.com/aerogo/sitemap v0.1.4
 	github.com/akyoto/assert v0.2.4
@@ -39,14 +39,14 @@ require (
 	github.com/animenotifier/overwatch v0.1.3
 	github.com/animenotifier/shoboi v0.2.4
 	github.com/animenotifier/twist v0.2.6
-	github.com/bwmarrin/discordgo v0.19.0
+	github.com/bwmarrin/discordgo v0.20.3
 	github.com/dustin/go-humanize v1.0.0
 	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
 	github.com/go-chi/chi v4.1.1+incompatible // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/protobuf v1.4.1 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
-	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c // indirect
+	github.com/gopherjs/gopherjs v0.0.0-20200217142428-fce0ec30dd00 // indirect
 	github.com/itchyny/gojq v0.6.0
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/json-iterator/go v1.1.9
@@ -59,9 +59,9 @@ require (
 	github.com/pariz/gountries v0.0.0-20200430155801-1c6a393df9c7
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/shirou/gopsutil v2.20.4+incompatible
-	github.com/smartystreets/assertions v1.0.0 // indirect
-	github.com/smartystreets/goconvey v0.0.0-20190710185942-9d28bd7c0945 // indirect
-	github.com/tebeka/strftime v0.1.3 // indirect
+	github.com/smartystreets/assertions v1.1.0 // indirect
+	github.com/smartystreets/goconvey v1.6.4 // indirect
+	github.com/tebeka/strftime v0.1.4 // indirect
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
