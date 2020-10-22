@@ -1,4 +1,4 @@
-component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensedAnime []*arn.Anime, closeCompanies []*arn.Company, distances map[string]float64, user *arn.User)
+component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensedAnime []*arn.Anime, closeCompanies []*arn.Company, distances map[string]float64, user *arn.User, overallRating float64, storyRating float64, visualsRating float64, soundtrackRating float64, overallCount int, storyCount int, visualsCount int, soundtrackCount int)
 	CompanyTabs(company, user)
 	
 	.company-page
@@ -13,6 +13,30 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 			CompanyAnimes("Licensed:", licensedAnime, user)
 		
 		.company-sidebar
+			h3.mountable Average Ratings:
+
+			table.company-rating-info-table
+				tbody
+					tr.mountable(data-mountable-type="ratings")
+						td.company-rating-info-key Overall:
+						td.company-rating-info-value
+							Rating(overallRating, overallCount, user)
+
+					tr.mountable(data-mountable-type="ratings")
+						td.company-rating-info-key Story:
+						td.company-rating-info-value
+							Rating(storyRating, storyCount, user)
+
+					tr.mountable(data-mountable-type="ratings")
+						td.company-rating-info-key Visuals:
+						td.company-rating-info-value
+							Rating(visualsRating, visualsCount, user)
+							
+					tr.mountable(data-mountable-type="ratings")
+						td.company-rating-info-key Soundtrack:
+						td.company-rating-info-value
+							Rating(soundtrackRating, soundtrackCount, user)
+
 			if company.Location.Latitude != 0 && company.Location.Longitude != 0
 				h3.mountable Location
 				iframe.company-location.mountable(src="https://www.google.com/maps/embed/v1/place?q=" + fmt.Sprint(company.Location.Latitude) + "," + fmt.Sprint(company.Location.Longitude) + "&key=AIzaSyAsx6fhqRGaMLTixIJMIZBU4Mg6HJmvQf0", importance="low", title=company.Name.English + " location map")

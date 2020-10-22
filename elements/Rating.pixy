@@ -1,5 +1,5 @@
 component Rating(value float64, userCount int, user *arn.User)
 	if user == nil
-		.anime-rating.tip(aria-label="Rated by " + stringutils.Plural(userCount, "user"))= fmt.Sprintf("%.1f", value)
+		.anime-rating.tip(aria-label="Based on " + stringutils.Plural(userCount, "rating"))= fmt.Sprintf("%.1f", value)
 	else
-		.anime-rating.tip(aria-label="Rated by " + stringutils.Plural(userCount, "user"))= fmt.Sprintf("%." + strconv.Itoa(user.Settings().Format.RatingsPrecision) + "f", value)
+		.anime-rating.tip(aria-label="Based on " + stringutils.Plural(userCount, "rating"))= fmt.Sprintf("%." + strconv.Itoa(user.Settings().Format.RatingsPrecision) + "f", value)
