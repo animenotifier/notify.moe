@@ -52,6 +52,28 @@ func Get(ctx aero.Context) error {
 	var closeCompanies []*arn.Company
 	distances := map[string]float64{}
 
+	var overallRating, storyRating, visualsRating, soundtrackRating float64
+	var overallCount, storyCount, visualsCount, soundtrackCount int
+
+	for _, anime := range studioAnime {
+		overallRating += anime.Rating.Overall
+		storyRating += anime.Rating.Story
+		visualsRating += anime.Rating.Visuals
+		soundtrackRating += anime.Rating.Soundtrack
+
+		overallCount += anime.Rating.Count.Overall
+		storyCount += anime.Rating.Count.Story
+		visualsCount += anime.Rating.Count.Visuals
+		soundtrackCount += anime.Rating.Count.Soundtrack
+	}
+
+	totalStudioAnime := float64(len(studioAnime))
+
+	overallRating /= totalStudioAnime
+	storyRating /= totalStudioAnime
+	visualsRating /= totalStudioAnime
+	soundtrackRating /= totalStudioAnime
+
 	if company.Location.IsValid() {
 		closeCompanies = arn.FilterCompanies(func(closeCompany *arn.Company) bool {
 			if closeCompany.ID == company.ID {
@@ -73,5 +95,5 @@ func Get(ctx aero.Context) error {
 		})
 	}
 
-	return ctx.HTML(components.CompanyPage(company, studioAnime, producedAnime, licensedAnime, closeCompanies, distances, user))
+	return ctx.HTML(components.CompanyPage(company, studioAnime, producedAnime, licensedAnime, closeCompanies, distances, user, overallRating, storyRating, visualsRating, soundtrackRating, overallCount, storyCount, visualsCount, soundtrackCount))
 }

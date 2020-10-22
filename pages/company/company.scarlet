@@ -41,3 +41,16 @@
 
 .company-anime-item-image
 	anime-mini-item-image
+
+.company-rating-info-table
+	vertical
+	margin 0
+
+	tr
+		horizontal
+
+.company-rating-info-key
+	flex 1
+
+.company-rating-info-value
+	text-align right
