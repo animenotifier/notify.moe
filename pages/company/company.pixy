@@ -1,4 +1,4 @@
-component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensedAnime []*arn.Anime, closeCompanies []*arn.Company, distances map[string]float64, user *arn.User, overallRating float64, storyRating float64, visualsRating float64, soundtrackRating float64, overallCount int, storyCount int, visualsCount int, soundtrackCount int)
+component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensedAnime []*arn.Anime, closeCompanies []*arn.Company, distances map[string]float64, rating *arn.AnimeRating, user *arn.User)
 	CompanyTabs(company, user)
 	
 	.company-page
@@ -13,29 +13,29 @@ component CompanyPage(company *arn.Company, studioAnime, producedAnime, licensed
 			CompanyAnimes("Licensed:", licensedAnime, user)
 		
 		.company-sidebar
-			h3.mountable Average Ratings:
+			h3.mountable Ratings
 
-			table.company-rating-info-table
+			table.company-rating-info-table.mountable
 				tbody
-					tr.mountable(data-mountable-type="ratings")
+					tr.mountable
 						td.company-rating-info-key Overall:
 						td.company-rating-info-value
-							Rating(overallRating, overallCount, user)
+							CompanyRating(rating.Overall, rating.Count.Overall, user)
 
-					tr.mountable(data-mountable-type="ratings")
+					tr.mountable
 						td.company-rating-info-key Story:
 						td.company-rating-info-value
-							Rating(storyRating, storyCount, user)
+							CompanyRating(rating.Story, rating.Count.Story, user)
 
-					tr.mountable(data-mountable-type="ratings")
+					tr.mountable
 						td.company-rating-info-key Visuals:
 						td.company-rating-info-value
-							Rating(visualsRating, visualsCount, user)
+							CompanyRating(rating.Visuals, rating.Count.Visuals, user)
 							
-					tr.mountable(data-mountable-type="ratings")
+					tr.mountable
 						td.company-rating-info-key Soundtrack:
 						td.company-rating-info-value
-							Rating(soundtrackRating, soundtrackCount, user)
+							CompanyRating(rating.Soundtrack, rating.Count.Soundtrack, user)
 
 			if company.Location.Latitude != 0 && company.Location.Longitude != 0
 				h3.mountable Location
