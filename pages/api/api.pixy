@@ -1,6 +1,9 @@
-component API(types []*autodocs.Type)
+component API(types []*autodocs.Type, user *arn.User)
 	.api-docs
 		h1.mountable API
+
+		h2.mountable API Token
+			h3.mountable= user.APIToken.String()
 
 		h2.mountable Endpoints
 		ul

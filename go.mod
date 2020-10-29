@@ -29,6 +29,7 @@ require (
 	github.com/akyoto/hash v0.4.10
 	github.com/akyoto/imageserver v0.3.7
 	github.com/akyoto/stringutils v0.3.1
+	github.com/akyoto/uuid v1.1.3
 	github.com/akyoto/webpush-go v0.1.2
 	github.com/animenotifier/anilist v0.2.6
 	github.com/animenotifier/ffxiv v0.2.2
@@ -46,6 +47,7 @@ require (
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/protobuf v1.4.1 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
+	github.com/google/uuid v1.1.2 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20200217142428-fce0ec30dd00 // indirect
 	github.com/itchyny/gojq v0.6.0
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect

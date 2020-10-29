@@ -12,6 +12,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/aerogo/http/client"
+	"github.com/akyoto/uuid"
 	"github.com/animenotifier/ffxiv"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
 	"github.com/animenotifier/notify.moe/arn/validate"
@@ -56,6 +57,7 @@ type User struct {
 	OS           UserOS       `json:"os" private:"true"`
 	Location     *Location    `json:"location" private:"true"`
 	FollowIDs    []UserID     `json:"follows"`
+	APIToken     uuid.UUID    `json:"apitoken" private:"true"`
 
 	hasPosts
 
@@ -137,6 +139,14 @@ func RegisterUser(user *User) {
 			}
 		}
 	}
+
+	// Create API Token
+	user.CreateAPIToken()
+}
+
+// (Re)create APIToken
+func (user *User) CreateAPIToken() {
+	user.APIToken = uuid.New()
 }
 
 // SendNotification accepts a PushNotification and generates a new Notification object.
