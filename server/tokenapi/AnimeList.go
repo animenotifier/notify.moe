@@ -12,5 +12,7 @@ type AnimeParameters struct {
 }
 
 func AnimeUpdate(request *TokenRequest, parameters *AnimeParameters) error {
+	// task := request.JSON.Get("task").String()
+
 	return nil
 }

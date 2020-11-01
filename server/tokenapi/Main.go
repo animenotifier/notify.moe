@@ -14,10 +14,10 @@ type TokenRequest struct {
 	Token uuid.UUID
 	User  arn.User
 
-	Json gjson.Result
+	JSON gjson.Result
 }
 
-func Main(app *aero.Application, authLog *log.Log) {
+func Main(app *aero.Application, Log *log.Log) {
 	app.Post("/tokenapi", func(ctx aero.Context) error {
 		response, err := ctx.Request().Body().String()
 		if err != nil {
@@ -28,24 +28,27 @@ func Main(app *aero.Application, authLog *log.Log) {
 		}
 
 		request := &TokenRequest{}
-		request.Json = gjson.Parse(response)
+		request.JSON = gjson.Parse(response)
 
-		token, err := uuid.Parse(request.Json.Get("token").String())
+		token, err := uuid.Parse(request.JSON.Get("token").String())
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Couldn't parse token", err)
 		}
 		request.Token = token
 		request.User = *GetUserFromToken(token)
 
-		action := request.Json.Get("action").String()
+		action := request.JSON.Get("action").String()
 		if action == "UpdateAnime" {
 			parameters := &AnimeParameters{}
 
 			// @TODO
 
 			AnimeUpdate(request, parameters)
+			if err != nil {
+				ctx.Error(http.StatusBadRequest, "Error updating anime:", err)
+			}
 		}
 
-		return ctx.Error(http.StatusAccepted, "Processed.")
+		return ctx.Error(http.StatusAccepted, "Processed request for", request.User.CleanNick())
 	})
 }
