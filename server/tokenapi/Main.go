@@ -17,7 +17,7 @@ type TokenRequest struct {
 	JSON gjson.Result
 }
 
-func Main(app *aero.Application, Log *log.Log) {
+func Main(app *aero.Application, log *log.Log) {
 	app.Post("/tokenapi", func(ctx aero.Context) error {
 		response, err := ctx.Request().Body().String()
 		if err != nil {
@@ -41,7 +41,7 @@ func Main(app *aero.Application, Log *log.Log) {
 		if action == "UpdateAnime" {
 			err := AnimeUpdate(request)
 			if err != nil {
-				ctx.Error(http.StatusBadRequest, "Error updating anime:", err)
+				return ctx.Error(http.StatusBadRequest, "Error updating anime:", err)
 			}
 		}
 
