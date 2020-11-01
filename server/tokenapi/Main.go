@@ -39,11 +39,7 @@ func Main(app *aero.Application, Log *log.Log) {
 
 		action := request.JSON.Get("action").String()
 		if action == "UpdateAnime" {
-			parameters := &AnimeParameters{}
-
-			// @TODO
-
-			AnimeUpdate(request, parameters)
+			err := AnimeUpdate(request)
 			if err != nil {
 				ctx.Error(http.StatusBadRequest, "Error updating anime:", err)
 			}
