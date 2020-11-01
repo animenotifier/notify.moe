@@ -15,6 +15,7 @@ import (
 	"github.com/animenotifier/notify.moe/server/graphql"
 	"github.com/animenotifier/notify.moe/server/https"
 	"github.com/animenotifier/notify.moe/server/middleware"
+	"github.com/animenotifier/notify.moe/server/tokenapi"
 	"github.com/animenotifier/notify.moe/utils/htmlemail"
 	"github.com/animenotifier/notify.moe/utils/routetests"
 )
@@ -73,6 +74,9 @@ func New() *aero.Application {
 
 	// GraphQL
 	graphql.Install(app)
+
+	// Tokenapi
+	tokenapi.Install(app)
 
 	// Close the database node on shutdown
 	app.OnEnd(arn.Node.Close)

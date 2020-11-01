@@ -35,6 +35,7 @@ func Main(app *aero.Application, authLog *log.Log) {
 			return ctx.Error(http.StatusBadRequest, "Couldn't parse token", err)
 		}
 		request.Token = token
+		request.User = *GetUserFromToken(token)
 
 		action := request.Json.Get("action").String()
 		if action == "UpdateAnime" {
