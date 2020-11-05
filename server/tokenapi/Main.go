@@ -20,6 +20,7 @@ type TokenRequest struct {
 func Main(app *aero.Application, log *log.Log) {
 	app.Post("/tokenapi", func(ctx aero.Context) error {
 		response, err := ctx.Request().Body().String()
+
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Couldn't get body", err)
 		}
@@ -29,15 +30,17 @@ func Main(app *aero.Application, log *log.Log) {
 
 		request := &TokenRequest{}
 		request.JSON = gjson.Parse(response)
-
 		token, err := uuid.Parse(request.JSON.Get("token").String())
+
 		if err != nil {
 			return ctx.Error(http.StatusBadRequest, "Couldn't parse token", err)
 		}
+
 		request.Token = token
 		request.User = *GetUserFromToken(token)
 
 		action := request.JSON.Get("action").String()
+
 		if action == "UpdateAnime" {
 			err := AnimeUpdate(request)
 			if err != nil {
