@@ -27,3 +27,9 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.Episode, episodeToFrie
 						.episode-friends
 							each friend in episodeToFriends[episode.Number] reversed
 								AvatarNoLink(friend)
+		
+			if user.Role == "editor" || user.Role == "admin"
+				.episode-buttons.mountable
+					button.action(data-action="syncEpisodes", data-trigger="click", data-anime-id=anime.ID)
+						Icon("refresh")
+						span Sync

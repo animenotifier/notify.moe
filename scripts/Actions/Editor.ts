@@ -105,3 +105,21 @@ export async function startJob(arn: AnimeNotifier, button: HTMLButtonElement) {
 	await arn.post(`/api/job/${jobName}/start`)
 	arn.reloadContent()
 }
+
+// Sync episodes
+export async function syncEpisodes(arn: AnimeNotifier, button: HTMLButtonElement) {
+	if(!confirm("Are you sure you want to start the episode sync?")) {
+		return
+	}
+
+	const animeId = button.dataset.animeId
+
+	arn.statusMessage.showInfo("Started episode sync.", -1)
+
+	try {
+		await arn.post(`/api/anime/${animeId}/sync-episodes`)
+		arn.statusMessage.showInfo("Finished episode sync.")
+	} catch(err) {
+		arn.statusMessage.showError(err)
+	}
+}
