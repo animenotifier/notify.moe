@@ -382,7 +382,7 @@ func (anime *Anime) RefreshEpisodes() error {
 	episodes = episodes.Merge(shoboiEpisodes)
 
 	// Cap the number of episodes
-	if anime.Status == "finished" && anime.EpisodeCount > 0 && len(episodes) > anime.EpisodeCount {
+	if anime.EpisodeCount > 0 && len(episodes) > anime.EpisodeCount {
 		episodes = episodes[:anime.EpisodeCount]
 	}
 
