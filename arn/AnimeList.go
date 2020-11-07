@@ -103,15 +103,27 @@ func (list *AnimeList) Find(animeID AnimeID) *AnimeListItem {
 
 // Import adds an anime to the list if it hasn't been added yet
 // and if it did exist it will update episode, rating and notes.
-func (list *AnimeList) Import(item *AnimeListItem) {
+func (list *AnimeList) Import(item *AnimeListItem) error {
 	existing := list.Find(item.AnimeID)
+	anime, err := GetAnime(item.AnimeID)
+
+	if err != nil {
+		return err
+	}
+
+	if anime.EpisodeCount < item.Episodes {
+		return errors.New("More episodes than possible, limit is: " + fmt.Sprint(anime.EpisodeCount))
+	}
 
 	// If it doesn't exist yet: Simply add it.
 	if existing == nil {
+		item.Created = DateTimeUTC()
+
 		list.Lock()
 		list.Items = append(list.Items, item)
 		list.Unlock()
-		return
+
+		existing = list.Find(item.AnimeID)
 	}
 
 	// Temporary save it before changing the status
@@ -119,9 +131,11 @@ func (list *AnimeList) Import(item *AnimeListItem) {
 	// This will prevent loss of "episodes watched" data.
 	existingEpisodes := existing.Episodes
 
-	// Status
-	existing.Status = item.Status
-	existing.OnStatusChange()
+	// Status change in the case the user asks for it
+	if item.Status != "" {
+		existing.Status = item.Status
+		existing.OnStatusChange()
+	}
 
 	// Episodes
 	if item.Episodes > existingEpisodes {
@@ -133,12 +147,22 @@ func (list *AnimeList) Import(item *AnimeListItem) {
 	existing.OnEpisodesChange()
 
 	// Rating
-	if existing.Rating.Overall == 0 {
+	if item.Rating.Overall != 0 {
 		existing.Rating.Overall = item.Rating.Overall
-		existing.Rating.Clamp()
+	}
+	if item.Rating.Story != 0 {
+		existing.Rating.Story = item.Rating.Story
+	}
+	if item.Rating.Soundtrack != 0 {
+		existing.Rating.Soundtrack = item.Rating.Soundtrack
+	}
+	if item.Rating.Visuals != 0 {
+		existing.Rating.Soundtrack = item.Rating.Visuals
 	}
 
-	if existing.Notes == "" {
+	existing.Rating.Clamp()
+
+	if existing.Notes == "" || (existing.Notes != item.Notes && item.Notes != "") {
 		existing.Notes = item.Notes
 	}
 
@@ -148,6 +172,8 @@ func (list *AnimeList) Import(item *AnimeListItem) {
 
 	// Edited
 	existing.Edited = DateTimeUTC()
+
+	return nil
 }
 
 // User returns the user this anime list belongs to.

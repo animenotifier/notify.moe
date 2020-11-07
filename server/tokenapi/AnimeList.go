@@ -18,6 +18,17 @@ func AnimeUpdate(request *TokenRequest) error {
 	animeListEntry.RewatchCount = int(animeJSON.Get("rewatchCount").Int())
 	animeListEntry.Private = animeJSON.Get("isPrivate").Bool()
 
+	switch animeListEntry.Status {
+	case arn.AnimeListStatusWatching:
+	case arn.AnimeListStatusCompleted:
+	case arn.AnimeListStatusPlanned:
+	case arn.AnimeListStatusHold:
+	case arn.AnimeListStatusDropped:
+		break
+	default:
+		animeListEntry.Status = ""
+	}
+
 	if animeListEntry.AnimeID == "" {
 		return errors.New("No anime ID has been supplied")
 	}
@@ -29,7 +40,11 @@ func AnimeUpdate(request *TokenRequest) error {
 	animeListEntry.Rating.Soundtrack = float64(rating.Get("soundtrack").Float())
 
 	animeList := request.User.AnimeList()
-	animeList.Import(animeListEntry)
+	err := animeList.Import(animeListEntry)
+
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
