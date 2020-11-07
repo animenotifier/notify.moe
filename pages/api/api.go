@@ -1,11 +1,13 @@
 package api
 
 import (
+	"net/http"
 	"path"
 	"sort"
 
 	"github.com/aerogo/aero"
 	"github.com/akyoto/color"
+	"github.com/akyoto/uuid"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/arn/autodocs"
 	"github.com/animenotifier/notify.moe/components"
@@ -14,6 +16,11 @@ import (
 // Get api page.
 func Get(ctx aero.Context) error {
 	types := []*autodocs.Type{}
+	user := arn.GetUserFromContext(ctx)
+
+	if user == nil {
+		return ctx.Error(http.StatusUnauthorized, "Not logged in")
+	}
 
 	for typeName := range arn.DB.Types() {
 		if typeName == "Session" {
@@ -33,5 +40,9 @@ func Get(ctx aero.Context) error {
 		return types[i].Name < types[j].Name
 	})
 
-	return ctx.HTML(components.API(types))
+	if (user.APIToken == uuid.UUID{}) {
+		user.CreateAPIToken()
+	}
+
+	return ctx.HTML(components.API(types, user))
 }

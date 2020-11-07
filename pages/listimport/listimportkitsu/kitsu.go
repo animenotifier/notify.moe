@@ -75,7 +75,10 @@ func Finish(ctx aero.Context) error {
 			Edited:       arn.DateTimeUTC(),
 		}
 
-		animeList.Import(item)
+		err := animeList.Import(item)
+		if err != nil {
+			return err
+		}
 	}
 
 	animeList.Save()

@@ -29,6 +29,7 @@ require (
 	github.com/akyoto/hash v0.4.10
 	github.com/akyoto/imageserver v0.3.7
 	github.com/akyoto/stringutils v0.3.1
+	github.com/akyoto/uuid v1.1.3
 	github.com/akyoto/webpush-go v0.1.2
 	github.com/andybalholm/cascadia v1.2.0 // indirect
 	github.com/animenotifier/anilist v0.2.6
@@ -45,6 +46,7 @@ require (
 	github.com/go-chi/chi v4.1.2+incompatible // indirect
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/gomodule/oauth1 v0.0.0-20181215000758-9a59ed3b0a84
+	github.com/google/uuid v1.1.2 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20200217142428-fce0ec30dd00 // indirect
 	github.com/itchyny/gojq v0.11.2
 	github.com/json-iterator/go v1.1.10
@@ -62,6 +64,7 @@ require (
 	github.com/smartystreets/assertions v1.2.0 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
+	github.com/tidwall/gjson v1.6.1
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/ventu-io/go-shortid v0.0.0-20171029131806-771a37caa5cf
 	github.com/xrash/smetrics v0.0.0-20200730060457-89a2a8a1fb0b
