@@ -75,7 +75,7 @@ func New() *aero.Application {
 	// GraphQL
 	graphql.Install(app)
 
-	// Tokenapi
+	// TokenAPI
 	tokenapi.Install(app)
 
 	// Close the database node on shutdown

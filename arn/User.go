@@ -57,7 +57,7 @@ type User struct {
 	OS           UserOS       `json:"os" private:"true"`
 	Location     *Location    `json:"location" private:"true"`
 	FollowIDs    []UserID     `json:"follows"`
-	APIToken     uuid.UUID    `json:"apitoken" private:"true"`
+	APIToken     uuid.UUID    `json:"apiToken" private:"true"`
 
 	hasPosts
 

@@ -7,29 +7,43 @@ import (
 )
 
 type AnimeParameters struct {
-	AnimeName    string
-	AnimeID      string
-	AnimeEpisode int
-	AnimeRating  arn.AnimeRatingCount
+	Name    string
+	ID      string
+	Episode int
+	Rating  arn.AnimeRatingCount
 }
 
+// AnimeUpdate parses parameters out of the JSON and then tries to integrate them into the database
 func AnimeUpdate(request *TokenRequest) error {
 	parameters := &AnimeParameters{}
 	animeJSON := request.JSON.Get("anime")
 
-	parameters.AnimeName = animeJSON.Get("name").String()
-	parameters.AnimeID = animeJSON.Get("id").String()
-	parameters.AnimeEpisode = int(animeJSON.Get("episode").Int())
+	parameters.Name = animeJSON.Get("name").String()
+	parameters.ID = animeJSON.Get("id").String()
+	parameters.Episode = int(animeJSON.Get("episode").Int())
 
-	if parameters.AnimeName == "" && parameters.AnimeID == "" {
+	if parameters.Name == "" && parameters.ID == "" {
 		return errors.New("Neither ID nor Name of the anime has been supplied")
 	}
 
 	rating := animeJSON.Get("ratings")
-	parameters.AnimeRating.Overall = int(rating.Get("overall").Int())
-	parameters.AnimeRating.Story = int(rating.Get("story").Int())
-	parameters.AnimeRating.Visuals = int(rating.Get("visuals").Int())
-	parameters.AnimeRating.Soundtrack = int(rating.Get("soundtrack").Int())
+	parameters.Rating.Overall = int(rating.Get("overall").Int())
+	parameters.Rating.Story = int(rating.Get("story").Int())
+	parameters.Rating.Visuals = int(rating.Get("visuals").Int())
+	parameters.Rating.Soundtrack = int(rating.Get("soundtrack").Int())
+
+	animeList := request.User.AnimeList()
+
+	if !animeList.Contains(parameters.ID) {
+		err := animeList.Add(parameters.ID)
+		if err != nil {
+			return err
+		}
+	}
+
+	animeEntry := animeList.Find(parameters.ID)
+	lastEpisode := animeEntry.Episodes
+	// @TODO: Continue working here. See AnimeListItemAPI.go for similar implementation.
 
 	return nil
 }
