@@ -12,6 +12,7 @@ import (
 	"github.com/aerogo/api"
 	"github.com/aerogo/http/client"
 	"github.com/akyoto/color"
+	"github.com/akyoto/uuid"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
 )
 
@@ -232,6 +233,7 @@ func (user *User) Filter() {
 	user.Location = &Location{}
 	user.Browser = UserBrowser{}
 	user.OS = UserOS{}
+	user.APIToken = uuid.UUID{}
 }
 
 // ShouldFilter tells whether data needs to be filtered in the given context.

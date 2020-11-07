@@ -1,9 +1,7 @@
 component API(types []*autodocs.Type, user *arn.User)
 	.api-docs
-		h1.mountable API
-
-		h2.mountable API Token
-			h3.mountable= user.APIToken.String()
+		h2.mountable
+			InputText("APIToken", user.APIToken.String(), "API Token", "Your API token for notify.moe, keep it a secret!", 0)
 
 		h2.mountable Endpoints
 		ul
