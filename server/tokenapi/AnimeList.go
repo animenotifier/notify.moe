@@ -34,10 +34,10 @@ func AnimeUpdate(request *TokenRequest) error {
 	}
 
 	rating := animeJSON.Get("ratings")
-	animeListEntry.Rating.Overall = float64(rating.Get("overall").Float())
-	animeListEntry.Rating.Story = float64(rating.Get("story").Float())
-	animeListEntry.Rating.Visuals = float64(rating.Get("visuals").Float())
-	animeListEntry.Rating.Soundtrack = float64(rating.Get("soundtrack").Float())
+	animeListEntry.Rating.Overall = rating.Get("overall").Float()
+	animeListEntry.Rating.Story = rating.Get("story").Float()
+	animeListEntry.Rating.Visuals = rating.Get("visuals").Float()
+	animeListEntry.Rating.Soundtrack = rating.Get("soundtrack").Float()
 
 	animeList := request.User.AnimeList()
 	err := animeList.Import(animeListEntry)
