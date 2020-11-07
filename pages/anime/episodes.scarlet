@@ -58,6 +58,3 @@ const episode-margin = 0.5rem
 		width calc(avatar-size / 2)
 		height calc(avatar-size / 2)
 		margin-left -0.5rem
-
-.episode-buttons
-	margin-top content-padding
