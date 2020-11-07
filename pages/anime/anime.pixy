@@ -44,6 +44,10 @@ component AnimeActions(anime *arn.Anime, listItem *arn.AnimeListItem, user *arn.
 	if user != nil
 		.buttons.anime-actions
 			if user.Role == "editor" || user.Role == "admin"
+				button.mountable.action(data-action="syncEpisodes", data-trigger="click", data-anime-id=anime.ID, data-mountable-type="header")
+					Icon("refresh")
+					span Sync
+				
 				a.button.mountable(href=anime.Link() + "/edit", data-mountable-type="header")
 					Icon("pencil-square-o")
 					span Edit anime
