@@ -5,6 +5,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
+	"github.com/animenotifier/notify.moe/pages/anime"
 	"github.com/animenotifier/notify.moe/pages/animeimport"
 	"github.com/animenotifier/notify.moe/pages/animelist"
 	"github.com/animenotifier/notify.moe/pages/api"
@@ -76,4 +77,5 @@ func Register(app *aero.Application) {
 
 	// Jobs
 	app.Post("/api/job/:job/start", jobs.Start)
+	app.Post("/api/anime/:id/sync-episodes", anime.SyncEpisodes)
 }

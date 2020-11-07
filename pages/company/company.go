@@ -52,27 +52,27 @@ func Get(ctx aero.Context) error {
 	var closeCompanies []*arn.Company
 	distances := map[string]float64{}
 
-	var overallRating, storyRating, visualsRating, soundtrackRating float64
-	var overallCount, storyCount, visualsCount, soundtrackCount int
+	// Average rating
+	rating := &arn.AnimeRating{}
 
 	for _, anime := range studioAnime {
-		overallRating += anime.Rating.Overall
-		storyRating += anime.Rating.Story
-		visualsRating += anime.Rating.Visuals
-		soundtrackRating += anime.Rating.Soundtrack
+		rating.Overall += anime.Rating.Overall
+		rating.Story += anime.Rating.Story
+		rating.Visuals += anime.Rating.Visuals
+		rating.Soundtrack += anime.Rating.Soundtrack
 
-		overallCount += anime.Rating.Count.Overall
-		storyCount += anime.Rating.Count.Story
-		visualsCount += anime.Rating.Count.Visuals
-		soundtrackCount += anime.Rating.Count.Soundtrack
+		rating.Count.Overall += anime.Rating.Count.Overall
+		rating.Count.Story += anime.Rating.Count.Story
+		rating.Count.Visuals += anime.Rating.Count.Visuals
+		rating.Count.Soundtrack += anime.Rating.Count.Soundtrack
 	}
 
 	totalStudioAnime := float64(len(studioAnime))
 
-	overallRating /= totalStudioAnime
-	storyRating /= totalStudioAnime
-	visualsRating /= totalStudioAnime
-	soundtrackRating /= totalStudioAnime
+	rating.Overall /= totalStudioAnime
+	rating.Story /= totalStudioAnime
+	rating.Visuals /= totalStudioAnime
+	rating.Soundtrack /= totalStudioAnime
 
 	if company.Location.IsValid() {
 		closeCompanies = arn.FilterCompanies(func(closeCompany *arn.Company) bool {
@@ -95,5 +95,5 @@ func Get(ctx aero.Context) error {
 		})
 	}
 
-	return ctx.HTML(components.CompanyPage(company, studioAnime, producedAnime, licensedAnime, closeCompanies, distances, user, overallRating, storyRating, visualsRating, soundtrackRating, overallCount, storyCount, visualsCount, soundtrackCount))
+	return ctx.HTML(components.CompanyPage(company, studioAnime, producedAnime, licensedAnime, closeCompanies, distances, rating, user))
 }
