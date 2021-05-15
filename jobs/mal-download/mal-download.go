@@ -128,7 +128,7 @@ func characterFilePath(malID string) string {
 
 func queueAnime(anime *arn.Anime, malCrawler *crawler.Crawler) {
 	malID := anime.GetMapping("myanimelist/anime")
-	url := "https://myanimelist.net/anime/" + malID
+	url := "https://myanimelist.net/v2/anime/" + malID
 	filePath := animeFilePath(malID)
 	fileInfo, err := os.Stat(filePath)
 
@@ -150,7 +150,7 @@ func queueAnime(anime *arn.Anime, malCrawler *crawler.Crawler) {
 
 func queueCharacter(character *arn.Character, malCrawler *crawler.Crawler) {
 	malID := character.GetMapping("myanimelist/character")
-	url := "https://myanimelist.net/character/" + malID
+	url := "https://myanimelist.net/v2/character/" + malID
 	filePath := characterFilePath(malID)
 	fileInfo, err := os.Stat(filePath)
 
