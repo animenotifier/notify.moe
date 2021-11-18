@@ -87,7 +87,7 @@ func AccountNick(nick string) string {
 
 // PostText fixes common mistakes in post texts.
 func PostText(text string) string {
-	text = strings.Replace(text, "http://", "https://", -1)
+	text = strings.ReplaceAll(text, "http://", "https://")
 	text = strings.TrimSpace(text)
 	return text
 }

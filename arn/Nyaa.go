@@ -23,7 +23,7 @@ func (nyaa *nyaaAnimeProvider) GetLink(anime *Anime, additionalSearchTerm string
 	subs := ""
 
 	nyaaSuffix := fmt.Sprintf("?f=0&c=1_2&q=%s+%s+%s&s=seeders&o=desc", searchTitle, quality, subs)
-	nyaaSuffix = strings.Replace(nyaaSuffix, "++", "+", -1)
+	nyaaSuffix = strings.ReplaceAll(nyaaSuffix, "++", "+")
 
 	return "https://nyaa.si/" + nyaaSuffix
 }
