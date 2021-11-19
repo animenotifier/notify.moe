@@ -16,7 +16,6 @@ import (
 	"github.com/animenotifier/notify.moe/server/https"
 	"github.com/animenotifier/notify.moe/server/middleware"
 	"github.com/animenotifier/notify.moe/utils/htmlemail"
-	"github.com/animenotifier/notify.moe/utils/routetests"
 )
 
 // New creates a new web server.
@@ -102,11 +101,6 @@ func New() *aero.Application {
 	app.AddPushCondition(func(ctx aero.Context) bool {
 		return !strings.Contains(ctx.Request().Header("Referer"), "/service-worker")
 	})
-
-	// Specify test routes
-	for route, examples := range routetests.All() {
-		app.Test(route, examples...)
-	}
 
 	return app
 }
