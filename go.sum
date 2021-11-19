@@ -54,8 +54,8 @@ github.com/StackExchange/wmi v1.2.1 h1:VIkavFPXSjcnS+O8yTq7NI32k0R5Aj+v39y29VYDO
 github.com/StackExchange/wmi v1.2.1/go.mod h1:rcmrprowKIVzvc+NUiLncP2uuArMWLCbu9SBzvHz7e8=
 github.com/aerogo/aero v1.3.29/go.mod h1:nHuG9q4VrzH7ZtiE1TEIt9Lazp/w3WpC3nqAKREkg0Q=
 github.com/aerogo/aero v1.3.30/go.mod h1:iAzV2JRnKAFOo/c+4KIgf35JGS82qMU4tI06ocHeRrk=
-github.com/aerogo/aero v1.3.56 h1:6MQFYX5zAbRGy7YdQPJbar4neU7Tk5KSrnmY/rlgCDM=
-github.com/aerogo/aero v1.3.56/go.mod h1:ehwj+mb117xQRTvp11jlnrRNPgbcYL6s6aBk9wbIZ0o=
+github.com/aerogo/aero v1.3.58 h1:LmQ8TYRwIaiMmUQlfD85bKNb+2LRm7ueXIoaw1EClLs=
+github.com/aerogo/aero v1.3.58/go.mod h1:ehwj+mb117xQRTvp11jlnrRNPgbcYL6s6aBk9wbIZ0o=
 github.com/aerogo/api v0.2.3 h1:REQR3a6WXzaHpNSF9NCjj4HjvSQdcHrMWGnp/xIpCh4=
 github.com/aerogo/api v0.2.3/go.mod h1:cClK+FXNc0IRGdDxAH5XmtibBxwUXCM2lLKMF7jKB+8=
 github.com/aerogo/cluster v0.1.8 h1:N/jU2t7kQfKjXzQIArBQvtNkJCiaP9+jgdEid3P2Omc=
