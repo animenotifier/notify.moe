@@ -12,6 +12,6 @@
 
 	::-webkit-scrollbar-thumb
 		border scrollbar-border-size solid transparent
-		border-radius 5px
+		border-radius scrollbar-border-radius
 		background-clip content-box
 		background-color scrollbar-thumb-color
