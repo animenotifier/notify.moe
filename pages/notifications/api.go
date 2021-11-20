@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/aero/event"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/assets"
 )
@@ -39,10 +40,7 @@ func MarkNotificationsAsSeen(ctx aero.Context) error {
 	}
 
 	// Update the counter on all clients
-	user.BroadcastEvent(&aero.Event{
-		Name: "notificationCount",
-		Data: 0,
-	})
+	user.BroadcastEvent(event.New("notificationCount", 0))
 
 	return nil
 }

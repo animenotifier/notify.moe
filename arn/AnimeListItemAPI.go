@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/aero/event"
 	"github.com/aerogo/api"
 )
 
@@ -46,10 +47,8 @@ func (item *AnimeListItem) Edit(ctx aero.Context, key string, value reflect.Valu
 
 				// Broadcast event to all users so they can reload the activity page if needed.
 				for receiver := range StreamUsers() {
-					receiver.BroadcastEvent(&aero.Event{
-						Name: "activity",
-						Data: receiver.IsFollowing(user.ID),
-					})
+					activityEvent := event.New("activity", receiver.IsFollowing(user.ID))
+					receiver.BroadcastEvent(activityEvent)
 				}
 			}
 		} else if newEpisodes >= lastActivity.FromEpisode {

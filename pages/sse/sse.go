@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/aero/event"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components/css"
 	"github.com/animenotifier/notify.moe/components/js"
@@ -22,35 +23,29 @@ func Events(ctx aero.Context) error {
 		return ctx.Error(http.StatusUnauthorized, "Not logged in")
 	}
 
-	stream := aero.NewEventStream()
+	stream := event.NewStream()
 	user.AddEventStream(stream)
 
 	go func() {
 		defer user.RemoveEventStream(stream)
 
 		// Send the ETag for the scripts
-		stream.Events <- &aero.Event{
-			Name: "etag",
-			Data: struct {
-				URL  string `json:"url"`
-				ETag string `json:"etag"`
-			}{
-				URL:  "/scripts",
-				ETag: scriptsETag,
-			},
-		}
+		stream.Events <- event.New("etag", struct {
+			URL  string `json:"url"`
+			ETag string `json:"etag"`
+		}{
+			URL:  "/scripts",
+			ETag: scriptsETag,
+		})
 
 		// Send the ETag for the styles
-		stream.Events <- &aero.Event{
-			Name: "etag",
-			Data: struct {
-				URL  string `json:"url"`
-				ETag string `json:"etag"`
-			}{
-				URL:  "/styles",
-				ETag: stylesETag,
-			},
-		}
+		stream.Events <- event.New("etag", struct {
+			URL  string `json:"url"`
+			ETag string `json:"etag"`
+		}{
+			URL:  "/styles",
+			ETag: stylesETag,
+		})
 
 		// Wait until the user closes the tab or disconnects
 		<-stream.Closed

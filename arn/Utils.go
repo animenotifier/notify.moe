@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/aero/event"
 	"github.com/aerogo/mirror"
 	"github.com/akyoto/color"
 	"github.com/animenotifier/kitsu"
@@ -201,9 +202,9 @@ func DateToSeason(date time.Time) string {
 }
 
 // BroadcastEvent sends the given event to the event streams of all users.
-func BroadcastEvent(event *aero.Event) {
+func BroadcastEvent(evt *event.Event) {
 	for user := range StreamUsers() {
-		user.BroadcastEvent(event)
+		user.BroadcastEvent(evt)
 	}
 }
 

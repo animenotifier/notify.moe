@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aerogo/aero"
+	"github.com/aerogo/aero/event"
 	"github.com/aerogo/http/client"
 	"github.com/animenotifier/ffxiv"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
@@ -61,7 +61,7 @@ type User struct {
 
 	eventStreams struct {
 		sync.Mutex
-		value []*aero.EventStream
+		value []*event.Stream
 	}
 }
 
@@ -219,10 +219,8 @@ func (user *User) SendNotification(pushNotification *PushNotification) {
 	// }
 
 	// Send an event to the user's open tabs
-	user.BroadcastEvent(&aero.Event{
-		Name: "notificationCount",
-		Data: userNotifications.CountUnseen(),
-	})
+	notificationCount := event.New("notificationCount", userNotifications.CountUnseen())
+	user.BroadcastEvent(notificationCount)
 }
 
 // RealName returns the real name of the user.
