@@ -12,7 +12,7 @@ const sidebar-spacing-y = 0.7rem
 	background sidebar-opaque-background
 	transform translateX(-100%)
 	overflow-x hidden
-	overflow-y auto
+	overflow-y overlay
 	opacity 0
 	pointer-events none
 	box-shadow 24px 0 24px rgba(0, 0, 0, 0.2)

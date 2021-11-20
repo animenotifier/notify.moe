@@ -7,6 +7,9 @@
 	::-webkit-scrollbar
 		width scrollbar-size
 
+	::-webkit-scrollbar-button
+		display none
+
 	::-webkit-scrollbar-track
 		background-color scrollbar-track-color
 
@@ -15,3 +18,7 @@
 		border-radius scrollbar-border-radius
 		background-clip content-box
 		background-color scrollbar-thumb-color
+
+		:hover,
+		:focus
+			background-color scrollbar-thumb-hover-color

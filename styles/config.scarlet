@@ -43,10 +43,11 @@ ui-disabled-color = rgb(224, 224, 224)
 const ui-element-border-radius = 3px
 
 // Scrollbar
-scrollbar-size = 10px
-scrollbar-border-size = 2px
-scrollbar-border-radius = 5px
-scrollbar-thumb-color = hsla(text-color-h, text-color-s, text-color-l, 0.75)
+scrollbar-size = 12px
+scrollbar-border-size = 3px
+scrollbar-border-radius = 7px
+scrollbar-thumb-color = hsla(text-color-h, text-color-s, text-color-l, 0.4)
+scrollbar-thumb-hover-color = hsla(text-color-h, text-color-s, text-color-l, 0.6)
 scrollbar-track-color = transparent
 
 // Input
