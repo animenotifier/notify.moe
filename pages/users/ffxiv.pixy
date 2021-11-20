@@ -1,8 +1,0 @@
-component FinalFantasyXIVRankingList(users []*arn.User, url string)
-	h1.page-title Final Fantasy XIV ranking list
-	UsersTabs(url)
-	
-	.user-cards
-		each user in users
-			UserCard(user, fmt.Sprintf("%s (iLvl %d)", user.Accounts.FinalFantasyXIV.Class, user.Accounts.FinalFantasyXIV.ItemLevel))
-				

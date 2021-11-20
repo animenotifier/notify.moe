@@ -104,16 +104,6 @@ func (track *SoundTrack) Anime() []*Anime {
 	return animeList
 }
 
-// OsuBeatmaps returns all osu beatmap IDs of the sound track.
-func (track *SoundTrack) OsuBeatmaps() []string {
-	return FilterIDTags(track.Tags, "osu-beatmap")
-}
-
-// EtternaBeatmaps returns all Etterna song IDs of the sound track.
-func (track *SoundTrack) EtternaBeatmaps() []string {
-	return FilterIDTags(track.Tags, "etterna")
-}
-
 // MainAnime ...
 func (track *SoundTrack) MainAnime() *Anime {
 	allAnime := track.Anime()

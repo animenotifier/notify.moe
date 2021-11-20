@@ -1,8 +1,0 @@
-component OsuRankingList(users []*arn.User, url string)
-	h1.page-title osu! ranking list
-	UsersTabs(url)
-
-	.user-cards
-		each user in users
-			UserCard(user, fmt.Sprintf("%s pp (%.1f%%)", humanize.Comma(int64(user.Accounts.Osu.PP + 0.5)), user.Accounts.Osu.Accuracy))
-				

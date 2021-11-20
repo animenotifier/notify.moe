@@ -86,48 +86,6 @@ func ActiveNoAvatar(ctx aero.Context) error {
 	return ctx.HTML(components.Users(users, followCount, ctx.Path()))
 }
 
-// Osu ...
-func Osu(ctx aero.Context) error {
-	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.Osu.PP > 0
-	})
-
-	// Sort by pp
-	sort.Slice(users, func(i, j int) bool {
-		return users[i].Accounts.Osu.PP > users[j].Accounts.Osu.PP
-	})
-
-	return ctx.HTML(components.OsuRankingList(users, ctx.Path()))
-}
-
-// Overwatch ...
-func Overwatch(ctx aero.Context) error {
-	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.Overwatch.SkillRating > 0
-	})
-
-	// Sort by Skill Ratings
-	sort.Slice(users, func(i, j int) bool {
-		return users[i].Accounts.Overwatch.SkillRating > users[j].Accounts.Overwatch.SkillRating
-	})
-
-	return ctx.HTML(components.OverwatchRankingList(users, ctx.Path()))
-}
-
-// FFXIV ...
-func FFXIV(ctx aero.Context) error {
-	users := arn.FilterUsers(func(user *arn.User) bool {
-		return user.HasAvatar() && user.HasNick() && user.IsActive() && user.Accounts.FinalFantasyXIV.ItemLevel > 0
-	})
-
-	// Sort by item level
-	sort.Slice(users, func(i, j int) bool {
-		return users[i].Accounts.FinalFantasyXIV.ItemLevel > users[j].Accounts.FinalFantasyXIV.ItemLevel
-	})
-
-	return ctx.HTML(components.FinalFantasyXIVRankingList(users, ctx.Path()))
-}
-
 // ByCountry ...
 func ByCountry(ctx aero.Context) error {
 	countryName := ctx.Get("country")

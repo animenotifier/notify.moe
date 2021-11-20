@@ -31,12 +31,9 @@ require (
 	github.com/akyoto/stringutils v0.3.1
 	github.com/akyoto/webpush-go v0.1.2
 	github.com/animenotifier/anilist v0.2.6
-	github.com/animenotifier/ffxiv v0.2.2
 	github.com/animenotifier/japanese v0.2.5
 	github.com/animenotifier/kitsu v0.2.4
 	github.com/animenotifier/mal v0.2.5
-	github.com/animenotifier/osu v0.1.2
-	github.com/animenotifier/overwatch v0.1.3
 	github.com/animenotifier/shoboi v0.2.4
 	github.com/animenotifier/twist v0.2.6
 	github.com/bwmarrin/discordgo v0.22.0

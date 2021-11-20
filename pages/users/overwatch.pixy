@@ -1,8 +1,0 @@
-component OverwatchRankingList(users []*arn.User, url string)
-	h1.page-title Overwatch ranking list
-	UsersTabs(url)
-	
-	.user-cards
-		each user in users
-			UserCard(user, fmt.Sprintf("%s (%d SR)", strings.Title(user.Accounts.Overwatch.Tier), user.Accounts.Overwatch.SkillRating))
-				

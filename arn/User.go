@@ -5,18 +5,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/aerogo/aero/event"
 	"github.com/aerogo/http/client"
-	"github.com/animenotifier/ffxiv"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
 	"github.com/animenotifier/notify.moe/arn/validate"
-	"github.com/animenotifier/osu"
-	"github.com/animenotifier/overwatch"
 	gravatar "github.com/ungerik/go-gravatar"
 )
 
@@ -513,71 +509,4 @@ func (user *User) TypeName() string {
 // Self returns the object itself.
 func (user *User) Self() Loggable {
 	return user
-}
-
-// RefreshOsuInfo refreshes a user's Osu information.
-func (user *User) RefreshOsuInfo() error {
-	if user.Accounts.Osu.Nick == "" {
-		return nil
-	}
-
-	osu, err := osu.GetUser(user.Accounts.Osu.Nick)
-
-	if err != nil {
-		return err
-	}
-
-	user.Accounts.Osu.PP, _ = strconv.ParseFloat(osu.PPRaw, 64)
-	user.Accounts.Osu.Level, _ = strconv.ParseFloat(osu.Level, 64)
-	user.Accounts.Osu.Accuracy, _ = strconv.ParseFloat(osu.Accuracy, 64)
-
-	return nil
-}
-
-// RefreshFFXIVInfo refreshes a user's FFXIV information.
-func (user *User) RefreshFFXIVInfo() error {
-	if user.Accounts.FinalFantasyXIV.Nick == "" || user.Accounts.FinalFantasyXIV.Server == "" {
-		return nil
-	}
-
-	characterID, err := ffxiv.GetCharacterID(user.Accounts.FinalFantasyXIV.Nick, user.Accounts.FinalFantasyXIV.Server)
-
-	if err != nil {
-		return err
-	}
-
-	character, err := ffxiv.GetCharacter(characterID)
-
-	if err != nil {
-		return err
-	}
-
-	user.Accounts.FinalFantasyXIV.Class = character.Class
-	user.Accounts.FinalFantasyXIV.Level = character.Level
-	user.Accounts.FinalFantasyXIV.ItemLevel = character.ItemLevel
-
-	return nil
-}
-
-// RefreshOverwatchInfo refreshes a user's Overwatch information.
-func (user *User) RefreshOverwatchInfo() error {
-	if user.Accounts.Overwatch.BattleTag == "" {
-		return nil
-	}
-
-	stats, err := overwatch.GetPlayerStats(user.Accounts.Overwatch.BattleTag)
-
-	if err != nil {
-		return err
-	}
-
-	skillRating, tier := stats.HighestSkillRating()
-
-	// Only show career highest skill rating
-	if skillRating > user.Accounts.Overwatch.SkillRating {
-		user.Accounts.Overwatch.SkillRating = skillRating
-		user.Accounts.Overwatch.Tier = tier
-	}
-
-	return nil
 }

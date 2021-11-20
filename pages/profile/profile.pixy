@@ -198,18 +198,6 @@ component ProfileTags(viewUser *arn.User, animeList *arn.AnimeList, user *arn.Us
 		if viewUser.Website != ""
 			a.profile-tag.tip.mountable.never-unmount.show-more(href=viewUser.WebsiteURL(), target="_blank", rel="noopener", aria-label=viewUser.WebsiteShortURL(), data-mountable-type="header")
 				RawIcon("globe")
-
-		if viewUser.Accounts.Osu.Nick != "" && viewUser.Accounts.Osu.PP >= 100
-			a.profile-tag.tip.mountable.never-unmount.show-more(href="https://osu.ppy.sh/u/" + viewUser.Accounts.Osu.Nick, aria-label=fmt.Sprintf("osu! | %.0f pp | Level %.0f | Accuracy: %.1f%%", viewUser.Accounts.Osu.PP, viewUser.Accounts.Osu.Level, viewUser.Accounts.Osu.Accuracy), target="_blank", rel="noopener", data-mountable-type="header")
-				RawIcon("trophy")
-
-		if viewUser.Accounts.Overwatch.BattleTag != "" && viewUser.Accounts.Overwatch.SkillRating >= 1000
-			a.profile-tag.tip.mountable.never-unmount.show-more(href="https://playoverwatch.com/en-us/career/pc/" + strings.Replace(viewUser.Accounts.Overwatch.BattleTag, "#", "-", 1), aria-label=fmt.Sprintf("Overwatch | %d SR | %s", viewUser.Accounts.Overwatch.SkillRating, stringutils.Capitalize(viewUser.Accounts.Overwatch.Tier)), target="_blank", rel="noopener", data-mountable-type="header")
-				RawIcon("overwatch")
-		
-		if viewUser.Accounts.FinalFantasyXIV.Nick != "" && viewUser.Accounts.FinalFantasyXIV.Class != ""
-			.profile-tag.tip.mountable.never-unmount.show-more(aria-label=fmt.Sprintf("Final Fantasy XIV | %s | Level %d | IL %d", viewUser.Accounts.FinalFantasyXIV.Class, viewUser.Accounts.FinalFantasyXIV.Level, viewUser.Accounts.FinalFantasyXIV.ItemLevel), data-mountable-type="header")
-				RawIcon("gamepad")
 		
 		if viewUser.Accounts.Discord.Nick != "" && viewUser.Accounts.Discord.Verified
 			a.profile-tag.tip.mountable.never-unmount.show-more(href="https://discord.gg/0kimAmMCeXGXuzNF", aria-label=fmt.Sprintf("Discord | %s", viewUser.Accounts.Discord.Nick), data-mountable-type="header")

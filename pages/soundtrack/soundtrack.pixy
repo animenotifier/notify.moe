@@ -44,20 +44,7 @@ component SoundTrackPage(track *arn.SoundTrack, relatedTracks []*arn.SoundTrack,
 						each relatedTrack in relatedTracks
 							li
 								a(href=relatedTrack.Link())= relatedTrack.TitleByUser(user)
-
-			//- TODO: This is quite ineffective, performance-wise
-			if len(track.OsuBeatmaps()) > 0 || len(track.EtternaBeatmaps()) > 0
-				.widget.mountable
-					h3.widget-title Beatmaps
-					ul.beatmaps
-						for index, beatmap := range track.OsuBeatmaps()
-							li
-								a.beatmap(href="https://osu.ppy.sh/s/" + beatmap, target="_blank")= "Osu Beatmap #" + strconv.Itoa(index + 1)
-						
-						for index, beatmap := range track.EtternaBeatmaps()
-							li
-								a.beatmap(href="https://etternaonline.com/song/view/" + beatmap, target="_blank")= "Etterna Beatmap #" + strconv.Itoa(index + 1)	
-
+			
 			.widget.mountable
 				h3.widget-title Tags
 

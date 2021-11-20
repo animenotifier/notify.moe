@@ -6,7 +6,6 @@ import (
 	"path"
 
 	"github.com/animenotifier/anilist"
-	"github.com/animenotifier/osu"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -57,10 +56,6 @@ type APIKeysData struct {
 		Secret string `json:"secret"`
 	} `json:"anilist"`
 
-	Osu struct {
-		Secret string `json:"secret"`
-	} `json:"osu"`
-
 	PayPal struct {
 		ID     string `json:"id"`
 		Secret string `json:"secret"`
@@ -110,9 +105,6 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-
-	// Set Osu API key
-	osu.APIKey = APIKeys.Osu.Secret
 
 	// Set Anilist API keys
 	anilist.APIKeyID = APIKeys.AniList.ID

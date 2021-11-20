@@ -11,7 +11,6 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/aerogo/api"
 	"github.com/aerogo/http/client"
-	"github.com/akyoto/color"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
 )
 
@@ -128,54 +127,6 @@ func (user *User) Edit(ctx aero.Context, key string, value reflect.Value, newVal
 		}
 
 		return true, nil
-
-	case "Accounts.Overwatch.BattleTag":
-		newBattleTag := newValue.String()
-		value.SetString(newBattleTag)
-
-		if newBattleTag == "" {
-			user.Accounts.Overwatch.SkillRating = 0
-			user.Accounts.Overwatch.Tier = ""
-		} else {
-			// Refresh Overwatch info if the battletag changed
-			go func() {
-				err := user.RefreshOverwatchInfo()
-
-				if err != nil {
-					color.Red("Error refreshing Overwatch info of user '%s' with Overwatch battle tag '%s': %v", user.Nick, newBattleTag, err)
-					return
-				}
-
-				color.Green("Refreshed Overwatch info of user '%s' with Overwatch battle tag '%s': %v", user.Nick, newBattleTag, user.Accounts.Overwatch.SkillRating)
-				user.Save()
-			}()
-		}
-
-		return true, nil
-
-	case "Accounts.FinalFantasyXIV.Nick", "Accounts.FinalFantasyXIV.Server":
-		newValue := newValue.String()
-		value.SetString(newValue)
-
-		if newValue == "" {
-			user.Accounts.FinalFantasyXIV.Class = ""
-			user.Accounts.FinalFantasyXIV.Level = 0
-			user.Accounts.FinalFantasyXIV.ItemLevel = 0
-		} else if user.Accounts.FinalFantasyXIV.Nick != "" && user.Accounts.FinalFantasyXIV.Server != "" {
-			// Refresh FinalFantasyXIV info if the name or server changed
-			go func() {
-				err := user.RefreshFFXIVInfo()
-
-				if err != nil {
-					color.Red("Error refreshing FinalFantasy XIV info of user '%s' with nick '%s' on server '%s': %v", user.Nick, user.Accounts.FinalFantasyXIV.Nick, user.Accounts.FinalFantasyXIV.Server, err)
-					return
-				}
-
-				user.Save()
-			}()
-		}
-
-		return true, nil
 	}
 
 	// Automatically correct account nicks
@@ -183,28 +134,6 @@ func (user *User) Edit(ctx aero.Context, key string, value reflect.Value, newVal
 		newNick := newValue.String()
 		newNick = autocorrect.AccountNick(newNick)
 		value.SetString(newNick)
-
-		// Refresh osu info if the name changed
-		if key == "Accounts.Osu.Nick" {
-			if newNick == "" {
-				user.Accounts.Osu.PP = 0
-				user.Accounts.Osu.Level = 0
-				user.Accounts.Osu.Accuracy = 0
-			} else {
-				go func() {
-					err := user.RefreshOsuInfo()
-
-					if err != nil {
-						color.Red("Error refreshing osu info of user '%s' with osu nick '%s': %v", user.Nick, newNick, err)
-						return
-					}
-
-					color.Green("Refreshed osu info of user '%s' with osu nick '%s': %v", user.Nick, newNick, user.Accounts.Osu.PP)
-					user.Save()
-				}()
-			}
-		}
-
 		return true, nil
 	}
 

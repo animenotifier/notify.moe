@@ -31,9 +31,7 @@ In the past it was, but not anymore. We're growing bigger by establishing a data
 * Quotes
 * Companies
 * Detailed anime rating system
-* [twist.moe](https://twist.moe) integration
 * [anilist.co](https://anilist.co/), [myanimelist.net](https://myanimelist.net/) and [kitsu.io](https://kitsu.io/) import
-* [osu](https://osu.ppy.sh/) ranking view
 * [Gravatar](https://gravatar.com) support
 
 ## Can I follow the project on social media?
