@@ -42,6 +42,12 @@ ui-hover-border = 1px solid ui-hover-border-color
 ui-disabled-color = rgb(224, 224, 224)
 const ui-element-border-radius = 3px
 
+// Scrollbar
+scrollbar-size = 10px
+scrollbar-border-size = 2px
+scrollbar-thumb-color = hsla(text-color-h, text-color-s, text-color-l, 0.75)
+scrollbar-track-color = transparent
+
 // Input
 input-height = 2.5rem
 input-focus-border-color = rgb(248, 165, 130)

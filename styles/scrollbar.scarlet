@@ -1,0 +1,17 @@
+// Desktop scrollbar
+@media (hover: hover) and (pointer: fine)
+	body
+		scrollbar-width scrollbar-size
+		scrollbar-color scrollbar-thumb-color scrollbar-track-color
+
+	::-webkit-scrollbar
+		width scrollbar-size
+
+	::-webkit-scrollbar-track
+		background-color scrollbar-track-color
+
+	::-webkit-scrollbar-thumb
+		border scrollbar-border-size solid transparent
+		border-radius 5px
+		background-clip content-box
+		background-color scrollbar-thumb-color
