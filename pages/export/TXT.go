@@ -7,8 +7,8 @@ import (
 	"github.com/aerogo/aero"
 )
 
-// Text renders the anime list items in plain text format.
-func Text(ctx aero.Context) error {
+// TXT renders the anime list items in plain text format.
+func TXT(ctx aero.Context) error {
 	animeList, err := getAnimeList(ctx)
 
 	if err != nil {

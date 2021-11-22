@@ -64,6 +64,12 @@ component SettingsAccounts(user *arn.User)
 				h3.widget-title
 					Icon("upload")
 					span Export
+
+				.widget-section
+					label CSV:
+					a.button(href=user.Link() + "/animelist/export/csv", target="_blank")
+						Icon("upload")
+						span Export as CSV
 				
 				.widget-section
 					label JSON:
@@ -73,6 +79,6 @@ component SettingsAccounts(user *arn.User)
 
 				.widget-section
 					label TXT:
-					a.button(href=user.Link() + "/animelist/export/text", target="_blank")
+					a.button(href=user.Link() + "/animelist/export/txt", target="_blank")
 						Icon("upload")
 						span Export as TXT

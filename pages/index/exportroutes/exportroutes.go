@@ -7,6 +7,7 @@ import (
 
 // Register registers the page routes.
 func Register(app *aero.Application) {
-	app.Get("/user/:nick/animelist/export/text", export.Text)
+	app.Get("/user/:nick/animelist/export/csv", export.CSV)
+	app.Get("/user/:nick/animelist/export/txt", export.TXT)
 	app.Get("/user/:nick/animelist/export/json", export.JSON)
 }
