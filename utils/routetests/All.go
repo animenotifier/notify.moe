@@ -6,55 +6,55 @@ var routeTests = map[string][]string{
 		"/+Akyoto",
 	},
 
-	// "/user/:nick/characters/liked": []string{
-	// 	"/+Akyoto/characters/liked",
-	// },
+	"/user/:nick/characters/liked": {
+		"/+Akyoto/characters/liked",
+	},
 
-	// "/user/:nick/forum/threads": []string{
+	// "/user/:nick/forum/threads": {
 	// 	"/+Akyoto/forum/threads",
 	// },
 
-	// "/user/:nick/forum/posts": []string{
+	// "/user/:nick/forum/posts": {
 	// 	"/+Akyoto/forum/posts",
 	// },
 
-	// "/user/:nick/soundtracks/added": []string{
+	// "/user/:nick/soundtracks/added": {
 	// 	"/+Akyoto/soundtracks/added",
 	// },
 
-	// "/user/:nick/soundtracks/added/from/:index": []string{
+	// "/user/:nick/soundtracks/added/from/:index": {
 	// 	"/+Akyoto/soundtracks/added/from/3",
 	// },
 
-	// "/user/:nick/soundtracks/liked": []string{
+	// "/user/:nick/soundtracks/liked": {
 	// 	"/+Akyoto/soundtracks/liked",
 	// },
 
-	// "/user/:nick/soundtracks/liked/from/:index": []string{
+	// "/user/:nick/soundtracks/liked/from/:index": {
 	// 	"/+Akyoto/soundtracks/liked/from/3",
 	// },
 
-	// "/user/:nick/quotes/added": []string{
+	// "/user/:nick/quotes/added": {
 	// 	"/+Scott/quotes/added",
 	// },
 
-	// "/user/:nick/quotes/added/from/:index": []string{
+	// "/user/:nick/quotes/added/from/:index": {
 	// 	"/+Scott/quotes/added/from/3",
 	// },
 
-	// "/user/:nick/quotes/liked": []string{
+	// "/user/:nick/quotes/liked": {
 	// 	"/+Scott/quotes/liked",
 	// },
 
-	// "/user/:nick/quotes/liked/from/:index": []string{
+	// "/user/:nick/quotes/liked/from/:index": {
 	// 	"/+Scott/quotes/liked/from/3",
 	// },
 
-	// "/user/:nick/followers": []string{
+	// "/user/:nick/followers": {
 	// 	"/+Akyoto/followers",
 	// },
 
-	// "/user/:nick/stats": []string{
+	// "/user/:nick/stats": {
 	// 	"/+Akyoto/stats",
 	// },
 
@@ -247,14 +247,6 @@ var routeTests = map[string][]string{
 		"/episode/oFlqThKWga",
 	},
 
-	// "/kitsu/character/:id": []string{
-	// 	"/kitsu/character/6556",
-	// },
-
-	// "/mal/character/:id": []string{
-	// 	"/mal/character/498",
-	// },
-
 	"/compare/animelist/:nick-1/:nick-2": {
 		"/compare/animelist/Akyoto/Scott",
 	},
@@ -396,81 +388,6 @@ var routeTests = map[string][]string{
 	"/_/search/dragon": {
 		"/_/search/dragon",
 	},
-
-	// Disable these tests because they require authorization
-	"/auth/google":                                   nil,
-	"/auth/google/callback":                          nil,
-	"/auth/facebook":                                 nil,
-	"/auth/facebook/callback":                        nil,
-	"/auth/twitter":                                  nil,
-	"/auth/twitter/callback":                         nil,
-	"/dashboard":                                     nil,
-	"/import":                                        nil,
-	"/import/anilist/animelist":                      nil,
-	"/import/anilist/animelist/finish":               nil,
-	"/import/myanimelist/animelist":                  nil,
-	"/import/myanimelist/animelist/finish":           nil,
-	"/import/kitsu/animelist":                        nil,
-	"/import/kitsu/animelist/finish":                 nil,
-	"/animelist/watching":                            nil,
-	"/animelist/completed":                           nil,
-	"/animelist/planned":                             nil,
-	"/animelist/hold":                                nil,
-	"/animelist/dropped":                             nil,
-	"/notifications":                                 nil,
-	"/user/:nick/notifications":                      nil,
-	"/user/:nick/edit":                               nil,
-	"/user/:nick/log":                                nil,
-	"/user/:nick/log/from/:index":                    nil,
-	"/editor/soundtracks/file":                       nil,
-	"/editor/soundtracks/links":                      nil,
-	"/editor/soundtracks/lyrics/missing":             nil,
-	"/editor/soundtracks/lyrics/unaligned":           nil,
-	"/editor/soundtracks/tags":                       nil,
-	"/api/test/notification":                         nil,
-	"/api/paypal/payment/create":                     nil,
-	"/api/emailtouser/:id":                           nil,
-	"/api/pushsubscriptions/:id/get/:item":           nil,
-	"/api/pushsubscriptions/:id/get/:item/:property": nil,
-	"/api/count/notifications/unseen":                nil,
-	"/api/mark/notifications/seen":                   nil,
-	"/api/sse/events":                                nil,
-	"/editor/kitsu/new/anime":                        nil,
-	"/paypal/success":                                nil,
-	"/paypal/cancel":                                 nil,
-	"/anime/:id/edit":                                nil,
-	"/anime/:id/edit/images":                         nil,
-	"/anime/:id/edit/characters":                     nil,
-	"/anime/:id/edit/relations":                      nil,
-	"/anime/:id/edit/episodes":                       nil,
-	"/anime/:id/edit/history":                        nil,
-	"/new/thread":                                    nil,
-	"/thread/:id/edit":                               nil,
-	"/post/:id/edit":                                 nil,
-	"/company/:id/edit":                              nil,
-	"/admin/purchases":                               nil,
-	"/admin/registrations":                           nil,
-	"/admin/payments":                                nil,
-	"/editor/anilist":                                nil,
-	"/editor/shoboi":                                 nil,
-	"/dark-flame-master":                             nil,
-	"/groups/joined":                                 nil,
-	"/user":                                          nil,
-	"/settings":                                      nil,
-	"/settings/accounts":                             nil,
-	"/settings/notifications":                        nil,
-	"/settings/info":                                 nil,
-	"/settings/style":                                nil,
-	"/settings/extras":                               nil,
-	"/shop":                                          nil,
-	"/shop/history":                                  nil,
-	"/support":                                       nil,
-	"/charge":                                        nil,
-	"/log":                                           nil,
-	"/log/from/:index":                               nil,
-	"/inventory":                                     nil,
-	"/extension/embed":                               nil,
-	"/welcome":                                       nil,
 }
 
 // All returns which specific routes to test for a given generic route.

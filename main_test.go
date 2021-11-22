@@ -93,8 +93,8 @@ func TestQuotes(t *testing.T) {
 	app.BindMiddleware()
 
 	for quote := range arn.StreamQuotes() {
-		fetch(t, app, quote.Link())
 		assert.NotNil(t, quote.Creator())
+		fetch(t, app, quote.Link())
 	}
 }
 

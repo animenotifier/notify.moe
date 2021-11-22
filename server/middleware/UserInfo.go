@@ -114,7 +114,7 @@ func updateUserLocation(user *arn.User, newIP string) {
 	user.Location.ZipCode = newLocation.ZipCode
 
 	// Make South Korea easier to read
-	if user.Location.CountryName == "Korea, Republic of" {
+	if user.Location.CountryName == "Korea, Republic of" || user.Location.CountryName == "Korea (Republic of)" {
 		user.Location.CountryName = "South Korea"
 	}
 

@@ -11,7 +11,7 @@ require (
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
 	github.com/aerogo/graphql v0.4.4
-	github.com/aerogo/http v1.1.3
+	github.com/aerogo/http v1.1.5
 	github.com/aerogo/log v0.2.6
 	github.com/aerogo/manifest v0.1.5
 	github.com/aerogo/markdown v0.1.9
@@ -30,7 +30,7 @@ require (
 	github.com/akyoto/imageserver v0.3.7
 	github.com/akyoto/stringutils v0.3.1
 	github.com/akyoto/webpush-go v0.1.2
-	github.com/animenotifier/anilist v0.2.6
+	github.com/animenotifier/anilist v0.2.8
 	github.com/animenotifier/japanese v0.2.5
 	github.com/animenotifier/kitsu v0.2.4
 	github.com/animenotifier/mal v0.2.5
