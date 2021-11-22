@@ -7,7 +7,7 @@ import (
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
 	"github.com/animenotifier/notify.moe/components"
-	minio "github.com/minio/minio-go/v6"
+	minio "github.com/minio/minio-go/v7"
 )
 
 // Get renders the anime episode.
@@ -33,7 +33,7 @@ func Get(ctx aero.Context) error {
 	uploaded := false
 
 	if arn.Spaces != nil {
-		stat, err := arn.Spaces.StatObject("arn", fmt.Sprintf("videos/anime/%s/%d.webm", anime.ID, episode.Number), minio.StatObjectOptions{})
+		stat, err := arn.Spaces.StatObject(ctx.Request().Context(), "arn", fmt.Sprintf("videos/anime/%s/%d.webm", anime.ID, episode.Number), minio.StatObjectOptions{})
 		uploaded = (err == nil) && (stat.Size > 0)
 	}
 

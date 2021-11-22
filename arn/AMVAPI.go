@@ -1,12 +1,14 @@
 package arn
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"reflect"
 
 	"github.com/aerogo/aero"
 	"github.com/aerogo/api"
+	"github.com/minio/minio-go/v7"
 )
 
 // Force interface implementations
@@ -103,7 +105,7 @@ func (amv *AMV) Delete() error {
 
 	// Remove file
 	if amv.File != "" && Spaces != nil {
-		err := Spaces.RemoveObject("arn", fmt.Sprintf("videos/amvs/%s", amv.File))
+		err := Spaces.RemoveObject(context.TODO(), "arn", fmt.Sprintf("videos/amvs/%s", amv.File), minio.RemoveObjectOptions{})
 
 		if err != nil {
 			return err

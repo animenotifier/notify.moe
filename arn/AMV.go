@@ -1,6 +1,7 @@
 package arn
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -10,7 +11,7 @@ import (
 
 	"github.com/aerogo/nano"
 	"github.com/animenotifier/notify.moe/arn/video"
-	"github.com/minio/minio-go/v6"
+	"github.com/minio/minio-go/v7"
 )
 
 // AMV is an anime music video.
@@ -120,7 +121,7 @@ func (amv *AMV) SetVideoReader(reader io.Reader) error {
 	}
 
 	// Upload the file to our storage server
-	_, err = Spaces.FPutObject("arn", fmt.Sprintf("videos/amvs/%s.webm", amv.ID), optimizedFile, minio.PutObjectOptions{
+	_, err = Spaces.FPutObject(context.TODO(), "arn", fmt.Sprintf("videos/amvs/%s.webm", amv.ID), optimizedFile, minio.PutObjectOptions{
 		ContentType:  "video/webm",
 		UserMetadata: userMetaData,
 	})
@@ -190,7 +191,7 @@ func (amv *AMV) Publish() error {
 	}
 
 	// No file uploaded
-	_, err := Spaces.StatObject("arn", fmt.Sprintf("videos/amvs/%s", amv.File), minio.StatObjectOptions{})
+	_, err := Spaces.StatObject(context.TODO(), "arn", fmt.Sprintf("videos/amvs/%s", amv.File), minio.StatObjectOptions{})
 
 	if err != nil {
 		return errors.New("You need to upload a WebM file for this AMV")

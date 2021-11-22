@@ -38,22 +38,18 @@ require (
 	github.com/animenotifier/twist v0.2.6
 	github.com/bwmarrin/discordgo v0.22.0
 	github.com/dustin/go-humanize v1.0.0
-	github.com/go-chi/chi v4.1.2+incompatible // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/gomodule/oauth1 v0.1.0
 	github.com/itchyny/gojq v0.11.2
 	github.com/json-iterator/go v1.1.12
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
-	github.com/mailgun/mailgun-go/v3 v3.6.4
-	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.16 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
-	github.com/minio/minio-go/v6 v6.0.57
+	github.com/minio/minio-go/v7 v7.0.15
 	github.com/minio/sha256-simd v1.0.0 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.3
 	github.com/pariz/gountries v0.0.0-20211104183308-60c653385099
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/shirou/gopsutil v3.21.10+incompatible
 	github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf // indirect
 	github.com/tklauser/go-sysconf v0.3.9 // indirect

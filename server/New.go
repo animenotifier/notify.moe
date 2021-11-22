@@ -15,7 +15,6 @@ import (
 	"github.com/animenotifier/notify.moe/server/graphql"
 	"github.com/animenotifier/notify.moe/server/https"
 	"github.com/animenotifier/notify.moe/server/middleware"
-	"github.com/animenotifier/notify.moe/utils/htmlemail"
 )
 
 // New creates a new web server.
@@ -85,9 +84,6 @@ func New() *aero.Application {
 	app.OnError(func(ctx aero.Context, err error) {
 		color.Red(err.Error())
 	})
-
-	// Emails
-	arn.HTMLEmailRenderer = &htmlemail.Renderer{}
 
 	// Check that this is the server
 	if !arn.Node.IsServer() && !IsTest() {

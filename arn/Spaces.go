@@ -3,7 +3,8 @@ package arn
 import (
 	"log"
 
-	"github.com/minio/minio-go/v6"
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
 // Spaces represents our file storage server.
@@ -18,10 +19,12 @@ func initSpaces() {
 	go func() {
 		var err error
 		endpoint := "sfo2.digitaloceanspaces.com"
-		ssl := true
 
 		// Initiate a client using DigitalOcean Spaces.
-		Spaces, err = minio.New(endpoint, APIKeys.S3.ID, APIKeys.S3.Secret, ssl)
+		Spaces, err = minio.New(endpoint, &minio.Options{
+			Secure: true,
+			Creds:  credentials.NewStaticV4(APIKeys.S3.ID, APIKeys.S3.Secret, ""),
+		})
 
 		if err != nil {
 			log.Fatal(err)

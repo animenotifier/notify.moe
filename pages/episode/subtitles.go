@@ -6,7 +6,7 @@ import (
 
 	"github.com/aerogo/aero"
 	"github.com/animenotifier/notify.moe/arn"
-	minio "github.com/minio/minio-go/v6"
+	minio "github.com/minio/minio-go/v7"
 )
 
 // Subtitles returns the subtitles.
@@ -31,7 +31,7 @@ func Subtitles(ctx aero.Context) error {
 	ctx.Response().SetHeader("Access-Control-Allow-Origin", "*")
 	ctx.Response().SetHeader("Content-Type", "text/vtt; charset=utf-8")
 
-	obj, err := arn.Spaces.GetObject("arn", fmt.Sprintf("videos/anime/%s/%d.%s.vtt", anime.ID, episode.Number, language), minio.GetObjectOptions{})
+	obj, err := arn.Spaces.GetObject(ctx.Request().Context(), "arn", fmt.Sprintf("videos/anime/%s/%d.%s.vtt", anime.ID, episode.Number, language), minio.GetObjectOptions{})
 
 	if err != nil {
 		return ctx.Error(http.StatusInternalServerError, err)
