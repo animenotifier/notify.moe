@@ -12,6 +12,7 @@ import (
 	"github.com/animenotifier/notify.moe/pages/index/companyroutes"
 	"github.com/animenotifier/notify.moe/pages/index/coreroutes"
 	"github.com/animenotifier/notify.moe/pages/index/exploreroutes"
+	"github.com/animenotifier/notify.moe/pages/index/exportroutes"
 	"github.com/animenotifier/notify.moe/pages/index/forumroutes"
 	"github.com/animenotifier/notify.moe/pages/index/grouproutes"
 	"github.com/animenotifier/notify.moe/pages/index/importroutes"
@@ -43,6 +44,7 @@ func Configure(app *aero.Application) {
 	grouproutes.Register(app)
 	searchroutes.Register(app)
 	importroutes.Register(app)
+	exportroutes.Register(app)
 	shoproutes.Register(app)
 	settingsroutes.Register(app)
 	staffroutes.Register(app)

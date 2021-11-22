@@ -67,6 +67,12 @@ component SettingsAccounts(user *arn.User)
 				
 				.widget-section
 					label JSON:
-					a.button(href="/api/animelist/" + user.ID, target="_blank")
+					a.button(href=user.Link() + "/animelist/export/json", target="_blank")
 						Icon("upload")
-						span Export anime list as JSON
+						span Export as JSON
+
+				.widget-section
+					label TXT:
+					a.button(href=user.Link() + "/animelist/export/text", target="_blank")
+						Icon("upload")
+						span Export as TXT
