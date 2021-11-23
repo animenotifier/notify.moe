@@ -21,7 +21,7 @@ func Watch(ctx aero.Context) error {
 
 // fetchCreateActivities filters the activities by the given filters.
 func fetchCreateActivities(user *arn.User) []arn.Activity {
-	followedOnly := user.Settings().Activity.ShowFollowedOnly
+	followedOnly := user != nil && user.Settings().Activity.ShowFollowedOnly
 
 	activities := arn.FilterActivityCreates(func(activity arn.Activity) bool {
 		if followedOnly && user != nil && !user.IsFollowing(activity.GetCreatedBy()) {
@@ -48,7 +48,7 @@ func fetchCreateActivities(user *arn.User) []arn.Activity {
 
 // fetchConsumeActivities filters the consume activities by the given filters.
 func fetchConsumeActivities(user *arn.User) []arn.Activity {
-	followedOnly := user.Settings().Activity.ShowFollowedOnly
+	followedOnly := user != nil && user.Settings().Activity.ShowFollowedOnly
 
 	activities := arn.FilterActivitiesConsumeAnime(func(activity arn.Activity) bool {
 		if followedOnly && user != nil && !user.IsFollowing(activity.GetCreatedBy()) {

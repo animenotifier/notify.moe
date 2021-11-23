@@ -5,15 +5,16 @@ component ActivityFeed(entries []arn.Activity, nextIndex int, user *arn.User)
 		Tab("Posts", "comment", "/activity")
 		Tab("Watch", "eye", "/activity/watch")
 
-	.corner-buttons(data-api="/api/settings/" + user.ID)
-		if user.Settings().Activity.ShowFollowedOnly
-			button.action(id="Activity.ShowFollowedOnly", data-action="disable", data-trigger="click", data-field="Activity.ShowFollowedOnly", title="Followed only")
-				Icon("toggle-on")
-				span Followed
-		else
-			button.action(id="Activity.ShowFollowedOnly", data-action="enable", data-trigger="click", data-field="Activity.ShowFollowedOnly", title="Followed only")
-				Icon("toggle-off")
-				span Followed
+	if user != nil
+		.corner-buttons(data-api="/api/settings/" + user.ID)
+			if user.Settings().Activity.ShowFollowedOnly
+				button.action(id="Activity.ShowFollowedOnly", data-action="disable", data-trigger="click", data-field="Activity.ShowFollowedOnly", title="Followed only")
+					Icon("toggle-on")
+					span Followed
+			else
+				button.action(id="Activity.ShowFollowedOnly", data-action="enable", data-trigger="click", data-field="Activity.ShowFollowedOnly", title="Followed only")
+					Icon("toggle-off")
+					span Followed
 
 	if len(entries) == 0
 		p.no-data.mountable No activity here.
