@@ -12,7 +12,8 @@ component Crashes(crashes []*arn.Crash)
 					td
 						each line in strings.Split(crash.Stack, "\n")
 							p= line
-					td.utc-date(data-date=crash.Created)
+					td
+						time.utc-date(datetime=crash.Created)
 					td.edit-log-user
 						if crash.CreatedBy != ""
 							Avatar(crash.Creator())

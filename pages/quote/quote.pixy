@@ -20,12 +20,12 @@ component QuoteMainColumn(quote *arn.Quote, user *arn.User)
 	footer.footer.mountable
 		if quote.EditedBy != ""
 			span Edited 
-			span.utc-date(data-date=quote.Edited)
+			time.utc-date(datetime=quote.Edited)
 			span  by 
 			a(href=quote.Editor().Link())= quote.Editor().Nick
 		else
 			span Posted 
-			span.utc-date(data-date=quote.Created)
+			time.utc-date(datetime=quote.Created)
 			span  by 
 			a(href=quote.Creator().Link())= quote.Creator().Nick
 			span .

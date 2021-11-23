@@ -33,7 +33,7 @@ component Notification(notification *arn.Notification)
 
 			footer.notification-footer
 				p.notification-text= notification.Message
-				.notification-date.utc-date(data-date=notification.Created)
+				time.notification-date.utc-date(datetime=notification.Created)
 		
 		if notification.Seen != ""
 			.notification-seen

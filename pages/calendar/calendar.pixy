@@ -36,5 +36,5 @@ component CalendarView(day *utils.CalendarDay, entry *utils.CalendarEntry, user 
 		.calendar-entry-info
 			.calendar-entry-title= entry.Anime.Title.ByUser(user)
 			.calendar-entry-time-and-episode
-				.calendar-entry-time.utc-date-absolute(data-date=entry.Episode.AiringDate.Start)
+				time.calendar-entry-time.utc-date-absolute(datetime=entry.Episode.AiringDate.Start)
 				.calendar-entry-episode= "Ep: " + strconv.Itoa(entry.Episode.Number)

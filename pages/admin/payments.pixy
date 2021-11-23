@@ -17,4 +17,5 @@ component GlobalPaymentHistory(payments []*arn.PayPalPayment)
 						a(href=payment.User().Link())= payment.User().Nick
 					td.history-price= payment.Amount
 					td.history-price= payment.Currency
-					td.history-date.utc-date(data-date=payment.Created)
+					td.history-date
+						time.utc-date(datetime=payment.Created)

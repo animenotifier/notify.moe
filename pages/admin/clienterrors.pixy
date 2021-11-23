@@ -11,7 +11,8 @@ component ClientErrors(reports []*arn.ClientErrorReport)
 					td
 						each line in strings.Split(report.Stack, "\n")
 							p= line
-					td.utc-date(data-date=report.Created)
+					td
+						time.utc-date(datetime=report.Created)
 					td.edit-log-user
 						if report.CreatedBy != ""
 							Avatar(report.Creator())

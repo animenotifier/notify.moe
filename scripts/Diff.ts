@@ -17,13 +17,16 @@ export default class Diff {
 	static mutations: MutationQueue = new MutationQueue()
 
 	// innerHTML will diff the element with the given HTML string and apply DOM mutations.
-	static innerHTML(aRoot: HTMLElement, html: string): Promise<void> {
+	static innerHTML(aRoot: HTMLElement, html: string) {
 		const container = document.createElement("main")
 		container.innerHTML = html
 
 		return new Promise((resolve, _) => {
 			Diff.childNodes(aRoot, container)
-			this.mutations.wait(resolve)
+
+			this.mutations.wait(() => {
+				resolve(null)
+			})
 		})
 	}
 
@@ -34,7 +37,10 @@ export default class Diff {
 			rootContainer.innerHTML = html.replace("<!DOCTYPE html>", "")
 
 			Diff.childNodes(aRoot.getElementsByTagName("body")[0], rootContainer.getElementsByTagName("body")[0])
-			this.mutations.wait(resolve)
+
+			this.mutations.wait(() => {
+				resolve(null)
+			})
 		})
 	}
 
@@ -82,9 +88,7 @@ export default class Diff {
 
 				const removeAttributes: Attr[] = []
 
-				for(let x = 0; x < elemA.attributes.length; x++) {
-					const attrib = elemA.attributes[x]
-
+				for(const attrib of elemA.attributes) {
 					if(attrib.specified) {
 						if(!elemB.hasAttribute(attrib.name) && !Diff.persistentAttributes.has(attrib.name)) {
 							removeAttributes.push(attrib)
@@ -98,9 +102,7 @@ export default class Diff {
 					}
 				})
 
-				for(let x = 0; x < elemB.attributes.length; x++) {
-					const attrib = elemB.attributes[x]
-
+				for(const attrib of elemB.attributes) {
 					if(!attrib.specified) {
 						continue
 					}

@@ -34,6 +34,6 @@ component SoundTrackFooter(track *arn.SoundTrack, user *arn.User)
 		else
 			a(href=track.Link())= track.Title.ByUser(user)
 		span  posted 
-		span.utc-date.no-tip(data-date=track.Created)
+		time.utc-date.no-tip(datetime=track.Created)
 		span  by 
 		a(href=track.Creator().Link())= track.Creator().Nick + " "

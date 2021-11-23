@@ -89,4 +89,4 @@ component EditLogScrollable(entries []*arn.EditLogEntry, user *arn.User)
 				else
 					span.clip-long-text= entry.NewValue
 
-			.edit-log-date.utc-date(data-date=entry.Created)
+			time.edit-log-date.utc-date(datetime=entry.Created)

@@ -34,7 +34,7 @@ component Postable(post arn.Postable, user *arn.User, includeReplies bool, showP
 					a.post-action.post-header-action.tip(href=post.Link(), aria-label="Link")
 						RawIcon("link")
 					
-					.post-date.utc-date(data-date=post.GetCreated())
+					time.post-date.utc-date(datetime=post.GetCreated())
 
 				.post-content(id="render-" + post.GetID())!= post.HTML()
 

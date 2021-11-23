@@ -21,7 +21,7 @@ component AnimeEpisodes(anime *arn.Anime, episodes []*arn.Episode, episodeToFrie
 							span.episode-title -
 						
 						if validate.DateTime(episode.AiringDate.Start)
-							.episode-airing-date-start.utc-airing-date.no-tip(data-start-date=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
+							time.episode-airing-date-start.utc-airing-date.no-tip(datetime=episode.AiringDate.Start, data-end-date=episode.AiringDate.End, data-episode-number=episode.Number)= episode.AiringDate.StartDateHuman()
 						
 						//- Show friends in reverse order
 						.episode-friends

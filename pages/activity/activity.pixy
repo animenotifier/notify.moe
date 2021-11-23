@@ -82,7 +82,7 @@ component ActivityConsumeAnime(activity *arn.ActivityConsumeAnime, user *arn.Use
 				.post-header-info
 					ActivityConsumeAnimeTitle(activity, user)
 				
-				.post-date.utc-date(data-date=activity.GetCreated())
+				time.post-date.utc-date(datetime=activity.GetCreated())
 			
 			.post-content
 				ActivityConsumeAnimeText(activity, user)

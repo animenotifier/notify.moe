@@ -10,6 +10,6 @@ component AMVFooter(amv *arn.AMV, user *arn.User)
 		else
 			a(href=amv.Link())= amv.Title.ByUser(user)
 		span  posted 
-		span.utc-date.no-tip(data-date=amv.Created)
+		time.utc-date.no-tip(datetime=amv.Created)
 		span  by 
 		a(href=amv.Creator().Link())= amv.Creator().Nick + " "

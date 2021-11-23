@@ -62,7 +62,7 @@ component SettingsExtras(user *arn.User)
 				.widget-section
 					label
 						span Your PRO account expires in 
-						span.utc-date(data-date=user.ProExpires)
+						time.utc-date(datetime=user.ProExpires)
 						span .
 					a.button(href="/shop")
 						Icon("star")

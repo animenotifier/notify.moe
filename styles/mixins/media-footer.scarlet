@@ -2,6 +2,4 @@ mixin media-footer
 	text-align center
 	margin-top 0.4rem
 	font-size 0.9em
-
-	span
-		color hsla(text-color-h, text-color-s, text-color-l, 0.65)
+	color hsla(text-color-h, text-color-s, text-color-l, 0.65)

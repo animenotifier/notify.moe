@@ -59,13 +59,13 @@ function getRemainingTime(remaining: number): string {
 	return "Just now"
 }
 
-export function displayAiringDate(element: HTMLElement, now: Date) {
-	if(!element.dataset.startDate || !element.dataset.endDate) {
+export function displayAiringDate(element: HTMLTimeElement, now: Date) {
+	if(!element.dateTime || !element.dataset.endDate) {
 		element.textContent = ""
 		return
 	}
 
-	const startDate = new Date(element.dataset.startDate)
+	const startDate = new Date(element.dateTime)
 	const endDate = new Date(element.dataset.endDate)
 
 	let h = startDate.getHours()
@@ -102,13 +102,13 @@ export function displayAiringDate(element: HTMLElement, now: Date) {
 	}
 }
 
-export function displayDate(element: HTMLElement, now: Date) {
-	if(!element.dataset.date) {
+export function displayDate(element: HTMLTimeElement, now: Date) {
+	if(!element.dateTime) {
 		element.textContent = ""
 		return
 	}
 
-	const startDate = new Date(element.dataset.date)
+	const startDate = new Date(element.dateTime)
 
 	const h = startDate.getHours()
 	const m = startDate.getMinutes()
@@ -133,13 +133,13 @@ export function displayDate(element: HTMLElement, now: Date) {
 	}
 }
 
-export function displayTime(element: HTMLElement) {
-	if(!element.dataset.date) {
+export function displayTime(element: HTMLTimeElement) {
+	if(!element.dateTime) {
 		element.textContent = ""
 		return
 	}
 
-	const startDate = new Date(element.dataset.date)
+	const startDate = new Date(element.dateTime)
 
 	const h = startDate.getHours()
 	const m = startDate.getMinutes()

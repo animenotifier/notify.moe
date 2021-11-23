@@ -25,4 +25,5 @@ component PurchaseInfo(purchase *arn.Purchase)
 	td= purchase.Item().Name
 	td.history-quantity= purchase.Quantity
 	td.history-price= purchase.Price
-	td.history-date.utc-date(data-date=purchase.Date)
+	td.history-date
+		time.utc-date(datetime=purchase.Date)
