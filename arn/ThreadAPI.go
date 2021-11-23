@@ -6,6 +6,7 @@ import (
 	"reflect"
 
 	"github.com/aerogo/aero"
+	"github.com/aerogo/aero/event"
 	"github.com/aerogo/api"
 	"github.com/aerogo/markdown"
 	"github.com/animenotifier/notify.moe/arn/autocorrect"
@@ -119,6 +120,12 @@ func (thread *Thread) Create(ctx aero.Context) error {
 	// Create activity
 	activity := NewActivityCreate("Thread", thread.ID, user.ID)
 	activity.Save()
+
+	// Broadcast event to all users so they can reload the activity page if needed
+	for receiver := range StreamUsers() {
+		activityEvent := event.New("post activity", receiver.IsFollowing(user.ID))
+		receiver.BroadcastEvent(activityEvent)
+	}
 
 	return nil
 }

@@ -21,7 +21,7 @@ export default function uploadWithProgress(url, options: RequestInit, onProgress
 		xhr.open(options.method || "GET", url, true)
 
 		if(options.headers) {
-			for(const key in options.headers) {
+			for(const key of Object.keys(options.headers)) {
 				xhr.setRequestHeader(key, options.headers[key])
 			}
 		}

@@ -5,22 +5,24 @@ import (
 	"github.com/animenotifier/notify.moe/arn"
 )
 
-// Global activity page.
-func Global(ctx aero.Context) error {
+// Posts activity page.
+func Posts(ctx aero.Context) error {
 	user := arn.GetUserFromContext(ctx)
-	activities := fetchActivities(user, false)
+	activities := fetchCreateActivities(user)
 	return render(ctx, activities)
 }
 
-// Followed activity page.
-func Followed(ctx aero.Context) error {
+// Watch activity page.
+func Watch(ctx aero.Context) error {
 	user := arn.GetUserFromContext(ctx)
-	activities := fetchActivities(user, true)
+	activities := fetchConsumeActivities(user)
 	return render(ctx, activities)
 }
 
-// fetchActivities filters the activities by the given filters.
-func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
+// fetchCreateActivities filters the activities by the given filters.
+func fetchCreateActivities(user *arn.User) []arn.Activity {
+	followedOnly := user.Settings().Activity.ShowFollowedOnly
+
 	activities := arn.FilterActivityCreates(func(activity arn.Activity) bool {
 		if followedOnly && user != nil && !user.IsFollowing(activity.GetCreatedBy()) {
 			return false
@@ -38,6 +40,26 @@ func fetchActivities(user *arn.User, followedOnly bool) []arn.Activity {
 
 		draft, isDraftable := obj.(arn.Draftable)
 		return !isDraftable || !draft.GetIsDraft()
+	})
+
+	arn.SortActivitiesLatestFirst(activities)
+	return activities
+}
+
+// fetchConsumeActivities filters the consume activities by the given filters.
+func fetchConsumeActivities(user *arn.User) []arn.Activity {
+	followedOnly := user.Settings().Activity.ShowFollowedOnly
+
+	activities := arn.FilterActivitiesConsumeAnime(func(activity arn.Activity) bool {
+		if followedOnly && user != nil && !user.IsFollowing(activity.GetCreatedBy()) {
+			return false
+		}
+
+		if !activity.Creator().HasNick() {
+			return false
+		}
+
+		return true
 	})
 
 	arn.SortActivitiesLatestFirst(activities)

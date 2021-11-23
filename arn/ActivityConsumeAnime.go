@@ -47,8 +47,9 @@ func (activity *ActivityConsumeAnime) Self() Loggable {
 
 // LastActivityConsumeAnime returns the last activity for the given anime.
 func (user *User) LastActivityConsumeAnime(animeID AnimeID) *ActivityConsumeAnime {
-	activities := FilterActivitiesConsumeAnime(func(activity *ActivityConsumeAnime) bool {
-		return activity.AnimeID == animeID && activity.CreatedBy == user.ID
+	activities := FilterActivitiesConsumeAnime(func(activity Activity) bool {
+		consume := activity.(*ActivityConsumeAnime)
+		return consume.AnimeID == animeID && consume.CreatedBy == user.ID
 	})
 
 	if len(activities) == 0 {
@@ -56,15 +57,15 @@ func (user *User) LastActivityConsumeAnime(animeID AnimeID) *ActivityConsumeAnim
 	}
 
 	sort.Slice(activities, func(i, j int) bool {
-		return activities[i].Created > activities[j].Created
+		return activities[i].GetCreated() > activities[j].GetCreated()
 	})
 
-	return activities[0]
+	return activities[0].(*ActivityConsumeAnime)
 }
 
 // FilterActivitiesConsumeAnime filters all anime consumption activities by a custom function.
-func FilterActivitiesConsumeAnime(filter func(*ActivityConsumeAnime) bool) []*ActivityConsumeAnime {
-	var filtered []*ActivityConsumeAnime
+func FilterActivitiesConsumeAnime(filter func(Activity) bool) []Activity {
+	var filtered []Activity
 
 	for obj := range DB.All("ActivityConsumeAnime") {
 		realObject := obj.(*ActivityConsumeAnime)

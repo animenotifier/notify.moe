@@ -32,7 +32,8 @@ function connect() {
 
 	eventSource.addEventListener("ping", (e: any) => ping(e))
 	eventSource.addEventListener("etag", (e: any) => etag(e))
-	eventSource.addEventListener("activity", (e: any) => activity(e))
+	eventSource.addEventListener("post activity", (e: any) => activity(e, "post"))
+	eventSource.addEventListener("watch activity", (e: any) => activity(e, "watch"))
 	eventSource.addEventListener("notificationCount", (e: any) => notificationCount(e))
 
 	eventSource.onerror = () => {
@@ -56,16 +57,27 @@ function etag(e: ServerEvent) {
 	etags.set(data.url, newETag)
 }
 
-function activity(e: ServerEvent) {
-	if(!location.pathname.startsWith("/activity")) {
+function activity(e: ServerEvent, activityType: string) {
+	if(activityType === "post" && !location.pathname.endsWith("/activity")) {
 		return
 	}
 
+	if(activityType === "watch" && !location.pathname.endsWith("/activity/watch")) {
+		return
+	}
+
+	const showFollowedOnlyButton = document.getElementById("Activity.ShowFollowedOnly")
+
+	if(!showFollowedOnlyButton) {
+		return
+	}
+
+	const showFollowedOnly = (showFollowedOnlyButton.dataset.action === "disable")
 	const isFollowingUser = JSON.parse(e.data)
 
 	// If we're on the followed only feed and we receive an activity
 	// about a user we don't follow, ignore the message.
-	if(location.pathname.startsWith("/activity/followed") && !isFollowingUser) {
+	if(showFollowedOnly && !isFollowingUser) {
 		return
 	}
 

@@ -16,7 +16,7 @@ export default class NotificationManager {
 		})
 
 		const body = await response.text()
-		this.setCounter(parseInt(body))
+		this.setCounter(parseInt(body, 10))
 	}
 
 	setCounter(unseen: number) {

@@ -55,6 +55,10 @@ func (user *User) Unfollow(userID UserID) bool {
 
 // IsFollowing checks if the object follows the user ID.
 func (user *User) IsFollowing(userID UserID) bool {
+	if userID == user.ID {
+		return true
+	}
+
 	for _, item := range user.FollowIDs {
 		if item == userID {
 			return true

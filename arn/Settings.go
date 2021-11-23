@@ -37,8 +37,14 @@ type Settings struct {
 	Notification  NotificationSettings `json:"notification"`
 	Editor        EditorSettings       `json:"editor"`
 	Privacy       PrivacySettings      `json:"privacy"`
+	Activity      ActivitySettings     `json:"activity"`
 	Calendar      CalendarSettings     `json:"calendar" editable:"true"`
 	Theme         string               `json:"theme" editable:"true"`
+}
+
+// ActivitySettings ...
+type ActivitySettings struct {
+	ShowFollowedOnly bool `json:"showFollowedOnly" editable:"true"`
 }
 
 // PrivacySettings ...

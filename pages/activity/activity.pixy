@@ -2,8 +2,18 @@ component ActivityFeed(entries []arn.Activity, nextIndex int, user *arn.User)
 	h1.page-title Activity
 
 	.tabs
-		Tab("Global", "globe", "/activity")
-		Tab("Followed", "user-plus", "/activity/followed")
+		Tab("Posts", "comment", "/activity")
+		Tab("Watch", "eye", "/activity/watch")
+
+	.corner-buttons(data-api="/api/settings/" + user.ID)
+		if user.Settings().Activity.ShowFollowedOnly
+			button.action(id="Activity.ShowFollowedOnly", data-action="disable", data-trigger="click", data-field="Activity.ShowFollowedOnly", title="Followed only")
+				Icon("toggle-on")
+				span Followed
+		else
+			button.action(id="Activity.ShowFollowedOnly", data-action="enable", data-trigger="click", data-field="Activity.ShowFollowedOnly", title="Followed only")
+				Icon("toggle-off")
+				span Followed
 
 	if len(entries) == 0
 		p.no-data.mountable No activity here.
@@ -62,16 +72,28 @@ component Activity(activity arn.Activity, user *arn.User)
 	//- 			ActivityConsumeAnimeText(activity.(*arn.ActivityConsumeAnime), user)
 
 component ActivityConsumeAnime(activity *arn.ActivityConsumeAnime, user *arn.User)
-	h1 TODO
+	.activity.mountable.post-parent(id=fmt.Sprintf("activity-%s", activity.GetID()), data-type="consume-anime")
+		.post-author
+			Avatar(activity.Creator())
+		
+		.post-box
+			.post-header
+				.post-header-info
+					ActivityConsumeAnimeTitle(activity, user)
+				
+				.post-date.utc-date(data-date=activity.GetCreated())
+			
+			.post-content
+				ActivityConsumeAnimeText(activity, user)
 
-component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
-	span  watched 
+component ActivityConsumeAnimeTitle(activity *arn.ActivityConsumeAnime, user *arn.User)
 	a(href=activity.Anime().Link())= activity.Anime().TitleByUser(user)
 
+component ActivityConsumeAnimeText(activity *arn.ActivityConsumeAnime, user *arn.User)
 	if activity.ToEpisode > activity.FromEpisode
-		span= fmt.Sprintf(" episodes %d - %d.", activity.FromEpisode, activity.ToEpisode)
+		span= fmt.Sprintf("%s watched episodes %d - %d.", activity.Creator().Nick, activity.FromEpisode, activity.ToEpisode)
 	else
-		span= fmt.Sprintf(" episode %d.", activity.ToEpisode)
+		span= fmt.Sprintf("%s watched episode %d.", activity.Creator().Nick, activity.ToEpisode)
 
 component ActivityCreate(activity *arn.ActivityCreate, user *arn.User)
 	Postable(activity.Postable(), user, false, true, "")

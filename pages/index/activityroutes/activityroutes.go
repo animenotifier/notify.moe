@@ -8,8 +8,8 @@ import (
 
 // Register registers the page routes.
 func Register(app *aero.Application) {
-	page.Get(app, "/activity", activity.Global)
-	page.Get(app, "/activity/from/:index", activity.Global)
-	page.Get(app, "/activity/followed", activity.Followed)
-	page.Get(app, "/activity/followed/from/:index", activity.Followed)
+	page.Get(app, "/activity", activity.Posts)
+	page.Get(app, "/activity/from/:index", activity.Posts)
+	page.Get(app, "/activity/watch", activity.Watch)
+	page.Get(app, "/activity/watch/from/:index", activity.Watch)
 }
