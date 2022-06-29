@@ -18,6 +18,7 @@ func main() {
 		if obj == nil {
 			color.Yellow(post.ID)
 			color.Red(post.Text)
+			post.Delete()
 		}
 	}
 }
