@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	shortid "github.com/ventu-io/go-shortid"
+	"github.com/teris-io/shortid"
 )
 
 // ID is used for object identification and is simply a string.
