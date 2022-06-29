@@ -18,7 +18,15 @@ func main() {
 		if obj == nil {
 			color.Yellow(post.ID)
 			color.Red(post.Text)
-			post.Delete()
+
+			// Remove activities
+			for activity := range arn.StreamActivityCreates() {
+				if activity.ObjectID == post.ID && activity.ObjectType == "Post" {
+					activity.Delete()
+				}
+			}
+
+			arn.DB.Delete("Post", post.ID)
 		}
 	}
 }
