@@ -7,7 +7,6 @@ require (
 	github.com/aerogo/api v0.2.3
 	github.com/aerogo/crawler v0.2.5
 	github.com/aerogo/flow v0.1.5
-	github.com/aerogo/graphql v0.4.4
 	github.com/aerogo/http v1.1.5
 	github.com/aerogo/log v0.2.6
 	github.com/aerogo/manifest v0.1.5
@@ -38,19 +37,19 @@ require (
 	github.com/itchyny/gojq v0.11.2
 	github.com/json-iterator/go v1.1.12
 	github.com/logpacker/PayPal-Go-SDK v1.1.4
-	github.com/minio/minio-go/v7 v7.0.32
+	github.com/minio/minio-go/v7 v7.0.38
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/mssola/user_agent v0.5.3
-	github.com/pariz/gountries v0.1.5
+	github.com/pariz/gountries v0.1.6
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/teris-io/shortid v0.0.0-20220617161101-71ec9f2aa569
 	github.com/ungerik/go-gravatar v0.0.0-20120802094239-6ab22628222a
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673
-	golang.org/x/oauth2 v0.0.0-20220722155238-128564f6959c
+	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1
 )
 
 require (
-	cloud.google.com/go/compute v1.7.0 // indirect
+	cloud.google.com/go/compute v1.10.0 // indirect
 	github.com/PuerkitoBio/goquery v1.8.0 // indirect
 	github.com/aerogo/cluster v0.1.8 // indirect
 	github.com/aerogo/csp v0.1.10 // indirect
@@ -70,9 +69,9 @@ require (
 	github.com/gorilla/websocket v1.4.0 // indirect
 	github.com/itchyny/astgen-go v0.0.0-20200815150004-12a293722290 // indirect
 	github.com/itchyny/timefmt-go v0.1.1 // indirect
-	github.com/klauspost/compress v1.15.9 // indirect
-	github.com/klauspost/cpuid/v2 v2.1.0 // indirect
-	github.com/microcosm-cc/bluemonday v1.0.19 // indirect
+	github.com/klauspost/compress v1.15.10 // indirect
+	github.com/klauspost/cpuid/v2 v2.1.1 // indirect
+	github.com/microcosm-cc/bluemonday v1.0.20 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
 	github.com/minio/sha256-simd v1.0.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -85,12 +84,12 @@ require (
 	github.com/tklauser/numcpus v0.5.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
-	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa // indirect
-	golang.org/x/net v0.0.0-20220726230323-06994584191e // indirect
-	golang.org/x/sys v0.0.0-20220727055044-e65921a090b8 // indirect
+	golang.org/x/crypto v0.0.0-20220924013350-4ba4fb4dd9e7 // indirect
+	golang.org/x/net v0.0.0-20220923203811-8be639271d50 // indirect
+	golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
-	gopkg.in/ini.v1 v1.66.6 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
+	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

@@ -7,9 +7,6 @@ component API(types []*autodocs.Type)
 			li.mountable
 				strong REST: 
 				span https://notify.moe/api
-			li.mountable
-				strong GraphQL: 
-				span https://notify.moe/graphql
 		
 		h2.mountable Types
 		table.api-types

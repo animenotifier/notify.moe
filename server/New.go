@@ -12,7 +12,6 @@ import (
 	"github.com/animenotifier/notify.moe/assets"
 	"github.com/animenotifier/notify.moe/pages"
 	"github.com/animenotifier/notify.moe/server/auth"
-	"github.com/animenotifier/notify.moe/server/graphql"
 	"github.com/animenotifier/notify.moe/server/https"
 	"github.com/animenotifier/notify.moe/server/middleware"
 )
@@ -68,9 +67,6 @@ func New() *aero.Application {
 
 	// Authentication
 	auth.Install(app)
-
-	// GraphQL
-	graphql.Install(app)
 
 	// Close the database node on shutdown
 	app.OnEnd(arn.Node.Close)
